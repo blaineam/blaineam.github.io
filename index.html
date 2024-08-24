@@ -850,7 +850,7 @@
         },
         false
       );
-
+      var first = true;
       document.getElementById("projects-toggle").addEventListener(
         "click",
         function () {
@@ -858,6 +858,12 @@
           document.getElementById("summary-toggle").classList.remove("hide");
           document.getElementById("projects").classList.remove("hide");
           document.getElementById("projects-toggle").classList.add("hide");
+          if (first) {
+            first = false;
+            document
+              .getElementById("projects")
+              .scroll({ top: -999999999, behavior: "smooth" });
+          }
         },
         false
       );
@@ -915,6 +921,10 @@
               animOptions
             );
           }
+
+          setTimeout(() => {
+            button.scrollIntoView({ block: "start", behavior: "smooth" });
+          }, animOptions.duration);
         }
         itemAction(e) {
           const { target } = e;
