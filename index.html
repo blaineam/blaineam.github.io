@@ -17,7 +17,11 @@
     <meta property="og:type" content="profile" />
     <meta property="og:title" content="Blaine Miller - Sr. Software Engineer" />
     <meta property="og:url" content="https://www.wemiller.com" />
-    <meta property="og:image" content="https://www.wemiller.com/profile.jpg" />
+    <meta property="og:image" content="http://www.wemiller.com/profile.jpg" />
+    <meta
+      property="og:image:secure_url"
+      content="https://www.wemiller.com/profile.jpg"
+    />
     <meta
       property="og:description"
       content="I enjoy finding unique solutions with tech. Photographing the world around me is fun. Just imagine what we can build together!"
@@ -34,7 +38,7 @@
       :root {
         --bg-color: rgba(255, 255, 255, 0.85);
         --bg-color-half: rgba(255, 255, 255, 0.425);
-        --fg-color-color: rgb(22, 22, 22);
+        --fg-color: rgb(22, 22, 22);
         --bg-hover-color: rgba(200, 200, 200, 0.85);
         --bg-hover-color-inverse: rgba(155, 155, 155, 0.85);
         --radius: 7px;
@@ -48,7 +52,7 @@
         :root {
           --bg-color: rgba(0, 0, 0, 0.85);
           --bg-color-half: rgba(0, 0, 0, 0.425);
-          --fg-color-color: rgb(222, 222, 222);
+          --fg-color: rgb(222, 222, 222);
           --bg-hover-color: rgba(50, 50, 50, 0.85);
           --bg-hover-color-inverse: rgba(100, 100, 100, 0.85);
         }
@@ -67,12 +71,12 @@
         height: 100%;
         margin: 0;
         font-family: sans-serif;
-        color: var(--fg-color-color);
+        color: var(--fg-color);
       }
 
       a {
         text-decoration: none;
-        color: var(--fg-color-color);
+        color: var(--fg-color);
       }
 
       .hide {
@@ -92,7 +96,7 @@
       }
 
       .icon {
-        color: var(--fg-color-color);
+        color: var(--fg-color);
         height: 20px;
         width: 20px;
         position: absolute;
@@ -111,7 +115,7 @@
       .button {
         display: inline-block;
         position: relative;
-        color: var(--fg-color-color);
+        color: var(--fg-color);
         padding: var(--padding);
         background: var(--bg-color);
         border-radius: var(--radius);
@@ -284,7 +288,7 @@
       }
       .timeline__arrow {
         background-color: transparent;
-        color: var(--fg-color-color);
+        color: var(--fg-color);
         border-radius: 0.25em;
         cursor: pointer;
         flex-shrink: 0;
@@ -313,6 +317,9 @@
       .timeline__date {
         font-size: 0.833em;
         line-height: 2.4;
+      }
+      .use-fg-as-bg {
+        background: var(--fg-color);
       }
       .timeline__dot {
         border-radius: 50%;
@@ -382,7 +389,7 @@
       }
     </style>
   </head>
-  <body>
+  <body class="hide">
     <div id="background">
       <img
         id="active-background"
@@ -657,18 +664,106 @@
                   {
                     date: "March, 2024",
                     title: "Ari Helper",
-                    icon: "ari-helper.png",
+                    icon: "ari-helper.jpg",
                     link: "https://apps.apple.com/us/app/ari-helper/id6480045555",
                     description:
                       "An on device, privacy focused, chat app that lets you chat with a micro large language model from anywhere including Siri. Its fast, and efficient and runs on iphones, ipads and macs.",
                   },
                   {
+                    date: "Feb, 2024",
+                    title: "Arcade",
+                    icon: "arcade.jpg",
+                    link: "https://arcade.wemiller.com",
+                    description:
+                      "Right before classic game emulators were available on the app store, I decided to build a web based library on top of another popular web based emulator that can play several different systems.",
+                  },
+                  {
                     date: "July, 2023",
                     title: "Mi Speaks",
-                    icon: "mi-speaks.png",
+                    icon: "mi-speaks.jpg",
                     link: "https://apps.apple.com/us/app/mi-speaks/id6451395651",
                     description:
                       "Want to listen to that long research paper? This native iOS app allows you to enjoy your written content from anywhere by listening to it. In a rush, use Turbo mode to speed read anything.",
+                  },
+                  {
+                    date: "July, 2023",
+                    title: "DeepSi",
+                    icon: "deepsi.jpg",
+                    link: "https://apps.apple.com/us/app/deepsi/id6449420511",
+                    description:
+                      "Ever wondered what it would be like if you saw depth instead of lights? This app lets you use your phones depth sensors as a camera to capture moments in unique ways or navigate in the dark with ease.",
+                  },
+                  {
+                    date: "August, 2023",
+                    title: "Lamdi",
+                    icon: "lamdi.jpg",
+                    link: "https://apps.apple.com/us/app/lamdi/id6446975599",
+                    description:
+                      "A mobile app for when you just want to preview that static site you might be working on. It spins up a light web server and allows you to test out your web page from anywhere.",
+                  },
+                  {
+                    date: "April, 2022",
+                    title: "What A Morning! Coffee Co.",
+                    icon: "wamcoffee.jpg",
+                    link: "https://wamcoffee.wemiller.com",
+                    description:
+                      'You ever had a random idea and say, "Wow that would be a great brand" and then you bring your brand to reality? just me? Ok, thats what happened with this coffee brand that we did sell real coffee from and it tasted great!',
+                  },
+                  {
+                    date: "July, 2022",
+                    title: "Topo",
+                    icon: "topo.jpg",
+                    link: "https://topo.wemiller.com",
+                    description:
+                      "My grandfather used to collect topographical maps and after all these years we decided to scan them and I threw together a quick website to enjoy them at.",
+                  },
+                  {
+                    date: "November, 2015",
+                    title: "Cache",
+                    icon: "cache.jpg",
+                    link: "",
+                    description:
+                      "Cache is a social network that allows you to place and find photos and videos in the world around you. I leverages the gps and an online database of content to know when you cross paths with something that was taken at that location where you were. It allows you to see and connect with significant events that happened where you stand before. Kind of a neat feature being a location based social network was a city localized chat room and what we referred to as Cache Hunting to find nearby Caches",
+                  },
+                  {
+                    date: "October, 2015",
+                    title: "Threndr",
+                    icon: "threndr.jpg",
+                    link: "",
+                    description:
+                      "As our final project in college, I wanted to build something great in our condensed 8 week course. So I threw together another customer ecomerce site. To my surprise our professor said we were the only team to build something this ready for production.",
+                  },
+                  {
+                    date: "October, 2014",
+                    title: "Featheread",
+                    icon: "featheread.jpg",
+                    link: "",
+                    description:
+                      "Besides simple company sites for the marketing portion of Cenode, Featheread was quite the deviation. It is defined simply as the YouTube for books. It allows young and aspiring authors to gain an audience. It is a gorgeously custom designed human interface and a testament to 2 years of dedication to the social network as a whole. It was our first social network preceding Cache.",
+                  },
+                  {
+                    date: "May, 2014",
+                    title: "Tri-Add",
+                    icon: "tri-add.jpg",
+                    link: "",
+                    description:
+                      "Some ideas you have to talking outside of the office when saying good by to a great friend. This was the concept for Tri-Add named by my friends mother. Simply additive color mixing game that turned out to be not so simple. This was our first go at an original game and it played with simple sound effects and animation. The premise seems simple but it got progressively more difficult as you went through the theoretically limitless randomized levels. This app was built when Obj-C was the only language on iOS",
+                  },
+                  {
+                    date: "April, 2014",
+                    title: "Wise Flyer",
+                    icon: "wise-flyer.jpg",
+                    link: "https://apps.apple.com/us/app/wise-flyer/id853900499",
+                    description:
+                      "A never ending game where you make an owl fly through electrical pipes, with an exceptional soundscape as well!",
+                  },
+                  {
+                    date: "June, 2013",
+                    title: "Flat Dash",
+                    icon: "flat-dash.jpg",
+                    link: "",
+                    description:
+                      'Cenode, originally named "Boss Design Labs" started with Flat Dash as a proof of concept in our ability to develop useful software applications. It was developed before Car Play was available. It provided an easy way to quickly navigate your phone and get useful stats such as time weather and speed.',
                   },
                   {
                     date: "June, 2013",
@@ -677,6 +772,14 @@
                     link: "https://cenode.wemiller.com/",
                     description:
                       "A marketing company that focused on bringing unique software interactions to life on both web and mobile. From launching the YouTube for books, to a geospatial passive social network, nothing was too unique to try.",
+                  },
+                  {
+                    date: "October, 2012",
+                    title: "Ripple",
+                    icon: "ripple.jpg",
+                    link: "",
+                    description:
+                      "My first Virtual Entierprise ecomerce shop that helped our virtual business win in the international trade show in NY. I one at the California website which solidified my desire to build beuatiful software going forward.",
                   },
                 ]
                   .map((item, index) => ({ ...item, position: index }))
@@ -702,13 +805,19 @@
                             <use href="#arrow" />
                           </svg>
                         </button>
-                        <span class="timeline__dot"><img src="projects/${item.icon}" /></span>
-                        <span id="item${item.position}-name" class="timeline__meta">
+                        <span class="timeline__dot ${
+                          item.icon.length ? "" : "use-fg-as-bg"
+                        }">${item.icon.length ? '<img src="projects/' : ""}${item.icon}${item.icon.length ? '" />' : ""}</span>
+                        <span id="item${
+                          item.position
+                        }-name" class="timeline__meta">
                           <time class="timeline__date" datetime="${item.date}"
                             >${item.date}</time
                           ><br />
                           <strong class="timeline__title">
-                           <a href="${item.link}">${item.title}</a></strong>
+                           ${
+                             item.link.length ? '<a href="' : ""
+                           }${item.link}${item.link.length ? '">' : ""}${item.title}${item.link.length ? "</a>" : ""}</strong>
                         </span>
                       </div>
                       <div
@@ -936,7 +1045,7 @@
               top: button.parentElement.parentElement.offsetTop - 7,
               behavior: "smooth",
             });
-          }, animOptions.duration);
+          }, animOptions.duration + 50);
         }
         itemAction(e) {
           const { target } = e;
@@ -970,6 +1079,10 @@
           }
         }
       }
+
+      window.addEventListener("load", function () {
+        document.body.classList.remove("hide");
+      });
     </script>
     <script type="application/ld+json">
       {
