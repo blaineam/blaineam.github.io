@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="canonical" href="https://wemiller.com/panos/" />
+	    <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Blaine Miller Photography Panorama Gallery</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha512-H9jrZiiopUdsLpg94A333EfumgUBpO9MdbxStdeITo+KEIMaNfHNvwyjjDJb+ERPaRS6DpyRlKbvPUasNItRyw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <style>
+
+            html, body {
+                margin: 0;
+                width: 100%;
+                height: 100%;
+                background-color: #222222;
+            }
+            .gallery a {
+                flex-grow: 1;
+                width: 360px;
+                height: 240px;
+                background-size: cover;
+                margin: 4px;
+                border: 1px solid #333333;
+                cursor: pointer;
+            }
+
+            .gallery a img {
+                width: 100%;
+                height: 100%;
+            }
+
+            .gallery a:hover {
+                border-color: #000;
+            }
+
+            .gallery {
+                display: flex;
+                flex-wrap: wrap;
+                margin-bottom: 4px;
+            }
+
+        </style>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha512-uURl+ZXMBrF4AwGaWmEetzrd+J5/8NRkWAvJx5sbPSSuOb0bZLqf+tOzniObO00BjHa/dD7gub9oCGMLPQHtQA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    </head>
+    <body>
+        <div class="gallery">
+
+        </div>
+        <script>
+            $(document).ready(function(){
+                var N = 6;
+                var urls = Array.from({length: N}, (_, index) => "https://cdn.wemiller.com/blainemillerphotography/panoramas/bmp-pano-sphere-" + (index + 1) + ".jpg").reverse();
+                for ( var i = 0; i < urls.length; i++ ) {
+                    url = urls[i];
+                    $('.gallery').append('<a data-fancybox="sphere-gallery" data-fancybox data-type="iframe" data-src="https://cdn.pannellum.org/2.5/pannellum.htm#panorama=' + url + '&amp;autoLoad=true"  href="javascript:;"><img loading="lazy" src="' + (url.replace('sphere-','sphere-thumb-')) + '" /> </a>');
+                }
+
+                var N = 99;
+                var urls = Array.from({length: N}, (_, index) => "https://cdn.wemiller.com/blainemillerphotography/panoramas/bmp-pano-" + (index + 1) + ".jpg").reverse();
+                for ( var i = 0; i < urls.length; i++ ) {
+                    url = urls[i];
+                    $('.gallery').append('<a data-fancybox="pano-gallery" data-fancybox data-type="image" data-src="'+ url + '"  href="javascript:;"><img loading="lazy" src="' + (url.replace('pano-','pano-thumb-')) + '" /> </a>');
+                }
+            });
+        </script>
+    </body>
+</html>
