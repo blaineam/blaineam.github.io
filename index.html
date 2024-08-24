@@ -1,65 +1,94 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Blaine Miller - Sr. Software Engineer & Photographer</title>
+    <title>Blaine Miller - Sr. Software Engineer</title>
     <meta name="darkreader-lock" />
-    <meta name="viewport" content="initial-scale = 1.0,maximum-scale = 1.0" />
+    <link rel="apple-touch-icon" href="profile.jpg" />
+    <link rel="icon" type="image/jpeg" href="profile.jpg" />
+    <meta
+      name="viewport"
+      content="initial-scale = 1.0,maximum-scale = 1.0,minimum-scale = 1.0"
+    />
+    <meta property="og:type" content="profile" />
+    <meta property="og:title" content="Blaine Miller - Sr. Software Engineer" />
+    <meta property="og:url" content="https://www.wemiller.com" />
+    <meta property="og:image" content="https://www.wemiller.com/profile.jpg" />
+    <meta
+      property="og:description"
+      content="I enjoy finding unique solutions with tech. Photographing the world around me is fun. Just imagine what we can build together!"
+    />
+    <meta property="profile:first_name" content="Blaine" />
+    <meta property="profile:last_name" content="Miller" />
     <style>
       * {
+        border: 0;
         box-sizing: border-box;
+        margin: 0;
+        padding: 0;
       }
-
       :root {
-        --bg-color: rgba(255, 255, 255, 0.5);
-        --bg-color-half: rgba(255, 255, 255, 0.25);
-        --fg-color: rgb(22, 22, 22);
-        --bg-hover-color: rgba(200, 200, 200, 0.5);
+        --bg-color: rgba(255, 255, 255, 0.85);
+        --bg-color-half: rgba(255, 255, 255, 0.425);
+        --fg-color-color: rgb(22, 22, 22);
+        --bg-hover-color: rgba(200, 200, 200, 0.85);
+        --bg-hover-color-inverse: rgba(155, 155, 155, 0.85);
+        --radius: 7px;
+        --margin: 5px;
+        --padding: 7px;
+        --trans-dur: 0.3s;
+        --trans-timing: cubic-bezier(0.65, 0, 0.35, 1);
       }
 
       @media (prefers-color-scheme: dark) {
         :root {
-          --bg-color: rgba(0, 0, 0, 0.7);
-          --bg-color-half: rgba(0, 0, 0, 0.35);
-          --fg-color: rgb(222, 222, 222);
-          --bg-hover-color: rgba(50, 50, 50, 0.7);
+          --bg-color: rgba(0, 0, 0, 0.85);
+          --bg-color-half: rgba(0, 0, 0, 0.425);
+          --fg-color-color: rgb(222, 222, 222);
+          --bg-hover-color: rgba(50, 50, 50, 0.85);
+          --bg-hover-color-inverse: rgba(100, 100, 100, 0.85);
         }
       }
 
       html {
         margin: 0;
         background-color: var(--bg-color);
-        background-size: cover;
-        background-image: url("slides/bmp-45.jpg");
-        background-attachment: fixed;
-        background-position: center center;
-        background-repeat: no-repeat;
-        transition: 2s;
+        overflow: hidden;
+        width: 100vw;
+        height: 100vh;
       }
 
       body {
-        overflow: scroll;
-        width: 100vw;
-        height: 100vh;
+        overflow: auto;
+        width: 100%;
+        height: 100%;
         margin: 0;
         font-family: sans-serif;
-        color: var(--fg-color);
+        color: var(--fg-color-color);
       }
 
       a {
         text-decoration: none;
+        color: var(--fg-color-color);
       }
 
       .hide {
         opacity: 0;
         transition: opacity 0.5s;
+        pointer-events: none;
+      }
+
+      .same-space {
+        position: absolute;
+        top: 0px;
+        left: 0px;
       }
 
       *:not(.hide) {
         transition: opacity 0.5s;
       }
 
-      svg {
-        color: var(--fg-color);
+      .icon {
+        color: var(--fg-color-color);
         height: 20px;
         width: 20px;
         position: absolute;
@@ -67,8 +96,8 @@
 
       #picture {
         padding: 0px;
-        width: calc(100% - 10px);
-        margin: 5px;
+        width: calc(100% - 20px);
+        margin: 0px 10px 10px 10px;
         overflow: hidden;
         border-radius: 50%;
         border: solid 7px var(--bg-color-half);
@@ -78,15 +107,15 @@
       .button {
         display: inline-block;
         position: relative;
-        color: var(--fg-color);
-        padding: 7px;
+        color: var(--fg-color-color);
+        padding: var(--padding);
         background: var(--bg-color);
-        border-radius: 7px;
+        border-radius: var(--radius);
         width: 34px;
         height: 34px;
-        margin-left: 5px;
-        margin-right: 5px;
-        margin-bottom: 5px;
+        margin-left: var(--margin);
+        margin-right: var(--margin);
+        margin-bottom: var(--margin);
       }
 
       .button:hover {
@@ -106,8 +135,8 @@
 
       #info-toggle {
         position: fixed;
+        left: 64px;
         bottom: 20px;
-        right: 20px;
       }
 
       .body {
@@ -116,6 +145,7 @@
         justify-content: center;
         height: 100vh;
         width: 100vw;
+        padding: 5vw;
       }
 
       #information {
@@ -123,29 +153,228 @@
         flex-direction: row;
         flex-wrap: wrap;
         max-width: 700px;
-        width: 80%;
       }
       #information #left {
         flex: 1;
       }
 
-      #information #summary {
-        background: var(--bg-color);
-        padding: 7px;
-        border-radius: 7px;
+      #information #navigable {
         flex: 1.5;
+      }
+
+      #summary,
+      #projects {
+        background: var(--bg-color);
+        padding: var(--padding);
+        border-radius: var(--radius);
         text-align: center;
         align-content: center;
+        margin-bottom: 10px;
+        overflow-y: auto;
+        height: calc(100% - 57px);
+        width: 100%;
+        line-height: 1.5;
+        -ms-overflow-style: none; /* Internet Explorer 10+ */
+        scrollbar-width: none; /* Firefox */
+      }
+      #summary::-webkit-scrollbar,
+      #projects::-webkit-scrollbar {
+        display: none;
       }
 
       @media only screen and (max-width: 700px) {
         #information {
           flex-direction: column;
         }
+        #navigable {
+          height: 500px;
+          flex: none !important;
+        }
+        .body {
+          padding: 25px;
+          margin-bottom: 54px;
+        }
+      }
+
+      #navigable-links {
+        position: absolute;
+        left: 0px;
+        bottom: var(--margin);
+        width: 100%;
+      }
+
+      #background {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        display: inline-block;
+        top: 0px;
+        left: 0px;
+        z-index: -1;
+      }
+      #background img {
+        width: 100vw;
+        height: 100vh;
+        object-fit: cover;
+      }
+
+      #navigable {
+        position: relative;
+      }
+
+      #projects-toggle,
+      #summary-toggle {
+        position: absolute;
+        width: fit-content;
+        bottom: 0px;
+        margin-right: 0px;
+        margin-left: 0px;
+      }
+      #projects-toggle {
+        right: 0px;
+      }
+      #summary-toggle {
+        left: 0px;
+      }
+
+      .btn {
+        background-color: var(--bg-color);
+        border-radius: var(--radius);
+        color: var(--fg-color);
+        cursor: pointer;
+        padding: var(--padding);
+        transition: background-color calc(var(--trans-dur) / 2) linear,
+          color var(--trans-dur);
+        -webkit-tap-highlight-color: transparent;
+      }
+      .btn:hover {
+        background-color: var(--bg-hover-color-inverse);
+      }
+      .btn-group {
+        display: none;
+        gap: 0.375em;
+        margin-bottom: 1.5em;
+      }
+      .timeline {
+        margin: auto;
+        width: 100%;
+        padding: var(--padding) 0px;
+      }
+      .timeline__arrow {
+        background-color: transparent;
+        color: var(--fg-color-color);
+        border-radius: 0.25em;
+        cursor: pointer;
+        flex-shrink: 0;
+        margin-inline-end: var(--margin);
+        outline: transparent;
+        width: 30px;
+        height: 30px;
+        transition: background-color calc(var(--trans-dur) / 2) linear,
+          color var(--trans-dur);
+        -webkit-appearance: none;
+        appearance: none;
+        -webkit-tap-highlight-color: transparent;
+      }
+      .timeline__arrow:focus-visible,
+      .timeline__arrow:hover {
+        background-color: var(--bg-hover-color-inverse);
+      }
+      .timeline__arrow-icon {
+        display: block;
+        pointer-events: none;
+        transform: rotate(-90deg);
+        transition: transform var(--trans-dur) var(--trans-timing);
+        width: 100%;
+        height: auto;
+      }
+      .timeline__date {
+        font-size: 0.833em;
+        line-height: 2.4;
+      }
+      .timeline__dot {
+        border-radius: 50%;
+        display: inline-block;
+        flex-shrink: 0;
+        margin: 0;
+        margin-inline-end: 0;
+        position: relative;
+        width: 30px;
+        height: 30px;
+        overflow: hidden;
+      }
+      .timeline__dot img {
+        object-fit: cover;
+        width: 100%;
+      }
+      .timeline__item {
+        position: relative;
+        padding-bottom: 2.25em;
+      }
+      .timeline__item:not(:last-child):before {
+        background-color: currentColor;
+        content: "";
+        display: block;
+        position: absolute;
+        top: 1em;
+        left: 50px;
+        width: 0.125em;
+        height: 100%;
+        transform: translateX(-50%);
+      }
+      .timeline__item-header {
+        display: flex;
+      }
+      .timeline__item-body {
+        border-radius: 0.375em;
+        overflow: hidden;
+        margin-top: 0.5em;
+        margin-inline-start: 4em;
+        height: 0;
+      }
+      .timeline__item-body-content {
+        opacity: 0;
+        padding: 0.5em 0.75em;
+        visibility: hidden;
+        transition: opacity var(--trans-dur) var(--trans-timing),
+          visibility var(--trans-dur) steps(1, end);
+      }
+      .timeline__meta {
+        width: 100%;
+      }
+      .timeline__title {
+        font-size: 1.5em;
+        line-height: 1.333;
+      }
+      /* Expanded state */
+      .timeline__item-body--expanded {
+        height: auto;
+      }
+      .timeline__item-body--expanded .timeline__item-body-content {
+        opacity: 1;
+        visibility: visible;
+        transition-delay: var(--trans-dur), 0s;
+      }
+      .timeline__arrow[aria-expanded="true"] .timeline__arrow-icon {
+        transform: rotate(0);
       }
     </style>
   </head>
   <body>
+    <div id="background">
+      <img
+        id="active-background"
+        class="same-space"
+        src="slides/bmp-63.jpg"
+        alt="Photography Background from Blaine Miller"
+      />
+      <img
+        id="next-background"
+        class="hide same-space"
+        src="slides/bmp-63.jpg"
+        alt="Photography Background from Blaine Miller"
+      />
+    </div>
     <div class="body">
       <div id="information">
         <div id="left">
@@ -257,7 +486,7 @@
                     "m" +
                     "'" +
                     ' title="email">' +
-                    '<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 7.00005L10.2 11.65C11.2667 12.45 12.7333 12.45 13.8 11.65L20 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>' +
+                    '<svg  class="icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 7.00005L10.2 11.65C11.2667 12.45 12.7333 12.45 13.8 11.65L20 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>' +
                     "<" +
                     "/" +
                     "a" +
@@ -271,6 +500,7 @@
                 title="linkedin"
               >
                 <svg
+                  class="icon"
                   viewBox="0 0 20 20"
                   version="1.1"
                   xmlns="http://www.w3.org/2000/svg"
@@ -304,6 +534,7 @@
             <span class="button">
               <a href="https://github.com/blaineam" title="github">
                 <svg
+                  class="icon"
                   viewBox="0 0 24 24"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
@@ -323,6 +554,7 @@
                 title="instagram"
               >
                 <svg
+                  class="icon"
                   viewBox="0 0 20 20"
                   version="1.1"
                   xmlns="http://www.w3.org/2000/svg"
@@ -356,6 +588,7 @@
             <span class="button">
               <a href="http://x.com/helloblaine " title="x formerly twitter">
                 <svg
+                  class="icon"
                   xmlns="http://www.w3.org/2000/svg"
                   shape-rendering="geometricPrecision"
                   text-rendering="geometricPrecision"
@@ -374,18 +607,116 @@
             </span>
           </div>
         </div>
-        <div id="summary">
-          <h1>Hello, I'm Blaine</h1>
-          <h2>Sr. Software Engineer</h2>
-          <p>I enjoy solving problems in unique ways.</p>
-          <p>Photographing the world around me is fun.</p>
-          <p>I wonder what we can accomplish together!</p>
+        <div id="navigable">
+          <div id="summary" class="same-space">
+            <h1>Hello, I'm Blaine</h1>
+            <h2>Sr. Software Engineer</h2>
+            <p>I enjoy finding unique solutions with tech.</p>
+            <p>Photographing the world around me is fun.</p>
+            <p>Just imagine what we can build together!</p>
+          </div>
+          <div id="projects" class="hide same-space">
+            <svg class="icon" display="none">
+              <symbol id="arrow">
+                <polyline
+                  points="7 10,12 15,17 10"
+                  fill="none"
+                  stroke="currentcolor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                />
+              </symbol>
+            </svg>
+            <div id="timeline" class="timeline">
+              <div class="btn-group"></div>
+              <script>
+                [
+                  {
+                    date: "March, 2024",
+                    title: "Ari Helper",
+                    icon: "ari-helper.png",
+                    link: "https://apps.apple.com/us/app/ari-helper/id6480045555",
+                    description:
+                      "An on device, privacy focused, chat app that lets you chat with a micro large language model from anywhere including Siri. Its fast, and efficient and runs on iphones, ipads and macs.",
+                  },
+                  {
+                    date: "July, 2023",
+                    title: "Mi Speaks",
+                    icon: "mi-speaks.png",
+                    link: "https://apps.apple.com/us/app/mi-speaks/id6451395651",
+                    description:
+                      "Want to listen to that long research paper? This native iOS app allows you to enjoy your written content from anywhere by listening to it. In a rush, use Turbo mode to speed read anything.",
+                  },
+                  {
+                    date: "June, 2013",
+                    title: "Cenode",
+                    icon: "cenode.jpg",
+                    link: "https://cenode.wemiller.com/",
+                    description:
+                      "A marketing company that focused on bringing unique software interactions to life on both web and mobile. From launching the YouTube for books, to a geospatial passive social network, nothing was too unique to try.",
+                  },
+                ]
+                  .map((item, index) => ({ ...item, position: index }))
+                  .forEach(function (item) {
+                    document.write(`<div class="timeline__item">
+                      <div class="timeline__item-header">
+                        <button
+                          class="timeline__arrow"
+                          type="button"
+                          id="item${item.position}"
+                          aria-labelledby="item${item.position}-name"
+                          aria-expanded="false"
+                          aria-controls="item${item.position}-ctrld"
+                          aria-haspopup="true"
+                          data-item="${item.position}"
+                        >
+                          <svg
+                            class="timeline__arrow-icon"
+                            viewBox="0 0 24 24"
+                            width="24px"
+                            height="24px"
+                          >
+                            <use href="#arrow" />
+                          </svg>
+                        </button>
+                        <span class="timeline__dot"><img src="projects/${item.icon}" /></span>
+                        <span id="item${item.position}-name" class="timeline__meta">
+                          <time class="timeline__date" datetime="${item.date}"
+                            >${item.date}</time
+                          ><br />
+                          <strong class="timeline__title">
+                           <a href="${item.link}">${item.title}</a></strong>
+                        </span>
+                      </div>
+                      <div
+                        class="timeline__item-body"
+                        id="item${item.position}-ctrld"
+                        role="region"
+                        aria-labelledby="item${item.position}"
+                        aria-hidden="true"
+                      >
+                        <div class="timeline__item-body-content">
+                          <p class="timeline__item-p">
+                           ${item.description}
+                          </p>
+                        </div>
+                      </div>
+                    </div>`);
+                  });
+              </script>
+            </div>
+          </div>
+          <div id="navigable-links">
+            <span id="summary-toggle" class="hide button">Summary</span>
+            <span id="projects-toggle" class="button">Projects</span>
+          </div>
         </div>
-        <div id="projects"></div>
       </div>
 
       <span id="info-toggle" class="button" title="Show/Hide Information"
         ><svg
+          class="icon"
           viewBox="0 0 24 24"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
@@ -407,6 +738,7 @@
       ></span>
       <span class="button" id="audio-toggle" title="Mute/Unmute">
         <svg
+          class="icon"
           id="muted"
           viewBox="0 0 24 24"
           fill="none"
@@ -421,8 +753,8 @@
           />
         </svg>
         <svg
+          class="icon hide"
           id="unmuted"
-          class="hide"
           viewBox="0 0 24 24"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
@@ -439,26 +771,27 @@
     </div>
     <audio id="bgaudio" lazy src="loop.mp3"></audio>
     <script>
-      var bgImageArray = [],
-        base = "slides/bmp-",
-        secs = 5;
+      var backgroundImages = [],
+        secs = 5,
+        transition = 500;
       for (var i = 63; i > -1; i--) {
-        bgImageArray.push(i + ".jpg");
+        backgroundImages.push("slides/bmp-" + i + ".jpg");
       }
-      // bgImageArray.forEach(function (img) {
-      //   new Image().src = base + img;
-      //   // caches images, avoiding white flash between background replacements
-      // });
 
       function backgroundSequence() {
         window.clearTimeout();
         var k = 0;
-        for (i = 0; i < bgImageArray.length; i++) {
+        for (i = 0; i < backgroundImages.length; i++) {
           setTimeout(function () {
-            new Image().src = base + bgImageArray[k];
-            document.documentElement.style.backgroundImage =
-              "url(" + base + bgImageArray[k] + ")";
-            if (k + 1 === bgImageArray.length) {
+            document.getElementById("next-background").src =
+              backgroundImages[k];
+            document.getElementById("next-background").classList.remove("hide");
+            setTimeout(function () {
+              document.getElementById("active-background").src =
+                backgroundImages[k];
+              document.getElementById("next-background").classList.add("hide");
+            }, transition);
+            if (k + 1 === backgroundImages.length) {
               setTimeout(function () {
                 backgroundSequence();
               }, secs * 1000);
@@ -503,6 +836,119 @@
         },
         false
       );
+
+      document.getElementById("projects-toggle").addEventListener(
+        "click",
+        function () {
+          document.getElementById("summary").classList.add("hide");
+          document.getElementById("summary-toggle").classList.remove("hide");
+          document.getElementById("projects").classList.remove("hide");
+          document.getElementById("projects-toggle").classList.add("hide");
+        },
+        false
+      );
+
+      document.getElementById("summary-toggle").addEventListener(
+        "click",
+        function () {
+          document.getElementById("projects").classList.add("hide");
+          document.getElementById("projects-toggle").classList.remove("hide");
+          document.getElementById("summary").classList.remove("hide");
+          document.getElementById("summary-toggle").classList.add("hide");
+        },
+        false
+      );
+
+      window.addEventListener("DOMContentLoaded", () => {
+        const ctl = new CollapsibleTimeline("#timeline");
+      });
+
+      class CollapsibleTimeline {
+        constructor(el) {
+          this.el = document.querySelector(el);
+
+          this.init();
+        }
+        init() {
+          this.el?.addEventListener("click", this.itemAction.bind(this));
+        }
+        animateItemAction(button, ctrld, contentHeight, shouldCollapse) {
+          const expandedClass = "timeline__item-body--expanded";
+          const animOptions = {
+            duration: 300,
+            easing: "cubic-bezier(0.65,0,0.35,1)",
+          };
+
+          if (shouldCollapse) {
+            button.ariaExpanded = "false";
+            ctrld.ariaHidden = "true";
+            ctrld.classList.remove(expandedClass);
+            animOptions.duration *= 2;
+            this.animation = ctrld.animate(
+              [
+                { height: `${contentHeight}px` },
+                { height: `${contentHeight}px` },
+                { height: "0px" },
+              ],
+              animOptions
+            );
+          } else {
+            button.ariaExpanded = "true";
+            ctrld.ariaHidden = "false";
+            ctrld.classList.add(expandedClass);
+            this.animation = ctrld.animate(
+              [{ height: "0px" }, { height: `${contentHeight}px` }],
+              animOptions
+            );
+          }
+        }
+        itemAction(e) {
+          const { target } = e;
+          const action = target?.getAttribute("data-action");
+          const item = target?.getAttribute("data-item");
+
+          if (action) {
+            const targetExpanded = action === "expand" ? "false" : "true";
+            const buttons = Array.from(
+              this.el?.querySelectorAll(`[aria-expanded="${targetExpanded}"]`)
+            );
+            const wasExpanded = action === "collapse";
+
+            for (let button of buttons) {
+              const buttonID = button.getAttribute("data-item");
+              const ctrld = this.el?.querySelector(`#item${buttonID}-ctrld`);
+              const contentHeight = ctrld.firstElementChild?.offsetHeight;
+
+              this.animateItemAction(button, ctrld, contentHeight, wasExpanded);
+            }
+          } else if (item) {
+            const button = this.el?.querySelector(`[data-item="${item}"]`);
+            const expanded = button?.getAttribute("aria-expanded");
+
+            if (!expanded) return;
+
+            const wasExpanded = expanded === "true";
+            const ctrld = this.el?.querySelector(`#item${item}-ctrld`);
+            const contentHeight = ctrld.firstElementChild?.offsetHeight;
+            this.animateItemAction(button, ctrld, contentHeight, wasExpanded);
+          }
+        }
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org/",
+        "@type": "Person",
+        "name": "Blaine Miller",
+        "image": "https://www.wemiller.com/profile.jpg",
+        "url": "https://www.wemiller.com",
+        "jobTitle": "Sr. Software Engineer",
+        "sameAs": [
+          "https://www.instagram.com/helloblainemiller/",
+          "https://www.linkedin.com/in/millerblaine/",
+          "http://x.com/helloblaine"
+        ]
+      }
     </script>
   </body>
 </html>
