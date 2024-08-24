@@ -9,7 +9,992 @@
       name="viewport"
       content="initial-scale = 1.0,maximum-scale = 1.0,minimum-scale = 1.0"
     />
+    <meta property="og:type" content="profile" /><!DOCTYPE html>
+<html>
+  <head>
+    <title>Blaine Miller - Sr. Software Engineer</title>
+    <meta name="darkreader-lock" />
+    <link rel="apple-touch-icon" href="profile.jpg" />
+    <link rel="icon" type="image/jpeg" href="profile.jpg" />
+    <meta
+      name="viewport"
+      content="initial-scale = 1.0,maximum-scale = 1.0,minimum-scale = 1.0"
+    />
     <meta property="og:type" content="profile" />
+    <meta property="og:title" content="Blaine Miller - Sr. Software Engineer" />
+    <meta property="og:url" content="https://www.wemiller.com" />
+    <meta property="og:image" content="https://www.wemiller.com/profile.jpg" />
+    <meta
+      property="og:description"
+      content="I enjoy finding unique solutions with tech. Photographing the world around me is fun. Just imagine what we can build together!"
+    />
+    <meta property="profile:first_name" content="Blaine" />
+    <meta property="profile:last_name" content="Miller" />
+    <style>
+      * {
+        border: 0;
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      :root {
+        --bg-color: rgba(255, 255, 255, 0.85);
+        --bg-color-half: rgba(255, 255, 255, 0.425);
+        --fg-color-color: rgb(22, 22, 22);
+        --bg-hover-color: rgba(200, 200, 200, 0.85);
+        --bg-hover-color-inverse: rgba(155, 155, 155, 0.85);
+        --radius: 7px;
+        --margin: 5px;
+        --padding: 7px;
+        --trans-dur: 0.3s;
+        --trans-timing: cubic-bezier(0.65, 0, 0.35, 1);
+      }
+
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg-color: rgba(0, 0, 0, 0.85);
+          --bg-color-half: rgba(0, 0, 0, 0.425);
+          --fg-color-color: rgb(222, 222, 222);
+          --bg-hover-color: rgba(50, 50, 50, 0.85);
+          --bg-hover-color-inverse: rgba(100, 100, 100, 0.85);
+        }
+      }
+
+      html {
+        margin: 0;
+        background-color: var(--bg-color);
+        overflow: clip;
+        width: 100%;
+        height: 100%;
+      }
+
+      body {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        font-family: sans-serif;
+        color: var(--fg-color-color);
+      }
+
+      a {
+        text-decoration: none;
+        color: var(--fg-color-color);
+      }
+
+      .hide {
+        opacity: 0;
+        transition: opacity 0.5s;
+        pointer-events: none;
+      }
+
+      .same-space {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+      }
+
+      *:not(.hide) {
+        transition: opacity 0.5s;
+      }
+
+      .icon {
+        color: var(--fg-color-color);
+        height: 20px;
+        width: 20px;
+        position: absolute;
+      }
+
+      #picture {
+        padding: 0px;
+        width: calc(100% - 20px);
+        margin: 0px 10px 10px 10px;
+        overflow: hidden;
+        border-radius: 50%;
+        border: solid 7px var(--bg-color-half);
+        background: var(--bg-color-half);
+      }
+
+      .button {
+        display: inline-block;
+        position: relative;
+        color: var(--fg-color-color);
+        padding: var(--padding);
+        background: var(--bg-color);
+        border-radius: var(--radius);
+        width: 34px;
+        height: 34px;
+        margin-left: var(--margin);
+        margin-right: var(--margin);
+        margin-bottom: var(--margin);
+      }
+
+      .button:hover {
+        background: var(--bg-hover-color);
+      }
+
+      #links {
+        margin: 0 auto;
+        width: fit-content;
+      }
+
+      #audio-toggle {
+        position: fixed;
+        bottom: 20px;
+        left: 20px;
+      }
+
+      #info-toggle {
+        position: fixed;
+        left: 20px;
+        bottom: 64px;
+      }
+
+      .body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        width: 100%;
+        padding: 18px 69px;
+        overflow: auto;
+        -ms-overflow-style: none; /* Internet Explorer 10+ */
+        scrollbar-width: none; /* Firefox */
+      }
+
+      #information {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        max-width: 700px;
+      }
+      #information #menu {
+        flex: 1;
+      }
+
+      #information #navigable {
+        flex: 1.5;
+      }
+
+      #summary,
+      #projects {
+        background: var(--bg-color);
+        padding: var(--padding);
+        border-radius: var(--radius);
+        text-align: center;
+        align-content: center;
+        margin-bottom: 10px;
+        height: calc(100% - 57px);
+        width: 100%;
+        line-height: 1.5;
+        -ms-overflow-style: none; /* Internet Explorer 10+ */
+        scrollbar-width: none; /* Firefox */
+      }
+      #summary::-webkit-scrollbar,
+      #projects::-webkit-scrollbar,
+      #timeline::-webkit-scrollbar,
+      .body::-webkit-scrollbar {
+        display: none;
+      }
+
+      @media only screen and (max-width: 700px) {
+        #information {
+          flex-direction: column;
+        }
+        #navigable {
+          height: 500px;
+          flex: none !important;
+        }
+        .body {
+          display: block;
+          padding: 54px;
+          padding-bottom: 0px;
+        }
+        #info-toggle {
+          left: 5px;
+          bottom: 49px;
+        }
+
+        #audio-toggle {
+          left: 5px;
+          bottom: 5px;
+        }
+      }
+
+      #navigable-links {
+        position: absolute;
+        left: 0px;
+        bottom: var(--margin);
+        width: 100%;
+      }
+
+      #background {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        display: inline-block;
+        top: 0px;
+        left: 0px;
+        z-index: -1;
+      }
+      #background img {
+        width: 100vw;
+        height: 100vh;
+        object-fit: cover;
+      }
+
+      #navigable {
+        position: relative;
+      }
+
+      #projects-toggle,
+      #summary-toggle {
+        position: absolute;
+        width: fit-content;
+        bottom: 0px;
+        margin-right: 0px;
+        margin-left: 0px;
+      }
+      #projects-toggle {
+        right: 0px;
+      }
+      #summary-toggle {
+        left: 0px;
+      }
+
+      .btn {
+        background-color: var(--bg-color);
+        border-radius: var(--radius);
+        color: var(--fg-color);
+        cursor: pointer;
+        padding: var(--padding);
+        transition: background-color calc(var(--trans-dur) / 2) linear,
+          color var(--trans-dur);
+        -webkit-tap-highlight-color: transparent;
+      }
+      .btn:hover {
+        background-color: var(--bg-hover-color-inverse);
+      }
+      .btn-group {
+        display: none;
+        gap: 0.375em;
+        margin-bottom: 1.5em;
+      }
+      .timeline {
+        margin: auto;
+        overflow: auto;
+        height: 100%;
+        width: 100%;
+        padding: var(--padding) 0px;
+        -ms-overflow-style: none; /* Internet Explorer 10+ */
+        scrollbar-width: none; /* Firefox */
+      }
+      .timeline__arrow {
+        background-color: transparent;
+        color: var(--fg-color-color);
+        border-radius: 0.25em;
+        cursor: pointer;
+        flex-shrink: 0;
+        margin-inline-end: var(--margin);
+        outline: transparent;
+        width: 30px;
+        height: 30px;
+        transition: background-color calc(var(--trans-dur) / 2) linear,
+          color var(--trans-dur);
+        -webkit-appearance: none;
+        appearance: none;
+        -webkit-tap-highlight-color: transparent;
+      }
+      .timeline__arrow:focus-visible,
+      .timeline__arrow:hover {
+        background-color: var(--bg-hover-color-inverse);
+      }
+      .timeline__arrow-icon {
+        display: block;
+        pointer-events: none;
+        transform: rotate(-90deg);
+        transition: transform var(--trans-dur) var(--trans-timing);
+        width: 100%;
+        height: auto;
+      }
+      .timeline__date {
+        font-size: 0.833em;
+        line-height: 2.4;
+      }
+      .timeline__dot {
+        border-radius: 50%;
+        display: inline-block;
+        flex-shrink: 0;
+        margin: 0;
+        margin-inline-end: 0;
+        position: relative;
+        width: 30px;
+        height: 30px;
+        overflow: hidden;
+      }
+      .timeline__dot img {
+        object-fit: cover;
+        width: 100%;
+      }
+      .timeline__item {
+        position: relative;
+        padding-bottom: 2.25em;
+      }
+      .timeline__item:not(:last-child):before {
+        background-color: currentColor;
+        content: "";
+        display: block;
+        position: absolute;
+        top: 1em;
+        left: 50px;
+        width: 0.125em;
+        height: 100%;
+        transform: translateX(-50%);
+      }
+      .timeline__item-header {
+        display: flex;
+      }
+      .timeline__item-body {
+        border-radius: 0.375em;
+        overflow: hidden;
+        margin-top: 0.5em;
+        margin-inline-start: 4em;
+        height: 0;
+      }
+      .timeline__item-body-content {
+        opacity: 0;
+        padding: 0.5em 0.75em;
+        visibility: hidden;
+        transition: opacity var(--trans-dur) var(--trans-timing),
+          visibility var(--trans-dur) steps(1, end);
+      }
+      .timeline__meta {
+        width: 100%;
+      }
+      .timeline__title {
+        font-size: 1.5em;
+        line-height: 1.333;
+      }
+      /* Expanded state */
+      .timeline__item-body--expanded {
+        height: auto;
+      }
+      .timeline__item-body--expanded .timeline__item-body-content {
+        opacity: 1;
+        visibility: visible;
+        transition-delay: var(--trans-dur), 0s;
+      }
+      .timeline__arrow[aria-expanded="true"] .timeline__arrow-icon {
+        transform: rotate(0);
+      }
+    </style>
+  </head>
+  <body>
+    <div id="background">
+      <img
+        id="active-background"
+        class="same-space"
+        src="slides/bmp-63.jpg"
+        alt="Photography Background from Blaine Miller"
+      />
+      <img
+        id="next-background"
+        class="hide same-space"
+        src="slides/bmp-63.jpg"
+        alt="Photography Background from Blaine Miller"
+      />
+    </div>
+    <div class="body">
+      <div id="information">
+        <div id="menu">
+          <img
+            id="picture"
+            src="profile.jpg"
+            alt="Photo of Blaine Miller with an oceanic island scene behind him"
+          />
+          <div id="links">
+            <span class="button">
+              <script>
+                document.write(
+                  "<" +
+                    "a" +
+                    " " +
+                    "h" +
+                    "r" +
+                    "e" +
+                    "f" +
+                    "=" +
+                    "'" +
+                    "&" +
+                    "#" +
+                    "1" +
+                    "0" +
+                    "9" +
+                    ";" +
+                    "&" +
+                    "#" +
+                    "9" +
+                    "7" +
+                    ";" +
+                    "i" +
+                    "&" +
+                    "#" +
+                    "1" +
+                    "0" +
+                    "8" +
+                    ";" +
+                    "t" +
+                    "o" +
+                    "&" +
+                    "#" +
+                    "5" +
+                    "8" +
+                    ";" +
+                    "%" +
+                    "6" +
+                    "2" +
+                    "l" +
+                    "a" +
+                    "%" +
+                    "6" +
+                    "9" +
+                    "&" +
+                    "#" +
+                    "3" +
+                    "7" +
+                    ";" +
+                    "6" +
+                    "E" +
+                    "e" +
+                    "%" +
+                    "4" +
+                    "0" +
+                    "&" +
+                    "#" +
+                    "1" +
+                    "1" +
+                    "9" +
+                    ";" +
+                    "&" +
+                    "#" +
+                    "1" +
+                    "0" +
+                    "1" +
+                    ";" +
+                    "%" +
+                    "&" +
+                    "#" +
+                    "5" +
+                    "4" +
+                    ";" +
+                    "D" +
+                    "&" +
+                    "#" +
+                    "3" +
+                    "7" +
+                    ";" +
+                    "6" +
+                    "9" +
+                    "l" +
+                    "%" +
+                    "6" +
+                    "C" +
+                    "e" +
+                    "r" +
+                    "&" +
+                    "#" +
+                    "4" +
+                    "6" +
+                    ";" +
+                    "&" +
+                    "#" +
+                    "9" +
+                    "9" +
+                    ";" +
+                    "o" +
+                    "m" +
+                    "'" +
+                    ' title="email">' +
+                    '<svg  class="icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 7.00005L10.2 11.65C11.2667 12.45 12.7333 12.45 13.8 11.65L20 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>' +
+                    "<" +
+                    "/" +
+                    "a" +
+                    ">"
+                );
+              </script>
+            </span>
+            <span class="button">
+              <a
+                href="https://www.linkedin.com/in/millerblaine/"
+                title="linkedin"
+              >
+                <svg
+                  class="icon"
+                  viewBox="0 0 20 20"
+                  version="1.1"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <g
+                    id="Page-1"
+                    stroke="none"
+                    stroke-width="1"
+                    fill="none"
+                    fill-rule="evenodd"
+                  >
+                    <g
+                      id="Dribbble-Light-Preview"
+                      transform="translate(-180.000000, -7479.000000)"
+                      fill="currentColor"
+                    >
+                      <g
+                        id="icons"
+                        transform="translate(56.000000, 160.000000)"
+                      >
+                        <path
+                          d="M144,7339 L140,7339 L140,7332.001 C140,7330.081 139.153,7329.01 137.634,7329.01 C135.981,7329.01 135,7330.126 135,7332.001 L135,7339 L131,7339 L131,7326 L135,7326 L135,7327.462 C135,7327.462 136.255,7325.26 139.083,7325.26 C141.912,7325.26 144,7326.986 144,7330.558 L144,7339 L144,7339 Z M126.442,7323.921 C125.093,7323.921 124,7322.819 124,7321.46 C124,7320.102 125.093,7319 126.442,7319 C127.79,7319 128.883,7320.102 128.883,7321.46 C128.884,7322.819 127.79,7323.921 126.442,7323.921 L126.442,7323.921 Z M124,7339 L129,7339 L129,7326 L124,7326 L124,7339 Z"
+                          id="linkedin-[#161]"
+                        ></path>
+                      </g>
+                    </g>
+                  </g>
+                </svg>
+              </a>
+            </span>
+            <span class="button">
+              <a href="https://github.com/blaineam" title="github">
+                <svg
+                  class="icon"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M20.9992 5.95846C21.0087 6.565 20.9333 7.32649 20.8658 7.8807C20.8395 8.09686 20.8037 8.27676 20.7653 8.42453C21.6227 10.01 22 11.9174 22 14C22 16.4684 20.8127 18.501 18.9638 19.8871C17.1319 21.2605 14.6606 22 12 22C9.33939 22 6.86809 21.2605 5.0362 19.8871C3.18727 18.501 2 16.4684 2 14C2 11.9174 2.37732 10.01 3.23472 8.42452C3.19631 8.27676 3.16055 8.09685 3.13422 7.8807C3.06673 7.32649 2.99133 6.565 3.00081 5.95846C3.01149 5.27506 3.10082 4.5917 3.19988 3.91379C3.24569 3.60028 3.31843 3.30547 3.65883 3.11917C4.00655 2.92886 4.37274 2.99981 4.73398 3.1021C5.95247 3.44713 7.09487 3.93108 8.16803 4.51287C9.2995 4.17287 10.5783 4 12 4C13.4217 4 14.7005 4.17287 15.832 4.51287C16.9051 3.93108 18.0475 3.44713 19.266 3.1021C19.6273 2.99981 19.9935 2.92886 20.3412 3.11917C20.6816 3.30547 20.7543 3.60028 20.8001 3.91379C20.8992 4.5917 20.9885 5.27506 20.9992 5.95846ZM20 14C20 12.3128 19.6122 10 17.5 10C16.5478 10 15.6474 10.2502 14.7474 10.5004C13.8482 10.7502 12.9495 11 12 11C11.0505 11 10.1518 10.7502 9.25263 10.5004C8.35261 10.2502 7.45216 10 6.5 10C4.39379 10 4 12.3197 4 14C4 15.7636 4.82745 17.231 6.23588 18.2869C7.66135 19.3556 9.69005 20 12 20C14.3099 20 16.3386 19.3555 17.7641 18.2869C19.1726 17.231 20 15.7636 20 14ZM10 14.5C10 15.8807 9.32843 17 8.5 17C7.67157 17 7 15.8807 7 14.5C7 13.1193 7.67157 12 8.5 12C9.32843 12 10 13.1193 10 14.5ZM15.5 17C16.3284 17 17 15.8807 17 14.5C17 13.1193 16.3284 12 15.5 12C14.6716 12 14 13.1193 14 14.5C14 15.8807 14.6716 17 15.5 17Z"
+                    fill="currentColor"
+                  />
+                </svg>
+              </a>
+            </span>
+            <span class="button">
+              <a
+                href="https://www.instagram.com/helloblainemiller/"
+                title="instagram"
+              >
+                <svg
+                  class="icon"
+                  viewBox="0 0 20 20"
+                  version="1.1"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <g
+                    id="Page-1"
+                    stroke="none"
+                    stroke-width="1"
+                    fill="none"
+                    fill-rule="evenodd"
+                  >
+                    <g
+                      id="Dribbble-Light-Preview"
+                      transform="translate(-340.000000, -7439.000000)"
+                      fill="currentColor"
+                    >
+                      <g
+                        id="icons"
+                        transform="translate(56.000000, 160.000000)"
+                      >
+                        <path
+                          d="M289.869652,7279.12273 C288.241769,7279.19618 286.830805,7279.5942 285.691486,7280.72871 C284.548187,7281.86918 284.155147,7283.28558 284.081514,7284.89653 C284.035742,7285.90201 283.768077,7293.49818 284.544207,7295.49028 C285.067597,7296.83422 286.098457,7297.86749 287.454694,7298.39256 C288.087538,7298.63872 288.809936,7298.80547 289.869652,7298.85411 C298.730467,7299.25511 302.015089,7299.03674 303.400182,7295.49028 C303.645956,7294.859 303.815113,7294.1374 303.86188,7293.08031 C304.26686,7284.19677 303.796207,7282.27117 302.251908,7280.72871 C301.027016,7279.50685 299.5862,7278.67508 289.869652,7279.12273 M289.951245,7297.06748 C288.981083,7297.0238 288.454707,7296.86201 288.103459,7296.72603 C287.219865,7296.3826 286.556174,7295.72155 286.214876,7294.84312 C285.623823,7293.32944 285.819846,7286.14023 285.872583,7284.97693 C285.924325,7283.83745 286.155174,7282.79624 286.959165,7281.99226 C287.954203,7280.99968 289.239792,7280.51332 297.993144,7280.90837 C299.135448,7280.95998 300.179243,7281.19026 300.985224,7281.99226 C301.980262,7282.98483 302.473801,7284.28014 302.071806,7292.99991 C302.028024,7293.96767 301.865833,7294.49274 301.729513,7294.84312 C300.829003,7297.15085 298.757333,7297.47145 289.951245,7297.06748 M298.089663,7283.68956 C298.089663,7284.34665 298.623998,7284.88065 299.283709,7284.88065 C299.943419,7284.88065 300.47875,7284.34665 300.47875,7283.68956 C300.47875,7283.03248 299.943419,7282.49847 299.283709,7282.49847 C298.623998,7282.49847 298.089663,7283.03248 298.089663,7283.68956 M288.862673,7288.98792 C288.862673,7291.80286 291.150266,7294.08479 293.972194,7294.08479 C296.794123,7294.08479 299.081716,7291.80286 299.081716,7288.98792 C299.081716,7286.17298 296.794123,7283.89205 293.972194,7283.89205 C291.150266,7283.89205 288.862673,7286.17298 288.862673,7288.98792 M290.655732,7288.98792 C290.655732,7287.16159 292.140329,7285.67967 293.972194,7285.67967 C295.80406,7285.67967 297.288657,7287.16159 297.288657,7288.98792 C297.288657,7290.81525 295.80406,7292.29716 293.972194,7292.29716 C292.140329,7292.29716 290.655732,7290.81525 290.655732,7288.98792"
+                          id="instagram-[#167]"
+                        ></path>
+                      </g>
+                    </g>
+                  </g>
+                </svg>
+              </a>
+            </span>
+            <span class="button">
+              <a href="http://x.com/helloblaine " title="x formerly twitter">
+                <svg
+                  class="icon"
+                  xmlns="http://www.w3.org/2000/svg"
+                  shape-rendering="geometricPrecision"
+                  text-rendering="geometricPrecision"
+                  image-rendering="optimizeQuality"
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  viewBox="0 0 512 462.799"
+                >
+                  <path
+                    fill-rule="nonzero"
+                    fill="currentColor"
+                    d="M403.229 0h78.506L310.219 196.04 512 462.799H354.002L230.261 301.007 88.669 462.799h-78.56l183.455-209.683L0 0h161.999l111.856 147.88L403.229 0zm-27.556 415.805h43.505L138.363 44.527h-46.68l283.99 371.278z"
+                  />
+                </svg>
+              </a>
+            </span>
+          </div>
+        </div>
+        <div id="navigable">
+          <div id="summary" class="same-space">
+            <h1>Hello, I'm Blaine</h1>
+            <h2>Sr. Software Engineer</h2>
+            <p>I enjoy finding unique solutions with tech.</p>
+            <p>Photographing the world around me is fun.</p>
+            <p>Just imagine what we can build together!</p>
+          </div>
+          <div id="projects" class="hide same-space">
+            <svg class="icon" display="none">
+              <symbol id="arrow">
+                <polyline
+                  points="7 10,12 15,17 10"
+                  fill="none"
+                  stroke="currentcolor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                />
+              </symbol>
+            </svg>
+            <div id="timeline" class="timeline">
+              <div class="btn-group"></div>
+              <script>
+                [
+                  {
+                    date: "March, 2024",
+                    title: "Ari Helper",
+                    icon: "ari-helper.png",
+                    link: "https://apps.apple.com/us/app/ari-helper/id6480045555",
+                    description:
+                      "An on device, privacy focused, chat app that lets you chat with a micro large language model from anywhere including Siri. Its fast, and efficient and runs on iphones, ipads and macs.",
+                  },
+                  {
+                    date: "July, 2023",
+                    title: "Mi Speaks",
+                    icon: "mi-speaks.png",
+                    link: "https://apps.apple.com/us/app/mi-speaks/id6451395651",
+                    description:
+                      "Want to listen to that long research paper? This native iOS app allows you to enjoy your written content from anywhere by listening to it. In a rush, use Turbo mode to speed read anything.",
+                  },
+                  {
+                    date: "June, 2013",
+                    title: "Cenode",
+                    icon: "cenode.jpg",
+                    link: "https://cenode.wemiller.com/",
+                    description:
+                      "A marketing company that focused on bringing unique software interactions to life on both web and mobile. From launching the YouTube for books, to a geospatial passive social network, nothing was too unique to try.",
+                  },
+                ]
+                  .map((item, index) => ({ ...item, position: index }))
+                  .forEach(function (item) {
+                    document.write(`<div class="timeline__item">
+                      <div class="timeline__item-header">
+                        <button
+                          class="timeline__arrow"
+                          type="button"
+                          id="item${item.position}"
+                          aria-labelledby="item${item.position}-name"
+                          aria-expanded="false"
+                          aria-controls="item${item.position}-ctrld"
+                          aria-haspopup="true"
+                          data-item="${item.position}"
+                        >
+                          <svg
+                            class="timeline__arrow-icon"
+                            viewBox="0 0 24 24"
+                            width="24px"
+                            height="24px"
+                          >
+                            <use href="#arrow" />
+                          </svg>
+                        </button>
+                        <span class="timeline__dot"><img src="projects/${item.icon}" /></span>
+                        <span id="item${item.position}-name" class="timeline__meta">
+                          <time class="timeline__date" datetime="${item.date}"
+                            >${item.date}</time
+                          ><br />
+                          <strong class="timeline__title">
+                           <a href="${item.link}">${item.title}</a></strong>
+                        </span>
+                      </div>
+                      <div
+                        class="timeline__item-body"
+                        id="item${item.position}-ctrld"
+                        role="region"
+                        aria-labelledby="item${item.position}"
+                        aria-hidden="true"
+                      >
+                        <div class="timeline__item-body-content">
+                          <p class="timeline__item-p">
+                           ${item.description}
+                          </p>
+                        </div>
+                      </div>
+                    </div>`);
+                  });
+              </script>
+            </div>
+          </div>
+          <div id="navigable-links">
+            <span id="summary-toggle" class="hide button">Summary</span>
+            <span id="projects-toggle" class="button">Projects</span>
+          </div>
+        </div>
+      </div>
+
+      <span id="info-toggle" class="button" title="Show/Hide Information"
+        ><svg
+          class="icon"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M12 10.75C12.4142 10.75 12.75 11.0858 12.75 11.5V16.5C12.75 16.9142 12.4142 17.25 12 17.25C11.5858 17.25 11.25 16.9142 11.25 16.5V11.5C11.25 11.0858 11.5858 10.75 12 10.75Z"
+            fill="currentColor"
+          />
+          <path
+            d="M12 9C12.5523 9 13 8.55228 13 8C13 7.44772 12.5523 7 12 7C11.4477 7 11 7.44772 11 8C11 8.55228 11.4477 9 12 9Z"
+            fill="currentColor"
+          />
+          <path
+            fill-rule="evenodd"
+            clip-rule="evenodd"
+            d="M3.25 12C3.25 7.16751 7.16751 3.25 12 3.25C16.8325 3.25 20.75 7.16751 20.75 12C20.75 16.8325 16.8325 20.75 12 20.75C7.16751 20.75 3.25 16.8325 3.25 12ZM12 4.75C7.99594 4.75 4.75 7.99594 4.75 12C4.75 16.0041 7.99594 19.25 12 19.25C16.0041 19.25 19.25 16.0041 19.25 12C19.25 7.99594 16.0041 4.75 12 4.75Z"
+            fill="currentColor"
+          /></svg
+      ></span>
+      <span class="button" id="audio-toggle" title="Mute/Unmute">
+        <svg
+          class="icon"
+          id="muted"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M22 9L16 15M16 9L22 15M3 10.5V13.5C3 14.6046 3.5 15.5 5.5 16C7.5 16.5 9 21 12 21C14 21 14 3 12 3C9 3 7.5 7.5 5.5 8C3.5 8.5 3 9.39543 3 10.5Z"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+        <svg
+          class="icon hide"
+          id="unmuted"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M19 6C20.5 7.5 21 10 21 12C21 14 20.5 16.5 19 18M16 8.99998C16.5 9.49998 17 10.5 17 12C17 13.5 16.5 14.5 16 15M3 10.5V13.5C3 14.6046 3.5 15.5 5.5 16C7.5 16.5 9 21 12 21C14 21 14 3 12 3C9 3 7.5 7.5 5.5 8C3.5 8.5 3 9.39543 3 10.5Z"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </span>
+    </div>
+    <audio id="bgaudio" lazy src="loop.mp3"></audio>
+    <script>
+      var backgroundImages = [],
+        secs = 5,
+        transition = 500;
+      for (var i = 0; i < 64; i++) {
+        backgroundImages.push("slides/bmp-" + i + ".jpg");
+      }
+      backgroundImages = backgroundImages.reverse();
+
+      function backgroundSequence() {
+        window.clearTimeout();
+        var k = 0;
+        for (i = 1; i < backgroundImages.length + 1; i++) {
+          setTimeout(function () {
+            document.getElementById("next-background").src =
+              backgroundImages[k];
+            document.getElementById("next-background").classList.remove("hide");
+            setTimeout(function () {
+              document.getElementById("active-background").src =
+                backgroundImages[k];
+              document.getElementById("next-background").classList.add("hide");
+            }, transition);
+            if (k + 1 === backgroundImages.length) {
+              setTimeout(function () {
+                backgroundSequence();
+              }, secs * 1000);
+            } else {
+              k++;
+            }
+          }, secs * 1000 * i);
+        }
+      }
+      backgroundSequence();
+
+      var audio = document.getElementById("bgaudio");
+      var audioBtn = document.getElementById("audio-toggle");
+      audioBtn.addEventListener(
+        "click",
+        function () {
+          audio.loop = true;
+          if (!audio.paused) {
+            audio.pause();
+            document.getElementById("muted").classList.remove("hide");
+            document.getElementById("unmuted").classList.add("hide");
+            return;
+          }
+          audio.play();
+          document.getElementById("unmuted").classList.remove("hide");
+          document.getElementById("muted").classList.add("hide");
+        },
+        false
+      );
+
+      var infoBtn = document.getElementById("info-toggle");
+      infoBtn.addEventListener(
+        "click",
+        function () {
+          if (
+            document.getElementById("information").classList.contains("hide")
+          ) {
+            document.getElementById("information").classList.remove("hide");
+            return;
+          }
+          document.getElementById("information").classList.add("hide");
+        },
+        false
+      );
+      var first = true;
+      document.getElementById("projects-toggle").addEventListener(
+        "click",
+        function () {
+          document.getElementById("summary").classList.add("hide");
+          document.getElementById("summary-toggle").classList.remove("hide");
+          document.getElementById("projects").classList.remove("hide");
+          document.getElementById("projects-toggle").classList.add("hide");
+          if (first) {
+            first = false;
+            document
+              .getElementById("projects")
+              .scroll({ top: -999999999, behavior: "smooth" });
+          }
+        },
+        false
+      );
+
+      document.getElementById("summary-toggle").addEventListener(
+        "click",
+        function () {
+          document.getElementById("projects").classList.add("hide");
+          document.getElementById("projects-toggle").classList.remove("hide");
+          document.getElementById("summary").classList.remove("hide");
+          document.getElementById("summary-toggle").classList.add("hide");
+        },
+        false
+      );
+
+      window.addEventListener("DOMContentLoaded", () => {
+        const ctl = new CollapsibleTimeline("#timeline");
+      });
+
+      class CollapsibleTimeline {
+        constructor(el) {
+          this.el = document.querySelector(el);
+
+          this.init();
+        }
+        init() {
+          this.el?.addEventListener("click", this.itemAction.bind(this));
+        }
+        animateItemAction(button, ctrld, contentHeight, shouldCollapse) {
+          const expandedClass = "timeline__item-body--expanded";
+          const animOptions = {
+            duration: 300,
+            easing: "cubic-bezier(0.65,0,0.35,1)",
+          };
+
+          if (shouldCollapse) {
+            button.ariaExpanded = "false";
+            ctrld.ariaHidden = "true";
+            ctrld.classList.remove(expandedClass);
+            animOptions.duration *= 2;
+            this.animation = ctrld.animate(
+              [
+                { height: `${contentHeight}px` },
+                { height: `${contentHeight}px` },
+                { height: "0px" },
+              ],
+              animOptions
+            );
+          } else {
+            button.ariaExpanded = "true";
+            ctrld.ariaHidden = "false";
+            ctrld.classList.add(expandedClass);
+            this.animation = ctrld.animate(
+              [{ height: "0px" }, { height: `${contentHeight}px` }],
+              animOptions
+            );
+          }
+
+          setTimeout(() => {
+            document.getElementById("timeline").scrollTo({
+              top: button.parentElement.parentElement.offsetTop - 7,
+              behavior: "smooth",
+            });
+          }, animOptions.duration);
+        }
+        itemAction(e) {
+          const { target } = e;
+          const action = target?.getAttribute("data-action");
+          const item = target?.getAttribute("data-item");
+
+          if (action) {
+            const targetExpanded = action === "expand" ? "false" : "true";
+            const buttons = Array.from(
+              this.el?.querySelectorAll(`[aria-expanded="${targetExpanded}"]`)
+            );
+            const wasExpanded = action === "collapse";
+
+            for (let button of buttons) {
+              const buttonID = button.getAttribute("data-item");
+              const ctrld = this.el?.querySelector(`#item${buttonID}-ctrld`);
+              const contentHeight = ctrld.firstElementChild?.offsetHeight;
+
+              this.animateItemAction(button, ctrld, contentHeight, wasExpanded);
+            }
+          } else if (item) {
+            const button = this.el?.querySelector(`[data-item="${item}"]`);
+            const expanded = button?.getAttribute("aria-expanded");
+
+            if (!expanded) return;
+
+            const wasExpanded = expanded === "true";
+            const ctrld = this.el?.querySelector(`#item${item}-ctrld`);
+            const contentHeight = ctrld.firstElementChild?.offsetHeight;
+            this.animateItemAction(button, ctrld, contentHeight, wasExpanded);
+          }
+        }
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org/",
+        "@type": "Person",
+        "name": "Blaine Miller",
+        "image": "https://www.wemiller.com/profile.jpg",
+        "url": "https://www.wemiller.com",
+        "jobTitle": "Sr. Software Engineer",
+        "sameAs": [
+          "https://www.instagram.com/helloblainemiller/",
+          "https://www.linkedin.com/in/millerblaine/",
+          "http://x.com/helloblaine"
+        ]
+      }
+    </script>
+  </body>
+</html>
+
     <meta property="og:title" content="Blaine Miller - Sr. Software Engineer" />
     <meta property="og:url" content="https://www.wemiller.com" />
     <meta property="og:image" content="https://www.wemiller.com/profile.jpg" />
