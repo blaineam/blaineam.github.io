@@ -144,7 +144,7 @@
         justify-content: center;
         height: 100%;
         width: 100%;
-        padding: 69px;
+        padding: 18px 69px;
         overflow: auto;
         -ms-overflow-style: none; /* Internet Explorer 10+ */
         scrollbar-width: none; /* Firefox */
@@ -196,7 +196,7 @@
         .body {
           display: block;
           padding: 54px;
-          padding-bottom: 5px;
+          padding-bottom: 0px;
         }
         #info-toggle {
           left: 5px;
@@ -787,14 +787,15 @@
       var backgroundImages = [],
         secs = 5,
         transition = 500;
-      for (var i = 63; i > -1; i--) {
+      for (var i = 0; i < 64; i++) {
         backgroundImages.push("slides/bmp-" + i + ".jpg");
       }
+      backgroundImages = backgroundImages.reverse();
 
       function backgroundSequence() {
         window.clearTimeout();
         var k = 0;
-        for (i = 0; i < backgroundImages.length; i++) {
+        for (i = 1; i < backgroundImages.length + 1; i++) {
           setTimeout(function () {
             document.getElementById("next-background").src =
               backgroundImages[k];
