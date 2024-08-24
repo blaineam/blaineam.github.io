@@ -134,8 +134,8 @@
 
       #info-toggle {
         position: fixed;
-        left: 64px;
-        bottom: 20px;
+        left: 20px;
+        bottom: 64px;
       }
 
       .body {
@@ -144,8 +144,10 @@
         justify-content: center;
         height: 100%;
         width: 100%;
-        padding: 5vw;
+        padding: 69px;
         overflow: auto;
+        -ms-overflow-style: none; /* Internet Explorer 10+ */
+        scrollbar-width: none; /* Firefox */
       }
 
       #information {
@@ -154,7 +156,7 @@
         flex-wrap: wrap;
         max-width: 700px;
       }
-      #information #left {
+      #information #menu {
         flex: 1;
       }
 
@@ -178,7 +180,8 @@
         scrollbar-width: none; /* Firefox */
       }
       #summary::-webkit-scrollbar,
-      #projects::-webkit-scrollbar {
+      #projects::-webkit-scrollbar,
+      .body::-webkit-scrollbar {
         display: none;
       }
 
@@ -192,8 +195,17 @@
         }
         .body {
           display: block;
-          padding: 25px;
-          padding-bottom: 62px;
+          padding: 54px;
+          padding-bottom: 5px;
+        }
+        #info-toggle {
+          left: 5px;
+          bottom: 49px;
+        }
+
+        #audio-toggle {
+          left: 5px;
+          bottom: 5px;
         }
       }
 
@@ -378,7 +390,7 @@
     </div>
     <div class="body">
       <div id="information">
-        <div id="left">
+        <div id="menu">
           <img
             id="picture"
             src="profile.jpg"
