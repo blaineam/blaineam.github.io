@@ -655,6 +655,14 @@
               <script>
                 [
                   {
+                    date: "January, 2025",
+                    title: "Luma Editor",
+                    icon: "luma-editor.jpg",
+                    link: "https://apps.apple.com/us/app/luma-editor/id6741085424",
+                    description:
+                      "An automatic photo editor that uses your own styled photos to develop new photos. It allows photograhers with their own style to duplicate their style onto new photos for rapid sharing to social media or news outlets. It features a clean  interface and is Privacy focused running entirely on device and doesn't collect user data or use any third party libraries. Yes, it was named after my dog, Luma.",
+                  },
+                  {
                     date: "October, 2024",
                     title: "Embr",
                     icon: "embr.jpg",
@@ -806,7 +814,9 @@
                         </button>
                         <span class="timeline__dot ${
                           item.icon.length ? "" : "use-fg-as-bg"
-                        }">${item.icon.length ? '<img src="projects/' : ""}${item.icon}${item.icon.length ? '" />' : ""}</span>
+                        }"> ${
+                           item.link.length ? '<a href="' : ""
+                         }${item.link}${item.link.length ? '">' : ""}${item.icon.length ? '<img src="projects/' : ""}${item.icon}${item.icon.length ? '" />' : ""}${item.link.length ? "</a>" : ""}</span>
                         <span id="item${
                           item.position
                         }-name" class="timeline__meta">
