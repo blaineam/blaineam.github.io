@@ -46,6 +46,11 @@
         --trans-dur: 0.3s;
         --trans-timing: cubic-bezier(0.65, 0, 0.35, 1);
       }
+      
+      @font-face {
+          font-family: blaine;
+          src: url("path/blaine.ttf") format('truetype');
+      }
 
       @media (prefers-color-scheme: dark) {
         :root {
@@ -55,6 +60,11 @@
           --bg-hover-color: rgba(50, 50, 50, 0.85);
           --bg-hover-color-inverse: rgba(100, 100, 100, 0.85);
         }
+      }
+      
+      h1 {
+        font-family: "blaine", sans-serif;
+        font-size: 3em;
       }
 
       html {
@@ -395,13 +405,13 @@
       <img
         id="active-background"
         class="same-space"
-        src="slides/bmp-92.jpg"
+        src="slides/bmp-93.jpg"
         alt="Photography Background from Blaine Miller"
       >
       <img
         id="next-background"
         class="hide same-space"
-        src="slides/bmp-92.jpg"
+        src="slides/bmp-93.jpg"
         alt="Photography Background from Blaine Miller"
       >
     </div>
@@ -914,7 +924,7 @@
       var backgroundImages = [],
         secs = 5,
         transition = 500;
-      for (var i = 0; i < 93; i++) {
+      for (var i = 0; i < 94; i++) {
         backgroundImages.push("slides/bmp-" + i + ".jpg");
       }
       backgroundImages = backgroundImages.reverse();
