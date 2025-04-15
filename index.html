@@ -1034,11 +1034,10 @@
           currentIndex = index;
           document.getElementById("next-background").src = backgroundImages[currentIndex];
           document.getElementById("next-background").classList.remove("hide");
-          
+          updateActiveThumbnail();
           setTimeout(function() {
               document.getElementById("active-background").src = backgroundImages[currentIndex];
               document.getElementById("next-background").classList.add("hide");
-              updateActiveThumbnail();
           }, transition);
       }
       
@@ -1189,6 +1188,12 @@
         "click",
         function () {
          toggleClass(document.getElementById("information"), "hide");
+         if (document.body.classList.contains("photos-gallery")) {
+           removeClass(document.body, "photos-gallery");
+           addClass(document.getElementById("thumbnail-container"), "hide");
+           removeClass(document.body, "photos-gallery-with-thumbnails");
+           resumeSlideshow();
+         }
         },
         false
       );
@@ -1197,14 +1202,15 @@
       photosBtn.addEventListener(
         "click",
         function () {
-          toggleClass(document.getElementById("information"), "hide");
           toggleClass(document.body, "photos-gallery");
           if (document.body.classList.contains("photos-gallery")) {
             setupThumbnails();
             removeClass(document.getElementById("thumbnail-container"), "hide");
             addClass(document.body, "photos-gallery-with-thumbnails");
+            addClass(document.getElementById("information"), "hide");
           } else {
             addClass(document.getElementById("thumbnail-container"), "hide");
+            removeClass(document.getElementById("information"), "hide");
             removeClass(document.body, "photos-gallery-with-thumbnails");
             resumeSlideshow();
           }
