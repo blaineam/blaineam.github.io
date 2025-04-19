@@ -1243,6 +1243,9 @@
           if (animationFrameId) {
               cancelAnimationFrame(animationFrameId);
           }
+          
+          document.getElementById("active-background").style.transform = `scale(1)`;
+          document.getElementById("next-background").style.transform = `scale(1)`;
       }
       
       function resumeSlideshow() {
