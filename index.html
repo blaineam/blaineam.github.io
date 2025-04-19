@@ -1154,7 +1154,7 @@
           activeBackground.src = currentImage.src;
           activeBackground.classList.remove("crossfade");
           nextBackground.classList.remove("crossfade");
-          nextBackground.src = ""; // Clear next background
+          nextBackground.src = currentImage.src; // Clear next background
       
           let isCrossfading = false;
       
@@ -1303,7 +1303,7 @@
           const ul = document.createElement("ul");
           const li = document.createElement("li");
           const a = document.createElement("a");
-          a.href = `puzzles/?image=${encodeURIComponent('../' + imageUrl)}`;
+          a.href = `puzzles/index.html?image=${encodeURIComponent('../' + imageUrl)}`;
           a.textContent = "Open Puzzle";
           li.appendChild(a);
           ul.appendChild(li);
@@ -1389,7 +1389,7 @@
                   if (tapLength < 500 && tapLength > 0) {
                       // if double click
                       e.preventDefault();
-                      showContextMenu(e.clientX, e.clientY, src);
+                      showContextMenu(e.changedTouches[0].screenX, e.changedTouches[0].screenY, src);
                   }
                   // remember the time of the last touch
                   this.lastTap = currentTime
@@ -1433,6 +1433,23 @@
       }
       
       setupSlideShow(getParameterValue("v")) 
+      
+      let touchstartX = 0
+      let touchendX = 0
+          
+      function checkDirection() {
+        if (touchendX < touchstartX) jumpToSlide((currentIndex + 1) % backgroundImages.length)
+        if (touchendX > touchstartX) jumpToSlide((currentIndex - 1) % backgroundImages.length)
+      }
+      
+      document.addEventListener('touchstart', e => {
+        touchstartX = e.changedTouches[0].screenX
+      })
+      
+      document.addEventListener('touchend', e => {
+        touchendX = e.changedTouches[0].screenX
+        checkDirection()
+      })
 
       var audio = document.getElementById("bgaudio");
       var audioBtn = document.getElementById("audio-toggle");
