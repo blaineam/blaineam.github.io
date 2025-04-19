@@ -1377,10 +1377,23 @@
               img.alt = `Slide ${index + 1}`;
               img.addEventListener("click", () => jumpToSlide(index)); 
               img.addEventListener("dblclick", (event) => {
-                  event.preventDefault(); // Prevent default behavior
-                  const imageUrl = src;
-                  showContextMenu(event.clientX, event.clientY, imageUrl);
+                  event.preventDefault();
+                  showContextMenu(event.clientX, event.clientY, src);
               });
+              img.addEventListener('touchend', (e) => {
+                  // time of current press
+                  const currentTime = new Date().getTime()
+                  // time between presses
+                  const tapLength = currentTime - this.lastTap
+              
+                  if (tapLength < 500 && tapLength > 0) {
+                      // if double click
+                      e.preventDefault();
+                      showContextMenu(e.clientX, e.clientY, src);
+                  }
+                  // remember the time of the last touch
+                  this.lastTap = currentTime
+              })
               container.appendChild(img);
           });
       
