@@ -1088,10 +1088,31 @@
       timer = null,
       animationFrameId = null;
       
-      for (var i = 0; i < 101; i++) {
-          backgroundImages.push("slides/bmp-" + i + ".jpg");
+      function setupSlideShow(filter) {
+        fetch("slide-filters.json")
+        .then(res => res.json())
+        .then(filters => {
+          backgroundImages = [];
+          for (var i = 0; i < 101; i++) {
+            if (filters[filter]?.length ) {
+              addClass(document.getElementById("information"), "hide");
+              if (!filters[filter].includes(i)) {
+                  continue;
+              }
+            }
+            backgroundImages.push("slides/bmp-" + i + ".jpg");
+          }
+          backgroundImages = backgroundImages.reverse();
+          
+          // Initialize slideshow
+          showSlide(currentIndex);
+          startSlideshow();
+          startIdleDetection();
+        })
+        .catch(err => console.log(err));
       }
-      backgroundImages = backgroundImages.reverse();
+      
+      
       
       function lerp(start, end, t) {
           return start + (end - start) * t; // Linear interpolation for smooth scaling
@@ -1391,10 +1412,13 @@
           });
       }
       
-      // Initialize slideshow
-      showSlide(currentIndex);
-      startSlideshow();
-      startIdleDetection();
+      function getParameterValue(parameterName) {
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        return urlParams.get(parameterName);
+      }
+      
+      setupSlideShow(getParameterValue("v")) 
 
       var audio = document.getElementById("bgaudio");
       var audioBtn = document.getElementById("audio-toggle");
