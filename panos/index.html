@@ -50,7 +50,7 @@
         <script>
         window.currentUrl = window.location.href.replace("index.html", "");
             $(document).ready(function(){
-                var N = 6;
+                var N = 7;
                 var urls = Array.from({length: N}, (_, index) => window.currentUrl + "panoramas/bmp-pano-sphere-" + (index + 1) + ".jpg").reverse();
                 for ( var i = 0; i < urls.length; i++ ) {
                     url = urls[i];

@@ -547,13 +547,13 @@
       <img
         id="active-background"
         class="same-space"
-        src=""
+        src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
         alt="Photography Background from Blaine Miller"
       >
       <img
         id="next-background"
         class="hide same-space"
-        src=""
+        src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
         alt="Photography Background from Blaine Miller"
       >
     </div>
@@ -1094,7 +1094,7 @@
         .then(res => res.json())
         .then(filters => {
           backgroundImages = [];
-          for (var i = 0; i < 101; i++) {
+          for (var i = 0; i < 116; i++) {
             if (filters[filter]?.length ) {
               addClass(document.getElementById("information"), "hide");
               if (!filters[filter].includes(i)) {
