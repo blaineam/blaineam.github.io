@@ -378,9 +378,9 @@
       left: 50%;
       top: 50%;
       max-width: 100%;
-      max-height: calc(100% - 90px);
+      max-height: 100%;
       height: auto;
-      transform: translate(-50%, calc(-50% - 45px)) !important;
+      transform: translate(-50%, -50%) !important;
       z-index: 1;
     }
 
@@ -417,8 +417,9 @@
       /* Start zoomed in */
     }
 
-    body.photos-gallery-with-thumbnails #background img {
+    body.photos-gallery-with-thumbnails #background #active-background {
       max-height: calc(100% - 90px);
+      transform: translate(-50%, calc(-50% - 45px)) !important;
     }
 
     #navigable {
@@ -1396,7 +1397,6 @@
 
       const blurredBackground = document.getElementById("blurred-background");
       blurredBackground.src = currentImage.src;
-
       let isCrossfading = false;
 
       function animate(currentTime) {
@@ -1419,7 +1419,7 @@
           const t = easeInOut((elapsed - (transitionDuration + stationaryDuration)) / transitionDuration);
           scale = lerp(1, 3, t);
         } else {
-
+          
           // Cycle complete, start next slide
           activeBackground.classList.remove("crossfade");
           nextBackground.classList.remove("crossfade");
