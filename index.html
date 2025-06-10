@@ -1749,6 +1749,7 @@
         event.stopPropagation();
         toggleClass(document.getElementById("information"), "hide");
         if (document.body.classList.contains("photos-gallery")) {
+          removeClass(document.getElementById("active-background"), "fade-edges");
           removeClass(document.body, "photos-gallery");
           addClass(document.getElementById("thumbnail-container"), "hide");
           removeClass(document.body, "photos-gallery-with-thumbnails");
