@@ -256,13 +256,13 @@
       #summary .liquidGlass-text::-webkit-scrollbar,
       #projects::-webkit-scrollbar,
       #timeline::-webkit-scrollbar,
-      .body::-webkit-scrollbar {
+      .body::-webkit-scrollbar,
+      .invisible-scroll::-webkit-scrollbar {
         display: none;
       }
-
-      #summary .liquidGlass-text  {
+      
+      .invisible-scroll {
         overflow-y: auto;
-        justify-content: start;
       }
       
       #navigable-links .liquidGlass-text {
@@ -939,11 +939,13 @@
             <div class="liquidGlass-tint"></div>
             <div class="liquidGlass-shine"></div>
             <div class="liquidGlass-text fill-space">
+              <div class="invisible-scroll">
             <h1>Hello, I'm Blaine</h1>
             <h2>Sr. Software Engineer</h2>
             <p>I enjoy finding unique solutions with tech.</p>
             <p>Photographing the world around me is fun.</p>
             <p>Just imagine what we can build together!</p>
+            </div>
             </div>
             </div>
           </div>
