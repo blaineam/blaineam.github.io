@@ -1591,7 +1591,6 @@
 
       // Close menu on outside click
       function closeMenu(event) {
-        event.stopPropagation();
         if (!menu.contains(event.target)) {
           menu.remove();
           activeMenu = null;
@@ -1693,12 +1692,10 @@
     }
 
     document.addEventListener('touchstart', e => {
-      e.stopPropagation();
       touchstartX = e.changedTouches[0].screenX
     })
 
     document.addEventListener('touchend', e => {
-      e.stopPropagation();
       touchendX = e.changedTouches[0].screenX
       checkDirection()
     })
@@ -1823,7 +1820,6 @@
     );
 
     window.addEventListener("DOMContentLoaded", (event) => {
-      event.stopPropagation();
       const ctl = new CollapsibleTimeline("#timeline");
     });
 
