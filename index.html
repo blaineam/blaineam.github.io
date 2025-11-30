@@ -1455,7 +1455,7 @@
         .then(res => res.json())
         .then(filters => {
           backgroundImages = [];
-          for (var i = 0; i < 116; i++) {
+          for (var i = 0; i < 128; i++) {
             if (filters[filter]?.length) {
               addClass(document.getElementById("information"), "hide");
               if (!filters[filter].includes(i)) {
