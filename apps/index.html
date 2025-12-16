@@ -92,6 +92,9 @@
     .app-card:nth-child(2) { animation-delay: 0.4s; }
     .app-card:nth-child(3) { animation-delay: 0.5s; }
     .app-card:nth-child(4) { animation-delay: 0.6s; }
+    .app-card:nth-child(5) { animation-delay: 0.7s; }
+    .app-card:nth-child(6) { animation-delay: 0.8s; }
+    .app-card:nth-child(7) { animation-delay: 0.9s; }
 
     .app-card::before {
       content: '';
@@ -196,6 +199,18 @@
       animation: floatIcon2 9s ease-in-out infinite;
     }
 
+    .app-card:nth-child(5) .app-icon {
+      animation: floatIcon1 10s ease-in-out infinite;
+    }
+
+    .app-card:nth-child(6) .app-icon {
+      animation: floatIcon2 11s ease-in-out infinite;
+    }
+
+    .app-card:nth-child(7) .app-icon {
+      animation: floatIcon1 12s ease-in-out infinite;
+    }
+
     /* Custom colors for each app */
     .app-card[data-app="enter-space"] .app-icon {
       background: linear-gradient(135deg, #667eea, #764ba2);
@@ -211,6 +226,18 @@
 
     .app-card[data-app="embr"] .app-icon {
       background: linear-gradient(135deg, #fa709a, #fee140);
+    }
+
+    .app-card[data-app="deepsi"] .app-icon {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+    }
+
+    .app-card[data-app="luma-editor"] .app-icon {
+      background: linear-gradient(135deg, #f093fb, #f5576c);
+    }
+
+    .app-card[data-app="wise-flyer"] .app-icon {
+      background: linear-gradient(135deg, #4facfe, #00f2fe);
     }
 
     .footer-back-home {
@@ -285,6 +312,30 @@
           <div class="app-icon">🔥</div>
           <h2 class="app-name">Embr</h2>
           <p class="app-tagline">Burn your debts away</p>
+          <span class="app-cta">Learn More →</span>
+        </a>
+
+        <!-- DeepSi -->
+        <a href="deepsi/" class="app-card" data-app="deepsi">
+          <div class="app-icon">📡</div>
+          <h2 class="app-name">DeepSi</h2>
+          <p class="app-tagline">See depth, not light</p>
+          <span class="app-cta">Learn More →</span>
+        </a>
+
+        <!-- Luma Editor -->
+        <a href="luma-editor/" class="app-card" data-app="luma-editor">
+          <div class="app-icon">🎨</div>
+          <h2 class="app-name">Luma Editor</h2>
+          <p class="app-tagline">Match your photo style</p>
+          <span class="app-cta">Learn More →</span>
+        </a>
+
+        <!-- Wise Flyer -->
+        <a href="wise-flyer/" class="app-card" data-app="wise-flyer">
+          <div class="app-icon">🦉</div>
+          <h2 class="app-name">Wise Flyer</h2>
+          <p class="app-tagline">Top the leaderboard!</p>
           <span class="app-cta">Learn More →</span>
         </a>
       </div>
