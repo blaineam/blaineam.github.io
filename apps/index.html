@@ -92,6 +92,9 @@
     .app-card:nth-child(2) { animation-delay: 0.4s; }
     .app-card:nth-child(3) { animation-delay: 0.5s; }
     .app-card:nth-child(4) { animation-delay: 0.6s; }
+    .app-card:nth-child(5) { animation-delay: 0.7s; }
+    .app-card:nth-child(6) { animation-delay: 0.8s; }
+    .app-card:nth-child(7) { animation-delay: 0.9s; }
 
     .app-card::before {
       content: '';
@@ -201,6 +204,18 @@
       animation: floatIcon2 9s ease-in-out infinite;
     }
 
+    .app-card:nth-child(5) .app-icon {
+      animation: floatIcon1 10s ease-in-out infinite;
+    }
+
+    .app-card:nth-child(6) .app-icon {
+      animation: floatIcon2 11s ease-in-out infinite;
+    }
+
+    .app-card:nth-child(7) .app-icon {
+      animation: floatIcon1 12s ease-in-out infinite;
+    }
+
     /* Custom colors for each app */
     .app-card[data-app="enter-space"] .app-icon {
       background: linear-gradient(135deg, #667eea, #764ba2);
@@ -218,10 +233,19 @@
       background: linear-gradient(135deg, #fa709a, #fee140);
     }
 
-    .back-home {
-      position: fixed;
-      top: var(--spacing-md);
-      left: var(--spacing-md);
+    .app-card[data-app="deepsi"] .app-icon {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+    }
+
+    .app-card[data-app="luma-editor"] .app-icon {
+      background: linear-gradient(135deg, #f093fb, #f5576c);
+    }
+
+    .app-card[data-app="wise-flyer"] .app-icon {
+      background: linear-gradient(135deg, #4facfe, #00f2fe);
+    }
+
+    .footer-back-home {
       background: var(--glass-bg);
       backdrop-filter: blur(20px) saturate(180%);
       -webkit-backdrop-filter: blur(20px) saturate(180%);
@@ -232,14 +256,14 @@
       text-decoration: none;
       font-weight: 600;
       transition: all var(--transition-fast);
-      z-index: 100;
       display: inline-flex;
       align-items: center;
       gap: var(--spacing-xs);
+      margin-top: var(--spacing-md);
     }
 
-    .back-home:hover {
-      transform: translateX(-5px);
+    .footer-back-home:hover {
+      transform: translateY(-2px);
       box-shadow: var(--glass-shadow);
     }
 
@@ -258,8 +282,6 @@
   </style>
 </head>
 <body>
-  <a href="/" class="back-home">← Back to Portfolio</a>
-
   <section class="apps-hero">
     <div class="apps-container">
       <h1 class="apps-title">My Apps</h1>
@@ -297,9 +319,41 @@
           <p class="app-tagline">Burn your debts away</p>
           <span class="app-cta">Learn More →</span>
         </a>
+
+        <!-- DeepSi -->
+        <a href="deepsi/" class="app-card" data-app="deepsi">
+          <div class="app-icon">📡</div>
+          <h2 class="app-name">DeepSi</h2>
+          <p class="app-tagline">See depth, not light</p>
+          <span class="app-cta">Learn More →</span>
+        </a>
+
+        <!-- Luma Editor -->
+        <a href="luma-editor/" class="app-card" data-app="luma-editor">
+          <div class="app-icon">🎨</div>
+          <h2 class="app-name">Luma Editor</h2>
+          <p class="app-tagline">Match your photo style</p>
+          <span class="app-cta">Learn More →</span>
+        </a>
+
+        <!-- Wise Flyer -->
+        <a href="wise-flyer/" class="app-card" data-app="wise-flyer">
+          <div class="app-icon">🦉</div>
+          <h2 class="app-name">Wise Flyer</h2>
+          <p class="app-tagline">Top the leaderboard!</p>
+          <span class="app-cta">Learn More →</span>
+        </a>
       </div>
     </div>
   </section>
+
+  <!-- Footer -->
+  <footer style="background: var(--bg-secondary); padding: var(--spacing-xl) var(--spacing-lg); text-align: center; border-top: 1px solid var(--border-color);">
+    <a href="/" class="footer-back-home">← Back to Portfolio</a>
+    <p style="color: var(--text-muted); margin-top: var(--spacing-md); font-size: 0.875rem;">
+      © 2024 My Apps. All rights reserved.
+    </p>
+  </footer>
 
   <script src="app-showcase.js"></script>
 </body>

@@ -61,12 +61,18 @@
       <div class="hero-image">
         <div class="hero-phone">
           <!-- Replace with actual app screenshot -->
-          <img src="assets/images/hero-mockup.png" alt="Ari Helper App" class="phone-mockup"
-               onerror="this.style.background='linear-gradient(135deg, #f093fb, #f5576c)'; this.style.minHeight='600px';">
+          <img src="/projects/ari.png" alt="Ari Helper App Icon" class="phone-mockup"
+               onerror="this.src='assets/images/hero-mockup.png'; this.onerror=function(){this.style.background='linear-gradient(135deg, #f093fb, #f5576c)'; this.style.minHeight='600px';};">
         </div>
       </div>
     </div>
   </section>
+
+  <!-- Floating App Store Button -->
+  <a href="https://apps.apple.com/us/app/ari-helper/id6480045555" class="floating-appstore" target="_blank">
+    <span class="floating-appstore-icon"></span>
+    <span>Download on App Store</span>
+  </a>
 
   <!-- Features Section -->
   <section id="features" class="section">
