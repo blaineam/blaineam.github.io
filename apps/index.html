@@ -117,7 +117,8 @@
     .app-icon {
       width: 120px;
       height: 120px;
-      border-radius: 27px;
+      overflow: hidden;
+      border-radius: 32px;
       background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
       display: flex;
       align-items: center;
@@ -128,6 +129,10 @@
       transition: all var(--transition-base);
       position: relative;
       z-index: 1;
+    }
+    
+    .app-icon img {
+      width: 100%;
     }
 
     .app-card:hover .app-icon {
@@ -263,7 +268,7 @@
       <div class="apps-grid">
         <!-- Enter Space -->
         <a href="enter-space/" class="app-card" data-app="enter-space">
-          <div class="app-icon">🚀</div>
+          <div class="app-icon"><img src="enter-space/assets/images/icon.png" /></div>
           <h2 class="app-name">Enter Space</h2>
           <p class="app-tagline">62 cloud storage accounts, unified</p>
           <span class="app-cta">Learn More →</span>
@@ -271,7 +276,7 @@
 
         <!-- Ari Helper -->
         <a href="ari-helper/" class="app-card" data-app="ari-helper">
-          <div class="app-icon">✨</div>
+          <div class="app-icon"><img src="ari-helper/assets/images/icon.png" /></div>
           <h2 class="app-name">Ari Helper</h2>
           <p class="app-tagline">All-in-one AI chat app</p>
           <span class="app-cta">Learn More →</span>
@@ -279,7 +284,7 @@
 
         <!-- Mi Speaks -->
         <a href="mi-speaks/" class="app-card" data-app="mi-speaks">
-          <div class="app-icon">🎤</div>
+          <div class="app-icon"><img src="mi-speaks/assets/images/icon.png" /></div>
           <h2 class="app-name">Mi Speaks</h2>
           <p class="app-tagline">Listen to any written content</p>
           <span class="app-cta">Learn More →</span>
@@ -287,7 +292,7 @@
 
         <!-- Embr -->
         <a href="embr/" class="app-card" data-app="embr">
-          <div class="app-icon">🔥</div>
+          <div class="app-icon"><img src="embr/assets/images/icon.png" /></div>
           <h2 class="app-name">Embr</h2>
           <p class="app-tagline">Burn your debts away</p>
           <span class="app-cta">Learn More →</span>
