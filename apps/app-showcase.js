@@ -168,7 +168,6 @@ function updateActiveNavLink() {
 
   sections.forEach(section => {
     const sectionTop = section.offsetTop;
-    const sectionHeight = section.clientHeight;
 
     if (window.pageYOffset >= sectionTop - 200) {
       current = section.getAttribute('id');
@@ -197,3 +196,5 @@ function staggerAnimation(selector, delay = 100) {
 staggerAnimation('.feature-card', 100);
 staggerAnimation('.screenshot-item', 100);
 staggerAnimation('.faq-item', 100);
+
+document.getElementById('year').textContent = new Date().getFullYear();

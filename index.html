@@ -26,10 +26,10 @@
 
     :root {
       --bg-color: rgba(255, 255, 255, 0.85);
-      --bg-color-half: rgba(198, 254, 234, 0.425);
+      --bg-color-half: rgba(255, 255, 255, 0.425);
       --fg-color: rgb(22, 22, 22);
-      --bg-hover-color: rgba(165, 255, 222, 0.85);
-      --bg-hover-color-inverse: rgba(132, 255, 211, 0.85);
+      --bg-hover-color: rgba(255, 255, 255, 0.85);
+      --bg-hover-color-inverse: rgba(255, 255, 255, 0.85);
       --radius: 17px;
       --margin: 5px;
       --padding: 7px;
@@ -45,10 +45,10 @@
     @media (prefers-color-scheme: dark) {
       :root {
         --bg-color: rgba(0, 0, 0, 0.85);
-        --bg-color-half: rgba(39, 50, 47, 0.549);
+        --bg-color-half: rgba(59, 59, 59, 0.549);
         --fg-color: rgb(222, 222, 222);
-        --bg-hover-color: rgba(37, 56, 49, 0.85);
-        --bg-hover-color-inverse: rgba(32, 63, 52, 0.85);
+        --bg-hover-color: rgba(50, 50, 50, 0.85);
+        --bg-hover-color-inverse: rgba(52, 52, 52, 0.85);
       }
     }
 
@@ -96,8 +96,8 @@
 
     .icon {
       color: var(--fg-color);
-      height: 20px;
-      width: 20px;
+      height: 56%;
+      width: 56%;
       position: absolute;
     }
 
@@ -120,10 +120,10 @@
       -webkit-mask-repeat: no-repeat;
       -webkit-mask-composite: source-in;
 
-
+/* 
       mask:
         linear-gradient(to top, transparent 2%, #fff 5% 95%, transparent 98%),
-        linear-gradient(to left, transparent 2%, #fff 5% 95%, transparent 98%);
+        linear-gradient(to left, transparent 2%, #fff 5% 95%, transparent 98%); */
       mask-size: 100% 100%;
       mask-position: center;
       mask-repeat: no-repeat;
@@ -214,6 +214,13 @@
       position: fixed;
       left: 20px;
       bottom: 152px;
+      z-index: 1;
+    }
+    
+    #apps-button {
+      position: fixed;
+      left: 20px;
+      bottom: 196px;
       z-index: 1;
     }
 

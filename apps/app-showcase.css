@@ -379,7 +379,8 @@ p {
 .phone-mockup {
   width: 100%;
   height: auto;
-  border-radius: var(--radius-xl);
+  border-radius: 27%;
+  /* border-radius: var(--radius-xl); */
   box-shadow: 0 20px 60px var(--shadow-color);
   background: var(--bg-card);
   padding: var(--spacing-sm);
