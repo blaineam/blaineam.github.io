@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wise Flyer - Can You Top the Leaderboard?</title>
+  <meta name="description" content="Tap to fly through endless obstacles in this addictive owl flying game. Unique graphics, simple mechanics, amazing soundtrack, and competitive leaderboard. Do you have what it takes?">
+  <link rel="stylesheet" href="../app-showcase.css">
+  <style>
+    /* Wise Flyer Specific Styling */
+    :root {
+      --app-primary: #4facfe;
+      --app-secondary: #00f2fe;
+      --app-accent: #43e97b;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, var(--app-primary) 0%, var(--app-secondary) 100%);
+      color: white;
+    }
+
+    .hero-title,
+    .hero-subtitle {
+      color: white;
+      -webkit-text-fill-color: white;
+    }
+
+    .hero-description {
+      color: rgba(255, 255, 255, 0.9);
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="app-nav">
+    <div class="nav-container">
+      <a href="../" class="nav-logo">← Apps</a>
+      <button class="mobile-menu-toggle">☰</button>
+      <ul class="nav-links">
+        <li><a href="#features" class="nav-link">Features</a></li>
+        <li><a href="#screenshots" class="nav-link">Screenshots</a></li>
+        <li><a href="#faq" class="nav-link">FAQ</a></li>
+        <li><a href="https://apps.apple.com/us/app/wise-flyer/id853900499" class="btn-buy" target="_blank">Download on App Store</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-text">
+        <p class="hero-subtitle">🦉 Wise Flyer</p>
+        <h1 class="hero-title">Can You Top the Leaderboard?</h1>
+        <p class="hero-description">
+          Tap to fly through endless obstacles in this addictive owl flying game inspired by a popular bird classic. Featuring unique graphics, simple tap mechanics, endless scrolling gameplay, an amazing soundtrack, and a competitive leaderboard. Do you have what it takes to stay on top?
+        </p>
+        <div class="hero-cta">
+          <a href="https://apps.apple.com/us/app/wise-flyer/id853900499" class="btn-buy" target="_blank">Download Now</a>
+        </div>
+      </div>
+      <div class="hero-image">
+        <div class="hero-phone">
+          <!-- Replace with actual app screenshot -->
+          <img src="/projects/wise-flyer.png" alt="Wise Flyer App Icon" class="phone-mockup"
+               onerror="this.src='assets/images/hero-mockup.png'; this.onerror=function(){this.style.background='linear-gradient(135deg, #4facfe, #00f2fe)'; this.style.minHeight='600px';};">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Floating App Store Button -->
+  <a href="https://apps.apple.com/us/app/wise-flyer/id853900499" class="floating-appstore" target="_blank">
+    <span class="floating-appstore-icon"></span>
+    <span>Download on App Store</span>
+  </a>
+
+  <!-- Features Section -->
+  <section id="features" class="section">
+    <div class="section-header">
+      <p class="section-subtitle">Why Choose Wise Flyer</p>
+      <h2>Addictive Gameplay</h2>
+      <p>Simple to learn, challenging to master, impossible to put down</p>
+    </div>
+
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-icon">🎮</div>
+        <h3 class="feature-title">Simple Tap Mechanics</h3>
+        <p class="feature-description">
+          Easy to learn, hard to master. Just tap to flap and navigate through obstacles. Perfect for quick gaming sessions or extended play.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🎨</div>
+        <h3 class="feature-title">Unique Graphics</h3>
+        <p class="feature-description">
+          Beautiful, distinctive art style featuring a charming owl character. Stand out visuals that make every flight memorable.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">∞</div>
+        <h3 class="feature-title">Endless Scrolling</h3>
+        <p class="feature-description">
+          Infinitely scrolling gameplay means the challenge never ends. How far can you fly? Test your skills and push your limits.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🎵</div>
+        <h3 class="feature-title">Amazing Soundtrack</h3>
+        <p class="feature-description">
+          Immersive music and satisfying sound effects enhance every moment. The perfect audio backdrop for your flying adventure.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🏆</div>
+        <h3 class="feature-title">Global Leaderboard</h3>
+        <p class="feature-description">
+          Compete with players worldwide on the leaderboard. Climb the ranks and prove you're the wisest flyer of them all.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">⚡</div>
+        <h3 class="feature-title">Instant Action</h3>
+        <p class="feature-description">
+          Jump right into the action with no complex menus or tutorials. Perfect for quick gaming sessions whenever you have a moment.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Magazine-style Feature Sections -->
+  <section class="section">
+    <div class="magazine-section">
+      <div class="magazine-content">
+        <h2>Tap to Soar</h2>
+        <p>
+          Inspired by the classic bird flying game you know and love, Wise Flyer brings its own unique
+          charm with beautiful owl graphics and smooth, addictive gameplay.
+        </p>
+        <p>
+          The simple tap mechanic makes it easy to pick up but challenging to master. Navigate through
+          obstacles, collect points, and see how far you can fly in this endless adventure.
+        </p>
+      </div>
+      <div class="magazine-image">
+        <!-- Replace with actual screenshot -->
+        <img src="assets/images/feature-1.png" alt="Gameplay"
+             onerror="this.style.background='linear-gradient(135deg, #4facfe, #00f2fe)'; this.style.minHeight='400px'; this.style.display='block';">
+      </div>
+    </div>
+
+    <div class="magazine-section reverse">
+      <div class="magazine-content">
+        <h2>Compete Globally</h2>
+        <p>
+          Think you're good? Prove it on the global leaderboard. Compare your high scores with players
+          from around the world and climb your way to the top.
+        </p>
+        <p>
+          The competition is fierce, but the glory is worth it. Do you have what it takes to become
+          the ultimate Wise Flyer and dominate the leaderboard?
+        </p>
+      </div>
+      <div class="magazine-image">
+        <!-- Replace with actual screenshot -->
+        <img src="assets/images/feature-2.png" alt="Leaderboard"
+             onerror="this.style.background='linear-gradient(135deg, #00f2fe, #43e97b)'; this.style.minHeight='400px'; this.style.display='block';">
+      </div>
+    </div>
+
+    <div class="magazine-section">
+      <div class="magazine-content">
+        <h2>Endless Entertainment</h2>
+        <p>
+          With infinitely scrolling gameplay and procedurally generated obstacles, no two flights are
+          the same. Every session brings new challenges and opportunities to beat your high score.
+        </p>
+        <p>
+          The perfect game for commutes, waiting rooms, or any time you need a quick gaming fix.
+          Pick it up for 30 seconds or 30 minutes—it's always ready when you are.
+        </p>
+      </div>
+      <div class="magazine-image">
+        <!-- Replace with actual screenshot -->
+        <img src="assets/images/feature-3.png" alt="Endless Fun"
+             onerror="this.style.background='linear-gradient(135deg, #4facfe, #43e97b)'; this.style.minHeight='400px'; this.style.display='block';">
+      </div>
+    </div>
+  </section>
+
+  <!-- Screenshots Section -->
+  <section id="screenshots" class="section">
+    <div class="section-header">
+      <p class="section-subtitle">See It In Action</p>
+      <h2>Screenshots</h2>
+      <p>Experience the addictive gameplay</p>
+    </div>
+
+    <div class="screenshots-grid">
+      <!-- Replace these with actual screenshots -->
+      <div class="screenshot-item">
+        <img src="assets/images/screenshot-1.png" alt="Screenshot 1"
+             onerror="this.style.background='linear-gradient(135deg, #4facfe, #00f2fe)'; this.style.minHeight='500px'; this.style.display='block';">
+      </div>
+      <div class="screenshot-item">
+        <img src="assets/images/screenshot-2.png" alt="Screenshot 2"
+             onerror="this.style.background='linear-gradient(135deg, #00f2fe, #43e97b)'; this.style.minHeight='500px'; this.style.display='block';">
+      </div>
+      <div class="screenshot-item">
+        <img src="assets/images/screenshot-3.png" alt="Screenshot 3"
+             onerror="this.style.background='linear-gradient(135deg, #43e97b, #4facfe)'; this.style.minHeight='500px'; this.style.display='block';">
+      </div>
+      <div class="screenshot-item">
+        <img src="assets/images/screenshot-4.png" alt="Screenshot 4"
+             onerror="this.style.background='linear-gradient(135deg, #4facfe, #00f2fe)'; this.style.minHeight='500px'; this.style.display='block';">
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section id="faq" class="faq-section">
+    <div class="section-header">
+      <p class="section-subtitle">Got Questions?</p>
+      <h2>Frequently Asked Questions</h2>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        <span>How do I play Wise Flyer?</span>
+        <span class="faq-icon">▼</span>
+      </button>
+      <div class="faq-answer">
+        <p>
+          Simply tap the screen to make the owl flap and fly upward. Release to let gravity bring you down.
+          Navigate through obstacles by timing your taps carefully. It's easy to learn but challenging to master!
+        </p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        <span>How does the leaderboard work?</span>
+        <span class="faq-icon">▼</span>
+      </button>
+      <div class="faq-answer">
+        <p>
+          The global leaderboard tracks high scores from players around the world. Your best score is automatically
+          submitted, and you can see where you rank against other players. Climb the ranks by improving your skills!
+        </p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        <span>Is Wise Flyer similar to other bird games?</span>
+        <span class="faq-icon">▼</span>
+      </button>
+      <div class="faq-answer">
+        <p>
+          Wise Flyer is inspired by the classic bird flying game genre but features unique graphics with a charming
+          owl character, distinctive visual style, and its own personality. If you loved those games, you'll love this!
+        </p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        <span>Can I play offline?</span>
+        <span class="faq-icon">▼</span>
+      </button>
+      <div class="faq-answer">
+        <p>
+          Yes! Wise Flyer can be played completely offline. Leaderboard features require an internet connection,
+          but the core gameplay works anywhere, anytime.
+        </p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        <span>Is the game truly endless?</span>
+        <span class="faq-icon">▼</span>
+      </button>
+      <div class="faq-answer">
+        <p>
+          Yes! The scrolling is infinite and obstacles are continuously generated. The game only ends when you
+          hit an obstacle. How far can you fly? The only limit is your skill!
+        </p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        <span>What makes Wise Flyer special?</span>
+        <span class="faq-icon">▼</span>
+      </button>
+      <div class="faq-answer">
+        <p>
+          Beautiful unique graphics featuring an adorable owl, smooth gameplay, an amazing soundtrack, competitive
+          leaderboard, and that perfect "just one more try" addictiveness. It's simple, fun, and incredibly hard
+          to put down!
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-links">
+        <a href="../" class="footer-link">All Apps</a>
+        <a href="../enter-space/" class="footer-link">Enter Space</a>
+        <a href="../ari-helper/" class="footer-link">Ari Helper</a>
+        <a href="../mi-speaks/" class="footer-link">Mi Speaks</a>
+        <a href="../embr/" class="footer-link">Embr</a>
+        <a href="../deepsi/" class="footer-link">DeepSi</a>
+        <a href="../luma-editor/" class="footer-link">Luma Editor</a>
+        <a href="/privacy/" class="footer-link">Privacy</a>
+        <a href="/terms/" class="footer-link">Terms</a>
+        <a href="/" class="footer-link">Portfolio</a>
+      </div>
+      <p style="color: var(--text-muted); margin-top: var(--spacing-md);">
+        © 2024 Wise Flyer. All rights reserved.
+      </p>
+    </div>
+  </footer>
+
+  <script src="../app-showcase.js"></script>
+</body>
+</html>
