@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mi Speaks - Voice Communication Made Easy</title>
+  <meta name="description" content="Mi Speaks empowers communication through innovative voice technology, making it easier than ever to express yourself.">
+  <link rel="stylesheet" href="../app-showcase.css">
+  <style>
+    /* Mi Speaks Specific Styling */
+    :root {
+      --app-primary: #4facfe;
+      --app-secondary: #00f2fe;
+      --app-accent: #43e97b;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, var(--app-primary) 0%, var(--app-secondary) 100%);
+      color: white;
+    }
+
+    .hero-title,
+    .hero-subtitle {
+      color: white;
+      -webkit-text-fill-color: white;
+    }
+
+    .hero-description {
+      color: rgba(255, 255, 255, 0.9);
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="app-nav">
+    <div class="nav-container">
+      <a href="../" class="nav-logo">← Apps</a>
+      <button class="mobile-menu-toggle">☰</button>
+      <ul class="nav-links">
+        <li><a href="#features" class="nav-link">Features</a></li>
+        <li><a href="#screenshots" class="nav-link">Screenshots</a></li>
+        <li><a href="#faq" class="nav-link">FAQ</a></li>
+        <li><a href="#" class="btn-buy" target="_blank">Download on App Store</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-text">
+        <p class="hero-subtitle">🎤 Mi Speaks</p>
+        <h1 class="hero-title">Voice Communication Made Easy</h1>
+        <p class="hero-description">
+          Express yourself freely with Mi Speaks. Advanced voice technology that helps everyone communicate clearly and confidently, no matter the challenge.
+        </p>
+        <div class="hero-cta">
+          <a href="#" class="btn-buy" target="_blank">Download Now</a>
+        </div>
+      </div>
+      <div class="hero-image">
+        <div class="hero-phone">
+          <!-- Replace with actual app screenshot -->
+          <img src="assets/images/hero-mockup.png" alt="Mi Speaks App" class="phone-mockup"
+               onerror="this.style.background='linear-gradient(135deg, #4facfe, #00f2fe)'; this.style.minHeight='600px';">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section id="features" class="section">
+    <div class="section-header">
+      <p class="section-subtitle">Why Choose Mi Speaks</p>
+      <h2>Empowering Features</h2>
+      <p>Technology that helps everyone communicate with confidence</p>
+    </div>
+
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-icon">🎯</div>
+        <h3 class="feature-title">Clear Speech</h3>
+        <p class="feature-description">
+          Advanced speech synthesis technology that produces natural-sounding, clear voice output customized to your preferences.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">💭</div>
+        <h3 class="feature-title">Quick Phrases</h3>
+        <p class="feature-description">
+          Access your most-used phrases instantly with customizable categories and favorites for faster communication.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🎨</div>
+        <h3 class="feature-title">Personalization</h3>
+        <p class="feature-description">
+          Customize voice, speed, pitch, and create unlimited custom phrases that match your communication style.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">📱</div>
+        <h3 class="feature-title">Simple Interface</h3>
+        <p class="feature-description">
+          Intuitive, accessible design with large buttons, clear text, and easy navigation for users of all abilities.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🌐</div>
+        <h3 class="feature-title">Multi-Language</h3>
+        <p class="feature-description">
+          Communicate in multiple languages with high-quality voices and support for diverse dialects and accents.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">♿</div>
+        <h3 class="feature-title">Accessibility</h3>
+        <p class="feature-description">
+          Built from the ground up with accessibility in mind, supporting VoiceOver, Switch Control, and more.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Magazine-style Feature Sections -->
+  <section class="section">
+    <div class="magazine-section">
+      <div class="magazine-content">
+        <h2>Natural Voice Technology</h2>
+        <p>
+          Mi Speaks uses state-of-the-art text-to-speech technology to deliver voices that sound natural and expressive.
+          Choose from a variety of voices and fine-tune them to perfectly match your communication needs.
+        </p>
+        <p>
+          Adjust speaking rate, pitch, and volume in real-time to ensure your message is heard exactly how you want it.
+        </p>
+      </div>
+      <div class="magazine-image">
+        <!-- Replace with actual screenshot -->
+        <img src="assets/images/feature-1.png" alt="Voice Technology"
+             onerror="this.style.background='linear-gradient(135deg, #4facfe, #00f2fe)'; this.style.minHeight='400px'; this.style.display='block';">
+      </div>
+    </div>
+
+    <div class="magazine-section reverse">
+      <div class="magazine-content">
+        <h2>Communicate Your Way</h2>
+        <p>
+          Create unlimited custom phrases organized in categories that make sense to you.
+          Add phrases for greetings, questions, responses, or anything else you need to say regularly.
+        </p>
+        <p>
+          Use the keyboard for quick typing or select from your saved phrases.
+          Perfect for conversations, emergencies, or daily interactions.
+        </p>
+      </div>
+      <div class="magazine-image">
+        <!-- Replace with actual screenshot -->
+        <img src="assets/images/feature-2.png" alt="Custom Phrases"
+             onerror="this.style.background='linear-gradient(135deg, #00f2fe, #43e97b)'; this.style.minHeight='400px'; this.style.display='block';">
+      </div>
+    </div>
+
+    <div class="magazine-section">
+      <div class="magazine-content">
+        <h2>Always Available</h2>
+        <p>
+          Mi Speaks works completely offline, so you can communicate anywhere, anytime without worrying
+          about internet connectivity or data usage.
+        </p>
+        <p>
+          Your phrases and settings sync via iCloud across all your devices, ensuring your communication
+          tools are always available when you need them.
+        </p>
+      </div>
+      <div class="magazine-image">
+        <!-- Replace with actual screenshot -->
+        <img src="assets/images/feature-3.png" alt="Offline Support"
+             onerror="this.style.background='linear-gradient(135deg, #4facfe, #43e97b)'; this.style.minHeight='400px'; this.style.display='block';">
+      </div>
+    </div>
+  </section>
+
+  <!-- Screenshots Section -->
+  <section id="screenshots" class="section">
+    <div class="section-header">
+      <p class="section-subtitle">See It In Action</p>
+      <h2>Screenshots</h2>
+      <p>Discover Mi Speaks' intuitive interface</p>
+    </div>
+
+    <div class="screenshots-grid">
+      <!-- Replace these with actual screenshots -->
+      <div class="screenshot-item">
+        <img src="assets/images/screenshot-1.png" alt="Screenshot 1"
+             onerror="this.style.background='linear-gradient(135deg, #4facfe, #00f2fe)'; this.style.minHeight='500px'; this.style.display='block';">
+      </div>
+      <div class="screenshot-item">
+        <img src="assets/images/screenshot-2.png" alt="Screenshot 2"
+             onerror="this.style.background='linear-gradient(135deg, #00f2fe, #43e97b)'; this.style.minHeight='500px'; this.style.display='block';">
+      </div>
+      <div class="screenshot-item">
+        <img src="assets/images/screenshot-3.png" alt="Screenshot 3"
+             onerror="this.style.background='linear-gradient(135deg, #43e97b, #4facfe)'; this.style.minHeight='500px'; this.style.display='block';">
+      </div>
+      <div class="screenshot-item">
+        <img src="assets/images/screenshot-4.png" alt="Screenshot 4"
+             onerror="this.style.background='linear-gradient(135deg, #4facfe, #00f2fe)'; this.style.minHeight='500px'; this.style.display='block';">
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section id="faq" class="faq-section">
+    <div class="section-header">
+      <p class="section-subtitle">Got Questions?</p>
+      <h2>Frequently Asked Questions</h2>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        <span>Who is Mi Speaks designed for?</span>
+        <span class="faq-icon">▼</span>
+      </button>
+      <div class="faq-answer">
+        <p>
+          Mi Speaks is designed for anyone who needs assistance with verbal communication, including individuals
+          with speech disabilities, those recovering from medical conditions, or anyone who prefers alternative
+          communication methods. It's also great for learning languages or communication in noisy environments.
+        </p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        <span>Does Mi Speaks require an internet connection?</span>
+        <span class="faq-icon">▼</span>
+      </button>
+      <div class="faq-answer">
+        <p>
+          No! Mi Speaks works completely offline after initial setup. All voices are downloaded to your device,
+          so you can communicate anywhere without needing internet connectivity.
+        </p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        <span>Can I customize the voices?</span>
+        <span class="faq-icon">▼</span>
+      </button>
+      <div class="faq-answer">
+        <p>
+          Yes! You can choose from multiple voice options and adjust the speaking rate, pitch, and volume
+          to find the perfect voice that represents you. Premium users get access to additional high-quality voices.
+        </p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        <span>How do I create and organize phrases?</span>
+        <span class="faq-icon">▼</span>
+      </button>
+      <div class="faq-answer">
+        <p>
+          Simply type or paste your phrases into Mi Speaks and organize them into custom categories.
+          You can create unlimited phrases and categories, mark favorites for quick access, and even
+          import/export phrase collections.
+        </p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        <span>Is Mi Speaks accessible?</span>
+        <span class="faq-icon">▼</span>
+      </button>
+      <div class="faq-answer">
+        <p>
+          Absolutely! Mi Speaks is built with accessibility as a core feature. It fully supports VoiceOver,
+          Dynamic Type, Switch Control, and other iOS accessibility features. The interface uses high contrast,
+          large touch targets, and clear visual hierarchy.
+        </p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        <span>Can I share my phrase collections?</span>
+        <span class="faq-icon">▼</span>
+      </button>
+      <div class="faq-answer">
+        <p>
+          Yes! You can export your phrase collections and share them with others, or import collections
+          shared by the Mi Speaks community. This makes it easy to get started with pre-made phrase sets
+          for common situations.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-links">
+        <a href="../" class="footer-link">All Apps</a>
+        <a href="../enter-space/" class="footer-link">Enter Space</a>
+        <a href="../ari-helper/" class="footer-link">Ari Helper</a>
+        <a href="../embr/" class="footer-link">Embr</a>
+        <a href="/privacy/" class="footer-link">Privacy</a>
+        <a href="/terms/" class="footer-link">Terms</a>
+        <a href="/" class="footer-link">Portfolio</a>
+      </div>
+      <p style="color: var(--text-muted); margin-top: var(--spacing-md);">
+        © 2024 Mi Speaks. All rights reserved.
+      </p>
+    </div>
+  </footer>
+
+  <script src="../app-showcase.js"></script>
+</body>
+</html>
