@@ -230,13 +230,67 @@ p {
   transform: translateY(0);
 }
 
+/* Floating App Store Button */
+.floating-appstore {
+  position: fixed;
+  bottom: var(--spacing-lg);
+  right: var(--spacing-lg);
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  color: white;
+  padding: var(--spacing-md) var(--spacing-lg);
+  border-radius: var(--radius-xl);
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1.125rem;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  transition: all var(--transition-fast);
+  box-shadow: 0 8px 30px rgba(102, 126, 234, 0.5);
+  border: none;
+  cursor: pointer;
+  z-index: var(--z-nav);
+  animation: floatPulse 2s ease-in-out infinite;
+}
+
+.floating-appstore:hover {
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 0 12px 40px rgba(102, 126, 234, 0.6);
+}
+
+.floating-appstore:active {
+  transform: translateY(-2px) scale(1.02);
+}
+
+.floating-appstore-icon {
+  font-size: 1.5rem;
+}
+
+@keyframes floatPulse {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+@media (max-width: 768px) {
+  .floating-appstore {
+    bottom: var(--spacing-md);
+    right: var(--spacing-md);
+    padding: var(--spacing-sm) var(--spacing-md);
+    font-size: 1rem;
+  }
+}
+
 /* Hero Section */
 .hero {
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: var(--spacing-2xl) var(--spacing-lg);
+  padding: calc(80px + var(--spacing-xl)) var(--spacing-lg) var(--spacing-2xl);
   background: linear-gradient(135deg,
     var(--bg-primary) 0%,
     var(--bg-secondary) 100%

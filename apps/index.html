@@ -213,10 +213,7 @@
       background: linear-gradient(135deg, #fa709a, #fee140);
     }
 
-    .back-home {
-      position: fixed;
-      top: var(--spacing-md);
-      left: var(--spacing-md);
+    .footer-back-home {
       background: var(--glass-bg);
       backdrop-filter: blur(20px) saturate(180%);
       -webkit-backdrop-filter: blur(20px) saturate(180%);
@@ -227,14 +224,14 @@
       text-decoration: none;
       font-weight: 600;
       transition: all var(--transition-fast);
-      z-index: 100;
       display: inline-flex;
       align-items: center;
       gap: var(--spacing-xs);
+      margin-top: var(--spacing-md);
     }
 
-    .back-home:hover {
-      transform: translateX(-5px);
+    .footer-back-home:hover {
+      transform: translateY(-2px);
       box-shadow: var(--glass-shadow);
     }
 
@@ -253,8 +250,6 @@
   </style>
 </head>
 <body>
-  <a href="/" class="back-home">← Back to Portfolio</a>
-
   <section class="apps-hero">
     <div class="apps-container">
       <h1 class="apps-title">My Apps</h1>
@@ -295,6 +290,14 @@
       </div>
     </div>
   </section>
+
+  <!-- Footer -->
+  <footer style="background: var(--bg-secondary); padding: var(--spacing-xl) var(--spacing-lg); text-align: center; border-top: 1px solid var(--border-color);">
+    <a href="/" class="footer-back-home">← Back to Portfolio</a>
+    <p style="color: var(--text-muted); margin-top: var(--spacing-md); font-size: 0.875rem;">
+      © 2024 My Apps. All rights reserved.
+    </p>
+  </footer>
 
   <script src="app-showcase.js"></script>
 </body>
