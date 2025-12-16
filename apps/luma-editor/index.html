@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Luma Editor - Match Your Photo Style</title>
+  <meta name="description" content="Bulk photo editing that matches your style. Develop new photos to look like your previous work or another photographer's style. Create and apply custom LUTs across your entire photo library.">
+  <link rel="stylesheet" href="../app-showcase.css">
+  <style>
+    /* Luma Editor Specific Styling */
+    :root {
+      --app-primary: #f093fb;
+      --app-secondary: #f5576c;
+      --app-accent: #fda085;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, var(--app-primary) 0%, var(--app-secondary) 100%);
+      color: white;
+    }
+
+    .hero-title,
+    .hero-subtitle {
+      color: white;
+      -webkit-text-fill-color: white;
+    }
+
+    .hero-description {
+      color: rgba(255, 255, 255, 0.9);
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="app-nav">
+    <div class="nav-container">
+      <a href="../" class="nav-logo">← Apps</a>
+      <button class="mobile-menu-toggle">☰</button>
+      <ul class="nav-links">
+        <li><a href="#features" class="nav-link">Features</a></li>
+        <li><a href="#screenshots" class="nav-link">Screenshots</a></li>
+        <li><a href="#faq" class="nav-link">FAQ</a></li>
+        <li><a href="https://apps.apple.com/us/app/luma-editor/id6741085424" class="btn-buy" target="_blank">Download on App Store</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-text">
+        <p class="hero-subtitle">🎨 Luma Editor</p>
+        <h1 class="hero-title">Match Your Photo Style</h1>
+        <p class="hero-description">
+          Bulk photo editing that matches your unique style. Develop new photos to look like your previous work or match another photographer's aesthetic. Create custom LUTs and apply consistent edits across your entire photo library with ease.
+        </p>
+        <div class="hero-cta">
+          <a href="https://apps.apple.com/us/app/luma-editor/id6741085424" class="btn-buy" target="_blank">Download Now</a>
+        </div>
+      </div>
+      <div class="hero-image">
+        <div class="hero-phone">
+          <!-- Replace with actual app screenshot -->
+          <img src="/projects/luma-editor.png" alt="Luma Editor App Icon" class="phone-mockup"
+               onerror="this.src='assets/images/hero-mockup.png'; this.onerror=function(){this.style.background='linear-gradient(135deg, #f093fb, #f5576c)'; this.style.minHeight='600px';};">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Floating App Store Button -->
+  <a href="https://apps.apple.com/us/app/luma-editor/id6741085424" class="floating-appstore" target="_blank">
+    <span class="floating-appstore-icon"></span>
+    <span>Download on App Store</span>
+  </a>
+
+  <!-- Features Section -->
+  <section id="features" class="section">
+    <div class="section-header">
+      <p class="section-subtitle">Why Choose Luma Editor</p>
+      <h2>Consistent Photo Style</h2>
+      <p>Develop photos that match your signature look or any style you love</p>
+    </div>
+
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-icon">🎨</div>
+        <h3 class="feature-title">Match Your Style</h3>
+        <p class="feature-description">
+          Develop new photos to automatically match your previously developed photos. Maintain a consistent aesthetic across all your work effortlessly.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">👁️</div>
+        <h3 class="feature-title">Match Any Photographer</h3>
+        <p class="feature-description">
+          Learn from other photographers by matching their editing style. Perfect for understanding different aesthetics and developing your own unique look.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">⚡</div>
+        <h3 class="feature-title">Bulk Photo Editing</h3>
+        <p class="feature-description">
+          Apply consistent edits across multiple photos at once. Save hours of editing time while maintaining professional quality across your entire shoot.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🎭</div>
+        <h3 class="feature-title">Create Custom LUTs</h3>
+        <p class="feature-description">
+          Generate LUTs (Lookup Tables) from your edits that can be applied in other apps and software. Export your style to use across your entire workflow.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🔄</div>
+        <h3 class="feature-title">Revertible Edits</h3>
+        <p class="feature-description">
+          All edits can be reverted and updated anytime later. Experiment freely knowing you can always go back or refine your adjustments.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">📱</div>
+        <h3 class="feature-title">Photos Integration</h3>
+        <p class="feature-description">
+          Seamlessly works with your Photos library. Edit, organize, and manage all your photos without leaving the Apple ecosystem.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Magazine-style Feature Sections -->
+  <section class="section">
+    <div class="magazine-section">
+      <div class="magazine-content">
+        <h2>Develop Your Signature Style</h2>
+        <p>
+          Luma Editor analyzes your previously developed photos to understand your unique editing style.
+          Apply that same aesthetic to new photos automatically, ensuring consistency across all your work.
+        </p>
+        <p>
+          Whether you're a professional photographer maintaining brand consistency or an enthusiast
+          perfecting your look, Luma Editor makes it easy to achieve cohesive results every time.
+        </p>
+      </div>
+      <div class="magazine-image">
+        <!-- Replace with actual screenshot -->
+        <img src="assets/images/feature-1.png" alt="Style Matching"
+             onerror="this.style.background='linear-gradient(135deg, #f093fb, #f5576c)'; this.style.minHeight='400px'; this.style.display='block';">
+      </div>
+    </div>
+
+    <div class="magazine-section reverse">
+      <div class="magazine-content">
+        <h2>Bulk Edit with Precision</h2>
+        <p>
+          Process entire photo shoots in minutes instead of hours. Apply your style to hundreds of photos
+          while maintaining the quality and attention to detail of manual editing.
+        </p>
+        <p>
+          Create and save custom LUTs that can be exported and used in other photo editing software.
+          Your style becomes portable and reusable across your entire creative workflow.
+        </p>
+      </div>
+      <div class="magazine-image">
+        <!-- Replace with actual screenshot -->
+        <img src="assets/images/feature-2.png" alt="Bulk Editing"
+             onerror="this.style.background='linear-gradient(135deg, #f5576c, #fda085)'; this.style.minHeight='400px'; this.style.display='block';">
+      </div>
+    </div>
+
+    <div class="magazine-section">
+      <div class="magazine-content">
+        <h2>Flexible & Non-Destructive</h2>
+        <p>
+          All edits are completely revertible. Change your mind about an edit from last week? No problem.
+          Update, refine, or completely redo any edit at any time.
+        </p>
+        <p>
+          Learn from other photographers by matching their style, then tweak and adapt it to create your
+          own unique look. Luma Editor is your creative playground for photographic style.
+        </p>
+      </div>
+      <div class="magazine-image">
+        <!-- Replace with actual screenshot -->
+        <img src="assets/images/feature-3.png" alt="Non-Destructive Editing"
+             onerror="this.style.background='linear-gradient(135deg, #f093fb, #fda085)'; this.style.minHeight='400px'; this.style.display='block';">
+      </div>
+    </div>
+  </section>
+
+  <!-- Screenshots Section -->
+  <section id="screenshots" class="section">
+    <div class="section-header">
+      <p class="section-subtitle">See It In Action</p>
+      <h2>Screenshots</h2>
+      <p>Experience Luma Editor's powerful workflow</p>
+    </div>
+
+    <div class="screenshots-grid">
+      <!-- Replace these with actual screenshots -->
+      <div class="screenshot-item">
+        <img src="assets/images/screenshot-1.png" alt="Screenshot 1"
+             onerror="this.style.background='linear-gradient(135deg, #f093fb, #f5576c)'; this.style.minHeight='500px'; this.style.display='block';">
+      </div>
+      <div class="screenshot-item">
+        <img src="assets/images/screenshot-2.png" alt="Screenshot 2"
+             onerror="this.style.background='linear-gradient(135deg, #f5576c, #fda085)'; this.style.minHeight='500px'; this.style.display='block';">
+      </div>
+      <div class="screenshot-item">
+        <img src="assets/images/screenshot-3.png" alt="Screenshot 3"
+             onerror="this.style.background='linear-gradient(135deg, #fda085, #f093fb)'; this.style.minHeight='500px'; this.style.display='block';">
+      </div>
+      <div class="screenshot-item">
+        <img src="assets/images/screenshot-4.png" alt="Screenshot 4"
+             onerror="this.style.background='linear-gradient(135deg, #f093fb, #f5576c)'; this.style.minHeight='500px'; this.style.display='block';">
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section id="faq" class="faq-section">
+    <div class="section-header">
+      <p class="section-subtitle">Got Questions?</p>
+      <h2>Frequently Asked Questions</h2>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        <span>How does Luma Editor match photo styles?</span>
+        <span class="faq-icon">▼</span>
+      </button>
+      <div class="faq-answer">
+        <p>
+          Luma Editor analyzes the color grading, tone curves, and other characteristics of your previously
+          developed photos. It then applies similar adjustments to new photos, maintaining consistency with
+          your established style or matching another photographer's aesthetic.
+        </p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        <span>Can I edit photos in bulk?</span>
+        <span class="faq-icon">▼</span>
+      </button>
+      <div class="faq-answer">
+        <p>
+          Yes! Luma Editor excels at bulk photo editing. Select multiple photos and apply your style to all
+          of them at once, saving hours of manual editing while maintaining consistent quality across your
+          entire photo shoot.
+        </p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        <span>What are LUTs and how do I use them?</span>
+        <span class="faq-icon">▼</span>
+      </button>
+      <div class="faq-answer">
+        <p>
+          LUTs (Lookup Tables) are color grading presets that can be applied to photos and videos. Luma Editor
+          lets you create custom LUTs from your edits and export them for use in other apps like Adobe Lightroom,
+          Premiere Pro, Final Cut Pro, and more.
+        </p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        <span>Are edits permanent?</span>
+        <span class="faq-icon">▼</span>
+      </button>
+      <div class="faq-answer">
+        <p>
+          No! All edits in Luma Editor are non-destructive and fully revertible. You can update, refine,
+          or completely undo any edit at any time. Your original photos are never modified.
+        </p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        <span>Can I match another photographer's style?</span>
+        <span class="faq-icon">▼</span>
+      </button>
+      <div class="faq-answer">
+        <p>
+          Absolutely! This is a great way to learn from photographers you admire. Luma Editor can analyze
+          any photo and apply similar color grading and tone adjustments to your own work, helping you
+          understand different editing styles and develop your own aesthetic.
+        </p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        <span>Does it work with my Photos library?</span>
+        <span class="faq-icon">▼</span>
+      </button>
+      <div class="faq-answer">
+        <p>
+          Yes! Luma Editor integrates seamlessly with Apple Photos. All your edits, albums, and organization
+          stay within the Apple ecosystem, making it easy to manage your entire photo workflow in one place.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-links">
+        <a href="../" class="footer-link">All Apps</a>
+        <a href="../enter-space/" class="footer-link">Enter Space</a>
+        <a href="../ari-helper/" class="footer-link">Ari Helper</a>
+        <a href="../mi-speaks/" class="footer-link">Mi Speaks</a>
+        <a href="../embr/" class="footer-link">Embr</a>
+        <a href="../deepsi/" class="footer-link">DeepSi</a>
+        <a href="/privacy/" class="footer-link">Privacy</a>
+        <a href="/terms/" class="footer-link">Terms</a>
+        <a href="/" class="footer-link">Portfolio</a>
+      </div>
+      <p style="color: var(--text-muted); margin-top: var(--spacing-md);">
+        © 2024 Luma Editor. All rights reserved.
+      </p>
+    </div>
+  </footer>
+
+  <script src="../app-showcase.js"></script>
+</body>
+</html>
