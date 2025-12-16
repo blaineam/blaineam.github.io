@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Apps - Beautiful iOS Applications</title>
+  <meta name="description" content="Discover our collection of beautiful and powerful iOS applications.">
+  <link rel="stylesheet" href="app-showcase.css">
+  <style>
+    /* Apps Landing Page Specific Styles */
+    .apps-hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--spacing-2xl) var(--spacing-lg);
+      background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .apps-hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background:
+        radial-gradient(circle at 20% 30%, rgba(102, 126, 234, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(118, 75, 162, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 50% 50%, rgba(240, 147, 251, 0.1) 0%, transparent 50%);
+      animation: pulseGradient 15s ease-in-out infinite;
+    }
+
+    @keyframes pulseGradient {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.7; }
+    }
+
+    .apps-container {
+      max-width: 1400px;
+      width: 100%;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .apps-title {
+      font-size: clamp(3rem, 6vw, 5rem);
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color), var(--accent-color));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: var(--spacing-md);
+      animation: fadeInUp 0.8s ease-out;
+    }
+
+    .apps-subtitle {
+      font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+      color: var(--text-secondary);
+      margin-bottom: var(--spacing-2xl);
+      animation: fadeInUp 0.8s ease-out 0.2s both;
+    }
+
+    .apps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: var(--spacing-xl);
+      margin-top: var(--spacing-2xl);
+    }
+
+    .app-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius-xl);
+      padding: var(--spacing-xl);
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: all var(--transition-base);
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      animation: fadeInScale 0.8s ease-out both;
+    }
+
+    .app-card:nth-child(1) { animation-delay: 0.3s; }
+    .app-card:nth-child(2) { animation-delay: 0.4s; }
+    .app-card:nth-child(3) { animation-delay: 0.5s; }
+    .app-card:nth-child(4) { animation-delay: 0.6s; }
+
+    .app-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      opacity: 0;
+      transition: opacity var(--transition-base);
+    }
+
+    .app-card:hover {
+      transform: translateY(-12px) scale(1.02);
+      box-shadow: 0 20px 60px var(--shadow-color);
+    }
+
+    .app-card:hover::before {
+      opacity: 0.05;
+    }
+
+    .app-icon {
+      width: 120px;
+      height: 120px;
+      border-radius: 27px;
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4rem;
+      margin-bottom: var(--spacing-md);
+      box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+      transition: all var(--transition-base);
+      position: relative;
+      z-index: 1;
+    }
+
+    .app-card:hover .app-icon {
+      transform: scale(1.1) rotate(5deg);
+      box-shadow: 0 15px 40px rgba(102, 126, 234, 0.5);
+    }
+
+    .app-name {
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: var(--spacing-xs);
+      position: relative;
+      z-index: 1;
+    }
+
+    .app-tagline {
+      font-size: 1rem;
+      color: var(--text-secondary);
+      margin-bottom: var(--spacing-md);
+      position: relative;
+      z-index: 1;
+    }
+
+    .app-cta {
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      color: white;
+      padding: var(--spacing-xs) var(--spacing-lg);
+      border-radius: var(--radius-lg);
+      font-weight: 600;
+      margin-top: auto;
+      transition: all var(--transition-fast);
+      position: relative;
+      z-index: 1;
+    }
+
+    .app-card:hover .app-cta {
+      transform: scale(1.05);
+      box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+    }
+
+    /* Floating animations for app icons */
+    @keyframes floatIcon1 {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-15px) rotate(3deg); }
+    }
+
+    @keyframes floatIcon2 {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-20px) rotate(-3deg); }
+    }
+
+    .app-card:nth-child(1) .app-icon {
+      animation: floatIcon1 6s ease-in-out infinite;
+    }
+
+    .app-card:nth-child(2) .app-icon {
+      animation: floatIcon2 7s ease-in-out infinite;
+    }
+
+    .app-card:nth-child(3) .app-icon {
+      animation: floatIcon1 8s ease-in-out infinite;
+    }
+
+    .app-card:nth-child(4) .app-icon {
+      animation: floatIcon2 9s ease-in-out infinite;
+    }
+
+    /* Custom colors for each app */
+    .app-card[data-app="enter-space"] .app-icon {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+    }
+
+    .app-card[data-app="ari-helper"] .app-icon {
+      background: linear-gradient(135deg, #f093fb, #f5576c);
+    }
+
+    .app-card[data-app="mi-speaks"] .app-icon {
+      background: linear-gradient(135deg, #4facfe, #00f2fe);
+    }
+
+    .app-card[data-app="embr"] .app-icon {
+      background: linear-gradient(135deg, #fa709a, #fee140);
+    }
+
+    .back-home {
+      position: fixed;
+      top: var(--spacing-md);
+      left: var(--spacing-md);
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius-md);
+      padding: var(--spacing-sm) var(--spacing-md);
+      color: var(--text-primary);
+      text-decoration: none;
+      font-weight: 600;
+      transition: all var(--transition-fast);
+      z-index: 100;
+      display: inline-flex;
+      align-items: center;
+      gap: var(--spacing-xs);
+    }
+
+    .back-home:hover {
+      transform: translateX(-5px);
+      box-shadow: var(--glass-shadow);
+    }
+
+    @media (max-width: 768px) {
+      .apps-grid {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-lg);
+      }
+
+      .app-icon {
+        width: 100px;
+        height: 100px;
+        font-size: 3rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a href="/" class="back-home">← Back to Portfolio</a>
+
+  <section class="apps-hero">
+    <div class="apps-container">
+      <h1 class="apps-title">My Apps</h1>
+      <p class="apps-subtitle">Discover beautiful and powerful iOS applications designed to enhance your life</p>
+
+      <div class="apps-grid">
+        <!-- Enter Space -->
+        <a href="enter-space/" class="app-card" data-app="enter-space">
+          <div class="app-icon">🚀</div>
+          <h2 class="app-name">Enter Space</h2>
+          <p class="app-tagline">62 cloud storage accounts, unified</p>
+          <span class="app-cta">Learn More →</span>
+        </a>
+
+        <!-- Ari Helper -->
+        <a href="ari-helper/" class="app-card" data-app="ari-helper">
+          <div class="app-icon">✨</div>
+          <h2 class="app-name">Ari Helper</h2>
+          <p class="app-tagline">All-in-one AI chat app</p>
+          <span class="app-cta">Learn More →</span>
+        </a>
+
+        <!-- Mi Speaks -->
+        <a href="mi-speaks/" class="app-card" data-app="mi-speaks">
+          <div class="app-icon">🎤</div>
+          <h2 class="app-name">Mi Speaks</h2>
+          <p class="app-tagline">Listen to any written content</p>
+          <span class="app-cta">Learn More →</span>
+        </a>
+
+        <!-- Embr -->
+        <a href="embr/" class="app-card" data-app="embr">
+          <div class="app-icon">🔥</div>
+          <h2 class="app-name">Embr</h2>
+          <p class="app-tagline">Burn your debts away</p>
+          <span class="app-cta">Learn More →</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <script src="app-showcase.js"></script>
+</body>
+</html>
