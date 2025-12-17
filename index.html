@@ -16,6 +16,8 @@
   <meta property="profile:last_name" content="Miller">
   <link rel="apple-touch-icon" href="profile.jpg">
   <link rel="icon" type="image/jpeg" href="profile.jpg">
+  <link rel="preload" as="image" href="profile.jpg" fetchpriority="high">
+  <link rel="preload" as="font" href="blaine.ttf" type="font/ttf" crossorigin>
   <style>
     * {
       border: 0;
@@ -768,7 +770,7 @@
   </style>
 </head>
 
-<body class="hide">
+<body>
   <div id="background">
     <img loading="lazy" id="blurred-background" class="same-space" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="Blurred Photography Background from Blaine Miller">
     <img loading="lazy" id="active-background" class="same-space" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="Photography Background from Blaine Miller">
@@ -783,7 +785,7 @@
             <div class="liquidGlass-tint"></div>
             <div class="liquidGlass-shine"></div>
             <div class="liquidGlass-text">
-              <img loading="lazy" src="profile.jpg" alt="Photo of Blaine Miller with an oceanic island scene behind him">
+              <img fetchpriority="high" src="profile.jpg" alt="Photo of Blaine Miller with an oceanic island scene behind him">
             </div>
           </div>
         </div>
@@ -2098,9 +2100,10 @@
       }
     }
 
-    window.addEventListener("load", function() {
-      document.body.classList.remove("hide");
-    });
+    // Body is now visible immediately on page load - no need to wait for load event
+    // window.addEventListener("load", function() {
+    //   document.body.classList.remove("hide");
+    // });
   </script>
   <script type="application/ld+json">
     {
