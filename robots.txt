@@ -1,5 +1,5 @@
 User-agent: *
 Allow: /
-Disallow: slides
-Disallow: privacy
-Disallow: terms
+Disallow: /slides
+Disallow: /privacy
+Disallow: /terms
