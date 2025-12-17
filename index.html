@@ -770,9 +770,9 @@
 
 <body class="hide">
   <div id="background">
-    <img id="blurred-background" class="same-space" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="Blurred Photography Background from Blaine Miller">
-    <img id="active-background" class="same-space" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="Photography Background from Blaine Miller">
-    <img id="next-background" class="hide same-space" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="Photography Background from Blaine Miller">
+    <img loading="lazy" id="blurred-background" class="same-space" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="Blurred Photography Background from Blaine Miller">
+    <img loading="lazy" id="active-background" class="same-space" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="Photography Background from Blaine Miller">
+    <img loading="lazy" id="next-background" class="hide same-space" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="Photography Background from Blaine Miller">
   </div>
   <div class="body">
     <div id="information">
@@ -783,13 +783,12 @@
             <div class="liquidGlass-tint"></div>
             <div class="liquidGlass-shine"></div>
             <div class="liquidGlass-text">
-              <img src="profile.jpg" alt="Photo of Blaine Miller with an oceanic island scene behind him">
+              <img loading="lazy" src="profile.jpg" alt="Photo of Blaine Miller with an oceanic island scene behind him">
             </div>
           </div>
         </div>
         <div id="links">
           <div class="liquidGlass-wrapper button">
-
             <div class="liquidGlass-effect"></div>
             <div class="liquidGlass-tint"></div>
             <div class="liquidGlass-shine"></div>
@@ -1002,7 +1001,7 @@
                       date: "June, 2025",
                       title: "Enter Space",
                       icon: "enter-space.png",
-                      link: "https://apps.apple.com/us/app/enter-space/id6746350540",
+                      link: "apps/enter-space/",
                       description: "Enter Space is simply a way to access a wide variety of cloud storage providers such as Google drive, Dropbox, pcloud and many more as if they were stored locally on your device. It directly integrates with the Apple ecosystem using similar technologies that iCloud is built upon.",
                       stack: [
                         "swift",
@@ -1021,7 +1020,7 @@
                       date: "January, 2025",
                       title: "Luma Editor",
                       icon: "luma-editor.jpg",
-                      link: "https://apps.apple.com/us/app/luma-editor/id6741085424",
+                      link: "apps/luma-editor/",
                       description: "An automatic photo editor that uses your own styled photos to develop new photos. It allows photograhers with their own style to duplicate their style onto new photos for rapid sharing to social media or news outlets. It features a clean  interface and is Privacy focused running entirely on device and doesn't collect user data or use any third party libraries. Yes, it was named after my dog, Luma.",
                       stack: [
                         "swift",
@@ -1039,7 +1038,7 @@
                       date: "October, 2024",
                       title: "Embr",
                       icon: "embr.jpg",
-                      link: "https://apps.apple.com/us/app/embr-burn-your-debts/id6727006089",
+                      link: "apps/embr/",
                       description: "A performant, privacy-focused, and user-friendly debt payoff management application designed to empower you with a comprehensive plan to achieve financial freedom from debts as swiftly as possible. Within this app, you maintain complete control over your financial strategy, ensuring that all your personal information remains securely protected and confidential.",
                       stack: [
                         "swift",
@@ -1056,7 +1055,7 @@
                       date: "March, 2024",
                       title: "Ari Helper",
                       icon: "ari.png",
-                      link: "https://apps.apple.com/us/app/ari-helper/id6480045555",
+                      link: "apps/ari-helper/",
                       description: "An all in one AI and LLM Chat app, with conversation history, code syntax highlighting, documents and images input and image generation with models privately on device, over the network for Ollama and Draw Things or even leveraging the latest cloud models from X.AI, OpenAI, & Anthropic all from a simple ui synced across all of your apple ecosystem devices.",
                       stack: [
                         "swift",
@@ -1093,7 +1092,7 @@
                       date: "July, 2023",
                       title: "Mi Speaks",
                       icon: "mi-speaks.png",
-                      link: "https://apps.apple.com/us/app/mi-speaks/id6451395651",
+                      link: "apps/mi-speaks/",
                       description: "Want to listen to that long research paper? This native iOS app allows you to enjoy your written content from anywhere by listening to it. In a rush, use Turbo mode to speed-read anything.",
                       stack: [
                         "swift",
@@ -1109,7 +1108,7 @@
                       date: "July, 2023",
                       title: "DeepSi",
                       icon: "deepsi.png",
-                      link: "https://apps.apple.com/us/app/deepsi/id6449420511",
+                      link: "apps/deepsi/",
                       description: "Ever wondered what it would be like if you saw depth instead of lights? This app lets you use your phone’s depth sensors as a camera to capture moments in unique ways or navigate in the dark with ease without illuminating the scene.",
                       stack: [
                         "swift",
@@ -1241,7 +1240,7 @@
                       date: "April, 2014",
                       title: "Wise Flyer",
                       icon: "wise-flyer.jpg",
-                      link: "https://apps.apple.com/us/app/wise-flyer/id853900499",
+                      link: "apps/wise-flyer/",
                       description: "A never ending game where you make an owl fly through electrical pipes, with an exceptional soundscape as well!",
                       stack: [
                         "game",
@@ -1324,7 +1323,7 @@
                           item.icon.length ? "" : "use-fg-as-bg"
                         }"> ${
                            item.link.length ? '<a href="' : ""
-                         }${item.link}${item.link.length ? '">' : ""}${item.icon.length ? '<img src="projects/' : ""}${item.icon}${item.icon.length ? '" />' : ""}${item.link.length ? "</a>" : ""}</span>
+                         }${item.link}${item.link.length ? '">' : ""}${item.icon.length ? '<img loading="lazy" src="projects/' : ""}${item.icon}${item.icon.length ? ('" alt="' + item.title + ' Icon">') : ""}${item.link.length ? "</a>" : ""}</span>
                         <span id="item${
                           item.position
                         }-name" class="timeline__meta">
