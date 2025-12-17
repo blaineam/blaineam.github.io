@@ -671,8 +671,8 @@ p {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
   background: var(--glass-bg);
   backdrop-filter: blur(20px) saturate(180%);
@@ -683,14 +683,14 @@ p {
 }
 
 .social-icon-link:hover {
-  transform: translateY(-3px) scale(1.1);
-  box-shadow: 0 8px 20px var(--shadow-color);
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 6px 16px var(--shadow-color);
   border-color: var(--primary-color);
 }
 
 .social-icon {
-  width: 20px;
-  height: 20px;
+  width: 16px;
+  height: 16px;
   fill: var(--text-secondary);
   transition: fill var(--transition-fast);
 }
