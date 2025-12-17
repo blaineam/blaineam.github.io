@@ -797,9 +797,9 @@
 
 <body class="hide">
   <div id="background">
-    <img id="blurred-background" class="same-space" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="Blurred Photography Background from Blaine Miller">
-    <img id="active-background" class="same-space" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="Photography Background from Blaine Miller">
-    <img id="next-background" class="hide same-space" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="Photography Background from Blaine Miller">
+    <img loading="lazy" id="blurred-background" class="same-space" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="Blurred Photography Background from Blaine Miller">
+    <img loading="lazy" id="active-background" class="same-space" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="Photography Background from Blaine Miller">
+    <img loading="lazy" id="next-background" class="hide same-space" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="Photography Background from Blaine Miller">
   </div>
   <div class="body">
     <div id="information">
@@ -810,13 +810,12 @@
             <div class="liquidGlass-tint"></div>
             <div class="liquidGlass-shine"></div>
             <div class="liquidGlass-text">
-              <img src="profile.jpg" alt="Photo of Blaine Miller with an oceanic island scene behind him">
+              <img loading="lazy" src="profile.jpg" alt="Photo of Blaine Miller with an oceanic island scene behind him">
             </div>
           </div>
         </div>
         <div id="links">
           <div class="liquidGlass-wrapper button">
-
             <div class="liquidGlass-effect"></div>
             <div class="liquidGlass-tint"></div>
             <div class="liquidGlass-shine"></div>
@@ -1351,7 +1350,7 @@
                           item.icon.length ? "" : "use-fg-as-bg"
                         }"> ${
                            item.link.length ? '<a href="' : ""
-                         }${item.link}${item.link.length ? '">' : ""}${item.icon.length ? '<img src="projects/' : ""}${item.icon}${item.icon.length ? ('" alt="' + item.title + ' Icon">') : ""}${item.link.length ? "</a>" : ""}</span>
+                         }${item.link}${item.link.length ? '">' : ""}${item.icon.length ? '<img loading="lazy" src="projects/' : ""}${item.icon}${item.icon.length ? ('" alt="' + item.title + ' Icon">') : ""}${item.link.length ? "</a>" : ""}</span>
                         <span id="item${
                           item.position
                         }-name" class="timeline__meta">
