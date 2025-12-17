@@ -682,6 +682,10 @@ p {
   text-decoration: none;
 }
 
+.social-icon-link svg {
+  width: 30px;
+} 
+
 .social-icon-link:hover {
   transform: translateY(-2px) scale(1.05);
   box-shadow: 0 6px 16px var(--shadow-color);
