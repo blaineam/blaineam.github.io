@@ -657,6 +657,48 @@ p {
   color: var(--primary-color);
 }
 
+/* Social Media Icons */
+.footer-social-links {
+  display: flex;
+  justify-content: center;
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-lg);
+  margin-bottom: var(--spacing-md);
+  flex-wrap: wrap;
+}
+
+.social-icon-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid var(--glass-border);
+  transition: all var(--transition-fast);
+  text-decoration: none;
+}
+
+.social-icon-link:hover {
+  transform: translateY(-3px) scale(1.1);
+  box-shadow: 0 8px 20px var(--shadow-color);
+  border-color: var(--primary-color);
+}
+
+.social-icon {
+  width: 20px;
+  height: 20px;
+  fill: var(--text-secondary);
+  transition: fill var(--transition-fast);
+}
+
+.social-icon-link:hover .social-icon {
+  fill: var(--primary-color);
+}
+
 /* Animations */
 @keyframes fadeInUp {
   from {
