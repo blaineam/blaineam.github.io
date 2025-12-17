@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <title>Blaine Miller - Sr. Software Engineer</title>
   <meta name="description" content="I enjoy finding unique solutions with tech. Photographing the world around me is fun. Just imagine what we can build together!">
-  <meta name="viewport" content="initial-scale = 1.0,maximum-scale = 1.0,minimum-scale = 1.0">
+  <meta name="viewport" content="initial-scale = 1.0,minimum-scale = 1.0">
   <meta property="og:type" content="profile">
   <meta property="og:title" content="Blaine Miller - Sr. Software Engineer">
   <meta property="og:url" content="https://www.wemiller.com">
@@ -120,10 +120,9 @@
       -webkit-mask-repeat: no-repeat;
       -webkit-mask-composite: source-in;
 
-/* 
       mask:
         linear-gradient(to top, transparent 2%, #fff 5% 95%, transparent 98%),
-        linear-gradient(to left, transparent 2%, #fff 5% 95%, transparent 98%); */
+        linear-gradient(to left, transparent 2%, #fff 5% 95%, transparent 98%);
       mask-size: 100% 100%;
       mask-position: center;
       mask-repeat: no-repeat;
@@ -153,7 +152,6 @@
       position: relative;
       color: var(--fg-color);
       padding: var(--padding);
-      /* background: var(--bg-color); */
       border-radius: var(--radius);
       width: 34px;
       height: 34px;
@@ -233,9 +231,7 @@
       padding: 18px 69px;
       overflow: auto;
       -ms-overflow-style: none;
-      /* Internet Explorer 10+ */
       scrollbar-width: none;
-      /* Firefox */
     }
 
     #information {
@@ -255,7 +251,6 @@
 
     #summary,
     #projects {
-      /* background: var(--bg-color); */
       padding: var(--padding);
       border-radius: var(--radius);
       text-align: center;
@@ -265,9 +260,7 @@
       width: 100%;
       line-height: 1.5;
       -ms-overflow-style: none;
-      /* Internet Explorer 10+ */
       scrollbar-width: none;
-      /* Firefox */
       transition: opacity 0.5s ease-in-out;
     }
 
@@ -373,12 +366,9 @@
       height: 100%;
       object-fit: cover;
       transform-origin: center center;
-      /* Consistent zoom point */
       will-change: opacity, transform;
-      /* Optimize for animations */
       opacity: 1;
       transition: opacity 0.5s ease-in-out;
-      /* 0.5s crossfade */
     }
 
     #active-background {
@@ -400,33 +390,27 @@
       z-index: 2;
       opacity: 0;
       transform: scale(3);
-      /* Ensure next image starts zoomed in */
     }
 
     #active-background.crossfade {
       opacity: 0;
-      /* Fade out active during crossfade */
     }
 
     #next-background.crossfade {
       opacity: 1;
-      /* Fade in next during crossfade */
     }
 
     #active-background.crossfade {
       opacity: 0;
-      /* Fade out active during crossfade */
     }
 
     #next-background.crossfade {
       opacity: 1;
-      /* Fade in next during crossfade */
     }
 
     body.photos-gallery #background img {
       object-fit: contain;
       transform: scale(3);
-      /* Start zoomed in */
     }
 
     body.photos-gallery-with-thumbnails #background #active-background {
@@ -488,9 +472,7 @@
       width: 100%;
       padding: var(--padding) 0px;
       -ms-overflow-style: none;
-      /* Internet Explorer 10+ */
       scrollbar-width: none;
-      /* Firefox */
     }
 
     .timeline__arrow {
@@ -596,7 +578,6 @@
       line-height: 1.333;
     }
 
-    /* Expanded state */
     .timeline__item-body--expanded {
       height: auto;
     }
@@ -653,7 +634,6 @@
     }
 
     .thumbnail.active {
-      /* border: 2px solid #fff; */
       opacity: 1 !important;
     }
 
@@ -716,9 +696,6 @@
       color: #ddd;
     }
 
-
-    /* LIQUID GLASS STYLES */
-
     .liquidGlass-wrapper {
       position: relative;
       display: flex;
@@ -732,9 +709,7 @@
       border: 1px solid rgba(255, 255, 255, 0.18);
       cursor: pointer;
       flex-shrink: 0;
-
       box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
-
       transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 2.2);
     }
 
@@ -788,10 +763,8 @@
     .tag-item {
         background-color: rgba(255, 255, 255, 0.20);
         border-radius: 50px;
-        /* overflow: hidden; */
         padding: 2px 8px;
     }
-    
   </style>
 </head>
 
@@ -2145,29 +2118,5 @@
       ]
     }
   </script>
-
-  <svg style="display: none">
-    <filter id="glass-distortion" x="0%" y="0%" width="100%" height="100%" filterUnits="objectBoundingBox">
-      <feTurbulence type="fractalNoise" baseFrequency="0.01 0.01" numOctaves="1" seed="5" result="turbulence" />
-      <!-- Seeds: 14, 17,  -->
-
-      <feComponentTransfer in="turbulence" result="mapped">
-        <feFuncR type="gamma" amplitude="1" exponent="10" offset="0.5" />
-        <feFuncG type="gamma" amplitude="0" exponent="1" offset="0" />
-        <feFuncB type="gamma" amplitude="0" exponent="1" offset="0.5" />
-      </feComponentTransfer>
-
-      <feGaussianBlur in="turbulence" stdDeviation="3" result="softMap" />
-
-      <feSpecularLighting in="softMap" surfaceScale="5" specularConstant="1" specularExponent="100" lighting-color="white" result="specLight">
-        <fePointLight x="-200" y="-200" z="300" />
-      </feSpecularLighting>
-
-      <feComposite in="specLight" in2="SourceGraphic" operator="arithmetic" k1="0" k2="1" k3="1" k4="0" result="litImage" />
-
-      <feDisplacementMap in="SourceGraphic" in2="softMap" scale="150" xChannelSelector="R" yChannelSelector="G" />
-    </filter>
-  </svg>
 </body>
-
 </html>
