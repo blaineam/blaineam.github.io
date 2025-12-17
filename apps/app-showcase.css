@@ -379,11 +379,11 @@ p {
 .phone-mockup {
   width: 100%;
   height: auto;
-  border-radius: 27%;
+  border-radius: 26%;
   /* border-radius: var(--radius-xl); */
   box-shadow: 0 20px 60px var(--shadow-color);
-  background: var(--bg-card);
-  padding: var(--spacing-sm);
+  /* background: var(--bg-card); */
+  /* padding: var(--spacing-sm); */
 }
 
 /* Feature Sections */
