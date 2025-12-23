@@ -286,7 +286,7 @@
       position: absolute;
       left: 54px;
       top: 50%;
-      transform: translateY(-50%) rotate(-45deg);
+      transform: translateY(-50%);
       transform-origin: -37px center;
       white-space: nowrap;
       font-size: 13px;
@@ -325,7 +325,56 @@
 
     .radial-menu-items .button:hover .button-label {
       opacity: 1;
-      transform: translateY(-50%) translateX(0px) rotate(-45deg) scale(1.1);
+      transform: translateY(-50%) translateX(8px);
+    }
+
+    /* Unique rotation for each label based on radial angle from center */
+    .radial-menu-items .button:nth-child(1) .button-label {
+      transform: translateY(-50%) rotate(-90deg);
+    }
+
+    .radial-menu-items .button:nth-child(1):hover .button-label {
+      transform: translateY(-50%) translateX(8px) rotate(-90deg);
+    }
+
+    .radial-menu-items .button:nth-child(2) .button-label {
+      transform: translateY(-50%) rotate(-72deg);
+    }
+
+    .radial-menu-items .button:nth-child(2):hover .button-label {
+      transform: translateY(-50%) translateX(8px) rotate(-72deg);
+    }
+
+    .radial-menu-items .button:nth-child(3) .button-label {
+      transform: translateY(-50%) rotate(-54deg);
+    }
+
+    .radial-menu-items .button:nth-child(3):hover .button-label {
+      transform: translateY(-50%) translateX(8px) rotate(-54deg);
+    }
+
+    .radial-menu-items .button:nth-child(4) .button-label {
+      transform: translateY(-50%) rotate(-36deg);
+    }
+
+    .radial-menu-items .button:nth-child(4):hover .button-label {
+      transform: translateY(-50%) translateX(8px) rotate(-36deg);
+    }
+
+    .radial-menu-items .button:nth-child(5) .button-label {
+      transform: translateY(-50%) rotate(-18deg);
+    }
+
+    .radial-menu-items .button:nth-child(5):hover .button-label {
+      transform: translateY(-50%) translateX(8px) rotate(-18deg);
+    }
+
+    .radial-menu-items .button:nth-child(6) .button-label {
+      transform: translateY(-50%) rotate(0deg);
+    }
+
+    .radial-menu-items .button:nth-child(6):hover .button-label {
+      transform: translateY(-50%) translateX(8px) rotate(0deg);
     }
 
     /* Responsive radial menu for narrow screens */
