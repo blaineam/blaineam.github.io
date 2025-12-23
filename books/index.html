@@ -949,19 +949,44 @@
                 let touchEndY = 0;
                 const minSwipeDistance = 50;
 
-                const bookContainer = document.querySelector('.book-container');
+                // Only attach to the flipbook element, not the entire container
+                // This ensures controls like sliders remain interactive
+                const flipbookElement = document.getElementById('flipbook');
+                if (!flipbookElement) return;
 
-                bookContainer.addEventListener('touchstart', (e) => {
+                flipbookElement.addEventListener('touchstart', (e) => {
+                    // Don't interfere with button/control touches
+                    if (e.target.tagName === 'BUTTON' || e.target.tagName === 'INPUT') {
+                        return;
+                    }
                     touchStartX = e.changedTouches[0].screenX;
                     touchStartY = e.changedTouches[0].screenY;
                 }, { passive: true });
 
-                bookContainer.addEventListener('touchmove', (e) => {
-                    // Prevent vertical scrolling while touching the book
-                    e.preventDefault();
+                flipbookElement.addEventListener('touchmove', (e) => {
+                    // Don't interfere with button/control touches
+                    if (e.target.tagName === 'BUTTON' || e.target.tagName === 'INPUT') {
+                        return;
+                    }
+
+                    touchEndX = e.changedTouches[0].screenX;
+                    touchEndY = e.changedTouches[0].screenY;
+
+                    const diffX = Math.abs(touchEndX - touchStartX);
+                    const diffY = Math.abs(touchEndY - touchStartY);
+
+                    // Only prevent default (scrolling) if horizontal swipe is dominant
+                    if (diffX > diffY && diffX > 10) {
+                        e.preventDefault();
+                    }
                 }, { passive: false });
 
-                bookContainer.addEventListener('touchend', (e) => {
+                flipbookElement.addEventListener('touchend', (e) => {
+                    // Don't interfere with button/control touches
+                    if (e.target.tagName === 'BUTTON' || e.target.tagName === 'INPUT') {
+                        return;
+                    }
+
                     touchEndX = e.changedTouches[0].screenX;
                     touchEndY = e.changedTouches[0].screenY;
                     this.handleSwipe(touchStartX, touchStartY, touchEndX, touchEndY, minSwipeDistance);

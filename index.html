@@ -265,7 +265,7 @@
       opacity: 0;
       pointer-events: none;
       transition: opacity 0.3s ease, transform 0.3s ease;
-      z-index: -1;
+      z-index: 10;
       height: 36px;
       display: flex;
       align-items: center;
@@ -298,6 +298,11 @@
       opacity: 1;
     }
 
+    /* Enable pointer events on labels when menu is active */
+    .radial-menu-container.active .radial-menu-items .button .button-label {
+      pointer-events: all;
+    }
+
     /* Label rotations and button positions set dynamically via JavaScript */
 
     /* Responsive radial menu for narrow screens */
@@ -305,6 +310,196 @@
       /* Make labels always visible on mobile */
       .radial-menu-items .button .button-label {
         opacity: 1;
+        pointer-events: all;
+      }
+
+      /* Backdrop blur and darken effect when menu is open */
+      body.radial-menu-backdrop-active::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        z-index: 999;
+        pointer-events: none;
+        animation: fadeIn 0.3s ease;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      /* Ensure radial menu stays above backdrop */
+      .radial-menu-container {
+        z-index: 1000;
+      }
+    }
+
+    /* Hidden Bible verse section - bottom right corner */
+    .hidden-verse {
+      display: none;
+    }
+
+    /* Mobile verse reference below summary/projects buttons */
+    .mobile-verse {
+      display: block;
+      position: absolute;
+      bottom: -50px;
+      left: 0;
+      right: 0;
+      height: 50px;
+      z-index: 998;
+      cursor: pointer;
+      text-align: center;
+    }
+
+    .mobile-verse-text {
+      display: inline-block;
+      transform: scale(0);
+      border-radius: 50px;
+      opacity: 0;
+      transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      white-space: nowrap;
+      pointer-events: none;
+      width: auto;
+    }
+
+    .mobile-verse-text .liquidGlass-text {
+      text-align: center;
+      padding: 8px 16px;
+      display: inline-block;
+    }
+
+    .mobile-verse.active .mobile-verse-text {
+      opacity: 1;
+      transform: scale(1);
+      pointer-events: all;
+    }
+    
+    .mobile-verse-text.liquidGlass-wrapper {
+        width: fit-content;
+        margin: 0 auto;
+    }
+
+    /* Add bottom spacing to navigable section on mobile */
+    @media only screen and (max-width: 768px) {
+      #navigable {
+        padding-bottom: 60px;
+      }
+    }
+
+    @media only screen and (min-width: 769px) {
+      .mobile-verse {
+        display: none;
+      }
+      .hidden-verse {
+        display: block;
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        width: 60px;
+        height: 60px;
+        z-index: 999;
+        cursor: help;
+      }
+
+      .hidden-verse::before {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        z-index: 1;
+      }
+
+      .hidden-verse:hover::before {
+        opacity: 1;
+      }
+      
+      .verse-text.liquidGlass-wrapper {
+          position: absolute;
+      }
+      
+      .verse-text {
+        position: fixed;
+        bottom: 50px;
+        right: 0px;
+        width: 320px;
+        max-width: calc(100vw - 60px);
+        border-radius: 16px;
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(10px);
+        transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        cursor: default;
+        display: block !important;
+        box-sizing: border-box !important;
+      }
+
+      .verse-text .liquidGlass-text {
+        padding: 18px;
+        box-sizing: border-box;
+        width: 100%;
+        height: 100%;
+        overflow-y: auto;
+        font-size: 0.95rem;
+        line-height: 1.7;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+        color: var(--fg-color);
+        text-align: left;
+        letter-spacing: 0.01em;
+        font-weight: 400;
+        display: block;
+      }
+
+      .verse-text cite {
+        display: block;
+        margin-top: 14px;
+        padding-top: 12px;
+        border-top: 1px solid rgba(255, 255, 255, 0.2);
+        font-style: italic;
+        text-align: right;
+        font-weight: 600;
+        font-size: 0.85rem;
+        color: #e94560;
+        letter-spacing: 0.02em;
+      }
+
+      .hidden-verse:hover .verse-text,
+      .verse-text:hover {
+        opacity: 1;
+        pointer-events: all;
+        transform: translateY(0);
+      }
+
+      .verse-text:hover {
+        cursor: text;
+      }
+
+      @media (prefers-color-scheme: dark) {
+        .verse-text cite {
+          border-top-color: rgba(255, 255, 255, 0.1);
+          color: #00d4ff;
+        }
       }
     }
 
@@ -1439,6 +1634,15 @@
             <div class="liquidGlass-text">Projects</div>
           </div>
         </div>
+        <!-- Mobile Verse Reference - Below Summary/Projects Buttons -->
+        <div class="mobile-verse" id="mobile-verse">
+          <div class="mobile-verse-text liquidGlass-wrapper">
+            <div class="liquidGlass-effect"></div>
+            <div class="liquidGlass-tint"></div>
+            <div class="liquidGlass-shine"></div>
+            <div class="liquidGlass-text">Romans 1:20</div>
+          </div>
+        </div>
       </div>
     </div>
     <!-- Radial Menu -->
@@ -2139,6 +2343,54 @@
     // Initialize on page load
     initializeRadialMenu();
 
+    // Make labels clickable - Need to set this up AFTER button handlers are registered
+    function setupLabelClickHandlers() {
+      // Helper to trigger button click with proper event
+      function triggerButtonClick(buttonId) {
+        const btn = document.getElementById(buttonId);
+        if (btn) {
+          const evt = new MouseEvent('click', {
+            view: window,
+            bubbles: true,
+            cancelable: true
+          });
+          btn.dispatchEvent(evt);
+        }
+      }
+
+      // Set up all label click handlers
+      const labelConfigs = [
+        { labelSelector: '#audio-toggle .button-label', buttonId: 'audio-toggle' },
+        { labelSelector: '#info-toggle .button-label', buttonId: 'info-toggle' },
+        { labelSelector: '#photos-toggle .button-label', buttonId: 'photos-toggle' },
+        { labelSelector: '#book-button .button-label', buttonId: 'book-button' },
+        { labelSelector: '#panos-button .button-label', buttonId: 'panos-button' },
+        { labelSelector: '#apps-button .button-label', buttonId: 'apps-button' }
+      ];
+
+      labelConfigs.forEach(config => {
+        const label = document.querySelector(config.labelSelector);
+        if (label) {
+          label.style.cursor = 'pointer';
+          label.addEventListener('click', function(event) {
+            event.stopPropagation();
+            event.preventDefault();
+            triggerButtonClick(config.buttonId);
+          }, false);
+
+          // Also handle touch events for mobile
+          label.addEventListener('touchend', function(event) {
+            event.stopPropagation();
+            event.preventDefault();
+            triggerButtonClick(config.buttonId);
+          }, false);
+        }
+      });
+    }
+
+    // Delay setup to ensure button handlers are registered first
+    setTimeout(setupLabelClickHandlers, 100);
+
     // Radial menu toggle
     var menuToggle = document.getElementById("menu-toggle");
     var menuContainer = document.querySelector(".radial-menu-container");
@@ -2154,6 +2406,11 @@
         isMenuOpen = true;
         menuContainer.classList.add("active");
         menuToggle.classList.add("active");
+
+        // Add backdrop blur/darken on narrow screens
+        if (window.innerWidth <= 768) {
+          document.body.classList.add("radial-menu-backdrop-active");
+        }
       }
     }
 
@@ -2161,6 +2418,9 @@
       isMenuOpen = false;
       menuContainer.classList.remove("active");
       menuToggle.classList.remove("active");
+
+      // Remove backdrop blur/darken
+      document.body.classList.remove("radial-menu-backdrop-active");
     }
 
     function toggleMenu(event) {
@@ -2430,6 +2690,55 @@
         "https://www.linkedin.com/in/millerblaine/",
         "http://x.com/helloblaine"
       ]
+    }
+  </script>
+
+  <!-- Hidden Bible Verse - Bottom Right Corner (Desktop) -->
+  <div class="hidden-verse">
+    <div class="verse-text liquidGlass-wrapper">
+      <div class="liquidGlass-effect"></div>
+      <div class="liquidGlass-tint"></div>
+      <div class="liquidGlass-shine"></div>
+      <div class="liquidGlass-text">
+        For his invisible attributes, that is, his eternal power and divine nature, have been clearly seen since the creation of the world, being understood through what he has made. As a result, people are without excuse.
+        <cite>Romans 1:20</cite>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Mobile verse tap handler
+    const mobileVerse = document.getElementById('mobile-verse');
+    if (mobileVerse) {
+      let hideTimeout;
+
+      mobileVerse.addEventListener('click', function() {
+        this.classList.add('active');
+
+        // Clear any existing timeout
+        if (hideTimeout) {
+          clearTimeout(hideTimeout);
+        }
+
+        // Hide after 3 seconds
+        hideTimeout = setTimeout(() => {
+          this.classList.remove('active');
+        }, 3000);
+      });
+
+      // Also handle touch events
+      mobileVerse.addEventListener('touchend', function(e) {
+        e.preventDefault();
+        this.classList.add('active');
+
+        if (hideTimeout) {
+          clearTimeout(hideTimeout);
+        }
+
+        hideTimeout = setTimeout(() => {
+          this.classList.remove('active');
+        }, 3000);
+      });
     }
   </script>
 </body>

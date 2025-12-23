@@ -4,8 +4,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Douglas Kent Schofield</title>
-	<meta name="description" content="Douglas Kent Schofield's Memorial Website I created for my Grandfather." />
-
+	<meta name="description" content="Douglas Kent Schofield's Memorial Website I created for my Grandfather.">
 	<style>
 		* {
 			margin: 0;
@@ -55,13 +54,65 @@
 			margin: 0 auto;
 			display: block;
 			border-radius: 20px;
-			box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+		}
+
+		.header-text {
+			margin-top: 30px;
+			text-align: center;
+		}
+
+		.header-text h1 {
+			font-size: 2rem;
+			font-weight: 700;
+			color: var(--text-dark);
+			margin-bottom: 10px;
+		}
+
+		.header-text .dates {
+			font-size: 1.3rem;
+			font-style: italic;
+			color: var(--text-light);
 		}
 
 		@media (prefers-color-scheme: dark) {
-			#header img {
-				box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+			.header-text h1 {
+				color: var(--primary-light);
 			}
+
+			.header-text .dates {
+				color: #e0e0e0;
+			}
+		}
+
+		/* Wide screen layout: image on left, text on right */
+		@media (min-width: 769px) {
+			#header {
+				display: flex;
+				align-items: center;
+				gap: 40px;
+				text-align: left;
+			}
+
+			#header img {
+				flex-shrink: 0;
+				width: 300px;
+				max-width: 300px;
+				margin: 0;
+			}
+
+			.header-text {
+				margin-top: 0;
+				text-align: left;
+				flex: 1;
+			}
+
+			.header-text h1 {
+				font-size: 2.5rem;
+			}
+		}
+
+		.content-wrapper {
+			display: block;
 		}
 
 		#video {
@@ -80,16 +131,27 @@
 			}
 		}
 
-		#video iframe {
+		.video-wrapper {
+			position: relative;
 			width: 100%;
-			height: 65vh;
-			min-height: 400px;
+			padding-bottom: 56.25%; /* 16:9 aspect ratio (9/16 = 0.5625) */
+			height: 0;
+			overflow: hidden;
+			border-radius: 12px;
+		}
+
+		#video iframe {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
 			border-radius: 12px;
 			border: none;
 		}
 
 		.link-button {
-			display: inline-block;
+			display: block;
 			margin: 25px auto;
 			padding: 16px 32px;
 			background: linear-gradient(135deg, var(--primary) 0%, #6ba3e8 100%);
@@ -99,6 +161,8 @@
 			font-weight: 600;
 			box-shadow: 0 8px 24px rgba(73, 137, 227, 0.4);
 			transition: all 0.3s ease;
+			width: fit-content;
+			text-align: center;
 		}
 
 		.link-button:hover {
@@ -225,10 +289,6 @@
 				margin: 24px 0;
 			}
 
-			#video iframe {
-				height: 50vh;
-				min-height: 300px;
-			}
 
 			.floating-back-btn {
 				bottom: 20px;
@@ -243,15 +303,21 @@
 <body>
 	<div class="container">
 		<div id="header">
-			<img src="https://40.media.tumblr.com/0ba4f182cb3b329c3efce17e250a58d8/tumblr_nlw2ntxG0h1rozy6jo1_540.png" alt="Douglas Kent Schofield" />
+			<img src="doug-schofield.png" alt="Douglas Kent Schofield">
+			<div class="header-text">
+				<h1>Douglas Kent Schofield</h1>
+				<p class="dates">December 21st, 1936 - March 18th, 2015</p>
+			</div>
 		</div>
+		<div class="content-wrapper">
 		<div id="video">
-			<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/MzJ5UpWHcp0?rel=0" allowfullscreen></iframe>
-			<br>
+			<div class="video-wrapper">
+				<iframe src="https://www.youtube-nocookie.com/embed/MzJ5UpWHcp0?rel=0" allowfullscreen></iframe>
+			</div>
 			<a class="link-button" href="https://www.icloud.com/sharedalbum/#B0v5n8hH4DwhRU">View Photo Album</a>
 		</div>
 		<div id="about">
-			<p>December 21, 1936 — March 18, 2015</p>
+			<p>A Life Well Lived — Devoted Husband, Father, and Grandfather</p>
 
 <p>Douglas Kent Schofield passed peacefully in his home in Bakersfield California on March 18th 2015.  On December 21, 1936 Doug was born in Las Vegas, Nevada and lived there until he joined the Air Force at the age of 17.  He served his country in England toward the end of the Korean War servicing the B-36 "Peacemakers".  Upon his return to the States he came home to Las Vegas and worked as a mailman.  He relocated to Bakersfield California where he continued to work for the postal service while attending BC.  While at BC he met the love of his life, Cindi Sheppard.  Soon after they married, he began his 50 plus years in the oil and gas industries.  Doug eventually became one of the top pump hydraulic engineers in Bakersfield.</p>
 
@@ -267,6 +333,7 @@
 
 <p>He was loved immensely and will be missed by all that knew him.
 </p>
+		</div>
 		</div>
 		<div id="footer">
 			<p>I will always love you Grandpa Schofield</p>
