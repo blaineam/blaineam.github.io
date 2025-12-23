@@ -1,0 +1,1230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Read 'A Walk Among the Giants' and 'Green Dot in a World of Blues' - Photography journals by Blaine Miller">
+    <title>Photography Journals - Blaine Miller</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="assets/js/turn.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --dark: #0f0f1e;
+            --primary: #1a1a2e;
+            --accent: #e94560;
+            --secondary-accent: #00d4ff;
+            --light: #f8f9fa;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, var(--dark) 0%, var(--primary) 100%);
+            min-height: 100vh;
+            color: var(--light);
+            overflow-x: hidden;
+            padding: 20px;
+        }
+        
+
+        @media (prefers-color-scheme: light) {
+            body {
+                background: linear-gradient(135deg, #f0f0f5 0%, #e0e0eb 100%);
+                color: var(--primary);
+            }
+
+            .hero h1, .reader-header h2 {
+                background: linear-gradient(135deg, var(--primary) 0%, #c52a4a 100%);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+            }
+
+            .book-card {
+                background: rgba(255, 255, 255, 0.95);
+                border: 2px solid rgba(0, 0, 0, 0.15);
+                box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            }
+
+            .book-card:hover {
+                box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+                border-color: #c52a4a;
+            }
+
+            .book-link.secondary {
+                background: rgba(0, 102, 204, 0.15);
+                color: #003d7a;
+                border: 2px solid #003d7a;
+            }
+
+            .reader-wrapper {
+                background: rgba(255, 255, 255, 0.95);
+                border: 2px solid rgba(0, 0, 0, 0.15);
+            }
+
+            .controls {
+                background: rgba(245, 245, 250, 0.95);
+                border: 2px solid rgba(0, 0, 0, 0.15);
+            }
+
+            .instructions {
+                background: rgba(245, 245, 250, 0.95);
+                border: 2px solid rgba(0, 0, 0, 0.15);
+            }
+
+            .reader-header h2 {
+                background: linear-gradient(135deg, var(--primary) 0%, #c52a4a 100%) !important;
+                -webkit-background-clip: text !important;
+                -webkit-text-fill-color: transparent !important;
+                background-clip: text !important;
+            }
+
+            select, input[type="number"] {
+                background: white;
+                border-color: rgba(0, 0, 0, 0.25);
+                color: var(--primary) !important;
+            }
+
+            select option {
+                background: white;
+                color: var(--primary);
+            }
+
+            .control-group label {
+                color: var(--primary) !important;
+                font-weight: 700;
+            }
+
+            .page-info {
+                color: var(--primary) !important;
+                font-weight: 700;
+            }
+
+            #book-title-display {
+                color: #c52a4a !important;
+            }
+
+            .page-num {
+                color: var(--primary) !important;
+            }
+
+            .instructions h3 {
+                color: var(--primary) !important;
+                font-weight: 800;
+            }
+
+            .loading {
+                color: var(--primary);
+            }
+
+            .inst-item {
+                background: white;
+                border: 2px solid rgba(0, 0, 0, 0.1);
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            }
+
+            .inst-item strong {
+                color: #c52a4a;
+                font-size: 1.05em;
+            }
+
+            .inst-item p {
+                color: rgba(26, 26, 46, 0.8);
+            }
+
+            button {
+                box-shadow: 0 2px 8px rgba(197, 42, 74, 0.3);
+            }
+
+            .nav-btn {
+                background: linear-gradient(135deg, #c52a4a 0%, #d94665 100%);
+            }
+        }
+
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: var(--accent);
+            color: white;
+            padding: 8px 16px;
+            text-decoration: none;
+            z-index: 100;
+        }
+
+        .skip-link:focus { top: 0; }
+
+        /* Hero */
+        .hero {
+            text-align: center;
+            padding: 60px 20px 40px;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 7vw, 4.5rem);
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--secondary-accent) 0%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 16px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: rgba(248, 249, 250, 0.85);
+        }
+
+        @media (prefers-color-scheme: light) {
+            .hero p {
+                color: rgba(26, 26, 46, 0.9) !important;
+            }
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        /* Book Cards */
+        .books-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .book-card {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            transition: all 0.4s ease;
+        }
+
+        .book-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 60px rgba(233, 69, 96, 0.4);
+            border-color: var(--secondary-accent);
+            background: rgba(255, 255, 255, 0.12);
+        }
+
+        .book-cover {
+            width: 60%;
+            padding: 24px;
+            margin: 0 auto;
+        }
+        
+        
+        .book-cover img {
+            width: 100%;
+            mask-image: linear-gradient(to right, 
+                transparent 0%,
+                white 0.5%,
+                rgba(0,0,0,0.8) 0.75%,
+                rgba(0,0,0,0.8) 1.25%,
+                white 1.75%,
+                rgba(0,0,0,0.8) 3.25%,
+                white 7%
+              );
+              border-radius: 0% 2% 2% 0%;
+        }
+
+        .book-info {
+            padding: 24px 28px 28px 28px;
+            text-align: center;
+        }
+
+        .book-title {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            text-align: center;
+        }
+
+        .book-link {
+            display: block;
+            padding: 12px 16px;
+            margin-bottom: 12px;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        .book-link:last-child {
+            margin-bottom: 0;
+        }
+
+        .book-link.primary {
+            background: linear-gradient(135deg, var(--accent) 0%, #ff6b8a 100%);
+            color: white;
+        }
+
+        .book-link.secondary {
+            background: rgba(0, 212, 255, 0.15);
+            color: var(--secondary-accent);
+            border: 2px solid var(--secondary-accent);
+        }
+
+        .book-link.read-btn {
+            background: linear-gradient(135deg, var(--secondary-accent) 0%, #00a8cc 100%);
+            color: white;
+            border: none;
+            font-size: 1.05rem;
+            padding: 14px 20px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .book-link:hover {
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+            opacity: 0.9;
+        }
+
+        /* Reader */
+        .reader-wrapper {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(30px);
+            border-radius: 24px;
+            padding: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            display: none;
+        }
+
+        .reader-wrapper.active {
+            display: block;
+        }
+
+        .reader-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .reader-header h2 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--light) 0%, var(--secondary-accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Controls */
+        .controls {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 16px;
+            padding: 24px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 16px;
+            margin-bottom: 32px;
+            align-items: end;
+        }
+
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .control-group label {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--secondary-accent);
+            font-weight: 600;
+        }
+
+        select, input[type="number"], button {
+            height: 48px;
+        }
+
+        select, input[type="number"] {
+            padding: 0 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            color: var(--light);
+            font-size: 1rem;
+        }
+
+        select:focus, input:focus {
+            outline: none;
+            border-color: var(--secondary-accent);
+            box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.1);
+        }
+
+        button {
+            padding: 0 24px;
+            background: linear-gradient(135deg, var(--accent) 0%, #ff6b8a 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        button:hover:not(:disabled) {
+            box-shadow: 0 4px 16px rgba(233, 69, 96, 0.4);
+            opacity: 0.9;
+        }
+
+        button:disabled {
+            background: rgba(108, 117, 125, 0.3);
+            cursor: not-allowed;
+        }
+
+        @media (max-width: 640px) {
+            .controls {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .progress-container {
+            grid-column: 1 / -1;
+        }
+
+        .page-info {
+            text-align: center;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--secondary-accent);
+        }
+
+        .progress-slider {
+            width: 100%;
+            height: 10px;
+            -webkit-appearance: none;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+            outline: none;
+        }
+
+        .progress-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--accent);
+            cursor: pointer;
+            box-shadow: -8px 0 0 8px var(--accent);
+        }
+
+        .progress-slider::-moz-range-thumb {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--accent);
+            cursor: pointer;
+            border: none;
+        }
+
+        /* Book Display */
+        .book-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 700px;
+            position: relative;
+            margin: 32px 0;
+        }
+
+        #flipbook {
+            width: 900px;
+            height: 600px;
+            margin: 0 auto;
+        }
+
+        /* TurnJS 4 wrapper centering */
+        .book-container > div {
+            margin: 0 auto !important;
+        }
+
+        #flipbook,
+        #flipbook > .turn-wrapper,
+        #flipbook.turn-wrapper {
+            margin: 0 auto !important;
+            display: block !important;
+        }
+
+        #flipbook .page {
+            width: 450px;
+            height: 600px;
+            background: white;
+            color: var(--primary);
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #flipbook .hard {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--dark) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #flipbook .page-content {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #flipbook .page.image-page .page-content {
+            padding: 0;
+        }
+
+        #flipbook .page.text-page .page-content {
+            padding: 48px;
+        }
+
+        .page-image-container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+        }
+
+        .page-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 0;
+            box-shadow: none;
+        }
+
+        .page-story {
+            font-size: clamp(0.85rem, 1.5vw, 1.05rem);
+            line-height: 1.8;
+            text-align: justify;
+            color: #2c3e50;
+            hyphens: auto;
+            max-height: 100%;
+            overflow-y: auto;
+            width: 100%;
+            padding-right: 12px;
+        }
+
+        .page-story::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .page-story::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.05);
+            border-radius: 3px;
+        }
+
+        .page-story::-webkit-scrollbar-thumb {
+            background: var(--accent);
+            border-radius: 3px;
+        }
+
+        .page-num {
+            position: absolute;
+            bottom: 16px;
+            font-size: 0.85rem;
+            color: var(--secondary-accent);
+            font-weight: 600;
+        }
+
+        /* Center page numbers on single-page mobile view */
+        @media (max-width: 768px) {
+            .page-num {
+                left: 50% !important;
+                right: auto !important;
+                transform: translateX(-50%) !important;
+            }
+
+            .page:nth-child(odd) .page-num,
+            .page:nth-child(even) .page-num {
+                left: 50% !important;
+                right: auto !important;
+                transform: translateX(-50%) !important;
+            }
+
+            .page.image-page .page-num,
+            .page.text-page .page-num {
+                left: 50% !important;
+                right: auto !important;
+                transform: translateX(-50%) !important;
+            }
+        }
+
+        #flipbook .hard .cover-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 0;
+            box-shadow: none;
+        }
+
+        #flipbook .hard .back-cover-text {
+            font-size: 2rem;
+            color: var(--secondary-accent);
+            font-weight: 700;
+            text-align: center;
+        }
+
+        /* Navigation */
+        .nav-controls {
+            position: absolute;
+            width: 100%;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px;
+            pointer-events: none;
+            z-index: 10;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .nav-controls:hover {
+            opacity: 1;
+        }
+
+        .nav-btn {
+            pointer-events: all;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            line-height: 52px;
+            background: linear-gradient(135deg, var(--accent) 0%, #ff6b8a 100%);
+            color: white;
+            border: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 24px rgba(233, 69, 96, 0.4);
+            opacity: 0;
+        }
+
+        .nav-controls:hover .nav-btn {
+            opacity: 1;
+        }
+
+        .nav-btn:hover:not(:disabled) {
+            box-shadow: 0 8px 24px rgba(233, 69, 96, 0.6);
+            opacity: 0.9;
+        }
+
+        .nav-btn:disabled {
+            background: rgba(108, 117, 125, 0.3);
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+
+        /* Instructions */
+        .instructions {
+            margin-top: 48px;
+            padding: 32px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 16px;
+        }
+
+        .instructions h3 {
+            font-size: 1.5rem;
+            color: var(--secondary-accent);
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: 700;
+        }
+
+        .inst-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+        }
+
+        .inst-item {
+            padding: 16px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 10px;
+        }
+
+        .inst-item strong {
+            color: var(--accent);
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 60px;
+            font-size: 1.3rem;
+            color: var(--secondary-accent);
+        }
+
+        @media (max-width: 768px) {
+            .book-spread {
+                flex-direction: column;
+            }
+
+            .book-page {
+                padding: 24px;
+                min-height: 300px;
+            }
+
+            .book-page.left {
+                border-right: none;
+                border-bottom: none;
+            }
+
+            .book-page.mobile-single {
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-start;
+                gap: 20px;
+            }
+
+            .page-image-container {
+                height: auto;
+                padding: 0;
+                margin-bottom: 20px;
+            }
+
+            .page-image {
+                height: 300px;
+                object-fit: cover;
+                border-radius: 0;
+            }
+
+            .page-story {
+                font-size: 0.95rem;
+                padding: 0;
+            }
+
+            .controls {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-btn {
+                width: 50px;
+                height: 50px;
+                font-size: 1.5rem;
+            }
+        }
+
+        /* Floating back to portfolio button */
+        .floating-back-btn {
+            position: fixed;
+            bottom: 32px;
+            left: 32px;
+            background: rgba(233, 69, 96, 0.9);
+            backdrop-filter: blur(20px);
+            color: white;
+            text-decoration: none;
+            padding: 16px 24px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1rem;
+            box-shadow: 0 8px 32px rgba(233, 69, 96, 0.4);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .floating-back-btn:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 48px rgba(233, 69, 96, 0.6);
+            background: rgba(233, 69, 96, 1);
+        }
+
+        @media (prefers-color-scheme: light) {
+            .floating-back-btn {
+                background: rgba(197, 42, 74, 0.95);
+                box-shadow: 0 8px 32px rgba(197, 42, 74, 0.3);
+            }
+
+            .floating-back-btn:hover {
+                background: rgba(197, 42, 74, 1);
+                box-shadow: 0 12px 48px rgba(197, 42, 74, 0.5);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .floating-back-btn {
+                bottom: 20px;
+                left: 20px;
+                padding: 12px 20px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="#main" class="skip-link">Skip to main content</a>
+
+    <section class="hero">
+        <h1>Photography Journals</h1>
+        <p>Explore visual stories through the lens of Blaine Miller</p>
+    </section>
+
+    <div class="container">
+        <div class="books-grid" id="books-grid">
+            <div class="loading">Loading books...</div>
+        </div>
+
+        <div class="reader-wrapper" id="main">
+            <div class="reader-header">
+                <h2>Read Online</h2>
+            </div>
+
+            <div class="controls">
+                <div class="control-group">
+                    <label for="page-jump">Jump to Page</label>
+                    <input type="number" id="page-jump" min="0" value="0">
+                </div>
+
+                <button id="jump-btn">Go to Page</button>
+
+                <div class="control-group progress-container">
+                    <div class="page-info">
+                        <span id="book-title-display">Select a book to begin</span> -
+                        Page <span id="curr-page">0</span> of <span id="total-pages">0</span>
+                    </div>
+                    <input type="range" id="progress" class="progress-slider" min="0" max="0" value="0">
+                </div>
+            </div>
+
+            <div class="book-container">
+                <div class="nav-controls">
+                    <button class="nav-btn" id="prev-btn" aria-label="Previous">‹</button>
+                    <button class="nav-btn" id="next-btn" aria-label="Next">›</button>
+                </div>
+
+                <div id="flipbook">
+                    <div class="loading">Loading content...</div>
+                </div>
+            </div>
+
+            <div class="instructions">
+                <h3>Navigation Guide</h3>
+                <div class="inst-grid">
+                    <div class="inst-item">
+                        <strong>Keyboard</strong>
+                        <p>Use ← → arrow keys to turn pages</p>
+                    </div>
+                    <div class="inst-item">
+                        <strong>Touch</strong>
+                        <p>Swipe left/right to navigate</p>
+                    </div>
+                    <div class="inst-item">
+                        <strong>Mouse</strong>
+                        <p>Click navigation buttons</p>
+                    </div>
+                    <div class="inst-item">
+                        <strong>Progress</strong>
+                        <p>Use slider to jump to any page</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const BOOKS = {
+            1: {
+                id: 1,
+                title: 'A Walk Among the Giants',
+                prefix: 'bmp-b1-',
+                cover: 'media/bmp-b1-cover.jpg',
+                links: {
+                    blurb: 'https://www.blurb.com/b/11517122-a-walk-among-the-giants',
+                    amazon: 'https://www.amazon.com/Walk-Among-Giants-Photography-Journal/dp/B0BXN6NP5Q/ref=tmm_pap_swatch_0?_encoding=UTF8&dib_tag=se&dib=eyJ2IjoiMSJ9.nadcpsg0MPpxNk-SuDCcZ1u0L9z6fWNqGhHFPRNEvgpERYLNJwksnLM4Q0AvHni8i4LMWbIaJ2LvWAOnhKQBO0mB-Vmt2xtdVXkScZX7nfiLWQb3yHVKHCS9AFfmv0WxxQsq31UE9MlOH8eBu5dLXajEmq_BLA0rpFqkHJTob0Yml3zOUf235ddkP0Z1v_QmEbtpQAHalnosS9OeIgX7x486k4hWv9qpcSqO_Xwmh7Q.LkIV9yafW7b50Hz2GFuuj2Dxpnkb4albritGoLvD7WA&qid=1766463662&sr=8-2'
+                }
+            },
+            2: {
+                id: 2,
+                title: 'Green Dot in a World of Blues',
+                prefix: 'bmp-b2-',
+                cover: 'media/bmp-b2-cover.jpg',
+                links: {
+                    blurb: 'https://www.blurb.com/b/11703882-green-dot-in-a-world-of-blues',
+                    amazon: 'https://www.amazon.com/Green-Dot-World-Blues-Photography/dp/B0CHL9557G/ref=tmm_pap_swatch_0?_encoding=UTF8&dib_tag=se&dib=eyJ2IjoiMSJ9.nadcpsg0MPpxNk-SuDCcZ1u0L9z6fWNqGhHFPRNEvgpERYLNJwksnLM4Q0AvHni8i4LMWbIaJ2LvWAOnhKQBO0mB-Vmt2xtdVXkScZX7nfiLWQb3yHVKHCS9AFfmv0WxxQsq31UE9MlOH8eBu5dLXajEmq_BLA0rpFqkHJTob0Yml3zOUf235ddkP0Z1v_QmEbtpQAHalnosS9OeIgX7x486k4hWv9qpcSqO_Xwmh7Q.LkIV9yafW7b50Hz2GFuuj2Dxpnkb4albritGoLvD7WA&qid=1766463662&sr=8-1'
+                }
+            }
+        };
+
+        class BookReader {
+            constructor() {
+                this.stories = null;
+                this.book = null;
+                this.currentPage = 0;
+                this.totalPagesCount = 0;
+                this.wasNarrowScreen = window.innerWidth <= 768;
+
+                this.els = {
+                    readerWrapper: document.querySelector('.reader-wrapper'),
+                    bookTitle: document.getElementById('book-title-display'),
+                    pageJump: document.getElementById('page-jump'),
+                    jumpBtn: document.getElementById('jump-btn'),
+                    progress: document.getElementById('progress'),
+                    currPage: document.getElementById('curr-page'),
+                    totalPages: document.getElementById('total-pages'),
+                    flipbook: $('#flipbook'),
+                    prevBtn: document.getElementById('prev-btn'),
+                    nextBtn: document.getElementById('next-btn')
+                };
+
+                this.init();
+            }
+
+            init() {
+                this.els.prevBtn.addEventListener('click', () => this.els.flipbook.turn('previous'));
+                this.els.nextBtn.addEventListener('click', () => this.els.flipbook.turn('next'));
+                this.els.jumpBtn.addEventListener('click', () => this.jump());
+                this.els.progress.addEventListener('input', e => this.slide(e));
+
+                document.addEventListener('keydown', e => this.keys(e));
+                document.addEventListener('contextmenu', e => e.preventDefault());
+
+                // Add resize handler with debounce
+                let resizeTimeout;
+                window.addEventListener('resize', () => {
+                    clearTimeout(resizeTimeout);
+                    resizeTimeout = setTimeout(() => this.handleResize(), 250);
+                });
+
+                this.load();
+            }
+
+            async load() {
+                try {
+                    const res = await fetch('media/stories.json');
+                    this.stories = await res.json();
+                    this.renderCards();
+                    this.loadState();
+                    if (this.book) {
+                        this.build();
+                        // Scroll to reader if a book was previously open
+                        setTimeout(() => {
+                            this.els.readerWrapper.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        }, 100);
+                    }
+                } catch (e) {
+                    console.error(e);
+                    const grid = document.getElementById('books-grid');
+                    if (grid) {
+                        grid.innerHTML = '<div class="loading">Error loading. Refresh page.</div>';
+                    }
+                }
+            }
+
+            renderCards() {
+                const grid = document.getElementById('books-grid');
+                grid.innerHTML = '';
+                Object.values(BOOKS).forEach(b => {
+                    const card = document.createElement('article');
+                    card.className = 'book-card';
+                    card.innerHTML = `
+                        <div class="book-cover">
+                            <img src="${b.cover}" alt="${b.title}">
+                        </div>
+                        <div class="book-info">
+                            <h2 class="book-title">${b.title}</h2>
+                            <a href="${b.links.blurb}" class="book-link primary" target="_blank" rel="noopener">
+                                Get Premium Edition
+                            </a>
+                            <a href="${b.links.amazon}" class="book-link secondary" target="_blank" rel="noopener">
+                                Get Paperback
+                            </a>
+                            <button class="book-link read-btn" data-book-id="${b.id}">
+                                Read Book
+                            </button>
+                        </div>
+                    `;
+
+                    // Add click handler for Read Book button
+                    const readBtn = card.querySelector('.read-btn');
+                    readBtn.addEventListener('click', () => this.selectBook(b.id));
+
+                    grid.appendChild(card);
+                });
+            }
+
+            selectBook(bookId) {
+                // Save current book's page before switching
+                if (this.book) {
+                    this.saveBookPage(this.book, this.currentPage);
+                }
+
+                this.book = bookId;
+                // Load saved page for this book, or default to 1
+                this.currentPage = this.loadBookPage(bookId);
+
+                // Save the newly selected book to localStorage
+                this.saveBookPage(bookId, this.currentPage);
+
+                this.els.readerWrapper.classList.add('active');
+                this.els.readerWrapper.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                this.build();
+            }
+
+            loadState() {
+                const s = localStorage.getItem('bookState');
+                if (s) {
+                    try {
+                        const state = JSON.parse(s);
+                        this.book = state.lastBook || null;
+                        if (this.book) {
+                            this.currentPage = this.loadBookPage(this.book);
+                            this.els.readerWrapper.classList.add('active');
+                        }
+                    } catch (e) {}
+                } else {
+                    this.book = null;
+                }
+            }
+
+            loadBookPage(bookId) {
+                const s = localStorage.getItem('bookState');
+                if (s) {
+                    try {
+                        const state = JSON.parse(s);
+                        return state.bookPages && state.bookPages[bookId] ? state.bookPages[bookId] : 1;
+                    } catch (e) {
+                        return 1;
+                    }
+                }
+                return 1;
+            }
+
+            saveBookPage(bookId, page) {
+                const s = localStorage.getItem('bookState');
+                let state = {};
+                if (s) {
+                    try {
+                        state = JSON.parse(s);
+                    } catch (e) {}
+                }
+
+                if (!state.bookPages) {
+                    state.bookPages = {};
+                }
+
+                state.bookPages[bookId] = page;
+                state.lastBook = bookId;
+
+                localStorage.setItem('bookState', JSON.stringify(state));
+            }
+
+            saveState() {
+                if (this.book) {
+                    this.saveBookPage(this.book, this.currentPage);
+                }
+            }
+
+            getDisplayMode() {
+                return window.innerWidth < 920 ? 'single' : 'double';
+            }
+
+            getDimensions() {
+                const isSingle = this.getDisplayMode() === 'single';
+                return {
+                    width: isSingle ? 450 : 900,
+                    height: 600,
+                    display: isSingle ? 'single' : 'double'
+                };
+            }
+
+            handleResize() {
+                if (!this.book || !this.els.flipbook.turn('is')) return;
+
+                const isNarrowScreen = window.innerWidth <= 768;
+
+                // Only rebuild if we crossed the breakpoint (narrow <-> wide)
+                if (isNarrowScreen !== this.wasNarrowScreen) {
+                    this.wasNarrowScreen = isNarrowScreen;
+                    const currentPage = this.els.flipbook.turn('page');
+                    this.currentPage = currentPage;
+                    this.build();
+                } else {
+                    // Just update dimensions for same mode
+                    const currentPage = this.els.flipbook.turn('page');
+                    this.currentPage = currentPage;
+                    const dims = this.getDimensions();
+                    this.els.flipbook.turn('size', dims.width, dims.height);
+                    this.els.flipbook.turn('display', dims.display);
+                }
+            }
+
+            build() {
+                const b = BOOKS[this.book];
+                if (!b) return;
+
+                // Update title
+                this.els.bookTitle.textContent = b.title;
+
+                // Destroy existing turn.js instance if it exists
+                try {
+                    if (typeof this.els.flipbook.turn === 'function') {
+                        this.els.flipbook.off('turned');
+                        this.els.flipbook.turn('destroy').remove();
+                    }
+                } catch (e) {
+                    console.log('No existing turnjs instance to destroy');
+                }
+
+                // Clear and recreate the flipbook container
+                const flipbookContainer = document.getElementById('flipbook');
+                if (flipbookContainer && flipbookContainer.parentNode) {
+                    const parent = flipbookContainer.parentNode;
+                    const newFlipbook = document.createElement('div');
+                    newFlipbook.id = 'flipbook';
+                    parent.replaceChild(newFlipbook, flipbookContainer);
+                } else {
+                    // If flipbook doesn't exist, create it in the book-container
+                    const bookContainer = document.querySelector('.book-container');
+                    const existingFlipbook = document.getElementById('flipbook');
+                    if (existingFlipbook) {
+                        existingFlipbook.remove();
+                    }
+                    const newFlipbook = document.createElement('div');
+                    newFlipbook.id = 'flipbook';
+                    // Insert before nav-controls
+                    const navControls = bookContainer.querySelector('.nav-controls');
+                    bookContainer.insertBefore(newFlipbook, navControls);
+                }
+                this.els.flipbook = $('#flipbook');
+
+                // Build page HTML
+                let html = '';
+
+                // Front cover (hard page)
+                html += `<div class="hard"><img src="${b.cover}" class="cover-img" alt="Cover"></div><div class="hard"></div><div></div>`;
+
+                // Get story pages
+                const storyKeys = Object.keys(this.stories)
+                    .filter(k => k.startsWith(b.prefix) && !k.includes('cover'))
+                    .sort((a, b) => {
+                        const numA = parseInt(a.match(/\d+/)[0]);
+                        const numB = parseInt(b.match(/\d+/)[0]);
+                        return numA - numB;
+                    });
+
+                // Check if narrow screen (mobile)
+                const isNarrowScreen = window.innerWidth <= 768;
+
+                // Add pages - always in numeric order, but alternate content
+                storyKeys.forEach((key, idx) => {
+                    const pageNum = (idx * 2) + 1;
+                    // Page numbers on OUTER corners: left page on LEFT, right page on RIGHT
+                    const leftPageNumStyle = 'left: 24px;';
+                    const rightPageNumStyle = 'right: 24px;';
+
+                    if (isNarrowScreen || idx % 2 === 0) {
+                        // Mobile OR first spread type: image on left page, story on right page
+                        const leftPage = `<div class="page image-page" data-page="${pageNum}"><div class="page-content"><img src="media/${key}" class="page-image" alt="Page ${pageNum}"></div><div class="page-num" data-num="${pageNum}" style="${leftPageNumStyle}">${pageNum}</div></div>`;
+                        const rightPage = `<div class="page text-page" data-page="${pageNum + 1}"><div class="page-content"><div class="page-story">${this.stories[key]}</div></div><div class="page-num" data-num="${pageNum + 1}" style="${rightPageNumStyle}">${pageNum + 1}</div></div>`;
+                        html += leftPage + rightPage;
+                    } else {
+                        // Wide screen, second spread type: story on left page, image on right page
+                        const leftPage = `<div class="page text-page" data-page="${pageNum}"><div class="page-content"><div class="page-story">${this.stories[key]}</div></div><div class="page-num" data-num="${pageNum}" style="${leftPageNumStyle}">${pageNum}</div></div>`;
+                        const rightPage = `<div class="page image-page" data-page="${pageNum + 1}"><div class="page-content"><img src="media/${key}" class="page-image" alt="Page ${pageNum + 1}"></div><div class="page-num" data-num="${pageNum + 1}" style="${rightPageNumStyle}">${pageNum + 1}</div></div>`;
+                        html += leftPage + rightPage;
+                    }
+                });
+
+                // Back cover (hard page)
+                html += `<div></div><div class="hard"></div><div class="hard"><div class="back-cover-text">The End</div></div>`;
+
+                // Set HTML and initialize turn.js
+                this.els.flipbook.html(html);
+                this.totalPagesCount = this.els.flipbook.children().length;
+
+                // Get responsive dimensions
+                const dims = this.getDimensions();
+
+                this.els.flipbook.turn({
+                    width: dims.width,
+                    height: dims.height,
+                    display: dims.display,
+                    autoCenter: true,
+                    duration: 1000,
+                    gradients: true,
+                    acceleration: true,
+                    elevation: 50,
+                    page: this.currentPage || 1
+                });
+
+                // Bind turn events
+                this.els.flipbook.bind('turned', (event, page) => {
+                    this.currentPage = page;
+                    this.updateControls();
+                    this.saveState();
+                });
+
+                this.updateControls();
+            }
+
+            updateControls() {
+                this.els.totalPages.textContent = this.totalPagesCount;
+                this.els.progress.max = this.totalPagesCount;
+                this.els.pageJump.max = this.totalPagesCount;
+                this.els.currPage.textContent = this.currentPage;
+                this.els.progress.value = this.currentPage;
+                this.els.pageJump.value = this.currentPage;
+                this.els.prevBtn.disabled = this.currentPage === 1;
+                this.els.nextBtn.disabled = this.currentPage >= this.totalPagesCount;
+            }
+
+            jump() {
+                const p = parseInt(this.els.pageJump.value);
+                if (p >= 1 && p <= this.totalPagesCount) {
+                    this.els.flipbook.turn('page', p);
+                }
+            }
+
+            slide(e) {
+                const p = parseInt(e.target.value);
+                if (p !== this.currentPage && p >= 1 && p <= this.totalPagesCount) {
+                    this.els.flipbook.turn('page', p);
+                }
+            }
+
+            keys(e) {
+                if (e.key === 'ArrowLeft') {
+                    e.preventDefault();
+                    this.els.flipbook.turn('previous');
+                } else if (e.key === 'ArrowRight') {
+                    e.preventDefault();
+                    this.els.flipbook.turn('next');
+                }
+            }
+        }
+
+        $(document).ready(function() {
+            new BookReader();
+        });
+    </script>
+
+    <a href="/" class="floating-back-btn">← Back to Portfolio</a>
+</body>
+</html>
