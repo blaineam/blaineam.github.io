@@ -1,87 +1,269 @@
 <!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="utf-8">
-		<title>Douglas Kent Schofield</title>
-		<meta name="description" content="Douglas Kent Schofield's Memorial Website I created for my Grandfather." />
-		
-		<style>
-			
-			html, body{
-				width: 100%;
-				height: 100%;
-				margin: 0px;
-				padding: 0px;
-				border: 0px solid transparent;
-				text-align: center;
-				display: block;
-				position: relative;
-				font-family: sans-serif;
-				background-color: #9EC6FF;
-				color: #565656;
-				font-size: x-large;
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Douglas Kent Schofield</title>
+	<meta name="description" content="Douglas Kent Schofield's Memorial Website I created for my Grandfather." />
+
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+
+		:root {
+			--primary: #4989E3;
+			--primary-light: #9EC6FF;
+			--text-dark: #1a1a2e;
+			--text-light: #565656;
+		}
+
+		html, body {
+			width: 100%;
+			min-height: 100%;
+			font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+			background: linear-gradient(135deg, #7ba8db 0%, #9EC6FF 100%);
+			color: var(--text-light);
+			font-size: 18px;
+			line-height: 1.6;
+		}
+
+		@media (prefers-color-scheme: dark) {
+			html, body {
+				background: linear-gradient(135deg, #1a1a2e 0%, #2d3561 100%);
+				color: #e0e0e0;
 			}
-			
-			#header, #about, #footer{
-				padding: 5%;
-				text-align: center;
-				display: block;
-				position: relative;
+		}
+
+		.container {
+			max-width: 1000px;
+			margin: 0 auto;
+			padding: 20px;
+		}
+
+		#header {
+			text-align: center;
+			padding: 60px 20px 40px;
+		}
+
+		#header img {
+			width: 100%;
+			max-width: 600px;
+			height: auto;
+			margin: 0 auto;
+			display: block;
+			border-radius: 20px;
+			box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+		}
+
+		@media (prefers-color-scheme: dark) {
+			#header img {
+				box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
 			}
-			
-			#about, #footer{
-				border-top: 2px solid #4989E3;				
+		}
+
+		#video {
+			background: rgba(255, 255, 255, 0.95);
+			backdrop-filter: blur(20px);
+			border-radius: 20px;
+			padding: 40px;
+			margin: 40px 0;
+			box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+		}
+
+		@media (prefers-color-scheme: dark) {
+			#video {
+				background: rgba(26, 26, 46, 0.9);
+				box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
 			}
-			
-			#header img{
-				width: 75%;
-				height: auto;
-				margin-left: auto;
-				margin-right: auto;
-				display: block;
-				position: relative;
+		}
+
+		#video iframe {
+			width: 100%;
+			height: 65vh;
+			min-height: 400px;
+			border-radius: 12px;
+			border: none;
+		}
+
+		.link-button {
+			display: inline-block;
+			margin: 25px auto;
+			padding: 16px 32px;
+			background: linear-gradient(135deg, var(--primary) 0%, #6ba3e8 100%);
+			color: white !important;
+			text-decoration: none;
+			border-radius: 50px;
+			font-weight: 600;
+			box-shadow: 0 8px 24px rgba(73, 137, 227, 0.4);
+			transition: all 0.3s ease;
+		}
+
+		.link-button:hover {
+			transform: translateY(-2px);
+			box-shadow: 0 12px 32px rgba(73, 137, 227, 0.6);
+		}
+
+		#about {
+			background: rgba(255, 255, 255, 0.95);
+			backdrop-filter: blur(20px);
+			border-radius: 20px;
+			padding: 40px;
+			margin: 40px 0;
+			text-align: left;
+			box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+		}
+
+		@media (prefers-color-scheme: dark) {
+			#about {
+				background: rgba(26, 26, 46, 0.9);
+				box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
 			}
-			
-			#video iframe{
-				width: 100%;
-				height: 65vh;
+		}
+
+		#about p {
+			margin-bottom: 24px;
+			font-size: 1.1rem;
+		}
+
+		#about p:first-child {
+			text-align: center;
+			font-size: 1.5rem;
+			font-weight: 700;
+			color: var(--primary);
+			margin-bottom: 32px;
+		}
+
+		@media (prefers-color-scheme: dark) {
+			#about p:first-child {
+				color: var(--primary-light);
 			}
-			a{
-			    position: relative;
-                display: block;
-                margin:25px;
-                border: 2px solid #4989E3;
-                padding: 5px;
-                color: #9EC6FF !important;
-                background-color: #4989E3;
-                border-radius: 5px;
+		}
+
+		#footer {
+			background: rgba(255, 255, 255, 0.95);
+			backdrop-filter: blur(20px);
+			border-radius: 20px;
+			padding: 40px;
+			margin: 40px 0 60px;
+			text-align: center;
+			box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+		}
+
+		@media (prefers-color-scheme: dark) {
+			#footer {
+				background: rgba(26, 26, 46, 0.9);
+				box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
 			}
-			
-		</style>
-	</head>
-	<body>
+		}
+
+		#footer p {
+			font-size: 1.3rem;
+			font-weight: 600;
+			font-style: italic;
+			color: var(--primary);
+		}
+
+		@media (prefers-color-scheme: dark) {
+			#footer p {
+				color: var(--primary-light);
+			}
+		}
+
+		.floating-back-btn {
+			position: fixed;
+			bottom: 32px;
+			left: 32px;
+			background: rgba(73, 137, 227, 0.9);
+			backdrop-filter: blur(20px);
+			color: white;
+			text-decoration: none;
+			padding: 16px 24px;
+			border-radius: 50px;
+			font-weight: 700;
+			font-size: 1rem;
+			box-shadow: 0 8px 32px rgba(73, 137, 227, 0.4);
+			transition: all 0.3s ease;
+			z-index: 1000;
+			display: inline-flex;
+			align-items: center;
+			gap: 8px;
+		}
+
+		.floating-back-btn:hover {
+			transform: translateY(-4px);
+			box-shadow: 0 12px 48px rgba(73, 137, 227, 0.6);
+			background: rgba(73, 137, 227, 1);
+		}
+
+		@media (prefers-color-scheme: dark) {
+			.floating-back-btn {
+				background: rgba(158, 198, 255, 0.9);
+				color: var(--text-dark);
+				box-shadow: 0 8px 32px rgba(158, 198, 255, 0.3);
+			}
+
+			.floating-back-btn:hover {
+				background: rgba(158, 198, 255, 1);
+				box-shadow: 0 12px 48px rgba(158, 198, 255, 0.5);
+			}
+		}
+
+		@media (max-width: 768px) {
+			html, body {
+				font-size: 16px;
+			}
+
+			#header {
+				padding: 40px 20px 30px;
+			}
+
+			#video, #about, #footer {
+				padding: 24px;
+				margin: 24px 0;
+			}
+
+			#video iframe {
+				height: 50vh;
+				min-height: 300px;
+			}
+
+			.floating-back-btn {
+				bottom: 20px;
+				left: 20px;
+				padding: 12px 20px;
+				font-size: 0.9rem;
+			}
+		}
+
+	</style>
+</head>
+<body>
+	<div class="container">
 		<div id="header">
 			<img src="https://40.media.tumblr.com/0ba4f182cb3b329c3efce17e250a58d8/tumblr_nlw2ntxG0h1rozy6jo1_540.png" alt="Douglas Kent Schofield" />
 		</div>
 		<div id="video">
-			<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/MzJ5UpWHcp0?rel=0" frameborder="0" allowfullscreen></iframe>
+			<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/MzJ5UpWHcp0?rel=0" allowfullscreen></iframe>
 			<br>
-			<a href="https://www.icloud.com/sharedalbum/#B0v5n8hH4DwhRU">To access and download each of the photos used in the video, please click here</a>
+			<a class="link-button" href="https://www.icloud.com/sharedalbum/#B0v5n8hH4DwhRU">View Photo Album</a>
 		</div>
 		<div id="about">
 			<p>December 21, 1936 — March 18, 2015</p>
 
-<p>Douglas Kent Schofield passed peacefully in his home in Bakersfield California on March 18th 2015.  On December 21, 1936 Doug was born in Las Vegas, Nevada and lived there until he joined the Air Force at the age of 17.  He served his country in England toward the end of the Korean War servicing the B-36 “Peacemakers”.  Upon his return to the States he came home to Las Vegas and worked as a mailman.  He relocated to Bakersfield California where he continued to work for the postal service while attending BC.  While at BC he met the love of his life, Cindi Sheppard.  Soon after they married, he began his 50 plus years in the oil and gas industries.  Doug eventually became one of the top pump hydraulic engineers in Bakersfield.</p>  
+<p>Douglas Kent Schofield passed peacefully in his home in Bakersfield California on March 18th 2015.  On December 21, 1936 Doug was born in Las Vegas, Nevada and lived there until he joined the Air Force at the age of 17.  He served his country in England toward the end of the Korean War servicing the B-36 "Peacemakers".  Upon his return to the States he came home to Las Vegas and worked as a mailman.  He relocated to Bakersfield California where he continued to work for the postal service while attending BC.  While at BC he met the love of his life, Cindi Sheppard.  Soon after they married, he began his 50 plus years in the oil and gas industries.  Doug eventually became one of the top pump hydraulic engineers in Bakersfield.</p>
 
-<p>Doug and Cindi raised three children Tracy, Kent and Kevin.  He was an amazing Father and when the time came, became an even more amazing Grandfather.  Doug's greatest legacy and what pleased his heart the most was that he surrendered his heart to God and with years of perseverance, led his entire family to salvation.  Doug was always an avid sports fan, especially of motor sports and raised his two sons at the Famoso Drag strip and always supported his daughter in her running. He always had a great passion for any kind of racing and he loved taking all his children and grandchildren camping. Family was most precious to Doug and he gave to his family unconditionally. </p>
+<p>Doug and Cindi raised three children Tracy, Kent and Kevin.  He was an amazing Father and when the time came, became an even more amazing Grandfather.  Doug's greatest legacy and what pleased his heart the most was that he surrendered his heart to God and with years of perseverance, led his entire family to salvation.  Doug was always an avid sports fan, especially of motor sports and raised his two sons at the Famoso Drag strip and always supported his daughter in her running. He always had a great passion for any kind of racing and he loved taking all his children and grandchildren camping. Family was most precious to Doug and he gave to his family unconditionally. </p>
 
-<p>Doug’s love for others went beyond his natural family.  He was always willing to help anybody in need, often taking in and caring for people that had no where else to go and treating them like members of his own family.  It could be said, Doug had a true heart for strays whether two-footed, or four-footed!  Extended family and pets always surrounded us. </p> 
+<p>Doug's love for others went beyond his natural family.  He was always willing to help anybody in need, often taking in and caring for people that had no where else to go and treating them like members of his own family.  It could be said, Doug had a true heart for strays whether two-footed, or four-footed!  Extended family and pets always surrounded us. </p>
 
-<p>But Doug had a lighter side.  He loved to make others laugh and had a quirky sense of humor that was shameless.  He was a true rodeo clown.  In fact he drove to many rodeos with his family loaded in a retired school bus pulling the ugly green horse trailer.  At one time Doug bought and restored a ‘62 Cadillac way before that was cool and his youngest son, Kevin, would only ride in it with a bag over his head in the back seat.</p>
+<p>But Doug had a lighter side.  He loved to make others laugh and had a quirky sense of humor that was shameless.  He was a true rodeo clown.  In fact he drove to many rodeos with his family loaded in a retired school bus pulling the ugly green horse trailer.  At one time Doug bought and restored a '62 Cadillac way before that was cool and his youngest son, Kevin, would only ride in it with a bag over his head in the back seat.</p>
 
-<p>Doug owned one and operated several successful pump sales and service companies.  However, to Doug, his most significant achievement wasn’t based on material success, it was sharing his personal belief in God with his family and others.  He did that with passion, as if running a race, which he ran to the finish.  Those of us who he left behind know that he is now truly resting in peace, having completed his life’s most important work.  </p>
+<p>Doug owned one and operated several successful pump sales and service companies.  However, to Doug, his most significant achievement wasn't based on material success, it was sharing his personal belief in God with his family and others.  He did that with passion, as if running a race, which he ran to the finish.  Those of us who he left behind know that he is now truly resting in peace, having completed his life's most important work.  </p>
 
-<p>Doug was preceded in death by his father Merle Schofield, mother Emma Jean Schofield, stepmother Margret "Peg" Schofield and older brother Grant Schofield.  He is survived by his wife Cindi, sister Marilyn Norried, sister-in-law Alysce Schofield, daughter Tracy Miller and husband Bruce, son Kent Schofield and wife Kelly, son Kevin Schofield and wife April.  He is also survived by 10 grandchildren: Steven, Ryan, Kent, James, Kayla, Blaine, Cody, Cameron, Bradyn and Presley. And 7 great grandchildren, Tyler, Dean, Natalie, Vincent, Genesis, Roland and Katelyn, as well as many nieces and nephews.</p>
+<p>Doug was preceded in death by his father Merle Schofield, mother Emma Jean Schofield, stepmother Margret "Peg" Schofield and older brother Grant Schofield.  He is survived by his wife Cindi, sister Marilyn Norried, sister-in-law Alysce Schofield, daughter Tracy Miller and husband Bruce, son Kent Schofield and wife Kelly, son Kevin Schofield and wife April.  He is also survived by 10 grandchildren: Steven, Ryan, Kent, James, Kayla, Blaine, Cody, Cameron, Bradyn and Presley. And 7 great grandchildren, Tyler, Dean, Natalie, Vincent, Genesis, Roland and Katelyn, as well as many nieces and nephews.</p>
 
 <p>He was loved immensely and will be missed by all that knew him.
 </p>
@@ -89,15 +271,8 @@
 		<div id="footer">
 			<p>I will always love you Grandpa Schofield</p>
 		</div>
-		<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+	</div>
 
-  ga('create', 'UA-28695008-1', 'auto');
-  ga('send', 'pageview');
-
-</script>
-	</body>
+	<a href="/" class="floating-back-btn">← Back to Portfolio</a>
+</body>
 </html>
