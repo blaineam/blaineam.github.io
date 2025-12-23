@@ -2124,12 +2124,18 @@
       const buttonSize = 34;      // Button width/height
       const labelGap = 8;         // Gap between button edge and label edge
       const labelHeight = 36;     // Label height
-
-      // Radius from menu center to button center
-      const radius = 70 + (buttonCount * 12);
+      const buttonSpacing = 12;   // Minimum gap between buttons
 
       // Angle step between buttons
       const angleBetween = buttonCount > 1 ? arcDegrees / (buttonCount - 1) : 0;
+      const angleStepRad = (angleBetween * Math.PI) / 180;
+
+      // Calculate radius dynamically based on button count
+      // Arc length between buttons must be >= buttonSize + spacing
+      // Arc length = radius * angleStepRad, so radius = minArcLength / angleStepRad
+      const minArcLength = buttonSize + buttonSpacing; // 46px
+      const minRadius = buttonCount > 1 ? minArcLength / angleStepRad : 60;
+      const radius = Math.max(Math.round(minRadius), 60);
 
       buttons.forEach((button, index) => {
         // Angle for this button: Audio at -90° (up), Apps at 0° (right)
@@ -2185,10 +2191,10 @@
           // Hover effect
           if (window.innerWidth > 768) {
             button.addEventListener('mouseenter', () => {
-              label.style.transform = `translateX(8px) rotate(${angleDeg}deg)`;
+              label.style.transform = `scale(1.1) rotate(${angleDeg}deg) translateY(-25%)`;
             });
             button.addEventListener('mouseleave', () => {
-              label.style.transform = `rotate(${angleDeg}deg)`;
+              label.style.transform = `rotate(${angleDeg}deg) translateY(-25%)`;
             });
           }
         }
