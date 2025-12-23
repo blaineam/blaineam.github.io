@@ -250,36 +250,7 @@
       transform: scale(1);
     }
 
-    /* Individual button positions in radial pattern - proper quarter-circle arc */
-    .radial-menu-container.active .radial-menu-items .button:nth-child(1) {
-      transform: translate(0, -140px) scale(1);
-      transition-delay: 0.05s;
-    }
-
-    .radial-menu-container.active .radial-menu-items .button:nth-child(2) {
-      transform: translate(43px, -133px) scale(1);
-      transition-delay: 0.1s;
-    }
-
-    .radial-menu-container.active .radial-menu-items .button:nth-child(3) {
-      transform: translate(82px, -113px) scale(1);
-      transition-delay: 0.15s;
-    }
-
-    .radial-menu-container.active .radial-menu-items .button:nth-child(4) {
-      transform: translate(113px, -82px) scale(1);
-      transition-delay: 0.2s;
-    }
-
-    .radial-menu-container.active .radial-menu-items .button:nth-child(5) {
-      transform: translate(133px, -43px) scale(1);
-      transition-delay: 0.25s;
-    }
-
-    .radial-menu-container.active .radial-menu-items .button:nth-child(6) {
-      transform: translate(140px, 0) scale(1);
-      transition-delay: 0.3s;
-    }
+    /* Button positions set dynamically via JavaScript */
 
     /* Button labels */
     .button-label {
@@ -325,57 +296,9 @@
 
     .radial-menu-items .button:hover .button-label {
       opacity: 1;
-      transform: translateY(-50%) translateX(8px);
     }
 
-    /* Unique rotation for each label based on radial angle from center */
-    .radial-menu-items .button:nth-child(1) .button-label {
-      transform: translateY(-50%) rotate(-90deg);
-    }
-
-    .radial-menu-items .button:nth-child(1):hover .button-label {
-      transform: translateY(-50%) translateX(8px) rotate(-90deg);
-    }
-
-    .radial-menu-items .button:nth-child(2) .button-label {
-      transform: translateY(-50%) rotate(-72deg);
-    }
-
-    .radial-menu-items .button:nth-child(2):hover .button-label {
-      transform: translateY(-50%) translateX(8px) rotate(-72deg);
-    }
-
-    .radial-menu-items .button:nth-child(3) .button-label {
-      transform: translateY(-50%) rotate(-54deg);
-    }
-
-    .radial-menu-items .button:nth-child(3):hover .button-label {
-      transform: translateY(-50%) translateX(8px) rotate(-54deg);
-    }
-
-    .radial-menu-items .button:nth-child(4) .button-label {
-      transform: translateY(-50%) rotate(-36deg);
-    }
-
-    .radial-menu-items .button:nth-child(4):hover .button-label {
-      transform: translateY(-50%) translateX(8px) rotate(-36deg);
-    }
-
-    .radial-menu-items .button:nth-child(5) .button-label {
-      transform: translateY(-50%) rotate(-18deg);
-    }
-
-    .radial-menu-items .button:nth-child(5):hover .button-label {
-      transform: translateY(-50%) translateX(8px) rotate(-18deg);
-    }
-
-    .radial-menu-items .button:nth-child(6) .button-label {
-      transform: translateY(-50%) rotate(0deg);
-    }
-
-    .radial-menu-items .button:nth-child(6):hover .button-label {
-      transform: translateY(-50%) translateX(8px) rotate(0deg);
-    }
+    /* Label rotations and button positions set dynamically via JavaScript */
 
     /* Responsive radial menu for narrow screens */
     @media only screen and (max-width: 768px) {
@@ -1527,6 +1450,16 @@
         <div class="liquidGlass-text">⋯</div>
       </div>
 
+      <!--
+        RADIAL MENU BUTTONS:
+        - Buttons are automatically positioned in a quarter-circle arc (straight up to straight right)
+        - To add a button: Just add a new .button div here
+        - To remove a button: Delete the .button div
+        - To reorder: Cut and paste .button divs in the desired order
+        - Labels automatically rotate to fan out from the center
+        - Radius can be adjusted in initializeRadialMenu() (default: 140px)
+        - Arc angle can be adjusted in initializeRadialMenu() (default: 90deg)
+      -->
       <div class="radial-menu-items">
         <div class="liquidGlass-wrapper button" id="audio-toggle" title="Mute/Unmute">
           <div class="liquidGlass-effect"></div>
@@ -2127,6 +2060,84 @@
       touchendX = e.changedTouches[0].screenX
       checkDirection()
     })
+
+    // Radial menu dynamic positioning
+    // Automatically positions buttons in a radial arc and rotates labels
+    function initializeRadialMenu() {
+      const radialMenuItems = document.querySelector(".radial-menu-items");
+      const buttons = Array.from(radialMenuItems.querySelectorAll(".button"));
+      const buttonCount = buttons.length;
+
+      if (buttonCount === 0) return;
+
+      // Configuration (adjust these values to customize the menu)
+      const radius = 140;         // Distance from center (px)
+      const arcDegrees = 90;      // Arc span in degrees (90 = quarter circle)
+      const startAngle = -90;     // Starting angle (-90 = straight up)
+
+      // Calculate angle between buttons
+      const angleBetween = buttonCount > 1 ? arcDegrees / (buttonCount - 1) : 0;
+
+      buttons.forEach((button, index) => {
+        // Calculate angle for this button (in degrees)
+        const angleDeg = startAngle + (index * angleBetween);
+        const angleRad = (angleDeg * Math.PI) / 180;
+
+        // Convert polar to cartesian coordinates
+        const x = Math.round(radius * Math.cos(angleRad));
+        const y = Math.round(radius * Math.sin(angleRad));
+
+        // Calculate transition delay
+        const delay = (index + 1) * 0.05;
+
+        // Set the button's active position via CSS custom property
+        button.style.setProperty('--radial-x', `${x}px`);
+        button.style.setProperty('--radial-y', `${y}px`);
+        button.style.setProperty('--radial-delay', `${delay}s`);
+
+        // Set label rotation
+        const label = button.querySelector('.button-label');
+        if (label) {
+          label.style.setProperty('--label-rotation', `${angleDeg}deg`);
+
+          // Update the label's transform to use the custom property
+          label.style.transform = `translateY(-50%) rotate(var(--label-rotation))`;
+
+          // Also set hover state (skip on mobile where labels are always visible)
+          if (window.innerWidth > 768) {
+            button.addEventListener('mouseenter', () => {
+              label.style.transform = `translateY(-50%) translateX(8px) rotate(var(--label-rotation))`;
+            });
+            button.addEventListener('mouseleave', () => {
+              label.style.transform = `translateY(-50%) rotate(var(--label-rotation))`;
+            });
+          }
+        }
+      });
+
+      // Add a style element for the active state transforms
+      const styleId = 'radial-menu-dynamic-styles';
+      let styleEl = document.getElementById(styleId);
+      if (!styleEl) {
+        styleEl = document.createElement('style');
+        styleEl.id = styleId;
+        document.head.appendChild(styleEl);
+      }
+
+      // Generate CSS for active state
+      let css = '';
+      buttons.forEach((button, index) => {
+        css += `.radial-menu-container.active .radial-menu-items .button:nth-child(${index + 1}) {
+          transform: translate(var(--radial-x), var(--radial-y)) scale(1);
+          transition-delay: var(--radial-delay);
+        }\n`;
+      });
+
+      styleEl.textContent = css;
+    }
+
+    // Initialize on page load
+    initializeRadialMenu();
 
     // Radial menu toggle
     var menuToggle = document.getElementById("menu-toggle");
