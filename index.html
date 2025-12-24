@@ -197,6 +197,8 @@
       bottom: 20px;
       left: 20px;
       z-index: 1000;
+      user-select: none;
+      -webkit-user-select: none;
     }
 
     .radial-menu-toggle {
@@ -270,7 +272,7 @@
       display: flex;
       align-items: center;
       padding: 0 14px;
-      border-radius: 8px;
+      border-radius: 18px;
       color: var(--fg-color);
       background: rgba(255, 255, 255, 0.25);
       backdrop-filter: blur(20px) saturate(180%);
@@ -294,23 +296,34 @@
       color: var(--fg-color);
     }
 
-    .radial-menu-items .button:hover .button-label {
-      opacity: 1;
+    /* Labels are now siblings of buttons, animate in with menu */
+    .radial-menu-items .button-label {
+      transform: rotate(var(--label-rotation, 0deg)) scale(0);
+      transition: opacity 0.3s ease, transform 0.3s ease;
     }
 
-    /* Enable pointer events on labels when menu is active */
-    .radial-menu-container.active .radial-menu-items .button .button-label {
+    .radial-menu-container.active .radial-menu-items .button-label {
+      opacity: 1;
       pointer-events: all;
+      transform: rotate(var(--label-rotation, 0deg)) scale(1);
+      transition-delay: var(--radial-delay, 0s);
+    }
+
+    .radial-menu-container.active .radial-menu-items .button-label.label-hover {
+      transform: rotate(var(--label-rotation, 0deg)) scale(1.08);
+      transition-delay: 0s;
     }
 
     /* Label rotations and button positions set dynamically via JavaScript */
 
     /* Responsive radial menu for narrow screens */
     @media only screen and (max-width: 768px) {
-      /* Make labels always visible on mobile */
-      .radial-menu-items .button .button-label {
+      /* Make labels animate in on mobile when menu active */
+      .radial-menu-container.active .radial-menu-items .button-label {
         opacity: 1;
         pointer-events: all;
+        transform: rotate(var(--label-rotation, 0deg)) scale(1);
+        transition-delay: var(--radial-delay, 0s);
       }
 
       /* Backdrop blur and darken effect when menu is open */
@@ -426,12 +439,24 @@
         backdrop-filter: blur(10px);
         -webkit-backdrop-filter: blur(10px);
         opacity: 0;
-        transition: opacity 0.3s ease;
         z-index: 1;
+        animation: verseShimmer 7s ease-in-out infinite;
+      }
+
+      @keyframes verseShimmer {
+        0%, 85%, 100% {
+          opacity: 0;
+          transform: scale(1);
+        }
+        90%, 95% {
+          opacity: 0.8;
+          transform: scale(1.1);
+        }
       }
 
       .hidden-verse:hover::before {
         opacity: 1;
+        animation: none;
       }
       
       .verse-text {
@@ -1586,70 +1611,52 @@
         - Arc angle can be adjusted in initializeRadialMenu() (default: 90deg)
       -->
       <div class="radial-menu-items">
-        <div class="liquidGlass button" id="audio-toggle">
+        <div class="liquidGlass button" id="audio-toggle" data-label="Audio">
           <svg class="icon" id="muted" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M22 9L16 15M16 9L22 15M3 10.5V13.5C3 14.6046 3.5 15.5 5.5 16C7.5 16.5 9 21 12 21C14 21 14 3 12 3C9 3 7.5 7.5 5.5 8C3.5 8.5 3 9.39543 3 10.5Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
           </svg>
           <svg class="icon hide" id="unmuted" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M19 6C20.5 7.5 21 10 21 12C21 14 20.5 16.5 19 18M16 8.99998C16.5 9.49998 17 10.5 17 12C17 13.5 16.5 14.5 16 15M3 10.5V13.5C3 14.6046 3.5 15.5 5.5 16C7.5 16.5 9 21 12 21C14 21 14 3 12 3C9 3 7.5 7.5 5.5 8C3.5 8.5 3 9.39543 3 10.5Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
           </svg>
-          <div class="button-label liquidGlass">
-            <span class="label-text">Audio</span>
-          </div>
         </div>
 
-        <div id="info-toggle" class="liquidGlass button">
+        <div id="info-toggle" class="liquidGlass button" data-label="Info">
           <svg class="icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M12 10.75C12.4142 10.75 12.75 11.0858 12.75 11.5V16.5C12.75 16.9142 12.4142 17.25 12 17.25C11.5858 17.25 11.25 16.9142 11.25 16.5V11.5C11.25 11.0858 11.5858 10.75 12 10.75Z" fill="currentColor" />
             <path d="M12 9C12.5523 9 13 8.55228 13 8C13 7.44772 12.5523 7 12 7C11.4477 7 11 7.44772 11 8C11 8.55228 11.4477 9 12 9Z" fill="currentColor" />
             <path fill-rule="evenodd" clip-rule="evenodd" d="M3.25 12C3.25 7.16751 7.16751 3.25 12 3.25C16.8325 3.25 20.75 7.16751 20.75 12C20.75 16.8325 16.8325 20.75 12 20.75C7.16751 20.75 3.25 16.8325 3.25 12ZM12 4.75C7.99594 4.75 4.75 7.99594 4.75 12C4.75 16.0041 7.99594 19.25 12 19.25C16.0041 19.25 19.25 16.0041 19.25 12C19.25 7.99594 16.0041 4.75 12 4.75Z" fill="currentColor" />
           </svg>
-          <div class="button-label liquidGlass">
-            <span class="label-text">Info</span>
-          </div>
         </div>
 
-        <div id="photos-toggle" class="liquidGlass button">
+        <div id="photos-toggle" class="liquidGlass button" data-label="Photos">
           <svg class="icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M17.2905 11.9687C17.2905 12.7073 16.6984 13.3062 15.9679 13.3062C15.2374 13.3062 14.6453 12.7073 14.6453 11.9687C14.6453 11.23 15.2374 10.6311 15.9679 10.6311C16.6984 10.6311 17.2905 11.23 17.2905 11.9687Z" fill="currentColor" />
             <path fill-rule="evenodd" clip-rule="evenodd" d="M18.1316 7.40799C17.2832 7.28732 16.1897 7.28734 14.8267 7.28736H9.17326C7.81031 7.28734 6.7168 7.28732 5.86839 7.40799C4.99062 7.53283 4.25955 7.80072 3.71603 8.42851C3.17252 9.05629 3.00655 9.82451 3.00019 10.7209C2.99404 11.5872 3.13858 12.6834 3.31873 14.0496L3.68419 16.8214C3.825 17.8895 3.93897 18.7539 4.11616 19.4309C4.3006 20.1355 4.57289 20.7197 5.08383 21.172C5.59477 21.6244 6.20337 21.8201 6.91841 21.9119C7.60534 22 8.46777 22 9.53332 22H14.4667C15.5322 22 16.3947 22 17.0816 21.9119C17.7966 21.8201 18.4052 21.6244 18.9162 21.172C19.4271 20.7197 19.6994 20.1355 19.8838 19.4309C20.061 18.7539 20.175 17.8894 20.3158 16.8213L20.6813 14.0496C20.8614 12.6834 21.006 11.5872 20.9998 10.7209C20.9934 9.82451 20.8275 9.05629 20.284 8.42851C19.7404 7.80072 19.0094 7.53283 18.1316 7.40799ZM6.05259 8.73247C5.32568 8.83585 4.95802 9.02442 4.71116 9.30956C4.4643 9.5947 4.32805 9.98816 4.32278 10.7305C4.31738 11.4918 4.44802 12.4945 4.63662 13.9249L4.68663 14.3042L5.05822 14.032C6.0171 13.3297 7.43388 13.3643 8.34576 14.1275L11.7301 16.9603C12.0499 17.228 12.6011 17.2781 12.9989 17.0441L13.2341 16.9057C14.3594 16.2437 15.8676 16.3135 16.9059 17.0958L18.7378 18.4758C18.8281 17.9802 18.909 17.3709 19.0107 16.5999L19.3634 13.9249C19.552 12.4945 19.6826 11.4918 19.6772 10.7305C19.6719 9.98816 19.5357 9.5947 19.2888 9.30956C19.042 9.02442 18.6743 8.83585 17.9474 8.73247C17.2019 8.62643 16.2018 8.62487 14.7748 8.62487H9.22521C7.79821 8.62487 6.7981 8.62643 6.05259 8.73247Z" fill="currentColor" />
             <path d="M8.85886 2.00001H15.141C15.3502 1.99995 15.5106 1.99991 15.6508 2.01515C16.6479 2.12351 17.4639 2.78957 17.81 3.68676H6.18981C6.53588 2.78957 7.35195 2.12351 8.34899 2.01515C8.48922 1.99991 8.64963 1.99995 8.85886 2.00001Z" fill="currentColor" />
             <path d="M6.87943 4.5C5.62786 4.5 4.60163 5.33974 4.25915 6.45377C4.25201 6.477 4.24517 6.50034 4.23862 6.5238C4.59696 6.40323 4.96989 6.32446 5.34741 6.27068C6.31974 6.13218 7.54855 6.13225 8.97598 6.13234L9.08258 6.13234L15.1789 6.13234C16.6063 6.13225 17.8351 6.13218 18.8074 6.27068C19.185 6.32446 19.5579 6.40323 19.9162 6.5238C19.9097 6.50034 19.9028 6.477 19.8957 6.45377C19.5532 5.33974 18.527 4.5 17.2754 4.5H6.87943Z" fill="currentColor" />
           </svg>
-          <div class="button-label liquidGlass">
-            <span class="label-text">Photos</span>
-          </div>
         </div>
 
-        <a id="book-button" class="liquidGlass button" href="books/">
+        <a id="book-button" class="liquidGlass button" href="books/" data-label="Books">
           <svg class="icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M12 6.5C10 4.5 7 4 4 5V18C7 17 10 17.5 12 19.5M12 6.5C14 4.5 17 4 20 5V18C17 17 14 17.5 12 19.5M12 6.5V19.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
-          <div class="button-label liquidGlass">
-            <span class="label-text">Books</span>
-          </div>
         </a>
 
-        <a id="panos-button" class="liquidGlass button" href="panos/">
+        <a id="panos-button" class="liquidGlass button" href="panos/" data-label="Panos">
             <svg class="icon" viewBox="0 0 24 24" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
               <path d="M6.243,1.767c0.145,0.129 0.156,0.243 0.168,0.432c0.001,0.117 0.001,0.235 0,0.352c0.001,0.065 0.001,0.129 0.002,0.194c0.001,0.175 0.001,0.351 -0,0.526c-0,0.183 0.001,0.366 0.002,0.55c0.001,0.347 0.001,0.694 0.001,1.041c-0,0.395 0.001,0.79 0.003,1.185c0.002,0.812 0.003,1.625 0.003,2.437c0.194,0.039 0.387,0.077 0.581,0.115c0.066,0.013 0.131,0.026 0.197,0.039c0.689,0.136 1.382,0.243 2.081,0.315c0.04,0.004 0.079,0.008 0.12,0.013c0.824,0.082 1.645,0.098 2.472,0.096c0.102,-0 0.205,-0.001 0.308,-0.001c0.992,-0.001 1.974,-0.02 2.96,-0.155c0.066,-0.009 0.133,-0.018 0.199,-0.026c0.609,-0.083 1.215,-0.178 1.816,-0.306c0.041,-0.009 0.082,-0.017 0.124,-0.026c0.099,-0.021 0.199,-0.042 0.298,-0.064c0,-0.033 0,-0.067 0,-0.101c-0,-0.818 0.001,-1.636 0.004,-2.453c0.001,-0.396 0.002,-0.791 0.002,-1.187c-0.001,-0.344 0,-0.689 0.002,-1.034c0.001,-0.182 0.001,-0.365 0.001,-0.547c-0.001,-0.172 -0,-0.344 0.001,-0.515c0.001,-0.093 -0,-0.186 -0.001,-0.279c0.006,-0.399 0.006,-0.399 0.1,-0.536c0.171,-0.148 0.301,-0.177 0.517,-0.164c0.264,0.042 0.515,0.122 0.769,0.204c0.044,0.014 0.044,0.014 0.09,0.029c1.457,0.462 3.223,1.179 3.983,2.602c0.123,0.266 0.21,0.492 0.21,0.787c0.001,0.068 0.001,0.068 0.001,0.139c0,0.05 0,0.1 0,0.152c0,0.054 0.001,0.107 0.001,0.162c0,0.18 0.001,0.36 0.001,0.54c0,0.129 0.001,0.258 0.001,0.387c0.001,0.387 0.002,0.774 0.003,1.161c-0,0.109 0,0.219 0,0.328c0.001,0.68 0.002,1.36 0.003,2.04c0,0.157 0,0.314 0,0.472c0,0.039 0,0.078 0.001,0.118c0,0.634 0.002,1.267 0.004,1.9c0.002,0.651 0.003,1.301 0.003,1.952c0,0.365 0.001,0.73 0.002,1.095c0.002,0.311 0.002,0.622 0.002,0.934c-0.001,0.158 -0,0.317 0.001,0.475c0.006,1.054 -0.133,1.694 -0.882,2.478c-0.271,0.262 -0.561,0.476 -0.881,0.674c-0.03,0.018 -0.06,0.037 -0.091,0.056c-1.771,1.08 -3.925,1.521 -5.956,1.781c-0.056,0.007 -0.112,0.014 -0.17,0.022c-1.028,0.125 -2.055,0.172 -3.091,0.169c-0.181,-0.001 -0.363,-0 -0.544,0c-1.04,0.001 -2.077,-0.053 -3.109,-0.185c-0.061,-0.008 -0.122,-0.016 -0.185,-0.024c-1.166,-0.154 -2.327,-0.386 -3.448,-0.741c-0.041,-0.013 -0.083,-0.026 -0.125,-0.04c-1.094,-0.351 -2.205,-0.818 -3.063,-1.601c-0.04,-0.036 -0.08,-0.072 -0.122,-0.109c-0.485,-0.455 -0.855,-1.019 -0.88,-1.698c-0.001,-0.097 -0.001,-0.194 -0,-0.29c-0.001,-0.054 -0.001,-0.107 -0.001,-0.162c-0.001,-0.179 -0.001,-0.357 -0.001,-0.536c0,-0.128 -0,-0.257 -0.001,-0.385c-0.001,-0.312 -0.001,-0.624 -0.001,-0.936c0,-0.254 -0,-0.507 -0,-0.761c-0.001,-0.073 -0.001,-0.147 -0.001,-0.22c0,-0.036 0,-0.073 0,-0.11c-0.001,-0.689 -0.001,-1.378 -0,-2.067c-0,-0.629 -0.001,-1.258 -0.003,-1.887c-0.001,-0.647 -0.002,-1.294 -0.002,-1.941c0,-0.363 0,-0.726 -0.001,-1.089c-0.001,-0.309 -0.001,-0.618 -0,-0.926c0,-0.158 0,-0.315 -0.001,-0.473c-0.004,-0.862 0.043,-1.463 0.593,-2.16c0.019,-0.027 0.039,-0.055 0.06,-0.083c0.717,-0.931 3.734,-2.74 4.87,-2.134Zm12.32,1.045l-0,5.438c0.559,-0.158 0.559,-0.158 1.095,-0.363c0.038,-0.016 0.075,-0.033 0.114,-0.049c0.113,-0.049 0.225,-0.1 0.337,-0.151c0.034,-0.015 0.068,-0.03 0.103,-0.046c0.788,-0.361 1.636,-0.864 2.007,-1.684c0.102,-0.315 0.096,-0.619 -0.027,-0.927c-0.588,-1.125 -1.974,-1.692 -3.114,-2.077c-0.17,-0.046 -0.34,-0.093 -0.515,-0.141Zm-15.844,1.219c-0.045,0.031 -0.09,0.062 -0.136,0.093c-0.376,0.28 -0.728,0.665 -0.849,1.126c-0.063,0.433 0.036,0.767 0.282,1.125c0.285,0.338 0.61,0.611 0.984,0.844c0.065,0.042 0.065,0.042 0.131,0.085c0.372,0.228 0.763,0.397 1.167,0.562c0.053,0.022 0.107,0.044 0.162,0.067c0.326,0.131 0.633,0.223 0.978,0.317l-0,-5.438c-0.872,0 -2.022,0.737 -2.719,1.219Zm-1.031,3.422c-0.003,1.337 -0.004,2.675 -0.005,4.012c-0.001,0.621 -0.001,1.242 -0.003,1.863c-0.001,0.541 -0.001,1.082 -0.001,1.624c-0,0.286 -0.001,0.573 -0.001,0.859c-0.001,0.27 -0.001,0.54 -0.001,0.81c-0,0.099 -0,0.197 -0.001,0.296c-0,0.136 -0,0.271 0,0.406c-0,0.039 -0,0.078 -0.001,0.118c0.003,0.58 0.18,1.011 0.584,1.432c0.225,0.214 0.466,0.432 0.741,0.58c0.122,-0.011 0.173,-0.031 0.256,-0.122c0.021,-0.032 0.042,-0.065 0.063,-0.098c0.024,-0.036 0.048,-0.072 0.073,-0.109c0.025,-0.04 0.051,-0.079 0.077,-0.119c0.054,-0.082 0.109,-0.164 0.163,-0.246c0.028,-0.041 0.055,-0.082 0.084,-0.124c0.117,-0.172 0.242,-0.338 0.368,-0.503c0.206,-0.271 0.402,-0.547 0.594,-0.829c0.187,-0.275 0.381,-0.544 0.576,-0.813c0.173,-0.238 0.343,-0.477 0.512,-0.717c0.218,-0.31 0.439,-0.618 0.662,-0.925c0.154,-0.212 0.305,-0.426 0.454,-0.64c0.709,-1.015 0.709,-1.015 1.321,-1.13c0.515,-0.042 0.906,0.045 1.323,0.35c0.152,0.132 0.26,0.293 0.373,0.459c0.027,0.037 0.053,0.074 0.08,0.112c0.054,0.077 0.108,0.154 0.161,0.232c0.096,0.138 0.194,0.276 0.291,0.414c0.046,0.065 0.092,0.13 0.138,0.196c0.169,0.24 0.341,0.478 0.514,0.716c0.242,0.333 0.476,0.67 0.707,1.011c0.157,0.233 0.321,0.459 0.491,0.682c0.209,-0.091 0.298,-0.236 0.419,-0.422c0.046,-0.068 0.092,-0.137 0.138,-0.205c0.036,-0.054 0.036,-0.054 0.072,-0.108c0.122,-0.179 0.249,-0.353 0.376,-0.528c0.18,-0.247 0.358,-0.495 0.534,-0.746c0.092,-0.131 0.184,-0.261 0.277,-0.392c0.051,-0.072 0.102,-0.145 0.152,-0.219c0.244,-0.339 0.54,-0.5 0.939,-0.614c0.476,-0.053 0.923,0.016 1.309,0.313c0.27,0.258 0.468,0.583 0.677,0.89c0.124,0.179 0.253,0.355 0.381,0.531c0.221,0.305 0.439,0.611 0.655,0.919c0.17,0.242 0.343,0.482 0.517,0.722c0.268,0.37 0.533,0.743 0.796,1.117c0.124,0.177 0.248,0.353 0.373,0.529c0.022,0.032 0.045,0.064 0.068,0.098c0.142,0.2 0.284,0.4 0.427,0.599c0.221,-0.064 0.405,-0.159 0.597,-0.284c0.029,-0.018 0.057,-0.037 0.087,-0.056c0.263,-0.175 0.498,-0.373 0.722,-0.597c0.028,-0.028 0.056,-0.056 0.084,-0.085c0.37,-0.398 0.439,-0.847 0.437,-1.372c0,-0.042 0,-0.084 0,-0.128c0,-0.142 0,-0.283 -0,-0.425c-0,-0.102 -0,-0.203 -0,-0.305c-0,-0.276 -0,-0.551 -0.001,-0.827c-0,-0.289 -0,-0.577 -0,-0.865c-0,-0.546 -0.001,-1.092 -0.001,-1.638c-0.001,-0.621 -0.001,-1.243 -0.001,-1.864c-0.001,-1.278 -0.001,-2.557 -0.002,-3.835c-0.026,0.019 -0.051,0.038 -0.077,0.058c-0.034,0.025 -0.067,0.05 -0.101,0.076c-0.034,0.025 -0.067,0.049 -0.101,0.075c-1.859,1.39 -4.271,1.907 -6.533,2.193c-0.056,0.008 -0.111,0.015 -0.169,0.022c-0.188,0.022 -0.377,0.042 -0.566,0.06c-0.042,0.005 -0.084,0.009 -0.127,0.013c-0.836,0.079 -1.67,0.098 -2.509,0.096c-0.102,-0 -0.205,-0 -0.307,-0c-1.025,-0.002 -2.04,-0.026 -3.057,-0.155c-0.033,-0.004 -0.066,-0.009 -0.1,-0.013c-2.374,-0.295 -4.854,-0.829 -6.801,-2.291c-0.033,-0.025 -0.067,-0.051 -0.101,-0.076c-0.025,-0.019 -0.05,-0.038 -0.076,-0.058Zm6.36,6.771c-0.068,0.085 -0.133,0.172 -0.196,0.26c-0.025,0.033 -0.049,0.066 -0.074,0.1c-0.212,0.29 -0.414,0.587 -0.616,0.885c-0.177,0.261 -0.36,0.517 -0.548,0.771c-0.159,0.214 -0.314,0.431 -0.468,0.65c-0.195,0.278 -0.392,0.554 -0.591,0.829c-0.221,0.304 -0.439,0.61 -0.655,0.917c-0.125,0.179 -0.252,0.356 -0.38,0.532c-0.028,0.039 -0.055,0.077 -0.084,0.116c-0.054,0.074 -0.108,0.148 -0.162,0.221c-0.024,0.034 -0.048,0.067 -0.073,0.101c-0.032,0.044 -0.032,0.044 -0.065,0.089c-0.059,0.088 -0.106,0.178 -0.152,0.274c1.892,0.754 3.834,1.135 5.86,1.312c0.051,0.005 0.103,0.009 0.156,0.014c0.607,0.047 1.215,0.04 1.824,0.039c0.159,-0 0.319,0 0.479,0c0.154,0.001 0.309,0 0.464,0c0.085,0 0.085,0 0.171,0.001c0.331,-0.001 0.655,-0.017 0.984,-0.054c-0.065,-0.132 -0.135,-0.254 -0.218,-0.376c-0.025,-0.036 -0.049,-0.072 -0.075,-0.109c-0.026,-0.038 -0.052,-0.076 -0.079,-0.115c-0.041,-0.06 -0.041,-0.06 -0.083,-0.121c-0.186,-0.27 -0.377,-0.536 -0.572,-0.799c-0.159,-0.215 -0.314,-0.432 -0.467,-0.651c-0.195,-0.278 -0.393,-0.554 -0.592,-0.829c-0.221,-0.304 -0.439,-0.611 -0.655,-0.919c-0.171,-0.242 -0.343,-0.482 -0.517,-0.721c-0.292,-0.404 -0.58,-0.811 -0.867,-1.219c-0.166,-0.236 -0.333,-0.472 -0.5,-0.708c-0.058,-0.083 -0.117,-0.167 -0.175,-0.25c-0.032,-0.047 -0.065,-0.093 -0.099,-0.141c-0.027,-0.039 -0.055,-0.079 -0.083,-0.12c-0.131,-0.152 -0.231,-0.184 -0.429,-0.202c-0.204,0.018 -0.323,0.07 -0.463,0.223Zm6.983,0.943c-0.068,0.093 -0.133,0.188 -0.198,0.284c-0.05,0.073 -0.1,0.145 -0.15,0.218c-0.025,0.037 -0.05,0.074 -0.076,0.112c-0.117,0.169 -0.235,0.337 -0.354,0.505c-0.023,0.033 -0.046,0.065 -0.07,0.099c-0.199,0.282 -0.402,0.562 -0.605,0.842c-0.218,0.302 -0.43,0.606 -0.64,0.914c0.182,0.278 0.372,0.551 0.568,0.82c0.274,0.378 0.544,0.758 0.813,1.14c0.076,0.108 0.152,0.216 0.229,0.324c0.025,0.037 0.051,0.073 0.077,0.11c0.05,0.07 0.099,0.14 0.149,0.21c0.033,0.047 0.033,0.047 0.067,0.095c0.019,0.028 0.039,0.055 0.059,0.084c0.05,0.071 0.098,0.144 0.147,0.217c0.371,0.032 0.736,-0.039 1.101,-0.1c0.032,-0.005 0.064,-0.01 0.097,-0.016c1.095,-0.18 2.157,-0.467 3.208,-0.822c-0.028,-0.140 -0.07,-0.235 -0.153,-0.35c-0.022,-0.031 -0.044,-0.062 -0.067,-0.094c-0.024,-0.033 -0.048,-0.067 -0.073,-0.101c-0.025,-0.035 -0.05,-0.07 -0.076,-0.106c-0.08,-0.111 -0.16,-0.222 -0.24,-0.333c-0.05,-0.069 -0.1,-0.138 -0.15,-0.207c-0.075,-0.104 -0.15,-0.208 -0.225,-0.311c-0.219,-0.302 -0.432,-0.608 -0.645,-0.913c-0.208,-0.298 -0.419,-0.592 -0.632,-0.886c-0.172,-0.237 -0.342,-0.476 -0.51,-0.715c-0.069,-0.098 -0.138,-0.195 -0.207,-0.293c-0.047,-0.066 -0.093,-0.132 -0.14,-0.198c-0.068,-0.097 -0.138,-0.195 -0.207,-0.292c-0.021,-0.029 -0.041,-0.058 -0.062,-0.088c-0.119,-0.165 -0.224,-0.277 -0.41,-0.363c-0.265,-0.028 -0.446,0.004 -0.625,0.214Z" style="fill-rule:nonzero;" fill="currentColor" />
               <path d="M13.288,11.041c0.346,0.244 0.637,0.603 0.754,1.015c0.087,0.559 0.072,1.119 -0.241,1.606c-0.336,0.457 -0.732,0.747 -1.3,0.851c-0.568,0.057 -1.041,-0.056 -1.505,-0.392c-0.369,-0.306 -0.642,-0.7 -0.694,-1.187c-0.032,-0.607 0.029,-1.107 0.434,-1.587c0.699,-0.733 1.698,-0.836 2.552,-0.306Zm-1.874,1.053c-0.155,0.257 -0.17,0.504 -0.117,0.797c0.096,0.24 0.248,0.425 0.469,0.562c0.276,0.11 0.517,0.123 0.793,0.01c0.25,-0.132 0.41,-0.314 0.519,-0.572c0.044,-0.289 0.037,-0.544 -0.117,-0.797c-0.179,-0.231 -0.365,-0.349 -0.654,-0.393c-0.383,-0.019 -0.656,0.088 -0.893,0.393Z" style="fill-rule:nonzero;" fill="currentColor" />
             </svg>
-          <div class="button-label liquidGlass">
-            <span class="label-text">Panos</span>
-          </div>
         </a>
 
-        <a id="apps-button" class="liquidGlass button" href="apps/">
+        <a id="apps-button" class="liquidGlass button" href="apps/" data-label="Apps">
           <svg class="icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path fill-rule="evenodd" clip-rule="evenodd" d="M2 6C2 4.89543 2.89543 4 4 4H9C10.1046 4 11 4.89543 11 6V11C11 12.1046 10.1046 13 9 13H4C2.89543 13 2 12.1046 2 11V6ZM4 6H9V11H4V6Z" fill="currentColor"/>
             <path fill-rule="evenodd" clip-rule="evenodd" d="M13 6C13 4.89543 13.8954 4 15 4H20C21.1046 4 22 4.89543 22 6V11C22 12.1046 21.1046 13 20 13H15C13.8954 13 13 12.1046 13 11V6ZM15 6H20V11H15V6Z" fill="currentColor"/>
             <path fill-rule="evenodd" clip-rule="evenodd" d="M2 17C2 15.8954 2.89543 15 4 15H9C10.1046 15 11 15.8954 11 17V22C11 23.1046 10.1046 24 9 24H4C2.89543 24 2 23.1046 2 22V17ZM4 17H9V22H4V17Z" fill="currentColor"/>
             <path fill-rule="evenodd" clip-rule="evenodd" d="M13 17C13 15.8954 13.8954 15 15 15H20C21.1046 15 22 15.8954 22 17V22C22 23.1046 21.1046 24 20 24H15C13.8954 24 13 23.1046 13 22V17ZM15 17H20V22H15V17Z" fill="currentColor"/>
           </svg>
-          <div class="button-label liquidGlass">
-            <span class="label-text">Apps</span>
-          </div>
         </a>
       </div>
     </div>
@@ -2158,45 +2165,56 @@
 
         button.style.setProperty('--radial-x', `${x}px`);
         button.style.setProperty('--radial-y', `${y}px`);
-        button.style.setProperty('--radial-delay', `${(index + 1) * 0.05}s`);
+        // Buttons animate first, then labels after all buttons
+        const buttonDelay = (index + 1) * 0.05;
+        button.style.setProperty('--radial-delay', `${buttonDelay}s`);
 
-        // Configure label - position along radial direction, then rotate
-        const label = button.querySelector('.button-label');
-        if (label) {
-          // Position label along the radial line from menu center through button center
-          //
-          // In button local coords (button top-left = 0,0, button center = 17,17):
-          const halfBtn = buttonSize / 2; // 17
-
-          // Distance from button center to label left edge center
-          // Add angle adjustment: steeper angles need more distance for visual consistency
-          const angleAdjust = 16 * Math.abs(Math.sin(angleRad));
-          const labelDistance = halfBtn + labelGap + angleAdjust;
-
-          // Label inner edge center position in button coords
-          const innerEdgeX = labelDistance * Math.cos(angleRad) + halfBtn;
-          const innerEdgeY = labelDistance * Math.sin(angleRad) + halfBtn;
-
-          // Label top-left position
-          const labelLeft = innerEdgeX;
-          const labelTop = innerEdgeY - labelHeight / 2;
-
-          label.style.left = `${Math.round(labelLeft)}px`;
-          label.style.top = `${Math.round(labelTop)}px`;
-
-          // Rotate around the left edge center
-          label.style.transformOrigin = `0px ${labelHeight / 2}px`;
-          label.style.transform = `rotate(${angleDeg}deg) translateY(-25%)`;
-
-          // Hover effect
-          if (window.innerWidth > 768) {
-            button.addEventListener('mouseenter', () => {
-              label.style.transform = `scale(1.1) rotate(${angleDeg}deg) translateY(-25%)`;
-            });
-            button.addEventListener('mouseleave', () => {
-              label.style.transform = `rotate(${angleDeg}deg) translateY(-25%)`;
-            });
+        // Create and configure label from data-label attribute
+        const labelText = button.getAttribute('data-label');
+        if (labelText) {
+          // Create label as sibling in the container (not child of button)
+          // This allows positioning from the same origin (menu center)
+          const buttonId = button.id || `btn-${index}`;
+          let label = radialMenuItems.querySelector(`.button-label[data-for="${buttonId}"]`);
+          if (!label) {
+            label = document.createElement('div');
+            label.className = 'button-label';
+            label.setAttribute('data-for', buttonId);
+            label.textContent = labelText;
+            radialMenuItems.appendChild(label);
           }
+
+          // Position label from menu center (same coordinate system as buttons)
+          // Distance from center to label's left edge
+          const labelRadius = radius + buttonSize / 2 + labelGap;
+
+          // Label left edge center position in our coordinate system
+          // (origin at menu center, +x right, +y down in screen coords but we use math coords)
+          const labelEdgeX = labelRadius * Math.cos(angleRad);
+          const labelEdgeY = labelRadius * Math.sin(angleRad);
+
+          // Position using bottom/left (same as buttons)
+          // left = x position of left edge
+          // bottom = -(y position) - half label height to center vertically on the radial line
+          label.style.position = 'absolute';
+          label.style.left = `${Math.round(labelEdgeX)}px`;
+          label.style.bottom = `${Math.round(-labelEdgeY - labelHeight / 2)}px`;
+
+          // Set CSS custom properties for animation
+          // CSS handles the transform using --label-rotation
+          // Labels start after all buttons have animated (buttonCount * 0.05s base)
+          const labelDelay = (buttonCount + index + 1) * 0.05;
+          label.style.transformOrigin = `0px ${labelHeight / 2}px`;
+          label.style.setProperty('--label-rotation', `${angleDeg}deg`);
+          label.style.setProperty('--radial-delay', `${labelDelay}s`);
+
+          // Add hover effect - scale up label when hovering button
+          button.addEventListener('mouseenter', () => {
+            label.classList.add('label-hover');
+          });
+          button.addEventListener('mouseleave', () => {
+            label.classList.remove('label-hover');
+          });
         }
       });
 
@@ -2224,52 +2242,43 @@
     // Initialize on page load
     initializeRadialMenu();
 
-    // Make labels clickable - Need to set this up AFTER button handlers are registered
+    // Make labels clickable - labels now use data-for attribute to reference buttons
     function setupLabelClickHandlers() {
-      // Helper to trigger button click with proper event
-      function triggerButtonClick(buttonId) {
-        const btn = document.getElementById(buttonId);
-        if (btn) {
+      const labels = document.querySelectorAll('.radial-menu-items .button-label');
+
+      labels.forEach(label => {
+        const buttonId = label.getAttribute('data-for');
+        const button = buttonId ? document.getElementById(buttonId) : null;
+        if (!button) return;
+
+        label.style.cursor = 'pointer';
+
+        label.addEventListener('click', function(event) {
+          event.stopPropagation();
+          event.preventDefault();
           const evt = new MouseEvent('click', {
             view: window,
             bubbles: true,
             cancelable: true
           });
-          btn.dispatchEvent(evt);
-        }
-      }
+          button.dispatchEvent(evt);
+        }, false);
 
-      // Set up all label click handlers
-      const labelConfigs = [
-        { labelSelector: '#audio-toggle .button-label', buttonId: 'audio-toggle' },
-        { labelSelector: '#info-toggle .button-label', buttonId: 'info-toggle' },
-        { labelSelector: '#photos-toggle .button-label', buttonId: 'photos-toggle' },
-        { labelSelector: '#book-button .button-label', buttonId: 'book-button' },
-        { labelSelector: '#panos-button .button-label', buttonId: 'panos-button' },
-        { labelSelector: '#apps-button .button-label', buttonId: 'apps-button' }
-      ];
-
-      labelConfigs.forEach(config => {
-        const label = document.querySelector(config.labelSelector);
-        if (label) {
-          label.style.cursor = 'pointer';
-          label.addEventListener('click', function(event) {
-            event.stopPropagation();
-            event.preventDefault();
-            triggerButtonClick(config.buttonId);
-          }, false);
-
-          // Also handle touch events for mobile
-          label.addEventListener('touchend', function(event) {
-            event.stopPropagation();
-            event.preventDefault();
-            triggerButtonClick(config.buttonId);
-          }, false);
-        }
+        // Also handle touch events for mobile
+        label.addEventListener('touchend', function(event) {
+          event.stopPropagation();
+          event.preventDefault();
+          const evt = new MouseEvent('click', {
+            view: window,
+            bubbles: true,
+            cancelable: true
+          });
+          button.dispatchEvent(evt);
+        }, false);
       });
     }
 
-    // Delay setup to ensure button handlers are registered first
+    // Delay setup to ensure labels are created first by initializeRadialMenu
     setTimeout(setupLabelClickHandlers, 100);
 
     // Handle radial link button clicks (books, panos, apps)
