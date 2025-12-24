@@ -182,6 +182,174 @@
                 height: 100% !important;
             }
 
+            /* Glassmorphic FancyBox Styles - Dark Mode (Default) */
+            .fancybox-bg {
+                background: rgba(15, 15, 30, 0.85) !important;
+                backdrop-filter: blur(20px) saturate(180%) !important;
+                -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+            }
+
+            .fancybox-toolbar,
+            .fancybox-infobar {
+                background: rgba(255, 255, 255, 0.1) !important;
+                backdrop-filter: blur(20px) saturate(180%) !important;
+                -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+                border: 1px solid rgba(255, 255, 255, 0.15) !important;
+                border-radius: 16px !important;
+                margin: 12px !important;
+                padding: 4px !important;
+                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3) !important;
+            }
+
+            .fancybox-button {
+                background: rgba(255, 255, 255, 0.08) !important;
+                backdrop-filter: blur(12px) saturate(150%) !important;
+                -webkit-backdrop-filter: blur(12px) saturate(150%) !important;
+                border: 1px solid rgba(255, 255, 255, 0.12) !important;
+                border-radius: 12px !important;
+                margin: 4px !important;
+                width: 40px !important;
+                height: 40px !important;
+                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+                box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2) !important;
+            }
+
+            .fancybox-button:hover {
+                background: rgba(255, 255, 255, 0.18) !important;
+                border-color: rgba(0, 212, 255, 0.5) !important;
+                box-shadow: 0 8px 24px rgba(0, 212, 255, 0.25) !important;
+                transform: scale(1.05) !important;
+            }
+
+            .fancybox-button svg {
+                color: rgba(255, 255, 255, 0.9) !important;
+                filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3)) !important;
+            }
+
+            .fancybox-button--arrow_left,
+            .fancybox-button--arrow_right {
+                position: absolute !important;
+                top: 50% !important;
+                transform: translateY(-50%) !important;
+                background: rgba(255, 255, 255, 0.1) !important;
+                backdrop-filter: blur(20px) saturate(180%) !important;
+                -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+                border: 1px solid rgba(255, 255, 255, 0.15) !important;
+                border-radius: 50% !important;
+                width: 52px !important;
+                height: 52px !important;
+                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3) !important;
+            }
+
+            .fancybox-button--arrow_left {
+                left: 16px !important;
+            }
+
+            .fancybox-button--arrow_right {
+                right: 16px !important;
+            }
+
+            .fancybox-button--arrow_left:hover,
+            .fancybox-button--arrow_right:hover {
+                background: rgba(0, 212, 255, 0.2) !important;
+                border-color: rgba(0, 212, 255, 0.5) !important;
+                box-shadow: 0 12px 40px rgba(0, 212, 255, 0.3) !important;
+            }
+
+            .fancybox-caption {
+                background: linear-gradient(to top, rgba(15, 15, 30, 0.9), transparent) !important;
+                backdrop-filter: blur(10px) !important;
+                -webkit-backdrop-filter: blur(10px) !important;
+                padding: 24px 44px !important;
+            }
+
+            .fancybox-caption__body {
+                color: rgba(255, 255, 255, 0.9) !important;
+                text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5) !important;
+            }
+
+            .fancybox-progress {
+                background: linear-gradient(90deg, #00d4ff, #e94560) !important;
+                height: 3px !important;
+                border-radius: 2px !important;
+            }
+
+            .fancybox-thumbs {
+                background: rgba(15, 15, 30, 0.9) !important;
+                backdrop-filter: blur(20px) saturate(180%) !important;
+                -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+            }
+
+            .fancybox-thumbs__list a::before {
+                border-color: #00d4ff !important;
+            }
+
+            /* Glassmorphic FancyBox Styles - Light Mode */
+            @media (prefers-color-scheme: light) {
+                .fancybox-bg {
+                    background: rgba(240, 240, 245, 0.85) !important;
+                }
+
+                .fancybox-toolbar,
+                .fancybox-infobar {
+                    background: rgba(255, 255, 255, 0.7) !important;
+                    border: 1px solid rgba(0, 0, 0, 0.1) !important;
+                    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1) !important;
+                }
+
+                .fancybox-button {
+                    background: rgba(255, 255, 255, 0.6) !important;
+                    border: 1px solid rgba(0, 0, 0, 0.08) !important;
+                    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08) !important;
+                }
+
+                .fancybox-button:hover {
+                    background: rgba(255, 255, 255, 0.9) !important;
+                    border-color: rgba(0, 102, 204, 0.4) !important;
+                    box-shadow: 0 8px 24px rgba(0, 102, 204, 0.2) !important;
+                }
+
+                .fancybox-button svg {
+                    color: rgba(26, 26, 46, 0.85) !important;
+                    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1)) !important;
+                }
+
+                .fancybox-button--arrow_left,
+                .fancybox-button--arrow_right {
+                    background: rgba(255, 255, 255, 0.7) !important;
+                    border: 1px solid rgba(0, 0, 0, 0.1) !important;
+                    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1) !important;
+                }
+
+                .fancybox-button--arrow_left:hover,
+                .fancybox-button--arrow_right:hover {
+                    background: rgba(255, 255, 255, 0.95) !important;
+                    border-color: rgba(0, 102, 204, 0.4) !important;
+                    box-shadow: 0 12px 40px rgba(0, 102, 204, 0.2) !important;
+                }
+
+                .fancybox-caption {
+                    background: linear-gradient(to top, rgba(240, 240, 245, 0.95), transparent) !important;
+                }
+
+                .fancybox-caption__body {
+                    color: rgba(26, 26, 46, 0.9) !important;
+                    text-shadow: 0 1px 4px rgba(255, 255, 255, 0.5) !important;
+                }
+
+                .fancybox-progress {
+                    background: linear-gradient(90deg, #0066cc, #c52a4a) !important;
+                }
+
+                .fancybox-thumbs {
+                    background: rgba(240, 240, 245, 0.95) !important;
+                }
+
+                .fancybox-thumbs__list a::before {
+                    border-color: #0066cc !important;
+                }
+            }
+
         </style>
         <script src="assets/js/jquery-3.7.0.min.js"></script>
         <script src="assets/js/jquery.fancybox.min.js"></script>
