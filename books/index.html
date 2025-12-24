@@ -421,21 +421,43 @@
 
         .progress-slider::-webkit-slider-thumb {
             -webkit-appearance: none;
-            width: 8px;
-            height: 8px;
+            width: 28px;
+            height: 28px;
             border-radius: 50%;
             background: var(--accent);
             cursor: pointer;
-            box-shadow: -8px 0 0 8px var(--accent);
+            margin-top: -9px;
         }
 
         .progress-slider::-moz-range-thumb {
-            width: 8px;
-            height: 8px;
+            width: 28px;
+            height: 28px;
             border-radius: 50%;
             background: var(--accent);
             cursor: pointer;
             border: none;
+        }
+
+        /* iOS touch fix for range input */
+        .progress-slider {
+            touch-action: manipulation;
+            cursor: pointer;
+            height: 44px;
+            padding: 17px 0;
+            background: transparent;
+            background-clip: content-box;
+        }
+
+        .progress-slider::-webkit-slider-runnable-track {
+            height: 10px;
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+
+        @media (prefers-color-scheme: light) {
+            .progress-slider::-webkit-slider-runnable-track {
+                background: rgba(0, 0, 0, 0.07);
+            }
         }
 
         /* Book Display */
@@ -947,58 +969,75 @@
                 let touchStartY = 0;
                 let touchEndX = 0;
                 let touchEndY = 0;
-                const minSwipeDistance = 50;
+                let directionLocked = null; // 'horizontal', 'vertical', or null
+                let isTracking = false;
+                const lockThreshold = 15; // pixels to determine direction
+                const minSwipeDistance = 40;
 
-                // Only attach to the flipbook element, not the entire container
-                // This ensures controls like sliders remain interactive
-                const flipbookElement = document.getElementById('flipbook');
-                if (!flipbookElement) return;
+                // Attach to book-container which is stable (flipbook element gets recreated)
+                const container = document.querySelector('.book-container');
+                if (!container) return;
 
-                flipbookElement.addEventListener('touchstart', (e) => {
-                    // Don't interfere with button/control touches
-                    if (e.target.tagName === 'BUTTON' || e.target.tagName === 'INPUT') {
-                        return;
-                    }
-                    touchStartX = e.changedTouches[0].screenX;
-                    touchStartY = e.changedTouches[0].screenY;
+                const isInteractiveElement = (el) => {
+                    const tag = el.tagName;
+                    return tag === 'BUTTON' || tag === 'INPUT' || tag === 'SELECT' ||
+                           el.closest('button') || el.closest('input') || el.closest('.nav-controls');
+                };
+
+                container.addEventListener('touchstart', (e) => {
+                    if (isInteractiveElement(e.target)) return;
+
+                    touchStartX = e.touches[0].clientX;
+                    touchStartY = e.touches[0].clientY;
+                    touchEndX = touchStartX;
+                    touchEndY = touchStartY;
+                    directionLocked = null;
+                    isTracking = true;
                 }, { passive: true });
 
-                flipbookElement.addEventListener('touchmove', (e) => {
-                    // Don't interfere with button/control touches
-                    if (e.target.tagName === 'BUTTON' || e.target.tagName === 'INPUT') {
-                        return;
-                    }
+                container.addEventListener('touchmove', (e) => {
+                    if (!isTracking || isInteractiveElement(e.target)) return;
 
-                    touchEndX = e.changedTouches[0].screenX;
-                    touchEndY = e.changedTouches[0].screenY;
+                    touchEndX = e.touches[0].clientX;
+                    touchEndY = e.touches[0].clientY;
 
                     const diffX = Math.abs(touchEndX - touchStartX);
                     const diffY = Math.abs(touchEndY - touchStartY);
 
-                    // Only prevent default (scrolling) if horizontal swipe is dominant
-                    if (diffX > diffY && diffX > 10) {
+                    // Lock direction once threshold is reached
+                    if (!directionLocked && (diffX > lockThreshold || diffY > lockThreshold)) {
+                        // Require horizontal to be significantly more than vertical
+                        directionLocked = diffX > diffY * 1.2 ? 'horizontal' : 'vertical';
+                    }
+
+                    // Prevent scrolling only if locked to horizontal
+                    if (directionLocked === 'horizontal') {
                         e.preventDefault();
                     }
                 }, { passive: false });
 
-                flipbookElement.addEventListener('touchend', (e) => {
-                    // Don't interfere with button/control touches
-                    if (e.target.tagName === 'BUTTON' || e.target.tagName === 'INPUT') {
-                        return;
+                container.addEventListener('touchend', (e) => {
+                    if (!isTracking) return;
+
+                    // Handle swipe if direction was locked to horizontal
+                    if (directionLocked === 'horizontal') {
+                        this.handleSwipe(touchStartX, touchEndX, minSwipeDistance);
                     }
 
-                    touchEndX = e.changedTouches[0].screenX;
-                    touchEndY = e.changedTouches[0].screenY;
-                    this.handleSwipe(touchStartX, touchStartY, touchEndX, touchEndY, minSwipeDistance);
+                    directionLocked = null;
+                    isTracking = false;
+                }, { passive: true });
+
+                container.addEventListener('touchcancel', () => {
+                    directionLocked = null;
+                    isTracking = false;
                 }, { passive: true });
             }
 
-            handleSwipe(startX, startY, endX, endY, minDistance) {
+            handleSwipe(startX, endX, minDistance) {
                 const diffX = endX - startX;
-                const diffY = endY - startY;
 
-                // Check if horizontal swipe is dominant
-                if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > minDistance) {
+                if (Math.abs(diffX) > minDistance) {
                     if (diffX > 0) {
                         // Swipe right - go to previous page
                         this.els.flipbook.turn('previous');
