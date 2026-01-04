@@ -1695,6 +1695,17 @@
           showSlide(currentIndex);
           startSlideshow();
           startIdleDetection();
+
+          // Sync blurred background when returning to tab
+          document.addEventListener("visibilitychange", function() {
+            if (document.visibilityState === "visible") {
+              const activeBackground = document.getElementById("active-background");
+              const blurredBackground = document.getElementById("blurred-background");
+              if (activeBackground.src && activeBackground.src !== blurredBackground.src) {
+                blurredBackground.src = activeBackground.src;
+              }
+            }
+          });
         })
         .catch(err => console.log(err));
     }
@@ -2048,7 +2059,11 @@
       resetIdleTimer();
     }
 
+    var thumbnailsCreated = false;
     function setupThumbnails() {
+      if (thumbnailsCreated) return;
+      thumbnailsCreated = true;
+
       const container = document.getElementById("thumbnail-container");
       backgroundImages.forEach((src, index) => {
         const img = document.createElement("img");
@@ -2064,11 +2079,12 @@
           event.preventDefault();
           showContextMenu(event.clientX, event.clientY, src);
         });
+        let lastTap = 0;
         img.addEventListener('touchend', (e) => {
           // time of current press
           const currentTime = new Date().getTime()
           // time between presses
-          const tapLength = currentTime - this.lastTap
+          const tapLength = currentTime - lastTap
 
           if (tapLength < 500 && tapLength > 0) {
             // if double click
@@ -2076,7 +2092,7 @@
             showContextMenu(e.changedTouches[0].screenX, e.changedTouches[0].screenY, src);
           }
           // remember the time of the last touch
-          this.lastTap = currentTime
+          lastTap = currentTime
         })
         container.appendChild(img);
       });
@@ -2379,11 +2395,12 @@
           audio.pause();
           document.getElementById("muted").classList.remove("hide");
           document.getElementById("unmuted").classList.add("hide");
-          return;
+        } else {
+          audio.play();
+          document.getElementById("unmuted").classList.remove("hide");
+          document.getElementById("muted").classList.add("hide");
         }
-        audio.play();
-        document.getElementById("unmuted").classList.remove("hide");
-        document.getElementById("muted").classList.add("hide");
+        closeMenu();
       },
       false
     );
@@ -2427,6 +2444,7 @@
           removeClass(document.body, "photos-gallery-with-thumbnails");
           resumeSlideshow();
         }
+        closeMenu();
       },
       false
     );
@@ -2450,6 +2468,7 @@
           removeClass(document.body, "photos-gallery-with-thumbnails");
           resumeSlideshow();
         }
+        closeMenu();
       },
       false
     );
