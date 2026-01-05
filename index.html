@@ -1696,14 +1696,56 @@
           startSlideshow();
           startIdleDetection();
 
-          // Sync blurred background when returning to tab
+          // Fix background state when returning to tab
           document.addEventListener("visibilitychange", function() {
             if (document.visibilityState === "visible") {
+              // Cancel any ongoing animation
+              if (animationFrameId) {
+                cancelAnimationFrame(animationFrameId);
+                animationFrameId = null;
+              }
+
               const activeBackground = document.getElementById("active-background");
+              const nextBackground = document.getElementById("next-background");
               const blurredBackground = document.getElementById("blurred-background");
-              if (activeBackground.src && activeBackground.src !== blurredBackground.src) {
+
+              // If next-background was fading in, use it as current
+              const nextHasImage = nextBackground.src && !nextBackground.src.endsWith("=");
+              if (nextHasImage) {
+                activeBackground.src = nextBackground.src;
+              }
+
+              // Remove crossfade classes FIRST
+              activeBackground.classList.remove("crossfade");
+              nextBackground.classList.remove("crossfade");
+
+              // Force reflow to ensure class removal takes effect
+              void activeBackground.offsetWidth;
+
+              // Reset styles with !important to override CSS
+              activeBackground.style.setProperty("transition", "none", "important");
+              activeBackground.style.setProperty("opacity", "1", "important");
+              nextBackground.style.setProperty("transition", "none", "important");
+              nextBackground.style.setProperty("opacity", "0", "important");
+              nextBackground.src = "";
+
+              // Sync blurred background
+              if (activeBackground.src) {
                 blurredBackground.src = activeBackground.src;
               }
+
+              // Clear the important flags after a frame so normal transitions work again
+              requestAnimationFrame(() => {
+                activeBackground.style.removeProperty("transition");
+                activeBackground.style.removeProperty("opacity");
+                nextBackground.style.removeProperty("transition");
+                nextBackground.style.removeProperty("opacity");
+
+                // Resume slideshow from current position
+                if (!document.body.classList.contains("photos-gallery")) {
+                  showSlide(currentIndex);
+                }
+              });
             }
           });
         })
