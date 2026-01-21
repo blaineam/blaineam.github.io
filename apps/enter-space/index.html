@@ -33,6 +33,40 @@
     .hero-description {
       color: rgba(255, 255, 255, 0.9);
     }
+
+    /* Soon Badge - easily add/remove by adding class to feature-card or inline */
+    .soon-badge {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--app-primary), var(--app-secondary));
+      color: white;
+      font-size: 0.65rem;
+      font-weight: 600;
+      padding: 0.2em 0.5em;
+      border-radius: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      vertical-align: middle;
+      margin-left: 0.5em;
+    }
+
+    .feature-card.has-soon-badge {
+      position: relative;
+    }
+
+    .feature-card.has-soon-badge::after {
+      content: "Soon";
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: linear-gradient(135deg, var(--app-primary), var(--app-secondary));
+      color: white;
+      font-size: 0.65rem;
+      font-weight: 600;
+      padding: 0.25em 0.6em;
+      border-radius: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
   </style>
 </head>
 <body>
@@ -128,7 +162,7 @@
         </p>
       </div>
 
-      <div class="feature-card">
+      <div class="feature-card has-soon-badge">
         <div class="feature-icon">📸</div>
         <h3 class="feature-title">Photos Library Backup</h3>
         <p class="feature-description">
@@ -136,7 +170,7 @@
         </p>
       </div>
 
-      <div class="feature-card">
+      <div class="feature-card has-soon-badge">
         <div class="feature-icon">🔒</div>
         <h3 class="feature-title">File Locking Support</h3>
         <p class="feature-description">
@@ -144,6 +178,15 @@
         </p>
       </div>
 
+      <!-- SOON VERSION -->
+      <div class="feature-card">
+        <div class="feature-icon">🎬</div>
+        <h3 class="feature-title">Built-in Media Player</h3>
+        <p class="feature-description">
+          View photos and watch videos directly from your cloud storage. Your media, always accessible. Audio playback<span class="soon-badge">Soon</span> and background playback<span class="soon-badge">Soon</span>.
+        </p>
+      </div>
+      <!-- RELEASED VERSION
       <div class="feature-card">
         <div class="feature-icon">🎬</div>
         <h3 class="feature-title">Built-in Media Player</h3>
@@ -151,8 +194,9 @@
           View photos, watch videos, and listen to audio directly from your cloud storage with background playback support. Your media, always accessible.
         </p>
       </div>
+      -->
 
-      <div class="feature-card">
+      <div class="feature-card has-soon-badge">
         <div class="feature-icon">🔗</div>
         <h3 class="feature-title">Public Link Creation</h3>
         <p class="feature-description">
@@ -168,6 +212,15 @@
         </p>
       </div>
 
+      <!-- SOON VERSION -->
+      <div class="feature-card">
+        <div class="feature-icon">🧭</div>
+        <h3 class="feature-title">Guided Remote Setup</h3>
+        <p class="feature-description">
+          Add remote configurations through a simple, guided visual interface. No command line required—get connected in just a few taps. Editing remote configurations<span class="soon-badge">Soon</span>.
+        </p>
+      </div>
+      <!-- RELEASED VERSION
       <div class="feature-card">
         <div class="feature-icon">🧭</div>
         <h3 class="feature-title">Guided Remote Setup</h3>
@@ -175,8 +228,9 @@
           Add and edit remote configurations through a simple, guided visual interface. No command line required—get connected in just a few taps.
         </p>
       </div>
+      -->
 
-      <div class="feature-card">
+      <div class="feature-card has-soon-badge">
         <div class="feature-icon">🕰️</div>
         <h3 class="feature-title">Time Portal</h3>
         <p class="feature-description">
