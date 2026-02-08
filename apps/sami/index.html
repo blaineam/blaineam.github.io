@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sami - Smart Media Optimizer for Apple Photos</title>
+  <meta name="description" content="Optimize your photos, videos, and PDFs with intelligent compression. Preview changes side-by-side, automate tasks with shortcuts, and reclaim storage space on your iPhone, iPad, and Mac.">
+  <meta property="og:title" content="Sami - Smart Media Optimizer for Apple Photos">
+  <meta property="og:description" content="Optimize your photos, videos, and PDFs with intelligent compression. Preview changes side-by-side, automate tasks with shortcuts, and reclaim storage space on your iPhone, iPad, and Mac.">
+  <meta property="og:type" content="app">
+  <meta property="og:url" content="https://wemiller.com/apps/sami/">
+  <meta property="og:image" content="https://wemiller.com/apps/sami/assets/images/poster.jpg">
+  <link rel="stylesheet" href="../app-showcase.css">
+  <style>
+    /* Sami Specific Styling */
+    :root {
+      --app-primary: #ff6b6b;
+      --app-secondary: #ee5a6f;
+      --app-accent: #feca57;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, var(--app-primary) 0%, var(--app-secondary) 100%);
+      color: white;
+    }
+
+    .hero-title,
+    .hero-subtitle {
+      color: white;
+      -webkit-text-fill-color: white;
+    }
+
+    .hero-description {
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    /* Download button hidden when coming soon */
+    .coming-soon .btn-buy,
+    .coming-soon .floating-appstore {
+      display: none !important;
+    }
+
+    /* Replace download button with coming soon message */
+    .coming-soon .hero-cta .btn-buy {
+      display: inline-block !important;
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+      cursor: default;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body class="coming-soon">
+  <!-- Navigation -->
+  <nav class="app-nav">
+    <div class="nav-container">
+      <a href="../" class="nav-logo">← Apps</a>
+      <button class="mobile-menu-toggle">☰</button>
+      <ul class="nav-links">
+        <li><a href="#features" class="nav-link">Features</a></li>
+        <li><a href="#screenshots" class="nav-link">Screenshots</a></li>
+        <li><a href="#faq" class="nav-link">FAQ</a></li>
+        <!-- Uncomment when app launches -->
+        <!-- <li><a href="https://apps.apple.com/us/app/sami/id6758907995" class="btn-buy" target="_blank">Download on App Store</a></li> -->
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-text">
+        <p class="hero-subtitle">🎨 Sami</p>
+        <h1 class="hero-title">Smart Media Optimizer for Your Photos</h1>
+        <p class="hero-description">
+          Reclaim storage space on your iPhone, iPad, and Mac with intelligent media optimization. Compress photos, videos, and PDFs while previewing every change side-by-side. Set up automated tasks that run on schedule or trigger from Apple Shortcuts.
+        </p>
+        <div class="hero-cta">
+          <!-- Uncomment when app launches and remove coming-soon class from body -->
+          <!-- <a href="https://apps.apple.com/us/app/sami/id6758907995" class="btn-buy" target="_blank">Download Now</a> -->
+          <span class="btn-buy">Coming Soon</span>
+        </div>
+      </div>
+      <div class="hero-image">
+        <div class="hero-phone">
+          <!-- Replace with actual app screenshot -->
+          <img src="assets/images/icon.png" alt="Sami App Icon" class="phone-mockup"
+               onerror="this.src='assets/images/hero-mockup.png'; this.onerror=function(){this.style.background='linear-gradient(135deg, #ff6b6b, #ee5a6f)'; this.style.minHeight='600px';};">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Floating App Store Button (Hidden until launch) -->
+  <!-- Uncomment when app launches -->
+  <!-- <a href="https://apps.apple.com/us/app/sami/id6758907995" class="floating-appstore" target="_blank">
+    <span class="floating-appstore-icon"></span>
+    <span>Download on App Store</span>
+  </a> -->
+
+  <!-- Features Section -->
+  <section id="features" class="section">
+    <div class="section-header">
+      <p class="section-subtitle">Why Choose Sami</p>
+      <h2>Powerful Optimization Features</h2>
+      <p>Intelligent media compression with complete control and transparency</p>
+    </div>
+
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-icon">📸</div>
+        <h3 class="feature-title">Apple Photos Integration</h3>
+        <p class="feature-description">
+          Optimize media directly from your Apple Photos library. Select albums, smart albums, or individual photos and videos to compress and save space.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">📁</div>
+        <h3 class="feature-title">Folder Optimization</h3>
+        <p class="feature-description">
+          Choose any folder on your device to optimize. Perfect for managing media in Documents, Downloads, or custom locations with full drag-and-drop support.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🎯</div>
+        <h3 class="feature-title">Targeted Task System</h3>
+        <p class="feature-description">
+          Create custom optimization tasks that target exactly the media you want. Set filters, quality levels, and output formats for precise control.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">⚡</div>
+        <h3 class="feature-title">Automated Optimization</h3>
+        <p class="feature-description">
+          Schedule tasks to run automatically in the background. Trigger optimizations from Apple Shortcuts or set up recurring schedules to keep storage under control.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">👀</div>
+        <h3 class="feature-title">Side-by-Side Preview</h3>
+        <p class="feature-description">
+          Preview optimizations before committing. Compare original and compressed versions side-by-side to ensure quality meets your standards.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🎨</div>
+        <h3 class="feature-title">Fun & Intuitive UI</h3>
+        <p class="feature-description">
+          Enjoy a delightful, playful interface that makes media optimization fun. Clear visualizations and smooth animations guide you through every step.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">📄</div>
+        <h3 class="feature-title">PDF Optimization</h3>
+        <p class="feature-description">
+          Not just for photos and videos—Sami optimizes PDFs too. Reduce file sizes of documents while maintaining readability and compatibility.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">💾</div>
+        <h3 class="feature-title">Savings Estimation</h3>
+        <p class="feature-description">
+          See exactly how much storage space you'll save before running any optimization. Make informed decisions about quality vs. storage trade-offs.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🖱️</div>
+        <h3 class="feature-title">Drag & Drop Support</h3>
+        <p class="feature-description">
+          Simply drag media files into Sami to optimize them. Quick, intuitive file handling makes batch processing a breeze on Mac and iPad.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🔄</div>
+        <h3 class="feature-title">Apple Shortcuts Integration</h3>
+        <p class="feature-description">
+          Trigger optimizations from Shortcuts automations. Integrate Sami into your workflows—optimize photos when you get home, before backups, or on demand.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">📊</div>
+        <h3 class="feature-title">Keep Reference Versions</h3>
+        <p class="feature-description">
+          Perfect for archiving. Optimize media you may not need at full quality but want to keep for reference, freeing up space without losing memories.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">📱</div>
+        <h3 class="feature-title">Universal Apple App</h3>
+        <p class="feature-description">
+          One app for iPhone, iPad, and Mac with full feature parity. Start optimization on your Mac and monitor progress on your iPhone—seamlessly.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Important Notice Section -->
+  <section class="section" style="background: linear-gradient(135deg, rgba(255, 107, 107, 0.1), rgba(254, 202, 87, 0.1)); padding: var(--spacing-xl) var(--spacing-lg); border-radius: 12px; margin: var(--spacing-xl) auto; max-width: 900px;">
+    <div style="text-align: center;">
+      <h3 style="color: var(--app-primary); margin-bottom: var(--spacing-md);">⚠️ Important: Lossy Compression</h3>
+      <p style="color: var(--text-secondary); line-height: 1.6; max-width: 700px; margin: 0 auto;">
+        Sami uses lossy compression to achieve significant space savings. This means there will be some quality loss
+        in the optimized media. The side-by-side preview lets you evaluate if the quality trade-off is acceptable for
+        your needs. Always keep backups of important media before optimization.
+      </p>
+    </div>
+  </section>
+
+  <!-- Magazine-style Feature Sections -->
+  <section class="section">
+    <div class="magazine-section">
+      <div class="magazine-content">
+        <h2>Preview Before You Commit</h2>
+        <p>
+          Never guess about quality. See exactly how your optimized media will look with side-by-side comparisons.
+          Inspect details before saving. Your photos, your control.
+        </p>
+        <p>
+          Adjust quality settings in real-time and see immediate previews. When you're happy with the balance
+          between file size and quality, commit the optimization.
+        </p>
+      </div>
+      <div class="magazine-image">
+        <!-- Replace with actual screenshot -->
+        <img src="assets/images/feature-1.png" alt="Side-by-side preview comparison"
+             onerror="this.style.background='linear-gradient(135deg, #ff6b6b, #ee5a6f)'; this.style.minHeight='400px'; this.style.display='block';">
+      </div>
+    </div>
+
+    <div class="magazine-section reverse">
+      <div class="magazine-content">
+        <h2>Smart Task System</h2>
+        <p>
+          Create optimization tasks tailored to your needs. Target specific albums, date ranges, file types, or
+          folders. Set quality levels, output formats, and file size limits for each task.
+        </p>
+        <p>
+          Run tasks manually, schedule them to run automatically, or trigger them from Apple Shortcuts.
+          Perfect for maintaining a lean photo library without constant manual management.
+        </p>
+      </div>
+      <div class="magazine-image">
+        <!-- Replace with actual screenshot -->
+        <img src="assets/images/feature-2.png" alt="Task configuration interface"
+             onerror="this.style.background='linear-gradient(135deg, #ee5a6f, #feca57)'; this.style.minHeight='400px'; this.style.display='block';">
+      </div>
+    </div>
+
+    <div class="magazine-section">
+      <div class="magazine-content">
+        <h2>Automation That Works for You</h2>
+        <p>
+          Set it and forget it. Configure tasks to run on a schedule—daily, weekly, or monthly. Sami works quietly
+          in the background, keeping your storage optimized without you thinking about it.
+        </p>
+        <p>
+          Integrate with Apple Shortcuts for powerful automation. Optimize photos when you arrive home, before
+          cloud backups, or based on available storage. The possibilities are endless.
+        </p>
+      </div>
+      <div class="magazine-image">
+        <!-- Replace with actual screenshot -->
+        <img src="assets/images/feature-3.png" alt="Automation and scheduling"
+             onerror="this.style.background='linear-gradient(135deg, #ff6b6b, #feca57)'; this.style.minHeight='400px'; this.style.display='block';">
+      </div>
+    </div>
+
+    <div class="magazine-section reverse">
+      <div class="magazine-content">
+        <h2>Fun, Playful Interface</h2>
+        <p>
+          Media optimization doesn't have to be boring. Sami features a delightfully fun UI with smooth animations,
+          clear visualizations, and intuitive controls that make managing your media library enjoyable.
+        </p>
+        <p>
+          Watch your storage savings grow with satisfying progress indicators. See estimated space savings update
+          in real-time as you adjust quality settings. Every interaction feels responsive and polished.
+        </p>
+      </div>
+      <div class="magazine-image">
+        <!-- Replace with actual screenshot -->
+        <img src="assets/images/feature-4.png" alt="Fun user interface"
+             onerror="this.style.background='linear-gradient(135deg, #feca57, #ff6b6b)'; this.style.minHeight='400px'; this.style.display='block';">
+      </div>
+    </div>
+
+    <div class="magazine-section">
+      <div class="magazine-content">
+        <h2>Universal Across Apple Devices</h2>
+        <p>
+          Sami is a universal app for iPhone, iPad, and Mac. One purchase works across all your devices with
+          full feature parity.
+        </p>
+        <p>
+          Native interfaces tailored to each platform mean you get the complete experience no matter which
+          device you're using.
+        </p>
+      </div>
+      <div class="magazine-image">
+        <!-- Replace with actual screenshot -->
+        <img src="assets/images/feature-5.png" alt="Universal app for iPhone, iPad, and Mac"
+             onerror="this.style.background='linear-gradient(135deg, #ee5a6f, #ff6b6b)'; this.style.minHeight='400px'; this.style.display='block';">
+      </div>
+    </div>
+  </section>
+
+  <!-- Screenshots Section -->
+  <section id="screenshots" class="section">
+    <div class="section-header">
+      <p class="section-subtitle">See It In Action</p>
+      <h2>Screenshots</h2>
+      <p>Take a closer look at Sami in action</p>
+    </div>
+
+    <div class="screenshots-grid">
+      <!-- Replace these with actual screenshots -->
+      <div class="screenshot-item">
+        <img src="assets/images/screenshot-1.png" alt="Screenshot 1"
+             onerror="this.style.background='linear-gradient(135deg, #ff6b6b, #ee5a6f)'; this.style.minHeight='500px'; this.style.display='block';">
+      </div>
+      <div class="screenshot-item">
+        <img src="assets/images/screenshot-2.png" alt="Screenshot 2"
+             onerror="this.style.background='linear-gradient(135deg, #ee5a6f, #feca57)'; this.style.minHeight='500px'; this.style.display='block';">
+      </div>
+      <div class="screenshot-item">
+        <img src="assets/images/screenshot-3.png" alt="Screenshot 3"
+             onerror="this.style.background='linear-gradient(135deg, #feca57, #ff6b6b)'; this.style.minHeight='500px'; this.style.display='block';">
+      </div>
+      <div class="screenshot-item">
+        <img src="assets/images/screenshot-4.png" alt="Screenshot 4"
+             onerror="this.style.background='linear-gradient(135deg, #ff6b6b, #feca57)'; this.style.minHeight='500px'; this.style.display='block';">
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section id="faq" class="faq-section">
+    <div class="section-header">
+      <p class="section-subtitle">Got Questions?</p>
+      <h2>Frequently Asked Questions</h2>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        <span>What types of media can Sami optimize?</span>
+        <span class="faq-icon">▼</span>
+      </button>
+      <div class="faq-answer">
+        <p>
+          Sami can optimize photos (JPEG, PNG, HEIC), videos (MP4, MOV, and more), and PDF documents. It works with media
+          from your Apple Photos library or any folder you choose on your device.
+        </p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        <span>Is the compression lossy? Will I lose quality?</span>
+        <span class="faq-icon">▼</span>
+      </button>
+      <div class="faq-answer">
+        <p>
+          Yes, Sami uses lossy compression to achieve significant space savings. There will be some quality loss, but the
+          side-by-side preview feature lets you evaluate the quality trade-off before committing. You have full control over
+          compression levels to balance quality vs. file size based on your needs.
+        </p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        <span>Can I preview changes before optimizing?</span>
+        <span class="faq-icon">▼</span>
+      </button>
+      <div class="faq-answer">
+        <p>
+          Absolutely! Sami's side-by-side comparison feature lets you see exactly how the optimized version will look
+          compared to the original. Inspect details to ensure you're happy with the quality before saving.
+        </p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        <span>How does task automation work?</span>
+        <span class="faq-icon">▼</span>
+      </button>
+      <div class="faq-answer">
+        <p>
+          Create optimization tasks with specific targets (albums, folders, date ranges) and quality settings. Tasks can run
+          manually, on a schedule (daily, weekly, monthly), or be triggered from Apple Shortcuts for integration with iOS
+          and macOS automation.
+        </p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        <span>Will Sami work on all my Apple devices?</span>
+        <span class="faq-icon">▼</span>
+      </button>
+      <div class="faq-answer">
+        <p>
+          Yes! Sami is a universal app that works on iPhone, iPad, and Mac with full feature parity. Purchase once and
+          use it across all your Apple devices.
+        </p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        <span>How much storage space can I save?</span>
+        <span class="faq-icon">▼</span>
+      </button>
+      <div class="faq-answer">
+        <p>
+          Savings vary based on your media and chosen quality settings, but typically range from 30-70% for photos and
+          videos. Sami provides estimated savings before you optimize, so you know exactly what to expect. PDFs can often
+          be reduced by 50% or more depending on their content.
+        </p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        <span>Does Sami keep backups of original files?</span>
+        <span class="faq-icon">▼</span>
+      </button>
+      <div class="faq-answer">
+        <p>
+          Sami can optionally keep reference versions depending on your settings, but you should always maintain your own
+          backups of important media before optimization. The compression is permanent, so backing up originals elsewhere
+          is recommended for files you may want at full quality in the future.
+        </p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        <span>Can I use drag and drop to add files?</span>
+        <span class="faq-icon">▼</span>
+      </button>
+      <div class="faq-answer">
+        <p>
+          Yes! On Mac and iPad, you can drag and drop media files directly into Sami to optimize them quickly. This makes
+          batch processing large numbers of files fast and intuitive.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-links">
+        <a href="../" class="footer-link">All Apps</a>
+        <a href="../enter-space/" class="footer-link">Enter Space</a>
+        <a href="../sami/" class="footer-link">Sami</a>
+        <a href="../ari-helper/" class="footer-link">Ari Helper</a>
+        <a href="../mi-speaks/" class="footer-link">Mi Speaks</a>
+        <a href="../embr/" class="footer-link">Embr</a>
+        <a href="../deepsi/" class="footer-link">DeepSi</a>
+        <a href="../luma-editor/" class="footer-link">Luma Editor</a>
+        <a href="../wise-flyer/" class="footer-link">Wise Flyer</a>
+        <a href="/privacy/" class="footer-link">Privacy</a>
+        <a href="/terms/" class="footer-link">Terms</a>
+        <a href="/" class="footer-link">Portfolio</a>
+      </div>
+
+      <!-- Social Media Links -->
+      <div class="footer-social-links">
+        <a href="https://x.com/apps_by_blaine" class="social-icon-link" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)">
+          <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+          </svg>
+        </a>
+        <a href="https://www.instagram.com/apps.by.blaine/" class="social-icon-link" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+          <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+          </svg>
+        </a>
+        <a href="https://www.youtube.com/@AppsByBlaine" class="social-icon-link" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+          <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+          </svg>
+        </a>
+      </div>
+
+      <p style="color: var(--text-muted); margin-top: var(--spacing-md);">
+        © <span id="year"></span> Blaine Miller. All rights reserved.
+      </p>
+    </div>
+  </footer>
+
+  <script src="../app-showcase.js"></script>
+</body>
+</html>
