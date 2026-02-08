@@ -100,6 +100,7 @@
     .app-card:nth-child(5) { animation-delay: 0.7s; }
     .app-card:nth-child(6) { animation-delay: 0.8s; }
     .app-card:nth-child(7) { animation-delay: 0.9s; }
+    .app-card:nth-child(8) { animation-delay: 1.0s; }
 
     .app-card::before {
       content: '';
@@ -221,9 +222,17 @@
       animation: floatIcon1 12s ease-in-out infinite;
     }
 
+    .app-card:nth-child(8) .app-icon {
+      animation: floatIcon2 13s ease-in-out infinite;
+    }
+
     /* Custom colors for each app */
     .app-card[data-app="enter-space"] .app-icon {
       background: linear-gradient(135deg, #667eea, #764ba2);
+    }
+
+    .app-card[data-app="sami"] .app-icon {
+      background: linear-gradient(135deg, #ff6b6b, #ee5a6f);
     }
 
     .app-card[data-app="ari-helper"] .app-icon {
@@ -321,6 +330,14 @@
           <div class="app-icon"><img src="enter-space/assets/images/icon.png" alt="Enter Space App Icon"></div>
           <h2 class="app-name">Enter Space</h2>
           <p class="app-tagline">62 cloud storage accounts, unified</p>
+          <span class="app-cta">Learn More →</span>
+        </a>
+
+        <!-- Sami -->
+        <a href="sami/" class="app-card" data-app="sami">
+          <div class="app-icon"><img src="sami/assets/images/icon.png" alt="Sami App Icon"></div>
+          <h2 class="app-name">Sami</h2>
+          <p class="app-tagline">Smart media optimizer</p>
           <span class="app-cta">Learn More →</span>
         </a>
 
