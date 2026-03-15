@@ -1,0 +1,117 @@
+# ~/.zshlocal - Lightweight zsh bootstrap for macOS (brew) or Debian/Ubuntu (apt)
+# Curl this from GitHub: curl -fsSL https://raw.githubusercontent.com/YOURUSER/YOURREPO/main/.zshlocal -o ~/.zshlocal
+# Then add to ~/.zshrc: [ -f ~/.zshlocal ] && source ~/.zshlocal
+
+setup_shell() {
+  local done_marker=~/.zshlocal-setup-done
+  if [[ -f "$done_marker" ]]; then
+    return 0
+  fi
+
+  local OS=$(uname -s)
+  local PKGMGR=""
+
+  case $OS in
+    Darwin)
+      PKGMGR="brew"
+      if ! command -v brew >/dev/null 2>&1; then
+        echo "Installing Homebrew..."
+        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+      fi
+      ;;
+    Linux)
+      if command -v apt >/dev/null 2>&1; then
+        PKGMGR="apt"
+        sudo apt update -qq >/dev/null 2>&1 || true
+      else
+        echo "Unsupported Linux distro (apt not found)"
+        return 1
+      fi
+      ;;
+    *)
+      echo "Unsupported OS: $OS"
+      return 1
+      ;;
+  esac
+
+  if [[ -n "$PKGMGR" ]]; then
+    case $PKGMGR in
+      brew)
+        local packages=(git tmux htop vim imagemagick ffmpeg rclone ncdu "the_silver_searcher" fzf watch tree)
+        for pkg in "${packages[@]}"; do
+          if ! brew list "$pkg" >/dev/null 2>&1; then
+            echo "Installing $pkg with brew..."
+            brew install "$pkg"
+          fi
+        done
+        ;;
+      apt)
+        local packages=(git tmux htop vim imagemagick ffmpeg rclone ncdu silversearcher-ag fzf procps tree)
+        local to_install=()
+        for pkg in "${packages[@]}"; do
+          if ! dpkg -l "$pkg" >/dev/null 2>&1; then
+            to_install+=("$pkg")
+          fi
+        done
+        if [[ ${#to_install[@]} -gt 0 ]]; then
+          echo "Installing ${to_install[*]} with apt..."
+          sudo DEBIAN_FRONTEND=noninteractive apt install -y "${to_install[@]}"
+        fi
+        # Refresh zsh command hash for new binaries
+        hash -r 2>/dev/null || true
+        ;;
+    esac
+  fi
+
+  touch "$done_marker"
+  echo "Shell setup complete! Restart your shell or source ~/.zshrc."
+}
+
+# Run setup once
+setup_shell
+
+# Ensure brew PATH if present
+if command -v brew >/dev/null 2>&1; then
+  eval "$(brew shellenv)"
+fi
+
+# Source fzf for zsh (completions + keybindings)
+if command -v fzf >/dev/null 2>&1; then
+  source <(fzf --zsh)
+fi
+
+# Useful cross-platform aliases
+local OS=$(uname -s)
+if [[ $OS == "Darwin" ]]; then
+  alias ls='ls -G'
+  alias ll='ls -lhG'
+  alias la='ls -laG'
+else
+  alias ls='ls --color=auto'
+  alias ll='ls -lh --color=auto'
+  alias la='ls -lah --color=auto'
+fi
+
+alias grep='grep --color=auto'
+alias diff='diff --color=auto'
+alias c='clear'
+alias ..='cd ..'
+alias ...='cd ../..'
+
+# Tool shortcuts
+alias g='git'
+alias v='vim'
+alias t='tmux'
+alias ag='ag'  # The Silver Searcher
+
+# Git aliases
+alias ga='git add'
+alias gs='git status'
+alias gd='git diff'
+alias gc='git commit -v'
+alias gcm='git commit -m'
+alias gl='git pull'
+alias gp='git push'
+alias gb='git branch'
+alias gba='git branch -a'
+alias gco='git checkout'
