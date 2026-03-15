@@ -1,6 +1,5 @@
 # ~/.zshlocal - Lightweight zsh bootstrap for macOS (brew) or Debian/Ubuntu (apt)
-# Curl this from GitHub: curl -fsSL https://raw.githubusercontent.com/YOURUSER/YOURREPO/main/.zshlocal -o ~/.zshlocal
-# Then add to ~/.zshrc: [ -f ~/.zshlocal ] && source ~/.zshlocal
+# Install with: `curl -fsSL https://raw.githubusercontent.com/blaineam/blaineam.github.io/main/.zshlocal -o ~/.zshlocal && echo '[ -f ~/.zshlocal ] && source ~/.zshlocal' >> ~/.zshrc`
 
 setup_shell() {
   local done_marker=~/.zshlocal-setup-done
