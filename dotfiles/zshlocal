@@ -1,9 +1,7 @@
 # ~/.zshlocal - Lightweight shell bootstrap for macOS (brew) or Debian/Ubuntu (apt)
 # Works with both zsh and bash
 # Install with:
-#   curl -fsSL https://raw.githubusercontent.com/blaineam/blaineam.github.io/main/.zshlocal -o ~/.zshlocal
-#   echo '[ -f ~/.zshlocal ] && source ~/.zshlocal' >> ~/.zshrc
-#   echo '[ -f ~/.zshlocal ] && source ~/.zshlocal' >> ~/.bashrc
+#   curl -fsSL https://raw.githubusercontent.com/blaineam/blaineam.github.io/main/dotfiles/zshlocal -o ~/.zshlocal && echo '[ -f ~/.zshlocal ] && source ~/.zshlocal' >> ~/.zshrc && echo '[ -f ~/.zshlocal ] && source ~/.zshlocal' >> ~/.bashrc
 
 # --- Shell detection and switching ---
 # If zsh is available and we're in bash, switch to zsh
