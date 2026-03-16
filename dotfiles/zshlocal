@@ -130,6 +130,7 @@ _fmt_duration() {
 
 # --- Custom prompt: user(teal)@(red)host(yellow)|(red)dir(green)(duration●)(red parens)→(purple) typed(white) ---
 if [ "$_CURRENT_SHELL" = "zsh" ]; then
+  zmodload zsh/datetime
   setopt PROMPT_SUBST
   _CMD_START=0
   _CMD_DURATION=0
