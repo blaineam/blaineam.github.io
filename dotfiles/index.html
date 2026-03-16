@@ -20,6 +20,8 @@
       --neon-purple: #b537f2;
       --neon-green: #39ff14;
       --neon-red: #ff3b3b;
+      --neon-yellow: #ffb830;
+      --neon-blue: #4d9dff;
       --dark-bg: #0a0a1a;
       --glass-bg: rgba(255, 255, 255, 0.04);
       --glass-border: rgba(255, 255, 255, 0.08);
@@ -37,7 +39,6 @@
       position: relative;
     }
 
-    /* Animated gradient background */
     body::before {
       content: '';
       position: fixed;
@@ -56,7 +57,6 @@
       100% { opacity: 1; }
     }
 
-    /* Grid floor effect */
     .grid-floor {
       position: fixed;
       bottom: 0; left: 0; right: 0;
@@ -79,7 +79,6 @@
       z-index: 1;
     }
 
-    /* Header */
     .header {
       text-align: center;
       margin-bottom: 56px;
@@ -113,7 +112,6 @@
       line-height: 1.6;
     }
 
-    /* Glass card */
     .glass {
       background: var(--glass-bg);
       border: 1px solid var(--glass-border);
@@ -140,13 +138,15 @@
       background-clip: text;
     }
 
-    /* Terminal demo */
+    /* Terminal */
     .terminal {
       background: rgba(0, 0, 0, 0.6);
       border: 1px solid rgba(255, 255, 255, 0.06);
       border-radius: 14px;
       overflow: hidden;
       box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5);
+      display: flex;
+      flex-direction: column;
     }
 
     .terminal-bar {
@@ -156,12 +156,11 @@
       padding: 12px 16px;
       background: rgba(255, 255, 255, 0.03);
       border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      flex-shrink: 0;
+      z-index: 2;
     }
 
-    .terminal-dot {
-      width: 12px; height: 12px;
-      border-radius: 50%;
-    }
+    .terminal-dot { width: 12px; height: 12px; border-radius: 50%; }
     .terminal-dot.red { background: #ff5f57; }
     .terminal-dot.yellow { background: #febc2e; }
     .terminal-dot.green { background: #28c840; }
@@ -180,23 +179,26 @@
       font-family: 'JetBrains Mono', monospace;
       font-size: 0.88em;
       line-height: 1.8;
-      min-height: 200px;
+      height: 260px;
+      overflow-y: hidden;
+      position: relative;
     }
 
     .prompt-line {
-      display: flex;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 0;
       white-space: nowrap;
     }
 
     .p-user { color: #00d4d4; }
-    .p-pipe { color: #ff3b3b; margin: 0 6px; }
+    .p-at { color: #ff3b3b; }
+    .p-host { color: #ffb830; }
+    .p-pipe { color: #ff3b3b; }
     .p-dir  { color: #39ff14; }
-    .p-arrow { color: #b537f2; margin: 0 6px; }
+    .p-duration { color: #b537f2; }
+    .p-ok { color: #39ff14; }
+    .p-err { color: #4d9dff; }
+    .p-arrow { color: #b537f2; }
     .p-cmd  { color: #e0e0e0; }
-    .p-output { color: rgba(224, 224, 240, 0.55); margin-left: 0; display: block; }
+    .p-output { color: rgba(224, 224, 240, 0.55); display: block; }
 
     .cursor {
       display: inline-block;
@@ -211,9 +213,6 @@
       0%, 100% { opacity: 1; }
       50% { opacity: 0; }
     }
-
-    /* Typing animation helper */
-    .typed { overflow: hidden; white-space: nowrap; }
 
     /* Install section */
     .install-block {
@@ -232,46 +231,57 @@
 
     .install-cmd {
       display: flex;
-      align-items: center;
-      gap: 12px;
+      align-items: stretch;
       background: rgba(0, 0, 0, 0.5);
       border: 1px solid rgba(255, 255, 255, 0.06);
       border-radius: 10px;
-      padding: 14px 16px;
       font-family: 'JetBrains Mono', monospace;
       font-size: 0.82em;
-      overflow-x: auto;
+      overflow: hidden;
     }
 
-    .install-cmd code {
+    .install-cmd-text {
       flex: 1;
+      min-width: 0;
+      padding: 14px 16px;
+      overflow-x: auto;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(181, 55, 242, 0.3) transparent;
+    }
+
+    .install-cmd-text::-webkit-scrollbar { height: 4px; }
+    .install-cmd-text::-webkit-scrollbar-track { background: transparent; }
+    .install-cmd-text::-webkit-scrollbar-thumb { background: rgba(181, 55, 242, 0.3); border-radius: 2px; }
+
+    .install-cmd-text code {
       color: var(--neon-cyan);
       white-space: nowrap;
       user-select: all;
+      display: block;
     }
 
     .copy-btn {
       flex-shrink: 0;
       background: rgba(181, 55, 242, 0.15);
-      border: 1px solid rgba(181, 55, 242, 0.3);
+      border: none;
+      border-left: 1px solid rgba(255, 255, 255, 0.06);
       color: var(--neon-purple);
-      padding: 6px 14px;
-      border-radius: 8px;
+      padding: 14px 18px;
       font-family: 'JetBrains Mono', monospace;
       font-size: 0.85em;
       cursor: pointer;
       transition: all 0.2s;
+      display: flex;
+      align-items: center;
     }
 
     .copy-btn:hover {
       background: rgba(181, 55, 242, 0.3);
-      border-color: var(--neon-purple);
       color: #fff;
     }
 
     .copy-btn.copied {
       background: rgba(57, 255, 20, 0.15);
-      border-color: rgba(57, 255, 20, 0.3);
       color: var(--neon-green);
     }
 
@@ -296,10 +306,7 @@
       background: rgba(255, 255, 255, 0.04);
     }
 
-    .feature-icon {
-      font-size: 1.4em;
-      margin-bottom: 8px;
-    }
+    .feature-icon { font-size: 1.4em; margin-bottom: 8px; }
 
     .feature h3 {
       font-weight: 500;
@@ -314,7 +321,6 @@
       line-height: 1.5;
     }
 
-    /* Shells supported */
     .shells {
       display: flex;
       gap: 10px;
@@ -345,7 +351,6 @@
       background: rgba(57, 255, 20, 0.06);
     }
 
-    /* Footer */
     .footer {
       text-align: center;
       margin-top: 60px;
@@ -359,7 +364,6 @@
     }
     .footer a:hover { text-decoration: underline; }
 
-    /* Responsive */
     @media (max-width: 600px) {
       .header h1 { font-size: 2.2em; }
       .glass { padding: 24px; }
@@ -372,7 +376,6 @@
   <div class="grid-floor"></div>
 
   <div class="container">
-    <!-- Header -->
     <div class="header">
       <h1>dotfiles</h1>
       <p>One-line shell bootstrap with a custom prompt, essential tools, and handy aliases for macOS and Linux.</p>
@@ -404,7 +407,7 @@
       <div class="install-block">
         <div class="install-label">one-line installer</div>
         <div class="install-cmd">
-          <code id="install-text">curl -fsSL https://raw.githubusercontent.com/blaineam/blaineam.github.io/main/dotfiles/zshlocal -o ~/.zshlocal && echo '[ -f ~/.zshlocal ] && source ~/.zshlocal' >> ~/.zshrc && echo '[ -f ~/.zshlocal ] && source ~/.zshlocal' >> ~/.bashrc && source ~/.zshlocal</code>
+          <div class="install-cmd-text"><code>curl -fsSL https://raw.githubusercontent.com/blaineam/blaineam.github.io/main/dotfiles/zshlocal -o ~/.zshlocal && echo '[ -f ~/.zshlocal ] && source ~/.zshlocal' >> ~/.zshrc && echo '[ -f ~/.zshlocal ] && source ~/.zshlocal' >> ~/.bashrc && source ~/.zshlocal</code></div>
           <button class="copy-btn" onclick="copyInstall(this)">copy</button>
         </div>
       </div>
@@ -412,7 +415,7 @@
       <div class="install-block" style="margin-top: 20px;">
         <div class="install-label">zsh only</div>
         <div class="install-cmd">
-          <code id="install-zsh">curl -fsSL https://raw.githubusercontent.com/blaineam/blaineam.github.io/main/dotfiles/zshlocal -o ~/.zshlocal && echo '[ -f ~/.zshlocal ] && source ~/.zshlocal' >> ~/.zshrc && source ~/.zshlocal</code>
+          <div class="install-cmd-text"><code>curl -fsSL https://raw.githubusercontent.com/blaineam/blaineam.github.io/main/dotfiles/zshlocal -o ~/.zshlocal && echo '[ -f ~/.zshlocal ] && source ~/.zshlocal' >> ~/.zshrc && source ~/.zshlocal</code></div>
           <button class="copy-btn" onclick="copyInstall(this)">copy</button>
         </div>
       </div>
@@ -420,7 +423,15 @@
       <div class="install-block" style="margin-top: 20px;">
         <div class="install-label">bash only</div>
         <div class="install-cmd">
-          <code id="install-bash">curl -fsSL https://raw.githubusercontent.com/blaineam/blaineam.github.io/main/dotfiles/zshlocal -o ~/.zshlocal && echo '[ -f ~/.zshlocal ] && source ~/.zshlocal' >> ~/.bashrc && source ~/.zshlocal</code>
+          <div class="install-cmd-text"><code>curl -fsSL https://raw.githubusercontent.com/blaineam/blaineam.github.io/main/dotfiles/zshlocal -o ~/.zshlocal && echo '[ -f ~/.zshlocal ] && source ~/.zshlocal' >> ~/.bashrc && source ~/.zshlocal</code></div>
+          <button class="copy-btn" onclick="copyInstall(this)">copy</button>
+        </div>
+      </div>
+
+      <div class="install-block" style="margin-top: 20px;">
+        <div class="install-label">update</div>
+        <div class="install-cmd">
+          <div class="install-cmd-text"><code>curl -fsSL https://raw.githubusercontent.com/blaineam/blaineam.github.io/main/dotfiles/zshlocal -o ~/.zshlocal && source ~/.zshlocal</code></div>
           <button class="copy-btn" onclick="copyInstall(this)">copy</button>
         </div>
       </div>
@@ -433,7 +444,7 @@
         <div class="feature">
           <div class="feature-icon">></div>
           <h3>Custom Prompt</h3>
-          <p><span style="color:#00d4d4">user</span> <span style="color:#ff3b3b">|</span> <span style="color:#39ff14">~/dir</span> <span style="color:#b537f2">&rarr;</span> with white text input</p>
+          <p><span style="color:#00d4d4">user</span><span style="color:#ff3b3b">@</span><span style="color:#ffb830">host</span><span style="color:#ff3b3b">|</span><span style="color:#39ff14">~/dir</span><span style="color:#39ff14">&#9679;</span><span style="color:#b537f2">&rarr;</span> with duration and exit status</p>
         </div>
         <div class="feature">
           <div class="feature-icon">~</div>
@@ -459,9 +470,8 @@
   </div>
 
   <script>
-    // Copy installer to clipboard
     function copyInstall(btn) {
-      const code = btn.previousElementSibling;
+      const code = btn.previousElementSibling.querySelector('code');
       navigator.clipboard.writeText(code.textContent).then(() => {
         btn.textContent = 'copied!';
         btn.classList.add('copied');
@@ -472,21 +482,23 @@
       });
     }
 
-    // Terminal animation
     const demo = document.getElementById('demo');
+    const HOST = 'macbook';
 
     const scenes = [
       {
-        user: 'blaine', dir: '~/projects',
+        user: 'blaine', host: HOST, dir: '~/projects',
         cmd: 'git status',
+        duration: '1s', ok: true,
         output: [
           'On branch main',
           'nothing to commit, working tree clean'
         ]
       },
       {
-        user: 'blaine', dir: '~/projects/app',
+        user: 'blaine', host: HOST, dir: '~/projects/app',
         cmd: 'ls -la',
+        duration: '', ok: true,
         output: [
           'drwxr-xr-x  src/',
           'drwxr-xr-x  tests/',
@@ -495,21 +507,48 @@
         ]
       },
       {
-        user: 'blaine', dir: '~',
-        cmd: 'echo "hello world"',
-        output: ['hello world']
+        user: 'blaine', host: HOST, dir: '~/projects/app',
+        cmd: 'npm test',
+        duration: '4s', ok: false,
+        output: [
+          'FAIL  src/utils.test.js',
+          '  Expected: 42',
+          '  Received: undefined'
+        ]
       },
       {
-        user: 'blaine', dir: '~/dotfiles',
-        cmd: 'vim ~/.zshlocal',
-        output: ['']
+        user: 'blaine', host: HOST, dir: '~/projects/app',
+        cmd: 'npm test',
+        duration: '3s', ok: true,
+        output: [
+          'PASS  src/utils.test.js',
+          'Tests: 12 passed, 12 total'
+        ]
+      },
+      {
+        user: 'blaine', host: HOST, dir: '~',
+        cmd: 'echo "hello world"',
+        duration: '', ok: true,
+        output: ['hello world']
       }
     ];
 
-    let sceneIdx = 0;
-
-    function buildPromptHTML(user, dir) {
-      return `<span class="p-user">${user}</span><span class="p-pipe">|</span><span class="p-dir">${dir}</span><span class="p-arrow">&rarr;</span>`;
+    // Build prompt: user@host|dir [duration] [status]→
+    // First prompt has no duration/status (fresh shell)
+    function buildPromptHTML(user, host, dir, duration, ok, isFirst) {
+      let html = `<span class="p-user">${user}</span><span class="p-at">@</span><span class="p-host">${host}</span><span class="p-pipe">|</span><span class="p-dir">${dir}</span>`;
+      if (!isFirst) {
+        if (duration) {
+          html += `<span class="p-duration">${duration}</span>`;
+        }
+        if (ok === true) {
+          html += `<span class="p-ok">&#9679;</span>`;
+        } else if (ok === false) {
+          html += `<span class="p-err">&#9679;</span>`;
+        }
+      }
+      html += `<span class="p-arrow">&rarr;</span> `;
+      return html;
     }
 
     function typeText(el, text, speed) {
@@ -527,11 +566,19 @@
       });
     }
 
+    function scrollToBottom() {
+      demo.scrollTop = demo.scrollHeight;
+    }
+
+    // Track previous command result for the next prompt
+    let prevDuration = '';
+    let prevOk = null;
+    let isFirstPrompt = true;
+
     async function playScene(scene) {
-      // Build prompt line
       const line = document.createElement('div');
       line.className = 'prompt-line';
-      line.innerHTML = buildPromptHTML(scene.user, scene.dir);
+      line.innerHTML = buildPromptHTML(scene.user, scene.host, scene.dir, prevDuration, prevOk, isFirstPrompt);
       const cmdSpan = document.createElement('span');
       cmdSpan.className = 'p-cmd';
       line.appendChild(cmdSpan);
@@ -539,42 +586,81 @@
       cursor.className = 'cursor';
       line.appendChild(cursor);
       demo.appendChild(line);
+      scrollToBottom();
 
-      // Type command
       await typeText(cmdSpan, scene.cmd, 55);
+      scrollToBottom();
 
-      // Remove cursor
       cursor.remove();
 
-      // Show output lines
       for (const out of scene.output) {
         if (out === '') continue;
         const outLine = document.createElement('div');
         outLine.className = 'p-output';
         outLine.textContent = out;
         demo.appendChild(outLine);
+        scrollToBottom();
       }
 
-      // Pause then continue
-      await new Promise(r => setTimeout(r, 1800));
+      // Store this command's result for the next prompt
+      prevDuration = scene.duration;
+      prevOk = scene.ok;
+      isFirstPrompt = false;
+
+      await new Promise(r => setTimeout(r, 1400));
+    }
+
+    async function clearScreen() {
+      // Type 'c' (the clear alias) on a new prompt
+      const line = document.createElement('div');
+      line.className = 'prompt-line';
+      line.innerHTML = buildPromptHTML('blaine', HOST, '~', prevDuration, prevOk, isFirstPrompt);
+      const cmdSpan = document.createElement('span');
+      cmdSpan.className = 'p-cmd';
+      line.appendChild(cmdSpan);
+      const cursor = document.createElement('span');
+      cursor.className = 'cursor';
+      line.appendChild(cursor);
+      demo.appendChild(line);
+      scrollToBottom();
+
+      await typeText(cmdSpan, 'c', 55);
+      await new Promise(r => setTimeout(r, 300));
+      cursor.remove();
+
+      // Clear the terminal
+      demo.innerHTML = '';
+      prevDuration = '';
+      prevOk = null;
+      isFirstPrompt = true;
     }
 
     async function runDemo() {
       while (true) {
         demo.innerHTML = '';
+        prevDuration = '';
+        prevOk = null;
+        isFirstPrompt = true;
+
         for (const scene of scenes) {
           await playScene(scene);
         }
-        // Blank prompt with blinking cursor at end
+
+        // Final idle prompt with blinking cursor
         const endLine = document.createElement('div');
         endLine.className = 'prompt-line';
-        endLine.innerHTML = buildPromptHTML('blaine', '~/dotfiles');
+        endLine.innerHTML = buildPromptHTML('blaine', HOST, '~', prevDuration, prevOk, false);
         const endCursor = document.createElement('span');
         endCursor.className = 'cursor';
         endLine.appendChild(endCursor);
         demo.appendChild(endLine);
+        scrollToBottom();
 
-        await new Promise(r => setTimeout(r, 3000));
+        await new Promise(r => setTimeout(r, 2500));
+
+        // Clear with the 'c' alias before looping
+        await clearScreen();
+        await new Promise(r => setTimeout(r, 600));
       }
     }
 

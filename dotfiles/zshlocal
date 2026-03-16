@@ -2,6 +2,8 @@
 # Works with both zsh and bash
 # Install with:
 #   curl -fsSL https://raw.githubusercontent.com/blaineam/blaineam.github.io/main/dotfiles/zshlocal -o ~/.zshlocal && echo '[ -f ~/.zshlocal ] && source ~/.zshlocal' >> ~/.zshrc && echo '[ -f ~/.zshlocal ] && source ~/.zshlocal' >> ~/.bashrc
+# Update with:
+#   curl -fsSL https://raw.githubusercontent.com/blaineam/blaineam.github.io/main/dotfiles/zshlocal -o ~/.zshlocal && source ~/.zshlocal
 
 # --- Shell detection and switching ---
 # If zsh is available and we're in bash, switch to zsh
@@ -102,22 +104,104 @@ if command -v fzf >/dev/null 2>&1; then
   fi
 fi
 
-# --- Custom prompt: user (teal) | (red) cwd (green) → (purple) typed text (white) ---
+# --- Human-readable duration formatter ---
+_fmt_duration() {
+  local secs=$1
+  if [ "$secs" -le 0 ] 2>/dev/null; then
+    return
+  fi
+  local h=$((secs / 3600))
+  local m=$(((secs % 3600) / 60))
+  local s=$((secs % 60))
+  local out=""
+  [ "$h" -gt 0 ] && out="${h}h"
+  [ "$m" -gt 0 ] && out="${out}${m}m"
+  [ "$s" -gt 0 ] && out="${out}${s}s"
+  [ -n "$out" ] && printf '%s' "$out"
+}
+
+# --- Custom prompt: user(teal)@(red)host(yellow)|(red)dir(green) duration(gray) status(circle)→(purple) typed(white) ---
 if [ "$_CURRENT_SHELL" = "zsh" ]; then
   setopt PROMPT_SUBST
-  PROMPT='%F{cyan}%n%f %F{red}|%f %F{green}%~%f %F{magenta}→%f %F{white}'
-  # Reset color after command input
-  preexec() { printf '\033[0m'; }
+  _CMD_START=0
+  _CMD_DURATION=0
+  _CMD_EXIT=0
+
+  preexec() {
+    _CMD_START=$EPOCHSECONDS
+    printf '\033[0m'
+  }
+
+  precmd() {
+    _CMD_EXIT=$?
+    if [ "$_CMD_START" -gt 0 ] 2>/dev/null; then
+      _CMD_DURATION=$(( EPOCHSECONDS - _CMD_START ))
+    else
+      _CMD_DURATION=0
+    fi
+    _CMD_START=0
+  }
+
+  _zsh_prompt() {
+    local dur=""
+    if [ "$_CMD_DURATION" -gt 0 ] 2>/dev/null; then
+      dur="%F{magenta}$(_fmt_duration $_CMD_DURATION)%f"
+    fi
+    local indicator=""
+    if [ "$_CMD_EXIT" -eq 0 ]; then
+      indicator="%F{green}●%f"
+    else
+      indicator="%F{blue}●%f"
+    fi
+    echo "%F{cyan}%n%f%F{red}@%f%F{yellow}%m%f%F{red}|%f%F{green}%~%f${dur}${indicator}%F{magenta}→%f %F{white}"
+  }
+
+  PROMPT='$(_zsh_prompt)'
+
 elif [ "$_CURRENT_SHELL" = "bash" ]; then
-  _teal='\[\033[0;36m\]'
-  _red='\[\033[0;31m\]'
-  _green='\[\033[0;32m\]'
-  _purple='\[\033[0;35m\]'
-  _white='\[\033[0;37m\]'
-  _reset='\[\033[0m\]'
-  PS1="${_teal}\u${_reset} ${_red}|${_reset} ${_green}\w${_reset} ${_purple}→${_reset} ${_white}"
-  # Reset color after command via DEBUG trap
-  trap 'printf "\033[0m"' DEBUG
+  _CMD_START=0
+  _CMD_DURATION=0
+
+  _bash_timer_start() {
+    _CMD_START=${_CMD_START:-$SECONDS}
+  }
+  trap '_bash_timer_start' DEBUG
+
+  _bash_prompt() {
+    local exit_code=$?
+    if [ "$_CMD_START" -gt 0 ] 2>/dev/null; then
+      _CMD_DURATION=$(( SECONDS - _CMD_START ))
+    else
+      _CMD_DURATION=0
+    fi
+    _CMD_START=0
+
+    local teal='\033[0;36m'
+    local red='\033[0;31m'
+    local yellow='\033[0;33m'
+    local green='\033[0;32m'
+    local purple='\033[0;35m'
+    local white='\033[0;37m'
+    local gray='\033[0;90m'
+    local blue='\033[0;34m'
+    local reset='\033[0m'
+
+    local dur=""
+    if [ "$_CMD_DURATION" -gt 0 ] 2>/dev/null; then
+      dur="${purple}$(_fmt_duration $_CMD_DURATION)${reset}"
+    fi
+
+    local indicator=""
+    if [ "$exit_code" -eq 0 ]; then
+      indicator="${green}●${reset}"
+    else
+      indicator="${blue}●${reset}"
+    fi
+
+    PS1="\[${teal}\]\u\[${red}\]@\[${yellow}\]\h\[${red}\]|\[${green}\]\w\[${reset}\]${dur}${indicator}\[${purple}\]→\[${reset}\] \[${white}\]"
+  }
+
+  PROMPT_COMMAND='_bash_prompt'
 fi
 
 # Useful cross-platform aliases
