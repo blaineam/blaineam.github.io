@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Dotfiles - Shell Bootstrap</title>
+  <meta name="description" content="One-line shell bootstrap for macOS and Linux. Custom prompt, useful aliases, and essential tools.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta property="og:title" content="Dotfiles - Shell Bootstrap">
+  <meta property="og:description" content="One-line installer for a beautiful shell setup with custom prompt, aliases, and tools.">
+  <meta property="og:url" content="https://www.wemiller.com/dotfiles">
+  <link rel="icon" type="image/jpeg" href="../profile.jpg">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Outfit:wght@300;500;700&display=swap');
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --neon-pink: #ff2d95;
+      --neon-cyan: #00f0ff;
+      --neon-purple: #b537f2;
+      --neon-green: #39ff14;
+      --neon-red: #ff3b3b;
+      --dark-bg: #0a0a1a;
+      --glass-bg: rgba(255, 255, 255, 0.04);
+      --glass-border: rgba(255, 255, 255, 0.08);
+      --glass-shadow: rgba(0, 0, 0, 0.4);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: var(--dark-bg);
+      color: #e0e0f0;
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Animated gradient background */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background:
+        radial-gradient(ellipse at 20% 50%, rgba(181, 55, 242, 0.15) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 20%, rgba(0, 240, 255, 0.1) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 80%, rgba(255, 45, 149, 0.1) 0%, transparent 50%);
+      animation: bgShift 12s ease-in-out infinite alternate;
+      z-index: 0;
+    }
+
+    @keyframes bgShift {
+      0% { opacity: 1; }
+      50% { opacity: 0.6; }
+      100% { opacity: 1; }
+    }
+
+    /* Grid floor effect */
+    .grid-floor {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      height: 40vh;
+      background:
+        linear-gradient(to top, rgba(181, 55, 242, 0.08), transparent),
+        repeating-linear-gradient(90deg, rgba(181, 55, 242, 0.06) 0px, transparent 1px, transparent 80px),
+        repeating-linear-gradient(0deg, rgba(181, 55, 242, 0.06) 0px, transparent 1px, transparent 80px);
+      transform: perspective(500px) rotateX(45deg);
+      transform-origin: bottom;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 60px 24px 100px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Header */
+    .header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+
+    .header h1 {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 700;
+      font-size: 3.2em;
+      letter-spacing: -0.02em;
+      background: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple), var(--neon-pink));
+      background-size: 200% 200%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: gradientText 4s ease infinite;
+      margin-bottom: 12px;
+    }
+
+    @keyframes gradientText {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    .header p {
+      font-size: 1.15em;
+      font-weight: 300;
+      color: rgba(224, 224, 240, 0.65);
+      max-width: 520px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    /* Glass card */
+    .glass {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 20px;
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      box-shadow: 0 8px 32px var(--glass-shadow), inset 0 1px 0 rgba(255,255,255,0.04);
+      padding: 36px;
+      margin-bottom: 36px;
+    }
+
+    .glass h2 {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 500;
+      font-size: 1.5em;
+      margin-bottom: 20px;
+      color: #f0f0ff;
+    }
+
+    .glass h2 .accent {
+      background: linear-gradient(90deg, var(--neon-cyan), var(--neon-purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* Terminal demo */
+    .terminal {
+      background: rgba(0, 0, 0, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5);
+    }
+
+    .terminal-bar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 16px;
+      background: rgba(255, 255, 255, 0.03);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .terminal-dot {
+      width: 12px; height: 12px;
+      border-radius: 50%;
+    }
+    .terminal-dot.red { background: #ff5f57; }
+    .terminal-dot.yellow { background: #febc2e; }
+    .terminal-dot.green { background: #28c840; }
+
+    .terminal-title {
+      flex: 1;
+      text-align: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75em;
+      color: rgba(255, 255, 255, 0.3);
+      margin-right: 48px;
+    }
+
+    .terminal-body {
+      padding: 20px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.88em;
+      line-height: 1.8;
+      min-height: 200px;
+    }
+
+    .prompt-line {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0;
+      white-space: nowrap;
+    }
+
+    .p-user { color: #00d4d4; }
+    .p-pipe { color: #ff3b3b; margin: 0 6px; }
+    .p-dir  { color: #39ff14; }
+    .p-arrow { color: #b537f2; margin: 0 6px; }
+    .p-cmd  { color: #e0e0e0; }
+    .p-output { color: rgba(224, 224, 240, 0.55); margin-left: 0; display: block; }
+
+    .cursor {
+      display: inline-block;
+      width: 8px;
+      height: 1.1em;
+      background: #e0e0e0;
+      vertical-align: text-bottom;
+      animation: blink 1s step-end infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    /* Typing animation helper */
+    .typed { overflow: hidden; white-space: nowrap; }
+
+    /* Install section */
+    .install-block {
+      position: relative;
+      margin-top: 16px;
+    }
+
+    .install-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7em;
+      color: rgba(224, 224, 240, 0.35);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 8px;
+    }
+
+    .install-cmd {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(0, 0, 0, 0.5);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 10px;
+      padding: 14px 16px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.82em;
+      overflow-x: auto;
+    }
+
+    .install-cmd code {
+      flex: 1;
+      color: var(--neon-cyan);
+      white-space: nowrap;
+      user-select: all;
+    }
+
+    .copy-btn {
+      flex-shrink: 0;
+      background: rgba(181, 55, 242, 0.15);
+      border: 1px solid rgba(181, 55, 242, 0.3);
+      color: var(--neon-purple);
+      padding: 6px 14px;
+      border-radius: 8px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85em;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .copy-btn:hover {
+      background: rgba(181, 55, 242, 0.3);
+      border-color: var(--neon-purple);
+      color: #fff;
+    }
+
+    .copy-btn.copied {
+      background: rgba(57, 255, 20, 0.15);
+      border-color: rgba(57, 255, 20, 0.3);
+      color: var(--neon-green);
+    }
+
+    /* Features */
+    .features {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 8px;
+    }
+
+    .feature {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      border-radius: 12px;
+      padding: 20px;
+      transition: border-color 0.3s, background 0.3s;
+    }
+
+    .feature:hover {
+      border-color: rgba(181, 55, 242, 0.2);
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .feature-icon {
+      font-size: 1.4em;
+      margin-bottom: 8px;
+    }
+
+    .feature h3 {
+      font-weight: 500;
+      font-size: 0.95em;
+      margin-bottom: 4px;
+      color: #f0f0ff;
+    }
+
+    .feature p {
+      font-size: 0.82em;
+      color: rgba(224, 224, 240, 0.5);
+      line-height: 1.5;
+    }
+
+    /* Shells supported */
+    .shells {
+      display: flex;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .shell-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78em;
+      font-weight: 700;
+      border: 1px solid;
+    }
+
+    .shell-badge.zsh {
+      color: var(--neon-cyan);
+      border-color: rgba(0, 240, 255, 0.25);
+      background: rgba(0, 240, 255, 0.06);
+    }
+
+    .shell-badge.bash {
+      color: var(--neon-green);
+      border-color: rgba(57, 255, 20, 0.25);
+      background: rgba(57, 255, 20, 0.06);
+    }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      margin-top: 60px;
+      font-size: 0.82em;
+      color: rgba(224, 224, 240, 0.25);
+    }
+
+    .footer a {
+      color: var(--neon-purple);
+      text-decoration: none;
+    }
+    .footer a:hover { text-decoration: underline; }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      .header h1 { font-size: 2.2em; }
+      .glass { padding: 24px; }
+      .features { grid-template-columns: 1fr; }
+      .container { padding: 40px 16px 80px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="grid-floor"></div>
+
+  <div class="container">
+    <!-- Header -->
+    <div class="header">
+      <h1>dotfiles</h1>
+      <p>One-line shell bootstrap with a custom prompt, essential tools, and handy aliases for macOS and Linux.</p>
+      <div class="shells" style="justify-content: center; margin-top: 20px;">
+        <span class="shell-badge zsh">zsh</span>
+        <span class="shell-badge bash">bash</span>
+      </div>
+    </div>
+
+    <!-- Terminal Demo -->
+    <div class="glass">
+      <h2><span class="accent">Live</span> Preview</h2>
+      <div class="terminal">
+        <div class="terminal-bar">
+          <div class="terminal-dot red"></div>
+          <div class="terminal-dot yellow"></div>
+          <div class="terminal-dot green"></div>
+          <div class="terminal-title">~/.zshlocal</div>
+        </div>
+        <div class="terminal-body" id="demo"></div>
+      </div>
+    </div>
+
+    <!-- Install -->
+    <div class="glass">
+      <h2><span class="accent">Install</span></h2>
+      <p style="color: rgba(224,224,240,0.5); font-size: 0.92em; margin-bottom: 20px;">Run this single command. It downloads the config, sources it from both <code style="color: var(--neon-cyan);">~/.zshrc</code> and <code style="color: var(--neon-green);">~/.bashrc</code>, and auto-detects your shell.</p>
+
+      <div class="install-block">
+        <div class="install-label">one-line installer</div>
+        <div class="install-cmd">
+          <code id="install-text">curl -fsSL https://raw.githubusercontent.com/blaineam/blaineam.github.io/main/dotfiles/zshlocal -o ~/.zshlocal && echo '[ -f ~/.zshlocal ] && source ~/.zshlocal' >> ~/.zshrc && echo '[ -f ~/.zshlocal ] && source ~/.zshlocal' >> ~/.bashrc && source ~/.zshlocal</code>
+          <button class="copy-btn" onclick="copyInstall(this)">copy</button>
+        </div>
+      </div>
+
+      <div class="install-block" style="margin-top: 20px;">
+        <div class="install-label">zsh only</div>
+        <div class="install-cmd">
+          <code id="install-zsh">curl -fsSL https://raw.githubusercontent.com/blaineam/blaineam.github.io/main/dotfiles/zshlocal -o ~/.zshlocal && echo '[ -f ~/.zshlocal ] && source ~/.zshlocal' >> ~/.zshrc && source ~/.zshlocal</code>
+          <button class="copy-btn" onclick="copyInstall(this)">copy</button>
+        </div>
+      </div>
+
+      <div class="install-block" style="margin-top: 20px;">
+        <div class="install-label">bash only</div>
+        <div class="install-cmd">
+          <code id="install-bash">curl -fsSL https://raw.githubusercontent.com/blaineam/blaineam.github.io/main/dotfiles/zshlocal -o ~/.zshlocal && echo '[ -f ~/.zshlocal ] && source ~/.zshlocal' >> ~/.bashrc && source ~/.zshlocal</code>
+          <button class="copy-btn" onclick="copyInstall(this)">copy</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- What's Included -->
+    <div class="glass">
+      <h2><span class="accent">What's</span> Included</h2>
+      <div class="features">
+        <div class="feature">
+          <div class="feature-icon">></div>
+          <h3>Custom Prompt</h3>
+          <p><span style="color:#00d4d4">user</span> <span style="color:#ff3b3b">|</span> <span style="color:#39ff14">~/dir</span> <span style="color:#b537f2">&rarr;</span> with white text input</p>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">~</div>
+          <h3>Shell Detection</h3>
+          <p>Auto-switches to zsh if available, falls back to bash gracefully</p>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">+</div>
+          <h3>Essential Tools</h3>
+          <p>Installs git, tmux, vim, fzf, htop, ffmpeg, tree, and more via brew or apt</p>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">&amp;</div>
+          <h3>Git Aliases</h3>
+          <p>Short aliases for common git commands &mdash; ga, gs, gd, gc, gp, gco, and more</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <a href="/">&larr; wemiller.com</a>
+    </div>
+  </div>
+
+  <script>
+    // Copy installer to clipboard
+    function copyInstall(btn) {
+      const code = btn.previousElementSibling;
+      navigator.clipboard.writeText(code.textContent).then(() => {
+        btn.textContent = 'copied!';
+        btn.classList.add('copied');
+        setTimeout(() => {
+          btn.textContent = 'copy';
+          btn.classList.remove('copied');
+        }, 2000);
+      });
+    }
+
+    // Terminal animation
+    const demo = document.getElementById('demo');
+
+    const scenes = [
+      {
+        user: 'blaine', dir: '~/projects',
+        cmd: 'git status',
+        output: [
+          'On branch main',
+          'nothing to commit, working tree clean'
+        ]
+      },
+      {
+        user: 'blaine', dir: '~/projects/app',
+        cmd: 'ls -la',
+        output: [
+          'drwxr-xr-x  src/',
+          'drwxr-xr-x  tests/',
+          '-rw-r--r--  package.json',
+          '-rw-r--r--  README.md'
+        ]
+      },
+      {
+        user: 'blaine', dir: '~',
+        cmd: 'echo "hello world"',
+        output: ['hello world']
+      },
+      {
+        user: 'blaine', dir: '~/dotfiles',
+        cmd: 'vim ~/.zshlocal',
+        output: ['']
+      }
+    ];
+
+    let sceneIdx = 0;
+
+    function buildPromptHTML(user, dir) {
+      return `<span class="p-user">${user}</span><span class="p-pipe">|</span><span class="p-dir">${dir}</span><span class="p-arrow">&rarr;</span>`;
+    }
+
+    function typeText(el, text, speed) {
+      return new Promise(resolve => {
+        let i = 0;
+        const interval = setInterval(() => {
+          if (i < text.length) {
+            el.textContent += text[i];
+            i++;
+          } else {
+            clearInterval(interval);
+            resolve();
+          }
+        }, speed);
+      });
+    }
+
+    async function playScene(scene) {
+      // Build prompt line
+      const line = document.createElement('div');
+      line.className = 'prompt-line';
+      line.innerHTML = buildPromptHTML(scene.user, scene.dir);
+      const cmdSpan = document.createElement('span');
+      cmdSpan.className = 'p-cmd';
+      line.appendChild(cmdSpan);
+      const cursor = document.createElement('span');
+      cursor.className = 'cursor';
+      line.appendChild(cursor);
+      demo.appendChild(line);
+
+      // Type command
+      await typeText(cmdSpan, scene.cmd, 55);
+
+      // Remove cursor
+      cursor.remove();
+
+      // Show output lines
+      for (const out of scene.output) {
+        if (out === '') continue;
+        const outLine = document.createElement('div');
+        outLine.className = 'p-output';
+        outLine.textContent = out;
+        demo.appendChild(outLine);
+      }
+
+      // Pause then continue
+      await new Promise(r => setTimeout(r, 1800));
+    }
+
+    async function runDemo() {
+      while (true) {
+        demo.innerHTML = '';
+        for (const scene of scenes) {
+          await playScene(scene);
+        }
+        // Blank prompt with blinking cursor at end
+        const endLine = document.createElement('div');
+        endLine.className = 'prompt-line';
+        endLine.innerHTML = buildPromptHTML('blaine', '~/dotfiles');
+        const endCursor = document.createElement('span');
+        endCursor.className = 'cursor';
+        endLine.appendChild(endCursor);
+        demo.appendChild(endLine);
+
+        await new Promise(r => setTimeout(r, 3000));
+      }
+    }
+
+    runDemo();
+  </script>
+</body>
+</html>

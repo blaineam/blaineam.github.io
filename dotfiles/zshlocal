@@ -1,9 +1,28 @@
-# ~/.zshlocal - Lightweight zsh bootstrap for macOS (brew) or Debian/Ubuntu (apt)
-# Install with: `curl -fsSL https://raw.githubusercontent.com/blaineam/blaineam.github.io/main/.zshlocal -o ~/.zshlocal && echo '[ -f ~/.zshlocal ] && source ~/.zshlocal' >> ~/.zshrc`
+# ~/.zshlocal - Lightweight shell bootstrap for macOS (brew) or Debian/Ubuntu (apt)
+# Works with both zsh and bash
+# Install with:
+#   curl -fsSL https://raw.githubusercontent.com/blaineam/blaineam.github.io/main/dotfiles/zshlocal -o ~/.zshlocal && echo '[ -f ~/.zshlocal ] && source ~/.zshlocal' >> ~/.zshrc && echo '[ -f ~/.zshlocal ] && source ~/.zshlocal' >> ~/.bashrc
+
+# --- Shell detection and switching ---
+# If zsh is available and we're in bash, switch to zsh
+if [ -n "$BASH_VERSION" ] && command -v zsh >/dev/null 2>&1; then
+  exec zsh -l
+fi
+# If bash is available and we're not in zsh or bash, try bash
+if [ -z "$ZSH_VERSION" ] && [ -z "$BASH_VERSION" ] && command -v bash >/dev/null 2>&1; then
+  exec bash -l
+fi
+
+# --- Detect current shell ---
+if [ -n "$ZSH_VERSION" ]; then
+  _CURRENT_SHELL="zsh"
+elif [ -n "$BASH_VERSION" ]; then
+  _CURRENT_SHELL="bash"
+fi
 
 setup_shell() {
   local done_marker=~/.zshlocal-setup-done
-  if [[ -f "$done_marker" ]]; then
+  if [ -f "$done_marker" ]; then
     return 0
   fi
 
@@ -33,7 +52,7 @@ setup_shell() {
       ;;
   esac
 
-  if [[ -n "$PKGMGR" ]]; then
+  if [ -n "$PKGMGR" ]; then
     case $PKGMGR in
       brew)
         local packages=(git tmux htop vim imagemagick ffmpeg rclone ncdu "the_silver_searcher" fzf watch tree)
@@ -52,18 +71,18 @@ setup_shell() {
             to_install+=("$pkg")
           fi
         done
-        if [[ ${#to_install[@]} -gt 0 ]]; then
+        if [ ${#to_install[@]} -gt 0 ]; then
           echo "Installing ${to_install[*]} with apt..."
           sudo DEBIAN_FRONTEND=noninteractive apt install -y "${to_install[@]}"
         fi
-        # Refresh zsh command hash for new binaries
+        # Refresh command hash for new binaries
         hash -r 2>/dev/null || true
         ;;
     esac
   fi
 
   touch "$done_marker"
-  echo "Shell setup complete! Restart your shell or source ~/.zshrc."
+  echo "Shell setup complete! Restart your shell or source your rc file."
 }
 
 # Run setup once
@@ -74,14 +93,36 @@ if command -v brew >/dev/null 2>&1; then
   eval "$(brew shellenv)"
 fi
 
-# Source fzf for zsh (completions + keybindings)
+# Source fzf (shell-aware)
 if command -v fzf >/dev/null 2>&1; then
-  source <(fzf --zsh)
+  if [ "$_CURRENT_SHELL" = "zsh" ]; then
+    source <(fzf --zsh)
+  elif [ "$_CURRENT_SHELL" = "bash" ]; then
+    eval "$(fzf --bash)"
+  fi
+fi
+
+# --- Custom prompt: user (teal) | (red) cwd (green) → (purple) typed text (white) ---
+if [ "$_CURRENT_SHELL" = "zsh" ]; then
+  setopt PROMPT_SUBST
+  PROMPT='%F{cyan}%n%f %F{red}|%f %F{green}%~%f %F{magenta}→%f %F{white}'
+  # Reset color after command input
+  preexec() { printf '\033[0m'; }
+elif [ "$_CURRENT_SHELL" = "bash" ]; then
+  _teal='\[\033[0;36m\]'
+  _red='\[\033[0;31m\]'
+  _green='\[\033[0;32m\]'
+  _purple='\[\033[0;35m\]'
+  _white='\[\033[0;37m\]'
+  _reset='\[\033[0m\]'
+  PS1="${_teal}\u${_reset} ${_red}|${_reset} ${_green}\w${_reset} ${_purple}→${_reset} ${_white}"
+  # Reset color after command via DEBUG trap
+  trap 'printf "\033[0m"' DEBUG
 fi
 
 # Useful cross-platform aliases
-local OS=$(uname -s)
-if [[ $OS == "Darwin" ]]; then
+_OS=$(uname -s)
+if [ "$_OS" = "Darwin" ]; then
   alias ls='ls -G'
   alias ll='ls -lhG'
   alias la='ls -laG'
@@ -90,6 +131,7 @@ else
   alias ll='ls -lh --color=auto'
   alias la='ls -lah --color=auto'
 fi
+unset _OS
 
 alias grep='grep --color=auto'
 alias diff='diff --color=auto'
