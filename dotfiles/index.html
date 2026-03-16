@@ -64,42 +64,11 @@
       left: 50%;
       transform: translateX(-50%);
       width: 280px;
-      height: 280px;
-      border-radius: 50%;
-      background: linear-gradient(to bottom, #ffde00 0%, #ff8c00 30%, #ff2d95 60%, #b537f2 100%);
+      height: 140px;
+      border-radius: 280px 280px 0 0;
+      background: linear-gradient(to bottom, #ffde00 0%, #ff8c00 30%, #ff2d95 70%, #b537f2 100%);
       z-index: 0;
-      overflow: hidden;
       pointer-events: none;
-      mask-image: linear-gradient(to bottom, black 50%, transparent 50%);
-      -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 50%);
-    }
-
-    .synthwave-sun::after {
-      content: '';
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      height: 50%;
-      background: repeating-linear-gradient(
-        to bottom,
-        transparent 0px,
-        transparent 4px,
-        var(--dark-bg) 4px,
-        var(--dark-bg) 8px,
-        transparent 8px,
-        transparent 16px,
-        var(--dark-bg) 16px,
-        var(--dark-bg) 22px,
-        transparent 22px,
-        transparent 34px,
-        var(--dark-bg) 34px,
-        var(--dark-bg) 42px,
-        transparent 42px,
-        transparent 58px,
-        var(--dark-bg) 58px,
-        var(--dark-bg) 68px
-      );
     }
 
     .synthwave-sun-glow {
@@ -107,13 +76,46 @@
       top: 40px;
       left: 50%;
       transform: translateX(-50%);
-      width: 280px;
-      height: 140px;
-      border-radius: 280px 280px 0 0;
-      background: radial-gradient(ellipse at 50% 100%, rgba(255, 45, 149, 0.3) 0%, rgba(255, 140, 0, 0.15) 40%, transparent 70%);
-      filter: blur(30px);
+      width: 400px;
+      height: 200px;
+      border-radius: 400px 400px 0 0;
+      background: radial-gradient(ellipse at 50% 100%, rgba(255, 45, 149, 0.35) 0%, rgba(255, 140, 0, 0.15) 40%, transparent 70%);
+      filter: blur(40px);
       z-index: 0;
       pointer-events: none;
+    }
+
+    /* Stars */
+    .stars-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 50vh;
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .star {
+      position: absolute;
+      border-radius: 50%;
+      background: #fff;
+    }
+
+    @keyframes twinkle1 {
+      0%, 100% { opacity: 0.2; }
+      50% { opacity: 1; }
+    }
+    @keyframes twinkle2 {
+      0%, 100% { opacity: 0.6; }
+      30% { opacity: 0.1; }
+      70% { opacity: 0.9; }
+    }
+    @keyframes twinkle3 {
+      0%, 100% { opacity: 0.4; }
+      40% { opacity: 1; }
+      80% { opacity: 0.15; }
     }
 
     .grid-floor {
@@ -144,20 +146,8 @@
     }
 
     .header {
-      background-color: var(--dark-bg);
-    }
-
-    .footer {
-      background-color: var(--dark-bg);
-      padding-bottom: 40px;
-      border-radius: 0 0 20px 20px;
-    }
-
-    .header {
-      border-radius: 20px 20px 0 0;
-      padding: 36px 24px 24px;
       text-align: center;
-      margin-bottom: 0;
+      margin-bottom: 36px;
     }
 
     .header h1 {
@@ -196,7 +186,7 @@
       -webkit-backdrop-filter: blur(24px);
       box-shadow: 0 8px 32px var(--glass-shadow), inset 0 1px 0 rgba(255,255,255,0.04);
       padding: 36px;
-      margin-bottom: 0;
+      margin-bottom: 28px;
     }
 
     .glass h2 {
@@ -430,7 +420,7 @@
 
     .footer {
       text-align: center;
-      margin-top: 0;
+      margin-top: 8px;
       font-size: 0.82em;
       color: rgba(224, 224, 240, 0.25);
     }
@@ -450,8 +440,9 @@
   </style>
 </head>
 <body>
-  <div class="synthwave-sun"></div>
+  <div class="stars-container" id="stars"></div>
   <div class="synthwave-sun-glow"></div>
+  <div class="synthwave-sun"></div>
   <div class="grid-floor"></div>
 
   <div class="container">
@@ -742,6 +733,28 @@
     }
 
     runDemo();
+
+    // Generate stars
+    (function() {
+      const container = document.getElementById('stars');
+      const count = 60;
+      const animations = ['twinkle1', 'twinkle2', 'twinkle3'];
+      for (let i = 0; i < count; i++) {
+        const star = document.createElement('div');
+        star.className = 'star';
+        const size = Math.random() * 2.5 + 1;
+        star.style.width = size + 'px';
+        star.style.height = size + 'px';
+        star.style.left = Math.random() * 100 + '%';
+        star.style.top = Math.random() * 100 + '%';
+        const anim = animations[Math.floor(Math.random() * animations.length)];
+        const dur = (Math.random() * 3 + 2).toFixed(1);
+        const delay = (Math.random() * 4).toFixed(1);
+        star.style.animation = anim + ' ' + dur + 's ' + delay + 's ease-in-out infinite';
+        star.style.opacity = Math.random() * 0.6 + 0.2;
+        container.appendChild(star);
+      }
+    })();
   </script>
 </body>
 </html>
