@@ -445,7 +445,7 @@
         <div class="feature">
           <div class="feature-icon">></div>
           <h3>Custom Prompt</h3>
-          <p><span style="color:#00d4d4">user</span><span style="color:#ff3b3b">@</span><span style="color:#ffb830">host</span><span style="color:#ff3b3b">|</span><span style="color:#39ff14">~/dir</span><span style="color:#ff3b3b">(</span><span style="color:#b537f2">3s</span><span style="color:#39ff14">&#9679;</span><span style="color:#ff3b3b">)</span><span style="color:#b537f2">&rarr;</span> with duration and exit status</p>
+          <p><span style="color:#00d4d4">user</span><span style="color:#ff3b3b">@</span><span style="color:#ffb830">host</span><span style="color:#ff3b3b">|</span><span style="color:#39ff14">~/dir</span><span style="color:#ff3b3b">[</span><span style="color:#b537f2">3s</span><span style="color:#39ff14">&#9679;</span><span style="color:#ff3b3b">]</span><span style="color:#b537f2">&rarr;</span> with duration and exit status</p>
         </div>
         <div class="feature">
           <div class="feature-icon">~</div>
@@ -541,9 +541,9 @@
       if (!isFirst) {
         let circle = ok ? `<span class="p-ok">&#9679;</span>` : `<span class="p-err">&#9679;</span>`;
         if (duration) {
-          html += `<span class="p-paren">(</span><span class="p-duration">${duration}</span>${circle}<span class="p-paren">)</span>`;
+          html += `<span class="p-paren">[</span><span class="p-duration">${duration}</span>${circle}<span class="p-paren">]</span>`;
         } else {
-          html += `<span class="p-paren">(</span>${circle}<span class="p-paren">)</span>`;
+          html += `<span class="p-paren">[</span>${circle}<span class="p-paren">]</span>`;
         }
       }
       html += `<span class="p-arrow">&rarr;</span> `;
