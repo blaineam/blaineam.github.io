@@ -163,9 +163,9 @@ if [ "$_CURRENT_SHELL" = "zsh" ]; then
       circle="%F{red}●%f"
     fi
     if [ -n "$dur_str" ]; then
-      info="%F{red}(%f%F{magenta}${dur_str}%f${circle}%F{red})%f"
+      info="%F{red}[%f%F{magenta}${dur_str}%f${circle}%F{red}]%f"
     else
-      info="%F{red}(%f${circle}%F{red})%f"
+      info="%F{red}[%f${circle}%F{red}]%f"
     fi
     echo "%F{cyan}%n%f%F{red}@%f%F{yellow}%m%f%F{red}|%f%F{green}%~%f${info}%F{magenta}→%f %F{white}"
   }
@@ -212,9 +212,9 @@ elif [ "$_CURRENT_SHELL" = "bash" ]; then
 
     local info=""
     if [ -n "$dur_str" ]; then
-      info="\[${red}\](\[${purple}\]${dur_str}\[${reset}\]${circle}\[${red}\])\[${reset}\]"
+      info="\[${red}\][\[${purple}\]${dur_str}\[${reset}\]${circle}\[${red}\]]\[${reset}\]"
     else
-      info="\[${red}\](\[${reset}\]${circle}\[${red}\])\[${reset}\]"
+      info="\[${red}\][\[${reset}\]${circle}\[${red}\]]\[${reset}\]"
     fi
 
     PS1="\[${teal}\]\u\[${red}\]@\[${yellow}\]\h\[${red}\]|\[${green}\]\w\[${reset}\]${info}\[${purple}\]→\[${reset}\] \[${white}\]"
