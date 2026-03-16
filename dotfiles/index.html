@@ -195,7 +195,8 @@
     .p-dir  { color: #39ff14; }
     .p-duration { color: #b537f2; }
     .p-ok { color: #39ff14; }
-    .p-err { color: #4d9dff; }
+    .p-err { color: #ff3b3b; }
+    .p-paren { color: #ff3b3b; }
     .p-arrow { color: #b537f2; }
     .p-cmd  { color: #e0e0e0; }
     .p-output { color: rgba(224, 224, 240, 0.55); display: block; }
@@ -444,7 +445,7 @@
         <div class="feature">
           <div class="feature-icon">></div>
           <h3>Custom Prompt</h3>
-          <p><span style="color:#00d4d4">user</span><span style="color:#ff3b3b">@</span><span style="color:#ffb830">host</span><span style="color:#ff3b3b">|</span><span style="color:#39ff14">~/dir</span><span style="color:#39ff14">&#9679;</span><span style="color:#b537f2">&rarr;</span> with duration and exit status</p>
+          <p><span style="color:#00d4d4">user</span><span style="color:#ff3b3b">@</span><span style="color:#ffb830">host</span><span style="color:#ff3b3b">|</span><span style="color:#39ff14">~/dir</span><span style="color:#ff3b3b">(</span><span style="color:#b537f2">3s</span><span style="color:#39ff14">&#9679;</span><span style="color:#ff3b3b">)</span><span style="color:#b537f2">&rarr;</span> with duration and exit status</p>
         </div>
         <div class="feature">
           <div class="feature-icon">~</div>
@@ -533,18 +534,16 @@
       }
     ];
 
-    // Build prompt: user@host|dir [duration] [status]→
-    // First prompt has no duration/status (fresh shell)
+    // Build prompt: user@host|dir(duration●)→
+    // First prompt has no (duration●) group (fresh shell)
     function buildPromptHTML(user, host, dir, duration, ok, isFirst) {
       let html = `<span class="p-user">${user}</span><span class="p-at">@</span><span class="p-host">${host}</span><span class="p-pipe">|</span><span class="p-dir">${dir}</span>`;
       if (!isFirst) {
+        let circle = ok ? `<span class="p-ok">&#9679;</span>` : `<span class="p-err">&#9679;</span>`;
         if (duration) {
-          html += `<span class="p-duration">${duration}</span>`;
-        }
-        if (ok === true) {
-          html += `<span class="p-ok">&#9679;</span>`;
-        } else if (ok === false) {
-          html += `<span class="p-err">&#9679;</span>`;
+          html += `<span class="p-paren">(</span><span class="p-duration">${duration}</span>${circle}<span class="p-paren">)</span>`;
+        } else {
+          html += `<span class="p-paren">(</span>${circle}<span class="p-paren">)</span>`;
         }
       }
       html += `<span class="p-arrow">&rarr;</span> `;

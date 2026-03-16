@@ -95,12 +95,20 @@ if command -v brew >/dev/null 2>&1; then
   eval "$(brew shellenv)"
 fi
 
-# Source fzf (shell-aware)
+# Source fzf (shell-aware, supports both new and old fzf versions)
 if command -v fzf >/dev/null 2>&1; then
   if [ "$_CURRENT_SHELL" = "zsh" ]; then
-    source <(fzf --zsh)
+    if fzf --zsh >/dev/null 2>&1; then
+      source <(fzf --zsh)
+    elif [ -f ~/.fzf.zsh ]; then
+      source ~/.fzf.zsh
+    fi
   elif [ "$_CURRENT_SHELL" = "bash" ]; then
-    eval "$(fzf --bash)"
+    if fzf --bash >/dev/null 2>&1; then
+      eval "$(fzf --bash)"
+    elif [ -f ~/.fzf.bash ]; then
+      source ~/.fzf.bash
+    fi
   fi
 fi
 
@@ -120,7 +128,7 @@ _fmt_duration() {
   [ -n "$out" ] && printf '%s' "$out"
 }
 
-# --- Custom prompt: user(teal)@(red)host(yellow)|(red)dir(green) duration(gray) status(circle)→(purple) typed(white) ---
+# --- Custom prompt: user(teal)@(red)host(yellow)|(red)dir(green)(duration●)(red parens)→(purple) typed(white) ---
 if [ "$_CURRENT_SHELL" = "zsh" ]; then
   setopt PROMPT_SUBST
   _CMD_START=0
@@ -143,38 +151,44 @@ if [ "$_CURRENT_SHELL" = "zsh" ]; then
   }
 
   _zsh_prompt() {
-    local dur=""
+    local info=""
+    local dur_str=""
     if [ "$_CMD_DURATION" -gt 0 ] 2>/dev/null; then
-      dur="%F{magenta}$(_fmt_duration $_CMD_DURATION)%f"
+      dur_str="$(_fmt_duration $_CMD_DURATION)"
     fi
-    local indicator=""
+    local circle=""
     if [ "$_CMD_EXIT" -eq 0 ]; then
-      indicator="%F{green}●%f"
+      circle="%F{green}●%f"
     else
-      indicator="%F{blue}●%f"
+      circle="%F{red}●%f"
     fi
-    echo "%F{cyan}%n%f%F{red}@%f%F{yellow}%m%f%F{red}|%f%F{green}%~%f${dur}${indicator}%F{magenta}→%f %F{white}"
+    if [ -n "$dur_str" ]; then
+      info="%F{red}(%f%F{magenta}${dur_str}%f${circle}%F{red})%f"
+    else
+      info="%F{red}(%f${circle}%F{red})%f"
+    fi
+    echo "%F{cyan}%n%f%F{red}@%f%F{yellow}%m%f%F{red}|%f%F{green}%~%f${info}%F{magenta}→%f %F{white}"
   }
 
   PROMPT='$(_zsh_prompt)'
 
 elif [ "$_CURRENT_SHELL" = "bash" ]; then
-  _CMD_START=0
-  _CMD_DURATION=0
+  _BASH_CMD_START=""
 
   _bash_timer_start() {
-    _CMD_START=${_CMD_START:-$SECONDS}
+    if [ -z "$_BASH_CMD_START" ]; then
+      _BASH_CMD_START=$SECONDS
+    fi
   }
   trap '_bash_timer_start' DEBUG
 
   _bash_prompt() {
     local exit_code=$?
-    if [ "$_CMD_START" -gt 0 ] 2>/dev/null; then
-      _CMD_DURATION=$(( SECONDS - _CMD_START ))
-    else
-      _CMD_DURATION=0
+    local duration=0
+    if [ -n "$_BASH_CMD_START" ]; then
+      duration=$(( SECONDS - _BASH_CMD_START ))
     fi
-    _CMD_START=0
+    _BASH_CMD_START=""
 
     local teal='\033[0;36m'
     local red='\033[0;31m'
@@ -182,23 +196,28 @@ elif [ "$_CURRENT_SHELL" = "bash" ]; then
     local green='\033[0;32m'
     local purple='\033[0;35m'
     local white='\033[0;37m'
-    local gray='\033[0;90m'
-    local blue='\033[0;34m'
     local reset='\033[0m'
 
-    local dur=""
-    if [ "$_CMD_DURATION" -gt 0 ] 2>/dev/null; then
-      dur="${purple}$(_fmt_duration $_CMD_DURATION)${reset}"
+    local dur_str=""
+    if [ "$duration" -gt 0 ] 2>/dev/null; then
+      dur_str="$(_fmt_duration $duration)"
     fi
 
-    local indicator=""
+    local circle=""
     if [ "$exit_code" -eq 0 ]; then
-      indicator="${green}●${reset}"
+      circle="\[${green}\]●\[${reset}\]"
     else
-      indicator="${blue}●${reset}"
+      circle="\[${red}\]●\[${reset}\]"
     fi
 
-    PS1="\[${teal}\]\u\[${red}\]@\[${yellow}\]\h\[${red}\]|\[${green}\]\w\[${reset}\]${dur}${indicator}\[${purple}\]→\[${reset}\] \[${white}\]"
+    local info=""
+    if [ -n "$dur_str" ]; then
+      info="\[${red}\](\[${purple}\]${dur_str}\[${reset}\]${circle}\[${red}\])\[${reset}\]"
+    else
+      info="\[${red}\](\[${reset}\]${circle}\[${red}\])\[${reset}\]"
+    fi
+
+    PS1="\[${teal}\]\u\[${red}\]@\[${yellow}\]\h\[${red}\]|\[${green}\]\w\[${reset}\]${info}\[${purple}\]→\[${reset}\] \[${white}\]"
   }
 
   PROMPT_COMMAND='_bash_prompt'
