@@ -57,7 +57,7 @@ setup_shell() {
   if [ -n "$PKGMGR" ]; then
     case $PKGMGR in
       brew)
-        local packages=(git tmux htop vim imagemagick ffmpeg rclone ncdu "the_silver_searcher" fzf watch tree)
+        local packages=(git tmux htop vim imagemagick ffmpeg rclone ncdu "the_silver_searcher" fzf watch tree bandwhich)
         for pkg in "${packages[@]}"; do
           if ! brew list "$pkg" >/dev/null 2>&1; then
             echo "Installing $pkg with brew..."
@@ -66,7 +66,7 @@ setup_shell() {
         done
         ;;
       apt)
-        local packages=(git tmux htop vim imagemagick ffmpeg rclone ncdu silversearcher-ag fzf procps tree)
+        local packages=(git tmux htop vim imagemagick ffmpeg rclone ncdu silversearcher-ag fzf procps tree nethogs)
         local to_install=()
         for pkg in "${packages[@]}"; do
           if ! dpkg -l "$pkg" >/dev/null 2>&1; then
@@ -168,7 +168,14 @@ if [ "$_CURRENT_SHELL" = "zsh" ]; then
     else
       info="%F{red}[%f${circle}%F{red}]%f"
     fi
-    echo "%F{cyan}%n%f%F{red}@%f%F{yellow}%m%f%F{red}|%f%F{green}%~%f${info}%F{magenta}→%f %F{white}"
+    local branch=""
+    local git_branch
+    git_branch=$(git branch --show-current 2>/dev/null)
+    if [ -n "$git_branch" ]; then
+      branch=" %F{red}(%f%F{#ff69b4}${git_branch}%f%F{red})%f"
+    fi
+    echo "%F{cyan}%n%f%F{red}@%f%F{yellow}%m%f%F{red}|%f%F{green}%~%f${branch}${info}
+%F{magenta}→%f %F{white}"
   }
 
   PROMPT='$(_zsh_prompt)'
@@ -196,6 +203,7 @@ elif [ "$_CURRENT_SHELL" = "bash" ]; then
     local yellow='\033[0;33m'
     local green='\033[0;32m'
     local purple='\033[0;35m'
+    local pink='\033[38;5;206m'
     local white='\033[0;37m'
     local reset='\033[0m'
 
@@ -218,7 +226,14 @@ elif [ "$_CURRENT_SHELL" = "bash" ]; then
       info="\[${red}\][\[${reset}\]${circle}\[${red}\]]\[${reset}\]"
     fi
 
-    PS1="\[${teal}\]\u\[${red}\]@\[${yellow}\]\h\[${red}\]|\[${green}\]\w\[${reset}\]${info}\[${purple}\]→\[${reset}\] \[${white}\]"
+    local branch=""
+    local git_branch
+    git_branch=$(git branch --show-current 2>/dev/null)
+    if [ -n "$git_branch" ]; then
+      branch=" \[${red}\](\[${pink}\]${git_branch}\[${red}\])\[${reset}\]"
+    fi
+
+    PS1="\[${teal}\]\u\[${red}\]@\[${yellow}\]\h\[${red}\]|\[${green}\]\w\[${reset}\]${branch}${info}\n\[${purple}\]→\[${reset}\] \[${white}\]"
   }
 
   PROMPT_COMMAND='_bash_prompt'
@@ -256,7 +271,7 @@ alias gd='git diff'
 alias gc='git commit -v'
 alias gcm='git commit -m'
 alias gl='git pull'
-alias gp='git push'
+alias gp='git push -u origin HEAD'
 alias gb='git branch'
 alias gba='git branch -a'
 alias gco='git checkout'
