@@ -64,11 +64,37 @@
       left: 50%;
       transform: translateX(-50%);
       width: 280px;
-      height: 140px;
-      border-radius: 280px 280px 0 0;
-      background: linear-gradient(to bottom, #ffde00 0%, #ff8c00 30%, #ff2d95 70%, #b537f2 100%);
+      height: 280px;
+      border-radius: 50%;
+      background: linear-gradient(to bottom, #ffde00 0%, #ff8c00 25%, #ff2d95 60%, #b537f2 100%);
       z-index: 0;
       pointer-events: none;
+      -webkit-mask-image: linear-gradient(to bottom,
+        black 0%, black 48%,
+        transparent 48%, transparent 50%,
+        black 50%, black 56%,
+        transparent 56%, transparent 59%,
+        black 59%, black 65%,
+        transparent 65%, transparent 69%,
+        black 69%, black 76%,
+        transparent 76%, transparent 81%,
+        black 81%, black 89%,
+        transparent 89%, transparent 95%,
+        black 95%, black 100%
+      );
+      mask-image: linear-gradient(to bottom,
+        black 0%, black 48%,
+        transparent 48%, transparent 50%,
+        black 50%, black 56%,
+        transparent 56%, transparent 59%,
+        black 59%, black 65%,
+        transparent 65%, transparent 69%,
+        black 69%, black 76%,
+        transparent 76%, transparent 81%,
+        black 81%, black 89%,
+        transparent 89%, transparent 95%,
+        black 95%, black 100%
+      );
     }
 
     .synthwave-sun-glow {
@@ -77,9 +103,9 @@
       left: 50%;
       transform: translateX(-50%);
       width: 400px;
-      height: 200px;
-      border-radius: 400px 400px 0 0;
-      background: radial-gradient(ellipse at 50% 100%, rgba(255, 45, 149, 0.35) 0%, rgba(255, 140, 0, 0.15) 40%, transparent 70%);
+      height: 400px;
+      border-radius: 50%;
+      background: radial-gradient(ellipse at 50% 50%, rgba(255, 45, 149, 0.35) 0%, rgba(255, 140, 0, 0.15) 40%, transparent 70%);
       filter: blur(40px);
       z-index: 0;
       pointer-events: none;
@@ -135,7 +161,7 @@
     .container {
       max-width: 860px;
       margin: 0 auto;
-      padding: 220px 24px 100px;
+      padding: 340px 24px 100px;
       position: relative;
       z-index: 1;
     }
@@ -245,7 +271,7 @@
       font-family: 'JetBrains Mono', monospace;
       font-size: 0.88em;
       line-height: 1.8;
-      height: 260px;
+      height: 320px;
       overflow-y: hidden;
       position: relative;
     }
@@ -259,6 +285,7 @@
     .p-host { color: #ffb830; }
     .p-pipe { color: #ff3b3b; }
     .p-dir  { color: #39ff14; }
+    .p-branch { color: #ff69b4; }
     .p-duration { color: #b537f2; }
     .p-ok { color: #39ff14; }
     .p-err { color: #ff3b3b; }
@@ -435,7 +462,20 @@
       .header h1 { font-size: 2.2em; }
       .glass { padding: 24px; }
       .features { grid-template-columns: 1fr; }
-      .container { padding: 180px 16px 80px; }
+      .container { padding: 240px 16px 80px; }
+      .synthwave-sun {
+        width: 180px;
+        height: 180px;
+        top: 30px;
+      }
+      .synthwave-sun-glow {
+        width: 260px;
+        height: 260px;
+        top: 30px;
+      }
+      .terminal-body {
+        font-size: 0.72em;
+      }
     }
   </style>
 </head>
@@ -514,7 +554,7 @@
         <div class="feature">
           <div class="feature-icon">></div>
           <h3>Custom Prompt</h3>
-          <p><span style="color:#00d4d4">user</span><span style="color:#ff3b3b">@</span><span style="color:#ffb830">host</span><span style="color:#ff3b3b">|</span><span style="color:#39ff14">~/dir</span><span style="color:#ff3b3b">[</span><span style="color:#b537f2">3s</span><span style="color:#39ff14">&#9679;</span><span style="color:#ff3b3b">]</span><span style="color:#b537f2">&rarr;</span> with duration and exit status</p>
+          <p><span style="color:#00d4d4">user</span><span style="color:#ff3b3b">@</span><span style="color:#ffb830">host</span><span style="color:#ff3b3b">|</span><span style="color:#39ff14">~/dir</span> <span style="color:#ff3b3b">(</span><span style="color:#ff69b4">main</span><span style="color:#ff3b3b">)</span><span style="color:#ff3b3b">[</span><span style="color:#b537f2">3s</span><span style="color:#39ff14">&#9679;</span><span style="color:#ff3b3b">]</span><br><span style="color:#b537f2">&rarr;</span> with git branch, duration, and exit status</p>
         </div>
         <div class="feature">
           <div class="feature-icon">~</div>
@@ -557,7 +597,7 @@
 
     const scenes = [
       {
-        user: 'blaine', host: HOST, dir: '~/projects',
+        user: 'blaine', host: HOST, dir: '~/projects', branch: 'main',
         cmd: 'git status',
         duration: '1s', ok: true,
         output: [
@@ -566,7 +606,7 @@
         ]
       },
       {
-        user: 'blaine', host: HOST, dir: '~/projects/app',
+        user: 'blaine', host: HOST, dir: '~/projects/app', branch: 'feat/ui',
         cmd: 'ls -la',
         duration: '', ok: true,
         output: [
@@ -577,7 +617,7 @@
         ]
       },
       {
-        user: 'blaine', host: HOST, dir: '~/projects/app',
+        user: 'blaine', host: HOST, dir: '~/projects/app', branch: 'feat/ui',
         cmd: 'npm test',
         duration: '4s', ok: false,
         output: [
@@ -587,7 +627,7 @@
         ]
       },
       {
-        user: 'blaine', host: HOST, dir: '~/projects/app',
+        user: 'blaine', host: HOST, dir: '~/projects/app', branch: 'feat/ui',
         cmd: 'npm test',
         duration: '3s', ok: true,
         output: [
@@ -596,17 +636,20 @@
         ]
       },
       {
-        user: 'blaine', host: HOST, dir: '~',
+        user: 'blaine', host: HOST, dir: '~', branch: '',
         cmd: 'echo "hello world"',
         duration: '', ok: true,
         output: ['hello world']
       }
     ];
 
-    // Build prompt: user@host|dir(duration●)→
-    // First prompt has no (duration●) group (fresh shell)
-    function buildPromptHTML(user, host, dir, duration, ok, isFirst) {
+    // Build prompt: user@host|dir (branch)[duration●]
+    // Arrow on new line. First prompt has no [duration●] group (fresh shell)
+    function buildPromptHTML(user, host, dir, duration, ok, isFirst, branch) {
       let html = `<span class="p-user">${user}</span><span class="p-at">@</span><span class="p-host">${host}</span><span class="p-pipe">|</span><span class="p-dir">${dir}</span>`;
+      if (branch) {
+        html += ` <span class="p-paren">(</span><span class="p-branch">${branch}</span><span class="p-paren">)</span>`;
+      }
       if (!isFirst) {
         let circle = ok ? `<span class="p-ok">&#9679;</span>` : `<span class="p-err">&#9679;</span>`;
         if (duration) {
@@ -615,7 +658,7 @@
           html += `<span class="p-paren">[</span>${circle}<span class="p-paren">]</span>`;
         }
       }
-      html += `<span class="p-arrow">&rarr;</span> `;
+      html += `<br><span class="p-arrow">&rarr;</span> `;
       return html;
     }
 
@@ -646,7 +689,7 @@
     async function playScene(scene) {
       const line = document.createElement('div');
       line.className = 'prompt-line';
-      line.innerHTML = buildPromptHTML(scene.user, scene.host, scene.dir, prevDuration, prevOk, isFirstPrompt);
+      line.innerHTML = buildPromptHTML(scene.user, scene.host, scene.dir, prevDuration, prevOk, isFirstPrompt, scene.branch);
       const cmdSpan = document.createElement('span');
       cmdSpan.className = 'p-cmd';
       line.appendChild(cmdSpan);
@@ -655,6 +698,9 @@
       line.appendChild(cursor);
       demo.appendChild(line);
       scrollToBottom();
+
+      // Pause before typing — user deciding what to type
+      await new Promise(r => setTimeout(r, 1200));
 
       await typeText(cmdSpan, scene.cmd, 55);
       scrollToBottom();
@@ -675,14 +721,15 @@
       prevOk = scene.ok;
       isFirstPrompt = false;
 
-      await new Promise(r => setTimeout(r, 1400));
+      // Brief pause after output before next prompt appears
+      await new Promise(r => setTimeout(r, 400));
     }
 
     async function clearScreen() {
       // Type 'c' (the clear alias) on a new prompt
       const line = document.createElement('div');
       line.className = 'prompt-line';
-      line.innerHTML = buildPromptHTML('blaine', HOST, '~', prevDuration, prevOk, isFirstPrompt);
+      line.innerHTML = buildPromptHTML('blaine', HOST, '~', prevDuration, prevOk, isFirstPrompt, '');
       const cmdSpan = document.createElement('span');
       cmdSpan.className = 'p-cmd';
       line.appendChild(cmdSpan);
@@ -692,6 +739,7 @@
       demo.appendChild(line);
       scrollToBottom();
 
+      await new Promise(r => setTimeout(r, 800));
       await typeText(cmdSpan, 'c', 55);
       await new Promise(r => setTimeout(r, 300));
       cursor.remove();
@@ -717,7 +765,7 @@
         // Final idle prompt with blinking cursor
         const endLine = document.createElement('div');
         endLine.className = 'prompt-line';
-        endLine.innerHTML = buildPromptHTML('blaine', HOST, '~', prevDuration, prevOk, false);
+        endLine.innerHTML = buildPromptHTML('blaine', HOST, '~', prevDuration, prevOk, false, '');
         const endCursor = document.createElement('span');
         endCursor.className = 'cursor';
         endLine.appendChild(endCursor);
