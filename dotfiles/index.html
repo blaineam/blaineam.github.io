@@ -57,6 +57,65 @@
       100% { opacity: 1; }
     }
 
+    /* Synthwave Sun */
+    .synthwave-sun {
+      position: fixed;
+      top: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 280px;
+      height: 280px;
+      border-radius: 50%;
+      background: linear-gradient(to bottom, #ffde00 0%, #ff8c00 30%, #ff2d95 60%, #b537f2 100%);
+      z-index: 0;
+      overflow: hidden;
+      pointer-events: none;
+      mask-image: linear-gradient(to bottom, black 50%, transparent 50%);
+      -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 50%);
+    }
+
+    .synthwave-sun::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 50%;
+      background: repeating-linear-gradient(
+        to bottom,
+        transparent 0px,
+        transparent 4px,
+        var(--dark-bg) 4px,
+        var(--dark-bg) 8px,
+        transparent 8px,
+        transparent 16px,
+        var(--dark-bg) 16px,
+        var(--dark-bg) 22px,
+        transparent 22px,
+        transparent 34px,
+        var(--dark-bg) 34px,
+        var(--dark-bg) 42px,
+        transparent 42px,
+        transparent 58px,
+        var(--dark-bg) 58px,
+        var(--dark-bg) 68px
+      );
+    }
+
+    .synthwave-sun-glow {
+      position: fixed;
+      top: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 280px;
+      height: 140px;
+      border-radius: 280px 280px 0 0;
+      background: radial-gradient(ellipse at 50% 100%, rgba(255, 45, 149, 0.3) 0%, rgba(255, 140, 0, 0.15) 40%, transparent 70%);
+      filter: blur(30px);
+      z-index: 0;
+      pointer-events: none;
+    }
+
     .grid-floor {
       position: fixed;
       bottom: 0; left: 0; right: 0;
@@ -74,14 +133,31 @@
     .container {
       max-width: 860px;
       margin: 0 auto;
-      padding: 60px 24px 100px;
+      padding: 220px 24px 100px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .container > * {
       position: relative;
       z-index: 1;
     }
 
     .header {
+      background-color: var(--dark-bg);
+    }
+
+    .footer {
+      background-color: var(--dark-bg);
+      padding-bottom: 40px;
+      border-radius: 0 0 20px 20px;
+    }
+
+    .header {
+      border-radius: 20px 20px 0 0;
+      padding: 36px 24px 24px;
       text-align: center;
-      margin-bottom: 56px;
+      margin-bottom: 0;
     }
 
     .header h1 {
@@ -113,14 +189,14 @@
     }
 
     .glass {
-      background: var(--glass-bg);
+      background: rgba(10, 10, 26, 0.97);
       border: 1px solid var(--glass-border);
       border-radius: 20px;
       backdrop-filter: blur(24px);
       -webkit-backdrop-filter: blur(24px);
       box-shadow: 0 8px 32px var(--glass-shadow), inset 0 1px 0 rgba(255,255,255,0.04);
       padding: 36px;
-      margin-bottom: 36px;
+      margin-bottom: 0;
     }
 
     .glass h2 {
@@ -354,7 +430,7 @@
 
     .footer {
       text-align: center;
-      margin-top: 60px;
+      margin-top: 0;
       font-size: 0.82em;
       color: rgba(224, 224, 240, 0.25);
     }
@@ -369,11 +445,13 @@
       .header h1 { font-size: 2.2em; }
       .glass { padding: 24px; }
       .features { grid-template-columns: 1fr; }
-      .container { padding: 40px 16px 80px; }
+      .container { padding: 180px 16px 80px; }
     }
   </style>
 </head>
 <body>
+  <div class="synthwave-sun"></div>
+  <div class="synthwave-sun-glow"></div>
   <div class="grid-floor"></div>
 
   <div class="container">
