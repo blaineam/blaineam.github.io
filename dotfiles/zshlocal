@@ -239,6 +239,14 @@ elif [ "$_CURRENT_SHELL" = "bash" ]; then
   PROMPT_COMMAND='_bash_prompt'
 fi
 
+# --- Case-insensitive tab completion ---
+if [ "$_CURRENT_SHELL" = "zsh" ]; then
+  autoload -Uz compinit && compinit -C
+  zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
+elif [ "$_CURRENT_SHELL" = "bash" ] && [[ $- == *i* ]]; then
+  bind 'set completion-ignore-case on'
+fi
+
 # Useful cross-platform aliases
 _OS=$(uname -s)
 if [ "$_OS" = "Darwin" ]; then
