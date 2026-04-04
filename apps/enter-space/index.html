@@ -313,6 +313,14 @@
       </div>
 
       <div class="feature-card">
+        <div class="feature-icon">🔐</div>
+        <h3 class="feature-title">Secure Drop</h3>
+        <p class="feature-description">
+          Share files and folders with end-to-end encryption built on Rclone's Crypt. Data is encrypted before it leaves your device, and the recipient decrypts it using a web-based decryption tool with a password you share outside of the storage provider — adding an extra layer of privacy even if the shared link is compromised.
+        </p>
+      </div>
+
+      <div class="feature-card">
         <div class="feature-icon">✏️</div>
         <h3 class="feature-title">Full-Featured Code Editor</h3>
         <p class="feature-description">
@@ -837,8 +845,11 @@
       </button>
       <div class="faq-answer">
         <p>
-          Yes! Enter Space can encrypt your files on your device before they're uploaded to the cloud. This means only you can decrypt
-          and access your data, even if the cloud provider or someone else gains access to your cloud account.
+          Yes! Enter Space can use Rclone's Crypt remote wrapper, which is built on XChaCha20-Poly1305 — an encryption algorithm
+          that is highly efficient and that some researchers have attributed as being theoretically
+          <a href="https://crypto.stackexchange.com/questions/79518/is-xchacha20-poly1305-quantum-resistant" target="_blank" rel="noopener" style="color: var(--accent);">post-quantum resilient</a>.
+          When using a remote wrapped in the crypt type your files are encrypted entirely on your device before they're uploaded to the cloud, meaning only you can decrypt
+          and access your data — even if the cloud provider or someone else gains access to your cloud account.
         </p>
       </div>
     </div>
@@ -851,7 +862,36 @@
       <div class="faq-answer">
         <p>
           No! Enter Space is a one-time purchase with no recurring subscription fees. Buy once and use it forever on your
-          iPhone, iPad, and Mac.
+          iPhone, iPad, Mac and even Apple TV!.
+        </p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        <span>Why doesn't Enter Space offer a free trial?</span>
+        <span class="faq-icon">▼</span>
+      </button>
+      <div class="faq-answer">
+        <p>
+          Enter Space is already priced to deliver far more value than leading competitors in the cloud storage management
+          space. While other apps use a trial mode to drive conversions, offering a trial would require switching to an
+          In-App Purchase model — and I personally don't like apps that appear free at first only to charge a "Subscription"
+          or "In-App Purchase" to unlock functionality. That's not the pricing model I want for my app.
+        </p>
+        <p>
+          My apps are designed to be feature-rich based on my own needs and priced based on the utility they bring. I also
+          don't want to change the pricing model for the customers who have already purchased an Enter Space license from
+          the Apple App Stores — they bought a complete app at a fair price and that commitment should be respected. On top
+          of that, maintaining two separate versions (free and paid) across the four platforms Enter Space already supports
+          is not something I want to take on.
+        </p>
+        <p>
+          That said, if you buy Enter Space and are truly unhappy, Apple offers a way to
+          <a href="https://support.apple.com/en-us/118223" target="_blank" rel="noopener" style="color: var(--accent);">request a refund</a>
+          and you're welcome to do so. I would encourage you, though, to
+          <a href="mailto:enter-space@wemiller.com" style="color: var(--accent);">contact me</a> first so I can try to solve
+          your issues before you go that route. Fixing issues for you improves the app for everyone else too!
         </p>
       </div>
     </div>
@@ -878,6 +918,84 @@
         <p>
           Yes! Enter Space includes basic file operations like copy, move, delete, rename, and create folders directly within the app.
           You can also use these operations through the Files app integration.
+        </p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        <span>What types of automated syncs are available?</span>
+        <span class="faq-icon">▼</span>
+      </button>
+      <div class="faq-answer">
+        <p>Enter Space offers several types of automated sync operations to keep your data backed up:</p>
+        <ul style="list-style: disc; padding-left: 1.25rem; margin-bottom: var(--spacing-md); color: var(--text-secondary);">
+          <li><strong>Sync</strong> — Makes the destination match the source, copying new and changed files and deleting files from the destination that are no longer in the source.</li>
+          <li><strong>Copy</strong> — Copies new and changed files from source to destination without deleting anything at the destination.</li>
+          <li><strong>Bisync</strong> — Two-way sync that keeps both source and destination in sync with each other, propagating changes in both directions.</li>
+          <li><strong>Move</strong> — Moves files from source to destination, removing them from the source after a successful transfer.</li>
+          <li><strong>Photos Backup</strong> — Automatically backs up media from your Photos library. Choose to export photos, videos, or both, and optionally preserve metadata via sidecar files. You can export the original unedited version, the edited version, or both. Only new or changed media items are exported, so subsequent runs are fast and incremental.</li>
+        </ul>
+        <p>Each scheduled sync task can be configured with a range of options:</p>
+        <ul style="list-style: disc; padding-left: 1.25rem; margin-bottom: var(--spacing-md); color: var(--text-secondary);">
+          <li><strong>Backup directories</strong> — Optionally configure a backup directory so that files replaced or deleted during a sync are preserved rather than permanently lost.</li>
+          <li><strong>Filtering</strong> — Include or exclude files using path wildcard patterns, modification timestamps, or file sizes. Filters can be applied in an inclusive or exclusive manner, giving you precise control over exactly which files are synced.</li>
+          <li><strong>Schedule options</strong> — Set syncs to run on custom intervals, or use near-realtime file monitoring to sync moments after changes are detected. They can even be triggered from Apple Shortcuts</li>
+          <li><strong>Network awareness</strong> — Automatically skip syncs when on battery power, low-data networks</li>
+          <li><strong>iCloud file materialization</strong> — When syncing iCloud Drive directories, Enter Space will automatically materialize (download) evicted files before the sync runs and re-evict them afterward. This lets you back up your full iCloud Documents even if the files aren't actively present on your device.</li>
+          <li><strong>Duplicate tasks</strong> — Quickly duplicate an existing scheduled sync task to set up a backup to an additional location. All settings, filters, and options are copied so you can reuse your existing configuration without starting from scratch.</li>
+        </ul>
+        <p>
+          Enter Space also keeps detailed logs from the last 50 scheduled sync executions, so you can review exactly what happened
+          during each run — including files transferred, errors encountered, and overall sync statistics.
+        </p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        <span>How do I recover my setup on a new or replacement Mac?</span>
+        <span class="faq-icon">▼</span>
+      </button>
+      <div class="faq-answer">
+        <p>
+          Enter Space is designed so that recovering from a lost or broken Mac is as painless as possible. Most of your Enter Space
+          settings are automatically saved to your iCloud account, and sensitive credentials like remote access tokens and passwords
+          are securely stored in your iCloud Keychain.
+        </p>
+        <p>The following are persisted to your iCloud account and will be available on your new device:</p>
+        <ul style="list-style: disc; padding-left: 1.25rem; margin-bottom: var(--spacing-md); color: var(--text-secondary);">
+          <li><strong>Scheduled sync tasks</strong> — All of your automated sync configurations, schedules, and filtering rules.</li>
+          <li><strong>Remote configurations</strong> — Your configured cloud storage remotes and their connection settings.</li>
+          <li><strong>Serve configurations</strong> — Any file serving setups you've created (e.g., WebDAV, SFTP, HTTP servers).</li>
+          <li><strong>Secrets and credentials</strong> — Access tokens, passwords, and API keys are stored in iCloud Keychain for end-to-end encrypted sync across your devices.</li>
+        </ul>
+        <p>
+          When you sign into your iCloud account on a new Mac and install Enter Space, your previous settings will be securely
+          restored — in most cases automatically. This means you can get back to a fully working backup setup without manually
+          re-entering credentials or recreating your sync tasks from scratch.
+        </p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        <span>What is the Serve feature?</span>
+        <span class="faq-icon">▼</span>
+      </button>
+      <div class="faq-answer">
+        <p>
+          The Serve feature lets you spin up a local server that exposes any of your configured remotes using a variety of
+          Rclone serve types — including WebDAV, FTP, SFTP, HTTP, DLNA, and more. This is useful for accessing your cloud
+          files through other apps or devices on your network.
+        </p>
+        <p>
+          On macOS, WebDAV and FTP serves can be automatically mounted into Finder with the <a href="helper.dmg">Mount Helper App</a>, giving you an alternative way to browse
+          and manage your cloud files alongside the standard File Provider integration. This can be especially handy if you
+          prefer a traditional mounted-volume experience or need compatibility with apps that work better with mounted drives.
+        </p>
+        <p style="font-style: italic; color: var(--text-tertiary); font-size: 0.9em; margin-top: var(--spacing-sm);">
+          *Enter Space is monitoring the features of FSKit and has plans to integrate with that framework once Apple has brought it to a maturity state ready for Network FileSystems.
         </p>
       </div>
     </div>
