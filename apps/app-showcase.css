@@ -580,7 +580,7 @@ p {
 }
 
 .faq-item.active .faq-answer {
-  max-height: 500px;
+  max-height: 3000px;
   padding: 0 var(--spacing-md) var(--spacing-md);
 }
 
