@@ -144,9 +144,20 @@
       background: rgba(102, 126, 234, 0.08);
     }
 
+    .comparison-table thead th.highlight-col {
+      background: linear-gradient(135deg, #4f6ae8, #5e3d9e);
+      box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.25);
+      color: white;
+      font-size: 1.05em;
+    }
+
     @media (prefers-color-scheme: dark) {
       .comparison-table .highlight-col {
         background: rgba(129, 140, 248, 0.1);
+      }
+      .comparison-table thead th.highlight-col {
+        background: linear-gradient(135deg, #4f6ae8, #5e3d9e);
+        color: white;
       }
       .comparison-table tbody tr:hover {
         background: rgba(129, 140, 248, 0.08);
@@ -560,7 +571,7 @@
             <td>Licensing</td>
             <td class="highlight-col"><strong>Universal purchase</strong></td>
             <td>Mac only</td>
-            <td>Per platform</td>
+            <td>Mac only</td>
             <td>Per platform</td>
           </tr>
           <tr>
