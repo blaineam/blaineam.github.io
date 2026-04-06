@@ -8,7 +8,7 @@ function parseQueryString() {
     for (; i < l; i++) {
         if (!parts[i]) { continue; }
         part = parts[i].split("=");
-        GET[unescape(part[0])] = unescape(part[1]);
+        GET[decodeURIComponent(part[0])] = decodeURIComponent(part[1]);
     }
 
     return GET;
