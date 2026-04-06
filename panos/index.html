@@ -419,14 +419,14 @@
                 var urls = Array.from({length: N}, (_, index) => "panoramas/bmp-pano-sphere-" + (index + 1) + ".jpg").reverse();
                 for ( var i = 0; i < urls.length; i++ ) {
                     url = urls[i];
-                    $('.gallery').append('<a data-fancybox="sphere-gallery" data-fancybox data-type="iframe" data-src="pannellum/pannellum.htm#panorama=../' + url + '&amp;autoLoad=true"  href="javascript:;"><img loading="lazy" src="' + (url.replace('sphere-','sphere-thumb-')) + '" /> </a>');
+                    $('.gallery').append('<a data-fancybox="sphere-gallery" data-fancybox data-type="iframe" data-src="pannellum/pannellum.htm#panorama=../' + url + '&amp;autoLoad=true"  href="#"><img loading="lazy" src="' + (url.replace('sphere-','sphere-thumb-')) + '" /> </a>');
                 }
 
                 var N = 99;
                 var urls = Array.from({length: N}, (_, index) => "panoramas/bmp-pano-" + (index + 1) + ".jpg").reverse();
                 for ( var i = 0; i < urls.length; i++ ) {
                     url = urls[i];
-                    $('.gallery').append('<a data-fancybox="pano-gallery" data-fancybox data-type="image" data-src="'+ url + '"  href="javascript:;"><img loading="lazy" src="' + (url.replace('pano-','pano-thumb-')) + '" /> </a>');
+                    $('.gallery').append('<a data-fancybox="pano-gallery" data-fancybox data-type="image" data-src="'+ url + '"  href="#"><img loading="lazy" src="' + (url.replace('pano-','pano-thumb-')) + '" /> </a>');
                 }
             });
         </script>
