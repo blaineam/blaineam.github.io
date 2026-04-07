@@ -886,6 +886,59 @@ p {
   pointer-events: none;
 }
 
+/* Security Hardening Callout */
+.security-callout {
+  background: var(--bg-secondary);
+  padding: var(--spacing-xl) 0;
+  border-top: 1px solid var(--border-color);
+}
+
+.security-callout .section-header {
+  margin-bottom: var(--spacing-lg);
+}
+
+.security-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-sm);
+  justify-content: center;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-md);
+}
+
+.security-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.2rem;
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--glass-border);
+  border-radius: 2rem;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  box-shadow: var(--glass-shadow);
+  transition: transform 0.2s ease;
+}
+
+.security-badge:hover {
+  transform: translateY(-2px);
+}
+
+.security-badge .badge-icon {
+  font-size: 1.1rem;
+}
+
+.security-audit-note {
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-top: var(--spacing-md);
+  padding: 0 var(--spacing-md);
+}
+
 /* Print Styles */
 @media print {
   .app-nav,
