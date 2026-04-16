@@ -1,0 +1,59 @@
+name: Build & Deploy GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+          cache-dependency-path: scripts/package-lock.json
+
+      - name: Install poster-generator dependencies
+        working-directory: scripts
+        run: npm ci
+
+      # Regenerates apps/apps-by-blaine-miller.jpg and each app's poster only
+      # when the app list or any app icon has changed (content-addressed via
+      # apps/.poster-cache.json).  Regenerated images are baked into the Pages
+      # artifact — they do not need to be committed back to the repo.
+      - name: Regenerate app posters (if icons or app list changed)
+        run: node scripts/generate-posters.js
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
