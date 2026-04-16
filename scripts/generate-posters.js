@@ -205,17 +205,41 @@ async function renderBackground(palette, seed) {
     .toBuffer();
 }
 
-// Prepare a single icon: resize, rotate, and render a soft drop-shadow beneath.
-// Returns { buffer, width, height } for the composite (includes shadow padding).
-async function tiltedIconWithShadow(iconPath, size, angleDeg) {
+// Builds the 2D affine matrix that represents the orthographic projection of a
+// 3D rotation Rx(rotX) · Ry(rotY) · Rz(rotZ). This is what gives icons the
+// "flying toward the viewer" look — X/Y rotations foreshorten the icon on one
+// side, while Z rotation is the existing in-plane tilt.
+function tilt3DMatrix({ rotX, rotY, rotZ }) {
+  const ca = Math.cos(rotX),
+    sa = Math.sin(rotX);
+  const cb = Math.cos(rotY),
+    sb = Math.sin(rotY);
+  const cg = Math.cos(rotZ),
+    sg = Math.sin(rotZ);
+  // Rows 0 & 1 of Rx · Ry · Rz.
+  const a = cb * cg;
+  const b = -cb * sg;
+  const c = ca * sg + sa * sb * cg;
+  const d = ca * cg - sa * sb * sg;
+  return [a, b, c, d];
+}
+
+// Prepare a single icon: resize, apply a 3D-ish tilt (rotX/rotY/rotZ via affine
+// projection), then render a soft drop-shadow beneath. Returns the composite
+// bitmap + its dimensions (which include shadow padding).
+async function tiltedIconWithShadow(iconPath, size, tilt) {
   const iconBuf = await sharp(iconPath)
     .resize(size, size, { fit: "cover" })
     .ensureAlpha()
     .png()
     .toBuffer();
 
+  const [a, b, c, d] = tilt3DMatrix(tilt);
   const rotated = await sharp(iconBuf)
-    .rotate(angleDeg, { background: { r: 0, g: 0, b: 0, alpha: 0 } })
+    .affine([a, b, c, d], {
+      background: { r: 0, g: 0, b: 0, alpha: 0 },
+      interpolator: "bicubic",
+    })
     .png()
     .toBuffer();
   const rawRotated = await sharp(rotated)
@@ -327,21 +351,37 @@ async function renderMainPoster(apps, seedHex) {
   for (let i = 0; i < total; i++) {
     const app = apps[i];
     const size = prominenceSize(i, total, centerSize, tailSize);
-    // Tilt grows with distance from center so outer icons feel more 3D.
-    const tiltMax = 14 + (i / Math.max(1, total - 1)) * 10;
-    const angleDeg = (rng() - 0.5) * 2 * tiltMax;
     const pos = spiralPosition(i, total, POSTER_W, POSTER_H);
     // Small positional jitter so the spiral doesn't look mechanical.
     const jitter = Math.min(POSTER_W, POSTER_H) * 0.03;
     pos.x += (rng() - 0.5) * jitter;
     pos.y += (rng() - 0.5) * jitter;
-    placements.push({ app, size, angleDeg, pos, order: i });
+
+    // Outward unit vector from the canvas center. Icons further out get a
+    // stronger 3D tilt that leans them away from the viewer (like cards
+    // thrown outward from the middle of the frame).
+    const vx = pos.x - POSTER_W / 2;
+    const vy = pos.y - POSTER_H / 2;
+    const mag = Math.hypot(vx, vy) || 1;
+    const dx = vx / mag;
+    const dy = vy / mag;
+    const outwardAmount = Math.min(1, mag / (POSTER_H * 0.55)); // 0..1
+    const leanRad = outwardAmount * (14 * Math.PI) / 180; // up to ~14°
+
+    // Combine position-driven lean with per-icon random wobble.
+    const randXY = 8 * Math.PI / 180;
+    const rotX = leanRad * -dy + (rng() - 0.5) * 2 * randXY; // up/down lean
+    const rotY = leanRad * dx + (rng() - 0.5) * 2 * randXY; // left/right lean
+    const zMax = 12 + outwardAmount * 10; // degrees
+    const rotZ = ((rng() - 0.5) * 2 * zMax * Math.PI) / 180;
+
+    placements.push({ app, size, pos, order: i, tilt: { rotX, rotY, rotZ } });
   }
 
   // Render icons in parallel.
   const rendered = await Promise.all(
     placements.map((p) =>
-      tiltedIconWithShadow(p.app.iconPath, p.size, p.angleDeg).then((res) => ({
+      tiltedIconWithShadow(p.app.iconPath, p.size, p.tilt).then((res) => ({
         ...p,
         ...res,
       })),
@@ -390,8 +430,13 @@ async function renderAppPoster(app, seedHex) {
 
   // Single large, tilted icon sitting roughly centered with a random offset.
   const size = Math.round(POSTER_H * 0.55);
-  const angleDeg = (rng() - 0.5) * 24; // -12°..+12°
-  const icon = await tiltedIconWithShadow(app.iconPath, size, angleDeg);
+  const deg = Math.PI / 180;
+  const tilt = {
+    rotX: (rng() - 0.5) * 20 * deg, // -10°..+10° up/down lean
+    rotY: (rng() - 0.5) * 20 * deg, // -10°..+10° left/right lean
+    rotZ: (rng() - 0.5) * 22 * deg, // -11°..+11° in-plane spin
+  };
+  const icon = await tiltedIconWithShadow(app.iconPath, size, tilt);
 
   const offsetX = (rng() - 0.5) * POSTER_W * 0.12;
   const offsetY = (rng() - 0.5) * POSTER_H * 0.08;
