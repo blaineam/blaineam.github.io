@@ -101,6 +101,8 @@
     .app-card:nth-child(6) { animation-delay: 0.8s; }
     .app-card:nth-child(7) { animation-delay: 0.9s; }
     .app-card:nth-child(8) { animation-delay: 1.0s; }
+    .app-card:nth-child(9) { animation-delay: 1.1s; }
+    .app-card:nth-child(10) { animation-delay: 1.2s; }
 
     .app-card::before {
       content: '';
@@ -226,6 +228,14 @@
       animation: floatIcon2 13s ease-in-out infinite;
     }
 
+    .app-card:nth-child(9) .app-icon {
+      animation: floatIcon1 14s ease-in-out infinite;
+    }
+
+    .app-card:nth-child(10) .app-icon {
+      animation: floatIcon2 15s ease-in-out infinite;
+    }
+
     /* Custom colors for each app */
     .app-card[data-app="enter-space"] .app-icon {
       background: linear-gradient(135deg, #667eea, #764ba2);
@@ -257,6 +267,14 @@
 
     .app-card[data-app="wise-flyer"] .app-icon {
       background: linear-gradient(135deg, #4facfe, #00f2fe);
+    }
+
+    .app-card[data-app="blip"] .app-icon {
+      background: linear-gradient(135deg, #11998e, #38ef7d);
+    }
+
+    .app-card[data-app="glint"] .app-icon {
+      background: linear-gradient(135deg, #f7b733, #fc4a1a);
     }
 
     .floating-back-btn {
@@ -333,11 +351,11 @@
           <span class="app-cta">Learn More →</span>
         </a>
 
-        <!-- Sami -->
-        <a href="sami/" class="app-card" data-app="sami">
-          <div class="app-icon"><img src="sami/assets/images/icon.png" alt="Sami App Icon"></div>
-          <h2 class="app-name">Sami</h2>
-          <p class="app-tagline">Smart media optimizer</p>
+        <!-- Blip -->
+        <a href="https://blip.wemiller.com" class="app-card" data-app="blip" target="_blank" rel="noopener">
+          <div class="app-icon"><img src="blip/assets/images/icon.png" alt="Blip App Icon"></div>
+          <h2 class="app-name">Blip</h2>
+          <p class="app-tagline">Featherlight Mac system monitor</p>
           <span class="app-cta">Learn More →</span>
         </a>
 
@@ -346,6 +364,14 @@
           <div class="app-icon"><img src="ari-helper/assets/images/icon.png" alt="Ari Helper App Icon"></div>
           <h2 class="app-name">Ari Helper</h2>
           <p class="app-tagline">All-in-one AI chat app</p>
+          <span class="app-cta">Learn More →</span>
+        </a>
+
+        <!-- Sami -->
+        <a href="sami/" class="app-card" data-app="sami">
+          <div class="app-icon"><img src="sami/assets/images/icon.png" alt="Sami App Icon"></div>
+          <h2 class="app-name">Sami</h2>
+          <p class="app-tagline">Smart media optimizer</p>
           <span class="app-cta">Learn More →</span>
         </a>
 
@@ -386,6 +412,14 @@
           <div class="app-icon"><img src="wise-flyer/assets/images/icon.png" alt="Wise Flyer App Icon"></div>
           <h2 class="app-name">Wise Flyer</h2>
           <p class="app-tagline">Top the leaderboard!</p>
+          <span class="app-cta">Learn More →</span>
+        </a>
+
+        <!-- Glint -->
+        <a href="https://glint.wemiller.com" class="app-card" data-app="glint" target="_blank" rel="noopener">
+          <div class="app-icon"><img src="glint/assets/images/icon.png" alt="Glint App Icon"></div>
+          <h2 class="app-name">Glint</h2>
+          <p class="app-tagline">Brightness & volume for any display</p>
           <span class="app-cta">Learn More →</span>
         </a>
       </div>
