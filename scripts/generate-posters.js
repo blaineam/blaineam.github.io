@@ -166,15 +166,53 @@ async function dominantHue(iconPath) {
   return { h, l: sumL / count };
 }
 
-// Pick a pleasant dark background palette given an icon hue. We use the soft
-// complement (+150°) so the bg does not share the icon's hue, but we keep it
-// dark and only moderately saturated so the composite stays "space-like" and
-// the icons pop — matches the original hand-tuned posters.
-function complementaryPalette(hue) {
-  const comp = (hue + 150) % 360;
-  const inner = hslToRgb(comp, 0.7, 0.22); // dim focal highlight
-  const mid = hslToRgb(comp, 0.65, 0.09); // fall-off
-  const outer = hslToRgb(comp, 0.55, 0.03); // near-black with hue tint
+// Pick a pleasant dark background palette for a given icon hue. Two issues to
+// solve: (a) many of the real icons cluster in the blue family, so a pure
+// "hue + 150°" rule collapses their complements into a narrow orange slice;
+// (b) a true diametric complement can feel harsh. We map each 30° hue slice
+// to a hand-picked companion hue inspired by the original hand-tuned
+// posters, then offset by a slug-derived jitter so adjacent-hue icons still
+// look distinct from each other.
+const HUE_COMPANIONS = [
+  // family center (deg) -> companion hue (deg). Covers 12 slices, 30° each.
+  { family: 0, companion: 205 }, // red        -> deep teal
+  { family: 30, companion: 215 }, // orange     -> ocean blue
+  { family: 60, companion: 255 }, // yellow     -> indigo
+  { family: 90, companion: 280 }, // lime       -> violet
+  { family: 120, companion: 295 }, // green      -> purple
+  { family: 150, companion: 320 }, // emerald    -> magenta
+  { family: 180, companion: 345 }, // cyan       -> rose
+  { family: 210, companion: 25 }, // azure      -> burnt orange
+  { family: 240, companion: 290 }, // blue       -> deep purple
+  { family: 270, companion: 155 }, // violet     -> emerald
+  { family: 300, companion: 120 }, // magenta    -> grass green
+  { family: 330, companion: 180 }, // rose       -> cyan
+];
+
+function companionHue(hue) {
+  const h = ((hue % 360) + 360) % 360;
+  // Interpolate between the two nearest family anchors so neighboring icons
+  // flow smoothly rather than snapping bin-to-bin.
+  const slot = h / 30;
+  const i0 = Math.floor(slot) % 12;
+  const i1 = (i0 + 1) % 12;
+  const t = slot - Math.floor(slot);
+  const a = HUE_COMPANIONS[i0].companion;
+  let b = HUE_COMPANIONS[i1].companion;
+  // Shortest arc around the colour wheel.
+  if (b - a > 180) b -= 360;
+  if (a - b > 180) b += 360;
+  return ((a + (b - a) * t) % 360 + 360) % 360;
+}
+
+function pleasantPalette(hue, seedStr) {
+  // Slug-based jitter (±18°) so similar-hue icons still get distinct bgs.
+  const rng = seededRng("palette:" + (seedStr || ""));
+  const jitter = (rng() - 0.5) * 36;
+  const comp = (companionHue(hue) + jitter + 360) % 360;
+  const inner = hslToRgb(comp, 0.78, 0.32); // saturated focal highlight
+  const mid = hslToRgb(comp, 0.72, 0.13);
+  const outer = hslToRgb(comp, 0.55, 0.035); // near-black with hue tint
   return { inner, mid, outer };
 }
 
@@ -302,25 +340,45 @@ function prominenceSize(index, total, maxSize, minSize) {
   return Math.round(minSize + (maxSize - minSize) * eased);
 }
 
-// Phyllotaxis / sunflower spiral placement so N icons fill the frame gracefully.
-// Index 0 is the centered icon; subsequent indices spiral outward.
-function spiralPosition(index, total, canvasW, canvasH) {
-  if (index === 0) {
-    return { x: canvasW / 2, y: canvasH / 2 };
+// Splits [1, total-1] into concentric rings (inner ring first). The inner
+// ring always gets enough slots to stay packed around the centered icon;
+// remaining icons spill into an outer ring. Returns [{ringIndex, angleIndex,
+// ringCount}] for each placement index ≥ 1.
+function ringAssignments(remaining) {
+  if (remaining <= 0) return [];
+  // One ring suffices when there are few icons; two otherwise.
+  const inner = Math.min(remaining, Math.max(5, Math.ceil(remaining * 0.55)));
+  const outer = Math.max(0, remaining - inner);
+  const slots = [];
+  for (let i = 0; i < inner; i++) {
+    slots.push({ ringIndex: 1, angleIndex: i, ringCount: inner });
   }
-  const golden = Math.PI * (3 - Math.sqrt(5)); // ~2.39996
-  // Normalize radius so the outermost index sits near the frame edge.
-  const maxR = Math.min(canvasW, canvasH) * 0.52;
-  const minR = Math.min(canvasW, canvasH) * 0.33;
-  const t = (index - 1) / Math.max(1, total - 1);
-  const r = minR + (maxR - minR) * Math.sqrt(t);
-  // Slight horizontal stretch because the canvas is wider than tall.
-  const stretchX = canvasW / Math.min(canvasW, canvasH);
-  const stretchY = canvasH / Math.min(canvasW, canvasH);
-  const angle = index * golden + 0.7; // offset so ring 1 isn't at 3-o'clock
-  const x = canvasW / 2 + Math.cos(angle) * r * stretchX * 0.92;
-  const y = canvasH / 2 + Math.sin(angle) * r * stretchY * 0.86;
-  return { x, y };
+  for (let i = 0; i < outer; i++) {
+    slots.push({ ringIndex: 2, angleIndex: i, ringCount: outer });
+  }
+  return slots;
+}
+
+function ringPosition(
+  ringIndex,
+  angleIndex,
+  ringCount,
+  canvasW,
+  canvasH,
+  phase,
+) {
+  if (ringIndex === 0) return { x: canvasW / 2, y: canvasH / 2 };
+  // Radii tuned so the inner ring hugs the center icon and the outer ring
+  // sits near the frame edges; canvas aspect stretches x a bit.
+  const base = Math.min(canvasW, canvasH);
+  const rBase = ringIndex === 1 ? base * 0.37 : base * 0.58;
+  const stretchX = canvasW / base;
+  const stretchY = canvasH / base;
+  const angle = phase + (2 * Math.PI * angleIndex) / ringCount;
+  return {
+    x: canvasW / 2 + Math.cos(angle) * rBase * stretchX * 0.9,
+    y: canvasH / 2 + Math.sin(angle) * rBase * stretchY * 0.82,
+  };
 }
 
 // ---------- Main poster (multi-icon fly-towards-viewer) ----------
@@ -334,48 +392,69 @@ async function renderMainPoster(apps, seedHex) {
     apps.length > 1 ? (await dominantHue(apps[1].iconPath)).h : primaryHue;
   const blendedHue =
     (((primaryHue + secondaryHue) / 2) % 360 + 360) % 360;
-  const palette = complementaryPalette(blendedHue);
+  const palette = pleasantPalette(blendedHue, "main");
   const bg = await renderBackground(palette, seedHex + ":main");
 
   const total = apps.length;
-  // Size ranges expressed as a fraction of canvas height so the layout scales.
-  // The spiral radius grows with total count, so shrink surrounding icons a
-  // bit when we have lots of apps to fit.
-  const density = Math.max(0.6, Math.min(1, 10 / Math.max(total, 1)));
+  const deg = Math.PI / 180;
+  // Sizing: a commanding centered icon, then an inner ring at a comfortable
+  // size, and any overflow in a smaller outer ring. Produces the "flying
+  // past the viewer" feel without leaving empty pockets.
   const centerSize = Math.round(POSTER_H * 0.38);
-  const tailSize = Math.round(POSTER_H * 0.16 * density);
+  const innerSize = Math.round(POSTER_H * 0.26);
+  const outerSize = Math.round(POSTER_H * 0.2);
+  const assignments = ringAssignments(total - 1);
+  const phase = -Math.PI / 2 + rng() * 0.5; // start near 12-o'clock
 
-  // Build placements in order but composite with larger icons last so the
-  // most prominent apps sit on top (front-and-center depth feel).
   const placements = [];
   for (let i = 0; i < total; i++) {
     const app = apps[i];
-    const size = prominenceSize(i, total, centerSize, tailSize);
-    const pos = spiralPosition(i, total, POSTER_W, POSTER_H);
-    // Small positional jitter so the spiral doesn't look mechanical.
-    const jitter = Math.min(POSTER_W, POSTER_H) * 0.03;
-    pos.x += (rng() - 0.5) * jitter;
-    pos.y += (rng() - 0.5) * jitter;
+    let size, pos, ring;
+    if (i === 0) {
+      size = centerSize;
+      pos = { x: POSTER_W / 2, y: POSTER_H / 2 };
+      ring = 0;
+    } else {
+      const a = assignments[i - 1];
+      ring = a.ringIndex;
+      size = ring === 1 ? innerSize : outerSize;
+      const ringPhase = phase + (ring === 2 ? Math.PI / a.ringCount : 0);
+      pos = ringPosition(
+        ring,
+        a.angleIndex,
+        a.ringCount,
+        POSTER_W,
+        POSTER_H,
+        ringPhase,
+      );
+      // Small positional jitter so rings don't read as perfect circles.
+      const jitter = size * 0.08;
+      pos.x += (rng() - 0.5) * jitter;
+      pos.y += (rng() - 0.5) * jitter;
+    }
 
-    // Outward unit vector from the canvas center. Icons further out get a
-    // stronger 3D tilt that leans them away from the viewer (like cards
-    // thrown outward from the middle of the frame).
+    // Outward direction from center drives 3D lean so each icon reads as
+    // tilting away from the middle of the frame (top recedes, far edge
+    // foreshortens) — like cards exploding past the viewer.
     const vx = pos.x - POSTER_W / 2;
     const vy = pos.y - POSTER_H / 2;
     const mag = Math.hypot(vx, vy) || 1;
     const dx = vx / mag;
     const dy = vy / mag;
-    const outwardAmount = Math.min(1, mag / (POSTER_H * 0.55)); // 0..1
-    const leanRad = outwardAmount * (14 * Math.PI) / 180; // up to ~14°
+    const outward = Math.min(1, mag / (POSTER_H * 0.5));
 
-    // Combine position-driven lean with per-icon random wobble.
-    const randXY = 8 * Math.PI / 180;
-    const rotX = leanRad * -dy + (rng() - 0.5) * 2 * randXY; // up/down lean
-    const rotY = leanRad * dx + (rng() - 0.5) * 2 * randXY; // left/right lean
-    const zMax = 12 + outwardAmount * 10; // degrees
-    const rotZ = ((rng() - 0.5) * 2 * zMax * Math.PI) / 180;
+    // Position-driven lean: Rx(α) positive tilts top toward viewer, so we
+    // want rotX with the same sign as dy (icon above center tilts back,
+    // icon below tilts forward). Ry(β) positive pushes right side back, so
+    // rotY matches sign of dx.
+    const radialLean = outward * 28 * deg; // up to 28°
+    const randXY = 9 * deg; // per-icon wobble
+    const rotX = radialLean * dy + (rng() - 0.5) * 2 * randXY;
+    const rotY = radialLean * dx + (rng() - 0.5) * 2 * randXY;
+    const zMax = (14 + outward * 14) * deg;
+    const rotZ = (rng() - 0.5) * 2 * zMax;
 
-    placements.push({ app, size, pos, order: i, tilt: { rotX, rotY, rotZ } });
+    placements.push({ app, size, pos, order: i, ring, tilt: { rotX, rotY, rotZ } });
   }
 
   // Render icons in parallel.
@@ -425,16 +504,18 @@ async function renderAppPoster(app, seedHex) {
 
   const rng = seededRng(seedHex + ":" + app.slug);
   const { h } = await dominantHue(app.iconPath);
-  const palette = complementaryPalette(h);
+  const palette = pleasantPalette(h, app.slug);
   const bg = await renderBackground(palette, seedHex + ":" + app.slug);
 
-  // Single large, tilted icon sitting roughly centered with a random offset.
+  // Single large, dramatically tilted icon — the per-app poster is meant to
+  // feel like that icon is the one flying past, so push the angles further
+  // than on the composite.
   const size = Math.round(POSTER_H * 0.55);
   const deg = Math.PI / 180;
   const tilt = {
-    rotX: (rng() - 0.5) * 20 * deg, // -10°..+10° up/down lean
-    rotY: (rng() - 0.5) * 20 * deg, // -10°..+10° left/right lean
-    rotZ: (rng() - 0.5) * 22 * deg, // -11°..+11° in-plane spin
+    rotX: (rng() - 0.5) * 36 * deg, // -18°..+18°
+    rotY: (rng() - 0.5) * 36 * deg, // -18°..+18°
+    rotZ: (rng() - 0.5) * 30 * deg, // -15°..+15° in-plane spin
   };
   const icon = await tiltedIconWithShadow(app.iconPath, size, tilt);
 
