@@ -1,0 +1,12 @@
+{
+  "name": "poster-generator",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Generates Open Graph posters for the apps page and each individual app.",
+  "scripts": {
+    "generate-posters": "node generate-posters.js"
+  },
+  "dependencies": {
+    "sharp": "^0.34.5"
+  }
+}
