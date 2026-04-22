@@ -612,7 +612,7 @@
     <p>Please see the "Do Not Sell My Personal Information" section and "Limit the Use or Disclosure of My Sensitive Personal Information" section for more information on how to opt out and limit the use of sensitive information collected.</p>
     <p>Additionally, in order to exercise any of Your rights under the CCPA/CPRA, and if You are a California resident, You can contact Us:</p>
     <ul>
-      <li>By email: policies@wemiller.com</li>
+      <li>By email: <a href="#" class="obf-mail" data-u="policies" data-d="wemiller" data-t="com" data-show="yes">contact</a></li>
     </ul>
     <p>Only You, or a person registered with the California Secretary of State that You authorize to act on Your behalf, may make a verifiable request related to Your personal information.</p>
     <p>Your request to Us must:</p>
@@ -687,7 +687,7 @@
     <h2>Contact Us</h2>
     <p>If you have any questions about this Privacy Policy, You can contact us:</p>
     <ul>
-      <li>By email: policies@wemiller.com</li>
+      <li>By email: <a href="#" class="obf-mail" data-u="policies" data-d="wemiller" data-t="com" data-show="yes">contact</a></li>
     </ul>
   </div>
 
@@ -734,5 +734,20 @@
   </footer>
 
   <script src="/apps/app-showcase.js"></script>
+  <script>
+    (function () {
+      var at = String.fromCharCode(64);
+      var scheme = String.fromCharCode(109, 97, 105, 108, 116, 111, 58);
+      document.querySelectorAll(".obf-mail").forEach(function (el) {
+        var addr = el.dataset.u + at + el.dataset.d + "." + el.dataset.t;
+        var bind = function () { el.setAttribute("href", scheme + addr); };
+        el.addEventListener("mouseenter", bind, { once: true });
+        el.addEventListener("focus", bind, { once: true });
+        el.addEventListener("touchstart", bind, { once: true, passive: true });
+        el.addEventListener("click", bind);
+        if (el.dataset.show === "yes") { el.textContent = addr; }
+      });
+    })();
+  </script>
 </body>
 </html>
