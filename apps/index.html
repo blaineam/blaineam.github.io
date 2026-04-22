@@ -227,6 +227,11 @@
     }
 
     /* Custom colors for each app */
+    .app-card[data-app="asteroic"] .app-icon {
+      background: linear-gradient(135deg, #6366f1, #8b5cf6);
+      box-shadow: 0 10px 30px rgba(99, 102, 241, 0.4), 0 0 60px rgba(139, 92, 246, 0.25);
+    }
+
     .app-card[data-app="enter-space"] .app-icon {
       background: linear-gradient(135deg, #667eea, #764ba2);
     }
@@ -325,6 +330,14 @@
       <p class="apps-subtitle">Discover beautiful and powerful iOS applications designed to enhance your life</p>
 
       <div class="apps-grid">
+        <!-- Asteroic -->
+        <a href="asteroic/" class="app-card" data-app="asteroic">
+          <div class="app-icon"><img src="asteroic/assets/images/icon.png" alt="Asteroic App Icon"></div>
+          <h2 class="app-name">Asteroic</h2>
+          <p class="app-tagline">Deep-sky astrophotography, all in one</p>
+          <span class="app-cta">Learn More →</span>
+        </a>
+
         <!-- Enter Space -->
         <a href="enter-space/" class="app-card" data-app="enter-space">
           <div class="app-icon"><img src="enter-space/assets/images/icon.png" alt="Enter Space App Icon"></div>
