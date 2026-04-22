@@ -618,7 +618,7 @@
         <div class="feature-icon">🛰️</div>
         <h3 class="feature-title">Offline Plate Solving</h3>
         <p class="feature-description">
-          Bundled star catalog and pattern matcher run entirely on-device. No internet, no astrometry.net round trips — solves work on the mount's air-gapped Wi-Fi network.
+          The same astrometry.net algorithm that powers every serious astrophotography tool, running 100 % on-device. Bundled star-index files, no internet, no API round-trips — solves finish in under a second on the mount's air-gapped Wi-Fi.
         </p>
       </div>
 
@@ -850,7 +850,7 @@
     </div>
 
     <p style="text-align: center; max-width: 720px; margin: 2rem auto 0; color: var(--text-secondary); font-size: 0.95rem;">
-      No mount? A dumb tripod works too. Pointing throws <code style="background: rgba(99,102,241,0.1); padding: 2px 6px; border-radius: 4px; font-family: 'SF Mono', monospace; font-size: 0.85em;">.unsupported</code> and everything else still runs — capture, plate solve, live stack.
+      No mount? A plain tripod works too. The slew and goto controls politely grey themselves out; capture, offline plate solving, live stacks, and the AR sky chart all still run as expected.
     </p>
   </section>
 
@@ -896,9 +896,9 @@
       </button>
       <div class="faq-answer">
         <p>
-          No. The mount-control features need a Polaris (over BLE + TCP), but Asteroic still runs on a dumb tripod —
-          you get capture, offline plate solving, live stacking, and the AR sky chart. Pointing operations cleanly
-          throw <code>.unsupported</code> and the rest of the app works as expected.
+          No. The mount-control features need a Polaris (over BLE + TCP), but Asteroic still runs great on a plain tripod — you get capture,
+          offline plate solving, live stacking, and the AR sky chart. The slew and goto controls simply grey themselves out until a
+          compatible mount is connected.
         </p>
       </div>
     </div>
@@ -927,6 +927,27 @@
           Yes. The star catalog and the pattern matcher are bundled inside the app and run on-device. There are no
           astrometry.net round-trips, no API keys, and no rate limits. Solves work on the mount's air-gapped Wi-Fi
           network at a remote dark site with no cellular signal.
+        </p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        <span>What's the plate-solver built on?</span>
+        <span class="faq-icon">▼</span>
+      </button>
+      <div class="faq-answer">
+        <p>
+          The same algorithm as the astrometry.net project — the quad-hash pattern matcher with Bayesian odds-ratio scoring
+          that backs the nova.astrometry.net web service and every serious astro tool that calls out to it. Asteroic runs
+          the core engine 100 % on-device.
+        </p>
+        <p>
+          The only substitution is the linear-algebra layer: astrometry.net's upstream build vendors GNU GSL (GPL v3),
+          which isn't compatible with the App Store's distribution terms. Asteroic swaps that subset for a permissively-licensed
+          shim (3-clause BSD) backed by Apple's Accelerate framework — LAPACK for LU / QR / SVD, CBLAS for dense matrix
+          multiply. Every component in the final binary ships under a permissive license; the full list is surfaced in the
+          app's Settings → About &amp; open source.
         </p>
       </div>
     </div>
