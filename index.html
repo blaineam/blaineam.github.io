@@ -1181,6 +1181,26 @@
             </a>
           </div>
           <div class="liquidGlass button">
+            <a id="sigBtn" href="#" title="signal" rel="nofollow noreferrer noopener">
+              <svg class="icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2.25C6.62 2.25 2.25 6.62 2.25 12c0 1.66.42 3.23 1.16 4.6l-1.07 3.93a.75.75 0 0 0 .92.92l3.93-1.07A9.7 9.7 0 0 0 12 21.75c5.38 0 9.75-4.37 9.75-9.75S17.38 2.25 12 2.25Z" fill="currentColor"/>
+              </svg>
+            </a>
+            <script>
+              (function () {
+                // Signal handle is split + base64-encoded so plaintext crawlers find nothing scrape-able.
+                var p = ["aHR0cHM6Ly9z", "aWduYWwubWUv", "I2V1L1VmbEMw", "anZhbGJDYnBi", "NmZteHo4NzEz", "NFpyOHdzc1px", "ajRYRVZqQXhP", "SjBETE42bWFO", "TkloSmNJWXdJ", "Zjhfb3A="];
+                var btn = document.getElementById("sigBtn");
+                var resolve = function () { btn.setAttribute("href", atob(p.join(""))); };
+                btn.addEventListener("mouseenter", resolve, { once: true });
+                btn.addEventListener("focus", resolve, { once: true });
+                btn.addEventListener("touchstart", resolve, { once: true, passive: true });
+                btn.addEventListener("click", function (e) { resolve(); });
+              })();
+            </script>
+          </div>
+          <!--
+          <div class="liquidGlass button">
             <a href="https://www.instagram.com/helloblainemiller/" title="instagram">
               <svg class="icon" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg">
                 <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -1200,6 +1220,7 @@
               </svg>
             </a>
           </div>
+          -->
         </div>
       </div>
       <div id="navigable">
@@ -1226,6 +1247,24 @@
                 <div class="btn-group"></div>
                 <script>
                   [{
+                      date: "April, 2026",
+                      title: "Asteroic",
+                      icon: "asteroic.png",
+                      link: "apps/asteroic/",
+                      description: "Deep-sky astrophotography for iPhone, iPad, Mac, and Apple Watch — one app drives a Benro Polaris tracking mount, a Canon EOS body over CCAPI, and a fully offline plate solver. Auto-align, live stacks, mosaic planner, motion timelapses, and an AR sky chart, all in a universal $9.99 purchase.",
+                      stack: [
+                        "swift",
+                        "swiftui",
+                        "watchos",
+                        "arkit",
+                        "ble",
+                        "ccapi",
+                        "plate solving",
+                        "ios",
+                        "ipados",
+                        "macos",
+                      ]
+                    },{
                       date: "April, 2026",
                       title: "Blip",
                       icon: "blip.png",
@@ -2735,9 +2774,7 @@
       "url": "https://www.wemiller.com",
       "jobTitle": "Sr. Software Engineer",
       "sameAs": [
-        "https://www.instagram.com/helloblainemiller/",
-        "https://www.linkedin.com/in/millerblaine/",
-        "http://x.com/helloblaine"
+        "https://www.linkedin.com/in/millerblaine/"
       ]
     }
   </script>

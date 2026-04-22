@@ -1068,7 +1068,7 @@
         </p>
         <p>
           If you run into any issues during your trial (or at any point after subscribing), please don't hesitate to
-          <a href="mailto:enter-space@wemiller.com" style="color: var(--accent);">reach out to me at enter-space@wemiller.com</a>.
+          <a href="#" class="obf-mail" data-u="enter-space" data-d="wemiller" data-t="com" style="color: var(--accent);">reach out to me</a>.
           I'm happy to help troubleshoot and resolve any problems. Fixing issues for you makes the app better for everyone.
         </p>
       </div>
@@ -1313,5 +1313,21 @@
   </footer>
 
   <script src="../app-showcase.js"></script>
+  <script>
+    // Resolve obfuscated mailto links lazily so plaintext crawlers find no addresses in source.
+    (function () {
+      var at = String.fromCharCode(64);
+      var scheme = String.fromCharCode(109, 97, 105, 108, 116, 111, 58);
+      document.querySelectorAll(".obf-mail").forEach(function (el) {
+        var addr = el.dataset.u + at + el.dataset.d + "." + el.dataset.t;
+        var bind = function () { el.setAttribute("href", scheme + addr); };
+        el.addEventListener("mouseenter", bind, { once: true });
+        el.addEventListener("focus", bind, { once: true });
+        el.addEventListener("touchstart", bind, { once: true, passive: true });
+        el.addEventListener("click", bind);
+        if (el.dataset.show === "yes") { el.textContent = addr; }
+      });
+    })();
+  </script>
 </body>
 </html>
