@@ -1,0 +1,1097 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Asteroic - Deep-Sky Astrophotography for Apple</title>
+  <meta name="description" content="One app drives your tracking mount, mirrorless camera, and offline plate solver. Auto-align, live stacks, mosaics, and motion timelapses for iPhone, iPad, Mac, and Apple Watch.">
+  <meta property="og:title" content="Asteroic - Deep-Sky Astrophotography for Apple">
+  <meta property="og:description" content="One app drives your tracking mount, mirrorless camera, and offline plate solver. Auto-align, live stacks, mosaics, and motion timelapses for iPhone, iPad, Mac, and Apple Watch.">
+  <meta property="og:type" content="app">
+  <meta property="og:url" content="https://wemiller.com/apps/asteroic/">
+  <meta property="og:image" content="https://wemiller.com/apps/asteroic/assets/images/icon.png">
+  <link rel="apple-touch-icon" href="assets/images/icon.png">
+  <link rel="icon" type="image/png" href="assets/images/icon.png">
+  <link rel="stylesheet" href="../app-showcase.css">
+  <style>
+    /* Asteroic — Deep Space Theme */
+    :root {
+      --app-primary: #6366f1;
+      --app-secondary: #8b5cf6;
+      --app-accent: #22d3ee;
+      --app-gold: #fbbf24;
+      --app-deep: #0a0a1f;
+      --app-deeper: #050514;
+    }
+
+    /* Cosmic hero with animated starfield */
+    .hero {
+      background:
+        radial-gradient(ellipse at 25% 30%, rgba(99, 102, 241, 0.35) 0%, transparent 55%),
+        radial-gradient(ellipse at 80% 70%, rgba(139, 92, 246, 0.30) 0%, transparent 55%),
+        radial-gradient(ellipse at 50% 100%, rgba(34, 211, 238, 0.20) 0%, transparent 60%),
+        linear-gradient(135deg, #050514 0%, #0a0a1f 40%, #1a103d 100%);
+      color: white;
+      position: relative;
+      overflow: hidden;
+      min-height: 100vh;
+    }
+
+    /* Layered starfields */
+    .starfield {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .stars-small,
+    .stars-medium,
+    .stars-large {
+      position: absolute;
+      inset: 0;
+      background-repeat: repeat;
+    }
+
+    .stars-small {
+      background-image:
+        radial-gradient(1px 1px at 20% 30%, white, transparent),
+        radial-gradient(1px 1px at 60% 70%, rgba(255,255,255,0.85), transparent),
+        radial-gradient(1px 1px at 50% 50%, white, transparent),
+        radial-gradient(1px 1px at 80% 10%, rgba(255,255,255,0.6), transparent),
+        radial-gradient(1px 1px at 90% 60%, white, transparent),
+        radial-gradient(1px 1px at 33% 80%, rgba(255,255,255,0.7), transparent),
+        radial-gradient(1px 1px at 15% 90%, white, transparent),
+        radial-gradient(1px 1px at 70% 25%, rgba(255,255,255,0.8), transparent);
+      background-size: 250px 250px;
+      animation: drift 240s linear infinite;
+      opacity: 0.9;
+    }
+
+    .stars-medium {
+      background-image:
+        radial-gradient(1.5px 1.5px at 10% 20%, rgba(255,255,255,0.95), transparent),
+        radial-gradient(1.5px 1.5px at 70% 60%, white, transparent),
+        radial-gradient(1.5px 1.5px at 40% 90%, rgba(255,255,255,0.85), transparent),
+        radial-gradient(1.5px 1.5px at 85% 15%, white, transparent),
+        radial-gradient(1.5px 1.5px at 25% 65%, rgba(255,255,255,0.9), transparent);
+      background-size: 400px 400px;
+      animation: drift 360s linear infinite reverse;
+      opacity: 0.8;
+    }
+
+    .stars-large {
+      background-image:
+        radial-gradient(2.5px 2.5px at 30% 40%, white, transparent),
+        radial-gradient(2px 2px at 75% 20%, rgba(34, 211, 238, 0.95), transparent),
+        radial-gradient(2px 2px at 50% 80%, rgba(251, 191, 36, 0.95), transparent),
+        radial-gradient(2.5px 2.5px at 90% 50%, white, transparent),
+        radial-gradient(2px 2px at 18% 75%, rgba(167, 139, 250, 0.9), transparent);
+      background-size: 600px 600px;
+      animation: drift 480s linear infinite, twinkle 4s ease-in-out infinite;
+      opacity: 0.95;
+    }
+
+    @keyframes drift {
+      from { transform: translateY(0); }
+      to { transform: translateY(-2000px); }
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.95; }
+      50% { opacity: 0.55; }
+    }
+
+    /* Slow parallax nebula glow */
+    .nebula-glow {
+      position: absolute;
+      inset: -20%;
+      background:
+        radial-gradient(circle at 30% 30%, rgba(139, 92, 246, 0.25) 0%, transparent 25%),
+        radial-gradient(circle at 70% 60%, rgba(99, 102, 241, 0.25) 0%, transparent 30%),
+        radial-gradient(circle at 50% 80%, rgba(34, 211, 238, 0.18) 0%, transparent 25%);
+      filter: blur(60px);
+      animation: nebulaShift 30s ease-in-out infinite alternate;
+      pointer-events: none;
+    }
+
+    @keyframes nebulaShift {
+      from { transform: translate(0, 0) rotate(0deg); }
+      to { transform: translate(40px, -30px) rotate(20deg); }
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-title,
+    .hero-subtitle {
+      color: white;
+      -webkit-text-fill-color: white;
+    }
+
+    .hero-title {
+      background: linear-gradient(135deg, #fff 0%, #c7d2fe 50%, #a5f3fc 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-shadow: 0 0 60px rgba(167, 139, 250, 0.4);
+    }
+
+    .hero-subtitle {
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--app-accent);
+      -webkit-text-fill-color: var(--app-accent);
+      font-weight: 600;
+    }
+
+    .hero-description {
+      color: rgba(255, 255, 255, 0.85);
+      max-width: 580px;
+    }
+
+    /* Hero icon with cosmic ring */
+    .hero-icon-wrap {
+      position: relative;
+      display: inline-block;
+      padding: 60px;
+    }
+
+    .hero-icon-wrap::before,
+    .hero-icon-wrap::after {
+      content: '';
+      position: absolute;
+      border-radius: 50%;
+      border: 1px solid rgba(167, 139, 250, 0.4);
+      pointer-events: none;
+    }
+
+    .hero-icon-wrap::before {
+      inset: 30px;
+      animation: orbit 24s linear infinite;
+      border-top-color: rgba(34, 211, 238, 0.9);
+      border-right-color: rgba(34, 211, 238, 0.4);
+    }
+
+    .hero-icon-wrap::after {
+      inset: 0;
+      animation: orbit 60s linear infinite reverse;
+      border-top-color: rgba(251, 191, 36, 0.7);
+      border-left-color: rgba(251, 191, 36, 0.3);
+    }
+
+    @keyframes orbit {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .hero-icon {
+      width: 280px;
+      height: 280px;
+      border-radius: 64px;
+      box-shadow:
+        0 30px 80px rgba(99, 102, 241, 0.5),
+        0 0 120px rgba(139, 92, 246, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      animation: floatIcon 6s ease-in-out infinite;
+      position: relative;
+      z-index: 2;
+    }
+
+    @keyframes floatIcon {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-12px); }
+    }
+
+    /* Cosmic CTA */
+    .hero-cta .btn-buy {
+      background: linear-gradient(135deg, var(--app-primary), var(--app-secondary));
+      box-shadow: 0 10px 40px rgba(99, 102, 241, 0.5);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    .hero-cta .btn-buy:hover {
+      box-shadow: 0 15px 60px rgba(139, 92, 246, 0.7);
+    }
+
+    /* Platform pills row */
+    .platform-pills {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-top: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .platform-pill {
+      padding: 0.4rem 0.95rem;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 99px;
+      color: rgba(255, 255, 255, 0.95);
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      backdrop-filter: blur(10px);
+    }
+
+    /* Cosmic feature card accents */
+    .feature-card {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .feature-card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(99, 102, 241, 0.08) 0%, transparent 60%);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      pointer-events: none;
+    }
+
+    .feature-card:hover::before {
+      opacity: 1;
+    }
+
+    .feature-icon {
+      background: linear-gradient(135deg, var(--app-primary), var(--app-secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* Hardware table */
+    .hw-table-wrap {
+      max-width: 900px;
+      margin: 0 auto;
+      overflow-x: auto;
+    }
+
+    .hw-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: 0 4px 20px var(--shadow-color);
+    }
+
+    .hw-table th,
+    .hw-table td {
+      padding: 1rem 1.25rem;
+      text-align: left;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .hw-table tr:last-child th,
+    .hw-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .hw-table thead th {
+      background: linear-gradient(135deg, rgba(99, 102, 241, 0.15), rgba(139, 92, 246, 0.15));
+      font-weight: 700;
+      color: var(--text-primary);
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .hw-table tbody th {
+      width: 32%;
+      color: var(--text-primary);
+      font-weight: 700;
+    }
+
+    .hw-table tbody td {
+      color: var(--text-secondary);
+    }
+
+    .hw-table tbody tr:hover {
+      background: rgba(99, 102, 241, 0.05);
+    }
+
+    .hw-pill {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      background: rgba(99, 102, 241, 0.12);
+      color: var(--app-primary);
+      border-radius: 6px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-right: 0.25rem;
+    }
+
+    /* Workflow / how it works */
+    .workflow-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+      max-width: 1100px;
+      margin: 0 auto;
+      counter-reset: step;
+    }
+
+    .workflow-step {
+      position: relative;
+      padding: 2rem 1.5rem 1.5rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      counter-increment: step;
+      transition: all var(--transition-base);
+      box-shadow: 0 4px 20px var(--shadow-color);
+    }
+
+    .workflow-step::before {
+      content: counter(step);
+      position: absolute;
+      top: -1.25rem;
+      left: 1.5rem;
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--app-primary), var(--app-secondary));
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 1.1rem;
+      box-shadow: 0 6px 16px rgba(99, 102, 241, 0.4);
+    }
+
+    .workflow-step:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 40px rgba(99, 102, 241, 0.18);
+      border-color: rgba(99, 102, 241, 0.4);
+    }
+
+    .workflow-step h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin: 0.5rem 0 0.5rem;
+    }
+
+    .workflow-step p {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      line-height: 1.55;
+      margin: 0;
+    }
+
+    /* Pricing */
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      max-width: 460px;
+      margin: 2rem auto 0;
+    }
+
+    .pricing-card {
+      background: var(--bg-card);
+      backdrop-filter: blur(20px) saturate(180%);
+      border: 2px solid var(--app-primary);
+      border-radius: var(--radius-lg);
+      padding: 2.5rem 2rem;
+      text-align: center;
+      box-shadow: 0 12px 40px rgba(99, 102, 241, 0.25);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .pricing-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% 0%, rgba(139, 92, 246, 0.15), transparent 60%);
+      pointer-events: none;
+    }
+
+    .pricing-badge {
+      display: inline-block;
+      padding: 0.35rem 1rem;
+      background: linear-gradient(135deg, var(--app-primary), var(--app-secondary));
+      color: white;
+      border-radius: 99px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    .pricing-card h3 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .pricing-price {
+      font-size: 3.5rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--app-primary), var(--app-secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+      margin: 0.75rem 0 0.25rem;
+    }
+
+    .pricing-period {
+      font-size: 1rem;
+      color: var(--text-secondary);
+      font-weight: 500;
+      margin-bottom: 1.25rem;
+    }
+
+    .pricing-features {
+      text-align: left;
+      max-width: 280px;
+      margin: 1.5rem auto;
+      list-style: none;
+      padding: 0;
+    }
+
+    .pricing-features li {
+      padding: 0.4rem 0;
+      color: var(--text-secondary);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.95rem;
+    }
+
+    .pricing-features li::before {
+      content: '✓';
+      color: var(--app-primary);
+      font-weight: 800;
+      font-size: 1.05rem;
+    }
+
+    .pricing-cta {
+      display: inline-block;
+      padding: 0.85rem 2rem;
+      background: linear-gradient(135deg, var(--app-primary), var(--app-secondary));
+      color: white;
+      text-decoration: none;
+      border-radius: 99px;
+      font-weight: 700;
+      box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
+      transition: all var(--transition-base);
+      margin-top: 0.5rem;
+    }
+
+    .pricing-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(99, 102, 241, 0.6);
+    }
+
+    /* Floating download button cosmic style */
+    .floating-appstore {
+      background: linear-gradient(135deg, var(--app-primary), var(--app-secondary));
+      box-shadow: 0 8px 32px rgba(99, 102, 241, 0.45);
+    }
+
+    /* Section subtitles in cosmic accent */
+    .section-subtitle {
+      color: var(--app-primary);
+    }
+
+    /* Magazine sections cosmic frame */
+    .magazine-image {
+      position: relative;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+    }
+
+    .magazine-image::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: var(--radius-lg);
+      box-shadow: inset 0 0 80px rgba(99, 102, 241, 0.15);
+      pointer-events: none;
+    }
+
+    /* Hero responsive tuning */
+    @media (max-width: 900px) {
+      .hero-icon {
+        width: 200px;
+        height: 200px;
+        border-radius: 48px;
+      }
+      .hero-icon-wrap {
+        padding: 40px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="app-nav">
+    <div class="nav-container">
+      <a href="../" class="nav-logo">← Apps</a>
+      <button class="mobile-menu-toggle">☰</button>
+      <ul class="nav-links">
+        <li><a href="#features" class="nav-link">Features</a></li>
+        <li><a href="#workflow" class="nav-link">Workflow</a></li>
+        <li><a href="#hardware" class="nav-link">Hardware</a></li>
+        <li><a href="#pricing" class="nav-link">Pricing</a></li>
+        <li><a href="#faq" class="nav-link">FAQ</a></li>
+        <li><a href="https://apps.apple.com/us/app/asteroic/id6762578808" class="btn-buy" target="_blank" rel="noopener noreferrer">Download on App Store</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="starfield">
+      <div class="stars-small"></div>
+      <div class="stars-medium"></div>
+      <div class="stars-large"></div>
+    </div>
+    <div class="nebula-glow"></div>
+
+    <div class="hero-content">
+      <div class="hero-text">
+        <p class="hero-subtitle">✦ Asteroic</p>
+        <h1 class="hero-title">Deep-Sky Astrophotography, Done Right</h1>
+        <p class="hero-description">
+          One app drives your tracking mount, mirrorless camera, and offline plate solver — so you can land the shot without babysitting three separate tools. Auto-align in seconds, run live stacks, plan mosaics, and shoot motion timelapses from your iPhone, iPad, Mac, or Apple Watch.
+        </p>
+
+        <div class="platform-pills">
+          <span class="platform-pill">iPhone</span>
+          <span class="platform-pill">iPad</span>
+          <span class="platform-pill">Mac</span>
+          <span class="platform-pill">Apple Watch</span>
+        </div>
+
+        <div class="hero-cta">
+          <a href="https://apps.apple.com/us/app/asteroic/id6762578808" class="btn-buy" target="_blank" rel="noopener noreferrer">Download on App Store</a>
+        </div>
+      </div>
+      <div class="hero-image">
+        <div class="hero-icon-wrap">
+          <img src="assets/images/icon.png" alt="Asteroic App Icon" class="hero-icon">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Floating App Store Button -->
+  <a href="https://apps.apple.com/us/app/asteroic/id6762578808" class="floating-appstore" target="_blank" rel="noopener noreferrer">
+    <span class="floating-appstore-icon"></span>
+    <span>Download on App Store</span>
+  </a>
+
+  <!-- Features Section -->
+  <section id="features" class="section">
+    <div class="section-header">
+      <p class="section-subtitle">What it does</p>
+      <h2>Three Tools, One Source of Truth</h2>
+      <p>No more swapping between the Polaris app, Canon's control utility, and a plate-solving service. Asteroic unifies the entire capture loop.</p>
+    </div>
+
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-icon">🎯</div>
+        <h3 class="feature-title">Integrated Mount + Camera</h3>
+        <p class="feature-description">
+          One screen drives the Benro Polaris mount over BLE + TCP and a Canon EOS body over CCAPI. Joystick, shutter, ISO wheels, and target picker all live together.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🛰️</div>
+        <h3 class="feature-title">Offline Plate Solving</h3>
+        <p class="feature-description">
+          Bundled star catalog and pattern matcher run entirely on-device. No internet, no astrometry.net round trips — solves work on the mount's air-gapped Wi-Fi network.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🎯</div>
+        <h3 class="feature-title">Auto-Align</h3>
+        <p class="feature-description">
+          Shoot → solve → sync → nudge, on repeat, until your target is centered. No two-star alignment walk. Sun, Moon, and planets resolved via live ephemeris.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🌌</div>
+        <h3 class="feature-title">Live Stacking</h3>
+        <p class="feature-description">
+          Translation-aligned integration with on-device star detection. The build-up preview updates every frame so you can watch faint nebulosity emerge in real time.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🧩</div>
+        <h3 class="feature-title">Mosaic Planner</h3>
+        <p class="feature-description">
+          Set two corners from the joystick and Asteroic walks the rectangular grid for you with configurable overlap. Capture wide-field panels of the Milky Way without doing the trig.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🎬</div>
+        <h3 class="feature-title">Motion Timelapses</h3>
+        <p class="feature-description">
+          Linear pan between start and end poses at your chosen frame rate. Optional sidereal tracking pins the stars while the foreground drifts.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">📱</div>
+        <h3 class="feature-title">AR Sky Chart</h3>
+        <p class="feature-description">
+          Point your phone at the sky and see labeled targets overlaid via ARKit. Tap a galaxy or nebula to slew the mount and start the capture.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">⌚</div>
+        <h3 class="feature-title">Apple Watch Companion</h3>
+        <p class="feature-description">
+          Full mount joystick, camera-setting wheels, plate-solve trigger, and a zoomable preview — right on your wrist. Works over Bluetooth even when your phone is on the mount's hotspot.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🖥️</div>
+        <h3 class="feature-title">Mac on the Big Canvas</h3>
+        <p class="feature-description">
+          Same source tree, same controls, larger workspace. Review the night's gallery, reprocess RAW frames, and rebuild stacks at desktop scale.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Workflow / How It Works -->
+  <section id="workflow" class="section">
+    <div class="section-header">
+      <p class="section-subtitle">How auto-align works</p>
+      <h2>From Tap to Framed in Seconds</h2>
+      <p>The closed loop that replaces the two-star alignment walk most mounts still demand.</p>
+    </div>
+
+    <div class="workflow-grid">
+      <div class="workflow-step">
+        <h3>Pick a target</h3>
+        <p>Browse the catalog, the AR sky chart, or visible-tonight filtered by altitude.</p>
+      </div>
+      <div class="workflow-step">
+        <h3>Capture a frame</h3>
+        <p>Asteroic triggers the camera over CCAPI and pulls the JPEG preview down the network.</p>
+      </div>
+      <div class="workflow-step">
+        <h3>Solve offline</h3>
+        <p>The bundled star-pattern matcher figures out exactly where the camera is pointing — no internet required.</p>
+      </div>
+      <div class="workflow-step">
+        <h3>Sync &amp; nudge</h3>
+        <p>The mount syncs to the solved coordinate and slews the residual error. Loop until the target is centered.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Magazine-style sections -->
+  <section class="section">
+    <div class="magazine-section">
+      <div class="magazine-content">
+        <h2>Plate Solving That Actually Works in the Field</h2>
+        <p>
+          Most plate-solving workflows assume you have a reliable internet connection at your dark site.
+          You don't. Asteroic ships the catalog and the pattern matcher inside the app and runs the
+          solve on the device's neural and CPU cores.
+        </p>
+        <p>
+          That means the loop closes in seconds even when you're tethered to the mount's
+          air-gapped Wi-Fi hotspot — the only network you actually have at 11pm in a national forest.
+        </p>
+      </div>
+      <div class="magazine-image">
+        <div style="background: radial-gradient(circle at 50% 50%, #1a103d, #050514); min-height: 380px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden;">
+          <div class="starfield">
+            <div class="stars-small" style="opacity: 0.5;"></div>
+            <div class="stars-large" style="opacity: 0.7;"></div>
+          </div>
+          <div style="position: relative; z-index: 1; width: 70%; max-width: 280px; aspect-ratio: 1; border: 2px dashed rgba(34, 211, 238, 0.6); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: rgba(34, 211, 238, 0.95); font-family: 'SF Mono', monospace; font-size: 0.85rem; text-align: center; padding: 1rem; line-height: 1.6;">
+            <div>
+              SOLVED<br>
+              <span style="color: white; font-size: 1.2rem; font-weight: 700;">RA 5h 35m 17s</span><br>
+              <span style="color: white; font-size: 1.2rem; font-weight: 700;">Dec −5° 23′</span><br>
+              <span style="color: rgba(251, 191, 36, 0.9); font-size: 0.9rem;">M42 — Orion Nebula</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="magazine-section reverse">
+      <div class="magazine-content">
+        <h2>The Watch You Already Wear, Now in Charge</h2>
+        <p>
+          Walk away from the tripod. The Apple Watch companion gives you the full mount joystick, ISO and shutter
+          wheels, lens picker, framing-corner capture, plate-solve trigger, and a zoomable live preview of both
+          the raw viewfinder and the in-progress stack.
+        </p>
+        <p>
+          Pairing happens automatically over WatchConnectivity even when the phone is joined to the mount's
+          offline Wi-Fi network — a surprisingly hard problem that Asteroic just handles.
+        </p>
+      </div>
+      <div class="magazine-image">
+        <div style="background: linear-gradient(135deg, #050514, #1a103d); min-height: 380px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden;">
+          <div class="starfield"><div class="stars-small" style="opacity: 0.4;"></div></div>
+          <div style="position: relative; z-index: 1; width: 200px; height: 240px; background: #000; border-radius: 40px; border: 4px solid #2a2a3e; padding: 16px; display: flex; flex-direction: column; gap: 8px; box-shadow: 0 20px 50px rgba(0,0,0,0.5);">
+            <div style="background: rgba(99, 102, 241, 0.2); border-radius: 12px; padding: 8px; color: white; font-size: 0.7rem; text-align: center;">M31 · +47°</div>
+            <div style="background: rgba(255,255,255,0.05); border-radius: 12px; flex: 1; display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.4); font-size: 0.65rem;">live preview</div>
+            <div style="display: flex; gap: 6px;">
+              <div style="flex: 1; background: rgba(34, 211, 238, 0.25); border-radius: 8px; padding: 6px; text-align: center; color: white; font-size: 0.65rem; font-weight: 700;">SOLVE</div>
+              <div style="flex: 1; background: rgba(239, 68, 68, 0.6); border-radius: 8px; padding: 6px; text-align: center; color: white; font-size: 0.65rem; font-weight: 700;">FIRE</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="magazine-section">
+      <div class="magazine-content">
+        <h2>Mosaics &amp; Motion, Without the Spreadsheet</h2>
+        <p>
+          Frame your two corners from the joystick. Asteroic computes the tile grid, the overlap, and walks
+          the mount through every panel — capturing each frame with the same exposure ladder.
+        </p>
+        <p>
+          For motion timelapses, set a start pose and an end pose, pick a duration and frame rate, and let
+          the linear interpolator drive the mount. Toggle sidereal tracking to keep the stars pinned while
+          the landscape rolls beneath them.
+        </p>
+      </div>
+      <div class="magazine-image">
+        <div style="background: linear-gradient(135deg, #050514, #1a103d); min-height: 380px; padding: 2rem; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden;">
+          <div class="starfield"><div class="stars-small" style="opacity: 0.4;"></div></div>
+          <div style="position: relative; z-index: 1; display: grid; grid-template-columns: repeat(4, 1fr); grid-template-rows: repeat(3, 1fr); gap: 4px; width: 80%; max-width: 360px; aspect-ratio: 4/3;">
+            <div style="background: rgba(99, 102, 241, 0.4); border: 1px solid rgba(167, 139, 250, 0.6); border-radius: 4px;"></div>
+            <div style="background: rgba(99, 102, 241, 0.5); border: 1px solid rgba(167, 139, 250, 0.6); border-radius: 4px;"></div>
+            <div style="background: rgba(99, 102, 241, 0.6); border: 1px solid rgba(167, 139, 250, 0.6); border-radius: 4px;"></div>
+            <div style="background: rgba(99, 102, 241, 0.4); border: 1px solid rgba(167, 139, 250, 0.6); border-radius: 4px;"></div>
+            <div style="background: rgba(139, 92, 246, 0.5); border: 1px solid rgba(167, 139, 250, 0.6); border-radius: 4px;"></div>
+            <div style="background: rgba(139, 92, 246, 0.7); border: 1px solid rgba(34, 211, 238, 0.95); border-radius: 4px; box-shadow: 0 0 16px rgba(34, 211, 238, 0.5);"></div>
+            <div style="background: rgba(139, 92, 246, 0.6); border: 1px solid rgba(167, 139, 250, 0.6); border-radius: 4px;"></div>
+            <div style="background: rgba(139, 92, 246, 0.4); border: 1px solid rgba(167, 139, 250, 0.6); border-radius: 4px;"></div>
+            <div style="background: rgba(99, 102, 241, 0.4); border: 1px solid rgba(167, 139, 250, 0.6); border-radius: 4px;"></div>
+            <div style="background: rgba(99, 102, 241, 0.5); border: 1px solid rgba(167, 139, 250, 0.6); border-radius: 4px;"></div>
+            <div style="background: rgba(99, 102, 241, 0.5); border: 1px solid rgba(167, 139, 250, 0.6); border-radius: 4px;"></div>
+            <div style="background: rgba(99, 102, 241, 0.3); border: 1px solid rgba(167, 139, 250, 0.6); border-radius: 4px;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Hardware Section -->
+  <section id="hardware" class="section">
+    <div class="section-header">
+      <p class="section-subtitle">Know your gear</p>
+      <h2>Hardware Compatibility</h2>
+      <p>Asteroic runs end-to-end on this stack — and degrades gracefully without it.</p>
+    </div>
+
+    <div class="hw-table-wrap">
+      <table class="hw-table">
+        <thead>
+          <tr>
+            <th>Piece</th>
+            <th>Minimum</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>Mount</th>
+            <td><span class="hw-pill">Benro Polaris</span> BLE wake + TCP 9090 rocker protocol</td>
+          </tr>
+          <tr>
+            <th>Camera</th>
+            <td><span class="hw-pill">Canon EOS</span> with CCAPI — tested on R5 Mark II (firmware 1.2)</td>
+          </tr>
+          <tr>
+            <th>Other cameras</th>
+            <td><span class="hw-pill">libgphoto2</span> Nikon, Sony, Fuji, Olympus over USB tether — anything gphoto2 supports</td>
+          </tr>
+          <tr>
+            <th>iPhone</th>
+            <td>iOS 26, A15 or newer (ARKit orientation tracking)</td>
+          </tr>
+          <tr>
+            <th>Apple Watch</th>
+            <td>watchOS 11, Series 6 or newer</td>
+          </tr>
+          <tr>
+            <th>Mac</th>
+            <td>macOS 26, Apple Silicon</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p style="text-align: center; max-width: 720px; margin: 2rem auto 0; color: var(--text-secondary); font-size: 0.95rem;">
+      No mount? A dumb tripod works too. Pointing throws <code style="background: rgba(99,102,241,0.1); padding: 2px 6px; border-radius: 4px; font-family: 'SF Mono', monospace; font-size: 0.85em;">.unsupported</code> and everything else still runs — capture, plate solve, live stack.
+    </p>
+  </section>
+
+  <!-- Pricing Section -->
+  <section id="pricing" class="section">
+    <div class="section-header">
+      <p class="section-subtitle">Pricing</p>
+      <h2>One Price. Every Apple Device.</h2>
+      <p>Buy once. Use it on iPhone, iPad, Mac, and Apple Watch. Forever.</p>
+    </div>
+
+    <div class="pricing-grid">
+      <div class="pricing-card">
+        <div class="pricing-badge">Universal Purchase</div>
+        <h3>Asteroic</h3>
+        <div class="pricing-price">$9.99</div>
+        <div class="pricing-period">one-time · all platforms</div>
+        <ul class="pricing-features">
+          <li>iPhone, iPad, Mac, Apple Watch</li>
+          <li>Mount + camera + plate solve</li>
+          <li>Live stacks, mosaics, timelapses</li>
+          <li>AR sky chart with ARKit</li>
+          <li>Offline catalog and solver</li>
+          <li>Apple Family Sharing</li>
+          <li>No subscription, ever</li>
+        </ul>
+        <a href="https://apps.apple.com/us/app/asteroic/id6762578808" class="pricing-cta" target="_blank" rel="noopener noreferrer">Get Asteroic →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section id="faq" class="faq-section">
+    <div class="section-header">
+      <p class="section-subtitle">Got Questions?</p>
+      <h2>Frequently Asked Questions</h2>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        <span>Do I need a Benro Polaris mount to use Asteroic?</span>
+        <span class="faq-icon">▼</span>
+      </button>
+      <div class="faq-answer">
+        <p>
+          No. The mount-control features need a Polaris (over BLE + TCP), but Asteroic still runs on a dumb tripod —
+          you get capture, offline plate solving, live stacking, and the AR sky chart. Pointing operations cleanly
+          throw <code>.unsupported</code> and the rest of the app works as expected.
+        </p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        <span>Which cameras work with Asteroic?</span>
+        <span class="faq-icon">▼</span>
+      </button>
+      <div class="faq-answer">
+        <p>
+          Canon EOS bodies that support CCAPI (tested on the R5 Mark II with firmware 1.2) are the first-class path
+          and connect over the mount's Wi-Fi hotspot. Other bodies — Nikon, Sony, Fuji, Olympus — connect via
+          libgphoto2 over USB tether. The iPhone's own camera is also a supported capture source.
+        </p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        <span>Does plate solving really work without the internet?</span>
+        <span class="faq-icon">▼</span>
+      </button>
+      <div class="faq-answer">
+        <p>
+          Yes. The star catalog and the pattern matcher are bundled inside the app and run on-device. There are no
+          astrometry.net round-trips, no API keys, and no rate limits. Solves work on the mount's air-gapped Wi-Fi
+          network at a remote dark site with no cellular signal.
+        </p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        <span>What is "auto-align" and how is it different from a two-star alignment?</span>
+        <span class="faq-icon">▼</span>
+      </button>
+      <div class="faq-answer">
+        <p>
+          A traditional two-star alignment requires you to manually slew to known stars and confirm them. Asteroic's
+          auto-align is a closed loop: it captures a frame, plate-solves it offline to figure out exactly where the
+          mount is pointing, syncs the mount to that coordinate, then slews the residual error toward your target.
+          It repeats until the target is centered. You tap once and walk away.
+        </p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        <span>How does the Apple Watch companion stay connected at the mount?</span>
+        <span class="faq-icon">▼</span>
+      </button>
+      <div class="faq-answer">
+        <p>
+          The Polaris exposes a Wi-Fi hotspot that your iPhone has to join in order to talk to the camera. That
+          would normally cut your phone off from cellular and from the watch, but Asteroic uses WatchConnectivity
+          over Bluetooth so the watch keeps full control of the mount, the camera, and the plate-solve trigger
+          regardless of what network the phone is on.
+        </p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        <span>What does the live stacking actually do?</span>
+        <span class="faq-icon">▼</span>
+      </button>
+      <div class="faq-answer">
+        <p>
+          As frames come in from the camera, Asteroic detects stars, computes the translation between frames,
+          aligns and integrates them on-device, and updates the build-up preview in real time. You see faint
+          nebulosity emerge over the course of the session instead of waiting until you get home to find out
+          you missed focus or had a bad guide.
+        </p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        <span>Can I plan a mosaic visually instead of doing the math?</span>
+        <span class="faq-icon">▼</span>
+      </button>
+      <div class="faq-answer">
+        <p>
+          Yes. Use the joystick to frame the top-left corner of the area you want, capture it, then frame the
+          bottom-right corner and capture that too. Asteroic computes the rectangular grid, applies your chosen
+          overlap percentage, and walks the mount through every tile with the same exposure settings.
+        </p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        <span>Does motion timelapse track the stars?</span>
+        <span class="faq-icon">▼</span>
+      </button>
+      <div class="faq-answer">
+        <p>
+          Optionally. By default the mount linearly interpolates between your start and end poses at the chosen
+          frame rate and duration. Toggle sidereal tracking on and the mount counter-rotates earth's spin while
+          panning, so the stars stay pinned in the frame and the foreground drifts beneath them.
+        </p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        <span>Is this a subscription?</span>
+        <span class="faq-icon">▼</span>
+      </button>
+      <div class="faq-answer">
+        <p>
+          No. Asteroic is a one-time $9.99 universal purchase. It works on iPhone, iPad, Mac, and Apple Watch with
+          a single buy, and supports Apple Family Sharing so one purchase covers your household. There are no
+          subscriptions, no in-app purchases, and no ongoing fees.
+        </p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        <span>What about the Sun, Moon, and planets?</span>
+        <span class="faq-icon">▼</span>
+      </button>
+      <div class="faq-answer">
+        <p>
+          The Sun, Moon, and planets are resolved against a live ephemeris instead of a stale catalog file, so
+          their positions are always current. They appear in the target picker and the AR sky chart with
+          visibility windows for tonight at your location.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+
+  <!-- Security Hardening Callout -->
+  <section class="security-callout">
+    <div class="section-header">
+      <p class="section-subtitle">Security &amp; Privacy</p>
+      <h2>Hardened by Design</h2>
+    </div>
+    <div class="security-badges">
+      <div class="security-badge"><span class="badge-icon">&#x1f4f7;</span> On-Device Capture &amp; Solve</div>
+      <div class="security-badge"><span class="badge-icon">&#x1f50c;</span> No Telemetry</div>
+      <div class="security-badge"><span class="badge-icon">&#x1f512;</span> Local Network Only</div>
+      <div class="security-badge"><span class="badge-icon">&#x2705;</span> Memory-Safe Swift</div>
+    </div>
+    <p class="security-audit-note">All capture, plate solving, and stacking happens on your device — no servers, no accounts.</p>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-links">
+        <a href="../" class="footer-link">All Apps</a>
+        <a href="../sami/" class="footer-link">Sami</a>
+        <a href="../enter-space/" class="footer-link">Enter Space</a>
+        <a href="../ari-helper/" class="footer-link">Ari Helper</a>
+        <a href="../mi-speaks/" class="footer-link">Mi Speaks</a>
+        <a href="../embr/" class="footer-link">Embr</a>
+        <a href="../deepsi/" class="footer-link">DeepSi</a>
+        <a href="../luma-editor/" class="footer-link">Luma Editor</a>
+        <a href="../wise-flyer/" class="footer-link">Wise Flyer</a>
+        <a href="/privacy/" class="footer-link">Privacy</a>
+        <a href="/terms/" class="footer-link">Terms</a>
+        <a href="/" class="footer-link">Portfolio</a>
+      </div>
+
+      <!-- Social Media Links -->
+      <div class="footer-social-links">
+        <a href="https://x.com/apps_by_blaine" class="social-icon-link" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)">
+          <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+          </svg>
+        </a>
+        <a href="https://www.instagram.com/apps.by.blaine/" class="social-icon-link" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+          <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+          </svg>
+        </a>
+        <a href="https://www.youtube.com/@AppsByBlaine" class="social-icon-link" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+          <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+          </svg>
+        </a>
+      </div>
+
+      <p style="color: var(--text-muted); margin-top: var(--spacing-md);">
+        © <span id="year"></span> Blaine Miller. All rights reserved.
+      </p>
+    </div>
+  </footer>
+
+  <script src="../app-showcase.js"></script>
+</body>
+</html>
