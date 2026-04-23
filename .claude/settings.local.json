@@ -7,7 +7,22 @@
       "Bash(git commit:*)",
       "Bash(git push)",
       "Bash(curl:*)",
-      "Bash(git cherry-pick:*)"
+      "Bash(git cherry-pick:*)",
+      "Bash(find /Users/blainemiller/Documents/scripts/blaineam.github.io -type f -name *ari*)",
+      "Bash(git push:*)",
+      "Bash(gh pr:*)",
+      "Bash(brew list:*)",
+      "Bash(git branch:*)",
+      "Bash(git rebase:*)",
+      "Bash(git reset:*)",
+      "Bash(grep -rn \"9.99\\\\|\\\\$\" /Users/blainemiller/Documents/scripts/blaineam.github.io/apps/sami/index.html)",
+      "WebFetch(domain:apps.apple.com)",
+      "WebFetch(domain:itunes.apple.com)",
+      "Bash(gh repo *)",
+      "Bash(gh api *)",
+      "Bash(python3 -c \"import json,sys; data=json.load\\(sys.stdin\\); [print\\(f['name'], f.get\\('size'\\), f.get\\('download_url'\\)\\) for f in data]\")",
+      "Bash(sips -z 60 60 /Users/blainemiller/Documents/scripts/blaineam.github.io/projects/asteroic.png)",
+      "Bash(node -e \"console.log\\(Buffer.from\\('https://signal.me/#eu/UflC0jvalbCbpb6fmxz87134Zr8wssZqj4XEVjAxOJ0DLN6maNNIhJcIYwIf8_op'\\).toString\\('base64'\\)\\)\")"
     ]
   }
 }
