@@ -1,0 +1,116 @@
+name: Mirror app docs into /apps
+
+# Pulls the `docs/` landing pages from each app's own public repo and
+# mirrors them under `apps/<slug>/` in this repo. Keeps the source of truth
+# in each app repo while consolidating hosting onto wemiller.com/apps/<slug>/.
+#
+# Triggers:
+#   - `schedule`   — belt-and-braces hourly mirror in case a notify fires
+#                    while this workflow is cooldown'd.
+#   - `workflow_dispatch` — manual trigger from the Actions tab.
+#   - `repository_dispatch` with `event_type: mirror-app-docs` — fired by
+#     each app repo's tiny notify workflow on push to main (optional; if
+#     you don't wire that up, cron is enough).
+#
+# Why pull instead of push: the app repos are public, so this workflow
+# checks them out with zero extra credentials. Push-mirroring would need
+# a write-scoped PAT stored in every app repo (secret sprawl). The write
+# token needed for commit-back is the default `GITHUB_TOKEN` plus
+# `contents: write` permission, scoped to this repo only.
+
+on:
+  # Daily fallback so a repo-dispatch failure / missed notify still lands
+  # fresh docs within 24h. The real-time trigger is `repository_dispatch`
+  # fired by each app repo's tiny notify workflow on push to its main.
+  schedule:
+    - cron: '17 7 * * *'   # 07:17 UTC daily (~03:17 ET)
+  workflow_dispatch:
+  repository_dispatch:
+    types: [mirror-app-docs]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: mirror-app-docs
+  cancel-in-progress: false
+
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout portfolio
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+
+      # Each entry is "<app-repo>:<portfolio-slug>". The source path
+      # inside the app repo is always `docs/`. Add more lines here to
+      # onboard a new app — no other workflow changes needed.
+      - name: Mirror Blip docs
+        uses: actions/checkout@v4
+        with:
+          repository: blaineam/Blip
+          path: .mirror/blip
+          ref: main
+          persist-credentials: false
+
+      - name: Mirror Glint docs
+        uses: actions/checkout@v4
+        with:
+          repository: blaineam/Glint
+          path: .mirror/glint
+          ref: main
+          persist-credentials: false
+
+      # rsync with --delete keeps the mirror exactly in sync: if the app
+      # repo renames/drops a file in docs/, the portfolio loses it too.
+      # Filter rules:
+      #   * exclude CNAME — the app's subdomain CNAME would hijack
+      #     wemiller.com if copied up.
+      #   * protect `assets/images/` — the apps grid (apps/index.html) uses
+      #     `apps/<slug>/assets/images/icon.png` as the card icon and that
+      #     file isn't tracked inside each app's docs/. `protect` (P)
+      #     prevents --delete from removing destination paths that don't
+      #     exist in the source.
+      - name: Sync into apps/
+        run: |
+          set -euo pipefail
+          sync_one() {
+            local slug="$1" src="$2"
+            mkdir -p "apps/$slug"
+            rsync -av --delete \
+              --filter='P assets/images/' \
+              --exclude='CNAME' \
+              --exclude='.git' \
+              --exclude='.github' \
+              "$src/docs/" "apps/$slug/"
+          }
+          sync_one blip  .mirror/blip
+          sync_one glint .mirror/glint
+
+      # Canonicalize the landing pages: the app repos still reference
+      # their old <slug>.wemiller.com subdomains in canonical / og / schema
+      # tags. We flip them to the new /apps/<slug>/ path at mirror time
+      # so the app repos don't need any edits.
+      - name: Rewrite subdomain URLs → /apps/<slug>/
+        run: |
+          set -euo pipefail
+          for slug in blip glint; do
+            f="apps/$slug/index.html"
+            [ -f "$f" ] || continue
+            sed -i "s|https://$slug.wemiller.com/|https://wemiller.com/apps/$slug/|g" "$f"
+          done
+
+      - name: Commit mirrored docs
+        run: |
+          set -euo pipefail
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add apps/blip apps/glint
+          if git diff --cached --quiet; then
+            echo "No upstream doc changes — nothing to mirror."
+          else
+            git commit -m "chore(mirror): sync blip/glint docs → /apps [skip ci]"
+            git push
+          fi
