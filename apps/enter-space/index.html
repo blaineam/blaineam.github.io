@@ -316,6 +316,7 @@
       <button class="mobile-menu-toggle">☰</button>
       <ul class="nav-links">
         <li><a href="#features" class="nav-link">Features</a></li>
+        <li><a href="#roadmap" class="nav-link">v5 Roadmap</a></li>
         <li><a href="#screenshots" class="nav-link">Screenshots</a></li>
         <li><a href="#pricing" class="nav-link">Pricing</a></li>
         <li><a href="#compare" class="nav-link">Compare</a></li>
@@ -564,6 +565,499 @@
         </p>
       </div>
     </div>
+  </section>
+
+  <!-- v5 Roadmap — Interactive Node Mesh -->
+  <section id="roadmap" class="section roadmap-section">
+    <div class="section-header">
+      <h2 class="section-title">What I'm building next</h2>
+      <p class="section-subtitle">Hover, swipe, or tap any node. Each one's a feature in progress or just over the horizon.</p>
+    </div>
+
+    <div class="roadmap-mesh-host">
+      <svg id="roadmapMesh" class="roadmap-mesh" viewBox="0 0 1200 720" preserveAspectRatio="xMidYMid meet" aria-label="Feature roadmap node mesh">
+        <defs>
+          <radialGradient id="nodeGlowProgress" cx="0.35" cy="0.35" r="0.65">
+            <stop offset="0%"  stop-color="#9bb5ff"/>
+            <stop offset="60%" stop-color="#3b82f6"/>
+            <stop offset="100%" stop-color="#1e3a8a"/>
+          </radialGradient>
+          <radialGradient id="nodeGlowPlanned" cx="0.35" cy="0.35" r="0.65">
+            <stop offset="0%"  stop-color="#fde68a"/>
+            <stop offset="60%" stop-color="#f59e0b"/>
+            <stop offset="100%" stop-color="#92400e"/>
+          </radialGradient>
+          <radialGradient id="nodeGlowFuture" cx="0.35" cy="0.35" r="0.65">
+            <stop offset="0%"  stop-color="#f0abfc"/>
+            <stop offset="60%" stop-color="#a855f7"/>
+            <stop offset="100%" stop-color="#581c87"/>
+          </radialGradient>
+          <filter id="nodeBlur" x="-30%" y="-30%" width="160%" height="160%">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="1.2"/>
+          </filter>
+        </defs>
+        <g id="meshLines" class="mesh-lines"></g>
+        <g id="meshNodes" class="mesh-nodes"></g>
+      </svg>
+
+      <div id="roadmapTooltip" class="roadmap-tooltip" hidden>
+        <div class="roadmap-tooltip-status"></div>
+        <h4 class="roadmap-tooltip-title"></h4>
+        <p class="roadmap-tooltip-body"></p>
+      </div>
+
+      <div class="roadmap-mesh-legend">
+        <span><span class="legend-dot legend-progress"></span> Building now</span>
+        <span><span class="legend-dot legend-planned"></span> Coming soon</span>
+        <span><span class="legend-dot legend-future"></span> On the horizon</span>
+      </div>
+    </div>
+
+    <style>
+      .roadmap-section {
+        background:
+          radial-gradient(ellipse at 30% 20%, rgba(102,126,234,0.22), transparent 55%),
+          radial-gradient(ellipse at 70% 80%, rgba(168,85,247,0.18), transparent 55%),
+          linear-gradient(180deg, #0d1230 0%, #1a1140 50%, #0d1230 100%);
+        color: #f1f5f9;
+      }
+      .roadmap-section .section-title {
+        color: #ffffff;
+        background: linear-gradient(135deg, #ffffff 0%, #c7d2fe 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      .roadmap-section .section-subtitle {
+        color: rgba(241,245,249,0.85);
+      }
+      .roadmap-mesh-host {
+        position: relative;
+        max-width: 1200px;
+        margin: 0 auto;
+        aspect-ratio: 1200 / 720;
+        perspective: 1200px;
+      }
+      @media (max-width: 700px) {
+        .roadmap-mesh-host {
+          aspect-ratio: 480 / 900;
+          max-width: 480px;
+        }
+      }
+      .roadmap-mesh {
+        width: 100%;
+        height: 100%;
+        display: block;
+        cursor: grab;
+        transform-style: preserve-3d;
+        transition: transform 0.4s ease-out;
+      }
+      .roadmap-mesh.dragging { cursor: grabbing; transition: none; }
+
+      .mesh-lines line {
+        stroke: rgba(196,181,253,0.32);
+        stroke-width: 1;
+        transition: stroke 0.2s ease, stroke-width 0.2s ease, opacity 0.3s ease;
+      }
+      .mesh-lines line.active {
+        stroke: rgba(232,121,249,0.85);
+        stroke-width: 1.8;
+      }
+
+      .mesh-nodes .node {
+        cursor: pointer;
+        transition: transform 0.25s ease;
+        transform-origin: center;
+      }
+      .mesh-nodes .node:hover .node-circle,
+      .mesh-nodes .node.active .node-circle {
+        filter: drop-shadow(0 0 14px rgba(168,85,247,0.55));
+      }
+      .mesh-nodes .node-circle {
+        transition: filter 0.2s ease, transform 0.25s ease;
+        transform-origin: center;
+        transform-box: fill-box;
+      }
+      .mesh-nodes .node:hover .node-circle,
+      .mesh-nodes .node.active .node-circle {
+        transform: scale(1.18);
+      }
+      .mesh-nodes .node-label {
+        fill: #f8fafc;
+        font-size: 13px;
+        font-weight: 600;
+        text-anchor: middle;
+        pointer-events: none;
+        paint-order: stroke fill;
+        stroke: rgba(15,23,42,0.6);
+        stroke-width: 3px;
+        stroke-linejoin: round;
+      }
+
+      .roadmap-tooltip {
+        position: absolute;
+        max-width: 320px;
+        background: white;
+        border-radius: 14px;
+        padding: 1rem 1.25rem;
+        box-shadow: 0 18px 44px rgba(102,126,234,0.22);
+        border: 1px solid rgba(102,126,234,0.16);
+        pointer-events: none;
+        z-index: 5;
+        opacity: 0;
+        /* Transform is set inline by activate() so we get pixel-precise
+           horizontal clamping. CSS variables inside transform don't reliably
+           trigger reflow on update across browsers. */
+        transform: translate(-50%, -100%) translateY(-12px);
+        transition: opacity 0.18s ease;
+      }
+      .roadmap-tooltip.visible {
+        opacity: 1;
+      }
+      .roadmap-tooltip-status {
+        display: inline-block;
+        font-size: 0.7rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        padding: 0.18rem 0.55rem;
+        border-radius: 999px;
+        margin-bottom: 0.5rem;
+      }
+      .roadmap-tooltip-status.s-progress { background: rgba(59,130,246,0.14); color: #1d4ed8; }
+      .roadmap-tooltip-status.s-planned  { background: rgba(245,158,11,0.16); color: #b45309; }
+      .roadmap-tooltip-status.s-future   { background: rgba(168,85,247,0.16); color: #6b21a8; }
+      .roadmap-tooltip-title { margin: 0 0 0.35rem; font-size: 1.05rem; color: #111827; }
+      .roadmap-tooltip-body { margin: 0; color: #475569; line-height: 1.5; font-size: 0.9rem; }
+
+      .roadmap-mesh-legend {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1.5rem;
+        margin-top: 1.5rem;
+        font-size: 0.85rem;
+        color: rgba(241,245,249,0.78);
+      }
+      .roadmap-mesh-legend .legend-dot {
+        display: inline-block;
+        width: 10px; height: 10px;
+        border-radius: 50%;
+        margin-right: 0.35rem;
+        vertical-align: 0;
+      }
+      .legend-progress { background: linear-gradient(135deg, #9bb5ff, #1e3a8a); }
+      .legend-planned  { background: linear-gradient(135deg, #fde68a, #92400e); }
+      .legend-future   { background: linear-gradient(135deg, #f0abfc, #581c87); }
+
+      @media (max-width: 700px) {
+        .roadmap-mesh-host { aspect-ratio: 4 / 5; }
+        .mesh-nodes .node-label { font-size: 11px; }
+        .roadmap-tooltip { max-width: 88vw; }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .roadmap-mesh { transition: none; }
+      }
+    </style>
+
+    <script>
+      (function(){
+        // Human-readable, marketing-flavored tease copy. Only what's in
+        // progress now or coming soon — nothing technical, nothing shipped.
+        const NODES = [
+          // In progress (currently being built — none of these have shipped publicly yet)
+          { t: "Open Anywhere",            s: "progress", d: "Right-click any file in Finder, share from any app — and Enter Space takes it from there." },
+          { t: "Photo Twin Finder",        s: "progress", d: "Sees through resizes, re-edits, and re-saves to find the duplicates your eyes can't keep track of." },
+          { t: "Catch the Watermark",      s: "progress", d: "Spots watermarked copies of your photos so you keep the clean one — and warns you before you ever delete the wrong file." },
+          { t: "Video Tracks That Sing",   s: "progress", d: "When two videos look the same, Enter Space picks the one with real audio over the silent one." },
+          { t: "Live Web Preview",         s: "progress", d: "Edit a webpage in the editor and watch it render right alongside — with every script, image, and stylesheet loading like the real thing." },
+          { t: "Pocket Code Studio",       s: "progress", d: "A real multi-file code editor with Git in your pocket, working on cloud folders just like local ones." },
+          { t: "Mirror Magic",             s: "progress", d: "Pull a cloud folder down to work on, push your changes back when you're ready — Git, build tools, everything works." },
+          { t: "Find the Big Stuff",       s: "progress", d: "Drill into any cloud or local storage location and see exactly which files and folders are eating your space — sorted biggest first, ready to clean up." },
+          { t: "Time Travel for Files",    s: "progress", d: "Browse and restore any version of any file from the past month, week, or yesterday — point in time, with a scrubbable timeline." },
+          { t: "Your Keys, Everywhere",    s: "progress", d: "One SSH key vault that powers your remotes, your code editor's Git, and anything else that needs to log in securely." },
+
+          // Coming soon
+          { t: "Sound-Alike Detector",     s: "planned",  d: "Hear two songs that sound identical? So does Enter Space — even if they're different bitrates or formats." },
+          { t: "Smart Cleanup Wizard",     s: "planned",  d: "One sweep through your storage with rules you set once: keep the higher resolution, the newer date, the cleaner copy. Done." },
+          { t: "Inline Diffs",             s: "planned",  d: "See exactly what changed in your code at a glance — line by line, side by side." },
+          { t: "Merge Without Tears",      s: "planned",  d: "When Git fights itself, a friendly tap-to-resolve UI walks you out of every conflict." },
+
+          // Coming soon (continued)
+          { t: "FSKit",                    s: "planned",  d: "Mount any cloud as a true native filesystem on macOS — no kernel extension, no FUSE workaround. Apple's modern, sanctioned way to wear the system's file-provider crown." },
+
+          // On the horizon
+          { t: "One Cloud, Every Cloud",   s: "future",   d: "Files in Dropbox, Google Drive, S3, OneDrive, your home server — search them all as if they lived in the same place." },
+          { t: "Voice & Shortcuts",        s: "future",   d: "Restore a folder, run a backup, find duplicates — by asking out loud or with a Shortcut." },
+          { t: "Editor on iPhone",         s: "future",   d: "Real Git on iOS too. Branch, commit, pull, push from your phone." },
+          { t: "AI Photo Curator",         s: "future",   d: "Sift the best shot from every burst, every event, every backup — and surface the keepers." },
+        ];
+
+        const STATUS_CFG = {
+          progress: { gradient: "url(#nodeGlowProgress)", radius: 24, label: "Building Now"  },
+          planned:  { gradient: "url(#nodeGlowPlanned)",  radius: 22, label: "Coming Soon"   },
+          future:   { gradient: "url(#nodeGlowFuture)",   radius: 20, label: "On the Horizon"},
+        };
+
+        const svg     = document.getElementById("roadmapMesh");
+        const linesG  = document.getElementById("meshLines");
+        const nodesG  = document.getElementById("meshNodes");
+        const tooltip = document.getElementById("roadmapTooltip");
+        const tipStatus = tooltip.querySelector(".roadmap-tooltip-status");
+        const tipTitle  = tooltip.querySelector(".roadmap-tooltip-title");
+        const tipBody   = tooltip.querySelector(".roadmap-tooltip-body");
+
+        const isNarrow = () => window.matchMedia("(max-width: 700px)").matches;
+
+        // Layout mode is reactive — recomputed when the viewport crosses the
+        // narrow threshold. Wide: concentric rings horizontally biased.
+        // Narrow: three stacked horizontal bands (progress / planned / future)
+        // so the mesh fills a tall column without overlap.
+        function computeLayout() {
+          if (isNarrow()) {
+            return layoutVertical();
+          }
+            return layoutWide();
+        }
+
+        function layoutWide() {
+          const VW = 1200, VH = 720;
+          const rings = {
+            progress: { count: NODES.filter(n => n.s === "progress").length, radius: 150, z: 30 },
+            planned:  { count: NODES.filter(n => n.s === "planned").length,  radius: 270, z: 0  },
+            future:   { count: NODES.filter(n => n.s === "future").length,   radius: 360, z: -30 },
+          };
+          const counters = { progress: 0, planned: 0, future: 0 };
+          const ringStart = { progress: -Math.PI/2, planned: -Math.PI/2 + 0.18, future: -Math.PI/2 + 0.32 };
+          const cx = VW/2, cy = VH/2;
+          const placed = NODES.map(node => {
+            const ring = rings[node.s];
+            const idx  = counters[node.s]++;
+            const a    = ringStart[node.s] + (2*Math.PI * idx) / ring.count;
+            const x = cx + Math.cos(a) * ring.radius * 1.05;
+            const y = cy + Math.sin(a) * ring.radius * 0.85;
+            return Object.assign({}, node, { x, y, z: ring.z });
+          });
+          return { viewBox: `0 0 ${VW} ${VH}`, placed };
+        }
+
+        function layoutVertical() {
+          // Tall canvas: three vertical bands stacked top→bottom.
+          const VW = 480, VH = 900;
+          const bands = [
+            { s: "progress", yCenter: 175, label: "Building Now"   },
+            { s: "planned",  yCenter: 470, label: "Coming Soon"    },
+            { s: "future",   yCenter: 750, label: "On the Horizon" },
+          ];
+          const placed = [];
+          for (const band of bands) {
+            const items = NODES.filter(n => n.s === band.s);
+            const count = items.length;
+            if (count === 0) continue;
+            // Within a band: zig-zag along a horizontal axis with vertical
+            // jitter so it reads as a mini-cluster rather than a straight
+            // line. Spread proportionally to the band's count.
+            const usableW = VW - 80;
+            const stepX = count > 1 ? usableW / (count - 1) : 0;
+            items.forEach((node, idx) => {
+              const x = 40 + stepX * idx;
+              const yJitter = (idx % 2 === 0 ? -1 : 1) * Math.min(38, 18 + count * 2);
+              placed.push(Object.assign({}, node, {
+                x,
+                y: band.yCenter + yJitter,
+                z: band.s === "progress" ? 20 : (band.s === "planned" ? 0 : -20)
+              }));
+            });
+          }
+          return { viewBox: `0 0 ${VW} ${VH}`, placed };
+        }
+
+        let placed = [];
+        let viewBox = "";
+        function render() {
+          const layout = computeLayout();
+          placed = layout.placed;
+          viewBox = layout.viewBox;
+          svg.setAttribute("viewBox", viewBox);
+
+          // Wipe + rerender lines and nodes.
+          while (linesG.firstChild) linesG.removeChild(linesG.firstChild);
+          while (nodesG.firstChild) nodesG.removeChild(nodesG.firstChild);
+
+          // Edges: each node connects to its 2 nearest neighbours.
+          const edges = [];
+          for (let i = 0; i < placed.length; i++) {
+            const dists = placed
+              .map((n, j) => ({ j, d: Math.hypot(n.x - placed[i].x, n.y - placed[i].y) }))
+              .filter(e => e.j !== i)
+              .sort((a, b) => a.d - b.d)
+              .slice(0, 2);
+            for (const e of dists) {
+              const key = i < e.j ? `${i}-${e.j}` : `${e.j}-${i}`;
+              if (!edges.find(x => x.key === key)) edges.push({ key, a: i, b: e.j });
+            }
+          }
+          for (const edge of edges) {
+            const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+            line.setAttribute("x1", placed[edge.a].x);
+            line.setAttribute("y1", placed[edge.a].y);
+            line.setAttribute("x2", placed[edge.b].x);
+            line.setAttribute("y2", placed[edge.b].y);
+            line.dataset.a = edge.a;
+            line.dataset.b = edge.b;
+            linesG.appendChild(line);
+          }
+
+          placed.forEach((n, idx) => {
+            const cfg = STATUS_CFG[n.s];
+            const g = document.createElementNS("http://www.w3.org/2000/svg", "g");
+            g.classList.add("node");
+            g.setAttribute("transform", `translate(${n.x}, ${n.y})`);
+            g.dataset.index = idx;
+            g.setAttribute("tabindex", "0");
+            g.setAttribute("role", "button");
+            g.setAttribute("aria-label", `${n.t} — ${cfg.label}`);
+
+            const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+            circle.classList.add("node-circle");
+            circle.setAttribute("r", cfg.radius);
+            circle.setAttribute("fill", cfg.gradient);
+            circle.setAttribute("stroke", "rgba(255,255,255,0.7)");
+            circle.setAttribute("stroke-width", "1.5");
+            g.appendChild(circle);
+
+            const label = document.createElementNS("http://www.w3.org/2000/svg", "text");
+            label.classList.add("node-label");
+            label.setAttribute("y", cfg.radius + 18);
+            label.textContent = n.t;
+            g.appendChild(label);
+
+            g.addEventListener("mouseenter", () => activate(idx));
+            g.addEventListener("mouseleave", () => deactivate(idx));
+            g.addEventListener("focus",      () => activate(idx));
+            g.addEventListener("blur",       () => deactivate(idx));
+            g.addEventListener("click",      () => activate(idx, true));
+            g.addEventListener("keydown", (e) => {
+              if (e.key === "Enter" || e.key === " ") { e.preventDefault(); activate(idx, true); }
+            });
+
+            nodesG.appendChild(g);
+          });
+        }
+        render();
+
+        // Re-layout when the viewport crosses the narrow / wide breakpoint.
+        let lastNarrow = isNarrow();
+        window.addEventListener("resize", () => {
+          const nowNarrow = isNarrow();
+          if (nowNarrow !== lastNarrow) {
+            lastNarrow = nowNarrow;
+            render();
+          }
+        });
+
+        let activeIdx = null;
+        function activate(idx, sticky=false) {
+          activeIdx = idx;
+          // Highlight node + connected edges
+          nodesG.querySelectorAll(".node").forEach((el, i) => el.classList.toggle("active", i === idx));
+          linesG.querySelectorAll("line").forEach(line => {
+            const touches = line.dataset.a == String(idx) || line.dataset.b == String(idx);
+            line.classList.toggle("active", touches);
+          });
+          // Position tooltip near the node. Read viewBox dimensions live so
+          // the math stays correct after the wide↔vertical re-layout.
+          const node = placed[idx];
+          const host = document.querySelector(".roadmap-mesh-host");
+          const rect = host.getBoundingClientRect();
+          const vb = svg.getAttribute("viewBox").split(/\s+/).map(parseFloat);
+          const VW = vb[2] || 1200;
+          const VH = vb[3] || 720;
+          const xRatio = node.x / VW;
+          const yRatio = node.y / VH;
+          const leftPx = xRatio * rect.width;
+          tooltip.style.left = leftPx + "px";
+          tooltip.style.top  = yRatio * rect.height + "px";
+
+          // Set content FIRST so offsetWidth reflects the real tooltip size,
+          // then reveal + edge-clamp horizontally in pixels so left/right-edge
+          // nodes (especially on narrow mobile viewports) don't get the tooltip
+          // sliced off the host.
+          tipStatus.className = "roadmap-tooltip-status s-" + node.s;
+          tipStatus.textContent = STATUS_CFG[node.s].label;
+          tipTitle.textContent = node.t;
+          tipBody.textContent  = node.d;
+          tooltip.hidden = false;
+          // Pixel-precise: anchor the tooltip's center on the node by default,
+          // then shift toward the host edges as the node nears them. Working
+          // in pixels (not %) avoids a known "transform with var()" reflow bug.
+          const tipW = tooltip.offsetWidth;
+          const margin = 12;
+          let leftEdgePx = leftPx - tipW / 2; // candidate tooltip left edge in host coords
+          if (leftEdgePx < margin) leftEdgePx = margin;
+          if (leftEdgePx + tipW > rect.width - margin) {
+            leftEdgePx = Math.max(margin, rect.width - margin - tipW);
+          }
+          // Compute the translate-X needed so the tooltip's left edge lands at
+          // leftEdgePx, given that style.left is `leftPx` and the (former)
+          // anchor was -50%.
+          const desiredTx = leftEdgePx - leftPx; // pixels relative to tip.style.left
+          tooltip.style.transform = `translate(${desiredTx}px, -100%) translateY(-12px)`;
+          // Fade-in
+          requestAnimationFrame(() => {
+            tooltip.classList.add("visible");
+            tooltip.style.transform = `translate(${desiredTx}px, -100%) translateY(-18px)`;
+          });
+        }
+        function deactivate(idx) {
+          if (activeIdx !== idx) return;
+          tooltip.classList.remove("visible");
+          setTimeout(() => {
+            if (!tooltip.classList.contains("visible")) {
+              tooltip.hidden = true;
+              nodesG.querySelectorAll(".node.active").forEach(el => el.classList.remove("active"));
+              linesG.querySelectorAll("line.active").forEach(el => el.classList.remove("active"));
+            }
+          }, 180);
+        }
+
+        // Mouse parallax: tilt the whole SVG slightly toward the cursor for
+        // a 3D-mesh feel. Disabled if the user prefers reduced motion.
+        const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        const host = document.querySelector(".roadmap-mesh-host");
+        if (!reducedMotion) {
+          host.addEventListener("mousemove", (e) => {
+            const rect = host.getBoundingClientRect();
+            const px = (e.clientX - rect.left) / rect.width  - 0.5;
+            const py = (e.clientY - rect.top)  / rect.height - 0.5;
+            const rx = -py * 8; // pitch
+            const ry =  px * 12; // yaw
+            svg.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg)`;
+          });
+          host.addEventListener("mouseleave", () => { svg.style.transform = ""; });
+        }
+
+        // Touch swipe: tilt based on swipe direction. Tap a node = activate it.
+        let touchStart = null;
+        host.addEventListener("touchstart", (e) => {
+          touchStart = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+          svg.classList.add("dragging");
+        }, { passive: true });
+        host.addEventListener("touchmove", (e) => {
+          if (!touchStart) return;
+          const dx = e.touches[0].clientX - touchStart.x;
+          const dy = e.touches[0].clientY - touchStart.y;
+          const rx = -dy / 12;
+          const ry =  dx / 10;
+          svg.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg)`;
+        }, { passive: true });
+        host.addEventListener("touchend", () => {
+          touchStart = null;
+          svg.classList.remove("dragging");
+          svg.style.transform = "";
+        });
+      })();
+    </script>
   </section>
 
   <!-- Magazine-style Feature Sections -->
