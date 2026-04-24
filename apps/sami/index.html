@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sami - Smart Media Optimizer for Apple Photos</title>
-  <meta name="description" content="Optimize your photos, videos, and PDFs with intelligent compression. Preview changes side-by-side, automate tasks with shortcuts, and reclaim storage space on your iPhone, iPad, and Mac.">
-  <meta property="og:title" content="Sami - Smart Media Optimizer for Apple Photos">
-  <meta property="og:description" content="Optimize your photos, videos, and PDFs with intelligent compression. Preview changes side-by-side, automate tasks with shortcuts, and reclaim storage space on your iPhone, iPad, and Mac.">
+  <title>Sami - Smart Media Optimizer for Apple Photos, Folders, and Cloud Drives</title>
+  <meta name="description" content="Optimize photos, videos, and PDFs with intelligent compression. Pick exactly which items to process, watch folders for changes on macOS, throttle network and cloud drives, and reclaim storage on your iPhone, iPad, and Mac.">
+  <meta property="og:title" content="Sami - Smart Media Optimizer for Apple Photos, Folders, and Cloud Drives">
+  <meta property="og:description" content="Optimize photos, videos, and PDFs with intelligent compression. Pick exactly which items to process, watch folders for changes on macOS, throttle network and cloud drives, and reclaim storage on your iPhone, iPad, and Mac.">
   <meta property="og:type" content="app">
   <meta property="og:url" content="https://wemiller.com/apps/sami/">
   <meta property="og:image" content="https://wemiller.com/apps/sami/assets/images/poster.jpg">
@@ -70,9 +70,9 @@
     <div class="hero-content">
       <div class="hero-text">
         <p class="hero-subtitle">🎨 Sami</p>
-        <h1 class="hero-title">Smart Media Optimizer for Your Photos</h1>
+        <h1 class="hero-title">Smart Media Optimizer for Photos, Folders, and the Cloud</h1>
         <p class="hero-description">
-          Reclaim storage space on your iPhone, iPad, and Mac with intelligent media optimization. Compress photos, videos, and PDFs while previewing every change side-by-side. Set up automated tasks that run on schedule or trigger from Apple Shortcuts.
+          Reclaim storage across your iPhone, iPad, and Mac with intelligent media optimization. Pick exactly which photos, videos, and PDFs to compress; let Sami watch folders for changes on macOS; and process cloud-hosted media on iCloud Drive or third-party File Provider extensions without saturating your network link.
         </p>
         <div class="hero-cta">
           <a href="https://apps.apple.com/us/app/sami-media-optimizer/id6758907995" class="btn-buy" target="_blank" rel="noopener noreferrer">Download Now</a>
@@ -195,7 +195,95 @@
         <div class="feature-icon">📱</div>
         <h3 class="feature-title">Universal Apple App</h3>
         <p class="feature-description">
-          One app for iPhone, iPad, and Mac with full feature parity. Start optimization on your Mac and monitor progress on your iPhone—seamlessly.
+          One app for iPhone, iPad, and Mac. Watched folders and menu-bar presence are macOS-only where they fit the lifecycle; everything else works everywhere.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">✅</div>
+        <h3 class="feature-title">Pick What You Optimize</h3>
+        <p class="feature-description">
+          Every task preview lets you enter Select mode and choose exactly which items to run. Sami processes only what you picked — never quietly pulls in newly-matching media behind your back.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">📡</div>
+        <h3 class="feature-title">Network-Friendly Throttling</h3>
+        <p class="feature-description">
+          Sami detects when a folder lives on a NAS, SMB share, or cloud drive and throttles reads and backup writes so your link never saturates. Local SSDs still run at full speed.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">☁️</div>
+        <h3 class="feature-title">iCloud Drive & File Provider Ready</h3>
+        <p class="feature-description">
+          Works with dataless files from iCloud Drive, Dropbox, Box, and other File Provider extensions. Sami materializes items before read and can evict the local cache after a successful run.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">👁️</div>
+        <h3 class="feature-title">Watched Folders (macOS)</h3>
+        <p class="feature-description">
+          Flag any folder as a watched source and Sami re-runs the task automatically whenever files are added or modified, with a configurable debounce so a big import doesn't thrash.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">📊</div>
+        <h3 class="feature-title">Live Activity Feed</h3>
+        <p class="feature-description">
+          Watch successes, skips, and failures scroll by in real time as a run progresses — with the reason next to each item — so you can spot patterns without waiting for the summary.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🌊</div>
+        <h3 class="feature-title">Menu Bar Presence</h3>
+        <p class="feature-description">
+          On macOS, Sami lives in the menu bar with a pulsing shark icon while a task is running. Pause, resume, or cancel right from the popover. Hide the Dock icon for an invisible background helper if you prefer.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">💽</div>
+        <h3 class="feature-title">Robust on Any Drive</h3>
+        <p class="feature-description">
+          Atomic, volume-local writes mean optimizations on external SSDs and network-mounted volumes don't leave partial files or corrupt data, even if something is yanked mid-run.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">⏱️</div>
+        <h3 class="feature-title">No Minimum Age Option</h3>
+        <p class="feature-description">
+          Don't want to wait a week before Sami touches a photo? Pick "No Minimum" and optimize everything that matches your filters, including files you just saved.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🗂️</div>
+        <h3 class="feature-title">Per-Task Backup Folders</h3>
+        <p class="feature-description">
+          Every task picks its own backup destination. Different tasks can back up to different drives — external SSD for videos, a NAS for photos, or nothing at all. No more global folder everything has to share.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🛑</div>
+        <h3 class="feature-title">Smart Run Conditions</h3>
+        <p class="feature-description">
+          Sami pauses automatically in Low Power Mode, on battery, on metered networks, or in Low Data Mode — each gate is an independent toggle. Folder tasks over a hotspot or a NAS with a capped plan just stop until conditions change.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🎚️</div>
+        <h3 class="feature-title">Adjustable Resource Usage</h3>
+        <p class="feature-description">
+          Low / Normal / Maximum CPU throttling plus a configurable concurrency cap. Low mode runs Sami at reduced process priority with longer pauses between files so your foreground apps stay responsive — great for daytime batches.
         </p>
       </div>
     </div>
@@ -451,6 +539,79 @@
         <p>
           Yes! On Mac and iPad, you can drag and drop media files directly into Sami to optimize them quickly. This makes
           batch processing large numbers of files fast and intuitive.
+        </p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        <span>How do watched folders work?</span>
+        <span class="faq-icon">▼</span>
+      </button>
+      <div class="faq-answer">
+        <p>
+          On macOS, you can flag a local folder task as "watched." Sami monitors the folder (and subfolders) for added or
+          modified files using macOS file system events, with a debounce you can tune per-task so a large import doesn't
+          trigger back-to-back runs. When changes settle, Sami runs the task automatically. iOS doesn't allow background
+          watchers on arbitrary folders, so this feature is macOS-only.
+        </p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        <span>Can Sami keep working after I close the window?</span>
+        <span class="faq-icon">▼</span>
+      </button>
+      <div class="faq-answer">
+        <p>
+          Yes, on macOS. Enable "Keep running when window is closed" in Settings and Sami stays alive so watched folders
+          and scheduled automations keep firing. You can independently control whether Sami appears in the Dock, the menu
+          bar, both, or neither — opt into fully invisible background execution if that's your preference. Relaunching
+          from Finder/Spotlight reactivates the running process and brings the window back.
+        </p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        <span>Will Sami saturate my network when I point it at a NAS or cloud drive?</span>
+        <span class="faq-icon">▼</span>
+      </button>
+      <div class="faq-answer">
+        <p>
+          No. Sami detects when a folder is on a network volume, SMB share, or File Provider extension (iCloud Drive,
+          Dropbox, Box, etc.) and throttles both reads and backup writes — chunked transfers with short pauses between
+          chunks — so your link stays usable for everything else. Local internal SSDs still run at full speed. You can
+          adjust the network concurrency cap per task.
+        </p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        <span>What about iCloud Drive and other cloud files that aren't downloaded?</span>
+        <span class="faq-icon">▼</span>
+      </button>
+      <div class="faq-answer">
+        <p>
+          Sami materializes dataless File Provider items before reading them, using the system's download coordination APIs.
+          After a successful optimization it can evict the local cached copy on iCloud Drive so your disk stays clean
+          (best-effort on third-party providers, which don't all expose the same eviction surface).
+        </p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        <span>Can I choose which media gets optimized in a task?</span>
+        <span class="faq-icon">▼</span>
+      </button>
+      <div class="faq-answer">
+        <p>
+          Absolutely. Every task preview has a Select mode so you can pick exact items with checkboxes before hitting Run.
+          Sami processes only what you selected — it won't silently pull in newly-matching items between preview and run.
+          Skip selection and Sami processes the full preview set.
         </p>
       </div>
     </div>
