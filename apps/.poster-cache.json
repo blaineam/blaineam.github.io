@@ -1,10 +1,10 @@
 {
-  "fingerprint": "9e78e0488a2f4de1f0e7d0fdbf3031a3bb34fdaf369921f04db30a5840f689a8",
+  "fingerprint": "47608f48781fe0c33c41bf8ce8cb7dc446699cde510974009bee8d9a34796a76",
   "apps": [
-    "asteroic",
     "enter-space",
     "blip",
     "ari-helper",
+    "asteroic",
     "sami",
     "mi-speaks",
     "embr",
@@ -13,5 +13,5 @@
     "wise-flyer",
     "glint"
   ],
-  "generatedAt": "2026-04-24T14:55:31.868Z"
+  "generatedAt": "2026-04-24T16:04:25.902Z"
 }
