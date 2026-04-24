@@ -93,10 +93,15 @@ jobs:
       - name: Configure Pages
         uses: actions/configure-pages@v5
 
+      # retention-days: 1 caps billed Actions storage — the default is 90
+       # days, which caused unexpired `github-pages` artifacts (~420 MB each)
+       # to stack up at 3.7 GB+ after a day of frequent redeploys. Only the
+       # latest artifact is ever served by Pages; older ones are dead weight.
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: .
+          retention-days: 1
 
   deploy:
     needs: build

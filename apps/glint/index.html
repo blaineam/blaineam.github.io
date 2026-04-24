@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glint — DDC Display Control for Mac</title>
+    <meta name="description" content="Control your external monitor's brightness and volume with your Mac keyboard. Tiny, invisible, free.">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="favicon-96.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://wemiller.com/apps/glint/">
+    <meta property="og:title" content="Glint — DDC Display Control for Mac">
+    <meta property="og:description" content="Control your external monitor's brightness and volume with your Mac keyboard. Tiny, invisible, free and open source.">
+    <meta property="og:image" content="https://wemiller.com/apps/glint/og-poster.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:type" content="image/jpeg">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Glint — DDC Display Control for Mac">
+    <meta name="twitter:description" content="Control your external monitor's brightness and volume with your Mac keyboard. Tiny, invisible, free.">
+    <meta name="twitter:image" content="https://wemiller.com/apps/glint/og-poster.jpg">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+        :root {
+            --gold: #FFC238;
+            --amber: #FF991A;
+            --deep: #D97308;
+            --bg-dark: #0a0a12;
+            --bg-card: rgba(255, 255, 255, 0.04);
+            --border: rgba(255, 255, 255, 0.08);
+            --text: #e8e4f0;
+            --text-muted: rgba(255, 255, 255, 0.5);
+            --glass-bg: rgba(255, 255, 255, 0.06);
+            --glass-border: rgba(255, 255, 255, 0.12);
+            --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            --glow-opacity: 0.08;
+            --monitor-bg: #111118;
+            --monitor-border: #2a2a35;
+            --monitor-screen: linear-gradient(180deg, #1a1a2e 0%, #0f0f1a 100%);
+            --code-bg: rgba(0, 0, 0, 0.3);
+            --key-bg: rgba(255, 255, 255, 0.06);
+            --key-border: rgba(255, 255, 255, 0.15);
+        }
+
+        @media (prefers-color-scheme: light) {
+            :root {
+                --gold: #D9960A;
+                --amber: #CC7A00;
+                --deep: #A85C00;
+                --bg-dark: #f5f3f0;
+                --bg-card: rgba(0, 0, 0, 0.03);
+                --border: rgba(0, 0, 0, 0.08);
+                --text: #1a1820;
+                --text-muted: rgba(0, 0, 0, 0.5);
+                --glass-bg: rgba(255, 255, 255, 0.7);
+                --glass-border: rgba(0, 0, 0, 0.08);
+                --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+                --glow-opacity: 0.04;
+                --monitor-bg: #e8e6e3;
+                --monitor-border: #c8c5c0;
+                --monitor-screen: linear-gradient(180deg, #2a2a3e 0%, #1a1a2a 100%);
+                --code-bg: rgba(0, 0, 0, 0.06);
+                --key-bg: rgba(0, 0, 0, 0.06);
+                --key-border: rgba(0, 0, 0, 0.2);
+            }
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Ambient glow */
+        body::before {
+            content: '';
+            position: fixed;
+            top: -30%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(255, 194, 56, var(--glow-opacity)) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 0 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* NAV */
+        nav {
+            padding: 20px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 1.4rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--gold), var(--amber));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.02em;
+        }
+        nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        nav a:hover { color: var(--gold); }
+        .nav-links { display: flex; gap: 24px; }
+
+        /* HERO */
+        .hero {
+            text-align: center;
+            padding: 80px 0 60px;
+        }
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            margin-bottom: 16px;
+            line-height: 1.1;
+        }
+        .hero h1 span {
+            background: linear-gradient(135deg, var(--gold), var(--amber), var(--deep));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .hero .subtitle {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            max-width: 520px;
+            margin: 0 auto 32px;
+            font-weight: 400;
+        }
+        .hero-cta {
+            display: inline-flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 28px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1rem;
+            text-decoration: none;
+            transition: all 0.2s;
+            cursor: pointer;
+            border: none;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, var(--gold), var(--amber));
+            color: #1a1000;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(255, 194, 56, 0.3);
+        }
+        .btn-secondary {
+            background: var(--glass-bg);
+            color: var(--text);
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(12px);
+        }
+        .btn-secondary:hover {
+            background: var(--glass-bg);
+            border-color: var(--glass-border);
+        }
+        .badge {
+            display: inline-block;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            background: rgba(255, 194, 56, 0.12);
+            color: var(--gold);
+            border: 1px solid rgba(255, 194, 56, 0.2);
+            margin-bottom: 20px;
+        }
+
+        /* DEMO SECTION */
+        .demo-section {
+            padding: 40px 0 80px;
+        }
+        .demo-container {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 40px;
+            backdrop-filter: blur(20px);
+            box-shadow: var(--glass-shadow);
+            overflow: hidden;
+        }
+        .desk-scene {
+            position: relative;
+            width: 100%;
+            max-width: 700px;
+            margin: 0 auto;
+            aspect-ratio: 16 / 9;
+        }
+        /* Monitor */
+        .monitor {
+            position: absolute;
+            width: 70%;
+            height: 65%;
+            top: 5%;
+            left: 15%;
+            background: var(--monitor-bg);
+            border-radius: 8px;
+            border: 3px solid var(--monitor-border);
+            overflow: hidden;
+            box-shadow: 0 0 40px rgba(255, 194, 56, 0.05);
+        }
+        .monitor-screen {
+            width: 100%;
+            height: 100%;
+            background: var(--monitor-screen);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        .monitor-stand {
+            position: absolute;
+            width: 8%;
+            height: 12%;
+            top: 70%;
+            left: 46%;
+            background: var(--monitor-border);
+        }
+        .monitor-base {
+            position: absolute;
+            width: 20%;
+            height: 3%;
+            top: 82%;
+            left: 40%;
+            background: var(--monitor-border);
+            border-radius: 2px;
+        }
+        /* Laptop */
+        .laptop {
+            position: absolute;
+            width: 36%;
+            height: 22%;
+            bottom: 8%;
+            left: 32%;
+        }
+        .laptop-screen {
+            width: 100%;
+            height: 75%;
+            background: var(--monitor-bg);
+            border-radius: 4px 4px 0 0;
+            border: 2px solid var(--monitor-border);
+            overflow: hidden;
+        }
+        .laptop-screen-inner {
+            width: 100%;
+            height: 100%;
+            background: var(--monitor-screen);
+        }
+        .laptop-base {
+            width: 110%;
+            height: 25%;
+            background: var(--monitor-bg);
+            border-radius: 0 0 4px 4px;
+            margin-left: -5%;
+            border: 2px solid var(--monitor-border);
+            border-top: none;
+        }
+        /* Keyboard hint */
+        .keyboard-hint {
+            position: absolute;
+            bottom: 4%;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 6px;
+        }
+        .key {
+            width: 28px;
+            height: 24px;
+            background: var(--key-bg);
+            border: 1px solid var(--key-border);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            color: var(--text-muted);
+            transition: all 0.15s;
+        }
+        .key.active {
+            background: rgba(255, 194, 56, 0.2);
+            border-color: var(--gold);
+            color: var(--gold);
+            box-shadow: 0 0 12px rgba(255, 194, 56, 0.3);
+        }
+        /* OSD pill overlay on monitor — matches Glint's actual OSD */
+        .osd {
+            position: absolute;
+            top: 10%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.55);
+            backdrop-filter: blur(10px);
+            border-radius: 100px;
+            padding: 6px 14px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 8px;
+            opacity: 0;
+            transition: opacity 0.2s;
+            white-space: nowrap;
+        }
+        .osd.visible { opacity: 1; }
+        .osd-icon { font-size: 11px; opacity: 0.9; }
+        .osd-bar {
+            width: 70px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 100px;
+            overflow: hidden;
+        }
+        .osd-fill {
+            height: 100%;
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 100px;
+            transition: width 0.3s ease;
+            width: 50%;
+        }
+        .osd-value {
+            font-size: 9px;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.5);
+            font-family: 'Inter', -apple-system, sans-serif;
+            min-width: 18px;
+            text-align: right;
+            font-variant-numeric: tabular-nums;
+        }
+        /* Screen brightness overlay */
+        .brightness-overlay {
+            position: absolute;
+            inset: 0;
+            background: white;
+            opacity: 0;
+            transition: opacity 0.5s;
+            pointer-events: none;
+        }
+
+        /* FEATURES */
+        .features {
+            padding: 80px 0;
+        }
+        .features h2 {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 48px;
+        }
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 16px;
+        }
+        .feature-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 24px;
+            backdrop-filter: blur(12px);
+            transition: all 0.3s;
+        }
+        .feature-card:hover {
+            border-color: rgba(255, 194, 56, 0.2);
+            background: var(--glass-bg);
+            transform: translateY(-2px);
+        }
+        .feature-icon {
+            font-size: 1.8rem;
+            margin-bottom: 12px;
+        }
+        .feature-card h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+        .feature-card p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        /* SIZE CALLOUT */
+        .size-callout {
+            text-align: center;
+            padding: 60px 0;
+        }
+        .size-number {
+            font-size: 5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--gold), var(--amber));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1;
+        }
+        .size-unit {
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+        .size-callout p {
+            color: var(--text-muted);
+            margin-top: 8px;
+            font-size: 1.1rem;
+        }
+
+        /* FAQ */
+        .faq {
+            padding: 80px 0;
+        }
+        .faq h2 {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 40px;
+        }
+        .faq-item {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            margin-bottom: 8px;
+            overflow: hidden;
+            backdrop-filter: blur(12px);
+        }
+        .faq-question {
+            padding: 18px 24px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            font-size: 0.95rem;
+            user-select: none;
+        }
+        .faq-question:hover { background: var(--bg-card); }
+        .faq-arrow {
+            transition: transform 0.3s;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+        .faq-item.open .faq-arrow { transform: rotate(180deg); }
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s;
+            padding: 0 24px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            line-height: 1.7;
+        }
+        .faq-item.open .faq-answer {
+            max-height: 300px;
+            padding: 0 24px 18px;
+        }
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            padding: 60px 0 40px;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--border);
+        }
+        footer a {
+            color: var(--gold);
+            text-decoration: none;
+        }
+
+        @media (max-width: 640px) {
+            .hero h1 { font-size: 2.2rem; }
+            .hero .subtitle { font-size: 1rem; }
+            .size-number { font-size: 3.5rem; }
+            .demo-container { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- NAV -->
+        <nav>
+            <div class="logo">✨ Glint</div>
+            <div class="nav-links">
+                <a href="#features">Features</a>
+                <a href="#faq">FAQ</a>
+                <a href="https://github.com/blaineam/Glint">GitHub</a>
+            </div>
+        </nav>
+
+        <!-- HERO -->
+        <section class="hero">
+            <div class="badge">🪶 Under 1 MB — zero dependencies</div>
+            <h1>Your keyboard.<br><span>Your monitor.</span></h1>
+            <p class="subtitle">
+                Control your external display's brightness and volume with the keys that should have worked all along. Free, open source, invisible.
+            </p>
+            <div class="hero-cta">
+                <a href="https://github.com/blaineam/Glint/releases/latest/download/Glint.dmg" class="btn btn-primary">
+                    ⬇ Download for Mac
+                </a>
+                <a href="https://github.com/blaineam/Glint" class="btn btn-secondary">
+                    View on GitHub
+                </a>
+            </div>
+        </section>
+
+        <!-- DEMO -->
+        <section class="demo-section">
+            <div class="demo-container">
+                <div class="desk-scene" id="deskScene">
+                    <!-- Monitor -->
+                    <div class="monitor">
+                        <div class="monitor-screen" id="monitorScreen">
+                            <div class="brightness-overlay" id="monitorBrightness"></div>
+                            <div class="osd" id="monitorOsd">
+                                <div class="osd-icon" id="osdIcon">☀️</div>
+                                <div class="osd-bar">
+                                    <div class="osd-fill" id="osdFill"></div>
+                                </div>
+                                <div class="osd-value" id="osdValue">50</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="monitor-stand"></div>
+                    <div class="monitor-base"></div>
+
+                    <!-- Laptop -->
+                    <div class="laptop">
+                        <div class="laptop-screen">
+                            <div class="laptop-screen-inner">
+                                <div class="brightness-overlay" id="laptopBrightness"></div>
+                            </div>
+                        </div>
+                        <div class="laptop-base"></div>
+                    </div>
+
+                    <!-- Keyboard keys -->
+                    <div class="keyboard-hint">
+                        <div class="key" id="keyDown">🔅</div>
+                        <div class="key" id="keyUp">🔆</div>
+                        <div class="key" id="keyVolDown">🔉</div>
+                        <div class="key" id="keyVolUp">🔊</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FEATURES -->
+        <section class="features" id="features">
+            <h2>Everything you need. Nothing you don't.</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🔆</div>
+                    <h3>Hardware Brightness</h3>
+                    <p>Controls your monitor's actual backlight via DDC — not a software overlay or gamma trick.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔊</div>
+                    <h3>Smart Volume</h3>
+                    <p>Uses DDC when audio goes to HDMI, DisplayPort, or USB-C (even through hubs). Falls back to system volume for built-in speakers, headphones, or Bluetooth.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3>Cursor-Aware</h3>
+                    <p>Brightness keys adjust only the display your cursor is on. No more changing every screen at once.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔄</div>
+                    <h3>Sync Mode</h3>
+                    <p>Syncs all displays to the same brightness on first press, then adjusts every screen in lockstep.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">👻</div>
+                    <h3>Invisible Mode</h3>
+                    <p>Hide from the menu bar and dock entirely. Completely out of sight, always listening.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🪶</div>
+                    <h3>Featherweight</h3>
+                    <p>Under 1 MB, zero dependencies, negligible CPU/memory. Pure Swift + IOKit.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🪵</div>
+                    <h3>Debug Logging</h3>
+                    <p>Optional diagnostic log records every DDC command and audio routing decision. Reveal in Finder with one click.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h3>Private & Secure</h3>
+                    <p>Zero telemetry, zero tracking, zero analytics. No server infrastructure — Glint works entirely on-device. Security audited to ensure your data never leaves your Mac.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🆓</div>
+                    <h3>Free & Open Source</h3>
+                    <p>MIT licensed. No accounts, no subscriptions. Read every line of code on GitHub.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SIZE CALLOUT -->
+        <section class="size-callout">
+            <div class="size-number">&lt;1</div>
+            <div class="size-unit">megabyte</div>
+            <p>No Electron. No frameworks. Just your keyboard and your display.</p>
+        </section>
+
+        <!-- FAQ -->
+        <section class="faq" id="faq">
+            <h2>Frequently Asked Questions</h2>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    Does Glint work with my monitor?
+                    <span class="faq-arrow">▼</span>
+                </div>
+                <div class="faq-answer">
+                    Most external monitors support DDC/CI. If your monitor has an OSD with brightness/volume controls, it almost certainly supports DDC. Works over HDMI, DisplayPort, and USB-C/Thunderbolt — including through USB-C hubs and docks. Glint automatically detects monitor audio routed through hubs.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    Why does Glint need Accessibility access?
+                    <span class="faq-arrow">▼</span>
+                </div>
+                <div class="faq-answer">
+                    To intercept media key events before macOS processes them, Glint uses a CGEventTap, which requires Accessibility permission. Without it, Glint can't detect brightness/volume key presses. This is a standard macOS security requirement for any app that reads keyboard input. After enabling access, you'll need to quit and relaunch Glint for it to take effect.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    Is this safe? Why isn't it on the Mac App Store?
+                    <span class="faq-arrow">▼</span>
+                </div>
+                <div class="faq-answer">
+                    Glint is open source (read every line!) and notarized by Apple (malware-scanned). There is no telemetry or tracking of any kind — no analytics, no crash reporters, no network calls home. No server infrastructure is used or needed for Glint to work; everything runs entirely on your Mac. The app has been security audited to ensure the utmost care in being a safe app for use. DDC requires IOKit I2C access, which the App Store sandbox blocks. This is the same reason BetterDisplay, MonitorControl, and Lunar distribute outside the Store.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    How do I get settings back after hiding the menu bar icon?
+                    <span class="faq-arrow">▼</span>
+                </div>
+                <div class="faq-answer">
+                    Open Glint from your Applications folder (or Spotlight search for "Glint"). When the app detects it's being re-opened, it automatically shows the settings window.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    Can I control multiple monitors?
+                    <span class="faq-arrow">▼</span>
+                </div>
+                <div class="faq-answer">
+                    Yes! Glint detects all connected external displays. With sync mode off, brightness keys adjust only the display your cursor is on. With sync mode on, all displays (including the built-in screen) are synced to the same brightness on first press, then adjusted together.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    What's the CPU/memory usage?
+                    <span class="faq-arrow">▼</span>
+                </div>
+                <div class="faq-answer">
+                    Effectively zero when idle. Glint uses a CGEventTap which is interrupt-driven — no polling, no timers, no background threads. Memory footprint is under 15 MB.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    Does it conflict with BetterDisplay / MonitorControl?
+                    <span class="faq-arrow">▼</span>
+                </div>
+                <div class="faq-answer">
+                    Possibly — if two apps both intercept the same media keys, they may interfere. We recommend using one DDC controller at a time.
+                </div>
+            </div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer>
+            <p>
+                ✨ Glint — free, open source, <a href="https://github.com/blaineam/Glint/blob/main/LICENSE">MIT License</a>
+                <br>
+                Built by <a href="https://github.com/blaineam">Blaine Miller</a>
+            </p>
+        </footer>
+    </div>
+
+    <script>
+        // FAQ toggle
+        function toggleFaq(el) {
+            el.parentElement.classList.toggle('open');
+        }
+
+        // Animated demo
+        (function() {
+            const monitorBrightness = document.getElementById('monitorBrightness');
+            const laptopBrightness = document.getElementById('laptopBrightness');
+            const monitorOsd = document.getElementById('monitorOsd');
+            const osdIcon = document.getElementById('osdIcon');
+            const osdFill = document.getElementById('osdFill');
+            const osdValue = document.getElementById('osdValue');
+            const keyUp = document.getElementById('keyUp');
+            const keyDown = document.getElementById('keyDown');
+            const keyVolUp = document.getElementById('keyVolUp');
+            const keyVolDown = document.getElementById('keyVolDown');
+
+            let brightness = 50;
+            let volume = 50;
+            let step = 0;
+
+            const sequence = [
+                // Brightness up sequence
+                { key: 'up', type: 'brightness', delta: 10 },
+                { key: 'up', type: 'brightness', delta: 10 },
+                { key: 'up', type: 'brightness', delta: 10 },
+                { key: 'up', type: 'brightness', delta: 10 },
+                // Pause
+                { key: null, type: 'pause', delta: 0 },
+                // Brightness down
+                { key: 'down', type: 'brightness', delta: -15 },
+                { key: 'down', type: 'brightness', delta: -15 },
+                { key: 'down', type: 'brightness', delta: -15 },
+                // Pause
+                { key: null, type: 'pause', delta: 0 },
+                // Volume up
+                { key: 'volUp', type: 'volume', delta: 12 },
+                { key: 'volUp', type: 'volume', delta: 12 },
+                { key: 'volUp', type: 'volume', delta: 12 },
+                // Pause
+                { key: null, type: 'pause', delta: 0 },
+                // Volume down
+                { key: 'volDown', type: 'volume', delta: -20 },
+                { key: 'volDown', type: 'volume', delta: -20 },
+                // Reset pause
+                { key: null, type: 'pause', delta: 0 },
+            ];
+
+            function showOsd(type, value) {
+                const clamped = Math.max(0, Math.min(100, Math.round(value)));
+                osdIcon.textContent = type === 'brightness' ? '☀️' : '🔊';
+                osdFill.style.width = clamped + '%';
+                osdValue.textContent = clamped;
+                monitorOsd.classList.add('visible');
+                setTimeout(() => monitorOsd.classList.remove('visible'), 1200);
+            }
+
+            function pressKey(keyName) {
+                const keyEl = keyName === 'up' ? keyUp
+                            : keyName === 'down' ? keyDown
+                            : keyName === 'volUp' ? keyVolUp
+                            : keyVolDown;
+                keyEl.classList.add('active');
+                setTimeout(() => keyEl.classList.remove('active'), 200);
+            }
+
+            function updateBrightness() {
+                const opacity = Math.max(0, Math.min(0.3, (brightness - 50) / 150));
+                monitorBrightness.style.opacity = opacity;
+                laptopBrightness.style.opacity = opacity;
+            }
+
+            function tick() {
+                const action = sequence[step % sequence.length];
+                step++;
+
+                if (action.type === 'pause') {
+                    setTimeout(tick, 1500);
+                    return;
+                }
+
+                if (action.key) pressKey(action.key);
+
+                if (action.type === 'brightness') {
+                    brightness = Math.max(10, Math.min(100, brightness + action.delta));
+                    updateBrightness();
+                    showOsd('brightness', brightness);
+                } else if (action.type === 'volume') {
+                    volume = Math.max(0, Math.min(100, volume + action.delta));
+                    showOsd('volume', volume);
+                }
+
+                setTimeout(tick, 700);
+            }
+
+            // Start animation after a short delay
+            setTimeout(tick, 2000);
+        })();
+    </script>
+</body>
+</html>
