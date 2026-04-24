@@ -3,10 +3,22 @@ name: Build & Deploy GitHub Pages
 on:
   push:
     branches: [main]
+    # Skip when the ONLY changed paths are the generated poster
+    # assets — that commit comes from the bot-authored "chore(posters):
+    # regenerate via CI" step below, and re-running on it causes
+    # an infinite loop (JPEG encoding isn't bit-stable, so each
+    # regen produces fresh bytes even for the same inputs).
+    # `paths-ignore` only skips when EVERY changed path matches; a
+    # human commit that touches source files + incidentally
+    # re-runs the generator still triggers the workflow.
+    paths-ignore:
+      - 'apps/**/poster.jpg'
+      - 'apps/apps-by-blaine-miller.jpg'
+      - 'apps/.poster-cache.json'
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write       # needed to commit regenerated posters back to main
   pages: write
   id-token: write
 
@@ -18,8 +30,13 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      # Persist-credentials so the regeneration commit below can push back.
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+          # `fetch-depth: 0` isn't needed — we only need HEAD for the
+          # commit-back step.
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
@@ -32,12 +49,46 @@ jobs:
         working-directory: scripts
         run: npm ci
 
-      # Regenerates apps/apps-by-blaine-miller.jpg and each app's poster only
-      # when the app list or any app icon has changed (content-addressed via
-      # apps/.poster-cache.json).  Regenerated images are baked into the Pages
-      # artifact — they do not need to be committed back to the repo.
-      - name: Regenerate app posters (if icons or app list changed)
-        run: node scripts/generate-posters.js
+      # Regenerates apps/apps-by-blaine-miller.jpg, every app's
+      # apps/<slug>/assets/images/poster.jpg, and .poster-cache.json.
+      # `--force` is intentional: we always re-run the hue-sampling
+      # so commits from any contributor get a fresh poster baked
+      # rather than relying on the fingerprint heuristic. If nothing
+      # changed the output is byte-identical and the commit-back step
+      # below is a no-op.
+      - name: Regenerate app posters
+        run: node scripts/generate-posters.js --force
+
+      # Commit and push any regenerated poster files + cache update
+      # back to `main`. This is the step the repo was missing —
+      # previously posters only lived inside the Pages artifact, so:
+      #   1. GitHub's legacy default `pages-build-deployment` workflow
+      #      (the one that runs when Pages source = "Deploy from a
+      #      branch") had nothing to deploy from the repo and thus
+      #      clobbered the artifact.
+      #   2. Direct-hotlinking to e.g.
+      #      wemiller.com/apps/asteroic/assets/images/poster.jpg
+      #      from a fresh checkout (or a meta og:image scraper that
+      #      checks the repo directly) would 404.
+      #
+      # The Pages source is now `workflow` (not `legacy`), so the
+      # default workflow is disabled and only THIS pipeline deploys.
+      # Committing the posters back is still worth doing so the repo
+      # is self-describing — you can clone it and see the generated
+      # assets without needing to run the generator locally.
+      - name: Commit regenerated posters
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add apps/apps-by-blaine-miller.jpg \
+                  apps/.poster-cache.json \
+                  apps/*/assets/images/poster.jpg
+          if git diff --cached --quiet; then
+            echo "No poster changes to commit."
+          else
+            git commit -m "chore(posters): regenerate via CI [skip ci]"
+            git push
+          fi
 
       - name: Configure Pages
         uses: actions/configure-pages@v5
