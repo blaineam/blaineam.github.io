@@ -262,13 +262,66 @@ function tilt3DMatrix({ rotX, rotY, rotZ }) {
   return [a, b, c, d];
 }
 
-// Prepare a single icon: resize, apply a 3D-ish tilt (rotX/rotY/rotZ via affine
-// projection), then render a soft drop-shadow beneath. Returns the composite
-// bitmap + its dimensions (which include shadow padding).
+// Apple-style "squircle" (continuous-corner superellipse) alpha mask.
+// Formula: (|x|/r)^n + (|y|/r)^n <= 1 with n≈5 matches the iOS 13+ icon
+// silhouette more faithfully than a plain rounded-rect radius would.
+// 4x4 supersampling gives a clean anti-aliased edge; results are memoized
+// per-size because every app at the same ring shares a mask.
+const SQUIRCLE_EXPONENT = 5;
+const squircleMaskCache = new Map();
+function squircleMaskBuffer(size) {
+  const cached = squircleMaskCache.get(size);
+  if (cached) return cached;
+  const n = SQUIRCLE_EXPONENT;
+  const ss = 4; // supersample factor
+  const r = size / 2;
+  const buf = Buffer.alloc(size * size);
+  for (let y = 0; y < size; y++) {
+    for (let x = 0; x < size; x++) {
+      let hits = 0;
+      for (let sy = 0; sy < ss; sy++) {
+        const yy = (y + (sy + 0.5) / ss - r) / r;
+        const ay = Math.pow(Math.abs(yy), n);
+        for (let sx = 0; sx < ss; sx++) {
+          const xx = (x + (sx + 0.5) / ss - r) / r;
+          const v = Math.pow(Math.abs(xx), n) + ay;
+          if (v <= 1) hits++;
+        }
+      }
+      buf[y * size + x] = Math.round((hits / (ss * ss)) * 255);
+    }
+  }
+  squircleMaskCache.set(size, buf);
+  return buf;
+}
+
+// Multiply the existing alpha channel by the squircle mask so icons whose
+// source PNG is a full-bleed square get clipped to the iOS silhouette.
+// Icons that already have rounded alpha (e.g. a transparent squircle PNG)
+// stay unchanged because the mask is 1.0 over the interior.
+function applySquircleMask(rgbaBuffer, size) {
+  const mask = squircleMaskBuffer(size);
+  const out = Buffer.from(rgbaBuffer);
+  for (let i = 0, j = 0; j < mask.length; i += 4, j++) {
+    out[i + 3] = (out[i + 3] * mask[j] + 127) >> 8;
+  }
+  return out;
+}
+
+// Prepare a single icon: resize, clip to an iOS-style squircle silhouette,
+// apply a 3D-ish tilt (rotX/rotY/rotZ via affine projection), then render a
+// soft drop-shadow beneath. Returns the composite bitmap + its dimensions
+// (which include shadow padding).
 async function tiltedIconWithShadow(iconPath, size, tilt) {
-  const iconBuf = await sharp(iconPath)
+  const iconRaw = await sharp(iconPath)
     .resize(size, size, { fit: "cover" })
     .ensureAlpha()
+    .raw()
+    .toBuffer({ resolveWithObject: true });
+  const maskedRgba = applySquircleMask(iconRaw.data, size);
+  const iconBuf = await sharp(maskedRgba, {
+    raw: { width: size, height: size, channels: 4 },
+  })
     .png()
     .toBuffer();
 
