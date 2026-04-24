@@ -1,6 +1,7 @@
 {
-  "fingerprint": "262d7b6d140a70a6ac06401b6ae2f4f83da1045c6ef93af82cfd31e5d64c5f0f",
+  "fingerprint": "9e78e0488a2f4de1f0e7d0fdbf3031a3bb34fdaf369921f04db30a5840f689a8",
   "apps": [
+    "asteroic",
     "enter-space",
     "blip",
     "ari-helper",
@@ -12,5 +13,5 @@
     "wise-flyer",
     "glint"
   ],
-  "generatedAt": "2026-04-16T20:03:30.768Z"
+  "generatedAt": "2026-04-24T08:28:37.022Z"
 }
