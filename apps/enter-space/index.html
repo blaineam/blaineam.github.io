@@ -316,7 +316,6 @@
       <button class="mobile-menu-toggle">☰</button>
       <ul class="nav-links">
         <li><a href="#features" class="nav-link">Features</a></li>
-        <li><a href="#roadmap" class="nav-link">v5 Roadmap</a></li>
         <li><a href="#screenshots" class="nav-link">Screenshots</a></li>
         <li><a href="#pricing" class="nav-link">Pricing</a></li>
         <li><a href="#compare" class="nav-link">Compare</a></li>
@@ -564,11 +563,77 @@
           Optionally share your remote configurations with the rclone command line through a shared rclone.conf file. Power users can seamlessly switch between the visual interface and terminal workflows.
         </p>
       </div>
+
+      <!-- New in v5.0.0 -->
+
+      <div class="feature-card">
+        <div class="feature-icon">🪞</div>
+        <h3 class="feature-title">Duplicate Photo, Video &amp; Audio Finder</h3>
+        <p class="feature-description">
+          Spot near-identical photos, videos, and audio across every connected cloud. Sees through resizes, format swaps, and re-edits — and warns you when one looks watermarked so you keep the clean original.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🧹</div>
+        <h3 class="feature-title">Storage Cleanup &amp; Space Inspector</h3>
+        <p class="feature-description">
+          Drill into any cloud or local storage location and see exactly which folders are eating your space. Sorted biggest first, recursive multi-select to clear it all out in one pass.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">📤</div>
+        <h3 class="feature-title">Open Anywhere</h3>
+        <p class="feature-description">
+          Right-click a file in Finder or share from any app — Enter Space opens it in the code editor, gallery, or sends it via Secure Drop. Native share extensions on iPhone, iPad, and Mac.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🌿</div>
+        <h3 class="feature-title">Git in the Code Editor</h3>
+        <p class="feature-description">
+          Stage, commit, push, pull, branch — full Git workflow built into the editor. SSH keys on Mac and HTTPS auto-token on iPhone, so the same SSH-form remote URL just works on every device.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🪄</div>
+        <h3 class="feature-title">Git Mirror</h3>
+        <p class="feature-description">
+          Pull a remote folder down as a local Git working copy, edit with your normal toolchain, push the changes back to the cloud. No mount required, no manual sync.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">👁️</div>
+        <h3 class="feature-title">Live Web Preview</h3>
+        <p class="feature-description">
+          Edit a webpage in the editor and watch it render live alongside — every script, image, and stylesheet loading like the real thing. Auto-refreshes the moment you save.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">💾</div>
+        <h3 class="feature-title">Auto-Saving Editor Drafts</h3>
+        <p class="feature-description">
+          Switch tabs, close the editor, force-quit the app — your unsaved work is captured automatically and waiting for you next time. No "discard changes?" surprises.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">☁️</div>
+        <h3 class="feature-title">iCloud-Optional Privacy</h3>
+        <p class="feature-description">
+          Default-on iCloud sync replicates your rclone configs, SSH keys, and Personal Access Tokens across your Apple devices. Prefer device-only? One toggle keeps every new credential local.
+        </p>
+      </div>
     </div>
   </section>
 
-  <!-- v5 Roadmap — Interactive Node Mesh -->
-  <section id="roadmap" class="section roadmap-section">
+  <!-- v5 Roadmap — Interactive Node Mesh (hidden for v5.0.0 launch; bring back when planning v5.1+ scope publicly) -->
+  <section id="roadmap" class="section roadmap-section" style="display: none;">
     <div class="section-header">
       <h2 class="section-title">What I'm building next</h2>
       <p class="section-subtitle">Hover, swipe, or tap any node. Each one's a feature in progress or just over the horizon.</p>
@@ -1381,6 +1446,27 @@
           </tr>
           <tr>
             <td>Code Editor</td>
+            <td class="highlight-col"><span class="check">✓</span></td>
+            <td><span class="cross">✗</span></td>
+            <td><span class="cross">✗</span></td>
+            <td><span class="check">✓</span></td>
+          </tr>
+          <tr>
+            <td>Git Management in Code Editor</td>
+            <td class="highlight-col"><span class="check">✓</span> Stage / commit / push / branch</td>
+            <td><span class="cross">✗</span></td>
+            <td><span class="cross">✗</span></td>
+            <td><span class="cross">✗</span></td>
+          </tr>
+          <tr>
+            <td>Duplicate Photo / Video / Audio Finder</td>
+            <td class="highlight-col"><span class="check">✓</span></td>
+            <td><span class="cross">✗</span></td>
+            <td><span class="cross">✗</span></td>
+            <td><span class="cross">✗</span></td>
+          </tr>
+          <tr>
+            <td>Storage Cleanup &amp; Space Inspector</td>
             <td class="highlight-col"><span class="check">✓</span></td>
             <td><span class="cross">✗</span></td>
             <td><span class="cross">✗</span></td>
