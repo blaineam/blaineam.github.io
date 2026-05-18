@@ -508,6 +508,14 @@
       </div>
 
       <div class="feature-card">
+        <div class="feature-icon">🔓</div>
+        <h3 class="feature-title">Approve Apple TV Unlocks from Your Phone</h3>
+        <p class="feature-description">
+          Hidden remotes stay hidden on the Apple TV by default. When someone taps "Show Hidden Remotes" on the TV, your iPhone or Mac gets a push notification with Approve / Deny buttons — even if the app's force-quit. Tap Approve, Face ID, done. Each TV is paired by name so an imposter device can't trick you into approving the wrong one. Tap Lock from the phone and the TV snaps back to the locked home grid instantly, even mid-playback.
+        </p>
+      </div>
+
+      <div class="feature-card">
         <div class="feature-icon">🔃</div>
         <h3 class="feature-title">Recently Played Syncing</h3>
         <p class="feature-description">
@@ -543,7 +551,7 @@
         <div class="feature-icon">🌍</div>
         <h3 class="feature-title">Serve Configuration</h3>
         <p class="feature-description">
-          Host your remote content locally with the Serve feature supporting WebDAV, FTP, S3, and more rclone serve types. Expose your cloud storage through standard protocols for flexible access from any compatible client.
+          Host your remote content locally with the Serve feature supporting WebDAV, NFS, FTP, S3, SFTP, HTTP, DLNA, and Restic. NFS is significantly faster than WebDAV for media playback over encrypted cloud remotes because macOS's NFS client skips the per-file metadata probes Finder's WebDAV client does.
         </p>
       </div>
 
@@ -551,7 +559,7 @@
         <div class="feature-icon">💻</div>
         <h3 class="feature-title">Mount Helper App</h3>
         <p class="feature-description">
-          The optional Enter Space Mount Helper App can auto mount a WebDAV or FTP Serve as a network drive, giving you Terminal shell access to content stored on your remotes thanks to macOS supported Network File System support.
+          The optional Enter Space Mount Helper App auto-mounts a WebDAV, FTP, or NFS Serve as a local folder with zero password prompts. NFS mounts land under <code>~/Library/Application Support/Enter Space/Mounts/</code> instead of <code>/Volumes/</code> so Spotlight doesn't try to index your entire cloud tree.
         </p>
         <a href="helper.dmg" download class="btn-download-helper">⬇ Download Helper</a>
       </div>
@@ -1794,16 +1802,45 @@
       <div class="faq-answer">
         <p>
           The Serve feature lets you spin up a local server that exposes any of your configured remotes using a variety of
-          Rclone serve types — including WebDAV, FTP, SFTP, HTTP, DLNA, and more. This is useful for accessing your cloud
+          Rclone serve types — including WebDAV, NFS, FTP, SFTP, HTTP, S3, DLNA, and Restic. This is useful for accessing your cloud
           files through other apps or devices on your network.
         </p>
         <p>
-          On macOS, WebDAV and FTP serves can be automatically mounted into Finder with the <a href="helper.dmg">Mount Helper App</a>, giving you an alternative way to browse
-          and manage your cloud files alongside the standard File Provider integration. This can be especially handy if you
-          prefer a traditional mounted-volume experience or need compatibility with apps that work better with mounted drives.
+          On macOS, WebDAV, FTP, and NFS serves can be automatically mounted into your filesystem with the <a href="helper.dmg">Mount Helper App</a>,
+          giving you an alternative way to browse and manage your cloud files alongside the standard File Provider integration.
+          NFS in particular is dramatically faster than WebDAV for media playback over encrypted cloud remotes because macOS's
+          NFS client doesn't probe every file the way Finder's WebDAV client does — and NFS mounts land under
+          <code>~/Library/Application Support/Enter Space/Mounts/</code> instead of <code>/Volumes/</code> so Spotlight doesn't
+          try to index your entire cloud tree.
         </p>
         <p style="font-style: italic; color: var(--text-tertiary); font-size: 0.9em; margin-top: var(--spacing-sm);">
           *Enter Space is monitoring the features of FSKit and has plans to integrate with that framework once Apple has brought it to a maturity state ready for Network FileSystems.
+        </p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        <span>How does the Apple TV hidden-remotes unlock work?</span>
+        <span class="faq-icon">▼</span>
+      </button>
+      <div class="faq-answer">
+        <p>
+          Apple TVs typically live in shared spaces, so by default any remote you've marked hidden stays hidden on every TV.
+          When someone taps "Show Hidden Remotes" on a TV, an unlock request is sent to your iPhone or Mac and a
+          push notification appears with <strong>Approve</strong> and <strong>Deny</strong> actions — even if the app is force-quit.
+          Tap Approve, authenticate with Face ID / Touch ID, and hidden remotes appear on that one TV for the next 3 hours.
+        </p>
+        <p>
+          Each Apple TV is paired by name. The first time you unlock a TV you're asked to confirm the name it claimed
+          for itself, which then locks on the TV — so another device on your iCloud account can't register a TV
+          with the same name to trick you into approving the wrong one. Confirmed TVs show up cleanly in the
+          unlock list; unconfirmed ones are flagged with an "Unconfirmed" pill.
+        </p>
+        <p>
+          Tap <strong>Lock</strong> from the phone or Mac and the TV snaps back to the locked home grid immediately — within seconds — even if
+          someone was mid-playback on hidden content. The lock signal rides Apple's CloudKit infrastructure (no server we
+          operate), with an iCloud-key-value fallback that catches it within a couple of seconds if the push gets delayed.
         </p>
       </div>
     </div>
