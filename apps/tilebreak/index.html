@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tilebreak — Match. Combo. Clear.</title>
+  <meta name="description" content="Polished modern Mahjong solitaire for iPhone and iPad. Provably solvable boards, procedural music, Game Center leaderboards & challenges. No ads. Plays offline.">
+  <meta property="og:title" content="Tilebreak — Match. Combo. Clear.">
+  <meta property="og:description" content="Polished modern Mahjong solitaire. Seven layouts, six themes, procedural music, Game Center leaderboards. Every board is provably solvable.">
+  <meta property="og:type" content="app">
+  <meta property="og:url" content="https://wemiller.com/apps/tilebreak/">
+  <meta property="og:image" content="https://wemiller.com/apps/tilebreak/assets/images/icon.png">
+  <link rel="stylesheet" href="../app-showcase.css">
+  <style>
+    /* Tilebreak — match the icon's deep-indigo → hot-orange burst palette */
+    :root {
+      --app-primary: #2a1769;    /* deep indigo */
+      --app-secondary: #ff8e34;  /* burst orange */
+      --app-accent:    #ffd23f;  /* spark yellow */
+    }
+
+    .hero {
+      background:
+        radial-gradient(ellipse at 50% 45%, rgba(255, 142, 52, 0.45) 0%, transparent 55%),
+        linear-gradient(160deg, #1a0d4a 0%, #2a1769 45%, #0d0626 100%);
+      color: white;
+    }
+    .hero-title,
+    .hero-subtitle { color: white; -webkit-text-fill-color: white; }
+    .hero-description { color: rgba(255, 255, 255, 0.92); }
+    .hero-subtitle { letter-spacing: 0.5px; }
+
+    /* Tile-like hero icon — float + subtle glow */
+    .hero-phone .phone-mockup {
+      border-radius: 22%;
+      box-shadow:
+        0 30px 80px rgba(255, 142, 52, 0.35),
+        0 10px 30px rgba(0, 0, 0, 0.5);
+      animation: tile-bob 4.5s ease-in-out infinite;
+    }
+    @keyframes tile-bob {
+      0%, 100% { transform: translateY(0); }
+      50%      { transform: translateY(-10px); }
+    }
+
+    /* Feature icons in this app's palette */
+    .feature-icon {
+      background: linear-gradient(135deg, var(--app-secondary) 0%, var(--app-accent) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="app-nav">
+    <div class="nav-container">
+      <a href="../" class="nav-logo">← Apps</a>
+      <button class="mobile-menu-toggle">☰</button>
+      <ul class="nav-links">
+        <li><a href="#features" class="nav-link">Features</a></li>
+        <li><a href="#screenshots" class="nav-link">Screenshots</a></li>
+        <li><a href="#faq" class="nav-link">FAQ</a></li>
+        <li><a href="https://apps.apple.com/us/app/tile-break-mahjong/id6772609707" class="btn-buy" target="_blank" rel="noopener noreferrer">Download on App Store</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-text">
+        <p class="hero-subtitle">🀄 Tilebreak</p>
+        <h1 class="hero-title">Match. Combo. Clear.</h1>
+        <p class="hero-description">
+          A polished modern Mahjong solitaire for iPhone and iPad.
+          Tap two matching free tiles to break the pair, build a combo, and clear the board.
+          Every deal is provably solvable. No ads. No tracking. Plays offline.
+        </p>
+        <div class="hero-cta">
+          <a href="https://apps.apple.com/us/app/tile-break-mahjong/id6772609707" class="btn-buy" target="_blank" rel="noopener noreferrer">Download Now</a>
+        </div>
+      </div>
+      <div class="hero-image">
+        <div class="hero-phone">
+          <img src="assets/images/icon.png" alt="Tilebreak App Icon" class="phone-mockup"
+               onerror="this.style.background='linear-gradient(135deg, #2a1769, #ff8e34)'; this.style.minHeight='600px';">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Floating App Store button -->
+  <a href="https://apps.apple.com/us/app/tile-break-mahjong/id6772609707" class="floating-appstore" target="_blank" rel="noopener noreferrer">
+    <span class="floating-appstore-icon"></span>
+    <span>Download on App Store</span>
+  </a>
+
+  <!-- Features -->
+  <section id="features" class="section">
+    <div class="section-header">
+      <p class="section-subtitle">What's inside</p>
+      <h2>Built for the long game</h2>
+      <p>Seven layouts, six themes, four face sets, two rule variants — and not a single ad in sight</p>
+    </div>
+
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-icon">🧩</div>
+        <h3 class="feature-title">Always solvable</h3>
+        <p class="feature-description">
+          Every board is generated via reverse-removal — we simulate a valid play-through first, then deal the tiles into the resulting order. No more random shuffles that lock you out two minutes in.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🗺️</div>
+        <h3 class="feature-title">Seven layouts</h3>
+        <p class="feature-description">
+          Garden, Pyramid, Turtle, Cross, Diamond, Tower, and Bricks. Each one is 144 tiles tuned for portrait phones and reads beautifully on iPad.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🎨</div>
+        <h3 class="feature-title">Six themes, four face sets</h3>
+        <p class="feature-description">
+          Mix Ivory, Jade, Midnight, Cherry, Lantern, or Cyber with Classic Mahjong, Icons, Garden, or Animals tile faces. Live-switch any of it from Settings without dropping your game.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🎵</div>
+        <h3 class="feature-title">Procedural soundtrack</h3>
+        <p class="feature-description">
+          Each theme ships with its own non-repetitive procedural music engine driven by AVAudio's sample-accurate scheduler. Respects your silent switch.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🔥</div>
+        <h3 class="feature-title">Combo + time scoring</h3>
+        <p class="feature-description">
+          Fast clears multiply your score. Combo streaks stack up to 5×. A misaimed tap breaks the streak — so does using a hint, but only if you cash it in.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🏆</div>
+        <h3 class="feature-title">Game Center leaderboards</h3>
+        <p class="feature-description">
+          Three global leaderboards: best single-game score, fastest clear, and longest combo. End-of-game screen shows your personal record next to each stat and highlights a new best in gold.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">📵</div>
+        <h3 class="feature-title">Offline, ad-free</h3>
+        <p class="feature-description">
+          No ads. No tracking. No analytics. No required sign-in. Plays everywhere, including airplane mode. Game Center features need a connection but the core game does not.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🤝</div>
+        <h3 class="feature-title">Challenge a friend</h3>
+        <p class="feature-description">
+          After a win, send a real native Game Center challenge tied to your actual leaderboard entry. They get an in-game banner with the score to beat.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🔋</div>
+        <h3 class="feature-title">Light on battery</h3>
+        <p class="feature-description">
+          SwiftUI + SpriteKit hybrid, 60 fps cap, zero third-party SDKs. Stack lift, side walls, and shadows are all proportional so the board scales cleanly from iPhone mini to iPad 13".
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Magazine sections -->
+  <section class="section">
+    <div class="magazine-section">
+      <div class="magazine-content">
+        <h2>Pick a layout. Pick a style.</h2>
+        <p>
+          Tilebreak ships with seven board layouts — from the classic Garden, to a brick-stacked Pyramid, to a Latin Cross that fans out across the screen. Whichever you pick, the deal is provably solvable.
+        </p>
+        <p>
+          Combine any layout with one of six themes and four face sets. Want Classic Mahjong tiles on a midnight background with a lo-fi soundtrack? Done. Want full-color animal emoji on a synthwave Cyber theme? Also done.
+        </p>
+      </div>
+      <div class="magazine-image">
+        <img src="assets/images/feature-1.png" alt="Garden layout with Classic tiles on the Ivory theme"
+             onerror="this.style.background='linear-gradient(135deg, #2a1769, #ff8e34)'; this.style.minHeight='400px'; this.style.display='block';">
+      </div>
+    </div>
+
+    <div class="magazine-section reverse">
+      <div class="magazine-content">
+        <h2>A real challenge, not a slot machine.</h2>
+        <p>
+          Time and combo both matter. A fast clear with a long streak posts a serious score. A slow clear with broken combos posts a fine one. Used a hint? Took an undo? You'll see the deduction.
+        </p>
+        <p>
+          The end screen pulls your personal best from Game Center and shows it next to every stat. Beat your record and the row goes gold — there's no ambiguity about whether you crushed it.
+        </p>
+      </div>
+      <div class="magazine-image">
+        <img src="assets/images/feature-2.png" alt="Pyramid layout with Animals face set on Cyber theme"
+             onerror="this.style.background='linear-gradient(135deg, #ff8e34, #ffd23f)'; this.style.minHeight='400px'; this.style.display='block';">
+      </div>
+    </div>
+
+    <div class="magazine-section">
+      <div class="magazine-content">
+        <h2>Made with care, shipped with care.</h2>
+        <p>
+          Tilebreak is hand-built in SwiftUI and SpriteKit — no Unity, no third-party SDKs, no analytics, no ads. The classic Mahjong tile faces are drawn procedurally in CoreGraphics so they look crisp at any tile size.
+        </p>
+        <p>
+          The app icon is procedural too: two matching Red Dragon tiles flanking a burst of sparks, generated by a Swift script so it can be tweaked and re-rendered in seconds. The whole thing is iOS 26 native and built against Swift 6 strict concurrency.
+        </p>
+      </div>
+      <div class="magazine-image">
+        <img src="assets/images/feature-3.png" alt="Diamond layout with Garden face set on Cherry theme"
+             onerror="this.style.background='linear-gradient(135deg, #2a1769, #ffd23f)'; this.style.minHeight='400px'; this.style.display='block';">
+      </div>
+    </div>
+  </section>
+
+  <!-- Screenshots -->
+  <section id="screenshots" class="section">
+    <div class="section-header">
+      <p class="section-subtitle">See it in action</p>
+      <h2>Screenshots</h2>
+      <p>Captured on iPhone 17 Pro Max</p>
+    </div>
+
+    <div class="screenshots-grid">
+      <div class="screenshot-item">
+        <img src="assets/images/screenshot-1.png" alt="Tilebreak home screen with floating hero tiles"
+             onerror="this.style.background='linear-gradient(135deg, #2a1769, #ff8e34)'; this.style.minHeight='500px'; this.style.display='block';">
+      </div>
+      <div class="screenshot-item">
+        <img src="assets/images/screenshot-2.png" alt="Turtle layout, Midnight theme, Animals face set"
+             onerror="this.style.background='linear-gradient(135deg, #ff8e34, #2a1769)'; this.style.minHeight='500px'; this.style.display='block';">
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="faq-section">
+    <div class="section-header">
+      <p class="section-subtitle">Got questions?</p>
+      <h2>FAQ</h2>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        <span>How do you match tiles?</span>
+        <span class="faq-icon">▼</span>
+      </button>
+      <div class="faq-answer">
+        <p>
+          Tap two matching tiles to remove them. A tile is "free" if nothing is stacked on top of it and at least one of its left or right sides is open. Most tiles need an exact match — under American rules, any flower matches any flower and any season matches any season.
+        </p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        <span>Is every board actually solvable?</span>
+        <span class="faq-icon">▼</span>
+      </button>
+      <div class="faq-answer">
+        <p>
+          Yes. Each board is generated by simulating a valid play-through first (the reverse-removal method) and then dealing the tiles into the resulting order. Even after a shuffle mid-game, the new layout is regenerated to be solvable.
+        </p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        <span>What's the difference between American and Strict rules?</span>
+        <span class="faq-icon">▼</span>
+      </button>
+      <div class="faq-answer">
+        <p>
+          American (the default) follows the modern western convention: any flower matches any flower, any season matches any season. Strict requires an exact identity match for every tile — and because flowers/seasons only ship as singles, Strict mode drops them from the pool entirely and substitutes extra winds so every tile has a partner.
+        </p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        <span>Are there ads or in-app purchases?</span>
+        <span class="faq-icon">▼</span>
+      </button>
+      <div class="faq-answer">
+        <p>
+          No to both. Tilebreak is a one-time purchase. There are no ads, no in-app purchases, no required sign-in, and no tracking. Game Center is opt-in for leaderboards and challenges.
+        </p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        <span>Does it play offline?</span>
+        <span class="faq-icon">▼</span>
+      </button>
+      <div class="faq-answer">
+        <p>
+          Completely. The full game works in airplane mode. Leaderboard submission and challenges sync up the next time you're online.
+        </p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        <span>Does it work on iPad?</span>
+        <span class="faq-icon">▼</span>
+      </button>
+      <div class="faq-answer">
+        <p>
+          Yes — native iPad support in both portrait and landscape. The board scales up to fill the bigger screen with proportional tile size, stack lift, and side-wall depth so the visual stays consistent.
+        </p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        <span>What's the music?</span>
+        <span class="faq-icon">▼</span>
+      </button>
+      <div class="faq-answer">
+        <p>
+          A procedural engine — there are no pre-recorded tracks. Each theme has its own character (Ivory is plucky, Midnight is brooding, Cyber is synthwave) and the engine schedules notes through AVAudio with sample-accurate timing so it never stutters. Toggleable from Settings, respects the silent switch.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Security -->
+  <section class="security-callout">
+    <div class="section-header">
+      <p class="section-subtitle">Privacy &amp; security</p>
+      <h2>Built clean</h2>
+    </div>
+    <div class="security-badges">
+      <div class="security-badge"><span class="badge-icon">🚫</span> No ads, no SDKs</div>
+      <div class="security-badge"><span class="badge-icon">🔍</span> No tracking</div>
+      <div class="security-badge"><span class="badge-icon">📋</span> Privacy Manifest</div>
+      <div class="security-badge"><span class="badge-icon">🎮</span> GameKit only</div>
+      <div class="security-badge"><span class="badge-icon">✈️</span> Plays offline</div>
+    </div>
+    <p class="security-audit-note">Zero third-party dependencies. Built on Swift 6 with strict concurrency.</p>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-links">
+        <a href="../" class="footer-link">All Apps</a>
+        <a href="../enter-space/" class="footer-link">Enter Space</a>
+        <a href="../blip/" class="footer-link">Blip</a>
+        <a href="../ari-helper/" class="footer-link">Ari Helper</a>
+        <a href="../aperion/" class="footer-link">Aperion</a>
+        <a href="../sami/" class="footer-link">Sami</a>
+        <a href="../mi-speaks/" class="footer-link">Mi Speaks</a>
+        <a href="../embr/" class="footer-link">Embr</a>
+        <a href="../deepsi/" class="footer-link">DeepSi</a>
+        <a href="../luma-editor/" class="footer-link">Luma Editor</a>
+        <a href="../wise-flyer/" class="footer-link">Wise Flyer</a>
+        <a href="../glint/" class="footer-link">Glint</a>
+        <a href="/privacy/" class="footer-link">Privacy</a>
+        <a href="/terms/" class="footer-link">Terms</a>
+        <a href="/" class="footer-link">Portfolio</a>
+      </div>
+
+      <div class="footer-social-links">
+        <a href="https://x.com/apps_by_blaine" class="social-icon-link" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)">
+          <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+          </svg>
+        </a>
+        <a href="https://www.instagram.com/apps.by.blaine/" class="social-icon-link" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+          <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+          </svg>
+        </a>
+        <a href="https://www.youtube.com/@AppsByBlaine" class="social-icon-link" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+          <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+          </svg>
+        </a>
+      </div>
+
+      <p style="color: var(--text-muted); margin-top: var(--spacing-md);">
+        © <span id="year"></span> Blaine Miller. All rights reserved.
+      </p>
+    </div>
+  </footer>
+
+  <script src="../app-showcase.js"></script>
+</body>
+</html>
