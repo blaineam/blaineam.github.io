@@ -1,6 +1,7 @@
 {
-  "fingerprint": "3a506b34a2cf2cd99f02020f062d51bd4c58cd9e8bdc527b06c4bd93fe323ef6",
+  "fingerprint": "f5f6e776d5f95de5ec76e05d82581467bea92a594b72973953b5960517847ce2",
   "apps": [
+    "tilebreak",
     "enter-space",
     "blip",
     "ari-helper",
@@ -13,5 +14,5 @@
     "wise-flyer",
     "glint"
   ],
-  "generatedAt": "2026-05-18T03:17:29.791Z"
+  "generatedAt": "2026-05-26T00:16:00.030Z"
 }
