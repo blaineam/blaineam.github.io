@@ -1,6 +1,7 @@
 {
-  "fingerprint": "e02998049f1d0b6c66fd5c02a7e1db8eeccf101e5d929c5bfb319c000f073e8c",
+  "fingerprint": "fe8751159198baa451e335b9218ff60cb318f227063f9760ae2a2cbbc7a4e2e5",
   "apps": [
+    "pinline",
     "enter-space",
     "blip",
     "ari-helper",
@@ -14,5 +15,5 @@
     "wise-flyer",
     "glint"
   ],
-  "generatedAt": "2026-05-28T15:23:30.214Z"
+  "generatedAt": "2026-05-28T22:14:49.380Z"
 }
