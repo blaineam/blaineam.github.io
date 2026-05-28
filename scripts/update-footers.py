@@ -12,11 +12,14 @@ APPS = ROOT / "apps"
 
 # (slug, label) in the order shown in the grid, minus external apps.
 ORDER = [
+    ("pinline",     "Pinline"),
     ("enter-space", "Enter Space"),
     ("blip",        "Blip"),
     ("ari-helper",  "Ari Helper"),
     ("asteroic",    "Asteroic"),
+    ("aperion",     "Aperion"),
     ("sami",        "Sami"),
+    ("tilebreak",   "Tilebreak"),
     ("mi-speaks",   "Mi Speaks"),
     ("embr",        "Embr"),
     ("deepsi",      "DeepSi"),
