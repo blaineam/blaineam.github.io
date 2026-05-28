@@ -1,13 +1,13 @@
 {
-  "fingerprint": "fe8751159198baa451e335b9218ff60cb318f227063f9760ae2a2cbbc7a4e2e5",
+  "fingerprint": "2e7d9909083485af994a315bd036d4d831d2999e1a4cb3245d023ad6b4977c6e",
   "apps": [
-    "pinline",
     "enter-space",
     "blip",
     "ari-helper",
+    "pinline",
+    "tilebreak",
     "aperion",
     "sami",
-    "tilebreak",
     "mi-speaks",
     "embr",
     "deepsi",
@@ -15,5 +15,5 @@
     "wise-flyer",
     "glint"
   ],
-  "generatedAt": "2026-05-28T22:14:49.380Z"
+  "generatedAt": "2026-05-28T23:07:09.587Z"
 }
