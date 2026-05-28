@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pinline - 1v1 Compound Bow Archery</title>
+  <meta name="description" content="Polished 1v1 turn-based archery for iPhone &amp; iPad. Real compound-bow pins, lateral wind, sway under tension, Game Center matches, and iMessage challenges. Pass-and-play, or take your shot one bubble at a time.">
+  <meta property="og:title" content="Pinline - 1v1 Compound Bow Archery">
+  <meta property="og:description" content="Polished 1v1 turn-based archery for iPhone &amp; iPad. Real compound-bow pins, lateral wind, sway under tension, Game Center matches, and iMessage challenges.">
+  <meta property="og:type" content="game">
+  <meta property="og:url" content="https://wemiller.com/apps/pinline/">
+  <meta property="og:image" content="https://wemiller.com/apps/pinline/assets/images/poster.jpg">
+  <link rel="stylesheet" href="../app-showcase.css">
+  <style>
+    /* Pinline-specific palette — pulled from the in-game peep-green accent +
+       sunset orange title gradient + dusk-blue sky stops. Keeps the page's
+       hero / accent / CTA hues consistent with what the player sees on
+       launch. */
+    :root {
+      --app-primary: #C7F232;        /* fluorescent peep-green */
+      --app-secondary: #FF6D2A;      /* orange pin */
+      --app-accent: #2641A6;         /* deep dusk blue */
+    }
+
+    .hero {
+      background:
+        radial-gradient(circle at 25% 15%, rgba(199, 242, 50, 0.20) 0%, transparent 55%),
+        radial-gradient(circle at 80% 70%, rgba(255, 109, 42, 0.18) 0%, transparent 55%),
+        linear-gradient(160deg, #0F1730 0%, #1A2858 55%, #C77035 100%);
+      color: white;
+    }
+
+    .hero-title,
+    .hero-subtitle {
+      color: white;
+      -webkit-text-fill-color: white;
+    }
+
+    .hero-title {
+      background: linear-gradient(135deg, #FFD24D 0%, #FF6D2A 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 60px rgba(199, 242, 50, 0.25);
+    }
+
+    .hero-subtitle {
+      color: var(--app-primary);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .hero-description {
+      color: rgba(255, 255, 255, 0.85);
+    }
+
+    /* Replace the wise-flyer-style icon-in-frame with a glowing peep ring
+       around the Pinline icon, echoing the in-game sight overlay. */
+    .hero-image .hero-phone {
+      position: relative;
+    }
+
+    .hero-image .hero-phone::before {
+      content: '';
+      position: absolute;
+      inset: -32px;
+      border-radius: 50%;
+      border: 4px solid var(--app-primary);
+      box-shadow:
+        0 0 60px rgba(199, 242, 50, 0.55),
+        inset 0 0 40px rgba(199, 242, 50, 0.2);
+      pointer-events: none;
+      animation: peep-pulse 3.6s ease-in-out infinite;
+    }
+
+    @keyframes peep-pulse {
+      0%, 100% {
+        transform: scale(1);
+        box-shadow:
+          0 0 60px rgba(199, 242, 50, 0.55),
+          inset 0 0 40px rgba(199, 242, 50, 0.2);
+      }
+      50% {
+        transform: scale(1.04);
+        box-shadow:
+          0 0 96px rgba(199, 242, 50, 0.75),
+          inset 0 0 50px rgba(199, 242, 50, 0.3);
+      }
+    }
+
+    .hero-image .phone-mockup {
+      border-radius: 28%;
+      box-shadow: 0 24px 70px rgba(0, 0, 0, 0.5);
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="app-nav">
+    <div class="nav-container">
+      <a href="../" class="nav-logo">← Apps</a>
+      <button class="mobile-menu-toggle">☰</button>
+      <ul class="nav-links">
+        <li><a href="#features" class="nav-link">Features</a></li>
+        <li><a href="#how-it-plays" class="nav-link">How It Plays</a></li>
+        <li><a href="#screenshots" class="nav-link">Screenshots</a></li>
+        <li><a href="#faq" class="nav-link">FAQ</a></li>
+        <li><a href="https://apps.apple.com/us/app/pinline/id6772773442" class="btn-buy" target="_blank" rel="noopener noreferrer">Download on App Store</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-text">
+        <p class="hero-subtitle">🎯 Pinline</p>
+        <h1 class="hero-title">Pin the Line. Win the Match.</h1>
+        <p class="hero-description">
+          1v1 compound-bow archery built around the things real shooters care about: pin yardages, lateral wind, sway under draw. Pass-and-play on one device, challenge a friend over iMessage, or matchmake on Game Center — every arrow is a fresh turn.
+        </p>
+        <div class="hero-cta">
+          <a href="https://apps.apple.com/us/app/pinline/id6772773442" class="btn-buy" target="_blank" rel="noopener noreferrer">Download Now</a>
+        </div>
+      </div>
+      <div class="hero-image">
+        <div class="hero-phone">
+          <img src="assets/images/icon.png" alt="Pinline App Icon" class="phone-mockup"
+               onerror="this.src='assets/images/hero-mockup.png'; this.onerror=function(){this.style.background='linear-gradient(135deg, #C7F232, #FF6D2A)'; this.style.minHeight='600px';};">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Floating App Store Button -->
+  <a href="https://apps.apple.com/us/app/pinline/id6772773442" class="floating-appstore" target="_blank" rel="noopener noreferrer">
+    <span class="floating-appstore-icon"></span>
+    <span>Download on App Store</span>
+  </a>
+
+  <!-- Features Section -->
+  <section id="features" class="section">
+    <div class="section-header">
+      <p class="section-subtitle">Why Pinline Hits Different</p>
+      <h2>Built for Real Archers</h2>
+      <p>Compound-bow mechanics in your pocket — not just a flappy bird with a quiver</p>
+    </div>
+
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-icon">🎯</div>
+        <h3 class="feature-title">Real Pin Yardages</h3>
+        <p class="feature-description">
+          20, 30, 40, 50, 60 yard pins on a fluorescent compound sight. Read the distance, pick your pin, hold steady, release. Wrong pin = wrong elevation, just like the lane.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">💨</div>
+        <h3 class="feature-title">Lateral Wind Compensation</h3>
+        <p class="feature-description">
+          Wind speed and direction read out live on the HUD. Aim INTO the wind to drift back to the bull. The flag on the lane tells you where it's blowing.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">😤</div>
+        <h3 class="feature-title">Sway Under Tension</h3>
+        <p class="feature-description">
+          Hold too long at full draw and your pin starts to wander — random anchor, brownian sway, fatigue jerks. Release on the bull or hold for the perfect line. Your call.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🦌</div>
+        <h3 class="feature-title">Olympic & 3D Animals</h3>
+        <p class="feature-description">
+          Paper Olympic 10-ring for the classic feel, or 3D animal targets — whitetail, turkey, boar — with painted kill zones and proper heart-shot scoring.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🌅</div>
+        <h3 class="feature-title">Atmospheric Range</h3>
+        <p class="feature-description">
+          Forest, alpine, coastal bluff, desert canyon. Sunrise, noon, sunset, night. Clear, rain, snow. Every match's range is uniquely generated.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">📲</div>
+        <h3 class="feature-title">Pass &amp; Play</h3>
+        <p class="feature-description">
+          Two shooters, one device. Per-arrow handoff screen, per-player bow color, full match without any sign-in friction. Perfect for couch competition.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">💬</div>
+        <h3 class="feature-title">iMessage Challenges</h3>
+        <p class="feature-description">
+          Send a Pinline bubble to a friend. They open it, take their shot, send it back. Each turn is one arrow. Like Wordle's group chat — but with a compound bow.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🎮</div>
+        <h3 class="feature-title">Game Center 1v1</h3>
+        <p class="feature-description">
+          Quick-match online or invite a friend. Asynchronous turn-based — your opponent shoots when they're free, you shoot when you're free, push notifications keep you in sync.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🏆</div>
+        <h3 class="feature-title">Global Leaderboard</h3>
+        <p class="feature-description">
+          Every online win submits to the Pinline wins leaderboard. Climb the global ranks one bubble at a time. Bragging rights included.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Magazine-style Feature Sections -->
+  <section id="how-it-plays" class="section">
+    <div class="magazine-section">
+      <div class="magazine-content">
+        <h2>Tap. Hold. Release.</h2>
+        <p>
+          Touch and hold to draw the bow — the compound rig rises into shooting position, the camera crunches in to 10° FOV (the actual angular drop between yardage pins),
+          and your fluorescent peep ring glows around the target.
+        </p>
+        <p>
+          Drag while drawn to fine-tune your aim. The bow's response is laggy on purpose — you're fighting a drawn compound bow, not nudging a cursor. Let go to release.
+        </p>
+      </div>
+      <div class="magazine-image">
+        <img src="assets/images/feature-1.png" alt="Drawing the bow"
+             onerror="this.style.background='linear-gradient(135deg, #1A2858, #C77035)'; this.style.minHeight='400px'; this.style.display='block';">
+      </div>
+    </div>
+
+    <div class="magazine-section reverse">
+      <div class="magazine-content">
+        <h2>Read the Range</h2>
+        <p>
+          Distance and target type sit on the lower-left HUD. Wind speed + direction sit on the lower-right with a rotating arrow showing exactly where it's blowing — and a flag on the lane confirms it.
+        </p>
+        <p>
+          The 20/30/40/50/60-yard pins stack inside a real compound sight. Picking the wrong pin throws the arc — picking the right one and letting the wind push it back to center is the whole game.
+        </p>
+      </div>
+      <div class="magazine-image">
+        <img src="assets/images/feature-2.png" alt="HUD readouts"
+             onerror="this.style.background='linear-gradient(135deg, #C7F232, #1A2858)'; this.style.minHeight='400px'; this.style.display='block';">
+      </div>
+    </div>
+
+    <div class="magazine-section">
+      <div class="magazine-content">
+        <h2>Three Ways to Compete</h2>
+        <p>
+          <strong>Pass-and-play.</strong> Hand the phone across the couch. A per-arrow handoff screen shows whose bow is up, in their colour. No sign-in, fully offline.
+        </p>
+        <p>
+          <strong>iMessage.</strong> Tap the Pinline iMessage app, send a challenge bubble with a format and target style. Recipient opens, takes one shot, sends the bubble back. Repeat until someone breaks 30.
+        </p>
+        <p>
+          <strong>Game Center.</strong> Quick-match or invite — every arrow ends your turn and pushes to your opponent. They get notified, take their shot, push back. Genuinely async.
+        </p>
+      </div>
+      <div class="magazine-image">
+        <img src="assets/images/feature-3.png" alt="Multiplayer modes"
+             onerror="this.style.background='linear-gradient(135deg, #FF6D2A, #C7F232)'; this.style.minHeight='400px'; this.style.display='block';">
+      </div>
+    </div>
+  </section>
+
+  <!-- Screenshots Section -->
+  <section id="screenshots" class="section">
+    <div class="section-header">
+      <p class="section-subtitle">See It In Action</p>
+      <h2>Screenshots</h2>
+      <p>Compound sights, painted animals, wind on the flag</p>
+    </div>
+
+    <div class="screenshots-grid">
+      <div class="screenshot-item">
+        <img src="assets/images/screenshot-1.png" alt="Main menu"
+             onerror="this.style.background='linear-gradient(135deg, #1A2858, #C77035)'; this.style.minHeight='500px'; this.style.display='block';">
+      </div>
+      <div class="screenshot-item">
+        <img src="assets/images/screenshot-2.png" alt="Full draw on the bull"
+             onerror="this.style.background='linear-gradient(135deg, #C7F232, #FF6D2A)'; this.style.minHeight='500px'; this.style.display='block';">
+      </div>
+      <div class="screenshot-item">
+        <img src="assets/images/screenshot-3.png" alt="3D animal target"
+             onerror="this.style.background='linear-gradient(135deg, #FF6D2A, #2641A6)'; this.style.minHeight='500px'; this.style.display='block';">
+      </div>
+      <div class="screenshot-item">
+        <img src="assets/images/screenshot-4.png" alt="Results screen"
+             onerror="this.style.background='linear-gradient(135deg, #2641A6, #C7F232)'; this.style.minHeight='500px'; this.style.display='block';">
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section id="faq" class="faq-section">
+    <div class="section-header">
+      <p class="section-subtitle">Got Questions?</p>
+      <h2>Frequently Asked Questions</h2>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        <span>How do I actually aim?</span>
+        <span class="faq-icon">▼</span>
+      </button>
+      <div class="faq-answer">
+        <p>
+          Read the distance on the HUD (e.g. "41 yd"). Pick the matching pin on the compound sight by tapping it — there are pins for 20, 30, 40, 50, and 60 yards. Hold the right pin on the target and release. If there's wind, aim INTO the wind so the arrow drifts back to centre.
+        </p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        <span>Why does my pin wander while I'm holding?</span>
+        <span class="faq-icon">▼</span>
+      </button>
+      <div class="faq-answer">
+        <p>
+          That's sway — your shooter is human, the bow is heavy, and full draw is exhausting. The longer you hold, the more your aim drifts. Release at the right moment or let the auto-release fire after you overdraw. Quick releases are easier; held releases give you precision but punish hesitation.
+        </p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        <span>How does the iMessage version work?</span>
+        <span class="faq-icon">▼</span>
+      </button>
+      <div class="faq-answer">
+        <p>
+          Open a conversation in Messages, tap the Pinline iMessage app, pick a format (Quickfire / Classic / Tournament) and target style (Olympic / 3D Animals), then send. Your friend taps the bubble, takes a single arrow, and sends the updated bubble back. Repeat until the match ends. Each arrow is one bubble — like Wordle, but for archers.
+        </p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        <span>What's the difference between Olympic and 3D Animals?</span>
+        <span class="faq-icon">▼</span>
+      </button>
+      <div class="faq-answer">
+        <p>
+          Olympic is paper — a 10-ring boss target with concentric scoring rings (10 in the bull, 1 on the edge). 3D Animals rotates between whitetail, turkey, and boar with painted kill zones — heart shot for max points, gut shot for low points, miss for zero. Both modes use the same physics; the targets just look different and have different scoring zones.
+        </p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        <span>Can I play offline?</span>
+        <span class="faq-icon">▼</span>
+      </button>
+      <div class="faq-answer">
+        <p>
+          Yes — Pass-and-play mode is fully offline. Two shooters, one device, no sign-in. Online (Game Center) and iMessage matches obviously need a connection to relay turns, but everything in-game runs locally.
+        </p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        <span>What devices does it run on?</span>
+        <span class="faq-icon">▼</span>
+      </button>
+      <div class="faq-answer">
+        <p>
+          iPhone and iPad. The game is portrait-only (the SwiftUI peep aperture sizing, FOV crunch, and follow-cam waypoints are tuned for vertical aspect). Built and tuned on iPhone 17 Pro Max; runs smoothly on anything from iPhone 12 forward.
+        </p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        <span>Are there in-app purchases or ads?</span>
+        <span class="faq-icon">▼</span>
+      </button>
+      <div class="faq-answer">
+        <p>
+          No. Pinline is a one-time purchase. No ads, no tracking, no in-app purchases, no subscriptions. You get the whole game, all modes, all targets, both online flows.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Security &amp; Privacy callout -->
+  <section class="security-callout">
+    <div class="section-header">
+      <p class="section-subtitle">Security &amp; Privacy</p>
+      <h2>Hardened by Design</h2>
+    </div>
+    <div class="security-badges">
+      <div class="security-badge"><span class="badge-icon">&#x1f4cb;</span> Privacy Manifest</div>
+      <div class="security-badge"><span class="badge-icon">&#x1f50d;</span> Input Validation</div>
+      <div class="security-badge"><span class="badge-icon">&#x1f3ae;</span> GameKit Security</div>
+      <div class="security-badge"><span class="badge-icon">&#x2705;</span> App Sandbox</div>
+    </div>
+    <p class="security-audit-note">No tracking. No ads. No in-app purchases.</p>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-links">
+        <a href="../" class="footer-link">All Apps</a>
+        <a href="../enter-space/" class="footer-link">Enter Space</a>
+        <a href="../blip/" class="footer-link">Blip</a>
+        <a href="../ari-helper/" class="footer-link">Ari Helper</a>
+        <a href="../asteroic/" class="footer-link">Asteroic</a>
+        <a href="../aperion/" class="footer-link">Aperion</a>
+        <a href="../sami/" class="footer-link">Sami</a>
+        <a href="../tilebreak/" class="footer-link">Tilebreak</a>
+        <a href="../mi-speaks/" class="footer-link">Mi Speaks</a>
+        <a href="../embr/" class="footer-link">Embr</a>
+        <a href="../deepsi/" class="footer-link">DeepSi</a>
+        <a href="../luma-editor/" class="footer-link">Luma Editor</a>
+        <a href="../wise-flyer/" class="footer-link">Wise Flyer</a>
+        <a href="../glint/" class="footer-link">Glint</a>
+        <a href="/privacy/" class="footer-link">Privacy</a>
+        <a href="/terms/" class="footer-link">Terms</a>
+        <a href="/" class="footer-link">Portfolio</a>
+      </div>
+
+      <div class="footer-social-links">
+        <a href="https://x.com/apps_by_blaine" class="social-icon-link" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)">
+          <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+          </svg>
+        </a>
+        <a href="https://www.instagram.com/apps.by.blaine/" class="social-icon-link" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+          <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+          </svg>
+        </a>
+        <a href="https://www.youtube.com/@AppsByBlaine" class="social-icon-link" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+          <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+          </svg>
+        </a>
+      </div>
+
+      <p style="color: var(--text-muted); margin-top: var(--spacing-md);">
+        © <span id="year"></span> Blaine Miller. All rights reserved.
+      </p>
+    </div>
+  </footer>
+
+  <script src="../app-showcase.js"></script>
+</body>
+</html>
