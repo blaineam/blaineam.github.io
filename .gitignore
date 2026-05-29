@@ -6,3 +6,6 @@ node_modules/
 
 # Claude scratch
 .claude/
+
+# Poster-generator prototype output — never deployed, never committed.
+apps/.poster-previews/
