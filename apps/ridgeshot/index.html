@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ridgeshot — Long-Range Marksman</title>
+  <meta name="description" content="Long-range rifle marksman for iPhone &amp; iPad. Second-focal-plane Christmas-tree reticle, 100–800 yard shots, Olympic targets and walking 3D wildlife, Game Center matches, and iMessage challenges. Quiet, patient, classy.">
+  <meta property="og:title" content="Ridgeshot — Long-Range Marksman">
+  <meta property="og:description" content="Long-range rifle marksman for iPhone &amp; iPad. SFP Christmas-tree reticle, 100–800 yd shots, walking wildlife, Game Center, and iMessage challenges.">
+  <meta property="og:type" content="game">
+  <meta property="og:url" content="https://wemiller.com/apps/ridgeshot/">
+  <meta property="og:image" content="https://wemiller.com/apps/ridgeshot/assets/images/poster.jpg">
+  <link rel="stylesheet" href="../app-showcase.css">
+  <style>
+    /* Ridgeshot palette — pulled from the in-game forest+brass aesthetic:
+       charcoal forest greens, warm amber dusk horizon, brass center-dot
+       reticle illumination. Keeps the page's hero / accent / CTA hues
+       consistent with what the player sees on launch. */
+    :root {
+      --app-primary: #C7973A;        /* brass */
+      --app-secondary: #9E5A2A;      /* copper */
+      --app-accent: #1A2A22;         /* deep charcoal forest green */
+    }
+
+    .hero {
+      background:
+        radial-gradient(circle at 50% 78%, rgba(250, 200, 118, 0.28) 0%, transparent 50%),
+        radial-gradient(circle at 25% 25%, rgba(199, 151, 58, 0.12) 0%, transparent 55%),
+        linear-gradient(180deg, #1A2A33 0%, #2D2452 38%, #5E3957 65%, #B27551 88%, #DC8D4A 100%);
+      color: white;
+    }
+
+    .hero-title,
+    .hero-subtitle {
+      color: white;
+      -webkit-text-fill-color: white;
+    }
+
+    .hero-title {
+      background: linear-gradient(135deg, #F0E8D4 0%, #C7973A 55%, #9E5A2A 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 60px rgba(199, 151, 58, 0.28);
+    }
+
+    .hero-subtitle {
+      color: var(--app-primary);
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+    }
+
+    .hero-description {
+      color: rgba(255, 255, 255, 0.86);
+    }
+
+    /* Reticle-style halo around the icon — etched bone ring with a
+       brass illumination glow, echoing the in-game scope picture. */
+    .hero-image .hero-phone {
+      position: relative;
+    }
+
+    .hero-image .hero-phone::before {
+      content: '';
+      position: absolute;
+      inset: -34px;
+      border-radius: 50%;
+      border: 3px solid rgba(240, 232, 212, 0.85);
+      box-shadow:
+        0 0 70px rgba(199, 151, 58, 0.55),
+        inset 0 0 36px rgba(199, 151, 58, 0.16);
+      pointer-events: none;
+      animation: reticle-pulse 4.2s ease-in-out infinite;
+    }
+
+    @keyframes reticle-pulse {
+      0%, 100% {
+        transform: scale(1);
+        box-shadow:
+          0 0 70px rgba(199, 151, 58, 0.55),
+          inset 0 0 36px rgba(199, 151, 58, 0.16);
+      }
+      50% {
+        transform: scale(1.04);
+        box-shadow:
+          0 0 90px rgba(199, 151, 58, 0.75),
+          inset 0 0 50px rgba(199, 151, 58, 0.24);
+      }
+    }
+
+    .cta-button.primary {
+      background: linear-gradient(135deg, #C7973A 0%, #9E5A2A 100%);
+      color: #1A1410;
+    }
+
+    .feature-card {
+      border: 1px solid rgba(199, 151, 58, 0.18);
+    }
+    .feature-card:hover {
+      border-color: rgba(199, 151, 58, 0.40);
+    }
+
+    .magazine-content h2 {
+      color: var(--app-primary);
+    }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <nav class="nav">
+    <a href="/" class="site-logo">Blaine Miller</a>
+    <ul class="nav-links">
+      <li><a href="#features">Features</a></li>
+      <li><a href="#how-it-plays">How It Plays</a></li>
+      <li><a href="#download">Get It</a></li>
+      <li><a href="/apps/">More Apps</a></li>
+    </ul>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-text">
+      <p class="hero-subtitle">For iPhone &amp; iPad</p>
+      <h1 class="hero-title">Ridgeshot</h1>
+      <p class="hero-description">
+        Long-range rifle marksman in your pocket. A second-focal-plane Christmas-tree
+        reticle, real bullet drop out to 800 yards, walking 3D wildlife, and 1v1 matches
+        you can send through a Messages bubble.
+      </p>
+      <div class="hero-cta">
+        <a href="#download" class="cta-button primary">Download on App Store</a>
+        <a href="#how-it-plays" class="cta-button secondary">See How It Plays</a>
+      </div>
+    </div>
+    <div class="hero-image">
+      <div class="hero-phone">
+        <img src="assets/images/app-icon.png" alt="Ridgeshot app icon"
+             onerror="this.style.background='radial-gradient(circle, #C7973A 0%, #1A2A22 80%)'; this.style.minHeight='320px'; this.style.aspectRatio='1'; this.style.borderRadius='22%'; this.style.display='block';">
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="features" class="section">
+  <div class="section-header">
+    <h2>Built for the Long Shot</h2>
+    <p>Eight things every Ridgeshot player learns to love.</p>
+  </div>
+
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-icon">🎯</div>
+      <h3 class="feature-title">SFP Christmas-Tree Reticle</h3>
+      <p class="feature-description">
+        A real second-focal-plane scope picture — etched crosshair, illuminated center
+        dot, and a Christmas-tree subtension with yardage hashes from the close zero
+        out to 800. Tap a hash to lock the holdover.
+      </p>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon">📐</div>
+      <h3 class="feature-title">Real Bullet Drop</h3>
+      <p class="feature-description">
+        Flatter than an arrow, never flat. Your shot tracks a continuous-angle ballistic
+        model from the muzzle to impact — pick the wrong holdover and the round
+        passes high or low exactly where the tree said it would.
+      </p>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon">💨</div>
+      <h3 class="feature-title">Wind &amp; Patience</h3>
+      <p class="feature-description">
+        Live wind speed and heading on the HUD. A flag on the lane confirms it. Hold
+        too long and your reticle starts to wander — controlled breath, clean break,
+        or wait for the next pass. Your call.
+      </p>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon">🦌</div>
+      <h3 class="feature-title">Walking Wildlife</h3>
+      <p class="feature-description">
+        Olympic concentric-ring targets, or 3D whitetail, elk, turkey, and boar that
+        wander through the scene with their own gait and pauses. Sometimes a trunk
+        slides into your sight picture — that's the wilderness reading right.
+      </p>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon">🌲</div>
+      <h3 class="feature-title">Atmospheric Range</h3>
+      <p class="feature-description">
+        Alpine meadow, forest clearing, coastal bluff, desert canyon. Sunrise, noon,
+        sunset, night. Clear, rain, snow. Every match's range is uniquely seeded —
+        no two ridgelines twice.
+      </p>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon">💬</div>
+      <h3 class="feature-title">iMessage Challenges</h3>
+      <p class="feature-description">
+        Send a Ridgeshot bubble to a friend. They open it, take their shot, send it
+        back. Each turn is one round. The whole match lives in your conversation —
+        no app switch, no sign-in.
+      </p>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon">🎮</div>
+      <h3 class="feature-title">Game Center 1v1</h3>
+      <p class="feature-description">
+        Quick-match online or invite a friend. Asynchronous turn-based — your opponent
+        shoots when they're free, you shoot when you're free. Push notifications keep
+        you in sync without keeping you tethered.
+      </p>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon">🏆</div>
+      <h3 class="feature-title">Five Leaderboards</h3>
+      <p class="feature-description">
+        Total wins, longest confirmed shot, season high score, rolling accuracy, and
+        Olympic 10-ring count. Five different ways to be measurably better than the
+        rest. Climb whichever one suits you.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- Magazine-style Feature Sections -->
+<section id="how-it-plays" class="section">
+  <div class="magazine-section">
+    <div class="magazine-content">
+      <h2>Press. Settle. Break.</h2>
+      <p>
+        Touch and hold to shoulder the rifle — the wood stock comes up, the support
+        hand finds the forend, the scope picture zooms to a 10° FOV (the actual
+        angular span of a long-range optic), and the reticle settles into your view.
+      </p>
+      <p>
+        Drag while settled to fine-tune your aim. The rifle responds with a touch
+        of mass on purpose — you're squeezing a trigger, not nudging a cursor.
+        Lift to break the shot.
+      </p>
+    </div>
+    <div class="magazine-image">
+      <img src="assets/images/feature-1.png" alt="Settling the rifle"
+           onerror="this.style.background='linear-gradient(135deg, #1A2A33, #B27551)'; this.style.minHeight='400px'; this.style.display='block';">
+    </div>
+  </div>
+
+  <div class="magazine-section reverse">
+    <div class="magazine-content">
+      <h2>Pick Your Holdover</h2>
+      <p>
+        Distance and target type sit on the lower-left HUD. Wind speed and direction
+        sit on the lower-right with a rotating arrow showing exactly which way it's
+        blowing — and a flag on the lane confirms it.
+      </p>
+      <p>
+        The Christmas tree gives you yardage hashes from 100 out to 800. Tap the
+        one that matches your range, place it on the heart or the X, and let the
+        wind decide if you need to drift a little. That last decision is the
+        whole game.
+      </p>
+    </div>
+    <div class="magazine-image">
+      <img src="assets/images/feature-2.png" alt="Reticle and HUD"
+           onerror="this.style.background='linear-gradient(135deg, #C7973A, #1A2A22)'; this.style.minHeight='400px'; this.style.display='block';">
+    </div>
+  </div>
+
+  <div class="magazine-section">
+    <div class="magazine-content">
+      <h2>One Bubble at a Time</h2>
+      <p>
+        Send a Ridgeshot bubble. Your friend opens it inside Messages, takes their
+        shot from inside the bubble, and sends it back. No app to install on their
+        end — just the iMessage extension, which downloads silently the first time
+        someone receives a match from you.
+      </p>
+      <p>
+        Pass-and-play works the same way on a single device. Two shooters, one
+        screen, alternating turns. The kind of match you can finish on a porch
+        before the sun is fully down.
+      </p>
+    </div>
+    <div class="magazine-image">
+      <img src="assets/images/feature-3.png" alt="iMessage challenges"
+           onerror="this.style.background='linear-gradient(135deg, #2D2452, #9E5A2A)'; this.style.minHeight='400px'; this.style.display='block';">
+    </div>
+  </div>
+</section>
+
+<!-- Download CTA -->
+<section id="download" class="section download-section">
+  <div class="download-content">
+    <h2>Ready to Take the Shot?</h2>
+    <p>Free to play on iPhone and iPad. No accounts required for pass-and-play. Game Center optional. iMessage support built in.</p>
+    <div class="download-buttons">
+      <a href="#" class="cta-button primary large">Download on the App Store</a>
+    </div>
+    <p class="download-note">iOS 17 or later. Universal app — same purchase covers iPhone and iPad.</p>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="footer-content">
+    <p>&copy; 2026 Blaine Miller. All rights reserved.</p>
+    <ul class="footer-links">
+      <li><a href="/privacy/">Privacy</a></li>
+      <li><a href="/terms/">Terms</a></li>
+      <li><a href="/apps/">More Apps</a></li>
+    </ul>
+  </div>
+</footer>
+
+<script src="../app-showcase.js"></script>
+</body>
+</html>
