@@ -54,40 +54,6 @@
       color: rgba(255, 255, 255, 0.86);
     }
 
-    /* Reticle-style halo around the icon — etched bone ring with a
-       brass illumination glow, echoing the in-game scope picture. */
-    .hero-image .hero-phone {
-      position: relative;
-    }
-
-    .hero-image .hero-phone::before {
-      content: '';
-      position: absolute;
-      inset: -34px;
-      border-radius: 50%;
-      border: 3px solid rgba(240, 232, 212, 0.85);
-      box-shadow:
-        0 0 70px rgba(199, 151, 58, 0.55),
-        inset 0 0 36px rgba(199, 151, 58, 0.16);
-      pointer-events: none;
-      animation: reticle-pulse 4.2s ease-in-out infinite;
-    }
-
-    @keyframes reticle-pulse {
-      0%, 100% {
-        transform: scale(1);
-        box-shadow:
-          0 0 70px rgba(199, 151, 58, 0.55),
-          inset 0 0 36px rgba(199, 151, 58, 0.16);
-      }
-      50% {
-        transform: scale(1.04);
-        box-shadow:
-          0 0 90px rgba(199, 151, 58, 0.75),
-          inset 0 0 50px rgba(199, 151, 58, 0.24);
-      }
-    }
-
     .hero-image .phone-mockup {
       border-radius: 28%;
       box-shadow: 0 24px 70px rgba(0, 0, 0, 0.55);

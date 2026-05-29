@@ -54,40 +54,6 @@
       color: rgba(255, 255, 255, 0.85);
     }
 
-    /* Replace the wise-flyer-style icon-in-frame with a glowing peep ring
-       around the Pinline icon, echoing the in-game sight overlay. */
-    .hero-image .hero-phone {
-      position: relative;
-    }
-
-    .hero-image .hero-phone::before {
-      content: '';
-      position: absolute;
-      inset: -32px;
-      border-radius: 50%;
-      border: 4px solid var(--app-primary);
-      box-shadow:
-        0 0 60px rgba(199, 242, 50, 0.55),
-        inset 0 0 40px rgba(199, 242, 50, 0.2);
-      pointer-events: none;
-      animation: peep-pulse 3.6s ease-in-out infinite;
-    }
-
-    @keyframes peep-pulse {
-      0%, 100% {
-        transform: scale(1);
-        box-shadow:
-          0 0 60px rgba(199, 242, 50, 0.55),
-          inset 0 0 40px rgba(199, 242, 50, 0.2);
-      }
-      50% {
-        transform: scale(1.04);
-        box-shadow:
-          0 0 96px rgba(199, 242, 50, 0.75),
-          inset 0 0 50px rgba(199, 242, 50, 0.3);
-      }
-    }
-
     .hero-image .phone-mockup {
       border-radius: 28%;
       box-shadow: 0 24px 70px rgba(0, 0, 0, 0.5);
