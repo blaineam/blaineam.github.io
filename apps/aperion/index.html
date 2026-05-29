@@ -24,6 +24,26 @@
       --app-deeper: #050514;
     }
 
+    /* Coming Soon — non-interactive placeholders for download CTAs */
+    .btn-coming-soon,
+    .pricing-coming-soon,
+    .floating-coming-soon {
+      cursor: default;
+      pointer-events: none;
+      background: rgba(139, 92, 246, 0.18) !important;
+      border: 1px solid rgba(139, 92, 246, 0.55) !important;
+      color: #e9e3ff !important;
+      box-shadow: 0 0 24px rgba(139, 92, 246, 0.25) !important;
+      letter-spacing: 0.04em;
+    }
+
+    .btn-coming-soon::before,
+    .pricing-coming-soon::before,
+    .floating-coming-soon::before {
+      content: "✦ ";
+      color: var(--app-accent);
+    }
+
     /* Cosmic hero with animated starfield */
     .hero {
       background:
@@ -550,7 +570,7 @@
         <li><a href="#hardware" class="nav-link">Hardware</a></li>
         <li><a href="#pricing" class="nav-link">Pricing</a></li>
         <li><a href="#faq" class="nav-link">FAQ</a></li>
-        <li><a href="https://apps.apple.com/us/app/aperion/id6762578808" class="btn-buy" target="_blank" rel="noopener noreferrer">Download on App Store</a></li>
+        <li><span class="btn-buy btn-coming-soon">Coming Soon</span></li>
       </ul>
     </div>
   </nav>
@@ -580,7 +600,7 @@
         </div>
 
         <div class="hero-cta">
-          <a href="https://apps.apple.com/us/app/aperion/id6762578808" class="btn-buy" target="_blank" rel="noopener noreferrer">Download on App Store</a>
+          <span class="btn-buy btn-coming-soon">Coming Soon — In Development</span>
         </div>
       </div>
       <div class="hero-image">
@@ -591,11 +611,10 @@
     </div>
   </section>
 
-  <!-- Floating App Store Button -->
-  <a href="https://apps.apple.com/us/app/aperion/id6762578808" class="floating-appstore" target="_blank" rel="noopener noreferrer">
-    <span class="floating-appstore-icon"></span>
-    <span>Download on App Store</span>
-  </a>
+  <!-- Floating Coming Soon Badge -->
+  <span class="floating-appstore floating-coming-soon">
+    <span>Coming Soon</span>
+  </span>
 
   <!-- Features Section -->
   <section id="features" class="section">
@@ -864,10 +883,10 @@
 
     <div class="pricing-grid">
       <div class="pricing-card">
-        <div class="pricing-badge">Universal Purchase</div>
+        <div class="pricing-badge">In Development</div>
         <h3>Aperion</h3>
         <div class="pricing-price">$9.99</div>
-        <div class="pricing-period">one-time · all platforms</div>
+        <div class="pricing-period">planned · universal · all platforms</div>
         <ul class="pricing-features">
           <li>iPhone, iPad, Mac, Apple Watch</li>
           <li>Mount + camera + plate solve</li>
@@ -877,7 +896,7 @@
           <li>Apple Family Sharing</li>
           <li>No subscription, ever</li>
         </ul>
-        <a href="https://apps.apple.com/us/app/aperion/id6762578808" class="pricing-cta" target="_blank" rel="noopener noreferrer">Get Aperion →</a>
+        <span class="pricing-cta pricing-coming-soon">Coming Soon</span>
       </div>
     </div>
   </section>
