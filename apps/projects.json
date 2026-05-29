@@ -1,0 +1,133 @@
+{
+  "schema_version": 1,
+  "ordering": "chronological-newest-first",
+  "note": "Source of truth for app metadata. apps/index.html renders its OWN custom display order; this file is the chronological list.",
+  "apps": [
+    {
+      "id": "ridgeshot",
+      "title": "Ridgeshot",
+      "tagline": "Long-range rifle marksman",
+      "page_url": "/apps/ridgeshot/",
+      "app_store_url": "https://apps.apple.com/us/app/ridgeshot/id6774483008",
+      "icon_url": "/apps/ridgeshot/assets/images/app-icon.png",
+      "released": "2026-05"
+    },
+    {
+      "id": "aperion",
+      "title": "Aperion",
+      "tagline": "Deep-sky astrophotography, all in one",
+      "page_url": "/apps/aperion/",
+      "app_store_url": null,
+      "icon_url": "/apps/aperion/assets/images/icon.png",
+      "released": "2026-04"
+    },
+    {
+      "id": "pinline",
+      "title": "Pinline",
+      "tagline": "1v1 compound-bow archery",
+      "page_url": "/apps/pinline/",
+      "app_store_url": "https://apps.apple.com/us/app/pinline/id6772773442",
+      "icon_url": "/apps/pinline/assets/images/icon.png",
+      "released": "2026-03"
+    },
+    {
+      "id": "tilebreak",
+      "title": "Tilebreak",
+      "tagline": "Match. Combo. Clear. Polished Mahjong solitaire",
+      "page_url": "/apps/tilebreak/",
+      "app_store_url": null,
+      "icon_url": "/apps/tilebreak/assets/images/icon.png",
+      "released": "2026-02"
+    },
+    {
+      "id": "blip",
+      "title": "Blip",
+      "tagline": "Featherlight macOS menu bar system monitor",
+      "page_url": "/apps/blip/",
+      "app_store_url": null,
+      "icon_url": "/apps/blip/assets/images/icon.png",
+      "released": "2026-01"
+    },
+    {
+      "id": "sami",
+      "title": "Sami",
+      "tagline": "Smart media optimizer",
+      "page_url": "/apps/sami/",
+      "app_store_url": null,
+      "icon_url": "/apps/sami/assets/images/icon.png",
+      "released": "2025-12"
+    },
+    {
+      "id": "glint",
+      "title": "Glint",
+      "tagline": "Brightness & volume for any display",
+      "page_url": "/apps/glint/",
+      "app_store_url": null,
+      "icon_url": "/apps/glint/assets/images/icon.png",
+      "released": "2025-11"
+    },
+    {
+      "id": "luma-editor",
+      "title": "Luma Editor",
+      "tagline": "Match your photo style",
+      "page_url": "/apps/luma-editor/",
+      "app_store_url": null,
+      "icon_url": "/apps/luma-editor/assets/images/icon.png",
+      "released": "2025-10"
+    },
+    {
+      "id": "embr",
+      "title": "Embr",
+      "tagline": "Burn your debts away",
+      "page_url": "/apps/embr/",
+      "app_store_url": null,
+      "icon_url": "/apps/embr/assets/images/icon.png",
+      "released": "2025-09"
+    },
+    {
+      "id": "enter-space",
+      "title": "Enter Space",
+      "tagline": "Local-feeling access to every cloud you use",
+      "page_url": "/apps/enter-space/",
+      "app_store_url": null,
+      "icon_url": "/apps/enter-space/assets/images/icon.png",
+      "released": "2025-08"
+    },
+    {
+      "id": "ari-helper",
+      "title": "Ari Helper",
+      "tagline": "All-in-one AI chat app",
+      "page_url": "/apps/ari-helper/",
+      "app_store_url": null,
+      "icon_url": "/apps/ari-helper/assets/images/icon.png",
+      "released": "2025-07"
+    },
+    {
+      "id": "mi-speaks",
+      "title": "Mi Speaks",
+      "tagline": "Listen to any written content",
+      "page_url": "/apps/mi-speaks/",
+      "app_store_url": null,
+      "icon_url": "/apps/mi-speaks/assets/images/icon.png",
+      "released": "2025-06"
+    },
+    {
+      "id": "deepsi",
+      "title": "DeepSi",
+      "tagline": "See depth, not light",
+      "page_url": "/apps/deepsi/",
+      "app_store_url": null,
+      "icon_url": "/apps/deepsi/assets/images/icon.png",
+      "released": "2025-05"
+    },
+    {
+      "id": "wise-flyer",
+      "title": "Wise Flyer",
+      "tagline": "Top the leaderboard!",
+      "page_url": "/apps/wise-flyer/",
+      "app_store_url": null,
+      "icon_url": "/apps/wise-flyer/assets/images/icon.png",
+      "released": "2025-04"
+    }
+  ]
+}
