@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Speed Test - We Miller</title>
+  <meta name="description" content="Check your internet connection speed with a fast, free, glassmorphic speed test.">
+  <meta property="og:title" content="Speed Test - We Miller">
+  <meta property="og:description" content="Check your internet connection speed with a fast, free speed test.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://wemiller.com/speedtest/">
+  <link rel="stylesheet" href="/apps/app-showcase.css">
+  <style>
+    .speedtest-page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: calc(var(--spacing-2xl) + var(--spacing-lg)) var(--spacing-lg) var(--spacing-2xl);
+      background: linear-gradient(135deg,
+        var(--bg-primary) 0%,
+        var(--bg-secondary) 100%
+      );
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Floating ambient glows, matching the app hero sections */
+    .speedtest-page::before,
+    .speedtest-page::after {
+      content: '';
+      position: absolute;
+      width: 60%;
+      height: 60%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .speedtest-page::before {
+      top: -20%;
+      right: -15%;
+      background: radial-gradient(circle, var(--primary-color) 0%, transparent 70%);
+      opacity: 0.12;
+      animation: float 20s ease-in-out infinite;
+    }
+
+    .speedtest-page::after {
+      bottom: -20%;
+      left: -15%;
+      background: radial-gradient(circle, var(--secondary-color) 0%, transparent 70%);
+      opacity: 0.12;
+      animation: float 25s ease-in-out infinite reverse;
+    }
+
+    .speedtest-header {
+      text-align: center;
+      max-width: 640px;
+      margin-bottom: var(--spacing-xl);
+      position: relative;
+      z-index: 1;
+      animation: fadeInUp 0.8s ease-out;
+    }
+
+    .speedtest-eyebrow {
+      color: var(--primary-color);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-size: 0.875rem;
+      margin-bottom: var(--spacing-xs);
+    }
+
+    .speedtest-header h1 {
+      font-size: clamp(2rem, 5vw, 3.25rem);
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: var(--spacing-sm);
+    }
+
+    .speedtest-header p {
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      color: var(--text-secondary);
+    }
+
+    /* Glassmorphic card holding the widget */
+    .speedtest-card {
+      width: 100%;
+      max-width: 880px;
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--glass-shadow);
+      padding: var(--spacing-sm);
+      position: relative;
+      z-index: 1;
+      overflow: hidden;
+      animation: fadeInUp 0.8s ease-out 0.2s both;
+    }
+
+    /* Accent line across the top of the card */
+    .speedtest-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    }
+
+    .speedtest-embed {
+      width: 100%;
+      height: 0;
+      padding-bottom: 56.25%;
+      min-height: 420px;
+      position: relative;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      background: var(--bg-card);
+    }
+
+    .speedtest-embed iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      min-height: 420px;
+      border: none;
+      overflow: hidden;
+    }
+
+    .speedtest-attribution {
+      text-align: center;
+      margin-top: var(--spacing-md);
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      position: relative;
+      z-index: 1;
+      animation: fadeInUp 0.8s ease-out 0.4s both;
+    }
+
+    .speedtest-attribution a {
+      color: var(--primary-color);
+      text-decoration: none;
+      font-weight: 600;
+      transition: color var(--transition-fast);
+    }
+
+    .speedtest-attribution a:hover {
+      color: var(--secondary-color);
+      text-decoration: underline;
+    }
+
+    @media (max-width: 600px) {
+      .speedtest-page {
+        padding: var(--spacing-xl) var(--spacing-sm) var(--spacing-lg);
+      }
+
+      .speedtest-card {
+        padding: var(--spacing-xs);
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="speedtest-page">
+    <div class="speedtest-header">
+      <p class="speedtest-eyebrow">Connection Check</p>
+      <h1>Speed Test</h1>
+      <p>Measure your download, upload, and latency in seconds. No installs, no ads &mdash; just a clean, fast test.</p>
+    </div>
+
+    <div class="speedtest-card">
+      <!-- OST Widget code start -->
+      <div class="speedtest-embed">
+        <iframe src="//openspeedtest.com/speedtest" title="OpenSpeedtest internet speed test"></iframe>
+      </div>
+      <!-- OST Widget code end -->
+    </div>
+
+    <p class="speedtest-attribution">
+      Provided by <a href="https://openspeedtest.com" target="_blank" rel="noopener">OpenSpeedtest.com</a>
+    </p>
+  </main>
+</body>
+</html>
