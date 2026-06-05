@@ -28,24 +28,24 @@ lists them chronologically. Both read from a single source of truth,
 
 | App | What it does | Released |
 |-----|--------------|----------|
-| **SightQuick** | Zero your rifle scope in minutes | 2026-06 |
-| **Pano Owl** | Stitch any panorama, in 360° | 2026-06 |
-| **Tri-Add** | The color-mixing game — a 2014 classic, relaunched | 2026-06 |
-| **Zap** | Electric trivia duels | 2026-06 |
-| **Ridgeshot** | Long-range rifle marksman | 2026-05 |
-| **Aperion** | Deep-sky astrophotography, all in one | 2026-04 |
-| **Pinline** | 1v1 compound-bow archery | 2026-03 |
-| **Tilebreak** | Match. Combo. Clear. Polished Mahjong solitaire | 2026-02 |
-| **Blip** | Featherlight macOS menu-bar system monitor | 2026-01 |
-| **Sami** | Smart media optimizer | 2025-12 |
-| **Glint** | Brightness & volume for any display | 2025-11 |
-| **Luma Editor** | Match your photo style | 2025-10 |
-| **Embr** | Burn your debts away | 2025-09 |
-| **Enter Space** | Local-feeling access to every cloud you use | 2025-08 |
-| **Ari Helper** | All-in-one AI chat app | 2025-07 |
-| **Mi Speaks** | Listen to any written content | 2025-06 |
-| **DeepSi** | See depth, not light | 2025-05 |
-| **Wise Flyer** | Top the leaderboard! | 2025-04 |
+| **SightQuick** | Zero your rifle scope in minutes | June 2026 |
+| **Zap** | Electric trivia duels | June 2026 |
+| **Tri-Add** | The color-mixing game — a 2014 classic, relaunched | June 2026 |
+| **Ridgeshot** | Long-range rifle marksman | May 2026 |
+| **Pinline** | 1v1 compound-bow archery | May 2026 |
+| **Tilebreak** | Match. Combo. Clear. Polished Mahjong solitaire | May 2026 |
+| **Aperion** | Deep-sky astrophotography, all in one | April 2026 |
+| **Blip** | Featherlight macOS menu-bar system monitor | April 2026 |
+| **Glint** | Brightness & volume for any display | April 2026 |
+| **Sami** | Smart media optimizer | February 2026 |
+| **Enter Space** | Local-feeling access to every cloud you use | June 2025 |
+| **Luma Editor** | Match your photo style | January 2025 |
+| **Embr** | Burn your debts away | October 2024 |
+| **Ari Helper** | All-in-one AI chat app | March 2024 |
+| **Mi Speaks** | Listen to any written content | July 2023 |
+| **DeepSi** | See depth, not light | July 2023 |
+| **Pano Owl** | Stitch any panorama, in 360° | March 2021 |
+| **Wise Flyer** | Top the leaderboard! | April 2014 |
 
 App Store screenshots are produced by a shared, automated pipeline (simulator
 capture → device-framed renders → App Store Connect upload), so every listing
