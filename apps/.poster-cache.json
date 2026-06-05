@@ -1,5 +1,5 @@
 {
-  "fingerprint": "63c217213b917af33b00e43b5d3a7a3efb209c99cfa86d9c055f6e8165eabcf4",
+  "fingerprint": "3666c97c7ef8bcab423dd4d0d6e936eaba2d02452051348b4fcca069510a35e6",
   "apps": [
     "enter-space",
     "blip",
@@ -7,6 +7,7 @@
     "zap",
     "tri-add",
     "ridgeshot",
+    "sightquick",
     "pano-owl",
     "pinline",
     "tilebreak",
@@ -19,5 +20,5 @@
     "wise-flyer",
     "glint"
   ],
-  "generatedAt": "2026-06-05T09:11:08.805Z"
+  "generatedAt": "2026-06-05T09:25:04.864Z"
 }
