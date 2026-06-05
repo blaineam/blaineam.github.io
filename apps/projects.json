@@ -4,6 +4,24 @@
   "note": "Source of truth for app metadata. apps/index.html renders its OWN custom display order; this file is the chronological list.",
   "apps": [
     {
+      "id": "pano-owl",
+      "title": "Pano Owl",
+      "tagline": "Stitch any panorama, in 360",
+      "page_url": "/apps/pano-owl/",
+      "app_store_url": "https://apps.apple.com/us/app/pano-owl/id1560273409",
+      "icon_url": "/apps/pano-owl/assets/images/icon.png",
+      "released": "2026-06"
+    },
+    {
+      "id": "tri-add",
+      "title": "Tri-Add",
+      "tagline": "The color mixing game",
+      "page_url": "/apps/tri-add/",
+      "app_store_url": "https://apps.apple.com/us/app/tri-add/id860253889",
+      "icon_url": "/apps/tri-add/assets/images/app-icon.png",
+      "released": "2026-06"
+    },
+    {
       "id": "zap",
       "title": "Zap",
       "tagline": "Electric trivia duels",
