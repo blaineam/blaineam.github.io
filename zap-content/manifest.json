@@ -1,139 +1,146 @@
 {
-  "version": 1,
-  "generatedAt": "2026-06-05T02:17:25Z",
+  "version": 2,
+  "generatedAt": "2026-06-05T07:11:20Z",
   "packs": [
     {
       "categoryID": "general",
-      "version": 3,
+      "version": 4,
       "url": "general.pack.json",
-      "sha256": "d1c79aa09957a5d6f248354391a5617a794d112069f84b8819b18608782243f5",
-      "questionCount": 415
+      "sha256": "d9b040f6fd2a00d4dfdffff02bef5329b7f909fdc20cc069f11e7adf53ed006a",
+      "questionCount": 478
     },
     {
       "categoryID": "science",
-      "version": 3,
+      "version": 4,
       "url": "science.pack.json",
-      "sha256": "3772746a9e579625cb15284ddd692349050d003b7f4d79a559bc34dbfcf57ace",
-      "questionCount": 261
+      "sha256": "ad88874d156e094b1a4baa9299be8707a14996d5f4a6532f6055d404f6d4e923",
+      "questionCount": 299
     },
     {
       "categoryID": "history",
-      "version": 3,
+      "version": 4,
       "url": "history.pack.json",
-      "sha256": "32bf09a2edd1e9afbcac300047b01a6d95323f7def45df57c81387c3c12f6bf4",
-      "questionCount": 410
+      "sha256": "d8cc41ee69a48ba6ae22c91640462ab6489317c653b82d9c9844610f1987a5d8",
+      "questionCount": 420
     },
     {
       "categoryID": "geography",
-      "version": 3,
+      "version": 4,
       "url": "geography.pack.json",
-      "sha256": "e2ac5f816d3fb65f029a125fafb3968874b4db8e7c4adde1a078546220771b08",
-      "questionCount": 364
+      "sha256": "18988088e6fb9ab125ca15259ece3733b005ba8ba29d418e5114f4b03fccede8",
+      "questionCount": 388
     },
     {
       "categoryID": "entertainment",
-      "version": 3,
+      "version": 4,
       "url": "entertainment.pack.json",
-      "sha256": "0691a453414329e4e18a8181d744986b85c0216960d139e7b96bffb8aa9be78b",
-      "questionCount": 262
+      "sha256": "c3de609016fc3d95dc8a40f7e15caec0dfb2d7cd0771912bb4e1185489dfb8cb",
+      "questionCount": 313
     },
     {
       "categoryID": "television",
-      "version": 1,
+      "version": 2,
       "url": "television.pack.json",
-      "sha256": "e75fe0e7f6733b19692e1b8190b55b3c6e5a804eaabda67941bef87c45229f85",
-      "questionCount": 150
+      "sha256": "a99e1b82b86b892f6ea45136883d3c3a2941bd6c9bf0cb5e146a06d1c4516c69",
+      "questionCount": 185
     },
     {
       "categoryID": "music",
-      "version": 3,
+      "version": 4,
       "url": "music.pack.json",
-      "sha256": "b4194987c037b27351a570c8d16a2fbb34d8954271a605343ee914a61184ac61",
-      "questionCount": 464
+      "sha256": "89995f3529b476af3017369c875614d1e417080fcb537dfb8cde8106c2b26e3c",
+      "questionCount": 504
     },
     {
       "categoryID": "sports",
-      "version": 3,
+      "version": 4,
       "url": "sports.pack.json",
-      "sha256": "cc6bb830d633a706817161d22eb9091171211dc386fe7b674953d3449b22b5cf",
-      "questionCount": 163
+      "sha256": "dd27b32c964aa75167d99d8a0b2f48affe57bf3c8f3c7dc4c8c81ac632db4586",
+      "questionCount": 186
     },
     {
       "categoryID": "videogames",
-      "version": 3,
+      "version": 4,
       "url": "videogames.pack.json",
-      "sha256": "a19db02e906cf895fa18695d4c4836f2c481ce722a581591876a7afaef0036ac",
-      "questionCount": 1162
+      "sha256": "cae65827355a9ee6f178a71c5c097c0e7451eaa052bc03b6707dc02a696d2117",
+      "questionCount": 1195
     },
     {
       "categoryID": "boardgames",
-      "version": 1,
+      "version": 2,
       "url": "boardgames.pack.json",
-      "sha256": "cefaef2855cacd5fdbf8e817c7b5785191f262aeb99a2b4b3aecfa505d530fef",
-      "questionCount": 50
+      "sha256": "53e12cd360173da51c4f0bf393f925bb6dc645aa36e5c4105727f673e0c58130",
+      "questionCount": 69
     },
     {
       "categoryID": "books",
-      "version": 1,
+      "version": 2,
       "url": "books.pack.json",
-      "sha256": "863f9351f880a37f2be53da27a634bdf4618c8832be017c17e3fe4b9ad291731",
-      "questionCount": 100
+      "sha256": "50f8ccea96b0ae5bb280332eaedf93c0a85e33ff254654cfe2beaa11435cec24",
+      "questionCount": 115
     },
     {
       "categoryID": "computers",
-      "version": 1,
+      "version": 2,
       "url": "computers.pack.json",
-      "sha256": "798b4386cf6fdc1d01b9d598506c63aada94a20cd6fb241d1e14fc0979fd9aa6",
-      "questionCount": 100
+      "sha256": "6807cee3d19e69aceac2afca3c9f1987291724b76298158e99b2622ed2fce9b1",
+      "questionCount": 172
     },
     {
       "categoryID": "math",
-      "version": 1,
+      "version": 2,
       "url": "math.pack.json",
-      "sha256": "32160553471904052c3905fbabcc4000f8f70d56e52cfcf9eb4bee391be6c4e2",
-      "questionCount": 49
+      "sha256": "064722a7827b0b2a5f572b0c4392e61978a7527e12c4dbbcec44dd32ad8e885c",
+      "questionCount": 71
     },
     {
       "categoryID": "mythology",
-      "version": 1,
+      "version": 2,
       "url": "mythology.pack.json",
-      "sha256": "cf35c853c19315642978ebb9a2f11d746efec2caa35fe3fae8faa773c6118753",
-      "questionCount": 50
+      "sha256": "511d10657cf32ca1be4191836ee63e8fd8d130d8b0bcf545119dfca1ad1fd648",
+      "questionCount": 65
     },
     {
       "categoryID": "animals",
-      "version": 1,
+      "version": 2,
       "url": "animals.pack.json",
-      "sha256": "e9fa2eb0848acdc62c038f156e55b1d00dfb01f5a37a37a858bc4bb3013a60cf",
-      "questionCount": 50
+      "sha256": "617706d6559ed2ffa087513e7b7484ca14fa22d4c102fba05af4fe94a9d5761d",
+      "questionCount": 78
     },
     {
       "categoryID": "vehicles",
-      "version": 1,
+      "version": 2,
       "url": "vehicles.pack.json",
-      "sha256": "5d2bf4043d433254eced4b93bbf6d767641270c993ab73e2e989df490a4595f3",
+      "sha256": "0518a2c34f50ad41c1f12d487fa6790c8ea502264e53638a9b157cc4df3220e5",
+      "questionCount": 69
+    },
+    {
+      "categoryID": "celebrities",
+      "version": 1,
+      "url": "celebrities.pack.json",
+      "sha256": "b5be85039b5f9f044dddf947d2fd1e1a2770d8e9f24aeeee722204d25b98dcea",
       "questionCount": 50
     },
     {
       "categoryID": "anime",
-      "version": 1,
+      "version": 2,
       "url": "anime.pack.json",
-      "sha256": "3df8f302c995badef38959e255c3d85a6c79fd891daafdd00ce0c5b9e9b55379",
-      "questionCount": 150
+      "sha256": "fdf88ab6e120e206fbcef2a520cee743813396fa5e47a722018eeca7377b9a29",
+      "questionCount": 204
     },
     {
       "categoryID": "cartoons",
-      "version": 1,
+      "version": 2,
       "url": "cartoons.pack.json",
-      "sha256": "ca8627772ab0695ad664b2dbaa5e3d74c960f4edcb52a7c1bfc32f57bf1c086e",
-      "questionCount": 50
+      "sha256": "9c6928b51011914b572e8deb5d5fdc837b54f569d9a98907dc94318ac0c2b2f5",
+      "questionCount": 104
     },
     {
       "categoryID": "comics",
-      "version": 1,
+      "version": 2,
       "url": "comics.pack.json",
-      "sha256": "42114f6cd353f246545f3aad85801d1176bcdff9700253033394689f04f2ca7f",
-      "questionCount": 50
+      "sha256": "98d10df61b6424f504ef1417f7de06c22985bb1d8bda8a86689e092232f7b773",
+      "questionCount": 68
     }
   ],
   "baseURL": "https://wemiller.com/zap-content/"
