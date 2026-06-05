@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SightQuick — Zero Your Scope in Minutes</title>
+  <meta name="description" content="SightQuick turns your iPhone into a scope-zeroing assistant. Print a uniquely-coded target, fire a group, snap a photo — on-device computer vision reads your shots and tells you exactly how many clicks to dial.">
+  <meta property="og:title" content="SightQuick — Zero Your Scope in Minutes">
+  <meta property="og:description" content="Print a target, fire a group, snap a photo. SightQuick reads your shots with on-device vision and tells you exactly how many clicks to dial.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://wemiller.com/apps/sightquick/">
+  <meta property="og:image" content="https://wemiller.com/apps/sightquick/assets/images/poster.jpg">
+  <link rel="stylesheet" href="../app-showcase.css">
+  <style>
+    /* SightQuick palette — brass orange aim dot on charcoal gunmetal,
+       matching the in-app accent and printed-target aesthetic. */
+    :root {
+      --app-primary: #ED6B1A;        /* SightQuick orange */
+      --app-secondary: #9E5A2A;      /* copper */
+      --app-accent: #14202B;         /* charcoal gunmetal */
+    }
+
+    .hero {
+      background:
+        radial-gradient(circle at 50% 80%, rgba(237, 107, 26, 0.28) 0%, transparent 52%),
+        radial-gradient(circle at 22% 24%, rgba(237, 107, 26, 0.12) 0%, transparent 55%),
+        linear-gradient(180deg, #0E1820 0%, #16242F 45%, #2A2230 72%, #6E4630 92%, #ED6B1A 100%);
+      color: white;
+    }
+
+    .hero-title,
+    .hero-subtitle { color: white; -webkit-text-fill-color: white; }
+
+    .hero-title {
+      background: linear-gradient(135deg, #FBE9D6 0%, #ED6B1A 55%, #9E5A2A 100%);
+      -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 60px rgba(237, 107, 26, 0.28);
+    }
+
+    .hero-subtitle { color: var(--app-primary); letter-spacing: 0.22em; text-transform: uppercase; }
+    .hero-description { color: rgba(255, 255, 255, 0.86); }
+
+    .hero-image .phone-mockup { border-radius: 26%; box-shadow: 0 24px 70px rgba(0, 0, 0, 0.55); }
+    .magazine-content h2 { color: var(--app-primary); }
+    .section-subtitle { color: var(--app-primary); }
+
+    /* Coming Soon — non-interactive placeholders until SightQuick is live. */
+    .btn-coming-soon,
+    .floating-coming-soon {
+      cursor: default;
+      pointer-events: none;
+      background: rgba(237, 107, 26, 0.18) !important;
+      border: 1px solid rgba(237, 107, 26, 0.55) !important;
+      color: #ffe9d6 !important;
+      box-shadow: 0 0 24px rgba(237, 107, 26, 0.25) !important;
+      letter-spacing: 0.04em;
+    }
+    .btn-coming-soon::before,
+    .floating-coming-soon::before { content: "✦ "; color: var(--app-primary); }
+
+    /* Fair-pricing pills */
+    .price-row { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 1rem; }
+    .price-pill {
+      padding: 0.55rem 1.05rem;
+      background: rgba(237, 107, 26, 0.10);
+      border: 1px solid rgba(237, 107, 26, 0.35);
+      border-radius: 99px;
+      color: var(--app-primary);
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="app-nav">
+    <div class="nav-container">
+      <a href="../" class="nav-logo">← Apps</a>
+      <button class="mobile-menu-toggle">☰</button>
+      <ul class="nav-links">
+        <li><a href="#features" class="nav-link">Features</a></li>
+        <li><a href="#how-it-works" class="nav-link">How It Works</a></li>
+        <li><a href="#faq" class="nav-link">FAQ</a></li>
+        <li><span class="btn-buy btn-coming-soon">Coming Soon</span></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-text">
+        <p class="hero-subtitle">🎯 SightQuick</p>
+        <h1 class="hero-title">Zero in minutes.</h1>
+        <p class="hero-description">
+          Your phone is the smartest tool on the bench. Print a uniquely-coded target, fire a 3-shot group, and snap a photo — SightQuick reads your shots with on-device computer vision and tells you exactly how many clicks to dial. No guesswork, no wasted ammo chasing a zero.
+        </p>
+        <div class="hero-cta">
+          <span class="btn-buy btn-coming-soon">Coming Soon — App Store</span>
+        </div>
+      </div>
+      <div class="hero-image">
+        <div class="hero-phone">
+          <img src="assets/images/app-icon.png" alt="SightQuick App Icon" class="phone-mockup"
+               onerror="this.style.background='radial-gradient(circle, #ED6B1A 0%, #14202B 80%)'; this.style.minHeight='320px'; this.style.aspectRatio='1'; this.style.borderRadius='22%'; this.style.display='block';">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Floating Coming Soon Badge -->
+  <span class="floating-appstore floating-coming-soon">
+    <span>Coming Soon</span>
+  </span>
+
+  <!-- Features Section -->
+  <section id="features" class="section">
+    <div class="section-header">
+      <p class="section-subtitle">Why SightQuick Works</p>
+      <h2>The Faster, Smarter Way to Sight In</h2>
+      <p>Everything you need to dial a precise zero — and nothing you don't</p>
+    </div>
+
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-icon">🎯</div>
+        <h3 class="feature-title">Coded Printable Targets</h3>
+        <p class="feature-description">
+          Generate a uniquely-coded ¼-inch grid target and print it on your own paper — Letter, A4, or Tabloid. A QR code embeds the exact size and geometry so the app knows precisely what it's looking at.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">📸</div>
+        <h3 class="feature-title">On-Device Shot Detection</h3>
+        <p class="feature-description">
+          Photograph the target and Apple's Vision framework finds every bullet hole, straightens the page off its border, and measures each shot against your point of aim. No internet, no server — it all happens on your phone.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🔢</div>
+        <h3 class="feature-title">Exact Turret Clicks</h3>
+        <p class="feature-description">
+          SightQuick converts your group's offset into precise windage and elevation clicks. "Left 4, Down 3." Dial it and you're done — no MOA mental math, no ballistic charts.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">📐</div>
+        <h3 class="feature-title">Two-Group Calibration</h3>
+        <p class="feature-description">
+          Fire a second group after dialing and SightQuick calibrates to your scope's real-world click value — accounting for the difference between a turret's marked clicks and how it actually tracks. Dead-on, every time.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">⚙️</div>
+        <h3 class="feature-title">Any Scope, Any Distance</h3>
+        <p class="feature-description">
+          Set your click value — ⅛, ¼, ½, or 1 MOA — and your zero distance. SightQuick handles the rest. Save a profile for every rifle in your safe.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🔒</div>
+        <h3 class="feature-title">Private by Design</h3>
+        <p class="feature-description">
+          Your photos never leave your device. No account, no tracking, no ads. SightQuick processes everything locally and keeps your zeroing history on your phone.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Magazine-style Feature Sections -->
+  <section id="how-it-works" class="section">
+    <div class="magazine-section">
+      <div class="magazine-content">
+        <h2>Print a Coded Target</h2>
+        <p>
+          Pick your paper size and rifle profile, and SightQuick generates a uniquely-serialized ¼-inch grid target with an orange aim dot, corner registration marks, and an embedded QR code. Print it on any home or office printer.
+        </p>
+        <p>
+          No special paper, no targets to order and wait for. Each printout is good for one complete zeroing session you can re-photograph as you dial in.
+        </p>
+      </div>
+      <div class="magazine-image">
+        <img src="assets/images/mockup-print.jpg" alt="Generating a printable SightQuick target"
+             onerror="this.style.background='linear-gradient(135deg, #14202B, #ED6B1A)'; this.style.minHeight='400px'; this.style.display='block';">
+      </div>
+    </div>
+
+    <div class="magazine-section reverse">
+      <div class="magazine-content">
+        <h2>Snap a Photo, Get Your Clicks</h2>
+        <p>
+          Fire three or more shots at the orange dot from a steady rest, then photograph the page — even at an angle. SightQuick straightens the image, finds your holes, and shows them overlaid so you can confirm or nudge any shot with a tap.
+        </p>
+        <p>
+          Then it tells you exactly how far to turn each turret: windage and elevation, in clicks. Dial them and fire again to confirm.
+        </p>
+      </div>
+      <div class="magazine-image">
+        <img src="assets/images/mockup-dial.jpg" alt="SightQuick showing windage and elevation click adjustments"
+             onerror="this.style.background='linear-gradient(135deg, #ED6B1A, #14202B)'; this.style.minHeight='400px'; this.style.display='block';">
+      </div>
+    </div>
+
+    <div class="magazine-section">
+      <div class="magazine-content">
+        <h2>Every Rifle, Every Session</h2>
+        <p>
+          Keep a profile for each rifle and scope, and a history of every zeroing session. Pick up right where you left off, compare groups, and watch your point of impact walk into the bullseye.
+        </p>
+        <div class="price-row">
+          <span class="price-pill">First target free</span>
+          <span class="price-pill">5 credits · $1.99</span>
+          <span class="price-pill">20 credits · $5.99</span>
+          <span class="price-pill">50 credits · $12.99</span>
+        </div>
+      </div>
+      <div class="magazine-image">
+        <img src="assets/images/mockup-home.jpg" alt="SightQuick home screen with saved zeroing sessions"
+             onerror="this.style.background='linear-gradient(135deg, #2A2230, #ED6B1A)'; this.style.minHeight='400px'; this.style.display='block';">
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section id="faq" class="faq-section">
+    <div class="section-header">
+      <p class="section-subtitle">Got Questions?</p>
+      <h2>Frequently Asked Questions</h2>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        <span>Do I need to buy special targets?</span>
+        <span class="faq-icon">▼</span>
+      </button>
+      <div class="faq-answer">
+        <p>
+          No. SightQuick generates the target for you and you print it on plain paper with any home or office printer — Letter, A4, or Tabloid. Each target is uniquely coded so the app knows its exact size and grid. There's nothing to order, ship, or store.
+        </p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        <span>How does it find my shots?</span>
+        <span class="faq-icon">▼</span>
+      </button>
+      <div class="faq-answer">
+        <p>
+          You photograph the target and SightQuick uses Apple's on-device Vision framework to read the QR code, straighten the page off its printed border, and locate every bullet hole against the orange aim point. It runs entirely on your phone — no internet required — and shows the detected shots so you can confirm or fine-tune them before it calculates your adjustment.
+        </p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        <span>What scopes does it work with?</span>
+        <span class="faq-icon">▼</span>
+      </button>
+      <div class="faq-answer">
+        <p>
+          Any scope with adjustable turrets. Set your click value — ⅛, ¼, ½, or 1 MOA — and your zero distance, and SightQuick converts your group into the exact number of clicks to dial. The two-group calibration step even corrects for scopes that don't track perfectly to their marked clicks.
+        </p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        <span>How does pricing work?</span>
+        <span class="faq-icon">▼</span>
+      </button>
+      <div class="faq-answer">
+        <p>
+          Your first target is free. After that, targets are print credits you buy in small consumable packs — 5 for $1.99, 20 for $5.99, or 50 for $12.99. Each credit creates one uniquely-coded target, good for a complete zeroing session you can re-photograph as you dial in. No subscriptions, no ads.
+        </p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        <span>Is my data private?</span>
+        <span class="faq-icon">▼</span>
+      </button>
+      <div class="faq-answer">
+        <p>
+          Completely. Your photos are analyzed on-device and never uploaded anywhere. There's no account and no tracking — your zeroing sessions and rifle profiles live only on your phone. Purchases are handled by Apple; SightQuick never sees your payment details.
+        </p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        <span>What devices does it run on?</span>
+        <span class="faq-icon">▼</span>
+      </button>
+      <div class="faq-answer">
+        <p>
+          SightQuick is an iPhone app, tuned for a phone you can bring to the bench or the range. It uses the camera to photograph your target and runs on iOS 26 or later.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Security & Privacy callout -->
+  <section class="security-callout">
+    <div class="section-header">
+      <p class="section-subtitle">Security &amp; Privacy</p>
+      <h2>On-Device by Design</h2>
+    </div>
+    <div class="security-badges">
+      <div class="security-badge"><span class="badge-icon">&#x1f4f7;</span> On-Device Vision</div>
+      <div class="security-badge"><span class="badge-icon">&#x1f4cb;</span> Privacy Manifest</div>
+      <div class="security-badge"><span class="badge-icon">&#x1f512;</span> Photos Never Uploaded</div>
+      <div class="security-badge"><span class="badge-icon">&#x2705;</span> App Sandbox</div>
+    </div>
+    <p class="security-audit-note">No tracking. No ads. Your photos never leave your phone.</p>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-links">
+        <a href="../" class="footer-link">All Apps</a>
+        <a href="../ridgeshot/" class="footer-link">Ridgeshot</a>
+        <a href="../pinline/" class="footer-link">Pinline</a>
+        <a href="../enter-space/" class="footer-link">Enter Space</a>
+        <a href="../blip/" class="footer-link">Blip</a>
+        <a href="../ari-helper/" class="footer-link">Ari Helper</a>
+        <a href="../aperion/" class="footer-link">Aperion</a>
+        <a href="../sami/" class="footer-link">Sami</a>
+        <a href="../tilebreak/" class="footer-link">Tilebreak</a>
+        <a href="../mi-speaks/" class="footer-link">Mi Speaks</a>
+        <a href="../embr/" class="footer-link">Embr</a>
+        <a href="../deepsi/" class="footer-link">DeepSi</a>
+        <a href="../luma-editor/" class="footer-link">Luma Editor</a>
+        <a href="../wise-flyer/" class="footer-link">Wise Flyer</a>
+        <a href="../glint/" class="footer-link">Glint</a>
+        <a href="/privacy/" class="footer-link">Privacy</a>
+        <a href="/terms/" class="footer-link">Terms</a>
+        <a href="/" class="footer-link">Portfolio</a>
+      </div>
+
+      <div class="footer-social-links">
+        <a href="https://x.com/apps_by_blaine" class="social-icon-link" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)">
+          <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+          </svg>
+        </a>
+        <a href="https://www.instagram.com/apps.by.blaine/" class="social-icon-link" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+          <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+          </svg>
+        </a>
+        <a href="https://www.youtube.com/@AppsByBlaine" class="social-icon-link" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+          <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+          </svg>
+        </a>
+      </div>
+
+      <p style="color: var(--text-muted); margin-top: var(--spacing-md);">
+        © <span id="year"></span> Blaine Miller. All rights reserved.
+      </p>
+    </div>
+  </footer>
+
+  <script src="../app-showcase.js"></script>
+</body>
+</html>

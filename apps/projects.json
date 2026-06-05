@@ -4,6 +4,15 @@
   "note": "Source of truth for app metadata. apps/index.html renders its OWN custom display order; this file is the chronological list.",
   "apps": [
     {
+      "id": "sightquick",
+      "title": "SightQuick",
+      "tagline": "Zero your scope in minutes",
+      "page_url": "/apps/sightquick/",
+      "app_store_url": null,
+      "icon_url": "/apps/sightquick/assets/images/app-icon.png",
+      "released": "2026-06"
+    },
+    {
       "id": "pano-owl",
       "title": "Pano Owl",
       "tagline": "Stitch any panorama, in 360",
