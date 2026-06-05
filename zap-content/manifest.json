@@ -1,6 +1,6 @@
 {
-  "version": 3,
-  "generatedAt": "2026-06-05T17:15:23Z",
+  "version": 4,
+  "generatedAt": "2026-06-05T22:43:45Z",
   "packs": [
     {
       "categoryID": "general",
@@ -144,10 +144,10 @@
     },
     {
       "categoryID": "bible",
-      "version": 1,
+      "version": 2,
       "url": "bible.pack.json",
-      "sha256": "1cff67d0e347a7d3e218805104cd5bb46a494431e4d33a681bdf2cfe01f2a034",
-      "questionCount": 65
+      "sha256": "ac2356a9a06ddc1fd646db8ea3bfa05d190d4c56f79351ab4ac6b87f5136c931",
+      "questionCount": 227
     }
   ],
   "baseURL": "https://wemiller.com/zap-content/"
