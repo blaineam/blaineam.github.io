@@ -13,12 +13,12 @@
       "released": "2026-06"
     },
     {
-      "id": "pano-owl",
-      "title": "Pano Owl",
-      "tagline": "Stitch any panorama, in 360",
-      "page_url": "/apps/pano-owl/",
-      "app_store_url": "https://apps.apple.com/us/app/pano-owl/id1560273409",
-      "icon_url": "/apps/pano-owl/assets/images/icon.png",
+      "id": "zap",
+      "title": "Zap",
+      "tagline": "Electric trivia duels",
+      "page_url": "/apps/zap/",
+      "app_store_url": "https://apps.apple.com/us/app/zap-trivia/id6776907420",
+      "icon_url": "/apps/zap/assets/images/icon.png",
       "released": "2026-06"
     },
     {
@@ -32,16 +32,7 @@
       "updated": "2026-06",
       "relaunch": true,
       "relaunch_of": "Tri-Add (2014)",
-      "note": "A complete, ground-up rebuild of the original 2014 Tri-Add \u2014 relaunched June 2026 with additive + subtractive mixing, inversions, and turn-based multiplayer."
-    },
-    {
-      "id": "zap",
-      "title": "Zap",
-      "tagline": "Electric trivia duels",
-      "page_url": "/apps/zap/",
-      "app_store_url": "https://apps.apple.com/us/app/zap-trivia/id6776907420",
-      "icon_url": "/apps/zap/assets/images/icon.png",
-      "released": "2026-06"
+      "note": "A complete, ground-up rebuild of the original 2014 Tri-Add — relaunched June 2026 with additive + subtractive mixing, inversions, and turn-based multiplayer."
     },
     {
       "id": "ridgeshot",
@@ -50,6 +41,24 @@
       "page_url": "/apps/ridgeshot/",
       "app_store_url": "https://apps.apple.com/us/app/ridgeshot/id6774483008",
       "icon_url": "/apps/ridgeshot/assets/images/app-icon.png",
+      "released": "2026-05"
+    },
+    {
+      "id": "pinline",
+      "title": "Pinline",
+      "tagline": "1v1 compound-bow archery",
+      "page_url": "/apps/pinline/",
+      "app_store_url": "https://apps.apple.com/us/app/pinline/id6772773442",
+      "icon_url": "/apps/pinline/assets/images/icon.png",
+      "released": "2026-05"
+    },
+    {
+      "id": "tilebreak",
+      "title": "Tilebreak",
+      "tagline": "Match. Combo. Clear. Polished Mahjong solitaire",
+      "page_url": "/apps/tilebreak/",
+      "app_store_url": null,
+      "icon_url": "/apps/tilebreak/assets/images/icon.png",
       "released": "2026-05"
     },
     {
@@ -62,40 +71,13 @@
       "released": "2026-04"
     },
     {
-      "id": "pinline",
-      "title": "Pinline",
-      "tagline": "1v1 compound-bow archery",
-      "page_url": "/apps/pinline/",
-      "app_store_url": "https://apps.apple.com/us/app/pinline/id6772773442",
-      "icon_url": "/apps/pinline/assets/images/icon.png",
-      "released": "2026-03"
-    },
-    {
-      "id": "tilebreak",
-      "title": "Tilebreak",
-      "tagline": "Match. Combo. Clear. Polished Mahjong solitaire",
-      "page_url": "/apps/tilebreak/",
-      "app_store_url": null,
-      "icon_url": "/apps/tilebreak/assets/images/icon.png",
-      "released": "2026-02"
-    },
-    {
       "id": "blip",
       "title": "Blip",
       "tagline": "Featherlight macOS menu bar system monitor",
       "page_url": "/apps/blip/",
       "app_store_url": null,
       "icon_url": "/apps/blip/assets/images/icon.png",
-      "released": "2026-01"
-    },
-    {
-      "id": "sami",
-      "title": "Sami",
-      "tagline": "Smart media optimizer",
-      "page_url": "/apps/sami/",
-      "app_store_url": null,
-      "icon_url": "/apps/sami/assets/images/icon.png",
-      "released": "2025-12"
+      "released": "2026-04"
     },
     {
       "id": "glint",
@@ -104,25 +86,16 @@
       "page_url": "/apps/glint/",
       "app_store_url": null,
       "icon_url": "/apps/glint/assets/images/icon.png",
-      "released": "2025-11"
+      "released": "2026-04"
     },
     {
-      "id": "luma-editor",
-      "title": "Luma Editor",
-      "tagline": "Match your photo style",
-      "page_url": "/apps/luma-editor/",
+      "id": "sami",
+      "title": "Sami",
+      "tagline": "Smart media optimizer",
+      "page_url": "/apps/sami/",
       "app_store_url": null,
-      "icon_url": "/apps/luma-editor/assets/images/icon.png",
-      "released": "2025-10"
-    },
-    {
-      "id": "embr",
-      "title": "Embr",
-      "tagline": "Burn your debts away",
-      "page_url": "/apps/embr/",
-      "app_store_url": null,
-      "icon_url": "/apps/embr/assets/images/icon.png",
-      "released": "2025-09"
+      "icon_url": "/apps/sami/assets/images/icon.png",
+      "released": "2026-02"
     },
     {
       "id": "enter-space",
@@ -131,7 +104,25 @@
       "page_url": "/apps/enter-space/",
       "app_store_url": null,
       "icon_url": "/apps/enter-space/assets/images/icon.png",
-      "released": "2025-08"
+      "released": "2025-06"
+    },
+    {
+      "id": "luma-editor",
+      "title": "Luma Editor",
+      "tagline": "Match your photo style",
+      "page_url": "/apps/luma-editor/",
+      "app_store_url": null,
+      "icon_url": "/apps/luma-editor/assets/images/icon.png",
+      "released": "2025-01"
+    },
+    {
+      "id": "embr",
+      "title": "Embr",
+      "tagline": "Burn your debts away",
+      "page_url": "/apps/embr/",
+      "app_store_url": null,
+      "icon_url": "/apps/embr/assets/images/icon.png",
+      "released": "2024-10"
     },
     {
       "id": "ari-helper",
@@ -140,7 +131,7 @@
       "page_url": "/apps/ari-helper/",
       "app_store_url": null,
       "icon_url": "/apps/ari-helper/assets/images/icon.png",
-      "released": "2025-07"
+      "released": "2024-03"
     },
     {
       "id": "mi-speaks",
@@ -149,7 +140,7 @@
       "page_url": "/apps/mi-speaks/",
       "app_store_url": null,
       "icon_url": "/apps/mi-speaks/assets/images/icon.png",
-      "released": "2025-06"
+      "released": "2023-07"
     },
     {
       "id": "deepsi",
@@ -158,7 +149,18 @@
       "page_url": "/apps/deepsi/",
       "app_store_url": null,
       "icon_url": "/apps/deepsi/assets/images/icon.png",
-      "released": "2025-05"
+      "released": "2023-07"
+    },
+    {
+      "id": "pano-owl",
+      "title": "Pano Owl",
+      "tagline": "Stitch any panorama, in 360",
+      "page_url": "/apps/pano-owl/",
+      "app_store_url": "https://apps.apple.com/us/app/pano-owl/id1560273409",
+      "icon_url": "/apps/pano-owl/assets/images/icon.png",
+      "released": "2021-03",
+      "updated": "2026-06",
+      "note": "Originally launched March 2021. v2.0 relaunch in progress."
     },
     {
       "id": "wise-flyer",
@@ -167,7 +169,7 @@
       "page_url": "/apps/wise-flyer/",
       "app_store_url": null,
       "icon_url": "/apps/wise-flyer/assets/images/icon.png",
-      "released": "2025-04"
+      "released": "2014-04"
     }
   ]
 }
