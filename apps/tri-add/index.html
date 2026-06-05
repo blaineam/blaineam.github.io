@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tri-Add — The Color Mixing Game</title>
+  <meta name="description" content="Mix two of three colors to match the target. Continuous difficulty, additive &amp; subtractive mixing, surprise inversion stages, dynamic music, turn-based multiplayer, and iMessage play. No ads, no tracking.">
+  <meta property="og:title" content="Tri-Add — The Color Mixing Game">
+  <meta property="og:description" content="Mix two of three colors to match the target. Additive &amp; subtractive mixing, surprise inversions, dynamic music, Game Center, and iMessage play.">
+  <meta property="og:type" content="game">
+  <meta property="og:url" content="https://wemiller.com/apps/tri-add/">
+  <meta property="og:image" content="https://wemiller.com/apps/tri-add/assets/images/app-icon.png">
+  <link rel="stylesheet" href="../app-showcase.css">
+  <style>
+    :root {
+      --app-primary: #33E5F2;
+      --app-secondary: #B05CFF;
+      --app-accent: #121218;
+    }
+    .hero {
+      background:
+        radial-gradient(circle at 30% 30%, rgba(255, 60, 60, 0.22) 0%, transparent 45%),
+        radial-gradient(circle at 70% 30%, rgba(60, 255, 90, 0.20) 0%, transparent 45%),
+        radial-gradient(circle at 50% 70%, rgba(70, 110, 255, 0.22) 0%, transparent 50%),
+        linear-gradient(180deg, #121218 0%, #1A1A2A 60%, #241A33 100%);
+      color: white;
+    }
+    .hero-title, .hero-subtitle { color: white; -webkit-text-fill-color: white; }
+    .hero-title {
+      background: linear-gradient(135deg, #FF5C5C 0%, #4CE266 45%, #466EFF 100%);
+      -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 60px rgba(51, 229, 242, 0.25);
+    }
+    .hero-subtitle { color: var(--app-primary); letter-spacing: 0.22em; text-transform: uppercase; }
+    .hero-description { color: rgba(255, 255, 255, 0.86); }
+    .hero-image .phone-mockup { border-radius: 28%; box-shadow: 0 24px 70px rgba(0, 0, 0, 0.55); }
+    .magazine-content h2 { color: var(--app-primary); }
+  </style>
+</head>
+<body>
+  <nav class="app-nav">
+    <div class="nav-container">
+      <a href="../" class="nav-logo">← Apps</a>
+      <button class="mobile-menu-toggle">☰</button>
+      <ul class="nav-links">
+        <li><a href="#features" class="nav-link">Features</a></li>
+        <li><a href="#how-it-plays" class="nav-link">How It Plays</a></li>
+        <li><a href="#faq" class="nav-link">FAQ</a></li>
+        <li><a href="https://apps.apple.com/us/app/tri-add/id860253889" class="btn-buy" target="_blank" rel="noopener noreferrer">Download on App Store</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-text">
+        <p class="hero-subtitle">🎨 Tri-Add</p>
+        <h1 class="hero-title">Mix. Match. Invert.</h1>
+        <p class="hero-description">
+          Mix two of three colors to match the target. The difficulty climbs the longer you
+          play, the music swells with your streak, and every so often the rules flip — additive
+          light-mixing becomes subtractive paint-mixing, and the whole screen changes with it.
+          A 2014 classic, rebuilt for 2026.
+        </p>
+        <div class="hero-cta">
+          <a href="https://apps.apple.com/us/app/tri-add/id860253889" class="btn-buy" target="_blank" rel="noopener noreferrer">Download Now</a>
+        </div>
+      </div>
+      <div class="hero-image">
+        <div class="hero-phone">
+          <img src="assets/images/app-icon.png" alt="Tri-Add App Icon" class="phone-mockup"
+               onerror="this.style.background='radial-gradient(circle, #33E5F2 0%, #121218 80%)'; this.style.minHeight='320px'; this.style.aspectRatio='1'; this.style.borderRadius='22%'; this.style.display='block';">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <a href="https://apps.apple.com/us/app/tri-add/id860253889" class="floating-appstore" target="_blank" rel="noopener noreferrer">
+    <span class="floating-appstore-icon"></span>
+    <span>Download on App Store</span>
+  </a>
+
+  <section id="features" class="section">
+    <div class="section-header">
+      <p class="section-subtitle">Why Tri-Add Hooks You</p>
+      <h2>Simple to Learn, Endlessly Deepening</h2>
+      <p>Eight things every Tri-Add player learns to love</p>
+    </div>
+    <div class="feature-grid">
+      <div class="feature-card"><div class="feature-icon">📈</div>
+        <h3 class="feature-title">Infinite Levels</h3>
+        <p class="feature-description">Every correct mix is a level. The colors get subtler and the help fades the deeper you go — climb as far as you can on a constant clock.</p></div>
+      <div class="feature-card"><div class="feature-icon">☀️</div>
+        <h3 class="feature-title">Light &amp; Paint Mixing</h3>
+        <p class="feature-description">Additive mode adds light toward white; subtractive mode multiplies pigment toward black. Two ways to think about every mix.</p></div>
+      <div class="feature-card"><div class="feature-icon">🔄</div>
+        <h3 class="feature-title">Inversion Stages</h3>
+        <p class="feature-description">The mix flips additive↔subtractive mid-run, with an interrupting animation, a persistent indicator, and a Light/Dark theme flip you can't miss.</p></div>
+      <div class="feature-card"><div class="feature-icon">⏱️</div>
+        <h3 class="feature-title">Beat the Clock</h3>
+        <p class="feature-description">Every round is timed — and you only get a couple of previews early on. Later, it's pure reading. Run out of time and you lose a life.</p></div>
+      <div class="feature-card"><div class="feature-icon">🎵</div>
+        <h3 class="feature-title">Dynamic Music</h3>
+        <p class="feature-description">A procedural bed whose intensity and layers scale with difficulty and streak, with a major↔minor swap and a stinger on every inversion.</p></div>
+      <div class="feature-card"><div class="feature-icon">💬</div>
+        <h3 class="feature-title">iMessage Play</h3>
+        <p class="feature-description">Send a Tri-Add bubble. Your friend takes their turn right inside Messages and sends it back. Co-op or versus, one bubble at a time.</p></div>
+      <div class="feature-card"><div class="feature-icon">🎮</div>
+        <h3 class="feature-title">Turn-Based Multiplayer</h3>
+        <p class="feature-description">Co-op builds one shared streak; competitive races the exact same seeded puzzles. Asynchronous via Game Center — play when you're free.</p></div>
+      <div class="feature-card"><div class="feature-icon">⌚️</div>
+        <h3 class="feature-title">On Your Wrist</h3>
+        <p class="feature-description">A simplified tap-to-mix mode on Apple Watch for a quick round anywhere. No ads. No tracking. Ever.</p></div>
+    </div>
+  </section>
+
+  <section id="how-it-plays" class="section">
+    <div class="magazine-section">
+      <div class="magazine-content">
+        <h2>Mix Two, Match One</h2>
+        <p>Each round shows a target color and three bubbles. Drag two bubbles together to mix them — one pair, and only one, reproduces the target. Read the colors and commit before the clock runs out.</p>
+        <p>Get it right and you level up. Get it wrong, or run out of time, and you lose a life. Fast, clean answers score the most.</p>
+      </div>
+      <div class="magazine-image">
+        <img src="assets/images/screenshot-play.png" alt="The Tri-Add board mid-mix"
+             onerror="this.style.background='linear-gradient(135deg, #121218, #466EFF)'; this.style.minHeight='400px'; this.style.display='block';">
+      </div>
+    </div>
+    <div class="magazine-section reverse">
+      <div class="magazine-content">
+        <h2>Climb the Levels</h2>
+        <p>Every correct mix is a level. The difficulty curve is invisible — colors quietly get subtler and the help fades the deeper you go — so it always feels like one more.</p>
+        <p>And keep an eye out for inversions: every so often the game flips light↔paint mid-run, changing the badge and the whole theme. Solve the first round after a flip to earn a life.</p>
+      </div>
+      <div class="magazine-image">
+        <img src="assets/images/screenshot-menu.png" alt="The Tri-Add menu"
+             onerror="this.style.background='linear-gradient(135deg, #B05CFF, #121218)'; this.style.minHeight='400px'; this.style.display='block';">
+      </div>
+    </div>
+    <div class="magazine-section">
+      <div class="magazine-content">
+        <h2>Learn by Doing</h2>
+        <p>An interactive walk-through replaces the old guide — you learn light mixing, paint mixing, and inversions by actually playing a few guided rounds, not watching a video.</p>
+        <p>Then take it online: turn-based co-op builds a shared streak, competitive races the same seeded puzzles, and you can even play inside an iMessage bubble.</p>
+      </div>
+      <div class="magazine-image">
+        <img src="assets/images/screenshot-tutorial.png" alt="The Tri-Add interactive walkthrough"
+             onerror="this.style.background='linear-gradient(135deg, #4CE266, #241A33)'; this.style.minHeight='400px'; this.style.display='block';">
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-header">
+      <p class="section-subtitle">The Story</p>
+      <h2>Built in 24 Hours, Reborn a Decade Later</h2>
+    </div>
+    <div class="magazine-section">
+      <div class="magazine-content">
+        <p>Tri-Add started as a late-night idea right after high school — an offhand "what if" one evening between friends. By the next day it was a whole app. <strong>Austin Buck</strong> and <strong>Blaine Miller</strong> built the original in about <strong>24 hours</strong>: an idea one night, a shipped game the next, fueled by friendship and the fun of making something together. <strong>Crystal Buck</strong> gave it its name.</p>
+        <p>This version is a <strong>complete, ground-up rebuild more than a decade later</strong> — modern tooling, modern polish, and a few long-wished-for features to make it more fun — staying faithful to the spirit of that time and the fun we shared.</p>
+      </div>
+      <div class="magazine-image">
+        <img src="assets/images/app-icon.png" alt="Tri-Add mark"
+             onerror="this.style.background='radial-gradient(circle, #33E5F2 0%, #121218 80%)'; this.style.minHeight='320px'; this.style.borderRadius='22%'; this.style.display='block';">
+      </div>
+    </div>
+  </section>
+
+  <section id="faq" class="faq-section">
+    <div class="section-header">
+      <p class="section-subtitle">Got Questions?</p>
+      <h2>Frequently Asked Questions</h2>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question"><span>What's the difference between light and paint mixing?</span><span class="faq-icon">▼</span></button>
+      <div class="faq-answer"><p>Light (additive) mixing starts from black and adds toward white — red light + green light makes yellow. Paint (subtractive) mixing starts from white and multiplies toward black — cyan + yellow makes green. Tri-Add teaches both, then flips between them mid-game.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question"><span>How does difficulty work?</span><span class="faq-icon">▼</span></button>
+      <div class="faq-answer"><p>The clock stays constant, but the colors get subtler as your level climbs and the preview "help" fades — two peeks early, then one, then none. A built-in perceptual floor keeps every color visibly distinct, even at the top.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question"><span>How do iMessage matches work?</span><span class="faq-icon">▼</span></button>
+      <div class="faq-answer"><p>Open the Tri-Add iMessage app in a conversation, pick co-op or versus, and take your turn. Send the bubble; your friend taps it, plays their round inside Messages, and sends it back. The match lives entirely in your thread.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question"><span>What devices does it run on?</span><span class="faq-icon">▼</span></button>
+      <div class="faq-answer"><p>iPhone and iPad (universal — one purchase covers both), plus a simplified mode on Apple Watch. Built and tuned on iPhone 17 Pro Max.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question"><span>Are there ads, IAPs, or subscriptions?</span><span class="faq-icon">▼</span></button>
+      <div class="faq-answer"><p>No. Tri-Add is a one-time $4.99 purchase. No ads, no tracking, no in-app purchases, no subscriptions — every mode included.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question"><span>Is this the same Tri-Add from years ago?</span><span class="faq-icon">▼</span></button>
+      <div class="faq-answer"><p>Yes — it's a relaunch of the 2014 original by Austin Buck &amp; Blaine Miller (named by Crystal Buck), rebuilt from scratch in modern Swift. If you owned it before, it's the same app on the App Store, and your old Game Center achievements still count.</p></div>
+    </div>
+  </section>
+
+  <section class="security-callout">
+    <div class="section-header">
+      <p class="section-subtitle">Privacy</p>
+      <h2>Yours, and Only Yours</h2>
+    </div>
+    <div class="security-badges">
+      <div class="security-badge"><span class="badge-icon">📋</span> Privacy Manifest</div>
+      <div class="security-badge"><span class="badge-icon">🚫</span> No Tracking</div>
+      <div class="security-badge"><span class="badge-icon">🎮</span> GameKit Security</div>
+      <div class="security-badge"><span class="badge-icon">✅</span> App Sandbox</div>
+    </div>
+    <p class="security-audit-note">No tracking. No ads. No in-app purchases.</p>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-links">
+        <a href="../" class="footer-link">All Apps</a>
+        <a href="../ridgeshot/" class="footer-link">Ridgeshot</a>
+        <a href="../pinline/" class="footer-link">Pinline</a>
+        <a href="../enter-space/" class="footer-link">Enter Space</a>
+        <a href="../blip/" class="footer-link">Blip</a>
+        <a href="../tilebreak/" class="footer-link">Tilebreak</a>
+        <a href="/privacy/" class="footer-link">Privacy</a>
+        <a href="/terms/" class="footer-link">Terms</a>
+        <a href="/" class="footer-link">Portfolio</a>
+      </div>
+      <p style="color: var(--text-muted); margin-top: var(--spacing-md);">
+        Original game by Austin Buck &amp; Blaine Miller · Name by Crystal Buck · © <span id="year"></span> Blaine Miller. All rights reserved.
+      </p>
+    </div>
+  </footer>
+
+  <script src="../app-showcase.js"></script>
+</body>
+</html>

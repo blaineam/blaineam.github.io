@@ -19,7 +19,10 @@
       "page_url": "/apps/tri-add/",
       "app_store_url": "https://apps.apple.com/us/app/tri-add/id860253889",
       "icon_url": "/apps/tri-add/assets/images/app-icon.png",
-      "released": "2026-06"
+      "released": "2026-06",
+      "relaunch": true,
+      "relaunch_of": "Tri-Add (2014)",
+      "note": "A complete, ground-up rebuild of the original 2014 Tri-Add \u2014 relaunched June 2026 with additive + subtractive mixing, inversions, and turn-based multiplayer."
     },
     {
       "id": "zap",
