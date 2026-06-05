@@ -4,6 +4,15 @@
   "note": "Source of truth for app metadata. apps/index.html renders its OWN custom display order; this file is the chronological list.",
   "apps": [
     {
+      "id": "zap",
+      "title": "Zap",
+      "tagline": "Electric trivia duels",
+      "page_url": "/apps/zap/",
+      "app_store_url": null,
+      "icon_url": "/apps/zap/assets/images/icon.png",
+      "released": "2026-06"
+    },
+    {
       "id": "ridgeshot",
       "title": "Ridgeshot",
       "tagline": "Long-range rifle marksman",
