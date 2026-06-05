@@ -1,0 +1,129 @@
+{
+  "source": "https://opentdb.com",
+  "license": "CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/)",
+  "fetchedAt": "2026-06-05T07:06:58Z",
+  "totalCategories": 24,
+  "totalQuestions": 4650,
+  "categories": {
+    "9": {
+      "name": "General Knowledge",
+      "file": "9-general-knowledge.json",
+      "count": 450
+    },
+    "10": {
+      "name": "Entertainment: Books",
+      "file": "10-entertainment-books.json",
+      "count": 100
+    },
+    "11": {
+      "name": "Entertainment: Film",
+      "file": "11-entertainment-film.json",
+      "count": 300
+    },
+    "12": {
+      "name": "Entertainment: Music",
+      "file": "12-entertainment-music.json",
+      "count": 450
+    },
+    "13": {
+      "name": "Entertainment: Musicals & Theatres",
+      "file": "13-entertainment-musicals-theatres.json",
+      "count": 0
+    },
+    "14": {
+      "name": "Entertainment: Television",
+      "file": "14-entertainment-television.json",
+      "count": 150
+    },
+    "15": {
+      "name": "Entertainment: Video Games",
+      "file": "15-entertainment-video-games.json",
+      "count": 1150
+    },
+    "16": {
+      "name": "Entertainment: Board Games",
+      "file": "16-entertainment-board-games.json",
+      "count": 50
+    },
+    "17": {
+      "name": "Science & Nature",
+      "file": "17-science-nature.json",
+      "count": 250
+    },
+    "18": {
+      "name": "Science: Computers",
+      "file": "18-science-computers.json",
+      "count": 150
+    },
+    "19": {
+      "name": "Science: Mathematics",
+      "file": "19-science-mathematics.json",
+      "count": 50
+    },
+    "20": {
+      "name": "Mythology",
+      "file": "20-mythology.json",
+      "count": 50
+    },
+    "21": {
+      "name": "Sports",
+      "file": "21-sports.json",
+      "count": 150
+    },
+    "22": {
+      "name": "Geography",
+      "file": "22-geography.json",
+      "count": 350
+    },
+    "23": {
+      "name": "History",
+      "file": "23-history.json",
+      "count": 400
+    },
+    "24": {
+      "name": "Politics",
+      "file": "24-politics.json",
+      "count": 50
+    },
+    "25": {
+      "name": "Art",
+      "file": "25-art.json",
+      "count": 50
+    },
+    "26": {
+      "name": "Celebrities",
+      "file": "26-celebrities.json",
+      "count": 50
+    },
+    "27": {
+      "name": "Animals",
+      "file": "27-animals.json",
+      "count": 50
+    },
+    "28": {
+      "name": "Vehicles",
+      "file": "28-vehicles.json",
+      "count": 50
+    },
+    "29": {
+      "name": "Entertainment: Comics",
+      "file": "29-entertainment-comics.json",
+      "count": 50
+    },
+    "30": {
+      "name": "Science: Gadgets",
+      "file": "30-science-gadgets.json",
+      "count": 0
+    },
+    "31": {
+      "name": "Entertainment: Japanese Anime & Manga",
+      "file": "31-entertainment-japanese-anime-manga.json",
+      "count": 200
+    },
+    "32": {
+      "name": "Entertainment: Cartoon & Animations",
+      "file": "32-entertainment-cartoon-animations.json",
+      "count": 100
+    }
+  }
+}

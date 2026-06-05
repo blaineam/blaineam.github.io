@@ -1,0 +1,577 @@
+{
+  "category": {
+    "id": 19,
+    "name": "Science: Mathematics"
+  },
+  "count": 50,
+  "questions": [
+    {
+      "category": "Science: Mathematics",
+      "type": "multiple",
+      "difficulty": "hard",
+      "question": "Which of the following mathematicians made major contributions to game theory?",
+      "correct_answer": "John Von Neumann",
+      "incorrect_answers": [
+        "Carl Friedrich Gauss",
+        "Leonhard Euler",
+        "Stefan Banach"
+      ]
+    },
+    {
+      "category": "Science: Mathematics",
+      "type": "multiple",
+      "difficulty": "hard",
+      "question": "Which of these did mathematician Leonhard Euler NOT develop?",
+      "correct_answer": "An improvement to the Fast Fourier Transform",
+      "incorrect_answers": [
+        "A method of solving first-order differential equations",
+        "An identity linking the numbers e, pi and i",
+        "A formula linking vertices, edges and faces on a graph"
+      ]
+    },
+    {
+      "category": "Science: Mathematics",
+      "type": "boolean",
+      "difficulty": "hard",
+      "question": "L'Hôpital was the mathematician who created the homonymous rule that uses derivatives to evaluate limits with indeterminations.",
+      "correct_answer": "False",
+      "incorrect_answers": [
+        "True"
+      ]
+    },
+    {
+      "category": "Science: Mathematics",
+      "type": "multiple",
+      "difficulty": "hard",
+      "question": "The notion of a \"set that contains all sets which do not contain themselves\" is a paradoxical idea attributed to which English philosopher?",
+      "correct_answer": "Bertrand Russel",
+      "incorrect_answers": [
+        "Francis Bacon",
+        "John Locke",
+        "Alfred North Whitehead"
+      ]
+    },
+    {
+      "category": "Science: Mathematics",
+      "type": "multiple",
+      "difficulty": "medium",
+      "question": "Which of the following dice is not a platonic solid?",
+      "correct_answer": "10-sided die",
+      "incorrect_answers": [
+        "12-sided die",
+        "20-sided die",
+        "8-sided die"
+      ]
+    },
+    {
+      "category": "Science: Mathematics",
+      "type": "multiple",
+      "difficulty": "medium",
+      "question": "How many books are in Euclid's Elements of Geometry?",
+      "correct_answer": "13",
+      "incorrect_answers": [
+        "8",
+        "10",
+        "17"
+      ]
+    },
+    {
+      "category": "Science: Mathematics",
+      "type": "multiple",
+      "difficulty": "medium",
+      "question": "To the nearest whole number, how many radians are in a whole circle?",
+      "correct_answer": "6",
+      "incorrect_answers": [
+        "3",
+        "4",
+        "5"
+      ]
+    },
+    {
+      "category": "Science: Mathematics",
+      "type": "multiple",
+      "difficulty": "easy",
+      "question": "What is the mathematician Euler's first name?",
+      "correct_answer": "Leonhard",
+      "incorrect_answers": [
+        "Lionel",
+        "Andrin",
+        "Ajan"
+      ]
+    },
+    {
+      "category": "Science: Mathematics",
+      "type": "multiple",
+      "difficulty": "medium",
+      "question": "In a normal distribution, 95% of the data lies within how many standard deviations of the mean?",
+      "correct_answer": "2",
+      "incorrect_answers": [
+        "1",
+        "3",
+        "4"
+      ]
+    },
+    {
+      "category": "Science: Mathematics",
+      "type": "boolean",
+      "difficulty": "easy",
+      "question": "The 'Squaring the Circle' problem is solvable.",
+      "correct_answer": "False",
+      "incorrect_answers": [
+        "True"
+      ]
+    },
+    {
+      "category": "Science: Mathematics",
+      "type": "boolean",
+      "difficulty": "easy",
+      "question": "An isosceles triangle has two sides of equal length as opposed to three.",
+      "correct_answer": "True",
+      "incorrect_answers": [
+        "False"
+      ]
+    },
+    {
+      "category": "Science: Mathematics",
+      "type": "multiple",
+      "difficulty": "easy",
+      "question": "What is the equation for the area of a sphere?",
+      "correct_answer": "(4/3)πr^3",
+      "incorrect_answers": [
+        "4πr^2",
+        "(1/3)πhr^2",
+        "πr^4"
+      ]
+    },
+    {
+      "category": "Science: Mathematics",
+      "type": "multiple",
+      "difficulty": "medium",
+      "question": "Which mathematician refused the Fields Medal?",
+      "correct_answer": "Grigori Perelman",
+      "incorrect_answers": [
+        "Andrew Wiles",
+        "Terence Tao",
+        "Edward Witten"
+      ]
+    },
+    {
+      "category": "Science: Mathematics",
+      "type": "boolean",
+      "difficulty": "hard",
+      "question": "If you could fold a piece of paper in half 50 times, its' thickness will be 3/4th the distance from the Earth to the Sun.",
+      "correct_answer": "True",
+      "incorrect_answers": [
+        "False"
+      ]
+    },
+    {
+      "category": "Science: Mathematics",
+      "type": "multiple",
+      "difficulty": "easy",
+      "question": "What's the square root of 49?",
+      "correct_answer": "7",
+      "incorrect_answers": [
+        "4",
+        "12",
+        "9"
+      ]
+    },
+    {
+      "category": "Science: Mathematics",
+      "type": "multiple",
+      "difficulty": "medium",
+      "question": "What type of function is x²+2x+1?",
+      "correct_answer": "Quadratic",
+      "incorrect_answers": [
+        "Rational",
+        "Linear",
+        "Exponential"
+      ]
+    },
+    {
+      "category": "Science: Mathematics",
+      "type": "boolean",
+      "difficulty": "hard",
+      "question": "In Topology, the complement of an open set is a closed set.",
+      "correct_answer": "True",
+      "incorrect_answers": [
+        "False"
+      ]
+    },
+    {
+      "category": "Science: Mathematics",
+      "type": "multiple",
+      "difficulty": "hard",
+      "question": "The French mathematician Évariste Galois is primarily known for his work in which?",
+      "correct_answer": "Galois Theory",
+      "incorrect_answers": [
+        "Galois' Continued Fractions",
+        "Galois' Method for PDE's ",
+        "Abelian Integration"
+      ]
+    },
+    {
+      "category": "Science: Mathematics",
+      "type": "multiple",
+      "difficulty": "easy",
+      "question": "How many sides does a trapezium have?",
+      "correct_answer": "4",
+      "incorrect_answers": [
+        "3",
+        "5",
+        "6"
+      ]
+    },
+    {
+      "category": "Science: Mathematics",
+      "type": "multiple",
+      "difficulty": "easy",
+      "question": "Who proved Fermat's Last Theorem?",
+      "correct_answer": "Andrew Wiles",
+      "incorrect_answers": [
+        "Leonhard Euler",
+        "Carl Friedrich Gauss",
+        "Srinivasa Ramanujan"
+      ]
+    },
+    {
+      "category": "Science: Mathematics",
+      "type": "multiple",
+      "difficulty": "medium",
+      "question": "In the hexadecimal system, what number comes after 9?",
+      "correct_answer": "The Letter A",
+      "incorrect_answers": [
+        "10",
+        "The Number 0",
+        "16"
+      ]
+    },
+    {
+      "category": "Science: Mathematics",
+      "type": "boolean",
+      "difficulty": "medium",
+      "question": "The Pythagorean theorem states that the square of the hypotenuse is equal to the product of the squares of the other two sides.",
+      "correct_answer": "False",
+      "incorrect_answers": [
+        "True"
+      ]
+    },
+    {
+      "category": "Science: Mathematics",
+      "type": "boolean",
+      "difficulty": "hard",
+      "question": "The binary number \"101001101\" is equivalent to the Decimal number \"334\"",
+      "correct_answer": "False",
+      "incorrect_answers": [
+        "True"
+      ]
+    },
+    {
+      "category": "Science: Mathematics",
+      "type": "multiple",
+      "difficulty": "medium",
+      "question": "How many zeros are there in a googol?",
+      "correct_answer": "100",
+      "incorrect_answers": [
+        "10",
+        "1,000",
+        "1,000,000"
+      ]
+    },
+    {
+      "category": "Science: Mathematics",
+      "type": "multiple",
+      "difficulty": "hard",
+      "question": "The decimal number 31 in hexadecimal would be what?",
+      "correct_answer": "1F",
+      "incorrect_answers": [
+        "3D",
+        "2E",
+        "1B"
+      ]
+    },
+    {
+      "category": "Science: Mathematics",
+      "type": "multiple",
+      "difficulty": "medium",
+      "question": "In the complex plane, multiplying a given function by i rotates it anti-clockwise by how many degrees?",
+      "correct_answer": "90",
+      "incorrect_answers": [
+        "180",
+        "270",
+        "0"
+      ]
+    },
+    {
+      "category": "Science: Mathematics",
+      "type": "multiple",
+      "difficulty": "medium",
+      "question": "What Greek letter is used to signify summation?",
+      "correct_answer": "Sigma",
+      "incorrect_answers": [
+        "Delta",
+        "Alpha",
+        "Omega"
+      ]
+    },
+    {
+      "category": "Science: Mathematics",
+      "type": "boolean",
+      "difficulty": "medium",
+      "question": "The set of all algebraic numbers is countable.",
+      "correct_answer": "True",
+      "incorrect_answers": [
+        "False"
+      ]
+    },
+    {
+      "category": "Science: Mathematics",
+      "type": "boolean",
+      "difficulty": "medium",
+      "question": "Aleph-nought is the cardinality of the set of all natural numbers.",
+      "correct_answer": "True",
+      "incorrect_answers": [
+        "False"
+      ]
+    },
+    {
+      "category": "Science: Mathematics",
+      "type": "multiple",
+      "difficulty": "easy",
+      "question": "What is a polygon with eight sides called?",
+      "correct_answer": "Octagon",
+      "incorrect_answers": [
+        "Hexagon",
+        "Nanagon",
+        "Heptagon"
+      ]
+    },
+    {
+      "category": "Science: Mathematics",
+      "type": "boolean",
+      "difficulty": "easy",
+      "question": "A universal set, or a set that contains all sets, exists.",
+      "correct_answer": "False",
+      "incorrect_answers": [
+        "True"
+      ]
+    },
+    {
+      "category": "Science: Mathematics",
+      "type": "boolean",
+      "difficulty": "medium",
+      "question": "Zero factorial is equal to zero. ",
+      "correct_answer": "False",
+      "incorrect_answers": [
+        "True"
+      ]
+    },
+    {
+      "category": "Science: Mathematics",
+      "type": "boolean",
+      "difficulty": "easy",
+      "question": "The sum of any two odd integers is odd.",
+      "correct_answer": "False",
+      "incorrect_answers": [
+        "True"
+      ]
+    },
+    {
+      "category": "Science: Mathematics",
+      "type": "multiple",
+      "difficulty": "easy",
+      "question": "What is the symbol for Displacement?",
+      "correct_answer": "Δr",
+      "incorrect_answers": [
+        "dr",
+        "Dp",
+        "r"
+      ]
+    },
+    {
+      "category": "Science: Mathematics",
+      "type": "multiple",
+      "difficulty": "medium",
+      "question": "Which greek mathematician ran through the streets of Syracuse naked while shouting \"Eureka\" after discovering the principle of displacement?",
+      "correct_answer": "Archimedes",
+      "incorrect_answers": [
+        "Euclid",
+        "Homer",
+        "Eratosthenes"
+      ]
+    },
+    {
+      "category": "Science: Mathematics",
+      "type": "multiple",
+      "difficulty": "easy",
+      "question": "How many sides does a pentagon have?",
+      "correct_answer": "5",
+      "incorrect_answers": [
+        "9",
+        "6",
+        "4"
+      ]
+    },
+    {
+      "category": "Science: Mathematics",
+      "type": "boolean",
+      "difficulty": "medium",
+      "question": "The proof for the Chinese Remainder Theorem used in Number Theory was NOT developed by its first publisher, Sun Tzu.",
+      "correct_answer": "True",
+      "incorrect_answers": [
+        "False"
+      ]
+    },
+    {
+      "category": "Science: Mathematics",
+      "type": "multiple",
+      "difficulty": "easy",
+      "question": "In Roman Numerals, what does XL equate to?",
+      "correct_answer": "40",
+      "incorrect_answers": [
+        "60",
+        "15",
+        "90"
+      ]
+    },
+    {
+      "category": "Science: Mathematics",
+      "type": "multiple",
+      "difficulty": "hard",
+      "question": "What is the only Millennium Prize Problem that has been solved so far?",
+      "correct_answer": "Poincaré conjecture",
+      "incorrect_answers": [
+        "P vs. NP problem",
+        "Riemann Hypothesis",
+        "Fermat's conjecture"
+      ]
+    },
+    {
+      "category": "Science: Mathematics",
+      "type": "multiple",
+      "difficulty": "easy",
+      "question": "Which two men are credited with independently discovering differential calculus? ",
+      "correct_answer": "Newton and Leibnitz",
+      "incorrect_answers": [
+        "Plato and Aristotle",
+        "Asiimov and Rutherford",
+        "Dvorak and Smith"
+      ]
+    },
+    {
+      "category": "Science: Mathematics",
+      "type": "boolean",
+      "difficulty": "medium",
+      "question": "111,111,111 x 111,111,111 = 12,345,678,987,654,321",
+      "correct_answer": "True",
+      "incorrect_answers": [
+        "False"
+      ]
+    },
+    {
+      "category": "Science: Mathematics",
+      "type": "boolean",
+      "difficulty": "easy",
+      "question": "An equilateral triangle always has every angle measuring 60°.",
+      "correct_answer": "True",
+      "incorrect_answers": [
+        "False"
+      ]
+    },
+    {
+      "category": "Science: Mathematics",
+      "type": "boolean",
+      "difficulty": "medium",
+      "question": "E = MC3",
+      "correct_answer": "False",
+      "incorrect_answers": [
+        "True"
+      ]
+    },
+    {
+      "category": "Science: Mathematics",
+      "type": "multiple",
+      "difficulty": "medium",
+      "question": "What are the first 6 digits of the number \"Pi\"?",
+      "correct_answer": "3.14159",
+      "incorrect_answers": [
+        "3.14169",
+        "3.12423",
+        "3.25812"
+      ]
+    },
+    {
+      "category": "Science: Mathematics",
+      "type": "multiple",
+      "difficulty": "hard",
+      "question": "Which of the following famous mathematicians died in a duel at the age of 20?",
+      "correct_answer": "Galois",
+      "incorrect_answers": [
+        "Abel",
+        "Euler",
+        "Gauss"
+      ]
+    },
+    {
+      "category": "Science: Mathematics",
+      "type": "multiple",
+      "difficulty": "medium",
+      "question": "What is the derivative of sin(x)",
+      "correct_answer": "cos(x)",
+      "incorrect_answers": [
+        "csc(x)",
+        "-cos(x)",
+        "-sin(x)"
+      ]
+    },
+    {
+      "category": "Science: Mathematics",
+      "type": "multiple",
+      "difficulty": "hard",
+      "question": "What is the smallest number that can be expressed as the sum of two positive cubes in two different ways?",
+      "correct_answer": "1729",
+      "incorrect_answers": [
+        "91",
+        "561",
+        "4104"
+      ]
+    },
+    {
+      "category": "Science: Mathematics",
+      "type": "multiple",
+      "difficulty": "easy",
+      "question": "What is the name of a nine sided polygon?",
+      "correct_answer": "Nonagon",
+      "incorrect_answers": [
+        "Hexagon",
+        "Octagon",
+        "Heptagon"
+      ]
+    },
+    {
+      "category": "Science: Mathematics",
+      "type": "multiple",
+      "difficulty": "easy",
+      "question": "How many sides does a heptagon have?",
+      "correct_answer": "7",
+      "incorrect_answers": [
+        "8",
+        "6",
+        "5"
+      ]
+    },
+    {
+      "category": "Science: Mathematics",
+      "type": "multiple",
+      "difficulty": "easy",
+      "question": "What is the correct order of operations for solving equations?",
+      "correct_answer": "Parentheses, Exponents, Multiplication, Division, Addition, Subtraction",
+      "incorrect_answers": [
+        "Addition, Multiplication, Division, Subtraction, Addition, Parentheses",
+        "Parentheses, Exponents, Addition, Substraction, Multiplication, Division",
+        "The order in which the operations are written."
+      ]
+    }
+  ]
+}
