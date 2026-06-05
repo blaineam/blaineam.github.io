@@ -1,6 +1,7 @@
 {
-  "fingerprint": "48b6655ea34591a999e8725c4aec40a52580e0b67213fa44d211822045c84336",
+  "fingerprint": "a22e4fe99648d699523307322b19f238ce135169c0d32f58ef15671ac8dd9329",
   "apps": [
+    "tri-add",
     "pano-owl",
     "enter-space",
     "blip",
@@ -17,5 +18,5 @@
     "wise-flyer",
     "glint"
   ],
-  "generatedAt": "2026-06-05T04:04:35.083Z"
+  "generatedAt": "2026-06-05T04:44:49.503Z"
 }
