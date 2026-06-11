@@ -939,6 +939,30 @@ p {
   padding: 0 var(--spacing-md);
 }
 
+/* OS 27 Ready badge — shared hero pill. Drop inside .hero-text between the
+   description and the CTA. Designed for the gradient heroes (white text). */
+.os-ready-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45em;
+  background: rgba(255, 255, 255, 0.16);
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  color: white;
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 0.4em 1em;
+  border-radius: 999px;
+  letter-spacing: 0.3px;
+  margin-bottom: var(--spacing-md);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  white-space: normal;
+}
+
+.os-ready-badge .badge-icon {
+  font-size: 1em;
+}
+
 /* Print Styles */
 @media print {
   .app-nav,
