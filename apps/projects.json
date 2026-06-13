@@ -75,9 +75,13 @@
       "title": "Blip",
       "tagline": "Featherlight macOS menu bar system monitor",
       "page_url": "/apps/blip/",
-      "app_store_url": null,
+      "app_store_url": "https://apps.apple.com/us/app/blip-stats/id6762329495",
       "icon_url": "/apps/blip/assets/images/icon.png",
-      "released": "2026-04"
+      "released": "2026-04",
+      "updated": "2026-06",
+      "version": "1.6.1",
+      "status": "live",
+      "note": "macOS menu-bar network & S.M.A.R.T. monitor with live MTR traceroute map, per-volume speed tests, kill-process controls, and a full Shortcuts (App Intents) catalog."
     },
     {
       "id": "glint",
@@ -93,54 +97,82 @@
       "title": "Sami",
       "tagline": "Smart media optimizer",
       "page_url": "/apps/sami/",
-      "app_store_url": null,
+      "app_store_url": "https://apps.apple.com/us/app/sami-media-optimizer/id6758907995",
       "icon_url": "/apps/sami/assets/images/icon.png",
-      "released": "2026-02"
+      "released": "2026-02",
+      "updated": "2026-06",
+      "version": "1.2.1",
+      "status": "in-review",
+      "note": "Smart photo & video optimizer that reclaims storage with quality-aware compression — keeps working via background continued-processing and is fully scriptable from Shortcuts. v1.2.0 live; v1.2.1 in review."
     },
     {
       "id": "enter-space",
       "title": "Enter Space",
       "tagline": "Local-feeling access to every cloud you use",
       "page_url": "/apps/enter-space/",
-      "app_store_url": null,
+      "app_store_url": "https://apps.apple.com/us/app/enter-space/id6746350540",
       "icon_url": "/apps/enter-space/assets/images/icon.png",
-      "released": "2025-06"
+      "released": "2025-06",
+      "updated": "2026-06",
+      "version": "5.5.1",
+      "status": "live",
+      "apple_watch": true,
+      "note": "Unified, local-feeling access to 100 cloud providers across iPhone, iPad, Mac & Apple TV — with full-content Spotlight indexing, encrypted offline mirror (Keep Offline), 24 Shortcuts & Siri actions, and an Apple Watch companion that syncs your cloud media to your wrist."
     },
     {
       "id": "luma-editor",
       "title": "Luma Editor",
       "tagline": "Match your photo style",
       "page_url": "/apps/luma-editor/",
-      "app_store_url": null,
+      "app_store_url": "https://apps.apple.com/us/app/luma-editor/id6741085424",
       "icon_url": "/apps/luma-editor/assets/images/icon.png",
-      "released": "2025-01"
+      "released": "2025-01",
+      "updated": "2026-06",
+      "version": "1.5.0",
+      "status": "live",
+      "note": "Photo editor that matches a look you like and applies it to your shots — with Vision-named one-tap styles and Siri-driven edits via Shortcuts. Universal on iPhone, iPad & Mac."
     },
     {
       "id": "embr",
       "title": "Embr",
       "tagline": "Burn your debts away",
       "page_url": "/apps/embr/",
-      "app_store_url": null,
+      "app_store_url": "https://apps.apple.com/us/app/embr-burn-your-debts/id6727006089",
       "icon_url": "/apps/embr/assets/images/icon.png",
-      "released": "2024-10"
+      "released": "2024-10",
+      "updated": "2026-06",
+      "version": "1.2.0",
+      "status": "live",
+      "apple_watch": true,
+      "note": "Debt-payoff tracker that lets you watch each balance literally burn away as you pay it down — with an Apple Watch app and complication showing your live payoff rings, plus Siri & Shortcuts."
     },
     {
       "id": "ari-helper",
       "title": "Ari Helper",
       "tagline": "All-in-one AI chat app",
       "page_url": "/apps/ari-helper/",
-      "app_store_url": null,
+      "app_store_url": "https://apps.apple.com/us/app/ari-helper/id6480045555",
       "icon_url": "/apps/ari-helper/assets/images/icon.png",
-      "released": "2024-03"
+      "released": "2024-03",
+      "updated": "2026-06",
+      "version": "5.4.0",
+      "status": "live",
+      "apple_watch": true,
+      "note": "All-in-one AI chat with on-device LLMs plus your favorite cloud models — and an Apple Watch app that remote-controls the chat from your wrist while your paired iPhone runs the model."
     },
     {
       "id": "mi-speaks",
       "title": "Mi Speaks",
       "tagline": "Listen to any written content",
       "page_url": "/apps/mi-speaks/",
-      "app_store_url": null,
+      "app_store_url": "https://apps.apple.com/us/app/mi-speaks/id6451395651",
       "icon_url": "/apps/mi-speaks/assets/images/icon.png",
-      "released": "2023-07"
+      "released": "2023-07",
+      "updated": "2026-06",
+      "version": "1.5.0",
+      "status": "in-review",
+      "apple_watch": true,
+      "note": "Text-to-speech reader for any written content, with a standalone Apple Watch player that reads along through the built-in speaker and highlights each word. v1.4.4 live; v1.5.0 in review."
     },
     {
       "id": "deepsi",
@@ -160,7 +192,11 @@
       "icon_url": "/apps/pano-owl/assets/images/icon.png",
       "released": "2021-03",
       "updated": "2026-06",
-      "note": "Originally launched March 2021. v2.0 relaunch in progress."
+      "version": "2.1.0",
+      "status": "live",
+      "relaunch": true,
+      "relaunch_of": "Pano Owl (2021)",
+      "note": "Originally launched March 2021. Fully relaunched as a 2.x ground-up rebuild on a hybrid OpenCV + Metal stitch engine (PanoKit) with a SwiftUI interface — true 360° equirectangular output, gigapixel memory-bounded stitching, an immersive in-app 360 viewer, and background continued-processing stitching from Shortcuts. Live on iOS, iPadOS & macOS."
     },
     {
       "id": "wise-flyer",
