@@ -114,10 +114,10 @@
       "icon_url": "/apps/enter-space/assets/images/icon.png",
       "released": "2025-06",
       "updated": "2026-06",
-      "version": "5.5.1",
+      "version": "5.6.0",
       "status": "live",
       "apple_watch": true,
-      "note": "Unified, local-feeling access to 100 cloud providers across iPhone, iPad, Mac & Apple TV — with full-content Spotlight indexing, encrypted offline mirror (Keep Offline), 24 Shortcuts & Siri actions, and an Apple Watch companion that syncs your cloud media to your wrist."
+      "note": "Unified, local-feeling access to 100 cloud providers across iPhone, iPad, Mac & Apple TV — with full-content Spotlight indexing, encrypted offline mirror (Keep Offline), 24 Shortcuts & Siri actions, and an Apple Watch companion that syncs your cloud media to your wrist and flips through a photo folder on the watch face. Scheduled syncs add rate-limit tuning (TPS limit, low-level retries, auto-abort) for providers like pCloud."
     },
     {
       "id": "luma-editor",

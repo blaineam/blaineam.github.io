@@ -679,7 +679,7 @@
         <div class="feature-icon">⌚️</div>
         <h3 class="feature-title">Enter Space on Apple Watch</h3>
         <p class="feature-description">
-          Sync your cloud media to your wrist. A media-first Apple Watch companion browses your synced library and plays it back right from the watch — with background audio so your music keeps going. Everything's stored encrypted at rest, with the media key delivered securely from your paired iPhone.
+          Sync your cloud media to your wrist. A media-first Apple Watch companion browses your synced library and plays it back right from the watch — with background audio so your music keeps going. A watch-face photo complication flips through a folder you choose (tap it to open that photo, turn the Digital Crown to zoom), and it adapts to tinted faces so your photos stay legible. Everything's stored encrypted at rest, with the media key delivered securely from your paired iPhone.
         </p>
       </div>
 
@@ -1815,6 +1815,7 @@
           <li><strong>Filtering</strong> — Include or exclude files using path wildcard patterns, modification timestamps, or file sizes. Filters can be applied in an inclusive or exclusive manner, giving you precise control over exactly which files are synced.</li>
           <li><strong>Schedule options</strong> — Set syncs to run on custom intervals, or use near-realtime file monitoring to sync moments after changes are detected. They can even be triggered from Apple Shortcuts</li>
           <li><strong>Network awareness</strong> — Automatically skip syncs when on battery power, low-data networks</li>
+          <li><strong>Rate-limit tuning</strong> — Set a transactions-per-second cap and low-level retry count to stay within a provider's limits (great for backends like pCloud with dynamic, unpredictable throttling). If a destination keeps rate-limiting, the sync detects the repeated limit and aborts cleanly with a clear message instead of hammering away.</li>
           <li><strong>iCloud file materialization</strong> — When syncing iCloud Drive directories, Enter Space will automatically materialize (download) evicted files before the sync runs and re-evict them afterward. This lets you back up your full iCloud Documents even if the files aren't actively present on your device.</li>
           <li><strong>Duplicate tasks</strong> — Quickly duplicate an existing scheduled sync task to set up a backup to an additional location. All settings, filters, and options are copied so you can reuse your existing configuration without starting from scratch.</li>
         </ul>
