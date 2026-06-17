@@ -1,0 +1,61 @@
+name: Replicate to iDrive e2
+
+# Mirrors the repo's working tree (checked-out files, not git history)
+# to an iDrive e2 bucket. iDrive e2 is S3-compatible, so this is just
+# `aws s3 sync` pointed at a custom endpoint.
+#
+# Required configuration (Settings → Secrets and variables → Actions):
+#   Secrets:
+#     IDRIVE_E2_ACCESS_KEY_ID      - access key from the e2 dashboard
+#     IDRIVE_E2_SECRET_ACCESS_KEY  - matching secret key
+#   Variables:
+#     IDRIVE_E2_ENDPOINT           - e.g. https://x8x8.va.idrivee2-99.com
+#     IDRIVE_E2_BUCKET             - destination bucket name (no s3:// prefix)
+#     IDRIVE_E2_REGION             - optional; defaults to us-east-1 below
+#                                    (iDrive e2 ignores it but the CLI needs one)
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# Don't let two syncs run at once — a later push supersedes an in-flight one.
+concurrency:
+  group: idrive-e2-replicate
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  replicate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          # Only the working tree is mirrored, so a shallow checkout is fine.
+          persist-credentials: false
+
+      # The aws CLI is preinstalled on ubuntu-latest runners.
+      - name: Sync working tree to iDrive e2
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.IDRIVE_E2_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.IDRIVE_E2_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: ${{ vars.IDRIVE_E2_REGION || 'us-east-1' }}
+          ENDPOINT: ${{ vars.IDRIVE_E2_ENDPOINT }}
+          BUCKET: ${{ vars.IDRIVE_E2_BUCKET }}
+        run: |
+          set -euo pipefail
+          if [ -z "${ENDPOINT}" ] || [ -z "${BUCKET}" ]; then
+            echo "::error::IDRIVE_E2_ENDPOINT and IDRIVE_E2_BUCKET repository variables must be set."
+            exit 1
+          fi
+          # --delete makes the bucket an exact mirror (removes files deleted
+          # from the repo). Drop it if you want an additive backup instead.
+          aws s3 sync . "s3://${BUCKET}/" \
+            --endpoint-url "${ENDPOINT}" \
+            --delete \
+            --no-progress \
+            --exclude ".git/*" \
+            --exclude ".github/*"
