@@ -4,6 +4,19 @@
   "note": "Source of truth for app metadata. apps/index.html renders its OWN custom display order; this file is the chronological list.",
   "apps": [
     {
+      "id": "kith",
+      "title": "Kith",
+      "tagline": "A private, post-quantum social network for the people you love",
+      "page_url": "/apps/kith/",
+      "app_store_url": "",
+      "icon_url": "/apps/kith/assets/icon.png",
+      "released": "2026-06",
+      "updated": "2026-06",
+      "version": "1.0.0",
+      "status": "beta",
+      "note": "Peer-to-peer, end-to-end encrypted, post-quantum social network for friends & family. No servers, no tracking, no ads. Nobody holds your keys."
+    },
+    {
       "id": "sightquick",
       "title": "SightQuick",
       "tagline": "Zero your scope in minutes",
