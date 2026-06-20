@@ -111,6 +111,22 @@
 </head>
 <body>
 
+<div id="invite" style="display:none"><div class="wrap" style="padding:18px 0 0">
+  <div style="background:linear-gradient(135deg,#7C3AED,#EC4899,#F59E0B);border-radius:18px;padding:20px 22px;display:flex;flex-wrap:wrap;align-items:center;gap:14px;justify-content:space-between;color:#fff">
+    <div style="display:flex;align-items:center;gap:12px;min-width:240px">
+      <div style="font-size:30px">🤝</div>
+      <div>
+        <div style="font-weight:700;font-size:18px">You've been invited to connect on Kith</div>
+        <div style="opacity:.9;font-size:14px">Open it in the app to add them to your private circle.</div>
+      </div>
+    </div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap">
+      <a id="inviteOpen" class="btn" style="background:#fff;color:#7C3AED;font-weight:700" href="#">Open in Kith</a>
+      <a class="btn btn-ghost" style="border-color:rgba(255,255,255,.6);color:#fff" href="https://github.com/blaineam/kith">Get Kith</a>
+    </div>
+  </div>
+</div></div>
+
 <nav><div class="wrap">
   <a class="logo" href="/apps/"><img src="assets/icon.png" alt="Kith"><span>Kith</span></a>
   <a class="btn btn-ghost" href="https://github.com/blaineam/kith">View source</a>
@@ -179,6 +195,22 @@
   Kith — kith and kin. Made with care by <a href="https://github.com/blaineam">Blaine Miller</a>.<br>
   No ads. No tracking. No kidding.
 </div></footer>
+
+<script>
+// If this page was opened from an invite link (/apps/kith/u/<id>#<verify>, routed
+// here as ?u=<id>#<verify>), reveal the banner and wire "Open in Kith" to the
+// kith:// deep link. The verification fragment never leaves the browser.
+(function () {
+  try {
+    var id = new URLSearchParams(location.search).get('u');
+    if (!id) return;
+    var verify = (location.hash || '').replace(/^#/, '');
+    document.getElementById('inviteOpen').href =
+      'kith://u/' + id + (verify ? '#' + verify : '');
+    document.getElementById('invite').style.display = 'block';
+  } catch (e) {}
+})();
+</script>
 
 </body>
 </html>
