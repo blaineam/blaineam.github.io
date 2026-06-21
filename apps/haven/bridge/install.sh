@@ -1,5 +1,5 @@
 #!/usr/bin/env sh
-# Kith Bridge — one-command setup to host your circle's always-on mailbox.
+# Haven Bridge — one-command setup to host your circle's always-on mailbox.
 #
 # A "bridge" is just an S3-compatible bucket your circle shares. Every post is stored
 # SEALED (the bridge can't read it) and re-served to anyone who's offline, so messages
@@ -11,7 +11,7 @@
 # another S3, SFTP, etc. Prefer a managed bucket (S3 / R2 / B2)? You don't need this
 # script — see README.md.
 #
-# Usage:   curl -fsSL https://wemiller.com/apps/kith/bridge/install.sh | sh
+# Usage:   curl -fsSL https://wemiller.com/apps/haven/bridge/install.sh | sh
 #   or:    sh install.sh [--native] [--port 8333] [--dir ~/kith-bridge]
 set -eu
 
@@ -45,7 +45,7 @@ else
   chmod 600 "$CREDFILE"
 fi
 
-echo "▸ Kith Bridge (rclone serve s3 — MIT)  OS=$OS ARCH=$ARCH mode=$MODE"
+echo "▸ Haven Bridge (rclone serve s3 — MIT)  OS=$OS ARCH=$ARCH mode=$MODE"
 echo "▸ Data dir: $DATADIR"
 
 start_docker() {
@@ -87,9 +87,9 @@ LANIP="$(ipconfig getifaddr en0 2>/dev/null || hostname -I 2>/dev/null | awk '{p
 cat <<EOF
 
 ═══════════════════════════════════════════════════════════════
-✓ Your Kith bridge is live (rclone serve s3 — MIT, fully open source).
+✓ Your Haven bridge is live (rclone serve s3 — MIT, fully open source).
 
-Paste these into Kith → You → Advanced → Storage → Custom S3 bucket,
+Paste these into Haven → You → Advanced → Storage → Custom S3 bucket,
 then turn on "Volunteer as tribute":
 
    Endpoint:    $LANIP:$PORT

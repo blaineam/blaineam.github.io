@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Haven — A private social network for the people you love</title>
+<meta name="description" content="Haven is a peer-to-peer, end-to-end encrypted, post-quantum social network for friends and family. No servers, no tracking, no ads, no doomscroll. Nobody — not even the maker — holds your keys.">
+
+<link rel="icon" type="image/png" href="assets/icon.png">
+<link rel="apple-touch-icon" href="assets/icon.png">
+<link rel="canonical" href="https://wemiller.com/apps/kith/">
+<meta name="author" content="Blaine Miller">
+<meta name="theme-color" content="#0a0a0f">
+<meta name="keywords" content="private social network, end-to-end encryption, post-quantum, peer-to-peer, no tracking, no ads, family, friends, iMessage alternative, Instagram alternative">
+
+<meta property="og:title" content="Haven — A private social network for the people you love">
+<meta property="og:description" content="Peer-to-peer, end-to-end encrypted, post-quantum. No servers, no tracking, no ads. Nobody holds your keys.">
+<meta property="og:image" content="https://wemiller.com/apps/kith/assets/icon.png">
+<meta property="og:url" content="https://wemiller.com/apps/kith/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Haven">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Haven — A private social network">
+<meta name="twitter:description" content="Peer-to-peer, end-to-end encrypted, post-quantum. No servers, no tracking, no ads.">
+<meta name="twitter:image" content="https://wemiller.com/apps/kith/assets/icon.png">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Haven",
+  "operatingSystem": "iOS 17.0+",
+  "applicationCategory": "SocialNetworkingApplication",
+  "description": "A peer-to-peer, end-to-end encrypted, post-quantum social network for friends and family. No servers, no tracking, no ads.",
+  "offers": { "@type": "Offer", "price": "9.99", "priceCurrency": "USD" },
+  "author": { "@type": "Person", "name": "Blaine Miller", "url": "https://github.com/blaineam" },
+  "url": "https://wemiller.com/apps/kith/"
+}
+</script>
+
+<style>
+  :root{
+    --bg:#0a0a0f; --text:#ececf1; --muted:#9a9aa6;
+    --violet:#7c3aed; --pink:#ec4899; --amber:#f59e0b;
+    --card:rgba(255,255,255,.045); --border:rgba(255,255,255,.09);
+    --brand:linear-gradient(120deg,#7c3aed,#ec4899,#f59e0b);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--text);font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+  .brandtext{background:var(--brand);-webkit-background-clip:text;background-clip:text;color:transparent}
+
+  /* ambient glow */
+  body::before{content:"";position:fixed;inset:0;z-index:-1;
+    background:
+      radial-gradient(600px 400px at 85% -5%, rgba(236,72,153,.18), transparent 60%),
+      radial-gradient(560px 420px at 5% 12%, rgba(124,58,237,.16), transparent 60%),
+      radial-gradient(700px 500px at 60% 110%, rgba(245,158,11,.10), transparent 60%);}
+
+  nav{position:sticky;top:0;z-index:10;backdrop-filter:blur(14px);background:rgba(10,10,15,.6);border-bottom:1px solid var(--border)}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:62px}
+  .logo{display:flex;align-items:center;gap:10px;font-weight:700}
+  .logo img{width:30px;height:30px;border-radius:8px}
+  .btn{display:inline-block;padding:11px 20px;border-radius:999px;font-weight:600;font-size:14px}
+  .btn-primary{background:var(--brand);color:#fff;box-shadow:0 8px 24px rgba(236,72,153,.3)}
+  .btn-ghost{border:1px solid var(--border);color:var(--text)}
+
+  header{padding:86px 0 40px;text-align:center}
+  .badge{display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border-radius:999px;border:1px solid var(--border);background:var(--card);font-size:13px;color:var(--muted);margin-bottom:26px}
+  .badge .dot{width:8px;height:8px;border-radius:50%;background:var(--amber);box-shadow:0 0 10px var(--amber)}
+  header h1{font-size:clamp(40px,7vw,72px);line-height:1.04;font-weight:800;letter-spacing:-.02em}
+  header p.sub{font-size:clamp(17px,2.4vw,21px);color:var(--muted);max-width:620px;margin:20px auto 0}
+  .cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:34px}
+  .kicker{margin-top:18px;font-size:13px;color:var(--muted)}
+
+  section{padding:54px 0}
+  h2{font-size:clamp(26px,4vw,38px);font-weight:800;letter-spacing:-.02em;text-align:center}
+  h2+.lead{color:var(--muted);text-align:center;max-width:640px;margin:14px auto 0}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;margin-top:42px}
+  .card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:24px}
+  .card .ico{font-size:28px}
+  .card h3{margin:14px 0 8px;font-size:18px}
+  .card p{color:var(--muted);font-size:15px}
+
+  /* security highlight */
+  .fort{margin-top:44px;border:1px solid var(--border);border-radius:24px;padding:36px;background:
+    linear-gradient(180deg,rgba(124,58,237,.10),rgba(236,72,153,.05));text-align:center}
+  .fort h2{text-align:center}
+  .fort ul{list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-top:26px;text-align:left}
+  .fort li{display:flex;gap:12px;align-items:flex-start;font-size:15px;color:var(--text)}
+  .fort li b{display:block} .fort li span{color:var(--muted);font-size:14px}
+  .check{flex:0 0 auto;width:22px;height:22px;border-radius:50%;background:var(--brand);display:flex;align-items:center;justify-content:center;color:#fff;font-size:12px;margin-top:2px}
+
+  /* shots */
+  .shots{display:flex;gap:18px;overflow-x:auto;padding:42px 4px 8px;scroll-snap-type:x mandatory}
+  .shots img{height:560px;border-radius:30px;border:1px solid var(--border);box-shadow:0 30px 60px rgba(0,0,0,.5);scroll-snap-align:center;background:#000}
+
+  .pricing{text-align:center}
+  .price{font-size:46px;font-weight:800;margin-top:10px}
+  .price small{font-size:16px;color:var(--muted);font-weight:500}
+
+  footer{border-top:1px solid var(--border);padding:40px 0;text-align:center;color:var(--muted);font-size:14px}
+  footer a{color:var(--text);border-bottom:1px solid var(--border)}
+  .flinks{display:flex;gap:22px;justify-content:center;flex-wrap:wrap;margin-bottom:18px}
+
+  @media(max-width:560px){ .shots img{height:460px} header{padding:64px 0 30px} }
+</style>
+</head>
+<body>
+
+<div id="invite" style="display:none"><div class="wrap" style="padding:18px 0 0">
+  <div style="background:linear-gradient(135deg,#7C3AED,#EC4899,#F59E0B);border-radius:18px;padding:20px 22px;display:flex;flex-wrap:wrap;align-items:center;gap:14px;justify-content:space-between;color:#fff">
+    <div style="display:flex;align-items:center;gap:12px;min-width:240px">
+      <div style="font-size:30px">🤝</div>
+      <div>
+        <div style="font-weight:700;font-size:18px">You've been invited to connect on Haven</div>
+        <div style="opacity:.9;font-size:14px">Open it in the app to add them to your private circle.</div>
+      </div>
+    </div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap">
+      <a id="inviteOpen" class="btn" style="background:#fff;color:#7C3AED;font-weight:700" href="#">Open in Haven</a>
+      <a class="btn btn-ghost" style="border-color:rgba(255,255,255,.6);color:#fff" href="https://github.com/blaineam/kith">Get Haven</a>
+    </div>
+  </div>
+</div></div>
+
+<nav><div class="wrap">
+  <a class="logo" href="/apps/"><img src="assets/icon.png" alt="Haven"><span>Haven</span></a>
+  <a class="btn btn-ghost" href="https://github.com/blaineam/kith">View source</a>
+</div></nav>
+
+<header><div class="wrap">
+  <div class="badge"><span class="dot"></span> In private beta — TestFlight</div>
+  <h1>A private place for<br>the people you <span class="brandtext">love</span>.</h1>
+  <p class="sub">Haven is a tiny social network for your real friends and family — photos, video, music, and messages, shared only with the people you choose. No ads. No tracking. No algorithm. No doomscroll.</p>
+  <div class="cta">
+    <a class="btn btn-primary" href="/apps/kith/app/">Open the web app</a>
+    <a class="btn btn-ghost" href="https://github.com/blaineam/kith">Follow the build</a>
+    <a class="btn btn-ghost" href="#fort">Why it's a stronghold</a>
+  </div>
+  <p class="kicker">iPhone · iPad · coming to Mac, Web &amp; Android</p>
+</div></header>
+
+<section><div class="wrap">
+  <h2>Built for connection, not attention</h2>
+  <p class="lead">Everything you'd want from iMessage, Apple Photos, and Apple Music — woven into one warm, private space.</p>
+  <div class="grid">
+    <div class="card"><div class="ico">🤝</div><h3>Just your circle</h3><p>Invite people one at a time. There are no strangers, no public feed, and nothing happens with people you didn't choose.</p></div>
+    <div class="card"><div class="ico">🖼️</div><h3>Photos, video &amp; music</h3><p>Share moments with a song playing alongside them. Auto-optimized by default, or pristine originals when you want them.</p></div>
+    <div class="card"><div class="ico">🔒</div><h3>Post-quantum E2E</h3><p>Every photo, message, and reaction is sealed with hybrid post-quantum encryption — safe even against tomorrow's computers.</p></div>
+    <div class="card"><div class="ico">🚫</div><h3>No ads, no tracking</h3><p>Haven collects nothing about you. No phone number, no email, no profile to sell. Your attention isn't the product.</p></div>
+  </div>
+</div></section>
+
+<section id="fort"><div class="wrap">
+  <div class="fort">
+    <h2>A stronghold by design</h2>
+    <p class="lead">The whole point of Haven is that <b>nobody holds the keys to your life</b> — not a company, not an algorithm, not even the person who built it.</p>
+    <ul>
+      <li><span class="check">✓</span><div><b>Your keys never leave your phone</b><span>Generated on-device and kept in the Secure Enclave. There's no account database to breach.</span></div></li>
+      <li><span class="check">✓</span><div><b>No central server</b><span>Posts travel peer-to-peer, end-to-end encrypted. There's no warehouse of your data, anywhere.</span></div></li>
+      <li><span class="check">✓</span><div><b>The maker can't read your stuff</b><span>By design there is no master key and no backdoor. Blaine can't be compelled to hand over what he never holds.</span></div></li>
+      <li><span class="check">✓</span><div><b>No PII, ever</b><span>No phone number or email to sign up. You're a key and a name you choose — nothing more.</span></div></li>
+      <li><span class="check">✓</span><div><b>You're in control</b><span>Block anyone instantly. On-device sensitive-content guards. You decide who's in, with friendly safety words to confirm it's really them.</span></div></li>
+      <li><span class="check">✓</span><div><b>Open and auditable</b><span>The code is source-available on GitHub. Don't trust the claims — read them.</span></div></li>
+    </ul>
+  </div>
+</div></section>
+
+<section><div class="wrap" style="text-align:center">
+  <h2>Warm, simple, yours</h2>
+  <p class="lead">No tech-speak. Haven walks you through everything — and gets out of the way.</p>
+  <div class="shots">
+    <img src="assets/shot-onboard.png" alt="Welcome to Haven" loading="lazy">
+    <img src="assets/shot-you.png" alt="Your profile and circle" loading="lazy">
+    <img src="assets/shot-connect.png" alt="Invite a friend with safety words" loading="lazy">
+    <img src="assets/shot-feed.png" alt="Your circle's feed" loading="lazy">
+  </div>
+</div></section>
+
+<section class="pricing"><div class="wrap">
+  <h2>Fair, like the old days</h2>
+  <div class="price">$9.99 <small>once. No subscription.</small></div>
+  <p class="lead">Your media rides on your own iCloud and direct peer-to-peer links, so there's no server to bankroll and nothing to monetize. Buy it once, it's yours.</p>
+</div></section>
+
+<footer><div class="wrap">
+  <div class="flinks">
+    <a href="https://github.com/blaineam/kith">GitHub</a>
+    <a href="/apps/">More apps</a>
+    <a href="/privacy/">Privacy</a>
+  </div>
+  Haven — kith and kin. Made with care by <a href="https://github.com/blaineam">Blaine Miller</a>.<br>
+  No ads. No tracking. No kidding.
+</div></footer>
+
+<script>
+// If this page was opened from an invite link (/apps/kith/u/<id>#<verify>, routed
+// here as ?u=<id>#<verify>), reveal the banner and wire "Open in Haven" to the
+// kith:// deep link. The verification fragment never leaves the browser.
+(function () {
+  try {
+    var id = new URLSearchParams(location.search).get('u');
+    if (!id) return;
+    var verify = (location.hash || '').replace(/^#/, '');
+    document.getElementById('inviteOpen').href =
+      'kith://u/' + id + (verify ? '#' + verify : '');
+    document.getElementById('invite').style.display = 'block';
+  } catch (e) {}
+})();
+</script>
+
+</body>
+</html>
