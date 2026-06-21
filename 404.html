@@ -2,28 +2,188 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Page not found</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#070710">
+<title>404 · Lost in space</title>
 <script>
 // Haven invite links arrive as /apps/haven/u/<id>#<verify>. GitHub Pages can't serve
 // that dynamic path, so route it back to the Haven page (the #verify fragment rides
-// along in the browser and is never sent to any server).
+// along in the browser and is never sent to any server). Runs first, before any paint.
 (function () {
   var m = location.pathname.match(/\/apps\/haven\/u\/([^\/?#]+)/);
   if (m) { location.replace('/apps/haven/?u=' + m[1] + location.hash); }
 })();
 </script>
 <style>
-  body { font-family: -apple-system, system-ui, sans-serif; background: #0b0b12; color: #eee;
-         display: grid; place-items: center; height: 100vh; margin: 0; text-align: center; }
-  a { color: #EC4899; text-decoration: none; }
-  h1 { font-weight: 800; }
+  :root{
+    --violet:#7C3AED; --pink:#EC4899; --amber:#F59E0B;
+    --bg:#070710; --text:#f3f3fb;
+    --brand:linear-gradient(120deg,var(--violet),var(--pink),var(--amber));
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{height:100%;overflow:hidden}
+  body{
+    background:var(--bg); color:var(--text); cursor:crosshair;
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",system-ui,sans-serif;
+    background-image:
+      radial-gradient(60% 50% at 18% 12%, rgba(124,58,237,.22), transparent 60%),
+      radial-gradient(55% 45% at 85% 88%, rgba(236,72,153,.20), transparent 60%);
+  }
+  #stars{position:fixed;inset:0;z-index:0;display:block}
+  .scene{position:fixed;inset:0;z-index:1;display:flex;flex-direction:column;
+         align-items:center;justify-content:center;text-align:center;padding:24px;gap:6px;
+         will-change:transform;transition:transform .25s cubic-bezier(.2,.7,.2,1)}
+
+  /* the 404 — the middle 0 is a ringed planet */
+  .four04{display:flex;align-items:center;gap:clamp(6px,2vw,22px);font-weight:900;line-height:.8;
+          font-size:clamp(96px,30vw,300px);letter-spacing:-.04em;
+          filter:drop-shadow(0 18px 60px rgba(236,72,153,.35))}
+  .digit{background:var(--brand);-webkit-background-clip:text;background-clip:text;color:transparent;
+         animation:floaty 6s ease-in-out infinite}
+  .digit.b{animation-delay:-3s}
+  .planet{position:relative;width:clamp(96px,30vw,300px);height:clamp(96px,30vw,300px);flex:0 0 auto}
+  .planet .body{position:absolute;inset:14%;border-radius:50%;
+        background:radial-gradient(circle at 32% 28%, #fff6, transparent 40%),
+                   radial-gradient(circle at 70% 75%, rgba(124,58,237,.9), transparent 60%),
+                   conic-gradient(from 200deg,var(--amber),var(--pink),var(--violet),var(--amber));
+        box-shadow:inset -16px -20px 50px rgba(0,0,0,.55), 0 0 60px rgba(236,72,153,.45);
+        animation:spin 18s linear infinite}
+  .planet .ring{position:absolute;inset:0;border-radius:50%;border:6px solid transparent;
+        border-top-color:rgba(255,255,255,.65);border-bottom-color:rgba(245,158,11,.6);
+        transform:rotateX(74deg) rotateZ(18deg) scale(1.32);
+        box-shadow:0 0 22px rgba(124,58,237,.45);animation:ringspin 9s linear infinite}
+
+  /* astronaut, tethered + drifting */
+  .astro{position:absolute;font-size:clamp(34px,8vw,68px);z-index:2;
+         left:50%;top:24%;transform:translate(-50%,-50%);
+         animation:drift 9s ease-in-out infinite;cursor:grab;user-select:none;
+         filter:drop-shadow(0 6px 14px rgba(0,0,0,.5))}
+  .astro:active{cursor:grabbing}
+  .bubble{position:absolute;left:60%;top:-8px;white-space:nowrap;font-size:13px;font-weight:700;
+          background:#fff;color:#15151f;padding:6px 11px;border-radius:14px;border-bottom-left-radius:3px;
+          transform:scale(0);transform-origin:bottom left;transition:transform .22s cubic-bezier(.3,1.6,.5,1);box-shadow:0 6px 18px rgba(0,0,0,.4)}
+  .bubble.show{transform:scale(1)}
+
+  .lead{font-size:clamp(20px,4.5vw,34px);font-weight:800;margin-top:18px;letter-spacing:-.01em}
+  .sub{font-size:clamp(13px,2.6vw,16px);color:#c9c9e0;opacity:.8;max-width:30ch;margin-top:4px}
+  .btns{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:22px;z-index:3}
+  .btn{font-size:14px;font-weight:700;text-decoration:none;color:#fff;padding:12px 20px;border-radius:999px;
+       border:1px solid rgba(255,255,255,.16);transition:transform .15s ease, box-shadow .2s ease;cursor:pointer}
+  .btn.primary{background:var(--brand);box-shadow:0 10px 30px rgba(236,72,153,.4);border-color:transparent}
+  .btn:hover{transform:translateY(-2px) scale(1.03);box-shadow:0 14px 34px rgba(124,58,237,.5)}
+  .hint{position:fixed;bottom:14px;left:0;right:0;text-align:center;font-size:11px;color:#8a8aa8;z-index:3;letter-spacing:.04em}
+
+  @keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+  @keyframes drift{0%,100%{transform:translate(-50%,-50%) rotate(-8deg)}
+                   50%{transform:translate(calc(-50% + 16px),calc(-50% - 18px)) rotate(10deg)}}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  @keyframes ringspin{to{transform:rotateX(74deg) rotateZ(378deg) scale(1.32)}}
+  @media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
 <body>
-  <div>
-    <h1>Page not found</h1>
-    <p><a href="/">Go home</a> · <a href="/apps/">Apps</a></p>
+<canvas id="stars"></canvas>
+
+<div class="scene" id="scene">
+  <div class="four04">
+    <span class="digit">4</span>
+    <span class="planet">
+      <span class="astro" id="astro">🧑‍🚀<span class="bubble" id="bubble"></span></span>
+      <span class="ring"></span>
+      <span class="body"></span>
+    </span>
+    <span class="digit b">4</span>
   </div>
+  <div class="lead">This page floated off into the void.</div>
+  <div class="sub">The link you followed has drifted past the edge of the map. No worries — let's tow you back.</div>
+  <div class="btns">
+    <a class="btn primary" href="/">🛰️ Beam me home</a>
+    <a class="btn" href="/apps/">Explore the apps →</a>
+  </div>
+</div>
+<div class="hint" id="hint">tap anywhere for a shooting star · tap the astronaut</div>
+
+<script>
+(function(){
+  var c = document.getElementById('stars'), x = c.getContext('2d');
+  var W, H, stars = [], shooters = [], DPR = Math.min(2, window.devicePixelRatio || 1);
+  function resize(){
+    W = c.width = innerWidth * DPR; H = c.height = innerHeight * DPR;
+    c.style.width = innerWidth + 'px'; c.style.height = innerHeight + 'px';
+    var n = Math.round((innerWidth * innerHeight) / 6500);
+    stars = []; for (var i=0;i<n;i++) stars.push({
+      x: Math.random()*W, y: Math.random()*H,
+      z: Math.random()*0.85 + 0.15,            // depth → parallax + size + brightness
+      r: Math.random()*1.6 + 0.3, t: Math.random()*Math.PI*2,
+      ts: Math.random()*0.04 + 0.01
+    });
+  }
+  addEventListener('resize', resize); resize();
+
+  var COL = ['255,255,255','236,72,153','124,58,237','245,158,11'];
+  function star(s){
+    s.t += s.ts; var tw = 0.55 + Math.sin(s.t)*0.45;
+    var col = COL[(s.r*97|0) % COL.length];
+    x.beginPath(); x.arc(s.x + px*s.z*40, s.y + py*s.z*40, s.r*s.z*DPR, 0, 7);
+    x.fillStyle = 'rgba('+col+','+(tw*s.z)+')'; x.fill();
+  }
+  function spawnShooter(sx, sy){
+    var a = Math.PI*0.18 + Math.random()*0.18;
+    shooters.push({x:sx*DPR, y:sy*DPR, vx:Math.cos(a)*(13+Math.random()*8)*DPR,
+                   vy:Math.sin(a)*(13+Math.random()*8)*DPR, life:1});
+  }
+  function shooter(s){
+    s.x += s.vx; s.y += s.vy; s.life -= 0.018;
+    var g = x.createLinearGradient(s.x, s.y, s.x - s.vx*5, s.y - s.vy*5);
+    g.addColorStop(0,'rgba(255,255,255,'+s.life+')'); g.addColorStop(1,'rgba(236,72,153,0)');
+    x.strokeStyle = g; x.lineWidth = 2.4*DPR; x.lineCap='round';
+    x.beginPath(); x.moveTo(s.x,s.y); x.lineTo(s.x - s.vx*5, s.y - s.vy*5); x.stroke();
+  }
+  var px=0, py=0, tpx=0, tpy=0;
+  function loop(){
+    px += (tpx-px)*0.06; py += (tpy-py)*0.06;
+    x.clearRect(0,0,W,H);
+    for (var i=0;i<stars.length;i++) star(stars[i]);
+    for (var j=shooters.length-1;j>=0;j--){ shooter(shooters[j]); if(shooters[j].life<=0) shooters.splice(j,1); }
+    requestAnimationFrame(loop);
+  }
+  loop();
+
+  // random shooting stars
+  setInterval(function(){ if(Math.random()<0.6) spawnShooter(Math.random()*innerWidth*0.5, Math.random()*innerHeight*0.4); }, 2600);
+
+  // parallax (mouse + gyro)
+  var scene = document.getElementById('scene');
+  function parallax(nx, ny){
+    tpx = nx; tpy = ny;
+    scene.style.transform = 'translate('+(nx*-22)+'px,'+(ny*-22)+'px)';
+  }
+  addEventListener('pointermove', function(e){ parallax((e.clientX/innerWidth-0.5)*2, (e.clientY/innerHeight-0.5)*2); });
+  addEventListener('deviceorientation', function(e){ if(e.gamma!=null) parallax(Math.max(-1,Math.min(1,e.gamma/45)), Math.max(-1,Math.min(1,(e.beta-45)/45))); });
+
+  // tap anywhere → shooting star
+  addEventListener('pointerdown', function(e){
+    if(e.target.closest('a,.astro')) return;
+    spawnShooter(e.clientX - 40, Math.max(20, e.clientY - 120));
+  });
+
+  // astronaut talks
+  var astro = document.getElementById('astro'), bubble = document.getElementById('bubble');
+  var lines = ["uh oh.","wrong turn?","send snacks 🍪","i'm not lost, you are","this isn't earth…","404 light-years away","tell Blaine i said hi","weeeeee 🌀"], li=0, bt;
+  astro.addEventListener('pointerdown', function(e){
+    e.stopPropagation();
+    bubble.textContent = lines[li++ % lines.length]; bubble.classList.add('show');
+    astro.style.animation='none'; void astro.offsetWidth;
+    astro.style.transform='translate(-50%,-50%) rotate('+(Math.random()*720-360)+'deg) scale(1.25)';
+    setTimeout(function(){ astro.style.transition='transform .8s cubic-bezier(.2,.8,.2,1)';
+      astro.style.transform='translate(-50%,-50%)';
+      astro.style.animation='drift 9s ease-in-out infinite'; }, 30);
+    clearTimeout(bt); bt = setTimeout(function(){ bubble.classList.remove('show'); }, 1900);
+  });
+
+  // hide hint after first interaction
+  ['pointerdown'].forEach(function(ev){ addEventListener(ev, function once(){ document.getElementById('hint').style.opacity=0; removeEventListener(ev, once); }); });
+})();
+</script>
 </body>
 </html>
