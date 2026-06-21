@@ -4,12 +4,12 @@
   "note": "Source of truth for app metadata. apps/index.html renders its OWN custom display order; this file is the chronological list.",
   "apps": [
     {
-      "id": "kith",
-      "title": "Kith",
+      "id": "haven",
+      "title": "Haven",
       "tagline": "A private, post-quantum social network for the people you love",
-      "page_url": "/apps/kith/",
+      "page_url": "/apps/haven/",
       "app_store_url": "",
-      "icon_url": "/apps/kith/assets/icon.png",
+      "icon_url": "/apps/haven/assets/icon.png",
       "released": "2026-06",
       "updated": "2026-06",
       "version": "1.0.0",
