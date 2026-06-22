@@ -122,14 +122,14 @@
     </div>
     <div style="display:flex;gap:10px;flex-wrap:wrap">
       <a id="inviteOpen" class="btn" style="background:#fff;color:#7C3AED;font-weight:700" href="#">Open in Haven</a>
-      <a class="btn btn-ghost" style="border-color:rgba(255,255,255,.6);color:#fff" href="https://github.com/blaineam/kith">Get Haven</a>
+      <a id="inviteWeb" class="btn btn-ghost" style="border-color:rgba(255,255,255,.6);color:#fff" href="app/">Continue in browser</a>
     </div>
   </div>
 </div></div>
 
 <nav><div class="wrap">
   <a class="logo" href="/apps/"><img src="assets/icon.png" alt="Haven"><span>Haven</span></a>
-  <a class="btn btn-ghost" href="https://github.com/blaineam/kith">View source</a>
+  <a class="btn btn-ghost" href="https://github.com/blaineam/haven">View source</a>
 </div></nav>
 
 <header><div class="wrap">
@@ -138,7 +138,7 @@
   <p class="sub">Haven is a tiny social network for your real friends and family — photos, video, music, and messages, shared only with the people you choose. No ads. No tracking. No algorithm. No doomscroll.</p>
   <div class="cta">
     <a class="btn btn-primary" href="/apps/haven/app/">Open the web app</a>
-    <a class="btn btn-ghost" href="https://github.com/blaineam/kith">Follow the build</a>
+    <a class="btn btn-ghost" href="https://github.com/blaineam/haven">Follow the build</a>
     <a class="btn btn-ghost" href="#fort">Why it's a stronghold</a>
   </div>
   <p class="kicker">iPhone · iPad · coming to Mac, Web &amp; Android</p>
@@ -189,7 +189,7 @@
 
 <footer><div class="wrap">
   <div class="flinks">
-    <a href="https://github.com/blaineam/kith">GitHub</a>
+    <a href="https://github.com/blaineam/haven">GitHub</a>
     <a href="/apps/">More apps</a>
     <a href="/privacy/">Privacy</a>
   </div>
@@ -198,16 +198,16 @@
 </div></footer>
 
 <script>
-// If this page was opened from an invite link (/apps/haven/u/<id>#<verify>, routed
-// here as ?u=<id>#<verify>), reveal the banner and wire "Open in Haven" to the
-// kith:// deep link. The verification fragment never leaves the browser.
+// If opened from an invite link (…/apps/haven/#<id>.<verify>), reveal the banner, wire
+// "Open in Haven" to the haven:// scheme, and carry the invite into the web app. The whole
+// payload lives in the URL fragment, so neither the id nor the verify ever reaches a server.
 (function () {
   try {
-    var id = new URLSearchParams(location.search).get('u');
-    if (!id) return;
-    var verify = (location.hash || '').replace(/^#/, '');
-    document.getElementById('inviteOpen').href =
-      'kith://u/' + id + (verify ? '#' + verify : '');
+    var payload = (location.hash || '').replace(/^#/, '');
+    if (payload.indexOf('.') < 1) return;   // expects "<id>.<verify>"
+    document.getElementById('inviteOpen').href = 'haven://invite#' + payload;
+    var web = document.getElementById('inviteWeb');
+    if (web) web.href = 'app/#' + payload;
     document.getElementById('invite').style.display = 'block';
   } catch (e) {}
 })();
