@@ -1,18 +1,18 @@
-/* @ts-self-types="./kith_wasm.d.ts" */
+/* @ts-self-types="./haven_wasm.d.ts" */
 
 /**
- * A real Kith engine instance for one identity (default circle = your contacts).
+ * A real Haven engine instance for one identity (default circle = your contacts).
  */
-export class KithEngine {
+export class HavenEngine {
     __destroy_into_raw() {
         const ptr = this.__wbg_ptr;
         this.__wbg_ptr = 0;
-        KithEngineFinalization.unregister(this);
+        HavenEngineFinalization.unregister(this);
         return ptr;
     }
     free() {
         const ptr = this.__destroy_into_raw();
-        wasm.__wbg_kithengine_free(ptr, 0);
+        wasm.__wbg_havenengine_free(ptr, 0);
     }
     /**
      * Add a contact from their public bundle (hex); returns their node id (hex).
@@ -25,7 +25,7 @@ export class KithEngine {
         try {
             const ptr0 = passStringToWasm0(bundle_hex, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
             const len0 = WASM_VECTOR_LEN;
-            const ret = wasm.kithengine_add_contact(this.__wbg_ptr, ptr0, len0);
+            const ret = wasm.havenengine_add_contact(this.__wbg_ptr, ptr0, len0);
             var ptr2 = ret[0];
             var len2 = ret[1];
             if (ret[3]) {
@@ -47,7 +47,7 @@ export class KithEngine {
         let deferred1_0;
         let deferred1_1;
         try {
-            const ret = wasm.kithengine_bundle_hex(this.__wbg_ptr);
+            const ret = wasm.havenengine_bundle_hex(this.__wbg_ptr);
             deferred1_0 = ret[0];
             deferred1_1 = ret[1];
             return getStringFromWasm0(ret[0], ret[1]);
@@ -56,11 +56,51 @@ export class KithEngine {
         }
     }
     /**
+     * Comment on a post (or another comment) by its event id.
+     * @param {string} target
+     * @param {string} body
+     * @param {string[]} media
+     * @param {bigint} created_at
+     * @returns {Uint8Array}
+     */
+    comment(target, body, media, created_at) {
+        const ptr0 = passStringToWasm0(target, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+        const len0 = WASM_VECTOR_LEN;
+        const ptr1 = passStringToWasm0(body, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+        const len1 = WASM_VECTOR_LEN;
+        const ptr2 = passArrayJsValueToWasm0(media, wasm.__wbindgen_malloc);
+        const len2 = WASM_VECTOR_LEN;
+        const ret = wasm.havenengine_comment(this.__wbg_ptr, ptr0, len0, ptr1, len1, ptr2, len2, created_at);
+        var v4 = getArrayU8FromWasm0(ret[0], ret[1]).slice();
+        wasm.__wbindgen_free(ret[0], ret[1] * 1, 1);
+        return v4;
+    }
+    /**
      * @returns {number}
      */
     contact_count() {
-        const ret = wasm.kithengine_contact_count(this.__wbg_ptr);
+        const ret = wasm.havenengine_contact_count(this.__wbg_ptr);
         return ret >>> 0;
+    }
+    /**
+     * Edit the body/media of one of your own posts or comments.
+     * @param {string} target
+     * @param {string} body
+     * @param {string[]} media
+     * @param {bigint} created_at
+     * @returns {Uint8Array}
+     */
+    edit(target, body, media, created_at) {
+        const ptr0 = passStringToWasm0(target, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+        const len0 = WASM_VECTOR_LEN;
+        const ptr1 = passStringToWasm0(body, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+        const len1 = WASM_VECTOR_LEN;
+        const ptr2 = passArrayJsValueToWasm0(media, wasm.__wbindgen_malloc);
+        const len2 = WASM_VECTOR_LEN;
+        const ret = wasm.havenengine_edit(this.__wbg_ptr, ptr0, len0, ptr1, len1, ptr2, len2, created_at);
+        var v4 = getArrayU8FromWasm0(ret[0], ret[1]).slice();
+        wasm.__wbindgen_free(ret[0], ret[1] * 1, 1);
+        return v4;
     }
     /**
      * The reduced feed as JSON (posts + comments + reactions), newest-first per the engine.
@@ -71,7 +111,7 @@ export class KithEngine {
         let deferred1_0;
         let deferred1_1;
         try {
-            const ret = wasm.kithengine_feed_json(this.__wbg_ptr, now_ms);
+            const ret = wasm.havenengine_feed_json(this.__wbg_ptr, now_ms);
             deferred1_0 = ret[0];
             deferred1_1 = ret[1];
             return getStringFromWasm0(ret[0], ret[1]);
@@ -89,13 +129,27 @@ export class KithEngine {
         try {
             const ptr0 = passStringToWasm0(domain, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
             const len0 = WASM_VECTOR_LEN;
-            const ret = wasm.kithengine_invite_link(this.__wbg_ptr, ptr0, len0);
+            const ret = wasm.havenengine_invite_link(this.__wbg_ptr, ptr0, len0);
             deferred2_0 = ret[0];
             deferred2_1 = ret[1];
             return getStringFromWasm0(ret[0], ret[1]);
         } finally {
             wasm.__wbindgen_free(deferred2_0, deferred2_1, 1);
         }
+    }
+    /**
+     * Author a direct message into the circle thread.
+     * @param {string} body
+     * @param {bigint} created_at
+     * @returns {Uint8Array}
+     */
+    message(body, created_at) {
+        const ptr0 = passStringToWasm0(body, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+        const len0 = WASM_VECTOR_LEN;
+        const ret = wasm.havenengine_message(this.__wbg_ptr, ptr0, len0, created_at);
+        var v2 = getArrayU8FromWasm0(ret[0], ret[1]).slice();
+        wasm.__wbindgen_free(ret[0], ret[1] * 1, 1);
+        return v2;
     }
     /**
      * Create a fresh identity, or restore one from a 64-char hex seed (e.g. decoded
@@ -105,12 +159,12 @@ export class KithEngine {
     constructor(seed_hex) {
         var ptr0 = isLikeNone(seed_hex) ? 0 : passStringToWasm0(seed_hex, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
         var len0 = WASM_VECTOR_LEN;
-        const ret = wasm.kithengine_new(ptr0, len0);
+        const ret = wasm.havenengine_new(ptr0, len0);
         if (ret[2]) {
             throw takeFromExternrefTable0(ret[1]);
         }
         this.__wbg_ptr = ret[0];
-        KithEngineFinalization.register(this, this.__wbg_ptr, this);
+        HavenEngineFinalization.register(this, this.__wbg_ptr, this);
         return this;
     }
     /**
@@ -120,7 +174,7 @@ export class KithEngine {
         let deferred1_0;
         let deferred1_1;
         try {
-            const ret = wasm.kithengine_node_id_hex(this.__wbg_ptr);
+            const ret = wasm.havenengine_node_id_hex(this.__wbg_ptr);
             deferred1_0 = ret[0];
             deferred1_1 = ret[1];
             return getStringFromWasm0(ret[0], ret[1]);
@@ -129,7 +183,7 @@ export class KithEngine {
         }
     }
     /**
-     * Author a post; returns the sealed envelope bytes to broadcast to the circle.
+     * Author a text post; returns the sealed envelope bytes to broadcast to the circle.
      * @param {string} body
      * @param {bigint} created_at
      * @returns {Uint8Array}
@@ -137,10 +191,45 @@ export class KithEngine {
     post(body, created_at) {
         const ptr0 = passStringToWasm0(body, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
         const len0 = WASM_VECTOR_LEN;
-        const ret = wasm.kithengine_post(this.__wbg_ptr, ptr0, len0, created_at);
+        const ret = wasm.havenengine_post(this.__wbg_ptr, ptr0, len0, created_at);
         var v2 = getArrayU8FromWasm0(ret[0], ret[1]).slice();
         wasm.__wbindgen_free(ret[0], ret[1] * 1, 1);
         return v2;
+    }
+    /**
+     * Author a post with media refs and/or a story flag (story = ephemeral 24h slide).
+     * @param {string} body
+     * @param {string[]} media
+     * @param {boolean} story
+     * @param {bigint} created_at
+     * @returns {Uint8Array}
+     */
+    post_full(body, media, story, created_at) {
+        const ptr0 = passStringToWasm0(body, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+        const len0 = WASM_VECTOR_LEN;
+        const ptr1 = passArrayJsValueToWasm0(media, wasm.__wbindgen_malloc);
+        const len1 = WASM_VECTOR_LEN;
+        const ret = wasm.havenengine_post_full(this.__wbg_ptr, ptr0, len0, ptr1, len1, story, created_at);
+        var v3 = getArrayU8FromWasm0(ret[0], ret[1]).slice();
+        wasm.__wbindgen_free(ret[0], ret[1] * 1, 1);
+        return v3;
+    }
+    /**
+     * React to a post or comment with an emoji.
+     * @param {string} target
+     * @param {string} emoji
+     * @param {bigint} created_at
+     * @returns {Uint8Array}
+     */
+    react(target, emoji, created_at) {
+        const ptr0 = passStringToWasm0(target, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+        const len0 = WASM_VECTOR_LEN;
+        const ptr1 = passStringToWasm0(emoji, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+        const len1 = WASM_VECTOR_LEN;
+        const ret = wasm.havenengine_react(this.__wbg_ptr, ptr0, len0, ptr1, len1, created_at);
+        var v3 = getArrayU8FromWasm0(ret[0], ret[1]).slice();
+        wasm.__wbindgen_free(ret[0], ret[1] * 1, 1);
+        return v3;
     }
     /**
      * Ingest a sealed envelope received from a peer. Returns true if it was new.
@@ -150,7 +239,7 @@ export class KithEngine {
     receive(envelope) {
         const ptr0 = passArray8ToWasm0(envelope, wasm.__wbindgen_malloc);
         const len0 = WASM_VECTOR_LEN;
-        const ret = wasm.kithengine_receive(this.__wbg_ptr, ptr0, len0);
+        const ret = wasm.havenengine_receive(this.__wbg_ptr, ptr0, len0);
         return ret !== 0;
     }
     /**
@@ -162,7 +251,7 @@ export class KithEngine {
         let deferred1_0;
         let deferred1_1;
         try {
-            const ret = wasm.kithengine_seed_hex(this.__wbg_ptr);
+            const ret = wasm.havenengine_seed_hex(this.__wbg_ptr);
             deferred1_0 = ret[0];
             deferred1_1 = ret[1];
             return getStringFromWasm0(ret[0], ret[1]);
@@ -175,7 +264,7 @@ export class KithEngine {
      * @returns {boolean}
      */
     self_test() {
-        const ret = wasm.kithengine_self_test(this.__wbg_ptr);
+        const ret = wasm.havenengine_self_test(this.__wbg_ptr);
         return ret !== 0;
     }
     /**
@@ -187,7 +276,7 @@ export class KithEngine {
         let deferred1_0;
         let deferred1_1;
         try {
-            const ret = wasm.kithengine_sync_envelopes_json(this.__wbg_ptr);
+            const ret = wasm.havenengine_sync_envelopes_json(this.__wbg_ptr);
             deferred1_0 = ret[0];
             deferred1_1 = ret[1];
             return getStringFromWasm0(ret[0], ret[1]);
@@ -196,13 +285,27 @@ export class KithEngine {
         }
     }
     /**
+     * Unsend (retract) one of your own posts, comments, or messages.
+     * @param {string} target
+     * @param {bigint} created_at
+     * @returns {Uint8Array}
+     */
+    unsend(target, created_at) {
+        const ptr0 = passStringToWasm0(target, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+        const len0 = WASM_VECTOR_LEN;
+        const ret = wasm.havenengine_unsend(this.__wbg_ptr, ptr0, len0, created_at);
+        var v2 = getArrayU8FromWasm0(ret[0], ret[1]).slice();
+        wasm.__wbindgen_free(ret[0], ret[1] * 1, 1);
+        return v2;
+    }
+    /**
      * @returns {string}
      */
     verification_hex() {
         let deferred1_0;
         let deferred1_1;
         try {
-            const ret = wasm.kithengine_verification_hex(this.__wbg_ptr);
+            const ret = wasm.havenengine_verification_hex(this.__wbg_ptr);
             deferred1_0 = ret[0];
             deferred1_1 = ret[1];
             return getStringFromWasm0(ret[0], ret[1]);
@@ -211,7 +314,7 @@ export class KithEngine {
         }
     }
 }
-if (Symbol.dispose) KithEngine.prototype[Symbol.dispose] = KithEngine.prototype.free;
+if (Symbol.dispose) HavenEngine.prototype[Symbol.dispose] = HavenEngine.prototype.free;
 function __wbg_get_imports() {
     const import0 = {
         __proto__: null,
@@ -231,6 +334,14 @@ function __wbg_get_imports() {
         __wbg___wbindgen_is_undefined_721f8decd50c87a3: function(arg0) {
             const ret = arg0 === undefined;
             return ret;
+        },
+        __wbg___wbindgen_string_get_71bb4348194e31f0: function(arg0, arg1) {
+            const obj = arg1;
+            const ret = typeof(obj) === 'string' ? obj : undefined;
+            var ptr1 = isLikeNone(ret) ? 0 : passStringToWasm0(ret, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+            var len1 = WASM_VECTOR_LEN;
+            getDataViewMemory0().setInt32(arg0 + 4 * 1, len1, true);
+            getDataViewMemory0().setInt32(arg0 + 4 * 0, ptr1, true);
         },
         __wbg___wbindgen_throw_ea4887a5f8f9a9db: function(arg0, arg1) {
             throw new Error(getStringFromWasm0(arg0, arg1));
@@ -344,13 +455,13 @@ function __wbg_get_imports() {
     };
     return {
         __proto__: null,
-        "./kith_wasm_bg.js": import0,
+        "./haven_wasm_bg.js": import0,
     };
 }
 
-const KithEngineFinalization = (typeof FinalizationRegistry === 'undefined')
+const HavenEngineFinalization = (typeof FinalizationRegistry === 'undefined')
     ? { register: () => {}, unregister: () => {} }
-    : new FinalizationRegistry(ptr => wasm.__wbg_kithengine_free(ptr, 1));
+    : new FinalizationRegistry(ptr => wasm.__wbg_havenengine_free(ptr, 1));
 
 function addToExternrefTable0(obj) {
     const idx = wasm.__externref_table_alloc();
@@ -400,6 +511,16 @@ function passArray8ToWasm0(arg, malloc) {
     const ptr = malloc(arg.length * 1, 1) >>> 0;
     getUint8ArrayMemory0().set(arg, ptr / 1);
     WASM_VECTOR_LEN = arg.length;
+    return ptr;
+}
+
+function passArrayJsValueToWasm0(array, malloc) {
+    const ptr = malloc(array.length * 4, 4) >>> 0;
+    for (let i = 0; i < array.length; i++) {
+        const add = addToExternrefTable0(array[i]);
+        getDataViewMemory0().setUint32(ptr + 4 * i, add, true);
+    }
+    WASM_VECTOR_LEN = array.length;
     return ptr;
 }
 
@@ -554,7 +675,7 @@ async function __wbg_init(module_or_path) {
     }
 
     if (module_or_path === undefined) {
-        module_or_path = new URL('kith_wasm_bg.wasm', import.meta.url);
+        module_or_path = new URL('haven_wasm_bg.wasm', import.meta.url);
     }
     const imports = __wbg_get_imports();
 
