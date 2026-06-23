@@ -1,6 +1,6 @@
 {
-  "version": 5,
-  "generatedAt": "2026-06-05T22:50:22Z",
+  "version": 6,
+  "generatedAt": "2026-06-23T22:00:00Z",
   "packs": [
     {
       "categoryID": "general",
@@ -53,10 +53,52 @@
     },
     {
       "categoryID": "sports",
-      "version": 4,
+      "version": 5,
       "url": "sports.pack.json",
-      "sha256": "dd27b32c964aa75167d99d8a0b2f48affe57bf3c8f3c7dc4c8c81ac632db4586",
-      "questionCount": 186
+      "sha256": "1f092f035f42015f0e7135aec0a2f39c014c0419e8fb06143d3ffeeee9110353",
+      "questionCount": 63
+    },
+    {
+      "categoryID": "football",
+      "version": 2,
+      "url": "football.pack.json",
+      "sha256": "c736c4286d1f710bf13a43ab9738512f4eff19b88482029732fe023e61b5d399",
+      "questionCount": 62
+    },
+    {
+      "categoryID": "soccer",
+      "version": 1,
+      "url": "soccer.pack.json",
+      "sha256": "36d409d33b4b343ef6121fc73ef3942e7335be37575315ee374fab78028fc2d4",
+      "questionCount": 63
+    },
+    {
+      "categoryID": "baseball",
+      "version": 2,
+      "url": "baseball.pack.json",
+      "sha256": "bcbe1b6b905e6bca8f5ea3d8343b10344757d408fb09b543abb54e2d0fe7dcbe",
+      "questionCount": 63
+    },
+    {
+      "categoryID": "basketball",
+      "version": 2,
+      "url": "basketball.pack.json",
+      "sha256": "1f4a272712446991c0672c506cf5bdb44974498b6bb25d11873a1168abff6280",
+      "questionCount": 60
+    },
+    {
+      "categoryID": "hockey",
+      "version": 2,
+      "url": "hockey.pack.json",
+      "sha256": "7000108125d9103c241449a8f212157e20421302e6ee7371e077fcae90113c3a",
+      "questionCount": 61
+    },
+    {
+      "categoryID": "olympics",
+      "version": 2,
+      "url": "olympics.pack.json",
+      "sha256": "deaa9afcdfc2a24277302bded62a105fd91193b7125c558cb22db9da39a1a6d1",
+      "questionCount": 61
     },
     {
       "categoryID": "videogames",
