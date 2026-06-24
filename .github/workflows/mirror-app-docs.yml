@@ -63,6 +63,16 @@ jobs:
           ref: main
           persist-credentials: false
 
+      # Haven's landing site lives in web/ (not docs/), and the site links to the
+      # relay install scripts — both mirrored in the Haven block under "Sync into apps/".
+      - name: Mirror Haven site
+        uses: actions/checkout@v4
+        with:
+          repository: blaineam/haven
+          path: .mirror/haven
+          ref: main
+          persist-credentials: false
+
       # rsync with --delete keeps the mirror exactly in sync: if the app
       # repo renames/drops a file in docs/, the portfolio loses it too.
       # Filter rules:
@@ -89,6 +99,16 @@ jobs:
           sync_one blip  .mirror/blip
           sync_one glint .mirror/glint
 
+          # Haven: source is web/ (not docs/), plus the relay install scripts the site
+          # links to. Protect the portfolio-only extras (card icon, app/, bridge/, relay/).
+          mkdir -p apps/haven apps/haven/relay
+          rsync -av --delete \
+            --filter='P app/' --filter='P bridge/' --filter='P relay/' \
+            --filter='P assets/icon.png' \
+            --exclude='CNAME' --exclude='.git' --exclude='.github' --exclude='_preview.html' \
+            .mirror/haven/web/ apps/haven/
+          cp .mirror/haven/relay/install.sh .mirror/haven/relay/install.ps1 apps/haven/relay/
+
       # Canonicalize the landing pages: the app repos still reference
       # their old <slug>.wemiller.com subdomains in canonical / og / schema
       # tags. We flip them to the new /apps/<slug>/ path at mirror time
@@ -107,10 +127,10 @@ jobs:
           set -euo pipefail
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add apps/blip apps/glint
+          git add apps/blip apps/glint apps/haven
           if git diff --cached --quiet; then
             echo "No upstream doc changes — nothing to mirror."
           else
-            git commit -m "chore(mirror): sync blip/glint docs → /apps [skip ci]"
+            git commit -m "chore(mirror): sync blip/glint/haven sites → /apps [skip ci]"
             git push
           fi
