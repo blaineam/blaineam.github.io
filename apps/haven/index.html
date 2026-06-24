@@ -1,217 +1,336 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Haven — A private social network for the people you love</title>
-<meta name="description" content="Haven is a peer-to-peer, end-to-end encrypted, post-quantum social network for friends and family. No servers, no tracking, no ads, no doomscroll. Nobody — not even the maker — holds your keys.">
-
-<link rel="icon" type="image/png" href="assets/icon.png">
-<link rel="apple-touch-icon" href="assets/icon.png">
-<link rel="canonical" href="https://wemiller.com/apps/haven/">
-<meta name="author" content="Blaine Miller">
-<meta name="theme-color" content="#0a0a0f">
-<meta name="keywords" content="private social network, end-to-end encryption, post-quantum, peer-to-peer, no tracking, no ads, family, friends, iMessage alternative, Instagram alternative">
-
-<meta property="og:title" content="Haven — A private social network for the people you love">
-<meta property="og:description" content="Peer-to-peer, end-to-end encrypted, post-quantum. No servers, no tracking, no ads. Nobody holds your keys.">
-<meta property="og:image" content="https://wemiller.com/apps/haven/assets/icon.png">
-<meta property="og:url" content="https://wemiller.com/apps/haven/">
-<meta property="og:type" content="website">
-<meta property="og:site_name" content="Haven">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Haven — A private social network">
-<meta name="twitter:description" content="Peer-to-peer, end-to-end encrypted, post-quantum. No servers, no tracking, no ads.">
-<meta name="twitter:image" content="https://wemiller.com/apps/haven/assets/icon.png">
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
-  "name": "Haven",
-  "operatingSystem": "iOS 17.0+",
-  "applicationCategory": "SocialNetworkingApplication",
-  "description": "A peer-to-peer, end-to-end encrypted, post-quantum social network for friends and family. No servers, no tracking, no ads.",
-  "offers": { "@type": "Offer", "price": "9.99", "priceCurrency": "USD" },
-  "author": { "@type": "Person", "name": "Blaine Miller", "url": "https://github.com/blaineam" },
-  "url": "https://wemiller.com/apps/haven/"
-}
-</script>
-
-<style>
-  :root{
-    --bg:#0a0a0f; --text:#ececf1; --muted:#9a9aa6;
-    --violet:#7c3aed; --pink:#ec4899; --amber:#f59e0b;
-    --card:rgba(255,255,255,.045); --border:rgba(255,255,255,.09);
-    --brand:linear-gradient(120deg,#7c3aed,#ec4899,#f59e0b);
-  }
-  *{box-sizing:border-box;margin:0;padding:0}
-  html{scroll-behavior:smooth}
-  body{background:var(--bg);color:var(--text);font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
-  a{color:inherit;text-decoration:none}
-  .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
-  .brandtext{background:var(--brand);-webkit-background-clip:text;background-clip:text;color:transparent}
-
-  /* ambient glow */
-  body::before{content:"";position:fixed;inset:0;z-index:-1;
-    background:
-      radial-gradient(600px 400px at 85% -5%, rgba(236,72,153,.18), transparent 60%),
-      radial-gradient(560px 420px at 5% 12%, rgba(124,58,237,.16), transparent 60%),
-      radial-gradient(700px 500px at 60% 110%, rgba(245,158,11,.10), transparent 60%);}
-
-  nav{position:sticky;top:0;z-index:10;backdrop-filter:blur(14px);background:rgba(10,10,15,.6);border-bottom:1px solid var(--border)}
-  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:62px}
-  .logo{display:flex;align-items:center;gap:10px;font-weight:700}
-  .logo img{width:30px;height:30px;border-radius:8px}
-  .btn{display:inline-block;padding:11px 20px;border-radius:999px;font-weight:600;font-size:14px}
-  .btn-primary{background:var(--brand);color:#fff;box-shadow:0 8px 24px rgba(236,72,153,.3)}
-  .btn-ghost{border:1px solid var(--border);color:var(--text)}
-
-  header{padding:86px 0 40px;text-align:center}
-  .badge{display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border-radius:999px;border:1px solid var(--border);background:var(--card);font-size:13px;color:var(--muted);margin-bottom:26px}
-  .badge .dot{width:8px;height:8px;border-radius:50%;background:var(--amber);box-shadow:0 0 10px var(--amber)}
-  header h1{font-size:clamp(40px,7vw,72px);line-height:1.04;font-weight:800;letter-spacing:-.02em}
-  header p.sub{font-size:clamp(17px,2.4vw,21px);color:var(--muted);max-width:620px;margin:20px auto 0}
-  .cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:34px}
-  .kicker{margin-top:18px;font-size:13px;color:var(--muted)}
-
-  section{padding:54px 0}
-  h2{font-size:clamp(26px,4vw,38px);font-weight:800;letter-spacing:-.02em;text-align:center}
-  h2+.lead{color:var(--muted);text-align:center;max-width:640px;margin:14px auto 0}
-
-  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;margin-top:42px}
-  .card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:24px}
-  .card .ico{font-size:28px}
-  .card h3{margin:14px 0 8px;font-size:18px}
-  .card p{color:var(--muted);font-size:15px}
-
-  /* security highlight */
-  .fort{margin-top:44px;border:1px solid var(--border);border-radius:24px;padding:36px;background:
-    linear-gradient(180deg,rgba(124,58,237,.10),rgba(236,72,153,.05));text-align:center}
-  .fort h2{text-align:center}
-  .fort ul{list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-top:26px;text-align:left}
-  .fort li{display:flex;gap:12px;align-items:flex-start;font-size:15px;color:var(--text)}
-  .fort li b{display:block} .fort li span{color:var(--muted);font-size:14px}
-  .check{flex:0 0 auto;width:22px;height:22px;border-radius:50%;background:var(--brand);display:flex;align-items:center;justify-content:center;color:#fff;font-size:12px;margin-top:2px}
-
-  /* shots */
-  .shots{display:flex;gap:18px;overflow-x:auto;padding:42px 4px 8px;scroll-snap-type:x mandatory}
-  .shots img{height:560px;border-radius:30px;border:1px solid var(--border);box-shadow:0 30px 60px rgba(0,0,0,.5);scroll-snap-align:center;background:#000}
-
-  .pricing{text-align:center}
-  .price{font-size:46px;font-weight:800;margin-top:10px}
-  .price small{font-size:16px;color:var(--muted);font-weight:500}
-
-  footer{border-top:1px solid var(--border);padding:40px 0;text-align:center;color:var(--muted);font-size:14px}
-  footer a{color:var(--text);border-bottom:1px solid var(--border)}
-  .flinks{display:flex;gap:22px;justify-content:center;flex-wrap:wrap;margin-bottom:18px}
-
-  @media(max-width:560px){ .shots img{height:460px} header{padding:64px 0 30px} }
-</style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#0b0b10" />
+<title>Haven — a private home for your people</title>
+<meta name="description" content="Haven is a private, peer-to-peer social app for your close circle. End-to-end encrypted, no servers, no ads, no tracking. iPhone, Mac, Android, Windows, Linux." />
+<meta property="og:title" content="Haven — a private home for your people" />
+<meta property="og:description" content="Share photos, stories, messages and calls with the people you love — end-to-end encrypted, no servers, no ads, no tracking." />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Haven" />
+<meta property="og:url" content="https://wemiller.com/apps/haven/" />
+<meta name="twitter:card" content="summary_large_image" />
+<link rel="canonical" href="https://wemiller.com/apps/haven/" />
+<link rel="stylesheet" href="styles.css" />
 </head>
 <body>
+<a class="skip" href="#main">Skip to content</a>
 
-<div id="invite" style="display:none"><div class="wrap" style="padding:18px 0 0">
-  <div style="background:linear-gradient(135deg,#7C3AED,#EC4899,#F59E0B);border-radius:18px;padding:20px 22px;display:flex;flex-wrap:wrap;align-items:center;gap:14px;justify-content:space-between;color:#fff">
-    <div style="display:flex;align-items:center;gap:12px;min-width:240px">
-      <div style="font-size:30px">🤝</div>
-      <div>
-        <div style="font-weight:700;font-size:18px">You've been invited to connect on Haven</div>
-        <div style="opacity:.9;font-size:14px">Open it in the app to add them to your private circle.</div>
+<header class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="index.html">Haven</a>
+    <button class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links">☰</button>
+    <nav class="nav-links" id="nav-links" aria-label="Primary">
+      <a href="index.html" class="active">Home</a>
+      <a href="features.html">Features</a>
+      <a href="relay.html">Relays</a>
+      <a href="index.html#privacy">Privacy</a>
+      <a href="docs.html">Docs</a>
+      <a href="https://github.com/blaineam/haven" rel="noopener">GitHub</a>
+      <a href="features.html" class="cta">Get Haven</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ── Invite slot: filled by JS when the URL carries an invite payload ── -->
+  <div class="container" id="invite-slot"></div>
+
+  <!-- ── Hero ── -->
+  <section class="hero" id="hero">
+    <div class="container">
+      <span class="eyebrow reveal">Your friends &amp; your family</span>
+      <h1 class="reveal">A private home<br /><span class="h-grad">for your people.</span></h1>
+      <p class="lead reveal">
+        Haven is a calm little social app just for the people you love. Share photos, stories,
+        messages and calls — all end-to-end encrypted, with no servers, no ads, and no tracking.
+        Nothing you share ever leaves your circle.
+      </p>
+
+      <div class="btn-row reveal">
+        <a class="btn" href="features.html">See everything Haven does</a>
+        <a class="btn ghost" href="relay.html">Run your own relay</a>
+      </div>
+
+      <div class="platforms reveal" style="margin-top:30px">
+        <span class="pill"><span class="ic"></span>iPhone &amp; iPad</span>
+        <span class="pill"><span class="ic"></span>Mac</span>
+        <span class="pill"><span class="ic"></span>Android</span>
+        <span class="pill"><span class="ic"></span>Windows</span>
+        <span class="pill"><span class="ic"></span>Linux</span>
+      </div>
+      <p class="dim reveal" style="margin-top:16px;font-size:13.5px">
+        One-time price. No subscription. No monthly cost, ever.
+      </p>
+    </div>
+  </section>
+
+  <!-- ── The one-sentence promise ── -->
+  <section class="section tight">
+    <div class="container">
+      <div class="card reveal center" style="padding:34px 26px">
+        <p style="font-size:clamp(20px,3.4vw,28px);font-weight:750;line-height:1.3;margin:0;letter-spacing:-.02em">
+          Imagine a family photo album and a group chat that
+          <span class="h-grad">only your people can ever open</span> —
+          with no company in the middle.
+        </p>
+        <p class="kicker center" style="margin:14px auto 0">
+          That's Haven. The keys that lock your moments live on your phone, not on a server.
+          Even we can't read them.
+        </p>
       </div>
     </div>
-    <div style="display:flex;gap:10px;flex-wrap:wrap">
-      <a id="inviteOpen" class="btn" style="background:#fff;color:#7C3AED;font-weight:700" href="#">Open in Haven</a>
-      <a id="inviteWeb" class="btn btn-ghost" style="border-color:rgba(255,255,255,.6);color:#fff" href="app/">Continue in browser</a>
+  </section>
+
+  <!-- ── Three pillars ── -->
+  <section class="section" id="why">
+    <div class="container">
+      <div class="center reveal">
+        <span class="eyebrow">Why Haven feels different</span>
+        <h2 style="font-size:clamp(26px,4.5vw,40px)">Built like a quiet room, not a stadium.</h2>
+        <p class="lead">No likes to chase, no strangers, no algorithm deciding what you see. Just your circle.</p>
+      </div>
+
+      <div class="grid cols-3" style="margin-top:36px">
+        <article class="card feature reveal">
+          <div class="ficon" aria-hidden="true">🔒</div>
+          <h3>Locked to your circle</h3>
+          <p>Everything is end-to-end encrypted before it leaves your device — and protected against even future quantum computers.</p>
+          <p class="why"><b>Why it matters:</b> the only people who can read your posts are the people you invited. Full stop.</p>
+        </article>
+        <article class="card feature reveal">
+          <div class="ficon" aria-hidden="true">🛰️</div>
+          <h3>No servers, no accounts</h3>
+          <p>Your posts travel peer-to-peer, device to device. There's no big database of you sitting in a data center somewhere.</p>
+          <p class="why"><b>Why it matters:</b> there's nothing to hack, sell, subpoena, or shut down. You don't even make an account.</p>
+        </article>
+        <article class="card feature reveal">
+          <div class="ficon" aria-hidden="true">🌿</div>
+          <h3>Calm by design</h3>
+          <p>No ads, no tracking, no engagement traps. Just photos, stories, messages and calls with people you actually know.</p>
+          <p class="why"><b>Why it matters:</b> a feed that exists to connect you, not to keep you scrolling.</p>
+        </article>
+      </div>
     </div>
+  </section>
+
+  <!-- ── Feature teaser ── -->
+  <section class="section tight">
+    <div class="container">
+      <div class="card reveal" style="padding:30px 26px">
+        <div class="center">
+          <span class="eyebrow">A quick tour</span>
+          <h2 style="font-size:clamp(24px,4vw,34px)">Everything you'd want, kept private.</h2>
+        </div>
+        <ul class="points" style="max-width:760px;margin:18px auto 0">
+          <li><span class="dot"></span><span><b>Circles</b> — small private groups for family, close friends, a team. You choose who's in.</span></li>
+          <li><span class="dot"></span><span><b>Posts &amp; stories</b> — photos and videos with beautiful film-style filters, including a warm Kodak Gold look.</span></li>
+          <li><span class="dot"></span><span><b>Messages &amp; group calls</b> — direct messages plus voice and video calls with screen sharing.</span></li>
+          <li><span class="dot"></span><span><b>Music on posts</b> — attach a song so your moment has a soundtrack, played through each viewer's own subscription.</span></li>
+          <li><span class="dot"></span><span><b>Nearby sharing</b> — pass things device-to-device even with no internet at all.</span></li>
+          <li><span class="dot"></span><span><b>Face ID locks &amp; multi-device</b> — lock private circles behind your face, and use Haven on all your devices.</span></li>
+        </ul>
+        <div class="btn-row">
+          <a class="btn" href="features.html">Explore every feature</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Privacy / trust ── -->
+  <section class="section" id="privacy">
+    <div class="container">
+      <div class="center reveal">
+        <span class="eyebrow">Privacy, in plain words</span>
+        <h2 style="font-size:clamp(26px,4.5vw,40px)">Your keys never leave your phone.</h2>
+        <p class="lead">
+          Here's the honest version of how Haven keeps your life yours — no asterisks, no fine print.
+        </p>
+      </div>
+
+      <div class="grid cols-2 reveal" style="margin-top:34px">
+        <div class="card">
+          <h3 style="font-size:20px;margin-bottom:8px">What stays private</h3>
+          <ul class="points" style="margin-top:6px">
+            <li><span class="dot"></span><span>Every post, message, photo, video and call is <b>encrypted on your device</b> before it's sent.</span></li>
+            <li><span class="dot"></span><span>The secret keys that unlock your content <b>live only on your devices</b> — stored in the Secure Enclave on Apple devices.</span></li>
+            <li><span class="dot"></span><span>There's <b>no central account</b>, no profile database, no advertising ID, no analytics.</span></li>
+            <li><span class="dot"></span><span>Choose <b>your own storage</b> — your iCloud, your S3 bucket, your NAS. We never hold your keys.</span></li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3 style="font-size:20px;margin-bottom:8px">The honest limits</h3>
+          <ul class="points" style="margin-top:6px">
+            <li><span class="dot"></span><span>A <b>relay</b> (an optional helper) can see that <em>some</em> encrypted bytes passed through, but never what they say.</span></li>
+            <li><span class="dot"></span><span>To deliver bytes to you, a relay <b>briefly handles your IP address</b> — that's just how the internet works. It's never logged, and never tied to who you are.</span></li>
+            <li><span class="dot"></span><span>Want full IP hiding? There's an <b>opt-in onion / Tor mode</b> for that.</span></li>
+            <li><span class="dot"></span><span>If someone steals your unlocked, malware-infected device, they have your device. No app on earth fixes that.</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="callout reveal" style="margin-top:18px">
+        <b>The promise:</b> never logged, never linked to you, optionally fully hidden. For the full picture,
+        read the <a class="inline" href="docs.html">threat model and architecture docs</a>.
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Relay teaser ── -->
+  <section class="section tight">
+    <div class="container">
+      <div class="card reveal" style="padding:32px 26px;background:var(--brand-soft)">
+        <div class="grid cols-2" style="align-items:center;gap:24px">
+          <div>
+            <span class="eyebrow">Want it even more reliable?</span>
+            <h2 style="font-size:clamp(23px,4vw,32px)">Run a relay for your circle.</h2>
+            <p class="muted" style="margin-top:12px;font-size:16px">
+              A relay is a tiny, always-on helper that holds your circle's <em>encrypted</em> messages
+              for friends who are offline, so nothing is missed. It can never read a word — and it's
+              free to run on an old laptop or a Raspberry Pi.
+            </p>
+            <div class="btn-row" style="justify-content:flex-start">
+              <a class="btn" href="relay.html">Set up a relay</a>
+            </div>
+          </div>
+          <div class="card flat" style="padding:18px">
+            <div class="copywrap">
+              <button class="copybtn" type="button">Copy</button>
+              <pre><code>curl -fsSL https://wemiller.com/apps/haven/relay/install.sh | sh
+haven-relay run --link "haven-relay://circle#…"</code></pre>
+            </div>
+            <p class="dim" style="font-size:13px;margin:10px 4px 0">
+              One command to install, one to go live. No ports, no domain, no cloud required.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Final CTA ── -->
+  <section class="section center">
+    <div class="container reveal">
+      <h2 style="font-size:clamp(28px,5vw,44px)">A smaller, kinder internet —<br /><span class="h-grad">just for your people.</span></h2>
+      <p class="lead">Bring your circle home to Haven.</p>
+      <div class="btn-row">
+        <a class="btn" href="features.html">Get started</a>
+        <a class="btn ghost" href="https://github.com/blaineam/haven" rel="noopener">View the source on GitHub</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="container">
+    <div class="foot-grid">
+      <div>
+        <a class="brand" href="index.html">Haven</a>
+        <p class="blurb">A private, peer-to-peer, end-to-end-encrypted social app for your close circle. No servers, no ads, no tracking.</p>
+        <div class="platforms" style="justify-content:flex-start">
+          <span class="pill">iOS</span><span class="pill">macOS</span><span class="pill">Android</span>
+          <span class="pill">Windows</span><span class="pill">Linux</span>
+        </div>
+      </div>
+      <div>
+        <h5>Product</h5>
+        <a href="features.html">Features</a>
+        <a href="relay.html">Relays</a>
+        <a href="index.html#privacy">Privacy</a>
+        <a href="docs.html">Documentation</a>
+      </div>
+      <div>
+        <h5>Learn more</h5>
+        <a href="docs.html#architecture">How it works</a>
+        <a href="docs.html#threat">Threat model</a>
+        <a href="docs.html#cost">Operating costs</a>
+        <a href="relay.html#byo">Bring your own storage</a>
+      </div>
+      <div>
+        <h5>Project</h5>
+        <a href="https://github.com/blaineam/haven" rel="noopener">GitHub repo ↗</a>
+        <a href="https://github.com/blaineam/haven/tree/main/docs" rel="noopener">Technical docs ↗</a>
+        <a href="https://github.com/blaineam/haven/tree/main/relay" rel="noopener">Relay tooling ↗</a>
+      </div>
+    </div>
+    <p class="legal">
+      Made with care for the people you love. Haven holds no keys and runs no servers — your circle is yours alone.
+    </p>
   </div>
-</div></div>
-
-<nav><div class="wrap">
-  <a class="logo" href="/apps/"><img src="assets/icon.png" alt="Haven"><span>Haven</span></a>
-  <a class="btn btn-ghost" href="https://github.com/blaineam/haven">View source</a>
-</div></nav>
-
-<header><div class="wrap">
-  <div class="badge"><span class="dot"></span> In private beta — TestFlight</div>
-  <h1>A private place for<br>the people you <span class="brandtext">love</span>.</h1>
-  <p class="sub">Haven is a tiny social network for your real friends and family — photos, video, music, and messages, shared only with the people you choose. No ads. No tracking. No algorithm. No doomscroll.</p>
-  <div class="cta">
-    <a class="btn btn-primary" href="/apps/haven/app/">Open the web app</a>
-    <a class="btn btn-ghost" href="https://github.com/blaineam/haven">Follow the build</a>
-    <a class="btn btn-ghost" href="#fort">Why it's a stronghold</a>
-  </div>
-  <p class="kicker">iPhone · iPad · coming to Mac, Web &amp; Android</p>
-</div></header>
-
-<section><div class="wrap">
-  <h2>Built for connection, not attention</h2>
-  <p class="lead">Everything you'd want from iMessage, Apple Photos, and Apple Music — woven into one warm, private space.</p>
-  <div class="grid">
-    <div class="card"><div class="ico">🤝</div><h3>Just your circle</h3><p>Invite people one at a time. There are no strangers, no public feed, and nothing happens with people you didn't choose.</p></div>
-    <div class="card"><div class="ico">🖼️</div><h3>Photos, video &amp; music</h3><p>Share moments with a song playing alongside them. Auto-optimized by default, or pristine originals when you want them.</p></div>
-    <div class="card"><div class="ico">🔒</div><h3>Post-quantum E2E</h3><p>Every photo, message, and reaction is sealed with hybrid post-quantum encryption — safe even against tomorrow's computers.</p></div>
-    <div class="card"><div class="ico">🚫</div><h3>No ads, no tracking</h3><p>Haven collects nothing about you. No phone number, no email, no profile to sell. Your attention isn't the product.</p></div>
-  </div>
-</div></section>
-
-<section id="fort"><div class="wrap">
-  <div class="fort">
-    <h2>A stronghold by design</h2>
-    <p class="lead">The whole point of Haven is that <b>nobody holds the keys to your life</b> — not a company, not an algorithm, not even the person who built it.</p>
-    <ul>
-      <li><span class="check">✓</span><div><b>Your keys never leave your phone</b><span>Generated on-device and kept in the Secure Enclave. There's no account database to breach.</span></div></li>
-      <li><span class="check">✓</span><div><b>No central server</b><span>Posts travel peer-to-peer, end-to-end encrypted. There's no warehouse of your data, anywhere.</span></div></li>
-      <li><span class="check">✓</span><div><b>The maker can't read your stuff</b><span>By design there is no master key and no backdoor. Blaine can't be compelled to hand over what he never holds.</span></div></li>
-      <li><span class="check">✓</span><div><b>No PII, ever</b><span>No phone number or email to sign up. You're a key and a name you choose — nothing more.</span></div></li>
-      <li><span class="check">✓</span><div><b>You're in control</b><span>Block anyone instantly. On-device sensitive-content guards. You decide who's in, with friendly safety words to confirm it's really them.</span></div></li>
-      <li><span class="check">✓</span><div><b>Open and auditable</b><span>The code is source-available on GitHub. Don't trust the claims — read them.</span></div></li>
-    </ul>
-  </div>
-</div></section>
-
-<section><div class="wrap" style="text-align:center">
-  <h2>Warm, simple, yours</h2>
-  <p class="lead">No tech-speak. Haven walks you through everything — and gets out of the way.</p>
-  <div class="shots">
-    <img src="assets/shot-onboard.png" alt="Welcome to Haven" loading="lazy">
-    <img src="assets/shot-you.png" alt="Your profile and circle" loading="lazy">
-    <img src="assets/shot-connect.png" alt="Invite a friend with safety words" loading="lazy">
-    <img src="assets/shot-feed.png" alt="Your circle's feed" loading="lazy">
-  </div>
-</div></section>
-
-<section class="pricing"><div class="wrap">
-  <h2>Fair, like the old days</h2>
-  <div class="price">$9.99 <small>once. No subscription.</small></div>
-  <p class="lead">Your media rides on your own iCloud and direct peer-to-peer links, so there's no server to bankroll and nothing to monetize. Buy it once, it's yours.</p>
-</div></section>
-
-<footer><div class="wrap">
-  <div class="flinks">
-    <a href="https://github.com/blaineam/haven">GitHub</a>
-    <a href="/apps/">More apps</a>
-    <a href="/privacy/">Privacy</a>
-  </div>
-  Haven — made with care by <a href="https://github.com/blaineam">Blaine Miller</a>.<br>
-  No ads. No tracking. No kidding.
-</div></footer>
+</footer>
 
 <script>
-// If opened from an invite link (…/apps/haven/#<id>.<verify>), reveal the banner, wire
-// "Open in Haven" to the haven:// scheme, and carry the invite into the web app. The whole
-// payload lives in the URL fragment, so neither the id nor the verify ever reaches a server.
+/* ──────────────────────────────────────────────────────────────────────────
+   Invite handling — preserved from the original landing page.
+   An invite payload "<id>.<verify>" rides in the URL fragment. When present,
+   we surface an "open in the app" card at the top and tuck the hero below it.
+   Haven is a NATIVE app; the browser can't be a peer, so this page's job is to
+   carry invite links into the app and to introduce Haven to newcomers.
+────────────────────────────────────────────────────────────────────────── */
 (function () {
-  try {
-    var payload = (location.hash || '').replace(/^#/, '');
-    if (payload.indexOf('.') < 1) return;   // expects "<id>.<verify>"
-    document.getElementById('inviteOpen').href = 'haven://invite#' + payload;
-    var web = document.getElementById('inviteWeb');
-    if (web) web.href = 'app/#' + payload;
-    document.getElementById('invite').style.display = 'block';
-  } catch (e) {}
+  var APP_STORE_URL = "";   // set when live on the App Store
+  var GET_URL = "features.html";
+
+  function detectInvite() {
+    var h = location.hash.replace(/^#/, "");
+    var dot = h.indexOf(".");
+    if (dot < 1) return null;
+    var id = h.slice(0, dot), verify = h.slice(dot + 1);
+    if (!id || !verify) return null;
+    return { appUrl: "haven://invite#" + id + "." + verify };
+  }
+
+  function openInApp(appUrl, statusEl) {
+    var left = false;
+    var onHide = function () { left = true; };
+    document.addEventListener("visibilitychange", onHide, { once: true });
+    setTimeout(function () {
+      document.removeEventListener("visibilitychange", onHide);
+      if (!left && statusEl) {
+        statusEl.textContent = "Don't have Haven yet? Install it, then tap the invite link again.";
+      }
+    }, 1500);
+    window.location.href = appUrl;
+  }
+
+  function render() {
+    var slot = document.getElementById("invite-slot");
+    var hero = document.getElementById("hero");
+    var inv = detectInvite();
+    if (!inv) { slot.innerHTML = ""; if (hero) hero.style.display = ""; return; }
+
+    if (hero) hero.style.display = "none";
+    var getBtn = APP_STORE_URL
+      ? '<a class="btn" href="' + APP_STORE_URL + '">Get Haven on the App Store</a>'
+      : '<a class="btn" href="' + GET_URL + '">Don\'t have Haven? Get it here</a>';
+
+    slot.innerHTML =
+      '<section class="section" style="padding-top:54px">' +
+        '<div class="card reveal in center" style="max-width:560px;margin:0 auto;padding:34px 26px">' +
+          '<div style="font-size:46px">👋</div>' +
+          '<h2 style="font-size:26px;margin:10px 0 6px">You\'ve been invited to Haven</h2>' +
+          '<p class="muted" style="margin:6px auto 18px;max-width:40ch">' +
+            'Open this invite in the Haven app to join the circle securely. Your acceptance is end-to-end encrypted.' +
+          '</p>' +
+          '<button class="btn" id="open-app" style="width:100%">Open in the Haven app</button>' +
+          '<div style="height:10px"></div>' +
+          getBtn.replace('class="btn"', 'class="btn ghost" style="width:100%"') +
+          '<p id="invite-status" class="dim" style="font-size:13px;margin-top:14px;min-height:18px"></p>' +
+        '</div>' +
+      '</section>';
+
+    var btn = document.getElementById("open-app");
+    var status = document.getElementById("invite-status");
+    if (btn) btn.addEventListener("click", function () { openInApp(inv.appUrl, status); });
+  }
+
+  render();
+  window.addEventListener("hashchange", render);
 })();
 </script>
-
+<script src="app.js" defer></script>
 </body>
 </html>
