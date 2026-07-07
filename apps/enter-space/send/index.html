@@ -1,0 +1,257 @@
+<!doctype html>
+<!--
+  Enter Space — File Request uploader.
+  Hosted variant lives at https://wemiller.com/apps/enter-space/send/
+  (see docs/file-request-uploader/ in the Enter Space repo). The upload
+  permission (an expiring, upload-only, folder-locked S3 presigned POST
+  policy) travels in the link's #fragment — fragments never reach the web
+  server, so the host learns nothing about the grant.
+-->
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Send files</title>
+<style>
+  :root {
+    color-scheme: light dark;
+    --accent: #4a9eff; --ok: #34c759; --err: #ff3b30;
+    --card: color-mix(in srgb, CanvasText 5%, Canvas);
+    --line: color-mix(in srgb, CanvasText 12%, transparent);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; min-height: 100vh; display: grid; place-items: center;
+         background: Canvas; color: CanvasText;
+         background-image: radial-gradient(1200px 600px at 20% -10%, color-mix(in srgb, var(--accent) 14%, transparent), transparent),
+                           radial-gradient(900px 500px at 110% 110%, color-mix(in srgb, var(--accent) 9%, transparent), transparent); }
+  main { width: min(560px, 94vw); padding: 24px 0 48px; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 20px;
+          padding: 28px; box-shadow: 0 12px 40px color-mix(in srgb, CanvasText 8%, transparent); }
+  .who { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+  .avatar { width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center;
+            background: linear-gradient(135deg, var(--accent), #7a5fff); color: white;
+            font-weight: 700; font-size: 1.1rem; flex: none; }
+  .who small { display: block; opacity: .6; font-size: .78rem; }
+  .who strong { font-size: 1.05rem; }
+  h1 { font-size: 1.4rem; margin: 6px 0 2px; }
+  #message { margin: 10px 0 0; padding: 12px 14px; border-left: 3px solid var(--accent);
+             background: color-mix(in srgb, var(--accent) 7%, transparent);
+             border-radius: 0 10px 10px 0; font-size: .95rem; white-space: pre-wrap; overflow-wrap: anywhere; }
+  #drop { margin-top: 20px; border: 2px dashed color-mix(in srgb, CanvasText 28%, transparent);
+          border-radius: 16px; padding: 46px 20px; text-align: center; cursor: pointer;
+          transition: border-color .15s, background .15s; }
+  #drop.over { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 6%, transparent); }
+  #drop .big { font-size: 2rem; }
+  #drop p { margin: 8px 0 0; opacity: .65; font-size: .9rem; }
+  #overall { margin-top: 18px; display: none; }
+  #overall .track, li .track { height: 6px; border-radius: 3px; background: var(--line); overflow: hidden; }
+  #overall .fill, li .fill { height: 100%; width: 0%; background: var(--accent); border-radius: 3px; transition: width .2s; }
+  #overall .label { display: flex; justify-content: space-between; font-size: .8rem; opacity: .7; margin-bottom: 6px; }
+  ul { list-style: none; padding: 0; margin: 14px 0 0; }
+  li { padding: 10px 2px; border-bottom: 1px solid var(--line); font-size: .9rem; }
+  li .row { display: flex; justify-content: space-between; gap: 12px; margin-bottom: 6px; }
+  li .name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  li .st { flex: none; opacity: .75; }
+  li.done .fill { background: var(--ok); }
+  li.fail .fill { background: var(--err); }
+  li.done .st { color: var(--ok); } li.fail .st { color: var(--err); }
+  #alldone { display: none; margin-top: 18px; text-align: center; padding: 16px;
+             border-radius: 12px; background: color-mix(in srgb, var(--ok) 10%, transparent);
+             color: var(--ok); font-weight: 600; }
+  .exp { text-align: center; opacity: .5; font-size: .78rem; margin-top: 18px; }
+  .powered { text-align: center; opacity: .4; font-size: .72rem; margin-top: 14px; }
+  .powered a { color: inherit; }
+  #invalid { text-align: center; padding: 40px 20px; }
+</style>
+<main>
+  <div class="card">
+    <div id="invalid" hidden>
+      <h1>Invalid link</h1>
+      <p>This file-request link is malformed, incomplete, or from an old version.</p>
+    </div>
+    <div id="app" hidden>
+      <div class="who">
+        <div class="avatar" id="avatar">?</div>
+        <div>
+          <small>File request from</small>
+          <strong id="from">Someone</strong>
+        </div>
+      </div>
+      <h1 id="title">Send files</h1>
+      <div id="message" hidden></div>
+      <div id="drop">
+        <div class="big">&#128228;</div>
+        <p><b>Drop files or folders here</b><br>or click to choose files</p>
+      </div>
+      <input id="pick" type="file" multiple hidden>
+      <div id="overall">
+        <div class="label"><span id="ocount"></span><span id="opct"></span></div>
+        <div class="track"><div class="fill" id="ofill"></div></div>
+      </div>
+      <ul id="list"></ul>
+      <div id="alldone">All files received &#10003; You can close this page.</div>
+      <p class="exp">Files go directly to the requester's private storage — nothing is shared back to you.<br>
+        Link expires <span id="expires"></span> &middot; Max file size <span id="max"></span></p>
+    </div>
+  </div>
+  <p class="powered">Powered by <a href="https://wemiller.com/apps/enter-space/" rel="noopener">Enter Space</a></p>
+</main>
+<script>
+"use strict";
+const INLINE = null;
+
+function decodePayload() {
+  if (INLINE) return INLINE;
+  try {
+    const raw = location.hash.slice(1).replaceAll("-", "+").replaceAll("_", "/");
+    // atob yields a Latin-1 byte string — decode as UTF-8 explicitly or any
+    // non-ASCII in names/messages arrives mojibake'd.
+    const bytes = Uint8Array.from(atob(raw), c => c.charCodeAt(0));
+    return JSON.parse(new TextDecoder("utf-8").decode(bytes));
+  } catch (e) { return null; }
+}
+
+// Courtesy profanity mask — backstops the app-side filter for hand-edited
+// fragments. Rendering is textContent-only, so this is cosmetic, not security.
+const VULGAR = ["fuck","shit","bitch","cunt","asshole","dick","pussy","bastard","slut","whore","fag","faggot","nigger","nigga","cock","twat","wanker","prick"];
+function maskText(s) {
+  return String(s || "").split(/\s+/).map(w => {
+    const n = w.toLowerCase().replace(/0/g,"o").replace(/1/g,"i").replace(/3/g,"e").replace(/4/g,"a").replace(/[5$]/g,"s").replace(/@/g,"a").replace(/[^a-z]/g,"");
+    return VULGAR.includes(n) ? "•".repeat(Math.max(3, w.length)) : w;
+  }).join(" ");
+}
+
+const REQ = decodePayload();
+if (!REQ || REQ.v !== 1 || !REQ.url || !Array.isArray(REQ.fields)) {
+  document.getElementById("invalid").hidden = false;
+} else {
+  document.getElementById("app").hidden = false;
+  const fromName = maskText(REQ.from) || "Someone";
+  document.getElementById("from").textContent = fromName;           // textContent: injection-inert
+  document.getElementById("avatar").textContent = fromName.trim().charAt(0).toUpperCase() || "?";
+  document.getElementById("title").textContent = maskText(REQ.title) || "Send files";
+  const msg = maskText(REQ.message);
+  if (msg) { const el = document.getElementById("message"); el.hidden = false; el.textContent = msg; }
+  document.getElementById("expires").textContent = new Date(REQ.expires * 1000).toLocaleString();
+  document.getElementById("max").textContent = (REQ.maxBytes / 1073741824).toFixed(1) + " GB";
+
+  const drop = document.getElementById("drop"), pick = document.getElementById("pick"), list = document.getElementById("list");
+  const overall = document.getElementById("overall"), ofill = document.getElementById("ofill");
+  const ocount = document.getElementById("ocount"), opct = document.getElementById("opct");
+  const alldone = document.getElementById("alldone");
+
+  drop.onclick = () => pick.click();
+  drop.ondragover = e => { e.preventDefault(); drop.classList.add("over"); };
+  drop.ondragleave = () => drop.classList.remove("over");
+  drop.ondrop = e => {
+    e.preventDefault(); drop.classList.remove("over");
+    collectDropped(e.dataTransfer).then(startBatch);
+  };
+  pick.onchange = () => startBatch([...pick.files].map(f => ({ file: f, rel: f.name })));
+
+  // Folder support: traverse directory entries recursively, preserving
+  // relative paths so folder structure survives into the request folder.
+  async function collectDropped(dt) {
+    const out = [];
+    const entries = [...dt.items].map(i => i.webkitGetAsEntry && i.webkitGetAsEntry()).filter(Boolean);
+    if (!entries.length) return [...dt.files].map(f => ({ file: f, rel: f.name }));
+    async function walk(entry, prefix) {
+      if (entry.isFile) {
+        const file = await new Promise((res, rej) => entry.file(res, rej));
+        out.push({ file, rel: prefix + file.name });
+      } else if (entry.isDirectory) {
+        const reader = entry.createReader();
+        for (;;) {
+          const batch = await new Promise((res, rej) => reader.readEntries(res, rej));
+          if (!batch.length) break;
+          for (const child of batch) await walk(child, prefix + entry.name + "/");
+        }
+      }
+    }
+    for (const entry of entries) await walk(entry, "");
+    return out;
+  }
+
+  const batch = { total: 0, sent: 0, failed: 0, bytesTotal: 0, bytesSent: new Map(), names: [] };
+
+  function startBatch(items) {
+    if (Date.now() / 1000 > REQ.expires) { alert("This request link has expired."); return; }
+    if (!items.length) return;
+    alldone.style.display = "none";
+    for (const item of items) upload(item);
+  }
+
+  function refreshOverall() {
+    overall.style.display = "block";
+    let sentBytes = 0;
+    for (const v of batch.bytesSent.values()) sentBytes += v;
+    const pct = batch.bytesTotal ? Math.min(100, Math.round(sentBytes / batch.bytesTotal * 100)) : 0;
+    ofill.style.width = pct + "%";
+    opct.textContent = pct + "%";
+    ocount.textContent = (batch.sent + batch.failed) + " of " + batch.total + " files";
+    if (batch.total > 0 && batch.sent + batch.failed === batch.total) {
+      if (batch.failed === 0) { alldone.style.display = "block"; }
+      sendCompletionMarker();
+    }
+  }
+
+  // After the whole batch lands, upload a tiny marker file the requester's
+  // Enter Space app watches for — that's what triggers their "files
+  // received" notification. Uses the same upload-only grant.
+  let markerSent = false;
+  function sendCompletionMarker() {
+    if (markerSent || !REQ.marker || batch.sent === 0) return;
+    markerSent = true;
+    const body = JSON.stringify({ from: fromName, files: batch.names, failed: batch.failed, at: Math.floor(Date.now() / 1000) });
+    const form = new FormData();
+    const markerName = REQ.marker + Math.floor(Date.now() / 1000) + ".json";
+    for (const f of REQ.fields) form.append(f.n, f.n === "key" ? f.v.replace("${filename}", markerName) : f.v);
+    form.append("file", new Blob([body], { type: "application/json" }), markerName);
+    fetch(REQ.url, { method: "POST", body: form }).catch(() => {});
+  }
+
+  function upload(item) {
+    const { file, rel } = item;
+    batch.total++; batch.bytesTotal += file.size;
+    const li = document.createElement("li");
+    li.innerHTML = '<div class="row"><span class="name"></span><span class="st">0%</span></div><div class="track"><div class="fill"></div></div>';
+    li.querySelector(".name").textContent = rel;
+    list.appendChild(li);
+    const st = li.querySelector(".st"), fill = li.querySelector(".fill");
+
+    if (file.size > REQ.maxBytes) {
+      st.textContent = "too large"; li.className = "fail"; fill.style.width = "100%";
+      batch.failed++; refreshOverall(); return;
+    }
+
+    const form = new FormData();
+    for (const f of REQ.fields) form.append(f.n, f.n === "key" ? f.v.replace("${filename}", rel) : f.v);
+    form.append("file", file);
+
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", REQ.url);
+    xhr.upload.onprogress = e => {
+      if (!e.lengthComputable) return;
+      batch.bytesSent.set(rel, e.loaded);
+      st.textContent = Math.round(e.loaded / e.total * 100) + "%";
+      fill.style.width = (e.loaded / e.total * 100) + "%";
+      refreshOverall();
+    };
+    xhr.onload = () => {
+      const ok = xhr.status >= 200 && xhr.status < 300;
+      batch.bytesSent.set(rel, file.size);
+      if (ok) { batch.sent++; batch.names.push(rel); st.textContent = "sent ✓"; li.className = "done"; }
+      else { batch.failed++; st.textContent = "failed (" + xhr.status + ")"; li.className = "fail"; }
+      fill.style.width = "100%";
+      refreshOverall();
+    };
+    xhr.onerror = () => {
+      batch.failed++; st.textContent = "failed — network/CORS"; li.className = "fail";
+      refreshOverall();
+    };
+    xhr.send(form);
+  }
+}
+</script>
+</html>
