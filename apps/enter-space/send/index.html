@@ -286,11 +286,19 @@ if (!isPutZip && !isP2P && !isPost) {
     overall.style.display = "block"; ocount.textContent = "Connecting…"; opct.textContent = "";
 
     const session = crypto.randomUUID();
-    const ws = new WebSocket(REQ.signal + "?role=sender&session=" + session);
-    const pc = new RTCPeerConnection({ iceServers: [
+    // Fetch ICE servers (STUN + TURN when the relay has TURN configured) so
+    // senders behind CGNAT / symmetric NAT can still connect via relay.
+    let iceServers = [
       { urls: "stun:stun.cloudflare.com:3478" },
       { urls: "stun:stun.l.google.com:19302" }
-    ]});
+    ];
+    try {
+      const iceURL = REQ.signal.replace(/^wss:/, "https:").replace(/\/r\/.*$/, "/ice");
+      const resp = await fetch(iceURL);
+      if (resp.ok) { const j = await resp.json(); if (Array.isArray(j.iceServers) && j.iceServers.length) iceServers = j.iceServers; }
+    } catch (e) {}
+    const ws = new WebSocket(REQ.signal + "?role=sender&session=" + session);
+    const pc = new RTCPeerConnection({ iceServers });
     const dc = pc.createDataChannel("files", { ordered: true });
     dc.binaryType = "arraybuffer";
     dc.bufferedAmountLowThreshold = P2P_LOW_WATER;
