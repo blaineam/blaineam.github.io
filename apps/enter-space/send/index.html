@@ -163,8 +163,9 @@ async function buildStoreZip(items, onProgress){
 
 const REQ = decodePayload();
 const isPutZip = REQ && REQ.v === 1 && REQ.mode === "put-zip" && Array.isArray(REQ.uploadURLs);
+const isP2P = REQ && REQ.v === 1 && REQ.mode === "p2p" && typeof REQ.signal === "string" && REQ.signal.startsWith("wss://");
 const isPost = REQ && REQ.v === 1 && REQ.url && Array.isArray(REQ.fields);
-if (!isPutZip && !isPost) {
+if (!isPutZip && !isP2P && !isPost) {
   document.getElementById("invalid").hidden = false;
 } else {
   document.getElementById("app").hidden = false;
@@ -221,7 +222,8 @@ if (!isPutZip && !isPost) {
     if (Date.now() / 1000 > REQ.expires) { alert("This request link has expired."); return; }
     if (!items.length) return;
     alldone.style.display = "none";
-    if (isPutZip) { uploadZipBatch(items); }
+    if (isP2P) { uploadP2PBatch(items); }
+    else if (isPutZip) { uploadZipBatch(items); }
     else { for (const item of items) upload(item); }
   }
 
@@ -263,6 +265,129 @@ if (!isPutZip && !isPost) {
     };
     xhr.onerror = () => { st.textContent = "failed — network/CORS"; li.className = "fail"; putURLs.unshift(putURL); };
     xhr.send(zipBlob);
+  }
+
+  // p2p: stream the batch straight to the requester's Enter Space app over a
+  // WebRTC DataChannel. Signaling rides a tiny relay (REQ.signal); file bytes
+  // go peer-to-peer (DTLS-encrypted) and never touch any server. Requires the
+  // requester's app to be open.
+  const P2P_CHUNK = 65536;          // 64 KiB per DataChannel message
+  const P2P_HIGH_WATER = 4194304;   // pause sending above 4 MiB buffered
+  const P2P_LOW_WATER = 1048576;    // resume below 1 MiB
+  async function uploadP2PBatch(items) {
+    const totalBytes = items.reduce((s, i) => s + i.file.size, 0);
+    if (totalBytes > REQ.maxBytes) { alert("This batch is larger than the " + (REQ.maxBytes/1073741824).toFixed(1) + " GB limit. Send fewer files at a time."); return; }
+
+    const li = document.createElement("li");
+    li.innerHTML = '<div class="row"><span class="name"></span><span class="st">connecting…</span></div><div class="track"><div class="fill"></div></div>';
+    li.querySelector(".name").textContent = items.length + " file" + (items.length === 1 ? "" : "s");
+    list.appendChild(li);
+    const st = li.querySelector(".st"), fill = li.querySelector(".fill");
+    overall.style.display = "block"; ocount.textContent = "Connecting…"; opct.textContent = "";
+
+    const session = crypto.randomUUID();
+    const ws = new WebSocket(REQ.signal + "?role=sender&session=" + session);
+    const pc = new RTCPeerConnection({ iceServers: [
+      { urls: "stun:stun.cloudflare.com:3478" },
+      { urls: "stun:stun.l.google.com:19302" }
+    ]});
+    const dc = pc.createDataChannel("files", { ordered: true });
+    dc.binaryType = "arraybuffer";
+    dc.bufferedAmountLowThreshold = P2P_LOW_WATER;
+
+    let finished = false;
+    const fail = (why) => {
+      if (finished) return; finished = true;
+      st.textContent = why; li.className = "fail"; ocount.textContent = "";
+      try { ws.close(); } catch (e) {}
+      try { pc.close(); } catch (e) {}
+    };
+
+    pc.onicecandidate = e => {
+      if (e.candidate && ws.readyState === 1) ws.send(JSON.stringify({ type: "ice", candidate: e.candidate }));
+    };
+
+    // The requester's app may not be listening yet — repeat the offer until
+    // an answer arrives so a late-joining host still picks it up.
+    let offerTimer = null, answered = false;
+    ws.onopen = async () => {
+      const offer = await pc.createOffer();
+      await pc.setLocalDescription(offer);
+      const sendOffer = () => {
+        if (!answered && ws.readyState === 1) ws.send(JSON.stringify({ type: "offer", sdp: pc.localDescription.sdp }));
+      };
+      sendOffer();
+      offerTimer = setInterval(sendOffer, 4000);
+      setTimeout(() => { if (!answered) fail("requester's app isn't reachable — ask them to open Enter Space, then retry"); }, 45000);
+    };
+    ws.onmessage = async e => {
+      let msg; try { msg = JSON.parse(e.data); } catch (err) { return; }
+      if (msg.type === "answer" && !answered) {
+        answered = true;
+        if (offerTimer) clearInterval(offerTimer);
+        await pc.setRemoteDescription({ type: "answer", sdp: msg.sdp });
+      } else if (msg.type === "ice" && msg.candidate) {
+        try { await pc.addIceCandidate(msg.candidate); } catch (err) {}
+      }
+    };
+    ws.onerror = () => { if (!answered) fail("couldn't reach the connection relay"); };
+
+    const waitForDrain = () => new Promise(resolve => {
+      if (dc.bufferedAmount <= P2P_HIGH_WATER) return resolve();
+      const h = () => { dc.removeEventListener("bufferedamountlow", h); resolve(); };
+      dc.addEventListener("bufferedamountlow", h);
+    });
+
+    dc.onerror = () => fail("connection lost");
+    dc.onclose = () => { if (!finished) fail("connection closed"); };
+    dc.onopen = async () => {
+      try {
+        dc.send(JSON.stringify({ t: "hello", totalBytes: totalBytes,
+          files: items.map(i => ({ path: i.rel, size: i.file.size })) }));
+        const go = await new Promise((resolve, reject) => {
+          dc.onmessage = m => { try { resolve(JSON.parse(m.data)); } catch (err) { reject(err); } };
+          setTimeout(() => reject(new Error("timeout")), 20000);
+        });
+        if (!go || go.t !== "go") { fail(go && go.reason ? maskText(go.reason) : "request refused"); return; }
+
+        // From here the app replies only at the very end.
+        const doneReply = new Promise((resolve) => {
+          dc.onmessage = m => { try { const r = JSON.parse(m.data); if (r.t === "received") resolve(r); } catch (err) {} };
+        });
+
+        let sentBytes = 0;
+        for (const item of items) {
+          dc.send(JSON.stringify({ t: "f", path: item.rel, size: item.file.size }));
+          const reader = item.file.stream().getReader();
+          for (;;) {
+            const { done, value } = await reader.read();
+            if (done) break;
+            for (let o = 0; o < value.length; o += P2P_CHUNK) {
+              await waitForDrain();
+              if (finished) return;
+              dc.send(value.subarray(o, Math.min(o + P2P_CHUNK, value.length)));
+              sentBytes += Math.min(P2P_CHUNK, value.length - o);
+              const pct = Math.round(sentBytes / Math.max(1, totalBytes) * 100);
+              st.textContent = pct + "%"; fill.style.width = pct + "%";
+              opct.textContent = pct + "%";
+              ocount.textContent = "Sending " + items.length + " file" + (items.length === 1 ? "" : "s") + " directly";
+            }
+          }
+          dc.send(JSON.stringify({ t: "fe" }));
+        }
+        dc.send(JSON.stringify({ t: "done" }));
+        st.textContent = "finishing…";
+        const reply = await Promise.race([doneReply, new Promise(r => setTimeout(() => r(null), 120000))]);
+        if (reply) {
+          finished = true;
+          st.textContent = "sent ✓"; li.className = "done"; fill.style.width = "100%";
+          alldone.style.display = "block"; opct.textContent = "100%";
+        } else {
+          fail("the requester's app didn't confirm receipt");
+        }
+        try { dc.close(); pc.close(); ws.close(); } catch (err) {}
+      } catch (err) { fail("transfer failed"); }
+    };
   }
 
   function refreshOverall() {
