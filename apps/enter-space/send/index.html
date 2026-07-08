@@ -122,8 +122,49 @@ function maskText(s) {
   }).join(" ");
 }
 
+// --- Minimal STORE-method (no compression) ZIP writer ---
+// Used for "put-zip" mode: each batch is bundled into ONE zip and uploaded
+// via a presigned PUT (universally supported by S3 backends, unlike POST
+// Object). The requester's app unzips it into place on receipt.
+const CRC_TABLE = (() => { const t = new Uint32Array(256); for (let n=0;n<256;n++){let c=n;for(let k=0;k<8;k++)c=(c&1)?(0xEDB88320^(c>>>1)):(c>>>1);t[n]=c>>>0;} return t; })();
+function crc32(u8){let c=0xFFFFFFFF;for(let i=0;i<u8.length;i++)c=CRC_TABLE[(c^u8[i])&0xFF]^(c>>>8);return (c^0xFFFFFFFF)>>>0;}
+function dosDateTime(d){const t=((d.getHours()&31)<<11)|((d.getMinutes()&63)<<5)|((d.getSeconds()>>1)&31);const dt=(((d.getFullYear()-1980)&127)<<9)|(((d.getMonth()+1)&15)<<5)|(d.getDate()&31);return {t,dt};}
+async function buildStoreZip(items, onProgress){
+  const enc=new TextEncoder(), parts=[], central=[]; let offset=0, done=0;
+  const {t:mt,dt:md}=dosDateTime(new Date());
+  for(const {file,rel} of items){
+    const nameBytes=enc.encode(rel.replace(/\\/g,"/"));
+    const data=new Uint8Array(await file.arrayBuffer());
+    const crc=crc32(data);
+    const lh=new DataView(new ArrayBuffer(30));
+    lh.setUint32(0,0x04034b50,true); lh.setUint16(4,20,true); lh.setUint16(6,0x0800,true); lh.setUint16(8,0,true);
+    lh.setUint16(10,mt,true); lh.setUint16(12,md,true); lh.setUint32(14,crc,true);
+    lh.setUint32(18,data.length,true); lh.setUint32(22,data.length,true);
+    lh.setUint16(26,nameBytes.length,true); lh.setUint16(28,0,true);
+    parts.push(new Uint8Array(lh.buffer), nameBytes, data);
+    central.push({nameBytes,crc,size:data.length,off:offset,mt,md});
+    offset += 30 + nameBytes.length + data.length;
+    done++; if(onProgress) onProgress(done/items.length*0.5);
+  }
+  const cdParts=[]; let cdSize=0;
+  for(const c of central){
+    const ch=new DataView(new ArrayBuffer(46));
+    ch.setUint32(0,0x02014b50,true); ch.setUint16(4,20,true); ch.setUint16(6,20,true); ch.setUint16(8,0x0800,true);
+    ch.setUint16(10,0,true); ch.setUint16(12,c.mt,true); ch.setUint16(14,c.md,true);
+    ch.setUint32(16,c.crc,true); ch.setUint32(20,c.size,true); ch.setUint32(24,c.size,true);
+    ch.setUint16(28,c.nameBytes.length,true); ch.setUint32(42,c.off,true);
+    cdParts.push(new Uint8Array(ch.buffer), c.nameBytes); cdSize += 46 + c.nameBytes.length;
+  }
+  const eocd=new DataView(new ArrayBuffer(22));
+  eocd.setUint32(0,0x06054b50,true); eocd.setUint16(8,central.length,true); eocd.setUint16(10,central.length,true);
+  eocd.setUint32(12,cdSize,true); eocd.setUint32(16,offset,true);
+  return new Blob([...parts, ...cdParts, new Uint8Array(eocd.buffer)], {type:"application/zip"});
+}
+
 const REQ = decodePayload();
-if (!REQ || REQ.v !== 1 || !REQ.url || !Array.isArray(REQ.fields)) {
+const isPutZip = REQ && REQ.v === 1 && REQ.mode === "put-zip" && Array.isArray(REQ.uploadURLs);
+const isPost = REQ && REQ.v === 1 && REQ.url && Array.isArray(REQ.fields);
+if (!isPutZip && !isPost) {
   document.getElementById("invalid").hidden = false;
 } else {
   document.getElementById("app").hidden = false;
@@ -174,12 +215,54 @@ if (!REQ || REQ.v !== 1 || !REQ.url || !Array.isArray(REQ.fields)) {
   }
 
   const batch = { total: 0, sent: 0, failed: 0, bytesTotal: 0, bytesSent: new Map(), names: [] };
+  let putURLs = isPutZip ? REQ.uploadURLs.slice() : [];
 
   function startBatch(items) {
     if (Date.now() / 1000 > REQ.expires) { alert("This request link has expired."); return; }
     if (!items.length) return;
     alldone.style.display = "none";
-    for (const item of items) upload(item);
+    if (isPutZip) { uploadZipBatch(items); }
+    else { for (const item of items) upload(item); }
+  }
+
+  // put-zip: bundle the whole drop into one store-zip and PUT it. Each drop
+  // consumes one presigned URL; the app recognizes the zip and unpacks it.
+  async function uploadZipBatch(items) {
+    const totalBytes = items.reduce((s, i) => s + i.file.size, 0);
+    if (totalBytes > REQ.maxBytes) { alert("This batch is larger than the " + (REQ.maxBytes/1073741824).toFixed(1) + " GB limit. Send fewer files at a time."); return; }
+    if (!putURLs.length) { alert("This request has reached its upload limit. Ask for a new link."); return; }
+    const putURL = putURLs.shift();
+
+    const li = document.createElement("li");
+    li.innerHTML = '<div class="row"><span class="name"></span><span class="st">packaging…</span></div><div class="track"><div class="fill"></div></div>';
+    li.querySelector(".name").textContent = items.length + " file" + (items.length === 1 ? "" : "s");
+    list.appendChild(li);
+    const st = li.querySelector(".st"), fill = li.querySelector(".fill");
+    overall.style.display = "block"; ocount.textContent = "Preparing…"; opct.textContent = "";
+
+    let zipBlob;
+    try {
+      zipBlob = await buildStoreZip(items, p => { fill.style.width = (p*100) + "%"; });
+    } catch (e) { st.textContent = "couldn't package"; li.className = "fail"; return; }
+
+    st.textContent = "0%";
+    const xhr = new XMLHttpRequest();
+    xhr.open("PUT", putURL);
+    xhr.setRequestHeader("Content-Type", "application/zip");
+    xhr.upload.onprogress = e => {
+      if (!e.lengthComputable) return;
+      const pct = Math.round(e.loaded / e.total * 100);
+      st.textContent = pct + "%"; fill.style.width = pct + "%";
+      opct.textContent = pct + "%"; ocount.textContent = "Uploading " + items.length + " file" + (items.length === 1 ? "" : "s");
+    };
+    xhr.onload = () => {
+      const ok = xhr.status >= 200 && xhr.status < 300;
+      fill.style.width = "100%";
+      if (ok) { st.textContent = "sent ✓"; li.className = "done"; alldone.style.display = "block"; opct.textContent = "100%"; }
+      else { st.textContent = "failed (" + xhr.status + ")"; li.className = "fail"; putURLs.unshift(putURL); }
+    };
+    xhr.onerror = () => { st.textContent = "failed — network/CORS"; li.className = "fail"; putURLs.unshift(putURL); };
+    xhr.send(zipBlob);
   }
 
   function refreshOverall() {
