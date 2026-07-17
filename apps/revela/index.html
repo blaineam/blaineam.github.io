@@ -259,13 +259,43 @@
             box-shadow: 2.5px -2.5px 0 rgba(60, 52, 40, 0.55), 0 3px 5px rgba(0,0,0,0.4);
             display: flex; flex-direction: column; overflow: hidden;
         }
-        .minibox .b { height: 22%; background: linear-gradient(120deg, var(--c1), var(--c2)); }
-        .minibox .i {
-            flex: 1; display: flex; align-items: center; justify-content: center;
-            font-family: 'Alfa Slab One', serif; color: var(--ink);
-            font-size: clamp(0.5rem, 1.9vw, 0.78rem);
+        .minibox .b {
+            height: 20%; background: linear-gradient(120deg, var(--c1), var(--c2));
+            display: flex; align-items: center; justify-content: center;
+            color: rgba(255,255,255,0.95);
+            font-size: clamp(0.22rem, 0.85vw, 0.34rem);
+            font-weight: 800; letter-spacing: 0.18em;
         }
-        .minibox .f { height: 15%; background: linear-gradient(90deg, var(--c2), var(--c3)); }
+        .minibox .mid {
+            flex: 1; display: flex; flex-direction: column;
+            align-items: center; justify-content: center; gap: 1px;
+            color: var(--ink); padding: 1px;
+        }
+        .minibox .nm {
+            font-family: 'Special Elite', monospace;
+            font-size: clamp(0.26rem, 1vw, 0.4rem);
+            white-space: nowrap;
+        }
+        .minibox .i {
+            font-family: 'Alfa Slab One', serif;
+            font-size: clamp(0.5rem, 1.9vw, 0.78rem);
+            line-height: 1;
+            background: linear-gradient(180deg, var(--c2), var(--c1));
+            -webkit-background-clip: text; background-clip: text; color: transparent;
+        }
+        .minibox .kd {
+            font-size: clamp(0.18rem, 0.7vw, 0.28rem);
+            letter-spacing: 0.08em;
+            color: rgba(43,34,24,0.55);
+            text-align: center;
+        }
+        .minibox .f {
+            height: 13%; background: linear-gradient(90deg, var(--c2), var(--c3));
+            display: flex; align-items: center; justify-content: center;
+            color: rgba(255,255,255,0.9);
+            font-size: clamp(0.18rem, 0.7vw, 0.26rem);
+            font-weight: 700; letter-spacing: 0.14em;
+        }
 
         /* door */
         .door {
@@ -713,12 +743,10 @@
             <p class="sub">A film camera that lives in your phone — not a filter, a whole ritual.
                This is the studio. The fridge is stocked. Go ahead, open it.</p>
             <div class="cta-row">
-                <a class="cta" href="#ritual">See the ritual</a>
-                <a class="cta ghost" href="#stocks">Browse the stocks</a>
+                <a class="cta" href="https://apps.apple.com/us/app/revela-vintage-film-camera/id6791874917">Get It Now — App&nbsp;Store</a>
+                <a class="cta ghost" href="#ritual">See the ritual</a>
             </div>
-            <p class="price-note">$7.99 · once · no subscription · no account —
-               <a href="https://apps.apple.com/us/app/revela-vintage-film-camera/id6791874917"
-                  style="color: var(--amber);">on the App&nbsp;Store</a></p>
+            <p class="price-note">$7.99 · once · no subscription · no account</p>
         </div>
 
         <div class="wall-things" aria-hidden="true">
@@ -938,6 +966,9 @@
                 <div class="slab">FILM KEEPS BEST IN THE FRIDGE!</div>
                 <p>Your photographs never leave your devices. No account, no server, no tracking —
                    just you, a fridge full of film, and the mail.</p>
+                <p style="margin-top: 18px;">
+                    <a class="cta" href="https://apps.apple.com/us/app/revela-vintage-film-camera/id6791874917">Get It Now — App&nbsp;Store</a>
+                </p>
             </div>
         </div>
     </section>
@@ -995,7 +1026,13 @@
             b.style.setProperty("--c1", s.c[0]);
             b.style.setProperty("--c2", s.c[1]);
             b.style.setProperty("--c3", s.c[2]);
-            b.innerHTML = `<div class="b"></div><div class="i">${s.iso}</div><div class="f"></div>`;
+            b.innerHTML = `<div class="b">REVELA</div>
+              <div class="mid">
+                <span class="nm">${s.name}</span>
+                <span class="i">${s.iso}</span>
+                <span class="kd">${s.kind}</span>
+              </div>
+              <div class="f">${s.kind.includes("MOTION") ? "REEL" : "135·36"}</div>`;
             row.appendChild(b);
         }
         interior.appendChild(row);
