@@ -1,8 +1,9 @@
 {
-  "fingerprint": "ddcf59e5a6b2f4a6e0a51d34752374565b139270f9c35589d26b2751b9953d54",
+  "fingerprint": "120cb21dbbdb9ca36241002b3468e02e91942a1b163ed3f9e4e421567dab06e2",
   "apps": [
     "enter-space",
     "haven",
+    "revela",
     "blip",
     "ari-helper",
     "zap",
@@ -21,5 +22,5 @@
     "wise-flyer",
     "glint"
   ],
-  "generatedAt": "2026-07-14T18:19:29.927Z"
+  "generatedAt": "2026-07-17T04:19:06.799Z"
 }
