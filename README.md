@@ -3,7 +3,7 @@
 **Software Engineer** · Apple-platform Developer · Photographer
 
 [![Website](https://img.shields.io/badge/Website-wemiller.com-blue?style=flat-square)](https://wemiller.com)
-[![Apps](https://img.shields.io/badge/Apps-18%20on%20the%20App%20Store-orange?style=flat-square)](https://wemiller.com/apps)
+[![Apps](https://img.shields.io/badge/Apps-19%20on%20the%20App%20Store-orange?style=flat-square)](https://wemiller.com/apps)
 [![Pages](https://img.shields.io/badge/GitHub%20Pages-auto--deployed-success?style=flat-square)](https://wemiller.com)
 
 The source for [**wemiller.com**](https://wemiller.com) — a static portfolio hosted on
@@ -21,13 +21,14 @@ Apple Watch. Just imagine what we can build together!
 
 ## Apps
 
-**18 apps on the App Store**, spanning iOS, iPadOS, macOS, tvOS, and watchOS. The
+**19 apps on the App Store**, spanning iOS, iPadOS, macOS, tvOS, and watchOS. The
 [`/apps`](https://wemiller.com/apps) showcase renders a curated order; the home page
 lists them chronologically. Both read from a single source of truth,
 [`apps/projects.json`](apps/projects.json).
 
 | App | What it does | Released |
 |-----|--------------|----------|
+| **Revela** | Shoot film. Wait for it — a vintage film camera | July 2026 |
 | **SightQuick** | Zero your rifle scope in minutes | June 2026 |
 | **Zap** | Electric trivia duels | June 2026 |
 | **Tri-Add** | The color-mixing game — a 2014 classic, relaunched | June 2026 |
