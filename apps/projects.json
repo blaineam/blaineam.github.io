@@ -21,12 +21,12 @@
       "title": "Haven",
       "tagline": "A private, post-quantum social network for the people you love",
       "page_url": "/apps/haven/",
-      "app_store_url": "",
+      "app_store_url": "https://apps.apple.com/us/app/haven/id6782147901",
       "icon_url": "/apps/haven/assets/icon.png",
-      "released": "2026-06",
-      "updated": "2026-06",
+      "released": "2026-07",
+      "updated": "2026-07",
       "version": "1.0.0",
-      "status": "beta",
+      "status": "released",
       "note": "Peer-to-peer, end-to-end encrypted, post-quantum social network for friends & family. No servers, no tracking, no ads. Nobody holds your keys."
     },
     {
