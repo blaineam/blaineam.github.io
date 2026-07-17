@@ -4,6 +4,19 @@
   "note": "Source of truth for app metadata. apps/index.html renders its OWN custom display order; this file is the chronological list.",
   "apps": [
     {
+      "id": "revela",
+      "title": "Revela",
+      "tagline": "Shoot film. Wait for it.",
+      "page_url": "/apps/revela/",
+      "app_store_url": "",
+      "icon_url": "/apps/revela/assets/images/icon.png",
+      "released": "2026-07",
+      "updated": "2026-07",
+      "version": "0.4.0",
+      "status": "beta",
+      "note": "A film camera that lives in your phone — honest rolls with real develop times, full-resolution RAW-first lab scans, movie reels, an AirPlay projector, and an earned darkroom. No account, no tracking, one price."
+    },
+    {
       "id": "haven",
       "title": "Haven",
       "tagline": "A private, post-quantum social network for the people you love",
