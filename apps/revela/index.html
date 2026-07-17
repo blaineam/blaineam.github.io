@@ -580,8 +580,6 @@
         .env-flap {
             position: absolute; left: 0; right: 0; top: 0; height: 52%;
             transform-origin: top center;
-            border-radius: 8px 8px 0 0;   /* match the envelope's corners */
-            overflow: hidden;             /* …and keep the seal on the paper */
             z-index: 4;
             /* closing: the flap seals only AFTER the prints are inside */
             transition: transform 0.7s cubic-bezier(0.4, 1.2, 0.4, 1) 0.6s,
@@ -593,13 +591,20 @@
             transition: transform 0.7s cubic-bezier(0.4, 1.2, 0.4, 1) 0s,
                         z-index 0s 0.3s;
         }
+        .flap-paper {
+            position: absolute; inset: 0;
+            border-radius: 8px 8px 0 0;   /* the flap's top corners follow the envelope */
+            overflow: hidden;
+        }
         .env-flap .tri {
             width: 100%; height: 100%;
             clip-path: polygon(0 0, 100% 0, 50% 100%);
             background: linear-gradient(180deg, #d9cfb8, #c4b899);
         }
         .env-seal {
-            position: absolute; left: 50%; top: 74%; transform: translate(-50%, -50%);
+            /* straddling the tip: half on the flap, half on the pocket — a
+               seal that actually seals the joint */
+            position: absolute; left: 50%; top: 100%; transform: translate(-50%, -58%);
             width: 44px; height: 44px; border-radius: 50%;
             background: var(--stopbath);
             color: #f2dcc4; font-family: 'Alfa Slab One', serif; font-size: 1.15rem;
@@ -912,7 +917,7 @@
                               fill="#e6dcc4" stroke="rgba(0,0,0,0.14)" stroke-width="1.5"/>
                     </svg>
                     <div class="env-flap">
-                        <div class="tri"></div>
+                        <div class="flap-paper"><div class="tri"></div></div>
                         <div class="env-seal">R</div>
                     </div>
                 </div>
