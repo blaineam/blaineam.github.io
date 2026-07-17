@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Revela — Shoot film. Wait for it.</title>
+    <meta name="description" content="A film camera that lives in your phone — honest rolls, real develop times, full-resolution lab scans, movie reels, and an envelope worth waiting for. $7.99, once.">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="favicon-96.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://wemiller.com/apps/revela/">
+    <meta property="og:title" content="Revela — Shoot film. Wait for it.">
+    <meta property="og:description" content="Load a roll. Shoot it blind. Wait for the lab. Tear open the envelope. A whole film ritual, not a filter.">
+    <meta property="og:image" content="https://wemiller.com/apps/revela/assets/images/icon.png">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Revela — Shoot film. Wait for it.">
+    <meta name="twitter:description" content="A film camera that lives in your phone — honest rolls, real develop times, an envelope worth waiting for.">
+    <meta name="twitter:image" content="https://wemiller.com/apps/revela/assets/images/icon.png">
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Special+Elite&family=Inter:wght@400;500;600&display=swap');
+
+        :root {
+            --darkroom: #221a12;
+            --darkroom-deep: #17110b;
+            --paper: #f0e9d8;
+            --paper-dim: #cfc6ae;
+            --cream: #efe8d5;
+            --mint: #b8d1c2;
+            --mint-deep: #8fb0a0;
+            --amber: #e8a33d;
+            --stopbath: #c24634;
+            --ink: #2b2218;
+            --muted: rgba(240, 233, 216, 0.55);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--darkroom);
+            color: var(--paper);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .type { font-family: 'Special Elite', monospace; }
+        .slab { font-family: 'Alfa Slab One', serif; font-weight: 400; }
+
+        /* The safelight bleeding in from the left, like the hall to the lab */
+        .glow-edge {
+            position: fixed;
+            left: 0; top: 0; bottom: 0;
+            width: 30px;
+            background: linear-gradient(to right, rgba(194, 60, 40, 0.45), transparent);
+            pointer-events: none;
+            z-index: 5;
+        }
+
+        .wrap { max-width: 980px; margin: 0 auto; padding: 0 24px; }
+
+        /* ── Hero ─────────────────────────────────────────── */
+        header {
+            position: relative;
+            padding: 96px 0 72px;
+            text-align: center;
+            background:
+                radial-gradient(ellipse 90% 60% at 50% 0%, rgba(232, 163, 61, 0.10), transparent 70%),
+                linear-gradient(180deg, #2a2015 0%, var(--darkroom) 100%);
+        }
+
+        .app-icon {
+            width: 116px; height: 116px;
+            border-radius: 26px;
+            box-shadow: 0 14px 42px rgba(0,0,0,0.55), 0 0 0 1px rgba(240,233,216,0.08);
+            margin-bottom: 28px;
+        }
+
+        h1 {
+            font-family: 'Alfa Slab One', serif;
+            font-weight: 400;
+            font-size: clamp(3rem, 9vw, 5rem);
+            letter-spacing: 0.04em;
+            color: var(--cream);
+            text-shadow: 0 3px 0 rgba(0,0,0,0.45);
+        }
+
+        .tagline {
+            font-family: 'Special Elite', monospace;
+            font-size: clamp(1.05rem, 3vw, 1.4rem);
+            color: var(--amber);
+            margin-top: 10px;
+        }
+
+        .sub {
+            max-width: 560px;
+            margin: 22px auto 0;
+            color: var(--muted);
+            font-size: 1.02rem;
+        }
+
+        .cta-row {
+            margin-top: 36px;
+            display: flex; gap: 16px; justify-content: center; align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .cta {
+            display: inline-block;
+            background: var(--stopbath);
+            color: var(--cream);
+            font-family: 'Special Elite', monospace;
+            font-size: 1.02rem;
+            padding: 14px 30px;
+            border-radius: 6px;
+            text-decoration: none;
+            box-shadow: 0 6px 18px rgba(194, 70, 52, 0.35);
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
+        .cta:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(194, 70, 52, 0.45); }
+        .cta.ghost {
+            background: transparent;
+            border: 1.5px solid rgba(240,233,216,0.3);
+            box-shadow: none;
+            color: var(--paper-dim);
+        }
+
+        .price-note {
+            font-family: 'Special Elite', monospace;
+            color: var(--muted);
+            font-size: 0.9rem;
+            margin-top: 14px;
+        }
+
+        /* ── Sections ─────────────────────────────────────── */
+        section { padding: 84px 0; position: relative; }
+
+        .kicker {
+            font-family: 'Special Elite', monospace;
+            color: var(--amber);
+            font-size: 0.85rem;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            text-align: center;
+        }
+
+        h2 {
+            font-family: 'Alfa Slab One', serif;
+            font-weight: 400;
+            font-size: clamp(1.7rem, 5vw, 2.5rem);
+            color: var(--cream);
+            text-align: center;
+            margin: 10px 0 14px;
+        }
+
+        .lede {
+            max-width: 620px;
+            margin: 0 auto;
+            text-align: center;
+            color: var(--muted);
+        }
+
+        /* Ritual steps as postmarked cards */
+        .steps {
+            margin-top: 52px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 22px;
+        }
+
+        .step {
+            background: var(--cream);
+            color: var(--ink);
+            border-radius: 8px;
+            padding: 26px 22px 24px;
+            box-shadow: 0 10px 26px rgba(0,0,0,0.4);
+            transform: rotate(-0.6deg);
+        }
+        .step:nth-child(2) { transform: rotate(0.7deg); }
+        .step:nth-child(3) { transform: rotate(-0.4deg); }
+        .step:nth-child(4) { transform: rotate(0.5deg); }
+
+        .step .no {
+            font-family: 'Special Elite', monospace;
+            display: inline-block;
+            color: var(--stopbath);
+            border: 1.6px solid var(--stopbath);
+            border-radius: 50%;
+            width: 34px; height: 34px;
+            line-height: 31px;
+            text-align: center;
+            transform: rotate(-6deg);
+            margin-bottom: 12px;
+        }
+
+        .step h3 {
+            font-family: 'Special Elite', monospace;
+            font-size: 1.06rem;
+            margin-bottom: 6px;
+        }
+
+        .step p { font-size: 0.93rem; color: rgba(43, 34, 24, 0.75); }
+
+        /* CSS film boxes, matching the ones in the fridge */
+        .stocks {
+            margin-top: 52px;
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .filmbox {
+            width: 108px; height: 168px;
+            background: var(--cream);
+            border-radius: 5px;
+            display: flex; flex-direction: column;
+            overflow: hidden;
+            box-shadow: 6px -6px 0 rgba(0,0,0,0.28), 0 10px 22px rgba(0,0,0,0.45);
+            transform: rotate(-1deg);
+            transition: transform 0.2s ease;
+        }
+        .filmbox:hover { transform: rotate(0deg) translateY(-4px); }
+        .filmbox:nth-child(even) { transform: rotate(1.2deg); }
+        .filmbox:nth-child(even):hover { transform: rotate(0deg) translateY(-4px); }
+
+        .filmbox .band {
+            height: 34px;
+            display: flex; align-items: center; justify-content: center;
+            color: #fff;
+            font-size: 0.62rem; font-weight: 600; letter-spacing: 0.25em;
+        }
+        .filmbox .face {
+            flex: 1;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            color: var(--ink);
+            gap: 2px;
+            padding: 6px;
+        }
+        .filmbox .name { font-family: 'Special Elite', monospace; font-size: 0.78rem; }
+        .filmbox .iso { font-family: 'Alfa Slab One', serif; font-size: 1.9rem; line-height: 1; }
+        .filmbox .kind { font-size: 0.5rem; letter-spacing: 0.12em; color: rgba(43,34,24,0.55); text-align: center; }
+        .filmbox .foot {
+            height: 20px;
+            display: flex; align-items: center; justify-content: center;
+            color: rgba(255,255,255,0.92);
+            font-size: 0.5rem; letter-spacing: 0.18em; font-weight: 700;
+        }
+
+        .chrome  { background: linear-gradient(135deg, #b8452f, #e8a33d); }
+        .sungold { background: linear-gradient(135deg, #c98a1e, #8a5a10); }
+        .panchro { background: linear-gradient(135deg, #4a4a4a, #232323); }
+        .cine    { background: linear-gradient(135deg, #2a5a8a, #1a3a5a); }
+        .chrome-iso  { color: #c2542f; }
+        .sungold-iso { color: #b07a18; }
+        .panchro-iso { color: #3a3a3a; }
+        .cine-iso    { color: #2a5a8a; }
+
+        /* Feature grid on darkroom paper */
+        .features {
+            margin-top: 52px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 18px;
+        }
+
+        .feature {
+            background: rgba(240, 233, 216, 0.05);
+            border: 1px solid rgba(240, 233, 216, 0.09);
+            border-radius: 10px;
+            padding: 24px 22px;
+        }
+
+        .feature h3 {
+            font-family: 'Special Elite', monospace;
+            color: var(--amber);
+            font-size: 1rem;
+            margin-bottom: 8px;
+        }
+
+        .feature p { color: var(--muted); font-size: 0.93rem; }
+
+        /* The lab section: safelight red */
+        .lab {
+            background:
+                radial-gradient(ellipse 70% 55% at 50% 40%, rgba(194, 60, 40, 0.16), transparent 75%),
+                var(--darkroom-deep);
+        }
+        .lab .kicker { color: #e06046; }
+
+        /* Mint fridge banner */
+        .fridge-note {
+            margin-top: 52px;
+            background: var(--mint);
+            color: var(--ink);
+            border-radius: 14px;
+            padding: 34px 30px;
+            text-align: center;
+            box-shadow: 10px -10px 0 rgba(0,0,0,0.25), 0 16px 34px rgba(0,0,0,0.4);
+        }
+        .fridge-note .slab { font-size: 1.4rem; letter-spacing: 0.06em; }
+        .fridge-note p { max-width: 560px; margin: 10px auto 0; color: rgba(43,34,24,0.75); font-size: 0.96rem; }
+
+        footer {
+            padding: 56px 0 64px;
+            text-align: center;
+            color: var(--muted);
+            font-size: 0.88rem;
+            border-top: 1px solid rgba(240,233,216,0.08);
+        }
+        footer a { color: var(--paper-dim); }
+        .postmark {
+            font-family: 'Special Elite', monospace;
+            display: inline-block;
+            color: var(--muted);
+            border: 1.6px solid rgba(240,233,216,0.25);
+            border-radius: 6px;
+            padding: 8px 16px;
+            transform: rotate(-2deg);
+            margin-bottom: 18px;
+        }
+
+        @media (max-width: 560px) {
+            section { padding: 64px 0; }
+            .filmbox { width: 92px; height: 148px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="glow-edge" aria-hidden="true"></div>
+
+    <header>
+        <div class="wrap">
+            <img class="app-icon" src="assets/images/icon.png" alt="Revela app icon — a print developing under warm light" width="116" height="116">
+            <h1>REVELA</h1>
+            <p class="tagline">Shoot film. Wait for it.</p>
+            <p class="sub">A film camera that lives in your phone — not a filter, a whole ritual.
+               Load a roll, shoot it blind, mail it to the lab, and tear open the envelope.</p>
+            <div class="cta-row">
+                <a class="cta" href="#ritual">See the ritual</a>
+                <a class="cta ghost" href="#stocks">Browse the fridge</a>
+            </div>
+            <p class="price-note">$7.99 · once · no subscription · no account — coming soon to the App&nbsp;Store</p>
+        </div>
+    </header>
+
+    <section id="ritual">
+        <div class="wrap">
+            <p class="kicker">The honest way</p>
+            <h2>Four steps. No shortcuts.</h2>
+            <p class="lede">Honest Mode means no preview, no switching stocks mid-roll, and a real wait
+               while the lab does its work. That's not a limitation — that's the whole point.</p>
+            <div class="steps">
+                <div class="step">
+                    <span class="no">1</span>
+                    <h3>Load a roll</h3>
+                    <p>Pick a box from the humming mint fridge — slide film from the '50s, drugstore color, panchromatic black &amp; white, or motion-picture stock.</p>
+                </div>
+                <div class="step">
+                    <span class="no">2</span>
+                    <h3>Shoot it blind</h3>
+                    <p>A viewfinder, a wind lever, a frame counter. Every frame counts because you can't see a single one of them yet.</p>
+                </div>
+                <div class="step">
+                    <span class="no">3</span>
+                    <h3>Mail it off</h3>
+                    <p>Rewind, drop the canister in the mailer, and wait like everyone used to. Rush it in an hour — or send it away for days.</p>
+                </div>
+                <div class="step">
+                    <span class="no">4</span>
+                    <h3>Tear it open</h3>
+                    <p>Your envelope lands on the shelf. Flip it, pull the seal, and meet your photographs for the very first time.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="stocks" style="background: var(--darkroom-deep);">
+        <div class="wrap">
+            <p class="kicker">The fridge</p>
+            <h2>Stocks from across the decades</h2>
+            <p class="lede">Every stock is built from per-film characteristic curves, layered grain,
+               halation, and bloom — developed from RAW into full-resolution lab scans.
+               The best of film, not a low-effort rendition of it.</p>
+            <div class="stocks" aria-hidden="true">
+                <div class="filmbox">
+                    <div class="band chrome">R E V E L A</div>
+                    <div class="face">
+                        <span class="name">Chrome 25</span>
+                        <span class="iso chrome-iso">25</span>
+                        <span class="kind">COLOR REVERSAL FILM</span>
+                    </div>
+                    <div class="foot chrome">135 · 36 EXP</div>
+                </div>
+                <div class="filmbox">
+                    <div class="band sungold">R E V E L A</div>
+                    <div class="face">
+                        <span class="name">Sungold 200</span>
+                        <span class="iso sungold-iso">200</span>
+                        <span class="kind">COLOR NEGATIVE FILM</span>
+                    </div>
+                    <div class="foot sungold">135 · 36 EXP</div>
+                </div>
+                <div class="filmbox">
+                    <div class="band panchro">R E V E L A</div>
+                    <div class="face">
+                        <span class="name">Panchro 400</span>
+                        <span class="iso panchro-iso">400</span>
+                        <span class="kind">PANCHROMATIC B&amp;W</span>
+                    </div>
+                    <div class="foot panchro">135 · 36 EXP</div>
+                </div>
+                <div class="filmbox">
+                    <div class="band cine">R E V E L A</div>
+                    <div class="face">
+                        <span class="name">Cine 500T</span>
+                        <span class="iso cine-iso">500</span>
+                        <span class="kind">MOTION PICTURE FILM</span>
+                    </div>
+                    <div class="foot cine">MOVIE REEL</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="wrap">
+            <p class="kicker">More than stills</p>
+            <h2>Reels, projector nights, and a studio</h2>
+            <div class="features">
+                <div class="feature">
+                    <h3>Movie reels</h3>
+                    <p>Cine stocks load as fixed-length reels at 24 fps — or a Super-8-style 18 — developed frame by frame with optional warm vinyl-character sound.</p>
+                </div>
+                <div class="feature">
+                    <h3>Projector night</h3>
+                    <p>AirPlay your finished rolls to the TV as a true second screen: slide-carousel clunks, projector fan hum, the whole family gathered around.</p>
+                </div>
+                <div class="feature">
+                    <h3>A lived-in studio</h3>
+                    <p>Shelves of photo boxes down a corridor, a wall calendar with reveal days circled in pen, a radio that plays, plants that grow the more you shoot — and eventually, a dog underfoot.</p>
+                </div>
+                <div class="feature">
+                    <h3>Premium lab scans</h3>
+                    <p>Finished prints land in your Photos library at full resolution. RAW-first pipeline, per-stock color science, honest grain.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="lab">
+        <div class="wrap">
+            <p class="kicker">Earn the darkroom</p>
+            <h2>The Lab</h2>
+            <p class="lede">Keep shooting and a red glow appears at the end of the hall. Behind that door
+               is a safelight darkroom where you develop photos from your own library into any stock —
+               trays, agitation, hanging prints and all. You become your own lab.</p>
+            <div class="fridge-note">
+                <div class="slab">FILM KEEPS BEST IN THE FRIDGE!</div>
+                <p>Your photographs never leave your devices. No account, no server, no tracking —
+                   just you, a fridge full of film, and the mail.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="wrap">
+            <div class="postmark">REVELA LAB · 1 SAFELIGHT WAY · DARKROOM COUNTY, F/8</div>
+            <p>© 2026 Blaine Miller · <a href="/privacy/">Privacy</a> · <a href="/apps/">All apps</a></p>
+        </div>
+    </footer>
+</body>
+</html>
