@@ -205,6 +205,10 @@
             padding-bottom: 7svh;
             margin-top: 8px;
         }
+        .plant { position: relative; z-index: 4; width: 84px; height: 140px; align-self: flex-end; }
+        .plant-left { margin-right: 14px; }
+        .plant-right { margin-left: 14px; }
+        @media (max-width: 560px) { .plant { width: 62px; height: 104px; } }
         .fridge-hint {
             position: absolute; bottom: 2.5svh; left: 50%; transform: translateX(-50%);
             font-family: 'Special Elite', monospace; font-size: 0.8rem;
@@ -348,8 +352,7 @@
             position: absolute; left: 16%; top: 32%;
             width: 26%;
             background: #f4efe2;
-            /* instant print: slim even sides, the chin carries the weight */
-            padding: 2.5% 2.5% 9%;
+            padding: 3%;   /* an even bordered print, all four sides alike */
             box-shadow: 0 4px 8px rgba(0,0,0,0.35);
             transform: rotate(-6deg);
         }
@@ -401,19 +404,6 @@
             background: var(--label, #c9803a);
         }
 
-        /* booklet on top, handle side */
-        .booklet {
-            position: absolute; top: -17px; right: 14%;
-            width: 56px; height: 30px;
-            background: linear-gradient(180deg, #c9a35a, #a67f3e);
-            border-radius: 2px;
-            transform: rotate(-3deg);
-            box-shadow: 2px 2px 0 #efe8d5, 3px 5px 8px rgba(0,0,0,0.4);
-            z-index: 4;
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-            color: #3a2a12; font-size: 0.42rem; font-weight: 800; letter-spacing: 0.12em;
-        }
-        .booklet small { font-size: 0.38rem; font-weight: 600; font-style: italic; letter-spacing: 0; }
 
         /* the resident dog, out for a stroll */
         .stroll {
@@ -590,6 +580,8 @@
         .env-flap {
             position: absolute; left: 0; right: 0; top: 0; height: 52%;
             transform-origin: top center;
+            border-radius: 8px 8px 0 0;   /* match the envelope's corners */
+            overflow: hidden;             /* …and keep the seal on the paper */
             z-index: 4;
             /* closing: the flap seals only AFTER the prints are inside */
             transition: transform 0.7s cubic-bezier(0.4, 1.2, 0.4, 1) 0.6s,
@@ -607,7 +599,7 @@
             background: linear-gradient(180deg, #d9cfb8, #c4b899);
         }
         .env-seal {
-            position: absolute; left: 50%; top: 88%; transform: translate(-50%, -50%);
+            position: absolute; left: 50%; top: 74%; transform: translate(-50%, -50%);
             width: 44px; height: 44px; border-radius: 50%;
             background: var(--stopbath);
             color: #f2dcc4; font-family: 'Alfa Slab One', serif; font-size: 1.15rem;
@@ -763,6 +755,15 @@
         </div>
 
         <div class="fridge-zone">
+            <svg class="plant plant-left" viewBox="0 0 90 150" aria-hidden="true">
+                <path d="M 45 96 Q 20 70 24 34" fill="none" stroke="#2e5233" stroke-width="10" stroke-linecap="round"/>
+                <path d="M 45 96 Q 45 56 45 26" fill="none" stroke="#3a6a40" stroke-width="11" stroke-linecap="round"/>
+                <path d="M 45 96 Q 68 68 64 40" fill="none" stroke="#2e5233" stroke-width="10" stroke-linecap="round"/>
+                <path d="M 45 100 Q 30 84 30 60" fill="none" stroke="#488050" stroke-width="9" stroke-linecap="round"/>
+                <path d="M 45 100 Q 60 84 60 62" fill="none" stroke="#488050" stroke-width="9" stroke-linecap="round"/>
+                <path d="M 24 104 L 66 104 L 61 144 Q 45 150 29 144 Z" fill="#a3552f"/>
+                <rect x="21" y="100" width="48" height="9" rx="3" fill="#b4643a"/>
+            </svg>
             <div class="fridge" id="fridge" role="button" aria-label="Open the fridge" tabindex="0">
                 <div class="cabinet"></div>
                 <div class="interior" id="interior"></div>
@@ -788,8 +789,14 @@
                         </div>
                     </div>
                 </div>
-                <div class="booklet" aria-hidden="true">REVELA<small>owner's manual</small></div>
             </div>
+            <svg class="plant plant-right" viewBox="0 0 90 150" aria-hidden="true">
+                <path d="M 45 98 Q 26 76 30 44" fill="none" stroke="#3a6a40" stroke-width="9" stroke-linecap="round"/>
+                <path d="M 45 98 Q 46 62 42 34" fill="none" stroke="#488050" stroke-width="10" stroke-linecap="round"/>
+                <path d="M 45 98 Q 64 74 60 50" fill="none" stroke="#2e5233" stroke-width="9" stroke-linecap="round"/>
+                <path d="M 26 104 L 64 104 L 60 142 Q 45 148 30 142 Z" fill="#a3552f"/>
+                <rect x="23" y="100" width="44" height="9" rx="3" fill="#b4643a"/>
+            </svg>
             <p class="fridge-hint type" id="fridgeHint">tap the fridge — film keeps best in there</p>
         </div>
 
