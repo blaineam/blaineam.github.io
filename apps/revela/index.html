@@ -539,9 +539,14 @@
             position: absolute; left: 50%; bottom: 42%; z-index: 2;
             width: 62%; aspect-ratio: 1.4;
             transform: translateX(-50%) translateY(20%);
-            transition: transform 0.9s cubic-bezier(0.3, 1.1, 0.4, 1) 0.25s;
+            /* closing: the prints slide home IMMEDIATELY */
+            transition: transform 0.7s cubic-bezier(0.3, 1.1, 0.4, 1) 0s;
         }
-        .env-stage.open .env-prints { transform: translateX(-50%) translateY(-78%); }
+        .env-stage.open .env-prints {
+            transform: translateX(-50%) translateY(-78%);
+            /* opening: they wait for the flap to swing clear */
+            transition: transform 0.9s cubic-bezier(0.3, 1.1, 0.4, 1) 0.3s;
+        }
         .print {
             position: absolute; inset: 0;
             background: #f4efe2; padding: 4.5% 4.5% 13%;
@@ -557,10 +562,17 @@
         .env-flap {
             position: absolute; left: 0; right: 0; top: 0; height: 52%;
             transform-origin: top center;
-            transition: transform 0.7s cubic-bezier(0.4, 1.2, 0.4, 1);
             z-index: 4;
+            /* closing: the flap seals only AFTER the prints are inside */
+            transition: transform 0.7s cubic-bezier(0.4, 1.2, 0.4, 1) 0.6s,
+                        z-index 0s 0.6s;
         }
-        .env-stage.open .env-flap { transform: rotateX(165deg); z-index: 1; transition: transform 0.7s cubic-bezier(0.4, 1.2, 0.4, 1), z-index 0s 0.3s; }
+        .env-stage.open .env-flap {
+            transform: rotateX(165deg); z-index: 1;
+            /* opening: flap first, dropping behind mid-swing */
+            transition: transform 0.7s cubic-bezier(0.4, 1.2, 0.4, 1) 0s,
+                        z-index 0s 0.3s;
+        }
         .env-flap .tri {
             width: 100%; height: 100%;
             clip-path: polygon(0 0, 100% 0, 50% 100%);
@@ -860,11 +872,11 @@
                     <!-- The folded back: side flaps then bottom flap, one SVG -->
                     <svg class="env-folds" viewBox="0 0 400 258" preserveAspectRatio="none"
                          xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                        <path d="M 0 0 L 224 134 L 176 134 Z M 0 0 L 0 258 L 200 258 Z"
+                        <path d="M 0 0 L 212 134 L 0 258 Z"
                               fill="#e3d8c0" stroke="rgba(0,0,0,0.12)" stroke-width="1.5"/>
-                        <path d="M 400 0 L 176 134 L 224 134 Z M 400 0 L 400 258 L 200 258 Z"
+                        <path d="M 400 0 L 188 134 L 400 258 Z"
                               fill="#ddd2b8" stroke="rgba(0,0,0,0.12)" stroke-width="1.5"/>
-                        <path d="M 0 258 L 200 104 L 400 258 Z"
+                        <path d="M 0 258 L 200 100 L 400 258 Z"
                               fill="#e6dcc4" stroke="rgba(0,0,0,0.14)" stroke-width="1.5"/>
                     </svg>
                     <div class="env-flap">
