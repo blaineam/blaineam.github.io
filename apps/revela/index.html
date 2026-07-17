@@ -318,7 +318,8 @@
             position: absolute; left: 16%; top: 32%;
             width: 26%;
             background: #f4efe2;
-            padding: 4.5% 4.5% 14%;
+            /* instant print: slim even sides, the chin carries the weight */
+            padding: 2.5% 2.5% 9%;
             box-shadow: 0 4px 8px rgba(0,0,0,0.35);
             transform: rotate(-6deg);
         }
@@ -715,7 +716,9 @@
                 <a class="cta" href="#ritual">See the ritual</a>
                 <a class="cta ghost" href="#stocks">Browse the stocks</a>
             </div>
-            <p class="price-note">$7.99 · once · no subscription · no account — coming soon to the App&nbsp;Store</p>
+            <p class="price-note">$7.99 · once · no subscription · no account —
+               <a href="https://apps.apple.com/us/app/revela-vintage-film-camera/id6791874917"
+                  style="color: var(--amber);">on the App&nbsp;Store</a></p>
         </div>
 
         <div class="wall-things" aria-hidden="true">
@@ -1069,7 +1072,7 @@
     // ── The calendar: this month's name, a few days circled in pen ──
     (function () {
         const monthEl = document.querySelector(".calendar .month");
-        monthEl.textContent = new Date().toLocaleString("en", { month: "short" }).toUpperCase();
+        monthEl.textContent = new Date().toLocaleString(undefined, { month: "short" }).toUpperCase();
         const days = document.getElementById("caldays");
         const circled = new Set([9, 17, 24]);
         for (let d = 0; d < 28; d++) {
