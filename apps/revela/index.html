@@ -217,6 +217,7 @@
 
         .fridge {
             position: relative;
+            z-index: 5;              /* the door swings OVER the plants */
             width: min(300px, 74vw);
             aspect-ratio: 0.62;
             cursor: pointer;
@@ -407,16 +408,9 @@
 
         /* the resident dog, out for a stroll */
         .stroll {
-            position: absolute; bottom: 12px; left: -140px; z-index: 6;
-            animation: stroll 34s linear infinite;
+            position: absolute; bottom: 12px; left: 0; z-index: 4;
             pointer-events: none;
-        }
-        @keyframes stroll {
-            0%   { transform: translateX(0) scaleX(1); }
-            46%  { transform: translateX(calc(100vw + 150px)) scaleX(1); }
-            50%  { transform: translateX(calc(100vw + 150px)) scaleX(-1); }
-            96%  { transform: translateX(0) scaleX(-1); }
-            100% { transform: translateX(0) scaleX(1); }
+            will-change: transform;
         }
         .dog { width: 88px; height: 62px; }
         .dog .leg { transform-origin: center 46px; animation: step 0.5s ease-in-out infinite alternate; }
@@ -723,7 +717,7 @@
             .fbox { width: 116px; height: 182px; }
         }
         @media (prefers-reduced-motion: reduce) {
-            .stroll, .dog *, .hangprint, .bulb, .neon { animation: none !important; }
+            .dog *, .hangprint, .bulb, .neon { animation: none !important; }
         }
     </style>
 </head>
@@ -1052,11 +1046,83 @@
 
     const fridge = document.getElementById("fridge");
     const hint = document.getElementById("fridgeHint");
-    function toggleFridge() {
+
+    // ── The dog: a real walker with door manners ──────────────
+    // The door swings left over the floor; that swept area is a place a
+    // polite dog does not stand. Opening WAITS for him to amble clear,
+    // and while the door is open he treats the zone like a wall.
+    const studio = document.querySelector(".studio");
+    const stroll = document.querySelector(".stroll");
+    const dogState = { x: -120, dir: 1, speed: 42, waiting: 0 };
+    let doorOpen = false;
+    let pendingToggle = null;
+
+    function doorZone() {
+        const f = fridge.getBoundingClientRect();
+        const s = studio.getBoundingClientRect();
+        // the swing sweeps one door-width left of the fridge
+        return { left: f.left - s.left - f.width - 20, right: f.left - s.left + f.width + 8 };
+    }
+    function dogSpan() {
+        return { left: dogState.x, right: dogState.x + 96 };
+    }
+    function dogInZone() {
+        const z = doorZone(), d = dogSpan();
+        return d.right > z.left && d.left < z.right;
+    }
+
+    let lastT = performance.now();
+    function walk() {
+        const t = performance.now();
+        const dt = Math.min(0.06, (t - lastT) / 1000);
+        lastT = t;
+        const w = studio.clientWidth;
+        if (dogState.waiting > 0) {
+            dogState.waiting -= dt;
+        } else {
+            let hurry = pendingToggle && dogInZone() ? 3.6 : 1;
+            dogState.x += dogState.dir * dogState.speed * hurry * dt;
+            const z = doorZone();
+            // an open (or about-to-move) door is a wall
+            if ((doorOpen || pendingToggle) && dogInZone()) {
+                if (dogState.dir > 0 && dogState.x + 96 > z.left && dogState.x < z.left) {
+                    dogState.dir = -1;
+                } else if (dogState.dir < 0 && dogState.x < z.right && dogState.x + 96 > z.right) {
+                    dogState.dir = 1;
+                }
+            }
+            if (dogState.x > w + 130) { dogState.dir = -1; dogState.waiting = 1.2; }
+            if (dogState.x < -130) { dogState.dir = 1; dogState.waiting = 1.2; }
+        }
+        stroll.style.transform = `translateX(${dogState.x}px) scaleX(${dogState.dir})`;
+        // a queued toggle fires the moment he's clear
+        if (pendingToggle && !dogInZone()) {
+            const fn = pendingToggle; pendingToggle = null; fn();
+        }
+    }
+    // An interval, not rAF: it keeps ticking in throttled/background
+    // contexts, so a queued door-swing can never stall.
+    setInterval(walk, 33);
+
+    function swingFridge() {
         const opening = !fridge.classList.contains("open");
+        doorOpen = opening;
         fridge.classList.toggle("open");
         hint.textContent = opening ? "twelve stocks, chilled since whenever" : "tap the fridge — film keeps best in there";
         thunk(opening ? 110 : 80, opening ? 0.18 : 0.28, 0.20, "triangle");
+    }
+    function toggleFridge() {
+        if (dogInZone()) {
+            // wait for the dog — he hustles out the NEAREST side
+            hint.textContent = "one sec — dog in the way";
+            const z = doorZone();
+            const mid = (z.left + z.right) / 2;
+            dogState.dir = (dogState.x + 48) < mid ? -1 : 1;
+            dogState.waiting = 0;
+            pendingToggle = swingFridge;
+        } else {
+            swingFridge();
+        }
     }
     fridge.addEventListener("click", toggleFridge);
     fridge.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggleFridge(); } });
