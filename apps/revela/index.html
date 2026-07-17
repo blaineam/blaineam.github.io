@@ -390,7 +390,7 @@
 
         /* the resident dog, out for a stroll */
         .stroll {
-            position: absolute; bottom: 3.2svh; left: -140px; z-index: 6;
+            position: absolute; bottom: 12px; left: -140px; z-index: 6;
             animation: stroll 34s linear infinite;
             pointer-events: none;
         }
@@ -401,12 +401,12 @@
             96%  { transform: translateX(0) scaleX(-1); }
             100% { transform: translateX(0) scaleX(1); }
         }
-        .dog { width: 108px; height: 76px; }
+        .dog { width: 88px; height: 62px; }
         .dog .leg { transform-origin: center 46px; animation: step 0.5s ease-in-out infinite alternate; }
         .dog .leg.alt { animation: step 0.5s ease-in-out infinite alternate-reverse; }
         @keyframes step { from { transform: rotate(-13deg); } to { transform: rotate(13deg); } }
-        .dog .tail { transform-origin: 22px 30px; animation: wag 0.55s ease-in-out infinite alternate; }
-        @keyframes wag { from { transform: rotate(-8deg); } to { transform: rotate(12deg); } }
+        .dog .tail { transform-origin: 26px 32px; animation: wag 0.55s ease-in-out infinite alternate; }
+        @keyframes wag { from { transform: rotate(-6deg); } to { transform: rotate(9deg); } }
 
         /* ═══════════ shared section chrome ═══════════ */
         section { padding: 88px 0; position: relative; }
@@ -536,7 +536,7 @@
             background: #9c8b6e;
         }
         .env-prints {
-            position: absolute; left: 50%; bottom: 42%;
+            position: absolute; left: 50%; bottom: 42%; z-index: 2;
             width: 62%; aspect-ratio: 1.4;
             transform: translateX(-50%) translateY(20%);
             transition: transform 0.9s cubic-bezier(0.3, 1.1, 0.4, 1) 0.25s;
@@ -560,7 +560,7 @@
             transition: transform 0.7s cubic-bezier(0.4, 1.2, 0.4, 1);
             z-index: 4;
         }
-        .env-stage.open .env-flap { transform: rotateX(165deg); }
+        .env-stage.open .env-flap { transform: rotateX(165deg); z-index: 1; transition: transform 0.7s cubic-bezier(0.4, 1.2, 0.4, 1), z-index 0s 0.3s; }
         .env-flap .tri {
             width: 100%; height: 100%;
             clip-path: polygon(0 0, 100% 0, 50% 100%);
@@ -574,19 +574,10 @@
             display: flex; align-items: center; justify-content: center;
             box-shadow: 0 3px 6px rgba(0,0,0,0.35);
         }
-        .env-side {
+        .env-folds {
             position: absolute; inset: 0; z-index: 3;
-            background: linear-gradient(180deg, #e6dcc4, #d4c8ab);
-            clip-path: polygon(0 0, 56% 52%, 44% 52%, 0 0, 0 100%, 100% 100%, 100% 0, 44% 52%, 56% 52%, 100% 0);
+            width: 100%; height: 100%;
             border-radius: 8px;
-        }
-        .env-body {
-            position: absolute; inset: 0; z-index: 3;
-            border-radius: 8px;
-            background:
-                linear-gradient(to bottom right, transparent 49.6%, #e0d5bc 50%) top left / 50% 52% no-repeat,
-                linear-gradient(to bottom left, transparent 49.6%, #e0d5bc 50%) top right / 50% 52% no-repeat,
-                linear-gradient(180deg, #e6dcc4, #d0c4a6) bottom / 100% 55% no-repeat;
         }
         .env-caption {
             position: absolute; bottom: -14px; left: 0; right: 0;
@@ -771,7 +762,7 @@
             <svg class="dog" viewBox="0 0 108 76" xmlns="http://www.w3.org/2000/svg">
                 <!-- tail: rooted at the rump, curling up over the back -->
                 <g class="tail">
-                    <path d="M 22 30 Q 6 24 8 8" fill="none" stroke="#a5762f"
+                    <path d="M 26 32 Q 8 26 12 10" fill="none" stroke="#a5762f"
                           stroke-width="7" stroke-linecap="round"/>
                 </g>
                 <!-- far legs: opaque shadow tone, drawn behind the body -->
@@ -789,16 +780,16 @@
                 <!-- near legs, catching the light -->
                 <g class="leg"><rect x="24" y="42" width="7.5" height="22" rx="3.75" fill="#c99e52"/></g>
                 <g class="leg alt"><rect x="54" y="42" width="7.5" height="22" rx="3.75" fill="#c99e52"/></g>
-                <!-- head, snout forward, floppy ear -->
-                <circle cx="82" cy="20" r="14" fill="#d9ae61"/>
-                <ellipse cx="94" cy="25" rx="9" ry="6" fill="#e6c286"/>
-                <circle cx="101" cy="24" r="3" fill="#1d1712"/>
-                <circle cx="85" cy="16" r="2.2" fill="#1d1712"/>
-                <path d="M 72 8 Q 66 22 74 28 Q 79 20 78 9 Q 75 6 72 8 Z" fill="#a5762f"/>
-                <!-- collar wrapping the neck, tag hanging at the LOW end -->
-                <rect x="68" y="24" width="6.5" height="17" rx="3.25" fill="#c24634"
-                      transform="rotate(-38 71 32)"/>
-                <circle cx="76" cy="40" r="3.4" fill="#f2cc66"/>
+                <!-- head settled ON the shoulders, snout forward, floppy ear -->
+                <circle cx="78" cy="22" r="13.5" fill="#d9ae61"/>
+                <ellipse cx="90" cy="27" rx="8.5" ry="6" fill="#e6c286"/>
+                <circle cx="96.5" cy="26" r="3" fill="#1d1712"/>
+                <circle cx="81" cy="18" r="2.2" fill="#1d1712"/>
+                <path d="M 68 10 Q 62 24 70 30 Q 75 22 74 11 Q 71 8 68 10 Z" fill="#a5762f"/>
+                <!-- collar wrapping the neck seam, tag hanging at the LOW end -->
+                <rect x="64" y="26" width="6.5" height="16" rx="3.25" fill="#c24634"
+                      transform="rotate(-36 67 34)"/>
+                <circle cx="71.5" cy="41" r="3.2" fill="#f2cc66"/>
             </svg>
         </div>
 
@@ -866,8 +857,16 @@
                         <div class="print"><div class="ph"></div></div>
                         <div class="print"><div class="ph"></div></div>
                     </div>
-                    <div class="env-side"></div>
-                    <div class="env-body"></div>
+                    <!-- The folded back: side flaps then bottom flap, one SVG -->
+                    <svg class="env-folds" viewBox="0 0 400 258" preserveAspectRatio="none"
+                         xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <path d="M 0 0 L 224 134 L 176 134 Z M 0 0 L 0 258 L 200 258 Z"
+                              fill="#e3d8c0" stroke="rgba(0,0,0,0.12)" stroke-width="1.5"/>
+                        <path d="M 400 0 L 176 134 L 224 134 Z M 400 0 L 400 258 L 200 258 Z"
+                              fill="#ddd2b8" stroke="rgba(0,0,0,0.12)" stroke-width="1.5"/>
+                        <path d="M 0 258 L 200 104 L 400 258 Z"
+                              fill="#e6dcc4" stroke="rgba(0,0,0,0.14)" stroke-width="1.5"/>
+                    </svg>
                     <div class="env-flap">
                         <div class="tri"></div>
                         <div class="env-seal">R</div>
