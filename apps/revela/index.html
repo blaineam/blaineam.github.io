@@ -433,6 +433,60 @@
         }
         .lede { max-width: 640px; margin: 0 auto; text-align: center; color: var(--muted); }
 
+        /* ═══════════ THE FILMSTRIP (device renders) ═══════════ */
+        /* The phone renders in assets/devices/ are a variant of the App Store
+           screenshot project (Revela/docs/appstore-screenshots/Revela-iphone.monkr)
+           with the background switched to true transparent and the baked shadow
+           turned OFF — see assets/regen-devices.sh. They are a clean alpha cut:
+           no plate, no halo, nothing to clash with the darkroom wall.
+
+           Because the render carries no shadow, the CSS owns it. drop-shadow()
+           follows the alpha channel, so it hugs the phone silhouette rather than
+           boxing it. Do NOT add a background or border — and do not re-enable the
+           shadow in the .monkr, or you get two of them. */
+        .filmstrip-sec { overflow: hidden; }
+        .filmstrip {
+            margin-top: 46px; position: relative; padding: 22px 0;
+            border-top: 2px solid rgba(240,233,216,0.09);
+            border-bottom: 2px solid rgba(240,233,216,0.09);
+            background: rgba(0,0,0,0.14);
+        }
+        /* sprocket holes, top and bottom, like the rebate of a 35mm strip */
+        .filmstrip::before, .filmstrip::after {
+            content: ''; position: absolute; left: 0; right: 0; height: 11px;
+            background-image: repeating-linear-gradient(to right,
+                rgba(240,233,216,0.16) 0 15px, transparent 15px 37px);
+            pointer-events: none;
+        }
+        .filmstrip::before { top: 5px; }
+        .filmstrip::after  { bottom: 5px; }
+        .strip-rail {
+            display: flex; gap: 26px; align-items: flex-end;
+            overflow-x: auto; overflow-y: hidden;
+            scroll-snap-type: x proximity;
+            padding: 20px 24px 24px;
+            scrollbar-width: none; -webkit-overflow-scrolling: touch;
+        }
+        .strip-rail::-webkit-scrollbar { display: none; }
+        /* The render inherits the App Store canvas, in which the phone occupies
+           ~90% of the width — hence the box being wider than the phone reads. */
+        .shot { flex: 0 0 auto; scroll-snap-align: center; width: 252px; margin: 0; text-align: center; }
+        .shot img {
+            display: block; width: 100%; height: auto;
+            filter: drop-shadow(0 16px 20px rgba(0,0,0,0.55));
+            transition: transform 0.25s ease;
+        }
+        .shot:hover img { transform: translateY(-9px); }
+        .shot figcaption {
+            font-family: 'Special Elite', monospace;
+            font-size: 0.76rem; letter-spacing: 0.14em; text-transform: uppercase;
+            color: var(--muted); margin-top: 12px;
+        }
+        .strip-hint {
+            text-align: center; margin-top: 22px; color: var(--muted);
+            font-family: 'Special Elite', monospace; font-size: 0.82rem;
+        }
+
         /* ritual postcards */
         .steps { margin-top: 52px; display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 22px; }
         .step {
@@ -869,6 +923,61 @@
                 </div>
             </div>
         </div>
+    </section>
+
+    <!-- ═══ THE FILMSTRIP ═══ -->
+    <section class="filmstrip-sec" id="screens">
+        <div class="wrap">
+            <p class="kicker">Frame by frame</p>
+            <h2>Eight frames off the roll</h2>
+            <p class="lede">Not mockup theatre — this is the actual app: the studio you walk around in,
+               the fridge you raid, the finder you shoot blind through, and the envelope that finally lands.</p>
+        </div>
+        <div class="filmstrip">
+            <div class="strip-rail" role="region" aria-label="Revela screenshots" tabindex="0">
+                <figure class="shot">
+                    <img src="assets/devices/01-studio.webp" width="920" height="1900" loading="lazy"
+                         alt="The Revela studio — a mint fridge against a dark wall, framed prints, a calendar and clock, a dog on the floorboards.">
+                    <figcaption>The studio</figcaption>
+                </figure>
+                <figure class="shot">
+                    <img src="assets/devices/02-fridge.webp" width="920" height="1900" loading="lazy"
+                         alt="The fridge standing open, twelve boxes of film stock lined up on the shelves.">
+                    <figcaption>The fridge</figcaption>
+                </figure>
+                <figure class="shot">
+                    <img src="assets/devices/03-camera.webp" width="920" height="1900" loading="lazy"
+                         alt="Behind the finder — the camera body, wind lever and frame counter, no preview of the stock.">
+                    <figcaption>The finder</figcaption>
+                </figure>
+                <figure class="shot">
+                    <img src="assets/devices/04-shelf.webp" width="920" height="1900" loading="lazy"
+                         alt="The shelf down the corridor — photo boxes, a waiting envelope, an hourglass counting down the develop time.">
+                    <figcaption>The shelf</figcaption>
+                </figure>
+                <figure class="shot">
+                    <img src="assets/devices/05-envelope.webp" width="920" height="1900" loading="lazy"
+                         alt="Reveal day — a stamped lab envelope addressed to The Photographer, waiting to be opened.">
+                    <figcaption>Reveal day</figcaption>
+                </figure>
+                <figure class="shot">
+                    <img src="assets/devices/06-stack.webp" width="920" height="1900" loading="lazy"
+                         alt="Flicking through a developed box of prints, one photograph at a time.">
+                    <figcaption>The prints</figcaption>
+                </figure>
+                <figure class="shot">
+                    <img src="assets/devices/07-lab.webp" width="920" height="1900" loading="lazy"
+                         alt="The Lab — a safelight darkroom with a negative on the bench and developing trays.">
+                    <figcaption>The Lab</figcaption>
+                </figure>
+                <figure class="shot">
+                    <img src="assets/devices/08-theater.webp" width="920" height="1900" loading="lazy"
+                         alt="Projector night — a finished roll playing to the television as a second screen.">
+                    <figcaption>Projector night</figcaption>
+                </figure>
+            </div>
+        </div>
+        <p class="strip-hint">drag the strip — there are eight frames on this roll</p>
     </section>
 
     <!-- ═══ ALL TWELVE STOCKS ═══ -->
