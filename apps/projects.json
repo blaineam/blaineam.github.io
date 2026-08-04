@@ -8,25 +8,25 @@
       "title": "Revela",
       "tagline": "Shoot film. Wait for it.",
       "page_url": "/apps/revela/",
-      "app_store_url": "https://apps.apple.com/us/app/revela-vintage-film-camera/id6791874917",
+      "app_store_url": "",
       "icon_url": "/apps/revela/assets/images/icon.png",
       "released": "2026-07",
       "updated": "2026-07",
       "version": "0.4.0",
-      "status": "in-review",
-      "note": "A vintage film camera that lives in your phone — honest rolls with real develop times, full-resolution RAW-first lab scans, movie reels, an AirPlay projector night, and an earned darkroom. No account, no tracking."
+      "status": "beta",
+      "note": "A film camera that lives in your phone — honest rolls with real develop times, full-resolution RAW-first lab scans, movie reels, an AirPlay projector, and an earned darkroom. No account, no tracking, one price."
     },
     {
       "id": "haven",
       "title": "Haven",
       "tagline": "A private, post-quantum social network for the people you love",
       "page_url": "/apps/haven/",
-      "app_store_url": "https://apps.apple.com/us/app/haven/id6782147901",
+      "app_store_url": "",
       "icon_url": "/apps/haven/assets/icon.png",
-      "released": "2026-07",
-      "updated": "2026-07",
+      "released": "2026-06",
+      "updated": "2026-06",
       "version": "1.0.0",
-      "status": "released",
+      "status": "beta",
       "note": "Peer-to-peer, end-to-end encrypted, post-quantum social network for friends & family. No servers, no tracking, no ads. Nobody holds your keys."
     },
     {
@@ -86,15 +86,6 @@
       "app_store_url": null,
       "icon_url": "/apps/tilebreak/assets/images/icon.png",
       "released": "2026-05"
-    },
-    {
-      "id": "aperion",
-      "title": "Aperion",
-      "tagline": "Deep-sky astrophotography, all in one",
-      "page_url": "/apps/aperion/",
-      "app_store_url": null,
-      "icon_url": "/apps/aperion/assets/images/icon.png",
-      "released": "2026-04"
     },
     {
       "id": "blip",
