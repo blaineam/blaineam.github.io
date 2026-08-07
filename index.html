@@ -1200,9 +1200,12 @@
             </script>
           </div>
           <div class="liquidGlass button">
-            <a id="havenBtn" href="#" title="Haven" rel="nofollow noreferrer noopener">
-              <!-- Haven's constellation mark, same geometry as the app icon. -->
-              <svg class="icon" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <a id="havenBtn" href="#" title="Haven" aria-label="Haven" rel="nofollow noreferrer noopener">
+              <!-- Haven's constellation mark, same geometry as the app icon. The viewBox is cropped to the
+                   mark's bounding box so it fills the button like the other glyphs do. The <title> child is
+                   what actually surfaces the tooltip when the pointer is over the SVG itself. -->
+              <svg class="icon" role="img" viewBox="15 14.5 70 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <title>Haven</title>
                 <g stroke="currentColor" stroke-opacity=".65" stroke-width="4" stroke-linecap="round">
                   <path d="M50 53V24M50 53L23 46M50 53l27-7M50 53L34 75M50 53l16 22M50 24L23 46M50 24l27 22M23 46l11 29M77 46L66 75"/>
                 </g>
