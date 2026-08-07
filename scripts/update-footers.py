@@ -17,7 +17,6 @@ ORDER = [
     ("blip",        "Blip"),
     ("ari-helper",  "Ari Helper"),
     ("asteroic",    "Asteroic"),
-    ("aperion",     "Aperion"),
     ("sami",        "Sami"),
     ("tilebreak",   "Tilebreak"),
     ("mi-speaks",   "Mi Speaks"),

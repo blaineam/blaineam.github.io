@@ -1199,6 +1199,32 @@
               })();
             </script>
           </div>
+          <div class="liquidGlass button">
+            <a id="havenBtn" href="#" title="Haven" rel="nofollow noreferrer noopener">
+              <!-- Haven's constellation mark, same geometry as the app icon. -->
+              <svg class="icon" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g stroke="currentColor" stroke-opacity=".65" stroke-width="4" stroke-linecap="round">
+                  <path d="M50 53V24M50 53L23 46M50 53l27-7M50 53L34 75M50 53l16 22M50 24L23 46M50 24l27 22M23 46l11 29M77 46L66 75"/>
+                </g>
+                <g fill="currentColor">
+                  <circle cx="50" cy="53" r="11"/><circle cx="50" cy="24" r="8"/><circle cx="23" cy="46" r="8"/>
+                  <circle cx="77" cy="46" r="8"/><circle cx="34" cy="75" r="8"/><circle cx="66" cy="75" r="8"/>
+                </g>
+              </svg>
+            </a>
+            <script>
+              (function () {
+                // Haven invite link is split + base64-encoded so plaintext crawlers find nothing scrape-able.
+                var p = ["aHR0cHM6Ly93", "ZW1pbGxlci5j", "b20vYXBwcy9o", "YXZlbi9vcGVu", "Lz9kPWI5ZWU5", "ZTk5NTVhZTI0", "NDJkMzAzODZh", "Y2ViYzMzNjFm", "MTRiN2U5ZGNk", "Y2VmY2JkMzkw", "N2QyNTg4NWJm", "MWJmODgsMDky", "NjgyMTM4MGJl", "ZTU1NmZiNDJk", "Yzk0Y2YxODQz", "MjdiMzczZjZk", "MWI4MGM4Yzc2", "NzllNjBhM2E2", "ZDM3MWRjMyNa", "M1JGVlhWT0lJ", "N1VXRFRMQkdZ", "TzNNNDJWWEFM", "Q1ZXRDdQM0RK", "SU5VVDQ3UUlE", "Q1BNQlNRLkQ3", "RlBNRFZORllE", "UzdOMjM3TFA2", "SDM3U1JN"];
+                var btn = document.getElementById("havenBtn");
+                var resolve = function () { btn.setAttribute("href", atob(p.join(""))); };
+                btn.addEventListener("mouseenter", resolve, { once: true });
+                btn.addEventListener("focus", resolve, { once: true });
+                btn.addEventListener("touchstart", resolve, { once: true, passive: true });
+                btn.addEventListener("click", function (e) { resolve(); });
+              })();
+            </script>
+          </div>
           <!--
           <div class="liquidGlass button">
             <a href="https://www.instagram.com/helloblainemiller/" title="instagram">

@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Aperion - Deep-Sky Astrophotography for Apple</title>
-  <meta name="description" content="One app drives your tracking mount, mirrorless camera, and offline plate solver. Auto-align, live stacks, mosaics, and motion timelapses for iPhone, iPad, Mac, and Apple Watch.">
-  <meta property="og:title" content="Aperion - Deep-Sky Astrophotography for Apple">
-  <meta property="og:description" content="One app drives your tracking mount, mirrorless camera, and offline plate solver. Auto-align, live stacks, mosaics, and motion timelapses for iPhone, iPad, Mac, and Apple Watch.">
-  <meta property="og:type" content="app">
+  <title>Aperion - Shelved: Deep-Sky Astrophotography for Apple</title>
+  <meta name="description" content="Shelved project archive. Aperion drove a Benro Polaris mount, a Canon EOS body, and an offline plate solver from one app — until a firmware patch turned out to be the better answer. Never shipped; kept online as a write-up.">
+  <meta property="og:title" content="Aperion - Shelved: Deep-Sky Astrophotography for Apple">
+  <meta property="og:description" content="Shelved project archive. Aperion drove a Benro Polaris mount, a Canon EOS body, and an offline plate solver from one app — until a firmware patch turned out to be the better answer. Never shipped; kept online as a write-up.">
+  <meta property="og:type" content="article">
   <meta property="og:url" content="https://wemiller.com/apps/aperion/">
   <meta property="og:image" content="https://wemiller.com/apps/aperion/assets/images/poster.jpg">
   <link rel="apple-touch-icon" href="assets/images/icon.png">
@@ -24,24 +24,83 @@
       --app-deeper: #050514;
     }
 
-    /* Coming Soon — non-interactive placeholders for download CTAs */
-    .btn-coming-soon,
-    .pricing-coming-soon,
-    .floating-coming-soon {
+    /* Shelved — this app was never released, so every download CTA is a
+       non-interactive marker instead of a link. */
+    .btn-shelved,
+    .pricing-shelved {
       cursor: default;
       pointer-events: none;
-      background: rgba(139, 92, 246, 0.18) !important;
-      border: 1px solid rgba(139, 92, 246, 0.55) !important;
-      color: #e9e3ff !important;
-      box-shadow: 0 0 24px rgba(139, 92, 246, 0.25) !important;
+      background: rgba(148, 163, 184, 0.16) !important;
+      border: 1px solid rgba(148, 163, 184, 0.45) !important;
+      color: #d7dce6 !important;
+      box-shadow: none !important;
       letter-spacing: 0.04em;
     }
 
-    .btn-coming-soon::before,
-    .pricing-coming-soon::before,
-    .floating-coming-soon::before {
-      content: "✦ ";
+    .btn-shelved::before,
+    .pricing-shelved::before {
+      content: "▪ ";
+      color: #94a3b8;
+    }
+
+    /* The one live CTA left on the page: the firmware patcher that replaced it. */
+    .floating-patcher {
+      animation: none;
+      background: linear-gradient(135deg, #334155, #1e293b) !important;
+      border: 1px solid rgba(148, 163, 184, 0.45) !important;
+      box-shadow: 0 8px 30px rgba(15, 23, 42, 0.55) !important;
+      font-size: 1rem;
+    }
+
+    .floating-patcher:hover {
+      box-shadow: 0 12px 40px rgba(15, 23, 42, 0.7) !important;
+    }
+
+    /* Shelved notice — the first thing anyone landing here should read. */
+    .shelved-notice {
+      max-width: 720px;
+      margin: 0 0 1.75rem;
+      padding: 1.1rem 1.35rem;
+      border-radius: 16px;
+      background: rgba(15, 23, 42, 0.55);
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      color: #cbd5e1;
+      font-size: 0.98rem;
+      line-height: 1.6;
+      text-align: left;
+    }
+
+    .shelved-notice strong {
+      color: #f1f5f9;
+    }
+
+    .shelved-notice a {
       color: var(--app-accent);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .shelved-tag {
+      display: inline-block;
+      margin-bottom: 0.6rem;
+      padding: 0.3rem 0.85rem;
+      border-radius: 99px;
+      background: rgba(148, 163, 184, 0.18);
+      border: 1px solid rgba(148, 163, 184, 0.45);
+      color: #e2e8f0;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    /* Everything below the notice describes what the app did, in past tense. */
+    .past-tense-note {
+      max-width: 760px;
+      margin: 0 auto 2.5rem;
+      text-align: center;
+      color: var(--text-secondary);
+      font-size: 0.95rem;
     }
 
     /* Cosmic hero with animated starfield */
@@ -565,12 +624,12 @@
       <a href="../" class="nav-logo">← Apps</a>
       <button class="mobile-menu-toggle">☰</button>
       <ul class="nav-links">
+        <li><a href="#status" class="nav-link">Why It's Shelved</a></li>
         <li><a href="#features" class="nav-link">Features</a></li>
         <li><a href="#workflow" class="nav-link">Workflow</a></li>
         <li><a href="#hardware" class="nav-link">Hardware</a></li>
-        <li><a href="#pricing" class="nav-link">Pricing</a></li>
         <li><a href="#faq" class="nav-link">FAQ</a></li>
-        <li><span class="btn-buy btn-coming-soon">Coming Soon</span></li>
+        <li><span class="btn-buy btn-shelved">Shelved</span></li>
       </ul>
     </div>
   </nav>
@@ -587,10 +646,23 @@
     <div class="hero-content">
       <div class="hero-text">
         <p class="hero-subtitle">✦ Aperion</p>
-        <h1 class="hero-title">Deep-Sky Astrophotography, Done Right</h1>
+        <h1 class="hero-title">Deep-Sky Astrophotography, Shelved</h1>
         <p class="hero-description">
-          One app drives your tracking mount, mirrorless camera, and offline plate solver — so you can land the shot without babysitting three separate tools. Auto-align in seconds, run live stacks, plan mosaics, and shoot motion timelapses from your iPhone, iPad, Mac, or Apple Watch.
+          One app drove your tracking mount, mirrorless camera, and offline plate solver — auto-align in seconds, live stacks, mosaic planning, and motion timelapses from an iPhone, iPad, Mac, or Apple Watch. It never shipped, and it isn't coming. This page stays up as the write-up.
         </p>
+
+        <div class="shelved-notice">
+          <span class="shelved-tag">Shelved · never released</span>
+          <p>
+            Aperion drove a <strong>Benro Polaris</strong> mount and a Canon body from an unofficial, reverse-engineered
+            control path. Getting that approved for the App Store — by Benro or by Apple — was never a realistic bet, and
+            my Polaris is long out of warranty, so there was nothing left to protect by staying on the sanctioned side of
+            the fence. Patching the mount's own firmware turned out to be the better fix: the automation runs
+            <strong>on the device</strong>, so the Polaris can shoot all night without my phone tethered to it and without
+            an app babysitting the session. That work lives on in the open-source
+            <a href="https://github.com/blaineam/benro-polaris-firmware-patcher" target="_blank" rel="noopener noreferrer">Benro Polaris Firmware Patcher</a>.
+          </p>
+        </div>
 
         <div class="platform-pills">
           <span class="platform-pill">iPhone</span>
@@ -599,10 +671,10 @@
           <span class="platform-pill">Apple Watch</span>
         </div>
 
-        <span class="os-ready-badge"><span class="badge-icon">✓</span> Ready for iOS 27 / iPadOS 27 / macOS 27 / watchOS 27</span>
+        <span class="os-ready-badge"><span class="badge-icon">✓</span> Built against iOS 27 / iPadOS 27 / macOS 27 / watchOS 27</span>
 
         <div class="hero-cta">
-          <span class="btn-buy btn-coming-soon">Coming Soon — In Development</span>
+          <span class="btn-buy btn-shelved">Shelved — Not Available</span>
         </div>
       </div>
       <div class="hero-image">
@@ -613,18 +685,24 @@
     </div>
   </section>
 
-  <!-- Floating Coming Soon Badge -->
-  <span class="floating-appstore floating-coming-soon">
-    <span>Coming Soon</span>
-  </span>
+  <!-- Floating CTA — points at the firmware patcher that replaced this app -->
+  <a class="floating-appstore floating-patcher" href="https://github.com/blaineam/benro-polaris-firmware-patcher" target="_blank" rel="noopener noreferrer">
+    <span class="floating-appstore-icon">🛠️</span>
+    <span>Get the Firmware Patcher</span>
+  </a>
 
   <!-- Features Section -->
   <section id="features" class="section">
     <div class="section-header">
-      <p class="section-subtitle">What it does</p>
+      <p class="section-subtitle">What it did</p>
       <h2>Three Tools, One Source of Truth</h2>
-      <p>No more swapping between the Polaris app, Canon's control utility, and a plate-solving service. Aperion unifies the entire capture loop.</p>
+      <p>No swapping between the Polaris app, Canon's control utility, and a plate-solving service. Aperion unified the entire capture loop.</p>
     </div>
+
+    <p class="past-tense-note">
+      Everything below describes the app as it was built. It was never released, and none of it is available to download —
+      see <a href="#status">why it's shelved</a>.
+    </p>
 
     <div class="feature-grid">
       <div class="feature-card">
@@ -875,31 +953,53 @@
     </p>
   </section>
 
-  <!-- Pricing Section -->
-  <section id="pricing" class="section">
+  <!-- Status Section — why the app was shelved -->
+  <section id="status" class="section">
     <div class="section-header">
-      <p class="section-subtitle">Pricing</p>
-      <h2>One Price. Every Apple Device.</h2>
-      <p>Buy once. Use it on iPhone, iPad, Mac, and Apple Watch. Forever.</p>
+      <p class="section-subtitle">Status</p>
+      <h2>Why Aperion Was Shelved</h2>
+      <p>It was planned as a $9.99 universal purchase. It never shipped, and it isn't going to.</p>
     </div>
 
     <div class="pricing-grid">
       <div class="pricing-card">
-        <div class="pricing-badge">In Development</div>
+        <div class="pricing-badge">Shelved</div>
         <h3>Aperion</h3>
-        <div class="pricing-price">$9.99</div>
-        <div class="pricing-period">planned · universal · all platforms</div>
+        <div class="pricing-price">—</div>
+        <div class="pricing-period">never released · no longer maintained</div>
         <ul class="pricing-features">
-          <li>iPhone, iPad, Mac, Apple Watch</li>
-          <li>Mount + camera + plate solve</li>
-          <li>Live stacks, mosaics, timelapses</li>
-          <li>AR sky chart with ARKit</li>
-          <li>Offline catalog and solver</li>
-          <li>Apple Family Sharing</li>
-          <li>No subscription, ever</li>
+          <li>App Store approval was never a realistic bet</li>
+          <li>Mount control relied on an unofficial protocol</li>
+          <li>Neither Benro nor Apple had reason to bless it</li>
+          <li>My Polaris is out of warranty — nothing to risk</li>
+          <li>A firmware patch solves it on the device instead</li>
+          <li>The mount can now shoot all night unattended</li>
+          <li>That work is open source and free</li>
         </ul>
-        <span class="pricing-cta pricing-coming-soon">Coming Soon</span>
+        <span class="pricing-cta pricing-shelved">Not Available</span>
       </div>
+    </div>
+
+    <div style="max-width: 760px; margin: 2.5rem auto 0; color: var(--text-secondary); line-height: 1.75;">
+      <p style="margin-bottom: 1.1rem;">
+        Aperion talked to the Benro Polaris over a reverse-engineered BLE + TCP protocol. That is fine for a personal
+        tool and a hard sell as a shipping product: the control path is undocumented, unsupported, and could break with
+        any mount firmware update, and getting it sanctioned — by Benro, or through App Store review — was never a bet
+        worth building a release around. Since my own Polaris is well past its warranty period, there was also nothing
+        left to protect by staying on the sanctioned side of that line.
+      </p>
+      <p style="margin-bottom: 1.1rem;">
+        Patching the mount's firmware directly turned out to be the better workaround. The intelligence lives
+        <strong style="color: var(--text-primary);">on the device</strong> rather than in a phone app, so the Polaris
+        runs a full session — slews, dwells, shutter triggers — without my phone tethered to it and without an app
+        driving it all night. No dead battery, no dropped BLE link at 3 a.m., no session lost because a phone locked up.
+      </p>
+      <p>
+        So Aperion is shelved: no longer maintained, never released, and removed from the
+        <a href="../" style="color: var(--app-accent);">apps directory</a>. Its goal lives on in the open-source
+        <a href="https://github.com/blaineam/benro-polaris-firmware-patcher" target="_blank" rel="noopener noreferrer" style="color: var(--app-accent);">Benro Polaris Firmware Patcher</a>,
+        which is free and does the job better.
+      </p>
     </div>
   </section>
 
@@ -1048,14 +1148,15 @@
 
     <div class="faq-item">
       <button class="faq-question">
-        <span>Is this a subscription?</span>
+        <span>Can I download or buy Aperion?</span>
         <span class="faq-icon">▼</span>
       </button>
       <div class="faq-answer">
         <p>
-          No. Aperion is a one-time $9.99 universal purchase. It works on iPhone, iPad, Mac, and Apple Watch with
-          a single buy, and supports Apple Family Sharing so one purchase covers your household. There are no
-          subscriptions, no in-app purchases, and no ongoing fees.
+          No. It was planned as a one-time $9.99 universal purchase, but it never reached the App Store and it has
+          been shelved — it isn't maintained and there's no build to install. If you want Polaris automation today,
+          use the <a href="https://github.com/blaineam/benro-polaris-firmware-patcher" target="_blank" rel="noopener noreferrer">Benro Polaris Firmware Patcher</a>
+          instead. It's open source, it's free, and it runs on the mount itself.
         </p>
       </div>
     </div>

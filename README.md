@@ -36,7 +36,6 @@ lists them chronologically. Both read from a single source of truth,
 | **Ridgeshot** | Long-range rifle marksman | May 2026 |
 | **Pinline** | 1v1 compound-bow archery | May 2026 |
 | **Tilebreak** | Match. Combo. Clear. Polished Mahjong solitaire | May 2026 |
-| **Aperion** | Deep-sky astrophotography, all in one | April 2026 |
 | **Blip** | Featherlight macOS menu-bar system monitor | April 2026 |
 | **Glint** | Brightness & volume for any display | April 2026 |
 | **Sami** | Smart media optimizer | February 2026 |
