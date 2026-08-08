@@ -81,6 +81,16 @@
       color: var(--fg-color);
     }
 
+    /* The language switcher is chrome: it leaves with the rest of the UI.
+       Photos mode marks body; "no info" mode adds .hide to #information —
+       :has() lets pure CSS follow both without touching the mode logic. */
+    body.photos-gallery .i18n-switcher,
+    body.photos-gallery-with-thumbnails .i18n-switcher,
+    body:has(#information.hide) .i18n-switcher {
+      opacity: 0;
+      pointer-events: none;
+    }
+
     .hide {
       opacity: 0;
       transition: opacity 0.5s;
