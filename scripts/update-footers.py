@@ -16,7 +16,6 @@ ORDER = [
     ("enter-space", "Enter Space"),
     ("blip",        "Blip"),
     ("ari-helper",  "Ari Helper"),
-    ("asteroic",    "Asteroic"),
     ("sami",        "Sami"),
     ("tilebreak",   "Tilebreak"),
     ("mi-speaks",   "Mi Speaks"),
