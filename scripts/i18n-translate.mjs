@@ -133,7 +133,9 @@ async function translateChunk(lang, chunk, attempt = 0) {
     parsed = parseJSON(await rocketAI(buildPrompt(lang, chunk)));
   } catch (e) {
     if (attempt < 2) return translateChunk(lang, chunk, attempt + 1);
-    throw e;
+    // Never let one bad chunk kill the whole run: keep English, warn, move on.
+    console.warn(`    ! chunk failed for ${lang} after retries (${String(e).slice(0, 140)}) — keeping English for ${Object.keys(chunk).length} strings`);
+    return { ...chunk };
   }
   const redo = {};
   for (const [k, en] of Object.entries(chunk)) {
@@ -192,6 +194,15 @@ for (const page of allPages) {
 
 let done = 0;
 const tasks = jobs.map(({ page, lang, en }) => async () => {
+  try {
+    await translatePage(page, lang, en);
+  } catch (e) {
+    done++;
+    console.warn(`[${done}/${jobs.length}] ${page}.${lang}.json FAILED: ${String(e).slice(0, 200)}`);
+  }
+});
+
+async function translatePage(page, lang, en) {
   const outPath = join(I18N, `${page}.${lang}.json`);
   const existing = existsSync(outPath) ? JSON.parse(readFileSync(outPath, 'utf8')) : {};
   const result = {};
@@ -222,7 +233,7 @@ const tasks = jobs.map(({ page, lang, en }) => async () => {
   writeFileSync(outPath, JSON.stringify(ordered, null, 2) + '\n');
   done++;
   console.log(`[${done}/${jobs.length}] ${page}.${lang}.json (${missing.length} newly translated)`);
-});
+}
 
 console.log(`translating ${allPages.length} pages × ${Object.keys(LANGS).length} languages …`);
 await pool(tasks, concurrency);
