@@ -53,18 +53,16 @@ the paths above (the same `data-i18n` + per-page dictionary approach works;
 copy `/i18n/i18n.js` or reference it absolutely at `/i18n/i18n.js` since the
 pages are served from wemiller.com). The next mirror run picks them up.
 
-### Haven: six languages only (export compliance)
+### Haven language handling
 
-Haven is **not distributed in France or China** (post-quantum crypto export
-compliance — see `excludeLocales` in Haven's `loc-glossary.json`). Its site
-must only ever ship `ja, de, es, ko, pt-BR, it` — **no French, no
-Simplified Chinese**. That rule is honored here too: Haven marketing strings
-that appear on localized portfolio pages (the Haven card tagline on
-`apps/index.html`, the Haven project description in index.html's timeline)
-are pinned to English in the `fr` and `zh-Hans` dictionaries
-(`PIN_ENGLISH` in `scripts/i18n-translate.mjs`). The i18n runtime also
-supports a `data-langs` attribute on its script tag should a page ever need
-to offer a restricted language set.
+Language ≠ distribution region: the portfolio's own dictionaries are fully
+translated in every language, including the Haven card tagline on
+`apps/index.html` and the Haven project description in index.html's timeline
+(an earlier revision pinned those to English for fr/zh-Hans; that policy was
+reversed). Haven's mirrored site under `apps/haven/` manages its own
+language set in the Haven repo — do not edit it here. The i18n runtime
+supports a `data-langs` attribute on its script tag for pages that need a
+restricted language set.
 
 ## Regenerating
 

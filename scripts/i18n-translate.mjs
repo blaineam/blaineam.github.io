@@ -8,9 +8,9 @@
 // Usage:
 //   node scripts/i18n-translate.mjs [--tm <cache.json>] [--concurrency N] [page …]
 //
-// Export compliance: Haven cannot ship into France or China, so Haven's
-// marketing strings are pinned to English in the fr and zh-Hans dictionaries
-// (see PIN_ENGLISH below and docs/LOCALIZATION.md).
+// Note: portfolio dictionaries are fully translated in every language —
+// language ≠ distribution region. (Haven's own mirrored site under
+// apps/haven/ manages its language set in the Haven repo.)
 
 import { execFile } from 'node:child_process';
 import { readFileSync, writeFileSync, existsSync, readdirSync } from 'node:fs';
@@ -49,13 +49,6 @@ const NEVER_TRANSLATE = [
   'Blaine Miller', 'Aperion', 'Monkr', 'Draw Things', 'Ollama', 'OpenAI',
   'Anthropic', 'Google Gemini', 'Grok', 'XAI', 'AWS Bedrock', 'MLX', 'MOA', 'MIL',
   'iMessage', 'iCloud', 'Benro Polaris', 'Canon', 'TestFlight', 'GitHub', 'LinkedIn',
-];
-
-// Strings that must stay English in specific locales (export compliance:
-// Haven is not distributed in France or China, so we don't advertise it there).
-const PIN_ENGLISH = [
-  { pages: ['apps'], langs: ['fr', 'zh-Hans'], test: (k, v) => /post-quantum social/i.test(v) },
-  { pages: ['index'], langs: ['fr', 'zh-Hans'], test: (k) => k === 'tl.haven.desc' },
 ];
 
 const args = process.argv.slice(2);
@@ -207,9 +200,7 @@ async function translatePage(page, lang, en) {
   const existing = existsSync(outPath) ? JSON.parse(readFileSync(outPath, 'utf8')) : {};
   const result = {};
   const missing = [];
-  const pins = PIN_ENGLISH.filter((p) => p.pages.includes(page) && p.langs.includes(lang));
   for (const [k, v] of Object.entries(en)) {
-    if (pins.some((p) => p.test(k, v))) { result[k] = v; continue; }  // pinned English
     const tmKey = `${lang} ${v}`;
     if (existing[k] && violations(v, existing[k]).length === 0 && existing[k] !== v) {
       result[k] = existing[k];

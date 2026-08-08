@@ -48,7 +48,7 @@
   "tl.glint.date": "2026年4月",
   "tl.glint.desc": "一款小巧的 macOS 菜单栏应用，可接管键盘上的亮度和音量按键，向外接显示器发送 DDC/CI 指令。用本就该好用的那几个按键，直接控制所有显示器的亮度与音量。免费、开源，体积不到 1 MB。",
   "tl.haven.date": "2026年6月",
-  "tl.haven.desc": "A private, peer-to-peer, end-to-end encrypted, post-quantum social network for the people you love. No servers, no tracking, no ads, no algorithm; nobody (not even me) can read your messages or hold your keys. Posts, stories, DMs, voice calls, and offline Bluetooth/Wi-Fi mesh sharing, all device-to-device. Also on Mac and the web.",
+  "tl.haven.desc": "专为你所爱的人打造的私密社交网络：点对点、端到端加密、抗量子。无服务器、无跟踪、无广告、无算法推荐；任何人（包括我本人）都无法读取你的消息或掌握你的密钥。动态、快拍、私信、语音通话，以及离线蓝牙/Wi-Fi 自组网分享，全部在设备之间直接完成。同时支持 Mac 与网页版。",
   "tl.lamdi.date": "2023年8月",
   "tl.lamdi.desc": "想随手预览正在制作的静态网站？这款移动应用会启动一个轻量 Web 服务器，让你随时随地测试自己的网页。",
   "tl.luma-editor.date": "2025年1月",
