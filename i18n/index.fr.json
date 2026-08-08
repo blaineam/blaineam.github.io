@@ -48,7 +48,7 @@
   "tl.glint.date": "Avril 2026",
   "tl.glint.desc": "Une toute petite app pour la barre des menus de macOS qui intercepte les touches de luminosité et de volume de votre clavier et envoie des commandes DDC/CI à vos moniteurs externes. Contrôlez la luminosité et le volume de tous vos écrans avec les touches qui auraient dû fonctionner depuis toujours. Gratuite, open source, moins de 1 Mo.",
   "tl.haven.date": "Juin 2026",
-  "tl.haven.desc": "A private, peer-to-peer, end-to-end encrypted, post-quantum social network for the people you love. No servers, no tracking, no ads, no algorithm; nobody (not even me) can read your messages or hold your keys. Posts, stories, DMs, voice calls, and offline Bluetooth/Wi-Fi mesh sharing, all device-to-device. Also on Mac and the web.",
+  "tl.haven.desc": "Un réseau social privé, pair-à-pair, chiffré de bout en bout et post-quantique, pour les personnes qui vous sont chères. Pas de serveurs, pas de pistage, pas de publicités, pas d'algorithme ; personne (pas même moi) ne peut lire vos messages ni détenir vos clés. Publications, stories, messages privés, appels vocaux et partage en réseau maillé Bluetooth/Wi-Fi hors ligne, le tout d'appareil à appareil. Également sur Mac et sur le web.",
   "tl.lamdi.date": "Août 2023",
   "tl.lamdi.desc": "Une app mobile pour quand vous voulez simplement prévisualiser le site statique sur lequel vous travaillez. Elle lance un serveur web léger et vous permet de tester votre page web depuis n'importe où.",
   "tl.luma-editor.date": "Janvier 2025",
