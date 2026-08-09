@@ -1,195 +1,1545 @@
 {
-  "version": 6,
-  "generatedAt": "2026-06-23T22:00:00Z",
+  "version": 2,
+  "generatedAt": "2026-08-09T06:56:50Z",
   "packs": [
     {
       "categoryID": "general",
       "version": 4,
       "url": "general.pack.json",
       "sha256": "d9b040f6fd2a00d4dfdffff02bef5329b7f909fdc20cc069f11e7adf53ed006a",
-      "questionCount": 478
+      "questionCount": 478,
+      "localizations": {
+        "de": {
+          "url": "general.de.pack.json",
+          "sha256": "05ae481c977a1f3feaec1ae058ecb17dc3df304c52333a1788f771ecbdf18a42",
+          "questionCount": 478,
+          "translatedCount": 478
+        },
+        "es": {
+          "url": "general.es.pack.json",
+          "sha256": "1602cbc320dcd9c978642bd022253df6d4be22d67ea969335813fd08b3efa285",
+          "questionCount": 478,
+          "translatedCount": 478
+        },
+        "fr": {
+          "url": "general.fr.pack.json",
+          "sha256": "341156b10c44df5dfe647efbb3695df33ef6e3a11e3fc57a9f97f30d717c8278",
+          "questionCount": 478,
+          "translatedCount": 478
+        },
+        "it": {
+          "url": "general.it.pack.json",
+          "sha256": "478bc6bf0f57dbda174f78800a691ba0cc1cfd5f72b2bdea3709637fb412f8f7",
+          "questionCount": 478,
+          "translatedCount": 478
+        },
+        "ja": {
+          "url": "general.ja.pack.json",
+          "sha256": "4fa1dd66c7c372aaaaeb251098cf1f66362d494d1d88aa35e3156e0df86487d9",
+          "questionCount": 478,
+          "translatedCount": 478
+        },
+        "ko": {
+          "url": "general.ko.pack.json",
+          "sha256": "3a51c2df6591090150b06389e19fc47e7d4e6783ee3d3d626a23176ff083beb5",
+          "questionCount": 478,
+          "translatedCount": 478
+        },
+        "pt-BR": {
+          "url": "general.pt-BR.pack.json",
+          "sha256": "f7f4e95a305891da09b0f9c987523bc0bb544e4c9d0ff9fa68ce910eb7a4d3bd",
+          "questionCount": 478,
+          "translatedCount": 478
+        },
+        "zh-Hans": {
+          "url": "general.zh-Hans.pack.json",
+          "sha256": "b3a5eab7450fedd51a8f21e8328f8c388ec90afc2fe7efd215a865d0ebaf9f21",
+          "questionCount": 478,
+          "translatedCount": 478
+        }
+      }
     },
     {
       "categoryID": "science",
       "version": 4,
       "url": "science.pack.json",
       "sha256": "ad88874d156e094b1a4baa9299be8707a14996d5f4a6532f6055d404f6d4e923",
-      "questionCount": 299
+      "questionCount": 299,
+      "localizations": {
+        "de": {
+          "url": "science.de.pack.json",
+          "sha256": "b61d49f4bfa59abae1249ef1925f27dd5c9bf674636bf5a3bb416eafe7febf65",
+          "questionCount": 299,
+          "translatedCount": 299
+        },
+        "es": {
+          "url": "science.es.pack.json",
+          "sha256": "5f4befd831fac951f72ecb579ccc672cc3639917bfd75c7c7a268f686e12f4a0",
+          "questionCount": 299,
+          "translatedCount": 299
+        },
+        "fr": {
+          "url": "science.fr.pack.json",
+          "sha256": "236b6cdf4386457f61d1da07f987be9e9ad1824668c76096b5f778fa926b4951",
+          "questionCount": 299,
+          "translatedCount": 299
+        },
+        "it": {
+          "url": "science.it.pack.json",
+          "sha256": "27876957954d16849b6635d64cda62621338ec5a45a77b0a635b12123581d93f",
+          "questionCount": 299,
+          "translatedCount": 299
+        },
+        "ja": {
+          "url": "science.ja.pack.json",
+          "sha256": "b1f563372ad24a4120ed9e0fff2599e43c8c7a7751048fb18ae33537e35d8b1b",
+          "questionCount": 299,
+          "translatedCount": 299
+        },
+        "ko": {
+          "url": "science.ko.pack.json",
+          "sha256": "07a24bbb9f1e33e2e02e6fe0c7dd34acaa8c596d9234d424a7a4c61c0d1df1a6",
+          "questionCount": 299,
+          "translatedCount": 299
+        },
+        "pt-BR": {
+          "url": "science.pt-BR.pack.json",
+          "sha256": "5e603ab6e306c269c0c0544421083b5ab0a91d4620d4a8c318b77cbe9149367b",
+          "questionCount": 299,
+          "translatedCount": 299
+        },
+        "zh-Hans": {
+          "url": "science.zh-Hans.pack.json",
+          "sha256": "f1eb0ea2d7d702ce8a94a71f2dc94f8c36b68b48f2d1f762e542335bd55f57ce",
+          "questionCount": 299,
+          "translatedCount": 299
+        }
+      }
     },
     {
       "categoryID": "history",
       "version": 4,
       "url": "history.pack.json",
       "sha256": "d8cc41ee69a48ba6ae22c91640462ab6489317c653b82d9c9844610f1987a5d8",
-      "questionCount": 420
+      "questionCount": 420,
+      "localizations": {
+        "de": {
+          "url": "history.de.pack.json",
+          "sha256": "a555711f8b228a589cb7e8dfe8a4d8c5568ba101fb3b97cd7424a6ac5256d4cc",
+          "questionCount": 420,
+          "translatedCount": 420
+        },
+        "es": {
+          "url": "history.es.pack.json",
+          "sha256": "8443ac662dd847122fa060e8d27febe7901e688297df9b26084449a287dc98d0",
+          "questionCount": 420,
+          "translatedCount": 420
+        },
+        "fr": {
+          "url": "history.fr.pack.json",
+          "sha256": "0bfe454edc65f2adfa3300dad8a68a63a00c9d99758167fee8a072443b50a6d1",
+          "questionCount": 420,
+          "translatedCount": 420
+        },
+        "it": {
+          "url": "history.it.pack.json",
+          "sha256": "f322c57a3ff3400ced772c76268c11410a2078ffbc6c94219379cfe0660de43e",
+          "questionCount": 420,
+          "translatedCount": 420
+        },
+        "ja": {
+          "url": "history.ja.pack.json",
+          "sha256": "7eea703a201405059daaca20fd4119fa3aac0935577b19e654b7157fdd46f6c1",
+          "questionCount": 420,
+          "translatedCount": 420
+        },
+        "ko": {
+          "url": "history.ko.pack.json",
+          "sha256": "4e726231e940416a81708f22a3e2e80ffd868416c206fd59c956ab9d8babcfcd",
+          "questionCount": 420,
+          "translatedCount": 420
+        },
+        "pt-BR": {
+          "url": "history.pt-BR.pack.json",
+          "sha256": "1213022b23e65d4327edd306794972d808dfbf242baf6ab9a6df82d9af8f523f",
+          "questionCount": 420,
+          "translatedCount": 420
+        },
+        "zh-Hans": {
+          "url": "history.zh-Hans.pack.json",
+          "sha256": "98dc28257dd20dbacfdcc5b270dd09b4100c6a81e271a91c07bc80b3113f27b4",
+          "questionCount": 420,
+          "translatedCount": 420
+        }
+      }
     },
     {
       "categoryID": "geography",
       "version": 4,
       "url": "geography.pack.json",
       "sha256": "18988088e6fb9ab125ca15259ece3733b005ba8ba29d418e5114f4b03fccede8",
-      "questionCount": 388
+      "questionCount": 388,
+      "localizations": {
+        "de": {
+          "url": "geography.de.pack.json",
+          "sha256": "049d498cc21a73b3e929822a6d3880f70d78af986b7640b1541c9ddc117e1ace",
+          "questionCount": 388,
+          "translatedCount": 388
+        },
+        "es": {
+          "url": "geography.es.pack.json",
+          "sha256": "858451b7b4a85a6244d47c5b1ac0ef21b2f43da52074823f36a67f98dcb44911",
+          "questionCount": 388,
+          "translatedCount": 388
+        },
+        "fr": {
+          "url": "geography.fr.pack.json",
+          "sha256": "2597eb92b2ff2091fe3269c4f209015c7f14427a58394e67ae933d604b72f534",
+          "questionCount": 388,
+          "translatedCount": 388
+        },
+        "it": {
+          "url": "geography.it.pack.json",
+          "sha256": "4a91beb571816d7195846d361c201057fe4b9a3506bd9b0b1f928431e38e0ee5",
+          "questionCount": 388,
+          "translatedCount": 388
+        },
+        "ja": {
+          "url": "geography.ja.pack.json",
+          "sha256": "44b4155ced0821f70abb16eace49bf253aedaa7ae855f6a625caf286676b0e72",
+          "questionCount": 388,
+          "translatedCount": 388
+        },
+        "ko": {
+          "url": "geography.ko.pack.json",
+          "sha256": "902ff9dc6bdb21b3c857518c7ef34445278a5ec3494eef1360e979f7403f8300",
+          "questionCount": 388,
+          "translatedCount": 388
+        },
+        "pt-BR": {
+          "url": "geography.pt-BR.pack.json",
+          "sha256": "c335b470ac24c37653d0c90cb89e8f563ed8929e9a3bb27e472e7c0a0af76534",
+          "questionCount": 388,
+          "translatedCount": 388
+        },
+        "zh-Hans": {
+          "url": "geography.zh-Hans.pack.json",
+          "sha256": "2dbffeb60c4a17dac397eddc48295a8d4ac325d1a7dcfd0bc3ff54fcf884bbba",
+          "questionCount": 388,
+          "translatedCount": 388
+        }
+      }
     },
     {
       "categoryID": "entertainment",
       "version": 4,
       "url": "entertainment.pack.json",
       "sha256": "c3de609016fc3d95dc8a40f7e15caec0dfb2d7cd0771912bb4e1185489dfb8cb",
-      "questionCount": 313
+      "questionCount": 313,
+      "localizations": {
+        "de": {
+          "url": "entertainment.de.pack.json",
+          "sha256": "5cb1ca50c6eef0c70a3499ccd4e43bd623aa59663590bbaf376c753321df4709",
+          "questionCount": 313,
+          "translatedCount": 313
+        },
+        "es": {
+          "url": "entertainment.es.pack.json",
+          "sha256": "f50d7d6226f8f1db9d844de80eb7c971bf95f7d122765a3c8b1107a494ed3578",
+          "questionCount": 313,
+          "translatedCount": 313
+        },
+        "fr": {
+          "url": "entertainment.fr.pack.json",
+          "sha256": "78075f83cd407ca75f3562f07b2738b15220b372e902248d8282b00f2e0e0ee9",
+          "questionCount": 313,
+          "translatedCount": 313
+        },
+        "it": {
+          "url": "entertainment.it.pack.json",
+          "sha256": "bb85317f7e0e47c6dfa054e8bbe3f62a3ab9f1f31b5c1c509d833ff44705a15a",
+          "questionCount": 313,
+          "translatedCount": 313
+        },
+        "ja": {
+          "url": "entertainment.ja.pack.json",
+          "sha256": "520105a0637c1151d95752eb3a89e85b1e4f102e036b93ab49cc8d861c96f95b",
+          "questionCount": 313,
+          "translatedCount": 313
+        },
+        "ko": {
+          "url": "entertainment.ko.pack.json",
+          "sha256": "8c5d47005213d5257c25a888e081c397defe0fce8dcb296af77cb550d3fcd866",
+          "questionCount": 313,
+          "translatedCount": 313
+        },
+        "pt-BR": {
+          "url": "entertainment.pt-BR.pack.json",
+          "sha256": "83deab6f07bf31dc2d66fb0923dab429ec6a77309d10c0736789d5674a26012f",
+          "questionCount": 313,
+          "translatedCount": 313
+        },
+        "zh-Hans": {
+          "url": "entertainment.zh-Hans.pack.json",
+          "sha256": "0719e55aa5d6938ee7ab4ea28cefba34c67cf71678f34066551426e1cda22402",
+          "questionCount": 313,
+          "translatedCount": 313
+        }
+      }
     },
     {
       "categoryID": "television",
       "version": 2,
       "url": "television.pack.json",
       "sha256": "a99e1b82b86b892f6ea45136883d3c3a2941bd6c9bf0cb5e146a06d1c4516c69",
-      "questionCount": 185
+      "questionCount": 185,
+      "localizations": {
+        "de": {
+          "url": "television.de.pack.json",
+          "sha256": "1c4a7baa2335bf1ee26d4b3a2acdb762e0cb1f79fd744a35f65342c07534c617",
+          "questionCount": 185,
+          "translatedCount": 185
+        },
+        "es": {
+          "url": "television.es.pack.json",
+          "sha256": "b746958296447338dbea0d37c5407e21472f97bbc4a9efccdf8c91d8eb9da61b",
+          "questionCount": 185,
+          "translatedCount": 185
+        },
+        "fr": {
+          "url": "television.fr.pack.json",
+          "sha256": "06de52d6130991078699ca3fbdd164899e32b062c0a45588f09cbcb832578e84",
+          "questionCount": 185,
+          "translatedCount": 185
+        },
+        "it": {
+          "url": "television.it.pack.json",
+          "sha256": "5bf5b7b03c50e0536098ba9c3c51da66e358464a5100d5ac0ab9a0ef3c37ebfa",
+          "questionCount": 185,
+          "translatedCount": 185
+        },
+        "ja": {
+          "url": "television.ja.pack.json",
+          "sha256": "8a5c0a8cb2206e6412e3b5d5c618aca67370202b7ed1cf594c6539ea049b4961",
+          "questionCount": 185,
+          "translatedCount": 185
+        },
+        "ko": {
+          "url": "television.ko.pack.json",
+          "sha256": "70d09386154b11f1d9602cbf49a8c9b99ae1359fc494491459b68975f76b1b0f",
+          "questionCount": 185,
+          "translatedCount": 185
+        },
+        "pt-BR": {
+          "url": "television.pt-BR.pack.json",
+          "sha256": "08fe7cc8e17dd516d249cbf5b671a782adc3e0fce983cc43c50fc0716625ed49",
+          "questionCount": 185,
+          "translatedCount": 185
+        },
+        "zh-Hans": {
+          "url": "television.zh-Hans.pack.json",
+          "sha256": "1d4395564ee7b8a9c273754bc5d8a12ce4079408fee3e3369f9a08ac9fa3fd8e",
+          "questionCount": 185,
+          "translatedCount": 185
+        }
+      }
     },
     {
       "categoryID": "music",
       "version": 4,
       "url": "music.pack.json",
       "sha256": "89995f3529b476af3017369c875614d1e417080fcb537dfb8cde8106c2b26e3c",
-      "questionCount": 504
+      "questionCount": 504,
+      "localizations": {
+        "de": {
+          "url": "music.de.pack.json",
+          "sha256": "f2a78209b2fb87641f35905205cb07c05e06c4d5041ea106cdcf0078f72037e6",
+          "questionCount": 504,
+          "translatedCount": 504
+        },
+        "es": {
+          "url": "music.es.pack.json",
+          "sha256": "4053b581b3223295f84a9f81c720b9c4c7feb4a06cdce725d18c41b5d40ba5c7",
+          "questionCount": 504,
+          "translatedCount": 504
+        },
+        "fr": {
+          "url": "music.fr.pack.json",
+          "sha256": "100cd13bf19bab08a92776c8cc90780c2dc9e75a1f178dd0b2cd61c80f165653",
+          "questionCount": 504,
+          "translatedCount": 504
+        },
+        "it": {
+          "url": "music.it.pack.json",
+          "sha256": "eb064405fcd4077440efe3dec9a7e1e7974e0f5972f239037fd5f13b1e8cff0b",
+          "questionCount": 504,
+          "translatedCount": 504
+        },
+        "ja": {
+          "url": "music.ja.pack.json",
+          "sha256": "5298d328a9ec21dad9dec4bce6f62741138700884e45bc89dc1484f17b433487",
+          "questionCount": 504,
+          "translatedCount": 504
+        },
+        "ko": {
+          "url": "music.ko.pack.json",
+          "sha256": "f01afc33c91caa39ea154d188a0823a0318faf34e3a32aa83e699855a251a6a5",
+          "questionCount": 504,
+          "translatedCount": 504
+        },
+        "pt-BR": {
+          "url": "music.pt-BR.pack.json",
+          "sha256": "5e53a79ef3c482a69dab81b168de18bf4add6ef3053e9733a8e2839d280b66fb",
+          "questionCount": 504,
+          "translatedCount": 504
+        },
+        "zh-Hans": {
+          "url": "music.zh-Hans.pack.json",
+          "sha256": "35a186a8505a5eca2124d2a9d774467121983bf3bbd80e555b8d8d17917c8310",
+          "questionCount": 504,
+          "translatedCount": 504
+        }
+      }
     },
     {
       "categoryID": "sports",
       "version": 5,
       "url": "sports.pack.json",
       "sha256": "1f092f035f42015f0e7135aec0a2f39c014c0419e8fb06143d3ffeeee9110353",
-      "questionCount": 63
+      "questionCount": 63,
+      "localizations": {
+        "de": {
+          "url": "sports.de.pack.json",
+          "sha256": "d4adf5195be5f52c834a9cc362c9bcb137a3ff411ba0395977310bc13d95092b",
+          "questionCount": 63,
+          "translatedCount": 63
+        },
+        "es": {
+          "url": "sports.es.pack.json",
+          "sha256": "0552cc425acb2228afd653dfabc05b3b24bbb03b5d08b8050103c207faf9ef64",
+          "questionCount": 63,
+          "translatedCount": 63
+        },
+        "fr": {
+          "url": "sports.fr.pack.json",
+          "sha256": "fa6203567409313c91492fceacfc2bf987423d34a6930bcd37eb6e01f2480ddd",
+          "questionCount": 63,
+          "translatedCount": 63
+        },
+        "it": {
+          "url": "sports.it.pack.json",
+          "sha256": "a436f531981213396121c16ae595fe7525bc2180a3bc9e588274bbd9b7adae35",
+          "questionCount": 63,
+          "translatedCount": 63
+        },
+        "ja": {
+          "url": "sports.ja.pack.json",
+          "sha256": "307a27650926538a1bcfa2c477cccfea0eb3ea051e5f1b01aacdd36bdbef9fd3",
+          "questionCount": 63,
+          "translatedCount": 63
+        },
+        "ko": {
+          "url": "sports.ko.pack.json",
+          "sha256": "7f625abe52191129bd251b99611629760c39f091a439889958daf8571109aa60",
+          "questionCount": 63,
+          "translatedCount": 63
+        },
+        "pt-BR": {
+          "url": "sports.pt-BR.pack.json",
+          "sha256": "99389e45af35625639ba1758632c56583848317d88884130faac1928bf65cf8c",
+          "questionCount": 63,
+          "translatedCount": 63
+        },
+        "zh-Hans": {
+          "url": "sports.zh-Hans.pack.json",
+          "sha256": "edbcad8abeaf865c74ea3430a9fe7e672226ef9f74cd5733e2212e9413570d22",
+          "questionCount": 63,
+          "translatedCount": 63
+        }
+      }
     },
     {
       "categoryID": "football",
       "version": 2,
       "url": "football.pack.json",
       "sha256": "c736c4286d1f710bf13a43ab9738512f4eff19b88482029732fe023e61b5d399",
-      "questionCount": 62
+      "questionCount": 62,
+      "localizations": {
+        "de": {
+          "url": "football.de.pack.json",
+          "sha256": "ee00a45add4e22fe1a01a4b323f292aa87ad6cf9a8ab55364fdb16c5df472e6b",
+          "questionCount": 62,
+          "translatedCount": 62
+        },
+        "es": {
+          "url": "football.es.pack.json",
+          "sha256": "4a512658d223ad7b5102adac102aa94f18907e3334dfcef627004612bc979c8e",
+          "questionCount": 62,
+          "translatedCount": 62
+        },
+        "fr": {
+          "url": "football.fr.pack.json",
+          "sha256": "d8502c34d3ee5ceedf78fde1f059426c9eb1b5e08d31bf51e4444e5e81c51bd4",
+          "questionCount": 62,
+          "translatedCount": 62
+        },
+        "it": {
+          "url": "football.it.pack.json",
+          "sha256": "e216b82bbf3f893903714df3e5f7f3edc5e808b56d86ceb9b571bc0b142ea27b",
+          "questionCount": 62,
+          "translatedCount": 62
+        },
+        "ja": {
+          "url": "football.ja.pack.json",
+          "sha256": "46fc04b335e2fbc83c6f02e86536f14e44b0dffcc7e7df25af54171f32543ef5",
+          "questionCount": 62,
+          "translatedCount": 62
+        },
+        "ko": {
+          "url": "football.ko.pack.json",
+          "sha256": "8583e9c9bb035e48318aa69363377081d99667118009069c54d4665718b24fb9",
+          "questionCount": 62,
+          "translatedCount": 62
+        },
+        "pt-BR": {
+          "url": "football.pt-BR.pack.json",
+          "sha256": "494cdc802d32054b896b2adc1150ed038a23aa8d913c4c94674451be68f577ef",
+          "questionCount": 62,
+          "translatedCount": 62
+        },
+        "zh-Hans": {
+          "url": "football.zh-Hans.pack.json",
+          "sha256": "5305ed4d9cabcec630e9ac55448a4812f997606f753f37223476e9ee3e2ff069",
+          "questionCount": 62,
+          "translatedCount": 62
+        }
+      }
     },
     {
       "categoryID": "soccer",
       "version": 1,
       "url": "soccer.pack.json",
       "sha256": "36d409d33b4b343ef6121fc73ef3942e7335be37575315ee374fab78028fc2d4",
-      "questionCount": 63
+      "questionCount": 63,
+      "localizations": {
+        "de": {
+          "url": "soccer.de.pack.json",
+          "sha256": "2d6d6935a0e035e5244730c72298cc692739b17213e2a9e53ba7397e59dc46af",
+          "questionCount": 63,
+          "translatedCount": 63
+        },
+        "es": {
+          "url": "soccer.es.pack.json",
+          "sha256": "63beeb510366da33c89d4362136e79d8b6f2dab66833aa04640d2994f0c1ac44",
+          "questionCount": 63,
+          "translatedCount": 63
+        },
+        "fr": {
+          "url": "soccer.fr.pack.json",
+          "sha256": "5ceafedc8ee112876ecea054b8f492e60d983c0f173408f45bd9b48d7f10e642",
+          "questionCount": 63,
+          "translatedCount": 63
+        },
+        "it": {
+          "url": "soccer.it.pack.json",
+          "sha256": "a54f5b6718aeaafea9a04c4b48beb1589b19717fed68d621d9c96db9c93798db",
+          "questionCount": 63,
+          "translatedCount": 63
+        },
+        "ja": {
+          "url": "soccer.ja.pack.json",
+          "sha256": "433ecbff0d745c12d7ca8a246e43e99676396adb7c3b5add77a4c1b7f7dc384a",
+          "questionCount": 63,
+          "translatedCount": 63
+        },
+        "ko": {
+          "url": "soccer.ko.pack.json",
+          "sha256": "dc72f86a43c9202c54e80d653204c9675aa670d454af6d59ff060691747a6fe2",
+          "questionCount": 63,
+          "translatedCount": 63
+        },
+        "pt-BR": {
+          "url": "soccer.pt-BR.pack.json",
+          "sha256": "0406f22a2df25f5ff4de185972ff3876e074330cb043ecc67efc1ca081ecbdc2",
+          "questionCount": 63,
+          "translatedCount": 63
+        },
+        "zh-Hans": {
+          "url": "soccer.zh-Hans.pack.json",
+          "sha256": "1d811d2cf9d9e3b018dc3340dcd15efb99595a8257f8b3ff30b04eb88ef89005",
+          "questionCount": 63,
+          "translatedCount": 63
+        }
+      }
     },
     {
       "categoryID": "baseball",
       "version": 2,
       "url": "baseball.pack.json",
       "sha256": "bcbe1b6b905e6bca8f5ea3d8343b10344757d408fb09b543abb54e2d0fe7dcbe",
-      "questionCount": 63
+      "questionCount": 63,
+      "localizations": {
+        "de": {
+          "url": "baseball.de.pack.json",
+          "sha256": "0741e3477589ca24c9bf71781a51df9d23e771559262cb56e58c3649a91499f3",
+          "questionCount": 63,
+          "translatedCount": 63
+        },
+        "es": {
+          "url": "baseball.es.pack.json",
+          "sha256": "df940a794a94e7e55e6d8d4a52eecb420217a3c368df4f767ff02c6102535a82",
+          "questionCount": 63,
+          "translatedCount": 63
+        },
+        "fr": {
+          "url": "baseball.fr.pack.json",
+          "sha256": "8a60bef35c41d1b2a1edf94eb673e2ef3eec04cb250fd0be07608ae934b3ddf3",
+          "questionCount": 63,
+          "translatedCount": 63
+        },
+        "it": {
+          "url": "baseball.it.pack.json",
+          "sha256": "1890871c6ce1ce89e0798476a3b104870b9f10b504e69d74974599093fbb1f7e",
+          "questionCount": 63,
+          "translatedCount": 63
+        },
+        "ja": {
+          "url": "baseball.ja.pack.json",
+          "sha256": "b5d63111170276093bfc344124519160b1d4f9fa17a10da7e81c78834d581ddd",
+          "questionCount": 63,
+          "translatedCount": 63
+        },
+        "ko": {
+          "url": "baseball.ko.pack.json",
+          "sha256": "fa28181e41320487923a9684692d7cb00277095267f71c8db6ec027d37a6a15c",
+          "questionCount": 63,
+          "translatedCount": 63
+        },
+        "pt-BR": {
+          "url": "baseball.pt-BR.pack.json",
+          "sha256": "f1aab5819b9e7b476c17329d0611ad7f2bb168098b96434f363da9af5b695c0e",
+          "questionCount": 63,
+          "translatedCount": 63
+        },
+        "zh-Hans": {
+          "url": "baseball.zh-Hans.pack.json",
+          "sha256": "1eb5224d6fb081ce8427fb50b3bab8f012901c6f192bb935ab2ca60f943edcb4",
+          "questionCount": 63,
+          "translatedCount": 63
+        }
+      }
     },
     {
       "categoryID": "basketball",
       "version": 2,
       "url": "basketball.pack.json",
-      "sha256": "1f4a272712446991c0672c506cf5bdb44974498b6bb25d11873a1168abff6280",
-      "questionCount": 60
+      "sha256": "910727e2acbe62e72dc9108e3b062d64613fe780b66826d057430934c1b7652d",
+      "questionCount": 61,
+      "localizations": {
+        "de": {
+          "url": "basketball.de.pack.json",
+          "sha256": "3596eb9743710eda54266f434246fa5662b8bc9de10fdc53c0e0534661531c14",
+          "questionCount": 61,
+          "translatedCount": 61
+        },
+        "es": {
+          "url": "basketball.es.pack.json",
+          "sha256": "2899ce30fc725db6ea89b3dfa91338159eef4f0aa698b31bc5831da3737d97af",
+          "questionCount": 61,
+          "translatedCount": 61
+        },
+        "fr": {
+          "url": "basketball.fr.pack.json",
+          "sha256": "daf61fa56e8bb0a6787b2b5e25762d0dd5537573edf245dbf3e5a2a2e4b158cf",
+          "questionCount": 61,
+          "translatedCount": 61
+        },
+        "it": {
+          "url": "basketball.it.pack.json",
+          "sha256": "ec97d2fed1c8b5ea3f0ce595a9219af016ede790607d0d8f443f3d4c7e1f095e",
+          "questionCount": 61,
+          "translatedCount": 61
+        },
+        "ja": {
+          "url": "basketball.ja.pack.json",
+          "sha256": "c9a644622ae3599a6a13f883de12ca7f50685febeca7b88bc6b69d76f579e39f",
+          "questionCount": 61,
+          "translatedCount": 61
+        },
+        "ko": {
+          "url": "basketball.ko.pack.json",
+          "sha256": "6c2e1fc452f58d06a66273cdfa34a33ea972feff5f5bbdb39aa6f3cee318bc08",
+          "questionCount": 61,
+          "translatedCount": 61
+        },
+        "pt-BR": {
+          "url": "basketball.pt-BR.pack.json",
+          "sha256": "b287968e9063606b4fd8f56a9ec0801d8cf0cb69b58b8443142a94979dae0471",
+          "questionCount": 61,
+          "translatedCount": 61
+        },
+        "zh-Hans": {
+          "url": "basketball.zh-Hans.pack.json",
+          "sha256": "d83d396a65ef2ab648e59579e14731617f468baccbf7ef16ab71205e7409987d",
+          "questionCount": 61,
+          "translatedCount": 61
+        }
+      }
     },
     {
       "categoryID": "hockey",
       "version": 2,
       "url": "hockey.pack.json",
       "sha256": "7000108125d9103c241449a8f212157e20421302e6ee7371e077fcae90113c3a",
-      "questionCount": 61
+      "questionCount": 61,
+      "localizations": {
+        "de": {
+          "url": "hockey.de.pack.json",
+          "sha256": "a092baf0bf51e4cf692d8ffd3ec4a650f21505277cf3e12a9bfc2e576aa290ba",
+          "questionCount": 61,
+          "translatedCount": 61
+        },
+        "es": {
+          "url": "hockey.es.pack.json",
+          "sha256": "7dfa6ffb517185fb64d708090e6b00c03212deb74df1d52e86b3a438ed9539f8",
+          "questionCount": 61,
+          "translatedCount": 61
+        },
+        "fr": {
+          "url": "hockey.fr.pack.json",
+          "sha256": "7500bdc7a53837be0da9fe6df625a18cb8f0c752b3220559247ad418234b945d",
+          "questionCount": 61,
+          "translatedCount": 61
+        },
+        "it": {
+          "url": "hockey.it.pack.json",
+          "sha256": "b87d07066de66b621da2972c3038d9f0c208aa2e4c8bddb1579e549a0914420c",
+          "questionCount": 61,
+          "translatedCount": 61
+        },
+        "ja": {
+          "url": "hockey.ja.pack.json",
+          "sha256": "456def0e1785652d0be0caf15cc0efbd2f33ef6d54f27d40592cbd6390b50d23",
+          "questionCount": 61,
+          "translatedCount": 61
+        },
+        "ko": {
+          "url": "hockey.ko.pack.json",
+          "sha256": "3e2048c71f69dbcfc165bd65b49601dd51053a148cd5b36c7d12aa543955dc98",
+          "questionCount": 61,
+          "translatedCount": 61
+        },
+        "pt-BR": {
+          "url": "hockey.pt-BR.pack.json",
+          "sha256": "ab0300b043b8522d651c93c2616504bba784b662394c61c61d243081361e4875",
+          "questionCount": 61,
+          "translatedCount": 61
+        },
+        "zh-Hans": {
+          "url": "hockey.zh-Hans.pack.json",
+          "sha256": "f6d7508a0a8de2d91c1adaeea27e1dd88af1e91de1a1038dcd8d097204fc01fa",
+          "questionCount": 61,
+          "translatedCount": 61
+        }
+      }
     },
     {
       "categoryID": "olympics",
       "version": 2,
       "url": "olympics.pack.json",
       "sha256": "deaa9afcdfc2a24277302bded62a105fd91193b7125c558cb22db9da39a1a6d1",
-      "questionCount": 61
+      "questionCount": 61,
+      "localizations": {
+        "de": {
+          "url": "olympics.de.pack.json",
+          "sha256": "de2f403f08126f42851092ad5583a85c69329e23c13ddb3092395b6559b6fa36",
+          "questionCount": 61,
+          "translatedCount": 61
+        },
+        "es": {
+          "url": "olympics.es.pack.json",
+          "sha256": "f26e79d672c4ad5a02a49c3cac9f96c38465701d8884319419cafb2a13e77fa6",
+          "questionCount": 61,
+          "translatedCount": 61
+        },
+        "fr": {
+          "url": "olympics.fr.pack.json",
+          "sha256": "29ef720927a916b90d7789cccef9a14b3613e996daee9a2836bf4a3b0a10b1be",
+          "questionCount": 61,
+          "translatedCount": 61
+        },
+        "it": {
+          "url": "olympics.it.pack.json",
+          "sha256": "4eec41700b7ceaa0a68e5a8f77e5800cc5d184708082c98ffb9d463654aae994",
+          "questionCount": 61,
+          "translatedCount": 61
+        },
+        "ja": {
+          "url": "olympics.ja.pack.json",
+          "sha256": "f2a909033ed6e489241df20cf576fc95c26f5ebab451da78a269813eb50eeef2",
+          "questionCount": 61,
+          "translatedCount": 61
+        },
+        "ko": {
+          "url": "olympics.ko.pack.json",
+          "sha256": "89e4e28eea5d550afc614bba4bcc5940d22155fa6a2be0b1d19dd76a37515b38",
+          "questionCount": 61,
+          "translatedCount": 61
+        },
+        "pt-BR": {
+          "url": "olympics.pt-BR.pack.json",
+          "sha256": "dea621b7d6a5a57ab1c19ec1cbe678395b6bdd5a1ec71933d617e288ff2c6641",
+          "questionCount": 61,
+          "translatedCount": 61
+        },
+        "zh-Hans": {
+          "url": "olympics.zh-Hans.pack.json",
+          "sha256": "6fc80671570de6c3947f5595bfe65111f951b17ad2ee89ef2d4ae19beb9c8e83",
+          "questionCount": 61,
+          "translatedCount": 61
+        }
+      }
     },
     {
       "categoryID": "videogames",
       "version": 4,
       "url": "videogames.pack.json",
       "sha256": "cae65827355a9ee6f178a71c5c097c0e7451eaa052bc03b6707dc02a696d2117",
-      "questionCount": 1195
+      "questionCount": 1195,
+      "localizations": {
+        "de": {
+          "url": "videogames.de.pack.json",
+          "sha256": "04d70f28424d029d4cebc98b8bf4bc43029944199cce8e71cf53815489827ba3",
+          "questionCount": 1195,
+          "translatedCount": 1195
+        },
+        "es": {
+          "url": "videogames.es.pack.json",
+          "sha256": "d1c9ab8c9f57c4f2f099ee8b950d4558a5bf3dc8e4687df9bbac4f1bacecf78c",
+          "questionCount": 1195,
+          "translatedCount": 1195
+        },
+        "fr": {
+          "url": "videogames.fr.pack.json",
+          "sha256": "d5c53cc434b1f0dbc3a4160f80b407ed7dcab0e2b37aac7b0e06f1a8092448ba",
+          "questionCount": 1195,
+          "translatedCount": 1195
+        },
+        "it": {
+          "url": "videogames.it.pack.json",
+          "sha256": "debb167b28d46ffe03f7020c7e6617a26fdd961741b588ef4131b53f978ede39",
+          "questionCount": 1195,
+          "translatedCount": 1195
+        },
+        "ja": {
+          "url": "videogames.ja.pack.json",
+          "sha256": "5146299d3af92e32b35d906f9f9ecfc544825580e04739146688ea39eee47973",
+          "questionCount": 1195,
+          "translatedCount": 1195
+        },
+        "ko": {
+          "url": "videogames.ko.pack.json",
+          "sha256": "ec171bc42edcda5e16da1c20dba5362ed37e2ed7b1bd6611e8a0eb89dfc91a88",
+          "questionCount": 1195,
+          "translatedCount": 1195
+        },
+        "pt-BR": {
+          "url": "videogames.pt-BR.pack.json",
+          "sha256": "4d139934a5e383610da9174f87162fcf389ed17180e9de3213ffeb3770a25e2b",
+          "questionCount": 1195,
+          "translatedCount": 1195
+        },
+        "zh-Hans": {
+          "url": "videogames.zh-Hans.pack.json",
+          "sha256": "eb54b13ff7e388df19a5fddfb13bf3bccbf65722b71591a52a11f999ae4fdb85",
+          "questionCount": 1195,
+          "translatedCount": 1195
+        }
+      }
     },
     {
       "categoryID": "boardgames",
       "version": 2,
       "url": "boardgames.pack.json",
       "sha256": "53e12cd360173da51c4f0bf393f925bb6dc645aa36e5c4105727f673e0c58130",
-      "questionCount": 69
+      "questionCount": 69,
+      "localizations": {
+        "de": {
+          "url": "boardgames.de.pack.json",
+          "sha256": "ae32930fe05e2766c99a4f9d27f94ab40ed8166723fddd92cbcd5ad22f96ae11",
+          "questionCount": 69,
+          "translatedCount": 69
+        },
+        "es": {
+          "url": "boardgames.es.pack.json",
+          "sha256": "0b1b3193dfeee565875722965d34fce6c403d7d572c73adb9b9176b8ed19fd72",
+          "questionCount": 69,
+          "translatedCount": 69
+        },
+        "fr": {
+          "url": "boardgames.fr.pack.json",
+          "sha256": "91a0794924d7a5280f23f46a24d568ce8bc5c9e7cf34d4f322ebc9ea486e8cdb",
+          "questionCount": 69,
+          "translatedCount": 69
+        },
+        "it": {
+          "url": "boardgames.it.pack.json",
+          "sha256": "3d5262a52aeb1423ec818a7adff3bed1c57ccd4aeb976f61a67fb82f324e4b67",
+          "questionCount": 69,
+          "translatedCount": 69
+        },
+        "ja": {
+          "url": "boardgames.ja.pack.json",
+          "sha256": "a9706d0197ca0bfb605ce94e886e2b35075aa9ba3052c7a71206fb602ca9214e",
+          "questionCount": 69,
+          "translatedCount": 69
+        },
+        "ko": {
+          "url": "boardgames.ko.pack.json",
+          "sha256": "f513c5f5ef2caaf372e6fb34e16b0b9d4c9c88887e88f30f299b0b61f8364060",
+          "questionCount": 69,
+          "translatedCount": 69
+        },
+        "pt-BR": {
+          "url": "boardgames.pt-BR.pack.json",
+          "sha256": "0cf4fbea9c3be09ff1e85f12cb5b0e66c79231233579d6e34b6e9a1da0aa7611",
+          "questionCount": 69,
+          "translatedCount": 69
+        },
+        "zh-Hans": {
+          "url": "boardgames.zh-Hans.pack.json",
+          "sha256": "4e96582bc67256a38bf2d43e025d618870e61d1b9f18ca6ed3189658cabfaa66",
+          "questionCount": 69,
+          "translatedCount": 69
+        }
+      }
     },
     {
       "categoryID": "books",
       "version": 2,
       "url": "books.pack.json",
       "sha256": "50f8ccea96b0ae5bb280332eaedf93c0a85e33ff254654cfe2beaa11435cec24",
-      "questionCount": 115
+      "questionCount": 115,
+      "localizations": {
+        "de": {
+          "url": "books.de.pack.json",
+          "sha256": "05e0d253c0daf9f49aa652b2bc0c9180f7e34016fd5fdee5353086ae7640c428",
+          "questionCount": 115,
+          "translatedCount": 115
+        },
+        "es": {
+          "url": "books.es.pack.json",
+          "sha256": "7ad51751cd129ce4ab7df87c97781c5884f6feb0badfb9e2a33ff5577688ac4a",
+          "questionCount": 115,
+          "translatedCount": 115
+        },
+        "fr": {
+          "url": "books.fr.pack.json",
+          "sha256": "50c0bd0545fcd89ea3ba6a1a934ce6d1c581e6fd0fce00eae34679e698f2842b",
+          "questionCount": 115,
+          "translatedCount": 115
+        },
+        "it": {
+          "url": "books.it.pack.json",
+          "sha256": "d925638a542ddd38ca1b2bc1cf78ef153da8d0ba05a7378c340e327bdbb187d0",
+          "questionCount": 115,
+          "translatedCount": 115
+        },
+        "ja": {
+          "url": "books.ja.pack.json",
+          "sha256": "f92171eb90f0c3afbcf1171d91c822b8e58f7f09342bb69a3342dd74bc60326b",
+          "questionCount": 115,
+          "translatedCount": 115
+        },
+        "ko": {
+          "url": "books.ko.pack.json",
+          "sha256": "4325763ce2526001ab9b9d718418422a86641791f85cd1dd6f4278bd453abe28",
+          "questionCount": 115,
+          "translatedCount": 115
+        },
+        "pt-BR": {
+          "url": "books.pt-BR.pack.json",
+          "sha256": "01cc36a03b9674dedcf8efc99df08d502a30938ec26e50fae1c50cd55737e1ea",
+          "questionCount": 115,
+          "translatedCount": 115
+        },
+        "zh-Hans": {
+          "url": "books.zh-Hans.pack.json",
+          "sha256": "38359773c6d41c7a834280e5e2d87113f1ad811d2941574c556feb890dfd621e",
+          "questionCount": 115,
+          "translatedCount": 115
+        }
+      }
     },
     {
       "categoryID": "computers",
       "version": 2,
       "url": "computers.pack.json",
       "sha256": "6807cee3d19e69aceac2afca3c9f1987291724b76298158e99b2622ed2fce9b1",
-      "questionCount": 172
+      "questionCount": 172,
+      "localizations": {
+        "de": {
+          "url": "computers.de.pack.json",
+          "sha256": "c83455b963a1c02384bab8657fff9fa113e925650a71400d48730f88b3c32529",
+          "questionCount": 172,
+          "translatedCount": 172
+        },
+        "es": {
+          "url": "computers.es.pack.json",
+          "sha256": "aa751326a539e9aede9296a7e9b6792743e5b02f531da7ad4bdac6e9043ce2b8",
+          "questionCount": 172,
+          "translatedCount": 172
+        },
+        "fr": {
+          "url": "computers.fr.pack.json",
+          "sha256": "4289a913ccc56544de3c971d2b60c3e3c8c6481ece5f63c2ffff7cf8f3715a68",
+          "questionCount": 172,
+          "translatedCount": 172
+        },
+        "it": {
+          "url": "computers.it.pack.json",
+          "sha256": "5b0df44b508ce98252adcc62c29dec1cfc201e9026d2a5649786a51cdc5fc834",
+          "questionCount": 172,
+          "translatedCount": 172
+        },
+        "ja": {
+          "url": "computers.ja.pack.json",
+          "sha256": "fb1540a57128cc4b1b43c3f09bd57091fe83a9ba47b37d3e04020aeefa5d9486",
+          "questionCount": 172,
+          "translatedCount": 172
+        },
+        "ko": {
+          "url": "computers.ko.pack.json",
+          "sha256": "33818b095d4ed5a1481a5311a2a370038f2fca69cf6e83c410e3c59a998d6223",
+          "questionCount": 172,
+          "translatedCount": 172
+        },
+        "pt-BR": {
+          "url": "computers.pt-BR.pack.json",
+          "sha256": "024237c8b1816386ae7bb706bfba10f42629a8a7f0d5ed3300923081fca16c3d",
+          "questionCount": 172,
+          "translatedCount": 172
+        },
+        "zh-Hans": {
+          "url": "computers.zh-Hans.pack.json",
+          "sha256": "94a6e50771157a92e5d745ba54e9c52f333a9651ff8232fe5ea2d35b0e628b32",
+          "questionCount": 172,
+          "translatedCount": 172
+        }
+      }
     },
     {
       "categoryID": "math",
       "version": 2,
       "url": "math.pack.json",
       "sha256": "064722a7827b0b2a5f572b0c4392e61978a7527e12c4dbbcec44dd32ad8e885c",
-      "questionCount": 71
+      "questionCount": 71,
+      "localizations": {
+        "de": {
+          "url": "math.de.pack.json",
+          "sha256": "510dc4e7b46c57a7634287173ace915e00f8d574cd5b0c95d7f000e99c8b88e1",
+          "questionCount": 71,
+          "translatedCount": 71
+        },
+        "es": {
+          "url": "math.es.pack.json",
+          "sha256": "0d8decddba8be9220a7131001fd7c8ebeb3e07fa0730f858c337d9e380564b85",
+          "questionCount": 71,
+          "translatedCount": 71
+        },
+        "fr": {
+          "url": "math.fr.pack.json",
+          "sha256": "c3684057c6b2319e2ac7cb0652f778fc6676b2993e3268a186bb47c766816df3",
+          "questionCount": 71,
+          "translatedCount": 71
+        },
+        "it": {
+          "url": "math.it.pack.json",
+          "sha256": "86c9c6f2393ca5ef764edff74613af5342aeb830b1f95a3b6d9d8a42fc79a4a9",
+          "questionCount": 71,
+          "translatedCount": 71
+        },
+        "ja": {
+          "url": "math.ja.pack.json",
+          "sha256": "4682a089e03afba8d4289263d505253562e7b85bb9fdbcf891c1a986e889bce6",
+          "questionCount": 71,
+          "translatedCount": 71
+        },
+        "ko": {
+          "url": "math.ko.pack.json",
+          "sha256": "d6212e59eb5b0cc616671d14c01119eca6b0f5a8eacb059323c279b13b8620c8",
+          "questionCount": 71,
+          "translatedCount": 71
+        },
+        "pt-BR": {
+          "url": "math.pt-BR.pack.json",
+          "sha256": "91a65eb17ce4abf1bc884db21121019c25a5f48252f6ccad6d7fe38460e1de87",
+          "questionCount": 71,
+          "translatedCount": 71
+        },
+        "zh-Hans": {
+          "url": "math.zh-Hans.pack.json",
+          "sha256": "aaffcc8a98aff8a5305d4608f2bb0083fe04aec741f517617bb02bd572fcd708",
+          "questionCount": 71,
+          "translatedCount": 71
+        }
+      }
     },
     {
       "categoryID": "mythology",
       "version": 2,
       "url": "mythology.pack.json",
       "sha256": "511d10657cf32ca1be4191836ee63e8fd8d130d8b0bcf545119dfca1ad1fd648",
-      "questionCount": 65
+      "questionCount": 65,
+      "localizations": {
+        "de": {
+          "url": "mythology.de.pack.json",
+          "sha256": "54d8715c7ab3542bbfbb3ee27bdaf3f464b0ce7d1e2239473b8a95b4f90ade55",
+          "questionCount": 65,
+          "translatedCount": 65
+        },
+        "es": {
+          "url": "mythology.es.pack.json",
+          "sha256": "3506dd26502cd76abd13e6201f3a3e425f8701dd5df0c9526a991e707399a491",
+          "questionCount": 65,
+          "translatedCount": 65
+        },
+        "fr": {
+          "url": "mythology.fr.pack.json",
+          "sha256": "470aa18b3ba2979b9d578854c7812046719c0228273971610855975bc49821a9",
+          "questionCount": 65,
+          "translatedCount": 65
+        },
+        "it": {
+          "url": "mythology.it.pack.json",
+          "sha256": "c2d75564098f403e24db1c5a435aa70d2102bc7f0b48d8fade912c956e9b3594",
+          "questionCount": 65,
+          "translatedCount": 65
+        },
+        "ja": {
+          "url": "mythology.ja.pack.json",
+          "sha256": "198f7bcec0b8dbcfb6bdc3753fa32794531c1157ca78f6869877b4aa55eeb826",
+          "questionCount": 65,
+          "translatedCount": 65
+        },
+        "ko": {
+          "url": "mythology.ko.pack.json",
+          "sha256": "f694c73c84460f30a85a97b36ea9a3d65228eb9ed2c3672a90da610315615ff4",
+          "questionCount": 65,
+          "translatedCount": 65
+        },
+        "pt-BR": {
+          "url": "mythology.pt-BR.pack.json",
+          "sha256": "71a14abd73834fc47eb82084b33463aa11b2dba4dbf1a9ceb7ae85a2944dd428",
+          "questionCount": 65,
+          "translatedCount": 65
+        },
+        "zh-Hans": {
+          "url": "mythology.zh-Hans.pack.json",
+          "sha256": "9fbf5f63f74df43e8a67664dfe07ad8a3359ff454852e13d8a88a9dc11377a88",
+          "questionCount": 65,
+          "translatedCount": 65
+        }
+      }
     },
     {
       "categoryID": "animals",
       "version": 2,
       "url": "animals.pack.json",
       "sha256": "617706d6559ed2ffa087513e7b7484ca14fa22d4c102fba05af4fe94a9d5761d",
-      "questionCount": 78
+      "questionCount": 78,
+      "localizations": {
+        "de": {
+          "url": "animals.de.pack.json",
+          "sha256": "a3f0bb1520b6f4dff298ff55f439536c8e8e69b8688d2d759a586362fac675e7",
+          "questionCount": 78,
+          "translatedCount": 78
+        },
+        "es": {
+          "url": "animals.es.pack.json",
+          "sha256": "9a248bfa52ee94075f77413fcce7621f00826aa17f262f6b73640e676d4b194f",
+          "questionCount": 78,
+          "translatedCount": 78
+        },
+        "fr": {
+          "url": "animals.fr.pack.json",
+          "sha256": "e6fb80ad2569ca86892305b79b0a121d662373ed36da12e43439e2eb91b91715",
+          "questionCount": 78,
+          "translatedCount": 78
+        },
+        "it": {
+          "url": "animals.it.pack.json",
+          "sha256": "6f3c650003715d5194bdd884b0ddd028982caedb3bf49cd062c61f6e7d746e8d",
+          "questionCount": 78,
+          "translatedCount": 78
+        },
+        "ja": {
+          "url": "animals.ja.pack.json",
+          "sha256": "e6fbbcf0c1b022ac1c31493e77dd22241374ee2042122489f80a5f3710ac3a75",
+          "questionCount": 78,
+          "translatedCount": 78
+        },
+        "ko": {
+          "url": "animals.ko.pack.json",
+          "sha256": "dd18103b50bfcd0b2442a5975f15ffc07199c65c7cc14690ee0b484bc6f0b037",
+          "questionCount": 78,
+          "translatedCount": 78
+        },
+        "pt-BR": {
+          "url": "animals.pt-BR.pack.json",
+          "sha256": "927cbf57f1dace23620a2d811c5c0d5c1e5fc67dbefe06cc3112f6a3cd97b805",
+          "questionCount": 78,
+          "translatedCount": 78
+        },
+        "zh-Hans": {
+          "url": "animals.zh-Hans.pack.json",
+          "sha256": "fbb17c37238a05d3acea20a0c7c3c7edd5b7409e7c612982b0a588b325a0406e",
+          "questionCount": 78,
+          "translatedCount": 78
+        }
+      }
     },
     {
       "categoryID": "vehicles",
       "version": 2,
       "url": "vehicles.pack.json",
       "sha256": "0518a2c34f50ad41c1f12d487fa6790c8ea502264e53638a9b157cc4df3220e5",
-      "questionCount": 69
+      "questionCount": 69,
+      "localizations": {
+        "de": {
+          "url": "vehicles.de.pack.json",
+          "sha256": "5e9c1135982d71f8b3c6ff6db68525bd188b805285edec26abc6ded93bedf24a",
+          "questionCount": 69,
+          "translatedCount": 69
+        },
+        "es": {
+          "url": "vehicles.es.pack.json",
+          "sha256": "7561a02b7c2eee03b6443489052be2606a7e59b63a4d9992120b4f87739e9711",
+          "questionCount": 69,
+          "translatedCount": 69
+        },
+        "fr": {
+          "url": "vehicles.fr.pack.json",
+          "sha256": "3542d947519c85edd2e04501ab6ae3250905fe40304375c41567363bf3646dc1",
+          "questionCount": 69,
+          "translatedCount": 69
+        },
+        "it": {
+          "url": "vehicles.it.pack.json",
+          "sha256": "7206c041fc70984541ee7ec01dcfdbfdf4da3addf49eb1ba55c0687f4843f067",
+          "questionCount": 69,
+          "translatedCount": 69
+        },
+        "ja": {
+          "url": "vehicles.ja.pack.json",
+          "sha256": "89f13d91c69f635462cac2bb124df50f8921ccb9052206714449ed4b9673372e",
+          "questionCount": 69,
+          "translatedCount": 69
+        },
+        "ko": {
+          "url": "vehicles.ko.pack.json",
+          "sha256": "7308f36deb803fa0be5293551a43137abaf8bee2a65879bb2771ec639750fb00",
+          "questionCount": 69,
+          "translatedCount": 69
+        },
+        "pt-BR": {
+          "url": "vehicles.pt-BR.pack.json",
+          "sha256": "2eec61d3efa2c8f9b336635023114a1610dabc9c015e8c24d30c410f527209c3",
+          "questionCount": 69,
+          "translatedCount": 69
+        },
+        "zh-Hans": {
+          "url": "vehicles.zh-Hans.pack.json",
+          "sha256": "009a2bf4fa981011847d9d858202c711de7a6d96f138800ed9a54cd5de3529bd",
+          "questionCount": 69,
+          "translatedCount": 69
+        }
+      }
     },
     {
       "categoryID": "celebrities",
       "version": 1,
       "url": "celebrities.pack.json",
       "sha256": "b5be85039b5f9f044dddf947d2fd1e1a2770d8e9f24aeeee722204d25b98dcea",
-      "questionCount": 50
+      "questionCount": 50,
+      "localizations": {
+        "de": {
+          "url": "celebrities.de.pack.json",
+          "sha256": "917e64456534e2eb6f8230a7f35e706ccf3b0dd1a3c7376e97edaee7b6ee8f08",
+          "questionCount": 50,
+          "translatedCount": 50
+        },
+        "es": {
+          "url": "celebrities.es.pack.json",
+          "sha256": "a2ef4f7690340ade6f49c8506cd1767fbb7e38f17c3df315b0ce2e6732d494b5",
+          "questionCount": 50,
+          "translatedCount": 50
+        },
+        "fr": {
+          "url": "celebrities.fr.pack.json",
+          "sha256": "3a172c13ce2376184a8b5947efc8e151eb900de0cdece81b5e531ab3b2bad9ed",
+          "questionCount": 50,
+          "translatedCount": 50
+        },
+        "it": {
+          "url": "celebrities.it.pack.json",
+          "sha256": "6537df5484adaecbb22b9710f0ad8011a78d204a8ce5bad60bad641724179789",
+          "questionCount": 50,
+          "translatedCount": 50
+        },
+        "ja": {
+          "url": "celebrities.ja.pack.json",
+          "sha256": "904ae9bdd11f8ba5c909135eb71e979ac8e2599a8e6c2338bdfc74385e7b552e",
+          "questionCount": 50,
+          "translatedCount": 50
+        },
+        "ko": {
+          "url": "celebrities.ko.pack.json",
+          "sha256": "65a95891f0002292641a643cec6e3f3faadbe7c3f2908a56e815ed921f43f136",
+          "questionCount": 50,
+          "translatedCount": 50
+        },
+        "pt-BR": {
+          "url": "celebrities.pt-BR.pack.json",
+          "sha256": "29d9bd09a29d63ca5b3130a9ce5cecb4c00926d4ae1d03e86b400fb176ac8a7c",
+          "questionCount": 50,
+          "translatedCount": 50
+        },
+        "zh-Hans": {
+          "url": "celebrities.zh-Hans.pack.json",
+          "sha256": "de192133f6cffa3c03dbe42e4985dac5ca1816639aff9ff46b81055a63a8497e",
+          "questionCount": 50,
+          "translatedCount": 50
+        }
+      }
     },
     {
       "categoryID": "anime",
       "version": 2,
       "url": "anime.pack.json",
       "sha256": "fdf88ab6e120e206fbcef2a520cee743813396fa5e47a722018eeca7377b9a29",
-      "questionCount": 204
+      "questionCount": 204,
+      "localizations": {
+        "de": {
+          "url": "anime.de.pack.json",
+          "sha256": "34052c05d995e7ba1093cf86109cb432bb108628957840cea6cacdfd53ffb274",
+          "questionCount": 204,
+          "translatedCount": 204
+        },
+        "es": {
+          "url": "anime.es.pack.json",
+          "sha256": "bf7166005037cdd6caaf171154077fd02bedcd02da0dc448d1a395bfc3821304",
+          "questionCount": 204,
+          "translatedCount": 204
+        },
+        "fr": {
+          "url": "anime.fr.pack.json",
+          "sha256": "16a7a333aa6021095b260e70e27b5367840e3a618fd652ff08d1d92e536cf723",
+          "questionCount": 204,
+          "translatedCount": 204
+        },
+        "it": {
+          "url": "anime.it.pack.json",
+          "sha256": "d40dcbffc0c41d7fdf116eb86e81d2cf811e7fe26092fec603a53a9276c3dc47",
+          "questionCount": 204,
+          "translatedCount": 204
+        },
+        "ja": {
+          "url": "anime.ja.pack.json",
+          "sha256": "1b106885e6bdb6e62a9191ad19b301f73571a5684f49bc49084d8ffe5cb5a472",
+          "questionCount": 204,
+          "translatedCount": 204
+        },
+        "ko": {
+          "url": "anime.ko.pack.json",
+          "sha256": "34063e73afcc6881e347f9139f71542fe3bf2e53a038c4e56953294a95c58e25",
+          "questionCount": 204,
+          "translatedCount": 204
+        },
+        "pt-BR": {
+          "url": "anime.pt-BR.pack.json",
+          "sha256": "af72cb739a6f84dd115b855c414586486e13ecae215f539e0df5918d90c8913b",
+          "questionCount": 204,
+          "translatedCount": 204
+        },
+        "zh-Hans": {
+          "url": "anime.zh-Hans.pack.json",
+          "sha256": "7673ce88c18311e50fcd15f57ba1e36757c6d88a521614779af73e7d0c048c07",
+          "questionCount": 204,
+          "translatedCount": 204
+        }
+      }
     },
     {
       "categoryID": "cartoons",
       "version": 2,
       "url": "cartoons.pack.json",
       "sha256": "9c6928b51011914b572e8deb5d5fdc837b54f569d9a98907dc94318ac0c2b2f5",
-      "questionCount": 104
+      "questionCount": 104,
+      "localizations": {
+        "de": {
+          "url": "cartoons.de.pack.json",
+          "sha256": "c52f74f529fb48cdaaa7cf7a6a3461b0ef22a0971035642aa2f5f4ed159fca77",
+          "questionCount": 104,
+          "translatedCount": 104
+        },
+        "es": {
+          "url": "cartoons.es.pack.json",
+          "sha256": "342797a12d42e7d8868ef80a1b206a7c63d3afe518513af1b20099cf590caa88",
+          "questionCount": 104,
+          "translatedCount": 104
+        },
+        "fr": {
+          "url": "cartoons.fr.pack.json",
+          "sha256": "72f2aabae03fa75e381c5d17af5faccc0770940004e095909559f13da5714d52",
+          "questionCount": 104,
+          "translatedCount": 104
+        },
+        "it": {
+          "url": "cartoons.it.pack.json",
+          "sha256": "6f0cf7ce872c8984dc50167066d3b46886b6fe3c4825c5755a0dd29ec88c277e",
+          "questionCount": 104,
+          "translatedCount": 104
+        },
+        "ja": {
+          "url": "cartoons.ja.pack.json",
+          "sha256": "3ecd5565602846795edd8e1dd237f542df41938e6f59be3e61e3075ed7e1c860",
+          "questionCount": 104,
+          "translatedCount": 104
+        },
+        "ko": {
+          "url": "cartoons.ko.pack.json",
+          "sha256": "f346a3e9d9e438794ffb6dd433798f50c0127e446fa6416d00b77f7e756393b8",
+          "questionCount": 104,
+          "translatedCount": 104
+        },
+        "pt-BR": {
+          "url": "cartoons.pt-BR.pack.json",
+          "sha256": "8e18ed0267a5ecfede87e2ec420edd6abf5f05760be5a3ad7a0920c09e460006",
+          "questionCount": 104,
+          "translatedCount": 104
+        },
+        "zh-Hans": {
+          "url": "cartoons.zh-Hans.pack.json",
+          "sha256": "3fe7ebb9cbbac037e185acb3a9928e1d6815b05c40a01844a7836815c6bda1c4",
+          "questionCount": 104,
+          "translatedCount": 104
+        }
+      }
     },
     {
       "categoryID": "comics",
       "version": 2,
       "url": "comics.pack.json",
       "sha256": "98d10df61b6424f504ef1417f7de06c22985bb1d8bda8a86689e092232f7b773",
-      "questionCount": 68
+      "questionCount": 68,
+      "localizations": {
+        "de": {
+          "url": "comics.de.pack.json",
+          "sha256": "bd6925d2a1e6336ec958aae665cef1b7a9062bc48162e3db9d81c4dffdceec25",
+          "questionCount": 68,
+          "translatedCount": 68
+        },
+        "es": {
+          "url": "comics.es.pack.json",
+          "sha256": "6d1cbf1883d389849de428b8f8e38f746dacebdfbab21baacce84e0146962489",
+          "questionCount": 68,
+          "translatedCount": 68
+        },
+        "fr": {
+          "url": "comics.fr.pack.json",
+          "sha256": "b00a7cba14fe9db7a020eb8d15e0886c534d44cafd2f2e5b5614473170e2e0cb",
+          "questionCount": 68,
+          "translatedCount": 68
+        },
+        "it": {
+          "url": "comics.it.pack.json",
+          "sha256": "4f2a51d2ce5c09dbaf724a226c0f5a823d24f944896b5f01f02ee0e899be3392",
+          "questionCount": 68,
+          "translatedCount": 68
+        },
+        "ja": {
+          "url": "comics.ja.pack.json",
+          "sha256": "2ffc95d6b99a176e7784cee0186c6d67a7a917d1de1cfee0479b0654a3cb28a0",
+          "questionCount": 68,
+          "translatedCount": 68
+        },
+        "ko": {
+          "url": "comics.ko.pack.json",
+          "sha256": "337e99f9c661e7d0b6b6525847586ea1d58623fa2a3c6a6af9561b39cd1b523d",
+          "questionCount": 68,
+          "translatedCount": 68
+        },
+        "pt-BR": {
+          "url": "comics.pt-BR.pack.json",
+          "sha256": "1c777b6318bc408026968794bffac1bc8175a5546477ba0b872b86bb82e2f197",
+          "questionCount": 68,
+          "translatedCount": 68
+        },
+        "zh-Hans": {
+          "url": "comics.zh-Hans.pack.json",
+          "sha256": "502717eb951a172f1bc7a16665f30478681f049c20798136b79f9a65ed20323d",
+          "questionCount": 68,
+          "translatedCount": 68
+        }
+      }
     },
     {
       "categoryID": "bible",
       "version": 2,
       "url": "bible.pack.json",
       "sha256": "ac2356a9a06ddc1fd646db8ea3bfa05d190d4c56f79351ab4ac6b87f5136c931",
-      "questionCount": 227
+      "questionCount": 227,
+      "localizations": {
+        "de": {
+          "url": "bible.de.pack.json",
+          "sha256": "55220a709b426005901411173efdce5d3a7741ce4d7af13430b6c400216b42aa",
+          "questionCount": 227,
+          "translatedCount": 227
+        },
+        "es": {
+          "url": "bible.es.pack.json",
+          "sha256": "e1c5d974bd5004de01b5dbcdc3b457be3b89ac712b93acfca05efd5850d425e9",
+          "questionCount": 227,
+          "translatedCount": 227
+        },
+        "fr": {
+          "url": "bible.fr.pack.json",
+          "sha256": "8fb33f10f0a3ff0311da7983067166008361888adbbef5621ab885a6ff9e223a",
+          "questionCount": 227,
+          "translatedCount": 227
+        },
+        "it": {
+          "url": "bible.it.pack.json",
+          "sha256": "5822a34e4c16f025e83ac6dd46b7c137e02938665c4599c34610f7081a6ac98b",
+          "questionCount": 227,
+          "translatedCount": 227
+        },
+        "ja": {
+          "url": "bible.ja.pack.json",
+          "sha256": "e099289a9804d52914744946b3178b772e9e98b9172f16394aafa1d8de7871bd",
+          "questionCount": 227,
+          "translatedCount": 227
+        },
+        "ko": {
+          "url": "bible.ko.pack.json",
+          "sha256": "17bcf1663c731313a053c807f2c3d4a095ce291b6ec64155afd8a10206d9e5fb",
+          "questionCount": 227,
+          "translatedCount": 227
+        },
+        "pt-BR": {
+          "url": "bible.pt-BR.pack.json",
+          "sha256": "f9f5db674dca24379513977eb9c001a53f0231e59882d951b4a31e53de6c1def",
+          "questionCount": 227,
+          "translatedCount": 227
+        },
+        "zh-Hans": {
+          "url": "bible.zh-Hans.pack.json",
+          "sha256": "0ebaabcabadb1c38b20def090611dd6c57490819abc543cf436984f7bd1a59f2",
+          "questionCount": 227,
+          "translatedCount": 227
+        }
+      }
     }
   ],
   "baseURL": "https://wemiller.com/apps/zap/content/"
