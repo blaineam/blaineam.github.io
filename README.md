@@ -26,6 +26,11 @@ Apple Watch. Just imagine what we can build together!
 lists them chronologically. Both read from a single source of truth,
 [`apps/projects.json`](apps/projects.json).
 
+**Haven**, **Blip**, and **Glint** are free — no ads, no tracking, no
+subscriptions. Their development is funded through
+[GitHub Sponsors](https://github.com/sponsors/blaineam), [Ko-fi](https://ko-fi.com/wemiller),
+and one-time tips; see the [Support](https://wemiller.com/support) page.
+
 | App | What it does | Released |
 |-----|--------------|----------|
 | **Revela** | Shoot film. Wait for it — a vintage film camera | July 2026 |
@@ -64,6 +69,7 @@ shares a consistent look.
 | [Puzzles](https://wemiller.com/puzzles) | Interactive puzzles and brain teasers |
 | [Speed Test](https://wemiller.com/speedtest) | In-browser network speed test |
 | [Pay](https://wemiller.com/pay) | Simple payment / tip page |
+| [Support](https://wemiller.com/support) | Fund future development of the free apps (Haven, Blip, Glint) via GitHub Sponsors, Ko-fi, or a one-time tip |
 
 ---
 

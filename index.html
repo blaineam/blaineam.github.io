@@ -1958,6 +1958,12 @@
             <path fill-rule="evenodd" clip-rule="evenodd" d="M13 17C13 15.8954 13.8954 15 15 15H20C21.1046 15 22 15.8954 22 17V22C22 23.1046 21.1046 24 20 24H15C13.8954 24 13 23.1046 13 22V17ZM15 17H20V22H15V17Z" fill="currentColor"/>
           </svg>
         </a>
+
+        <a id="support-button" class="liquidGlass button" href="support/" data-label="Support" data-i18n-attr="data-label:radial.support">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 20.3L10.8 19.2C5.4 14.4 2.5 11.8 2.5 8.5C2.5 5.9 4.6 4 7.2 4C8.7 4 10.1 4.7 11 5.8L12 7L13 5.8C13.9 4.7 15.3 4 16.8 4C19.4 4 21.5 5.9 21.5 8.5C21.5 11.8 18.6 14.4 13.2 19.2L12 20.3Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </a>
       </div>
     </div>
   </div>
@@ -2639,9 +2645,9 @@
     // Delay setup to ensure labels are created first by initializeRadialMenu
     setTimeout(setupLabelClickHandlers, 100);
 
-    // Handle radial link button clicks (books, panos, apps)
+    // Handle radial link button clicks (books, panos, apps, support)
     function setupRadialLinkButtons() {
-      const linkButtons = ['book-button', 'panos-button', 'apps-button'];
+      const linkButtons = ['book-button', 'panos-button', 'apps-button', 'support-button'];
       linkButtons.forEach(id => {
         const btn = document.getElementById(id);
         if (btn) {

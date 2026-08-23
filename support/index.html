@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Support future development - Blaine Miller</title>
+  <meta name="description" content="Haven, Blip and Glint are free — no ads, no tracking, no subscriptions. Help fund what comes next through GitHub Sponsors, Ko-fi or a one-time tip.">
+  <link rel="canonical" href="https://wemiller.com/support/">
+  <meta property="og:title" content="Support future development - Blaine Miller">
+  <meta property="og:description" content="Haven, Blip and Glint are free — no ads, no tracking, no subscriptions. Help fund what comes next through GitHub Sponsors, Ko-fi or a one-time tip.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://wemiller.com/support/">
+  <meta property="og:image" content="https://wemiller.com/apps/apps-by-blaine-miller.jpg">
+  <link rel="stylesheet" href="/apps/app-showcase.css">
+  <style>
+    /* Support Page Specific Styles — same glass language as /apps/ */
+    .support-hero {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: calc(80px + var(--spacing-2xl)) var(--spacing-lg) var(--spacing-2xl);
+      background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    .support-hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background:
+        radial-gradient(circle at 20% 30%, rgba(102, 126, 234, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(118, 75, 162, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 50% 50%, rgba(240, 147, 251, 0.1) 0%, transparent 50%);
+      animation: pulseGradient 15s ease-in-out infinite;
+    }
+
+    @keyframes pulseGradient {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.7; }
+    }
+
+    .support-container {
+      max-width: 1100px;
+      width: 100%;
+      position: relative;
+      z-index: 1;
+    }
+
+    .support-eyebrow {
+      color: var(--primary-color);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-size: 0.875rem;
+      margin-bottom: var(--spacing-sm);
+      animation: fadeInUp 0.8s ease-out;
+    }
+
+    .support-title {
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color), var(--accent-color));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: var(--spacing-md);
+      animation: fadeInUp 0.8s ease-out 0.1s both;
+    }
+
+    .support-intro {
+      font-size: clamp(1.125rem, 2vw, 1.375rem);
+      color: var(--text-secondary);
+      max-width: 720px;
+      margin: 0 auto;
+      animation: fadeInUp 0.8s ease-out 0.2s both;
+    }
+
+    /* The three ways */
+    .support-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: var(--spacing-lg);
+      margin-top: var(--spacing-2xl);
+      text-align: left;
+    }
+
+    .support-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius-xl);
+      padding: var(--spacing-lg);
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-xs);
+      position: relative;
+      overflow: hidden;
+      transition: all var(--transition-base);
+      animation: fadeInScale 0.8s ease-out both;
+    }
+
+    .support-card:nth-child(1) { animation-delay: 0.3s; }
+    .support-card:nth-child(2) { animation-delay: 0.4s; }
+    .support-card:nth-child(3) { animation-delay: 0.5s; }
+
+    .support-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+      transform: scaleX(0);
+      transition: transform var(--transition-base);
+    }
+
+    .support-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 60px var(--shadow-color);
+    }
+
+    .support-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .support-card-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: var(--radius-md);
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: var(--spacing-sm);
+      box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+      transition: transform var(--transition-base);
+    }
+
+    .support-card-icon svg {
+      width: 28px;
+      height: 28px;
+      display: block;
+    }
+
+    .support-card:hover .support-card-icon {
+      transform: scale(1.1) rotate(5deg);
+    }
+
+    .support-card-title {
+      font-family: var(--font-heading);
+      font-size: 1.375rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      letter-spacing: -0.02em;
+    }
+
+    .support-card-desc {
+      color: var(--text-secondary);
+      margin-bottom: var(--spacing-md);
+      flex: 1;
+    }
+
+    .support-card-cta {
+      align-self: flex-start;
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      color: white;
+      padding: var(--spacing-xs) var(--spacing-md);
+      border-radius: var(--radius-lg);
+      font-weight: 600;
+      box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+      transition: all var(--transition-fast);
+    }
+
+    .support-card:hover .support-card-cta {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+    }
+
+    .support-aside {
+      margin: var(--spacing-xl) auto 0;
+      max-width: 720px;
+      font-size: 1rem;
+      color: var(--text-muted);
+      animation: fadeInUp 0.8s ease-out 0.6s both;
+    }
+
+    .support-aside a {
+      color: var(--primary-color);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .support-aside a:hover {
+      text-decoration: underline;
+    }
+
+    /* The free apps */
+    .free-apps {
+      padding: var(--spacing-2xl) var(--spacing-lg) 0;
+      max-width: 1100px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .free-apps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: var(--spacing-lg);
+      margin-top: var(--spacing-xl);
+      text-align: left;
+    }
+
+    .free-app {
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border: 1px solid var(--border-color);
+      box-shadow: var(--glass-shadow);
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-md);
+      text-decoration: none;
+      color: inherit;
+      display: grid;
+      grid-template-columns: 64px 1fr;
+      column-gap: var(--spacing-md);
+      align-items: start;
+      transition: all var(--transition-base);
+    }
+
+    .free-app:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 16px 40px var(--shadow-color);
+    }
+
+    .free-app-icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 18px;
+      overflow: hidden;
+      grid-row: span 4;
+      box-shadow: 0 8px 24px rgba(102, 126, 234, 0.25);
+      transition: transform var(--transition-base);
+    }
+
+    .free-app-icon img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+    }
+
+    .free-app:hover .free-app-icon {
+      transform: scale(1.08) rotate(3deg);
+    }
+
+    .free-app-name {
+      font-family: var(--font-heading);
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      letter-spacing: -0.02em;
+    }
+
+    .free-app-tagline {
+      color: var(--text-secondary);
+      display: block;
+    }
+
+    .free-app-where {
+      display: block;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-top: var(--spacing-xs);
+    }
+
+    .free-app-cta {
+      display: inline-block;
+      margin-top: var(--spacing-sm);
+      color: var(--primary-color);
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 768px) {
+      .support-hero {
+        padding-top: calc(70px + var(--spacing-xl));
+      }
+
+      .support-grid,
+      .free-apps-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+  <link rel="alternate" hreflang="x-default" href="https://wemiller.com/support/">
+  <link rel="alternate" hreflang="en" href="https://wemiller.com/support/">
+  <link rel="alternate" hreflang="zh-Hans" href="https://wemiller.com/support/?lang=zh-Hans">
+  <link rel="alternate" hreflang="ja" href="https://wemiller.com/support/?lang=ja">
+  <link rel="alternate" hreflang="de" href="https://wemiller.com/support/?lang=de">
+  <link rel="alternate" hreflang="fr" href="https://wemiller.com/support/?lang=fr">
+  <link rel="alternate" hreflang="es" href="https://wemiller.com/support/?lang=es">
+  <link rel="alternate" hreflang="ko" href="https://wemiller.com/support/?lang=ko">
+  <link rel="alternate" hreflang="pt-BR" href="https://wemiller.com/support/?lang=pt-BR">
+  <link rel="alternate" hreflang="it" href="https://wemiller.com/support/?lang=it">
+  <script src="/i18n/i18n.js" defer data-page="support" data-pos="bottom-right"></script>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="app-nav">
+    <div class="nav-container">
+      <a href="/apps/" class="nav-logo" data-i18n="apps.2d61f2">← Apps</a>
+      <button class="mobile-menu-toggle">☰</button>
+      <ul class="nav-links">
+        <li><a href="/" class="nav-link" data-i18n="portfolio.036b18">Portfolio</a></li>
+        <li><a href="/apps/" class="nav-link" data-i18n="apps.d9a368">Apps</a></li>
+        <li><a href="/support/" class="nav-link active" data-i18n="support.f32d5a">Support</a></li>
+        <li><a href="https://github.com/sponsors/blaineam" class="btn-buy" target="_blank" rel="noopener" data-i18n="sponsor-on-github.f22fdf">Sponsor on GitHub</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero + the three ways -->
+  <section class="support-hero">
+    <div class="support-container">
+      <p class="support-eyebrow" data-i18n="haven-blip-and-glint.daf41d">Haven, Blip and Glint are free</p>
+      <h1 class="support-title" data-i18n="support-future-development.921741">Support future development</h1>
+      <p class="support-intro" data-i18n="haven-blip-and-glint.e3647a">Haven, Blip and Glint are free — no ads, no tracking, no subscriptions. If they earn a place on your devices, you can help fund what comes next.</p>
+
+      <div class="support-grid">
+        <!-- GitHub Sponsors -->
+        <a href="https://github.com/sponsors/blaineam" class="support-card" target="_blank" rel="noopener">
+          <span class="support-card-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/>
+            </svg>
+          </span>
+          <span class="support-card-title" data-i18n="sponsor-on-github.f22fdf">Sponsor on GitHub</span>
+          <span class="support-card-desc" data-i18n="recurring-or-one-time.34007f">Recurring or one-time, through GitHub Sponsors.</span>
+          <span class="support-card-cta" data-i18n="sponsor.149a67">Sponsor →</span>
+        </a>
+
+        <!-- Ko-fi -->
+        <a href="https://ko-fi.com/wemiller" class="support-card" target="_blank" rel="noopener">
+          <span class="support-card-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+              <path d="M4 9h12v6a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4V9z"/>
+              <path d="M16 10h1.5a2.5 2.5 0 0 1 0 5H16"/>
+              <path d="M7.5 3.5c0 1-1 1.5-1 2.5M11 3.5c0 1-1 1.5-1 2.5M14.5 3.5c0 1-1 1.5-1 2.5"/>
+            </svg>
+          </span>
+          <span class="support-card-title" data-i18n="buy-me-a-coffee.149bea">Buy me a coffee on Ko-fi</span>
+          <span class="support-card-desc" data-i18n="a-one-time-tip.37a88f">A one-time tip — no account needed.</span>
+          <span class="support-card-cta" data-i18n="buy-a-coffee.c759ec">Buy a coffee →</span>
+        </a>
+
+        <!-- One-time tip (Stripe) -->
+        <a href="/pay/" class="support-card" target="_blank" rel="noopener">
+          <span class="support-card-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 20.3l-1.2-1.1C5.4 14.4 2.5 11.8 2.5 8.5 2.5 5.9 4.6 4 7.2 4c1.5 0 2.9.7 3.8 1.8l1 1.2 1-1.2C13.9 4.7 15.3 4 16.8 4c2.6 0 4.7 1.9 4.7 4.5 0 3.3-2.9 5.9-8.3 10.7L12 20.3z"/>
+            </svg>
+          </span>
+          <span class="support-card-title" data-i18n="one-time-tip.ca6c3e">One-time tip</span>
+          <span class="support-card-desc" data-i18n="any-amount-by-card.4e31c9">Any amount by card, through Stripe.</span>
+          <span class="support-card-cta" data-i18n="leave-a-tip.34ece0">Leave a tip →</span>
+        </a>
+      </div>
+
+      <p class="support-aside" data-i18n-html="prefer-something-in-return.2bb1f3">Prefer something in return? The <a href="/apps/">paid apps on the App Store</a> are another way to support the work.</p>
+    </div>
+  </section>
+
+  <!-- The free apps -->
+  <section class="free-apps">
+    <h2 data-i18n="the-free-apps.a328ba">The free apps</h2>
+    <p data-i18n="no-ads-no-tracking.abc870">No ads, no tracking, no subscriptions — each one is free everywhere it ships.</p>
+
+    <div class="free-apps-grid">
+      <a href="/apps/haven/" class="free-app">
+        <span class="free-app-icon"><img src="/apps/haven/assets/icon.png" alt="Haven App Icon"></span>
+        <span class="free-app-name">Haven</span>
+        <span class="free-app-tagline" data-i18n="private-post-quantum-social.c00c0e">Private, post-quantum social for your people</span>
+        <span class="free-app-where" data-i18n="free-on-the-app.0b0a74">Free on the App Store, Google Play, the Microsoft Store and Linux</span>
+        <span class="free-app-cta" data-i18n="learn-more.140c43">Learn More →</span>
+      </a>
+
+      <a href="/apps/blip/" class="free-app">
+        <span class="free-app-icon"><img src="/apps/blip/assets/images/icon.png" alt="Blip App Icon"></span>
+        <span class="free-app-name">Blip</span>
+        <span class="free-app-tagline" data-i18n="featherlight-mac-system-monitor.abb394">Featherlight Mac system monitor</span>
+        <span class="free-app-where" data-i18n="free-on-the-mac.6bb39d">Free on the Mac App Store, by direct download and via Homebrew</span>
+        <span class="free-app-cta" data-i18n="learn-more.140c43">Learn More →</span>
+      </a>
+
+      <a href="/apps/glint/" class="free-app">
+        <span class="free-app-icon"><img src="/apps/glint/assets/images/icon.png" alt="Glint App Icon"></span>
+        <span class="free-app-name">Glint</span>
+        <span class="free-app-tagline" data-i18n="brightness-volume-for-any.a559eb">Brightness &amp; volume for any display</span>
+        <span class="free-app-where" data-i18n="free-by-direct-download.0479d7">Free by direct download for the Mac</span>
+        <span class="free-app-cta" data-i18n="learn-more.140c43">Learn More →</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-links">
+        <a href="/apps/" class="footer-link" data-i18n="apps.d9a368">Apps</a>
+        <a href="/apps/haven/" class="footer-link">Haven</a>
+        <a href="/apps/blip/" class="footer-link">Blip</a>
+        <a href="/apps/glint/" class="footer-link">Glint</a>
+        <a href="/privacy/" class="footer-link" data-i18n="privacy.cf0148">Privacy</a>
+        <a href="/terms/" class="footer-link" data-i18n="terms.a55a27">Terms</a>
+        <a href="/" class="footer-link" data-i18n="portfolio.036b18">Portfolio</a>
+      </div>
+
+      <div class="footer-social-links">
+        <a href="https://x.com/apps_by_blaine" class="social-icon-link" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)">
+          <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+          </svg>
+        </a>
+        <a href="https://www.instagram.com/apps.by.blaine/" class="social-icon-link" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+          <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+          </svg>
+        </a>
+        <a href="https://www.youtube.com/@AppsByBlaine" class="social-icon-link" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+          <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+          </svg>
+        </a>
+      </div>
+
+      <p style="color: var(--text-muted); margin-top: var(--spacing-md);" data-i18n-html="blaine-miller-all-rights.b327c2">
+        © <span id="year"></span> Blaine Miller. All rights reserved.
+      </p>
+    </div>
+  </footer>
+
+  <script src="/apps/app-showcase.js"></script>
+</body>
+</html>

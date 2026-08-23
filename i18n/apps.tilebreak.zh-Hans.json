@@ -60,6 +60,7 @@
   "seven-layouts-six-themes.7f28c6": "七种布局、六款主题、四套牌面、两种规则玩法——且全程不见一条广告",
   "seven-layouts.040c5c": "七种布局",
   "six-themes-four-face.026673": "六款主题、四套牌面",
+  "support.f32d5a": "支持",
   "swiftui-spritekit-hybrid-60.08b000": "SwiftUI + SpriteKit 混合架构，60 fps 帧率上限，零第三方 SDK。堆叠层高、侧壁和阴影全部按比例绘制，因此牌局从 iPhone mini 到 13 英寸 iPad 都能干净利落地缩放。",
   "tap-two-matching-tiles.494962": "点按两张相同的牌即可消除。若一张牌上方没有其他牌压住，且左右两侧至少有一侧空出，这张牌就是“自由”牌。大多数牌需要完全相同才能配对——而在美式规则下，任意花牌可与任意花牌配对，任意季牌可与任意季牌配对。",
   "terms.a55a27": "条款",

@@ -32,19 +32,27 @@ FOOTER_RE = re.compile(
 )
 
 
+# Site-wide links that follow the app list. The data-i18n keys are the ones
+# scripts/i18n-tag.py mints for these exact labels (slug + sha1[:6] of the
+# English), so rewriting the block keeps the footer translatable.
+SITE_LINKS = [
+    ("/privacy/", "Privacy",   "privacy.cf0148"),
+    ("/terms/",   "Terms",     "terms.a55a27"),
+    ("/support/", "Support",   "support.f32d5a"),
+    ("/",         "Portfolio", "portfolio.036b18"),
+]
+
+
 def build_block(self_slug: str) -> str:
     lines = ['<div class="footer-links">',
-             '        <a href="../" class="footer-link">All Apps</a>']
+             '        <a href="../" class="footer-link" data-i18n="all-apps.429449">All Apps</a>']
     for slug, label in ORDER:
         if slug == self_slug:
             continue
         lines.append(f'        <a href="../{slug}/" class="footer-link">{label}</a>')
-    lines += [
-        '        <a href="/privacy/" class="footer-link">Privacy</a>',
-        '        <a href="/terms/" class="footer-link">Terms</a>',
-        '        <a href="/" class="footer-link">Portfolio</a>',
-        '      </div>',
-    ]
+    for href, label, key in SITE_LINKS:
+        lines.append(f'        <a href="{href}" class="footer-link" data-i18n="{key}">{label}</a>')
+    lines.append('      </div>')
     return "\n".join(lines)
 
 
