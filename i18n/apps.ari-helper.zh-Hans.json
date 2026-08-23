@@ -100,5 +100,5 @@
   "yes-when-using-local.7d1876": "当然！使用本地设备端模型或局域网中的 Ollama 时，任何数据都不会离开你的设备或本地网络。私密模式配合生物识别锁定，为敏感对话再添一重保护。",
   "yes-you-can-share.13d3cb": "当然！你可以将对话分享为精美的图片或 HTML 文件，非常适合与亲友和同事分享见解、代码片段或创意内容。",
   "your-conversations-are-now.0db54e": "现在，你的对话可直接通过系统 Spotlight 搜索 —— 点按搜索结果即可立即回到原处。将任意对话标记为“私密”，它就会彻底从搜索中隐藏，相关媒体也会转移至 Ari 的加密存储中。",
-  "not-sold-in-the.04baa8": "不在欧盟 App Store 销售"
+  "is-ari-helper-available.e70f87": "Ari Helper 在欧盟可以下载吗？"
 }

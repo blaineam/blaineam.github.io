@@ -81,5 +81,5 @@
   "yes-each-board-is.243716": "Ja. Jedes Spielfeld entsteht, indem zuerst ein gültiger Spielverlauf simuliert wird (die Methode des umgekehrten Entfernens) und die Steine anschließend in der daraus resultierenden Reihenfolge ausgelegt werden. Auch nach einem Mischen mitten im Spiel wird das neue Layout so neu erzeugt, dass es lösbar ist.",
   "yes-native-ipad-support.59fa42": "Ja – native iPad-Unterstützung im Hoch- und Querformat. Das Spielfeld skaliert auf den größeren Bildschirm, mit proportionaler Steingröße, Stapelhöhe und Seitenwandtiefe, damit die Optik konsistent bleibt.",
   "zero-third-party-dependencies.a096e5": "Keine Abhängigkeiten von Drittanbietern. Gebaut mit Swift 6 und strikter Nebenläufigkeit.",
-  "not-sold-in-the.04baa8": "Nicht im EU-App-Store erhältlich"
+  "is-tilebreak-available-in.5a1587": "Ist Tilebreak in der Europäischen Union erhältlich?"
 }

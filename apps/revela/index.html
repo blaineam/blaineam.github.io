@@ -126,7 +126,7 @@
         .cta:hover { transform: translateY(-2px); }
         .cta.ghost { background: transparent; border: 1.5px solid rgba(240,233,216,0.3); box-shadow: none; color: var(--paper-dim); }
         .price-note { font-family: 'Special Elite', monospace; color: var(--muted); font-size: 0.85rem; margin-top: 10px; }
-        .availability-note { max-width: 560px; margin: 10px auto 0; font-size: 0.72rem; line-height: 1.5; opacity: 0.55; }
+        .availability-note { max-width: 560px; margin: 0 auto 18px; padding: 0 20px; text-align: center; color: var(--muted); font-size: 0.72rem; line-height: 1.5; opacity: 0.55; }
         .availability-note summary { cursor: pointer; list-style: none; display: inline; text-decoration: underline dotted; text-underline-offset: 3px; }
         .availability-note summary::-webkit-details-marker { display: none; }
         .availability-note[open] { opacity: 0.75; }
@@ -808,10 +808,6 @@
                 <a class="cta ghost" href="#ritual" data-i18n="see-the-ritual.f2fa29">See the ritual</a>
             </div>
             <p class="price-note" data-i18n="7-99-once-no.cbe995">$7.99 · once · no subscription · no account</p>
-            <details class="price-note availability-note">
-          <summary data-i18n="not-sold-in-the.04baa8">Not sold in the EU App Store</summary>
-          <p data-i18n="revela-isn-t-sold.b8637d">Revela isn't sold on the App Store in the European Union — under the EU Digital Services Act, selling there requires publishing a trader listing with personal contact details, which I've opted out of as an independent developer. It's available in every other App Store territory.</p>
-        </details>
         </div>
 
         <div class="wall-things" aria-hidden="true">
@@ -1107,6 +1103,11 @@
             </div>
         </div>
     </section>
+
+    <details class="availability-note type">
+        <summary data-i18n="not-sold-in-the.04baa8">Not sold in the EU App Store</summary>
+        <p data-i18n="revela-isn-t-sold.b8637d">Revela isn't sold on the App Store in the European Union — under the EU Digital Services Act, selling there requires publishing a trader listing with personal contact details, which I've opted out of as an independent developer. It's available in every other App Store territory.</p>
+    </details>
 
     <footer>
         <div class="wrap">
