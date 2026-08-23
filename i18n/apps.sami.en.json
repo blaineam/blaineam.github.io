@@ -130,5 +130,5 @@
   "yes-on-macos-enable.096678": "Yes, on macOS. Enable \"Keep running when window is closed\" in Settings and Sami stays alive so watched folders and scheduled automations keep firing. You can independently control whether Sami appears in the Dock, the menu bar, both, or neither — opt into fully invisible background execution if that's your preference. Relaunching from Finder/Spotlight reactivates the running process and brings the window back.",
   "yes-sami-is-a.dcce95": "Yes! Sami is a universal app that works on iPhone, iPad, and Mac with full feature parity. Purchase once and use it across all your Apple devices.",
   "yes-sami-uses-lossy.64f3d5": "Yes, Sami uses lossy compression to achieve significant space savings. There will be some quality loss, but the side-by-side preview feature lets you evaluate the quality trade-off before committing. You have full control over compression levels to balance quality vs. file size based on your needs.",
-  "not-sold-in-the.04baa8": "Not sold in the EU App Store"
+  "is-sami-available-in.c07415": "Is Sami available in the European Union?"
 }

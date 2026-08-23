@@ -130,5 +130,5 @@
   "yes-on-macos-enable.096678": "Sim, no macOS. Ative \"Continuar em execução quando a janela for fechada\" nos Ajustes e o Sami permanece ativo, para que as pastas monitoradas e as automações agendadas continuem funcionando. Você controla de forma independente se o Sami aparece no Dock, na barra de menus, em ambos ou em nenhum — e pode optar por uma execução em segundo plano totalmente invisível, se preferir. Abrir o app novamente pelo Finder ou pelo Spotlight reativa o processo em execução e traz a janela de volta.",
   "yes-sami-is-a.dcce95": "Sim! O Sami é um app universal que funciona no iPhone, no iPad e no Mac com os mesmos recursos em todas as plataformas. Compre uma vez e use em todos os seus dispositivos Apple.",
   "yes-sami-uses-lossy.64f3d5": "Sim, o Sami usa compressão com perdas para obter uma economia de espaço significativa. Há alguma perda de qualidade, mas a visualização lado a lado permite avaliar esse equilíbrio antes de confirmar. Você tem controle total sobre os níveis de compressão para equilibrar qualidade e tamanho de arquivo conforme a sua necessidade.",
-  "not-sold-in-the.04baa8": "Não vendido na App Store da UE"
+  "is-sami-available-in.c07415": "O Sami está disponível na União Europeia?"
 }

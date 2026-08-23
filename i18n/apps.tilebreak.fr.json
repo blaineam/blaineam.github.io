@@ -81,5 +81,5 @@
   "yes-each-board-is.243716": "Oui. Chaque plateau est généré en simulant d'abord une partie valide de bout en bout (la méthode du retrait inversé), puis en distribuant les tuiles dans l'ordre obtenu. Même après un mélange en cours de partie, la nouvelle disposition est régénérée de manière à rester solvable.",
   "yes-native-ipad-support.59fa42": "Oui — prise en charge native de l'iPad, en mode portrait comme en paysage. Le plateau s'agrandit pour remplir l'écran plus grand, avec une taille de tuile, une hauteur de pile et une profondeur de paroi latérale proportionnelles, pour un rendu visuel toujours cohérent.",
   "zero-third-party-dependencies.a096e5": "Zéro dépendance tierce. Conçue avec Swift 6 et sa concurrence stricte.",
-  "not-sold-in-the.04baa8": "Non vendu sur l'App Store de l'UE"
+  "is-tilebreak-available-in.5a1587": "Tilebreak est-il disponible dans l'Union européenne ?"
 }
