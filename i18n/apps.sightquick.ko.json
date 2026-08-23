@@ -5,7 +5,6 @@
   "all-apps.429449": "모든 앱",
   "app-sandbox.b85ecb": "<span class=\"badge-icon\">&#x2705;</span> 앱 샌드박스",
   "apps.2d61f2": "← 앱",
-  "availability.681b5b": "판매 지역",
   "blaine-miller-all-rights.b327c2": "© <span id=\"year\"></span> Blaine Miller. 판권 소유.",
   "coded-printable-targets.5e6026": "코드가 담긴 인쇄용 표적",
   "completely-your-photos-are.16b5c5": "완벽합니다. 사진은 기기에서만 분석되며 어디에도 업로드되지 않습니다. 계정도 추적도 없고, 영점 세션과 총기 프로필은 오직 사용자의 휴대폰에만 저장됩니다. 결제는 Apple이 처리하며, SightQuick는 결제 정보를 전혀 보지 않습니다.",
@@ -66,5 +65,6 @@
   "your-photos-never-leave.2e873f": "촬영한 사진은 기기 밖으로 절대 나가지 않습니다. 계정도, 추적도, 광고도 없습니다. SightQuick은 모든 처리를 기기 안에서 수행하며 영점 기록도 휴대폰에 그대로 보관합니다.",
   "zero-in-minutes.f6176f": "영점, 단 몇 분이면 끝.",
   "download-on-app-store.cf50c2": "App Store에서 다운로드",
-  "download-now.6d56a8": "지금 다운로드"
+  "download-now.6d56a8": "지금 다운로드",
+  "not-sold-in-the.04baa8": "EU App Store에서는 판매하지 않습니다"
 }

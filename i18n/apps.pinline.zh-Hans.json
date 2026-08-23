@@ -8,7 +8,6 @@
   "apps.2d61f2": "← App 列表",
   "are-there-in-app.e18c19": "有内购或广告吗？",
   "atmospheric-range.55a239": "氛围靶场",
-  "availability.681b5b": "上架地区",
   "blaine-miller-all-rights.b327c2": "© <span id=\"year\"></span> Blaine Miller. 保留所有权利。",
   "built-for-real-archers.ea4c52": "为真正的射手打造",
   "can-i-play-offline.897eb4": "可以离线游玩吗？",
@@ -83,5 +82,6 @@
   "why-does-my-pin.cacfb8": "为什么我拉住不放时瞄点会乱飘？",
   "why-pinline-hits-different.254d14": "Pinline 为何与众不同",
   "wind-speed-and-direction.d9678b": "风速与风向在 HUD 上实时显示。迎风瞄准，让箭飘回靶心。靶道旁的旗帜会告诉你风往哪儿吹。",
-  "yes-pass-and-play.3bd176": "可以——轮流传递模式完全离线。两名射手，一台设备，无需登录。线上（Game Center）和 iMessage 对战当然需要联网来传递回合，但游戏内的一切都在本地运行。"
+  "yes-pass-and-play.3bd176": "可以——轮流传递模式完全离线。两名射手，一台设备，无需登录。线上（Game Center）和 iMessage 对战当然需要联网来传递回合，但游戏内的一切都在本地运行。",
+  "not-sold-in-the.04baa8": "不在欧盟 App Store 销售"
 }

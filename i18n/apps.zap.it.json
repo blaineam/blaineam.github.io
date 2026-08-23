@@ -10,7 +10,6 @@
   "anti-tamper-matches.f68981": "<span class=\"badge-icon\">&#x1f512;</span> Partite a prova di manomissione",
   "app-sandbox.b85ecb": "<span class=\"badge-icon\">&#x2705;</span> App Sandbox",
   "apps.2d61f2": "← App",
-  "availability.681b5b": "Disponibilità",
   "blaine-miller-all-rights.b327c2": "© <span id=\"year\"></span> Blaine Miller. Tutti i diritti riservati.",
   "both-players-get-the.42ba59": "Entrambi i giocatori ricevono le stesse domande e la stessa griglia di carte mescolata: ogni duello si decide con velocità, intuito e sangue freddo.",
   "branding-by-marty-buck.24746a": "Branding di Marty Buck · Sound design e ispirazione originale di Austin Buck · Sviluppo e musica di Blaine Miller",
@@ -66,5 +65,6 @@
   "zap-has-no-ads.92302a": "Zap non ha pubblicità, né tracciamento, né acquisti in-app.",
   "zap-isn-t-sold.021c53": "Zap non è in vendita sull'App Store nell'Unione europea: in base al Digital Services Act (DSA) dell'UE, per vendere lì bisogna pubblicare una scheda di operatore commerciale con recapiti personali, cosa a cui ho rinunciato come sviluppatore indipendente. È disponibile in tutti gli altri Paesi e regioni dell'App Store.",
   "zap-resizes-freely-on.324217": "Zap si ridimensiona liberamente su iPad: sono supportati tutti gli orientamenti, Split View, Stage Manager e le finestre su iPad, con il menu che passa allo scorrimento nelle finestre più basse, così nulla viene mai tagliato.",
-  "zap.1cd56e": "⚡ Zap"
+  "zap.1cd56e": "⚡ Zap",
+  "not-sold-in-the.04baa8": "Non in vendita sull'App Store UE"
 }

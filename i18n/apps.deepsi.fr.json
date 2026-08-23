@@ -7,7 +7,6 @@
   "all-your-depth-based.ef1a57": "Tous vos médias de profondeur sont enregistrés dans un album dédié de Photos : il devient facile de partager votre perspective unique ou de l'utiliser dans vos projets créatifs.",
   "app-sandbox.b85ecb": "<span class=\"badge-icon\">&#x2705;</span> App Sandbox",
   "apps.2d61f2": "← Applications",
-  "availability.681b5b": "Disponibilité",
   "blaine-miller-all-rights.b327c2": "© <span id=\"year\"></span> Blaine Miller. Tous droits réservés.",
   "can-i-customize-the.4e2870": "Puis-je personnaliser les thèmes de couleurs ?",
   "can-i-record-videos.0153cc": "Puis-je enregistrer des vidéos avec le son ?",
@@ -75,5 +74,6 @@
   "whether-you-re-exploring.b4599d": "Que vous exploriez la nuit, que vous traversiez une pièce sombre ou que vous soyez simplement curieux de savoir comment fonctionne la détection de profondeur, DeepSi vous permet de voir là où la vision traditionnelle échoue.",
   "why-choose-deepsi.d18d6c": "Pourquoi choisir DeepSi",
   "yes-tap-and-hold.c8211b": "Oui ! Touchez et maintenez pour enregistrer des vidéos de profondeur avec le son. Vous pouvez ainsi créer des clips immersifs qui associent la visualisation unique de la profondeur à l'audio, pour une expérience sensorielle complète.",
-  "your-chosen-depth-color.8aa041": "Le thème de couleurs de profondeur que vous choisissez est désormais conservé d'un lancement à l'autre — choisissez une fois parmi les 12 thèmes et DeepSi s'en souvient."
+  "your-chosen-depth-color.8aa041": "Le thème de couleurs de profondeur que vous choisissez est désormais conservé d'un lancement à l'autre — choisissez une fois parmi les 12 thèmes et DeepSi s'en souvient.",
+  "not-sold-in-the.04baa8": "Non vendu sur l'App Store de l'UE"
 }

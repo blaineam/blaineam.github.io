@@ -18,7 +18,6 @@
   "ari-on-apple-watch.f45590": "Ari sur Apple Watch",
   "ask-any-model-apple.c636ed": "Interrogez n'importe quel modèle — Apple Intelligence, un modèle local téléchargé ou l'un de vos fournisseurs cloud — analysez des documents, générez et modifiez des images, faites lire les réponses à voix haute, exécutez des tâches de code et déportez le travail de votre iPhone vers votre Mac. Chaque action s'enchaîne dans Shortcuts.",
   "ask-ari-from-your.e4bb25": "Interrogez Ari depuis votre poignet : dictez ou écrivez une question et la réponse arrive en direct depuis votre iPhone jumelé, avec une lecture vocale facultative par le haut-parleur de la montre. Une complication « Ask Ari » ouvre directement la saisie, et les questions en attente sont envoyées automatiquement dès que votre iPhone se reconnecte.",
-  "availability.681b5b": "Disponibilité",
   "aws-bedrock-support.aafd5d": "Prise en charge d'AWS Bedrock",
   "biometric-encryption.b67112": "<span class=\"badge-icon\">&#x1f512;</span> Chiffrement biométrique",
   "blaine-miller-all-rights.b327c2": "© <span id=\"year\"></span> Blaine Miller. Tous droits réservés.",
@@ -100,5 +99,6 @@
   "why-choose-ari-helper.283965": "Pourquoi choisir Ari Helper",
   "yes-when-using-local.7d1876": "Oui ! Avec les modèles locaux exécutés sur l'appareil ou avec Ollama sur votre réseau, aucune donnée ne quitte votre appareil ni votre réseau local. Le mode privé, avec verrouillage biométrique, ajoute une sécurité supplémentaire pour vos conversations sensibles.",
   "yes-you-can-share.13d3cb": "Oui ! Vous pouvez partager vos conversations sous forme de superbes images ou de fichiers HTML : idéal pour transmettre des idées, des extraits de code ou du contenu créatif à vos amis et à vos collègues.",
-  "your-conversations-are-now.0db54e": "Vos conversations sont désormais accessibles depuis le Spotlight du système — touchez un résultat pour y revenir aussitôt. Marquez une conversation comme privée et elle reste entièrement exclue de la recherche, ses médias étant déplacés dans le stockage chiffré d'Ari."
+  "your-conversations-are-now.0db54e": "Vos conversations sont désormais accessibles depuis le Spotlight du système — touchez un résultat pour y revenir aussitôt. Marquez une conversation comme privée et elle reste entièrement exclue de la recherche, ses médias étant déplacés dans le stockage chiffré d'Ari.",
+  "not-sold-in-the.04baa8": "Non vendu sur l'App Store de l'UE"
 }

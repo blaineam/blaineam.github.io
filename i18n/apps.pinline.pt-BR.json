@@ -8,7 +8,6 @@
   "apps.2d61f2": "← Apps",
   "are-there-in-app.e18c19": "Há compras no app ou anúncios?",
   "atmospheric-range.55a239": "Campo de Tiro Atmosférico",
-  "availability.681b5b": "Disponibilidade",
   "blaine-miller-all-rights.b327c2": "© <span id=\"year\"></span> Blaine Miller. Todos os direitos reservados.",
   "built-for-real-archers.ea4c52": "Feito para Arqueiros de Verdade",
   "can-i-play-offline.897eb4": "Dá para jogar offline?",
@@ -83,5 +82,6 @@
   "why-does-my-pin.cacfb8": "Por que meu pino oscila enquanto estou segurando?",
   "why-pinline-hits-different.254d14": "Por Que Pinline É Diferente",
   "wind-speed-and-direction.d9678b": "A velocidade e a direção do vento aparecem ao vivo no HUD. Mire CONTRA o vento para a flecha voltar ao centro do alvo. A bandeira na pista mostra para onde ele está soprando.",
-  "yes-pass-and-play.3bd176": "Sim — o modo passa-e-joga funciona totalmente offline. Dois arqueiros, um dispositivo, sem login. As partidas online (Game Center) e por iMessage precisam de conexão para transmitir os turnos, claro, mas todo o resto do jogo roda localmente."
+  "yes-pass-and-play.3bd176": "Sim — o modo passa-e-joga funciona totalmente offline. Dois arqueiros, um dispositivo, sem login. As partidas online (Game Center) e por iMessage precisam de conexão para transmitir os turnos, claro, mas todo o resto do jogo roda localmente.",
+  "not-sold-in-the.04baa8": "Não vendido na App Store da UE"
 }

@@ -12,7 +12,6 @@
   "app-sandbox.2b1166": "<span class=\"badge-icon\">✅</span> App Sandbox",
   "apps.2d61f2": "← アプリ",
   "are-there-ads-iaps.46a41b": "広告やアプリ内課金、サブスクリプションはありますか？",
-  "availability.681b5b": "販売地域",
   "built-in-24-hours.f64269": "24時間で生まれ、10年の時を経てよみがえる",
   "climb-the-levels.62713b": "レベルを駆け上がる",
   "co-op-builds-one.fbc5f1": "協力プレイでは連続正解をふたりで積み上げ、対戦プレイではまったく同じ問題でスピードを競います。Game Centerによる非同期対戦だから、空いた時間にプレイできます。",
@@ -78,5 +77,6 @@
   "what-s-the-difference.666d2f": "光の混色と絵の具の混色は何が違うの？",
   "why-tri-add-hooks.874207": "Tri-Add がクセになる理由",
   "yes-it-s-a.3a6fc5": "はい。2014年に Austin Buck と Blaine Miller が作ったオリジナル版（名付け親は Crystal Buck）のリニューアルで、最新の Swift でゼロから作り直しました。以前に購入された方は App Store 上でも同じアプリのままで、これまでの Game Center の実績もそのまま有効です。",
-  "yours-and-only-yours.15489f": "あなただけのもの"
+  "yours-and-only-yours.15489f": "あなただけのもの",
+  "not-sold-in-the.04baa8": "EU の App Store では販売していません"
 }

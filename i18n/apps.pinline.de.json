@@ -8,7 +8,6 @@
   "apps.2d61f2": "← Apps",
   "are-there-in-app.e18c19": "Gibt es In-App-Käufe oder Werbung?",
   "atmospheric-range.55a239": "Atmosphärische Schießplätze",
-  "availability.681b5b": "Verfügbarkeit",
   "blaine-miller-all-rights.b327c2": "© <span id=\"year\"></span> Blaine Miller. Alle Rechte vorbehalten.",
   "built-for-real-archers.ea4c52": "Für echte Bogenschützen gemacht",
   "can-i-play-offline.897eb4": "Kann ich offline spielen?",
@@ -83,5 +82,6 @@
   "why-does-my-pin.cacfb8": "Warum wandert mein Pin, während ich halte?",
   "why-pinline-hits-different.254d14": "Warum Pinline anders trifft",
   "wind-speed-and-direction.d9678b": "Windgeschwindigkeit und -richtung werden live im HUD angezeigt. Ziele GEGEN den Wind, damit der Pfeil zurück ins Gold getrieben wird. Die Fahne an der Bahn zeigt dir, woher er weht.",
-  "yes-pass-and-play.3bd176": "Ja – der Modus „Duell am Gerät\" funktioniert komplett offline. Zwei Schützen, ein Gerät, keine Anmeldung. Online-Matches (Game Center) und iMessage-Matches brauchen natürlich eine Verbindung, um die Züge zu übertragen, aber alles im Spiel selbst läuft lokal."
+  "yes-pass-and-play.3bd176": "Ja – der Modus „Duell am Gerät\" funktioniert komplett offline. Zwei Schützen, ein Gerät, keine Anmeldung. Online-Matches (Game Center) und iMessage-Matches brauchen natürlich eine Verbindung, um die Züge zu übertragen, aber alles im Spiel selbst läuft lokal.",
+  "not-sold-in-the.04baa8": "Nicht im EU-App-Store erhältlich"
 }

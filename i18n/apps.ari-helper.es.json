@@ -18,7 +18,6 @@
   "ari-on-apple-watch.f45590": "Ari en el Apple Watch",
   "ask-any-model-apple.c636ed": "Pregunta a cualquier modelo —Apple Intelligence, un modelo local descargado o cualquiera de tus proveedores en la nube—, analiza documentos, genera y edita imágenes, escucha las respuestas en voz alta, ejecuta tareas de programación y envía trabajo desde tu iPhone a tu Mac. Todas las acciones se pueden encadenar en Shortcuts.",
   "ask-ari-from-your.e4bb25": "Pregunta a Ari desde tu muñeca: dicta o escribe una pregunta y la respuesta llega en directo desde el iPhone vinculado, con una respuesta hablada opcional por el altavoz del reloj. Una complicación de «Preguntar a Ari» abre directamente el campo de entrada, y las preguntas en cola se envían automáticamente cuando el iPhone vuelve a conectarse.",
-  "availability.681b5b": "Disponibilidad",
   "aws-bedrock-support.aafd5d": "Compatibilidad con AWS Bedrock",
   "biometric-encryption.b67112": "<span class=\"badge-icon\">&#x1f512;</span> Cifrado biométrico",
   "blaine-miller-all-rights.b327c2": "© <span id=\"year\"></span> Blaine Miller. Todos los derechos reservados.",
@@ -100,5 +99,6 @@
   "why-choose-ari-helper.283965": "Por qué elegir Ari Helper",
   "yes-when-using-local.7d1876": "¡Sí! Cuando usas modelos locales en el dispositivo u Ollama en tu red, ningún dato sale de tu dispositivo ni de tu red local. El modo privado con bloqueo biométrico añade seguridad adicional para las conversaciones sensibles.",
   "yes-you-can-share.13d3cb": "¡Sí! Puedes compartir conversaciones como imágenes espectaculares o archivos HTML, ideales para compartir ideas, fragmentos de código o contenido creativo con amigos y compañeros.",
-  "your-conversations-are-now.0db54e": "Ahora puedes buscar tus conversaciones desde Spotlight del sistema: toca un resultado para volver directamente a ella. Marca cualquier conversación como Privada y quedará totalmente fuera de la búsqueda, con su contenido multimedia trasladado al almacén cifrado de Ari."
+  "your-conversations-are-now.0db54e": "Ahora puedes buscar tus conversaciones desde Spotlight del sistema: toca un resultado para volver directamente a ella. Marca cualquier conversación como Privada y quedará totalmente fuera de la búsqueda, con su contenido multimedia trasladado al almacén cifrado de Ari.",
+  "not-sold-in-the.04baa8": "No se vende en el App Store de la UE"
 }

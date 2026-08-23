@@ -11,7 +11,6 @@
   "american-the-default-follows.de8dc1": "American（默认）遵循现代西方惯例：任意花牌可与任意花牌配对，任意季节牌可与任意季节牌配对。Strict 则要求每张牌完全相同才能配对——由于花牌与季节牌都只有单张，Strict 模式会将它们整体移出牌库，并补入额外的风牌，确保每张牌都有搭档。",
   "apps.2d61f2": "← App 列表",
   "are-there-ads-or.cc7da0": "有广告或应用内购买吗？",
-  "availability.681b5b": "上架地区",
   "blaine-miller-all-rights.b327c2": "© <span id=\"year\"></span> Blaine Miller. 保留所有权利。",
   "built-clean.a00f77": "纯净打造",
   "built-for-the-long.c2083b": "为长线体验而生",
@@ -81,5 +80,6 @@
   "what-s-the-music.cd7ddb": "游戏音乐是怎么来的？",
   "yes-each-board-is.243716": "是的。每一局棋盘都先模拟一次完整可行的通关过程（逆向消除法）生成，再按得出的顺序发牌。即使中途洗牌，新的布局也会重新生成为有解的牌局。",
   "yes-native-ipad-support.59fa42": "是的——原生支持 iPad，竖屏、横屏皆可。棋盘会放大以填满更大的屏幕，牌面尺寸、堆叠层高和侧壁厚度都按比例调整，视觉效果始终如一。",
-  "zero-third-party-dependencies.a096e5": "零第三方依赖。基于 Swift 6 构建，采用严格并发。"
+  "zero-third-party-dependencies.a096e5": "零第三方依赖。基于 Swift 6 构建，采用严格并发。",
+  "not-sold-in-the.04baa8": "不在欧盟 App Store 销售"
 }

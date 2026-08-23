@@ -11,7 +11,6 @@
   "american-the-default-follows.de8dc1": "Le mode American (par défaut) suit la convention occidentale moderne : n'importe quelle fleur s'associe à n'importe quelle fleur, n'importe quelle saison à n'importe quelle saison. Le mode Strict exige une correspondance exacte pour chaque tuile — et comme les fleurs et les saisons n'existent qu'en exemplaire unique, il les retire entièrement du jeu et les remplace par des vents supplémentaires, afin que chaque tuile ait sa partenaire.",
   "apps.2d61f2": "← Applications",
   "are-there-ads-or.cc7da0": "Y a-t-il des publicités ou des achats intégrés ?",
-  "availability.681b5b": "Disponibilité",
   "blaine-miller-all-rights.b327c2": "© <span id=\"year\"></span> Blaine Miller. Tous droits réservés.",
   "built-clean.a00f77": "Conçu proprement",
   "built-for-the-long.c2083b": "Conçu pour durer",
@@ -81,5 +80,6 @@
   "what-s-the-music.cd7ddb": "Quelle est la musique ?",
   "yes-each-board-is.243716": "Oui. Chaque plateau est généré en simulant d'abord une partie valide de bout en bout (la méthode du retrait inversé), puis en distribuant les tuiles dans l'ordre obtenu. Même après un mélange en cours de partie, la nouvelle disposition est régénérée de manière à rester solvable.",
   "yes-native-ipad-support.59fa42": "Oui — prise en charge native de l'iPad, en mode portrait comme en paysage. Le plateau s'agrandit pour remplir l'écran plus grand, avec une taille de tuile, une hauteur de pile et une profondeur de paroi latérale proportionnelles, pour un rendu visuel toujours cohérent.",
-  "zero-third-party-dependencies.a096e5": "Zéro dépendance tierce. Conçue avec Swift 6 et sa concurrence stricte."
+  "zero-third-party-dependencies.a096e5": "Zéro dépendance tierce. Conçue avec Swift 6 et sa concurrence stricte.",
+  "not-sold-in-the.04baa8": "Non vendu sur l'App Store de l'UE"
 }

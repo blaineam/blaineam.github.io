@@ -8,7 +8,6 @@
   "apps.2d61f2": "← Applications",
   "are-there-ads-iaps.46a41b": "Y a-t-il des publicités, des achats intégrés ou des abonnements ?",
   "atmospheric-range.55a239": "Parcours atmosphériques",
-  "availability.681b5b": "Disponibilité",
   "blaine-miller-all-rights.b327c2": "© <span id=\"year\"></span> Blaine Miller. Tous droits réservés.",
   "built-for-the-long.f0026b": "Conçu pour le tir longue distance",
   "can-i-play-offline.897eb4": "Puis-je jouer hors ligne ?",
@@ -74,5 +73,6 @@
   "why-does-my-reticle.ea9a33": "Pourquoi mon réticule dérive-t-il quand je maintiens ma visée ?",
   "why-ridgeshot-reads-right.4a3f8a": "Pourquoi Ridgeshot sonne juste",
   "wind-patience.657adb": "Vent et patience",
-  "yes-pass-and-play.81d0c1": "Oui — le mode à tour de rôle fonctionne entièrement hors ligne. Deux tireurs, un seul appareil, aucune connexion à un compte. La recherche d'adversaires Game Center et les défis iMessage nécessitent bien sûr une connexion pour transmettre les tours, mais toute la simulation — balistique, vent, animaux, météo — s'exécute sur l'appareil. Aucun aller-retour vers un serveur à chaque tir, aucune attente de synchronisation du classement avant d'enchaîner la manche suivante."
+  "yes-pass-and-play.81d0c1": "Oui — le mode à tour de rôle fonctionne entièrement hors ligne. Deux tireurs, un seul appareil, aucune connexion à un compte. La recherche d'adversaires Game Center et les défis iMessage nécessitent bien sûr une connexion pour transmettre les tours, mais toute la simulation — balistique, vent, animaux, météo — s'exécute sur l'appareil. Aucun aller-retour vers un serveur à chaque tir, aucune attente de synchronisation du classement avant d'enchaîner la manche suivante.",
+  "not-sold-in-the.04baa8": "Non vendu sur l'App Store de l'UE"
 }

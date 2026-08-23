@@ -12,7 +12,6 @@
   "atomic-volume-local-writes.f3a545": "原子化的卷内本地写入，意味着在外置 SSD 和网络挂载卷上进行优化时，即便中途设备被拔出，也不会留下残缺文件或损坏数据。",
   "automated-optimization.c526c6": "自动优化",
   "automation-that-works-for.ef415b": "为你而生的自动化",
-  "availability.681b5b": "上架地区",
   "blaine-miller-all-rights.b327c2": "© <span id=\"year\"></span> Blaine Miller. 保留所有权利。",
   "can-i-choose-which.2f175f": "我可以选择任务中优化哪些媒体吗？",
   "can-i-preview-changes.b1fcbe": "优化前可以预览效果吗？",
@@ -130,5 +129,6 @@
   "yes-on-mac-and.5c6090": "可以！在 Mac 和 iPad 上，你可以将媒体文件直接拖放到 Sami 中快速优化。这让大量文件的批量处理既快速又直观。",
   "yes-on-macos-enable.096678": "可以，在 macOS 上支持。只需在“设置”中启用“关闭窗口后继续运行”，Sami 便会保持运行，让文件夹监视和定时自动化持续生效。你还可以自由选择 Sami 是显示在程序坞、菜单栏、两者都显示，还是都不显示——如果你愿意，也可以让它完全隐身地在后台运行。从访达或聚焦重新启动时，会直接唤回正在运行的进程并重新显示窗口。",
   "yes-sami-is-a.dcce95": "当然！Sami 是一款通用 App，在 iPhone、iPad 和 Mac 上功能完全一致。一次购买，即可在你所有的 Apple 设备上使用。",
-  "yes-sami-uses-lossy.64f3d5": "是的，Sami 采用有损压缩来大幅节省空间。画质会有一定损失，但你可以借助并排预览功能，在确认之前评估画质取舍。压缩级别完全由你掌控，可根据需要在画质与文件大小之间取得平衡。"
+  "yes-sami-uses-lossy.64f3d5": "是的，Sami 采用有损压缩来大幅节省空间。画质会有一定损失，但你可以借助并排预览功能，在确认之前评估画质取舍。压缩级别完全由你掌控，可根据需要在画质与文件大小之间取得平衡。",
+  "not-sold-in-the.04baa8": "不在欧盟 App Store 销售"
 }

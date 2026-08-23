@@ -5,7 +5,6 @@
   "all-apps.429449": "Alle Apps",
   "app-sandbox.b85ecb": "<span class=\"badge-icon\">&#x2705;</span> App Sandbox",
   "apps.2d61f2": "← Apps",
-  "availability.681b5b": "Verfügbarkeit",
   "blaine-miller-all-rights.b327c2": "© <span id=\"year\"></span> Blaine Miller. Alle Rechte vorbehalten.",
   "coded-printable-targets.5e6026": "Codierte Zielscheiben zum Ausdrucken",
   "completely-your-photos-are.16b5c5": "Vollkommen. Deine Fotos werden direkt auf dem Gerät analysiert und niemals irgendwohin hochgeladen. Es gibt kein Konto und kein Tracking — deine Einschieß-Sitzungen und Gewehrprofile bleiben ausschließlich auf deinem iPhone. Käufe wickelt Apple ab; SightQuick sieht deine Zahlungsdaten nie.",
@@ -66,5 +65,6 @@
   "your-photos-never-leave.2e873f": "Ihre Fotos verlassen Ihr Gerät nie. Kein Konto, kein Tracking, keine Werbung. SightQuick verarbeitet alles lokal und speichert Ihren Einschieß-Verlauf auf Ihrem Smartphone.",
   "zero-in-minutes.f6176f": "In Minuten eingeschossen.",
   "download-on-app-store.cf50c2": "Im App Store laden",
-  "download-now.6d56a8": "Jetzt laden"
+  "download-now.6d56a8": "Jetzt laden",
+  "not-sold-in-the.04baa8": "Nicht im EU-App-Store erhältlich"
 }

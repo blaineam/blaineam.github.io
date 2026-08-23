@@ -8,7 +8,6 @@
   "app-sandbox.b85ecb": "<span class=\"badge-icon\">&#x2705;</span> App 沙盒",
   "apps.2d61f2": "← App 列表",
   "as-many-as-you.87a61d": "多少张都行。Pano Owl 会在整组照片之间匹配特征，核外分块引擎让内存占用始终有上限——所以输出分辨率不受设备限制。从两张照片的随手一扫，到完整的 360° 十亿像素场景，都不在话下。",
-  "availability.681b5b": "上架地区",
   "blaine-miller-all-rights.b327c2": "© <span id=\"year\"></span> Blaine Miller. 保留所有权利。",
   "can-i-turn-a.0f6ea7": "可以把视频变成全景吗？",
   "capture-now-stitch-later.cdd42f": "先拍摄，后拼接。位置与罗盘朝向随每一张照片一同记录。",
@@ -72,5 +71,6 @@
   "yes-pick-a-video.3efcb6": "可以。选择一段视频，Pano Owl 会自动提取最清晰、间距均匀的帧，然后像处理普通照片组一样完成拼接。",
   "yes-true-equirectangular-spherical.b0a5b8": "可以——支持真正的等距柱状（球面）输出，另有柱面与平面投影。部分弧段和完整 360° 均可处理。导出文件包含标准 GPano 元数据，因此在网页查看器、“照片”App 以及 Apple Vision Pro 上都能正确显示。",
   "your-panorama-library-the.1c4c99": "你的全景图库、拼接工作室，以及沉浸式 360° 查看器",
-  "your-photos-stay-yours.93a5b3": "你的照片，始终属于你"
+  "your-photos-stay-yours.93a5b3": "你的照片，始终属于你",
+  "not-sold-in-the.04baa8": "不在欧盟 App Store 销售"
 }

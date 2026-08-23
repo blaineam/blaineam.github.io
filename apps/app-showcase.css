@@ -963,20 +963,35 @@ p {
   font-size: 1em;
 }
 
-/* EU availability note — quiet footnote under the hero CTA. Same white-text
-   gradient heroes as .os-ready-badge. */
+/* EU availability note — a one-line disclosure under the hero CTA. Deliberately
+   faint: the fact fits in six words, the reason lives behind the click. Same
+   white-text gradient heroes as .os-ready-badge. */
 .availability-note {
   max-width: 36em;
-  margin: var(--spacing-md) 0 0;
-  font-size: 0.8rem;
-  line-height: 1.55;
-  color: rgba(255, 255, 255, 0.72);
-  animation: fadeInUp 0.8s ease-out 0.6s both;
+  margin: 10px 0 0;
+  font-size: 0.72rem;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.45);
 }
 
-.availability-note strong {
-  color: rgba(255, 255, 255, 0.92);
-  font-weight: 600;
+.availability-note summary {
+  display: inline;
+  cursor: pointer;
+  list-style: none;
+  text-decoration: underline dotted;
+  text-underline-offset: 3px;
+}
+
+.availability-note summary::-webkit-details-marker {
+  display: none;
+}
+
+.availability-note[open] {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.availability-note p {
+  margin: 6px 0 0;
 }
 
 /* Print Styles */

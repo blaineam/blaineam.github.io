@@ -12,7 +12,6 @@
   "app-sandbox.2b1166": "<span class=\"badge-icon\">✅</span> App Sandbox",
   "apps.2d61f2": "← Applications",
   "are-there-ads-iaps.46a41b": "Y a-t-il des publicités, des achats intégrés ou des abonnements ?",
-  "availability.681b5b": "Disponibilité",
   "built-in-24-hours.f64269": "Créé en 24 heures, renaissant une décennie plus tard",
   "climb-the-levels.62713b": "Grimpez les niveaux",
   "co-op-builds-one.fbc5f1": "En coopération, vous bâtissez une série commune ; en compétition, vous courez sur exactement les mêmes énigmes issues de la même graine. En asynchrone via Game Center — jouez quand vous êtes libre.",
@@ -78,5 +77,6 @@
   "what-s-the-difference.666d2f": "Quelle est la différence entre le mélange des lumières et celui des peintures ?",
   "why-tri-add-hooks.874207": "Pourquoi Tri-Add vous accroche",
   "yes-it-s-a.3a6fc5": "Oui — c'est la relance de l'original de 2014 signé Austin Buck et Blaine Miller (baptisé par Crystal Buck), reconstruit de zéro en Swift moderne. Si vous l'aviez déjà acheté, c'est la même app sur l'App Store, et vos anciennes réussites Game Center comptent toujours.",
-  "yours-and-only-yours.15489f": "À vous, et à vous seul"
+  "yours-and-only-yours.15489f": "À vous, et à vous seul",
+  "not-sold-in-the.04baa8": "Non vendu sur l'App Store de l'UE"
 }

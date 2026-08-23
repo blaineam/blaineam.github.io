@@ -8,7 +8,6 @@
   "any-voice-on-your.c4d5fe": "デバイス内のあらゆる音声に対応",
   "app-sandbox.b85ecb": "<span class=\"badge-icon\">&#x2705;</span> App Sandbox",
   "apps.2d61f2": "← アプリ",
-  "availability.681b5b": "販売地域",
   "background-playback.efc5fb": "バックグラウンド再生",
   "blaine-miller-all-rights.b327c2": "© <span id=\"year\"></span> Blaine Miller. 無断転載を禁じます。",
   "built-in-helpful-tips.a104d6": "内蔵のヒントが各機能の使い方を案内し、Mi Speaks を最大限に活用できるようサポートします。",
@@ -77,5 +76,6 @@
   "yes-mi-speaks-highlights.298462": "はい。Mi Speaks は読み上げに合わせて単語をハイライト表示するので、目で追いやすく、内容の理解や新しい知識の習得に役立ちます。",
   "yes-mi-speaks-includes.7a0f2a": "はい。Mi Speaks は強力なテキスト認識機能を備えており、画像やPDFファイルからテキストを抽出できます。写真や書類、スキャンした資料の内容も手軽に聴けます。",
   "yes-mi-speaks-is.f1ab38": "はい。Mi Speaks は完全にオフラインで利用できます。デバイスの「設定」から音声をダウンロードしておけば、インターネット接続がなくてもどこでもコンテンツを聴けます。",
-  "zero-data-collection.939efa": "データ収集は一切なし"
+  "zero-data-collection.939efa": "データ収集は一切なし",
+  "not-sold-in-the.04baa8": "EU の App Store では販売していません"
 }

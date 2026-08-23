@@ -12,7 +12,6 @@
   "atomic-volume-local-writes.f3a545": "Atomare, volume-lokale Schreibvorgänge sorgen dafür, dass Optimierungen auf externen SSDs und per Netzwerk eingebundenen Volumes keine unvollständigen Dateien oder beschädigten Daten hinterlassen – selbst wenn mitten im Vorgang etwas abgezogen wird.",
   "automated-optimization.c526c6": "Automatisierte Optimierung",
   "automation-that-works-for.ef415b": "Automatisierung, die für Sie arbeitet",
-  "availability.681b5b": "Verfügbarkeit",
   "blaine-miller-all-rights.b327c2": "© <span id=\"year\"></span> Blaine Miller. Alle Rechte vorbehalten.",
   "can-i-choose-which.2f175f": "Kann ich auswählen, welche Medien in einer Aufgabe optimiert werden?",
   "can-i-preview-changes.b1fcbe": "Kann ich Änderungen vor dem Optimieren in der Vorschau ansehen?",
@@ -130,5 +129,6 @@
   "yes-on-mac-and.5c6090": "Ja! Auf Mac und iPad kannst du Mediendateien per Drag & Drop direkt in Sami ziehen und schnell optimieren. So geht die Stapelverarbeitung großer Dateimengen zügig und intuitiv von der Hand.",
   "yes-on-macos-enable.096678": "Ja, unter macOS. Aktiviere in den Einstellungen „Weiterlaufen, wenn das Fenster geschlossen ist“, und Sami bleibt aktiv, sodass überwachte Ordner und geplante Automationen weiterhin ausgelöst werden. Unabhängig davon legst du fest, ob Sami im Dock, in der Menüleiste, in beidem oder nirgends erscheint – auf Wunsch läuft es vollständig unsichtbar im Hintergrund. Ein erneuter Start über Finder oder Spotlight aktiviert den laufenden Prozess wieder und holt das Fenster zurück.",
   "yes-sami-is-a.dcce95": "Ja! Sami ist eine universelle App, die auf iPhone, iPad und Mac mit vollem Funktionsumfang läuft. Einmal kaufen und auf allen deinen Apple-Geräten nutzen.",
-  "yes-sami-uses-lossy.64f3d5": "Ja, Sami nutzt verlustbehaftete Komprimierung, um spürbar Speicherplatz zu sparen. Ein gewisser Qualitätsverlust bleibt nicht aus, doch mit der Vorschau nebeneinander kannst du den Kompromiss beurteilen, bevor du dich festlegst. Du hast die volle Kontrolle über die Komprimierungsstufen und wägst Qualität und Dateigröße ganz nach deinen Bedürfnissen ab."
+  "yes-sami-uses-lossy.64f3d5": "Ja, Sami nutzt verlustbehaftete Komprimierung, um spürbar Speicherplatz zu sparen. Ein gewisser Qualitätsverlust bleibt nicht aus, doch mit der Vorschau nebeneinander kannst du den Kompromiss beurteilen, bevor du dich festlegst. Du hast die volle Kontrolle über die Komprimierungsstufen und wägst Qualität und Dateigröße ganz nach deinen Bedürfnissen ab.",
+  "not-sold-in-the.04baa8": "Nicht im EU-App-Store erhältlich"
 }

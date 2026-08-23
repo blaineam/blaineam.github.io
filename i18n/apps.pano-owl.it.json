@@ -8,7 +8,6 @@
   "app-sandbox.b85ecb": "<span class=\"badge-icon\">&#x2705;</span> App Sandbox",
   "apps.2d61f2": "← App",
   "as-many-as-you.87a61d": "Quante ne vuoi. Pano Owl individua le corrispondenze tra i dettagli dell'intera serie e il suo motore a tile out-of-core mantiene la memoria sotto controllo, così la risoluzione finale non è limitata dal tuo dispositivo. Da una panoramica a due scatti a un'intera scena a 360° da gigapixel.",
-  "availability.681b5b": "Disponibilità",
   "blaine-miller-all-rights.b327c2": "© <span id=\"year\"></span> Blaine Miller. Tutti i diritti riservati.",
   "can-i-turn-a.0f6ea7": "Posso trasformare un video in un panorama?",
   "capture-now-stitch-later.cdd42f": "Cattura ora, unisci dopo. La posizione e la direzione della bussola accompagnano ogni scatto.",
@@ -72,5 +71,6 @@
   "yes-pick-a-video.3efcb6": "Sì. Scegli un video e Pano Owl estrae automaticamente i fotogrammi più nitidi e ben distanziati, poi li unisce come qualsiasi altro set.",
   "yes-true-equirectangular-spherical.b0a5b8": "Sì: vero output equirettangolare (sferico), oltre a cilindrico e planare. Funzionano sia gli archi parziali sia i 360 completi. Le esportazioni includono i metadati GPano standard, quindi vengono visualizzate correttamente nei visualizzatori web, nell'app Foto e su Apple Vision Pro.",
   "your-panorama-library-the.1c4c99": "La tua libreria di panorami, lo studio di unione e il visualizzatore immersivo a 360°",
-  "your-photos-stay-yours.93a5b3": "Le tue foto restano tue"
+  "your-photos-stay-yours.93a5b3": "Le tue foto restano tue",
+  "not-sold-in-the.04baa8": "Non in vendita sull'App Store UE"
 }

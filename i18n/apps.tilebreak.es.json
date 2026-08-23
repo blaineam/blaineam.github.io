@@ -11,7 +11,6 @@
   "american-the-default-follows.de8dc1": "El modo Americano (el predeterminado) sigue la convención occidental moderna: cualquier flor combina con cualquier flor y cualquier estación con cualquier estación. El modo Estricto exige una coincidencia exacta en cada ficha y, como las flores y estaciones solo existen como piezas únicas, ese modo las elimina por completo del conjunto y las sustituye por vientos adicionales para que toda ficha tenga pareja.",
   "apps.2d61f2": "← Apps",
   "are-there-ads-or.cc7da0": "¿Hay anuncios o compras dentro de la app?",
-  "availability.681b5b": "Disponibilidad",
   "blaine-miller-all-rights.b327c2": "© <span id=\"year\"></span> Blaine Miller. Todos los derechos reservados.",
   "built-clean.a00f77": "Desarrollo limpio",
   "built-for-the-long.c2083b": "Pensado para durar",
@@ -81,5 +80,6 @@
   "what-s-the-music.cd7ddb": "¿Qué música suena?",
   "yes-each-board-is.243716": "Sí. Cada tablero se genera simulando primero una partida válida (el método de eliminación inversa) y repartiendo después las fichas en el orden resultante. Incluso al barajar a mitad de partida, el nuevo tablero se regenera para que tenga solución.",
   "yes-native-ipad-support.59fa42": "Sí: compatibilidad nativa con el iPad en vertical y horizontal. El tablero se amplía para llenar la pantalla grande con un tamaño de ficha, una elevación de pila y una profundidad de paredes proporcionales, de modo que el aspecto se mantiene coherente.",
-  "zero-third-party-dependencies.a096e5": "Cero dependencias de terceros. Creado con Swift 6 y concurrencia estricta."
+  "zero-third-party-dependencies.a096e5": "Cero dependencias de terceros. Creado con Swift 6 y concurrencia estricta.",
+  "not-sold-in-the.04baa8": "No se vende en el App Store de la UE"
 }

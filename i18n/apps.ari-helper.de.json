@@ -18,7 +18,6 @@
   "ari-on-apple-watch.f45590": "Ari auf der Apple Watch",
   "ask-any-model-apple.c636ed": "Frag jedes Modell – Apple Intelligence, ein heruntergeladenes lokales Modell oder einen deiner Cloud-Anbieter –, analysiere Dokumente, erzeuge und bearbeite Bilder, lass dir Antworten vorlesen, führe Coding-Aufgaben aus und verlagere Arbeit von deinem iPhone auf deinen Mac. Jede Aktion lässt sich in Shortcuts verketten.",
   "ask-ari-from-your.e4bb25": "Frag Ari direkt vom Handgelenk: Diktiere oder kritzle eine Frage, und die Antwort wird von deinem gekoppelten iPhone gestreamt – auf Wunsch gesprochen über den Lautsprecher der Watch. Eine „Ari fragen“-Komplikation startet direkt in der Eingabe, und Fragen in der Warteschlange werden automatisch zugestellt, sobald dein iPhone wieder verbunden ist.",
-  "availability.681b5b": "Verfügbarkeit",
   "aws-bedrock-support.aafd5d": "AWS Bedrock-Unterstützung",
   "biometric-encryption.b67112": "<span class=\"badge-icon\">&#x1f512;</span> Biometrische Verschlüsselung",
   "blaine-miller-all-rights.b327c2": "© <span id=\"year\"></span> Blaine Miller. Alle Rechte vorbehalten.",
@@ -100,5 +99,6 @@
   "why-choose-ari-helper.283965": "Warum Ari Helper?",
   "yes-when-using-local.7d1876": "Ja! Bei der Nutzung lokaler Modelle auf dem Gerät oder von Ollama in Ihrem Netzwerk verlassen keine Daten Ihr Gerät oder Ihr lokales Netzwerk. Der private Modus mit biometrischer Sperre bietet zusätzliche Sicherheit für vertrauliche Gespräche.",
   "yes-you-can-share.13d3cb": "Ja! Sie können Gespräche als ansprechende Bilder oder HTML-Dateien teilen – ideal, um Erkenntnisse, Code-Schnipsel oder kreative Inhalte mit Freunden und Kollegen zu teilen.",
-  "your-conversations-are-now.0db54e": "Ihre Gespräche sind jetzt über die System-Spotlight-Suche auffindbar – tippen Sie auf ein Ergebnis, um direkt dorthin zurückzukehren. Markieren Sie ein Gespräch als privat, bleibt es vollständig aus der Suche ausgeschlossen und seine Medien wandern in Aris verschlüsselten Speicher."
+  "your-conversations-are-now.0db54e": "Ihre Gespräche sind jetzt über die System-Spotlight-Suche auffindbar – tippen Sie auf ein Ergebnis, um direkt dorthin zurückzukehren. Markieren Sie ein Gespräch als privat, bleibt es vollständig aus der Suche ausgeschlossen und seine Medien wandern in Aris verschlüsselten Speicher.",
+  "not-sold-in-the.04baa8": "Nicht im EU-App-Store erhältlich"
 }

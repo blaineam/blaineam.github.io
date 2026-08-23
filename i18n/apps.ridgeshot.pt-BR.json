@@ -8,7 +8,6 @@
   "apps.2d61f2": "← Apps",
   "are-there-ads-iaps.46a41b": "Há anúncios, compras no app ou assinaturas?",
   "atmospheric-range.55a239": "Campo de Tiro Atmosférico",
-  "availability.681b5b": "Disponibilidade",
   "blaine-miller-all-rights.b327c2": "© <span id=\"year\"></span> Blaine Miller. Todos os direitos reservados.",
   "built-for-the-long.f0026b": "Feito para o Tiro Longo",
   "can-i-play-offline.897eb4": "Dá para jogar offline?",
@@ -74,5 +73,6 @@
   "why-does-my-reticle.ea9a33": "Por que minha retícula oscila enquanto estou mirando?",
   "why-ridgeshot-reads-right.4a3f8a": "Por que o Ridgeshot parece tão real",
   "wind-patience.657adb": "Vento & Paciência",
-  "yes-pass-and-play.81d0c1": "Sim — o modo passa-e-joga funciona totalmente offline. Dois atiradores, um só aparelho, sem login. O matchmaking do Game Center e os desafios por iMessage obviamente precisam de conexão para transmitir os turnos, mas toda a simulação — balística, vento, animais, clima — roda no próprio aparelho. Sem idas e vindas ao servidor a cada tiro, sem esperar a sincronização do placar para partir para a próxima rodada."
+  "yes-pass-and-play.81d0c1": "Sim — o modo passa-e-joga funciona totalmente offline. Dois atiradores, um só aparelho, sem login. O matchmaking do Game Center e os desafios por iMessage obviamente precisam de conexão para transmitir os turnos, mas toda a simulação — balística, vento, animais, clima — roda no próprio aparelho. Sem idas e vindas ao servidor a cada tiro, sem esperar a sincronização do placar para partir para a próxima rodada.",
+  "not-sold-in-the.04baa8": "Não vendido na App Store da UE"
 }

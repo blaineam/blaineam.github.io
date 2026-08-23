@@ -10,7 +10,6 @@
   "anti-tamper-matches.f68981": "<span class=\"badge-icon\">&#x1f512;</span> 不正防止マッチ",
   "app-sandbox.b85ecb": "<span class=\"badge-icon\">&#x2705;</span> App Sandbox",
   "apps.2d61f2": "← アプリ",
-  "availability.681b5b": "販売地域",
   "blaine-miller-all-rights.b327c2": "© <span id=\"year\"></span> Blaine Miller. 無断転載を禁じます。",
   "both-players-get-the.42ba59": "両プレイヤーに配られるのは、同じ問題と同じシャッフル順のカードグリッド。だから勝敗を決めるのは、スピードと知識と度胸だけです。",
   "branding-by-marty-buck.24746a": "ブランディング: Marty Buck · サウンドデザイン＆原案: Austin Buck · 開発＆音楽: Blaine Miller",
@@ -66,5 +65,6 @@
   "zap-has-no-ads.92302a": "Zap には広告もトラッキングもアプリ内課金もありません。",
   "zap-isn-t-sold.021c53": "Zapは欧州連合（EU）のApp Storeでは販売していません。EUのデジタルサービス法（DSA）では、EU内で販売するには個人の連絡先を含む事業者情報の公開が必要なため、個人開発者としてこれを見送りました。その他すべての国と地域のApp Storeでご利用いただけます。",
   "zap-resizes-freely-on.324217": "Zap は iPad で自在にサイズを変えられます。すべての画面の向き、Split View、Stage Manager、iPad のウインドウ表示に対応。ウインドウの高さが足りないときはメニューがスクロール表示に切り替わるので、内容が見切れることはありません。",
-  "zap.1cd56e": "⚡ Zap"
+  "zap.1cd56e": "⚡ Zap",
+  "not-sold-in-the.04baa8": "EU の App Store では販売していません"
 }

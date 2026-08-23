@@ -7,7 +7,6 @@
   "app-sandbox.b85ecb": "<span class=\"badge-icon\">&#x2705;</span> App Sandbox",
   "apps.2d61f2": "← Apps",
   "attack-mode.4a15d9": "ATTACK-Modus",
-  "availability.681b5b": "Verfügbarkeit",
   "beautiful-distinctive-art-style.712389": "Wunderschöner, unverwechselbarer Grafikstil mit einer charmanten Eule als Hauptfigur. Auffällige Optik, die jeden Flug unvergesslich macht.",
   "beautiful-unique-graphics-featuring.41cde2": "Wunderschöne, einzigartige Grafik mit einer bezaubernden Eule, flüssiges Gameplay, ein großartiger Soundtrack, eine Bestenliste und genau dieses perfekte „nur noch ein Versuch“-Suchtpotenzial. Einfach, unterhaltsam und unglaublich schwer aus der Hand zu legen!",
   "blaine-miller-all-rights.b327c2": "© <span id=\"year\"></span> Blaine Miller. Alle Rechte vorbehalten.",
@@ -75,5 +74,6 @@
   "with-infinitely-scrolling-gameplay.099be7": "Dank endlos scrollendem Gameplay und prozedural generierten Hindernissen gleicht kein Flug dem anderen. Jede Runde bringt neue Herausforderungen und neue Chancen, deinen Highscore zu übertreffen.",
   "yes-the-scrolling-is.f7335d": "Ja! Das Scrolling ist unendlich und es werden laufend neue Hindernisse generiert. Das Spiel endet erst, wenn du ein Hindernis triffst. Wie weit kommst du? Die einzige Grenze ist dein Können!",
   "yes-wise-flyer-can.52a69d": "Ja! Wise Flyer lässt sich komplett offline spielen. Für die Bestenlisten ist eine Internetverbindung nötig, das eigentliche Spiel funktioniert aber überall und jederzeit.",
-  "your-local-best-score.16fb62": "Dein lokaler Bestwert wird nicht mehr überschrieben, wenn Game Center deaktiviert ist, Ghost-Wiederholungen im Attack-Modus laufen spürbar flüssiger und Bestenlisten öffnen sich in der neuesten Game Center-Oberfläche."
+  "your-local-best-score.16fb62": "Dein lokaler Bestwert wird nicht mehr überschrieben, wenn Game Center deaktiviert ist, Ghost-Wiederholungen im Attack-Modus laufen spürbar flüssiger und Bestenlisten öffnen sich in der neuesten Game Center-Oberfläche.",
+  "not-sold-in-the.04baa8": "Nicht im EU-App-Store erhältlich"
 }

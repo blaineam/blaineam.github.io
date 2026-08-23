@@ -18,7 +18,6 @@
   "ari-on-apple-watch.f45590": "Apple WatchのAri",
   "ask-any-model-apple.c636ed": "どのモデルにも質問できます——Apple Intelligence、ダウンロードしたローカルモデル、お使いのクラウドプロバイダのいずれでも。書類を分析し、画像を生成・編集し、回答を読み上げ、コーディングタスクを実行し、iPhoneからMacへ処理を任せることも。すべての操作はShortcutsで連携できます。",
   "ask-ari-from-your.e4bb25": "手首からAriに質問。音声入力や手書きで質問すると、ペアリングしたiPhoneから回答がストリーミングで届き、必要に応じてWatchのスピーカーで読み上げます。「Ask Ari」コンプリケーションをタップすればすぐに入力画面へ。待機中の質問は、iPhoneが再接続したときに自動で送信されます。",
-  "availability.681b5b": "販売地域",
   "aws-bedrock-support.aafd5d": "AWS Bedrock対応",
   "biometric-encryption.b67112": "<span class=\"badge-icon\">&#x1f512;</span> 生体認証による暗号化",
   "blaine-miller-all-rights.b327c2": "© <span id=\"year\"></span> Blaine Miller. 無断転載を禁じます。",
@@ -100,5 +99,6 @@
   "why-choose-ari-helper.283965": "Ari Helper が選ばれる理由",
   "yes-when-using-local.7d1876": "はい。デバイス上で動作するローカルモデルやネットワーク上の Ollama を使えば、データが端末やローカルネットワークの外に出ることはありません。生体認証ロック付きのプライベートモードなら、機密性の高い会話をさらに安全に守れます。",
   "yes-you-can-share.13d3cb": "はい。会話は美しい画像や HTML ファイルとして共有できます。気づきやコードスニペット、クリエイティブな内容を友人や同僚と共有するのに最適です。",
-  "your-conversations-are-now.0db54e": "会話はシステムの Spotlight から検索できるようになりました。検索結果をタップすれば、そのまま続きから再開できます。プライベートに設定した会話は検索対象から完全に除外され、メディアは Ari の暗号化ストレージに移動します。"
+  "your-conversations-are-now.0db54e": "会話はシステムの Spotlight から検索できるようになりました。検索結果をタップすれば、そのまま続きから再開できます。プライベートに設定した会話は検索対象から完全に除外され、メディアは Ari の暗号化ストレージに移動します。",
+  "not-sold-in-the.04baa8": "EU の App Store では販売していません"
 }

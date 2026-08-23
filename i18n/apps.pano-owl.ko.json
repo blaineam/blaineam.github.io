@@ -8,7 +8,6 @@
   "app-sandbox.b85ecb": "<span class=\"badge-icon\">&#x2705;</span> 앱 샌드박스",
   "apps.2d61f2": "← 앱",
   "as-many-as-you.87a61d": "원하는 만큼요. Pano Owl은 전체 사진에서 특징점을 매칭하고, 아웃오브코어 타일 엔진이 메모리 사용량을 일정하게 유지합니다 — 덕분에 출력 해상도가 기기에 제한되지 않습니다. 두 장짜리 스윕부터 완전한 360° 기가픽셀 장면까지.",
-  "availability.681b5b": "판매 지역",
   "blaine-miller-all-rights.b327c2": "© <span id=\"year\"></span> Blaine Miller. 판권 소유.",
   "can-i-turn-a.0f6ea7": "동영상을 파노라마로 만들 수 있나요?",
   "capture-now-stitch-later.cdd42f": "지금 촬영하고, 나중에 이어 붙이세요. 위치와 나침반 방위가 모든 사진에 함께 담깁니다.",
@@ -72,5 +71,6 @@
   "yes-pick-a-video.3efcb6": "네. 영상을 고르기만 하면 Pano Owl이 간격이 고르고 가장 깨끗한 프레임을 자동으로 추출한 뒤, 다른 사진 세트와 똑같이 스티칭합니다.",
   "yes-true-equirectangular-spherical.b0a5b8": "네 — 진정한 등장방형(구형) 출력은 물론 원통형과 평면형까지 지원합니다. 부분 파노라마와 완전한 360° 모두 가능합니다. 표준 GPano 메타데이터를 포함해 내보내므로 웹 뷰어, 사진 앱, Apple Vision Pro에서 올바르게 표시됩니다.",
   "your-panorama-library-the.1c4c99": "나만의 파노라마 라이브러리, 스티칭 스튜디오, 그리고 몰입형 360 뷰어",
-  "your-photos-stay-yours.93a5b3": "사진은 언제나 내 것"
+  "your-photos-stay-yours.93a5b3": "사진은 언제나 내 것",
+  "not-sold-in-the.04baa8": "EU App Store에서는 판매하지 않습니다"
 }
