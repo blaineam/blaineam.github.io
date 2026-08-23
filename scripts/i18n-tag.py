@@ -19,6 +19,7 @@ REPO = str(pathlib.Path(__file__).resolve().parents[1])
 PAGES = [
     ("index.html", "index", "https://wemiller.com/", "top-right"),
     ("apps/index.html", "apps", "https://wemiller.com/apps/", "bottom-right"),
+    ("support/index.html", "support", "https://wemiller.com/support/", "bottom-right"),
 ] + [
     (f"apps/{slug}/index.html", f"apps.{slug}", f"https://wemiller.com/apps/{slug}/", "bottom-left")
     for slug in [
