@@ -34,7 +34,6 @@
   "automated-scheduled-sync.e20f2c": "自动定时同步",
   "automated-sync.8e1ee8": "自动同步",
   "automatically-skip-scheduled-syncs.c490e8": "使用电池供电，或连接到低流量、高资费网络时，自动跳过定时同步。既省电，又免去意外的流量费用。",
-  "availability.681b5b": "上架地区",
   "aws-s3.d14c09": "AWS S3",
   "azure-blob.f17e69": "Azure Blob",
   "back-up-your-entire.9d76da": "将整个「照片」图库备份到任意云服务商。以自动、安全的照片备份，守护你的珍贵回忆。",
@@ -358,5 +357,6 @@
   "your-files-are-encrypted.ce8455": "你的文件会先在设备上加密，然后才上传到云端。Enter Space 采用端到端加密，确保只有你才能访问自己的数据——即使云服务商遭到入侵也一样。",
   "zadara.08ddf9": "Zadara",
   "zata.8418cf": "Zata",
-  "zoho-workdrive.5b01dc": "Zoho WorkDrive"
+  "zoho-workdrive.5b01dc": "Zoho WorkDrive",
+  "not-sold-in-the.04baa8": "不在欧盟 App Store 销售"
 }

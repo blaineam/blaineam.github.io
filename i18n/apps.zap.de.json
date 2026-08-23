@@ -10,7 +10,6 @@
   "anti-tamper-matches.f68981": "<span class=\"badge-icon\">&#x1f512;</span> Manipulationssichere Matches",
   "app-sandbox.b85ecb": "<span class=\"badge-icon\">&#x2705;</span> App Sandbox",
   "apps.2d61f2": "← Apps",
-  "availability.681b5b": "Verfügbarkeit",
   "blaine-miller-all-rights.b327c2": "© <span id=\"year\"></span> Blaine Miller. Alle Rechte vorbehalten.",
   "both-players-get-the.42ba59": "Beide Spieler bekommen dieselben Fragen und dasselbe gemischte Kartenraster – jedes Duell entscheidet sich also durch Tempo, Wissen und Nervenstärke.",
   "branding-by-marty-buck.24746a": "Branding von Marty Buck · Sounddesign & ursprüngliche Idee von Austin Buck · Entwicklung & Musik von Blaine Miller",
@@ -66,5 +65,6 @@
   "zap-has-no-ads.92302a": "Zap hat keine Werbung, kein Tracking und keine In-App-Käufe.",
   "zap-isn-t-sold.021c53": "Zap wird im App Store in der Europäischen Union nicht verkauft – der Digital Services Act (DSA) der EU verlangt dafür einen veröffentlichten Händlereintrag mit persönlichen Kontaktdaten, worauf ich als unabhängiger Entwickler verzichte. In allen anderen Ländern und Regionen des App Store ist die App erhältlich.",
   "zap-resizes-freely-on.324217": "Zap passt sich auf dem iPad frei an – jede Ausrichtung, Split View, Stage Manager und iPad-Fenster werden unterstützt, und in niedrigen Fenstern wird das Menü scrollbar, damit nie etwas abgeschnitten wird.",
-  "zap.1cd56e": "⚡ Zap"
+  "zap.1cd56e": "⚡ Zap",
+  "not-sold-in-the.04baa8": "Nicht im EU-App-Store erhältlich"
 }

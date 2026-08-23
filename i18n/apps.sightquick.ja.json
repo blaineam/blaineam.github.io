@@ -5,7 +5,6 @@
   "all-apps.429449": "すべてのアプリ",
   "app-sandbox.b85ecb": "<span class=\"badge-icon\">&#x2705;</span> App Sandbox",
   "apps.2d61f2": "← アプリ",
-  "availability.681b5b": "販売地域",
   "blaine-miller-all-rights.b327c2": "© <span id=\"year\"></span> Blaine Miller. 無断転載を禁じます。",
   "coded-printable-targets.5e6026": "コード付き印刷ターゲット",
   "completely-your-photos-are.16b5c5": "完全に守られます。写真は端末内で解析され、どこにもアップロードされません。アカウントもトラッキングもなく、ゼロインのセッション記録とライフルのプロファイルはお使いのiPhoneの中だけに保存されます。購入手続きはAppleが処理するため、SightQuickがお支払い情報を見ることはありません。",
@@ -66,5 +65,6 @@
   "your-photos-never-leave.2e873f": "撮影した写真が端末の外に出ることはありません。アカウント登録も、トラッキングも、広告もなし。SightQuick はすべての処理をローカルで行い、ゼロインの履歴もお使いのスマートフォン内に保存します。",
   "zero-in-minutes.f6176f": "ゼロインは、数分で。",
   "download-on-app-store.cf50c2": "App Storeでダウンロード",
-  "download-now.6d56a8": "今すぐダウンロード"
+  "download-now.6d56a8": "今すぐダウンロード",
+  "not-sold-in-the.04baa8": "EU の App Store では販売していません"
 }

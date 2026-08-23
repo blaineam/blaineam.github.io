@@ -8,7 +8,6 @@
   "apps.2d61f2": "← Apps",
   "are-there-ads-iaps.46a41b": "Gibt es Werbung, In-App-Käufe oder Abos?",
   "atmospheric-range.55a239": "Atmosphärische Schießplätze",
-  "availability.681b5b": "Verfügbarkeit",
   "blaine-miller-all-rights.b327c2": "© <span id=\"year\"></span> Blaine Miller. Alle Rechte vorbehalten.",
   "built-for-the-long.f0026b": "Gebaut für den weiten Schuss",
   "can-i-play-offline.897eb4": "Kann ich offline spielen?",
@@ -74,5 +73,6 @@
   "why-does-my-reticle.ea9a33": "Warum wandert mein Absehen, während ich halte?",
   "why-ridgeshot-reads-right.4a3f8a": "Warum sich Ridgeshot richtig anfühlt",
   "wind-patience.657adb": "Wind & Geduld",
-  "yes-pass-and-play.81d0c1": "Ja – abwechselnd an einem Gerät zu spielen funktioniert komplett offline. Zwei Schützen, ein Gerät, keine Anmeldung. Das Matchmaking über Game Center und Herausforderungen per iMessage brauchen natürlich eine Verbindung, um die Züge zu übertragen, aber die gesamte Simulation – Ballistik, Wind, Tiere, Wetter – läuft auf dem Gerät. Keine Server-Roundtrips pro Schuss, kein Warten auf eine Bestenlisten-Synchronisierung, bevor der nächste Schuss fällt."
+  "yes-pass-and-play.81d0c1": "Ja – abwechselnd an einem Gerät zu spielen funktioniert komplett offline. Zwei Schützen, ein Gerät, keine Anmeldung. Das Matchmaking über Game Center und Herausforderungen per iMessage brauchen natürlich eine Verbindung, um die Züge zu übertragen, aber die gesamte Simulation – Ballistik, Wind, Tiere, Wetter – läuft auf dem Gerät. Keine Server-Roundtrips pro Schuss, kein Warten auf eine Bestenlisten-Synchronisierung, bevor der nächste Schuss fällt.",
+  "not-sold-in-the.04baa8": "Nicht im EU-App-Store erhältlich"
 }

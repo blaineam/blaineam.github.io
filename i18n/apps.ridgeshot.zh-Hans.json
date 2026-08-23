@@ -8,7 +8,6 @@
   "apps.2d61f2": "← App 列表",
   "are-there-ads-iaps.46a41b": "有广告、内购或订阅吗？",
   "atmospheric-range.55a239": "氛围靶场",
-  "availability.681b5b": "上架地区",
   "blaine-miller-all-rights.b327c2": "© <span id=\"year\"></span> Blaine Miller. 保留所有权利。",
   "built-for-the-long.f0026b": "为远射而生",
   "can-i-play-offline.897eb4": "可以离线游玩吗？",
@@ -74,5 +73,6 @@
   "why-does-my-reticle.ea9a33": "为什么据枪时我的分划板会游移？",
   "why-ridgeshot-reads-right.4a3f8a": "Ridgeshot 为何真实可信",
   "wind-patience.657adb": "风与耐心",
-  "yes-pass-and-play.81d0c1": "是的 —— 轮流对战完全离线。两名射手、一台设备、无需登录。Game Center 匹配和 iMessage 挑战自然需要联网来传递回合，但整套模拟 —— 弹道、风、动物、天气 —— 全部在设备端运行。每一枪都无需往返服务器，也不必等排行榜同步完成才能开始下一轮。"
+  "yes-pass-and-play.81d0c1": "是的 —— 轮流对战完全离线。两名射手、一台设备、无需登录。Game Center 匹配和 iMessage 挑战自然需要联网来传递回合，但整套模拟 —— 弹道、风、动物、天气 —— 全部在设备端运行。每一枪都无需往返服务器，也不必等排行榜同步完成才能开始下一轮。",
+  "not-sold-in-the.04baa8": "不在欧盟 App Store 销售"
 }

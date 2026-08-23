@@ -12,7 +12,6 @@
   "atomic-volume-local-writes.f3a545": "Le scritture atomiche e locali al volume fanno sì che le ottimizzazioni su SSD esterni e volumi montati in rete non lascino file parziali né dati corrotti, anche se qualcosa viene scollegato a metà esecuzione.",
   "automated-optimization.c526c6": "Ottimizzazione automatica",
   "automation-that-works-for.ef415b": "Un'automazione che lavora per te",
-  "availability.681b5b": "Disponibilità",
   "blaine-miller-all-rights.b327c2": "© <span id=\"year\"></span> Blaine Miller. Tutti i diritti riservati.",
   "can-i-choose-which.2f175f": "Posso scegliere quali contenuti multimediali vengono ottimizzati in un'attività?",
   "can-i-preview-changes.b1fcbe": "Posso vedere un'anteprima delle modifiche prima di ottimizzare?",
@@ -130,5 +129,6 @@
   "yes-on-mac-and.5c6090": "Sì! Su Mac e iPad puoi trascinare i file multimediali direttamente in Sami per ottimizzarli in un attimo. In questo modo l'elaborazione in blocco di grandi quantità di file diventa rapida e intuitiva.",
   "yes-on-macos-enable.096678": "Sì, su macOS. Attiva \"Continua l'esecuzione a finestra chiusa\" nelle Impostazioni e Sami resterà attivo, così le cartelle monitorate e le automazioni pianificate continueranno a funzionare. Puoi decidere in modo indipendente se Sami compare nel Dock, nella barra dei menu, in entrambi o in nessuno dei due: se preferisci, puoi optare per un'esecuzione in background completamente invisibile. Riaprendolo da Finder/Spotlight riattivi il processo già in esecuzione e riporti in primo piano la finestra.",
   "yes-sami-is-a.dcce95": "Sì! Sami è un'app universale che funziona su iPhone, iPad e Mac con le stesse identiche funzionalità. Acquistala una volta sola e usala su tutti i tuoi dispositivi Apple.",
-  "yes-sami-uses-lossy.64f3d5": "Sì, Sami utilizza la compressione lossy per ottenere un risparmio di spazio significativo. Ci sarà una certa perdita di qualità, ma l'anteprima affiancata ti permette di valutare il compromesso prima di confermare. Hai il pieno controllo sui livelli di compressione, per bilanciare qualità e dimensione dei file in base alle tue esigenze."
+  "yes-sami-uses-lossy.64f3d5": "Sì, Sami utilizza la compressione lossy per ottenere un risparmio di spazio significativo. Ci sarà una certa perdita di qualità, ma l'anteprima affiancata ti permette di valutare il compromesso prima di confermare. Hai il pieno controllo sui livelli di compressione, per bilanciare qualità e dimensione dei file in base alle tue esigenze.",
+  "not-sold-in-the.04baa8": "Non in vendita sull'App Store UE"
 }

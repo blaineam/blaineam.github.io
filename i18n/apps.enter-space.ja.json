@@ -34,7 +34,6 @@
   "automated-scheduled-sync.e20f2c": "スケジュール自動同期",
   "automated-sync.8e1ee8": "自動同期",
   "automatically-skip-scheduled-syncs.c490e8": "バッテリー駆動中や、データ量が限られた回線・従量課金のネットワークに接続しているときは、予約同期を自動的にスキップ。バッテリーを節約し、想定外のデータ料金も防ぎます。",
-  "availability.681b5b": "販売地域",
   "aws-s3.d14c09": "AWS S3",
   "azure-blob.f17e69": "Azure Blob",
   "back-up-your-entire.9d76da": "「写真」ライブラリ全体を、どのクラウドプロバイダにもバックアップ。自動で安全な写真バックアップが、大切な思い出を守ります。",
@@ -358,5 +357,6 @@
   "your-files-are-encrypted.ce8455": "ファイルはクラウドにアップロードされる前に、デバイス上で暗号化されます。Enter Space はエンドツーエンド暗号化を採用しているため、万が一クラウド事業者が侵害されても、データにアクセスできるのはあなただけです。",
   "zadara.08ddf9": "Zadara",
   "zata.8418cf": "Zata",
-  "zoho-workdrive.5b01dc": "Zoho WorkDrive"
+  "zoho-workdrive.5b01dc": "Zoho WorkDrive",
+  "not-sold-in-the.04baa8": "EU の App Store では販売していません"
 }

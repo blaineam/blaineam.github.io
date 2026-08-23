@@ -5,7 +5,6 @@
   "all-apps.429449": "All Apps",
   "app-sandbox.b85ecb": "<span class=\"badge-icon\">&#x2705;</span> App Sandbox",
   "apps.2d61f2": "← Apps",
-  "availability.681b5b": "Availability",
   "blaine-miller-all-rights.b327c2": "© <span id=\"year\"></span> Blaine Miller. All rights reserved.",
   "coded-printable-targets.5e6026": "Coded Printable Targets",
   "completely-your-photos-are.16b5c5": "Completely. Your photos are analyzed on-device and never uploaded anywhere. There's no account and no tracking — your zeroing sessions and rifle profiles live only on your phone. Purchases are handled by Apple; SightQuick never sees your payment details.",
@@ -66,5 +65,6 @@
   "your-photos-never-leave.2e873f": "Your photos never leave your device. No account, no tracking, no ads. SightQuick processes everything locally and keeps your zeroing history on your phone.",
   "zero-in-minutes.f6176f": "Zero in minutes.",
   "download-on-app-store.cf50c2": "Download on App Store",
-  "download-now.6d56a8": "Download Now"
+  "download-now.6d56a8": "Download Now",
+  "not-sold-in-the.04baa8": "Not sold in the EU App Store"
 }

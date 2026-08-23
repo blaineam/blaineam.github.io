@@ -8,7 +8,6 @@
   "apps.2d61f2": "← Apps",
   "are-there-in-app.e18c19": "¿Hay compras dentro de la app o anuncios?",
   "atmospheric-range.55a239": "Campo de tiro atmosférico",
-  "availability.681b5b": "Disponibilidad",
   "blaine-miller-all-rights.b327c2": "© <span id=\"year\"></span> Blaine Miller. Todos los derechos reservados.",
   "built-for-real-archers.ea4c52": "Hecho para arqueros de verdad",
   "can-i-play-offline.897eb4": "¿Puedo jugar sin conexión?",
@@ -83,5 +82,6 @@
   "why-does-my-pin.cacfb8": "¿Por qué se me mueve el pin mientras aguanto?",
   "why-pinline-hits-different.254d14": "Por qué Pinline es diferente",
   "wind-speed-and-direction.d9678b": "La velocidad y la dirección del viento se muestran en tiempo real en el HUD. Apunta CONTRA el viento para que la flecha vuelva al centro. La bandera de la calle te indica hacia dónde sopla.",
-  "yes-pass-and-play.3bd176": "Sí: el modo por turnos en un mismo dispositivo funciona totalmente sin conexión. Dos arqueros, un dispositivo y sin iniciar sesión. Las partidas en línea (Game Center) y por iMessage necesitan conexión para transmitir los turnos, pero todo el juego se ejecuta localmente."
+  "yes-pass-and-play.3bd176": "Sí: el modo por turnos en un mismo dispositivo funciona totalmente sin conexión. Dos arqueros, un dispositivo y sin iniciar sesión. Las partidas en línea (Game Center) y por iMessage necesitan conexión para transmitir los turnos, pero todo el juego se ejecuta localmente.",
+  "not-sold-in-the.04baa8": "No se vende en el App Store de la UE"
 }

@@ -8,7 +8,6 @@
   "app-sandbox.b85ecb": "<span class=\"badge-icon\">&#x2705;</span> App Sandbox",
   "apps.2d61f2": "← アプリ",
   "as-many-as-you.87a61d": "好きなだけ。Pano Owl はすべての写真から特徴点をマッチングし、アウトオブコアのタイルエンジンがメモリ使用量を一定に保ちます — だから出力解像度がデバイスに縛られません。2枚のスイープから、完全な360°ギガピクセルシーンまで。",
-  "availability.681b5b": "販売地域",
   "blaine-miller-all-rights.b327c2": "© <span id=\"year\"></span> Blaine Miller. 無断転載を禁じます。",
   "can-i-turn-a.0f6ea7": "動画をパノラマにできますか？",
   "capture-now-stitch-later.cdd42f": "今撮って、あとでスティッチ。位置情報とコンパスの方位が、すべてのショットに付いてきます。",
@@ -72,5 +71,6 @@
   "yes-pick-a-video.3efcb6": "はい。動画を選ぶだけで、Pano Owl が適切な間隔で最もクリアなフレームを自動的に抽出し、通常の写真セットと同じようにスティッチします。",
   "yes-true-equirectangular-spherical.b0a5b8": "はい — 本格的な正距円筒図法（球面）に加え、円筒図法と平面図法にも対応。部分的な弧も完全な360°も扱えます。書き出したファイルには標準のGPanoメタデータが含まれるため、Webビューアや「写真」アプリ、Apple Vision Proでも正しく表示されます。",
   "your-panorama-library-the.1c4c99": "パノラマライブラリ、スティッチスタジオ、そして没入感あふれる360°ビューア",
-  "your-photos-stay-yours.93a5b3": "写真は、あなたのものだけ"
+  "your-photos-stay-yours.93a5b3": "写真は、あなたのものだけ",
+  "not-sold-in-the.04baa8": "EU の App Store では販売していません"
 }

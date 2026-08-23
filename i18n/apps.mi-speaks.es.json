@@ -8,7 +8,6 @@
   "any-voice-on-your.c4d5fe": "Cualquier voz de tu dispositivo",
   "app-sandbox.b85ecb": "<span class=\"badge-icon\">&#x2705;</span> App Sandbox",
   "apps.2d61f2": "← Apps",
-  "availability.681b5b": "Disponibilidad",
   "background-playback.efc5fb": "Reproducción en segundo plano",
   "blaine-miller-all-rights.b327c2": "© <span id=\"year\"></span> Blaine Miller. Todos los derechos reservados.",
   "built-in-helpful-tips.a104d6": "Los consejos integrados te guían por las funciones y te ayudan a sacarle el máximo partido a Mi Speaks.",
@@ -77,5 +76,6 @@
   "yes-mi-speaks-highlights.298462": "¡Sí! Mi Speaks resalta y sigue las palabras a medida que las lee, lo que facilita seguir el texto, mejorar la comprensión y aprender contenidos nuevos.",
   "yes-mi-speaks-includes.7a0f2a": "¡Sí! Mi Speaks incluye un potente reconocimiento de texto capaz de extraerlo de imágenes y archivos PDF, así que escuchar contenidos de fotos, documentos y materiales escaneados es muy sencillo.",
   "yes-mi-speaks-is.f1ab38": "¡Sí! Mi Speaks es totalmente compatible con el uso sin conexión. Una vez que hayas descargado las voces desde los Ajustes de tu dispositivo, podrás escuchar tus contenidos en cualquier lugar sin necesidad de conexión a internet.",
-  "zero-data-collection.939efa": "Cero recopilación de datos"
+  "zero-data-collection.939efa": "Cero recopilación de datos",
+  "not-sold-in-the.04baa8": "No se vende en el App Store de la UE"
 }

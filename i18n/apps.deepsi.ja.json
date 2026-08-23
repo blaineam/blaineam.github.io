@@ -7,7 +7,6 @@
   "all-your-depth-based.ef1a57": "深度ベースのメディアはすべて「写真」の専用アルバムに保存。あなただけの視点を誰かと共有したり、クリエイティブな作品に活用したりできます。",
   "app-sandbox.b85ecb": "<span class=\"badge-icon\">&#x2705;</span> App Sandbox",
   "apps.2d61f2": "← アプリ",
-  "availability.681b5b": "販売地域",
   "blaine-miller-all-rights.b327c2": "© <span id=\"year\"></span> Blaine Miller. 無断転載を禁じます。",
   "can-i-customize-the.4e2870": "カラーテーマはカスタマイズできますか？",
   "can-i-record-videos.0153cc": "音声付きで動画を撮影できますか？",
@@ -75,5 +74,6 @@
   "whether-you-re-exploring.b4599d": "夜の屋外を探索するときも、暗い部屋を移動するときも、深度センシングの仕組みを知りたいだけのときも。DeepSiなら、通常の視覚が通用しない場面でも「見る」ことができます。",
   "why-choose-deepsi.d18d6c": "DeepSiが選ばれる理由",
   "yes-tap-and-hold.c8211b": "はい！長押しすると、音声付きの深度ビデオを録画できます。独特な深度ビジュアライゼーションとサウンドが組み合わさった、没入感あふれるクリップを作成できます。",
-  "your-chosen-depth-color.8aa041": "選んだ深度カラーテーマが、次回の起動後もそのまま保持されるようになりました。12種類のテーマから一度選ぶだけで、DeepSiが記憶します。"
+  "your-chosen-depth-color.8aa041": "選んだ深度カラーテーマが、次回の起動後もそのまま保持されるようになりました。12種類のテーマから一度選ぶだけで、DeepSiが記憶します。",
+  "not-sold-in-the.04baa8": "EU の App Store では販売していません"
 }

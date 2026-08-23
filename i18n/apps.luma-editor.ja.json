@@ -9,7 +9,6 @@
   "apply-consistent-edits-across.0fc2e4": "複数の写真に一貫した編集を一度に適用。撮影した写真すべてにプロ品質を保ちながら、編集時間を大幅に短縮します。",
   "apps.2d61f2": "← アプリ",
   "are-edits-permanent.b1705e": "編集は元に戻せませんか？",
-  "availability.681b5b": "販売地域",
   "blaine-miller-all-rights.b327c2": "© <span id=\"year\"></span> Blaine Miller. 無断転載を禁じます。",
   "bulk-edit-with-precision.bd7f1a": "精密な一括編集",
   "bulk-photo-editing-that.377ee6": "あなただけのスタイルに合わせた一括写真編集。過去の作品のように、あるいは他の写真家の雰囲気に合わせて新しい写真を現像できます。カスタムLUTを作成し、写真ライブラリ全体に一貫した編集を簡単に適用しましょう。",
@@ -76,5 +75,6 @@
   "why-choose-luma-editor.fab346": "Luma Editor を選ぶ理由",
   "yes-luma-editor-excels.e6a95c": "はい！Luma Editor は写真の一括編集を得意としています。複数の写真を選んでスタイルをまとめて適用すれば、手作業なら何時間もかかる編集を短縮しながら、撮影した写真全体で一貫した品質を保てます。",
   "yes-luma-editor-integrates.b03d11": "はい！Luma Editor は Apple の「写真」とシームレスに連携します。編集内容もアルバムも整理も、すべて Apple のエコシステム内に留まるので、写真のワークフロー全体を一か所で管理できます。",
-  "your-styles-in-spotlight.bcebfd": "Spotlight で見つかる、あなたのスタイル"
+  "your-styles-in-spotlight.bcebfd": "Spotlight で見つかる、あなたのスタイル",
+  "not-sold-in-the.04baa8": "EU の App Store では販売していません"
 }

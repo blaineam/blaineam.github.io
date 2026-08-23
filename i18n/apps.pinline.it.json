@@ -8,7 +8,6 @@
   "apps.2d61f2": "← App",
   "are-there-in-app.e18c19": "Ci sono acquisti in-app o pubblicità?",
   "atmospheric-range.55a239": "Ambientazioni atmosferiche",
-  "availability.681b5b": "Disponibilità",
   "blaine-miller-all-rights.b327c2": "© <span id=\"year\"></span> Blaine Miller. Tutti i diritti riservati.",
   "built-for-real-archers.ea4c52": "Fatto per veri arcieri",
   "can-i-play-offline.897eb4": "Posso giocare offline?",
@@ -83,5 +82,6 @@
   "why-does-my-pin.cacfb8": "Perché il pin si sposta mentre sono in trazione?",
   "why-pinline-hits-different.254d14": "Perché Pinline è un'altra cosa",
   "wind-speed-and-direction.d9678b": "Velocità e direzione del vento sono indicate in tempo reale sull'HUD. Mira CONTRO vento per rientrare sul centro. La bandierina sulla corsia ti dice da dove soffia.",
-  "yes-pass-and-play.3bd176": "Sì: la modalità Pass-and-play è completamente offline. Due tiratori, un dispositivo, nessun accesso richiesto. Le partite online (Game Center) e su iMessage hanno ovviamente bisogno di una connessione per trasmettere i turni, ma tutto il gioco gira in locale."
+  "yes-pass-and-play.3bd176": "Sì: la modalità Pass-and-play è completamente offline. Due tiratori, un dispositivo, nessun accesso richiesto. Le partite online (Game Center) e su iMessage hanno ovviamente bisogno di una connessione per trasmettere i turni, ma tutto il gioco gira in locale.",
+  "not-sold-in-the.04baa8": "Non in vendita sull'App Store UE"
 }

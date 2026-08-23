@@ -11,7 +11,6 @@
   "american-the-default-follows.de8dc1": "American (die Voreinstellung) folgt der modernen westlichen Konvention: Jede Blume passt zu jeder Blume, jede Jahreszeit zu jeder Jahreszeit. Strict verlangt für jeden Stein eine exakte Übereinstimmung — und weil Blumen und Jahreszeiten jeweils nur einmal vorkommen, nimmt der Strict-Modus sie komplett aus dem Pool und ersetzt sie durch zusätzliche Winde, damit jeder Stein einen Partner hat.",
   "apps.2d61f2": "← Apps",
   "are-there-ads-or.cc7da0": "Gibt es Werbung oder In-App-Käufe?",
-  "availability.681b5b": "Verfügbarkeit",
   "blaine-miller-all-rights.b327c2": "© <span id=\"year\"></span> Blaine Miller. Alle Rechte vorbehalten.",
   "built-clean.a00f77": "Sauber gebaut",
   "built-for-the-long.c2083b": "Für die lange Strecke gebaut",
@@ -81,5 +80,6 @@
   "what-s-the-music.cd7ddb": "Was ist das für Musik?",
   "yes-each-board-is.243716": "Ja. Jedes Spielfeld entsteht, indem zuerst ein gültiger Spielverlauf simuliert wird (die Methode des umgekehrten Entfernens) und die Steine anschließend in der daraus resultierenden Reihenfolge ausgelegt werden. Auch nach einem Mischen mitten im Spiel wird das neue Layout so neu erzeugt, dass es lösbar ist.",
   "yes-native-ipad-support.59fa42": "Ja – native iPad-Unterstützung im Hoch- und Querformat. Das Spielfeld skaliert auf den größeren Bildschirm, mit proportionaler Steingröße, Stapelhöhe und Seitenwandtiefe, damit die Optik konsistent bleibt.",
-  "zero-third-party-dependencies.a096e5": "Keine Abhängigkeiten von Drittanbietern. Gebaut mit Swift 6 und strikter Nebenläufigkeit."
+  "zero-third-party-dependencies.a096e5": "Keine Abhängigkeiten von Drittanbietern. Gebaut mit Swift 6 und strikter Nebenläufigkeit.",
+  "not-sold-in-the.04baa8": "Nicht im EU-App-Store erhältlich"
 }

@@ -8,7 +8,6 @@
   "apps.2d61f2": "← Applications",
   "are-there-in-app.e18c19": "Y a-t-il des achats intégrés ou des publicités ?",
   "atmospheric-range.55a239": "Parcours atmosphériques",
-  "availability.681b5b": "Disponibilité",
   "blaine-miller-all-rights.b327c2": "© <span id=\"year\"></span> Blaine Miller. Tous droits réservés.",
   "built-for-real-archers.ea4c52": "Conçu pour les vrais archers",
   "can-i-play-offline.897eb4": "Puis-je jouer hors ligne ?",
@@ -83,5 +82,6 @@
   "why-does-my-pin.cacfb8": "Pourquoi mon pin dérive-t-il quand je maintiens l'allonge ?",
   "why-pinline-hits-different.254d14": "Ce qui rend Pinline différent",
   "wind-speed-and-direction.d9678b": "La vitesse et la direction du vent s'affichent en direct sur le HUD. Visez FACE au vent pour dériver vers le centre. Le drapeau du pas de tir vous indique dans quelle direction il souffle.",
-  "yes-pass-and-play.3bd176": "Oui — le mode Chacun son tour fonctionne entièrement hors ligne. Deux archers, un appareil, aucune connexion. Les matchs en ligne (Game Center) et iMessage ont bien sûr besoin d'une connexion pour transmettre les tours, mais tout le jeu tourne en local."
+  "yes-pass-and-play.3bd176": "Oui — le mode Chacun son tour fonctionne entièrement hors ligne. Deux archers, un appareil, aucune connexion. Les matchs en ligne (Game Center) et iMessage ont bien sûr besoin d'une connexion pour transmettre les tours, mais tout le jeu tourne en local.",
+  "not-sold-in-the.04baa8": "Non vendu sur l'App Store de l'UE"
 }

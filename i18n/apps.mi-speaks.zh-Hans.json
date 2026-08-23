@@ -8,7 +8,6 @@
   "any-voice-on-your.c4d5fe": "设备上的任意语音",
   "app-sandbox.b85ecb": "<span class=\"badge-icon\">&#x2705;</span> App 沙盒",
   "apps.2d61f2": "← App 列表",
-  "availability.681b5b": "上架地区",
   "background-playback.efc5fb": "后台播放",
   "blaine-miller-all-rights.b327c2": "© <span id=\"year\"></span> Blaine Miller. 保留所有权利。",
   "built-in-helpful-tips.a104d6": "内置的贴心提示会引导你了解各项功能，帮助你充分用好 Mi Speaks。",
@@ -77,5 +76,6 @@
   "yes-mi-speaks-highlights.298462": "当然可以！Mi Speaks 会在朗读时高亮并跟随当前词句，让你更容易跟上进度、提升理解力、学习新知识。",
   "yes-mi-speaks-includes.7a0f2a": "当然可以！Mi Speaks 内置强大的文字识别功能，可从图片和 PDF 文件中提取文本，轻松聆听照片、文档和扫描件中的内容。",
   "yes-mi-speaks-is.f1ab38": "当然可以！Mi Speaks 完全支持离线使用。只要在设备「设置」中下载好语音，就能随时随地收听内容，无需联网。",
-  "zero-data-collection.939efa": "零数据收集"
+  "zero-data-collection.939efa": "零数据收集",
+  "not-sold-in-the.04baa8": "不在欧盟 App Store 销售"
 }

@@ -18,7 +18,6 @@
   "ari-on-apple-watch.f45590": "Ari on Apple Watch",
   "ask-any-model-apple.c636ed": "Ask any model — Apple Intelligence, a downloaded local model, or any of your cloud providers — analyze documents, generate and edit images, speak responses, run coding tasks, and dispatch work from your iPhone to your Mac. Every action is chainable in Shortcuts.",
   "ask-ari-from-your.e4bb25": "Ask Ari from your wrist: dictate or scribble a question and the answer streams in from your paired iPhone, with an optional spoken reply through the watch speaker. An \"Ask Ari\" complication launches straight into input, and queued questions deliver automatically when your iPhone reconnects.",
-  "availability.681b5b": "Availability",
   "aws-bedrock-support.aafd5d": "AWS Bedrock Support",
   "biometric-encryption.b67112": "<span class=\"badge-icon\">&#x1f512;</span> Biometric Encryption",
   "blaine-miller-all-rights.b327c2": "© <span id=\"year\"></span> Blaine Miller. All rights reserved.",
@@ -100,5 +99,6 @@
   "why-choose-ari-helper.283965": "Why Choose Ari Helper",
   "yes-when-using-local.7d1876": "Yes! When using local on-device models or Ollama on your network, no data leaves your device or local network. Private mode with biometric lock adds extra security for sensitive conversations.",
   "yes-you-can-share.13d3cb": "Yes! You can share conversations as beautiful images or HTML files, perfect for sharing insights, code snippets, or creative content with friends and colleagues.",
-  "your-conversations-are-now.0db54e": "Your conversations are now searchable from system Spotlight — tap a result to jump straight back in. Mark any conversation Private and it stays out of search entirely, with its media moved into Ari's encrypted store."
+  "your-conversations-are-now.0db54e": "Your conversations are now searchable from system Spotlight — tap a result to jump straight back in. Mark any conversation Private and it stays out of search entirely, with its media moved into Ari's encrypted store.",
+  "not-sold-in-the.04baa8": "Not sold in the EU App Store"
 }

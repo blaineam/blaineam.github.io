@@ -5,7 +5,6 @@
   "all-apps.429449": "全部 App",
   "app-sandbox.b85ecb": "<span class=\"badge-icon\">&#x2705;</span> App 沙盒",
   "apps.2d61f2": "← App 列表",
-  "availability.681b5b": "上架地区",
   "blaine-miller-all-rights.b327c2": "© <span id=\"year\"></span> Blaine Miller. 保留所有权利。",
   "coded-printable-targets.5e6026": "可打印的编码靶纸",
   "completely-your-photos-are.16b5c5": "完全私密。照片全部在设备端分析，绝不上传到任何地方。无需账号，没有追踪——你的校枪记录和枪支档案只保存在手机里。支付由 Apple 处理，SightQuick 从不接触你的支付信息。",
@@ -66,5 +65,6 @@
   "your-photos-never-leave.2e873f": "你的照片绝不会离开设备。无需账号，没有追踪，没有广告。SightQuick 全部在本地处理，并把你的校枪记录保存在手机上。",
   "zero-in-minutes.f6176f": "几分钟完成校枪。",
   "download-on-app-store.cf50c2": "在 App Store 下载",
-  "download-now.6d56a8": "立即下载"
+  "download-now.6d56a8": "立即下载",
+  "not-sold-in-the.04baa8": "不在欧盟 App Store 销售"
 }

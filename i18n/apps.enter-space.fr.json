@@ -34,7 +34,6 @@
   "automated-scheduled-sync.e20f2c": "Synchronisation planifiée automatisée",
   "automated-sync.8e1ee8": "Synchronisation automatisée",
   "automatically-skip-scheduled-syncs.c490e8": "Ignorez automatiquement les synchronisations planifiées lorsque vous êtes sur batterie ou connecté à un réseau limité en données ou coûteux. Préservez votre autonomie et évitez les frais de données imprévus.",
-  "availability.681b5b": "Disponibilité",
   "aws-s3.d14c09": "AWS S3",
   "azure-blob.f17e69": "Azure Blob",
   "back-up-your-entire.9d76da": "Sauvegardez l'intégralité de votre photothèque sur n'importe quel fournisseur cloud. Protégez vos souvenirs les plus précieux grâce à des sauvegardes photo automatisées et sécurisées.",
@@ -358,5 +357,6 @@
   "your-files-are-encrypted.ce8455": "Vos fichiers sont chiffrés sur votre appareil avant d'être envoyés vers le cloud. Enter Space utilise un chiffrement de bout en bout afin que vous seul puissiez accéder à vos données, même en cas de compromission du fournisseur cloud.",
   "zadara.08ddf9": "Zadara",
   "zata.8418cf": "Zata",
-  "zoho-workdrive.5b01dc": "Zoho WorkDrive"
+  "zoho-workdrive.5b01dc": "Zoho WorkDrive",
+  "not-sold-in-the.04baa8": "Non vendu sur l'App Store de l'UE"
 }

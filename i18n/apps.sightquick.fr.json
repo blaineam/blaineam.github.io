@@ -5,7 +5,6 @@
   "all-apps.429449": "Toutes les apps",
   "app-sandbox.b85ecb": "<span class=\"badge-icon\">&#x2705;</span> App Sandbox",
   "apps.2d61f2": "← Applications",
-  "availability.681b5b": "Disponibilité",
   "blaine-miller-all-rights.b327c2": "© <span id=\"year\"></span> Blaine Miller. Tous droits réservés.",
   "coded-printable-targets.5e6026": "Cibles imprimables à code unique",
   "completely-your-photos-are.16b5c5": "Totalement. Vos photos sont analysées sur l'appareil et ne sont jamais téléversées où que ce soit. Il n'y a ni compte ni suivi — vos séances de réglage et vos profils de carabine restent uniquement sur votre téléphone. Les achats sont gérés par Apple ; SightQuick ne voit jamais vos informations de paiement.",
@@ -66,5 +65,6 @@
   "your-photos-never-leave.2e873f": "Vos photos ne quittent jamais votre appareil. Aucun compte, aucun suivi, aucune publicité. SightQuick traite tout en local et conserve l'historique de vos réglages sur votre téléphone.",
   "zero-in-minutes.f6176f": "Réglez votre zéro en quelques minutes.",
   "download-on-app-store.cf50c2": "Télécharger sur l'App Store",
-  "download-now.6d56a8": "Télécharger"
+  "download-now.6d56a8": "Télécharger",
+  "not-sold-in-the.04baa8": "Non vendu sur l'App Store de l'UE"
 }

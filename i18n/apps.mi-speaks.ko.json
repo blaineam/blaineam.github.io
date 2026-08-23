@@ -8,7 +8,6 @@
   "any-voice-on-your.c4d5fe": "기기의 모든 음성",
   "app-sandbox.b85ecb": "<span class=\"badge-icon\">&#x2705;</span> 앱 샌드박스",
   "apps.2d61f2": "← 앱",
-  "availability.681b5b": "판매 지역",
   "background-playback.efc5fb": "백그라운드 재생",
   "blaine-miller-all-rights.b327c2": "© <span id=\"year\"></span> Blaine Miller. 판권 소유.",
   "built-in-helpful-tips.a104d6": "앱에 내장된 유용한 팁이 각 기능을 안내하며 Mi Speaks를 최대한 활용할 수 있도록 도와줍니다.",
@@ -77,5 +76,6 @@
   "yes-mi-speaks-highlights.298462": "물론입니다! Mi Speaks는 읽어주는 단어를 하이라이트하며 따라가기 때문에 내용을 따라 읽기 쉽고, 이해력을 높이며, 새로운 내용을 배우는 데 도움이 됩니다.",
   "yes-mi-speaks-includes.7a0f2a": "물론입니다! Mi Speaks에는 강력한 텍스트 인식 기능이 있어 이미지와 PDF 파일에서 텍스트를 추출할 수 있습니다. 사진, 문서, 스캔한 자료의 내용도 손쉽게 들을 수 있습니다.",
   "yes-mi-speaks-is.f1ab38": "물론입니다! Mi Speaks는 오프라인을 완벽하게 지원합니다. 기기 설정에서 음성을 내려받으면 인터넷 연결 없이도 어디서나 콘텐츠를 들을 수 있습니다.",
-  "zero-data-collection.939efa": "데이터 수집 전혀 없음"
+  "zero-data-collection.939efa": "데이터 수집 전혀 없음",
+  "not-sold-in-the.04baa8": "EU App Store에서는 판매하지 않습니다"
 }

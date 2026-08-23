@@ -11,7 +11,6 @@
   "american-the-default-follows.de8dc1": "American（デフォルト）は現代の西洋式ルールに従い、花牌はどの花牌とも、季節牌はどの季節牌とも一致します。Strict はすべての牌に完全一致を求めます — 花牌と季節牌は各1枚ずつしか収録されていないため、Strict モードでは牌の構成から外し、代わりに風牌を追加して、すべての牌に必ず相方がいるようにしています。",
   "apps.2d61f2": "← アプリ",
   "are-there-ads-or.cc7da0": "広告やアプリ内課金はありますか？",
-  "availability.681b5b": "販売地域",
   "blaine-miller-all-rights.b327c2": "© <span id=\"year\"></span> Blaine Miller. 無断転載を禁じます。",
   "built-clean.a00f77": "クリーンな作り",
   "built-for-the-long.c2083b": "長く遊べる設計",
@@ -81,5 +80,6 @@
   "what-s-the-music.cd7ddb": "音楽はどんな感じ？",
   "yes-each-board-is.243716": "はい。各盤面は、まず有効なプレイ手順をシミュレートし（逆順除去法）、その結果の順番どおりに牌を配ることで生成されます。ゲーム中にシャッフルした場合も、新しい配置は必ずクリア可能なものとして再生成されます。",
   "yes-native-ipad-support.59fa42": "はい — iPad にネイティブ対応し、縦向き・横向きの両方をサポートします。牌のサイズ、牌の浮き上がり、側面の奥行きが比例して大きくなるので、広い画面いっぱいに盤面が広がっても見た目の一貫性が保たれます。",
-  "zero-third-party-dependencies.a096e5": "サードパーティ製の依存関係はゼロ。Swift 6 の厳格な並行性チェックのもとで構築されています。"
+  "zero-third-party-dependencies.a096e5": "サードパーティ製の依存関係はゼロ。Swift 6 の厳格な並行性チェックのもとで構築されています。",
+  "not-sold-in-the.04baa8": "EU の App Store では販売していません"
 }

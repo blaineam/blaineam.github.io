@@ -8,7 +8,6 @@
   "apps.2d61f2": "← Apps",
   "are-there-in-app.e18c19": "Are there in-app purchases or ads?",
   "atmospheric-range.55a239": "Atmospheric Range",
-  "availability.681b5b": "Availability",
   "blaine-miller-all-rights.b327c2": "© <span id=\"year\"></span> Blaine Miller. All rights reserved.",
   "built-for-real-archers.ea4c52": "Built for Real Archers",
   "can-i-play-offline.897eb4": "Can I play offline?",
@@ -83,5 +82,6 @@
   "why-does-my-pin.cacfb8": "Why does my pin wander while I'm holding?",
   "why-pinline-hits-different.254d14": "Why Pinline Hits Different",
   "wind-speed-and-direction.d9678b": "Wind speed and direction read out live on the HUD. Aim INTO the wind to drift back to the bull. The flag on the lane tells you where it's blowing.",
-  "yes-pass-and-play.3bd176": "Yes — Pass-and-play mode is fully offline. Two shooters, one device, no sign-in. Online (Game Center) and iMessage matches obviously need a connection to relay turns, but everything in-game runs locally."
+  "yes-pass-and-play.3bd176": "Yes — Pass-and-play mode is fully offline. Two shooters, one device, no sign-in. Online (Game Center) and iMessage matches obviously need a connection to relay turns, but everything in-game runs locally.",
+  "not-sold-in-the.04baa8": "Not sold in the EU App Store"
 }

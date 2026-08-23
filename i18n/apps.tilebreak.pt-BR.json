@@ -11,7 +11,6 @@
   "american-the-default-follows.de8dc1": "O modo Americano (padrão) segue a convenção ocidental moderna: qualquer flor combina com qualquer flor, qualquer estação combina com qualquer estação. O modo Estrito exige correspondência exata para cada peça — e, como as flores e estações vêm apenas como peças únicas, o modo Estrito as retira totalmente do conjunto e coloca ventos extras no lugar, para que toda peça tenha um par.",
   "apps.2d61f2": "← Apps",
   "are-there-ads-or.cc7da0": "Há anúncios ou compras dentro do app?",
-  "availability.681b5b": "Disponibilidade",
   "blaine-miller-all-rights.b327c2": "© <span id=\"year\"></span> Blaine Miller. Todos os direitos reservados.",
   "built-clean.a00f77": "Limpo por dentro",
   "built-for-the-long.c2083b": "Feito para durar",
@@ -81,5 +80,6 @@
   "what-s-the-music.cd7ddb": "Qual é a música?",
   "yes-each-board-is.243716": "Sim. Cada tabuleiro é gerado simulando primeiro uma partida válida do início ao fim (o método de remoção reversa) e depois distribuindo as peças na ordem resultante. Mesmo após um embaralhamento no meio do jogo, o novo layout é regenerado para continuar solucionável.",
   "yes-native-ipad-support.59fa42": "Sim — suporte nativo ao iPad em retrato e paisagem. O tabuleiro aumenta para preencher a tela maior, com tamanho de peça, elevação das pilhas e profundidade das paredes laterais proporcionais, mantendo o visual consistente.",
-  "zero-third-party-dependencies.a096e5": "Zero dependências de terceiros. Feito em Swift 6 com concorrência estrita."
+  "zero-third-party-dependencies.a096e5": "Zero dependências de terceiros. Feito em Swift 6 com concorrência estrita.",
+  "not-sold-in-the.04baa8": "Não vendido na App Store da UE"
 }

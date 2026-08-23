@@ -34,7 +34,6 @@
   "automated-scheduled-sync.e20f2c": "예약 자동 동기화",
   "automated-sync.8e1ee8": "자동 동기화",
   "automatically-skip-scheduled-syncs.c490e8": "배터리로 작동 중이거나 데이터가 제한된 네트워크 또는 요금이 부과되는 네트워크에 연결된 경우 예약된 동기화를 자동으로 건너뜁니다. 배터리를 아끼고 예상치 못한 데이터 요금을 피하세요.",
-  "availability.681b5b": "판매 지역",
   "aws-s3.d14c09": "AWS S3",
   "azure-blob.f17e69": "Azure Blob",
   "back-up-your-entire.9d76da": "사진 라이브러리 전체를 원하는 클라우드 제공업체에 백업하세요. 자동화된 안전한 사진 백업으로 소중한 추억을 지킵니다.",
@@ -358,5 +357,6 @@
   "your-files-are-encrypted.ce8455": "파일은 클라우드에 업로드되기 전에 기기에서 암호화됩니다. Enter Space는 종단간 암호화를 사용하므로 클라우드 제공업체가 침해되더라도 오직 사용자만 데이터에 접근할 수 있습니다.",
   "zadara.08ddf9": "Zadara",
   "zata.8418cf": "Zata",
-  "zoho-workdrive.5b01dc": "Zoho WorkDrive"
+  "zoho-workdrive.5b01dc": "Zoho WorkDrive",
+  "not-sold-in-the.04baa8": "EU App Store에서는 판매하지 않습니다"
 }

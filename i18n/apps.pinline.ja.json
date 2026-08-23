@@ -8,7 +8,6 @@
   "apps.2d61f2": "← アプリ",
   "are-there-in-app.e18c19": "アプリ内課金や広告はありますか？",
   "atmospheric-range.55a239": "情景豊かなレンジ",
-  "availability.681b5b": "販売地域",
   "blaine-miller-all-rights.b327c2": "© <span id=\"year\"></span> Blaine Miller. 無断転載を禁じます。",
   "built-for-real-archers.ea4c52": "本物のアーチャーのために",
   "can-i-play-offline.897eb4": "オフラインでもプレイできますか？",
@@ -83,5 +82,6 @@
   "why-does-my-pin.cacfb8": "引き絞っている間にピンが揺れるのはなぜ？",
   "why-pinline-hits-different.254d14": "Pinlineが別格な理由",
   "wind-speed-and-direction.d9678b": "風速と風向はHUDにリアルタイムで表示されます。風上に向けて狙えば、矢が流されて中心に戻ります。レーンの旗が、風の吹く向きを教えてくれます。",
-  "yes-pass-and-play.3bd176": "はい——パス＆プレイモードは完全にオフラインで動作します。1台の端末で2人の射手が、サインインなしで対戦できます。オンライン（Game Center）とiMessageの対戦はターンをやり取りするため接続が必要ですが、ゲーム内の処理はすべて端末上で動きます。"
+  "yes-pass-and-play.3bd176": "はい——パス＆プレイモードは完全にオフラインで動作します。1台の端末で2人の射手が、サインインなしで対戦できます。オンライン（Game Center）とiMessageの対戦はターンをやり取りするため接続が必要ですが、ゲーム内の処理はすべて端末上で動きます。",
+  "not-sold-in-the.04baa8": "EU の App Store では販売していません"
 }

@@ -11,7 +11,6 @@
   "american-the-default-follows.de8dc1": "La modalità American (predefinita) segue la convenzione occidentale moderna: qualsiasi fiore si abbina a qualsiasi fiore, qualsiasi stagione a qualsiasi stagione. La modalità Strict richiede una corrispondenza identica per ogni tessera — e poiché fiori e stagioni esistono solo come pezzi singoli, la modalità Strict li esclude del tutto dal mazzo e li sostituisce con venti aggiuntivi, così ogni tessera ha la sua compagna.",
   "apps.2d61f2": "← App",
   "are-there-ads-or.cc7da0": "Ci sono pubblicità o acquisti in-app?",
-  "availability.681b5b": "Disponibilità",
   "blaine-miller-all-rights.b327c2": "© <span id=\"year\"></span> Blaine Miller. Tutti i diritti riservati.",
   "built-clean.a00f77": "Costruito pulito",
   "built-for-the-long.c2083b": "Pensato per durare",
@@ -81,5 +80,6 @@
   "what-s-the-music.cd7ddb": "Che musica c'è?",
   "yes-each-board-is.243716": "Sì. Ogni tabellone viene generato simulando prima una partita valida (il metodo della rimozione inversa) e distribuendo poi le tessere nell'ordine risultante. Anche dopo un rimescolamento a metà partita, la nuova disposizione viene rigenerata in modo da essere risolvibile.",
   "yes-native-ipad-support.59fa42": "Sì — supporto nativo per iPad sia in verticale sia in orizzontale. Il tabellone si ingrandisce per riempire lo schermo più grande con dimensione delle tessere, rialzo delle pile e profondità delle pareti laterali proporzionali, così l'aspetto resta coerente.",
-  "zero-third-party-dependencies.a096e5": "Zero dipendenze di terze parti. Sviluppata in Swift 6 con concorrenza rigorosa."
+  "zero-third-party-dependencies.a096e5": "Zero dipendenze di terze parti. Sviluppata in Swift 6 con concorrenza rigorosa.",
+  "not-sold-in-the.04baa8": "Non in vendita sull'App Store UE"
 }

@@ -7,7 +7,6 @@
   "app-sandbox.b85ecb": "<span class=\"badge-icon\">&#x2705;</span> App Sandbox",
   "apps.2d61f2": "← アプリ",
   "attack-mode.4a15d9": "ATTACK モード",
-  "availability.681b5b": "販売地域",
   "beautiful-distinctive-art-style.712389": "愛らしいフクロウが主役の、美しく個性的なアートスタイル。すべてのフライトを記憶に残す、印象的なビジュアルです。",
   "beautiful-unique-graphics-featuring.41cde2": "愛らしいフクロウが登場する美しく個性的なグラフィック、なめらかなゲームプレイ、心地よいサウンドトラック、白熱のリーダーボード、そして「あと1回だけ」と思わせる絶妙な中毒性。シンプルで楽しくて、どうにも手放せません！",
   "blaine-miller-all-rights.b327c2": "© <span id=\"year\"></span> Blaine Miller. 無断転載を禁じます。",
@@ -75,5 +74,6 @@
   "with-infinitely-scrolling-gameplay.099be7": "無限にスクロールするゲームプレイと自動生成される障害物により、同じフライトは二度とありません。プレイするたびに、新しい挑戦とハイスコア更新のチャンスが待っています。",
   "yes-the-scrolling-is.f7335d": "はい！スクロールは無限に続き、障害物も次々と生成されます。ゲームが終わるのは障害物にぶつかったときだけ。どこまで飛べるかは、あなたの腕次第です！",
   "yes-wise-flyer-can.52a69d": "はい！Wise Flyer は完全にオフラインでプレイできます。リーダーボード機能にはインターネット接続が必要ですが、ゲーム本編はいつでもどこでも楽しめます。",
-  "your-local-best-score.16fb62": "Game Center がオフのときに、端末内のベストスコアが上書きされることはなくなりました。アタックモードのゴーストリプレイは目に見えてなめらかに再生され、リーダーボードは最新の Game Center の画面で開きます。"
+  "your-local-best-score.16fb62": "Game Center がオフのときに、端末内のベストスコアが上書きされることはなくなりました。アタックモードのゴーストリプレイは目に見えてなめらかに再生され、リーダーボードは最新の Game Center の画面で開きます。",
+  "not-sold-in-the.04baa8": "EU の App Store では販売していません"
 }

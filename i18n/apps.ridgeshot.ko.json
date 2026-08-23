@@ -8,7 +8,6 @@
   "apps.2d61f2": "← 앱",
   "are-there-ads-iaps.46a41b": "광고나 인앱 구매, 구독이 있나요?",
   "atmospheric-range.55a239": "분위기 넘치는 사대",
-  "availability.681b5b": "판매 지역",
   "blaine-miller-all-rights.b327c2": "© <span id=\"year\"></span> Blaine Miller. 판권 소유.",
   "built-for-the-long.f0026b": "장거리 한 발을 위해 만들었습니다",
   "can-i-play-offline.897eb4": "오프라인에서도 플레이할 수 있나요?",
@@ -74,5 +73,6 @@
   "why-does-my-reticle.ea9a33": "조준하는 동안 레티클이 흔들리는 이유는 뭔가요?",
   "why-ridgeshot-reads-right.4a3f8a": "Ridgeshot이 제대로 느껴지는 이유",
   "wind-patience.657adb": "바람과 인내",
-  "yes-pass-and-play.81d0c1": "네 — 패스 앤 플레이는 완전한 오프라인입니다. 사수 두 명, 기기 한 대, 로그인 불필요. Game Center 매치메이킹과 iMessage 대결은 당연히 턴을 주고받기 위해 연결이 필요하지만, 탄도와 바람, 동물, 날씨까지 시뮬레이션 전체는 기기에서 직접 구동됩니다. 한 발 쏠 때마다 서버를 오갈 일도, 다음 라운드를 시작하려고 리더보드 동기화를 기다릴 일도 없습니다."
+  "yes-pass-and-play.81d0c1": "네 — 패스 앤 플레이는 완전한 오프라인입니다. 사수 두 명, 기기 한 대, 로그인 불필요. Game Center 매치메이킹과 iMessage 대결은 당연히 턴을 주고받기 위해 연결이 필요하지만, 탄도와 바람, 동물, 날씨까지 시뮬레이션 전체는 기기에서 직접 구동됩니다. 한 발 쏠 때마다 서버를 오갈 일도, 다음 라운드를 시작하려고 리더보드 동기화를 기다릴 일도 없습니다.",
+  "not-sold-in-the.04baa8": "EU App Store에서는 판매하지 않습니다"
 }

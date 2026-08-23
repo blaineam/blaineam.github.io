@@ -7,7 +7,6 @@
   "app-sandbox.b85ecb": "<span class=\"badge-icon\">&#x2705;</span> App 沙盒",
   "apps.2d61f2": "← App 列表",
   "attack-mode.4a15d9": "ATTACK 模式",
-  "availability.681b5b": "上架地区",
   "beautiful-distinctive-art-style.712389": "精美而独特的美术风格，搭配萌趣十足的猫头鹰角色。出众的视觉表现，让每一次飞行都令人难忘。",
   "beautiful-unique-graphics-featuring.41cde2": "精美独特的画面、憨态可掬的猫头鹰、流畅的操作手感、动听的配乐、激烈的排行榜竞争，还有那种「再来一次」的十足魔力。简单、有趣，让人根本停不下来！",
   "blaine-miller-all-rights.b327c2": "© <span id=\"year\"></span> Blaine Miller. 保留所有权利。",
@@ -75,5 +74,6 @@
   "with-infinitely-scrolling-gameplay.099be7": "无限滚动的玩法搭配程序生成的障碍，让每一次飞行都独一无二。每一局都带来全新的挑战，也带来刷新最高分的机会。",
   "yes-the-scrolling-is.f7335d": "当然！滚动是无限的，障碍会持续生成，只有撞上障碍游戏才会结束。你能飞多远？唯一的限制就是你的技术！",
   "yes-wise-flyer-can.52a69d": "当然！Wise Flyer 完全可以离线畅玩。排行榜功能需要联网，但核心玩法随时随地都能尽情享受。",
-  "your-local-best-score.16fb62": "关闭 Game Center 时，你的本地最高分不会再被覆盖；Attack 模式中的幽灵回放明显更流畅；排行榜也会通过最新的 Game Center 体验打开。"
+  "your-local-best-score.16fb62": "关闭 Game Center 时，你的本地最高分不会再被覆盖；Attack 模式中的幽灵回放明显更流畅；排行榜也会通过最新的 Game Center 体验打开。",
+  "not-sold-in-the.04baa8": "不在欧盟 App Store 销售"
 }

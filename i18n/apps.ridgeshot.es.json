@@ -8,7 +8,6 @@
   "apps.2d61f2": "← Apps",
   "are-there-ads-iaps.46a41b": "¿Hay anuncios, compras integradas o suscripciones?",
   "atmospheric-range.55a239": "Campo de tiro atmosférico",
-  "availability.681b5b": "Disponibilidad",
   "blaine-miller-all-rights.b327c2": "© <span id=\"year\"></span> Blaine Miller. Todos los derechos reservados.",
   "built-for-the-long.f0026b": "Hecho para el tiro largo",
   "can-i-play-offline.897eb4": "¿Puedo jugar sin conexión?",
@@ -74,5 +73,6 @@
   "why-does-my-reticle.ea9a33": "¿Por qué se me desvía la retícula mientras apunto?",
   "why-ridgeshot-reads-right.4a3f8a": "Por qué Ridgeshot se siente auténtico",
   "wind-patience.657adb": "Viento y paciencia",
-  "yes-pass-and-play.81d0c1": "Sí: el modo por turnos en un mismo dispositivo funciona totalmente sin conexión. Dos tiradores, un dispositivo, sin iniciar sesión. El emparejamiento de Game Center y los desafíos por iMessage necesitan conexión, claro, para transmitir los turnos, pero toda la simulación —balística, viento, animales, meteorología— se ejecuta en el dispositivo. Sin idas y venidas al servidor en cada disparo ni esperas a que se sincronice una clasificación para tirar la siguiente ronda."
+  "yes-pass-and-play.81d0c1": "Sí: el modo por turnos en un mismo dispositivo funciona totalmente sin conexión. Dos tiradores, un dispositivo, sin iniciar sesión. El emparejamiento de Game Center y los desafíos por iMessage necesitan conexión, claro, para transmitir los turnos, pero toda la simulación —balística, viento, animales, meteorología— se ejecuta en el dispositivo. Sin idas y venidas al servidor en cada disparo ni esperas a que se sincronice una clasificación para tirar la siguiente ronda.",
+  "not-sold-in-the.04baa8": "No se vende en el App Store de la UE"
 }
