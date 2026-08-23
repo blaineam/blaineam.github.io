@@ -10,6 +10,7 @@
   "anti-tamper-matches.f68981": "<span class=\"badge-icon\">&#x1f512;</span> Partidas à prova de fraude",
   "app-sandbox.b85ecb": "<span class=\"badge-icon\">&#x2705;</span> App Sandbox",
   "apps.2d61f2": "← Apps",
+  "availability.681b5b": "Disponibilidade",
   "blaine-miller-all-rights.b327c2": "© <span id=\"year\"></span> Blaine Miller. Todos os direitos reservados.",
   "both-players-get-the.42ba59": "Os dois jogadores recebem as mesmas perguntas e a mesma grade de cartas embaralhada — então cada duelo se decide na velocidade, no conhecimento e na coragem.",
   "branding-by-marty-buck.24746a": "Identidade visual por Marty Buck · Design de som e inspiração original por Austin Buck · Desenvolvimento e música por Blaine Miller",
@@ -63,6 +64,7 @@
   "yes-both-players-receive.49ac22": "Sim. Os dois jogadores recebem exatamente as mesmas perguntas na mesma ordem, geradas a partir de uma semente aleatória compartilhada — nenhum dos lados consegue ver as perguntas do outro com antecedência, e uma verificação à prova de fraude protege as partidas no iMessage.",
   "yours-private.8ada41": "Seu, e só seu",
   "zap-has-no-ads.92302a": "O Zap não tem anúncios, nem rastreamento, nem compras no app.",
+  "zap-isn-t-sold.021c53": "Zap não está à venda na App Store da União Europeia: pela Lei de Serviços Digitais (DSA) da UE, vender lá exige publicar um cadastro de comerciante com dados de contato pessoais, do qual abri mão como desenvolvedor independente. Está disponível em todos os outros países e regiões da App Store.",
   "zap-resizes-freely-on.324217": "O Zap se ajusta livremente no iPad — todas as orientações, Split View, Stage Manager e o sistema de janelas do iPad são compatíveis, e o menu passa a rolar em janelas baixas para que nada seja cortado.",
   "zap.1cd56e": "⚡ Zap"
 }

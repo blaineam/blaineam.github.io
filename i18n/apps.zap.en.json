@@ -10,6 +10,7 @@
   "anti-tamper-matches.f68981": "<span class=\"badge-icon\">&#x1f512;</span> Anti-Tamper Matches",
   "app-sandbox.b85ecb": "<span class=\"badge-icon\">&#x2705;</span> App Sandbox",
   "apps.2d61f2": "← Apps",
+  "availability.681b5b": "Availability",
   "blaine-miller-all-rights.b327c2": "© <span id=\"year\"></span> Blaine Miller. All rights reserved.",
   "both-players-get-the.42ba59": "Both players get the same questions and the same shuffled card grid — so every duel comes down to speed, smarts, and nerve.",
   "branding-by-marty-buck.24746a": "Branding by Marty Buck · Sound design & original inspiration by Austin Buck · Development & music by Blaine Miller",
@@ -63,6 +64,7 @@
   "yes-both-players-receive.49ac22": "Yes. Both players receive the exact same questions in the same order, derived from a shared random seed — neither side can see the other's questions in advance, and an anti-tamper check guards iMessage matches.",
   "yours-private.8ada41": "Yours, Private",
   "zap-has-no-ads.92302a": "Zap has no ads, no tracking, and no in-app purchases.",
+  "zap-isn-t-sold.021c53": "Zap isn't sold on the App Store in the European Union — under the EU Digital Services Act, selling there requires publishing a trader listing with personal contact details, which I've opted out of as an independent developer. It's available in every other App Store territory.",
   "zap-resizes-freely-on.324217": "Zap resizes freely on iPad — every orientation, Split View, Stage Manager, and iPad windowing all supported, with the menu falling back to scrolling in short windows so nothing ever clips.",
   "zap.1cd56e": "⚡ Zap"
 }

@@ -963,6 +963,22 @@ p {
   font-size: 1em;
 }
 
+/* EU availability note — quiet footnote under the hero CTA. Same white-text
+   gradient heroes as .os-ready-badge. */
+.availability-note {
+  max-width: 36em;
+  margin: var(--spacing-md) 0 0;
+  font-size: 0.8rem;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.72);
+  animation: fadeInUp 0.8s ease-out 0.6s both;
+}
+
+.availability-note strong {
+  color: rgba(255, 255, 255, 0.92);
+  font-weight: 600;
+}
+
 /* Print Styles */
 @media print {
   .app-nav,
