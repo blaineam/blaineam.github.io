@@ -8,8 +8,6 @@
   "availability.681b5b": "Availability",
   "blaine-miller-all-rights.b327c2": "© <span id=\"year\"></span> Blaine Miller. All rights reserved.",
   "coded-printable-targets.5e6026": "Coded Printable Targets",
-  "coming-soon-app-store.d6ea53": "Coming Soon — App Store",
-  "coming-soon.04d2fd": "Coming Soon",
   "completely-your-photos-are.16b5c5": "Completely. Your photos are analyzed on-device and never uploaded anywhere. There's no account and no tracking — your zeroing sessions and rifle profiles live only on your phone. Purchases are handled by Apple; SightQuick never sees your payment details.",
   "do-i-need-to.3a507d": "Do I need to buy special targets?",
   "do-you-sell-targets.c7b758": "Do you sell targets to ranges & retailers?",
@@ -66,5 +64,7 @@
   "your-first-target-is.7d68ed": "Your first target is free. After that, targets are print credits you buy in small consumable packs — 1 for $1.99, 5 for $8.99, or 20 for $29.99. Each credit creates one uniquely-coded target, good for a complete zeroing session you can re-photograph as you dial in. No subscriptions, no ads.",
   "your-phone-is-the.e3a9fd": "Your phone is the smartest tool on the bench. Print a uniquely-coded target, fire a 3-shot group, and snap a photo — SightQuick reads your shots with on-device computer vision and tells you exactly how many clicks to dial. No guesswork, no wasted ammo chasing a zero.",
   "your-photos-never-leave.2e873f": "Your photos never leave your device. No account, no tracking, no ads. SightQuick processes everything locally and keeps your zeroing history on your phone.",
-  "zero-in-minutes.f6176f": "Zero in minutes."
+  "zero-in-minutes.f6176f": "Zero in minutes.",
+  "download-on-app-store.cf50c2": "Download on App Store",
+  "download-now.6d56a8": "Download Now"
 }

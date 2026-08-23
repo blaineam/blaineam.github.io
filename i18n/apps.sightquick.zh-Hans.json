@@ -8,8 +8,6 @@
   "availability.681b5b": "上架地区",
   "blaine-miller-all-rights.b327c2": "© <span id=\"year\"></span> Blaine Miller. 保留所有权利。",
   "coded-printable-targets.5e6026": "可打印的编码靶纸",
-  "coming-soon-app-store.d6ea53": "即将上架 — App Store",
-  "coming-soon.04d2fd": "即将推出",
   "completely-your-photos-are.16b5c5": "完全私密。照片全部在设备端分析，绝不上传到任何地方。无需账号，没有追踪——你的校枪记录和枪支档案只保存在手机里。支付由 Apple 处理，SightQuick 从不接触你的支付信息。",
   "do-i-need-to.3a507d": "我需要购买专用靶纸吗？",
   "do-you-sell-targets.c7b758": "你们向靶场和零售商销售靶纸吗？",
@@ -66,5 +64,7 @@
   "your-first-target-is.7d68ed": "首张靶纸免费。之后，靶纸以打印额度的形式提供，可按小包消耗型内购购买——1 张 $1.99、5 张 $8.99、20 张 $29.99。每个额度可生成一张带专属编码的靶纸，足够完成一次完整的校枪流程，其间可反复拍照直到调准。无订阅，无广告。",
   "your-phone-is-the.e3a9fd": "你的手机，就是射击台上最聪明的工具。打印一张带专属编码的靶纸，打出 3 发弹组，再拍张照片——SightQuick 会用设备端计算机视觉读取你的弹着点，并准确告诉你该拨动多少格。无需猜测，不再为校枪白费子弹。",
   "your-photos-never-leave.2e873f": "你的照片绝不会离开设备。无需账号，没有追踪，没有广告。SightQuick 全部在本地处理，并把你的校枪记录保存在手机上。",
-  "zero-in-minutes.f6176f": "几分钟完成校枪。"
+  "zero-in-minutes.f6176f": "几分钟完成校枪。",
+  "download-on-app-store.cf50c2": "在 App Store 下载",
+  "download-now.6d56a8": "立即下载"
 }

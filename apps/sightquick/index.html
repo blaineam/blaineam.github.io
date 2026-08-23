@@ -45,19 +45,6 @@
     .magazine-content h2 { color: var(--app-primary); }
     .section-subtitle { color: var(--app-primary); }
 
-    /* Coming Soon — non-interactive placeholders until SightQuick is live. */
-    .btn-coming-soon,
-    .floating-coming-soon {
-      cursor: default;
-      pointer-events: none;
-      background: rgba(237, 107, 26, 0.18) !important;
-      border: 1px solid rgba(237, 107, 26, 0.55) !important;
-      color: #ffe9d6 !important;
-      box-shadow: 0 0 24px rgba(237, 107, 26, 0.25) !important;
-      letter-spacing: 0.04em;
-    }
-    .btn-coming-soon::before,
-    .floating-coming-soon::before { content: "✦ "; color: var(--app-primary); }
 
     /* Fair-pricing pills */
     .price-row { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 1rem; }
@@ -93,7 +80,7 @@
         <li><a href="#features" class="nav-link" data-i18n="features.fc338f">Features</a></li>
         <li><a href="#how-it-works" class="nav-link" data-i18n="how-it-works.8cecc8">How It Works</a></li>
         <li><a href="#faq" class="nav-link" data-i18n="faq.03688b">FAQ</a></li>
-        <li><span class="btn-buy btn-coming-soon" data-i18n="coming-soon.04d2fd">Coming Soon</span></li>
+        <li><a href="https://apps.apple.com/us/app/sightquick/id6776991403" class="btn-buy" target="_blank" rel="noopener noreferrer" data-i18n="download-on-app-store.cf50c2">Download on App Store</a></li>
       </ul>
     </div>
   </nav>
@@ -109,7 +96,7 @@
         </p>
         <span class="os-ready-badge" data-i18n-html="ready-for-ios-27.ff257b"><span class="badge-icon">✓</span> Ready for iOS 27</span>
         <div class="hero-cta">
-          <span class="btn-buy btn-coming-soon" data-i18n="coming-soon-app-store.d6ea53">Coming Soon — App Store</span>
+          <a href="https://apps.apple.com/us/app/sightquick/id6776991403" class="btn-buy" target="_blank" rel="noopener noreferrer" data-i18n="download-now.6d56a8">Download Now</a>
         </div>
         <p class="availability-note"><strong data-i18n="availability.681b5b">Availability</strong> · <span data-i18n="sightquick-isn-t-sold.c68681">SightQuick isn't sold on the App Store in the European Union — under the EU Digital Services Act, selling there requires publishing a trader listing with personal contact details, which I've opted out of as an independent developer. It's available in every other App Store territory.</span></p>
       </div>
@@ -122,10 +109,11 @@
     </div>
   </section>
 
-  <!-- Floating Coming Soon Badge -->
-  <span class="floating-appstore floating-coming-soon">
-    <span data-i18n="coming-soon.04d2fd">Coming Soon</span>
-  </span>
+  <!-- Floating App Store Button -->
+  <a href="https://apps.apple.com/us/app/sightquick/id6776991403" class="floating-appstore" target="_blank" rel="noopener noreferrer">
+    <span class="floating-appstore-icon"></span>
+    <span data-i18n="download-on-app-store.cf50c2">Download on App Store</span>
+  </a>
 
   <!-- Features Section -->
   <section id="features" class="section">
