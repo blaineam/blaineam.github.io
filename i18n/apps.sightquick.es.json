@@ -8,8 +8,6 @@
   "availability.681b5b": "Disponibilidad",
   "blaine-miller-all-rights.b327c2": "© <span id=\"year\"></span> Blaine Miller. Todos los derechos reservados.",
   "coded-printable-targets.5e6026": "Dianas imprimibles con código",
-  "coming-soon-app-store.d6ea53": "Muy pronto — App Store",
-  "coming-soon.04d2fd": "Muy pronto",
   "completely-your-photos-are.16b5c5": "Completamente. Tus fotos se analizan en el propio dispositivo y nunca se suben a ningún sitio. No hay cuenta ni seguimiento: tus sesiones de puesta a cero y tus perfiles de rifle solo existen en tu teléfono. Las compras las gestiona Apple; SightQuick nunca ve los datos de tu método de pago.",
   "do-i-need-to.3a507d": "¿Necesito comprar dianas especiales?",
   "do-you-sell-targets.c7b758": "¿Vendéis dianas a galerías de tiro y tiendas?",
@@ -66,5 +64,7 @@
   "your-first-target-is.7d68ed": "Tu primera diana es gratis. A partir de ahí, las dianas son créditos de impresión que compras en packs consumibles: 1 por 1,99 $, 5 por 8,99 $ o 20 por 29,99 $. Cada crédito genera una diana con código único, válida para una sesión completa de reglaje que puedes volver a fotografiar mientras ajustas. Sin suscripciones ni anuncios.",
   "your-phone-is-the.e3a9fd": "Tu teléfono es la herramienta más inteligente del banco de tiro. Imprime una diana con código único, dispara un grupo de 3 tiros y haz una foto: SightQuick lee tus impactos con visión artificial en el propio dispositivo y te dice exactamente cuántos clics tienes que ajustar. Sin conjeturas ni munición desperdiciada persiguiendo el reglaje.",
   "your-photos-never-leave.2e873f": "Tus fotos nunca salen de tu dispositivo. Sin cuenta, sin seguimiento y sin anuncios. SightQuick lo procesa todo localmente y guarda tu historial de reglaje en tu teléfono.",
-  "zero-in-minutes.f6176f": "Reglaje en minutos."
+  "zero-in-minutes.f6176f": "Reglaje en minutos.",
+  "download-on-app-store.cf50c2": "Descargar en el App Store",
+  "download-now.6d56a8": "Descargar ahora"
 }

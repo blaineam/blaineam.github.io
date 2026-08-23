@@ -8,8 +8,6 @@
   "availability.681b5b": "판매 지역",
   "blaine-miller-all-rights.b327c2": "© <span id=\"year\"></span> Blaine Miller. 판권 소유.",
   "coded-printable-targets.5e6026": "코드가 담긴 인쇄용 표적",
-  "coming-soon-app-store.d6ea53": "출시 예정 — App Store",
-  "coming-soon.04d2fd": "출시 예정",
   "completely-your-photos-are.16b5c5": "완벽합니다. 사진은 기기에서만 분석되며 어디에도 업로드되지 않습니다. 계정도 추적도 없고, 영점 세션과 총기 프로필은 오직 사용자의 휴대폰에만 저장됩니다. 결제는 Apple이 처리하며, SightQuick는 결제 정보를 전혀 보지 않습니다.",
   "do-i-need-to.3a507d": "특별한 표적을 따로 사야 하나요?",
   "do-you-sell-targets.c7b758": "사격장이나 소매점에 표적을 판매하나요?",
@@ -66,5 +64,7 @@
   "your-first-target-is.7d68ed": "첫 표적은 무료입니다. 이후에는 소량 소모성 팩으로 구매하는 인쇄 크레딧을 사용합니다 — 1장 $1.99, 5장 $8.99, 20장 $29.99. 크레딧 1개로 고유 코드가 부여된 표적 1장을 만들 수 있으며, 영점을 맞춰 가는 동안 몇 번이고 다시 촬영할 수 있는 완전한 영점 사격 세션에 쓰입니다. 구독도, 광고도 없습니다.",
   "your-phone-is-the.e3a9fd": "사격대 위에서 가장 똑똑한 장비는 바로 휴대폰입니다. 고유 코드가 담긴 표적을 인쇄하고, 3발을 쏜 뒤, 사진 한 장만 찍으세요 — SightQuick이 온디바이스 컴퓨터 비전으로 탄착군을 읽어 다이얼을 몇 클릭 돌려야 하는지 정확히 알려 줍니다. 어림짐작도, 영점을 잡느라 허비하는 탄약도 없습니다.",
   "your-photos-never-leave.2e873f": "촬영한 사진은 기기 밖으로 절대 나가지 않습니다. 계정도, 추적도, 광고도 없습니다. SightQuick은 모든 처리를 기기 안에서 수행하며 영점 기록도 휴대폰에 그대로 보관합니다.",
-  "zero-in-minutes.f6176f": "영점, 단 몇 분이면 끝."
+  "zero-in-minutes.f6176f": "영점, 단 몇 분이면 끝.",
+  "download-on-app-store.cf50c2": "App Store에서 다운로드",
+  "download-now.6d56a8": "지금 다운로드"
 }

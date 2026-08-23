@@ -8,8 +8,6 @@
   "availability.681b5b": "Disponibilità",
   "blaine-miller-all-rights.b327c2": "© <span id=\"year\"></span> Blaine Miller. Tutti i diritti riservati.",
   "coded-printable-targets.5e6026": "Bersagli stampabili codificati",
-  "coming-soon-app-store.d6ea53": "Presto disponibile — App Store",
-  "coming-soon.04d2fd": "Presto disponibile",
   "completely-your-photos-are.16b5c5": "Completamente. Le tue foto vengono analizzate on-device e non vengono mai caricate da nessuna parte. Non c'è alcun account né tracciamento: le tue sessioni di azzeramento e i profili delle carabine restano solo sul tuo telefono. Gli acquisti sono gestiti da Apple; SightQuick non vede mai i tuoi dati di pagamento.",
   "do-i-need-to.3a507d": "Devo acquistare bersagli speciali?",
   "do-you-sell-targets.c7b758": "Vendete bersagli a poligoni e rivenditori?",
@@ -66,5 +64,7 @@
   "your-first-target-is.7d68ed": "Il primo bersaglio è gratis. Dopodiché i bersagli sono crediti di stampa che acquisti in piccoli pacchetti consumabili: 1 a 1,99 $, 5 a 8,99 $ oppure 20 a 29,99 $. Ogni credito genera un bersaglio a codice univoco, valido per un'intera sessione di azzeramento che puoi rifotografare mentre metti a punto la regolazione. Nessun abbonamento, nessuna pubblicità.",
   "your-phone-is-the.e3a9fd": "Il tuo telefono è lo strumento più intelligente sul banco. Stampa un bersaglio a codice univoco, spara una rosata da 3 colpi e scatta una foto: SightQuick legge i tuoi colpi con la computer vision sul dispositivo e ti dice esattamente quanti click regolare. Niente stime a occhio, niente munizioni sprecate a inseguire l'azzeramento.",
   "your-photos-never-leave.2e873f": "Le tue foto non lasciano mai il tuo dispositivo. Nessun account, nessun tracciamento, nessuna pubblicità. SightQuick elabora tutto in locale e conserva la cronologia degli azzeramenti sul tuo telefono.",
-  "zero-in-minutes.f6176f": "Azzera in pochi minuti."
+  "zero-in-minutes.f6176f": "Azzera in pochi minuti.",
+  "download-on-app-store.cf50c2": "Scarica su App Store",
+  "download-now.6d56a8": "Scarica ora"
 }

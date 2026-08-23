@@ -8,8 +8,6 @@
   "availability.681b5b": "Disponibilité",
   "blaine-miller-all-rights.b327c2": "© <span id=\"year\"></span> Blaine Miller. Tous droits réservés.",
   "coded-printable-targets.5e6026": "Cibles imprimables à code unique",
-  "coming-soon-app-store.d6ea53": "Bientôt disponible — App Store",
-  "coming-soon.04d2fd": "Bientôt disponible",
   "completely-your-photos-are.16b5c5": "Totalement. Vos photos sont analysées sur l'appareil et ne sont jamais téléversées où que ce soit. Il n'y a ni compte ni suivi — vos séances de réglage et vos profils de carabine restent uniquement sur votre téléphone. Les achats sont gérés par Apple ; SightQuick ne voit jamais vos informations de paiement.",
   "do-i-need-to.3a507d": "Dois-je acheter des cibles spéciales ?",
   "do-you-sell-targets.c7b758": "Vendez-vous des cibles aux stands de tir et aux revendeurs ?",
@@ -66,5 +64,7 @@
   "your-first-target-is.7d68ed": "Votre première cible est gratuite. Ensuite, les cibles prennent la forme de crédits d'impression, vendus en petits lots consommables — 1 pour 1,99 $, 5 pour 8,99 $ ou 20 pour 29,99 $. Chaque crédit génère une cible à code unique, valable pour une séance de réglage complète que vous pouvez rephotographier au fil de vos ajustements. Sans abonnement ni publicité.",
   "your-phone-is-the.e3a9fd": "Votre téléphone est l'outil le plus intelligent de la table de tir. Imprimez une cible à code unique, tirez un groupement de 3 balles et prenez une photo — SightQuick lit vos impacts grâce à la vision par ordinateur embarquée et vous indique exactement combien de clics régler. Fini les approximations et les munitions gaspillées à chercher son zéro.",
   "your-photos-never-leave.2e873f": "Vos photos ne quittent jamais votre appareil. Aucun compte, aucun suivi, aucune publicité. SightQuick traite tout en local et conserve l'historique de vos réglages sur votre téléphone.",
-  "zero-in-minutes.f6176f": "Réglez votre zéro en quelques minutes."
+  "zero-in-minutes.f6176f": "Réglez votre zéro en quelques minutes.",
+  "download-on-app-store.cf50c2": "Télécharger sur l'App Store",
+  "download-now.6d56a8": "Télécharger"
 }
