@@ -33,6 +33,7 @@
   "hardened-by-design.084a16": "Hardened by Design",
   "how-does-deepsi-work.e6e2a3": "How does DeepSi work in the dark?",
   "input-validation.5de1a2": "<span class=\"badge-icon\">&#x1f50d;</span> Input Validation",
+  "is-deepsi-available-in.58388e": "Is DeepSi available in the European Union?",
   "just-shipped.243f10": "Just Shipped",
   "lidar-camera.e46131": "LiDAR Camera",
   "lidar-uses-infrared-light.a6de83": "LiDAR uses infrared light pulses to measure depth, not visible light. This means it works perfectly in complete darkness without needing to illuminate the scene. You can navigate and capture depth data even when it's pitch black.",
@@ -74,6 +75,5 @@
   "whether-you-re-exploring.b4599d": "Whether you're exploring at night, moving through a dark room, or just curious about how depth sensing works, DeepSi lets you see when traditional vision fails.",
   "why-choose-deepsi.d18d6c": "Why Choose DeepSi",
   "yes-tap-and-hold.c8211b": "Yes! Tap and hold to record depth videos with audio. This lets you create immersive clips that combine the unique depth visualization with sound for a complete sensory experience.",
-  "your-chosen-depth-color.8aa041": "Your chosen depth color theme now persists across launches — pick from all 12 themes once and DeepSi remembers it.",
-  "is-deepsi-available-in.58388e": "Is DeepSi available in the European Union?"
+  "your-chosen-depth-color.8aa041": "Your chosen depth color theme now persists across launches — pick from all 12 themes once and DeepSi remembers it."
 }

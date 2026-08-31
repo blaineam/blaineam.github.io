@@ -38,6 +38,7 @@
   "import-text-from-other.cfc3a5": "Import text from other apps, extract text from images, and even read PDF files with powerful text recognition.",
   "import-text-pdfs-or.69f1ec": "Import text, PDFs, or photos (with text recognition) into saved speeches; play, pause, and resume from automations; switch voices and playback speed; render any text to an audio file fully offline; and export a sentence range as audio — every action chainable in Shortcuts.",
   "input-validation.5de1a2": "<span class=\"badge-icon\">&#x1f50d;</span> Input Validation",
+  "is-mi-speaks-available.cc6f02": "Is Mi Speaks available in the European Union?",
   "just-shipped.243f10": "Just Shipped",
   "listen-to-any-written.a4dc7c": "Listen to Any Written Content",
   "listen-to-anything.98f2db": "Listen to Anything",
@@ -76,6 +77,5 @@
   "yes-mi-speaks-highlights.298462": "Yes! Mi Speaks highlights and follows spoken words as it reads, making it easier to follow along, improve comprehension, and learn new content.",
   "yes-mi-speaks-includes.7a0f2a": "Yes! Mi Speaks includes powerful text recognition that can extract text from images and PDF files, making it easy to listen to content from photos, documents, and scanned materials.",
   "yes-mi-speaks-is.f1ab38": "Yes! Mi Speaks is fully offline compatible. Once you've downloaded voices through your device Settings, you can listen to content anywhere without needing an internet connection.",
-  "zero-data-collection.939efa": "Zero Data Collection",
-  "is-mi-speaks-available.cc6f02": "Is Mi Speaks available in the European Union?"
+  "zero-data-collection.939efa": "Zero Data Collection"
 }

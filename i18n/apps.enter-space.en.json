@@ -182,6 +182,7 @@
   "internxt.3d631d": "Internxt",
   "ionos-cloud.d1a907": "IONOS Cloud",
   "iphone-ipad.0e7acd": "iPhone & iPad",
+  "is-enter-space-available.0f95d6": "Is Enter Space available in the European Union?",
   "is-my-data-secure.cb1d55": "Is my data secure with end-to-end encryption?",
   "jottacloud.627695": "Jottacloud",
   "keep-offline.107753": "Keep Offline",
@@ -357,6 +358,5 @@
   "your-files-are-encrypted.ce8455": "Your files are encrypted on your device before they're uploaded to the cloud. Enter Space uses end-to-end encryption to ensure only you can access your data, even if the cloud provider is compromised.",
   "zadara.08ddf9": "Zadara",
   "zata.8418cf": "Zata",
-  "zoho-workdrive.5b01dc": "Zoho WorkDrive",
-  "is-enter-space-available.0f95d6": "Is Enter Space available in the European Union?"
+  "zoho-workdrive.5b01dc": "Zoho WorkDrive"
 }

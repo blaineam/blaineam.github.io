@@ -51,6 +51,7 @@
   "input-validation.5de1a2": "<span class=\"badge-icon\">&#x1f50d;</span> Input Validation",
   "integrate-with-apple-shortcuts.a38f7d": "Integrate with Apple Shortcuts for powerful automation. Optimize photos when you arrive home, before cloud backups, or based on available storage. The possibilities are endless.",
   "intelligent-media-compression-with.f172f7": "Intelligent media compression with complete control and transparency",
+  "is-sami-available-in.c07415": "Is Sami available in the European Union?",
   "is-the-compression-lossy.c912bd": "Is the compression lossy? Will I lose quality?",
   "just-shipped.243f10": "Just Shipped",
   "keep-reference-versions.26dcfd": "Keep Reference Versions",
@@ -129,6 +130,5 @@
   "yes-on-mac-and.5c6090": "Yes! On Mac and iPad, you can drag and drop media files directly into Sami to optimize them quickly. This makes batch processing large numbers of files fast and intuitive.",
   "yes-on-macos-enable.096678": "Yes, on macOS. Enable \"Keep running when window is closed\" in Settings and Sami stays alive so watched folders and scheduled automations keep firing. You can independently control whether Sami appears in the Dock, the menu bar, both, or neither — opt into fully invisible background execution if that's your preference. Relaunching from Finder/Spotlight reactivates the running process and brings the window back.",
   "yes-sami-is-a.dcce95": "Yes! Sami is a universal app that works on iPhone, iPad, and Mac with full feature parity. Purchase once and use it across all your Apple devices.",
-  "yes-sami-uses-lossy.64f3d5": "Yes, Sami uses lossy compression to achieve significant space savings. There will be some quality loss, but the side-by-side preview feature lets you evaluate the quality trade-off before committing. You have full control over compression levels to balance quality vs. file size based on your needs.",
-  "is-sami-available-in.c07415": "Is Sami available in the European Union?"
+  "yes-sami-uses-lossy.64f3d5": "Yes, Sami uses lossy compression to achieve significant space savings. There will be some quality loss, but the side-by-side preview feature lets you evaluate the quality trade-off before committing. You have full control over compression levels to balance quality vs. file size based on your needs."
 }
