@@ -4,6 +4,19 @@
   "note": "Source of truth for app metadata. apps/index.html renders its OWN custom display order; this file is the chronological list.",
   "apps": [
     {
+      "id": "kern",
+      "title": "Kern",
+      "tagline": "Handle letters with care",
+      "page_url": "/apps/kern/",
+      "app_store_url": "https://apps.apple.com/us/app/kern-word-puzzles/id6806896106",
+      "icon_url": "/apps/kern/assets/images/icon.png",
+      "released": "2026-08",
+      "updated": "2026-08",
+      "version": "1.0.0",
+      "status": "live",
+      "note": "Word puzzles about handling letters with care — Wheel, Search, and Chain share one fair par-based score inside thirteen living worlds that react to the words you find. Generated music, Game Center daily leaderboards, fully offline. No ads, no IAP, no data collection."
+    },
+    {
       "id": "revela",
       "title": "Revela",
       "tagline": "Shoot film. Wait for it.",

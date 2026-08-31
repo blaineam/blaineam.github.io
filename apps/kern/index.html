@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kern — Word Puzzles</title>
+  <meta name="description" content="Word puzzles for iPhone & iPad: Wheel, Search, and Chain share one fair par-based score inside thirteen living worlds that react to what you spell. Generated music, Game Center daily leaderboards, fully offline — no ads, no accounts, no data collection.">
+  <meta property="og:title" content="Kern — Word Puzzles">
+  <meta property="og:description" content="Three word games, one fair score, thirteen living worlds that react to what you spell. Generated music, daily leaderboards, fully offline. Handle letters with care.">
+  <meta property="og:type" content="game">
+  <meta property="og:url" content="https://wemiller.com/apps/kern/">
+  <meta property="og:image" content="https://wemiller.com/apps/kern/assets/images/poster.jpg">
+  <link rel="stylesheet" href="../app-showcase.css">
+  <style>
+    /* Kern — letterpress palette lifted straight from the app icon and the
+       in-game Print Shop world: charcoal ink, paper cream, rubine red. */
+    :root {
+      --app-primary: #C8442A;      /* rubine ink red */
+      --app-secondary: #B08D57;    /* brass */
+      --app-accent: #F5F1E8;       /* paper cream */
+      --kern-ink: #16161A;         /* charcoal */
+      --kern-paper: #F5F1E8;
+      --kern-serif: "Iowan Old Style", "Palatino", Georgia, "Times New Roman", serif;
+    }
+
+    .hero {
+      background:
+        radial-gradient(circle at 78% 22%, rgba(200, 68, 42, 0.16) 0%, transparent 50%),
+        radial-gradient(circle at 10% 82%, rgba(176, 141, 87, 0.12) 0%, transparent 55%),
+        linear-gradient(165deg, #101014 0%, #16161A 45%, #232328 100%);
+      color: white;
+    }
+    .hero-subtitle {
+      color: rgba(245, 241, 232, 0.78);
+      letter-spacing: 0.5px;
+    }
+    .hero-description { color: rgba(255, 255, 255, 0.9); }
+
+    /* ---- The wordmark: letters drift in from loose tracking and settle.
+       The r and n overshoot on the way — for one beat, Kern is keming. ---- */
+    .kern-wordmark {
+      font-family: var(--kern-serif);
+      font-weight: 600;
+      font-size: clamp(4.25rem, 11vw, 8rem);
+      line-height: 1.08;
+      color: var(--kern-paper);
+      -webkit-text-fill-color: var(--kern-paper);
+      background: none;
+      display: inline-block;
+      position: relative;
+      padding: 0.08em 0.1em 0.06em;
+      margin-bottom: var(--spacing-xs);
+    }
+    /* Cap-height and baseline guides, like the icon */
+    .kern-wordmark::before {
+      content: '';
+      position: absolute;
+      left: -0.22em;
+      right: -0.22em;
+      top: 0.16em;
+      bottom: 0.1em;
+      border-top: 1px solid rgba(245, 241, 232, 0.22);
+      border-bottom: 1px solid rgba(245, 241, 232, 0.22);
+      pointer-events: none;
+    }
+    /* Three red kerning ticks stamp in under the r–n pair once it settles */
+    .kern-wordmark::after {
+      content: '';
+      position: absolute;
+      left: 67%;
+      bottom: -0.02em;
+      width: 0.34em;
+      height: 0.075em;
+      background: repeating-linear-gradient(90deg,
+        var(--app-primary) 0 0.07em, transparent 0.07em 0.155em);
+      opacity: 0;
+      animation: kern-ticks 0.5s ease-out 2.2s forwards;
+    }
+    @keyframes kern-ticks {
+      from { opacity: 0; transform: translateY(0.06em); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .km {
+      display: inline-block;
+      transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      animation: km-settle 1.9s cubic-bezier(0.3, 0.7, 0.2, 1) 0.25s backwards;
+    }
+    .km:nth-child(1) { --k0: -0.42em; }
+    .km:nth-child(2) { --k0: -0.14em; animation-delay: 0.3s; }
+    .km:nth-child(3) { --k0: 0.15em;  --k1: 0.02em;   animation-delay: 0.35s; }
+    .km:nth-child(4) { --k0: 0.48em;  --k1: -0.115em; animation-delay: 0.4s; }
+    @keyframes km-settle {
+      0%   { transform: translateX(var(--k0, 0)); opacity: 0; }
+      30%  { opacity: 1; }
+      68%  { transform: translateX(var(--k1, 0)); }
+      100% { transform: translateX(0); opacity: 1; }
+    }
+    /* Squeeze the pair yourself: hover the wordmark and mind the keming */
+    .kern-wordmark:hover .km:nth-child(4) { transform: translateX(-0.12em); }
+
+    .kern-tagline {
+      font-family: var(--kern-serif);
+      font-style: italic;
+      font-size: clamp(1.3rem, 2.6vw, 1.75rem);
+      color: rgba(245, 241, 232, 0.94);
+      margin-bottom: var(--spacing-md);
+    }
+    .kern-price {
+      font-size: 0.9rem;
+      color: rgba(245, 241, 232, 0.6);
+      margin-top: var(--spacing-sm);
+      margin-bottom: 0;
+    }
+
+    /* Floating letter tiles around the icon, each tinted by a world */
+    .hero-phone { position: relative; }
+    .hero-phone .phone-mockup {
+      border-radius: 22%;
+      box-shadow:
+        0 30px 80px rgba(200, 68, 42, 0.22),
+        0 10px 30px rgba(0, 0, 0, 0.55);
+    }
+    .kern-tiles { position: absolute; inset: 0; pointer-events: none; }
+    .kern-tile {
+      position: absolute;
+      width: clamp(48px, 5.5vw, 66px);
+      aspect-ratio: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--kern-serif);
+      font-weight: 700;
+      font-size: clamp(1.5rem, 2.6vw, 2rem);
+      background: var(--tf);
+      color: var(--ti);
+      border-radius: 16%;
+      border-bottom: 3px solid var(--ta);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.45);
+      rotate: var(--tr);
+      animation: tile-drift var(--td) ease-in-out var(--tdel) infinite alternate;
+    }
+    .kern-tile:nth-child(1) { top: -6%;  left: -14%; }
+    .kern-tile:nth-child(2) { top: 12%;  right: -16%; }
+    .kern-tile:nth-child(3) { bottom: 14%; left: -18%; }
+    .kern-tile:nth-child(4) { bottom: -6%; right: -10%; }
+    @keyframes tile-drift {
+      from { transform: translateY(-7px); }
+      to   { transform: translateY(9px); }
+    }
+
+    /* ---- Mode cards with animated sketches ---- */
+    .modes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: var(--spacing-lg);
+    }
+    .mode-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-lg);
+      transition: transform var(--transition-base), box-shadow var(--transition-base);
+    }
+    .mode-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--glass-shadow);
+    }
+    .mode-num {
+      font-family: var(--kern-serif);
+      font-size: 0.85rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--app-primary);
+      margin-bottom: var(--spacing-xs);
+    }
+    .mode-card h3 { font-size: 1.5rem; }
+    .mode-card p { margin-bottom: 0; }
+    .mode-sketch {
+      display: block;
+      width: 100%;
+      height: auto;
+      margin-bottom: var(--spacing-md);
+      border-radius: var(--radius-sm);
+    }
+    .mode-sketch text {
+      font-family: var(--kern-serif);
+      font-weight: 700;
+      fill: var(--text-muted);
+    }
+    .mode-sketch .sk-cell { fill: none; stroke: var(--border-color); stroke-width: 1.5; }
+    .mode-sketch .sk-lit  { fill: var(--text-primary); }
+    .mode-sketch .sk-dot  { fill: var(--text-muted); }
+    /* traced paths draw themselves, hold, and reset */
+    .sk-trace {
+      fill: none;
+      stroke: var(--app-primary);
+      stroke-width: 3.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-dasharray: 260;
+      stroke-dashoffset: 260;
+      animation: sk-draw 5.2s ease-in-out infinite;
+    }
+    @keyframes sk-draw {
+      0%   { stroke-dashoffset: 260; opacity: 1; }
+      52%  { stroke-dashoffset: 0; opacity: 1; }
+      78%  { stroke-dashoffset: 0; opacity: 1; }
+      88%  { stroke-dashoffset: 0; opacity: 0; }
+      100% { stroke-dashoffset: 260; opacity: 0; }
+    }
+    .sk-sweep {
+      fill: rgba(200, 68, 42, 0.16);
+      stroke: var(--app-primary);
+      stroke-width: 2;
+      transform-box: fill-box;
+      transform-origin: left center;
+      transform: scaleX(0);
+      animation: sk-sweep 5.2s ease-in-out infinite;
+    }
+    @keyframes sk-sweep {
+      0%   { transform: scaleX(0); opacity: 1; }
+      45%  { transform: scaleX(1); opacity: 1; }
+      78%  { transform: scaleX(1); opacity: 1; }
+      88%  { transform: scaleX(1); opacity: 0; }
+      100% { transform: scaleX(0); opacity: 0; }
+    }
+
+    /* ---- Worlds ---- */
+    .worlds-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: var(--spacing-md);
+    }
+    .world-card {
+      position: relative;
+      overflow: hidden;
+      border-radius: var(--radius-md);
+      aspect-ratio: 5 / 4;
+      padding: var(--spacing-md);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      background: linear-gradient(180deg, var(--w1) 0%, var(--w2) 55%, var(--w3) 100%);
+      box-shadow: 0 10px 30px var(--shadow-color);
+      transition: transform var(--transition-base), box-shadow var(--transition-base);
+      --sp:  color-mix(in srgb, var(--wa) 62%, transparent);
+      --sp2: color-mix(in srgb, var(--wf) 40%, transparent);
+    }
+    .world-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 18px 44px var(--shadow-color);
+    }
+    /* legibility vignette */
+    .world-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 45%, rgba(0, 0, 0, 0.3) 100%);
+      pointer-events: none;
+    }
+    /* ambient specks drifting upward, colored by the world's accent */
+    .world-card::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      height: 200%;
+      background-image:
+        radial-gradient(2.5px 2.5px at 18% 11%, var(--sp) 50%, transparent 52%),
+        radial-gradient(1.5px 1.5px at 63% 27%, var(--sp2) 50%, transparent 52%),
+        radial-gradient(2px 2px at 84% 7%, var(--sp) 50%, transparent 52%),
+        radial-gradient(1.5px 1.5px at 37% 41%, var(--sp2) 50%, transparent 52%),
+        radial-gradient(2px 2px at 51% 19%, var(--sp) 50%, transparent 52%),
+        radial-gradient(1.5px 1.5px at 8% 33%, var(--sp) 50%, transparent 52%);
+      background-size: 100% 50%;
+      background-repeat: repeat;
+      animation: speck-drift var(--sd, 30s) linear infinite;
+      pointer-events: none;
+    }
+    @keyframes speck-drift { to { transform: translateY(-50%); } }
+    .world-card:nth-child(3n)   { --sd: 40s; }
+    .world-card:nth-child(3n+1) { --sd: 26s; }
+    .world-card:nth-child(4n)   { --sd: 46s; }
+    .world-body { position: relative; z-index: 1; }
+    .world-name {
+      font-family: var(--kern-serif);
+      font-size: 1.3rem;
+      margin-bottom: 0;
+      color: var(--wf);
+    }
+    .world-name::after {
+      content: '';
+      display: block;
+      width: 1.6em;
+      height: 3px;
+      border-radius: 2px;
+      background: var(--wa);
+      margin-top: 6px;
+    }
+    .world-vibe {
+      font-size: 0.85rem;
+      line-height: 1.45;
+      color: var(--wf);
+      opacity: 0.85;
+      margin: 8px 0 0;
+    }
+    .world-window {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      z-index: 1;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      padding: 3px 10px;
+      border-radius: 999px;
+      color: var(--wf);
+      background: color-mix(in srgb, var(--wa) 26%, transparent);
+      border: 1px solid color-mix(in srgb, var(--wa) 45%, transparent);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+    }
+    .worlds-note {
+      text-align: center;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      max-width: 640px;
+      margin: var(--spacing-lg) auto 0;
+    }
+
+    /* ---- The two pledges: ink and paper ---- */
+    .kern-pledges {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: var(--spacing-lg);
+    }
+    .pledge {
+      position: relative;
+      overflow: hidden;
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-xl);
+    }
+    .pledge h3 {
+      font-family: var(--kern-serif);
+      font-size: clamp(1.6rem, 3vw, 2.1rem);
+    }
+    .pledge p { margin-bottom: 0; }
+    .pledge::after {
+      content: '';
+      position: absolute;
+      left: var(--spacing-xl);
+      bottom: var(--spacing-md);
+      width: 42px;
+      height: 8px;
+      background: repeating-linear-gradient(90deg,
+        var(--app-primary) 0 6px, transparent 6px 13px);
+    }
+    .pledge--ink {
+      background: linear-gradient(170deg, #101014 0%, #232328 100%);
+      border: 1px solid rgba(245, 241, 232, 0.14);
+    }
+    .pledge--ink h3 { color: var(--kern-paper); }
+    .pledge--ink p  { color: rgba(245, 241, 232, 0.84); }
+    .pledge--paper {
+      background: linear-gradient(170deg, #F7F3EA 0%, #EFE8D9 100%);
+      border: 1px solid rgba(28, 28, 33, 0.12);
+    }
+    .pledge--paper h3 { color: #1C1C21; }
+    .pledge--paper p  { color: rgba(28, 28, 33, 0.78); }
+
+    /* Footer footnote gag */
+    .kern-footnote {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      margin-top: var(--spacing-md);
+      margin-bottom: 0;
+    }
+
+    /* Everything above is decoration — none of it should move for people
+       who've asked motion to sit still. End states only. */
+    @media (prefers-reduced-motion: reduce) {
+      .km, .kern-tile, .kern-wordmark::after, .world-card::after,
+      .sk-trace, .sk-sweep,
+      .hero-text, .hero-subtitle, .hero-title, .hero-description, .hero-cta,
+      .hero-image, .hero-phone, .hero::before, .hero::after,
+      .section-header, .feature-card, .faq-item, .floating-appstore {
+        animation: none !important;
+        transition: none !important;
+      }
+      .kern-wordmark::after { opacity: 1; }
+      .sk-trace { stroke-dashoffset: 0; }
+      .sk-sweep { transform: scaleX(1); }
+    }
+
+    @media (max-width: 768px) {
+      .kern-tile:nth-child(1) { left: -4%; }
+      .kern-tile:nth-child(3) { left: -6%; }
+      .kern-tile:nth-child(2) { right: -5%; }
+      .kern-tile:nth-child(4) { right: -3%; }
+    }
+  </style>
+  <link rel="alternate" hreflang="x-default" href="https://wemiller.com/apps/kern/">
+  <link rel="alternate" hreflang="en" href="https://wemiller.com/apps/kern/">
+  <link rel="alternate" hreflang="zh-Hans" href="https://wemiller.com/apps/kern/?lang=zh-Hans">
+  <link rel="alternate" hreflang="ja" href="https://wemiller.com/apps/kern/?lang=ja">
+  <link rel="alternate" hreflang="de" href="https://wemiller.com/apps/kern/?lang=de">
+  <link rel="alternate" hreflang="fr" href="https://wemiller.com/apps/kern/?lang=fr">
+  <link rel="alternate" hreflang="es" href="https://wemiller.com/apps/kern/?lang=es">
+  <link rel="alternate" hreflang="ko" href="https://wemiller.com/apps/kern/?lang=ko">
+  <link rel="alternate" hreflang="pt-BR" href="https://wemiller.com/apps/kern/?lang=pt-BR">
+  <link rel="alternate" hreflang="it" href="https://wemiller.com/apps/kern/?lang=it">
+  <script src="/i18n/i18n.js" defer data-page="apps.kern" data-pos="bottom-left"></script>
+</head>
+<body>
+  <nav class="app-nav">
+    <div class="nav-container">
+      <a href="../" class="nav-logo" data-i18n="apps.2d61f2">← Apps</a>
+      <button class="mobile-menu-toggle">☰</button>
+      <ul class="nav-links">
+        <li><a href="#modes" class="nav-link" data-i18n="modes.79f5b2">Modes</a></li>
+        <li><a href="#worlds" class="nav-link" data-i18n="worlds.8e4d97">Worlds</a></li>
+        <li><a href="#fair-play" class="nav-link" data-i18n="fair-play.87f91a">Fair Play</a></li>
+        <li><a href="#faq" class="nav-link" data-i18n="faq.03688b">FAQ</a></li>
+        <li><a href="https://apps.apple.com/us/app/kern-word-puzzles/id6806896106" class="btn-buy" target="_blank" rel="noopener noreferrer">App Store</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-text">
+        <p class="hero-subtitle" data-i18n="kern-word-puzzles.409874">🔤 Kern — Word Puzzles</p>
+        <h1 class="hero-title kern-wordmark" aria-label="Kern"><span class="km" aria-hidden="true">K</span><span class="km" aria-hidden="true">e</span><span class="km" aria-hidden="true">r</span><span class="km" aria-hidden="true">n</span></h1>
+        <p class="kern-tagline" data-i18n="handle-letters-with-care.b22879">Handle letters with care.</p>
+        <p class="hero-description" data-i18n="three-word-games-wheel.6fa4f6">
+          Three word games — Wheel, Search, and Chain — share one fair, par-based score inside thirteen living worlds that react to what you spell. Generated music, Game Center daily leaderboards, and not a single thing that leaves your device.
+        </p>
+        <span class="os-ready-badge" data-i18n-html="ready-for-ios-27.e06c8c"><span class="badge-icon">✓</span> Ready for iOS 27 / iPadOS 27</span>
+        <div class="hero-cta">
+          <a href="https://apps.apple.com/us/app/kern-word-puzzles/id6806896106" class="btn-buy" target="_blank" rel="noopener noreferrer" data-i18n="download-on-the-app.a9096a">Download on the App Store</a>
+        </div>
+        <p class="kern-price" data-i18n="4-99-once-no.304f1b">$4.99 once — no ads, no subscriptions, no in-app purchases.</p>
+      </div>
+      <div class="hero-image">
+        <div class="hero-phone">
+          <img src="assets/images/icon.png" alt="Kern App Icon" class="phone-mockup"
+               onerror="this.style.background='linear-gradient(165deg, #16161A, #2E2E35)'; this.style.minHeight='300px'; this.style.minWidth='300px';">
+          <div class="kern-tiles" aria-hidden="true">
+            <span class="kern-tile" style="--tf:#F2F7F5; --ti:#143642; --ta:#35C4B5; --tr:-8deg; --td:7.5s; --tdel:0s">K</span>
+            <span class="kern-tile" style="--tf:#FFF3E4; --ti:#4A2338; --ta:#FF9E5E; --tr:6deg; --td:8.6s; --tdel:0.9s">E</span>
+            <span class="kern-tile" style="--tf:#F1F5EC; --ti:#1F3D2B; --ta:#7FB069; --tr:-5deg; --td:9.4s; --tdel:0.4s">R</span>
+            <span class="kern-tile" style="--tf:#F7FAFF; --ti:#1A2B44; --ta:#D64545; --tr:9deg; --td:8.1s; --tdel:1.3s">N</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Floating App Store button -->
+  <a href="https://apps.apple.com/us/app/kern-word-puzzles/id6806896106" class="floating-appstore" target="_blank" rel="noopener noreferrer">
+    <span class="floating-appstore-icon"></span>
+    <span data-i18n="download-on-app-store.cf50c2">Download on App Store</span>
+  </a>
+
+  <!-- Modes -->
+  <section id="modes" class="section">
+    <div class="section-header">
+      <p class="section-subtitle" data-i18n="three-ways-to-play.432812">Three ways to play</p>
+      <h2 data-i18n="three-modes-one-fair.192345">Three modes. One fair score.</h2>
+      <p data-i18n="wheel-search-and-chain.17083f">Wheel, Search, and Chain share a single par-based formula — so the daily leaderboard is one competition, not three.</p>
+    </div>
+
+    <div class="modes-grid">
+      <div class="mode-card">
+        <svg class="mode-sketch" viewBox="0 0 220 132" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Sketch of the Wheel mode: a traced path through a letter wheel filling a mini crossword">
+          <rect class="sk-cell" x="76" y="8" width="20" height="20" rx="4"/>
+          <rect class="sk-cell" x="100" y="8" width="20" height="20" rx="4"/>
+          <rect class="sk-cell" x="124" y="8" width="20" height="20" rx="4"/>
+          <rect class="sk-cell" x="100" y="32" width="20" height="20" rx="4"/>
+          <text x="86" y="23" font-size="13" text-anchor="middle">C</text>
+          <text x="110" y="23" font-size="13" text-anchor="middle">A</text>
+          <text x="134" y="23" font-size="13" text-anchor="middle">T</text>
+          <circle cx="110" cy="94" r="30" fill="none" stroke="var(--border-color)" stroke-width="1.5"/>
+          <text x="110" y="70" font-size="12" text-anchor="middle">A</text>
+          <text x="136" y="90" font-size="12" text-anchor="middle">C</text>
+          <text x="126" y="119" font-size="12" text-anchor="middle">T</text>
+          <text x="94" y="119" font-size="12" text-anchor="middle">E</text>
+          <text x="84" y="90" font-size="12" text-anchor="middle">R</text>
+          <polyline class="sk-trace" points="132,86 110,66 122,114"/>
+        </svg>
+        <p class="mode-num" data-i18n="mode-01.0205c4">Mode 01</p>
+        <h3 data-i18n="wheel.0d972a">Wheel</h3>
+        <p data-i18n="swipe-through-a-letter.2f2f6e">Swipe through a letter wheel to spell words that fill a mini crossword. Extra words bank as bonus finds.</p>
+      </div>
+
+      <div class="mode-card">
+        <svg class="mode-sketch" viewBox="0 0 220 132" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Sketch of the Search mode: a highlight sweeping across a hidden word in a letter grid">
+          <text x="30" y="26" font-size="13" text-anchor="middle">P</text>
+          <text x="68" y="26" font-size="13" text-anchor="middle">M</text>
+          <text x="106" y="26" font-size="13" text-anchor="middle">K</text>
+          <text x="144" y="26" font-size="13" text-anchor="middle">E</text>
+          <text x="182" y="26" font-size="13" text-anchor="middle">B</text>
+          <rect class="sk-sweep" x="14" y="42" width="192" height="30" rx="15"/>
+          <text x="30" y="63" font-size="13" text-anchor="middle">C</text>
+          <text x="68" y="63" font-size="13" text-anchor="middle">O</text>
+          <text x="106" y="63" font-size="13" text-anchor="middle">R</text>
+          <text x="144" y="63" font-size="13" text-anchor="middle">A</text>
+          <text x="182" y="63" font-size="13" text-anchor="middle">L</text>
+          <text x="30" y="100" font-size="13" text-anchor="middle">D</text>
+          <text x="68" y="100" font-size="13" text-anchor="middle">V</text>
+          <text x="106" y="100" font-size="13" text-anchor="middle">S</text>
+          <text x="144" y="100" font-size="13" text-anchor="middle">N</text>
+          <text x="182" y="100" font-size="13" text-anchor="middle">U</text>
+          <text x="30" y="126" font-size="13" text-anchor="middle">H</text>
+          <text x="68" y="126" font-size="13" text-anchor="middle">T</text>
+          <text x="106" y="126" font-size="13" text-anchor="middle">I</text>
+          <text x="144" y="126" font-size="13" text-anchor="middle">W</text>
+          <text x="182" y="126" font-size="13" text-anchor="middle">G</text>
+        </svg>
+        <p class="mode-num" data-i18n="mode-02.b1f77c">Mode 02</p>
+        <h3 data-i18n="search.bce064">Search</h3>
+        <p data-i18n="a-word-search-with.108338">A word search with a twist: every hidden word belongs to the world you're in. An Ocean board hides ocean words.</p>
+      </div>
+
+      <div class="mode-card">
+        <svg class="mode-sketch" viewBox="0 0 220 132" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Sketch of the Chain mode: a winding path drawn through adjacent letter tiles">
+          <rect class="sk-cell" x="42" y="8" width="28" height="28" rx="6"/>
+          <rect class="sk-cell" x="78" y="8" width="28" height="28" rx="6"/>
+          <rect class="sk-cell" x="114" y="8" width="28" height="28" rx="6"/>
+          <rect class="sk-cell" x="150" y="8" width="28" height="28" rx="6"/>
+          <rect class="sk-cell" x="42" y="44" width="28" height="28" rx="6"/>
+          <rect class="sk-cell" x="78" y="44" width="28" height="28" rx="6"/>
+          <rect class="sk-cell" x="114" y="44" width="28" height="28" rx="6"/>
+          <rect class="sk-cell" x="150" y="44" width="28" height="28" rx="6"/>
+          <rect class="sk-cell" x="42" y="80" width="28" height="28" rx="6"/>
+          <rect class="sk-cell" x="78" y="80" width="28" height="28" rx="6"/>
+          <rect class="sk-cell" x="114" y="80" width="28" height="28" rx="6"/>
+          <rect class="sk-cell" x="150" y="80" width="28" height="28" rx="6"/>
+          <text x="56" y="99" font-size="13" text-anchor="middle">W</text>
+          <text x="92" y="63" font-size="13" text-anchor="middle">O</text>
+          <text x="128" y="27" font-size="13" text-anchor="middle">R</text>
+          <text x="164" y="63" font-size="13" text-anchor="middle">D</text>
+          <polyline class="sk-trace" points="56,94 92,58 128,22 164,58"/>
+        </svg>
+        <p class="mode-num" data-i18n="mode-03.a69b02">Mode 03</p>
+        <h3 data-i18n="chain.d81f36">Chain</h3>
+        <p data-i18n="drag-any-path-through.e30752">Drag any path through neighboring letters and build your own words. The board hides more than you think.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Worlds -->
+  <section id="worlds" class="section">
+    <div class="section-header">
+      <p class="section-subtitle" data-i18n="thirteen-living-worlds.9addb4">Thirteen living worlds</p>
+      <h2 data-i18n="pick-a-place-not.91b441">Pick a place, not a palette</h2>
+      <p data-i18n="every-world-has-its.9ec5a0">Every world has its own light, its own tiles, and its own generated music — and it listens. Long words pulse the board, streaks build the world's energy, and a word that belongs to the world earns its signature flourish.</p>
+    </div>
+
+    <div class="worlds-grid">
+      <div class="world-card" style="--w1:#052A3E; --w2:#0A4A63; --w3:#0E6B7E; --wa:#35C4B5; --wf:#F2F7F5;">
+        <div class="world-body">
+          <h3 class="world-name" data-i18n="ocean.76022a">Ocean</h3>
+          <p class="world-vibe" data-i18n="deep-water-patient-light.b23e2f">Deep water, patient light. Spell CORAL and the sea answers.</p>
+        </div>
+      </div>
+      <div class="world-card" style="--w1:#2B1B44; --w2:#7A2E52; --w3:#D96C3F; --wa:#FF9E5E; --wf:#FFF3E4;">
+        <div class="world-body">
+          <h3 class="world-name" data-i18n="sunset.181bcd">Sunset</h3>
+          <p class="world-vibe" data-i18n="the-sky-burns-low.1463d4">The sky burns low, and long words send it deeper.</p>
+        </div>
+      </div>
+      <div class="world-card" style="--w1:#12261E; --w2:#1E4032; --w3:#2E5C43; --wa:#7FB069; --wf:#F1F5EC;">
+        <div class="world-body">
+          <h3 class="world-name" data-i18n="forest.f41c4e">Forest</h3>
+          <p class="world-vibe" data-i18n="dusk-under-old-growth.5499a4">Dusk under old growth — streaks wake the fireflies.</p>
+        </div>
+      </div>
+      <div class="world-card" style="--w1:#3E2A1F; --w2:#8A5A33; --w3:#C98A4B; --wa:#E0A458; --wf:#FBF3E4;">
+        <div class="world-body">
+          <h3 class="world-name" data-i18n="desert.f6db3f">Desert</h3>
+          <p class="world-vibe" data-i18n="warm-stone-long-shadows.98c54b">Warm stone, long shadows, a scale you can't quite place.</p>
+        </div>
+      </div>
+      <div class="world-card" style="--w1:#241D16; --w2:#3E3226; --w3:#59452F; --wa:#B08D57; --wf:#F5EDDE;">
+        <div class="world-body">
+          <h3 class="world-name" data-i18n="library.b8100f">Library</h3>
+          <p class="world-vibe" data-i18n="felt-piano-and-old.5e5913">Felt piano and old paper. FOLIO earns a flourish.</p>
+        </div>
+      </div>
+      <div class="world-card" style="--w1:#1C3A2A; --w2:#3E7C4F; --w3:#7FB86B; --wa:#F2C14E; --wf:#F4FAEF;">
+        <div class="world-body">
+          <h3 class="world-name" data-i18n="park.f92c24">Park</h3>
+          <p class="world-vibe" data-i18n="a-bright-afternoon-that.f8b641">A bright afternoon that keeps time with your streak.</p>
+        </div>
+      </div>
+      <div class="world-card" style="--w1:#14303B; --w2:#1F5F6B; --w3:#3E8989; --wa:#63C7B2; --wf:#EFF7F6;">
+        <div class="world-body">
+          <h3 class="world-name" data-i18n="river.de019a">River</h3>
+          <p class="world-vibe" data-i18n="cool-current-steady-pulse.2046f1">Cool current, steady pulse, words that flow.</p>
+        </div>
+      </div>
+      <div class="world-card" style="--w1:#16161A; --w2:#232328; --w3:#2E2E35; --wa:#C8442A; --wf:#F5F1E8;">
+        <div class="world-body">
+          <h3 class="world-name" data-i18n="print-shop.20d357">Print Shop</h3>
+          <p class="world-vibe" data-i18n="letterpress-tiles-and-ink.09f710">Letterpress tiles and ink — the type nerd's home turf.</p>
+        </div>
+      </div>
+      <div class="world-card" style="--w1:#3A1F14; --w2:#7A3B1E; --w3:#B5651D; --wa:#E8842C; --wf:#FBF1E3;">
+        <span class="world-window" data-i18n="sep-22-nov-30.62a76e">Sep 22 – Nov 30</span>
+        <div class="world-body">
+          <h3 class="world-name" data-i18n="autumn.36da46">Autumn</h3>
+          <p class="world-vibe" data-i18n="leaves-fall-harder-the.7ff17a">Leaves fall harder the longer your words get.</p>
+        </div>
+      </div>
+      <div class="world-card" style="--w1:#14101E; --w2:#2A1B3D; --w3:#43265E; --wa:#F26D21; --wf:#F7E8D0;">
+        <span class="world-window" data-i18n="oct-15-nov-1.d09b28">Oct 15 – Nov 1</span>
+        <div class="world-body">
+          <h3 class="world-name" data-i18n="halloween.d7925e">Halloween</h3>
+          <p class="world-vibe" data-i18n="purple-dark-pumpkin-light.ecc261">Purple dark, pumpkin light, something in the letters.</p>
+        </div>
+      </div>
+      <div class="world-card" style="--w1:#33231A; --w2:#6B4423; --w3:#96602C; --wa:#D9822B; --wf:#FAF0DC;">
+        <span class="world-window" data-i18n="nov-15-nov-30.01c928">Nov 15 – Nov 30</span>
+        <div class="world-body">
+          <h3 class="world-name" data-i18n="harvest.1b665f">Harvest</h3>
+          <p class="world-vibe" data-i18n="amber-fields-felt-keys.fda0e7">Amber fields, felt keys, a slow golden hour.</p>
+        </div>
+      </div>
+      <div class="world-card" style="--w1:#0E1B2E; --w2:#1C3A5F; --w3:#2E5E8C; --wa:#D64545; --wf:#F7FAFF;">
+        <span class="world-window" data-i18n="dec-1-26.95f309">Dec 1 – 26</span>
+        <div class="world-body">
+          <h3 class="world-name" data-i18n="snowfall.199387">Snowfall</h3>
+          <p class="world-vibe" data-i18n="hushed-snow-cold-blue.55872f">Hushed snow, cold blue light, a touch of red.</p>
+        </div>
+      </div>
+      <div class="world-card" style="--w1:#08080F; --w2:#141428; --w3:#232345; --wa:#E8C547; --wf:#F2F0FA;">
+        <span class="world-window" data-i18n="dec-27-jan-7.dc5f6f">Dec 27 – Jan 7</span>
+        <div class="world-body">
+          <h3 class="world-name" data-i18n="midnight.558287">Midnight</h3>
+          <p class="world-vibe" data-i18n="gold-sparks-over-the.3a33f0">Gold sparks over the year's last letters.</p>
+        </div>
+      </div>
+    </div>
+
+    <p class="worlds-note" data-i18n="seasonal-worlds-join-the.9f8cd8">Seasonal worlds join the picker and the daily rotation on their own calendar — no downloads, no events to sign up for. They simply appear when their season does, and step back when it passes.</p>
+  </section>
+
+  <!-- Fair play + privacy pledges -->
+  <section id="fair-play" class="section">
+    <div class="kern-pledges">
+      <div class="pledge pledge--ink">
+        <h3 data-i18n="one-score-no-favorites.adb0d4">One score. No favorites.</h3>
+        <p data-i18n="every-puzzle-carries-a.4ff387">
+          Every puzzle carries a computed par, and your score is your quality against par plus a speed bonus — the same formula in every mode, every world, every level. No theme or setting can buy points. That's what makes the daily leaderboard one competition instead of three.
+        </p>
+      </div>
+      <div class="pledge pledge--paper">
+        <h3 data-i18n="nothing-leaves-your-device.9ca63d">Nothing leaves your device.</h3>
+        <p data-i18n="no-accounts-no-ads.ed3960">
+          No accounts, no ads, no analytics, no third-party SDKs. Puzzles, scoring, worlds, and music are all computed locally, and the whole game works offline. The only thing that ever leaves is a Game Center score you choose to post.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- The rest -->
+  <section id="daily" class="section">
+    <div class="section-header">
+      <p class="section-subtitle" data-i18n="and-the-rest.73b72e">And the rest</p>
+      <h2 data-i18n="built-the-quiet-way.0a9566">Built the quiet way</h2>
+      <p data-i18n="a-daily-ritual-that.146c5a">A daily ritual that respects your time — no server, no events, no strings.</p>
+    </div>
+
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-icon">📅</div>
+        <h3 class="feature-title" data-i18n="the-daily-kern.5bda05">The Daily Kern</h3>
+        <p class="feature-description" data-i18n="one-seeded-puzzle-per.324b7e">One seeded puzzle per mode per day — the same boards for everyone on Earth, computed on your device. No server involved, nothing to download.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🏆</div>
+        <h3 class="feature-title" data-i18n="daily-leaderboards.a129bc">Daily leaderboards</h3>
+        <p class="feature-description" data-i18n="game-center-daily-boards.f94027">Game Center daily boards for each mode, plus a combined board that sums all three. Lifetime scores count in Ems — an em is type's own unit of measure.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🎖️</div>
+        <h3 class="feature-title" data-i18n="achievements-with-jokes.ace9dc">Achievements with jokes</h3>
+        <p class="feature-description" data-i18n="from-first-ligature-to.dd76ed">From First Ligature to Em Dash to Full Bleed — and yes, playing a word with consecutive r-n in it unlocks one called Keming.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🎼</div>
+        <h3 class="feature-title" data-i18n="music-that-never-loops.54fc1a">Music that never loops</h3>
+        <p class="feature-description" data-i18n="every-session-composes-itself.fc32c9">Every session composes itself from the world's own recipe: letters walk the scale, a valid word resolves the chord. No two sessions sound alike.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">✈️</div>
+        <h3 class="feature-title" data-i18n="fully-offline.ec9dfc">Fully offline</h3>
+        <p class="feature-description" data-i18n="dictionary-puzzle-generation-scoring.fef60e">Dictionary, puzzle generation, scoring, worlds, and music all live on device. Airplane mode is a perfectly good place to play.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📱</div>
+        <h3 class="feature-title" data-i18n="iphone-ipad.a1bb7a">iPhone + iPad</h3>
+        <p class="feature-description" data-i18n="universal-in-every-orientation.d37717">Universal, in every orientation — Split View, Slide Over, and Stage Manager included. The board scales, the wheel re-anchors, nothing clips.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="faq-section">
+    <div class="section-header">
+      <p class="section-subtitle" data-i18n="got-questions.001f6d">Got questions?</p>
+      <h2 data-i18n="faq.03688b">FAQ</h2>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        <span data-i18n="how-does-the-fair.50b7f0">How does the fair score work?</span>
+        <span class="faq-icon">▼</span>
+      </button>
+      <div class="faq-answer">
+        <p data-i18n="every-puzzle-is-generated.d8a8a0">
+          Every puzzle is generated with a solver-computed par. Your score is your quality against that par, plus a speed bonus that only multiplies quality — capped at 1,100 points per puzzle, with the identical formula in all three modes. Harder boards allow more time, so nothing about your world, level, or mode choice can tilt the leaderboard.
+        </p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        <span data-i18n="do-worlds-change-the.4d6bb5">Do worlds change the difficulty or the score?</span>
+        <span class="faq-icon">▼</span>
+      </button>
+      <div class="faq-answer">
+        <p data-i18n="no-reactivity-is-cosmetic.173b6d">
+          No — reactivity is cosmetic by law. Worlds change the light, the tiles, the music, and the flourishes, never the formula. Finding a word that belongs to a world feeds achievements and your per-world journal, not your score.
+        </p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        <span data-i18n="what-is-the-daily.eb19f1">What is the Daily Kern?</span>
+        <span class="faq-icon">▼</span>
+      </button>
+      <div class="faq-answer">
+        <p data-i18n="one-seeded-puzzle-per.d0c0c7">
+          One seeded puzzle per mode per day, derived from the date itself — so the whole world plays the same boards with no server involved. Your first completion per mode posts to that day's Game Center leaderboards, and free play stays endless alongside it.
+        </p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        <span data-i18n="does-kern-work-offline.2bc665">Does Kern work offline?</span>
+        <span class="faq-icon">▼</span>
+      </button>
+      <div class="faq-answer">
+        <p data-i18n="completely-the-dictionary-puzzle.d3542c">
+          Completely. The dictionary, puzzle generation, scoring, worlds, and music are all on device, so airplane mode changes nothing. Game Center scores sync up the next time you're online — and signing in is never required to play.
+        </p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        <span data-i18n="are-there-ads-or.cc7da0">Are there ads or in-app purchases?</span>
+        <span class="faq-icon">▼</span>
+      </button>
+      <div class="faq-answer">
+        <p data-i18n="no-to-both-kern.ebd1db">
+          No to both. Kern is $4.99 once — no ads, no subscriptions, no in-app purchases, no data collection. Seasonal worlds arrive as part of the game, not as events or passes.
+        </p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        <span data-i18n="where-does-the-music.7c401b">Where does the music come from?</span>
+        <span class="faq-icon">▼</span>
+      </button>
+      <div class="faq-answer">
+        <p data-i18n="it-s-generated-on.879df5">
+          It's generated on your device — there are no looping tracks. Each world has a recipe (scale, tempo, instruments), your letter selections walk up the scale, and a valid word resolves a chord sized by its length. It honors the silent switch, and you can mix with your own audio from Settings.
+        </p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        <span data-i18n="why-is-it-called.18b5e2">Why is it called Kern?</span>
+        <span class="faq-icon">▼</span>
+      </button>
+      <div class="faq-answer">
+        <p data-i18n="kerning-is-the-typographer.0759ec">
+          Kerning is the typographer's craft of adjusting the space between letter pairs until a word sits perfectly — the most obsessive, invisible detail in type. A word game named Kern promises letter-level care. And if you squeeze the r and n too close together, "kerning" reads as "keming" — which is why playing a word with r-n in it earns an achievement by that name.
+        </p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        <span data-i18n="is-kern-available-in.54bbc3">Is Kern available in the European Union?</span>
+        <span class="faq-icon">▼</span>
+      </button>
+      <div class="faq-answer">
+        <p data-i18n="kern-isn-t-sold.cefc5d">
+          Kern isn't sold on the App Store in the European Union — under the EU Digital Services Act, selling there requires publishing a trader listing with personal contact details, which I've opted out of as an independent developer. It's also not currently offered in France or China. It's available in every other App Store territory.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Privacy & security -->
+  <section class="security-callout" id="privacy">
+    <div class="section-header">
+      <p class="section-subtitle" data-i18n="privacy-security.75c011">Privacy &amp; security</p>
+      <h2 data-i18n="set-in-quiet-type.597ec0">Set in quiet type</h2>
+    </div>
+    <div class="security-badges">
+      <div class="security-badge" data-i18n-html="data-not-collected.35f244"><span class="badge-icon">🔒</span> Data Not Collected</div>
+      <div class="security-badge" data-i18n-html="no-ads-no-iap.ed9428"><span class="badge-icon">🚫</span> No ads, no IAP</div>
+      <div class="security-badge" data-i18n-html="works-offline.372393"><span class="badge-icon">✈️</span> Works offline</div>
+      <div class="security-badge" data-i18n-html="privacy-manifest.e8ed85"><span class="badge-icon">📋</span> Privacy Manifest</div>
+      <div class="security-badge" data-i18n-html="gamekit-only.58b497"><span class="badge-icon">🎮</span> GameKit only</div>
+    </div>
+    <p class="security-audit-note" data-i18n="no-accounts-no-analytics.268b6d">No accounts. No analytics. No third-party SDKs. Nothing leaves your device except the scores you choose to post.</p>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-links">
+        <a href="../" class="footer-link" data-i18n="all-apps.429449">All Apps</a>
+        <a href="../pinline/" class="footer-link">Pinline</a>
+        <a href="../enter-space/" class="footer-link">Enter Space</a>
+        <a href="../blip/" class="footer-link">Blip</a>
+        <a href="../ari-helper/" class="footer-link">Ari Helper</a>
+        <a href="../sami/" class="footer-link">Sami</a>
+        <a href="../tilebreak/" class="footer-link">Tilebreak</a>
+        <a href="../mi-speaks/" class="footer-link">Mi Speaks</a>
+        <a href="../embr/" class="footer-link">Embr</a>
+        <a href="../deepsi/" class="footer-link">DeepSi</a>
+        <a href="../luma-editor/" class="footer-link">Luma Editor</a>
+        <a href="../wise-flyer/" class="footer-link">Wise Flyer</a>
+        <a href="../glint/" class="footer-link">Glint</a>
+        <a href="/privacy/" class="footer-link" data-i18n="privacy.cf0148">Privacy</a>
+        <a href="/terms/" class="footer-link" data-i18n="terms.a55a27">Terms</a>
+        <a href="/support/" class="footer-link" data-i18n="support.f32d5a">Support</a>
+        <a href="/" class="footer-link" data-i18n="portfolio.036b18">Portfolio</a>
+      </div>
+
+      <div class="footer-social-links">
+        <a href="https://x.com/apps_by_blaine" class="social-icon-link" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)">
+          <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+          </svg>
+        </a>
+        <a href="https://www.instagram.com/apps.by.blaine/" class="social-icon-link" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+          <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+          </svg>
+        </a>
+        <a href="https://www.youtube.com/@AppsByBlaine" class="social-icon-link" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+          <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+          </svg>
+        </a>
+      </div>
+
+      <p class="kern-footnote" data-i18n="kern-v-to-mind.094598">
+        kern (v.) — to mind the space between letters. Mind it poorly and "rn" becomes "m"; around here that's called keming, and yes, there's an achievement for it.
+      </p>
+      <p class="kern-footnote" data-i18n="word-list-based-on.2f832e">
+        Word list based on the public-domain ENABLE list, locally curated.
+      </p>
+      <p style="color: var(--text-muted); margin-top: var(--spacing-md);" data-i18n-html="blaine-miller-all-rights.b327c2">
+        © <span id="year"></span> Blaine Miller. All rights reserved.
+      </p>
+    </div>
+  </footer>
+
+  <script src="../app-showcase.js"></script>
+</body>
+</html>
