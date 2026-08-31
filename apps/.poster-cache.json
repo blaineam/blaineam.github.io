@@ -1,9 +1,8 @@
 {
-  "fingerprint": "9e92d56a1b0fc031239137a8514288307dc1295cf6fb8c3a9ef86a71e0541e02",
+  "fingerprint": "0336a7d5b6ee10410aec76df73bbd60b1974578d0b9feec9329e511640920f08",
   "apps": [
     "enter-space",
     "haven",
-    "kern",
     "revela",
     "blip",
     "ari-helper",
@@ -14,6 +13,7 @@
     "pano-owl",
     "pinline",
     "tilebreak",
+    "kern",
     "sami",
     "mi-speaks",
     "embr",
@@ -22,5 +22,5 @@
     "wise-flyer",
     "glint"
   ],
-  "generatedAt": "2026-08-31T06:48:58.974Z"
+  "generatedAt": "2026-08-31T06:56:48.684Z"
 }
