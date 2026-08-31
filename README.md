@@ -21,7 +21,7 @@ Apple Watch. Just imagine what we can build together!
 
 ## Apps
 
-**20 apps on the App Store**, spanning iOS, iPadOS, macOS, tvOS, and watchOS. The
+**21 apps on the App Store**, spanning iOS, iPadOS, macOS, tvOS, and watchOS. The
 [`/apps`](https://wemiller.com/apps) showcase renders a curated order; the home page
 lists them chronologically. Both read from a single source of truth,
 [`apps/projects.json`](apps/projects.json).
@@ -33,6 +33,7 @@ and one-time tips; see the [Support](https://wemiller.com/support) page.
 
 | App | What it does | Released |
 |-----|--------------|----------|
+| **Kern** | Handle letters with care — word puzzles in living worlds | August 2026 |
 | **Revela** | Shoot film. Wait for it — a vintage film camera | July 2026 |
 | **Haven** | A private, post-quantum social network for the people you love | July 2026 |
 | **SightQuick** | Zero your rifle scope in minutes | June 2026 |
