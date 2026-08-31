@@ -21,10 +21,10 @@ Apple Watch. Just imagine what we can build together!
 
 ## Apps
 
-**21 apps on the App Store**, spanning iOS, iPadOS, macOS, tvOS, and watchOS. The
+**20 apps on the App Store**, spanning iOS, iPadOS, macOS, tvOS, and watchOS. The
 [`/apps`](https://wemiller.com/apps) showcase renders a curated order; the home page
-lists them chronologically. Both read from a single source of truth,
-[`apps/projects.json`](apps/projects.json).
+lists them chronologically. [`apps/projects.json`](apps/projects.json) is the
+source of truth for app metadata; the showcase's display order is hand-curated.
 
 **Haven**, **Blip**, and **Glint** are free — no ads, no tracking, no
 subscriptions. Their development is funded through
@@ -42,7 +42,7 @@ and one-time tips; see the [Support](https://wemiller.com/support) page.
 | **Ridgeshot** | Long-range rifle marksman | May 2026 |
 | **Pinline** | 1v1 compound-bow archery | May 2026 |
 | **Tilebreak** | Match. Combo. Clear. Polished Mahjong solitaire | May 2026 |
-| **Blip** | Featherlight macOS menu-bar system monitor | April 2026 |
+| **Blip** | Featherlight system monitor for Mac & iPhone | April 2026 |
 | **Glint** | Brightness & volume for any display | April 2026 |
 | **Sami** | Smart media optimizer | February 2026 |
 | **Enter Space** | Local-feeling access to every cloud you use | June 2025 |
@@ -86,8 +86,8 @@ to GitHub Pages via two GitHub Actions workflows:
   each app's own docs site into `/apps/<slug>/`, so app pages stay in sync from their
   source repos with no manual copying.
 
-`apps/projects.json` is the single source of truth for app metadata; the home page and
-the `/apps` showcase both render from it.
+`apps/projects.json` is the single source of truth for app metadata; the `/apps`
+showcase and home-page timeline are hand-curated views kept in step with it.
 
 ### Local preview
 
