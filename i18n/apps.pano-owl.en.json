@@ -36,6 +36,7 @@
   "immersive-360-viewer.1898a3": "Immersive 360 Viewer",
   "iphone-and-ipad-with.e11fbb": "iPhone and iPad, with a native Mac app sharing the same Metal engine for heavier gigapixel work. Guided camera capture is on iPhone & iPad; stitching, correcting, and viewing work everywhere.",
   "iphone-ipad-mac.56fd62": "iPhone, iPad & Mac",
+  "is-pano-owl-available.48236b": "Is Pano Owl available in the European Union?",
   "location-heading.7b57cc": "Location & Heading",
   "look-around-your-panoramas.e510ed": "Look around your panoramas right in the app — drag, or move your device to glance around the scene. Open any panorama from your photo library and step inside it.",
   "modern-metal-stitching-from.ad14fe": "Modern Metal stitching — from a quick eye-level sweep to a full 360° gigapixel scene",
@@ -71,6 +72,5 @@
   "yes-pick-a-video.3efcb6": "Yes. Pick a video and Pano Owl extracts the cleanest, well-spaced frames automatically, then stitches them like any other set.",
   "yes-true-equirectangular-spherical.b0a5b8": "Yes — true equirectangular (spherical) output, plus cylindrical and planar. Partial arcs and full 360 both work. Exports include standard GPano metadata, so they render correctly in web viewers, the Photos app, and on Apple Vision Pro.",
   "your-panorama-library-the.1c4c99": "Your panorama library, the stitch studio, and the immersive 360 viewer",
-  "your-photos-stay-yours.93a5b3": "Your Photos Stay Yours",
-  "is-pano-owl-available.48236b": "Is Pano Owl available in the European Union?"
+  "your-photos-stay-yours.93a5b3": "Your Photos Stay Yours"
 }

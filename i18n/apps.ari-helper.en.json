@@ -61,6 +61,7 @@
   "image-generation-made-easy.f26b0a": "Image Generation Made Easy",
   "image-generation.e4eb52": "Image Generation",
   "input-sanitization.b676be": "<span class=\"badge-icon\">&#x1f50d;</span> Input Sanitization",
+  "is-ari-helper-available.e70f87": "Is Ari Helper available in the European Union?",
   "is-my-data-private.ac57e0": "Is my data private when using local models?",
   "just-shipped.243f10": "Just Shipped",
   "local-models-run-on.575896": "Local models run on Apple's MLX neural network framework, optimized for Apple Silicon. Get the best possible performance for on-device AI with hardware-accelerated inference on M-series chips.",
@@ -99,6 +100,5 @@
   "why-choose-ari-helper.283965": "Why Choose Ari Helper",
   "yes-when-using-local.7d1876": "Yes! When using local on-device models or Ollama on your network, no data leaves your device or local network. Private mode with biometric lock adds extra security for sensitive conversations.",
   "yes-you-can-share.13d3cb": "Yes! You can share conversations as beautiful images or HTML files, perfect for sharing insights, code snippets, or creative content with friends and colleagues.",
-  "your-conversations-are-now.0db54e": "Your conversations are now searchable from system Spotlight — tap a result to jump straight back in. Mark any conversation Private and it stays out of search entirely, with its media moved into Ari's encrypted store.",
-  "is-ari-helper-available.e70f87": "Is Ari Helper available in the European Union?"
+  "your-conversations-are-now.0db54e": "Your conversations are now searchable from system Spotlight — tap a result to jump straight back in. Mark any conversation Private and it stays out of search entirely, with its media moved into Ari's encrypted store."
 }

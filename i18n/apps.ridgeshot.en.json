@@ -36,6 +36,7 @@
   "input-validation.5de1a2": "<span class=\"badge-icon\">&#x1f50d;</span> Input Validation",
   "ipad-any-way-you.3a62ad": "iPad, Any Way You Hold It",
   "iphone-and-ipad-universal.6b4998": "iPhone and iPad. Universal app — same purchase covers both. The game is portrait-only because the FOV crunch, reticle subtension spacing, and follow-cam waypoints are tuned for a vertical aspect. Built and tuned on iPhone 17 Pro Max; runs smoothly back to iPhone 12 and any iPad with iOS 17 or later.",
+  "is-ridgeshot-available-in.5fc13e": "Is Ridgeshot available in the European Union?",
   "just-shipped.243f10": "Just Shipped",
   "live-wind-speed-and.641867": "Live wind speed and heading on the HUD. A flag on the lane confirms it. Hold too long and your reticle starts to wander — controlled breath, clean break, or wait for the next pass. Your call.",
   "long-range-rifle-marksman.0faa9b": "Long-range rifle marksman in your pocket. A second-focal-plane Christmas-tree reticle, real bullet drop out to 800 yards, walking 3D wildlife, and 1v1 matches you can send through a Messages bubble. Quiet, patient, classy.",
@@ -73,6 +74,5 @@
   "why-does-my-reticle.ea9a33": "Why does my reticle drift while I'm holding?",
   "why-ridgeshot-reads-right.4a3f8a": "Why Ridgeshot Reads Right",
   "wind-patience.657adb": "Wind & Patience",
-  "yes-pass-and-play.81d0c1": "Yes — pass-and-play is fully offline. Two shooters, one device, no sign-in. Game Center matchmaking and iMessage challenges obviously need a connection to relay turns, but the whole simulation — ballistics, wind, animals, weather — runs on-device. No server round-trips per shot, no waiting for a leaderboard sync to take your next round.",
-  "is-ridgeshot-available-in.5fc13e": "Is Ridgeshot available in the European Union?"
+  "yes-pass-and-play.81d0c1": "Yes — pass-and-play is fully offline. Two shooters, one device, no sign-in. Game Center matchmaking and iMessage challenges obviously need a connection to relay turns, but the whole simulation — ballistics, wind, animals, weather — runs on-device. No server round-trips per shot, no waiting for a leaderboard sync to take your next round."
 }

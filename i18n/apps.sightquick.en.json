@@ -10,6 +10,8 @@
   "completely-your-photos-are.16b5c5": "Completely. Your photos are analyzed on-device and never uploaded anywhere. There's no account and no tracking — your zeroing sessions and rifle profiles live only on your phone. Purchases are handled by Apple; SightQuick never sees your payment details.",
   "do-i-need-to.3a507d": "Do I need to buy special targets?",
   "do-you-sell-targets.c7b758": "Do you sell targets to ranges & retailers?",
+  "download-now.6d56a8": "Download Now",
+  "download-on-app-store.cf50c2": "Download on App Store",
   "every-rifle-every-session.ee691e": "Every Rifle, Every Session",
   "everything-you-need-to.3a8a4f": "Everything you need to dial a precise zero — and nothing you don't",
   "exact-turret-clicks.0c5b61": "Exact Turret Clicks",
@@ -25,6 +27,7 @@
   "how-does-pricing-work.6c717e": "How does pricing work?",
   "how-it-works.8cecc8": "How It Works",
   "is-my-data-private.888dc3": "Is my data private?",
+  "is-sightquick-available-in.9ad552": "Is SightQuick available in the European Union?",
   "keep-a-profile-for.9c1be4": "Keep a profile for each rifle and scope, and a history of every zeroing session. Pick up right where you left off, compare groups, and watch your point of impact walk into the bullseye.",
   "moa-or-mil-turrets.b11cf0": "MOA or MIL turrets, at any distance in yards or meters — even pistol red dots at 10 yd. Shooting a bow? SightQuick measures your group and tells you which way to move your sight (\"chase the arrow\"). Imperial or metric, set to your region. Save a profile for every setup.",
   "no-sightquick-generates-the.569f6d": "No. SightQuick generates the target for you and you print it on plain paper with any home or office printer — Letter, A4, or Tabloid. Each target is uniquely coded so the app knows its exact size and geometry. There's nothing to order, ship, or store.",
@@ -63,8 +66,5 @@
   "your-first-target-is.7d68ed": "Your first target is free. After that, targets are print credits you buy in small consumable packs — 1 for $1.99, 5 for $8.99, or 20 for $29.99. Each credit creates one uniquely-coded target, good for a complete zeroing session you can re-photograph as you dial in. No subscriptions, no ads.",
   "your-phone-is-the.e3a9fd": "Your phone is the smartest tool on the bench. Print a uniquely-coded target, fire a 3-shot group, and snap a photo — SightQuick reads your shots with on-device computer vision and tells you exactly how many clicks to dial. No guesswork, no wasted ammo chasing a zero.",
   "your-photos-never-leave.2e873f": "Your photos never leave your device. No account, no tracking, no ads. SightQuick processes everything locally and keeps your zeroing history on your phone.",
-  "zero-in-minutes.f6176f": "Zero in minutes.",
-  "download-on-app-store.cf50c2": "Download on App Store",
-  "download-now.6d56a8": "Download Now",
-  "is-sightquick-available-in.9ad552": "Is SightQuick available in the European Union?"
+  "zero-in-minutes.f6176f": "Zero in minutes."
 }
