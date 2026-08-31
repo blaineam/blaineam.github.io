@@ -13,8 +13,8 @@
       "released": "2026-08",
       "updated": "2026-08",
       "version": "1.0.0",
-      "status": "live",
-      "note": "Word puzzles about handling letters with care — Wheel, Search, and Chain share one fair par-based score inside thirteen living worlds that react to the words you find. Generated music, Game Center daily leaderboards, fully offline. No ads, no IAP, no data collection."
+      "status": "in-review",
+      "note": "Word puzzles about handling letters with care — Wheel, Search, and Chain share one fair par-based score inside eighteen living worlds that react to the words you find. Generated music, Game Center daily leaderboards, fully offline. No ads, no IAP, no data collection."
     },
     {
       "id": "revela",
@@ -24,9 +24,9 @@
       "app_store_url": "",
       "icon_url": "/apps/revela/assets/images/icon.png",
       "released": "2026-07",
-      "updated": "2026-07",
-      "version": "0.4.0",
-      "status": "beta",
+      "updated": "2026-08",
+      "version": "1.0.0",
+      "status": "in-review",
       "note": "A film camera that lives in your phone — honest rolls with real develop times, full-resolution RAW-first lab scans, movie reels, an AirPlay projector, and an earned darkroom. No account, no tracking, one price."
     },
     {
@@ -37,9 +37,9 @@
       "app_store_url": "",
       "icon_url": "/apps/haven/assets/icon.png",
       "released": "2026-06",
-      "updated": "2026-06",
-      "version": "1.0.0",
-      "status": "beta",
+      "updated": "2026-08",
+      "version": "1.6.1",
+      "status": "live",
       "note": "Peer-to-peer, end-to-end encrypted, post-quantum social network for friends & family. No servers, no tracking, no ads. Nobody holds your keys."
     },
     {
@@ -108,8 +108,8 @@
       "app_store_url": "https://apps.apple.com/us/app/blip-stats/id6762329495",
       "icon_url": "/apps/blip/assets/images/icon.png",
       "released": "2026-04",
-      "updated": "2026-06",
-      "version": "1.6.1",
+      "updated": "2026-08",
+      "version": "2.0.1",
       "status": "live",
       "note": "macOS menu-bar network & S.M.A.R.T. monitor with live MTR traceroute map, per-volume speed tests, kill-process controls, and a full Shortcuts (App Intents) catalog."
     },
@@ -132,7 +132,7 @@
       "released": "2026-02",
       "updated": "2026-06",
       "version": "1.2.1",
-      "status": "in-review",
+      "status": "live",
       "note": "Smart photo & video optimizer that reclaims storage with quality-aware compression — keeps working via background continued-processing and is fully scriptable from Shortcuts. v1.2.0 live; v1.2.1 in review."
     },
     {
@@ -200,7 +200,7 @@
       "released": "2023-07",
       "updated": "2026-06",
       "version": "1.5.0",
-      "status": "in-review",
+      "status": "live",
       "apple_watch": true,
       "note": "Text-to-speech reader for any written content, with a standalone Apple Watch player that reads along through the built-in speaker and highlights each word. v1.4.4 live; v1.5.0 in review."
     },
