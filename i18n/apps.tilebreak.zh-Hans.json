@@ -69,7 +69,7 @@
   "the-window-resizes-freely.8bd34e": "窗口可在分屏浏览、台前调度和 iPad 多窗口中自由缩放——主界面、教程和标题主视觉都随窗口而非设备自适应，因此小窗口下依然整洁有序。",
   "three-global-leaderboards-best.1474f8": "三张全球排行榜：单局最高分、最快通关和最长连击。结算界面会在每项数据旁显示你的个人纪录，并以金色高亮新纪录。",
   "tilebreak-is-hand-built.a623b2": "Tilebreak 完全用 SwiftUI 和 SpriteKit 手工打造——没有 Unity，没有第三方 SDK，没有数据分析，没有广告。经典麻将牌面由 CoreGraphics 程序化绘制，因此在任何牌面尺寸下都清晰锐利。",
-  "tilebreak-isn-t-sold.aa6948": "Tilebreak 未在欧盟地区的 App Store 上架销售——根据欧盟《数字服务法》(DSA)，在欧盟销售需要公开包含个人联系方式的交易者信息，作为独立开发者，我选择不这样做。在其他所有国家和地区的 App Store 均可下载。",
+  "tilebreak-isn-t-sold.a2a848": "Tilebreak 未在欧盟地区的 App Store 上架销售——根据欧盟《数字服务法》(DSA)，在欧盟销售需要公开包含个人联系方式的交易者信息，作为独立开发者，我选择不这样做。目前在法国也暂不提供。在其他所有国家和地区的 App Store 均可下载。",
   "tilebreak-ships-with-seven.74135b": "Tilebreak 内置七种棋盘布局——从经典的“花园”，到砖块堆叠的“金字塔”，再到在屏幕上层层铺展的“拉丁十字”。无论选择哪一种，牌局都保证有解。",
   "tilebreak.cb8cd3": "🀄 Tilebreak",
   "time-and-combo-both.418814": "时间和连击同样重要。快速通关加上长连击，成绩相当可观；拖沓通关又频频断连，分数自然平平。用了提示？撤销过一步？扣了多少分，清清楚楚。",
