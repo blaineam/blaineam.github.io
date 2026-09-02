@@ -203,8 +203,16 @@
       <div class="feature-card">
         <div class="feature-icon">📡</div>
         <h3 class="feature-title" data-i18n="remote-dispatch.321d02">Remote Dispatch</h3>
-        <p class="feature-description" data-i18n="dispatch-prompts-from-ios.7a8888">
-          Dispatch prompts from iOS devices to remote Macs or other hardware for heavy processing. Seamless cross-device AI workflows.
+        <p class="feature-description" data-i18n="dispatch-prompts-from-ios.f16dd9">
+          Dispatch prompts from iOS devices to remote Macs or other hardware for heavy processing. On the Mac, Dispatch Priority sets when that work runs—immediately, only while you aren't prompting yourself, or only once the Mac has been idle for a few minutes.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🛜</div>
+        <h3 class="feature-title" data-i18n="direct-device-link.bbcd75">Direct Device Link</h3>
+        <p class="feature-description" data-i18n="with-ari-open-on.cf27f4">
+          With Ari open on two of your devices on the same Wi-Fi, a conversation travels straight between them in about a second instead of waiting on iCloud—attachments and all. iCloud stays the system of record and still carries anything the local link misses.
         </p>
       </div>
 
@@ -406,9 +414,19 @@
         <span class="faq-icon">▼</span>
       </button>
       <div class="faq-answer">
-        <p data-i18n="conversations-sync-across-all.80d2f1">
+        <p data-i18n="conversations-sync-across-all.2f9544">
           Conversations sync across all your Apple devices via iCloud. Start a chat on your iPhone and continue it
-          on your iPad or Mac seamlessly. All your conversation history stays in sync.
+          on your iPad or Mac seamlessly. When two of your devices are awake on the same Wi-Fi, Ari also hands the
+          conversation straight across the local network, so it lands in about a second instead of waiting for the
+          next iCloud round trip.
+        </p>
+        <p data-i18n="the-pictures-and-files.22ac31">
+          The pictures and files in a conversation travel the same way, not just their names—the receiving device
+          asks only for what it's missing, and every file is verified against a hash before it's kept. Anything
+          over 16 MB is deliberately left to iCloud, which resumes and survives a quit. iCloud remains the system
+          of record either way: a device that's asleep, on cellular, or on another network catches up exactly as it
+          always has. If you'd rather everything went through the cloud, the local link can be switched off in
+          Settings → API Settings → Direct Device Link.
         </p>
       </div>
     </div>
@@ -453,6 +471,7 @@
           <li data-i18n-html="fortress-mode-lock-down.2900b6"><strong>Fortress Mode</strong> — Lock down the app to only allow connections to secure, vetted model platforms. When enabled, Ari Helper restricts which providers can be used, ensuring your sensitive prompts are only sent to trusted endpoints. IT administrators can also enforce Fortress Mode across an organization via Apple MDM profiles.</li>
           <li data-i18n-html="confirmation-dialogs-before-sending.f86ec0"><strong>Confirmation dialogs</strong> — Before sending prompts to external providers, Ari Helper can present confirmation dialogs so you always have a chance to review what's being sent and to which provider before any data leaves your device.</li>
           <li data-i18n-html="encrypted-private-conversations-sens.fe38ec"><strong>Encrypted Private Conversations</strong> — Sensitive chats can be encrypted and locked behind biometric authentication (Face ID or Touch ID). Private conversations are encrypted on device, so even if someone has access to your device they cannot read them without your biometric approval.</li>
+          <li data-i18n-html="encrypted-local-sync-when.36cd3d"><strong>Encrypted local sync</strong> — When a conversation moves directly between your own devices over Wi-Fi, a private conversation crosses the link as exactly the encrypted bytes it is on disk; nothing is decrypted in transit, and the key that opens it never leaves your iCloud keychain. The link itself is TLS, and only devices signed in to your own iCloud account can complete the handshake.</li>
         </ul>
         <p data-i18n="whether-you-re-running.ddec8d">
           Whether you're running models entirely on device, connecting to a self-hosted Ollama instance on your network, or using
@@ -466,7 +485,7 @@
         <span class="faq-icon">▼</span>
       </button>
       <div class="faq-answer">
-        <p data-i18n="ari-helper-isn-t.55d324">Ari Helper isn't sold on the App Store in the European Union — under the EU Digital Services Act, selling there requires publishing a trader listing with personal contact details, which I've opted out of as an independent developer. It's available in every other App Store territory.</p>
+        <p data-i18n="ari-helper-isn-t.b45e34">Ari Helper isn't sold on the App Store in the European Union — under the EU Digital Services Act, selling there requires publishing a trader listing with personal contact details, which I've opted out of as an independent developer. It's also not currently offered in France or China. It's available in every other App Store territory.</p>
       </div>
     </div>
   </section>
