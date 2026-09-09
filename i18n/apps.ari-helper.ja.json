@@ -13,7 +13,7 @@
   "apps.2d61f2": "← アプリ",
   "ari-helper-is-built.f17bb6": "Ari Helperは何層ものプライバシー保護とセキュリティ対策を備え、あなたのデータを完全にコントロールできるよう設計されています：",
   "ari-helper-is-designed.8ee226": "Ari Helperは、iOS、iPadOS、macOSで機能が完全に一致する真のユニバーサルアプリとして設計されています。すべての機能、すべての性能、細部にいたるまで——妥協なく、お持ちのすべてのApple製デバイスでご利用いただけます。",
-  "ari-helper-isn-t.b45e34": "Ari Helperは欧州連合（EU）のApp Storeでは販売していません。EUのデジタルサービス法（DSA）では、EU内で販売するには個人の連絡先を含む事業者情報の公開が必要なため、個人開発者としてこれを見送りました。フランスと中国でも現在は提供していません。その他すべての国と地域のApp Storeでご利用いただけます。",
+  "yes-ari-helper-is.0f9dc6": "はい。Ari Helperはフランスを含む欧州連合（EU）の全域で販売しています。中国本土を除き、Appleが提供するすべての国と地域のApp Storeでご利用いただけます。中国本土は生成AIコンテンツに独自の規制があるためです。",
   "ari-helper-supports-local.85ee79": "Ari Helperは、デバイス上で動くローカルモデル（内蔵のモデルマネージャからダウンロード）、ネットワーク上で動作するOllamaのモデル、OpenAIのGPTモデル、Anthropic Claude、Google Gemini、XAI Grokに対応しています。クラウドプロバイダはご自身のAPIキーでご利用いただけます。",
   "ari-on-apple-watch.f45590": "Apple WatchのAri",
   "ask-any-model-apple.c636ed": "どのモデルにも質問できます——Apple Intelligence、ダウンロードしたローカルモデル、お使いのクラウドプロバイダのいずれでも。書類を分析し、画像を生成・編集し、回答を読み上げ、コーディングタスクを実行し、iPhoneからMacへ処理を任せることも。すべての操作はShortcutsで連携できます。",

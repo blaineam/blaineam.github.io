@@ -17,7 +17,6 @@
   "create-stunning-photos-and.85df29": "Create stunning photos and videos that showcase depth in unique ways. Swipe between beautiful color themes to find the perfect visualization for each moment.",
   "deepsi-includes-multiple-built.cf8af1": "DeepSi includes multiple built-in color themes that you can swipe through in real-time. Each theme visualizes depth data differently, from thermal-inspired gradients to artistic color palettes.",
   "deepsi-is-perfect-for.41c9b8": "DeepSi is perfect for creative photography projects, scientific visualization, navigating in the dark, understanding how LiDAR works, or simply experiencing your environment from a fascinating new perspective. Artists, educators, and curious minds all find unique ways to use depth sensing.",
-  "deepsi-isn-t-sold.044c81": "DeepSi isn't sold on the App Store in the European Union — under the EU Digital Services Act, selling there requires publishing a trader listing with personal contact details, which I've opted out of as an independent developer. It's also not currently offered in France. It's available in every other App Store territory.",
   "deepsi-requires-a-device.ae22ed": "DeepSi requires a device with a LiDAR sensor. This includes iPhone 12 Pro and later Pro models, iPad Pro (2020 and later), and other compatible Apple devices with depth-sensing hardware.",
   "deepsi-transforms-your-phone.4cfa95": "DeepSi transforms your phone's LiDAR sensor into a unique camera that sees depth instead of light. Experience the world in a completely new way that traditional cameras can't capture.",
   "deepsi.ab40b3": "📡 DeepSi",
@@ -74,6 +73,7 @@
   "where-are-my-photos.59433f": "Where are my photos and videos saved?",
   "whether-you-re-exploring.b4599d": "Whether you're exploring at night, moving through a dark room, or just curious about how depth sensing works, DeepSi lets you see when traditional vision fails.",
   "why-choose-deepsi.d18d6c": "Why Choose DeepSi",
+  "yes-deepsi-is-on.67af63": "Yes. DeepSi is on the App Store everywhere in the European Union, France included. It's available in every App Store territory Apple offers.",
   "yes-tap-and-hold.c8211b": "Yes! Tap and hold to record depth videos with audio. This lets you create immersive clips that combine the unique depth visualization with sound for a complete sensory experience.",
   "your-chosen-depth-color.8aa041": "Your chosen depth color theme now persists across launches — pick from all 12 themes once and DeepSi remembers it."
 }

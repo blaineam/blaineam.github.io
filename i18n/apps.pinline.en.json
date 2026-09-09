@@ -52,7 +52,6 @@
   "pass-and-play-hand.bda123": "<strong>Pass-and-play.</strong> Hand the phone across the couch. A per-arrow handoff screen shows whose bow is up, in their colour. No sign-in, fully offline.",
   "pass-play.be124b": "Pass & Play",
   "pin-the-line-win.1bd25f": "Pin the Line. Win the Match.",
-  "pinline-isn-t-sold.5485e9": "Pinline isn't sold on the App Store in the European Union — under the EU Digital Services Act, selling there requires publishing a trader listing with personal contact details, which I've opted out of as an independent developer. It's also not currently offered in France. It's available in every other App Store territory.",
   "pinline.929bc6": "🎯 Pinline",
   "portfolio.036b18": "Portfolio",
   "privacy-manifest.5063fd": "<span class=\"badge-icon\">&#x1f4cb;</span> Privacy Manifest",
@@ -83,5 +82,6 @@
   "why-does-my-pin.cacfb8": "Why does my pin wander while I'm holding?",
   "why-pinline-hits-different.254d14": "Why Pinline Hits Different",
   "wind-speed-and-direction.d9678b": "Wind speed and direction read out live on the HUD. Aim INTO the wind to drift back to the bull. The flag on the lane tells you where it's blowing.",
-  "yes-pass-and-play.3bd176": "Yes — Pass-and-play mode is fully offline. Two shooters, one device, no sign-in. Online (Game Center) and iMessage matches obviously need a connection to relay turns, but everything in-game runs locally."
+  "yes-pass-and-play.3bd176": "Yes — Pass-and-play mode is fully offline. Two shooters, one device, no sign-in. Online (Game Center) and iMessage matches obviously need a connection to relay turns, but everything in-game runs locally.",
+  "yes-pinline-is-on.4f2d86": "Yes. Pinline is on the App Store everywhere in the European Union, France included. It's available in every App Store territory Apple offers."
 }
