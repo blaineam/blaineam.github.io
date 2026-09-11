@@ -271,7 +271,7 @@
   "sandboxed-execution.1cbe47": "<span class=\"badge-icon\">&#x2705;</span> Esecuzione in sandbox",
   "save-over-68-compared.2c1795": "Risparmia oltre il 68% rispetto al piano mensile",
   "scaleway.29ae71": "Scaleway",
-  "schedule-automated-sync-operations.459b29": "Pianifica sincronizzazioni automatiche con filtri avanzati e backup incrementali. Supporta il monitoraggio delle modifiche ai file quasi in tempo reale, così i tuoi dati si sincronizzano pochi istanti dopo ogni cambiamento. Mantieni i tuoi dati al sicuro su tutti i dispositivi con trasferimenti intelligenti ed efficienti.",
+  "schedule-automated-sync-operations.e46125": "Pianifica sincronizzazioni automatiche con filtri avanzati e backup incrementali: un'intera cartella o un singolo file. Supporta il monitoraggio delle modifiche ai file quasi in tempo reale, così i tuoi dati si sincronizzano pochi istanti dopo ogni cambiamento. Mantieni i tuoi dati al sicuro su tutti i dispositivi con trasferimenti intelligenti ed efficienti.",
   "schedule-options-set-syncs.cec558": "<strong>Opzioni di pianificazione</strong> — Imposta sincronizzazioni a intervalli personalizzati oppure usa il monitoraggio dei file quasi in tempo reale per sincronizzare pochi istanti dopo il rilevamento delle modifiche. Puoi persino avviarle da Shortcuts",
   "scheduled-sync-tasks-all.5fc3d9": "<strong>Attività di sincronizzazione pianificate</strong> — Tutte le tue configurazioni di sincronizzazione automatica, le pianificazioni e le regole di filtro.",
   "screenshots.597b63": "Screenshot",

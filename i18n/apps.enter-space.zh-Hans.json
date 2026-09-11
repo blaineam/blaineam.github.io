@@ -271,7 +271,7 @@
   "sandboxed-execution.1cbe47": "<span class=\"badge-icon\">&#x2705;</span> 沙盒化运行",
   "save-over-68-compared.2c1795": "相比按月订阅立省 68% 以上",
   "scaleway.29ae71": "Scaleway",
-  "schedule-automated-sync-operations.459b29": "安排自动同步任务，支持高级过滤与增量备份。支持近乎实时的文件变动监控，数据一有改动，片刻之后即完成同步。智能高效的传输，让你的数据在所有设备上都安然无恙。",
+  "schedule-automated-sync-operations.e46125": "安排自动同步任务，支持高级过滤与增量备份——可以是整个文件夹，也可以是单个文件。支持近乎实时的文件变动监控，数据一有改动，片刻之后即完成同步。智能高效的传输，让你的数据在所有设备上都安然无恙。",
   "schedule-options-set-syncs.cec558": "<strong>计划选项</strong> — 让同步按自定义间隔运行，或使用近乎实时的文件监控，在检测到变动后片刻即开始同步。甚至还能通过 Apple Shortcuts 触发",
   "scheduled-sync-tasks-all.5fc3d9": "<strong>计划同步任务</strong> — 你的全部自动同步配置、计划安排和过滤规则。",
   "screenshots.597b63": "屏幕截图",
