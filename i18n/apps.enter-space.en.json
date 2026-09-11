@@ -271,7 +271,7 @@
   "sandboxed-execution.1cbe47": "<span class=\"badge-icon\">&#x2705;</span> Sandboxed Execution",
   "save-over-68-compared.2c1795": "Save over 68% compared to monthly",
   "scaleway.29ae71": "Scaleway",
-  "schedule-automated-sync-operations.459b29": "Schedule automated sync operations with advanced filtering and incremental backups. Supports near realtime file change monitoring so your data syncs moments after it changes. Keep your data safe across all devices with smart, efficient transfers.",
+  "schedule-automated-sync-operations.e46125": "Schedule automated sync operations with advanced filtering and incremental backups — a whole folder, or a single file. Supports near realtime file change monitoring so your data syncs moments after it changes. Keep your data safe across all devices with smart, efficient transfers.",
   "schedule-options-set-syncs.cec558": "<strong>Schedule options</strong> — Set syncs to run on custom intervals, or use near-realtime file monitoring to sync moments after changes are detected. They can even be triggered from Apple Shortcuts",
   "scheduled-sync-tasks-all.5fc3d9": "<strong>Scheduled sync tasks</strong> — All of your automated sync configurations, schedules, and filtering rules.",
   "screenshots.597b63": "Screenshots",

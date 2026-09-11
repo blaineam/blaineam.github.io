@@ -271,7 +271,7 @@
   "sandboxed-execution.1cbe47": "<span class=\"badge-icon\">&#x2705;</span> 샌드박스 실행",
   "save-over-68-compared.2c1795": "월간 결제 대비 68% 이상 절약",
   "scaleway.29ae71": "Scaleway",
-  "schedule-automated-sync-operations.459b29": "고급 필터링과 증분 백업으로 자동 동기화 작업을 예약하세요. 거의 실시간에 가까운 파일 변경 모니터링을 지원해, 변경된 지 얼마 지나지 않아 데이터가 동기화됩니다. 스마트하고 효율적인 전송으로 모든 기기에서 데이터를 안전하게 지키세요.",
+  "schedule-automated-sync-operations.e46125": "고급 필터링과 증분 백업으로 자동 동기화 작업을 예약하세요. 폴더 전체도, 파일 하나도 가능합니다. 거의 실시간에 가까운 파일 변경 모니터링을 지원해, 변경된 지 얼마 지나지 않아 데이터가 동기화됩니다. 스마트하고 효율적인 전송으로 모든 기기에서 데이터를 안전하게 지키세요.",
   "schedule-options-set-syncs.cec558": "<strong>예약 옵션</strong> — 원하는 주기로 동기화를 실행하거나, 거의 실시간에 가까운 파일 모니터링으로 변경이 감지된 직후 동기화하세요. Apple Shortcuts에서 실행할 수도 있습니다",
   "scheduled-sync-tasks-all.5fc3d9": "<strong>예약된 동기화 작업</strong> — 자동 동기화 구성, 일정, 필터링 규칙 전체입니다.",
   "screenshots.597b63": "스크린샷",

@@ -271,7 +271,7 @@
   "sandboxed-execution.1cbe47": "<span class=\"badge-icon\">&#x2705;</span> Ejecución en sandbox",
   "save-over-68-compared.2c1795": "Ahorra más de un 68 % frente al plan mensual",
   "scaleway.29ae71": "Scaleway",
-  "schedule-automated-sync-operations.459b29": "Programa sincronizaciones automáticas con filtrado avanzado y copias de seguridad incrementales. Admite la monitorización de cambios en archivos casi en tiempo real, para que tus datos se sincronicen instantes después de modificarse. Mantén tus datos a salvo en todos tus dispositivos con transferencias inteligentes y eficientes.",
+  "schedule-automated-sync-operations.e46125": "Programa sincronizaciones automáticas con filtrado avanzado y copias de seguridad incrementales: una carpeta entera o un solo archivo. Admite la monitorización de cambios en archivos casi en tiempo real, para que tus datos se sincronicen instantes después de modificarse. Mantén tus datos a salvo en todos tus dispositivos con transferencias inteligentes y eficientes.",
   "schedule-options-set-syncs.cec558": "<strong>Opciones de programación</strong> — Configura las sincronizaciones para que se ejecuten en intervalos personalizados o usa la monitorización de archivos casi en tiempo real para sincronizar instantes después de detectar los cambios. Incluso se pueden activar desde Apple Shortcuts",
   "scheduled-sync-tasks-all.5fc3d9": "<strong>Tareas de sincronización programadas</strong> — Todas tus configuraciones de sincronización automática, sus horarios y sus reglas de filtrado.",
   "screenshots.597b63": "Capturas de pantalla",
