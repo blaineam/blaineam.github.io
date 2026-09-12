@@ -1244,7 +1244,17 @@
             <script>
               (function () {
                 // Haven invite link is split + base64-encoded so plaintext crawlers find nothing scrape-able.
-                var p = ["aHR0cHM6Ly93", "ZW1pbGxlci5j", "b20vYXBwcy9o", "YXZlbi9vcGVu", "Lz9kPWI5ZWU5", "ZTk5NTVhZTI0", "NDJkMzAzODZh", "Y2ViYzMzNjFm", "MTRiN2U5ZGNk", "Y2VmY2JkMzkw", "N2QyNTg4NWJm", "MWJmODgsMDky", "NjgyMTM4MGJl", "ZTU1NmZiNDJk", "Yzk0Y2YxODQz", "MjdiMzczZjZk", "MWI4MGM4Yzc2", "NzllNjBhM2E2", "ZDM3MWRjMyNa", "M1JGVlhWT0lJ", "N1VXRFRMQkdZ", "TzNNNDJWWEFM", "Q1ZXRDdQM0RK", "SU5VVDQ3UUlE", "Q1BNQlNRLkQ3", "RlBNRFZORllE", "UzdOMjM3TFA2", "SDM3U1JN"];
+                var p = ["aHR0cHM6Ly93", "ZW1pbGxlci5j", "b20vYXBwcy9o", "YXZlbi9vcGVu", "Lz9kPTA5MjY4", "MjEzODBiZWU1",
+                    "NTZmYjQyZGM5", "NGNmMTg0MzI3", "YjM3M2Y2ZDFi", "ODBjOGM3Njc5", "ZTYwYTNhNmQz", "NzFkYzMsYjll",
+                    "ZTllOTk1NWFl", "MjQ0MmQzMDM4", "NmFjZWJjMzM2", "MWYxNGI3ZTlk", "Y2RjZWZjYmQz", "OTA3ZDI1ODg1",
+                    "YmYxYmY4OCZ0", "PUFjN2lXdDZ1", "UWo5TERtc0pz", "TzJ6bXEzQXNW", "YkQtX1kwb2JT", "ZlB3UU1UMkJs",
+                    "SDhyMkRxMHVC", "eS0zV19yZjQt", "X3lpOFlJaW9P", "UUVoN05WZnJ5", "U0h5ZUdaenZT", "NFZzdjVSVHpS",
+                    "UUNtN0thcXVS", "am5RbWphZ0FB", "QUFBQkFBQUFR", "QUFBQURObVpE", "RXpaR1kxWW1R", "MlpUSXlZMkU1",
+                    "TnpoalpETmhZ", "amRoWXpWak9X", "TTJNREEyTWpJ", "eU1UaGlOMkUw", "WkRBek9HTXla", "V1JoWW1ZNVlt",
+                    "VmhaV000Tnpj", "Q0FBQUFDU2FD", "RTRDLTVWYjdR", "dHlVenhoREo3", "Tno5dEc0REl4", "MmVlWUtPbTAz",
+                    "SGNPNTdsNlpW", "YTRrUXRNRGhx", "enJ3ellmRkxm", "cDNOenZ5OU9R", "ZlNXSVdfR19p", "QSNaM1JGVlhW",
+                    "T0lJN1VXRFRM", "QkdZTzNNNDJW", "WEFMQ1ZXRDdQ", "M0RKSU5VVDQ3", "UUlEQ1BNQlNR", "LkQ3RlBNRFZO",
+                    "RllEUzdOMjM3", "TFA2SDM3U1JN"];
                 var btn = document.getElementById("havenBtn");
                 var resolve = function () { btn.setAttribute("href", atob(p.join(""))); };
                 btn.addEventListener("mouseenter", resolve, { once: true });
