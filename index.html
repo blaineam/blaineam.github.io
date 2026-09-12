@@ -1077,6 +1077,45 @@
         </div>
         <div id="links">
           <div class="liquidGlass button">
+            <a id="havenBtn" href="#" title="Haven" aria-label="Haven" rel="nofollow noreferrer noopener">
+              <!-- Haven's constellation mark, same geometry as the app icon. The viewBox is cropped to the
+                   mark's bounding box so it fills the button like the other glyphs do. The <title> child is
+                   what actually surfaces the tooltip when the pointer is over the SVG itself. -->
+              <svg class="icon" role="img" viewBox="15 14.5 70 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <title>Haven</title>
+                <g stroke="currentColor" stroke-opacity=".65" stroke-width="4" stroke-linecap="round">
+                  <path d="M50 53V24M50 53L23 46M50 53l27-7M50 53L34 75M50 53l16 22M50 24L23 46M50 24l27 22M23 46l11 29M77 46L66 75"/>
+                </g>
+                <g fill="currentColor">
+                  <circle cx="50" cy="53" r="11"/><circle cx="50" cy="24" r="8"/><circle cx="23" cy="46" r="8"/>
+                  <circle cx="77" cy="46" r="8"/><circle cx="34" cy="75" r="8"/><circle cx="66" cy="75" r="8"/>
+                </g>
+              </svg>
+            </a>
+            <script>
+              (function () {
+                // Haven invite link is split + base64-encoded so plaintext crawlers find nothing scrape-able.
+                var p = ["aHR0cHM6Ly93", "ZW1pbGxlci5j", "b20vYXBwcy9o", "YXZlbi9vcGVu", "Lz9kPTA5MjY4", "MjEzODBiZWU1",
+                    "NTZmYjQyZGM5", "NGNmMTg0MzI3", "YjM3M2Y2ZDFi", "ODBjOGM3Njc5", "ZTYwYTNhNmQz", "NzFkYzMsYjll",
+                    "ZTllOTk1NWFl", "MjQ0MmQzMDM4", "NmFjZWJjMzM2", "MWYxNGI3ZTlk", "Y2RjZWZjYmQz", "OTA3ZDI1ODg1",
+                    "YmYxYmY4OCZ0", "PUFjN2lXdDZ1", "UWo5TERtc0pz", "TzJ6bXEzQXNW", "YkQtX1kwb2JT", "ZlB3UU1UMkJs",
+                    "SDhyMkRxMHVC", "eS0zV19yZjQt", "X3lpOFlJaW9P", "UUVoN05WZnJ5", "U0h5ZUdaenZT", "NFZzdjVSVHpS",
+                    "UUNtN0thcXVS", "am5RbWphZ0FB", "QUFBQkFBQUFR", "QUFBQURObVpE", "RXpaR1kxWW1R", "MlpUSXlZMkU1",
+                    "TnpoalpETmhZ", "amRoWXpWak9X", "TTJNREEyTWpJ", "eU1UaGlOMkUw", "WkRBek9HTXla", "V1JoWW1ZNVlt",
+                    "VmhaV000Tnpj", "Q0FBQUFDU2FD", "RTRDLTVWYjdR", "dHlVenhoREo3", "Tno5dEc0REl4", "MmVlWUtPbTAz",
+                    "SGNPNTdsNlpW", "YTRrUXRNRGhx", "enJ3ellmRkxm", "cDNOenZ5OU9R", "ZlNXSVdfR19p", "QSNaM1JGVlhW",
+                    "T0lJN1VXRFRM", "QkdZTzNNNDJW", "WEFMQ1ZXRDdQ", "M0RKSU5VVDQ3", "UUlEQ1BNQlNR", "LkQ3RlBNRFZO",
+                    "RllEUzdOMjM3", "TFA2SDM3U1JN"];
+                var btn = document.getElementById("havenBtn");
+                var resolve = function () { btn.setAttribute("href", atob(p.join(""))); };
+                btn.addEventListener("mouseenter", resolve, { once: true });
+                btn.addEventListener("focus", resolve, { once: true });
+                btn.addEventListener("touchstart", resolve, { once: true, passive: true });
+                btn.addEventListener("click", function (e) { resolve(); });
+              })();
+            </script>
+          </div>
+          <div class="liquidGlass button">
             <script>
               document.write(
                 "<" +
@@ -1205,45 +1244,6 @@
                 <path fill-rule="evenodd" clip-rule="evenodd" d="M20.9992 5.95846C21.0087 6.565 20.9333 7.32649 20.8658 7.8807C20.8395 8.09686 20.8037 8.27676 20.7653 8.42453C21.6227 10.01 22 11.9174 22 14C22 16.4684 20.8127 18.501 18.9638 19.8871C17.1319 21.2605 14.6606 22 12 22C9.33939 22 6.86809 21.2605 5.0362 19.8871C3.18727 18.501 2 16.4684 2 14C2 11.9174 2.37732 10.01 3.23472 8.42452C3.19631 8.27676 3.16055 8.09685 3.13422 7.8807C3.06673 7.32649 2.99133 6.565 3.00081 5.95846C3.01149 5.27506 3.10082 4.5917 3.19988 3.91379C3.24569 3.60028 3.31843 3.30547 3.65883 3.11917C4.00655 2.92886 4.37274 2.99981 4.73398 3.1021C5.95247 3.44713 7.09487 3.93108 8.16803 4.51287C9.2995 4.17287 10.5783 4 12 4C13.4217 4 14.7005 4.17287 15.832 4.51287C16.9051 3.93108 18.0475 3.44713 19.266 3.1021C19.6273 2.99981 19.9935 2.92886 20.3412 3.11917C20.6816 3.30547 20.7543 3.60028 20.8001 3.91379C20.8992 4.5917 20.9885 5.27506 20.9992 5.95846ZM20 14C20 12.3128 19.6122 10 17.5 10C16.5478 10 15.6474 10.2502 14.7474 10.5004C13.8482 10.7502 12.9495 11 12 11C11.0505 11 10.1518 10.7502 9.25263 10.5004C8.35261 10.2502 7.45216 10 6.5 10C4.39379 10 4 12.3197 4 14C4 15.7636 4.82745 17.231 6.23588 18.2869C7.66135 19.3556 9.69005 20 12 20C14.3099 20 16.3386 19.3555 17.7641 18.2869C19.1726 17.231 20 15.7636 20 14ZM10 14.5C10 15.8807 9.32843 17 8.5 17C7.67157 17 7 15.8807 7 14.5C7 13.1193 7.67157 12 8.5 12C9.32843 12 10 13.1193 10 14.5ZM15.5 17C16.3284 17 17 15.8807 17 14.5C17 13.1193 16.3284 12 15.5 12C14.6716 12 14 13.1193 14 14.5C14 15.8807 14.6716 17 15.5 17Z" fill="currentColor" />
               </svg>
             </a>
-          </div>
-          <div class="liquidGlass button">
-            <a id="havenBtn" href="#" title="Haven" aria-label="Haven" rel="nofollow noreferrer noopener">
-              <!-- Haven's constellation mark, same geometry as the app icon. The viewBox is cropped to the
-                   mark's bounding box so it fills the button like the other glyphs do. The <title> child is
-                   what actually surfaces the tooltip when the pointer is over the SVG itself. -->
-              <svg class="icon" role="img" viewBox="15 14.5 70 70" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <title>Haven</title>
-                <g stroke="currentColor" stroke-opacity=".65" stroke-width="4" stroke-linecap="round">
-                  <path d="M50 53V24M50 53L23 46M50 53l27-7M50 53L34 75M50 53l16 22M50 24L23 46M50 24l27 22M23 46l11 29M77 46L66 75"/>
-                </g>
-                <g fill="currentColor">
-                  <circle cx="50" cy="53" r="11"/><circle cx="50" cy="24" r="8"/><circle cx="23" cy="46" r="8"/>
-                  <circle cx="77" cy="46" r="8"/><circle cx="34" cy="75" r="8"/><circle cx="66" cy="75" r="8"/>
-                </g>
-              </svg>
-            </a>
-            <script>
-              (function () {
-                // Haven invite link is split + base64-encoded so plaintext crawlers find nothing scrape-able.
-                var p = ["aHR0cHM6Ly93", "ZW1pbGxlci5j", "b20vYXBwcy9o", "YXZlbi9vcGVu", "Lz9kPTA5MjY4", "MjEzODBiZWU1",
-                    "NTZmYjQyZGM5", "NGNmMTg0MzI3", "YjM3M2Y2ZDFi", "ODBjOGM3Njc5", "ZTYwYTNhNmQz", "NzFkYzMsYjll",
-                    "ZTllOTk1NWFl", "MjQ0MmQzMDM4", "NmFjZWJjMzM2", "MWYxNGI3ZTlk", "Y2RjZWZjYmQz", "OTA3ZDI1ODg1",
-                    "YmYxYmY4OCZ0", "PUFjN2lXdDZ1", "UWo5TERtc0pz", "TzJ6bXEzQXNW", "YkQtX1kwb2JT", "ZlB3UU1UMkJs",
-                    "SDhyMkRxMHVC", "eS0zV19yZjQt", "X3lpOFlJaW9P", "UUVoN05WZnJ5", "U0h5ZUdaenZT", "NFZzdjVSVHpS",
-                    "UUNtN0thcXVS", "am5RbWphZ0FB", "QUFBQkFBQUFR", "QUFBQURObVpE", "RXpaR1kxWW1R", "MlpUSXlZMkU1",
-                    "TnpoalpETmhZ", "amRoWXpWak9X", "TTJNREEyTWpJ", "eU1UaGlOMkUw", "WkRBek9HTXla", "V1JoWW1ZNVlt",
-                    "VmhaV000Tnpj", "Q0FBQUFDU2FD", "RTRDLTVWYjdR", "dHlVenhoREo3", "Tno5dEc0REl4", "MmVlWUtPbTAz",
-                    "SGNPNTdsNlpW", "YTRrUXRNRGhx", "enJ3ellmRkxm", "cDNOenZ5OU9R", "ZlNXSVdfR19p", "QSNaM1JGVlhW",
-                    "T0lJN1VXRFRM", "QkdZTzNNNDJW", "WEFMQ1ZXRDdQ", "M0RKSU5VVDQ3", "UUlEQ1BNQlNR", "LkQ3RlBNRFZO",
-                    "RllEUzdOMjM3", "TFA2SDM3U1JN"];
-                var btn = document.getElementById("havenBtn");
-                var resolve = function () { btn.setAttribute("href", atob(p.join(""))); };
-                btn.addEventListener("mouseenter", resolve, { once: true });
-                btn.addEventListener("focus", resolve, { once: true });
-                btn.addEventListener("touchstart", resolve, { once: true, passive: true });
-                btn.addEventListener("click", function (e) { resolve(); });
-              })();
-            </script>
           </div>
           <div class="liquidGlass button">
             <a id="sigBtn" href="#" title="signal" rel="nofollow noreferrer noopener">
