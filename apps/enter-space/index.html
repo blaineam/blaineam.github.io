@@ -12,63 +12,555 @@
   <meta property="og:image" content="https://wemiller.com/apps/enter-space/assets/images/poster.jpg">
   <link rel="stylesheet" href="../app-showcase.css">
   <style>
-    /* Enter Space Specific Styling */
+    /* ==========================================================================
+       Enter Space — bespoke page theme.
+       The marketing renders are all composited on the same deep-space gradient
+       (#0a0a2e → #21216f), so the page is built on that exact gradient: the
+       screenshots have no visible frame, they just sit in the sky.
+       ========================================================================== */
     :root {
-      --app-primary: #667eea;
-      --app-secondary: #764ba2;
-      --app-accent: #f093fb;
+      --app-primary: #4f6bf6;
+      --app-secondary: #6d4df0;
+      --app-accent: #6ee7ff;
+
+      --es-void: #0a0a2e;
+      --es-deep: #141451;
+      --es-horizon: #21216f;
+      --es-ink: #f4f6ff;
+      --es-ink-dim: rgba(226, 232, 255, 0.72);
+      --es-ink-faint: rgba(198, 208, 245, 0.55);
+      --es-line: rgba(140, 160, 255, 0.18);
+      --es-glass: rgba(120, 140, 255, 0.07);
+      --es-blue: #6f8cff;
+      --es-cyan: #6ee7ff;
     }
 
-    .hero {
-      background: linear-gradient(135deg, var(--app-primary) 0%, var(--app-secondary) 100%);
-      color: white;
+    /* The shared stylesheet paints h1 with a gradient text-fill; on the dark
+       bands we want plain luminous type instead. */
+    .es-band h1,
+    .es-band h2,
+    .es-band h3 {
+      background: none;
+      -webkit-text-fill-color: currentColor;
+      color: var(--es-ink);
     }
+    .es-band p { color: var(--es-ink-dim); }
 
-    .hero-title,
-    .hero-subtitle {
-      color: white;
-      -webkit-text-fill-color: white;
-    }
-
-    .hero-description {
-      color: rgba(255, 255, 255, 0.9);
-    }
-
-    /* Soon Badge - easily add/remove by adding class to feature-card or inline */
-    .soon-badge {
-      display: inline-block;
-      background: linear-gradient(135deg, var(--app-primary), var(--app-secondary));
-      color: white;
-      font-size: 0.65rem;
-      font-weight: 600;
-      padding: 0.2em 0.5em;
-      border-radius: 4px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      vertical-align: middle;
-      margin-left: 0.5em;
-    }
-
-    .feature-card.has-soon-badge {
+    /* --------------------------------------------------------------- bands -- */
+    .es-band {
       position: relative;
+      isolation: isolate;
+      background:
+        radial-gradient(90rem 50rem at 78% -10%, rgba(109, 77, 240, 0.35), transparent 60%),
+        radial-gradient(70rem 45rem at 8% 108%, rgba(79, 107, 246, 0.28), transparent 62%),
+        linear-gradient(150deg, var(--es-void) 0%, var(--es-deep) 52%, var(--es-horizon) 100%);
+      color: var(--es-ink);
+      overflow: clip;
     }
 
-    .feature-card.has-soon-badge::after {
-      content: "Soon";
+    /* Soft seam so the dark stretch doesn't slam into the themed sections. */
+    .es-band-end::after,
+    .es-band-start::before {
+      content: "";
       position: absolute;
-      top: 12px;
-      right: 12px;
-      background: linear-gradient(135deg, var(--app-primary), var(--app-secondary));
-      color: white;
-      font-size: 0.65rem;
-      font-weight: 600;
-      padding: 0.25em 0.6em;
-      border-radius: 4px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
+      left: 0;
+      right: 0;
+      height: 90px;
+      pointer-events: none;
+      z-index: 2;
+    }
+    .es-band-end::after { bottom: 0; background: linear-gradient(to bottom, transparent, var(--bg-primary)); }
+    .es-band-start::before { top: 0; background: linear-gradient(to top, transparent, var(--bg-primary)); }
+
+    .es-stars {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0.9;
+    }
+    .es-stars circle { fill: #fff; }
+    .es-twinkle { animation: esTwinkle 5.5s ease-in-out infinite; }
+    @keyframes esTwinkle {
+      0%, 100% { opacity: 0.25; }
+      50%      { opacity: 1; }
     }
 
-    /* Comparison Table */
+    .es-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: clamp(4rem, 9vw, 7.5rem) clamp(1.25rem, 4vw, 2.5rem);
+    }
+
+    .es-eyebrow {
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--es-cyan);
+      margin-bottom: 0.9rem;
+    }
+    .section-subtitle.es-eyebrow { color: var(--es-cyan); }
+
+    /* ---------------------------------------------------------------- hero -- */
+    .es-hero { padding-top: 76px; }
+
+    .es-hero-grid {
+      position: relative;
+      z-index: 1;
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: clamp(3.5rem, 7vw, 6rem) clamp(1.25rem, 4vw, 2.5rem) clamp(3rem, 6vw, 5rem);
+      display: grid;
+      grid-template-columns: minmax(0, 1.02fr) minmax(0, 1fr);
+      gap: clamp(2rem, 5vw, 4.5rem);
+      align-items: center;
+    }
+
+    .es-hero h1 {
+      font-size: clamp(2.6rem, 5.4vw, 4.1rem);
+      line-height: 1.04;
+      margin-bottom: 1.25rem;
+      text-wrap: balance;
+    }
+
+    .es-deck {
+      font-size: clamp(1.02rem, 1.5vw, 1.18rem);
+      line-height: 1.62;
+      max-width: 34em;
+      margin-bottom: 1.5rem;
+    }
+    .es-deck strong { color: var(--es-ink); font-weight: 650; }
+
+    .es-hero .os-ready-badge { margin-bottom: 1.5rem; }
+
+    .es-cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.85rem;
+      align-items: center;
+      margin-bottom: 0.9rem;
+    }
+
+    .es-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.95rem 1.7rem;
+      border-radius: 999px;
+      font-size: 1.02rem;
+      font-weight: 650;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast);
+    }
+    .es-btn-primary {
+      background: linear-gradient(135deg, #5b7bff, #8b5cf6);
+      color: #fff;
+      box-shadow: 0 10px 34px rgba(91, 123, 255, 0.45);
+    }
+    .es-btn-primary:hover { transform: translateY(-2px); box-shadow: 0 16px 44px rgba(91, 123, 255, 0.55); }
+    .es-btn-ghost {
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--es-ink);
+      border: 1px solid rgba(160, 180, 255, 0.32);
+    }
+    .es-btn-ghost:hover { background: rgba(255, 255, 255, 0.12); transform: translateY(-2px); }
+
+    .es-cta-fine {
+      font-size: 0.88rem;
+      color: var(--es-ink-faint);
+      margin-bottom: 0;
+    }
+
+    .es-stats {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1rem clamp(1rem, 3vw, 2.25rem);
+      margin-top: 2.5rem;
+      padding-top: 1.75rem;
+      border-top: 1px solid var(--es-line);
+    }
+    .es-stat-num {
+      font-family: var(--font-heading);
+      font-size: clamp(1.6rem, 3vw, 2.15rem);
+      font-weight: 800;
+      line-height: 1;
+      color: #fff;
+      letter-spacing: -0.02em;
+    }
+    .es-stat-label {
+      font-size: 0.78rem;
+      line-height: 1.35;
+      color: var(--es-ink-faint);
+      margin: 0.45rem 0 0;
+    }
+
+    /* Hero art: the renders already carry this exact sky, so they are blended
+       into the band rather than framed. */
+    .es-hero-art { position: relative; }
+    /* Every render is a background-free Monkr frame, so the device sits
+       directly on the sky — the only shadow is one that follows its alpha. */
+    .es-hero-art img {
+      display: block;
+      width: 100%;
+      height: auto;
+      filter: drop-shadow(0 26px 46px rgba(0, 0, 0, 0.55));
+    }
+    .es-hero-art img.es-art-mac { position: relative; z-index: 1; }
+    .es-hero-art img.es-art-phone {
+      position: absolute;
+      z-index: 2;
+      left: 1%;
+      bottom: -16%;
+      width: 20%;
+    }
+    .es-hero-glow {
+      position: absolute;
+      inset: -22% -12%;
+      z-index: 0;
+      background: radial-gradient(closest-side, rgba(111, 140, 255, 0.4), transparent 72%);
+      filter: blur(12px);
+      pointer-events: none;
+    }
+
+    /* ------------------------------------------------------------- problem -- */
+    .es-problem-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 0.95fr);
+      gap: clamp(2rem, 5vw, 4rem);
+      align-items: center;
+    }
+    .es-problem-grid h2 {
+      font-size: clamp(1.9rem, 3.6vw, 2.9rem);
+      margin-bottom: 1.1rem;
+      text-wrap: balance;
+    }
+    .es-scatter {
+      font-size: clamp(1rem, 1.5vw, 1.12rem);
+      line-height: 1.7;
+    }
+    .es-payoff {
+      margin-top: 1.5rem;
+      padding-left: 1.1rem;
+      border-left: 2px solid var(--es-cyan);
+      font-size: clamp(1.02rem, 1.6vw, 1.2rem);
+      line-height: 1.6;
+      color: var(--es-ink) !important;
+      font-weight: 550;
+    }
+
+    /* Orbit diagram */
+    .es-orbit {
+      --r1: clamp(88px, 15vw, 132px);
+      --r2: clamp(150px, 25vw, 224px);
+      position: relative;
+      width: min(100%, 520px);
+      aspect-ratio: 1;
+      margin: 0 auto;
+      display: grid;
+      place-items: center;
+    }
+    .es-ring {
+      position: absolute;
+      border-radius: 50%;
+      border: 1px solid rgba(150, 170, 255, 0.16);
+      inset: 0;
+      margin: auto;
+    }
+    .es-ring-1 { width: calc(var(--r1) * 2); height: calc(var(--r1) * 2); }
+    .es-ring-2 { width: calc(var(--r2) * 2); height: calc(var(--r2) * 2); border-style: dashed; }
+
+    .es-orbit-core {
+      position: relative;
+      z-index: 3;
+      width: clamp(72px, 12vw, 104px);
+      height: clamp(72px, 12vw, 104px);
+      border-radius: 24%;
+      box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.14), 0 0 60px rgba(91, 123, 255, 0.65);
+    }
+    .es-orbit-core img { width: 100%; height: 100%; border-radius: inherit; display: block; }
+
+    .es-spin { position: absolute; inset: 0; animation: esSpin 64s linear infinite; }
+    .es-spin-rev { animation-duration: 92s; animation-direction: reverse; }
+    @keyframes esSpin { to { transform: rotate(360deg); } }
+
+    .es-chip {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) rotate(var(--a)) translateX(var(--r)) rotate(calc(-1 * var(--a)));
+      white-space: nowrap;
+      font-size: clamp(0.66rem, 1.15vw, 0.78rem);
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      padding: 0.36em 0.72em;
+      border-radius: 999px;
+      color: var(--es-ink);
+      background: rgba(18, 20, 64, 0.82);
+      border: 1px solid rgba(150, 170, 255, 0.28);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+    }
+    .es-spin-counter .es-chip { animation: esSpinCounter 64s linear infinite; }
+    .es-spin-rev .es-chip { animation: esSpinCounter 92s linear infinite reverse; }
+    @keyframes esSpinCounter { to { transform: translate(-50%, -50%) rotate(var(--a)) translateX(var(--r)) rotate(calc(-1 * var(--a))) rotate(-360deg); } }
+
+    @media (prefers-reduced-motion: reduce) {
+      .es-spin, .es-spin .es-chip, .es-twinkle { animation: none !important; }
+    }
+
+    /* ---------------------------------------------------------------- tour -- */
+    .es-tour-block {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.12fr);
+      gap: clamp(1.75rem, 4.5vw, 4rem);
+      align-items: center;
+      margin-bottom: clamp(3.5rem, 7vw, 6rem);
+    }
+    .es-tour-block:last-child { margin-bottom: 0; }
+    .es-tour-block.reverse .es-tour-copy { order: 2; }
+    .es-tour-block.reverse .es-tour-shot { order: 1; }
+
+    .es-step {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 2rem;
+      height: 2rem;
+      border-radius: 50%;
+      border: 1px solid rgba(150, 170, 255, 0.35);
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--es-cyan);
+      margin-bottom: 1rem;
+    }
+    .es-tour-copy h3 {
+      font-size: clamp(1.5rem, 2.8vw, 2.15rem);
+      margin-bottom: 0.9rem;
+      text-wrap: balance;
+    }
+    .es-tour-copy p { font-size: 1rem; line-height: 1.68; }
+    .es-tour-copy p:last-child { margin-bottom: 0; }
+
+    .es-tour-shot { position: relative; }
+    .es-tour-shot img {
+      display: block;
+      width: 100%;
+      height: auto;
+      filter: drop-shadow(0 22px 40px rgba(0, 0, 0, 0.5));
+    }
+    .es-tour-shot.portrait { max-width: 265px; margin: 0 auto; }
+    .es-tour-shot.portrait-lg { max-width: 380px; margin: 0 auto; }
+
+    /* ------------------------------------------------------------ gallery -- */
+    .es-gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: clamp(1.25rem, 3vw, 2.5rem);
+    }
+    .es-shot {
+      margin: 0;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+    }
+    .es-shot img { margin-top: auto; max-width: 235px; margin-inline: auto; }
+    .es-shot img {
+      display: block;
+      width: 100%;
+      height: auto;
+      filter: drop-shadow(0 16px 32px rgba(0, 0, 0, 0.5));
+    }
+    .es-shot figcaption {
+      margin-top: 0.85rem;
+      font-size: 0.86rem;
+      line-height: 1.5;
+      color: var(--es-ink-faint);
+    }
+
+    /* ----------------------------------------------------------- personas -- */
+    .es-persona-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+      gap: clamp(1.25rem, 2.5vw, 1.75rem);
+    }
+    .es-persona {
+      background: var(--es-glass);
+      border: 1px solid var(--es-line);
+      border-radius: var(--radius-lg);
+      padding: clamp(1.5rem, 2.5vw, 2rem);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+    .es-persona h3 {
+      font-size: clamp(1.15rem, 1.9vw, 1.4rem);
+      margin-bottom: 0.75rem;
+      text-wrap: balance;
+    }
+    .es-persona p { font-size: 0.95rem; line-height: 1.65; margin-bottom: 1.15rem; }
+    .es-tags { display: flex; flex-wrap: wrap; gap: 0.45rem; }
+    .es-tag {
+      font-size: 0.74rem;
+      font-weight: 600;
+      padding: 0.34em 0.7em;
+      border-radius: 999px;
+      color: var(--es-ink);
+      background: rgba(111, 140, 255, 0.16);
+      border: 1px solid rgba(150, 170, 255, 0.24);
+    }
+
+    /* ----------------------------------------------------------- replaces -- */
+    .es-replaces {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 0.75rem;
+      margin: 2.25rem 0 1.75rem;
+    }
+    .es-replace {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.85rem 1rem;
+      border-radius: var(--radius-md);
+      background: rgba(255, 255, 255, 0.045);
+      border: 1px solid var(--es-line);
+      font-size: 0.9rem;
+      font-weight: 550;
+      color: var(--es-ink);
+    }
+    .es-replace span[aria-hidden] { font-size: 1.1rem; line-height: 1; }
+    .es-replace-out { text-decoration: line-through; text-decoration-color: rgba(255, 120, 120, 0.7); }
+
+    .es-oneline {
+      text-align: center;
+      font-size: clamp(1.1rem, 2.2vw, 1.5rem);
+      font-weight: 650;
+      color: var(--es-ink) !important;
+      margin: 0;
+    }
+
+    /* ------------------------------------------------------------ pricing -- */
+    .pricing-deadline {
+      max-width: 760px;
+      margin: 0 auto 1.5rem;
+      text-align: center;
+      padding: 0.85rem 1.25rem;
+      border-radius: 999px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #b45309;
+      background: rgba(245, 158, 11, 0.12);
+      border: 1px solid rgba(245, 158, 11, 0.35);
+    }
+    .pricing-deadline p { margin: 0; color: inherit; font-size: inherit; }
+    @media (prefers-color-scheme: dark) {
+      .pricing-deadline { color: #fcd34d; }
+    }
+
+    .es-assure {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.6rem;
+      margin-top: 1.75rem;
+    }
+    .es-assure-item {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      padding: 0.4em 0.9em;
+      border-radius: 999px;
+      border: 1px solid var(--border-color);
+      background: var(--glass-bg);
+    }
+    .es-pricing-cta { text-align: center; margin-top: 2rem; }
+
+    /* -------------------------------------------------- everything / groups -- */
+    .es-groups {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: grid;
+      gap: 0.85rem;
+    }
+    .es-group {
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      background: var(--bg-card);
+      overflow: hidden;
+    }
+    .es-group > summary {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      list-style: none;
+      cursor: pointer;
+      padding: 1.15rem 1.35rem;
+      font-family: var(--font-heading);
+      font-size: clamp(1.05rem, 1.8vw, 1.25rem);
+      font-weight: 700;
+      color: var(--text-primary);
+      transition: background var(--transition-fast);
+    }
+    .es-group > summary::-webkit-details-marker { display: none; }
+    .es-group > summary:hover { background: rgba(79, 107, 246, 0.06); }
+    .es-group-icon { font-size: 1.35rem; line-height: 1; }
+    .es-group-count {
+      margin-left: auto;
+      font-family: var(--font-primary);
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--app-primary);
+      background: rgba(79, 107, 246, 0.12);
+      border-radius: 999px;
+      padding: 0.25em 0.7em;
+    }
+    .es-group-caret {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      transition: transform var(--transition-fast);
+    }
+    .es-group[open] .es-group-caret { transform: rotate(180deg); }
+
+    .es-group-body {
+      padding: 0 1.35rem 1.35rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.15rem 2rem;
+    }
+    .es-item { display: flex; gap: 0.8rem; }
+    .es-item-icon { font-size: 1.15rem; line-height: 1.4; flex: none; }
+    .es-item h4 {
+      font-size: 0.98rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 0.2rem;
+      line-height: 1.35;
+    }
+    .es-item p {
+      font-size: 0.86rem;
+      line-height: 1.55;
+      color: var(--text-secondary);
+      margin-bottom: 0;
+    }
+    .es-item .btn-download-helper { margin-top: 0.5rem; }
+
+    /* ----------------------------------------------------------- final CTA -- */
+    .es-final { text-align: center; }
+    .es-final h2 {
+      font-size: clamp(2rem, 4.4vw, 3.2rem);
+      margin-bottom: 1rem;
+      text-wrap: balance;
+    }
+    .es-final p { max-width: 42em; margin-inline: auto; }
+    .es-final .es-cta-row { justify-content: center; margin-top: 1.75rem; }
+
+    /* --------------------------------------------------------- comparison -- */
     .comparison-wrapper {
       overflow-x: auto;
       -webkit-overflow-scrolling: touch;
@@ -78,14 +570,12 @@
       backdrop-filter: blur(20px) saturate(180%);
       -webkit-backdrop-filter: blur(20px) saturate(180%);
     }
-
     .comparison-table {
       width: 100%;
       min-width: 600px;
       border-collapse: collapse;
       font-size: 0.95rem;
     }
-
     .comparison-table thead th {
       position: sticky;
       top: 0;
@@ -96,74 +586,36 @@
       text-align: center;
       white-space: nowrap;
     }
-
-    .comparison-table thead th:first-child {
-      text-align: left;
-      border-radius: var(--radius-lg) 0 0 0;
-    }
-
-    .comparison-table thead th:last-child {
-      border-radius: 0 var(--radius-lg) 0 0;
-    }
-
+    .comparison-table thead th:first-child { text-align: left; border-radius: var(--radius-lg) 0 0 0; }
+    .comparison-table thead th:last-child { border-radius: 0 var(--radius-lg) 0 0; }
     .comparison-table tbody td {
       padding: 0.75rem;
       text-align: center;
       border-bottom: 1px solid var(--border-color);
       color: var(--text-secondary);
     }
-
     .comparison-table tbody td:first-child {
       text-align: left;
       font-weight: 600;
       color: var(--text-primary);
       white-space: nowrap;
     }
-
-    .comparison-table tbody tr:last-child td {
-      border-bottom: none;
-    }
-
-    .comparison-table tbody tr:hover {
-      background: rgba(102, 126, 234, 0.05);
-    }
-
-    .comparison-table .check {
-      color: #22c55e;
-      font-weight: 700;
-      font-size: 1.2rem;
-    }
-
-    .comparison-table .cross {
-      color: #ef4444;
-      font-weight: 700;
-      font-size: 1.2rem;
-    }
-
-    .comparison-table .highlight-col {
-      background: rgba(102, 126, 234, 0.08);
-    }
-
+    .comparison-table tbody tr:last-child td { border-bottom: none; }
+    .comparison-table tbody tr:hover { background: rgba(79, 107, 246, 0.05); }
+    .comparison-table .check { color: #22c55e; font-weight: 700; font-size: 1.2rem; }
+    .comparison-table .cross { color: #ef4444; font-weight: 700; font-size: 1.2rem; }
+    .comparison-table .highlight-col { background: rgba(79, 107, 246, 0.08); }
     .comparison-table thead th.highlight-col {
-      background: linear-gradient(135deg, #4f6ae8, #5e3d9e);
+      background: linear-gradient(135deg, #3f5bef, #6d4df0);
       box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.25);
       color: white;
       font-size: 1.05em;
     }
-
     @media (prefers-color-scheme: dark) {
-      .comparison-table .highlight-col {
-        background: rgba(129, 140, 248, 0.1);
-      }
-      .comparison-table thead th.highlight-col {
-        background: linear-gradient(135deg, #4f6ae8, #5e3d9e);
-        color: white;
-      }
-      .comparison-table tbody tr:hover {
-        background: rgba(129, 140, 248, 0.08);
-      }
+      .comparison-table .highlight-col { background: rgba(129, 140, 248, 0.1); }
+      .comparison-table thead th.highlight-col { background: linear-gradient(135deg, #3f5bef, #6d4df0); color: white; }
+      .comparison-table tbody tr:hover { background: rgba(129, 140, 248, 0.08); }
     }
-
     .comparison-scroll-hint {
       display: none;
       text-align: center;
@@ -172,20 +624,7 @@
       margin-top: 0.5rem;
     }
 
-    @media (max-width: 768px) {
-      .comparison-scroll-hint {
-        display: block;
-      }
-      .comparison-table {
-        font-size: 0.85rem;
-      }
-      .comparison-table thead th,
-      .comparison-table tbody td {
-        padding: 0.6rem 0.5rem;
-      }
-    }
-
-    /* Pricing Section */
+    /* ------------------------------------------------------------- pricing -- */
     .pricing-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -193,7 +632,6 @@
       max-width: 900px;
       margin: 0 auto;
     }
-
     .pricing-card {
       background: var(--glass-bg);
       backdrop-filter: blur(20px) saturate(180%);
@@ -205,17 +643,8 @@
       position: relative;
       transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
-
-    .pricing-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 40px rgba(102, 126, 234, 0.15);
-    }
-
-    .pricing-card.featured {
-      border: 2px solid var(--app-primary);
-      box-shadow: 0 8px 30px rgba(102, 126, 234, 0.2);
-    }
-
+    .pricing-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(79, 107, 246, 0.15); }
+    .pricing-card.featured { border: 2px solid var(--app-primary); box-shadow: 0 8px 30px rgba(79, 107, 246, 0.2); }
     .pricing-badge {
       position: absolute;
       top: -12px;
@@ -231,80 +660,60 @@
       letter-spacing: 0.5px;
       white-space: nowrap;
     }
-
-    .pricing-card h3 {
-      font-size: 1.25rem;
-      font-weight: 700;
-      color: var(--text-primary);
-      margin-bottom: 0.75rem;
-    }
-
-    .pricing-price {
-      font-size: 2.25rem;
-      font-weight: 800;
-      color: var(--app-primary);
-      margin-bottom: 0.25rem;
-    }
-
-    .pricing-period {
-      font-size: 0.9rem;
-      color: var(--text-secondary);
-      margin-bottom: 0.75rem;
-    }
-
-    .pricing-future {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      margin-top: 0.5rem;
-    }
-
-    .pricing-future .strikethrough {
-      text-decoration: line-through;
-      color: #ef4444;
-      font-weight: 600;
-    }
-
-    .pricing-detail {
-      font-size: 0.85rem;
-      color: var(--text-secondary);
-      margin-top: 0.5rem;
-      line-height: 1.5;
-    }
-
-    .pricing-note {
-      max-width: 700px;
-      margin: 2rem auto 0;
-      text-align: center;
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      line-height: 1.6;
-    }
-
+    .pricing-card h3 { font-size: 1.25rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.75rem; }
+    .pricing-price { font-size: 2.25rem; font-weight: 800; color: var(--app-primary); margin-bottom: 0.25rem; }
+    .pricing-period { font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 0.75rem; }
+    .pricing-future { font-size: 0.85rem; color: var(--text-muted); margin-top: 0.5rem; }
+    .pricing-future .strikethrough { text-decoration: line-through; color: #ef4444; font-weight: 600; }
+    .pricing-detail { font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.5rem; line-height: 1.5; }
+    .pricing-note { max-width: 700px; margin: 2rem auto 0; text-align: center; font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; }
     .pricing-trial-banner {
       text-align: center;
       margin-bottom: 2rem;
       padding: 1rem 1.5rem;
-      background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+      background: linear-gradient(135deg, rgba(79, 107, 246, 0.1), rgba(109, 77, 240, 0.1));
       border-radius: var(--radius-lg);
-      border: 1px solid rgba(102, 126, 234, 0.2);
+      border: 1px solid rgba(79, 107, 246, 0.2);
+    }
+    .pricing-trial-banner p { font-size: 1.1rem; color: var(--text-primary); font-weight: 600; margin: 0; }
+    .pricing-trial-banner p span { color: var(--app-primary); }
+    .pricing-family { text-align: center; margin-top: 1.5rem; font-size: 0.95rem; color: var(--text-secondary); font-weight: 500; }
+
+    /* ------------------------------------------------------------- reveal -- */
+    .es-reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .es-reveal.is-in { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) {
+      .es-reveal { opacity: 1; transform: none; transition: none; }
     }
 
-    .pricing-trial-banner p {
-      font-size: 1.1rem;
-      color: var(--text-primary);
-      font-weight: 600;
+    /* --------------------------------------------------------- responsive -- */
+    @media (max-width: 980px) {
+      .es-hero-grid,
+      .es-problem-grid { grid-template-columns: minmax(0, 1fr); }
+      .es-hero-art { order: -1; max-width: 560px; margin: 0 auto; }
+      .es-tour-block { grid-template-columns: minmax(0, 1fr); }
+      .es-tour-block.reverse .es-tour-copy,
+      .es-tour-block.reverse .es-tour-shot { order: initial; }
+      .es-tour-shot { max-width: 620px; margin: 0 auto; }
     }
-
-    .pricing-trial-banner p span {
-      color: var(--app-primary);
+    @media (max-width: 768px) {
+      .comparison-scroll-hint { display: block; }
+      .comparison-table { font-size: 0.85rem; }
+      .comparison-table thead th,
+      .comparison-table tbody td { padding: 0.6rem 0.5rem; }
+      .es-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .es-cta-row .es-btn { flex: 1 1 100%; }
+      .es-orbit { --r2: clamp(118px, 34vw, 190px); --r1: clamp(70px, 20vw, 110px); }
+      .es-group-body { padding: 0 1.1rem 1.15rem; }
+      .es-replaces { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     }
-
-    .pricing-family {
-      text-align: center;
-      margin-top: 1.5rem;
-      font-size: 0.95rem;
-      color: var(--text-secondary);
-      font-weight: 500;
+    @media (max-width: 480px) {
+      .es-hero-art img.es-art-phone { width: 22%; left: 2%; bottom: -10%; }
+      .es-chip { font-size: 0.6rem; padding: 0.3em 0.55em; }
     }
   </style>
   <link rel="alternate" hreflang="x-default" href="https://wemiller.com/apps/enter-space/">
@@ -326,7 +735,7 @@
       <a href="../" class="nav-logo" data-i18n="apps.2d61f2">← Apps</a>
       <button class="mobile-menu-toggle">☰</button>
       <ul class="nav-links">
-        <li><a href="#features" class="nav-link" data-i18n="features.fc338f">Features</a></li>
+        <li><a href="#tour" class="nav-link" data-i18n="features.fc338f">Features</a></li>
         <li><a href="#screenshots" class="nav-link" data-i18n="screenshots.597b63">Screenshots</a></li>
         <li><a href="#pricing" class="nav-link" data-i18n="pricing.a0d9bb">Pricing</a></li>
         <li><a href="#compare" class="nav-link" data-i18n="compare.8d105c">Compare</a></li>
@@ -336,26 +745,75 @@
     </div>
   </nav>
 
-  <!-- Hero Section -->
-  <section class="hero">
-    <div class="hero-content">
-      <div class="hero-text">
-        <p class="hero-subtitle" data-i18n="enter-space.884390">🚀 Enter Space</p>
-        <h1 class="hero-title" data-i18n="all-your-cloud-storage.ac8483">All Your Cloud Storage, One Place</h1>
-        <p class="hero-description" data-i18n="connect-to-100-different.4be71c">
-          Connect to 100 different cloud storage accounts on your iPhone, iPad, and Mac. Seamless integration with Finder and Files app, end-to-end encryption, and automated backups powered by proven open-source technology.
+  <!-- ===== Hero — the promise, the proof, the price ===== -->
+  <section class="es-band es-hero">
+    <svg class="es-stars" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
+      <circle cx="651.4" cy="503.8" r="1.61" opacity="0.54" class="es-twinkle" style="animation-delay:2.8s"/><circle cx="845.8" cy="166.2" r="1.11" opacity="0.67"/><circle cx="1141.9" cy="84.7" r="0.86" opacity="0.25"/><circle cx="1165.9" cy="624.1" r="0.55" opacity="0.94"/><circle cx="1389.3" cy="588.5" r="1.24" opacity="0.3"/><circle cx="21.6" cy="475.5" r="0.57" opacity="0.33"/>
+      <circle cx="348.4" cy="27.1" r="1.06" opacity="0.52"/><circle cx="1213.1" cy="467.2" r="1.27" opacity="0.56" class="es-twinkle" style="animation-delay:3.6s"/><circle cx="658.6" cy="250.3" r="1.7" opacity="0.95"/><circle cx="1209.9" cy="637.0" r="0.88" opacity="0.36"/><circle cx="416.2" cy="63.2" r="1.42" opacity="0.49"/><circle cx="1219.1" cy="347.9" r="1.65" opacity="0.83"/>
+      <circle cx="0.8" cy="188.7" r="1.59" opacity="0.54"/><circle cx="1411.7" cy="357.7" r="0.59" opacity="0.66"/><circle cx="1121.1" cy="242.8" r="0.6" opacity="0.44" class="es-twinkle" style="animation-delay:5.3s"/><circle cx="1091.6" cy="106.2" r="0.8" opacity="0.26"/><circle cx="86.2" cy="717.3" r="0.71" opacity="0.61"/><circle cx="644.3" cy="171.6" r="1.38" opacity="0.28"/>
+      <circle cx="926.9" cy="104.9" r="1.0" opacity="0.34"/><circle cx="388.5" cy="873.8" r="1.46" opacity="0.41"/><circle cx="1274.2" cy="189.6" r="0.97" opacity="0.84"/><circle cx="924.2" cy="90.3" r="1.69" opacity="0.34" class="es-twinkle" style="animation-delay:1.4s"/><circle cx="1112.7" cy="296.1" r="0.86" opacity="0.24"/><circle cx="129.8" cy="524.5" r="0.79" opacity="0.64"/>
+      <circle cx="535.3" cy="407.9" r="1.65" opacity="0.55"/><circle cx="827.4" cy="779.9" r="0.72" opacity="0.3"/><circle cx="1308.1" cy="736.0" r="0.8" opacity="0.33"/><circle cx="1064.8" cy="846.4" r="0.74" opacity="0.91"/><circle cx="1270.4" cy="543.2" r="1.01" opacity="0.26" class="es-twinkle" style="animation-delay:0.2s"/><circle cx="1386.3" cy="214.6" r="1.35" opacity="0.38"/>
+      <circle cx="1186.2" cy="536.8" r="0.85" opacity="0.32"/><circle cx="1037.3" cy="61.9" r="0.77" opacity="0.61"/><circle cx="1227.5" cy="552.9" r="0.84" opacity="0.89"/><circle cx="293.7" cy="14.9" r="0.82" opacity="0.52"/><circle cx="87.1" cy="158.6" r="0.94" opacity="0.62"/><circle cx="189.5" cy="325.9" r="1.57" opacity="0.93" class="es-twinkle" style="animation-delay:3.6s"/>
+      <circle cx="995.4" cy="526.0" r="0.67" opacity="0.21"/><circle cx="25.8" cy="819.2" r="1.34" opacity="0.92"/><circle cx="30.6" cy="572.6" r="1.08" opacity="0.74"/><circle cx="459.2" cy="899.4" r="0.59" opacity="0.6"/><circle cx="1061.3" cy="810.2" r="1.38" opacity="0.72"/><circle cx="1142.3" cy="823.5" r="0.92" opacity="0.71"/>
+      <circle cx="1297.2" cy="784.0" r="1.0" opacity="0.79" class="es-twinkle" style="animation-delay:4.7s"/><circle cx="824.8" cy="562.5" r="0.96" opacity="0.63"/><circle cx="876.8" cy="72.2" r="1.27" opacity="0.94"/><circle cx="1266.9" cy="655.4" r="0.97" opacity="0.75"/><circle cx="836.6" cy="396.5" r="1.51" opacity="0.24"/><circle cx="1080.3" cy="26.8" r="1.22" opacity="0.55"/>
+      <circle cx="331.5" cy="628.5" r="1.1" opacity="0.65"/><circle cx="1325.5" cy="230.2" r="0.51" opacity="0.41" class="es-twinkle" style="animation-delay:3.7s"/><circle cx="291.7" cy="152.6" r="1.59" opacity="0.69"/><circle cx="636.4" cy="802.6" r="0.89" opacity="0.69"/><circle cx="285.8" cy="387.8" r="1.47" opacity="0.88"/><circle cx="1267.6" cy="346.0" r="1.2" opacity="0.42"/>
+      <circle cx="196.1" cy="446.8" r="1.5" opacity="0.83"/><circle cx="1024.2" cy="855.0" r="0.83" opacity="0.31"/><circle cx="648.9" cy="247.6" r="0.76" opacity="0.5" class="es-twinkle" style="animation-delay:3.4s"/><circle cx="711.2" cy="283.8" r="1.51" opacity="0.94"/><circle cx="651.6" cy="67.2" r="0.54" opacity="0.85"/><circle cx="59.7" cy="637.8" r="1.18" opacity="0.42"/>
+      <circle cx="1139.8" cy="17.2" r="0.66" opacity="0.53"/><circle cx="35.6" cy="746.7" r="0.78" opacity="0.29"/><circle cx="67.6" cy="566.3" r="1.04" opacity="0.67"/><circle cx="943.3" cy="726.6" r="1.65" opacity="0.71" class="es-twinkle" style="animation-delay:1.1s"/><circle cx="684.2" cy="160.8" r="0.51" opacity="0.54"/><circle cx="1028.4" cy="161.2" r="0.83" opacity="0.45"/>
+      <circle cx="1004.1" cy="468.4" r="1.24" opacity="0.76"/><circle cx="566.7" cy="712.7" r="1.59" opacity="0.25"/><circle cx="1342.9" cy="650.1" r="0.66" opacity="0.53"/><circle cx="900.8" cy="819.0" r="0.95" opacity="0.62"/><circle cx="1266.2" cy="717.1" r="1.63" opacity="0.54" class="es-twinkle" style="animation-delay:3.6s"/><circle cx="295.0" cy="649.7" r="1.48" opacity="0.67"/>
+      <circle cx="1033.4" cy="192.0" r="1.58" opacity="0.93"/><circle cx="1407.4" cy="483.3" r="1.45" opacity="0.43"/><circle cx="1310.4" cy="770.2" r="0.92" opacity="0.24"/><circle cx="634.9" cy="495.3" r="1.42" opacity="0.56"/><circle cx="40.9" cy="728.2" r="0.58" opacity="0.8"/><circle cx="249.0" cy="301.5" r="1.45" opacity="0.29" class="es-twinkle" style="animation-delay:0.8s"/>
+      <circle cx="743.8" cy="651.2" r="1.51" opacity="0.71"/><circle cx="1361.9" cy="443.3" r="1.64" opacity="0.25"/><circle cx="318.8" cy="474.0" r="0.85" opacity="0.74"/><circle cx="920.0" cy="470.5" r="1.51" opacity="0.61"/><circle cx="448.8" cy="343.1" r="1.51" opacity="0.87"/><circle cx="299.9" cy="765.7" r="1.66" opacity="0.58"/>
+      <circle cx="825.1" cy="180.9" r="1.14" opacity="0.57" class="es-twinkle" style="animation-delay:3.3s"/><circle cx="40.0" cy="872.5" r="1.12" opacity="0.49"/><circle cx="1153.5" cy="506.6" r="1.09" opacity="0.71"/><circle cx="94.9" cy="484.8" r="1.0" opacity="0.92"/><circle cx="1329.7" cy="242.3" r="1.07" opacity="0.28"/><circle cx="624.5" cy="734.1" r="1.58" opacity="0.55"/>
+      <circle cx="456.8" cy="172.3" r="1.24" opacity="0.89"/><circle cx="186.4" cy="701.4" r="0.53" opacity="0.33" class="es-twinkle" style="animation-delay:1.2s"/><circle cx="989.3" cy="289.9" r="0.93" opacity="0.66"/><circle cx="151.0" cy="657.8" r="0.65" opacity="0.57"/><circle cx="360.8" cy="178.0" r="1.14" opacity="0.52"/><circle cx="541.1" cy="372.1" r="1.14" opacity="0.3"/>
+      <circle cx="294.1" cy="568.2" r="1.27" opacity="0.59"/><circle cx="1225.8" cy="550.5" r="1.53" opacity="0.36"/><circle cx="1066.7" cy="729.5" r="1.58" opacity="0.42" class="es-twinkle" style="animation-delay:1.7s"/><circle cx="1328.8" cy="196.3" r="1.7" opacity="0.86"/><circle cx="192.9" cy="215.4" r="1.37" opacity="0.38"/><circle cx="139.7" cy="749.0" r="1.01" opacity="0.79"/>
+      <circle cx="181.4" cy="362.5" r="1.32" opacity="0.19"/><circle cx="289.3" cy="614.1" r="1.59" opacity="0.93"/><circle cx="166.2" cy="455.1" r="1.41" opacity="0.57"/><circle cx="987.4" cy="170.1" r="0.58" opacity="0.26" class="es-twinkle" style="animation-delay:0.2s"/><circle cx="794.4" cy="463.3" r="1.18" opacity="0.29"/><circle cx="265.7" cy="183.5" r="1.51" opacity="0.94"/>
+      <circle cx="1334.7" cy="85.7" r="0.57" opacity="0.91"/><circle cx="665.4" cy="688.2" r="0.89" opacity="0.54"/><circle cx="742.0" cy="387.1" r="1.22" opacity="0.19"/><circle cx="1009.5" cy="759.8" r="0.72" opacity="0.53"/><circle cx="1064.6" cy="364.8" r="0.73" opacity="0.31" class="es-twinkle" style="animation-delay:2.8s"/><circle cx="22.2" cy="803.9" r="1.46" opacity="0.72"/>
+      <circle cx="1239.5" cy="566.4" r="0.99" opacity="0.64"/><circle cx="726.2" cy="884.4" r="1.47" opacity="0.38"/><circle cx="1312.3" cy="670.0" r="1.43" opacity="0.81"/><circle cx="584.1" cy="806.9" r="1.56" opacity="0.71"/><circle cx="1104.9" cy="688.7" r="0.99" opacity="0.74"/><circle cx="101.6" cy="307.5" r="1.06" opacity="0.19" class="es-twinkle" style="animation-delay:2.0s"/>
+      <circle cx="919.7" cy="561.6" r="0.78" opacity="0.91"/><circle cx="959.2" cy="304.0" r="1.29" opacity="0.62"/><circle cx="767.6" cy="350.6" r="1.7" opacity="0.67"/><circle cx="1009.8" cy="685.6" r="1.68" opacity="0.2"/><circle cx="886.2" cy="664.9" r="0.81" opacity="0.49"/><circle cx="72.7" cy="175.9" r="0.95" opacity="0.26"/>
+      <circle cx="361.3" cy="815.1" r="1.16" opacity="0.57" class="es-twinkle" style="animation-delay:5.3s"/><circle cx="817.9" cy="895.6" r="1.27" opacity="0.8"/><circle cx="109.7" cy="537.8" r="1.41" opacity="0.21"/><circle cx="1339.4" cy="143.9" r="1.07" opacity="0.31"/><circle cx="713.6" cy="550.1" r="0.57" opacity="0.91"/><circle cx="605.8" cy="474.1" r="1.22" opacity="0.46"/>
+      <circle cx="411.5" cy="589.6" r="1.17" opacity="0.4"/><circle cx="1031.9" cy="266.4" r="0.52" opacity="0.37" class="es-twinkle" style="animation-delay:0.2s"/><circle cx="225.5" cy="679.2" r="0.97" opacity="0.87"/><circle cx="1077.6" cy="45.1" r="1.69" opacity="0.91"/><circle cx="105.8" cy="815.0" r="1.02" opacity="0.55"/><circle cx="1401.4" cy="219.3" r="1.13" opacity="0.9"/>
+      <circle cx="1040.7" cy="421.5" r="1.67" opacity="0.81"/><circle cx="869.2" cy="103.6" r="1.25" opacity="0.53"/><circle cx="293.3" cy="46.9" r="1.13" opacity="0.28" class="es-twinkle" style="animation-delay:2.4s"/><circle cx="961.8" cy="410.0" r="0.81" opacity="0.63"/><circle cx="604.1" cy="700.2" r="1.14" opacity="0.95"/><circle cx="1371.8" cy="660.9" r="0.79" opacity="0.27"/>
+      <circle cx="1285.5" cy="705.9" r="1.25" opacity="0.46"/><circle cx="391.0" cy="616.5" r="1.18" opacity="0.64"/><circle cx="911.7" cy="678.0" r="0.73" opacity="0.37"/><circle cx="1410.8" cy="824.1" r="1.55" opacity="0.21" class="es-twinkle" style="animation-delay:0.3s"/><circle cx="390.2" cy="382.7" r="1.25" opacity="0.26"/><circle cx="780.0" cy="65.2" r="0.6" opacity="0.7"/>
+    </svg>
+    <div class="es-hero-grid">
+      <div class="es-hero-copy">
+        <p class="es-eyebrow" data-i18n="enter-space.884390">🚀 Enter Space</p>
+        <h1 data-i18n="all-your-cloud-storage.ac8483">All Your Cloud Storage, One Place</h1>
+        <p class="es-deck" data-i18n="google-drive-dropbox-onedrive.e04d95">
+          Google Drive, Dropbox, OneDrive, S3, the NAS in your closet — 100 providers, mounted in Finder and the Files app like local drives. Then Enter Space does what none of them can do alone: one photo library across every cloud, a private Theater for your media, versioned recovery, and encryption they can never read.
         </p>
         <span class="os-ready-badge" data-i18n-html="ready-for-ios-27.5181f1"><span class="badge-icon">✓</span> Ready for iOS 27 / iPadOS 27 / macOS 27 / tvOS 27</span>
-        <div class="hero-cta">
-          <a href="https://apps.apple.com/us/app/enter-space/id6746350540" class="btn-buy" target="_blank" rel="noopener noreferrer" data-i18n="download-now.6d56a8">Download Now</a>
+        <div class="es-cta-row">
+          <a href="https://apps.apple.com/us/app/enter-space/id6746350540" class="es-btn es-btn-primary" target="_blank" rel="noopener noreferrer" data-i18n="start-your-7-day.bec0d2">Start your 7-day free trial</a>
+          <a href="#tour" class="es-btn es-btn-ghost" data-i18n="see-what-it-does.0888c5">See what it does</a>
+        </div>
+        <p class="es-cta-fine" data-i18n="then-7-99-month.58ba74">Then $7.99/month, $29.99/year, or $59.99 once. Family Sharing included.</p>
+
+        <div class="es-stats">
+          <div>
+            <div class="es-stat-num">100</div>
+            <p class="es-stat-label" data-i18n="cloud-providers-one-app.c20b49">cloud providers, one app</p>
+          </div>
+          <div>
+            <div class="es-stat-num">5</div>
+            <p class="es-stat-label" data-i18n="apple-platforms-full-parity.70a897">Apple platforms, full parity</p>
+          </div>
+          <div>
+            <div class="es-stat-num">1</div>
+            <p class="es-stat-label" data-i18n="purchase-covers-all-of.05379f">purchase covers all of them</p>
+          </div>
+          <div>
+            <div class="es-stat-num">0</div>
+            <p class="es-stat-label" data-i18n="servers-of-mine-in.4c2207">servers of mine in between</p>
+          </div>
         </div>
       </div>
-      <div class="hero-image">
-        <div class="hero-phone">
-          <!-- Replace with actual app screenshot -->
-          <img src="assets/images/icon.png" alt="Enter Space App Icon" class="phone-mockup"
-               onerror="this.src='assets/images/hero-mockup.png'; this.onerror=function(){this.style.background='linear-gradient(135deg, #667eea, #764ba2)'; this.style.minHeight='600px';};">
-        </div>
+
+      <div class="es-hero-art">
+        <span class="es-hero-glow" aria-hidden="true"></span>
+        <img class="es-art-mac" src="assets/images/hero-mac.png" width="1500" height="860"
+             alt="The Enter Space menu bar app on macOS listing Amazon S3, an encrypted Crypt remote, an SMB home NAS, a WebDAV media library, and Google Drive side by side">
+        <img class="es-art-phone" src="assets/images/hero-phone.png" width="300" height="620" loading="lazy"
+             alt="The same account&apos;s photo library, browsed by day on iPhone">
       </div>
     </div>
   </section>
@@ -366,391 +824,965 @@
     <span data-i18n="download-on-app-store.cf50c2">Download on App Store</span>
   </a>
 
-  <!-- Features Section -->
-  <section id="features" class="section">
+  <!-- ===== The tension: why anyone needs this at all ===== -->
+  <section class="es-band">
+    <svg class="es-stars" viewBox="0 0 1440 820" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
+      <circle cx="1331.8" cy="777.9" r="1.38" opacity="0.24" class="es-twinkle" style="animation-delay:3.3s"/><circle cx="610.2" cy="434.7" r="0.54" opacity="0.33"/><circle cx="640.2" cy="181.3" r="0.9" opacity="0.2"/><circle cx="123.5" cy="582.2" r="0.86" opacity="0.57"/><circle cx="1057.3" cy="294.4" r="0.46" opacity="0.78"/><circle cx="848.3" cy="539.5" r="1.08" opacity="0.93"/>
+      <circle cx="522.4" cy="623.0" r="0.81" opacity="0.62"/><circle cx="951.2" cy="257.8" r="0.49" opacity="0.55" class="es-twinkle" style="animation-delay:3.9s"/><circle cx="850.5" cy="366.9" r="1.11" opacity="0.32"/><circle cx="257.1" cy="265.2" r="1.3" opacity="0.33"/><circle cx="164.6" cy="80.9" r="0.44" opacity="0.39"/><circle cx="824.9" cy="672.9" r="0.76" opacity="0.46"/>
+      <circle cx="415.4" cy="249.9" r="1.26" opacity="0.6"/><circle cx="372.1" cy="87.8" r="1.26" opacity="0.72"/><circle cx="1193.1" cy="195.2" r="1.0" opacity="0.89" class="es-twinkle" style="animation-delay:3.3s"/><circle cx="1361.5" cy="137.2" r="1.47" opacity="0.22"/><circle cx="599.4" cy="19.2" r="1.29" opacity="0.71"/><circle cx="1402.2" cy="660.1" r="1.44" opacity="0.59"/>
+      <circle cx="1423.0" cy="614.2" r="0.78" opacity="0.93"/><circle cx="542.9" cy="158.5" r="0.48" opacity="0.54"/><circle cx="283.2" cy="765.5" r="1.45" opacity="0.35"/><circle cx="149.0" cy="433.8" r="0.59" opacity="0.6" class="es-twinkle" style="animation-delay:4.5s"/><circle cx="364.4" cy="345.8" r="1.39" opacity="0.52"/><circle cx="493.6" cy="731.7" r="1.3" opacity="0.87"/>
+      <circle cx="990.4" cy="338.4" r="1.16" opacity="0.82"/><circle cx="920.9" cy="195.5" r="0.72" opacity="0.5"/><circle cx="1111.2" cy="456.8" r="1.0" opacity="0.82"/><circle cx="156.2" cy="517.6" r="0.77" opacity="0.61"/><circle cx="1202.9" cy="203.6" r="1.45" opacity="0.24" class="es-twinkle" style="animation-delay:3.1s"/><circle cx="780.2" cy="192.8" r="1.02" opacity="0.54"/>
+      <circle cx="647.4" cy="589.1" r="0.4" opacity="0.47"/><circle cx="1131.3" cy="116.3" r="1.35" opacity="0.34"/><circle cx="980.8" cy="142.0" r="0.89" opacity="0.51"/><circle cx="117.8" cy="573.7" r="0.93" opacity="0.71"/><circle cx="776.4" cy="455.8" r="0.98" opacity="0.41"/><circle cx="1294.2" cy="70.8" r="1.36" opacity="0.84" class="es-twinkle" style="animation-delay:2.7s"/>
+      <circle cx="1118.8" cy="552.2" r="1.07" opacity="0.4"/><circle cx="460.3" cy="286.5" r="0.73" opacity="0.92"/><circle cx="491.4" cy="317.8" r="0.86" opacity="0.81"/><circle cx="688.0" cy="454.1" r="0.68" opacity="0.39"/><circle cx="128.3" cy="178.2" r="0.69" opacity="0.84"/><circle cx="723.6" cy="90.5" r="0.91" opacity="0.27"/>
+      <circle cx="815.1" cy="362.5" r="1.34" opacity="0.38" class="es-twinkle" style="animation-delay:4.7s"/><circle cx="356.5" cy="805.7" r="1.1" opacity="0.21"/><circle cx="1162.3" cy="226.0" r="0.8" opacity="0.29"/><circle cx="1205.9" cy="74.1" r="1.21" opacity="0.48"/><circle cx="978.4" cy="240.3" r="0.49" opacity="0.88"/><circle cx="942.8" cy="139.1" r="1.47" opacity="0.88"/>
+      <circle cx="262.9" cy="15.7" r="1.07" opacity="0.29"/><circle cx="1053.9" cy="384.5" r="1.18" opacity="0.62" class="es-twinkle" style="animation-delay:4.2s"/><circle cx="1183.1" cy="494.4" r="1.05" opacity="0.43"/><circle cx="193.1" cy="75.8" r="1.34" opacity="0.34"/><circle cx="614.3" cy="259.7" r="1.08" opacity="0.59"/><circle cx="1237.0" cy="357.6" r="0.8" opacity="0.68"/>
+      <circle cx="1072.5" cy="758.9" r="0.74" opacity="0.86"/><circle cx="1413.3" cy="805.5" r="0.54" opacity="0.47"/><circle cx="1114.5" cy="681.4" r="0.44" opacity="0.48" class="es-twinkle" style="animation-delay:4.0s"/><circle cx="1091.9" cy="438.8" r="0.63" opacity="0.49"/><circle cx="84.3" cy="258.9" r="0.87" opacity="0.81"/><circle cx="848.6" cy="339.8" r="0.67" opacity="0.42"/>
+      <circle cx="965.9" cy="365.3" r="0.59" opacity="0.81"/><circle cx="828.9" cy="793.4" r="0.99" opacity="0.66"/><circle cx="615.8" cy="498.8" r="1.41" opacity="0.94"/><circle cx="951.8" cy="352.8" r="0.47" opacity="0.83" class="es-twinkle" style="animation-delay:2.2s"/><circle cx="550.7" cy="46.8" r="0.44" opacity="0.48"/><circle cx="1403.6" cy="607.3" r="1.18" opacity="0.69"/>
+      <circle cx="392.9" cy="138.3" r="1.06" opacity="0.23"/><circle cx="846.8" cy="421.9" r="1.0" opacity="0.27"/><circle cx="97.3" cy="388.1" r="0.56" opacity="0.67"/><circle cx="445.7" cy="508.9" r="1.23" opacity="0.65"/><circle cx="765.5" cy="161.8" r="0.78" opacity="0.93" class="es-twinkle" style="animation-delay:1.5s"/><circle cx="409.4" cy="404.5" r="1.0" opacity="0.79"/>
+      <circle cx="425.2" cy="789.5" r="0.42" opacity="0.79"/><circle cx="820.4" cy="739.0" r="0.57" opacity="0.71"/><circle cx="1364.0" cy="547.0" r="0.52" opacity="0.89"/><circle cx="1396.3" cy="90.9" r="1.31" opacity="0.24"/><circle cx="117.1" cy="652.2" r="1.19" opacity="0.92"/><circle cx="910.0" cy="419.6" r="0.7" opacity="0.62" class="es-twinkle" style="animation-delay:5.5s"/>
+      <circle cx="931.2" cy="717.9" r="0.62" opacity="0.75"/><circle cx="1053.8" cy="58.1" r="1.3" opacity="0.32"/><circle cx="313.0" cy="50.2" r="1.13" opacity="0.29"/><circle cx="1405.0" cy="0.0" r="1.29" opacity="0.76"/><circle cx="819.8" cy="469.0" r="1.28" opacity="0.67"/><circle cx="200.7" cy="653.4" r="0.79" opacity="0.63"/>
+      <circle cx="737.9" cy="741.3" r="0.86" opacity="0.84" class="es-twinkle" style="animation-delay:0.4s"/><circle cx="469.7" cy="549.9" r="1.07" opacity="0.82"/><circle cx="299.4" cy="659.4" r="1.28" opacity="0.29"/><circle cx="201.4" cy="478.3" r="1.47" opacity="0.65"/><circle cx="616.3" cy="415.6" r="1.29" opacity="0.58"/><circle cx="772.9" cy="486.5" r="1.43" opacity="0.8"/>
+      <circle cx="1208.4" cy="218.3" r="1.06" opacity="0.81"/><circle cx="1034.1" cy="780.5" r="1.41" opacity="0.28" class="es-twinkle" style="animation-delay:2.8s"/><circle cx="515.2" cy="168.2" r="0.95" opacity="0.94"/><circle cx="1106.3" cy="81.3" r="0.67" opacity="0.46"/><circle cx="1274.6" cy="376.8" r="0.58" opacity="0.6"/><circle cx="356.0" cy="31.4" r="1.05" opacity="0.94"/>
+      <circle cx="1117.3" cy="603.7" r="0.57" opacity="0.61"/><circle cx="917.2" cy="622.5" r="0.89" opacity="0.22"/><circle cx="1335.9" cy="217.7" r="1.21" opacity="0.54" class="es-twinkle" style="animation-delay:4.3s"/><circle cx="486.3" cy="75.8" r="0.87" opacity="0.55"/><circle cx="1141.3" cy="331.1" r="1.13" opacity="0.47"/><circle cx="1055.0" cy="142.9" r="1.37" opacity="0.91"/>
+      <circle cx="34.1" cy="703.9" r="1.26" opacity="0.71"/><circle cx="152.5" cy="600.9" r="1.25" opacity="0.66"/><circle cx="1387.7" cy="776.5" r="1.1" opacity="0.89"/><circle cx="207.1" cy="244.6" r="0.98" opacity="0.58" class="es-twinkle" style="animation-delay:5.2s"/><circle cx="915.8" cy="509.5" r="1.08" opacity="0.91"/><circle cx="576.6" cy="606.3" r="1.06" opacity="0.49"/>
+      <circle cx="488.2" cy="126.0" r="0.41" opacity="0.44"/><circle cx="432.3" cy="66.6" r="0.93" opacity="0.45"/>
+    </svg>
+    <div class="es-inner">
+      <div class="es-problem-grid">
+        <div>
+          <p class="es-eyebrow" data-i18n="the-problem.8a9400">The problem</p>
+          <h2 data-i18n="your-files-didn-t.703734">Your files didn't mean to scatter.</h2>
+          <p class="es-scatter" data-i18n="a-drive-for-work.ffc988">
+            A Drive for work. A Dropbox folder a client shared once and never took back. Photos that outgrew iCloud two phones ago. An S3 bucket you're still paying for. A NAS in the closet. Six apps, six logins, six search boxes — and whatever you're looking for is always in the seventh.
+          </p>
+          <p class="es-payoff" data-i18n="enter-space-puts-every.3ccdef">
+            Enter Space puts every one of them behind one browser, one search box, and one set of keys — in Finder, in Files, and on every Apple device you own.
+          </p>
+        </div>
+
+        <div class="es-orbit" aria-hidden="true">
+          <span class="es-ring es-ring-1"></span>
+          <span class="es-ring es-ring-2"></span>
+          <span class="es-spin es-spin-counter">
+          <span class="es-chip" style="--a:18deg;--r:var(--r1)">Google Drive</span>
+          <span class="es-chip" style="--a:92deg;--r:var(--r1)">Dropbox</span>
+          <span class="es-chip" style="--a:166deg;--r:var(--r1)">OneDrive</span>
+          <span class="es-chip" style="--a:240deg;--r:var(--r1)">S3</span>
+          <span class="es-chip" style="--a:310deg;--r:var(--r1)">Backblaze B2</span>
+          </span>
+          <span class="es-spin es-spin-rev es-spin-counter">
+          <span class="es-chip" style="--a:8deg;--r:var(--r2)">WebDAV</span>
+          <span class="es-chip" style="--a:62deg;--r:var(--r2)">SFTP</span>
+          <span class="es-chip" style="--a:112deg;--r:var(--r2)">SMB</span>
+          <span class="es-chip" style="--a:160deg;--r:var(--r2)">Nextcloud</span>
+          <span class="es-chip" style="--a:212deg;--r:var(--r2)">pCloud</span>
+          <span class="es-chip" style="--a:258deg;--r:var(--r2)">Box</span>
+          <span class="es-chip" style="--a:300deg;--r:var(--r2)">Mega</span>
+          <span class="es-chip" style="--a:340deg;--r:var(--r2)">Seafile</span>
+          </span>
+          <span class="es-orbit-core"><img src="assets/images/icon.png" width="1024" height="1024" alt=""></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== The tour: six things you use in week one ===== -->
+  <section id="tour" class="es-band">
+    <svg class="es-stars" viewBox="0 0 1440 2400" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
+      <circle cx="982.1" cy="219.8" r="1.14" opacity="0.83" class="es-twinkle" style="animation-delay:4.6s"/><circle cx="741.6" cy="1514.5" r="0.84" opacity="0.59"/><circle cx="155.3" cy="1639.1" r="1.12" opacity="0.4"/><circle cx="545.1" cy="1766.7" r="0.93" opacity="0.92"/><circle cx="1398.6" cy="2012.1" r="0.51" opacity="0.24"/><circle cx="415.6" cy="866.7" r="1.25" opacity="0.82"/>
+      <circle cx="810.2" cy="1534.1" r="1.09" opacity="0.21"/><circle cx="758.4" cy="511.8" r="0.9" opacity="0.19" class="es-twinkle" style="animation-delay:3.6s"/><circle cx="1310.7" cy="164.7" r="1.1" opacity="0.2"/><circle cx="506.7" cy="382.3" r="1.43" opacity="0.74"/><circle cx="1291.0" cy="523.1" r="1.26" opacity="0.72"/><circle cx="735.4" cy="2198.9" r="1.15" opacity="0.4"/>
+      <circle cx="1032.6" cy="1155.0" r="0.66" opacity="0.66"/><circle cx="69.5" cy="1077.8" r="1.07" opacity="0.18"/><circle cx="933.9" cy="211.7" r="1.18" opacity="0.44" class="es-twinkle" style="animation-delay:0.2s"/><circle cx="1439.0" cy="154.0" r="0.59" opacity="0.57"/><circle cx="353.0" cy="1273.0" r="0.97" opacity="0.62"/><circle cx="782.8" cy="706.1" r="0.65" opacity="0.71"/>
+      <circle cx="617.7" cy="1249.3" r="1.5" opacity="0.19"/><circle cx="399.4" cy="1352.2" r="0.46" opacity="0.76"/><circle cx="577.9" cy="759.3" r="0.63" opacity="0.92"/><circle cx="67.0" cy="1971.5" r="1.25" opacity="0.87" class="es-twinkle" style="animation-delay:3.9s"/><circle cx="499.6" cy="1319.9" r="1.51" opacity="0.21"/><circle cx="1223.9" cy="1616.2" r="0.64" opacity="0.92"/>
+      <circle cx="431.4" cy="11.0" r="0.72" opacity="0.58"/><circle cx="40.0" cy="1420.2" r="0.93" opacity="0.44"/><circle cx="1088.2" cy="1484.1" r="1.56" opacity="0.85"/><circle cx="1238.6" cy="2239.3" r="1.42" opacity="0.55"/><circle cx="98.5" cy="1073.0" r="1.14" opacity="0.93" class="es-twinkle" style="animation-delay:3.6s"/><circle cx="826.9" cy="207.1" r="1.18" opacity="0.21"/>
+      <circle cx="206.6" cy="103.7" r="1.28" opacity="0.9"/><circle cx="855.7" cy="209.9" r="1.29" opacity="0.31"/><circle cx="1021.6" cy="1623.4" r="1.53" opacity="0.31"/><circle cx="335.8" cy="766.1" r="0.49" opacity="0.91"/><circle cx="896.6" cy="255.0" r="0.97" opacity="0.26"/><circle cx="1387.6" cy="862.9" r="0.4" opacity="0.75" class="es-twinkle" style="animation-delay:1.8s"/>
+      <circle cx="935.3" cy="1877.7" r="0.49" opacity="0.6"/><circle cx="1368.3" cy="545.8" r="0.7" opacity="0.7"/><circle cx="83.2" cy="1967.6" r="1.36" opacity="0.91"/><circle cx="1199.9" cy="1393.0" r="0.95" opacity="0.59"/><circle cx="915.9" cy="2344.0" r="0.58" opacity="0.56"/><circle cx="647.9" cy="589.4" r="0.6" opacity="0.78"/>
+      <circle cx="842.3" cy="1654.2" r="0.71" opacity="0.55" class="es-twinkle" style="animation-delay:0.9s"/><circle cx="218.7" cy="323.6" r="1.18" opacity="0.83"/><circle cx="822.7" cy="1872.2" r="0.49" opacity="0.58"/><circle cx="200.9" cy="1259.5" r="0.7" opacity="0.38"/><circle cx="1322.9" cy="1316.3" r="0.69" opacity="0.56"/><circle cx="409.5" cy="1907.9" r="0.88" opacity="0.83"/>
+      <circle cx="856.1" cy="1563.5" r="1.13" opacity="0.63"/><circle cx="90.2" cy="1896.9" r="1.14" opacity="0.35" class="es-twinkle" style="animation-delay:2.7s"/><circle cx="1369.6" cy="1568.5" r="1.06" opacity="0.59"/><circle cx="99.8" cy="1191.3" r="0.92" opacity="0.67"/><circle cx="521.4" cy="345.8" r="1.42" opacity="0.37"/><circle cx="324.7" cy="1045.1" r="1.53" opacity="0.72"/>
+      <circle cx="203.7" cy="229.3" r="1.0" opacity="0.23"/><circle cx="327.4" cy="271.9" r="1.44" opacity="0.86"/><circle cx="1251.3" cy="1569.7" r="0.45" opacity="0.39" class="es-twinkle" style="animation-delay:4.6s"/><circle cx="58.8" cy="1196.1" r="1.36" opacity="0.38"/><circle cx="499.5" cy="1525.7" r="1.19" opacity="0.3"/><circle cx="1137.9" cy="199.1" r="0.59" opacity="0.42"/>
+      <circle cx="289.0" cy="1093.8" r="0.82" opacity="0.74"/><circle cx="1175.8" cy="1852.3" r="1.43" opacity="0.37"/><circle cx="946.1" cy="1892.7" r="1.4" opacity="0.5"/><circle cx="1290.5" cy="862.0" r="1.47" opacity="0.7" class="es-twinkle" style="animation-delay:0.4s"/><circle cx="1320.3" cy="1856.4" r="1.05" opacity="0.92"/><circle cx="1275.4" cy="1924.1" r="1.32" opacity="0.73"/>
+      <circle cx="167.5" cy="1407.0" r="0.41" opacity="0.57"/><circle cx="249.1" cy="1686.7" r="1.5" opacity="0.34"/><circle cx="808.0" cy="687.3" r="1.57" opacity="0.56"/><circle cx="249.7" cy="1539.6" r="0.96" opacity="0.58"/><circle cx="647.3" cy="377.6" r="0.54" opacity="0.64" class="es-twinkle" style="animation-delay:0.7s"/><circle cx="558.2" cy="1355.6" r="1.35" opacity="0.3"/>
+      <circle cx="545.2" cy="272.2" r="0.69" opacity="0.92"/><circle cx="1053.2" cy="163.9" r="1.58" opacity="0.44"/><circle cx="820.5" cy="1896.0" r="0.67" opacity="0.4"/><circle cx="455.7" cy="1437.9" r="1.56" opacity="0.3"/><circle cx="1397.2" cy="1378.7" r="0.96" opacity="0.24"/><circle cx="1028.8" cy="185.5" r="1.41" opacity="0.39" class="es-twinkle" style="animation-delay:4.5s"/>
+      <circle cx="1084.0" cy="885.5" r="0.75" opacity="0.62"/><circle cx="668.7" cy="979.1" r="1.59" opacity="0.44"/><circle cx="504.1" cy="1784.7" r="0.93" opacity="0.38"/><circle cx="602.8" cy="279.3" r="0.6" opacity="0.81"/><circle cx="672.7" cy="1085.6" r="0.94" opacity="0.32"/><circle cx="173.5" cy="28.3" r="1.11" opacity="0.42"/>
+      <circle cx="967.8" cy="767.7" r="1.34" opacity="0.9" class="es-twinkle" style="animation-delay:2.0s"/><circle cx="893.6" cy="400.7" r="1.12" opacity="0.4"/><circle cx="645.5" cy="1977.1" r="1.45" opacity="0.5"/><circle cx="977.4" cy="1324.4" r="0.86" opacity="0.24"/><circle cx="74.0" cy="350.0" r="0.9" opacity="0.4"/><circle cx="270.4" cy="707.1" r="0.81" opacity="0.77"/>
+      <circle cx="1159.4" cy="1906.8" r="1.08" opacity="0.21"/><circle cx="1190.7" cy="1886.1" r="0.54" opacity="0.37" class="es-twinkle" style="animation-delay:2.5s"/><circle cx="303.8" cy="2385.2" r="1.16" opacity="0.62"/><circle cx="356.5" cy="949.4" r="1.06" opacity="0.78"/><circle cx="489.1" cy="1014.2" r="0.8" opacity="0.55"/><circle cx="461.1" cy="584.9" r="1.07" opacity="0.88"/>
+      <circle cx="1371.5" cy="2268.5" r="0.82" opacity="0.91"/><circle cx="190.0" cy="630.3" r="0.65" opacity="0.66"/><circle cx="368.1" cy="705.2" r="0.54" opacity="0.72" class="es-twinkle" style="animation-delay:3.5s"/><circle cx="663.1" cy="1486.5" r="1.45" opacity="0.92"/><circle cx="315.0" cy="2048.4" r="1.14" opacity="0.73"/><circle cx="210.1" cy="2319.1" r="0.85" opacity="0.25"/>
+      <circle cx="744.8" cy="783.0" r="1.27" opacity="0.67"/><circle cx="1181.6" cy="2092.1" r="1.34" opacity="0.46"/><circle cx="735.3" cy="1195.9" r="1.25" opacity="0.65"/><circle cx="846.8" cy="805.2" r="0.99" opacity="0.48" class="es-twinkle" style="animation-delay:4.3s"/><circle cx="1377.2" cy="1628.2" r="0.83" opacity="0.38"/><circle cx="1405.9" cy="2277.0" r="1.41" opacity="0.86"/>
+      <circle cx="788.1" cy="1780.0" r="1.0" opacity="0.21"/><circle cx="775.9" cy="2360.6" r="0.85" opacity="0.7"/><circle cx="184.9" cy="1590.5" r="0.85" opacity="0.93"/><circle cx="754.4" cy="1656.4" r="0.79" opacity="0.44"/><circle cx="1135.0" cy="1212.6" r="1.15" opacity="0.86" class="es-twinkle" style="animation-delay:0.6s"/><circle cx="513.1" cy="2139.4" r="1.19" opacity="0.8"/>
+      <circle cx="901.5" cy="1750.6" r="0.49" opacity="0.26"/><circle cx="1101.5" cy="1751.0" r="0.77" opacity="0.53"/><circle cx="1257.8" cy="2156.1" r="0.69" opacity="0.94"/><circle cx="1425.1" cy="849.9" r="1.02" opacity="0.31"/><circle cx="617.5" cy="480.7" r="0.73" opacity="0.67"/><circle cx="1194.7" cy="1005.8" r="1.58" opacity="0.25" class="es-twinkle" style="animation-delay:3.7s"/>
+      <circle cx="1436.3" cy="283.9" r="0.66" opacity="0.53"/><circle cx="349.8" cy="2075.5" r="1.02" opacity="0.18"/><circle cx="469.3" cy="987.5" r="1.15" opacity="0.34"/><circle cx="1119.6" cy="1002.7" r="1.11" opacity="0.52"/><circle cx="1335.9" cy="179.1" r="1.29" opacity="0.82"/><circle cx="1383.4" cy="73.7" r="0.65" opacity="0.45"/>
+      <circle cx="1246.9" cy="1635.4" r="0.97" opacity="0.68" class="es-twinkle" style="animation-delay:2.8s"/><circle cx="1267.5" cy="1133.5" r="0.9" opacity="0.32"/><circle cx="1020.8" cy="257.1" r="0.96" opacity="0.26"/><circle cx="716.8" cy="1561.6" r="1.41" opacity="0.63"/><circle cx="1012.6" cy="368.5" r="0.86" opacity="0.2"/><circle cx="774.3" cy="876.7" r="1.03" opacity="0.21"/>
+      <circle cx="1390.1" cy="2024.5" r="0.63" opacity="0.83"/><circle cx="832.0" cy="1678.6" r="1.07" opacity="0.91" class="es-twinkle" style="animation-delay:0.7s"/><circle cx="1237.5" cy="1791.0" r="1.24" opacity="0.95"/><circle cx="1371.1" cy="10.6" r="0.69" opacity="0.71"/><circle cx="848.5" cy="1368.3" r="1.05" opacity="0.74"/><circle cx="162.1" cy="476.9" r="0.73" opacity="0.56"/>
+      <circle cx="790.6" cy="1029.8" r="0.81" opacity="0.66"/><circle cx="165.4" cy="507.4" r="1.58" opacity="0.72"/><circle cx="269.3" cy="975.3" r="0.76" opacity="0.54" class="es-twinkle" style="animation-delay:4.7s"/><circle cx="1138.0" cy="51.2" r="1.18" opacity="0.91"/><circle cx="593.2" cy="783.7" r="0.61" opacity="0.42"/><circle cx="1329.2" cy="793.2" r="0.7" opacity="0.49"/>
+      <circle cx="1295.7" cy="24.9" r="0.4" opacity="0.71"/><circle cx="52.0" cy="622.5" r="0.9" opacity="0.52"/><circle cx="450.7" cy="1588.3" r="0.75" opacity="0.63"/><circle cx="1265.7" cy="1816.6" r="1.46" opacity="0.28" class="es-twinkle" style="animation-delay:2.2s"/><circle cx="901.6" cy="803.9" r="0.78" opacity="0.26"/><circle cx="517.3" cy="2280.5" r="0.88" opacity="0.23"/>
+      <circle cx="497.4" cy="34.5" r="1.32" opacity="0.33"/><circle cx="848.0" cy="2254.1" r="0.99" opacity="0.89"/><circle cx="745.2" cy="403.9" r="0.92" opacity="0.23"/><circle cx="865.3" cy="942.7" r="1.08" opacity="0.31"/><circle cx="445.1" cy="2055.1" r="1.17" opacity="0.7" class="es-twinkle" style="animation-delay:1.6s"/><circle cx="411.1" cy="1052.4" r="0.53" opacity="0.8"/>
+      <circle cx="324.2" cy="283.4" r="0.57" opacity="0.44"/><circle cx="386.2" cy="1995.6" r="1.13" opacity="0.62"/><circle cx="1275.2" cy="768.2" r="0.73" opacity="0.73"/><circle cx="785.4" cy="1098.6" r="0.5" opacity="0.81"/><circle cx="967.4" cy="689.4" r="1.43" opacity="0.42"/><circle cx="299.1" cy="1868.2" r="0.51" opacity="0.25" class="es-twinkle" style="animation-delay:1.1s"/>
+      <circle cx="720.3" cy="1150.8" r="1.41" opacity="0.86"/><circle cx="1306.4" cy="834.5" r="0.95" opacity="0.31"/><circle cx="234.5" cy="1003.7" r="0.79" opacity="0.26"/><circle cx="706.2" cy="1419.6" r="1.47" opacity="0.36"/><circle cx="1321.5" cy="384.6" r="0.95" opacity="0.31"/><circle cx="1245.2" cy="477.9" r="0.82" opacity="0.25"/>
+      <circle cx="1262.8" cy="2098.8" r="0.63" opacity="0.7" class="es-twinkle" style="animation-delay:0.8s"/><circle cx="1345.0" cy="1451.2" r="0.54" opacity="0.33"/><circle cx="1198.1" cy="1434.9" r="1.14" opacity="0.33"/><circle cx="1338.4" cy="2294.9" r="1.39" opacity="0.91"/><circle cx="226.1" cy="924.8" r="1.33" opacity="0.85"/><circle cx="963.5" cy="2385.6" r="0.59" opacity="0.49"/>
+      <circle cx="951.2" cy="1933.0" r="1.4" opacity="0.87"/><circle cx="500.5" cy="2207.9" r="1.34" opacity="0.88" class="es-twinkle" style="animation-delay:3.2s"/><circle cx="154.1" cy="2077.2" r="0.5" opacity="0.59"/><circle cx="732.7" cy="1928.1" r="1.29" opacity="0.88"/><circle cx="26.7" cy="2305.2" r="1.48" opacity="0.51"/><circle cx="260.1" cy="1476.1" r="1.01" opacity="0.58"/>
+      <circle cx="1400.6" cy="1946.3" r="0.99" opacity="0.26"/><circle cx="1059.0" cy="1573.4" r="1.6" opacity="0.73"/><circle cx="598.9" cy="1760.1" r="1.54" opacity="0.86" class="es-twinkle" style="animation-delay:3.0s"/><circle cx="281.4" cy="513.7" r="0.6" opacity="0.41"/><circle cx="1352.3" cy="1415.2" r="0.49" opacity="0.3"/><circle cx="847.3" cy="2270.6" r="1.48" opacity="0.81"/>
+      <circle cx="828.6" cy="512.9" r="0.97" opacity="0.81"/><circle cx="375.8" cy="304.5" r="1.1" opacity="0.34"/><circle cx="427.6" cy="391.4" r="0.66" opacity="0.65"/><circle cx="1090.8" cy="2111.8" r="0.44" opacity="0.9" class="es-twinkle" style="animation-delay:1.8s"/><circle cx="98.5" cy="524.6" r="0.97" opacity="0.63"/><circle cx="264.8" cy="585.4" r="1.0" opacity="0.83"/>
+      <circle cx="1192.9" cy="68.9" r="1.45" opacity="0.44"/><circle cx="1215.1" cy="872.7" r="0.62" opacity="0.83"/><circle cx="629.0" cy="2079.0" r="0.95" opacity="0.64"/><circle cx="921.8" cy="931.7" r="0.76" opacity="0.77"/><circle cx="899.7" cy="689.3" r="0.52" opacity="0.39" class="es-twinkle" style="animation-delay:0.7s"/><circle cx="725.7" cy="1545.3" r="0.75" opacity="0.31"/>
+      <circle cx="1150.7" cy="1575.5" r="1.16" opacity="0.66"/><circle cx="34.7" cy="647.0" r="1.42" opacity="0.48"/><circle cx="168.4" cy="612.6" r="0.96" opacity="0.69"/><circle cx="792.5" cy="623.8" r="0.49" opacity="0.28"/><circle cx="1009.4" cy="1018.1" r="1.38" opacity="0.82"/><circle cx="1270.0" cy="1643.9" r="0.81" opacity="0.53" class="es-twinkle" style="animation-delay:3.8s"/>
+      <circle cx="400.5" cy="1069.1" r="0.94" opacity="0.41"/><circle cx="834.6" cy="1140.6" r="1.56" opacity="0.81"/><circle cx="298.2" cy="2012.0" r="0.62" opacity="0.3"/><circle cx="344.3" cy="1546.1" r="1.46" opacity="0.51"/><circle cx="1108.9" cy="2396.2" r="1.07" opacity="0.9"/><circle cx="810.6" cy="1651.0" r="0.47" opacity="0.32"/>
+      <circle cx="395.8" cy="2369.2" r="1.18" opacity="0.74" class="es-twinkle" style="animation-delay:3.6s"/><circle cx="1143.3" cy="1305.2" r="0.72" opacity="0.25"/><circle cx="260.9" cy="1371.7" r="1.6" opacity="0.72"/><circle cx="137.7" cy="2015.0" r="0.99" opacity="0.26"/><circle cx="1366.0" cy="1000.5" r="1.07" opacity="0.32"/><circle cx="521.9" cy="2093.7" r="1.43" opacity="0.75"/>
+      <circle cx="1303.8" cy="2151.2" r="1.45" opacity="0.25"/><circle cx="13.6" cy="986.2" r="0.69" opacity="0.57" class="es-twinkle" style="animation-delay:3.4s"/><circle cx="294.1" cy="1771.0" r="1.22" opacity="0.18"/><circle cx="984.1" cy="987.9" r="1.24" opacity="0.77"/><circle cx="949.1" cy="625.0" r="0.96" opacity="0.23"/><circle cx="1431.1" cy="1319.2" r="1.5" opacity="0.37"/>
+      <circle cx="454.1" cy="620.3" r="1.34" opacity="0.4"/><circle cx="1062.7" cy="374.5" r="1.54" opacity="0.89"/><circle cx="605.0" cy="1807.7" r="0.91" opacity="0.28" class="es-twinkle" style="animation-delay:3.7s"/><circle cx="648.8" cy="1115.3" r="1.14" opacity="0.68"/><circle cx="629.6" cy="631.7" r="1.37" opacity="0.21"/><circle cx="1296.6" cy="848.3" r="1.29" opacity="0.84"/>
+      <circle cx="229.2" cy="181.6" r="0.5" opacity="0.57"/><circle cx="582.7" cy="2343.9" r="1.05" opacity="0.76"/><circle cx="1138.7" cy="282.0" r="1.53" opacity="0.93"/><circle cx="1203.9" cy="1430.5" r="1.11" opacity="0.73" class="es-twinkle" style="animation-delay:2.2s"/><circle cx="962.9" cy="1961.1" r="0.42" opacity="0.7"/><circle cx="396.4" cy="311.3" r="1.58" opacity="0.53"/>
+      <circle cx="331.9" cy="1486.3" r="1.07" opacity="0.68"/><circle cx="122.8" cy="855.3" r="1.56" opacity="0.39"/><circle cx="939.1" cy="2111.9" r="0.78" opacity="0.36"/><circle cx="656.1" cy="2297.1" r="0.94" opacity="0.63"/><circle cx="750.7" cy="334.1" r="0.9" opacity="0.37" class="es-twinkle" style="animation-delay:4.9s"/><circle cx="1185.9" cy="644.9" r="0.43" opacity="0.27"/>
+      <circle cx="1153.5" cy="1584.9" r="1.21" opacity="0.61"/><circle cx="518.3" cy="405.8" r="0.52" opacity="0.7"/><circle cx="475.6" cy="1539.5" r="0.51" opacity="0.61"/><circle cx="909.6" cy="718.0" r="1.13" opacity="0.4"/><circle cx="560.0" cy="1408.7" r="1.59" opacity="0.47"/><circle cx="781.0" cy="1214.1" r="1.39" opacity="0.33" class="es-twinkle" style="animation-delay:2.5s"/>
+      <circle cx="524.6" cy="439.4" r="1.34" opacity="0.77"/><circle cx="1009.9" cy="1480.5" r="0.94" opacity="0.7"/><circle cx="1076.9" cy="641.9" r="1.35" opacity="0.9"/><circle cx="408.2" cy="855.8" r="0.85" opacity="0.4"/><circle cx="949.2" cy="2305.4" r="0.79" opacity="0.95"/><circle cx="50.9" cy="1281.8" r="1.36" opacity="0.34"/>
+      <circle cx="46.9" cy="980.2" r="0.61" opacity="0.8" class="es-twinkle" style="animation-delay:1.6s"/><circle cx="865.5" cy="2235.0" r="0.65" opacity="0.8"/><circle cx="167.8" cy="2140.4" r="1.54" opacity="0.28"/><circle cx="1024.4" cy="1311.1" r="0.83" opacity="0.42"/><circle cx="1107.8" cy="878.6" r="0.73" opacity="0.62"/><circle cx="1270.1" cy="1042.2" r="1.27" opacity="0.82"/>
+      <circle cx="457.3" cy="926.3" r="0.59" opacity="0.88"/><circle cx="1344.0" cy="41.2" r="1.35" opacity="0.22" class="es-twinkle" style="animation-delay:0.5s"/>
+    </svg>
+    <div class="es-inner">
+      <div class="section-header">
+        <p class="section-subtitle es-eyebrow" data-i18n="the-tour.09f792">The tour</p>
+        <h2 data-i18n="what-it-actually-does.c9681d">What it actually does</h2>
+        <p data-i18n="six-things-you-will.e4d959">Six things you will use in the first week — not a list of checkboxes.</p>
+      </div>
+
+      <div class="es-tour-block">
+        <div class="es-tour-copy">
+          <span class="es-step" aria-hidden="true">1</span>
+          <h3 data-i18n="mount-every-cloud-like.091239">Mount every cloud like a local drive</h3>
+          <p data-i18n="enter-space-integrates-directly.cf0237">
+          Enter Space integrates directly with macOS Finder and iOS Files app through File Provider technology.
+          Access all 100 cloud storage providers as if they were native drives on your device.
+        </p>
+        <p data-i18n="drag-and-drop-files.b40b4c">
+          Drag and drop files, use Spotlight search, and work with your cloud files using any app—just like they're stored locally.
+          Full read and write support for the majority of supported clouds.
+        </p>
+        </div>
+        <div class="es-tour-shot">
+          <img src="assets/images/tour-mount.png" width="1500" height="860" alt="An SMB home NAS open in an Enter Space window on the Mac desktop, browsing like any local folder">
+        </div>
+      </div>
+      <div class="es-tour-block reverse">
+        <div class="es-tour-copy">
+          <span class="es-step" aria-hidden="true">2</span>
+          <h3 data-i18n="one-photo-library-laid.5c0ef9">One photo library, laid over every cloud</h3>
+          <p data-i18n="an-apple-photos-style.e29b8d">An Apple-Photos-style library over any of your remotes: year/month/day timeline, Places map, Albums, Favorites, and full-text search. Live Photos play on hold, RAW files open as true RAW develops, and 360° shots get an interactive look-around viewer. Everything indexes into a private, encrypted on-device library that syncs to your other devices serverlessly — and any photo, video, or album can be downloaded for fully offline use, encrypted at rest.</p>
+        </div>
+        <div class="es-tour-shot portrait-lg">
+          <img src="assets/images/tour-photos.png" width="690" height="900" loading="lazy" alt="The Photos-style library on iPad, grouped by day across two dates">
+        </div>
+      </div>
+      <div class="es-tour-block">
+        <div class="es-tour-copy">
+          <span class="es-step" aria-hidden="true">3</span>
+          <h3 data-i18n="a-private-theater-built.f1d63d">A private Theater built from files you already own</h3>
+          <p data-i18n="point-theater-at-your.613d1f">Point Theater at your movie and TV folders and get Netflix-style shelves with artwork and details from TMDB — or no key at all, and it builds your library from your file names. Continue Watching follows you across iPhone, Mac, and Apple TV; episodes auto-advance; resume never spoils. A custom player built for real-world files means audio and subtitle track choices actually switch and are remembered — across resume, episodes, launches, and devices. Download whole seasons for offline viewing, encrypted on-device.</p>
+        </div>
+        <div class="es-tour-shot">
+          <img src="assets/images/tour-theater.png" width="1500" height="970" loading="lazy" alt="Theater on Apple TV with Continue Watching and Favorite Media shelves of cover art">
+        </div>
+      </div>
+      <div class="es-tour-block reverse">
+        <div class="es-tour-copy">
+          <span class="es-step" aria-hidden="true">4</span>
+          <h3 data-i18n="encrypted-before-it-ever.cbeca3">Encrypted before it ever leaves your device</h3>
+          <p data-i18n="your-files-are-encrypted.ce8455">
+          Your files are encrypted on your device before they're uploaded to the cloud. Enter Space uses
+          end-to-end encryption to ensure only you can access your data, even if the cloud provider is compromised.
+        </p>
+        <p data-i18n="built-on-rclone-s.4cbbc4">
+          Built on Rclone's proven open-source technology with years of community testing and security audits.
+          Fast, reliable, and secure cloud access you can trust.
+        </p>
+        </div>
+        <div class="es-tour-shot portrait">
+          <img src="assets/images/tour-encrypted.png" width="338" height="700" loading="lazy" alt="The Storage list on iPhone with an encrypted Crypt remote alongside Amazon S3, SMB, WebDAV and Google Drive">
+        </div>
+      </div>
+      <div class="es-tour-block">
+        <div class="es-tour-copy">
+          <span class="es-step" aria-hidden="true">5</span>
+          <h3 data-i18n="set-the-schedule-once.276789">Set the schedule once, then stop thinking about backups</h3>
+          <p data-i18n="schedule-automated-sync-operations.e46125">Schedule automated sync operations with advanced filtering and incremental backups — a whole folder, or a single file. Supports near realtime file change monitoring so your data syncs moments after it changes. Keep your data safe across all devices with smart, efficient transfers.</p>
+        </div>
+        <div class="es-tour-shot">
+          <img src="assets/images/tour-schedule.png" width="1500" height="860" loading="lazy" alt="Scheduled Syncs on the Mac with nightly backup, photo library sync, and media mirror tasks">
+        </div>
+      </div>
+      <div class="es-tour-block reverse">
+        <div class="es-tour-copy">
+          <span class="es-step" aria-hidden="true">6</span>
+          <h3 data-i18n="rewind-any-folder-to.ac5f70">Rewind any folder to any moment</h3>
+          <p data-i18n="browse-through-your-version.b498c7">Browse through your version history from any snapshot's point of view. Restore files and folders as needed with intuitive time-travel navigation.</p>
+        </div>
+        <div class="es-tour-shot portrait">
+          <img src="assets/images/tour-timeportal.png" width="338" height="700" loading="lazy" alt="The Time Portal version-history browser on iPhone, scrubbed back two hours">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Screenshots, captioned so they sell rather than decorate ===== -->
+  <section id="screenshots" class="es-band">
+    <svg class="es-stars" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
+      <circle cx="548.7" cy="207.6" r="0.58" opacity="0.88" class="es-twinkle" style="animation-delay:3.2s"/><circle cx="993.8" cy="497.8" r="0.82" opacity="0.74"/><circle cx="830.1" cy="703.1" r="1.13" opacity="0.83"/><circle cx="632.7" cy="139.5" r="0.56" opacity="0.74"/><circle cx="241.2" cy="589.2" r="1.08" opacity="0.23"/><circle cx="1129.4" cy="29.7" r="1.35" opacity="0.83"/>
+      <circle cx="310.9" cy="653.6" r="1.21" opacity="0.28"/><circle cx="964.7" cy="111.4" r="1.4" opacity="0.71" class="es-twinkle" style="animation-delay:5.4s"/><circle cx="77.1" cy="286.0" r="1.08" opacity="0.65"/><circle cx="262.2" cy="799.0" r="1.33" opacity="0.41"/><circle cx="210.1" cy="600.9" r="0.85" opacity="0.69"/><circle cx="710.3" cy="355.3" r="0.42" opacity="0.28"/>
+      <circle cx="660.1" cy="655.4" r="0.87" opacity="0.75"/><circle cx="777.3" cy="792.3" r="1.12" opacity="0.43"/><circle cx="199.9" cy="59.2" r="0.44" opacity="0.84" class="es-twinkle" style="animation-delay:4.8s"/><circle cx="1082.0" cy="98.4" r="1.13" opacity="0.28"/><circle cx="1280.3" cy="589.9" r="1.22" opacity="0.65"/><circle cx="602.5" cy="763.6" r="1.46" opacity="0.37"/>
+      <circle cx="629.8" cy="660.1" r="1.15" opacity="0.5"/><circle cx="648.0" cy="870.9" r="0.7" opacity="0.34"/><circle cx="988.0" cy="249.3" r="1.39" opacity="0.43"/><circle cx="1331.5" cy="341.8" r="1.37" opacity="0.76" class="es-twinkle" style="animation-delay:4.0s"/><circle cx="308.6" cy="147.8" r="0.43" opacity="0.32"/><circle cx="959.8" cy="57.9" r="0.66" opacity="0.62"/>
+      <circle cx="223.4" cy="296.2" r="0.65" opacity="0.7"/><circle cx="170.7" cy="897.8" r="1.06" opacity="0.73"/><circle cx="795.7" cy="448.0" r="1.47" opacity="0.87"/><circle cx="1183.6" cy="26.9" r="1.05" opacity="0.91"/><circle cx="919.2" cy="461.7" r="1.11" opacity="0.32" class="es-twinkle" style="animation-delay:4.0s"/><circle cx="1128.5" cy="64.5" r="0.96" opacity="0.64"/>
+      <circle cx="506.9" cy="613.5" r="1.41" opacity="0.88"/><circle cx="443.2" cy="136.6" r="1.34" opacity="0.65"/><circle cx="1194.5" cy="782.0" r="0.71" opacity="0.63"/><circle cx="436.6" cy="717.7" r="1.16" opacity="0.36"/><circle cx="720.2" cy="534.7" r="0.66" opacity="0.32"/><circle cx="682.9" cy="64.9" r="0.94" opacity="0.9" class="es-twinkle" style="animation-delay:4.5s"/>
+      <circle cx="78.2" cy="743.2" r="1.19" opacity="0.73"/><circle cx="38.6" cy="683.9" r="0.61" opacity="0.8"/><circle cx="464.3" cy="330.0" r="0.59" opacity="0.85"/><circle cx="319.4" cy="785.5" r="0.97" opacity="0.29"/><circle cx="943.4" cy="477.8" r="0.43" opacity="0.81"/><circle cx="390.1" cy="21.5" r="1.24" opacity="0.74"/>
+      <circle cx="555.5" cy="167.6" r="0.98" opacity="0.63" class="es-twinkle" style="animation-delay:3.8s"/><circle cx="705.0" cy="511.1" r="1.19" opacity="0.33"/><circle cx="260.0" cy="436.0" r="1.23" opacity="0.8"/><circle cx="1228.8" cy="395.0" r="1.19" opacity="0.26"/><circle cx="559.7" cy="60.1" r="1.32" opacity="0.95"/><circle cx="964.3" cy="677.2" r="0.81" opacity="0.79"/>
+      <circle cx="122.4" cy="333.6" r="0.79" opacity="0.85"/><circle cx="249.1" cy="143.2" r="0.5" opacity="0.83" class="es-twinkle" style="animation-delay:1.7s"/><circle cx="1300.4" cy="281.7" r="1.32" opacity="0.33"/><circle cx="1299.6" cy="876.3" r="1.37" opacity="0.71"/><circle cx="1290.8" cy="822.9" r="1.46" opacity="0.39"/><circle cx="1223.8" cy="701.7" r="0.78" opacity="0.31"/>
+      <circle cx="1295.5" cy="425.1" r="0.98" opacity="0.86"/><circle cx="696.7" cy="227.2" r="1.15" opacity="0.59"/><circle cx="392.3" cy="622.8" r="1.39" opacity="0.37" class="es-twinkle" style="animation-delay:4.5s"/><circle cx="1085.3" cy="470.2" r="0.61" opacity="0.69"/><circle cx="405.2" cy="225.7" r="1.34" opacity="0.39"/><circle cx="133.2" cy="760.9" r="1.49" opacity="0.42"/>
+      <circle cx="583.2" cy="490.1" r="1.23" opacity="0.19"/><circle cx="933.1" cy="210.3" r="1.42" opacity="0.5"/><circle cx="1359.7" cy="405.1" r="1.12" opacity="0.21"/><circle cx="291.9" cy="266.6" r="0.81" opacity="0.31" class="es-twinkle" style="animation-delay:2.3s"/><circle cx="126.9" cy="509.6" r="1.46" opacity="0.84"/><circle cx="895.6" cy="883.6" r="1.2" opacity="0.67"/>
+      <circle cx="658.5" cy="74.1" r="1.38" opacity="0.87"/><circle cx="1159.0" cy="620.1" r="1.29" opacity="0.92"/><circle cx="1399.6" cy="692.8" r="0.42" opacity="0.91"/><circle cx="817.5" cy="406.9" r="0.87" opacity="0.39"/><circle cx="49.0" cy="556.5" r="1.08" opacity="0.25" class="es-twinkle" style="animation-delay:5.1s"/><circle cx="1301.0" cy="778.2" r="0.99" opacity="0.48"/>
+      <circle cx="677.5" cy="333.5" r="1.45" opacity="0.89"/><circle cx="1293.9" cy="467.8" r="0.96" opacity="0.71"/><circle cx="416.5" cy="165.7" r="1.48" opacity="0.39"/><circle cx="389.0" cy="443.1" r="0.5" opacity="0.58"/><circle cx="230.7" cy="746.2" r="0.49" opacity="0.8"/><circle cx="387.0" cy="709.2" r="1.28" opacity="0.92" class="es-twinkle" style="animation-delay:1.0s"/>
+      <circle cx="1417.9" cy="133.2" r="0.79" opacity="0.19"/><circle cx="711.3" cy="73.8" r="1.01" opacity="0.9"/><circle cx="1125.7" cy="583.0" r="0.5" opacity="0.94"/><circle cx="525.3" cy="854.5" r="0.56" opacity="0.41"/><circle cx="1364.7" cy="672.3" r="0.6" opacity="0.53"/><circle cx="781.0" cy="226.7" r="0.64" opacity="0.24"/>
+      <circle cx="733.6" cy="374.3" r="0.78" opacity="0.55" class="es-twinkle" style="animation-delay:1.9s"/><circle cx="556.3" cy="687.4" r="0.56" opacity="0.25"/><circle cx="643.6" cy="260.7" r="0.92" opacity="0.84"/><circle cx="1362.6" cy="735.0" r="1.41" opacity="0.36"/><circle cx="498.6" cy="100.5" r="0.72" opacity="0.38"/><circle cx="345.3" cy="300.1" r="1.43" opacity="0.58"/>
+      <circle cx="1295.6" cy="474.6" r="1.22" opacity="0.7"/><circle cx="853.3" cy="831.9" r="1.05" opacity="0.57" class="es-twinkle" style="animation-delay:1.3s"/><circle cx="142.6" cy="386.0" r="0.85" opacity="0.28"/><circle cx="1371.5" cy="15.9" r="0.89" opacity="0.37"/><circle cx="588.0" cy="753.0" r="1.46" opacity="0.49"/><circle cx="1025.3" cy="803.2" r="0.72" opacity="0.49"/>
+      <circle cx="624.1" cy="753.2" r="0.73" opacity="0.87"/><circle cx="266.9" cy="612.8" r="1.09" opacity="0.21"/><circle cx="471.2" cy="752.0" r="0.84" opacity="0.22" class="es-twinkle" style="animation-delay:2.6s"/><circle cx="778.8" cy="422.5" r="0.86" opacity="0.9"/><circle cx="965.9" cy="399.7" r="0.89" opacity="0.77"/><circle cx="343.1" cy="433.8" r="1.24" opacity="0.25"/>
+      <circle cx="213.1" cy="45.7" r="1.14" opacity="0.8"/><circle cx="953.0" cy="558.0" r="0.43" opacity="0.46"/><circle cx="665.9" cy="303.1" r="0.68" opacity="0.47"/><circle cx="327.4" cy="63.0" r="1.03" opacity="0.2" class="es-twinkle" style="animation-delay:2.4s"/><circle cx="578.4" cy="729.3" r="1.18" opacity="0.53"/><circle cx="8.8" cy="640.6" r="1.2" opacity="0.67"/>
+      <circle cx="1426.5" cy="442.7" r="0.84" opacity="0.59"/><circle cx="150.8" cy="563.9" r="0.55" opacity="0.7"/><circle cx="881.1" cy="616.3" r="0.6" opacity="0.73"/><circle cx="1358.0" cy="887.1" r="1.24" opacity="0.3"/><circle cx="1114.9" cy="159.5" r="1.48" opacity="0.2" class="es-twinkle" style="animation-delay:0.1s"/><circle cx="578.7" cy="70.2" r="1.45" opacity="0.9"/>
+      <circle cx="373.9" cy="782.6" r="0.78" opacity="0.81"/><circle cx="179.4" cy="846.7" r="0.89" opacity="0.36"/><circle cx="640.7" cy="1.2" r="0.44" opacity="0.55"/><circle cx="858.5" cy="897.1" r="0.97" opacity="0.44"/><circle cx="376.5" cy="19.0" r="1.41" opacity="0.72"/><circle cx="380.8" cy="680.8" r="1.16" opacity="0.67" class="es-twinkle" style="animation-delay:2.5s"/>
+    </svg>
+    <div class="es-inner">
+      <div class="section-header">
+        <p class="section-subtitle es-eyebrow" data-i18n="see-it-in-action.8c8d28">See It In Action</p>
+        <h2 data-i18n="screenshots.597b63">Screenshots</h2>
+        <p data-i18n="take-a-closer-look.bec0b1">Take a closer look at Enter Space in action</p>
+      </div>
+      <div class="es-gallery">
+        <figure class="es-shot">
+          <img src="assets/images/shot-space.png" width="329" height="680" loading="lazy" alt="Space Inspector on iPhone showing folder sizes as colour-coded bars">
+          <figcaption data-i18n="space-inspector-tells-you.bef32e">Space Inspector tells you exactly which folders ate the space — biggest first, on any cloud or local drive.</figcaption>
+        </figure>
+        <figure class="es-shot">
+          <img src="assets/images/shot-doppel.png" width="329" height="680" loading="lazy" alt="The Doppel duplicate finder listing recoverable duplicate files">
+          <figcaption data-i18n="doppel-finds-the-same.c99b4e">Doppel finds the same photo saved five times across three clouds, even after a resize or a format swap.</figcaption>
+        </figure>
+        <figure class="es-shot">
+          <img src="assets/images/shot-browser.png" width="329" height="680" loading="lazy" alt="The Enter Space cloud file browser on iPhone">
+          <figcaption data-i18n="every-remote-browses-identically.0d5e8f">Every remote browses identically — an SMB NAS, an S3 bucket and a Drive account all feel like one disk.</figcaption>
+        </figure>
+        <figure class="es-shot">
+          <img src="assets/images/shot-editor.png" width="329" height="680" loading="lazy" alt="The built-in code editor on iPhone with a Swift file open and Git controls in the toolbar">
+          <figcaption data-i18n="a-real-editor-with.b2cbc1">A real editor with Git built in — open a file straight off the remote, then stage, commit and push it back.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Who buys it, and what it replaces ===== -->
+  <section class="es-band es-band-end">
+    <svg class="es-stars" viewBox="0 0 1440 1400" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
+      <circle cx="888.7" cy="1246.2" r="0.95" opacity="0.73" class="es-twinkle" style="animation-delay:5.2s"/><circle cx="749.6" cy="1027.4" r="1.27" opacity="0.84"/><circle cx="53.0" cy="237.0" r="1.6" opacity="0.76"/><circle cx="375.8" cy="1039.4" r="0.6" opacity="0.46"/><circle cx="634.9" cy="320.3" r="0.57" opacity="0.57"/><circle cx="931.7" cy="445.6" r="1.19" opacity="0.94"/>
+      <circle cx="79.3" cy="389.7" r="0.51" opacity="0.7"/><circle cx="594.1" cy="615.2" r="0.7" opacity="0.78" class="es-twinkle" style="animation-delay:4.2s"/><circle cx="644.3" cy="1154.9" r="0.68" opacity="0.45"/><circle cx="1379.2" cy="319.4" r="0.57" opacity="0.2"/><circle cx="968.1" cy="1148.9" r="0.46" opacity="0.55"/><circle cx="570.8" cy="459.0" r="0.68" opacity="0.48"/>
+      <circle cx="203.4" cy="1290.5" r="0.64" opacity="0.59"/><circle cx="922.8" cy="920.4" r="0.97" opacity="0.58"/><circle cx="1348.4" cy="243.0" r="0.64" opacity="0.41" class="es-twinkle" style="animation-delay:4.1s"/><circle cx="609.9" cy="545.8" r="0.49" opacity="0.28"/><circle cx="938.3" cy="320.5" r="0.95" opacity="0.36"/><circle cx="448.0" cy="267.9" r="1.49" opacity="0.66"/>
+      <circle cx="700.8" cy="320.5" r="1.4" opacity="0.61"/><circle cx="192.7" cy="252.9" r="1.54" opacity="0.43"/><circle cx="591.6" cy="134.9" r="1.45" opacity="0.37"/><circle cx="811.9" cy="1012.5" r="1.05" opacity="0.47" class="es-twinkle" style="animation-delay:1.4s"/><circle cx="998.9" cy="360.2" r="1.14" opacity="0.92"/><circle cx="1328.9" cy="939.9" r="1.11" opacity="0.3"/>
+      <circle cx="1171.0" cy="1274.2" r="0.82" opacity="0.23"/><circle cx="766.4" cy="604.3" r="1.42" opacity="0.76"/><circle cx="621.3" cy="744.7" r="0.98" opacity="0.69"/><circle cx="921.1" cy="923.3" r="0.66" opacity="0.8"/><circle cx="76.8" cy="367.8" r="1.07" opacity="0.2" class="es-twinkle" style="animation-delay:3.3s"/><circle cx="462.9" cy="471.5" r="0.5" opacity="0.47"/>
+      <circle cx="831.2" cy="68.0" r="1.4" opacity="0.94"/><circle cx="750.5" cy="772.8" r="1.38" opacity="0.68"/><circle cx="958.5" cy="665.2" r="1.02" opacity="0.46"/><circle cx="150.9" cy="1089.4" r="1.2" opacity="0.18"/><circle cx="1120.6" cy="1379.9" r="0.89" opacity="0.89"/><circle cx="312.1" cy="885.4" r="1.36" opacity="0.49" class="es-twinkle" style="animation-delay:1.6s"/>
+      <circle cx="195.6" cy="762.7" r="0.77" opacity="0.55"/><circle cx="886.7" cy="328.1" r="0.89" opacity="0.21"/><circle cx="955.1" cy="1024.9" r="0.75" opacity="0.34"/><circle cx="915.2" cy="634.4" r="1.38" opacity="0.76"/><circle cx="650.5" cy="598.4" r="1.1" opacity="0.64"/><circle cx="685.3" cy="763.1" r="0.85" opacity="0.71"/>
+      <circle cx="699.5" cy="185.4" r="1.16" opacity="0.43" class="es-twinkle" style="animation-delay:1.9s"/><circle cx="841.0" cy="1219.1" r="0.88" opacity="0.49"/><circle cx="919.9" cy="1190.9" r="1.36" opacity="0.94"/><circle cx="89.5" cy="743.0" r="0.84" opacity="0.46"/><circle cx="447.5" cy="828.8" r="1.31" opacity="0.69"/><circle cx="103.2" cy="653.0" r="1.39" opacity="0.48"/>
+      <circle cx="399.9" cy="499.6" r="1.13" opacity="0.41"/><circle cx="251.0" cy="17.1" r="0.56" opacity="0.7" class="es-twinkle" style="animation-delay:0.4s"/><circle cx="473.6" cy="385.8" r="1.37" opacity="0.82"/><circle cx="60.6" cy="193.4" r="0.71" opacity="0.3"/><circle cx="689.5" cy="1319.8" r="0.88" opacity="0.7"/><circle cx="733.0" cy="1290.7" r="0.87" opacity="0.69"/>
+      <circle cx="170.2" cy="521.7" r="0.44" opacity="0.58"/><circle cx="913.8" cy="269.6" r="0.98" opacity="0.71"/><circle cx="466.9" cy="1306.4" r="0.49" opacity="0.46" class="es-twinkle" style="animation-delay:5.4s"/><circle cx="1395.8" cy="692.8" r="0.61" opacity="0.44"/><circle cx="583.3" cy="502.0" r="0.92" opacity="0.46"/><circle cx="1276.3" cy="54.0" r="1.42" opacity="0.47"/>
+      <circle cx="1410.1" cy="1258.4" r="1.49" opacity="0.59"/><circle cx="1230.1" cy="192.8" r="0.8" opacity="0.28"/><circle cx="65.7" cy="1293.6" r="0.85" opacity="0.35"/><circle cx="1284.3" cy="1132.0" r="1.14" opacity="0.41" class="es-twinkle" style="animation-delay:0.6s"/><circle cx="181.0" cy="855.5" r="1.5" opacity="0.67"/><circle cx="369.1" cy="224.7" r="1.4" opacity="0.77"/>
+      <circle cx="706.7" cy="821.0" r="0.46" opacity="0.29"/><circle cx="1400.5" cy="43.3" r="1.37" opacity="0.31"/><circle cx="1058.3" cy="213.7" r="0.52" opacity="0.7"/><circle cx="1351.3" cy="715.0" r="1.49" opacity="0.7"/><circle cx="1238.5" cy="786.1" r="1.46" opacity="0.7" class="es-twinkle" style="animation-delay:2.2s"/><circle cx="585.5" cy="1171.9" r="0.47" opacity="0.55"/>
+      <circle cx="152.0" cy="1175.7" r="1.06" opacity="0.82"/><circle cx="555.2" cy="616.6" r="1.05" opacity="0.65"/><circle cx="336.4" cy="75.8" r="1.0" opacity="0.26"/><circle cx="723.4" cy="192.9" r="1.13" opacity="0.59"/><circle cx="235.1" cy="1125.7" r="0.97" opacity="0.9"/><circle cx="442.2" cy="696.6" r="0.87" opacity="0.72" class="es-twinkle" style="animation-delay:1.9s"/>
+      <circle cx="827.4" cy="657.3" r="0.64" opacity="0.92"/><circle cx="458.3" cy="1255.3" r="1.11" opacity="0.51"/><circle cx="550.1" cy="354.2" r="0.55" opacity="0.41"/><circle cx="1354.1" cy="224.6" r="0.99" opacity="0.54"/><circle cx="472.1" cy="31.7" r="1.29" opacity="0.58"/><circle cx="861.1" cy="632.7" r="1.49" opacity="0.58"/>
+      <circle cx="985.7" cy="314.2" r="0.89" opacity="0.66" class="es-twinkle" style="animation-delay:5.1s"/><circle cx="1102.7" cy="1149.6" r="0.97" opacity="0.77"/><circle cx="1149.8" cy="1107.9" r="0.58" opacity="0.76"/><circle cx="1385.1" cy="1096.6" r="1.2" opacity="0.19"/><circle cx="498.3" cy="69.6" r="1.24" opacity="0.65"/><circle cx="1331.7" cy="132.7" r="1.03" opacity="0.93"/>
+      <circle cx="1240.4" cy="171.5" r="0.88" opacity="0.94"/><circle cx="485.0" cy="766.2" r="0.55" opacity="0.88" class="es-twinkle" style="animation-delay:5.1s"/><circle cx="605.8" cy="147.2" r="0.83" opacity="0.67"/><circle cx="1316.7" cy="707.3" r="0.88" opacity="0.31"/><circle cx="483.0" cy="463.3" r="1.39" opacity="0.52"/><circle cx="1115.1" cy="244.4" r="0.48" opacity="0.31"/>
+      <circle cx="222.9" cy="1317.4" r="0.96" opacity="0.43"/><circle cx="96.9" cy="337.5" r="1.24" opacity="0.71"/><circle cx="804.4" cy="436.3" r="1.39" opacity="0.45" class="es-twinkle" style="animation-delay:4.5s"/><circle cx="14.2" cy="1313.1" r="1.03" opacity="0.84"/><circle cx="1391.2" cy="165.7" r="0.44" opacity="0.38"/><circle cx="257.8" cy="991.0" r="1.05" opacity="0.64"/>
+      <circle cx="1359.7" cy="436.7" r="1.17" opacity="0.37"/><circle cx="868.9" cy="1391.9" r="0.49" opacity="0.66"/><circle cx="1379.2" cy="1157.4" r="0.68" opacity="0.73"/><circle cx="513.3" cy="717.2" r="0.42" opacity="0.7" class="es-twinkle" style="animation-delay:3.0s"/><circle cx="376.1" cy="293.9" r="0.49" opacity="0.82"/><circle cx="574.9" cy="348.9" r="1.56" opacity="0.31"/>
+      <circle cx="543.1" cy="74.7" r="0.63" opacity="0.53"/><circle cx="300.2" cy="1237.2" r="0.65" opacity="0.8"/><circle cx="699.7" cy="1017.6" r="1.38" opacity="0.87"/><circle cx="1298.6" cy="980.6" r="0.54" opacity="0.4"/><circle cx="636.2" cy="1346.5" r="1.16" opacity="0.86" class="es-twinkle" style="animation-delay:0.4s"/><circle cx="1425.2" cy="1285.5" r="1.47" opacity="0.46"/>
+      <circle cx="476.4" cy="767.6" r="1.31" opacity="0.18"/><circle cx="771.7" cy="1227.9" r="1.54" opacity="0.55"/><circle cx="25.2" cy="1118.5" r="1.05" opacity="0.64"/><circle cx="388.6" cy="1021.8" r="1.15" opacity="0.21"/><circle cx="1038.7" cy="1360.9" r="0.86" opacity="0.58"/><circle cx="399.8" cy="103.1" r="1.54" opacity="0.74" class="es-twinkle" style="animation-delay:1.0s"/>
+      <circle cx="1411.4" cy="889.1" r="1.3" opacity="0.47"/><circle cx="550.8" cy="303.4" r="0.88" opacity="0.77"/><circle cx="205.5" cy="112.7" r="0.71" opacity="0.42"/><circle cx="1304.3" cy="1341.6" r="1.37" opacity="0.4"/><circle cx="68.4" cy="1336.4" r="1.13" opacity="0.93"/><circle cx="1107.4" cy="92.1" r="1.18" opacity="0.24"/>
+      <circle cx="113.9" cy="757.2" r="1.23" opacity="0.51" class="es-twinkle" style="animation-delay:4.8s"/><circle cx="823.7" cy="161.6" r="0.45" opacity="0.88"/><circle cx="962.0" cy="1151.3" r="0.82" opacity="0.57"/><circle cx="690.0" cy="1368.4" r="0.69" opacity="0.28"/><circle cx="285.5" cy="605.0" r="1.42" opacity="0.58"/><circle cx="898.6" cy="158.9" r="1.42" opacity="0.79"/>
+      <circle cx="497.7" cy="908.9" r="1.19" opacity="0.25"/><circle cx="1262.2" cy="1008.2" r="0.44" opacity="0.58" class="es-twinkle" style="animation-delay:3.2s"/><circle cx="1111.6" cy="1105.5" r="0.73" opacity="0.56"/><circle cx="1369.8" cy="1081.1" r="0.85" opacity="0.8"/><circle cx="200.7" cy="683.4" r="1.29" opacity="0.44"/><circle cx="709.2" cy="988.1" r="0.58" opacity="0.93"/>
+      <circle cx="1311.7" cy="484.9" r="1.36" opacity="0.8"/><circle cx="453.8" cy="179.2" r="1.39" opacity="0.78"/><circle cx="667.9" cy="1325.9" r="0.76" opacity="0.58" class="es-twinkle" style="animation-delay:0.6s"/><circle cx="1129.0" cy="564.4" r="1.35" opacity="0.28"/><circle cx="727.7" cy="474.5" r="1.14" opacity="0.52"/><circle cx="126.8" cy="1333.6" r="1.39" opacity="0.88"/>
+      <circle cx="1290.6" cy="927.5" r="0.91" opacity="0.93"/><circle cx="193.9" cy="847.7" r="1.2" opacity="0.85"/><circle cx="1338.2" cy="62.5" r="1.45" opacity="0.32"/><circle cx="717.3" cy="55.6" r="1.09" opacity="0.92" class="es-twinkle" style="animation-delay:2.6s"/><circle cx="836.4" cy="149.4" r="1.37" opacity="0.59"/><circle cx="727.3" cy="561.4" r="1.01" opacity="0.85"/>
+      <circle cx="973.2" cy="112.1" r="0.44" opacity="0.35"/><circle cx="138.7" cy="561.9" r="1.14" opacity="0.88"/><circle cx="1218.2" cy="499.8" r="0.64" opacity="0.79"/><circle cx="224.4" cy="440.1" r="1.05" opacity="0.51"/><circle cx="675.2" cy="323.4" r="0.96" opacity="0.51" class="es-twinkle" style="animation-delay:3.7s"/><circle cx="1018.7" cy="1019.3" r="0.42" opacity="0.83"/>
+      <circle cx="843.8" cy="809.0" r="1.12" opacity="0.91"/><circle cx="858.2" cy="725.6" r="1.21" opacity="0.55"/><circle cx="645.4" cy="833.3" r="1.3" opacity="0.26"/><circle cx="71.8" cy="67.5" r="1.14" opacity="0.48"/><circle cx="1062.7" cy="1117.9" r="0.54" opacity="0.69"/><circle cx="517.7" cy="1276.9" r="1.33" opacity="0.57" class="es-twinkle" style="animation-delay:2.6s"/>
+      <circle cx="842.6" cy="866.7" r="0.89" opacity="0.66"/><circle cx="115.1" cy="736.7" r="0.99" opacity="0.29"/><circle cx="452.7" cy="771.2" r="1.53" opacity="0.79"/><circle cx="468.5" cy="1215.3" r="0.51" opacity="0.75"/><circle cx="345.0" cy="93.8" r="1.23" opacity="0.38"/><circle cx="357.0" cy="1347.6" r="0.82" opacity="0.64"/>
+      <circle cx="1379.6" cy="1015.9" r="0.87" opacity="0.56" class="es-twinkle" style="animation-delay:2.0s"/><circle cx="1068.0" cy="415.2" r="1.12" opacity="0.49"/>
+    </svg>
+    <div class="es-inner">
+      <div class="section-header">
+        <p class="section-subtitle es-eyebrow" data-i18n="who-buys-it.4cdb05">Who buys it</p>
+        <h2 data-i18n="three-reasons-people-install.6f8c4c">Three reasons people install it</h2>
+        <p data-i18n="most-people-arrive-for.8c0127">Most people arrive for one of these and stay for the other two.</p>
+      </div>
+
+      <div class="es-persona-grid">
+        <div class="es-persona">
+          <h3 data-i18n="your-photos-outgrew-icloud.575e4a">Your photos outgrew iCloud</h3>
+          <p data-i18n="point-enter-space-at.888b13">Point Enter Space at any remote and get a real photo library over it — year/month/day timeline, a Places map, albums, favourites and full-text search. Back the iPhone library up to storage you actually control, find the same shot saved five times, and keep the ones that matter offline and encrypted.</p>
+          <div class="es-tags">
+            <span class="es-tag" data-i18n="photos-library-your-photos.b84cd0">Photos Library — Your Photos, Any Cloud</span>
+            <span class="es-tag" data-i18n="photos-library-backup.88ba83">Photos Library Backup</span>
+            <span class="es-tag" data-i18n="duplicate-photo-video-audio.ab35aa">Duplicate Photo, Video &amp; Audio Finder</span>
+            <span class="es-tag" data-i18n="keep-offline.107753">Keep Offline</span>
+          </div>
+        </div>
+        <div class="es-persona">
+          <h3 data-i18n="you-own-more-media.9e270b">You own more media than you can stream</h3>
+          <p data-i18n="theater-turns-your-movie.156a1f">Theater turns your movie and TV folders into shelves with artwork, Continue Watching that follows you from iPhone to Apple TV, and a player that genuinely remembers your audio and subtitle tracks. Download a whole season before a flight; it stays encrypted on the device.</p>
+          <div class="es-tags">
+            <span class="es-tag" data-i18n="theater-a-private-streaming.2bbfba">Theater — A Private Streaming Service for Your Files</span>
+            <span class="es-tag" data-i18n="apple-tv-playback.ed55d6">Apple TV Playback</span>
+            <span class="es-tag" data-i18n="built-in-media-player.6463ce">Built-in Media Player</span>
+            <span class="es-tag" data-i18n="recently-played-syncing.16a7b8">Recently Played Syncing</span>
+          </div>
+        </div>
+        <div class="es-persona">
+          <h3 data-i18n="you-work-across-clouds.ebf6be">You work across clouds for a living</h3>
+          <p data-i18n="every-remote-in-finder.6121f9">Every remote in Finder and Files with full read/write. A real code editor with Git — stage, commit, push, branch. Serve any remote over WebDAV, NFS, SFTP or S3. Share one rclone.conf with the CLI. Then automate the whole surface from Shortcuts.</p>
+          <div class="es-tags">
+            <span class="es-tag" data-i18n="native-files-integration.d2ca7b">Native Files Integration</span>
+            <span class="es-tag" data-i18n="git-in-the-code.0856a9">Git in the Code Editor</span>
+            <span class="es-tag" data-i18n="serve-configuration.7b6518">Serve Configuration</span>
+            <span class="es-tag" data-i18n="rclone-cli-integration.9f6596">Rclone CLI Integration</span>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top: clamp(3.5rem, 7vw, 5.5rem);">
+        <div class="section-header" style="margin-bottom: 0;">
+          <p class="section-subtitle es-eyebrow" data-i18n="one-purchase.d19c1b">One purchase</p>
+          <h2 data-i18n="one-app-instead-of.eb5253">One app instead of eight</h2>
+          <p data-i18n="enter-space-is-not.44be7f">Enter Space is not a cloud drive with extras bolted on. It is the mounter, the vault, the media server, the scheduler, the duplicate finder, the space analyzer, the editor and the version history — bought once, on every Apple device you own.</p>
+        </div>
+
+        <div class="es-replaces">
+        <div class="es-replace">
+          <span aria-hidden="true">🗄️</span>
+          <span class="es-replace-out" data-i18n="a-cloud-mounter.326f73">A cloud mounter</span>
+        </div>
+        <div class="es-replace">
+          <span aria-hidden="true">🔐</span>
+          <span class="es-replace-out" data-i18n="an-encrypted-vault.d1db0b">An encrypted vault</span>
+        </div>
+        <div class="es-replace">
+          <span aria-hidden="true">🍿</span>
+          <span class="es-replace-out" data-i18n="a-media-server.5c2aab">A media server</span>
+        </div>
+        <div class="es-replace">
+          <span aria-hidden="true">⏱️</span>
+          <span class="es-replace-out" data-i18n="a-backup-scheduler.917cc9">A backup scheduler</span>
+        </div>
+        <div class="es-replace">
+          <span aria-hidden="true">🪞</span>
+          <span class="es-replace-out" data-i18n="a-duplicate-finder.6c2c01">A duplicate finder</span>
+        </div>
+        <div class="es-replace">
+          <span aria-hidden="true">🧹</span>
+          <span class="es-replace-out" data-i18n="a-disk-space-analyzer.d75b84">A disk-space analyzer</span>
+        </div>
+        <div class="es-replace">
+          <span aria-hidden="true">⌨️</span>
+          <span class="es-replace-out" data-i18n="a-code-editor-with.75790f">A code editor with Git</span>
+        </div>
+        <div class="es-replace">
+          <span aria-hidden="true">🕰️</span>
+          <span class="es-replace-out" data-i18n="a-versioned-file-service.f2b776">A versioned-file service</span>
+        </div>
+        </div>
+
+        <p class="es-oneline" data-i18n="59-99-once-or.7287a0">$59.99 once, or $29.99 a year. Family Sharing included.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="pricing" class="section">
     <div class="section-header">
-      <p class="section-subtitle" data-i18n="why-choose-enter-space.641be1">Why Choose Enter Space</p>
-      <h2 data-i18n="powerful-features.c537fd">Powerful Features</h2>
-      <p data-i18n="unified-cloud-storage-management.2d6190">Unified cloud storage management with enterprise-grade security</p>
+      <p class="section-subtitle" data-i18n="simple-transparent-pricing.b25b82">Simple, Transparent Pricing</p>
+      <h2 data-i18n="choose-your-plan.c197d6">Choose Your Plan</h2>
+      <p data-i18n="every-plan-includes-the.751147">Every plan includes the full Enter Space experience — no features held back</p>
     </div>
 
-    <div class="feature-grid">
-      <div class="feature-card">
-        <div class="feature-icon">🖼️</div>
-        <h3 class="feature-title" data-i18n="photos-library-your-photos.b84cd0">Photos Library — Your Photos, Any Cloud</h3>
-        <p class="feature-description" data-i18n="an-apple-photos-style.e29b8d">
-          An Apple-Photos-style library over any of your remotes: year/month/day timeline, Places map, Albums, Favorites, and full-text search. Live Photos play on hold, RAW files open as true RAW develops, and 360° shots get an interactive look-around viewer. Everything indexes into a private, encrypted on-device library that syncs to your other devices serverlessly — and any photo, video, or album can be downloaded for fully offline use, encrypted at rest.
-        </p>
+    <div class="pricing-deadline">
+      <p data-i18n="introductory-pricing-ends-october.6a18d0">Introductory pricing ends October 1. Prices go up after that, and no further sale is planned.</p>
+    </div>
+
+    <div class="pricing-trial-banner">
+      <p data-i18n-html="start-with-a-free.00ecae">Start with a <span>free 7-day trial</span> — no commitment, full access to everything.</p>
+    </div>
+
+    <div class="pricing-grid">
+      <div class="pricing-card">
+        <h3 data-i18n="monthly.d31edb">Monthly</h3>
+        <div class="pricing-price">$7.99</div>
+        <div class="pricing-period" data-i18n="per-month.d0e619">per month</div>
+        <div class="pricing-detail" data-i18n="flexibility-to-subscribe-month.691daf">Flexibility to subscribe month-to-month</div>
+        <div class="pricing-future" data-i18n-html="9-99-mo-after.983862">
+          <span class="strikethrough">$9.99/mo</span> after Oct 1
+        </div>
       </div>
 
-      <div class="feature-card">
-        <div class="feature-icon">🍿</div>
-        <h3 class="feature-title" data-i18n="theater-a-private-streaming.2bbfba">Theater — A Private Streaming Service for Your Files</h3>
-        <p class="feature-description" data-i18n="point-theater-at-your.613d1f">
-          Point Theater at your movie and TV folders and get Netflix-style shelves with artwork and details from TMDB — or no key at all, and it builds your library from your file names. Continue Watching follows you across iPhone, Mac, and Apple TV; episodes auto-advance; resume never spoils. A custom player built for real-world files means audio and subtitle track choices actually switch and are remembered — across resume, episodes, launches, and devices. Download whole seasons for offline viewing, encrypted on-device.
-        </p>
+      <div class="pricing-card featured">
+        <div class="pricing-badge" data-i18n="best-value.ca89f1">Best Value</div>
+        <h3 data-i18n="yearly.7622eb">Yearly</h3>
+        <div class="pricing-price">$29.99</div>
+        <div class="pricing-period" data-i18n="per-year.d412fe">per year</div>
+        <div class="pricing-detail" data-i18n="save-over-68-compared.2c1795">Save over 68% compared to monthly</div>
+        <div class="pricing-future" data-i18n-html="49-99-yr-after.23b911">
+          <span class="strikethrough">$49.99/yr</span> after Oct 1
+        </div>
       </div>
 
-      <div class="feature-card">
-        <div class="feature-icon">☁️</div>
-        <h3 class="feature-title" data-i18n="100-cloud-providers.92c0c9">100 Cloud Providers</h3>
-        <p class="feature-description" data-i18n="connect-to-virtually-any.0dd9ec">
-          Connect to virtually any cloud storage service including Google Drive, Dropbox, OneDrive, iCloud, S3, and 95 more providers all in one place.
-        </p>
+      <div class="pricing-card">
+        <div class="pricing-badge" data-i18n="limited-time.f78ca8">Limited Time</div>
+        <h3 data-i18n="lifetime.8d33f3">Lifetime</h3>
+        <div class="pricing-price">$59.99</div>
+        <div class="pricing-period" data-i18n="one-time-purchase.8ebbdc">one-time purchase</div>
+        <div class="pricing-detail" data-i18n="pay-once-use-forever.87c60c">Pay once, use forever — no recurring fees</div>
+        <div class="pricing-future" data-i18n-html="99-99-after-oct.c639b6">
+          <span class="strikethrough">$99.99</span> after Oct 1
+        </div>
       </div>
+    </div>
 
-      <div class="feature-card">
-        <div class="feature-icon">📁</div>
-        <h3 class="feature-title" data-i18n="native-files-integration.d2ca7b">Native Files Integration</h3>
-        <p class="feature-description" data-i18n="direct-integration-with-finder.583e4b">
-          Direct integration with Finder on Mac and Files app on iOS via File Provider. Access all your clouds like native storage with full read/write support.
-        </p>
-      </div>
+    <div class="pricing-family" data-i18n="all-plans-support-apple.46b41c">All plans support Apple Family Sharing — one subscription covers your entire family.</div>
 
-      <div class="feature-card">
-        <div class="feature-icon">🔐</div>
-        <h3 class="feature-title" data-i18n="end-to-end-encryption.24c2ac">End-to-End Encryption</h3>
-        <p class="feature-description" data-i18n="your-data-is-encrypted.0f816b">
-          Your data is encrypted before it leaves your device, ensuring maximum security and privacy across all your cloud storage accounts.
-        </p>
-      </div>
+    <div class="es-assure">
+      <span class="es-assure-item" data-i18n="7-days-free-everything.085cfe">7 days free, everything unlocked</span>
+      <span class="es-assure-item" data-i18n="one-purchase-every-apple.7e831d">One purchase, every Apple device</span>
+      <span class="es-assure-item">Family Sharing</span>
+      <span class="es-assure-item" data-i18n="cancel-anytime-in-the.54bbfd">Cancel anytime in the App Store</span>
+    </div>
 
-      <div class="feature-card">
-        <div class="feature-icon">⚡</div>
-        <h3 class="feature-title" data-i18n="powered-by-rclone.29633d">Powered by Rclone</h3>
-        <p class="feature-description" data-i18n="built-on-the-proven.ec36e2">
-          Built on the proven open-source Rclone CLI with a track record of reliability. Fast, efficient, and communicates directly with cloud providers.
-        </p>
-      </div>
+    <div class="es-pricing-cta">
+      <a href="https://apps.apple.com/us/app/enter-space/id6746350540" class="es-btn es-btn-primary" target="_blank" rel="noopener noreferrer" data-i18n="start-your-7-day.bec0d2">Start your 7-day free trial</a>
+    </div>
 
-      <div class="feature-card">
-        <div class="feature-icon">🔄</div>
-        <h3 class="feature-title" data-i18n="automated-sync.8e1ee8">Automated Sync</h3>
-        <p class="feature-description" data-i18n="schedule-automated-sync-operations.e46125">
-          Schedule automated sync operations with advanced filtering and incremental backups — a whole folder, or a single file. Supports near realtime file change monitoring so your data syncs moments after it changes. Keep your data safe across all devices with smart, efficient transfers.
-        </p>
-      </div>
+    <div class="pricing-note">
+      <p data-i18n="the-entire-app-requires.dae500">
+        The entire app requires an active subscription or lifetime purchase — there is no free tier or partial access.
+        Current introductory pricing is available for a limited time. No additional sales are planned after this introductory period.
+        Pricing is subject to change as features and market conditions evolve.
+      </p>
+    </div>
+  </section>
 
-      <div class="feature-card">
-        <div class="feature-icon">📸</div>
-        <h3 class="feature-title" data-i18n="photos-library-backup.88ba83">Photos Library Backup</h3>
-        <p class="feature-description" data-i18n="back-up-your-entire.9d76da">
-          Back up your entire Photos library to any cloud provider. Protect your precious memories with automated, secure photo backups.
-        </p>
-      </div>
+  <!-- Comparison Section -->
+  <section id="compare" class="section">
+    <div class="section-header">
+      <p class="section-subtitle" data-i18n="see-the-difference.f97599">See the Difference</p>
+      <h2 data-i18n="how-enter-space-compares.4a977f">How Enter Space Compares</h2>
+      <p data-i18n="more-features-more-platforms.ad2088">More features, more platforms, flexible pricing</p>
+    </div>
 
-      <div class="feature-card">
-        <div class="feature-icon">🔒</div>
-        <h3 class="feature-title" data-i18n="file-locking-support.7c2b84">File Locking Support</h3>
-        <p class="feature-description" data-i18n="lock-files-on-supported.f17e75">
-          Lock files on supported cloud providers to prevent accidental edits or deletions. Keep critical files safe with collaborative locking support.
-        </p>
-      </div>
-      
-      <div class="feature-card">
-        <div class="feature-icon">🎬</div>
-        <h3 class="feature-title" data-i18n="built-in-media-player.6463ce">Built-in Media Player</h3>
-        <p class="feature-description" data-i18n="view-photos-watch-videos.c7fca0">
-          View photos, watch videos, and listen to audio directly from your cloud storage with background playback support. Video plays in Enter Space's own player — Liquid Glass controls, AirPlay, playback speed, and audio/subtitle menus that work reliably with multi-track files. Your media, always accessible.
-        </p>
-      </div>
-     
-      <div class="feature-card">
-        <div class="feature-icon">🔗</div>
-        <h3 class="feature-title" data-i18n="public-link-creation.6e10b9">Public Link Creation</h3>
-        <p class="feature-description" data-i18n="generate-shareable-public-links.d55212">
-          Generate shareable public links for files and folders on supported cloud providers. Share your content instantly without leaving the app.
-        </p>
-      </div>
+    <div class="comparison-wrapper">
+      <table class="comparison-table">
+        <thead>
+          <tr>
+            <th data-i18n="feature.ad565d">Feature</th>
+            <th class="highlight-col">Enter Space</th>
+            <th data-i18n="cloudmounter.4cc61e">CloudMounter</th>
+            <th data-i18n="mountain-duck.ed3961">Mountain Duck</th>
+            <th data-i18n="file-browser-pro.9f260b">File Browser Pro</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td data-i18n="price.3e8248">Price</td>
+            <td class="highlight-col"><strong data-i18n="from-7-99-mo.03a4b7">From $7.99/mo</strong></td>
+            <td data-i18n="from-29-99-yr.cade10">From $29.99/yr</td>
+            <td data-i18n="49-per-platform.1269bc">$49 per platform</td>
+            <td data-i18n="14-99-per-platform.6a6139">$14.99 per platform</td>
+          </tr>
+          <tr>
+            <td data-i18n="free-trial.11d1f9">Free Trial</td>
+            <td class="highlight-col" data-i18n-html="7-days.3723e6"><span class="check">✓</span> 7 days</td>
+            <td data-i18n-html="7-days.3723e6"><span class="check">✓</span> 7 days</td>
+            <td data-i18n-html="14-days.8ab0c3"><span class="check">✓</span> 14 days</td>
+            <td><span class="cross">✗</span></td>
+          </tr>
+          <tr>
+            <td data-i18n="lifetime-option.06548a">Lifetime Option</td>
+            <td class="highlight-col"><span class="check">✓</span> $59.99</td>
+            <td><span class="check">✓</span></td>
+            <td><span class="check">✓</span></td>
+            <td><span class="cross">✗</span></td>
+          </tr>
+          <tr>
+            <td>Family Sharing</td>
+            <td class="highlight-col"><span class="check">✓</span></td>
+            <td><span class="cross">✗</span></td>
+            <td><span class="cross">✗</span></td>
+            <td><span class="cross">✗</span></td>
+          </tr>
+          <tr>
+            <td data-i18n="licensing.aa636d">Licensing</td>
+            <td class="highlight-col"><strong data-i18n="universal-purchase.f89ab1">Universal purchase</strong></td>
+            <td data-i18n="mac-only.858ac5">Mac only</td>
+            <td data-i18n="mac-only.858ac5">Mac only</td>
+            <td data-i18n="per-platform.f37f69">Per platform</td>
+          </tr>
+          <tr>
+            <td data-i18n="iphone-ipad.0e7acd">iPhone &amp; iPad</td>
+            <td class="highlight-col"><span class="check">✓</span></td>
+            <td><span class="cross">✗</span></td>
+            <td><span class="cross">✗</span></td>
+            <td><span class="check">✓</span></td>
+          </tr>
+          <tr>
+            <td>Mac</td>
+            <td class="highlight-col"><span class="check">✓</span></td>
+            <td><span class="check">✓</span></td>
+            <td><span class="check">✓</span></td>
+            <td><span class="check">✓</span></td>
+          </tr>
+          <tr>
+            <td>Apple TV</td>
+            <td class="highlight-col"><span class="check">✓</span></td>
+            <td><span class="cross">✗</span></td>
+            <td><span class="cross">✗</span></td>
+            <td><span class="check">✓</span></td>
+          </tr>
+          <tr>
+            <td data-i18n="cloud-providers.36f789">Cloud Providers</td>
+            <td class="highlight-col"><strong>100</strong></td>
+            <td>12</td>
+            <td>13</td>
+            <td>30</td>
+          </tr>
+          <tr>
+            <td data-i18n="finder-files-integration.718ce5">Finder / Files Integration</td>
+            <td class="highlight-col"><span class="check">✓</span></td>
+            <td data-i18n-html="finder-only.aa21eb"><span class="check">✓</span> Finder only</td>
+            <td data-i18n-html="finder-only.aa21eb"><span class="check">✓</span> Finder only</td>
+            <td><span class="check">✓</span></td>
+          </tr>
+          <tr>
+            <td data-i18n="end-to-end-encryption.24c2ac">End-to-End Encryption</td>
+            <td class="highlight-col"><span class="check">✓</span></td>
+            <td><span class="check">✓</span></td>
+            <td data-i18n-html="cryptomator.156e88"><span class="check">✓</span> Cryptomator</td>
+            <td><span class="cross">✗</span></td>
+          </tr>
+          <tr>
+            <td data-i18n="automated-scheduled-sync.e20f2c">Automated Scheduled Sync</td>
+            <td class="highlight-col"><span class="check">✓</span></td>
+            <td><span class="cross">✗</span></td>
+            <td><span class="cross">✗</span></td>
+            <td><span class="check">✓</span></td>
+          </tr>
+          <tr>
+            <td data-i18n="realtime-file-monitoring.8a05a6">Realtime File Monitoring</td>
+            <td class="highlight-col"><span class="check">✓</span></td>
+            <td><span class="cross">✗</span></td>
+            <td><span class="cross">✗</span></td>
+            <td><span class="cross">✗</span></td>
+          </tr>
+          <tr>
+            <td data-i18n="smart-sync-battery-network.7c1654">Smart Sync (Battery / Network)</td>
+            <td class="highlight-col"><span class="check">✓</span></td>
+            <td><span class="cross">✗</span></td>
+            <td><span class="cross">✗</span></td>
+            <td><span class="cross">✗</span></td>
+          </tr>
+          <tr>
+            <td data-i18n="photos-library-backup.88ba83">Photos Library Backup</td>
+            <td class="highlight-col"><span class="check">✓</span></td>
+            <td><span class="cross">✗</span></td>
+            <td><span class="cross">✗</span></td>
+            <td><span class="cross">✗</span></td>
+          </tr>
+          <tr>
+            <td data-i18n="built-in-media-player.6463ce">Built-in Media Player</td>
+            <td class="highlight-col"><span class="check">✓</span></td>
+            <td><span class="cross">✗</span></td>
+            <td><span class="cross">✗</span></td>
+            <td><span class="check">✓</span></td>
+          </tr>
+          <tr>
+            <td data-i18n="code-editor.926f42">Code Editor</td>
+            <td class="highlight-col"><span class="check">✓</span></td>
+            <td><span class="cross">✗</span></td>
+            <td><span class="cross">✗</span></td>
+            <td><span class="check">✓</span></td>
+          </tr>
+          <tr>
+            <td data-i18n="git-management-in-code.73d4f2">Git Management in Code Editor</td>
+            <td class="highlight-col" data-i18n-html="stage-commit-push-branch.e4431a"><span class="check">✓</span> Stage / commit / push / branch</td>
+            <td><span class="cross">✗</span></td>
+            <td><span class="cross">✗</span></td>
+            <td><span class="cross">✗</span></td>
+          </tr>
+          <tr>
+            <td data-i18n="duplicate-photo-video-audio.43144a">Duplicate Photo / Video / Audio Finder</td>
+            <td class="highlight-col"><span class="check">✓</span></td>
+            <td><span class="cross">✗</span></td>
+            <td><span class="cross">✗</span></td>
+            <td><span class="cross">✗</span></td>
+          </tr>
+          <tr>
+            <td data-i18n="storage-cleanup-space-inspector.f52362">Storage Cleanup &amp; Space Inspector</td>
+            <td class="highlight-col"><span class="check">✓</span></td>
+            <td><span class="cross">✗</span></td>
+            <td><span class="cross">✗</span></td>
+            <td><span class="cross">✗</span></td>
+          </tr>
+          <tr>
+            <td data-i18n="custom-environment-variables.aa033b">Custom Environment Variables</td>
+            <td class="highlight-col"><span class="check">✓</span></td>
+            <td><span class="cross">✗</span></td>
+            <td><span class="cross">✗</span></td>
+            <td><span class="cross">✗</span></td>
+          </tr>
+          <tr>
+            <td data-i18n="open-source-engine.1cd74b">Open-Source Engine</td>
+            <td class="highlight-col" data-i18n-html="rclone.53de58"><span class="check">✓</span> Rclone</td>
+            <td><span class="cross">✗</span></td>
+            <td data-i18n-html="cyberduck.90c9b6"><span class="check">✓</span> Cyberduck</td>
+            <td><span class="cross">✗</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="comparison-scroll-hint" data-i18n="swipe-to-see-all.47040a">← Swipe to see all apps →</p>
+  </section>
 
-      <div class="feature-card">
-        <div class="feature-icon">🔐</div>
-        <h3 class="feature-title" data-i18n="secure-drop.451d6b">Secure Drop</h3>
-        <p class="feature-description" data-i18n="share-files-and-folders.f5ad59">
-          Share files and folders with end-to-end encryption built on Rclone's Crypt. Data is encrypted before it leaves your device, and the recipient decrypts it using a web-based decryption tool with a password you share outside of the storage provider — adding an extra layer of privacy even if the shared link is compromised.
-        </p>
-      </div>
+  <!-- ===== The full surface, folded away so it reads as depth, not a wall ===== -->
+  <section id="features" class="section">
+    <div class="section-header">
+      <p class="section-subtitle" data-i18n="the-full-surface.1c37c4">The full surface</p>
+      <h2 data-i18n="everything-else-in-the.c70dde">Everything else, in the box</h2>
+      <p data-i18n="no-tiers-no-add.9ae9a9">No tiers, no add-ons, nothing held back for a higher plan. Open a drawer and read the rest.</p>
+    </div>
 
-      <div class="feature-card">
-        <div class="feature-icon">✏️</div>
-        <h3 class="feature-title" data-i18n="full-featured-code-editor.508d36">Full-Featured Code Editor</h3>
-        <p class="feature-description" data-i18n="edit-code-with-syntax.a9b2cb">
-          Edit code with syntax highlighting, code folding, comprehensive find and replace, draft versioning, and follow mode for watching logs in real-time.
-        </p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">🧭</div>
-        <h3 class="feature-title" data-i18n="guided-remote-setup.7ada13">Guided Remote Setup</h3>
-        <p class="feature-description" data-i18n="add-and-edit-remote.34bd67">
-          Add and edit remote configurations through a simple, guided visual interface. No command line required—get connected in just a few taps.
-        </p>
-      </div>
-      
-      <div class="feature-card">
-        <div class="feature-icon">🕰️</div>
-        <h3 class="feature-title">Time Portal</h3>
-        <p class="feature-description" data-i18n="browse-through-your-version.b498c7">
-          Browse through your version history from any snapshot's point of view. Restore files and folders as needed with intuitive time-travel navigation.
-        </p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">💰</div>
-        <h3 class="feature-title" data-i18n="try-free-for-7.ecf5b4">Try Free for 7 Days</h3>
-        <p class="feature-description" data-i18n="experience-everything-enter-space.2bd6f1">
-          Experience everything Enter Space has to offer with a free 7-day trial. Then choose the plan that works for you — monthly, yearly, or a one-time lifetime purchase. All plans support Family Sharing.
-        </p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">🎞️</div>
-        <h3 class="feature-title" data-i18n="swf-media-playback.8f81ee">SWF Media Playback</h3>
-        <p class="feature-description" data-i18n="play-legacy-flash-swf.1bcc5b">
-          Play legacy Flash SWF files directly within the app. Revisit classic Flash content and animations without needing a separate player or browser plugin.
-        </p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">🛠️</div>
-        <h3 class="feature-title" data-i18n="in-app-browser-debug.0e11fa">In-App Browser Debug Console</h3>
-        <p class="feature-description" data-i18n="inspect-and-debug-web.318577">
-          Inspect and debug web content with a built-in developer console for the in-app browser. View logs, errors, and network activity without leaving the app.
-        </p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">🌐</div>
-        <h3 class="feature-title" data-i18n="360-180-media-playback.12fb01">360° & 180° Media Playback</h3>
-        <p class="feature-description" data-i18n="immerse-yourself-in-360.e28aaa">
-          Immerse yourself in 360° and 180° photos and videos streamed directly from your cloud storage. Explore panoramic and spatial media with intuitive controls.
-        </p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">📺</div>
-        <h3 class="feature-title" data-i18n="apple-tv-playback.ed55d6">Apple TV Playback</h3>
-        <p class="feature-description" data-i18n="stream-your-cloud-stored.c8c930">
-          Stream your cloud-stored media directly to Apple TV. Enjoy your videos, photos, and audio on the big screen with seamless AirPlay integration.
-        </p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">🔓</div>
-        <h3 class="feature-title" data-i18n="approve-apple-tv-unlocks.48d3d5">Approve Apple TV Unlocks from Your Phone</h3>
-        <p class="feature-description" data-i18n="hidden-remotes-stay-hidden.c1090d">
-          Hidden remotes stay hidden on the Apple TV by default. When someone taps "Show Hidden Remotes" on the TV, your iPhone or Mac gets a push notification with Approve / Deny buttons — even if the app's force-quit. Tap Approve, Face ID, done. Each TV is paired by name so an imposter device can't trick you into approving the wrong one. Tap Lock from the phone and the TV snaps back to the locked home grid instantly, even mid-playback.
-        </p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">🔃</div>
-        <h3 class="feature-title" data-i18n="recently-played-syncing.16a7b8">Recently Played Syncing</h3>
-        <p class="feature-description" data-i18n="pick-up-where-you.5d6a0c">
-          Pick up where you left off on any device. Your recently played media syncs across iPhone, iPad, and Mac so you never lose your place.
-        </p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">⭐</div>
-        <h3 class="feature-title" data-i18n="favorited-folders.d974ee">Favorited Folders</h3>
-        <p class="feature-description" data-i18n="pin-your-most-used.cb7496">
-          Pin your most-used folders for instant access. Favorite folders stay front and center across all your devices for quick navigation.
-        </p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">🔧</div>
-        <h3 class="feature-title" data-i18n="custom-environment-variables.aa033b">Custom Environment Variables</h3>
-        <p class="feature-description" data-i18n="set-custom-environment-variables.c48005">
-          Set custom environment variables for fine-grained control over Rclone behavior and cloud provider configurations. Tailor your setup to match advanced workflows.
-        </p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">🔋</div>
-        <h3 class="feature-title" data-i18n="smart-sync-scheduling.8869c2">Smart Sync Scheduling</h3>
-        <p class="feature-description" data-i18n="automatically-skip-scheduled-syncs.c490e8">
-          Automatically skip scheduled syncs when on battery power or connected to low-data or costly networks. Save battery life and avoid unexpected data charges.
-        </p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">🌍</div>
-        <h3 class="feature-title" data-i18n="serve-configuration.7b6518">Serve Configuration</h3>
-        <p class="feature-description" data-i18n="host-your-remote-content.2616d7">
-          Host your remote content locally with the Serve feature supporting WebDAV, NFS, FTP, S3, SFTP, HTTP, DLNA, and Restic. NFS is significantly faster than WebDAV for media playback over encrypted cloud remotes because macOS's NFS client skips the per-file metadata probes Finder's WebDAV client does.
-        </p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">💻</div>
-        <h3 class="feature-title" data-i18n="mount-helper-app.0814a8">Mount Helper App</h3>
-        <p class="feature-description" data-i18n-html="the-optional-enter-space.2abcca">
-          The optional Enter Space Mount Helper App auto-mounts a WebDAV, FTP, or NFS Serve as a local folder with zero password prompts. NFS mounts land under <code>~/Library/Application Support/Enter Space/Mounts/</code> instead of <code>/Volumes/</code> so Spotlight doesn't try to index your entire cloud tree.
-        </p>
-        <a href="helper.dmg" download class="btn-download-helper" data-i18n="download-helper.7da541">⬇ Download Helper</a>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">⚙️</div>
-        <h3 class="feature-title" data-i18n="rclone-cli-integration.9f6596">Rclone CLI Integration</h3>
-        <p class="feature-description" data-i18n="optionally-share-your-remote.6da255">
-          Optionally share your remote configurations with the rclone command line through a shared rclone.conf file. Power users can seamlessly switch between the visual interface and terminal workflows.
-        </p>
-      </div>
-
-      <!-- New in v5.0.0 -->
-
-      <div class="feature-card">
-        <div class="feature-icon">🪞</div>
-        <h3 class="feature-title" data-i18n="duplicate-photo-video-audio.ab35aa">Duplicate Photo, Video &amp; Audio Finder</h3>
-        <p class="feature-description" data-i18n="spot-near-identical-photos.a4314c">
-          Spot near-identical photos, videos, and audio across every connected cloud. Sees through resizes, format swaps, and re-edits — and warns you when one looks watermarked so you keep the clean original.
-        </p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">🧹</div>
-        <h3 class="feature-title" data-i18n="storage-cleanup-space-inspector.f52362">Storage Cleanup &amp; Space Inspector</h3>
-        <p class="feature-description" data-i18n="drill-into-any-cloud.1acf58">
-          Drill into any cloud or local storage location and see exactly which folders are eating your space. Sorted biggest first, recursive multi-select to clear it all out in one pass.
-        </p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">📤</div>
-        <h3 class="feature-title" data-i18n="open-anywhere.345457">Open Anywhere</h3>
-        <p class="feature-description" data-i18n="right-click-a-file.0a1851">
-          Right-click a file in Finder or share from any app — Enter Space opens it in the code editor, gallery, or sends it via Secure Drop. Native share extensions on iPhone, iPad, and Mac.
-        </p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">🌿</div>
-        <h3 class="feature-title" data-i18n="git-in-the-code.0856a9">Git in the Code Editor</h3>
-        <p class="feature-description" data-i18n="stage-commit-push-pull.6d045f">
-          Stage, commit, push, pull, branch — full Git workflow built into the editor. SSH keys on Mac and HTTPS auto-token on iPhone, so the same SSH-form remote URL just works on every device.
-        </p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">🪄</div>
-        <h3 class="feature-title">Git Mirror</h3>
-        <p class="feature-description" data-i18n="pull-a-remote-folder.cc9c9c">
-          Pull a remote folder down as a local Git working copy, edit with your normal toolchain, push the changes back to the cloud. No mount required, no manual sync.
-        </p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">👁️</div>
-        <h3 class="feature-title" data-i18n="live-web-preview.bb0c30">Live Web Preview</h3>
-        <p class="feature-description" data-i18n="edit-a-webpage-in.ae34a4">
-          Edit a webpage in the editor and watch it render live alongside — every script, image, and stylesheet loading like the real thing. Auto-refreshes the moment you save.
-        </p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">💾</div>
-        <h3 class="feature-title" data-i18n="auto-saving-editor-drafts.cd7a81">Auto-Saving Editor Drafts</h3>
-        <p class="feature-description" data-i18n="switch-tabs-close-the.f3c049">
-          Switch tabs, close the editor, force-quit the app — your unsaved work is captured automatically and waiting for you next time. No "discard changes?" surprises.
-        </p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">☁️</div>
-        <h3 class="feature-title" data-i18n="icloud-optional-privacy.678a09">iCloud-Optional Privacy</h3>
-        <p class="feature-description" data-i18n="default-on-icloud-sync.350460">
-          Default-on iCloud sync replicates your rclone configs, SSH keys, and Personal Access Tokens across your Apple devices. Prefer device-only? One toggle keeps every new credential local.
-        </p>
-      </div>
-
-      <!-- New in v5.5.0 -->
-
-      <div class="feature-card">
-        <div class="feature-icon">🗄️</div>
-        <h3 class="feature-title" data-i18n="unified-storage-hub.f14791">Unified Storage Hub</h3>
-        <p class="feature-description" data-i18n="cloud-remotes-and-local.ebe0b9">
-          Cloud remotes and local folders now live together in one tidy Storage list — combined actions, per-item encryption toggles, and a one-tap sort that flips between alphabetical and most-recently-used.
-        </p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">✨</div>
-        <h3 class="feature-title" data-i18n="streamlined-menu-bar-home.2861b6">Streamlined Menu Bar &amp; Home</h3>
-        <p class="feature-description" data-i18n="a-refreshed-macos-menu.c7a66c">
-          A refreshed macOS menu-bar experience: a quick-add button for new storage, Settings and Help in their own windows that stay out of your way, and a Home tab that puts favorites, recently played media, and scheduled syncs front and center on every device.
-        </p>
-      </div>
-
-      <!-- New in v5.6.0 -->
-
-      <div class="feature-card">
-        <div class="feature-icon">🔎</div>
-        <h3 class="feature-title" data-i18n="spotlight-full-content-file.b190c6">Spotlight Full-Content File Search</h3>
-        <p class="feature-description" data-i18n="find-files-by-what.0f523f">
-          Find files by what's INSIDE them, straight from system Spotlight — text, Markdown, source code, and PDFs in local sources are content-indexed, and cloud sources are searchable by name. Privacy is built in: hidden content is never indexed and encrypted remotes stay out of Spotlight by default, with per-source toggles in Settings.
-        </p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">📌</div>
-        <h3 class="feature-title" data-i18n="keep-offline.107753">Keep Offline</h3>
-        <p class="feature-description" data-i18n="pin-any-folder-of.005d53">
-          Pin any folder of any remote and Enter Space keeps a complete local copy — encrypted at rest — that refreshes automatically in the background. When the remote can't be reached, you can still browse and preview the downloaded copy, with a per-pin Wi-Fi Only toggle to protect your data plan.
-        </p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">⌚️</div>
-        <h3 class="feature-title" data-i18n="enter-space-on-apple.3c6951">Enter Space on Apple Watch</h3>
-        <p class="feature-description" data-i18n="sync-your-cloud-media.997111">
-          Sync your cloud media to your wrist. A media-first Apple Watch companion browses your synced library and plays it back right from the watch — with background audio so your music keeps going. A watch-face photo complication flips through a folder you choose (tap it to open that photo, turn the Digital Crown to zoom), and it adapts to tinted faces so your photos stay legible. Everything's stored encrypted at rest, with the media key delivered securely from your paired iPhone.
-        </p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">🗣️</div>
-        <h3 class="feature-title" data-i18n="24-shortcuts-siri-actions.a5a1e4">24 Shortcuts &amp; Siri Actions</h3>
-        <p class="feature-description" data-i18n="enter-space-s-whole.1f163f">
-          Enter Space's whole feature surface, automatable: copy, move, rename, upload, download, and share files; recover versions through Time Portal; run Doppel duplicate scans and Space Inspector reports; commit and push Git changes; create and run scheduled syncs — all chainable, with time, location, and Focus triggers via Shortcuts automations. Secrets can never be read or written.
-        </p>
-      </div>
-
-      <!-- New in v5.7.0 -->
-
-      <div class="feature-card">
-        <div class="feature-icon">🧩</div>
-        <h3 class="feature-title" data-i18n="home-lock-screen-widgets.ed046c">Home &amp; Lock Screen Widgets</h3>
-        <p class="feature-description" data-i18n="four-starfield-styled-widgets.57f6b5">
-          Four starfield-styled widgets for iPhone, iPad, and Mac: a Photo Slideshow of your favorites, a Storage Dashboard with per-location used/free bars and provider icons, a Bandwidth monitor, and a Sync Status board for your scheduled syncs. Tap any one to jump straight into the app — a widget photo opens that exact frame in the gallery slideshow, a sync opens its run-results detail.
-        </p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">📊</div>
-        <h3 class="feature-title" data-i18n="storage-space-at-a.d34f0a">Storage Space at a Glance</h3>
-        <p class="feature-description" data-i18n="every-storage-location-now.5d70c7">
-          Every storage location now carries a thin used/free capacity bar — cloud remotes and linked local folders alike — color-coded as space runs low, with the full readout a long-press away. Make it yours in Settings: hide the bars or switch them to a calm monochrome.
-        </p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">☁️</div>
-        <h3 class="feature-title" data-i18n="cross-device-icloud-sync.f13f37">Cross-Device iCloud Sync</h3>
-        <p class="feature-description" data-i18n="your-apple-watch-favorites.2d73e7">
-          Your Apple Watch favorites and hidden items, your recently-played list, and your exact playback position now follow you from device to device through your private iCloud — pick a track or photo back up right where you left off.
-        </p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">⌚️</div>
-        <h3 class="feature-title" data-i18n="smarter-apple-watch-sync.27b99e">Smarter Apple Watch Sync</h3>
-        <p class="feature-description" data-i18n="slideshows-advance-on-their.a9e754">
-          Slideshows advance on their own when a track ends, look-alike photos are de-duplicated before they reach your wrist, VR/360 media is skipped (the watch can't project it), and watch copies are never larger than the original. Background transfers pause while you're watching or listening, so playback stays smooth.
-        </p>
-      </div>
+    <div class="es-groups">
+      <details class="es-group" open>
+        <summary>
+          <span class="es-group-icon" aria-hidden="true">🛰️</span>
+          <span data-i18n="connect-mount.d563cc">Connect &amp; mount</span>
+          <span class="es-group-count">9</span>
+          <span class="es-group-caret" aria-hidden="true">▼</span>
+        </summary>
+        <div class="es-group-body">
+          <div class="es-item">
+            <span class="es-item-icon" aria-hidden="true">☁️</span>
+            <div>
+              <h4 data-i18n="100-cloud-providers.92c0c9">100 Cloud Providers</h4>
+              <p data-i18n="connect-to-virtually-any.0dd9ec">Connect to virtually any cloud storage service including Google Drive, Dropbox, OneDrive, iCloud, S3, and 95 more providers all in one place.</p>
+            </div>
+          </div>
+          <div class="es-item">
+            <span class="es-item-icon" aria-hidden="true">🗄️</span>
+            <div>
+              <h4 data-i18n="unified-storage-hub.f14791">Unified Storage Hub</h4>
+              <p data-i18n="cloud-remotes-and-local.ebe0b9">Cloud remotes and local folders now live together in one tidy Storage list — combined actions, per-item encryption toggles, and a one-tap sort that flips between alphabetical and most-recently-used.</p>
+            </div>
+          </div>
+          <div class="es-item">
+            <span class="es-item-icon" aria-hidden="true">🧭</span>
+            <div>
+              <h4 data-i18n="guided-remote-setup.7ada13">Guided Remote Setup</h4>
+              <p data-i18n="add-and-edit-remote.34bd67">Add and edit remote configurations through a simple, guided visual interface. No command line required—get connected in just a few taps.</p>
+            </div>
+          </div>
+          <div class="es-item">
+            <span class="es-item-icon" aria-hidden="true">🌍</span>
+            <div>
+              <h4 data-i18n="serve-configuration.7b6518">Serve Configuration</h4>
+              <p data-i18n="host-your-remote-content.2616d7">Host your remote content locally with the Serve feature supporting WebDAV, NFS, FTP, S3, SFTP, HTTP, DLNA, and Restic. NFS is significantly faster than WebDAV for media playback over encrypted cloud remotes because macOS's NFS client skips the per-file metadata probes Finder's WebDAV client does.</p>
+            </div>
+          </div>
+          <div class="es-item">
+            <span class="es-item-icon" aria-hidden="true">💻</span>
+            <div>
+              <h4 data-i18n="mount-helper-app.0814a8">Mount Helper App</h4>
+              <p data-i18n-html="the-optional-enter-space.2abcca">The optional Enter Space Mount Helper App auto-mounts a WebDAV, FTP, or NFS Serve as a local folder with zero password prompts. NFS mounts land under <code>~/Library/Application Support/Enter Space/Mounts/</code> instead of <code>/Volumes/</code> so Spotlight doesn't try to index your entire cloud tree.</p>
+              <a href="helper.dmg" download class="btn-download-helper" data-i18n="download-helper.7da541">⬇ Download Helper</a>
+            </div>
+          </div>
+          <div class="es-item">
+            <span class="es-item-icon" aria-hidden="true">🔒</span>
+            <div>
+              <h4 data-i18n="file-locking-support.7c2b84">File Locking Support</h4>
+              <p data-i18n="lock-files-on-supported.f17e75">Lock files on supported cloud providers to prevent accidental edits or deletions. Keep critical files safe with collaborative locking support.</p>
+            </div>
+          </div>
+          <div class="es-item">
+            <span class="es-item-icon" aria-hidden="true">⭐</span>
+            <div>
+              <h4 data-i18n="favorited-folders.d974ee">Favorited Folders</h4>
+              <p data-i18n="pin-your-most-used.cb7496">Pin your most-used folders for instant access. Favorite folders stay front and center across all your devices for quick navigation.</p>
+            </div>
+          </div>
+          <div class="es-item">
+            <span class="es-item-icon" aria-hidden="true">📊</span>
+            <div>
+              <h4 data-i18n="storage-space-at-a.d34f0a">Storage Space at a Glance</h4>
+              <p data-i18n="every-storage-location-now.5d70c7">Every storage location now carries a thin used/free capacity bar — cloud remotes and linked local folders alike — color-coded as space runs low, with the full readout a long-press away. Make it yours in Settings: hide the bars or switch them to a calm monochrome.</p>
+            </div>
+          </div>
+          <div class="es-item">
+            <span class="es-item-icon" aria-hidden="true">✨</span>
+            <div>
+              <h4 data-i18n="streamlined-menu-bar-home.2861b6">Streamlined Menu Bar &amp; Home</h4>
+              <p data-i18n="a-refreshed-macos-menu.c7a66c">A refreshed macOS menu-bar experience: a quick-add button for new storage, Settings and Help in their own windows that stay out of your way, and a Home tab that puts favorites, recently played media, and scheduled syncs front and center on every device.</p>
+            </div>
+          </div>
+        </div>
+      </details>
+      <details class="es-group">
+        <summary>
+          <span class="es-group-icon" aria-hidden="true">🎞️</span>
+          <span data-i18n="photos-media.ad6d1b">Photos &amp; media</span>
+          <span class="es-group-count">6</span>
+          <span class="es-group-caret" aria-hidden="true">▼</span>
+        </summary>
+        <div class="es-group-body">
+          <div class="es-item">
+            <span class="es-item-icon" aria-hidden="true">🎬</span>
+            <div>
+              <h4 data-i18n="built-in-media-player.6463ce">Built-in Media Player</h4>
+              <p data-i18n="view-photos-watch-videos.c7fca0">View photos, watch videos, and listen to audio directly from your cloud storage with background playback support. Video plays in Enter Space's own player — Liquid Glass controls, AirPlay, playback speed, and audio/subtitle menus that work reliably with multi-track files. Your media, always accessible.</p>
+            </div>
+          </div>
+          <div class="es-item">
+            <span class="es-item-icon" aria-hidden="true">🌐</span>
+            <div>
+              <h4 data-i18n="360-180-media-playback.12fb01">360° & 180° Media Playback</h4>
+              <p data-i18n="immerse-yourself-in-360.e28aaa">Immerse yourself in 360° and 180° photos and videos streamed directly from your cloud storage. Explore panoramic and spatial media with intuitive controls.</p>
+            </div>
+          </div>
+          <div class="es-item">
+            <span class="es-item-icon" aria-hidden="true">📺</span>
+            <div>
+              <h4 data-i18n="apple-tv-playback.ed55d6">Apple TV Playback</h4>
+              <p data-i18n="stream-your-cloud-stored.c8c930">Stream your cloud-stored media directly to Apple TV. Enjoy your videos, photos, and audio on the big screen with seamless AirPlay integration.</p>
+            </div>
+          </div>
+          <div class="es-item">
+            <span class="es-item-icon" aria-hidden="true">🔓</span>
+            <div>
+              <h4 data-i18n="approve-apple-tv-unlocks.48d3d5">Approve Apple TV Unlocks from Your Phone</h4>
+              <p data-i18n="hidden-remotes-stay-hidden.c1090d">Hidden remotes stay hidden on the Apple TV by default. When someone taps "Show Hidden Remotes" on the TV, your iPhone or Mac gets a push notification with Approve / Deny buttons — even if the app's force-quit. Tap Approve, Face ID, done. Each TV is paired by name so an imposter device can't trick you into approving the wrong one. Tap Lock from the phone and the TV snaps back to the locked home grid instantly, even mid-playback.</p>
+            </div>
+          </div>
+          <div class="es-item">
+            <span class="es-item-icon" aria-hidden="true">🔃</span>
+            <div>
+              <h4 data-i18n="recently-played-syncing.16a7b8">Recently Played Syncing</h4>
+              <p data-i18n="pick-up-where-you.5d6a0c">Pick up where you left off on any device. Your recently played media syncs across iPhone, iPad, and Mac so you never lose your place.</p>
+            </div>
+          </div>
+          <div class="es-item">
+            <span class="es-item-icon" aria-hidden="true">🎞️</span>
+            <div>
+              <h4 data-i18n="swf-media-playback.8f81ee">SWF Media Playback</h4>
+              <p data-i18n="play-legacy-flash-swf.1bcc5b">Play legacy Flash SWF files directly within the app. Revisit classic Flash content and animations without needing a separate player or browser plugin.</p>
+            </div>
+          </div>
+        </div>
+      </details>
+      <details class="es-group">
+        <summary>
+          <span class="es-group-icon" aria-hidden="true">🔁</span>
+          <span data-i18n="sync-backup-recovery.f73897">Sync, backup &amp; recovery</span>
+          <span class="es-group-count">5</span>
+          <span class="es-group-caret" aria-hidden="true">▼</span>
+        </summary>
+        <div class="es-group-body">
+          <div class="es-item">
+            <span class="es-item-icon" aria-hidden="true">📸</span>
+            <div>
+              <h4 data-i18n="photos-library-backup.88ba83">Photos Library Backup</h4>
+              <p data-i18n="back-up-your-entire.9d76da">Back up your entire Photos library to any cloud provider. Protect your precious memories with automated, secure photo backups.</p>
+            </div>
+          </div>
+          <div class="es-item">
+            <span class="es-item-icon" aria-hidden="true">🔋</span>
+            <div>
+              <h4 data-i18n="smart-sync-scheduling.8869c2">Smart Sync Scheduling</h4>
+              <p data-i18n="automatically-skip-scheduled-syncs.c490e8">Automatically skip scheduled syncs when on battery power or connected to low-data or costly networks. Save battery life and avoid unexpected data charges.</p>
+            </div>
+          </div>
+          <div class="es-item">
+            <span class="es-item-icon" aria-hidden="true">📌</span>
+            <div>
+              <h4 data-i18n="keep-offline.107753">Keep Offline</h4>
+              <p data-i18n="pin-any-folder-of.005d53">Pin any folder of any remote and Enter Space keeps a complete local copy — encrypted at rest — that refreshes automatically in the background. When the remote can't be reached, you can still browse and preview the downloaded copy, with a per-pin Wi-Fi Only toggle to protect your data plan.</p>
+            </div>
+          </div>
+          <div class="es-item">
+            <span class="es-item-icon" aria-hidden="true">🧹</span>
+            <div>
+              <h4 data-i18n="storage-cleanup-space-inspector.f52362">Storage Cleanup &amp; Space Inspector</h4>
+              <p data-i18n="drill-into-any-cloud.1acf58">Drill into any cloud or local storage location and see exactly which folders are eating your space. Sorted biggest first, recursive multi-select to clear it all out in one pass.</p>
+            </div>
+          </div>
+          <div class="es-item">
+            <span class="es-item-icon" aria-hidden="true">🪞</span>
+            <div>
+              <h4 data-i18n="duplicate-photo-video-audio.ab35aa">Duplicate Photo, Video &amp; Audio Finder</h4>
+              <p data-i18n="spot-near-identical-photos.a4314c">Spot near-identical photos, videos, and audio across every connected cloud. Sees through resizes, format swaps, and re-edits — and warns you when one looks watermarked so you keep the clean original.</p>
+            </div>
+          </div>
+        </div>
+      </details>
+      <details class="es-group">
+        <summary>
+          <span class="es-group-icon" aria-hidden="true">🛡️</span>
+          <span data-i18n="security-privacy.27f69f">Security &amp; privacy</span>
+          <span class="es-group-count">4</span>
+          <span class="es-group-caret" aria-hidden="true">▼</span>
+        </summary>
+        <div class="es-group-body">
+          <div class="es-item">
+            <span class="es-item-icon" aria-hidden="true">🔐</span>
+            <div>
+              <h4 data-i18n="secure-drop.451d6b">Secure Drop</h4>
+              <p data-i18n="share-files-and-folders.f5ad59">Share files and folders with end-to-end encryption built on Rclone's Crypt. Data is encrypted before it leaves your device, and the recipient decrypts it using a web-based decryption tool with a password you share outside of the storage provider — adding an extra layer of privacy even if the shared link is compromised.</p>
+            </div>
+          </div>
+          <div class="es-item">
+            <span class="es-item-icon" aria-hidden="true">☁️</span>
+            <div>
+              <h4 data-i18n="icloud-optional-privacy.678a09">iCloud-Optional Privacy</h4>
+              <p data-i18n="default-on-icloud-sync.350460">Default-on iCloud sync replicates your rclone configs, SSH keys, and Personal Access Tokens across your Apple devices. Prefer device-only? One toggle keeps every new credential local.</p>
+            </div>
+          </div>
+          <div class="es-item">
+            <span class="es-item-icon" aria-hidden="true">🔗</span>
+            <div>
+              <h4 data-i18n="public-link-creation.6e10b9">Public Link Creation</h4>
+              <p data-i18n="generate-shareable-public-links.d55212">Generate shareable public links for files and folders on supported cloud providers. Share your content instantly without leaving the app.</p>
+            </div>
+          </div>
+          <div class="es-item">
+            <span class="es-item-icon" aria-hidden="true">⚡</span>
+            <div>
+              <h4 data-i18n="powered-by-rclone.29633d">Powered by Rclone</h4>
+              <p data-i18n="built-on-the-proven.ec36e2">Built on the proven open-source Rclone CLI with a track record of reliability. Fast, efficient, and communicates directly with cloud providers.</p>
+            </div>
+          </div>
+        </div>
+      </details>
+      <details class="es-group">
+        <summary>
+          <span class="es-group-icon" aria-hidden="true">⌨️</span>
+          <span data-i18n="developer-tools.4fc1a4">Developer tools</span>
+          <span class="es-group-count">8</span>
+          <span class="es-group-caret" aria-hidden="true">▼</span>
+        </summary>
+        <div class="es-group-body">
+          <div class="es-item">
+            <span class="es-item-icon" aria-hidden="true">✏️</span>
+            <div>
+              <h4 data-i18n="full-featured-code-editor.508d36">Full-Featured Code Editor</h4>
+              <p data-i18n="edit-code-with-syntax.a9b2cb">Edit code with syntax highlighting, code folding, comprehensive find and replace, draft versioning, and follow mode for watching logs in real-time.</p>
+            </div>
+          </div>
+          <div class="es-item">
+            <span class="es-item-icon" aria-hidden="true">🌿</span>
+            <div>
+              <h4 data-i18n="git-in-the-code.0856a9">Git in the Code Editor</h4>
+              <p data-i18n="stage-commit-push-pull.6d045f">Stage, commit, push, pull, branch — full Git workflow built into the editor. SSH keys on Mac and HTTPS auto-token on iPhone, so the same SSH-form remote URL just works on every device.</p>
+            </div>
+          </div>
+          <div class="es-item">
+            <span class="es-item-icon" aria-hidden="true">🪄</span>
+            <div>
+              <h4 >Git Mirror</h4>
+              <p data-i18n="pull-a-remote-folder.cc9c9c">Pull a remote folder down as a local Git working copy, edit with your normal toolchain, push the changes back to the cloud. No mount required, no manual sync.</p>
+            </div>
+          </div>
+          <div class="es-item">
+            <span class="es-item-icon" aria-hidden="true">👁️</span>
+            <div>
+              <h4 data-i18n="live-web-preview.bb0c30">Live Web Preview</h4>
+              <p data-i18n="edit-a-webpage-in.ae34a4">Edit a webpage in the editor and watch it render live alongside — every script, image, and stylesheet loading like the real thing. Auto-refreshes the moment you save.</p>
+            </div>
+          </div>
+          <div class="es-item">
+            <span class="es-item-icon" aria-hidden="true">💾</span>
+            <div>
+              <h4 data-i18n="auto-saving-editor-drafts.cd7a81">Auto-Saving Editor Drafts</h4>
+              <p data-i18n="switch-tabs-close-the.f3c049">Switch tabs, close the editor, force-quit the app — your unsaved work is captured automatically and waiting for you next time. No "discard changes?" surprises.</p>
+            </div>
+          </div>
+          <div class="es-item">
+            <span class="es-item-icon" aria-hidden="true">🔧</span>
+            <div>
+              <h4 data-i18n="custom-environment-variables.aa033b">Custom Environment Variables</h4>
+              <p data-i18n="set-custom-environment-variables.c48005">Set custom environment variables for fine-grained control over Rclone behavior and cloud provider configurations. Tailor your setup to match advanced workflows.</p>
+            </div>
+          </div>
+          <div class="es-item">
+            <span class="es-item-icon" aria-hidden="true">⚙️</span>
+            <div>
+              <h4 data-i18n="rclone-cli-integration.9f6596">Rclone CLI Integration</h4>
+              <p data-i18n="optionally-share-your-remote.6da255">Optionally share your remote configurations with the rclone command line through a shared rclone.conf file. Power users can seamlessly switch between the visual interface and terminal workflows.</p>
+            </div>
+          </div>
+          <div class="es-item">
+            <span class="es-item-icon" aria-hidden="true">🛠️</span>
+            <div>
+              <h4 data-i18n="in-app-browser-debug.0e11fa">In-App Browser Debug Console</h4>
+              <p data-i18n="inspect-and-debug-web.318577">Inspect and debug web content with a built-in developer console for the in-app browser. View logs, errors, and network activity without leaving the app.</p>
+            </div>
+          </div>
+        </div>
+      </details>
+      <details class="es-group">
+        <summary>
+          <span class="es-group-icon" aria-hidden="true">📱</span>
+          <span data-i18n="across-your-devices.cfb745">Across your devices</span>
+          <span class="es-group-count">7</span>
+          <span class="es-group-caret" aria-hidden="true">▼</span>
+        </summary>
+        <div class="es-group-body">
+          <div class="es-item">
+            <span class="es-item-icon" aria-hidden="true">⌚️</span>
+            <div>
+              <h4 data-i18n="enter-space-on-apple.3c6951">Enter Space on Apple Watch</h4>
+              <p data-i18n="sync-your-cloud-media.997111">Sync your cloud media to your wrist. A media-first Apple Watch companion browses your synced library and plays it back right from the watch — with background audio so your music keeps going. A watch-face photo complication flips through a folder you choose (tap it to open that photo, turn the Digital Crown to zoom), and it adapts to tinted faces so your photos stay legible. Everything's stored encrypted at rest, with the media key delivered securely from your paired iPhone.</p>
+            </div>
+          </div>
+          <div class="es-item">
+            <span class="es-item-icon" aria-hidden="true">⌚️</span>
+            <div>
+              <h4 data-i18n="smarter-apple-watch-sync.27b99e">Smarter Apple Watch Sync</h4>
+              <p data-i18n="slideshows-advance-on-their.a9e754">Slideshows advance on their own when a track ends, look-alike photos are de-duplicated before they reach your wrist, VR/360 media is skipped (the watch can't project it), and watch copies are never larger than the original. Background transfers pause while you're watching or listening, so playback stays smooth.</p>
+            </div>
+          </div>
+          <div class="es-item">
+            <span class="es-item-icon" aria-hidden="true">🧩</span>
+            <div>
+              <h4 data-i18n="home-lock-screen-widgets.ed046c">Home &amp; Lock Screen Widgets</h4>
+              <p data-i18n="four-starfield-styled-widgets.57f6b5">Four starfield-styled widgets for iPhone, iPad, and Mac: a Photo Slideshow of your favorites, a Storage Dashboard with per-location used/free bars and provider icons, a Bandwidth monitor, and a Sync Status board for your scheduled syncs. Tap any one to jump straight into the app — a widget photo opens that exact frame in the gallery slideshow, a sync opens its run-results detail.</p>
+            </div>
+          </div>
+          <div class="es-item">
+            <span class="es-item-icon" aria-hidden="true">🗣️</span>
+            <div>
+              <h4 data-i18n="24-shortcuts-siri-actions.a5a1e4">24 Shortcuts &amp; Siri Actions</h4>
+              <p data-i18n="enter-space-s-whole.1f163f">Enter Space's whole feature surface, automatable: copy, move, rename, upload, download, and share files; recover versions through Time Portal; run Doppel duplicate scans and Space Inspector reports; commit and push Git changes; create and run scheduled syncs — all chainable, with time, location, and Focus triggers via Shortcuts automations. Secrets can never be read or written.</p>
+            </div>
+          </div>
+          <div class="es-item">
+            <span class="es-item-icon" aria-hidden="true">☁️</span>
+            <div>
+              <h4 data-i18n="cross-device-icloud-sync.f13f37">Cross-Device iCloud Sync</h4>
+              <p data-i18n="your-apple-watch-favorites.2d73e7">Your Apple Watch favorites and hidden items, your recently-played list, and your exact playback position now follow you from device to device through your private iCloud — pick a track or photo back up right where you left off.</p>
+            </div>
+          </div>
+          <div class="es-item">
+            <span class="es-item-icon" aria-hidden="true">🔎</span>
+            <div>
+              <h4 data-i18n="spotlight-full-content-file.b190c6">Spotlight Full-Content File Search</h4>
+              <p data-i18n="find-files-by-what.0f523f">Find files by what's INSIDE them, straight from system Spotlight — text, Markdown, source code, and PDFs in local sources are content-indexed, and cloud sources are searchable by name. Privacy is built in: hidden content is never indexed and encrypted remotes stay out of Spotlight by default, with per-source toggles in Settings.</p>
+            </div>
+          </div>
+          <div class="es-item">
+            <span class="es-item-icon" aria-hidden="true">📤</span>
+            <div>
+              <h4 data-i18n="open-anywhere.345457">Open Anywhere</h4>
+              <p data-i18n="right-click-a-file.0a1851">Right-click a file in Finder or share from any app — Enter Space opens it in the code editor, gallery, or sends it via Secure Drop. Native share extensions on iPhone, iPad, and Mac.</p>
+            </div>
+          </div>
+        </div>
+      </details>
     </div>
   </section>
 
@@ -1247,375 +2279,21 @@
     </script>
   </section>
 
-  <!-- Magazine-style Feature Sections -->
-  <section class="section">
-    <div class="magazine-section">
-      <div class="magazine-content">
-        <h2 data-i18n="seamless-apple-integration.727bf7">Seamless Apple Integration</h2>
-        <p data-i18n="enter-space-integrates-directly.cf0237">
-          Enter Space integrates directly with macOS Finder and iOS Files app through File Provider technology.
-          Access all 100 cloud storage providers as if they were native drives on your device.
-        </p>
-        <p data-i18n="drag-and-drop-files.b40b4c">
-          Drag and drop files, use Spotlight search, and work with your cloud files using any app—just like they're stored locally.
-          Full read and write support for the majority of supported clouds.
-        </p>
-      </div>
-      <div class="magazine-image">
-        <!-- Replace with actual screenshot -->
-        <img src="assets/images/feature-1-v570.png" alt="Enter Space menu bar app on macOS showing the unified Storage list"
-             onerror="this.style.background='linear-gradient(135deg, #667eea, #764ba2)'; this.style.minHeight='400px'; this.style.display='block';">
-      </div>
-    </div>
-
-    <div class="magazine-section reverse">
-      <div class="magazine-content">
-        <h2 data-i18n="bank-grade-security.f82ba9">Bank-Grade Security</h2>
-        <p data-i18n="your-files-are-encrypted.ce8455">
-          Your files are encrypted on your device before they're uploaded to the cloud. Enter Space uses
-          end-to-end encryption to ensure only you can access your data, even if the cloud provider is compromised.
-        </p>
-        <p data-i18n="built-on-rclone-s.4cbbc4">
-          Built on Rclone's proven open-source technology with years of community testing and security audits.
-          Fast, reliable, and secure cloud access you can trust.
-        </p>
-      </div>
-      <div class="magazine-image">
-        <!-- Replace with actual screenshot -->
-        <img src="assets/images/feature-2-v570.png" alt="Storage list on iPhone with an encrypted Crypt remote alongside cloud providers"
-             onerror="this.style.background='linear-gradient(135deg, #764ba2, #f093fb)'; this.style.minHeight='400px'; this.style.display='block';">
-      </div>
-    </div>
-
-    <div class="magazine-section">
-      <div class="magazine-content">
-        <h2 data-i18n="set-it-and-forget.762d71">Set It and Forget It</h2>
-        <p data-i18n="configure-automated-sync-operations.886f19">
-          Configure automated sync operations to keep your important files backed up across multiple cloud providers.
-          Schedule syncs to run in the background, ensuring your data is always safe.
-        </p>
-        <p data-i18n="perfect-for-backing-up.a989b7">
-          Perfect for backing up photos, documents, and important files. Works on iPhone, iPad, and Mac with
-          flexible subscription options or a one-time lifetime purchase.
-        </p>
-      </div>
-      <div class="magazine-image">
-        <!-- Replace with actual screenshot -->
-        <img src="assets/images/feature-3-v570.png" alt="Scheduled Syncs on iPhone with nightly backup, photo sync, and media mirror tasks"
-             onerror="this.style.background='linear-gradient(135deg, #667eea, #f093fb)'; this.style.minHeight='400px'; this.style.display='block';">
-      </div>
-    </div>
-
-    <div class="magazine-section reverse">
-      <div class="magazine-content">
-        <h2 data-i18n="create-view-on-the.c214a5">Create & View On the Go</h2>
-        <p data-i18n="enter-space-includes-a.e83bf5">
-          Enter Space includes a powerful built-in code editor with syntax highlighting for dozens of languages,
-          code folding, line numbers, and intelligent formatting—everything you need for a quick, enjoyable
-          editing experience wherever you are. Perfect for reviewing scripts, making quick fixes, or diving into
-          configuration files right from your cloud storage.
-        </p>
-        <p data-i18n="need-to-browse-media.7443d4">
-          Need to browse media? The integrated gallery beautifully displays images and videos from any folder,
-          complete with smooth slideshow functionality. Preview your photos, watch videos, and navigate through
-          your media collection without leaving the app—your cloud files have never been more accessible.
-        </p>
-      </div>
-      <div class="magazine-image">
-        <img src="assets/images/feature-4-v570.png" alt="Built-in media gallery viewing a cloud photo on iPad"
-             onerror="this.style.background='linear-gradient(135deg, #764ba2, #667eea)'; this.style.minHeight='400px'; this.style.display='block';">
-      </div>
-    </div>
-
-    <div class="magazine-section">
-      <div class="magazine-content">
-        <h2 data-i18n="one-app-every-apple.42a844">One App, Every Apple Device</h2>
-        <p data-i18n="enter-space-is-a.7be22b">
-          Enter Space is a true universal app built from the ground up for the entire Apple ecosystem.
-          Whether you're on your iPhone, iPad, or Mac, you get the complete experience—no compromises,
-          no missing features, no second-class platforms.
-        </p>
-        <p data-i18n="enjoy-full-feature-parity.a40439">
-          Enjoy full feature parity across all your devices with a native interface tailored to each platform.
-          Start a sync on your Mac, check progress on your iPhone, browse files on your iPad—your cloud
-          storage moves seamlessly with you. One purchase unlocks Enter Space everywhere.
-        </p>
-      </div>
-      <div class="magazine-image">
-        <img src="assets/images/feature-5-v570.png" alt="Enter Space home screen on Apple TV with favorite and recently played media"
-             onerror="this.style.background='linear-gradient(135deg, #667eea, #764ba2)'; this.style.minHeight='400px'; this.style.display='block';">
-      </div>
-    </div>
-  </section>
-
-  <!-- Screenshots Section -->
-  <section id="screenshots" class="section">
+  <!-- Security Hardening Callout -->
+  <section class="security-callout">
     <div class="section-header">
-      <p class="section-subtitle" data-i18n="see-it-in-action.8c8d28">See It In Action</p>
-      <h2 data-i18n="screenshots.597b63">Screenshots</h2>
-      <p data-i18n="take-a-closer-look.bec0b1">Take a closer look at Enter Space in action</p>
+      <p class="section-subtitle" data-i18n="security-privacy.67a15f">Security &amp; Privacy</p>
+      <h2 data-i18n="hardened-by-design.084a16">Hardened by Design</h2>
     </div>
-
-    <div class="screenshots-grid">
-      <!-- Replace these with actual screenshots -->
-      <div class="screenshot-item">
-        <img src="assets/images/screenshot-1-v570.png" alt="Space Inspector storage analyzer on iPhone showing folder sizes with color-coded bars"
-             onerror="this.style.background='linear-gradient(135deg, #667eea, #764ba2)'; this.style.minHeight='500px'; this.style.display='block';">
-      </div>
-      <div class="screenshot-item">
-        <img src="assets/images/screenshot-2-v570.png" alt="Time Portal version history browser on iPhone"
-             onerror="this.style.background='linear-gradient(135deg, #764ba2, #f093fb)'; this.style.minHeight='500px'; this.style.display='block';">
-      </div>
-      <div class="screenshot-item">
-        <img src="assets/images/screenshot-3-v570.png" alt="Cloud file browser on iPhone"
-             onerror="this.style.background='linear-gradient(135deg, #f093fb, #667eea)'; this.style.minHeight='500px'; this.style.display='block';">
-      </div>
-      <div class="screenshot-item">
-        <img src="assets/images/screenshot-4-v570.png" alt="Doppel duplicate finder showing recoverable duplicate files"
-             onerror="this.style.background='linear-gradient(135deg, #667eea, #764ba2)'; this.style.minHeight='500px'; this.style.display='block';">
-      </div>
-      <div class="screenshot-item">
-        <img src="assets/images/screenshot-watch-v570.png" alt="Enter Space on Apple Watch showing a grid of synced cloud photos"
-             onerror="this.style.background='linear-gradient(135deg, #764ba2, #667eea)'; this.style.minHeight='500px'; this.style.display='block';">
-      </div>
+    <div class="security-badges">
+      <div class="security-badge" data-i18n-html="end-to-end-encryption.d99a6e"><span class="badge-icon">&#x1f512;</span> End-to-End Encryption</div>
+      <div class="security-badge" data-i18n-html="secure-file-handling.db349a"><span class="badge-icon">&#x1f6e1;</span> Secure File Handling</div>
+      <div class="security-badge" data-i18n-html="input-validation.5de1a2"><span class="badge-icon">&#x1f50d;</span> Input Validation</div>
+      <div class="security-badge" data-i18n-html="tls-certificate-pinning.c7aadf"><span class="badge-icon">&#x1f510;</span> TLS Certificate Pinning</div>
+      <div class="security-badge" data-i18n-html="timeout-protection.e2a1db"><span class="badge-icon">&#x23f1;</span> Timeout Protection</div>
+      <div class="security-badge" data-i18n-html="sandboxed-execution.1cbe47"><span class="badge-icon">&#x2705;</span> Sandboxed Execution</div>
     </div>
-  </section>
-
-  <!-- Pricing Section -->
-  <section id="pricing" class="section">
-    <div class="section-header">
-      <p class="section-subtitle" data-i18n="simple-transparent-pricing.b25b82">Simple, Transparent Pricing</p>
-      <h2 data-i18n="choose-your-plan.c197d6">Choose Your Plan</h2>
-      <p data-i18n="every-plan-includes-the.751147">Every plan includes the full Enter Space experience — no features held back</p>
-    </div>
-
-    <div class="pricing-trial-banner">
-      <p data-i18n-html="start-with-a-free.00ecae">Start with a <span>free 7-day trial</span> — no commitment, full access to everything.</p>
-    </div>
-
-    <div class="pricing-grid">
-      <div class="pricing-card">
-        <h3 data-i18n="monthly.d31edb">Monthly</h3>
-        <div class="pricing-price">$7.99</div>
-        <div class="pricing-period" data-i18n="per-month.d0e619">per month</div>
-        <div class="pricing-detail" data-i18n="flexibility-to-subscribe-month.691daf">Flexibility to subscribe month-to-month</div>
-        <div class="pricing-future" data-i18n-html="9-99-mo-after.983862">
-          <span class="strikethrough">$9.99/mo</span> after Oct 1
-        </div>
-      </div>
-
-      <div class="pricing-card featured">
-        <div class="pricing-badge" data-i18n="best-value.ca89f1">Best Value</div>
-        <h3 data-i18n="yearly.7622eb">Yearly</h3>
-        <div class="pricing-price">$29.99</div>
-        <div class="pricing-period" data-i18n="per-year.d412fe">per year</div>
-        <div class="pricing-detail" data-i18n="save-over-68-compared.2c1795">Save over 68% compared to monthly</div>
-        <div class="pricing-future" data-i18n-html="49-99-yr-after.23b911">
-          <span class="strikethrough">$49.99/yr</span> after Oct 1
-        </div>
-      </div>
-
-      <div class="pricing-card">
-        <div class="pricing-badge" data-i18n="limited-time.f78ca8">Limited Time</div>
-        <h3 data-i18n="lifetime.8d33f3">Lifetime</h3>
-        <div class="pricing-price">$59.99</div>
-        <div class="pricing-period" data-i18n="one-time-purchase.8ebbdc">one-time purchase</div>
-        <div class="pricing-detail" data-i18n="pay-once-use-forever.87c60c">Pay once, use forever — no recurring fees</div>
-        <div class="pricing-future" data-i18n-html="99-99-after-oct.c639b6">
-          <span class="strikethrough">$99.99</span> after Oct 1
-        </div>
-      </div>
-    </div>
-
-    <div class="pricing-family" data-i18n="all-plans-support-apple.46b41c">All plans support Apple Family Sharing — one subscription covers your entire family.</div>
-
-    <div class="pricing-note">
-      <p data-i18n="the-entire-app-requires.dae500">
-        The entire app requires an active subscription or lifetime purchase — there is no free tier or partial access.
-        Current introductory pricing is available for a limited time. No additional sales are planned after this introductory period.
-        Pricing is subject to change as features and market conditions evolve.
-      </p>
-    </div>
-  </section>
-
-  <!-- Comparison Section -->
-  <section id="compare" class="section">
-    <div class="section-header">
-      <p class="section-subtitle" data-i18n="see-the-difference.f97599">See the Difference</p>
-      <h2 data-i18n="how-enter-space-compares.4a977f">How Enter Space Compares</h2>
-      <p data-i18n="more-features-more-platforms.ad2088">More features, more platforms, flexible pricing</p>
-    </div>
-
-    <div class="comparison-wrapper">
-      <table class="comparison-table">
-        <thead>
-          <tr>
-            <th data-i18n="feature.ad565d">Feature</th>
-            <th class="highlight-col">Enter Space</th>
-            <th data-i18n="cloudmounter.4cc61e">CloudMounter</th>
-            <th data-i18n="mountain-duck.ed3961">Mountain Duck</th>
-            <th data-i18n="file-browser-pro.9f260b">File Browser Pro</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td data-i18n="price.3e8248">Price</td>
-            <td class="highlight-col"><strong data-i18n="from-7-99-mo.03a4b7">From $7.99/mo</strong></td>
-            <td data-i18n="from-29-99-yr.cade10">From $29.99/yr</td>
-            <td data-i18n="49-per-platform.1269bc">$49 per platform</td>
-            <td data-i18n="14-99-per-platform.6a6139">$14.99 per platform</td>
-          </tr>
-          <tr>
-            <td data-i18n="free-trial.11d1f9">Free Trial</td>
-            <td class="highlight-col" data-i18n-html="7-days.3723e6"><span class="check">✓</span> 7 days</td>
-            <td data-i18n-html="7-days.3723e6"><span class="check">✓</span> 7 days</td>
-            <td data-i18n-html="14-days.8ab0c3"><span class="check">✓</span> 14 days</td>
-            <td><span class="cross">✗</span></td>
-          </tr>
-          <tr>
-            <td data-i18n="lifetime-option.06548a">Lifetime Option</td>
-            <td class="highlight-col"><span class="check">✓</span> $59.99</td>
-            <td><span class="check">✓</span></td>
-            <td><span class="check">✓</span></td>
-            <td><span class="cross">✗</span></td>
-          </tr>
-          <tr>
-            <td>Family Sharing</td>
-            <td class="highlight-col"><span class="check">✓</span></td>
-            <td><span class="cross">✗</span></td>
-            <td><span class="cross">✗</span></td>
-            <td><span class="cross">✗</span></td>
-          </tr>
-          <tr>
-            <td data-i18n="licensing.aa636d">Licensing</td>
-            <td class="highlight-col"><strong data-i18n="universal-purchase.f89ab1">Universal purchase</strong></td>
-            <td data-i18n="mac-only.858ac5">Mac only</td>
-            <td data-i18n="mac-only.858ac5">Mac only</td>
-            <td data-i18n="per-platform.f37f69">Per platform</td>
-          </tr>
-          <tr>
-            <td data-i18n="iphone-ipad.0e7acd">iPhone &amp; iPad</td>
-            <td class="highlight-col"><span class="check">✓</span></td>
-            <td><span class="cross">✗</span></td>
-            <td><span class="cross">✗</span></td>
-            <td><span class="check">✓</span></td>
-          </tr>
-          <tr>
-            <td>Mac</td>
-            <td class="highlight-col"><span class="check">✓</span></td>
-            <td><span class="check">✓</span></td>
-            <td><span class="check">✓</span></td>
-            <td><span class="check">✓</span></td>
-          </tr>
-          <tr>
-            <td>Apple TV</td>
-            <td class="highlight-col"><span class="check">✓</span></td>
-            <td><span class="cross">✗</span></td>
-            <td><span class="cross">✗</span></td>
-            <td><span class="check">✓</span></td>
-          </tr>
-          <tr>
-            <td data-i18n="cloud-providers.36f789">Cloud Providers</td>
-            <td class="highlight-col"><strong>100</strong></td>
-            <td>12</td>
-            <td>13</td>
-            <td>30</td>
-          </tr>
-          <tr>
-            <td data-i18n="finder-files-integration.718ce5">Finder / Files Integration</td>
-            <td class="highlight-col"><span class="check">✓</span></td>
-            <td data-i18n-html="finder-only.aa21eb"><span class="check">✓</span> Finder only</td>
-            <td data-i18n-html="finder-only.aa21eb"><span class="check">✓</span> Finder only</td>
-            <td><span class="check">✓</span></td>
-          </tr>
-          <tr>
-            <td data-i18n="end-to-end-encryption.24c2ac">End-to-End Encryption</td>
-            <td class="highlight-col"><span class="check">✓</span></td>
-            <td><span class="check">✓</span></td>
-            <td data-i18n-html="cryptomator.156e88"><span class="check">✓</span> Cryptomator</td>
-            <td><span class="cross">✗</span></td>
-          </tr>
-          <tr>
-            <td data-i18n="automated-scheduled-sync.e20f2c">Automated Scheduled Sync</td>
-            <td class="highlight-col"><span class="check">✓</span></td>
-            <td><span class="cross">✗</span></td>
-            <td><span class="cross">✗</span></td>
-            <td><span class="check">✓</span></td>
-          </tr>
-          <tr>
-            <td data-i18n="realtime-file-monitoring.8a05a6">Realtime File Monitoring</td>
-            <td class="highlight-col"><span class="check">✓</span></td>
-            <td><span class="cross">✗</span></td>
-            <td><span class="cross">✗</span></td>
-            <td><span class="cross">✗</span></td>
-          </tr>
-          <tr>
-            <td data-i18n="smart-sync-battery-network.7c1654">Smart Sync (Battery / Network)</td>
-            <td class="highlight-col"><span class="check">✓</span></td>
-            <td><span class="cross">✗</span></td>
-            <td><span class="cross">✗</span></td>
-            <td><span class="cross">✗</span></td>
-          </tr>
-          <tr>
-            <td data-i18n="photos-library-backup.88ba83">Photos Library Backup</td>
-            <td class="highlight-col"><span class="check">✓</span></td>
-            <td><span class="cross">✗</span></td>
-            <td><span class="cross">✗</span></td>
-            <td><span class="cross">✗</span></td>
-          </tr>
-          <tr>
-            <td data-i18n="built-in-media-player.6463ce">Built-in Media Player</td>
-            <td class="highlight-col"><span class="check">✓</span></td>
-            <td><span class="cross">✗</span></td>
-            <td><span class="cross">✗</span></td>
-            <td><span class="check">✓</span></td>
-          </tr>
-          <tr>
-            <td data-i18n="code-editor.926f42">Code Editor</td>
-            <td class="highlight-col"><span class="check">✓</span></td>
-            <td><span class="cross">✗</span></td>
-            <td><span class="cross">✗</span></td>
-            <td><span class="check">✓</span></td>
-          </tr>
-          <tr>
-            <td data-i18n="git-management-in-code.73d4f2">Git Management in Code Editor</td>
-            <td class="highlight-col" data-i18n-html="stage-commit-push-branch.e4431a"><span class="check">✓</span> Stage / commit / push / branch</td>
-            <td><span class="cross">✗</span></td>
-            <td><span class="cross">✗</span></td>
-            <td><span class="cross">✗</span></td>
-          </tr>
-          <tr>
-            <td data-i18n="duplicate-photo-video-audio.43144a">Duplicate Photo / Video / Audio Finder</td>
-            <td class="highlight-col"><span class="check">✓</span></td>
-            <td><span class="cross">✗</span></td>
-            <td><span class="cross">✗</span></td>
-            <td><span class="cross">✗</span></td>
-          </tr>
-          <tr>
-            <td data-i18n="storage-cleanup-space-inspector.f52362">Storage Cleanup &amp; Space Inspector</td>
-            <td class="highlight-col"><span class="check">✓</span></td>
-            <td><span class="cross">✗</span></td>
-            <td><span class="cross">✗</span></td>
-            <td><span class="cross">✗</span></td>
-          </tr>
-          <tr>
-            <td data-i18n="custom-environment-variables.aa033b">Custom Environment Variables</td>
-            <td class="highlight-col"><span class="check">✓</span></td>
-            <td><span class="cross">✗</span></td>
-            <td><span class="cross">✗</span></td>
-            <td><span class="cross">✗</span></td>
-          </tr>
-          <tr>
-            <td data-i18n="open-source-engine.1cd74b">Open-Source Engine</td>
-            <td class="highlight-col" data-i18n-html="rclone.53de58"><span class="check">✓</span> Rclone</td>
-            <td><span class="cross">✗</span></td>
-            <td data-i18n-html="cyberduck.90c9b6"><span class="check">✓</span> Cyberduck</td>
-            <td><span class="cross">✗</span></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <p class="comparison-scroll-hint" data-i18n="swipe-to-see-all.47040a">← Swipe to see all apps →</p>
+    <p class="security-audit-note" data-i18n="comprehensive-security-audit-complet.9f66b8">Comprehensive security audit completed April 2026</p>
   </section>
 
   <!-- FAQ Section -->
@@ -2008,23 +2686,34 @@
     </div>
   </section>
 
-  <!-- Footer -->
-
-  <!-- Security Hardening Callout -->
-  <section class="security-callout">
-    <div class="section-header">
-      <p class="section-subtitle" data-i18n="security-privacy.67a15f">Security &amp; Privacy</p>
-      <h2 data-i18n="hardened-by-design.084a16">Hardened by Design</h2>
+  <!-- ===== Close ===== -->
+  <section class="es-band es-band-start es-final">
+    <svg class="es-stars" viewBox="0 0 1440 620" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
+      <circle cx="107.7" cy="474.9" r="1.76" opacity="0.5" class="es-twinkle" style="animation-delay:5.2s"/><circle cx="618.4" cy="385.4" r="1.7" opacity="0.34"/><circle cx="57.2" cy="109.6" r="0.55" opacity="0.52"/><circle cx="177.1" cy="59.2" r="0.9" opacity="0.49"/><circle cx="1269.6" cy="7.9" r="1.34" opacity="0.88"/><circle cx="1056.2" cy="99.6" r="0.7" opacity="0.47"/>
+      <circle cx="9.4" cy="600.8" r="1.49" opacity="0.8"/><circle cx="937.1" cy="611.8" r="1.01" opacity="0.21" class="es-twinkle" style="animation-delay:2.0s"/><circle cx="626.6" cy="501.2" r="0.5" opacity="0.84"/><circle cx="503.4" cy="16.1" r="1.29" opacity="0.85"/><circle cx="875.4" cy="456.0" r="1.07" opacity="0.48"/><circle cx="35.5" cy="540.7" r="1.25" opacity="0.28"/>
+      <circle cx="274.1" cy="333.5" r="1.4" opacity="0.91"/><circle cx="614.9" cy="339.3" r="1.41" opacity="0.23"/><circle cx="1384.0" cy="236.6" r="1.78" opacity="0.85" class="es-twinkle" style="animation-delay:4.6s"/><circle cx="204.1" cy="282.1" r="1.13" opacity="0.42"/><circle cx="693.6" cy="188.4" r="1.26" opacity="0.73"/><circle cx="979.6" cy="500.2" r="1.53" opacity="0.46"/>
+      <circle cx="934.6" cy="478.2" r="0.6" opacity="0.7"/><circle cx="663.6" cy="86.3" r="0.88" opacity="0.77"/><circle cx="958.3" cy="333.6" r="1.67" opacity="0.64"/><circle cx="24.4" cy="399.4" r="1.16" opacity="0.79" class="es-twinkle" style="animation-delay:3.4s"/><circle cx="1094.5" cy="36.1" r="1.4" opacity="0.35"/><circle cx="218.1" cy="469.6" r="1.56" opacity="0.92"/>
+      <circle cx="498.7" cy="590.5" r="1.36" opacity="0.71"/><circle cx="1183.7" cy="518.9" r="0.58" opacity="0.66"/><circle cx="862.9" cy="406.3" r="0.96" opacity="0.92"/><circle cx="286.2" cy="513.8" r="0.76" opacity="0.26"/><circle cx="136.7" cy="556.1" r="0.54" opacity="0.4" class="es-twinkle" style="animation-delay:4.1s"/><circle cx="444.0" cy="581.5" r="1.59" opacity="0.53"/>
+      <circle cx="999.7" cy="515.9" r="1.39" opacity="0.9"/><circle cx="446.0" cy="353.0" r="0.81" opacity="0.2"/><circle cx="1062.8" cy="196.8" r="0.52" opacity="0.61"/><circle cx="1031.1" cy="44.0" r="0.91" opacity="0.86"/><circle cx="841.5" cy="42.3" r="1.48" opacity="0.37"/><circle cx="574.4" cy="606.1" r="1.77" opacity="0.22" class="es-twinkle" style="animation-delay:0.4s"/>
+      <circle cx="987.7" cy="253.2" r="0.76" opacity="0.44"/><circle cx="1342.3" cy="135.4" r="1.31" opacity="0.58"/><circle cx="485.5" cy="284.2" r="1.33" opacity="0.26"/><circle cx="894.4" cy="22.6" r="0.5" opacity="0.3"/><circle cx="494.5" cy="252.9" r="1.2" opacity="0.29"/><circle cx="1171.5" cy="326.8" r="1.64" opacity="0.6"/>
+      <circle cx="332.4" cy="594.0" r="1.26" opacity="0.45" class="es-twinkle" style="animation-delay:3.3s"/><circle cx="773.3" cy="442.0" r="0.69" opacity="0.88"/><circle cx="796.0" cy="298.1" r="0.57" opacity="0.34"/><circle cx="1109.4" cy="274.7" r="1.25" opacity="0.66"/><circle cx="545.7" cy="4.9" r="0.52" opacity="0.85"/><circle cx="838.3" cy="524.6" r="1.46" opacity="0.68"/>
+      <circle cx="495.5" cy="447.8" r="1.19" opacity="0.6"/><circle cx="601.8" cy="430.3" r="1.66" opacity="0.88" class="es-twinkle" style="animation-delay:5.1s"/><circle cx="92.8" cy="338.4" r="0.98" opacity="0.34"/><circle cx="802.5" cy="20.8" r="0.57" opacity="0.73"/><circle cx="1187.1" cy="351.3" r="1.51" opacity="0.89"/><circle cx="210.5" cy="158.3" r="1.18" opacity="0.4"/>
+      <circle cx="1086.6" cy="315.8" r="0.85" opacity="0.9"/><circle cx="425.9" cy="373.7" r="1.43" opacity="0.84"/><circle cx="174.2" cy="204.5" r="1.76" opacity="0.57" class="es-twinkle" style="animation-delay:1.7s"/><circle cx="721.3" cy="353.0" r="1.23" opacity="0.34"/><circle cx="717.0" cy="31.3" r="1.4" opacity="0.78"/><circle cx="208.7" cy="136.2" r="1.51" opacity="0.74"/>
+      <circle cx="226.6" cy="395.6" r="1.01" opacity="0.21"/><circle cx="1056.0" cy="85.0" r="1.05" opacity="0.33"/><circle cx="1007.4" cy="250.1" r="1.74" opacity="0.18"/><circle cx="658.3" cy="418.7" r="0.61" opacity="0.67" class="es-twinkle" style="animation-delay:0.1s"/><circle cx="850.4" cy="49.6" r="0.64" opacity="0.7"/><circle cx="1319.0" cy="381.0" r="0.65" opacity="0.76"/>
+      <circle cx="112.4" cy="516.5" r="0.86" opacity="0.67"/><circle cx="63.1" cy="94.3" r="1.2" opacity="0.61"/><circle cx="746.3" cy="123.0" r="0.96" opacity="0.46"/><circle cx="617.8" cy="91.8" r="1.66" opacity="0.37"/><circle cx="134.2" cy="112.6" r="0.86" opacity="0.35" class="es-twinkle" style="animation-delay:2.5s"/><circle cx="1187.8" cy="180.9" r="0.88" opacity="0.8"/>
+      <circle cx="1239.0" cy="286.0" r="1.5" opacity="0.4"/><circle cx="963.7" cy="405.8" r="0.56" opacity="0.67"/><circle cx="600.6" cy="393.8" r="1.69" opacity="0.64"/><circle cx="612.9" cy="534.8" r="0.96" opacity="0.26"/><circle cx="840.3" cy="569.1" r="1.34" opacity="0.84"/><circle cx="1004.1" cy="466.8" r="1.64" opacity="0.92" class="es-twinkle" style="animation-delay:2.5s"/>
+      <circle cx="1163.0" cy="349.3" r="1.01" opacity="0.42"/><circle cx="309.0" cy="174.1" r="0.68" opacity="0.77"/><circle cx="953.3" cy="510.8" r="0.69" opacity="0.65"/><circle cx="194.0" cy="209.6" r="0.71" opacity="0.84"/><circle cx="1327.3" cy="148.7" r="0.66" opacity="0.5"/><circle cx="1296.3" cy="135.7" r="1.58" opacity="0.72"/>
+      <circle cx="172.7" cy="592.0" r="0.54" opacity="0.28" class="es-twinkle" style="animation-delay:1.8s"/><circle cx="479.5" cy="310.8" r="1.2" opacity="0.55"/><circle cx="1400.0" cy="575.3" r="0.95" opacity="0.82"/><circle cx="1166.9" cy="295.4" r="1.71" opacity="0.81"/><circle cx="647.4" cy="402.1" r="0.76" opacity="0.42"/><circle cx="758.5" cy="391.5" r="0.52" opacity="0.91"/>
+    </svg>
+    <div class="es-inner">
+      <h2 data-i18n="stop-hunting-for-your.86c7a1">Stop hunting for your own files.</h2>
+      <p data-i18n="seven-days-free-the.4bf4d2">Seven days free, the whole app, nothing held back. Then monthly, yearly, or pay once and be done — while introductory pricing lasts.</p>
+      <div class="es-cta-row">
+        <a href="https://apps.apple.com/us/app/enter-space/id6746350540" class="es-btn es-btn-primary" target="_blank" rel="noopener noreferrer" data-i18n="download-on-app-store.cf50c2">Download on App Store</a>
+        <a href="#pricing" class="es-btn es-btn-ghost" data-i18n="compare-the-plans.43d631">Compare the plans</a>
+      </div>
+      <p class="es-cta-fine" style="margin-top: 1.25rem;" data-i18n="iphone-ipad-mac-apple.16d231">iPhone · iPad · Mac · Apple TV · Apple Watch — one purchase covers all of them.</p>
     </div>
-    <div class="security-badges">
-      <div class="security-badge" data-i18n-html="end-to-end-encryption.d99a6e"><span class="badge-icon">&#x1f512;</span> End-to-End Encryption</div>
-      <div class="security-badge" data-i18n-html="secure-file-handling.db349a"><span class="badge-icon">&#x1f6e1;</span> Secure File Handling</div>
-      <div class="security-badge" data-i18n-html="input-validation.5de1a2"><span class="badge-icon">&#x1f50d;</span> Input Validation</div>
-      <div class="security-badge" data-i18n-html="tls-certificate-pinning.c7aadf"><span class="badge-icon">&#x1f510;</span> TLS Certificate Pinning</div>
-      <div class="security-badge" data-i18n-html="timeout-protection.e2a1db"><span class="badge-icon">&#x23f1;</span> Timeout Protection</div>
-      <div class="security-badge" data-i18n-html="sandboxed-execution.1cbe47"><span class="badge-icon">&#x2705;</span> Sandboxed Execution</div>
-    </div>
-    <p class="security-audit-note" data-i18n="comprehensive-security-audit-complet.9f66b8">Comprehensive security audit completed April 2026</p>
   </section>
 
   <footer class="footer">
@@ -2088,6 +2777,28 @@
         el.addEventListener("click", bind);
         if (el.dataset.show === "yes") { el.textContent = addr; }
       });
+    })();
+  </script>
+  <script>
+    // Progressive reveal. The hidden state is applied from JS so a reader with
+    // scripting off still gets the whole page.
+    (function () {
+      var sel = ".es-tour-block, .es-persona, .es-shot, .es-group, .es-replace, .es-stats > div";
+      var els = Array.prototype.slice.call(document.querySelectorAll(sel));
+      if (!els.length || !("IntersectionObserver" in window) ||
+          window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+      els.forEach(function (el, i) {
+        el.classList.add("es-reveal");
+        el.style.transitionDelay = (Math.min(i % 4, 3) * 70) + "ms";
+      });
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (!e.isIntersecting) return;
+          e.target.classList.add("is-in");
+          io.unobserve(e.target);
+        });
+      }, { threshold: 0.08, rootMargin: "0px 0px -40px 0px" });
+      els.forEach(function (el) { io.observe(el); });
     })();
   </script>
 </body>
