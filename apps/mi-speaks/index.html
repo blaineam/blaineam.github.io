@@ -33,6 +33,14 @@
     .hero-description {
       color: rgba(255, 255, 255, 0.9);
     }
+  
+    .voice-samples { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.25rem; max-width: 900px; margin: 0 auto; }
+    .voice-sample { margin: 0; padding: 1rem 1.15rem; border-radius: 14px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,105,240,0.18); }
+    .voice-sample figcaption { display: flex; align-items: baseline; gap: .5rem; margin-bottom: .6rem; }
+    .voice-sample figcaption strong { font-size: 1.05rem; }
+    .voice-sample figcaption span { font-size: .8rem; opacity: .6; }
+    .voice-sample audio { width: 100%; }
+    .voice-samples-note { max-width: 700px; margin: 1.75rem auto 0; text-align: center; font-size: .9rem; opacity: .65; }
   </style>
   <link rel="alternate" hreflang="x-default" href="https://wemiller.com/apps/mi-speaks/">
   <link rel="alternate" hreflang="en" href="https://wemiller.com/apps/mi-speaks/">
@@ -84,6 +92,40 @@
         </div>
       </div>
     </div>
+  </section>
+
+  <!-- Hear It Section -->
+  <section id="hear-it" class="section">
+    <div class="section-header">
+      <p class="section-subtitle" data-i18n="studio-voices.378ad1">Studio Voices</p>
+      <h2 data-i18n="hear-it-for-yourself.5398d7">Hear it for yourself</h2>
+      <p data-i18n="twenty-eight-neural-voices.eb2f6a">Twenty-eight neural voices, generated entirely on your iPhone. Nothing is uploaded, and they work in airplane mode.</p>
+    </div>
+
+    <div class="voice-samples">
+      <figure class="voice-sample">
+        <figcaption><strong data-i18n="heart.2a3733">Heart</strong> <span data-i18n="american.ee70dc">American</span></figcaption>
+        <audio controls preload="none" src="assets/audio/af_heart.m4a"></audio>
+      </figure>
+      <figure class="voice-sample">
+        <figcaption><strong data-i18n="bella.d9cef0">Bella</strong> <span data-i18n="american.ee70dc">American</span></figcaption>
+        <audio controls preload="none" src="assets/audio/af_bella.m4a"></audio>
+      </figure>
+      <figure class="voice-sample">
+        <figcaption><strong data-i18n="michael.f8c38b">Michael</strong> <span data-i18n="american.ee70dc">American</span></figcaption>
+        <audio controls preload="none" src="assets/audio/am_michael.m4a"></audio>
+      </figure>
+      <figure class="voice-sample">
+        <figcaption><strong data-i18n="emma.409ae7">Emma</strong> <span data-i18n="british.e0f542">British</span></figcaption>
+        <audio controls preload="none" src="assets/audio/bf_emma.m4a"></audio>
+      </figure>
+      <figure class="voice-sample">
+        <figcaption><strong data-i18n="george.9e8c55">George</strong> <span data-i18n="british.e0f542">British</span></figcaption>
+        <audio controls preload="none" src="assets/audio/bm_george.m4a"></audio>
+      </figure>
+    </div>
+
+    <p class="voice-samples-note" data-i18n="every-clip-on-this.f51d66">Every clip on this page was generated on-device by the same engine that ships in the app. Studio Voices are part of Premium and need a one-time download.</p>
   </section>
 
   <!-- Floating App Store Button -->
