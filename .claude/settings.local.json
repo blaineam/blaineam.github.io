@@ -24,7 +24,13 @@
       "Bash(sips -z 60 60 /Users/blainemiller/Documents/scripts/blaineam.github.io/projects/asteroic.png)",
       "Bash(node -e \"console.log\\(Buffer.from\\('https://signal.me/#eu/UflC0jvalbCbpb6fmxz87134Zr8wssZqj4XEVjAxOJ0DLN6maNNIhJcIYwIf8_op'\\).toString\\('base64'\\)\\)\")",
       "Bash(python3 -c \"import yaml,sys; yaml.safe_load\\(open\\('.github/workflows/replicate-to-idrive-e2.yml'\\)\\); print\\('YAML OK'\\)\")",
-      "Bash(git pull *)"
+      "Bash(git pull *)",
+      "Bash(tee /dev/stderr)",
+      "Bash(xargs sed -i '' '/<a href=\"..\\\\/aperion\\\\/\" class=\"footer-link\">Aperion<\\\\/a>/d')",
+      "Read(//Users/blainemiller/Documents/mine/Personal/Apps/_shared/rocket/**)",
+      "Bash(node rocket.mjs build Ari)",
+      "Read(//Users/blainemiller/Documents/mine/Personal/Apps/Blip/**)",
+      "Bash(gh run *)"
     ]
   }
 }

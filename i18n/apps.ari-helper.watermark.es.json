@@ -1,0 +1,14 @@
+{
+  "_meta.description": "Comprueba si una imagen lleva la marca invisible que Ari Helper añade a las imágenes que genera. Todo ocurre en tu navegador: no se sube nada.",
+  "_title": "Buscar la marca de Ari",
+  "back": "← Ari Helper",
+  "blocks-agree": "de los bloques coinciden",
+  "caveat": "Una marca encontrada es fiable: el patrón que busca no aparece por casualidad, así que una imagen que da positivo realmente lleva la marca de Ari. Que <em>no</em> se encuentre demuestra mucho menos. La compresión fuerte, el recorte, el reescalado y las capturas de pantalla la destruyen, y esto no dice nada sobre imágenes de otras herramientas. Tampoco es una firma: indica que una imagen viene de Ari, no quién la hizo.",
+  "drop": "Suelta una imagen aquí, o haz clic para elegir una",
+  "explain-found": "Esta imagen lleva la marca invisible que Ari Helper añade a las imágenes que genera.",
+  "explain-missing": "Esta imagen no lleva la marca, pero lee la nota de abajo antes de concluir nada.",
+  "lede": "Ari Helper puede añadir una marca invisible a las imágenes que genera. Suelta una aquí para ver si la lleva. La imagen no sale de tu dispositivo: la comprobación se hace en esta página.",
+  "title": "Buscar la marca de Ari",
+  "verdict-found": "La marca de Ari está presente",
+  "verdict-missing": "No se encontró ninguna marca"
+}

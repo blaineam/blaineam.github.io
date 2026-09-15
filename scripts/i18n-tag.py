@@ -20,6 +20,8 @@ PAGES = [
     ("index.html", "index", "https://wemiller.com/", "top-right"),
     ("apps/index.html", "apps", "https://wemiller.com/apps/", "bottom-right"),
     ("support/index.html", "support", "https://wemiller.com/support/", "bottom-right"),
+    ("apps/ari-helper/watermark/index.html", "apps.ari-helper.watermark",
+     "https://wemiller.com/apps/ari-helper/watermark/", "bottom-right"),
 ] + [
     (f"apps/{slug}/index.html", f"apps.{slug}", f"https://wemiller.com/apps/{slug}/", "bottom-left")
     for slug in [

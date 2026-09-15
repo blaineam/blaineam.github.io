@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Check for Ari's mark</title>
+  <meta name="description" content="Check whether a picture carries the invisible mark Ari Helper adds to images it generates. Runs entirely in your browser — nothing is uploaded.">
+  <meta property="og:title" content="Check for Ari's mark">
+  <meta property="og:description" content="Check whether a picture carries the invisible mark Ari Helper adds to images it generates. Runs entirely in your browser — nothing is uploaded.">
+  <meta property="og:url" content="https://wemiller.com/apps/ari-helper/watermark/">
+  <link rel="stylesheet" href="../../app-showcase.css">
+  <style>
+    :root { --app-primary: #f093fb; --app-secondary: #f5576c; }
+    .wrap { max-width: 720px; margin: 0 auto; padding: 3rem 1.25rem 4rem; }
+    h1 { margin-bottom: .5rem; }
+    .lede { color: #555; margin-bottom: 2rem; }
+    .drop {
+      border: 2px dashed rgba(240,147,251,.6); border-radius: 14px;
+      padding: 3rem 1.5rem; text-align: center; cursor: pointer;
+      transition: background .15s, border-color .15s; background: rgba(240,147,251,.04);
+    }
+    .drop:hover, .drop.over { background: rgba(240,147,251,.12); border-color: var(--app-secondary); }
+    .drop input { display: none; }
+    .result { margin-top: 1.75rem; padding: 1.1rem 1.25rem; border-radius: 12px; display: none; }
+    .result.show { display: block; }
+    .result.found { background: rgba(52,199,89,.12); border: 1px solid rgba(52,199,89,.45); }
+    .result.missing { background: rgba(255,159,10,.10); border: 1px solid rgba(255,159,10,.4); }
+    .result h2 { font-size: 1.05rem; margin: 0 0 .4rem; }
+    .result p { margin: 0; color: #444; font-size: .93rem; }
+    .meta { font-family: ui-monospace, Menlo, monospace; font-size: .82rem; color: #666; margin-top: .5rem; }
+    .caveat { margin-top: 2.25rem; font-size: .86rem; color: #666; line-height: 1.55; }
+    .back { display: inline-block; margin-bottom: 1.5rem; font-size: .9rem; }
+    @media (prefers-color-scheme: dark) {
+      .lede, .result p { color: #bbb; } .caveat, .meta { color: #999; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <a class="back" href="../" data-i18n="back">← Ari Helper</a>
+    <h1 data-i18n="title">Check for Ari's mark</h1>
+    <p class="lede" data-i18n="lede">Ari Helper can add an invisible mark to pictures it generates. Drop one here to see whether it carries that mark. The picture never leaves your device — the check runs in this page.</p>
+
+    <label class="drop" id="drop">
+      <input type="file" id="file" accept="image/*">
+      <span data-i18n="drop">Drop a picture here, or click to choose one</span>
+    </label>
+
+    <!-- The result wording lives in the DOM so the site's own translator
+         handles it; i18n.js exposes no runtime lookup for scripts. -->
+    <div hidden>
+      <span id="s-found" data-i18n="verdict-found">Ari's mark is present</span>
+      <span id="s-missing" data-i18n="verdict-missing">No mark found</span>
+      <span id="s-found-why" data-i18n="explain-found">This picture carries the invisible mark Ari Helper adds to images it generates.</span>
+      <span id="s-missing-why" data-i18n="explain-missing">This picture does not carry the mark — but see the note below before concluding anything from that.</span>
+      <span id="s-agree" data-i18n="blocks-agree">of blocks agree</span>
+    </div>
+
+    <div class="result" id="result">
+      <h2 id="verdict"></h2>
+      <p id="explain"></p>
+      <div class="meta" id="meta"></div>
+    </div>
+
+    <p class="caveat" data-i18n-html="caveat">A mark that is found is reliable: the pattern it looks for does not occur by chance, so a picture reporting Ari's mark really does carry it. A mark that is <em>not</em> found proves much less. Heavy compression, cropping, resizing and screenshots all destroy it, and this says nothing about pictures from any other tool. It is also not a signature — it shows a picture came from Ari, not who made it.</p>
+  </div>
+
+  <script src="../../i18n/i18n.js" data-page="apps.ari-helper.watermark"></script>
+  <script>
+  // The detector, matching the embedder in Ari's InvisibleWatermark.swift.
+  //
+  // Plain JavaScript rather than WebAssembly: the work is one 8x8 DCT per block,
+  // which typed arrays do in well under a second for any picture a browser will
+  // open, and a page with no build step is one anybody can read and check
+  // against the app. A wasm blob would be faster at nothing that matters here
+  // and auditable by fewer people.
+  (function () {
+    var BLOCK = 8, BITS = 64, MAGIC = 0x41524931;      // "ARI1"
+    var FIRST = 1 * 8 + 3, SECOND = 3 * 8 + 1;          // (u:3,v:1) and (u:1,v:3)
+
+    var basis = new Float32Array(64);
+    for (var f = 0; f < 8; f++) {
+      var scale = f === 0 ? Math.sqrt(1 / 8) : Math.sqrt(2 / 8);
+      for (var p = 0; p < 8; p++) {
+        basis[f * 8 + p] = scale * Math.cos(Math.PI * f * (2 * p + 1) / 16);
+      }
+    }
+
+    function dct(samples, out) {
+      var rows = new Float32Array(64), r, c, f, p, sum;
+      for (r = 0; r < 8; r++) {
+        for (f = 0; f < 8; f++) {
+          sum = 0;
+          for (p = 0; p < 8; p++) sum += samples[r * 8 + p] * basis[f * 8 + p];
+          rows[r * 8 + f] = sum;
+        }
+      }
+      for (c = 0; c < 8; c++) {
+        for (f = 0; f < 8; f++) {
+          sum = 0;
+          for (p = 0; p < 8; p++) sum += rows[p * 8 + c] * basis[f * 8 + p];
+          out[f * 8 + c] = sum;
+        }
+      }
+    }
+
+    function detect(imageData) {
+      var w = imageData.width, h = imageData.height, data = imageData.data;
+      if (w < BLOCK || h < BLOCK) return null;
+
+      var luma = new Float32Array(w * h);
+      for (var i = 0, n = w * h; i < n; i++) {
+        luma[i] = 0.299 * data[i * 4] + 0.587 * data[i * 4 + 1] + 0.114 * data[i * 4 + 2];
+      }
+
+      var votesFor = new Int32Array(BITS), votesAgainst = new Int32Array(BITS);
+      var patch = new Float32Array(64), coef = new Float32Array(64), index = 0;
+
+      // Same traversal order as the embedder: rows of blocks, left to right.
+      for (var by = 0; by + BLOCK <= h; by += BLOCK) {
+        for (var bx = 0; bx + BLOCK <= w; bx += BLOCK) {
+          for (var row = 0; row < BLOCK; row++) {
+            for (var col = 0; col < BLOCK; col++) {
+              patch[row * 8 + col] = luma[(by + row) * w + bx + col];
+            }
+          }
+          dct(patch, coef);
+          var slot = index % BITS;
+          index++;
+          if (coef[FIRST] - coef[SECOND] > 0) votesFor[slot]++; else votesAgainst[slot]++;
+        }
+      }
+      if (index < BITS) return null;
+
+      var magic = 0, id = 0, agreement = 0;
+      for (var s = 0; s < BITS; s++) {
+        var total = votesFor[s] + votesAgainst[s];
+        var bit = votesFor[s] >= votesAgainst[s] ? 1 : 0;
+        agreement += Math.max(votesFor[s], votesAgainst[s]) / total;
+        // >>> 0 keeps these unsigned; << 1 on bit 31 would otherwise go negative.
+        if (s < 32) magic = ((magic << 1) | bit) >>> 0; else id = ((id << 1) | bit) >>> 0;
+      }
+      if (magic !== MAGIC) return null;
+      return { identifier: id, confidence: agreement / BITS, blocks: index };
+    }
+
+    // Exposed so the detector can be checked against the app's embedder
+    // without a browser — see the cross-check in Ari's repo.
+    window.AriWatermark = { detect: detect };
+
+    var drop = document.getElementById('drop');
+    var file = document.getElementById('file');
+    var result = document.getElementById('result');
+
+    function phrase(id) {
+      var element = document.getElementById(id);
+      return element ? element.textContent : '';
+    }
+
+    function say(found, payload) {
+      result.className = 'result show ' + (found ? 'found' : 'missing');
+      document.getElementById('verdict').textContent = phrase(found ? 's-found' : 's-missing');
+      document.getElementById('explain').textContent =
+        phrase(found ? 's-found-why' : 's-missing-why');
+      document.getElementById('meta').textContent = found
+        ? 'id ' + payload.identifier.toString(16).toUpperCase().padStart(8, '0')
+          + ' · ' + Math.round(payload.confidence * 100) + '% ' + phrase('s-agree')
+          + ' (' + payload.blocks + ')'
+        : '';
+    }
+
+    function examine(blob) {
+      var image = new Image();
+      image.onload = function () {
+        var canvas = document.createElement('canvas');
+        canvas.width = image.naturalWidth;
+        canvas.height = image.naturalHeight;
+        var context = canvas.getContext('2d', { willReadFrequently: true });
+        context.drawImage(image, 0, 0);
+        var found = detect(context.getImageData(0, 0, canvas.width, canvas.height));
+        say(!!found, found);
+        URL.revokeObjectURL(image.src);
+      };
+      image.src = URL.createObjectURL(blob);
+    }
+
+    file.addEventListener('change', function () { if (file.files[0]) examine(file.files[0]); });
+    ['dragenter', 'dragover'].forEach(function (name) {
+      drop.addEventListener(name, function (event) { event.preventDefault(); drop.classList.add('over'); });
+    });
+    ['dragleave', 'drop'].forEach(function (name) {
+      drop.addEventListener(name, function (event) { event.preventDefault(); drop.classList.remove('over'); });
+    });
+    drop.addEventListener('drop', function (event) {
+      var item = event.dataTransfer.files[0];
+      if (item) examine(item);
+    });
+  })();
+  </script>
+</body>
+</html>

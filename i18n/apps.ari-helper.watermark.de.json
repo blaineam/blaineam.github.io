@@ -1,0 +1,14 @@
+{
+  "_meta.description": "Prüfen Sie, ob ein Bild die unsichtbare Markierung trägt, die Ari Helper seinen erzeugten Bildern hinzufügt. Läuft vollständig im Browser – nichts wird hochgeladen.",
+  "_title": "Auf Aris Markierung prüfen",
+  "back": "← Ari Helper",
+  "blocks-agree": "der Blöcke stimmen überein",
+  "caveat": "Eine gefundene Markierung ist verlässlich: Das gesuchte Muster entsteht nicht zufällig, ein Bild mit gemeldeter Ari-Markierung trägt sie also wirklich. Wird <em>keine</em> Markierung gefunden, sagt das deutlich weniger. Starke Kompression, Zuschneiden, Skalieren und Screenshots zerstören sie alle, und über Bilder aus anderen Werkzeugen sagt dies nichts aus. Es ist auch keine Signatur – es zeigt, dass ein Bild von Ari stammt, nicht wer es gemacht hat.",
+  "drop": "Bild hierher ziehen oder klicken, um eines zu wählen",
+  "explain-found": "Dieses Bild trägt die unsichtbare Markierung, die Ari Helper seinen erzeugten Bildern hinzufügt.",
+  "explain-missing": "Dieses Bild trägt die Markierung nicht – lesen Sie aber den Hinweis unten, bevor Sie daraus etwas schließen.",
+  "lede": "Ari Helper kann Bildern, die es erzeugt, eine unsichtbare Markierung hinzufügen. Ziehen Sie eines hierher, um zu sehen, ob es diese Markierung trägt. Das Bild verlässt Ihr Gerät nicht – die Prüfung läuft auf dieser Seite.",
+  "title": "Auf Aris Markierung prüfen",
+  "verdict-found": "Aris Markierung ist vorhanden",
+  "verdict-missing": "Keine Markierung gefunden"
+}
