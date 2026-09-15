@@ -47,6 +47,7 @@ const NEVER_TRANSLATE = [
   'Files', 'Spotlight', 'Time Machine', 'Family Sharing', 'Game Center', 'iCloud Keychain',
   'App Store', 'Shortcuts', 'App Intents', 'QuickLook', 'Face ID', 'Touch ID',
   'Blaine Miller', 'Aperion', 'Monkr', 'Draw Things', 'Ollama', 'OpenAI',
+  'Studio Voices', 'Personal Voice', 'Prepare for Offline', 'Smart Stack', 'Turbo',
   'Anthropic', 'Google Gemini', 'Grok', 'XAI', 'AWS Bedrock', 'MLX', 'MOA', 'MIL',
   'iMessage', 'iCloud', 'Benro Polaris', 'Canon', 'TestFlight', 'GitHub', 'LinkedIn',
 ];
