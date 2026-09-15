@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mi Speaks - Voice Communication Made Easy</title>
-  <meta name="description" content="Mi Speaks empowers communication through innovative voice technology, making it easier than ever to express yourself.">
-  <meta property="og:title" content="Mi Speaks - Voice Communication Made Easy">
-  <meta property="og:description" content="Mi Speaks empowers communication through innovative voice technology, making it easier than ever to express yourself.">
+  <title>Mi Speaks — Neural voices that read anything aloud, on your iPhone</title>
+  <meta name="description" content="Mi Speaks reads articles, books and PDFs aloud in twenty-eight neural Studio Voices generated entirely on your iPhone. Offline, private, and the spoken word highlighted on the page it came from.">
+  <meta property="og:title" content="Mi Speaks — Neural voices that read anything aloud, on your iPhone">
+  <meta property="og:description" content="Twenty-eight neural Studio Voices, generated on your iPhone. Nothing is uploaded. Hear them for yourself.">
   <meta property="og:type" content="app">
   <meta property="og:url" content="https://wemiller.com/apps/mi-speaks/">
   <meta property="og:image" content="https://wemiller.com/apps/mi-speaks/assets/images/poster.jpg">
@@ -41,6 +41,27 @@
     .voice-sample figcaption span { font-size: .8rem; opacity: .6; }
     .voice-sample audio { width: 100%; }
     .voice-samples-note { max-width: 700px; margin: 1.75rem auto 0; text-align: center; font-size: .9rem; opacity: .65; }
+
+    /* Secondary hero CTA — sends people to the samples before the App Store,
+       because hearing it is the pitch. */
+    .btn-secondary {
+      display: inline-flex; align-items: center; gap: .5rem;
+      padding: 0.9rem 1.6rem; border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.55);
+      color: #fff; text-decoration: none; font-weight: 600;
+      transition: background .2s ease, border-color .2s ease, transform .2s ease;
+    }
+    .btn-secondary:hover { background: rgba(255,255,255,0.14); border-color: #fff; transform: translateY(-2px); }
+
+    .section-note { max-width: 620px; margin: .6rem auto 0; font-size: .95rem; opacity: .7; }
+
+    /* The device renders come out of Monkr on a transparent canvas, so they
+       float instead of sitting in a card with its own background. */
+    .hero-phone img, .magazine-image img { background: none; box-shadow: none; }
+    .screenshots-grid .screenshot-item {
+      background: none; box-shadow: none; overflow: visible; margin: 0;
+    }
+    .screenshots-grid .screenshot-item:hover { transform: translateY(-8px); box-shadow: none; }
   </style>
   <link rel="alternate" hreflang="x-default" href="https://wemiller.com/apps/mi-speaks/">
   <link rel="alternate" hreflang="en" href="https://wemiller.com/apps/mi-speaks/">
@@ -61,6 +82,7 @@
       <a href="../" class="nav-logo" data-i18n="apps.2d61f2">← Apps</a>
       <button class="mobile-menu-toggle">☰</button>
       <ul class="nav-links">
+        <li><a href="#hear-it" class="nav-link" data-i18n="hear-it.51c9d3">Hear It</a></li>
         <li><a href="#whats-new" class="nav-link" data-i18n="what-s-new.a2efe2">What's New</a></li>
         <li><a href="#features" class="nav-link" data-i18n="features.fc338f">Features</a></li>
         <li><a href="#screenshots" class="nav-link" data-i18n="screenshots.597b63">Screenshots</a></li>
@@ -75,20 +97,21 @@
     <div class="hero-content">
       <div class="hero-text">
         <p class="hero-subtitle" data-i18n="mi-speaks.6c9a62">🎤 Mi Speaks</p>
-        <h1 class="hero-title" data-i18n="listen-to-any-written.a4dc7c">Listen to Any Written Content</h1>
-        <p class="hero-description" data-i18n="mi-speaks-lets-you.a4a62d">
-          Mi Speaks lets you listen and read along to various media on your devices. Transform any text into natural-sounding speech with powerful features and customization.
+        <h1 class="hero-title" data-i18n="a-voice-you-will.2a89c7">A voice you will actually want to listen to</h1>
+        <p class="hero-description" data-i18n="mi-speaks-reads-articles.2bbb34">
+          Mi Speaks reads articles, books and PDFs aloud in twenty-eight neural Studio Voices — generated entirely on your iPhone. No account, no upload, no signal. Follow along word by word, right on the page it came from.
         </p>
         <span class="os-ready-badge" data-i18n-html="ready-for-ios-27.75e4d6"><span class="badge-icon">✓</span> Ready for iOS 27 / iPadOS 27 / watchOS 27</span>
         <div class="hero-cta">
           <a href="https://apps.apple.com/us/app/mi-speaks/id6451395651" class="btn-buy" target="_blank" rel="noopener noreferrer" data-i18n="download-now.6d56a8">Download Now</a>
+          <a href="#hear-it" class="btn-secondary" data-i18n="hear-a-voice-first.af2287">Hear a voice first</a>
         </div>
       </div>
       <div class="hero-image">
         <div class="hero-phone">
-          <!-- Replace with actual app screenshot -->
-          <img src="assets/images/icon.png" alt="Mi Speaks App Icon" class="phone-mockup"
-               onerror="this.src='assets/images/hero-mockup.png'; this.onerror=function(){this.style.background='linear-gradient(135deg, #ff69f0, #ff1ad9)'; this.style.minHeight='600px';};">
+          <img src="assets/images/device-reader.webp"
+               alt="Mi Speaks on an iPhone, reading a book on its own PDF page with the spoken word highlighted"
+               class="phone-mockup" loading="eager">
         </div>
       </div>
     </div>
@@ -100,6 +123,7 @@
       <p class="section-subtitle" data-i18n="studio-voices.378ad1">Studio Voices</p>
       <h2 data-i18n="hear-it-for-yourself.5398d7">Hear it for yourself</h2>
       <p data-i18n="twenty-eight-neural-voices.eb2f6a">Twenty-eight neural voices, generated entirely on your iPhone. Nothing is uploaded, and they work in airplane mode.</p>
+      <p class="section-note" data-i18n="five-of-them-same.82d47a">Five of them, same passage, straight off a phone. Press play.</p>
     </div>
 
     <div class="voice-samples">
@@ -138,40 +162,40 @@
   <section id="whats-new" class="section">
     <div class="section-header">
       <p class="section-subtitle" data-i18n="just-shipped.243f10">Just Shipped</p>
-      <h2 data-i18n="what-s-new-in.0b488f">What's New in Mi Speaks</h2>
-      <p data-i18n="spotlight-search-shortcuts-audio.3e80f9">Spotlight search, Shortcuts audio rendering, a Resume Reading widget, and an Apple Watch reader</p>
+      <h2 data-i18n="mi-speaks-2-0.1b81e7">Mi Speaks 2.0</h2>
+      <p data-i18n="neural-studio-voices-imported.d06009">Neural Studio Voices, imported books on their own page, chapter navigation, and audio prepared before you need it</p>
     </div>
 
     <div class="feature-grid">
       <div class="feature-card">
-        <div class="feature-icon">🔍</div>
-        <h3 class="feature-title" data-i18n="find-speeches-in-spotlight.7f6ff1">Find Speeches in Spotlight</h3>
-        <p class="feature-description" data-i18n="saved-speeches-are-indexed.0c5e42">
-          Saved speeches are indexed by their content, so a phrase you remember finds the speech. Tap a result and you land right back in it, ready to play.
+        <div class="feature-icon">🎙️</div>
+        <h3 class="feature-title" data-i18n="studio-voices.378ad1">Studio Voices</h3>
+        <p class="feature-description" data-i18n="twenty-eight-neural-voices.899e23">
+          Twenty-eight neural voices, American and British, produced on your iPhone by an eighty-two-million-parameter model. They breathe, they phrase, and they stop sounding like a phone reading to you. Part of Premium, with a one-time download.
         </p>
       </div>
 
       <div class="feature-card">
-        <div class="feature-icon">🗣️</div>
-        <h3 class="feature-title" data-i18n="shortcuts-siri.7a3d08">Shortcuts &amp; Siri</h3>
-        <p class="feature-description" data-i18n="import-text-pdfs-or.69f1ec">
-          Import text, PDFs, or photos (with text recognition) into saved speeches; play, pause, and resume from automations; switch voices and playback speed; render any text to an audio file fully offline; and export a sentence range as audio — every action chainable in Shortcuts.
+        <div class="feature-icon">📖</div>
+        <h3 class="feature-title" data-i18n="your-book-on-its.3a3c23">Your book, on its own page</h3>
+        <p class="feature-description" data-i18n="import-a-pdf-and.05fcc5">
+          Import a PDF and read it where it actually lives: the real page, the real layout, with the spoken word lit up exactly where it sits. Turn it off and you are back to plain sentences — it is a mode, not a takeover.
         </p>
       </div>
 
       <div class="feature-card">
-        <div class="feature-icon">🧩</div>
-        <h3 class="feature-title" data-i18n="resume-reading-widget.6bda23">Resume Reading Widget</h3>
-        <p class="feature-description" data-i18n="home-screen-and-lock.e55fb0">
-          Home screen and lock screen widgets show your last speech and how far you got, and tap straight back into playback. Surfaces in the Smart Stack while a speech is partially read.
+        <div class="feature-icon">🔖</div>
+        <h3 class="feature-title" data-i18n="jump-to-any-chapter.6b7753">Jump to any chapter</h3>
+        <p class="feature-description" data-i18n="mi-speaks-reads-a.07be02">
+          Mi Speaks reads a PDF's own table of contents, and when a book has none it finds the headings from the page layout. A four-hundred-page import becomes a list you can move around in.
         </p>
       </div>
 
       <div class="feature-card">
-        <div class="feature-icon">⌚</div>
-        <h3 class="feature-title" data-i18n="mi-speaks-on-apple.1a5933">Mi Speaks on Apple Watch</h3>
-        <p class="feature-description" data-i18n="a-standalone-watch-reader.3aaf1c">
-          A standalone watch reader with background audio — through the speaker or your Bluetooth headphones — that highlights each word as it's spoken. Progress syncs both ways, so your iPhone and watch resume each other seamlessly.
+        <div class="feature-icon">✈️</div>
+        <h3 class="feature-title" data-i18n="ready-before-you-are.0c350f">Ready before you are</h3>
+        <p class="feature-description" data-i18n="prepare-a-whole-document.dce128">
+          Prepare a whole document once and every sentence is already rendered to audio. It keeps playing with the screen locked, in a tunnel, on a plane — and it resumes where you left off on your iPhone, iPad or Apple Watch.
         </p>
       </div>
     </div>
@@ -188,9 +212,9 @@
     <div class="feature-grid">
       <div class="feature-card">
         <div class="feature-icon">🎙️</div>
-        <h3 class="feature-title" data-i18n="any-voice-on-your.c4d5fe">Any Voice on Your Device</h3>
-        <p class="feature-description" data-i18n="listen-using-any-voice.a73812">
-          Listen using any voice available on your device. Download even more voices in the Settings App for endless customization.
+        <h3 class="feature-title" data-i18n="studio-voices-or-any.a03d7c">Studio Voices, or any voice you own</h3>
+        <p class="feature-description" data-i18n="twenty-eight-neural-studio.78d344">
+          Twenty-eight neural Studio Voices, plus every system voice already on your device — including Apple's Enhanced and Premium downloads and your own Personal Voice. Mi Speaks tells you which is which, so you are never handed the worst one by default.
         </p>
       </div>
 
@@ -251,46 +275,45 @@
         </p>
       </div>
       <div class="magazine-image">
-        <!-- Replace with actual screenshot -->
-        <img src="assets/images/feature-1.png" alt="Listen to Content"
-             onerror="this.style.background='linear-gradient(135deg, #ff69f0, #ff1ad9)'; this.style.minHeight='400px'; this.style.display='block';">
+        <img src="assets/images/device-voices.webp"
+             alt="The Mi Speaks voice picker on an iPhone, showing the Studio Voices section" loading="lazy">
       </div>
     </div>
 
     <div class="magazine-section reverse">
       <div class="magazine-content">
-        <h2 data-i18n="premium-features-unlock-more.eba3ef">Premium Features Unlock More</h2>
-        <p data-i18n="get-unlimited-text-input.9c66ff">
-          Get unlimited text input, cross-device speech sync via iCloud Drive, saved speeches with playback positions,
-          and export your audio to files for use in other projects.
+        <h2 data-i18n="free-is-a-real.33ccd1">Free is a real app, not a demo</h2>
+        <p data-i18n="there-is-no-length.989103">
+          There is no length limit on the free tier. Paste a whole article, import a whole book, and listen to all of it
+          with any voice on your device — no trial countdown, no truncation, no paywall in the middle of a chapter.
+          Free keeps three saved speeches, each with its own place marked.
         </p>
-        <p data-i18n="turbo-mode-lets-you.9890fc">
-          Turbo mode lets you increase playback speed for faster listening. All at an affordable price that makes
-          premium text-to-speech accessible to everyone.
+        <p data-i18n="premium-adds-the-twenty.c581e1">
+          Premium adds the twenty-eight Studio Voices, an unlimited library synced across your devices, audio export,
+          and Turbo playback speeds. Monthly, yearly, or bought once and kept.
         </p>
       </div>
       <div class="magazine-image">
-        <!-- Replace with actual screenshot -->
-        <img src="assets/images/feature-2.png" alt="Premium Features"
-             onerror="this.style.background='linear-gradient(135deg, #ff1ad9, #ffa8ff)'; this.style.minHeight='400px'; this.style.display='block';">
+        <img src="assets/images/device-chapters.webp"
+             alt="Chapter navigation in Mi Speaks, listing the detected headings of an imported book" loading="lazy">
       </div>
     </div>
 
     <div class="magazine-section">
       <div class="magazine-content">
-        <h2 data-i18n="offline-always-ready.8f2f38">Offline & Always Ready</h2>
-        <p data-i18n="works-completely-offline-once.fe7460">
-          Works completely offline once you've downloaded your preferred voices. Listen to your content
-          anywhere without worrying about internet connectivity or data usage.
+        <h2 data-i18n="nothing-leaves-your-device.a74da2">Nothing leaves your device</h2>
+        <p data-i18n="every-voice-runs-locally.1555ee">
+          Every voice runs locally. Your text is never uploaded, never sent to a server to be spoken, and never needs
+          an account — which also means Mi Speaks works the same in airplane mode as it does on Wi-Fi.
         </p>
-        <p data-i18n="follow-along-with-highlighted.a6cb7e">
-          Follow along with highlighted text as Mi Speaks reads, making it easier to understand and retain information.
+        <p data-i18n="tap-prepare-for-offline.b51ff4">
+          Tap Prepare for Offline and a whole document is rendered ahead of time, so a long read keeps playing with the
+          screen locked, underground, or somewhere with no signal at all.
         </p>
       </div>
       <div class="magazine-image">
-        <!-- Replace with actual screenshot -->
-        <img src="assets/images/feature-3.png" alt="Offline Ready"
-             onerror="this.style.background='linear-gradient(135deg, #ff69f0, #ffa8ff)'; this.style.minHeight='400px'; this.style.display='block';">
+        <img src="assets/images/device-editor.webp"
+             alt="The Mi Speaks editor on an iPhone with a Studio Voice selected and Prepare for Offline ready" loading="lazy">
       </div>
     </div>
   </section>
@@ -300,31 +323,34 @@
     <div class="section-header">
       <p class="section-subtitle" data-i18n="see-it-in-action.8c8d28">See It In Action</p>
       <h2 data-i18n="screenshots.597b63">Screenshots</h2>
-      <p data-i18n="discover-mi-speaks-intuitive.101211">Discover Mi Speaks' intuitive interface</p>
+      <p data-i18n="iphone-ipad-and-apple.038fee">iPhone, iPad and Apple Watch — the same library, the same place in it</p>
     </div>
 
     <div class="screenshots-grid">
-      <!-- Replace these with actual screenshots -->
-      <div class="screenshot-item">
-        <img src="assets/images/screenshot-1.png" alt="Screenshot 1"
-             onerror="this.style.background='linear-gradient(135deg, #4facfe, #00f2fe)'; this.style.minHeight='500px'; this.style.display='block';">
-      </div>
-      <div class="screenshot-item">
-        <img src="assets/images/screenshot-2.png" alt="Screenshot 2"
-             onerror="this.style.background='linear-gradient(135deg, #00f2fe, #43e97b)'; this.style.minHeight='500px'; this.style.display='block';">
-      </div>
-      <div class="screenshot-item">
-        <img src="assets/images/screenshot-3.png" alt="Screenshot 3"
-             onerror="this.style.background='linear-gradient(135deg, #43e97b, #4facfe)'; this.style.minHeight='500px'; this.style.display='block';">
-      </div>
-      <div class="screenshot-item">
-        <img src="assets/images/screenshot-4.png" alt="Screenshot 4"
-             onerror="this.style.background='linear-gradient(135deg, #4facfe, #00f2fe)'; this.style.minHeight='500px'; this.style.display='block';">
-      </div>
-      <div class="screenshot-item">
-        <img src="assets/images/screenshot-watch.png" alt="Mi Speaks on Apple Watch, reading along word by word"
-             onerror="this.style.background='linear-gradient(135deg, #00f2fe, #4facfe)'; this.style.minHeight='500px'; this.style.display='block';">
-      </div>
+      <figure class="screenshot-item">
+        <img src="assets/images/frame-iphone-editor.webp" loading="lazy"
+             alt="Mi Speaks on iPhone: sample text in the editor with a Studio Voice selected">
+      </figure>
+      <figure class="screenshot-item">
+        <img src="assets/images/frame-iphone-voices.webp" loading="lazy"
+             alt="Mi Speaks on iPhone: the Studio Voices section of the voice picker">
+      </figure>
+      <figure class="screenshot-item">
+        <img src="assets/images/frame-iphone-page.webp" loading="lazy"
+             alt="Mi Speaks on iPhone: an imported book on its own page with the spoken word highlighted">
+      </figure>
+      <figure class="screenshot-item">
+        <img src="assets/images/frame-iphone-chapters.webp" loading="lazy"
+             alt="Mi Speaks on iPhone: the chapter list detected from an imported book">
+      </figure>
+      <figure class="screenshot-item">
+        <img src="assets/images/frame-ipad-page.webp" loading="lazy"
+             alt="Mi Speaks on iPad: a book on its own page, read along word by word">
+      </figure>
+      <figure class="screenshot-item">
+        <img src="assets/images/frame-watch-player.webp" loading="lazy"
+             alt="Mi Speaks on Apple Watch, highlighting each word as it is spoken">
+      </figure>
     </div>
   </section>
 
@@ -354,9 +380,10 @@
         <span class="faq-icon">▼</span>
       </button>
       <div class="faq-answer">
-        <p data-i18n="yes-mi-speaks-is.f1ab38">
-          Yes! Mi Speaks is fully offline compatible. Once you've downloaded voices through your device Settings,
-          you can listen to content anywhere without needing an internet connection.
+        <p data-i18n="yes-completely-every-voice.c29d4e">
+          Yes, completely. Every voice runs on the device — the system voices are already there, and the Studio Voices
+          are a one-time download you keep. Nothing needs a connection after that, and Prepare for Offline renders a
+          whole document ahead of time so a long read keeps playing with no signal at all.
         </p>
       </div>
     </div>
@@ -380,10 +407,11 @@
         <span class="faq-icon">▼</span>
       </button>
       <div class="faq-answer">
-        <p data-i18n="premium-unlocks-cross-device.f83740">
-          Premium unlocks cross-device speech sync via iCloud Drive, unlimited text input, saved speeches with playback positions,
-          the ability to share spoken text as audio files, and increased playback speed with Turbo mode. Available as monthly,
-          yearly subscriptions, or a lifetime purchase.
+        <p data-i18n="premium-adds-the-twenty.ec35ec">
+          Premium adds the twenty-eight neural Studio Voices, an unlimited library of saved speeches synced across your
+          devices via iCloud Drive, audio export to a file, and Turbo playback speeds. It is sold monthly, yearly, or as a
+          one-time lifetime purchase. Free is not time-limited and has no length limit: any text, any system voice, three
+          saved speeches.
         </p>
       </div>
     </div>
@@ -413,6 +441,35 @@
         </p>
       </div>
     </div>
+    <div class="faq-item">
+      <button class="faq-question">
+        <span data-i18n="what-are-studio-voices.a8efa6">What are Studio Voices, and why is there a download?</span>
+        <span class="faq-icon">▼</span>
+      </button>
+      <div class="faq-answer">
+        <p data-i18n="studio-voices-are-neural.3f3a44">
+          Studio Voices are neural voices: instead of stitching together recorded fragments, an eighty-two-million-parameter
+          model generates the waveform from the text, which is why the phrasing and breath sound human. The model and its
+          voice packs are about 325 MB, downloaded once over Wi-Fi and then kept on the device. Nothing is sent anywhere
+          afterwards — or during, beyond fetching the files themselves.
+        </p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        <span data-i18n="is-my-text-ever.1114b8">Is my text ever uploaded?</span>
+        <span class="faq-icon">▼</span>
+      </button>
+      <div class="faq-answer">
+        <p data-i18n="no-every-voice-system.4a3674">
+          No. Every voice, system and Studio alike, runs on your device, and Mi Speaks has no account to sign in to. If you
+          turn on Premium's library sync, your saved speeches travel through your own iCloud Drive — Apple's, not mine. I
+          never see them.
+        </p>
+      </div>
+    </div>
+
     <div class="faq-item">
       <button class="faq-question">
         <span data-i18n="is-mi-speaks-available.cc6f02">Is Mi Speaks available in the European Union?</span>
