@@ -104,5 +104,7 @@
   "with-ari-open-on.cf27f4": "Com o Ari aberto em dois dos seus dispositivos no mesmo Wi-Fi, uma conversa passa direto de um para o outro em cerca de um segundo, sem esperar o iCloud — anexos inclusive. O iCloud continua sendo a referência e ainda leva tudo o que a conexão local deixar passar.",
   "yes-when-using-local.7d1876": "Sim! Ao usar modelos locais no dispositivo ou o Ollama na sua rede, nenhum dado sai do seu dispositivo nem da sua rede local. O modo privado com bloqueio biométrico adiciona segurança extra para conversas sensíveis.",
   "yes-you-can-share.13d3cb": "Sim! Você pode compartilhar conversas como belas imagens ou arquivos HTML, perfeitos para compartilhar ideias, trechos de código ou conteúdo criativo com amigos e colegas.",
-  "your-conversations-are-now.0db54e": "Agora suas conversas podem ser encontradas pelo Spotlight do sistema — toque em um resultado para voltar direto para ela. Marque qualquer conversa como Privada e ela fica totalmente fora da busca, com suas mídias movidas para o armazenamento criptografado do Ari."
+  "your-conversations-are-now.0db54e": "Agora suas conversas podem ser encontradas pelo Spotlight do sistema — toque em um resultado para voltar direto para ela. Marque qualquer conversa como Privada e ela fica totalmente fora da busca, com suas mídias movidas para o armazenamento criptografado do Ari.",
+  "can-i-tell-whether.15df7c": "Dá para saber se uma imagem veio do Ari Helper?",
+  "yes-ari-helper-adds.f988c0": "Sim. O Ari Helper adiciona uma marca invisível às imagens que gera, na própria imagem e não em metadados que um novo salvamento apagaria, e ela resiste à compressão comum. <a href=\"watermark/\">Verifique uma imagem aqui</a> — roda no seu navegador e nada é enviado."
 }

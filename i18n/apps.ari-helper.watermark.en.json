@@ -1,0 +1,14 @@
+{
+  "_meta.description": "Check whether a picture carries the invisible mark Ari Helper adds to images it generates. Runs entirely in your browser — nothing is uploaded.",
+  "_title": "Check for Ari's mark",
+  "back": "← Ari Helper",
+  "blocks-agree": "of blocks agree",
+  "caveat": "A mark that is found is reliable: the pattern it looks for does not occur by chance, so a picture reporting Ari's mark really does carry it. A mark that is <em>not</em> found proves much less. Heavy compression, cropping, resizing and screenshots all destroy it, and this says nothing about pictures from any other tool. It is also not a signature — it shows a picture came from Ari, not who made it.",
+  "drop": "Drop a picture here, or click to choose one",
+  "explain-found": "This picture carries the invisible mark Ari Helper adds to images it generates.",
+  "explain-missing": "This picture does not carry the mark — but see the note below before concluding anything from that.",
+  "lede": "Ari Helper can add an invisible mark to pictures it generates. Drop one here to see whether it carries that mark. The picture never leaves your device — the check runs in this page.",
+  "title": "Check for Ari's mark",
+  "verdict-found": "Ari's mark is present",
+  "verdict-missing": "No mark found"
+}
