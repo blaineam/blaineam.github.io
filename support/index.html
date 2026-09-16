@@ -4,10 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Support future development - Blaine Miller</title>
-  <meta name="description" content="Haven, Blip and Glint are free — no ads, no tracking, no subscriptions. Help fund what comes next through GitHub Sponsors, Ko-fi or a one-time tip.">
+  <meta name="description" content="Haven, Blip, Glint and Lathe are free — no ads, no tracking, no subscriptions. Help fund what comes next through GitHub Sponsors, Ko-fi or a one-time tip.">
   <link rel="canonical" href="https://wemiller.com/support/">
   <meta property="og:title" content="Support future development - Blaine Miller">
-  <meta property="og:description" content="Haven, Blip and Glint are free — no ads, no tracking, no subscriptions. Help fund what comes next through GitHub Sponsors, Ko-fi or a one-time tip.">
+  <meta property="og:description" content="Haven, Blip, Glint and Lathe are free — no ads, no tracking, no subscriptions. Help fund what comes next through GitHub Sponsors, Ko-fi or a one-time tip.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://wemiller.com/support/">
   <meta property="og:image" content="https://wemiller.com/apps/apps-by-blaine-miller.jpg">
@@ -211,9 +211,10 @@
       text-align: center;
     }
 
+    /* Four free apps: two by two, never three and a lonely fourth. */
     .free-apps-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: var(--spacing-lg);
       margin-top: var(--spacing-xl);
       text-align: left;
@@ -331,9 +332,9 @@
   <!-- Hero + the three ways -->
   <section class="support-hero">
     <div class="support-container">
-      <p class="support-eyebrow" data-i18n="haven-blip-and-glint.daf41d">Haven, Blip and Glint are free</p>
+      <p class="support-eyebrow" data-i18n="haven-blip-glint-and.68c2fd">Haven, Blip, Glint and Lathe are free</p>
       <h1 class="support-title" data-i18n="support-future-development.921741">Support future development</h1>
-      <p class="support-intro" data-i18n="haven-blip-and-glint.e3647a">Haven, Blip and Glint are free — no ads, no tracking, no subscriptions. If they earn a place on your devices, you can help fund what comes next.</p>
+      <p class="support-intro" data-i18n="haven-blip-glint-and.dd4d14">Haven, Blip, Glint and Lathe are free — no ads, no tracking, no subscriptions. If they earn a place on your devices, you can help fund what comes next.</p>
 
       <div class="support-grid">
         <!-- GitHub Sponsors -->
@@ -406,6 +407,14 @@
         <span class="free-app-name">Glint</span>
         <span class="free-app-tagline" data-i18n="brightness-volume-for-any.a559eb">Brightness &amp; volume for any display</span>
         <span class="free-app-where" data-i18n="free-by-direct-download.0479d7">Free by direct download for the Mac</span>
+        <span class="free-app-cta" data-i18n="learn-more.140c43">Learn More →</span>
+      </a>
+
+      <a href="/apps/lathe/" class="free-app">
+        <span class="free-app-icon"><img src="/apps/lathe/assets/images/icon.png" alt="Lathe App Icon"></span>
+        <span class="free-app-name">Lathe</span>
+        <span class="free-app-tagline" data-i18n="open-source-mac-downloader.f2956f">Open-source Mac downloader and media engine</span>
+        <span class="free-app-where" data-i18n="free-and-open-source.361ac4">Free and open source, by direct download for the Mac</span>
         <span class="free-app-cta" data-i18n="learn-more.140c43">Learn More →</span>
       </a>
     </div>

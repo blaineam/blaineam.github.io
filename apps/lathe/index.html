@@ -1,0 +1,382 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lathe — media, turned down to spec</title>
+<meta name="description" content="A Swift media engine that runs entirely on the device: encoding, frames, tags, subtitles, chapters, AV1 and Flash, through the system frameworks, with no subprocesses. Free under Apache-2.0.">
+<link rel="canonical" href="https://wemiller.com/apps/lathe/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Lathe — media, turned down to spec">
+<meta property="og:description" content="A Swift media engine that runs entirely on the device: encoding, frames, tags, subtitles, chapters, AV1 and Flash, through the system frameworks, with no subprocesses. Free under Apache-2.0.">
+<meta property="og:url" content="https://wemiller.com/apps/lathe/">
+<meta property="og:image" content="https://wemiller.com/apps/lathe/media/icon.png">
+<meta name="twitter:card" content="summary">
+<meta name="theme-color" content="#16192b">
+<link rel="icon" type="image/png" href="media/icon-180.png">
+<link rel="apple-touch-icon" href="media/icon-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,500;0,6..96,700;0,6..96,800;0,6..96,900;1,6..96,500&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="lathe.css">
+</head>
+<body>
+<header class="masthead">
+  <div class="wrap">
+    <div class="issue-line">
+      <span>Vol. 0.13.0 &middot; September 2026</span>
+      <span>Swift 6 &middot; iOS 17 &middot; macOS 14 &middot; Apache-2.0</span>
+      <span>Measured, not claimed</span>
+    </div>
+    <div class="mast-row">
+      <a class="wordmark" href="index.html"><img src="media/icon-180.png" alt="" width="38" height="38">Lathe</a>
+      <nav aria-label="Pages"><ul class="contents-nav"><li><a href="index.html" aria-current="page">The Issue</a></li><li><a href="documentation.html">Documentation</a></li><li><a href="benchmarks.html">Benchmarks</a></li><li><a href="mac.html">Mac app</a></li><li><a href="sami.html">Sami</a></li><li><a href="https://github.com/blaineam/Lathe">GitHub</a></li></ul></nav>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<section class="cover">
+  <div class="wrap cover-grid">
+    <div>
+      <div class="kicker">The on-device issue</div>
+      <h1>Media, turned down <em>to spec.</em></h1>
+      <p class="dek">A Swift media engine that runs <b>entirely on the device</b> — no subprocesses, no server, no third-party runtime. The system frameworks do the work they were built for; Lathe is the careful layer on top. <b>Free, under Apache&nbsp;2.0.</b></p>
+      <div class="cover-actions">
+        <a class="btn amber" href="https://github.com/blaineam/Lathe/releases/latest/download/Lathe.dmg">Download the Mac app <small>free · notarized</small></a>
+        <a class="btn ghost" href="documentation.html">Read the documentation</a>
+      </div>
+      <p class="byline">Swift package &middot; 13 products &middot; iOS 17 and macOS 14 &middot; by Blaine Miller</p>
+    </div>
+    <figure class="plate">
+      <div class="dim">A FACING CUT</div>
+      <div class="frame"><img src="media/icon.png" alt="The Lathe icon: a silver workpiece seen end-on, a cutting tool at its edge, and an amber chip curling away." width="512" height="512"></div>
+      <figcaption>The mark is the operation the machine is named for — the work, the tool, and the chip coming off the cut.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="glance" aria-label="At a glance">
+  <div class="wrap">
+    <div class="stat"><div class="k">This issue</div><div class="v">0.13.0</div></div>
+    <div class="stat"><div class="k">Tests</div><div class="v">810</div></div>
+    <div class="stat"><div class="k">Products</div><div class="v">13<small>to choose from</small></div></div>
+    <div class="stat"><div class="k">Subprocesses</div><div class="v">Zero</div></div>
+  </div>
+</section>
+
+<section class="toc">
+  <div class="wrap">
+    <div class="kicker">In this issue</div>
+    <h2 class="section-title">Four ways in</h2>
+    <div class="toc-grid">
+      <a class="toc-item" href="documentation.html">
+        <span class="pg">Documentation</span>
+        <h3>Take only what you need</h3>
+        <p>Each module is its own product, with a sample for every one — and every sample compiles.</p>
+      </a>
+      <a class="toc-item" href="benchmarks.html">
+        <span class="pg">Benchmarks</span>
+        <h3>Against ffmpeg, and the rest</h3>
+        <p>Speed, CPU, size and quality in one table, including the rows where Lathe loses.</p>
+      </a>
+      <a class="toc-item" href="mac.html">
+        <span class="pg">The Mac app</span>
+        <h3>A downloader, built on it</h3>
+        <p>Paste a hundred links or browse signed in. Free, open source, and notarized.</p>
+      </a>
+      <a class="toc-item" href="sami.html">
+        <span class="pg">Sami</span>
+        <h3>The app it was built for</h3>
+        <p>Compression and conversion for iPhone, iPad and Mac, on the App&nbsp;Store.</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="feature">
+  <div class="wrap">
+    <div class="feature-head">
+      <div>
+        <div class="kicker">Why it exists</div>
+        <h2 class="section-title">Porting the C tools is the wrong answer</h2>
+      </div>
+      <p class="standfirst">Most media tooling on Apple platforms is a command-line binary behind a process spawn. That works on a desktop and cannot work on a phone.</p>
+    </div>
+    <div class="columns">
+      <p>On an iPhone there is no <code>fork</code> and no <code>exec</code>. A media feature that shells out to ffmpeg is a feature the iPhone version will never have, and the usual response is to port the C tools and ship them inside the app — megabytes of codecs, licences to audit, and a second copy of work the device already knows how to do.</p>
+      <p>Because it does know how. ImageIO writes HEIC, AVIF, JPEG, PNG, GIF and TIFF. AVFoundation reads containers without decoding them and extracts frames. VideoToolbox encodes H.264 and HEVC on the media engine at a constant quality. Vision reads text. None of it costs a licence, and most of it runs in silicon built for the job.</p>
+      <blockquote class="pull">Lathe is the thin, well-tested layer over those frameworks — plus the few libraries that fill the gaps they really leave.<cite>The design, in one sentence</cite></blockquote>
+      <p>The gaps are real and there are three. Nothing Apple ships writes <b>WebP</b>, so libwebp is compiled in from source. Nothing writes <b>MP3</b>, so LAME ships as its own replaceable framework, as its licence asks. And no Apple chip encodes <b>AV1</b>, so SVT-AV1 runs on the CPU in a product of its own, for the apps that want it.</p>
+      <p>Everything else is the system doing the work it was built for — asked what it can do rather than assumed, reporting progress through one channel that can also say stop, and never overwriting a file until the new one is whole.</p>
+    </div>
+  </div>
+</section>
+
+<section class="night">
+  <div class="wrap">
+    <div class="feature-head">
+      <div>
+        <div class="kicker">Fig. 1 — see it</div>
+        <h2 class="section-title">The same picture, four ways</h2>
+      </div>
+      <p class="standfirst">Drag the handle. Left is the lossless original; right is what Lathe wrote. Start at the setting you would ship — look for the damage, then look at the size.</p>
+    </div>
+
+    <div class="pickers">
+      <div class="segmented" id="tiers" role="group" aria-label="Quality"></div>
+      <div class="segmented" id="formats" role="group" aria-label="Format"></div>
+    </div>
+
+    <figure class="compare" id="compare">
+      <img id="before" src="media/comparison-original.png" alt="The test card, uncompressed" width="1440" height="900">
+      <div class="after"><img id="afterImage" src="media/comparison-avif-visually-lossless.avif" alt="The test card after compression" width="1440" height="900"></div>
+      <div class="handle" aria-hidden="true"></div>
+      <div class="grip" aria-hidden="true">◀▶</div>
+      <span class="tag left" id="beforeLabel">PNG original</span>
+      <span class="tag right" id="afterLabel">AVIF</span>
+    </figure>
+    <input class="compare-range" id="split" type="range" min="0" max="100" value="50" aria-label="Reveal more of the compressed image">
+    <p class="fig-caption">Fig. 1 — a generated test card, built from what codecs find hardest: a slow gradient that bands, fine texture that smears, hard type that rings, and saturated edges that bleed. <b>Every size is the real size of the real file.</b></p>
+    <p class="verdict" id="savingLine">Every figure here is the real size of the real file, written by the encoder that produced it.</p>
+  </div>
+</section>
+
+<section class="feature">
+  <div class="wrap">
+    <div class="feature-head">
+      <div>
+        <div class="kicker">The departments</div>
+        <h2 class="section-title">What it does</h2>
+      </div>
+      <p class="standfirst">Every module is its own library product, so an app links exactly what it uses — and an App&nbsp;Store target never links what it should not.</p>
+    </div>
+    <div class="depts">
+      <div class="dept"><div class="code">VIDEO</div><h3>Probe, frames, transcode</h3><p>Container headers without decoding, stills at any time or count, and H.264 or HEVC on the media engine with chapters kept.</p><span class="product">LatheVideo</span></div>
+      <div class="dept"><div class="code">IMAGE</div><h3>Stills and animations</h3><p>HEIC, AVIF, JPEG, PNG, TIFF, GIF and WebP — still or animated — with the device asked what it can write first.</p><span class="product">LatheImage</span></div>
+      <div class="dept"><div class="code">AUDIO</div><h3>Loudness and codecs</h3><p>AAC, ALAC, Opus and FLAC, a mean volume that matches the familiar filter, and an audibility check that stops early.</p><span class="product">LatheAudio</span></div>
+      <div class="dept"><div class="code">META</div><h3>Tags, chapters, subtitles</h3><p>One model over iTunes atoms, ID3, EXIF and PDF; chapter tracks written in; SubRip and WebVTT muxed as real tracks.</p><span class="product">LatheMeta</span></div>
+      <div class="dept"><div class="code">DOC</div><h3>PDFs and comics</h3><p>Reorder, merge and recompress PDF and CBZ pages, add a searchable text layer, and turn a folder of frames into a book.</p><span class="product">LatheDoc</span></div>
+      <div class="dept"><div class="code">AV1</div><h3>AV1, on the CPU</h3><p>SVT-AV1 into MP4, carrying rotation, colour and HDR, for the apps that want the smallest files and can wait for them.</p><span class="product">LatheAV1</span></div>
+      <div class="dept"><div class="code">MP3</div><h3>MP3, replaceably</h3><p>LAME as its own dynamic framework, so the LGPL is kept where it belongs and a user can swap it.</p><span class="product">LatheMP3</span></div>
+      <div class="dept"><div class="code">SWF</div><h3>Flash, recovered</h3><p>The images and sounds a Flash movie stores, extracted as files — and what it draws, rendered by a bundled Ruffle.</p><span class="product">LatheSWF · LatheSWFRender</span></div>
+      <div class="dept"><div class="code">LOOKUP</div><h3>Titles and artwork</h3><p>TMDb and OpenSubtitles behind one protocol, with a release-name parser. The key is always the caller's own.</p><span class="product">LatheLookup</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="feature">
+  <div class="wrap">
+    <div class="feature-head">
+      <div>
+        <div class="kicker">Fig. 2 — measured</div>
+        <h2 class="section-title">Faster where it counts, and honest where it isn't</h2>
+      </div>
+      <p class="standfirst">The same work through Lathe and through the command-line tool it replaces, on the same Mac. The full table carries CPU, size and quality too.</p>
+    </div>
+    <div class="figure">
+      <p class="figure-label"><b>Fig. 2</b> — wall-clock ratio, Lathe against each tool. Grey rows are where Lathe is slower.</p>
+      <div class="bars"><div class="bar-row"><div class="name">Probe a 1080p file (duration, tracks, codecs)</div><div class="bar-track"><div class="bar-fill" style="width:100.0%">108.7× faster</div></div><div class="value">vs ffprobe</div></div><div class="bar-row"><div class="name">Write title and author into a JPEG</div><div class="bar-track"><div class="bar-fill" style="width:25.6%">7.1× faster</div></div><div class="value">vs exiftool</div></div><div class="bar-row"><div class="name">1080p30 5 s → VP9</div><div class="bar-track"><div class="bar-fill" style="width:23.3%">5.9× faster</div></div><div class="value">vs ffmpeg −c:v libvpx-vp9</div></div><div class="bar-row"><div class="name">HEVC transcode, 1080p30, 5 s</div><div class="bar-track"><div class="bar-fill" style="width:19.4%">4.1× faster</div></div><div class="value">vs ffmpeg −c:v libx265 −preset medium</div></div><div class="bar-row"><div class="name">AAC encode, 10 s stereo 44.1 kHz</div><div class="bar-track"><div class="bar-fill" style="width:17.2%">3.2× faster</div></div><div class="value">vs ffmpeg −c:a aac</div></div><div class="bar-row"><div class="name">1080p30 5 s → AV1</div><div class="bar-track"><div class="bar-fill" style="width:13.9%">2.1× faster</div></div><div class="value">vs ffmpeg −c:v libsvtav1</div></div></div>
+      <p class="chart-note">Drawn on a square-root scale so the largest ratio does not flatten the rest; the figure on each bar is the real one. <a href="benchmarks.html">Every row, with its caveats →</a></p>
+    </div>
+  </div>
+</section>
+
+<section class="feature">
+  <div class="wrap">
+    <div class="feature-head">
+      <div>
+        <div class="kicker">A detail worth the space</div>
+        <h2 class="section-title">The audibility cliff</h2>
+      </div>
+      <p class="standfirst">Mean volume over a whole file is how most tools answer <em>does this have sound?</em> — and it is quietly wrong.</p>
+    </div>
+    <div class="two-up">
+      <div>
+        <div class="prose">
+          <p>Ten minutes containing two seconds of speech averages about <b>−45&nbsp;dBFS</b>: by that number, indistinguishable from a file with nothing in it. That is not a corner case. It is an ordinary phone video with one sentence in it.</p>
+          <p>So Lathe answers the question the caller has. <code>meanVolumeDB</code> reports the familiar statistic, so existing thresholds keep working; <code>hasAudibleAudio</code> reads short windows and <b>returns the moment it knows</b>. A loud file is decided in its first second.</p>
+        </div>
+        <pre><code><span class="c">// A measurement, and a decision that stops as soon as it has an answer.</span>
+<span class="k">let</span> volume = <span class="k">try</span> <span class="k">await</span> LoudnessProbe().meanVolumeDB(url: source)
+<span class="k">let</span> audible = <span class="k">try</span> <span class="k">await</span> LoudnessProbe().hasAudibleAudio(url: source)
+
+<span class="c">// Re-encoding a lossy source is refused unless asked for.</span>
+<span class="k">let</span> outcome = <span class="k">try</span> <span class="k">await</span> AudioTranscoder().transcode(
+    source: source, to: out, codec: .aac, quality: .quality(0.5))</code></pre>
+      </div>
+      <aside class="spec" aria-label="Specifications">
+        <h3>Specifications</h3>
+        <dl>
+          <dt>Version</dt><dd>0.13.0</dd>
+          <dt>Platforms</dt><dd>iOS 17 · macOS 14</dd>
+          <dt>Language</dt><dd>Swift 6</dd>
+          <dt>Licence</dt><dd>Apache-2.0</dd>
+          <dt>Runtime dependencies</dt><dd>None</dd>
+          <dt>Subprocesses</dt><dd>None</dd>
+          <dt>Compiled in</dt><dd>libwebp</dd>
+          <dt>Separate products</dt><dd>LAME · SVT-AV1 · Ruffle</dd>
+          <dt>Tests</dt><dd>810</dd>
+        </dl>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<section class="feature">
+  <div class="wrap">
+    <div class="feature-head">
+      <div>
+        <div class="kicker">Install</div>
+        <h2 class="section-title">One line, then only what you use</h2>
+      </div>
+      <p class="standfirst">Add the package, then depend on the products your target needs. The <code>Lathe</code> umbrella re-exports the media modules and deliberately leaves out anything that downloads, needs a licence decision, or runs on the CPU for minutes.</p>
+    </div>
+    <div class="figure">
+<pre><code><span class="c">// Package.swift</span>
+.package(url: <span class="s">"https://github.com/blaineam/Lathe.git"</span>, from: <span class="s">"0.13.0"</span>)
+
+<span class="c">// then, per target</span>
+.product(name: <span class="s">"LatheVideo"</span>, package: <span class="s">"Lathe"</span>),
+.product(name: <span class="s">"LatheAV1"</span>, package: <span class="s">"Lathe"</span>)</code></pre>
+    </div>
+  </div>
+</section>
+
+<section class="ad" aria-label="Advertisement">
+  <div class="wrap">
+    <div class="ad-label">Advertisement</div>
+    <div class="ad-card ad-sami">
+      <div>
+        <div class="kicker">From the same workshop</div>
+        <h2>Sami. <em>Your library, lighter.</em></h2>
+        <p>Every capability on this page exists because Sami needed it on a phone, offline, without spawning anything. Sami compresses exactly the photos, videos and PDFs you choose — with a side-by-side preview before anything is committed.</p>
+        <ul class="ad-list">
+          <li>iPhone, iPad and Mac, one purchase</li>
+          <li>HEIF and JPEG for photos, HEVC and H.264 for video</li>
+          <li>Watched folders, Shortcuts and Siri</li>
+          <li>Nothing uploaded — it runs on your device</li>
+        </ul>
+        <div class="cover-actions">
+          <a class="btn" href="https://apps.apple.com/us/app/sami-media-optimizer/id6758907995">Download on the App&nbsp;Store</a>
+          <a class="btn ghost" href="https://wemiller.com/apps/sami/">See what Sami does</a>
+        </div>
+        <p class="fine">Lathe is free and always will be. Sami is how the work is paid for.</p>
+      </div>
+      <div class="ad-art"><img src="https://wemiller.com/apps/sami/assets/images/icon.png" alt="The Sami app icon: a white shark on green." width="250" height="250"></div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<script>
+// Fig. 1 is driven by the manifest the encoder wrote, so the numbers on the
+// page cannot drift from the files beside them. If it fails to load, the
+// slider still works; it just cannot label the sizes.
+(function () {
+  const compare = document.getElementById("compare");
+  if (!compare) return;
+  const afterImage = document.getElementById("afterImage");
+  const afterLabel = document.getElementById("afterLabel");
+  const beforeLabel = document.getElementById("beforeLabel");
+  const range = document.getElementById("split");
+  const formats = document.getElementById("formats");
+  const tiers = document.getElementById("tiers");
+  const savingLine = document.getElementById("savingLine");
+
+  const setSplit = (percent) => {
+    const clamped = Math.max(0, Math.min(100, percent));
+    compare.style.setProperty("--split", clamped + "%");
+    range.value = String(Math.round(clamped));
+  };
+  setSplit(50);
+  const fromEvent = (event) => {
+    const box = compare.getBoundingClientRect();
+    return ((event.clientX - box.left) / box.width) * 100;
+  };
+  let dragging = false;
+  compare.addEventListener("pointerdown", (e) => { dragging = true; compare.setPointerCapture(e.pointerId); setSplit(fromEvent(e)); });
+  compare.addEventListener("pointermove", (e) => { if (dragging) setSplit(fromEvent(e)); });
+  compare.addEventListener("pointerup", () => { dragging = false; });
+  range.addEventListener("input", () => setSplit(Number(range.value)));
+
+  const kb = (n) => (n / 1024).toFixed(1) + " kB";
+  fetch("media/comparison.json")
+    .then((r) => (r.ok ? r.json() : Promise.reject(r.status)))
+    .then((manifest) => {
+      beforeLabel.textContent = "PNG original · " + kb(manifest.originalBytes);
+      let tier = manifest.tiers[0];
+      let format = "AVIF";
+      const entryFor = (t, f) => manifest.encodings.find((e) => e.tier === t && e.label === f);
+      const render = () => {
+        const entry = entryFor(tier, format) || manifest.encodings.find((e) => e.tier === tier && e.displayable);
+        if (!entry) return;
+        format = entry.label;
+        afterImage.src = "media/" + entry.file;
+        afterLabel.textContent = entry.label + " · " + kb(entry.bytes);
+        const saved = Math.round((1 - entry.bytes / manifest.originalBytes) * 100);
+        const lead = entry.tier === manifest.tiers[0]
+          ? "At the setting you would ship, <b>" + entry.label + "</b> is "
+          : "Told to stop caring, <b>" + entry.label + "</b> is ";
+        savingLine.innerHTML = lead + kb(entry.bytes) + " against the original's " +
+          kb(manifest.originalBytes) + " — <b>" + saved + "% smaller</b>.";
+        for (const b of tiers.children) b.setAttribute("aria-pressed", String(b.dataset.tier === tier));
+        for (const b of formats.children) {
+          b.setAttribute("aria-pressed", String(b.dataset.format === format));
+          const e = entryFor(tier, b.dataset.format);
+          if (e) b.textContent = b.dataset.format + " · " + kb(e.bytes);
+        }
+      };
+      for (const name of manifest.tiers) {
+        const b = document.createElement("button");
+        b.type = "button"; b.dataset.tier = name; b.textContent = name;
+        b.addEventListener("click", () => { tier = name; render(); });
+        tiers.appendChild(b);
+      }
+      const seen = [];
+      for (const entry of manifest.encodings) {
+        if (seen.includes(entry.label)) continue;
+        seen.push(entry.label);
+        const b = document.createElement("button");
+        b.type = "button"; b.dataset.format = entry.label; b.textContent = entry.label;
+        if (entry.displayable) {
+          b.addEventListener("click", () => { format = entry.label; render(); });
+        } else {
+          // Its size is a real result, and no browser shows it; say so
+          // rather than leave a pane silently empty.
+          b.disabled = true;
+          b.title = "No browser displays HEIC — the size is measured, the picture cannot be shown here.";
+        }
+        formats.appendChild(b);
+      }
+      render();
+    })
+    .catch(() => {});
+})();
+</script>
+<footer class="colophon">
+  <div class="wrap">
+    <div>
+      <h4>Colophon</h4>
+      <p>Lathe 0.13.0, an on-device media engine for Apple platforms, free under the Apache&nbsp;2.0 licence.</p>
+      <p>Set in Bodoni Moda, Hanken Grotesk and JetBrains Mono. Every page is generated from the repository by <code>docs/build.py</code>; every number on it was measured, and every code sample compiles.</p>
+    </div>
+    <div>
+      <h4>Lathe</h4>
+      <p><a href="documentation.html">Documentation</a></p>
+      <p><a href="benchmarks.html">Benchmarks</a></p>
+      <p><a href="mac.html">The Mac app</a></p>
+      <p><a href="https://github.com/blaineam/Lathe">Source on GitHub</a></p>
+    </div>
+    <div>
+      <h4>Elsewhere</h4>
+      <p><a href="https://wemiller.com/apps/sami/">Sami, the app it powers</a></p>
+      <p><a href="https://wemiller.com/apps/">More apps by Blaine Miller</a></p>
+      <p><a href="https://wemiller.com/support/">Support the free apps</a></p>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

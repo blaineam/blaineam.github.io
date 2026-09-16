@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Lathe Mac app — a free downloader</title>
+<meta name="description" content="Paste one link or a hundred, or browse signed in and take what is on the page. A free, open-source Mac downloader built on Lathe, with Tor built in and a hand-off to Sami.">
+<link rel="canonical" href="https://wemiller.com/apps/lathe/mac.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="The Lathe Mac app — a free downloader">
+<meta property="og:description" content="Paste one link or a hundred, or browse signed in and take what is on the page. A free, open-source Mac downloader built on Lathe, with Tor built in and a hand-off to Sami.">
+<meta property="og:url" content="https://wemiller.com/apps/lathe/mac.html">
+<meta property="og:image" content="https://wemiller.com/apps/lathe/media/icon.png">
+<meta name="twitter:card" content="summary">
+<meta name="theme-color" content="#16192b">
+<link rel="icon" type="image/png" href="media/icon-180.png">
+<link rel="apple-touch-icon" href="media/icon-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,500;0,6..96,700;0,6..96,800;0,6..96,900;1,6..96,500&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="lathe.css">
+</head>
+<body>
+<header class="masthead">
+  <div class="wrap">
+    <div class="issue-line">
+      <span>Vol. 0.13.0 &middot; September 2026</span>
+      <span>Swift 6 &middot; iOS 17 &middot; macOS 14 &middot; Apache-2.0</span>
+      <span>Measured, not claimed</span>
+    </div>
+    <div class="mast-row">
+      <a class="wordmark" href="index.html"><img src="media/icon-180.png" alt="" width="38" height="38">Lathe</a>
+      <nav aria-label="Pages"><ul class="contents-nav"><li><a href="index.html">The Issue</a></li><li><a href="documentation.html">Documentation</a></li><li><a href="benchmarks.html">Benchmarks</a></li><li><a href="mac.html" aria-current="page">Mac app</a></li><li><a href="sami.html">Sami</a></li><li><a href="https://github.com/blaineam/Lathe">GitHub</a></li></ul></nav>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<section class="pagehead">
+  <div class="wrap cover-grid">
+    <div>
+      <div class="kicker">The Mac app &middot; free &middot; macOS 26</div>
+      <h1>Paste a hundred links. <em>Walk away.</em></h1>
+      <p class="dek">A downloader built on the engine. Paste links, or browse to the page signed in as yourself and take what is on it. It works through them in the background — and hands the results to Sami if you want them smaller.</p>
+      <div class="cover-actions">
+        <a class="btn amber" href="https://github.com/blaineam/Lathe/releases/latest/download/Lathe.dmg">Download Lathe.dmg <small>signed · notarized</small></a>
+        <a class="btn ghost" href="https://github.com/blaineam/Lathe/releases/latest">Release notes</a>
+      </div>
+      <p class="byline">Version 0.13.0 &middot; Apple silicon &middot; Apache-2.0 &middot; no account</p>
+    </div>
+    <figure class="plate">
+      <div class="appframe" role="img" aria-label="A drawing of the Lathe window: a queue of three downloads.">
+        <div class="titlebar">
+          <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+          <div class="tabs"><span class="on">Queue</span><span>Browse</span><span>Downloaders</span></div>
+        </div>
+        <div class="body">
+          <div class="field">
+            <div class="input">https://example.com/talks/building-for-the-device</div>
+            <span class="mini on">Add</span>
+            <span class="mini">Paste All</span>
+          </div>
+          <div class="row">
+            <div class="thumb"></div>
+            <div><div class="t">Keynote — building for the device.mp4</div><div class="s">1080p · H.264 + AAC · 4.1 MB/s</div><div class="progress"><i style="width:68%"></i></div></div>
+            <span class="state live">68%</span>
+          </div>
+          <div class="row">
+            <div class="thumb"></div>
+            <div><div class="t">Garden timelapse — spring.mp4</div><div class="s">tagged · handed to Sami</div></div>
+            <span class="state done">done</span>
+          </div>
+          <div class="row">
+            <div class="thumb"></div>
+            <div><div class="t">Botanical plates, public domain</div><div class="s">gallery-dl · 11 of 42 images</div></div>
+            <span class="state">extracting</span>
+          </div>
+        </div>
+        <div class="foot"><span>Downloads folder…</span><span>Route through Tor</span><span>3 items · 1 finished</span></div>
+      </div>
+      <p class="frame-note">A drawing of the window, in this page's own type and colours, so it stays sharp and follows your theme. The files are invented — and your own kind of media: Lathe is for material you have the right to keep.</p>
+    </figure>
+  </div>
+</section>
+
+<section class="feature" style="border-top:0">
+  <div class="wrap">
+    <div class="feature-head">
+      <div>
+        <div class="kicker">What it is</div>
+        <h2 class="section-title">A queue, a browser, and somewhere to land</h2>
+      </div>
+      <p class="standfirst">The field at the top takes links separated by spaces or new lines, so a column pasted from a spreadsheet works as it is. Each becomes a row that reports its own progress, and the rows run side by side.</p>
+    </div>
+    <div class="cards">
+      <div class="card"><h3>Browse signed in</h3><p>A real browser with tabs and a persistent store, so signing in sticks. Downloading from a tab hands over that site's cookies and nothing else.</p><span class="product">per-tab sessions</span></div>
+      <div class="card"><h3>From your phone</h3><p>A one-step Shortcut on the iPhone share sheet adds a link to a file in iCloud Drive. Lathe watches it and starts the download on the Mac.</p><span class="product">iCloud Drive · Shortcuts</span></div>
+      <div class="card"><h3>Tor, built in</h3><p>The daemon is linked into the app, not launched beside it. Browsing and downloading both go through it when it is on.</p><span class="product">in process</span></div>
+      <div class="card"><h3>Two extractors, routed</h3><p>yt-dlp for video and audio, gallery-dl for images, chosen per link — and a plain media URL needs neither.</p><span class="product">yt-dlp · gallery-dl</span></div>
+      <div class="card"><h3>This, or everything</h3><p>A link that names an item and a playlist means the item. Switch the row to take the whole playlist or gallery.</p><span class="product">per-row scope</span></div>
+      <div class="card"><h3>Mute a tab</h3><p>A tab that starts talking can be silenced from the tab, without switching to it.</p><span class="product">per-tab audio</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="night">
+  <div class="wrap">
+    <div class="feature-head">
+      <div>
+        <div class="kicker">Onboarding</div>
+        <h2 class="section-title">It ships no extractor, and says so</h2>
+      </div>
+      <p class="standfirst">Nothing is bundled. On first run a banner offers to install yt-dlp and gallery-dl into a Python environment inside the app's own container. No system Python is touched.</p>
+    </div>
+    <div class="cards">
+      <div class="card"><h3>No pip</h3><p>Wheels are resolved from PyPI's metadata, verified by hash and unpacked by the interpreter's own zip support — all in Swift.</p></div>
+      <div class="card"><h3>Markers and extras</h3><p>Dependency resolution honours PEP&nbsp;508, so installing gallery-dl installs what it needs and nothing only its extras need.</p></div>
+      <div class="card"><h3>A tool, not a liability</h3><p>A downloader you assembled is a different thing from one that arrives with a thousand sites built in.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="feature" style="border-top:0">
+  <div class="wrap">
+    <div class="feature-head">
+      <div>
+        <div class="kicker">Privacy</div>
+        <h2 class="section-title">Fail closed, or do not offer it</h2>
+      </div>
+      <div class="prose">
+        <p>A proxy is checked with a real SOCKS5 handshake before anything downloads — not just a connection, because anything can be listening on a port.</p>
+        <p>If the proxy is not there, the download fails. A downloader that quietly drops the proxy it was told to use is worse than one with no proxy option: you would believe something about your traffic that is not true.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="feature">
+  <div class="wrap">
+    <div class="feature-head">
+      <div>
+        <div class="kicker">The hand-off</div>
+        <h2 class="section-title">Lathe downloads it. Sami makes it smaller.</h2>
+      </div>
+      <div class="prose">
+        <p>Sami is sandboxed, as anything from the App&nbsp;Store is: it cannot read a folder Lathe picked or see Lathe's settings. What a sandbox does accept is a file the system hands it — so the request travels as a file.</p>
+        <ol class="steps">
+          <li>Choose a download folder once, and whether finished files go to Sami.</li>
+          <li>Pick compression or conversion, and a preset.</li>
+          <li>Lathe opens a small request document in Sami together with the media — one delivery.</li>
+          <li>Sami picks both up and gets to work. Without Sami, the file simply lands in your folder.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="feature">
+  <div class="wrap">
+    <div class="feature-head">
+      <div>
+        <div class="kicker">Build it yourself</div>
+        <h2 class="section-title">One script, no project file</h2>
+      </div>
+      <div>
+<pre><code><span class="c"># builds App/build/Lathe.app</span>
+./App/make-app.sh</code></pre>
+        <p class="frame-note">The whole repository builds with <code>swift build</code>; an Xcode project would be a second source of truth. Releases are built by CI, signed with a Developer ID and notarized by Apple, and the disk image is stapled so it opens offline.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+<footer class="colophon">
+  <div class="wrap">
+    <div>
+      <h4>Colophon</h4>
+      <p>Lathe 0.13.0, an on-device media engine for Apple platforms, free under the Apache&nbsp;2.0 licence.</p>
+      <p>Set in Bodoni Moda, Hanken Grotesk and JetBrains Mono. Every page is generated from the repository by <code>docs/build.py</code>; every number on it was measured, and every code sample compiles.</p>
+    </div>
+    <div>
+      <h4>Lathe</h4>
+      <p><a href="documentation.html">Documentation</a></p>
+      <p><a href="benchmarks.html">Benchmarks</a></p>
+      <p><a href="mac.html">The Mac app</a></p>
+      <p><a href="https://github.com/blaineam/Lathe">Source on GitHub</a></p>
+    </div>
+    <div>
+      <h4>Elsewhere</h4>
+      <p><a href="https://wemiller.com/apps/sami/">Sami, the app it powers</a></p>
+      <p><a href="https://wemiller.com/apps/">More apps by Blaine Miller</a></p>
+      <p><a href="https://wemiller.com/support/">Support the free apps</a></p>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
