@@ -17,7 +17,7 @@
   "can-i-use-different.b24d35": "다른 음성을 사용할 수 있나요?",
   "complete-privacy-all-processing.b37baf": "완벽한 프라이버시—모든 처리가 기기에서 이루어집니다. 어떤 데이터도 수집·추적되거나 외부로 전송되지 않습니다. 합리적인 가격에 프라이버시를 최우선으로 합니다.",
   "comprehensive-security-audit-complet.9f66b8": "2026년 4월 종합 보안 감사 완료",
-  "continue-listening-while-using.8df13d": "다른 앱을 사용하거나 화면이 잠긴 상태에서도 계속 들을 수 있습니다. 언제든 일시정지하고 이어서 재생하세요.",
+  "keep-listening-in-another.a95c5b": "다른 앱을 쓰거나 화면이 잠긴 상태에서도 계속 들을 수 있고, 잠금 화면에서 재생, 일시정지, 건너뛰기를 할 수 있습니다. Studio Voice용으로 아직 준비되지 않은 부분은 사용자의 시스템 음성으로 이어서 읽어 주므로, 읽기가 갑자기 멈추지 않습니다.",
   "does-it-highlight-text.8717e1": "읽어주는 동안 텍스트를 하이라이트해 주나요?",
   "does-it-work-offline.eac3a5": "오프라인에서도 작동하나요?",
   "download-now.6d56a8": "지금 다운로드",
@@ -43,7 +43,7 @@
   "highlight-follow.60299c": "하이라이트 & 따라 읽기",
   "import-a-pdf-and.05fcc5": "PDF를 가져와 원래 모습 그대로 읽으세요. 실제 페이지, 실제 레이아웃 위에서 지금 읽고 있는 단어가 제자리에 그대로 표시됩니다. 끄면 다시 평범한 문장으로 돌아옵니다. 하나의 모드일 뿐, 앱을 통째로 바꾸지 않습니다.",
   "import-from-anywhere.cb4f3c": "어디서든 가져오기",
-  "import-text-from-other.cfc3a5": "다른 앱에서 텍스트를 가져오고, 이미지에서 텍스트를 추출하고, 강력한 텍스트 인식으로 PDF 파일까지 읽어보세요.",
+  "share-a-pdf-from.e98080": "파일, Safari, Mail에서 PDF를 공유하면 페이지, 하이라이트, 목차가 그대로 담긴 실제 문서로 열립니다. 어떤 앱에서든 텍스트를 붙여 넣거나, 페이지를 촬영하면 Mi Speaks가 그 글자를 읽어 줍니다.",
   "input-validation.5de1a2": "<span class=\"badge-icon\">&#x1f50d;</span> 입력값 검증",
   "iphone-ipad-and-apple.038fee": "iPhone, iPad, Apple Watch — 같은 라이브러리, 듣던 그 지점 그대로",
   "is-mi-speaks-available.cc6f02": "Mi Speaks 앱을 유럽연합(EU)에서 받을 수 있나요?",
@@ -53,7 +53,7 @@
   "listen-to-anything.98f2db": "무엇이든 들어보세요",
   "mi-speaks-2-0.1b81e7": "Mi Speaks 2.0",
   "mi-speaks-can-read.079199": "Mi Speaks는 직접 입력한 텍스트, 다른 앱의 콘텐츠, 이미지에서 추출한 텍스트, PDF 파일까지 모든 글을 읽어줍니다. 기사, 문서, 이메일, 책 등에 안성맞춤입니다.",
-  "mi-speaks-reads-a.07be02": "Mi Speaks는 PDF에 담긴 목차를 그대로 읽어 들이고, 목차가 없는 책은 페이지 레이아웃에서 제목을 찾아냅니다. 400페이지짜리 책도 자유롭게 오갈 수 있는 목록이 됩니다.",
+  "mi-speaks-reads-a.209fd0": "Mi Speaks는 PDF에 담긴 목차를 그대로 읽어 들이고, 목차가 없는 책은 페이지 레이아웃에서 제목을 찾아냅니다. 400페이지짜리 책도 자유롭게 오갈 수 있는 목록이 되고, 잠금 화면의 건너뛰기 버튼으로도 장 단위로 이동할 수 있습니다.",
   "mi-speaks-reads-articles.2bbb34": "Mi Speaks는 기사와 책, PDF를 28가지 뉴럴 Studio Voices로 읽어 줍니다. 모든 음성은 iPhone에서 직접 생성됩니다. 계정도, 업로드도, 신호도 필요 없습니다. 원문이 있던 바로 그 페이지 위에서 단어 하나하나를 따라가 보세요.",
   "mi-speaks.6c9a62": "🎤 Mi Speaks",
   "michael.f8c38b": "Michael",
@@ -79,7 +79,7 @@
   "support.f32d5a": "후원하기",
   "terms.a55a27": "이용약관",
   "there-is-no-length.989103": "무료 버전에는 길이 제한이 없습니다. 기사 전문을 붙여넣고, 책 한 권을 통째로 가져와 기기에 있는 어떤 음성으로든 끝까지 들어 보세요. 체험 기간 카운트다운도, 중간에 잘리는 일도, 챕터 한가운데의 결제 요구도 없습니다. 무료 버전은 저장한 음성 세 개를 각각 듣던 지점과 함께 보관합니다.",
-  "there-is-one-real.afbbfd": "진짜 제약은 딱 하나 있는데, 네트워크가 아닙니다. 뉴럴 음성을 생성하려면 그래픽 프로세서를 써야 하는데, iOS는 앱이 화면에 없을 때 이를 실행하지 않습니다. 그래서 '전체 문서 준비'를 누르면 모든 문장이 미리 렌더링됩니다. 그 뒤에는 생성할 것이 남지 않으므로, 화면을 잠가도, 다른 앱을 써도, 비행기 안에서도 끝까지 재생됩니다.",
+  "there-is-one-real.bf3cef": "진짜 제약은 딱 하나 있는데, 네트워크가 아닙니다. 뉴럴 음성을 생성하려면 그래픽 프로세서를 써야 하는데, iOS는 앱이 화면에 없을 때 이를 실행하지 않습니다. '전체 문서 준비'를 누르면 모든 문장이 미리 렌더링되어, 화면을 잠가도, 다른 앱을 써도, 비행기 안에서도 Studio Voice가 끝까지 읽어 줍니다. 이 단계를 건너뛰어도 멈추지 않습니다. 아직 준비되지 않은 부분은 사용자의 시스템 음성으로 읽고, 다음을 위해 문서를 준비하도록 권해 드립니다.",
   "transform-any-written-content.0d5682": "어떤 글이든 자연스러운 음성으로 바꿔보세요. 이미지, PDF, 웹 페이지에서 텍스트를 가져오거나 앱에 직접 입력할 수 있습니다. Mi Speaks는 모든 콘텐츠를 오디오로 즐길 수 있게 해줍니다.",
   "twenty-eight-neural-studio.78d344": "28가지 뉴럴 Studio Voices에 더해, 기기에 이미 있는 모든 시스템 음성까지. Apple의 향상됨·프리미엄 다운로드 음성과 직접 만든 Personal Voice도 포함됩니다. Mi Speaks가 어떤 음성이 어떤 종류인지 알려 주므로, 기본값으로 가장 품질이 낮은 음성을 쓰게 되는 일은 없습니다.",
   "twenty-eight-neural-voices.899e23": "8,200만 파라미터 모델이 iPhone에서 직접 만들어 내는 28가지 뉴럴 음성, 미국식과 영국식 영어. 숨을 쉬고 문장을 끊어 읽으며, 더 이상 휴대폰이 읽어 주는 소리처럼 들리지 않습니다. Premium에 포함되며 한 번만 내려받으면 됩니다.",
@@ -94,5 +94,6 @@
   "yes-mi-speaks-includes.7a0f2a": "물론입니다! Mi Speaks에는 강력한 텍스트 인식 기능이 있어 이미지와 PDF 파일에서 텍스트를 추출할 수 있습니다. 사진, 문서, 스캔한 자료의 내용도 손쉽게 들을 수 있습니다.",
   "yes-mi-speaks-is.888a80": "네. Mi Speaks 앱은 프랑스를 포함한 유럽연합(EU) 전역에서 판매하고 있습니다. Apple이 제공하는 모든 국가 및 지역의 App Store에서 이용하실 수 있습니다.",
   "your-book-on-its.3a3c23": "당신의 책을, 원래 페이지 그대로",
-  "zero-data-collection.939efa": "데이터 수집 전혀 없음"
+  "zero-data-collection.939efa": "데이터 수집 전혀 없음",
+  "download-free-then-try.21f9b8": "무료로 다운로드하고 Premium을 7일간 무료로 체험하세요"
 }
