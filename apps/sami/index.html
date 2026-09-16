@@ -155,6 +155,21 @@
       padding: 0.35rem 0.75rem; border-radius: 999px; border: 1px solid var(--sm-line);
     }
 
+    .sm-announce {
+      display: inline-flex; align-items: center; gap: 0.6rem; margin-top: 1.1rem;
+      padding: 0.45rem 0.9rem 0.45rem 0.45rem; border-radius: 999px;
+      border: 1px solid var(--sm-line); background: var(--sm-glass);
+      color: var(--sm-ink-dim); text-decoration: none; font-size: 0.92rem; line-height: 1.35;
+    }
+    .sm-announce b {
+      flex: none; padding: 0.2rem 0.6rem; border-radius: 999px;
+      background: var(--sm-cyan); color: #03202a; font-size: 0.8rem;
+    }
+    .sm-announce:hover { border-color: var(--sm-cyan); color: var(--sm-ink); }
+    .sm-announce:focus-visible { outline: 3px solid var(--sm-cyan); outline-offset: 3px; }
+    .sm-tools { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+    .sm-tools .sm-problem h3 { margin-top: 0; }
+
     /* ---- Figures strip ---------------------------------------------------- */
     .sm-stats {
       display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -282,11 +297,11 @@
       .sm-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .sm-stat:nth-child(3) { padding-left: 0; border-left: 0; }
       .sm-stat:nth-child(n+3) { border-top: 1px solid var(--sm-line); margin-top: 1.2rem; }
-      .sm-problems, .sm-all { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .sm-problems, .sm-all, .sm-tools { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .sm-screens { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     }
     @media (max-width: 600px) {
-      .sm-problems, .sm-all, .sm-people, .sm-new { grid-template-columns: minmax(0, 1fr); }
+      .sm-problems, .sm-all, .sm-people, .sm-new, .sm-tools { grid-template-columns: minmax(0, 1fr); }
       .sm-hero { padding-top: calc(var(--spacing-xl) + 3.5rem); }
       .sm-stat b { font-size: 1.4rem; }
       .sm-btn { width: 100%; justify-content: center; }
@@ -316,6 +331,7 @@
       <button class="mobile-menu-toggle">☰</button>
       <ul class="nav-links">
         <li><a href="#how" class="nav-link" data-i18n="how-it-works.1dd6a1">How it works</a></li>
+        <li><a href="#sami-2" class="nav-link" data-i18n="sami-2-0.343d36">Sami 2.0</a></li>
         <li><a href="#features" class="nav-link" data-i18n="features.fc338f">Features</a></li>
         <li><a href="#pricing" class="nav-link" data-i18n="pricing.a0d9bb">Pricing</a></li>
         <li><a href="#faq" class="nav-link" data-i18n="faq.03688b">FAQ</a></li>
@@ -340,6 +356,7 @@
             <a class="sm-btn sm-btn-ghost" href="#how" data-i18n="see-how-it-works.f7b38f">See how it works</a>
           </div>
           <p class="sm-fine" data-i18n="14-99-once-in.47ef84">$14.99 once in the US. No subscription, no account, no ads.</p>
+          <a class="sm-announce" href="#sami-2"><b>Sami 2.0</b><span data-i18n="convert-tags-live-photos.7ef6c5">Convert, tags, Live Photos and Flash movies are on the way</span></a>
           <span class="os-ready-badge" data-i18n-html="ready-for-ios-27.4543d0"><span class="badge-icon">✓</span> Ready for iOS 27 / iPadOS 27 / macOS 27</span>
         </div>
         <figure class="sm-hero-art" style="margin:0">
@@ -455,6 +472,25 @@
         </p>
         </div>
         <div class="sm-step-art"><img src="assets/images/feature-4.png" alt="Sami scanning a library, with sharks swimming past" width="1920" height="1280" loading="lazy"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sami 2.0 -->
+  <section id="sami-2" class="sm-light">
+    <div class="sm-wrap">
+      <div class="sm-head">
+        <span class="sm-eyebrow" data-i18n="sami-2-0-in.a87bea">Sami 2.0 · in App Review</span>
+        <h2 class="sm-title" data-i18n="more-than-an-optimizer.b735b6">More than an optimizer.</h2>
+        <p class="sm-lede" data-i18n="sami-2-0-puts.a8c9b9">Sami 2.0 puts four new tools on the main screen and a new engine underneath. It's a free update for everyone who owns Sami, arriving as soon as Apple approves it.</p>
+      </div>
+      <div class="sm-tools">
+        <div class="sm-problem"><h3 data-i18n="convert-combine.68b1b0">Convert &amp; Combine</h3><p data-i18n="drop-in-files-or.3b618b">Drop in files or whole folders and turn them into another format — images, video, audio, animations, PDFs and comic archives — or combine a folder of images into one animation, PDF or book.</p></div>
+        <div class="sm-problem"><h3 data-i18n="new-formats.e422f9">New formats</h3><p data-i18n="webp-and-avif-images.06b7e4">WebP and AVIF images, still or animated; AV1 video, encoded right on your device for the smallest files; and MP3 audio.</p></div>
+        <div class="sm-problem"><h3 data-i18n="edit-tags.b15bc9">Edit Tags</h3><p data-i18n="titles-artists-artwork-tv.5ff25b">Titles, artists, artwork, TV and film details, chapters and subtitles for video and music. Look details up online with your own TMDb and OpenSubtitles keys.</p></div>
+        <div class="sm-problem"><h3 data-i18n="live-photos.d15d69">Live Photos</h3><p data-i18n="take-a-live-photo.c3f3a6">Take a Live Photo apart, combine a photo and a video into one, turn a video into a Live Photo, or turn one into an animation.</p></div>
+        <div class="sm-problem"><h3 data-i18n="flash-movies.38164f">Flash Movies</h3><p data-i18n="open-a-swf-play.3d716d">Open a .swf, play it with its sound, and record it at up to 4K — even with your speakers muted — then save it or convert it.</p></div>
+        <div class="sm-problem"><h3 data-i18n="optimizing-that-explains-itself.2c73ca">Optimizing that explains itself</h3><p data-i18n="every-run-shows-the.9a3ea3">Every run shows the step it's on and the file it's working on, then tells you what it skipped, why, and what failed.</p></div>
       </div>
     </div>
   </section>
@@ -729,14 +765,13 @@
           </div>
         </div>
         <div>
-          <span class="sm-eyebrow" data-i18n="coming-in-the-next.dc77e4">Coming in the next update</span>
-          <h2 class="sm-title" data-i18n="more-formats-and-new.56a401">More formats, and new tools.</h2>
-          <p class="sm-lede" data-i18n="these-are-finished-and.f55277">These are finished and on their way. They aren't in the version on the App Store today.</p>
+          <span class="sm-eyebrow" data-i18n="sami-2-0.343d36">Sami 2.0</span>
+          <h2 class="sm-title" data-i18n="buy-once-get-2.ab9b6b">Buy once. Get 2.0 free.</h2>
+          <p class="sm-lede" data-i18n="everyone-who-owns-sami.e01d24">Everyone who owns Sami gets 2.0 as a free update: conversion, tags, Live Photos and Flash movies, plus WebP, AVIF, AV1 and MP3.</p>
           <div class="sm-soon" style="margin-top:1.4rem">
-            <div class="sm-soon-item"><h3 data-i18n="avif-and-webp-images.cd4ae6">AVIF and WebP images</h3><p data-i18n="smaller-stills-than-heic.2b6460">Smaller stills than HEIC, for the places that can open them.</p></div>
-            <div class="sm-soon-item"><h3 data-i18n="av1-video.d8a8ae">AV1 video</h3><p data-i18n="the-smallest-video-files.cf482b">The smallest video files Sami can write, for clips you'd rather keep than edit.</p></div>
-            <div class="sm-soon-item"><h3 data-i18n="a-flash-movie-player.3b400e">A Flash movie player and recorder</h3><p data-i18n="open-a-swf-play.ddc177">Open a .swf, play it with its sound, and record it at up to 4K.</p></div>
-            <div class="sm-soon-item"><h3 data-i18n="live-photos-tags-and.856c49">Live Photos, tags, and converting</h3><p data-i18n="take-live-photos-apart.f49622">Take Live Photos apart or make new ones, edit video and music tags, and convert or combine files.</p></div>
+            <div class="sm-soon-item"><h3 data-i18n="in-app-review-now.1bc5a5">In App Review now</h3><p data-i18n="it-arrives-on-iphone.f20f1f">It arrives on iPhone, iPad and Mac as soon as Apple approves it.</p></div>
+            <div class="sm-soon-item"><h3 data-i18n="nothing-to-re-buy.6d36c0">Nothing to re-buy</h3><p data-i18n="no-upgrade-fee-no.06d6dc">No upgrade fee, no subscription. Your tasks and settings carry over.</p></div>
+            <a class="sm-btn sm-btn-ghost" href="#sami-2" style="justify-self:start" data-i18n="see-what-s-in.d97c55">See what's in 2.0</a>
             <p class="sm-fine" data-i18n-html="built-on-lathe-the.835d03">Built on <a href="../lathe/">Lathe</a>, the open-source media engine behind Sami. Updates are free for everyone who owns Sami.</p>
           </div>
         </div>
