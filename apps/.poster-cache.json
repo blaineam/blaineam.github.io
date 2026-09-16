@@ -1,5 +1,5 @@
 {
-  "fingerprint": "ecb91805a4e9109cd36635deb0a3d2ba16228b9fcdd97b1f472e178b18baa2cf",
+  "fingerprint": "8e38e6cae60ba2f14a91c75845c3305dd971f0324ea788b14730260c26e94670",
   "apps": [
     "enter-space",
     "haven",
@@ -20,7 +20,8 @@
     "deepsi",
     "luma-editor",
     "wise-flyer",
-    "glint"
+    "glint",
+    "lathe"
   ],
-  "generatedAt": "2026-09-16T21:10:28.389Z"
+  "generatedAt": "2026-09-16T21:46:03.464Z"
 }
