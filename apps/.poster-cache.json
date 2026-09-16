@@ -1,27 +1,27 @@
 {
-  "fingerprint": "8e38e6cae60ba2f14a91c75845c3305dd971f0324ea788b14730260c26e94670",
+  "fingerprint": "d0b9535618e832df7781ac6c64df3c988b042a2a377ede57b961af0c13688f96",
   "apps": [
     "enter-space",
     "haven",
-    "revela",
-    "blip",
     "ari-helper",
-    "zap",
-    "tri-add",
-    "ridgeshot",
-    "sightquick",
     "pano-owl",
-    "pinline",
-    "tilebreak",
-    "kern",
+    "luma-editor",
     "sami",
     "mi-speaks",
+    "revela",
+    "tilebreak",
+    "kern",
+    "tri-add",
+    "zap",
+    "pinline",
+    "ridgeshot",
+    "wise-flyer",
+    "sightquick",
     "embr",
     "deepsi",
-    "luma-editor",
-    "wise-flyer",
-    "glint",
-    "lathe"
+    "blip",
+    "lathe",
+    "glint"
   ],
-  "generatedAt": "2026-09-16T21:50:59.229Z"
+  "generatedAt": "2026-09-16T21:52:44.539Z"
 }
