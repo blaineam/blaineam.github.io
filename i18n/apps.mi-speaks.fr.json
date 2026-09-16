@@ -17,7 +17,7 @@
   "can-i-use-different.b24d35": "Puis-je utiliser différentes voix ?",
   "complete-privacy-all-processing.b37baf": "Confidentialité totale : tout le traitement s'effectue sur votre appareil. Aucune donnée n'est collectée, suivie ni transmise où que ce soit. Un tarif abordable, dans le respect de votre vie privée.",
   "comprehensive-security-audit-complet.9f66b8": "Audit de sécurité complet réalisé en avril 2026",
-  "continue-listening-while-using.8df13d": "Continuez à écouter tout en utilisant d'autres apps ou lorsque votre écran est verrouillé. Mettez en pause et reprenez à tout moment.",
+  "keep-listening-in-another.a95c5b": "Continuez à écouter dans une autre app ou écran verrouillé, avec lecture, pause et saut depuis l'écran verrouillé. Si un passage n'est pas encore prêt pour une Studio Voice, la lecture continue avec votre propre voix système — elle ne s'arrête jamais d'un coup.",
   "does-it-highlight-text.8717e1": "Le texte est-il surligné pendant la lecture ?",
   "does-it-work-offline.eac3a5": "Mi Speaks fonctionne-t-il hors ligne ?",
   "download-now.6d56a8": "Télécharger",
@@ -43,7 +43,7 @@
   "highlight-follow.60299c": "Surlignage et suivi",
   "import-a-pdf-and.05fcc5": "Importez un PDF et lisez-le là où il vit vraiment : la vraie page, la vraie mise en page, avec le mot prononcé mis en évidence exactement à sa place. Désactivez l'option et vous retrouvez le texte brut — c'est un mode, pas une mainmise.",
   "import-from-anywhere.cb4f3c": "Importez depuis n'importe où",
-  "import-text-from-other.cfc3a5": "Importez du texte depuis d'autres apps, extrayez le texte d'images et lisez même des fichiers PDF grâce à une puissante reconnaissance de texte.",
+  "share-a-pdf-from.e98080": "Partagez un PDF depuis Fichiers, Safari ou Mail et il s'ouvre comme le vrai document, avec ses pages, la mise en évidence et ses chapitres. Collez du texte depuis n'importe quelle app, ou photographiez une page et Mi Speaks en lit les mots.",
   "input-validation.5de1a2": "<span class=\"badge-icon\">&#x1f50d;</span> Validation des entrées",
   "iphone-ipad-and-apple.038fee": "iPhone, iPad et Apple Watch — la même bibliothèque, au même endroit",
   "is-mi-speaks-available.cc6f02": "Mi Speaks est-il disponible dans l'Union européenne ?",
@@ -53,7 +53,7 @@
   "listen-to-anything.98f2db": "Écoutez tout",
   "mi-speaks-2-0.1b81e7": "Mi Speaks 2.0",
   "mi-speaks-can-read.079199": "Mi Speaks peut lire n'importe quel contenu écrit : le texte que vous saisissez, le contenu d'autres apps, le texte extrait d'images et les fichiers PDF. Parfait pour les articles, les documents, les e-mails, les livres et bien plus encore.",
-  "mi-speaks-reads-a.07be02": "Mi Speaks lit la table des matières du PDF lui-même, et quand un livre n'en a pas, il repère les titres à partir de la mise en page. Un import de quatre cents pages devient une liste dans laquelle vous naviguez librement.",
+  "mi-speaks-reads-a.209fd0": "Mi Speaks lit la table des matières du PDF lui-même, et quand un livre n'en a pas, il repère les titres à partir de la mise en page. Un import de quatre cents pages devient une liste dans laquelle vous naviguez librement — et les boutons de saut de l'écran verrouillé passent d'un chapitre à l'autre.",
   "mi-speaks-reads-articles.2bbb34": "Mi Speaks lit à voix haute vos articles, livres et PDF avec vingt-huit Studio Voices neuronales — générées entièrement sur votre iPhone. Aucun compte, aucun téléversement, aucun réseau. Suivez mot à mot, directement sur la page d'origine.",
   "mi-speaks.6c9a62": "🎤 Mi Speaks",
   "michael.f8c38b": "Michael",
@@ -79,7 +79,7 @@
   "support.f32d5a": "Soutenir",
   "terms.a55a27": "Conditions",
   "there-is-no-length.989103": "La formule gratuite n'impose aucune limite de longueur. Collez un article entier, importez un livre entier et écoutez-le en intégralité avec n'importe quelle voix de votre appareil — pas de compte à rebours d'essai, pas de troncature, pas de paywall au milieu d'un chapitre. La version gratuite conserve trois lectures enregistrées, chacune avec son propre signet.",
-  "there-is-one-real.afbbfd": "Il n'existe qu'une seule véritable limite, et ce n'est pas le réseau : générer une voix neuronale sollicite le processeur graphique, et iOS ne l'autorise pas lorsque l'app n'est plus à l'écran. Touchez donc Préparer tout le document et chaque phrase est générée à l'avance — ensuite, il ne reste plus rien à produire, et la lecture va jusqu'au bout, écran verrouillé, dans une autre app ou en plein vol.",
+  "there-is-one-real.bf3cef": "Il n'existe qu'une seule véritable limite, et ce n'est pas le réseau : générer une voix neuronale sollicite le processeur graphique, et iOS ne l'autorise pas lorsque l'app n'est plus à l'écran. Touchez Préparer tout le document et chaque phrase est générée à l'avance : la Studio Voice lit alors jusqu'au bout, écran verrouillé, dans une autre app ou en plein vol. Et sans cette étape, rien ne s'arrête : tout passage qui n'est pas encore prêt est lu avec votre propre voix système, et Mi Speaks propose de préparer le document pour la prochaine fois.",
   "transform-any-written-content.0d5682": "Transformez n'importe quel contenu écrit en voix au naturel saisissant. Importez du texte depuis des images, des PDF ou des pages web, ou saisissez-le directement dans l'app. Mi Speaks rend tous vos contenus accessibles à l'écoute.",
   "twenty-eight-neural-studio.78d344": "Vingt-huit Studio Voices neuronales, plus toutes les voix système déjà présentes sur votre appareil — y compris les téléchargements Améliorée et Premium d'Apple et votre propre Personal Voice. Mi Speaks vous indique laquelle est laquelle, pour ne jamais vous retrouver avec la pire par défaut.",
   "twenty-eight-neural-voices.899e23": "Vingt-huit voix neuronales, américaines et britanniques, produites sur votre iPhone par un modèle de quatre-vingt-deux millions de paramètres. Elles respirent, elles phrasent, et elles cessent de ressembler à un téléphone qui vous fait la lecture. Incluses dans Premium, avec un téléchargement unique.",
@@ -94,5 +94,6 @@
   "yes-mi-speaks-includes.7a0f2a": "Oui ! Mi Speaks intègre une puissante reconnaissance de texte capable d'extraire le texte des images et des fichiers PDF : écoutez facilement le contenu de vos photos, documents et numérisations.",
   "yes-mi-speaks-is.888a80": "Oui. Mi Speaks est en vente dans toute l'Union européenne, France comprise. L'app est disponible dans tous les pays et régions de l'App Store proposés par Apple.",
   "your-book-on-its.3a3c23": "Votre livre, sur sa propre page",
-  "zero-data-collection.939efa": "Aucune collecte de données"
+  "zero-data-collection.939efa": "Aucune collecte de données",
+  "download-free-then-try.21f9b8": "Téléchargez gratuitement, puis essayez Premium gratuitement pendant 7 jours"
 }

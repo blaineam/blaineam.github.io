@@ -74,6 +74,24 @@
   <link rel="alternate" hreflang="pt-BR" href="https://wemiller.com/apps/mi-speaks/?lang=pt-BR">
   <link rel="alternate" hreflang="it" href="https://wemiller.com/apps/mi-speaks/?lang=it">
   <script src="/i18n/i18n.js" defer data-page="apps.mi-speaks" data-pos="bottom-left"></script>
+  <!-- Safari on iPhone and iPad shows a native "Get" bar for the app. -->
+  <meta name="apple-itunes-app" content="app-id=6451395651">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://wemiller.com/apps/mi-speaks/">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "MobileApplication",
+    "name": "Mi Speaks",
+    "operatingSystem": "iOS, iPadOS, watchOS",
+    "applicationCategory": "UtilitiesApplication",
+    "description": "Reads books, articles and PDFs aloud in twenty-eight neural Studio Voices generated entirely on your device, with live word highlighting, PDF page view and chapter navigation.",
+    "url": "https://wemiller.com/apps/mi-speaks/",
+    "installUrl": "https://apps.apple.com/us/app/mi-speaks/id6451395651",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "author": { "@type": "Person", "name": "Blaine Miller" }
+  }
+  </script>
 </head>
 <body>
   <!-- Navigation -->
@@ -186,8 +204,8 @@
       <div class="feature-card">
         <div class="feature-icon">🔖</div>
         <h3 class="feature-title" data-i18n="jump-to-any-chapter.6b7753">Jump to any chapter</h3>
-        <p class="feature-description" data-i18n="mi-speaks-reads-a.07be02">
-          Mi Speaks reads a PDF's own table of contents, and when a book has none it finds the headings from the page layout. A four-hundred-page import becomes a list you can move around in.
+        <p class="feature-description" data-i18n="mi-speaks-reads-a.209fd0">
+          Mi Speaks reads a PDF's own table of contents, and when a book has none it finds the headings from the page layout. A four-hundred-page import becomes a list you can move around in — and the skip buttons on your lock screen move chapter by chapter.
         </p>
       </div>
 
@@ -221,16 +239,16 @@
       <div class="feature-card">
         <div class="feature-icon">📄</div>
         <h3 class="feature-title" data-i18n="import-from-anywhere.cb4f3c">Import from Anywhere</h3>
-        <p class="feature-description" data-i18n="import-text-from-other.cfc3a5">
-          Import text from other apps, extract text from images, and even read PDF files with powerful text recognition.
+        <p class="feature-description" data-i18n="share-a-pdf-from.e98080">
+          Share a PDF from Files, Safari or Mail and it opens as the real document, with its pages, highlighting and chapters. Paste text from any app, or photograph a page and Mi Speaks reads the words off it.
         </p>
       </div>
 
       <div class="feature-card">
         <div class="feature-icon">⏯️</div>
         <h3 class="feature-title" data-i18n="background-playback.efc5fb">Background Playback</h3>
-        <p class="feature-description" data-i18n="continue-listening-while-using.8df13d">
-          Continue listening while using other apps or when your screen is locked. Pause and resume anytime.
+        <p class="feature-description" data-i18n="keep-listening-in-another.a95c5b">
+          Keep listening in another app or with the screen locked, with play, pause and skip on the lock screen. If a Studio Voice passage isn't prepared yet, it carries on in your own system voice — the reading never just stops.
         </p>
       </div>
 
@@ -292,6 +310,9 @@
           Premium adds the twenty-eight Studio Voices, an unlimited library synced across your devices, audio export,
           and Turbo playback speeds. Monthly, yearly, or bought once and kept.
         </p>
+        <div style="margin-top: var(--spacing-lg);">
+          <a href="https://apps.apple.com/us/app/mi-speaks/id6451395651" class="btn-buy" target="_blank" rel="noopener noreferrer" data-i18n="download-free-then-try.21f9b8">Download free, then try Premium free for 7 days</a>
+        </div>
       </div>
       <div class="magazine-image">
         <img src="assets/images/device-chapters.webp"
@@ -306,11 +327,12 @@
           Every voice runs locally. Your text is never uploaded, never sent to a server to be spoken, and never needs
           an account — which also means Mi Speaks works the same in airplane mode as it does on Wi-Fi.
         </p>
-        <p data-i18n="there-is-one-real.afbbfd">
+        <p data-i18n="there-is-one-real.bf3cef">
           There is one real limit, and it is not the network: generating a neural voice uses the graphics processor, and
-          iOS will not run that while an app is off screen. So tap Prepare Full Document and every sentence is rendered up
-          front — after that there is nothing left to generate, and it plays to the end with the screen locked, in another
-          app, or on a flight.
+          iOS will not run that while an app is off screen. Tap Prepare Full Document and every sentence is rendered up
+          front, so the Studio Voice reads to the end with the screen locked, in another app, or on a flight. Skip that
+          step and nothing stops: any passage that isn't ready yet is read in your own system voice, and Mi Speaks offers
+          to prepare the document for next time.
         </p>
       </div>
       <div class="magazine-image">

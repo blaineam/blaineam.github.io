@@ -17,7 +17,7 @@
   "can-i-use-different.b24d35": "Posso usare voci diverse?",
   "complete-privacy-all-processing.b37baf": "Privacy totale: tutta l'elaborazione avviene sul tuo dispositivo. Nessun dato viene raccolto, tracciato o inviato da nessuna parte. Conveniente e attento alla privacy.",
   "comprehensive-security-audit-complet.9f66b8": "Audit di sicurezza completo effettuato ad aprile 2026",
-  "continue-listening-while-using.8df13d": "Continua ad ascoltare mentre usi altre app o quando lo schermo è bloccato. Metti in pausa e riprendi quando vuoi.",
+  "keep-listening-in-another.a95c5b": "Continua ad ascoltare in un'altra app o a schermo bloccato, con riproduzione, pausa e salto dalla schermata di blocco. Se un passaggio non è ancora pronto per una Studio Voice, la lettura prosegue con la tua voce di sistema: non si interrompe mai all'improvviso.",
   "does-it-highlight-text.8717e1": "Evidenzia il testo durante la lettura?",
   "does-it-work-offline.eac3a5": "Funziona offline?",
   "download-now.6d56a8": "Scarica ora",
@@ -43,7 +43,7 @@
   "highlight-follow.60299c": "Evidenzia e segui",
   "import-a-pdf-and.05fcc5": "Importa un PDF e leggilo dove vive davvero: la pagina reale, l'impaginazione reale, con la parola pronunciata evidenziata esattamente dove si trova. Disattivalo e tornerai alle frasi semplici — è una modalità, non un'imposizione.",
   "import-from-anywhere.cb4f3c": "Importa da qualsiasi fonte",
-  "import-text-from-other.cfc3a5": "Importa testo da altre app, estrai testo dalle immagini e leggi anche file PDF grazie a un potente riconoscimento del testo.",
+  "share-a-pdf-from.e98080": "Condividi un PDF da File, Safari o Mail e si apre come il documento vero, con pagine, evidenziazione e capitoli. Incolla testo da qualsiasi app, oppure fotografa una pagina e Mi Speaks ne legge le parole.",
   "input-validation.5de1a2": "<span class=\"badge-icon\">&#x1f50d;</span> Convalida dell'input",
   "iphone-ipad-and-apple.038fee": "iPhone, iPad e Apple Watch — la stessa libreria, lo stesso punto al suo interno",
   "is-mi-speaks-available.cc6f02": "Mi Speaks è disponibile nell'Unione europea?",
@@ -53,7 +53,7 @@
   "listen-to-anything.98f2db": "Ascolta qualsiasi cosa",
   "mi-speaks-2-0.1b81e7": "Mi Speaks 2.0",
   "mi-speaks-can-read.079199": "Mi Speaks può leggere qualsiasi contenuto scritto: il testo che digiti, i contenuti di altre app, il testo estratto dalle immagini e i file PDF. Perfetto per articoli, documenti, email, libri e molto altro.",
-  "mi-speaks-reads-a.07be02": "Mi Speaks legge l'indice del PDF stesso e, quando un libro non ne ha uno, individua i titoli dall'impaginazione. Un'importazione di quattrocento pagine diventa un elenco in cui puoi muoverti.",
+  "mi-speaks-reads-a.209fd0": "Mi Speaks legge l'indice del PDF stesso e, quando un libro non ne ha uno, individua i titoli dall'impaginazione. Un'importazione di quattrocento pagine diventa un elenco in cui puoi muoverti, e i tasti di salto della schermata di blocco passano da un capitolo all'altro.",
   "mi-speaks-reads-articles.2bbb34": "Mi Speaks legge ad alta voce articoli, libri e PDF con ventotto Studio Voices neurali — generate interamente sul tuo iPhone. Nessun account, nessun caricamento, nessun segnale. Segui parola per parola, proprio sulla pagina da cui arriva.",
   "mi-speaks.6c9a62": "🎤 Mi Speaks",
   "michael.f8c38b": "Michael",
@@ -79,7 +79,7 @@
   "support.f32d5a": "Sostieni",
   "terms.a55a27": "Termini",
   "there-is-no-length.989103": "Nella versione gratuita non c'è alcun limite di lunghezza. Incolla un articolo intero, importa un libro intero e ascoltalo tutto con qualsiasi voce presente sul tuo dispositivo — nessun conto alla rovescia di prova, nessun troncamento, nessun paywall a metà capitolo. La versione gratuita conserva tre discorsi salvati, ciascuno con il proprio segnalibro.",
-  "there-is-one-real.afbbfd": "C'è un solo limite reale, e non è la rete: generare una voce neurale usa il processore grafico, e iOS non lo consente a un'app che non è in primo piano. Basta quindi toccare Prepara documento completo e ogni frase viene generata in anticipo: da quel momento non resta più nulla da elaborare e la riproduzione arriva fino in fondo anche a schermo bloccato, in un'altra app o in aereo.",
+  "there-is-one-real.bf3cef": "C'è un solo limite reale, e non è la rete: generare una voce neurale usa il processore grafico, e iOS non lo consente a un'app che non è in primo piano. Tocca Prepara documento completo e ogni frase viene generata in anticipo, così la Studio Voice legge fino in fondo anche a schermo bloccato, in un'altra app o in aereo. E se salti questo passaggio non si ferma nulla: ogni parte non ancora pronta viene letta con la tua voce di sistema, e Mi Speaks ti propone di preparare il documento per la volta successiva.",
   "transform-any-written-content.0d5682": "Trasforma qualsiasi contenuto scritto in una voce dal suono naturale. Importa il testo da immagini, PDF e pagine web, oppure scrivilo direttamente nell'app. Mi Speaks rende tutti i tuoi contenuti accessibili tramite l'audio.",
   "twenty-eight-neural-studio.78d344": "Ventotto Studio Voices neurali, più tutte le voci di sistema già presenti sul tuo dispositivo — comprese quelle scaricabili Migliorate e Premium di Apple e la tua Personal Voice. Mi Speaks ti dice qual è quale, così non ti ritrovi mai la peggiore per impostazione predefinita.",
   "twenty-eight-neural-voices.899e23": "Ventotto voci neurali, americane e britanniche, prodotte sul tuo iPhone da un modello da ottantadue milioni di parametri. Respirano, costruiscono il fraseggio e smettono di sembrare un telefono che ti legge qualcosa. Incluse in Premium, con un download una tantum.",
@@ -94,5 +94,6 @@
   "yes-mi-speaks-includes.7a0f2a": "Sì! Mi Speaks include un potente riconoscimento del testo, capace di estrarlo da immagini e file PDF: ascoltare i contenuti di foto, documenti e materiali scansionati diventa semplicissimo.",
   "yes-mi-speaks-is.888a80": "Sì. Mi Speaks è in vendita in tutta l'Unione europea, Francia compresa. È disponibile in tutti i Paesi e le regioni dell'App Store offerti da Apple.",
   "your-book-on-its.3a3c23": "Il tuo libro, sulla sua pagina",
-  "zero-data-collection.939efa": "Zero raccolta di dati"
+  "zero-data-collection.939efa": "Zero raccolta di dati",
+  "download-free-then-try.21f9b8": "Scaricala gratis, poi prova Premium gratis per 7 giorni"
 }

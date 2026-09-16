@@ -17,7 +17,7 @@
   "can-i-use-different.b24d35": "Posso usar vozes diferentes?",
   "complete-privacy-all-processing.b37baf": "Privacidade total — todo o processamento acontece no seu dispositivo. Nenhum dado é coletado, rastreado ou enviado para lugar algum. Acessível e focado na privacidade.",
   "comprehensive-security-audit-complet.9f66b8": "Auditoria de segurança completa concluída em abril de 2026",
-  "continue-listening-while-using.8df13d": "Continue ouvindo enquanto usa outros apps ou com a tela bloqueada. Pause e retome quando quiser.",
+  "keep-listening-in-another.a95c5b": "Continue ouvindo em outro app ou com a tela bloqueada, com tocar, pausar e pular na tela bloqueada. Se um trecho ainda não estiver preparado para uma Studio Voice, a leitura segue na sua própria voz do sistema — ela nunca simplesmente para.",
   "does-it-highlight-text.8717e1": "Ele destaca o texto durante a leitura?",
   "does-it-work-offline.eac3a5": "Funciona off-line?",
   "download-now.6d56a8": "Baixar Agora",
@@ -43,7 +43,7 @@
   "highlight-follow.60299c": "Destaque e acompanhe",
   "import-a-pdf-and.05fcc5": "Importe um PDF e leia onde ele realmente está: a página real, o layout real, com a palavra falada destacada exatamente onde ela fica. Desative e você volta às frases simples — é um modo, não uma imposição.",
   "import-from-anywhere.cb4f3c": "Importe de qualquer lugar",
-  "import-text-from-other.cfc3a5": "Importe texto de outros apps, extraia texto de imagens e até leia arquivos PDF com um poderoso reconhecimento de texto.",
+  "share-a-pdf-from.e98080": "Compartilhe um PDF do Arquivos, do Safari ou do Mail e ele abre como o documento de verdade, com as páginas, o destaque e os capítulos. Cole texto de qualquer app, ou fotografe uma página e o Mi Speaks lê as palavras dela.",
   "input-validation.5de1a2": "<span class=\"badge-icon\">&#x1f50d;</span> Validação de entrada",
   "iphone-ipad-and-apple.038fee": "iPhone, iPad e Apple Watch — a mesma biblioteca, o mesmo ponto dentro dela",
   "is-mi-speaks-available.cc6f02": "O Mi Speaks está disponível na União Europeia?",
@@ -53,7 +53,7 @@
   "listen-to-anything.98f2db": "Ouça de tudo",
   "mi-speaks-2-0.1b81e7": "Mi Speaks 2.0",
   "mi-speaks-can-read.079199": "O Mi Speaks pode ler qualquer conteúdo escrito, incluindo textos que você digita, conteúdo de outros apps, textos extraídos de imagens e arquivos PDF. Perfeito para artigos, documentos, e-mails, livros e muito mais.",
-  "mi-speaks-reads-a.07be02": "O Mi Speaks lê o próprio sumário do PDF e, quando o livro não tem um, encontra os títulos pelo layout da página. Uma importação de quatrocentas páginas vira uma lista pela qual você pode navegar.",
+  "mi-speaks-reads-a.209fd0": "O Mi Speaks lê o próprio sumário do PDF e, quando o livro não tem um, encontra os títulos pelo layout da página. Uma importação de quatrocentas páginas vira uma lista pela qual você pode navegar — e os botões de pular da tela bloqueada avançam de capítulo em capítulo.",
   "mi-speaks-reads-articles.2bbb34": "O Mi Speaks lê artigos, livros e PDFs em voz alta com vinte e oito Studio Voices neurais — geradas inteiramente no seu iPhone. Sem conta, sem envio de dados, sem sinal. Acompanhe palavra por palavra, na própria página de onde o texto veio.",
   "mi-speaks.6c9a62": "🎤 Mi Speaks",
   "michael.f8c38b": "Michael",
@@ -79,7 +79,7 @@
   "support.f32d5a": "Apoiar",
   "terms.a55a27": "Termos",
   "there-is-no-length.989103": "Não há limite de tamanho na versão gratuita. Cole um artigo inteiro, importe um livro inteiro e ouça tudo com qualquer voz do seu dispositivo — sem contagem regressiva de teste, sem cortes, sem paywall no meio de um capítulo. A versão gratuita guarda três leituras salvas, cada uma com seu próprio ponto marcado.",
-  "there-is-one-real.afbbfd": "Existe um único limite real, e não é a rede: gerar uma voz neural usa o processador gráfico, e o iOS não permite isso enquanto o app está fora da tela. Então toque em Preparar Documento Completo e cada frase é gerada de uma vez — depois disso não sobra nada para gerar, e a leitura vai até o fim com a tela bloqueada, em outro app ou durante um voo.",
+  "there-is-one-real.bf3cef": "Existe um único limite real, e não é a rede: gerar uma voz neural usa o processador gráfico, e o iOS não permite isso enquanto o app está fora da tela. Toque em Preparar Documento Completo e cada frase é gerada de uma vez, para que a Studio Voice leia até o fim com a tela bloqueada, em outro app ou durante um voo. E se você pular essa etapa, nada para: qualquer trecho que ainda não esteja pronto é lido na sua própria voz do sistema, e o Mi Speaks oferece preparar o documento para a próxima vez.",
   "transform-any-written-content.0d5682": "Transforme qualquer conteúdo escrito em uma fala com som natural. Importe texto de imagens, PDFs e páginas da web, ou digite direto no app. O Mi Speaks deixa todo o seu conteúdo acessível em áudio.",
   "twenty-eight-neural-studio.78d344": "Vinte e oito Studio Voices neurais, além de todas as vozes do sistema que já estão no seu dispositivo — incluindo os downloads Aprimorada e Premium da Apple e sua própria Personal Voice. O Mi Speaks mostra qual é qual, para que você nunca receba a pior delas por padrão.",
   "twenty-eight-neural-voices.899e23": "Vinte e oito vozes neurais, americanas e britânicas, produzidas no seu iPhone por um modelo de oitenta e dois milhões de parâmetros. Elas respiram, elas fraseiam e deixam de soar como um celular lendo para você. Fazem parte do Premium, com um download único.",
@@ -94,5 +94,6 @@
   "yes-mi-speaks-includes.7a0f2a": "Sim! O Mi Speaks inclui um poderoso reconhecimento de texto capaz de extrair conteúdo de imagens e arquivos PDF, o que torna fácil ouvir textos de fotos, documentos e materiais digitalizados.",
   "yes-mi-speaks-is.888a80": "Sim. Mi Speaks está à venda em toda a União Europeia, França inclusive. Está disponível em todos os países e regiões da App Store que a Apple oferece.",
   "your-book-on-its.3a3c23": "Seu livro, na própria página",
-  "zero-data-collection.939efa": "Zero coleta de dados"
+  "zero-data-collection.939efa": "Zero coleta de dados",
+  "download-free-then-try.21f9b8": "Baixe grátis e experimente o Premium grátis por 7 dias"
 }
