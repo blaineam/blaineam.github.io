@@ -47,7 +47,7 @@ SKIP_EXACT = {s.lower() for s in [
     # glossary / product names that must never be translated; skipping them
     # entirely when they stand alone keeps dictionaries lean.
     "Enter Space", "Haven", "Ari", "Ari Helper", "Sami", "Pano Owl", "Blip",
-    "Glint", "Tilebreak", "Tri-Add", "Zap", "Kern", "Embr", "Mi Speaks", "Revela",
+    "Glint", "Lathe", "Tilebreak", "Tri-Add", "Zap", "Kern", "Embr", "Mi Speaks", "Revela",
     "Ridgeshot", "SightQuick", "Pinline", "Luma Editor", "Wise Flyer",
     "DeepSi", "Doppel", "Time Portal", "Space Inspector", "Git Mirror",
     "Theater", "rclone", "WebDAV", "SFTP", "SMB", "Samba", "FTP", "S3",

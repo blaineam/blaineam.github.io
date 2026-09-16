@@ -36,7 +36,7 @@ const LANGS = {
 
 // Mirrors rocket's DEFAULT_GLOSSARY plus site-specific proper nouns.
 const NEVER_TRANSLATE = [
-  'Enter Space', 'Haven', 'Ari', 'Ari Helper', 'Sami', 'Pano Owl', 'Blip', 'Glint',
+  'Enter Space', 'Haven', 'Ari', 'Ari Helper', 'Sami', 'Pano Owl', 'Blip', 'Glint', 'Lathe',
   'Tilebreak', 'Tri-Add', 'Zap', 'Embr', 'Mi Speaks', 'Revela', 'Ridgeshot',
   'SightQuick', 'Pinline', 'Luma Editor', 'Wise Flyer', 'DeepSi',
   'Doppel', 'Time Portal', 'Space Inspector', 'Git Mirror', 'Theater',

@@ -4,6 +4,22 @@
   "note": "Source of truth for app metadata. apps/index.html renders its OWN custom display order; this file is the chronological list.",
   "apps": [
     {
+      "id": "lathe",
+      "title": "Lathe",
+      "tagline": "A free Mac downloader, and the media engine behind Sami",
+      "page_url": "/apps/lathe/",
+      "app_store_url": null,
+      "download_url": "https://github.com/blaineam/Lathe/releases/latest/download/Lathe.dmg",
+      "source_url": "https://github.com/blaineam/Lathe",
+      "icon_url": "/apps/lathe/assets/images/icon.png",
+      "released": "2026-09",
+      "updated": "2026-09",
+      "version": "0.13.0",
+      "status": "live",
+      "price": "free",
+      "note": "An open-source (Apache-2.0) Swift media engine that runs entirely on device — encoding, frames, tags, chapters, subtitles, AV1 and Flash through the system frameworks with no subprocesses — and a free, notarized Mac downloader built on it: paste links or browse signed in, Tor built in, hand-off to Sami."
+    },
+    {
       "id": "kern",
       "title": "Kern",
       "tagline": "Handle letters with care",
@@ -11,9 +27,9 @@
       "app_store_url": "https://apps.apple.com/us/app/kern-word-puzzles/id6806896106",
       "icon_url": "/apps/kern/assets/images/icon.png",
       "released": "2026-08",
-      "updated": "2026-08",
+      "updated": "2026-09",
       "version": "1.0.0",
-      "status": "in-review",
+      "status": "live",
       "note": "Word puzzles about handling letters with care — Wheel, Search, and Chain share one fair par-based score inside eighteen living worlds that react to the words you find. Generated music, Game Center daily leaderboards, fully offline. No ads, no IAP, no data collection."
     },
     {
@@ -21,12 +37,12 @@
       "title": "Revela",
       "tagline": "Shoot film. Wait for it.",
       "page_url": "/apps/revela/",
-      "app_store_url": "",
+      "app_store_url": "https://apps.apple.com/us/app/revela-vintage-film-camera/id6791874917",
       "icon_url": "/apps/revela/assets/images/icon.png",
       "released": "2026-07",
       "updated": "2026-08",
-      "version": "1.0.0",
-      "status": "in-review",
+      "version": "1.1.0",
+      "status": "live",
       "note": "A film camera that lives in your phone — honest rolls with real develop times, full-resolution RAW-first lab scans, movie reels, an AirPlay projector, and an earned darkroom. No account, no tracking, one price."
     },
     {
@@ -49,7 +65,10 @@
       "page_url": "/apps/sightquick/",
       "app_store_url": "https://apps.apple.com/us/app/sightquick/id6776991403",
       "icon_url": "/apps/sightquick/assets/images/app-icon.png",
-      "released": "2026-06"
+      "released": "2026-06",
+      "updated": "2026-08",
+      "version": "1.1.1",
+      "status": "live"
     },
     {
       "id": "zap",
@@ -58,7 +77,10 @@
       "page_url": "/apps/zap/",
       "app_store_url": "https://apps.apple.com/us/app/zap-trivia/id6776907420",
       "icon_url": "/apps/zap/assets/images/icon.png",
-      "released": "2026-06"
+      "released": "2026-06",
+      "updated": "2026-09",
+      "version": "1.3.0",
+      "status": "live"
     },
     {
       "id": "tri-add",
@@ -68,10 +90,12 @@
       "app_store_url": "https://apps.apple.com/us/app/tri-add/id860253889",
       "icon_url": "/apps/tri-add/assets/images/app-icon.png",
       "released": "2026-06",
-      "updated": "2026-06",
+      "updated": "2026-09",
       "relaunch": true,
       "relaunch_of": "Tri-Add (2014)",
-      "note": "A complete, ground-up rebuild of the original 2014 Tri-Add — relaunched June 2026 with additive + subtractive mixing, inversions, and turn-based multiplayer."
+      "note": "A complete, ground-up rebuild of the original 2014 Tri-Add — relaunched June 2026 with additive + subtractive mixing, inversions, and turn-based multiplayer.",
+      "version": "2.4.1",
+      "status": "live"
     },
     {
       "id": "ridgeshot",
@@ -80,7 +104,10 @@
       "page_url": "/apps/ridgeshot/",
       "app_store_url": "https://apps.apple.com/us/app/ridgeshot/id6774483008",
       "icon_url": "/apps/ridgeshot/assets/images/app-icon.png",
-      "released": "2026-05"
+      "released": "2026-05",
+      "updated": "2026-09",
+      "version": "1.3.2",
+      "status": "live"
     },
     {
       "id": "pinline",
@@ -89,7 +116,10 @@
       "page_url": "/apps/pinline/",
       "app_store_url": "https://apps.apple.com/us/app/pinline/id6772773442",
       "icon_url": "/apps/pinline/assets/images/icon.png",
-      "released": "2026-05"
+      "released": "2026-05",
+      "updated": "2026-09",
+      "version": "1.3.1",
+      "status": "live"
     },
     {
       "id": "tilebreak",
@@ -108,8 +138,8 @@
       "app_store_url": "https://apps.apple.com/us/app/blip-stats/id6762329495",
       "icon_url": "/apps/blip/assets/images/icon.png",
       "released": "2026-04",
-      "updated": "2026-08",
-      "version": "2.0.1",
+      "updated": "2026-09",
+      "version": "2.0.2",
       "status": "live",
       "note": "macOS menu-bar network & S.M.A.R.T. monitor with live MTR traceroute map, per-volume speed tests, kill-process controls, and a full Shortcuts (App Intents) catalog."
     },
@@ -130,10 +160,10 @@
       "app_store_url": "https://apps.apple.com/us/app/sami-media-optimizer/id6758907995",
       "icon_url": "/apps/sami/assets/images/icon.png",
       "released": "2026-02",
-      "updated": "2026-06",
-      "version": "1.2.1",
+      "updated": "2026-09",
+      "version": "1.4.3",
       "status": "live",
-      "note": "Smart photo & video optimizer that reclaims storage with quality-aware compression — keeps working via background continued-processing and is fully scriptable from Shortcuts. v1.2.0 live; v1.2.1 in review."
+      "note": "Smart photo, video & PDF optimizer that reclaims storage with quality-aware compression — watched folders on the Mac, network-aware throttling for NAS and cloud drives, background continued processing, and fully scriptable from Shortcuts. v1.4.3 live; the next version adds a bulk tag editor, Flash capture, Live Photo conversions and AVIF/WebP/AV1/MP3 output, built on Lathe."
     },
     {
       "id": "enter-space",
@@ -143,8 +173,8 @@
       "app_store_url": "https://apps.apple.com/us/app/enter-space/id6746350540",
       "icon_url": "/apps/enter-space/assets/images/icon.png",
       "released": "2025-06",
-      "updated": "2026-06",
-      "version": "5.6.0",
+      "updated": "2026-09",
+      "version": "7.0.2",
       "status": "live",
       "apple_watch": true,
       "note": "Unified, local-feeling access to 100 cloud providers across iPhone, iPad, Mac & Apple TV — with full-content Spotlight indexing, encrypted offline mirror (Keep Offline), 24 Shortcuts & Siri actions, and an Apple Watch companion that syncs your cloud media to your wrist and flips through a photo folder on the watch face. Scheduled syncs add rate-limit tuning (TPS limit, low-level retries, auto-abort) for providers like pCloud."
@@ -157,8 +187,8 @@
       "app_store_url": "https://apps.apple.com/us/app/luma-editor/id6741085424",
       "icon_url": "/apps/luma-editor/assets/images/icon.png",
       "released": "2025-01",
-      "updated": "2026-06",
-      "version": "1.5.0",
+      "updated": "2026-08",
+      "version": "1.6.0",
       "status": "live",
       "note": "Photo editor that matches a look you like and applies it to your shots — with Vision-named one-tap styles and Siri-driven edits via Shortcuts. Universal on iPhone, iPad & Mac."
     },
@@ -170,8 +200,8 @@
       "app_store_url": "https://apps.apple.com/us/app/embr-burn-your-debts/id6727006089",
       "icon_url": "/apps/embr/assets/images/icon.png",
       "released": "2024-10",
-      "updated": "2026-06",
-      "version": "1.2.0",
+      "updated": "2026-09",
+      "version": "1.4.1",
       "status": "live",
       "apple_watch": true,
       "note": "Debt-payoff tracker that lets you watch each balance literally burn away as you pay it down — with an Apple Watch app and complication showing your live payoff rings, plus Siri & Shortcuts."
@@ -184,8 +214,8 @@
       "app_store_url": "https://apps.apple.com/us/app/ari-helper/id6480045555",
       "icon_url": "/apps/ari-helper/assets/images/icon.png",
       "released": "2024-03",
-      "updated": "2026-06",
-      "version": "5.4.0",
+      "updated": "2026-09",
+      "version": "6.0.0",
       "status": "live",
       "apple_watch": true,
       "note": "All-in-one AI chat with on-device LLMs plus your favorite cloud models — and an Apple Watch app that remote-controls the chat from your wrist while your paired iPhone runs the model."
@@ -198,8 +228,8 @@
       "app_store_url": "https://apps.apple.com/us/app/mi-speaks/id6451395651",
       "icon_url": "/apps/mi-speaks/assets/images/icon.png",
       "released": "2023-07",
-      "updated": "2026-06",
-      "version": "1.5.0",
+      "updated": "2026-09",
+      "version": "1.6.2",
       "status": "live",
       "apple_watch": true,
       "note": "Text-to-speech reader for any written content, with a standalone Apple Watch player that reads along through the built-in speaker and highlights each word. v1.4.4 live; v1.5.0 in review."
@@ -209,9 +239,12 @@
       "title": "DeepSi",
       "tagline": "See depth, not light",
       "page_url": "/apps/deepsi/",
-      "app_store_url": null,
+      "app_store_url": "https://apps.apple.com/us/app/deepsi/id6449420511",
       "icon_url": "/apps/deepsi/assets/images/icon.png",
-      "released": "2023-07"
+      "released": "2023-07",
+      "updated": "2026-09",
+      "version": "1.3.1",
+      "status": "live"
     },
     {
       "id": "pano-owl",
@@ -221,8 +254,8 @@
       "app_store_url": "https://apps.apple.com/us/app/pano-owl/id1560273409",
       "icon_url": "/apps/pano-owl/assets/images/icon.png",
       "released": "2021-03",
-      "updated": "2026-06",
-      "version": "2.1.0",
+      "updated": "2026-09",
+      "version": "2.5.1",
       "status": "live",
       "relaunch": true,
       "relaunch_of": "Pano Owl (2021)",
@@ -233,9 +266,12 @@
       "title": "Wise Flyer",
       "tagline": "Top the leaderboard!",
       "page_url": "/apps/wise-flyer/",
-      "app_store_url": null,
+      "app_store_url": "https://apps.apple.com/us/app/wise-flyer/id853900499",
       "icon_url": "/apps/wise-flyer/assets/images/icon.png",
-      "released": "2014-04"
+      "released": "2014-04",
+      "updated": "2026-08",
+      "version": "1.10.0",
+      "status": "live"
     }
   ]
 }

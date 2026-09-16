@@ -290,12 +290,21 @@
       margin: 0 auto;
     }
 
+    /* Four free apps: one row when they fit, otherwise two by two, never
+       three and a lonely fourth. */
     .free-apps-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: var(--spacing-lg);
       margin-top: var(--spacing-xl);
       text-align: left;
+    }
+
+    @media (min-width: 1100px) {
+      .free-apps-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    }
+    @media (max-width: 560px) {
+      .free-apps-grid { grid-template-columns: 1fr; }
     }
 
     .free-app-card {
@@ -644,6 +653,14 @@
           <p class="app-tagline" data-i18n="brightness-volume-for-any.a559eb">Brightness & volume for any display</p>
           <span class="app-cta" data-i18n="learn-more.140c43">Learn More →</span>
         </a>
+
+        <!-- Lathe -->
+        <a href="lathe/" class="app-card" data-app="lathe">
+          <div class="app-icon"><img src="lathe/assets/images/icon.png" alt="Lathe App Icon"></div>
+          <h2 class="app-name">Lathe</h2>
+          <p class="app-tagline" data-i18n="a-free-mac-downloader.5238ec">A free Mac downloader, and the media engine behind Sami</p>
+          <span class="app-cta" data-i18n="learn-more.140c43">Learn More →</span>
+        </a>
       </div>
       <p class="apps-availability-note" data-i18n="every-app-here-is.d186b8">Every app here is now available in the European Union, France included — except Haven, which isn't offered in France. Outside the EU, a few still skip a country or two: Ari Helper, Haven, Kern, Tri-Add and Wise Flyer.</p>
     </div>
@@ -652,7 +669,7 @@
   <!-- Free apps · support future development -->
   <section class="free-apps-section" id="support">
     <h2 class="free-apps-title" data-i18n="free-apps-support-future.bde25b">Free apps · support future development</h2>
-    <p class="free-apps-lede" data-i18n="these-three-are-free.8e9968">These three are free — no ads, no tracking, no subscription. If they earn a place on your devices, you can help fund what comes next.</p>
+    <p class="free-apps-lede" data-i18n="these-four-are-free.5e02d2">These four are free — no ads, no tracking, no subscription. If they earn a place on your devices, you can help fund what comes next.</p>
 
     <div class="free-apps-grid">
       <a href="haven/" class="free-app-card">
@@ -669,6 +686,11 @@
         <span class="free-app-icon"><img src="glint/assets/images/icon.png" alt="Glint App Icon"></span>
         <span class="free-app-name">Glint</span>
         <span class="free-app-tagline" data-i18n="brightness-volume-for-any.a559eb">Brightness &amp; volume for any display</span>
+      </a>
+      <a href="lathe/" class="free-app-card">
+        <span class="free-app-icon"><img src="lathe/assets/images/icon.png" alt="Lathe App Icon"></span>
+        <span class="free-app-name">Lathe</span>
+        <span class="free-app-tagline" data-i18n="open-source-mac-downloader.f2956f">Open-source Mac downloader and media engine</span>
       </a>
     </div>
 

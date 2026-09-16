@@ -21,18 +21,20 @@ Apple Watch. Just imagine what we can build together!
 
 ## Apps
 
-**20 apps on the App Store**, spanning iOS, iPadOS, macOS, tvOS, and watchOS. The
+**20 apps on the App Store**, spanning iOS, iPadOS, macOS, tvOS, and watchOS — plus
+**Lathe**, an open-source media engine and free Mac app distributed on GitHub. The
 [`/apps`](https://wemiller.com/apps) showcase renders a curated order; the home page
 lists them chronologically. [`apps/projects.json`](apps/projects.json) is the
 source of truth for app metadata; the showcase's display order is hand-curated.
 
-**Haven**, **Blip**, and **Glint** are free — no ads, no tracking, no
+**Haven**, **Blip**, **Glint**, and **Lathe** are free — no ads, no tracking, no
 subscriptions. Their development is funded through
 [GitHub Sponsors](https://github.com/sponsors/blaineam), [Ko-fi](https://ko-fi.com/wemiller),
 and one-time tips; see the [Support](https://wemiller.com/support) page.
 
 | App | What it does | Released |
 |-----|--------------|----------|
+| **Lathe** | Open-source media engine behind Sami, and a free Mac downloader (not on the App Store; [download](https://github.com/blaineam/Lathe/releases/latest)) | September 2026 |
 | **Kern** | Handle letters with care — word puzzles in living worlds | August 2026 |
 | **Revela** | Shoot film. Wait for it — a vintage film camera | July 2026 |
 | **Haven** | A private, post-quantum social network for the people you love | July 2026 |
@@ -70,7 +72,7 @@ shares a consistent look.
 | [Puzzles](https://wemiller.com/puzzles) | Interactive puzzles and brain teasers |
 | [Speed Test](https://wemiller.com/speedtest) | In-browser network speed test |
 | [Pay](https://wemiller.com/pay) | Simple payment / tip page |
-| [Support](https://wemiller.com/support) | Fund future development of the free apps (Haven, Blip, Glint) via GitHub Sponsors, Ko-fi, or a one-time tip |
+| [Support](https://wemiller.com/support) | Fund future development of the free apps (Haven, Blip, Glint, Lathe) via GitHub Sponsors, Ko-fi, or a one-time tip |
 
 ---
 
@@ -83,8 +85,8 @@ to GitHub Pages via two GitHub Actions workflows:
   regenerates social/poster images ([`scripts/generate-posters.js`](scripts/generate-posters.js)),
   runs footer maintenance, and publishes the site.
 - **[`mirror-app-docs.yml`](.github/workflows/mirror-app-docs.yml)** — automatically mirrors
-  each app's own docs site into `/apps/<slug>/`, so app pages stay in sync from their
-  source repos with no manual copying.
+  each app's own docs site into `/apps/<slug>/` (Blip, Glint, Haven and Lathe), so
+  app pages stay in sync from their source repos with no manual copying.
 
 `apps/projects.json` is the single source of truth for app metadata; the `/apps`
 showcase and home-page timeline are hand-curated views kept in step with it.
