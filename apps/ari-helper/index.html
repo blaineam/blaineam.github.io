@@ -171,14 +171,21 @@
     .ar-row { display: grid; grid-template-columns: 1fr; gap: 40px; align-items: center; margin-top: 56px; }
     @media (min-width: 900px) { .ar-row { grid-template-columns: 1fr 1fr; } .ar-row.flip > :first-child { order: 2; } }
     .ar-phones { display: flex; gap: 18px; justify-content: center; }
-    .ar-phone {
-      width: min(46%, 260px); border-radius: 30px; overflow: hidden; background: #000;
-      box-shadow: 0 24px 60px rgba(0,0,0,0.28); border: 1px solid rgba(255,255,255,0.08);
-    }
+    /* Screens are shown in their device frame, rendered with a transparent
+       background, so the page supplies the shadow and nothing else. */
+    .ar-phone { width: min(46%, 260px); }
+    .ar-phone img { filter: drop-shadow(0 22px 34px rgba(0,0,0,0.32)); }
+    .app-nav .nav-link, .app-nav .btn-buy { white-space: nowrap; }
+    .ar-hero-devices { display: flex; justify-content: center; align-items: flex-start; gap: 4%; }
+    .ar-hero-devices .ar-phone { width: min(44%, 300px); }
+    .ar-hero-devices .raised { margin-top: 56px; }
+    .ar-everywhere { display: flex; align-items: flex-end; justify-content: center; gap: 4%; margin: 40px 0 8px; }
+    .ar-everywhere .ar-mac { width: min(72%, 760px); }
+    .ar-everywhere .ar-watch { width: min(20%, 190px); }
+    .ar-everywhere img { width: 100%; height: auto; display: block; filter: drop-shadow(0 22px 34px rgba(0,0,0,0.28)); }
+    .ar-steps.stacked { grid-template-columns: 1fr; margin-top: 0; }
     .ar-phone img { display: block; width: 100%; height: auto; }
     .ar-phone.lone { width: min(62%, 300px); }
-    .ar-mac { border-radius: 12px; overflow: hidden; box-shadow: 0 24px 60px rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.08); }
-    .ar-mac img { display: block; width: 100%; height: auto; }
     .ar-list { list-style: none; padding: 0; margin: 20px 0 0; }
     .ar-list li { padding: 12px 0; border-top: 1px solid var(--ar-rule); color: var(--ar-ink-soft); line-height: 1.55; }
     .ar-dark .ar-list li { border-color: var(--ar-dark-rule); color: var(--ar-light-soft); }
@@ -199,6 +206,7 @@
     }
     .ar-demo h3 { font: 600 1.35rem/1.25 var(--ar-serif); margin: 16px 0 6px; }
     .ar-demo p { margin: 0; color: var(--ar-light-soft); line-height: 1.55; }
+    .ar-demo .credit a { color: var(--ar-pink); }
     .ar-demo .credit { display: block; margin-top: 6px; font-size: 0.78rem; color: var(--ar-light-faint); }
 
     /* Film */
@@ -236,6 +244,7 @@
 
     .ar-strip { display: flex; gap: 16px; overflow-x: auto; padding: 8px 4px 20px; scroll-snap-type: x mandatory; }
     .ar-strip .ar-phone { flex: 0 0 220px; width: 220px; scroll-snap-align: start; }
+    .ar-strip { padding-bottom: 40px; }
 
     /* Pricing */
     .ar-price-grid { display: grid; grid-template-columns: 1fr; gap: 18px; margin-top: 36px; align-items: stretch; }
@@ -277,8 +286,8 @@
       <button class="mobile-menu-toggle">☰</button>
       <ul class="nav-links">
         <li><a href="#chat" class="nav-link" data-i18n="chat.2ced57">Chat</a></li>
+        <li><a href="#live-camera" class="nav-link" data-i18n="live-camera.b8f14a">Live camera</a></li>
         <li><a href="#photo-studio" class="nav-link" data-i18n="photo-studio.627ce0">Photo Studio</a></li>
-        <li><a href="#film-studio" class="nav-link" data-i18n="film-studio.4c6de3">Film Studio</a></li>
         <li><a href="#pricing" class="nav-link" data-i18n="pricing.a0d9bb">Pricing</a></li>
         <li><a href="#faq" class="nav-link" data-i18n="faq.03688b">FAQ</a></li>
         <li><a href="https://apps.apple.com/us/app/ari-helper/id6480045555" class="btn-buy" target="_blank" rel="noopener noreferrer" data-i18n="download-on-app-store.cf50c2">Download on App Store</a></li>
@@ -292,29 +301,24 @@
       <div class="ar-hero-grid">
         <div>
           <span class="ar-eyebrow" data-i18n="ari-helper-7-iphone.aaefe6">Ari Helper 7 · iPhone, iPad, Mac and Apple Watch</span>
-          <h1 class="ar-display" data-i18n="every-model-you-use.4282bf">Every model you use. Now with a studio.</h1>
-          <p class="ar-lede" data-i18n="ari-puts-the-ai.384a95">Ari puts the AI you already rely on — on your device, on your own server, or in the cloud with your own keys — into one private app. Version 7 adds a Photo Studio and a Film Studio that make, repair and clean up pictures and film on your device.</p>
+          <h1 class="ar-display" data-i18n="ask-anything-point-at.7655dd">Ask anything. Point at anything.</h1>
+          <p class="ar-lede" data-i18n="chat-with-apple-intelligence.1846e1">Chat with Apple Intelligence, a model on your own device, your own server, or any cloud provider you have a key for — all in one private app. Point the camera at the world and just ask. And when a picture or a film needs fixing, Ari 7's studios do it on your device.</p>
           <div class="ar-cta">
             <a class="ar-btn ar-btn-primary" href="https://apps.apple.com/us/app/ari-helper/id6480045555" target="_blank" rel="noopener noreferrer" data-i18n="get-ari-helper-24.3cdd82">Get Ari Helper — $24.99</a>
-            <a class="ar-btn ar-btn-ghost" href="#photo-studio" data-i18n="see-what-it-can.c1963c">See what it can do</a>
+            <a class="ar-btn ar-btn-ghost" href="#chat" data-i18n="see-what-it-can.c1963c">See what it can do</a>
           </div>
           <p class="ar-fine" data-i18n="one-purchase-for-iphone.ee7319">One purchase for iPhone, iPad, Mac and Apple Watch. No subscription, no account.</p>
           <span class="os-ready-badge" data-i18n-html="ready-for-ios-27.ee6eee"><span class="badge-icon">✓</span> Ready for iOS 27 / iPadOS 27 / macOS 27 / watchOS 27</span>
         </div>
-        <figure class="ar-compare" data-compare aria-label="Before and after: drag to compare">
-          <img src="assets/images/showcase/remove-object-before.jpg" alt="Mather Point at the Grand Canyon, with a visitor at the rail" width="1024" height="687">
-          <div class="ar-after"><img src="assets/images/showcase/remove-object-after.jpg" alt="The same photograph with the visitor painted out by Ari" width="1024" height="687"></div>
-          <div class="ar-rule"></div>
-          <div class="ar-knob" aria-hidden="true">⇆</div>
-          <span class="ar-tag left" data-i18n="before.74f396">Before</span>
-          <span class="ar-tag right" data-i18n="in-ari.b92de4">In Ari</span>
-        </figure>
+        <div class="ar-hero-devices">
+          <div class="ar-phone"><img src="assets/images/device-vision.png" alt="Ari describing a photo of a barn owl" width="640" height="1324"></div>
+          <div class="ar-phone raised"><img src="assets/images/device-live-camera.png" alt="Ari answering a question about what the camera sees" width="640" height="1324"></div>
+        </div>
       </div>
-      <p class="ar-caption" data-i18n="drag-across-the-picture.117222">Drag across the picture. The visitor on the right was brushed over once; the canyon behind was painted in on the iPhone.</p>
 
       <div class="ar-facts">
         <div class="ar-fact"><b>One app</b><span data-i18n="for-on-device-models.5ee4fb">for on-device models, your own server and every major cloud provider</span></div>
-        <div class="ar-fact"><b>On device</b><span data-i18n="chat-pictures-and-restoration.d852e7">chat, pictures and restoration run without a network when you choose</span></div>
+        <div class="ar-fact"><b>Live camera</b><span data-i18n="point-ask-by-voice.f535e9">point, ask by voice, and hear the answer</span></div>
         <div class="ar-fact"><b>Two studios</b><span data-i18n="photo-studio-and-film.5616b3">Photo Studio and Film Studio, new in Ari 7</span></div>
         <div class="ar-fact"><b>$24.99 once</b><span data-i18n="for-every-apple-device.800dee">for every Apple device you own, with every update</span></div>
       </div>
@@ -332,7 +336,7 @@
       <span class="ar-eyebrow" data-i18n="the-idea.43e198">The idea</span>
       <h2 class="ar-title" data-i18n="your-ai-should-work.a97097">Your AI should work for you, not the other way round.</h2>
       <p data-i18n="most-ai-apps-choose.f087b3">Most AI apps choose the model, keep your conversations and charge by the month. Ari does the opposite. It runs the model you pick — one on your iPhone, one on the Mac under your desk, or one from any provider you have a key for — and keeps what you say on your devices.</p>
-      <p data-i18n="ari-7-applies-the.3b12df">Ari 7 applies the same idea to pictures and film. Take a stranger out of a holiday photograph, repair a scan of your grandparents' wedding, give an old broadcast its detail back. The models that do it download once, then run on your device.</p>
+      <p data-i18n="so-you-can-ask.03251b">So you can ask about a recipe on your wrist, send a long document to Claude from your iPhone, and let the Mac finish the heavy lifting overnight — then point the camera at a plant you can't name, or clean up the photos from the weekend, without anything leaving your hands.</p>
       <p class="ar-byline" data-i18n="ari-helper-7.8aa325">Ari Helper 7</p>
     </div>
   </section>
@@ -349,50 +353,102 @@
 
       <div class="ar-row">
         <div class="ar-phones">
-          <div class="ar-phone"><img src="assets/images/ui-chat.jpg" alt="A conversation in Ari" loading="lazy"></div>
-          <div class="ar-phone"><img src="assets/images/ui-models.jpg" alt="Downloading an on-device model in Ari" loading="lazy"></div>
+          <div class="ar-phone"><img src="assets/images/device-image.png" alt="Ari generating a picture from a sentence" loading="lazy"></div>
+          <div class="ar-phone"><img src="assets/images/device-models.png" alt="Choosing an on-device model in Ari" loading="lazy"></div>
         </div>
         <ul class="ar-list">
           <li data-i18n-html="private-by-default-on.ef6f93"><b>Private by default.</b> On-device models run on Apple silicon with MLX and need no network. Your prompts don't leave the device.</li>
           <li data-i18n-html="your-own-server-point.986451"><b>Your own server.</b> Point Ari at Ollama or any OpenAI-compatible server by entering its address.</li>
           <li data-i18n-html="your-own-keys-cloud.d37a4c"><b>Your own keys.</b> Cloud providers are billed to your account at their prices. Ari takes no cut and keeps no copy.</li>
-          <li data-i18n-html="it-sees-too-attach.7865a9"><b>It sees, too.</b> Attach photos, PDFs and source files, or point the camera at something and ask about it.</li>
+          <li data-i18n-html="it-reads-what-you.bcd325"><b>It reads what you share.</b> Attach photos, PDFs and source files; Ari reads text and objects in pictures on device, so Spotlight finds a conversation by what was in its images.</li>
           <li data-i18n-html="pictures-from-a-sentence.de074d"><b>Pictures from a sentence.</b> Generate images on device, through Draw Things, or with GPT Image, Imagen and Grok Imagine.</li>
+          <li data-i18n-html="spoken-back-to-you.3bfc4d"><b>Spoken back to you.</b> Replies can be read aloud with a natural voice, and a conversation can be hands-free from start to finish.</li>
         </ul>
       </div>
     </div>
   </section>
 
-  <!-- 02 Photo Studio -->
+  <!-- 02 Look at Something -->
+  <section id="live-camera" class="ar ar-dark">
+    <div class="ar-wrap">
+      <div class="ar-chapter-head"><span class="ar-chapter-n">02</span><span class="ar-eyebrow" data-i18n="look-at-something.ae9580">Look at Something</span></div>
+      <div class="ar-row" style="margin-top:12px">
+        <div class="ar-phones"><div class="ar-phone lone"><img src="assets/images/device-live-camera.png" alt="The live camera with an answer captioned under the picture" loading="lazy"></div></div>
+        <div>
+          <h2 class="ar-title" data-i18n="point-the-camera-ask.8a70fd">Point the camera. Ask out loud.</h2>
+          <p class="ar-lede" data-i18n="look-at-something-turns.434b73">Look at Something turns the camera into a conversation. Ari sends what you see to the model you've chosen — on device, self-hosted or in the cloud — captions the answer under the picture, and reads it to you.</p>
+          <ul class="ar-list">
+            <li data-i18n-html="talk-don-t-type.0fdebc"><b>Talk, don't type.</b> Ask a question and Ari listens, answers, then listens again, so you can keep going with your hands full.</li>
+            <li data-i18n-html="keep-looking-turn-it.681a30"><b>Keep looking.</b> Turn it on and Ari follows along as you move, describing what's in front of you.</li>
+            <li data-i18n-html="one-press-away-start.2a5d62"><b>One press away.</b> Start it from the button beside the microphone, the Lock Screen, Control Center, the Action Button or Siri.</li>
+            <li data-i18n-html="any-model-you-trust.0cdf50"><b>Any model you trust.</b> Keep it on device for privacy, or send it to a stronger vision model when you need one.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 Everywhere -->
+  <section class="ar ar-light-section ar-tint">
+    <div class="ar-wrap">
+      <div class="ar-chapter-head"><span class="ar-chapter-n">03</span><span class="ar-eyebrow" data-i18n="everywhere.2f2b74">Everywhere</span></div>
+      <h2 class="ar-title" data-i18n="start-on-your-wrist.796abb">Start on your wrist. Finish at your desk.</h2>
+      <p class="ar-lede" data-i18n="ari-works-the-same.ea48bb">Ari works the same on iPhone, iPad and Mac, and one purchase covers them all. Conversations and films sync through iCloud. When two of your devices share a Wi-Fi network, a conversation reaches the other one in about a second.</p>
+      <div class="ar-everywhere">
+        <div class="ar-mac"><img src="assets/images/device-mac.png" alt="Ari on the Mac" loading="lazy"></div>
+        <div class="ar-watch"><img src="assets/images/device-watch.png" alt="Ari on Apple Watch" loading="lazy"></div>
+      </div>
+      <div class="ar-four">
+        <div><h3>Apple Watch</h3><p data-i18n="dictate-from-the-ask.46979e">Dictate from the Ask Ari complication and watch the answer stream in from your iPhone, spoken if you like.</p></div>
+        <div><h3>Mac</h3><p data-i18n="code-sessions-give-a.7a4a56">Code Sessions give a model tools to read, edit, search, run git and the shell, browse and use MCP servers inside a project folder.</p></div>
+        <div><h3 data-i18n="dispatch.840e1b">Dispatch</h3><p data-i18n="send-heavy-prompts-from.b9fe01">Send heavy prompts from your iPhone to your Mac, and let the Mac decide when to run them.</p></div>
+        <div><h3 data-i18n="siri-and-shortcuts.00486c">Siri and Shortcuts</h3><p data-i18n="ask-ari-generate-pictures.81db53">Ask Ari, generate pictures, read PDFs and dispatch work from a full Shortcuts catalog.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 Photo Studio -->
   <section id="photo-studio" class="ar ar-dark">
     <div class="ar-wrap">
-      <div class="ar-chapter-head"><span class="ar-chapter-n">02</span><span class="ar-eyebrow" data-i18n="photo-studio.627ce0">Photo Studio</span></div>
+      <div class="ar-chapter-head"><span class="ar-chapter-n">04</span><span class="ar-eyebrow" data-i18n="photo-studio.627ce0">Photo Studio</span></div>
       <h2 class="ar-title" data-i18n="brush-over-it-watch.2a1039">Brush over it. Watch it go.</h2>
       <p class="ar-lede" data-i18n="photo-studio-is-a.f2db97">Photo Studio is a canvas editor with on-device models behind it. Paint over what's wrong and pick a tool, or select nothing and treat the whole photograph. Every step is kept, so going back three edits takes one tap.</p>
-      <p class="ar-fine" data-i18n="everything-below-was-produced.de5c30">Everything below was produced by Ari on public-domain pictures that ship with the app. Where a picture had nothing to fix, the flaw was added first, so you can compare the result with the real original. Open "See what each tool does" in Ari to run them yourself.</p>
+      <p class="ar-fine" data-i18n="everything-below-was-produced.4002b7">Everything below was produced by Ari on pictures that ship with the app. Where a picture had nothing to fix, the flaw was added first, so you can compare the result with the real original. Open "See what each tool does" in Ari to run them yourself.</p>
 
       <div class="ar-gallery">
-        <div class="ar-demo">
-          <figure class="ar-compare" data-compare aria-label="Repair a damaged print: drag to compare">
-            <img src="assets/images/showcase/repair-damage-before.jpg" alt="Migrant Mother, 1936, with scratches and dust" width="788" height="1024" loading="lazy">
-            <div class="ar-after"><img src="assets/images/showcase/repair-damage-after.jpg" alt="The same print with the damage filled by Ari" width="788" height="1024" loading="lazy"></div>
+        <div class="ar-demo wide">
+          <figure class="ar-compare" data-compare aria-label="Remove something: drag to compare">
+            <img src="assets/images/showcase/remove-object-before.jpg" alt="A lookout at the Grand Canyon, with a visitor at the rail" width="1024" height="687" loading="lazy">
+            <div class="ar-after"><img src="assets/images/showcase/remove-object-after.jpg" alt="The same photograph with the visitor painted out by Ari" width="1024" height="687" loading="lazy"></div>
             <div class="ar-rule"></div><div class="ar-knob" aria-hidden="true">⇆</div>
-            <span class="ar-tag left" data-i18n="scan.28cba5">Scan</span><span class="ar-tag right" data-i18n="repaired.f2a00f">Repaired</span>
+            <span class="ar-tag left" data-i18n="before.74f396">Before</span><span class="ar-tag right" data-i18n="in-ari.b92de4">In Ari</span>
           </figure>
-          <h3 data-i18n="repair-a-damaged-print.64c45a">Repair a damaged print</h3>
-          <p data-i18n="ari-finds-the-scratches.00e9e9">Ari finds the scratches, dust and cracks itself and fills them from what surrounds them. The damage here is real; nothing was added.</p>
-          <span class="credit" data-i18n="migrant-mother-dorothea-lange.d57965">Migrant Mother — Dorothea Lange, 1936, Library of Congress.</span>
+          <div>
+            <h3 data-i18n="remove-something.2fe1e3">Remove something</h3>
+            <p data-i18n="the-visitor-on-the.9a851c">The visitor on the right was brushed over once; Ari fitted the stroke to them and painted in the canyon behind.</p>
+            <span class="credit" data-i18n="mather-point-grand-canyon.e92d39">Mather Point, Grand Canyon — National Park Service.</span>
+          </div>
         </div>
         <div class="ar-demo">
           <figure class="ar-compare" data-compare aria-label="Add color: drag to compare">
-            <img src="assets/images/showcase/colorize-before.jpg" alt="Abraham Lincoln, glass-plate portrait, 1865" width="794" height="1024" loading="lazy">
-            <div class="ar-after"><img src="assets/images/showcase/colorize-after.jpg" alt="The same portrait given colour by Ari" width="794" height="1024" loading="lazy"></div>
+            <img src="assets/images/showcase/colorize-before.jpg" alt="A beach photograph in black and white" width="1024" height="683" loading="lazy">
+            <div class="ar-after"><img src="assets/images/showcase/colorize-after.jpg" alt="The same photograph given its color back by Ari" width="1024" height="683" loading="lazy"></div>
             <div class="ar-rule"></div><div class="ar-knob" aria-hidden="true">⇆</div>
-            <span class="ar-tag left">1865</span><span class="ar-tag right" data-i18n="colorized.be4101">Colorized</span>
+            <span class="ar-tag left">B&amp;W</span><span class="ar-tag right" data-i18n="colorized.be4101">Colorized</span>
           </figure>
           <h3 data-i18n="add-color.c29d05">Add color</h3>
-          <p data-i18n="a-black-and-white.689f10">A black-and-white photograph gets colors that look right. It's the model's guess — nobody knows what the real colors were.</p>
-          <span class="credit" data-i18n="abraham-lincoln-alexander-gardner.486142">Abraham Lincoln — Alexander Gardner, 1865.</span>
+          <p data-i18n="a-color-photo-turned.12969e">A color photo turned black and white, then colored again by the model: blue sea, golden rock, wet sand. A strength slider sets how bold the color is.</p>
+          <span class="credit"><a href="assets/images/showcase/colorize-original.jpg" data-i18n="see-the-original.cf5998">See the original</a></span>
+        </div>
+        <div class="ar-demo">
+          <figure class="ar-compare" data-compare aria-label="Heal scratches and dust: drag to compare">
+            <img src="assets/images/showcase/repair-damage-before.jpg" alt="A sunset on the beach covered in scratches and dust" width="1024" height="768" loading="lazy">
+            <div class="ar-after"><img src="assets/images/showcase/repair-damage-after.jpg" alt="The same photograph with the damage healed by Ari" width="1024" height="768" loading="lazy"></div>
+            <div class="ar-rule"></div><div class="ar-knob" aria-hidden="true">⇆</div>
+            <span class="ar-tag left" data-i18n="scratched.4ca138">Scratched</span><span class="ar-tag right" data-i18n="repaired.f2a00f">Repaired</span>
+          </figure>
+          <h3 data-i18n="heal-scratches-and-dust.f095dc">Heal scratches and dust</h3>
+          <p data-i18n="scratches-a-crease-and.82b7a0">Scratches, a crease and dust over a sunset, brushed over and healed from what surrounds each one. On an old scan, Repair damage looks for them itself.</p>
         </div>
         <div class="ar-demo">
           <figure class="ar-compare" data-compare aria-label="Remove noise: drag to compare">
@@ -403,41 +459,27 @@
           </figure>
           <h3 data-i18n="remove-noise.1cbfd1">Remove noise</h3>
           <p data-i18n="heavy-sensor-noise-added.dedf9c">Heavy sensor noise added to a clean photograph, then removed without smearing the rail or the clouds.</p>
-          <span class="credit" data-i18n="mather-point-grand-canyon.e92d39">Mather Point, Grand Canyon — National Park Service.</span>
         </div>
         <div class="ar-demo">
-          <figure class="ar-compare" data-compare aria-label="Undo camera shake: drag to compare">
-            <img src="assets/images/showcase/deblur-before.jpg" alt="The Grand Canyon photograph with slight camera shake" width="1024" height="687" loading="lazy">
-            <div class="ar-after"><img src="assets/images/showcase/deblur-after.jpg" alt="The same photograph sharpened by Ari" width="1024" height="687" loading="lazy"></div>
-            <div class="ar-rule"></div><div class="ar-knob" aria-hidden="true">⇆</div>
-            <span class="ar-tag left" data-i18n="shaken.9920e0">Shaken</span><span class="ar-tag right" data-i18n="sharpened.f3828d">Sharpened</span>
-          </figure>
-          <h3 data-i18n="undo-camera-shake.54d34e">Undo camera shake</h3>
-          <p data-i18n="slight-shake-sharpened-look.864207">Slight shake, sharpened. Look at the plaid and the fence. It won't rescue a picture that's badly blurred.</p>
-          <span class="credit" data-i18n="mather-point-grand-canyon.e92d39">Mather Point, Grand Canyon — National Park Service.</span>
-        </div>
-        <div class="ar-demo wide">
-          <figure class="ar-compare" data-compare aria-label="Make it bigger: drag to compare" style="max-width:560px">
+          <figure class="ar-compare" data-compare aria-label="Make it bigger: drag to compare">
             <img src="assets/images/showcase/upscale-before.jpg" alt="Earthrise at 320 pixels, enlarged the ordinary way" width="1280" height="1280" loading="lazy">
             <div class="ar-after"><img src="assets/images/showcase/upscale-after.jpg" alt="The same 320-pixel picture enlarged four times by Ari" width="1280" height="1280" loading="lazy"></div>
             <div class="ar-rule"></div><div class="ar-knob" aria-hidden="true">⇆</div>
             <span class="ar-tag left" data-i18n="stretched.3d1cdb">Stretched</span><span class="ar-tag right" data-i18n="upscaled-4.9dd1ce">Upscaled ×4</span>
           </figure>
-          <div>
-            <h3 data-i18n="make-it-bigger.f779aa">Make it bigger</h3>
-            <p data-i18n="earthrise-shrunk-to-320.aa1f50">Earthrise shrunk to 320 pixels, then enlarged four times: on the left the ordinary way, on the right by Ari, with detail added to match.</p>
-            <span class="credit" data-i18n="earthrise-nasa-apollo-8.90964f">Earthrise — NASA, Apollo 8, 1968.</span>
-          </div>
+          <h3 data-i18n="make-it-bigger.f779aa">Make it bigger</h3>
+          <p data-i18n="earthrise-shrunk-to-320.aa1f50">Earthrise shrunk to 320 pixels, then enlarged four times: on the left the ordinary way, on the right by Ari, with detail added to match.</p>
+          <span class="credit" data-i18n="earthrise-nasa-apollo-8.90964f">Earthrise — NASA, Apollo 8, 1968.</span>
         </div>
       </div>
 
       <div class="ar-row">
         <div class="ar-phones">
-          <div class="ar-phone lone"><img src="assets/images/ui-photo-studio.jpg" alt="Photo Studio in Ari" loading="lazy"></div>
+          <div class="ar-phone lone"><img src="assets/images/device-photo-studio.png" alt="Photo Studio in Ari, with a stroke brushed over a visitor" loading="lazy"></div>
         </div>
         <ul class="ar-list">
           <li data-i18n-html="heal-and-remove-brush.c9183b"><b>Heal and remove.</b> Brush roughly over a leash, a sign or a stranger; Ari fits the stroke to the object and fills the gap.</li>
-          <li data-i18n-html="repair-denoise-sharpen-colorize.101ec4"><b>Repair, denoise, sharpen, colorize, upscale.</b> On a selection or the whole photograph.</li>
+          <li data-i18n-html="repair-denoise-sharpen-colorize.e426e3"><b>Repair, denoise, sharpen, colorize, upscale.</b> On a selection or the whole photograph, with a strength slider for color.</li>
           <li data-i18n-html="describe-it-instead-say.4df21b"><b>Describe it instead.</b> Say what should be in the selection and a generative model paints it in.</li>
           <li data-i18n-html="inside-photos-the-same.a0d13b"><b>Inside Photos.</b> The same tools, from the Edit screen of the Photos app.</li>
           <li data-i18n-html="downloaded-once-each-model.0569fc"><b>Downloaded once.</b> Each model downloads the first time you use it. Nothing is uploaded.</li>
@@ -446,21 +488,24 @@
     </div>
   </section>
 
-  <!-- 03 Film Studio -->
+  <!-- 05 Film Studio -->
   <section id="film-studio" class="ar ar-light-section">
     <div class="ar-wrap">
-      <div class="ar-chapter-head"><span class="ar-chapter-n">03</span><span class="ar-eyebrow" data-i18n="film-studio.4c6de3">Film Studio</span></div>
+      <div class="ar-chapter-head"><span class="ar-chapter-n">05</span><span class="ar-eyebrow" data-i18n="film-studio.4c6de3">Film Studio</span></div>
       <h2 class="ar-title" data-i18n="write-a-film-one.7c29d5">Write a film one shot at a time.</h2>
       <p class="ar-lede" data-i18n="film-studio-is-laid.2dd49c">Film Studio is laid out like an editing suite. Write a film as a list of shots, render each with the video model you choose, keep the takes that work, and watch the cut come together above the timeline. Films sync through iCloud, so a scene started on the Mac is there on the iPhone.</p>
-      <div class="ar-steps">
-        <div><h3 data-i18n="write.4a4893">Write</h3><p data-i18n="describe-each-shot-and.7e6cf9">Describe each shot and how long it runs. Narration and a still to start from are optional.</p></div>
-        <div><h3 data-i18n="render.b2e402">Render</h3><p data-i18n="each-shot-is-rendered.e7164d">Each shot is rendered on its own, with the settings its model needs, and shows a live preview while it works.</p></div>
-        <div><h3 data-i18n="cut.38d13b">Cut</h3><p data-i18n="keep-the-good-takes.772588">Keep the good takes, drop the rest, and play the film from the first shot to the last.</p></div>
+      <div class="ar-row">
+        <div class="ar-phones"><div class="ar-phone lone"><img src="assets/images/device-film-studio.png" alt="A film open in Film Studio, with its timeline of shots" loading="lazy"></div></div>
+        <div class="ar-steps stacked">
+          <div><h3 data-i18n="write.4a4893">Write</h3><p data-i18n="describe-each-shot-and.7e6cf9">Describe each shot and how long it runs. Narration and a still to start from are optional.</p></div>
+          <div><h3 data-i18n="render.b2e402">Render</h3><p data-i18n="each-shot-is-rendered.e7164d">Each shot is rendered on its own, with the settings its model needs, and shows a live preview while it works.</p></div>
+          <div><h3 data-i18n="cut.38d13b">Cut</h3><p data-i18n="keep-the-good-takes.772588">Keep the good takes, drop the rest, and play the film from the first shot to the last.</p></div>
+        </div>
       </div>
 
       <div class="ar-row flip">
         <div>
-          <figure class="ar-compare" data-compare data-film aria-label="Old film cleaned up: drag to compare">
+          <figure id="film-compare" class="ar-compare" data-compare data-film aria-label="Old film cleaned up: drag to compare">
             <video src="assets/images/showcase/film-before.mp4" muted autoplay loop playsinline webkit-playsinline preload="auto" disablepictureinpicture disableremoteplayback poster="assets/images/showcase/film-before.jpg"></video>
             <div class="ar-after"><video src="assets/images/showcase/film-after.mp4" muted autoplay loop playsinline webkit-playsinline preload="auto" disablepictureinpicture disableremoteplayback poster="assets/images/showcase/film-after.jpg"></video></div>
             <div class="ar-rule"></div><div class="ar-knob" aria-hidden="true">⇆</div>
@@ -511,25 +556,10 @@
     </div>
   </section>
 
-  <!-- 04 Everywhere -->
-  <section class="ar ar-light-section ar-tint">
-    <div class="ar-wrap">
-      <div class="ar-chapter-head"><span class="ar-chapter-n">04</span><span class="ar-eyebrow" data-i18n="everywhere.2f2b74">Everywhere</span></div>
-      <h2 class="ar-title" data-i18n="start-on-your-wrist.796abb">Start on your wrist. Finish at your desk.</h2>
-      <p class="ar-lede" data-i18n="ari-works-the-same.ea48bb">Ari works the same on iPhone, iPad and Mac, and one purchase covers them all. Conversations and films sync through iCloud. When two of your devices share a Wi-Fi network, a conversation reaches the other one in about a second.</p>
-      <div class="ar-four">
-        <div><h3>Apple Watch</h3><p data-i18n="dictate-from-the-ask.46979e">Dictate from the Ask Ari complication and watch the answer stream in from your iPhone, spoken if you like.</p></div>
-        <div><h3>Mac</h3><p data-i18n="code-sessions-give-a.7a4a56">Code Sessions give a model tools to read, edit, search, run git and the shell, browse and use MCP servers inside a project folder.</p></div>
-        <div><h3 data-i18n="dispatch.840e1b">Dispatch</h3><p data-i18n="send-heavy-prompts-from.b9fe01">Send heavy prompts from your iPhone to your Mac, and let the Mac decide when to run them.</p></div>
-        <div><h3 data-i18n="siri-and-shortcuts.00486c">Siri and Shortcuts</h3><p data-i18n="ask-ari-generate-pictures.81db53">Ask Ari, generate pictures, read PDFs and dispatch work from a full Shortcuts catalog.</p></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 05 Privacy -->
+  <!-- 06 Privacy -->
   <section class="ar ar-light-section">
     <div class="ar-wrap">
-      <div class="ar-chapter-head"><span class="ar-chapter-n">05</span><span class="ar-eyebrow" data-i18n="privacy.cf0148">Privacy</span></div>
+      <div class="ar-chapter-head"><span class="ar-chapter-n">06</span><span class="ar-eyebrow" data-i18n="privacy.cf0148">Privacy</span></div>
       <div class="ar-row" style="margin-top:12px">
         <div>
           <h2 class="ar-title" data-i18n="you-decide-who-hears.6b0110">You decide who hears what.</h2>
@@ -540,7 +570,7 @@
             <li data-i18n-html="marked-pictures-images-ari.2e9979"><b>Marked pictures.</b> Images Ari generates carry an invisible watermark that survives compression. <a href="watermark/">Check a picture</a> in your browser.</li>
           </ul>
         </div>
-        <div class="ar-phones"><div class="ar-phone lone"><img src="assets/images/ui-settings.jpg" alt="Provider settings in Ari" loading="lazy"></div></div>
+        <div class="ar-phones"><div class="ar-phone lone"><img src="assets/images/device-settings.png" alt="Provider settings in Ari" loading="lazy"></div></div>
       </div>
     </div>
   </section>
@@ -551,13 +581,14 @@
       <span class="ar-eyebrow" data-i18n="see-it-in-action.8c8d28">See It In Action</span>
       <h2 class="ar-title" data-i18n="screenshots.597b63">Screenshots</h2>
       <div class="ar-strip">
-        <div class="ar-phone"><img src="assets/images/ui-chat.jpg" alt="Chat" loading="lazy"></div>
-        <div class="ar-phone"><img src="assets/images/ui-photo-studio.jpg" alt="Photo Studio" loading="lazy"></div>
-        <div class="ar-phone"><img src="assets/images/ui-film-studio.jpg" alt="Film Studio" loading="lazy"></div>
-        <div class="ar-phone"><img src="assets/images/ui-image.jpg" alt="Image generation" loading="lazy"></div>
-        <div class="ar-phone"><img src="assets/images/ui-vision.jpg" alt="Asking about a photo" loading="lazy"></div>
-        <div class="ar-phone"><img src="assets/images/ui-models.jpg" alt="On-device models" loading="lazy"></div>
-        <div class="ar-phone"><img src="assets/images/screenshot-watch.png" alt="Ari on Apple Watch" loading="lazy"></div>
+        <div class="ar-phone"><img src="assets/images/device-chat.png" alt="Chat" loading="lazy"></div>
+        <div class="ar-phone"><img src="assets/images/device-live-camera.png" alt="Look at Something" loading="lazy"></div>
+        <div class="ar-phone"><img src="assets/images/device-vision.png" alt="Asking about a photo" loading="lazy"></div>
+        <div class="ar-phone"><img src="assets/images/device-image.png" alt="Image generation" loading="lazy"></div>
+        <div class="ar-phone"><img src="assets/images/device-photo-studio.png" alt="Photo Studio" loading="lazy"></div>
+        <div class="ar-phone"><img src="assets/images/device-film-studio.png" alt="Film Studio" loading="lazy"></div>
+        <div class="ar-phone"><img src="assets/images/device-models.png" alt="On-device models" loading="lazy"></div>
+        <div class="ar-phone"><img src="assets/images/device-settings.png" alt="Settings" loading="lazy"></div>
       </div>
     </div>
   </section>
@@ -634,6 +665,16 @@
       </button>
       <div class="faq-answer">
         <p data-i18n="no-the-restoration-models.7e7645">No. The restoration models download from their public hosts the first time you use them, then run on your device. The only exception is repainting from a description, which uses the provider you pick and follows that provider's privacy policy.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        <span data-i18n="how-does-the-live.951b68">How does the live camera work?</span>
+        <span class="faq-icon">▼</span>
+      </button>
+      <div class="faq-answer">
+        <p data-i18n="open-look-at-something.89449e">Open Look at Something from the button beside the microphone, the Lock Screen, Control Center, the Action Button or Siri, point the camera and ask a question out loud or in text. Ari sends the frame to whichever model you've chosen, captions the answer under the picture and can read it to you, then listens for your next question. Turn on Keep looking and it follows along as you move. With an on-device model, nothing leaves your iPhone.</p>
       </div>
     </div>
 
@@ -770,7 +811,7 @@
       <div class="ar-cta">
         <a class="ar-btn ar-btn-primary" href="https://apps.apple.com/us/app/ari-helper/id6480045555" target="_blank" rel="noopener noreferrer" data-i18n="get-ari-helper-24.3cdd82">Get Ari Helper — $24.99</a>
       </div>
-      <p class="ar-fine" data-i18n="sample-pictures-and-film.52d1dc">Sample pictures and film on this page are in the public domain: Mather Point, Grand Canyon (National Park Service); Migrant Mother (Dorothea Lange, 1936, Library of Congress); Abraham Lincoln (Alexander Gardner, 1865); Earthrise (NASA, Apollo 8, 1968); Apollo 11 television (NASA, 1969). Every result was produced by Ari Helper. Noise reduction and deblurring use NAFNet (MIT licence); damage repair uses LaMa (Apache 2.0).</p>
+      <p class="ar-fine" data-i18n="the-beach-photographs-are.81eb29">The beach photographs are sample pictures from Luma Editor. Mather Point, Grand Canyon (National Park Service), Earthrise (NASA, Apollo 8, 1968) and the Apollo 11 television broadcast (NASA, 1969) are in the public domain. Every result was produced by Ari Helper. Colorizing uses DDColor (Apache 2.0), noise reduction and deblurring use NAFNet (MIT), and damage repair uses LaMa (Apache 2.0).</p>
     </div>
   </section>
 
