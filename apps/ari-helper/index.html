@@ -116,6 +116,16 @@
       touch-action: pan-y; cursor: ew-resize; background: #000; margin: 0;
       box-shadow: 0 30px 80px rgba(0,0,0,0.35);
     }
+    /* Dragging must not select anything: Safari highlights text and images
+       in blue unless the prefixed properties are set, and the slider's focus
+       ring only belongs to keyboard use. */
+    .ar-compare, .ar-compare * {
+      -webkit-user-select: none; user-select: none;
+      -webkit-user-drag: none; -webkit-touch-callout: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .ar-compare:focus { outline: none; }
+    .ar-compare:focus-visible { outline: 2px solid currentColor; outline-offset: 3px; }
     .ar-compare img, .ar-compare video { display: block; width: 100%; height: auto; pointer-events: none; }
     .ar-compare .ar-after { position: absolute; inset: 0; clip-path: inset(0 0 0 var(--split, 50%)); }
     .ar-compare .ar-after img, .ar-compare .ar-after video { width: 100%; height: 100%; object-fit: cover; }
@@ -451,8 +461,8 @@
       <div class="ar-row flip">
         <div>
           <figure class="ar-compare" data-compare data-film aria-label="Old film cleaned up: drag to compare">
-            <video src="assets/images/showcase/film-before.mp4" muted loop playsinline preload="metadata" poster="assets/images/showcase/film-before.jpg"></video>
-            <div class="ar-after"><video src="assets/images/showcase/film-after.mp4" muted loop playsinline preload="metadata" poster="assets/images/showcase/film-after.jpg"></video></div>
+            <video src="assets/images/showcase/film-before.mp4" muted autoplay loop playsinline webkit-playsinline preload="auto" disablepictureinpicture disableremoteplayback poster="assets/images/showcase/film-before.jpg"></video>
+            <div class="ar-after"><video src="assets/images/showcase/film-after.mp4" muted autoplay loop playsinline webkit-playsinline preload="auto" disablepictureinpicture disableremoteplayback poster="assets/images/showcase/film-after.jpg"></video></div>
             <div class="ar-rule"></div><div class="ar-knob" aria-hidden="true">⇆</div>
             <span class="ar-tag left">1969</span><span class="ar-tag right" data-i18n="cleaned.1b52c2">Cleaned</span>
           </figure>
@@ -839,7 +849,10 @@
         set((event.clientX - box.left) / box.width);
       };
       let dragging = false;
-      figure.addEventListener('pointerdown', (e) => { dragging = true; figure.setPointerCapture(e.pointerId); fromEvent(e); });
+      figure.querySelectorAll('img, video').forEach((media) => { media.draggable = false; });
+      figure.addEventListener('pointerdown', (e) => { e.preventDefault(); dragging = true; figure.setPointerCapture(e.pointerId); fromEvent(e); });
+      figure.addEventListener('selectstart', (e) => e.preventDefault());
+      figure.addEventListener('dragstart', (e) => e.preventDefault());
       figure.addEventListener('pointermove', (e) => { if (dragging) fromEvent(e); });
       figure.addEventListener('pointerup', () => { dragging = false; });
       figure.addEventListener('pointercancel', () => { dragging = false; });
@@ -860,6 +873,13 @@
     document.querySelectorAll('[data-film]').forEach((figure) => {
       const [before, after] = figure.querySelectorAll('video');
       const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      // iOS only plays inline video it knows is silent, and checks the
+      // property as well as the attribute.
+      [before, after].forEach((v) => { v.muted = true; v.defaultMuted = true; v.playsInline = true; });
+      const playBoth = () => Promise.all([before.play(), after.play()]);
+      // Low Power Mode refuses any play() that no touch started; the first
+      // touch on the clip starts it instead.
+      figure.addEventListener('pointerup', () => { if (before.paused) playBoth().catch(() => {}); });
       const follow = () => { if (Math.abs(after.currentTime - before.currentTime) > 0.08) after.currentTime = before.currentTime; };
       // The broadcast opens on black; start, and loop back, to where there is
       // something to see.
@@ -871,7 +891,7 @@
       if (reduced || !('IntersectionObserver' in window)) return;
       new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) { before.play().catch(() => {}); after.play().catch(() => {}); }
+          if (entry.isIntersecting) { playBoth().catch(() => {}); }
           else { before.pause(); after.pause(); }
         });
       }, { threshold: 0.35 }).observe(figure);
