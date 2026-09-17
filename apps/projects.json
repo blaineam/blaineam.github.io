@@ -14,7 +14,7 @@
       "icon_url": "/apps/lathe/assets/images/icon.png",
       "released": "2026-09",
       "updated": "2026-09",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "status": "live",
       "price": "free",
       "note": "An open-source (Apache-2.0) Swift media engine that runs entirely on device — encoding, frames, tags, chapters, subtitles, AV1 and Flash through the system frameworks with no subprocesses — and a free, notarized Mac downloader built on it: paste links or browse signed in, Tor built in, hand-off to Sami."
