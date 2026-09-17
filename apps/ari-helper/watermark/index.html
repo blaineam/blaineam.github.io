@@ -10,60 +10,254 @@
   <meta property="og:url" content="https://wemiller.com/apps/ari-helper/watermark/">
   <link rel="stylesheet" href="../../app-showcase.css">
   <style>
-    :root { --app-primary: #f093fb; --app-secondary: #f5576c; }
-    .wrap { max-width: 720px; margin: 0 auto; padding: 3rem 1.25rem 4rem; }
-    h1 { margin-bottom: .5rem; }
-    .lede { color: #555; margin-bottom: 2rem; }
-    .drop {
-      border: 2px dashed rgba(240,147,251,.6); border-radius: 14px;
-      padding: 3rem 1.5rem; text-align: center; cursor: pointer;
-      transition: background .15s, border-color .15s; background: rgba(240,147,251,.04);
+    /* The Ari page's studio look: a night band for the title, paper for the
+       work, Ari's pink-to-coral kept for the one thing to press. */
+    :root {
+      --app-primary: #f093fb; --app-secondary: #f5576c;
+      --primary-color: #e0529a; --secondary-color: #f5576c;
+      --wm-paper: #f7f3f1; --wm-paper-2: #efe8e5; --wm-card: #ffffff;
+      --wm-ink: #1a1419; --wm-ink-soft: #4d434b; --wm-ink-faint: #7d7079;
+      --wm-rule: rgba(26, 20, 25, 0.12);
+      --wm-dark: #0f0b12; --wm-light: #f6eff4;
+      --wm-light-soft: rgba(246, 239, 244, 0.76); --wm-dark-rule: rgba(246, 239, 244, 0.14);
+      --wm-pink: #f093fb; --wm-coral: #f5576c;
+      --wm-grad: linear-gradient(120deg, #f093fb 0%, #f5576c 100%);
+      --wm-green: #1f9d55; --wm-amber: #c77700;
+      --wm-serif: ui-serif, "New York", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+      --wm-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
     }
-    .drop:hover, .drop.over { background: rgba(240,147,251,.12); border-color: var(--app-secondary); }
-    .drop input { display: none; }
-    .result { margin-top: 1.75rem; padding: 1.1rem 1.25rem; border-radius: 12px; display: none; }
-    .result.show { display: block; }
-    .result.found { background: rgba(52,199,89,.12); border: 1px solid rgba(52,199,89,.45); }
-    .result.missing { background: rgba(255,159,10,.10); border: 1px solid rgba(255,159,10,.4); }
-    .result h2 { font-size: 1.05rem; margin: 0 0 .4rem; }
-    .result p { margin: 0; color: #444; font-size: .93rem; }
-    .meta { font-family: ui-monospace, Menlo, monospace; font-size: .82rem; color: #666; margin-top: .5rem; }
-    .caveat { margin-top: 2.25rem; font-size: .86rem; color: #666; line-height: 1.55; }
-    .back { display: inline-block; margin-bottom: 1.5rem; font-size: .9rem; }
     @media (prefers-color-scheme: dark) {
-      .lede, .result p { color: #bbb; } .caveat, .meta { color: #999; }
+      :root {
+        --wm-paper: #18131a; --wm-paper-2: #211a23; --wm-card: #221b25;
+        --wm-ink: #f3ecf1; --wm-ink-soft: rgba(243, 236, 241, 0.78);
+        --wm-ink-faint: rgba(243, 236, 241, 0.55); --wm-rule: rgba(243, 236, 241, 0.12);
+        --wm-green: #4ade80; --wm-amber: #fbbf24;
+      }
     }
+    body { background: var(--wm-paper); color: var(--wm-ink); font-family: var(--wm-sans); }
+
+    .app-nav { background: rgba(15, 11, 18, 0.82) !important; border-bottom: 1px solid var(--wm-dark-rule); }
+    .nav-container { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+    .nav-logo { background: none; -webkit-text-fill-color: var(--wm-light); color: var(--wm-light); font-family: var(--wm-serif); }
+    .wm-store {
+      display: inline-flex; align-items: center; border-radius: 999px; padding: 9px 18px;
+      background: var(--wm-grad); color: #230712; font: 600 .9rem/1 var(--wm-sans);
+      text-decoration: none; white-space: nowrap;
+    }
+    .wm-store:hover { filter: brightness(1.08); }
+    .nav-logo { white-space: nowrap; }
+    @media (max-width: 600px) {
+      .nav-logo { font-size: 1.2rem; }
+      .wm-store { padding: 8px 14px; font-size: .82rem; }
+    }
+
+    .wm-narrow { max-width: 760px; margin: 0 auto; padding: 0 24px; }
+
+    .wm-hero {
+      background: radial-gradient(120% 90% at 85% 0%, rgba(240, 147, 251, .22), transparent 60%),
+                  radial-gradient(90% 80% at 0% 100%, rgba(245, 87, 108, .16), transparent 60%),
+                  var(--wm-dark);
+      color: var(--wm-light);
+      padding: clamp(120px, 16vw, 168px) 0 clamp(128px, 16vw, 176px);
+    }
+    .wm-eyebrow {
+      display: inline-block; font: 600 .74rem/1 var(--wm-sans);
+      letter-spacing: .16em; text-transform: uppercase; color: var(--wm-pink);
+    }
+    .wm-hero h1 {
+      font-family: var(--wm-serif); font-weight: 600; color: var(--wm-light);
+      background: none; -webkit-text-fill-color: currentColor;
+      font-size: clamp(2.3rem, 6vw, 4rem); line-height: 1.04; letter-spacing: -.02em;
+      margin: 16px 0 20px;
+    }
+    .wm-hero p { font-size: clamp(1.05rem, 1.7vw, 1.22rem); line-height: 1.65; color: var(--wm-light-soft); max-width: 60ch; }
+    .wm-promise {
+      display: inline-flex; align-items: center; gap: 10px; margin-top: 28px;
+      padding: 10px 16px; border-radius: 999px; border: 1px solid var(--wm-dark-rule);
+      font-size: .9rem; color: var(--wm-light-soft);
+    }
+    .wm-promise svg { flex: none; color: var(--wm-pink); }
+
+    .wm-main { padding: clamp(48px, 8vw, 88px) 0 clamp(64px, 10vw, 112px); }
+
+    .wm-card {
+      background: var(--wm-card); border: 1px solid var(--wm-rule); border-radius: 22px;
+      padding: clamp(18px, 3vw, 28px);
+      box-shadow: 0 24px 60px rgba(26, 20, 25, .08);
+      margin-top: calc(-1 * clamp(72px, 10vw, 112px));
+      position: relative;
+    }
+    .drop {
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 14px; min-height: 260px; padding: 40px 24px; text-align: center; cursor: pointer;
+      border: 2px dashed rgba(240, 147, 251, .55); border-radius: 16px;
+      background: linear-gradient(180deg, rgba(240, 147, 251, .07), rgba(245, 87, 108, .04));
+      transition: background .15s, border-color .15s, transform .15s;
+    }
+    .drop:hover, .drop.over {
+      border-color: var(--wm-coral);
+      background: linear-gradient(180deg, rgba(240, 147, 251, .14), rgba(245, 87, 108, .08));
+    }
+    .drop.over { transform: scale(1.01); }
+    .drop:focus-within { outline: 3px solid rgba(240, 147, 251, .5); outline-offset: 3px; }
+    .drop input { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
+    .drop-icon {
+      width: 64px; height: 64px; border-radius: 18px; display: grid; place-items: center;
+      background: var(--wm-grad); color: #fff; box-shadow: 0 10px 28px rgba(245, 87, 108, .3);
+    }
+    .drop-title { font: 600 1.15rem/1.35 var(--wm-sans); color: var(--wm-ink); }
+    .drop-hint { font-size: .9rem; color: var(--wm-ink-faint); }
+
+    .result {
+      display: none; margin-top: 20px; padding: 18px; border-radius: 16px;
+      grid-template-columns: 96px 1fr; gap: 18px; align-items: center;
+    }
+    .result.show { display: grid; }
+    .result.found { background: rgba(31, 157, 85, .09); border: 1px solid rgba(31, 157, 85, .35); }
+    .result.missing { background: rgba(199, 119, 0, .08); border: 1px solid rgba(199, 119, 0, .32); }
+    .result img {
+      width: 96px; height: 96px; object-fit: cover; border-radius: 12px; display: block;
+      background: var(--wm-paper-2);
+    }
+    .result h2 {
+      display: flex; align-items: center; gap: 8px;
+      font: 600 1.15rem/1.3 var(--wm-sans); margin: 0 0 6px; color: var(--wm-ink);
+      background: none; -webkit-text-fill-color: currentColor;
+    }
+    .result.found h2 .dot { background: var(--wm-green); }
+    .result.missing h2 .dot { background: var(--wm-amber); }
+    .result h2 .dot { width: 10px; height: 10px; border-radius: 50%; flex: none; }
+    .result p { margin: 0; color: var(--wm-ink-soft); font-size: .95rem; line-height: 1.55; }
+    .meta { font-family: ui-monospace, Menlo, monospace; font-size: .8rem; color: var(--wm-ink-faint); margin-top: 8px; word-break: break-word; }
+    @media (max-width: 480px) {
+      .result { grid-template-columns: 1fr; }
+      .result img { width: 100%; height: 160px; }
+    }
+
+    .wm-section-title {
+      font-family: var(--wm-serif); font-weight: 600; color: var(--wm-ink);
+      background: none; -webkit-text-fill-color: currentColor;
+      font-size: clamp(1.5rem, 3vw, 2rem); letter-spacing: -.01em;
+      margin: clamp(56px, 8vw, 80px) 0 24px;
+    }
+    .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 16px; list-style: none; padding: 0; margin: 0; }
+    .steps li {
+      background: var(--wm-paper-2); border-radius: 16px; padding: 22px 20px;
+      border: 1px solid var(--wm-rule);
+    }
+    .steps .num {
+      display: inline-grid; place-items: center; width: 30px; height: 30px; border-radius: 50%;
+      background: var(--wm-grad); color: #230712; font: 700 .85rem/1 var(--wm-sans); margin-bottom: 14px;
+    }
+    .steps h3 {
+      font: 600 1.02rem/1.35 var(--wm-sans); margin: 0 0 6px; color: var(--wm-ink);
+      background: none; -webkit-text-fill-color: currentColor;
+    }
+    .steps p { margin: 0; font-size: .92rem; line-height: 1.55; color: var(--wm-ink-soft); }
+
+    .caveat {
+      margin-top: clamp(40px, 6vw, 56px); padding: 22px 24px; border-radius: 16px;
+      border-left: 4px solid var(--wm-coral); background: var(--wm-paper-2);
+      font-size: .95rem; line-height: 1.65; color: var(--wm-ink-soft);
+    }
+    .caveat strong { display: block; margin-bottom: 6px; color: var(--wm-ink); font-size: 1rem; }
+
+    .wm-back { display: inline-block; margin-top: 40px; color: var(--wm-coral); font-weight: 600; text-decoration: none; }
+    .wm-back:hover { text-decoration: underline; }
+
+    .footer { background: var(--wm-dark); }
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <a class="back" href="../" data-i18n="back">← Ari Helper</a>
-    <h1 data-i18n="title">Check for Ari's mark</h1>
-    <p class="lede" data-i18n="lede">Ari Helper can add an invisible mark to pictures it generates. Drop one here to see whether it carries that mark. The picture never leaves your device — the check runs in this page.</p>
-
-    <label class="drop" id="drop">
-      <input type="file" id="file" accept="image/*">
-      <span data-i18n="drop">Drop a picture here, or click to choose one</span>
-    </label>
-
-    <!-- The result wording lives in the DOM so the site's own translator
-         handles it; i18n.js exposes no runtime lookup for scripts. -->
-    <div hidden>
-      <span id="s-found" data-i18n="verdict-found">Ari's mark is present</span>
-      <span id="s-missing" data-i18n="verdict-missing">No mark found</span>
-      <span id="s-found-why" data-i18n="explain-found">This picture carries the invisible mark Ari Helper adds to images it generates.</span>
-      <span id="s-missing-why" data-i18n="explain-missing">This picture does not carry the mark — but see the note below before concluding anything from that.</span>
-      <span id="s-agree" data-i18n="blocks-agree">of blocks agree</span>
+  <nav class="app-nav">
+    <div class="nav-container">
+      <a href="../" class="nav-logo" data-i18n="back">← Ari Helper</a>
+      <a href="https://apps.apple.com/us/app/ari-helper/id6480045555" class="wm-store" target="_blank" rel="noopener noreferrer" data-i18n="get-ari">Get Ari Helper</a>
     </div>
+  </nav>
 
-    <div class="result" id="result">
-      <h2 id="verdict"></h2>
-      <p id="explain"></p>
-      <div class="meta" id="meta"></div>
+  <header class="wm-hero">
+    <div class="wm-narrow">
+      <span class="wm-eyebrow" data-i18n="eyebrow">Invisible mark</span>
+      <h1 data-i18n="title">Check for Ari's mark</h1>
+      <p data-i18n="lede">Ari Helper can add an invisible mark to pictures it generates. Drop one here to see whether it carries that mark. The picture never leaves your device — the check runs in this page.</p>
+      <div class="wm-promise">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2.5"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
+        <span data-i18n="promise">Nothing is uploaded</span>
+      </div>
     </div>
+  </header>
 
-    <p class="caveat" data-i18n-html="caveat">A mark that is found is reliable: the pattern it looks for does not occur by chance, so a picture reporting Ari's mark really does carry it. A mark that is <em>not</em> found proves much less. Heavy compression, cropping, resizing and screenshots all destroy it, and this says nothing about pictures from any other tool. It is also not a signature — it shows a picture came from Ari, not who made it.</p>
-  </div>
+  <main class="wm-main">
+    <div class="wm-narrow">
+      <div class="wm-card">
+        <label class="drop" id="drop">
+          <input type="file" id="file" accept="image/*">
+          <span class="drop-icon" aria-hidden="true">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.8"/><path d="m21 15-4.5-4.5L5 21"/></svg>
+          </span>
+          <span class="drop-title" data-i18n="drop">Drop a picture here, or click to choose one</span>
+          <span class="drop-hint" data-i18n="drop-hint">PNG, JPEG, HEIC or any picture your browser can open</span>
+        </label>
+
+        <!-- The result wording lives in the DOM so the site's own translator
+             handles it; i18n.js exposes no runtime lookup for scripts. -->
+        <div hidden>
+          <span id="s-found" data-i18n="verdict-found">Ari's mark is present</span>
+          <span id="s-missing" data-i18n="verdict-missing">No mark found</span>
+          <span id="s-found-why" data-i18n="explain-found">This picture carries the invisible mark Ari Helper adds to images it generates.</span>
+          <span id="s-missing-why" data-i18n="explain-missing">This picture does not carry the mark — but see the note below before concluding anything from that.</span>
+          <span id="s-agree" data-i18n="blocks-agree">of blocks agree</span>
+        </div>
+
+        <div class="result" id="result" aria-live="polite">
+          <img id="preview" alt="">
+          <div>
+            <h2><span class="dot" aria-hidden="true"></span><span id="verdict"></span></h2>
+            <p id="explain"></p>
+            <div class="meta" id="meta"></div>
+          </div>
+        </div>
+      </div>
+
+      <h2 class="wm-section-title" data-i18n="how-title">How the check works</h2>
+      <ol class="steps">
+        <li>
+          <span class="num">1</span>
+          <h3 data-i18n="step-1-title">Woven into the picture</h3>
+          <p data-i18n="step-1">Ari nudges the fine detail of every small square of the image, not its metadata, so a re-save doesn't strip it.</p>
+        </li>
+        <li>
+          <span class="num">2</span>
+          <h3 data-i18n="step-2-title">Read back here</h3>
+          <p data-i18n="step-2">This page reads those squares with the same arithmetic, in your browser, and counts how many agree.</p>
+        </li>
+        <li>
+          <span class="num">3</span>
+          <h3 data-i18n="step-3-title">A clear answer</h3>
+          <p data-i18n="step-3">When enough squares agree they spell out Ari's fixed pattern, which ordinary pictures never do by chance.</p>
+        </li>
+      </ol>
+
+      <div class="caveat">
+        <strong data-i18n="caveat-title">What a result means</strong>
+        <span data-i18n-html="caveat">A mark that is found is reliable: the pattern it looks for does not occur by chance, so a picture reporting Ari's mark really does carry it. A mark that is <em>not</em> found proves much less. Heavy compression, cropping, resizing and screenshots all destroy it, and this says nothing about pictures from any other tool. It is also not a signature — it shows a picture came from Ari, not who made it.</span>
+      </div>
+
+      <a class="wm-back" href="../" data-i18n="back-long">← Back to Ari Helper</a>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-links">
+        <a href="../../" class="footer-link" data-i18n="all-apps">All Apps</a>
+        <a href="/privacy/" class="footer-link" data-i18n="privacy">Privacy</a>
+        <a href="/support/" class="footer-link" data-i18n="support">Support</a>
+        <a href="/" class="footer-link" data-i18n="portfolio">Portfolio</a>
+      </div>
+    </div>
+  </footer>
 
   <script src="../../i18n/i18n.js" data-page="apps.ari-helper.watermark"></script>
   <script>
@@ -157,8 +351,9 @@
       return element ? element.textContent : '';
     }
 
-    function say(found, payload) {
+    function say(found, payload, picture) {
       result.className = 'result show ' + (found ? 'found' : 'missing');
+      document.getElementById('preview').src = picture;
       document.getElementById('verdict').textContent = phrase(found ? 's-found' : 's-missing');
       document.getElementById('explain').textContent =
         phrase(found ? 's-found-why' : 's-missing-why');
@@ -178,8 +373,15 @@
         var context = canvas.getContext('2d', { willReadFrequently: true });
         context.drawImage(image, 0, 0);
         var found = detect(context.getImageData(0, 0, canvas.width, canvas.height));
-        say(!!found, found);
+        // A small copy for the result, so the object URL can be let go.
+        var thumb = document.createElement('canvas');
+        var fit = 192 / Math.max(canvas.width, canvas.height);
+        thumb.width = Math.max(1, Math.round(canvas.width * Math.min(1, fit)));
+        thumb.height = Math.max(1, Math.round(canvas.height * Math.min(1, fit)));
+        thumb.getContext('2d').drawImage(canvas, 0, 0, thumb.width, thumb.height);
+        say(!!found, found, thumb.toDataURL('image/jpeg', 0.85));
         URL.revokeObjectURL(image.src);
+        result.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
       };
       image.src = URL.createObjectURL(blob);
     }
