@@ -140,6 +140,15 @@ jobs:
             sed -i "s|https://$slug.wemiller.com/|https://wemiller.com/apps/$slug/|g" "$f"
           done
 
+      # The mirrored sites have no portfolio navigation of their own — they
+      # are each app's site, hosted here. This adds one small pill (icon,
+      # name, link back to /apps/) so someone landing from a search result
+      # can see whose app it is and find the others. Injected at mirror time
+      # rather than committed upstream: the app repos stay unaware of where
+      # their docs are hosted.
+      - name: Inject the back-to-apps pill
+        run: python3 scripts/inject-back-to-apps.py
+
       - name: Commit mirrored docs
         run: |
           set -euo pipefail

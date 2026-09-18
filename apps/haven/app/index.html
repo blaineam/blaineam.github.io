@@ -407,5 +407,6 @@ Object.assign(window, { render, state, openViewer, viewerPrev, viewerNext, close
 document.querySelectorAll("nav.tabs button").forEach(b=>b.onclick=()=>{ state.tab=b.dataset.tab; state.thread=null; render(); });
 boot();
 </script>
+  <script defer src="/apps/_shared/back-to-apps.js"></script>
 </body>
 </html>

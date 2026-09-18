@@ -632,7 +632,12 @@
   <!-- Navigation -->
   <nav class="app-nav">
     <div class="nav-container">
-      <a href="../" class="nav-logo" data-i18n="apps.2d61f2">← Apps</a>
+      <a href="../" class="nav-logo nav-brand" title="← Apps" aria-label="← Apps"
+         data-i18n-attr="title:apps.2d61f2;aria-label:apps.2d61f2">
+        <span class="nav-brand-back" aria-hidden="true">←</span>
+        <img class="nav-brand-icon" src="assets/images/icon.png" alt="" width="60" height="60">
+        <span class="nav-brand-name">Aperion</span>
+      </a>
       <button class="mobile-menu-toggle">☰</button>
       <ul class="nav-links">
         <li><a href="#status" class="nav-link" data-i18n="why-it-s-shelved.b6ad2a">Why It's Shelved</a></li>
