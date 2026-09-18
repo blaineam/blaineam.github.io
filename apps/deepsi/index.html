@@ -50,7 +50,12 @@
   <!-- Navigation -->
   <nav class="app-nav">
     <div class="nav-container">
-      <a href="../" class="nav-logo" data-i18n="apps.2d61f2">← Apps</a>
+      <a href="../" class="nav-logo nav-brand" title="← Apps" aria-label="← Apps"
+         data-i18n-attr="title:apps.2d61f2;aria-label:apps.2d61f2">
+        <span class="nav-brand-back" aria-hidden="true">←</span>
+        <img class="nav-brand-icon" src="assets/images/icon.png" alt="" width="60" height="60">
+        <span class="nav-brand-name">DeepSi</span>
+      </a>
       <button class="mobile-menu-toggle">☰</button>
       <ul class="nav-links">
         <li><a href="#whats-new" class="nav-link" data-i18n="what-s-new.a2efe2">What's New</a></li>
