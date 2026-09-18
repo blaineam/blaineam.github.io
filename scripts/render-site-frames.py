@@ -25,6 +25,7 @@ match.
 import argparse
 import json
 import pathlib
+import re
 import shutil
 import subprocess
 import sys
@@ -64,6 +65,16 @@ def transparent_project(app_dir: pathlib.Path, device: str,
     return made
 
 
+def is_framed(path: pathlib.Path) -> bool:
+    """True when the image has see-through pixels, the mark of a framed render."""
+    with Image.open(path) as image:
+        if image.mode not in ("RGBA", "LA"):
+            return False
+        alpha = image.getchannel("A")
+        low, _high = alpha.getextrema()
+        return low < 255
+
+
 def crop_to_alpha(path: pathlib.Path) -> None:
     """Trim the transparent margin Monkr's canvas leaves around the frame."""
     with Image.open(path) as image:
@@ -81,7 +92,7 @@ def compress(path: pathlib.Path) -> None:
 
 
 def render(slug: str, app_dir: pathlib.Path, device: str,
-           scenes: list[str], suffix: str) -> int:
+           scenes: list[str], suffix: str, raw_dir: str = "") -> int:
     # The input must be a raw capture — a picture of the screen and nothing
     # else. The pictures already on the pages cannot be used: most of them are
     # themselves framed renders, and there is no reliable way to tell. Some
@@ -89,15 +100,19 @@ def render(slug: str, app_dir: pathlib.Path, device: str,
     # onto the frame's own gradient and look exactly like a screenshot to
     # everything except an eye. Framing one of those a second time draws a
     # phone inside a phone. So the capture rig's output, or nothing.
-    raw = app_dir / "docs/appstore-screenshots" / device / "raw"
-    if not raw.is_dir():
-        raw = app_dir / "screenshots" / device
+    if raw_dir:
+        raw = (app_dir / raw_dir) if not pathlib.Path(raw_dir).is_absolute() else pathlib.Path(raw_dir)
+    else:
+        raw = app_dir / "docs/appstore-screenshots" / device / "raw"
+        if not raw.is_dir():
+            raw = app_dir / "screenshots" / device
     if not raw.is_dir():
         raise SystemExit(
             f"{slug}: no raw captures for {device} under {app_dir} — run that "
             "app's capture rig first. Never feed the page's own images back in: "
             "most are already framed.")
-    shots = sorted(raw.glob("*.png"))
+    shots = [p for p in sorted(raw.glob("*.png"))
+             if not re.search(r" \d+$", p.stem)]
     if scenes:
         wanted = []
         for scene in scenes:
@@ -109,14 +124,18 @@ def render(slug: str, app_dir: pathlib.Path, device: str,
     if not shots:
         raise SystemExit(f"no screenshots in {raw}")
 
-    # A screenshot that already carries alpha is already a framed render —
-    # every page that was done by hand holds those. Framing it again puts a
-    # phone inside a phone, which is exactly what it looks like.
-    already = [p for p in shots if Image.open(p).mode in ("RGBA", "LA")]
+    # A framed render has a transparent surround; a raw capture does not.
+    #
+    # Testing for an alpha *channel* is not the same test and rejects every
+    # honest simulator capture, because simctl writes RGBA with the alpha
+    # fully opaque. What distinguishes a frame is transparent pixels, so that
+    # is what gets measured: if the darkest alpha in the image is 255, nothing
+    # is see-through and there is no frame to collide with.
+    already = [p for p in shots if is_framed(p)]
     if already:
         raise SystemExit(
-            f"{slug} {device}: {already[0].name} is already framed (it has an "
-            "alpha channel) — point this at the app's raw captures instead")
+            f"{slug} {device}: {already[0].name} already has a transparent "
+            "surround — it is a framed render, not a capture")
 
     destination = SITE / "apps" / slug / "assets/images"
     destination.mkdir(parents=True, exist_ok=True)
@@ -163,10 +182,13 @@ def main() -> int:
                         help="substrings of the shots to use, in page order")
     parser.add_argument("--suffix", default="",
                         help="appended to each name, to defeat the year-long cache")
+    parser.add_argument("--raw", default="",
+                        help="the capture directory, when it is not named after the device "
+                             "(rigs differ: screenshots/iphone-6.9, docs/.../iphone/raw, …)")
     args = parser.parse_args()
 
     count = render(args.slug, args.app_dir.expanduser(), args.device,
-                   args.scenes, args.suffix)
+                   args.scenes, args.suffix, args.raw)
     print(f"{count} frame(s) written for {args.slug}")
     return 0
 
