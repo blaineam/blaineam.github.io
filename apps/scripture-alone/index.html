@@ -4,68 +4,81 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Scripture Alone - A Free, Private Bible</title>
-  <meta name="description" content="A free, open-source Bible app for iPhone, iPad and Mac. Read offline in the ASV, BSB or KJV, highlight and take notes, and sync privately through your own iCloud — no ads, no trackers, no accounts.">
+  <meta name="description" content="A free, open-source Bible for iPhone, iPad, Mac and Apple Watch. Read offline in the ASV, BSB or KJV, study with cross-references, commentary and maps, listen, take sermon notes, share verse images, and sync privately through your own iCloud — no ads, no trackers, no accounts.">
   <meta property="og:title" content="Scripture Alone - A Free, Private Bible">
-  <meta property="og:description" content="The Word, and nothing in the way. A free, open-source Bible for iPhone, iPad and Mac — offline, private, no ads, no trackers, no accounts.">
+  <meta property="og:description" content="The Word, and nothing in the way. A free, open-source Bible for iPhone, iPad, Mac and Apple Watch — offline, private, no ads, no trackers, no accounts.">
   <meta property="og:type" content="app">
   <meta property="og:url" content="https://wemiller.com/apps/scripture-alone/">
   <meta property="og:image" content="https://wemiller.com/apps/scripture-alone/assets/images/poster.jpg">
+  <script>
+    /* A share link (#s=…) shows its verse card first; decide before first paint
+       so the product page doesn't flash. share.js takes over from here. */
+    if (/(^#|&)s=/.test(location.hash)) document.documentElement.classList.add('sa-share-pending');
+  </script>
   <link rel="stylesheet" href="../app-showcase.css">
   <style>
-    /* Scripture Alone — the icon's crimson binding and parchment page, with
-       the reader's own sepia-brown for chapter numbers. */
+    /* Scripture Alone — the icon's dawn: an indigo sky warming to plum, a white
+       open book for the horizon and a warm sun rising from its fold. */
     :root {
-      --app-primary: #8A1A1C;      /* crimson binding */
-      --app-secondary: #4A0C10;    /* deep oxblood */
-      --app-accent: #F8ECD4;       /* parchment */
-      --primary-color: #8A1A1C;
-      --secondary-color: #5A1014;
-      --sa-ink: #7A1618;           /* accent text on light ground */
-      --sa-brown: #8B5E34;         /* the reader's chapter-number brown */
-      --sa-serif: "New York", "Iowan Old Style", "Palatino", Georgia, "Times New Roman", serif;
+      --app-primary: #22234F;      /* night indigo, top of the sky */
+      --app-secondary: #7A527E;    /* plum, the sky at the horizon */
+      --app-accent: #EFAE70;       /* the sun */
+      --primary-color: #4A3F7C;    /* indigo-violet: legible text on light ground */
+      --secondary-color: #7A527E;
+      --sa-ink: #4A3D7C;           /* accent text on light ground */
+      --sa-sun: #B8662A;           /* the sun, deepened for light ground */
+      --sa-cream: #FBF1DF;         /* the page of the book */
+      --sa-sky: linear-gradient(172deg, #22234F 0%, #36305F 42%, #5A4271 72%, #7A527E 100%);
+      --sa-serif: ui-serif, "New York", "Iowan Old Style", "Palatino", Georgia, "Times New Roman", serif;
     }
     @media (prefers-color-scheme: dark) {
       :root {
-        --primary-color: #9E2224;
-        --secondary-color: #5A1014;
-        --sa-ink: #EFC3A4;
-        --sa-brown: #D2A679;
+        --primary-color: #B4A8EC;
+        --secondary-color: #C9A3CB;
+        --sa-ink: #D5CAF6;
+        --sa-sun: #F2BE85;
       }
     }
 
     .hero {
       background:
-        radial-gradient(circle at 80% 20%, rgba(248, 236, 212, 0.10) 0%, transparent 50%),
-        radial-gradient(circle at 12% 85%, rgba(139, 94, 52, 0.18) 0%, transparent 55%),
-        linear-gradient(170deg, #8A1A1C 0%, #5E1115 55%, #3A090C 100%);
+        radial-gradient(circle at 78% 34%, rgba(249, 223, 166, 0.26) 0%, rgba(239, 174, 112, 0.10) 22%, transparent 48%),
+        radial-gradient(circle at 10% 90%, rgba(122, 82, 126, 0.45) 0%, transparent 55%),
+        var(--sa-sky);
       color: white;
     }
     .hero-subtitle {
-      color: rgba(248, 236, 212, 0.8);
-      -webkit-text-fill-color: rgba(248, 236, 212, 0.8);
+      color: rgba(249, 223, 166, 0.85);
+      -webkit-text-fill-color: rgba(249, 223, 166, 0.85);
       letter-spacing: 0.5px;
     }
     .hero-title {
       font-family: var(--sa-serif);
       font-weight: 600;
-      color: #F8ECD4;
-      -webkit-text-fill-color: #F8ECD4;
+      color: var(--sa-cream);
+      -webkit-text-fill-color: var(--sa-cream);
       background: none;
     }
     .hero-description { color: rgba(255, 255, 255, 0.9); }
     .sa-mission {
-      color: rgba(248, 236, 212, 0.85);
+      color: rgba(251, 241, 223, 0.85);
       font-family: var(--sa-serif);
       font-style: italic;
       font-size: 1.1rem;
       line-height: 1.6;
       margin-top: var(--spacing-md);
     }
+    /* The icon already carries its own rounded shape and transparent corners. */
+    .hero .phone-mockup {
+      border-radius: 0;
+      box-shadow: none;
+      filter: drop-shadow(0 26px 48px rgba(12, 10, 36, 0.55));
+    }
 
     .section-subtitle { color: var(--sa-ink); }
     .section-header h2,
     .faq-section h2 { font-family: var(--sa-serif); }
-    .btn-buy { box-shadow: 0 4px 15px rgba(138, 26, 28, 0.35); }
+    .btn-buy { box-shadow: 0 4px 15px rgba(34, 35, 79, 0.35); }
 
     /* Coming Soon — non-interactive placeholders until Scripture Alone is on
        the App Store (same treatment SightQuick used before its launch). */
@@ -74,19 +87,19 @@
       cursor: default;
       pointer-events: none;
       background: var(--bg-card) !important;
-      border: 1px solid rgba(138, 26, 28, 0.55) !important;
+      border: 1px solid rgba(122, 82, 126, 0.55) !important;
       color: var(--sa-ink) !important;
-      box-shadow: 0 0 24px rgba(138, 26, 28, 0.18) !important;
+      box-shadow: 0 0 24px rgba(34, 35, 79, 0.18) !important;
       letter-spacing: 0.04em;
     }
     .hero .btn-coming-soon {
-      background: rgba(248, 236, 212, 0.12) !important;
-      border-color: rgba(248, 236, 212, 0.55) !important;
-      color: #F8ECD4 !important;
+      background: rgba(251, 241, 223, 0.12) !important;
+      border-color: rgba(249, 223, 166, 0.55) !important;
+      color: var(--sa-cream) !important;
     }
     .btn-coming-soon::before,
-    .floating-coming-soon::before { content: "✦ "; color: var(--sa-brown); }
-    .hero .btn-coming-soon::before { color: #E9C999; }
+    .floating-coming-soon::before { content: "✦ "; color: var(--sa-sun); }
+    .hero .btn-coming-soon::before { color: #F9DFA6; }
 
     .hero-cta { flex-wrap: wrap; gap: var(--spacing-sm); }
     .btn-source {
@@ -95,42 +108,177 @@
       gap: var(--spacing-xs);
       padding: var(--spacing-xs) var(--spacing-md);
       border-radius: var(--radius-lg);
-      border: 1px solid rgba(248, 236, 212, 0.55);
-      color: #F8ECD4;
+      border: 1px solid rgba(251, 241, 223, 0.55);
+      color: var(--sa-cream);
       text-decoration: none;
       font-weight: 600;
       transition: all var(--transition-fast);
     }
     .btn-source:hover {
-      background: rgba(248, 236, 212, 0.12);
+      background: rgba(251, 241, 223, 0.12);
       transform: translateY(-2px);
     }
+
+    .feature-description a { color: var(--sa-ink); }
 
     /* Roadmap cards read as "not yet": a dashed edge, a quieter ground. */
     .roadmap .feature-card {
       border-style: dashed;
       background: transparent;
     }
-    .roadmap .feature-description a { color: var(--sa-ink); }
 
-    /* Real simulator captures, no device frame: round them like the glass. */
-    #screenshots .screenshots-grid {
-      max-width: 720px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    #screenshots .screenshot-item {
-      border-radius: 40px;
-      max-width: 330px;
-      justify-self: center;
-    }
-    .screenshots-caption {
-      text-align: center;
-      color: var(--text-muted);
+    /* Screenshots: Monkr device frames, transparent PNGs, so the shadow follows
+       the device outline (drop-shadow) instead of a rectangle. A swipeable row
+       that snaps; wide screens see four at a time. */
+    .sa-shots {
+      display: flex;
+      gap: clamp(16px, 3vw, 32px);
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      overscroll-behavior-x: contain;
+      padding: var(--spacing-md) max(16px, calc((100% - 1160px) / 2)) var(--spacing-lg);
       margin-top: var(--spacing-lg);
+      scrollbar-width: thin;
+      -webkit-overflow-scrolling: touch;
+    }
+    .sa-shot {
+      flex: 0 0 auto;
+      width: clamp(160px, 42vw, 220px);
+      margin: 0;
+      scroll-snap-align: center;
+      text-align: center;
+    }
+    .sa-shot img {
+      display: block;
+      width: 100%;
+      height: auto;
+      filter: drop-shadow(0 18px 28px rgba(20, 16, 50, 0.28));
+    }
+    .sa-shot figcaption {
+      margin-top: var(--spacing-sm);
+      font-size: 0.92rem;
+      color: var(--text-secondary);
+      line-height: 1.4;
+    }
+    @media (prefers-color-scheme: dark) {
+      .sa-shot img { filter: drop-shadow(0 18px 30px rgba(0, 0, 0, 0.55)); }
     }
 
     .faq-answer a { color: var(--sa-ink); }
+
+    /* ---- Share link: a verse card rebuilt from #s=… ---------------------- */
+    #shared-verse { display: none; }
+    .sa-share-pending #shared-verse,
+    .sa-sharing #shared-verse { display: flex; }
+    .sa-sharing .floating-coming-soon { display: none; }
+
+    .sa-share {
+      background:
+        radial-gradient(circle at 50% 108%, rgba(239, 174, 112, 0.30) 0%, transparent 46%),
+        var(--sa-sky);
+      color: var(--sa-cream);
+      padding: calc(76px + var(--spacing-lg)) 16px var(--spacing-xl);
+      min-height: 100svh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .sa-share-inner {
+      width: 100%;
+      max-width: 980px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--spacing-md);
+      text-align: center;
+    }
+    .sa-share-eyebrow {
+      font-size: 0.85rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(249, 223, 166, 0.9);
+      margin: 0;
+    }
+    .sa-share-card {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+    }
+    .sa-share-card canvas {
+      display: block;
+      width: auto;
+      height: auto;
+      max-width: 100%;
+      max-height: min(68svh, 760px);
+      border-radius: 6px;
+      box-shadow: 0 30px 70px rgba(8, 6, 28, 0.55), 0 2px 8px rgba(8, 6, 28, 0.35);
+    }
+    .sa-share-card[data-aspect="wide"] canvas { max-height: min(60svh, 560px); }
+    .sa-share-actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: var(--spacing-sm);
+    }
+    .sa-share-actions[hidden], .sa-share-card[hidden], .sa-share-open[hidden], .sa-share-error[hidden], .sa-share-note[hidden] { display: none; }
+    .sa-share-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      padding: 0.7rem 1.4rem;
+      border-radius: 999px;
+      font: 600 1rem/1.2 var(--font-primary);
+      text-decoration: none;
+      cursor: pointer;
+      transition: transform var(--transition-fast), background var(--transition-fast);
+    }
+    .sa-share-btn:hover { transform: translateY(-2px); }
+    .sa-share-btn:focus-visible { outline: 3px solid #F9DFA6; outline-offset: 3px; }
+    .sa-share-open {
+      background: linear-gradient(180deg, #F9DFA6, #EFAE70);
+      color: #2A1E3E;
+      border: none;
+      box-shadow: 0 8px 24px rgba(239, 174, 112, 0.35);
+    }
+    .sa-share-save {
+      background: rgba(251, 241, 223, 0.10);
+      color: var(--sa-cream);
+      border: 1px solid rgba(251, 241, 223, 0.5);
+    }
+    .sa-share-note {
+      max-width: 36rem;
+      margin: 0;
+      font-size: 0.9rem;
+      line-height: 1.5;
+      color: rgba(251, 241, 223, 0.72);
+    }
+    .sa-share-error {
+      max-width: 32rem;
+      margin: var(--spacing-lg) 0;
+      font-family: var(--sa-serif);
+      font-size: 1.3rem;
+      line-height: 1.5;
+      color: var(--sa-cream);
+    }
+    .sa-share-about {
+      color: rgba(249, 223, 166, 0.95);
+      font-weight: 600;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(249, 223, 166, 0.4);
+      padding-bottom: 2px;
+    }
+    .sa-share-about:hover { border-bottom-color: rgba(249, 223, 166, 0.9); }
+    @media (max-width: 600px) {
+      .sa-share { padding-top: calc(64px + var(--spacing-md)); padding-bottom: var(--spacing-lg); }
+      .sa-share-card canvas { max-height: 62svh; }
+      .sa-share-actions { width: 100%; }
+      .sa-share-btn { flex: 1 1 100%; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .sa-share-btn { transition: none; }
+      .sa-share-btn:hover { transform: none; }
+    }
   </style>
   <link rel="alternate" hreflang="x-default" href="https://wemiller.com/apps/scripture-alone/">
   <link rel="alternate" hreflang="en" href="https://wemiller.com/apps/scripture-alone/">
@@ -143,6 +291,7 @@
   <link rel="alternate" hreflang="pt-BR" href="https://wemiller.com/apps/scripture-alone/?lang=pt-BR">
   <link rel="alternate" hreflang="it" href="https://wemiller.com/apps/scripture-alone/?lang=it">
   <script src="/i18n/i18n.js" defer data-page="apps.scripture-alone" data-pos="bottom-left"></script>
+  <script src="share.js" defer></script>
 </head>
 <body>
   <!-- Navigation -->
@@ -165,14 +314,37 @@
     </div>
   </nav>
 
+  <!-- Shared verse: only shown for a share link (#s=…). The card is drawn by
+       share.js from the link's fragment, which never reaches the server. -->
+  <section id="shared-verse" class="sa-share" aria-live="polite">
+    <div class="sa-share-inner">
+      <p class="sa-share-eyebrow" data-i18n="a-verse-shared-from.c15b16">A verse shared from Scripture Alone</p>
+      <div class="sa-share-card" hidden>
+        <canvas role="img" aria-label="" width="2160" height="2160"></canvas>
+      </div>
+      <p class="sa-share-error" hidden></p>
+      <div class="sa-share-actions" hidden>
+        <a class="sa-share-btn sa-share-open" href="#" hidden data-i18n="open-in-scripture-alone.5f6b9b">Open in Scripture Alone</a>
+        <button type="button" class="sa-share-btn sa-share-save" data-i18n="save-image.2c1469">Save image</button>
+      </div>
+      <p class="sa-share-note" hidden data-i18n="this-card-was-rebuilt.8b3b06">This card was rebuilt in your browser from the link itself. The verse was never sent to a server.</p>
+      <a href="#about" class="sa-share-about" data-i18n="about-scripture-alone.815ea6">About Scripture Alone ↓</a>
+      <div class="sa-share-messages" hidden>
+        <span data-sa-message="newer" data-i18n="this-link-needs-a.35b383">This link needs a newer version of the page.</span>
+        <span data-sa-message="broken" data-i18n="this-share-link-is.5d635d">This share link is incomplete or damaged, so its verse can't be shown.</span>
+        <span data-sa-message="long" data-i18n="this-passage-is-too.ce073d">This passage is too long to show from a link.</span>
+      </div>
+    </div>
+  </section>
+
   <!-- Hero Section -->
-  <section class="hero">
+  <section class="hero" id="about">
     <div class="hero-content">
       <div class="hero-text">
         <p class="hero-subtitle" data-i18n="scripture-alone.c923df">📖 Scripture Alone</p>
         <h1 class="hero-title" data-i18n="the-word-and-nothing.59b9cc">The Word, and nothing in the way.</h1>
-        <p class="hero-description" data-i18n="a-free-open-source.6fc212">
-          A free, open-source Bible for iPhone, iPad and Mac. Three complete translations live on your device, so you can read, search, highlight and take notes anywhere in the world — with or without a connection.
+        <p class="hero-description" data-i18n="a-free-open-source.04b934">
+          A free, open-source Bible for iPhone, iPad and Mac, with its own Apple Watch app. Three complete translations live on your device, so you can read, study, listen and take notes anywhere in the world — with or without a connection.
         </p>
         <div class="hero-cta">
           <span class="btn-buy btn-coming-soon" data-i18n="coming-soon-to-the.557a3b">Coming soon to the App Store</span>
@@ -182,8 +354,8 @@
       </div>
       <div class="hero-image">
         <div class="hero-phone">
-          <img src="assets/images/icon.png" alt="Scripture Alone App Icon" class="phone-mockup"
-               onerror="this.style.background='linear-gradient(170deg, #8A1A1C, #3A090C)'; this.style.minHeight='300px'; this.style.minWidth='300px';">
+          <img src="assets/images/icon.png" alt="Scripture Alone App Icon" class="phone-mockup" width="1024" height="1024"
+               onerror="this.style.background='linear-gradient(172deg, #22234F, #7A527E)'; this.style.borderRadius='22%'; this.style.minHeight='300px'; this.style.minWidth='300px';">
         </div>
       </div>
     </div>
@@ -245,17 +417,73 @@
 
       <div class="feature-card">
         <div class="feature-icon">🖍️</div>
-        <h3 class="feature-title" data-i18n="highlights-and-notes.c16ff9">Highlights and notes</h3>
-        <p class="feature-description" data-i18n="highlight-in-five-colors.eb0a84">
-          Highlight in five colors. Attach a note to one or more passages — a Sunday sermon on Romans 8:1–17, say — and see it inline beside the verse and gathered in the Notes panel.
+        <h3 class="feature-title" data-i18n="highlights-notes-and-favorites.30f023">Highlights, notes and favorites</h3>
+        <p class="feature-description" data-i18n="highlight-in-five-colors.0d2ff8">
+          Highlight in five colors, heart the verses you return to, and attach a note to one or more passages — a Sunday sermon on Romans 8:1–17, say. Export your notes as a PDF, Markdown or plain text.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">📷</div>
+        <h3 class="feature-title" data-i18n="camera-notes.91ff1a">Camera notes</h3>
+        <p class="feature-description" data-i18n="photograph-the-sermon-slide.813c96">
+          Photograph the sermon slide and on-device text recognition starts your note: titled from the slide, linked to every passage on it, its points ready as bullets. The photo is discarded unless you keep it.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🎧</div>
+        <h3 class="feature-title" data-i18n="listen.c518fb">Listen</h3>
+        <p class="feature-description" data-i18n-html="hear-any-chapter-read.f4ef56">
+          Hear any chapter read aloud with your device's voices, Premium and Personal Voice included, the spoken verse marked as it goes, with a sleep timer and lock-screen controls. On iPhone and iPad, <a href="/apps/mi-speaks/">Mi Speaks</a> subscribers can hand a chapter to its Studio voices.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🔎</div>
+        <h3 class="feature-title" data-i18n="study-mode.08a731">Study mode</h3>
+        <p class="feature-description" data-i18n="a-toggle-away-tap.774cf2">
+          A toggle away: tap a verse and the Study panel follows, with ranked cross-references (one tap there and back) and classic commentary from John Calvin, John Gill and Jamieson‑Fausset‑Brown. Out of sight when you just want to read.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🗺️</div>
+        <h3 class="feature-title" data-i18n="maps-timeline-and-charts.0233c4">Maps, timeline and charts</h3>
+        <p class="feature-description" data-i18n="each-chapter-s-era.4b0bd3">
+          Each chapter's era on a timeline of the biblical periods, an offline map of the places it names, and charts of the kings of Israel and Judah, Paul's journeys, the twelve tribes and the feasts of Israel.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🖼️</div>
+        <h3 class="feature-title" data-i18n="verse-images-worth-sharing.215c64">Verse images worth sharing</h3>
+        <p class="feature-description" data-i18n="design-a-verse-image.0a20c5">
+          Design a verse image on your device from eight templates, or send a link that rebuilds the card in any browser from the link itself — nothing is stored on a server.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">⌚</div>
+        <h3 class="feature-title" data-i18n="widgets-and-apple-watch.efef3c">Widgets and Apple Watch</h3>
+        <p class="feature-description" data-i18n="verse-of-the-day.54e7cf">
+          Verse of the Day and Favorites &amp; Notes widgets for the Home and Lock Screens, and an Apple Watch app with its own offline ASV, your favorites and notes, and a complication with the day's reference.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🕯️</div>
+        <h3 class="feature-title" data-i18n="legacy-bible.0d5a64">Legacy Bible</h3>
+        <p class="feature-description" data-i18n="make-a-keepsake-of.5d6bbd">
+          Make a keepsake of your highlights and notes for your family: one file, optionally protected with a passphrase, that they open and read as you marked it — a digital “Dad's Bible” to hand down.
         </p>
       </div>
 
       <div class="feature-card">
         <div class="feature-icon">☁️</div>
         <h3 class="feature-title" data-i18n="private-icloud-sync.dcabcd">Private iCloud sync</h3>
-        <p class="feature-description" data-i18n="your-highlights-and-notes.9e0f41">
-          Your highlights and notes follow you across iPhone, iPad and Mac through your own private iCloud. No account, no server — I never see your data.
+        <p class="feature-description" data-i18n="your-highlights-notes-and.4c0001">
+          Your highlights, notes and favorites follow you across iPhone, iPad, Mac and Apple Watch through your own private iCloud. No account, no server — I never see your data.
         </p>
       </div>
 
@@ -269,22 +497,47 @@
     </div>
   </section>
 
-  <!-- Screenshots Section -->
+  <!-- Screenshots Section: Monkr device frames (scripts/render-site-frames.py) -->
   <section id="screenshots" class="section">
     <div class="section-header">
       <p class="section-subtitle" data-i18n="see-it.620c9c">See it</p>
       <h2 data-i18n="screenshots.597b63">Screenshots</h2>
     </div>
 
-    <div class="screenshots-grid">
-      <div class="screenshot-item">
-        <img src="assets/images/shot-reading.png" alt="Psalm 23 in the American Standard Version on the Sepia theme" loading="lazy" width="660" height="1434">
-      </div>
-      <div class="screenshot-item">
-        <img src="assets/images/shot-comfort.png" alt="Reading options: five themes, text size, line spacing, paragraph or verse-by-verse layout, and typeface" loading="lazy" width="660" height="1434">
-      </div>
+    <div class="sa-shots">
+      <figure class="sa-shot">
+        <img src="assets/images/frame-reader.png" alt="John 3 in the American Standard Version, the words of Christ in red and a highlighted verse" width="1040" height="2152" loading="lazy">
+        <figcaption data-i18n="red-letters-and-your.33addb">Red letters and your highlights</figcaption>
+      </figure>
+      <figure class="sa-shot">
+        <img src="assets/images/frame-jump.png" alt="Typing a reference to jump straight to a passage" width="1040" height="2152" loading="lazy">
+        <figcaption data-i18n="jump-to-any-passage.98b325">Jump to any passage</figcaption>
+      </figure>
+      <figure class="sa-shot">
+        <img src="assets/images/frame-study.png" alt="The Study panel with cross-references and commentary for the selected verse" width="1040" height="2152" loading="lazy">
+        <figcaption data-i18n="cross-references-and-commentary.85bec1">Cross-references and commentary</figcaption>
+      </figure>
+      <figure class="sa-shot">
+        <img src="assets/images/frame-maps.png" alt="An offline map of the places named in Acts 13" width="1040" height="2152" loading="lazy">
+        <figcaption data-i18n="a-map-for-every.acab82">A map for every chapter</figcaption>
+      </figure>
+      <figure class="sa-shot">
+        <img src="assets/images/frame-sermon-notes.png" alt="A sermon slide read into a note, linked to the passages on it" width="1040" height="2152" loading="lazy">
+        <figcaption data-i18n="from-sermon-slide-to.3da176">From sermon slide to note</figcaption>
+      </figure>
+      <figure class="sa-shot">
+        <img src="assets/images/frame-listen.png" alt="The listen bar reading the chapter aloud, the spoken verse marked" width="1040" height="2152" loading="lazy">
+        <figcaption data-i18n="listen-along.233446">Listen along</figcaption>
+      </figure>
+      <figure class="sa-shot">
+        <img src="assets/images/frame-share.png" alt="Designing a verse image from one of eight templates" width="1040" height="2152" loading="lazy">
+        <figcaption data-i18n="design-a-verse-image.1cbe44">Design a verse image</figcaption>
+      </figure>
+      <figure class="sa-shot">
+        <img src="assets/images/frame-themes.png" alt="The reader in one of its five themes" width="1040" height="2152" loading="lazy">
+        <figcaption data-i18n="five-reading-themes.275ab8">Five reading themes</figcaption>
+      </figure>
     </div>
-    <p class="screenshots-caption" data-i18n="psalm-23-in-the.1e0f7e">Psalm 23 in the American Standard Version on the Sepia theme, and the reading options behind the Aa button.</p>
   </section>
 
   <!-- Roadmap -->
@@ -297,38 +550,6 @@
 
     <div class="feature-grid">
       <div class="feature-card">
-        <div class="feature-icon">🖼️</div>
-        <h3 class="feature-title" data-i18n="verse-images-worth-sharing.215c64">Verse images worth sharing</h3>
-        <p class="feature-description" data-i18n="make-a-beautiful-image.4df149">
-          Make a beautiful image of a verse right on your device. Share links rebuild the image in the browser from the link itself — nothing is stored on a server.
-        </p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">🎧</div>
-        <h3 class="feature-title" data-i18n="listen.c518fb">Listen</h3>
-        <p class="feature-description" data-i18n-html="hear-any-chapter-read.b40fe9">
-          Hear any chapter read aloud with the system voices, or hand it off to <a href="/apps/mi-speaks/">Mi Speaks</a> for its Studio voices.
-        </p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">🗺️</div>
-        <h3 class="feature-title" data-i18n="study-mode.08a731">Study mode</h3>
-        <p class="feature-description" data-i18n="cross-references-maps-and.184f76">
-          Cross-references, maps and timelines of the biblical periods, charts, and classic Reformed commentary — a toggle away when you want to dig deeper, out of sight when you just want to read.
-        </p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">📷</div>
-        <h3 class="feature-title" data-i18n="camera-notes.91ff1a">Camera notes</h3>
-        <p class="feature-description" data-i18n="snap-the-sermon-slide.cf0596">
-          Snap the sermon slide at church. On-device text recognition titles your note and links the passages it mentions.
-        </p>
-      </div>
-
-      <div class="feature-card">
         <div class="feature-icon">📚</div>
         <h3 class="feature-title" data-i18n="more-translations.1c0903">More translations</h3>
         <p class="feature-description" data-i18n="we-re-requesting-licenses.06f2fd">
@@ -337,10 +558,18 @@
       </div>
 
       <div class="feature-card">
-        <div class="feature-icon">🕯️</div>
-        <h3 class="feature-title" data-i18n="heir-mode.c8fded">Heir mode</h3>
-        <p class="feature-description" data-i18n="share-a-read-only.8c0ea6">
-          Share a read-only copy of your notes and highlights with your family, or export them as a keepsake — a digital “Dad's Bible” to hand down.
+        <div class="feature-icon">👨‍👩‍👧</div>
+        <h3 class="feature-title" data-i18n="live-family-sharing.a34cc6">Live family sharing</h3>
+        <p class="feature-description" data-i18n="share-your-notes-and.6116ef">
+          Share your notes and highlights with family as you keep adding to them, not only as a keepsake file.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">📱</div>
+        <h3 class="feature-title" data-i18n="made-for-iphone-duo.bead80">Made for iPhone Duo</h3>
+        <p class="feature-description" data-i18n="layouts-that-know-about.4b0f61">
+          Layouts that know about the fold, so the text and the Study panel make the most of iPhone Duo's larger screen.
         </p>
       </div>
     </div>
@@ -373,6 +602,42 @@
       <div class="faq-answer">
         <p data-i18n="none-there-are-no.762c80">
           None. There are no analytics, no trackers and no accounts. Your highlights and notes stay on your devices and sync only through your own private iCloud, which I can't see.
+        </p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        <span data-i18n="how-do-share-links.af837c">How do share links work? Is my verse sent anywhere?</span>
+        <span class="faq-icon">▼</span>
+      </button>
+      <div class="faq-answer">
+        <p data-i18n="the-link-carries-the.8f367c">
+          The link carries the verse itself, after the “#” in the address. Browsers never send that part to a server, so this site never sees what you shared: the page rebuilds the card right in the browser. If Scripture Alone is installed, the link opens the passage in the app instead.
+        </p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        <span data-i18n="does-it-run-on.9c3d28">Does it run on Mac?</span>
+        <span class="faq-icon">▼</span>
+      </button>
+      <div class="faq-answer">
+        <p data-i18n="yes-on-any-mac.d853c7">
+          Yes, on any Mac with Apple silicon. Install the iPad app from the App Store on your Mac, and your highlights and notes sync with your iPhone and iPad through iCloud.
+        </p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        <span data-i18n="does-it-work-on.d22ae5">Does it work on Apple Watch?</span>
+        <span class="faq-icon">▼</span>
+      </button>
+      <div class="faq-answer">
+        <p data-i18n="yes-the-watch-app.a55a96">
+          Yes. The watch app carries its own copy of the American Standard Version, so it reads offline even without your iPhone nearby. It has the Verse of the Day, your favorites and notes, can read a passage aloud, and puts the day's reference on your watch face.
         </p>
       </div>
     </div>

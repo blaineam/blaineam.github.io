@@ -13,6 +13,21 @@
             "comment": "The bare page without a trailing slash."
           }
         ]
+      },
+      {
+        "appIDs": ["8ZVSPZYSVF.com.blainemiller.ScriptureAlone"],
+        "components": [
+          {
+            "/": "/apps/scripture-alone",
+            "#": "s=*",
+            "comment": "Share link without a trailing slash"
+          },
+          {
+            "/": "/apps/scripture-alone/*",
+            "#": "s=*",
+            "comment": "Share link: the verse rides in the fragment"
+          }
+        ]
       }
     ]
   }
