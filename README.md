@@ -27,14 +27,14 @@ Apple Watch. Just imagine what we can build together!
 lists them chronologically. [`apps/projects.json`](apps/projects.json) is the
 source of truth for app metadata; the showcase's display order is hand-curated.
 
-**Haven**, **Blip**, **Glint**, and **Lathe** are free — no ads, no tracking, no
-subscriptions. Their development is funded through
+**Haven**, **Blip**, **Glint**, **Lathe**, **DeepSi**, **Zap!** and **Scripture Alone**
+(coming soon) are free — no ads, no tracking, no subscriptions. Their development is funded through
 [GitHub Sponsors](https://github.com/sponsors/blaineam), [Ko-fi](https://ko-fi.com/wemiller),
 and one-time tips; see the [Support](https://wemiller.com/support) page.
 
 | App | What it does | Released |
 |-----|--------------|----------|
-| **Scripture Alone** | A free, private, offline Bible — open source (AGPL-3.0) | Coming soon |
+| **Scripture Alone** | A free, private, offline Bible for iPhone, iPad, Mac and Apple Watch — open source (AGPL-3.0); share links rebuild verse cards in the browser | Coming soon |
 | **Lathe** | Open-source media engine behind Sami, and a free Mac downloader (not on the App Store; [download](https://github.com/blaineam/Lathe/releases/latest)) | September 2026 |
 | **Kern** | Handle letters with care — word puzzles in living worlds | August 2026 |
 | **Revela** | Shoot film. Wait for it — a vintage film camera | July 2026 |

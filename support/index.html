@@ -4,10 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Support future development - Blaine Miller</title>
-  <meta name="description" content="Haven, Blip, Glint, Lathe, DeepSi and Zap! are free — no ads, no tracking, no subscriptions. Help fund what comes next through GitHub Sponsors, Ko-fi or a one-time tip.">
+  <meta name="description" content="Haven, Blip, Glint, Lathe, DeepSi, Zap! and Scripture Alone are free — no ads, no tracking, no subscriptions. Help fund what comes next through GitHub Sponsors, Ko-fi or a one-time tip.">
   <link rel="canonical" href="https://wemiller.com/support/">
   <meta property="og:title" content="Support future development - Blaine Miller">
-  <meta property="og:description" content="Haven, Blip, Glint, Lathe, DeepSi and Zap! are free — no ads, no tracking, no subscriptions. Help fund what comes next through GitHub Sponsors, Ko-fi or a one-time tip.">
+  <meta property="og:description" content="Haven, Blip, Glint, Lathe, DeepSi, Zap! and Scripture Alone are free — no ads, no tracking, no subscriptions. Help fund what comes next through GitHub Sponsors, Ko-fi or a one-time tip.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://wemiller.com/support/">
   <meta property="og:image" content="https://wemiller.com/apps/apps-by-blaine-miller.jpg">
@@ -211,7 +211,7 @@
       text-align: center;
     }
 
-    /* Four free apps: two by two, never three and a lonely fourth. */
+    /* Two by two; an odd last card spans the row rather than sitting alone. */
     .free-apps-grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -235,6 +235,12 @@
       column-gap: var(--spacing-md);
       align-items: start;
       transition: all var(--transition-base);
+    }
+
+    .free-apps-grid > .free-app:last-child:nth-child(odd) {
+      grid-column: 1 / -1;
+      justify-self: center;
+      width: min(100%, calc(50% - var(--spacing-lg) / 2));
     }
 
     .free-app:hover {
@@ -300,6 +306,11 @@
       .free-apps-grid {
         grid-template-columns: 1fr;
       }
+
+      .free-apps-grid > .free-app:last-child:nth-child(odd) {
+        width: auto;
+        justify-self: stretch;
+      }
     }
   </style>
   <link rel="alternate" hreflang="x-default" href="https://wemiller.com/support/">
@@ -332,9 +343,9 @@
   <!-- Hero + the three ways -->
   <section class="support-hero">
     <div class="support-container">
-      <p class="support-eyebrow" data-i18n="haven-blip-glint-lathe.163344">Haven, Blip, Glint, Lathe, DeepSi and Zap! are free</p>
+      <p class="support-eyebrow" data-i18n="haven-blip-glint-lathe.93a56a">Haven, Blip, Glint, Lathe, DeepSi, Zap! and Scripture Alone are free</p>
       <h1 class="support-title" data-i18n="support-future-development.921741">Support future development</h1>
-      <p class="support-intro" data-i18n="haven-blip-glint-and.dd4d14">Haven, Blip, Glint, Lathe, DeepSi and Zap! are free — no ads, no tracking, no subscriptions. If they earn a place on your devices, you can help fund what comes next.</p>
+      <p class="support-intro" data-i18n="haven-blip-glint-lathe.11a7b9">Haven, Blip, Glint, Lathe, DeepSi, Zap! and Scripture Alone are free — no ads, no tracking, no subscriptions. If they earn a place on your devices, you can help fund what comes next.</p>
 
       <div class="support-grid">
         <!-- GitHub Sponsors -->
@@ -431,6 +442,14 @@
         <span class="free-app-name">Zap!</span>
         <span class="free-app-tagline" data-i18n="electric-trivia-duels.96a7a2">Electric trivia duels</span>
         <span class="free-app-where" data-i18n="free-on-the-app-store.e9c4f3">Free on the App Store</span>
+        <span class="free-app-cta" data-i18n="learn-more.140c43">Learn More →</span>
+      </a>
+
+      <a href="/apps/scripture-alone/" class="free-app">
+        <span class="free-app-icon"><img src="/apps/scripture-alone/assets/images/icon.png" alt="Scripture Alone App Icon"></span>
+        <span class="free-app-name">Scripture Alone</span>
+        <span class="free-app-tagline" data-i18n="a-private-offline-bible.127da7">A private, offline Bible</span>
+        <span class="free-app-where" data-i18n="free-and-open-source.672f8f">Free and open source — coming soon to the App Store</span>
         <span class="free-app-cta" data-i18n="learn-more.140c43">Learn More →</span>
       </a>
     </div>
