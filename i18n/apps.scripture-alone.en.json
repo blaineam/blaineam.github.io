@@ -102,5 +102,7 @@
   "yes-the-full-source.c48195": "Yes. The full source is on <a href=\"https://github.com/blaineam/Scripture-Alone\" target=\"_blank\" rel=\"noopener noreferrer\">GitHub</a> under the AGPL-3.0 license.",
   "yes-the-watch-app.a55a96": "Yes. The watch app carries its own copy of the American Standard Version, so it reads offline even without your iPhone nearby. It has the Verse of the Day, your favorites and notes, can read a passage aloud, and puts the day's reference on your watch face.",
   "yes-when-scripture-alone.86db06": "Yes. When Scripture Alone arrives on the App Store, it will be available everywhere in the European Union, France included. The source code is open to everyone on GitHub today.",
-  "your-highlights-notes-and.4c0001": "Your highlights, notes and favorites follow you across iPhone, iPad, Mac and Apple Watch through your own private iCloud. No account, no server — I never see your data."
+  "your-highlights-notes-and.4c0001": "Your highlights, notes and favorites follow you across iPhone, iPad, Mac and Apple Watch through your own private iCloud. No account, no server — I never see your data.",
+  "can-i-add-another-translation.4b1e7a": "Can I add another translation myself?",
+  "scripture-alone-can-open-usfm.7c2d05": "Yes, for translations that are openly licensed. Scripture Alone can open a USFM file, and it can fetch the free catalogue published by <a href=\"https://ebible.org/\" rel=\"noopener\">eBible.org</a> when you ask it to — nothing is downloaded unless you tap. Imported translations stay on your device. This is an interim arrangement: requests to license the major modern translations are with their publishers, and if those are granted the translations will simply be in the app, and this may go away."
 }
