@@ -34,6 +34,7 @@ and one-time tips; see the [Support](https://wemiller.com/support) page.
 
 | App | What it does | Released |
 |-----|--------------|----------|
+| **Scripture Alone** | A free, private, offline Bible — open source (AGPL-3.0) | Coming soon |
 | **Lathe** | Open-source media engine behind Sami, and a free Mac downloader (not on the App Store; [download](https://github.com/blaineam/Lathe/releases/latest)) | September 2026 |
 | **Kern** | Handle letters with care — word puzzles in living worlds | August 2026 |
 | **Revela** | Shoot film. Wait for it — a vintage film camera | July 2026 |
