@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scripture Alone - A Free, Private Bible</title>
+  <meta name="description" content="A free, open-source Bible app for iPhone, iPad and Mac. Read offline in the ASV, BSB or KJV, highlight and take notes, and sync privately through your own iCloud — no ads, no trackers, no accounts.">
+  <meta property="og:title" content="Scripture Alone - A Free, Private Bible">
+  <meta property="og:description" content="The Word, and nothing in the way. A free, open-source Bible for iPhone, iPad and Mac — offline, private, no ads, no trackers, no accounts.">
+  <meta property="og:type" content="app">
+  <meta property="og:url" content="https://wemiller.com/apps/scripture-alone/">
+  <meta property="og:image" content="https://wemiller.com/apps/scripture-alone/assets/images/poster.jpg">
+  <link rel="stylesheet" href="../app-showcase.css">
+  <style>
+    /* Scripture Alone — the icon's crimson binding and parchment page, with
+       the reader's own sepia-brown for chapter numbers. */
+    :root {
+      --app-primary: #8A1A1C;      /* crimson binding */
+      --app-secondary: #4A0C10;    /* deep oxblood */
+      --app-accent: #F8ECD4;       /* parchment */
+      --primary-color: #8A1A1C;
+      --secondary-color: #5A1014;
+      --sa-ink: #7A1618;           /* accent text on light ground */
+      --sa-brown: #8B5E34;         /* the reader's chapter-number brown */
+      --sa-serif: "New York", "Iowan Old Style", "Palatino", Georgia, "Times New Roman", serif;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --primary-color: #9E2224;
+        --secondary-color: #5A1014;
+        --sa-ink: #EFC3A4;
+        --sa-brown: #D2A679;
+      }
+    }
+
+    .hero {
+      background:
+        radial-gradient(circle at 80% 20%, rgba(248, 236, 212, 0.10) 0%, transparent 50%),
+        radial-gradient(circle at 12% 85%, rgba(139, 94, 52, 0.18) 0%, transparent 55%),
+        linear-gradient(170deg, #8A1A1C 0%, #5E1115 55%, #3A090C 100%);
+      color: white;
+    }
+    .hero-subtitle {
+      color: rgba(248, 236, 212, 0.8);
+      -webkit-text-fill-color: rgba(248, 236, 212, 0.8);
+      letter-spacing: 0.5px;
+    }
+    .hero-title {
+      font-family: var(--sa-serif);
+      font-weight: 600;
+      color: #F8ECD4;
+      -webkit-text-fill-color: #F8ECD4;
+      background: none;
+    }
+    .hero-description { color: rgba(255, 255, 255, 0.9); }
+    .sa-mission {
+      color: rgba(248, 236, 212, 0.85);
+      font-family: var(--sa-serif);
+      font-style: italic;
+      font-size: 1.1rem;
+      line-height: 1.6;
+      margin-top: var(--spacing-md);
+    }
+
+    .section-subtitle { color: var(--sa-ink); }
+    .section-header h2,
+    .faq-section h2 { font-family: var(--sa-serif); }
+    .btn-buy { box-shadow: 0 4px 15px rgba(138, 26, 28, 0.35); }
+
+    /* Coming Soon — non-interactive placeholders until Scripture Alone is on
+       the App Store (same treatment SightQuick used before its launch). */
+    .btn-coming-soon,
+    .floating-coming-soon {
+      cursor: default;
+      pointer-events: none;
+      background: var(--bg-card) !important;
+      border: 1px solid rgba(138, 26, 28, 0.55) !important;
+      color: var(--sa-ink) !important;
+      box-shadow: 0 0 24px rgba(138, 26, 28, 0.18) !important;
+      letter-spacing: 0.04em;
+    }
+    .hero .btn-coming-soon {
+      background: rgba(248, 236, 212, 0.12) !important;
+      border-color: rgba(248, 236, 212, 0.55) !important;
+      color: #F8ECD4 !important;
+    }
+    .btn-coming-soon::before,
+    .floating-coming-soon::before { content: "✦ "; color: var(--sa-brown); }
+    .hero .btn-coming-soon::before { color: #E9C999; }
+
+    .hero-cta { flex-wrap: wrap; gap: var(--spacing-sm); }
+    .btn-source {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--spacing-xs);
+      padding: var(--spacing-xs) var(--spacing-md);
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(248, 236, 212, 0.55);
+      color: #F8ECD4;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all var(--transition-fast);
+    }
+    .btn-source:hover {
+      background: rgba(248, 236, 212, 0.12);
+      transform: translateY(-2px);
+    }
+
+    /* Roadmap cards read as "not yet": a dashed edge, a quieter ground. */
+    .roadmap .feature-card {
+      border-style: dashed;
+      background: transparent;
+    }
+    .roadmap .feature-description a { color: var(--sa-ink); }
+
+    /* Real simulator captures, no device frame: round them like the glass. */
+    #screenshots .screenshots-grid {
+      max-width: 720px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    #screenshots .screenshot-item {
+      border-radius: 40px;
+      max-width: 330px;
+      justify-self: center;
+    }
+    .screenshots-caption {
+      text-align: center;
+      color: var(--text-muted);
+      margin-top: var(--spacing-lg);
+    }
+
+    .faq-answer a { color: var(--sa-ink); }
+  </style>
+  <link rel="alternate" hreflang="x-default" href="https://wemiller.com/apps/scripture-alone/">
+  <link rel="alternate" hreflang="en" href="https://wemiller.com/apps/scripture-alone/">
+  <link rel="alternate" hreflang="zh-Hans" href="https://wemiller.com/apps/scripture-alone/?lang=zh-Hans">
+  <link rel="alternate" hreflang="ja" href="https://wemiller.com/apps/scripture-alone/?lang=ja">
+  <link rel="alternate" hreflang="de" href="https://wemiller.com/apps/scripture-alone/?lang=de">
+  <link rel="alternate" hreflang="fr" href="https://wemiller.com/apps/scripture-alone/?lang=fr">
+  <link rel="alternate" hreflang="es" href="https://wemiller.com/apps/scripture-alone/?lang=es">
+  <link rel="alternate" hreflang="ko" href="https://wemiller.com/apps/scripture-alone/?lang=ko">
+  <link rel="alternate" hreflang="pt-BR" href="https://wemiller.com/apps/scripture-alone/?lang=pt-BR">
+  <link rel="alternate" hreflang="it" href="https://wemiller.com/apps/scripture-alone/?lang=it">
+  <script src="/i18n/i18n.js" defer data-page="apps.scripture-alone" data-pos="bottom-left"></script>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="app-nav">
+    <div class="nav-container">
+      <a href="../" class="nav-logo nav-brand" title="← Apps" aria-label="← Apps"
+         data-i18n-attr="title:apps.2d61f2;aria-label:apps.2d61f2">
+        <span class="nav-brand-back" aria-hidden="true">←</span>
+        <img class="nav-brand-icon" src="assets/images/icon.png" alt="" width="60" height="60">
+        <span class="nav-brand-name">Scripture Alone</span>
+      </a>
+      <button class="mobile-menu-toggle">☰</button>
+      <ul class="nav-links">
+        <li><a href="#features" class="nav-link" data-i18n="features.fc338f">Features</a></li>
+        <li><a href="#on-the-way" class="nav-link" data-i18n="on-the-way.9b601c">On the Way</a></li>
+        <li><a href="#screenshots" class="nav-link" data-i18n="screenshots.597b63">Screenshots</a></li>
+        <li><a href="#faq" class="nav-link" data-i18n="faq.03688b">FAQ</a></li>
+        <li><span class="btn-buy btn-coming-soon" data-i18n="coming-soon.04d2fd">Coming Soon</span></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-text">
+        <p class="hero-subtitle" data-i18n="scripture-alone.c923df">📖 Scripture Alone</p>
+        <h1 class="hero-title" data-i18n="the-word-and-nothing.59b9cc">The Word, and nothing in the way.</h1>
+        <p class="hero-description" data-i18n="a-free-open-source.6fc212">
+          A free, open-source Bible for iPhone, iPad and Mac. Three complete translations live on your device, so you can read, search, highlight and take notes anywhere in the world — with or without a connection.
+        </p>
+        <div class="hero-cta">
+          <span class="btn-buy btn-coming-soon" data-i18n="coming-soon-to-the.557a3b">Coming soon to the App Store</span>
+          <a href="https://github.com/blaineam/Scripture-Alone" class="btn-source" target="_blank" rel="noopener noreferrer" data-i18n="source-on-github.c60f2f">Source on GitHub</a>
+        </div>
+        <p class="sa-mission" data-i18n="free-forever-no-ads.ca5514">Free forever. No ads, no trackers, no accounts. Built to help people study God's word and grow closer to Christ.</p>
+      </div>
+      <div class="hero-image">
+        <div class="hero-phone">
+          <img src="assets/images/icon.png" alt="Scripture Alone App Icon" class="phone-mockup"
+               onerror="this.style.background='linear-gradient(170deg, #8A1A1C, #3A090C)'; this.style.minHeight='300px'; this.style.minWidth='300px';">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Floating Coming Soon Badge -->
+  <span class="floating-appstore floating-coming-soon">
+    <span data-i18n="coming-soon.04d2fd">Coming Soon</span>
+  </span>
+
+  <!-- Features Section -->
+  <section id="features" class="section">
+    <div class="section-header">
+      <p class="section-subtitle" data-i18n="available-now.bb374a">Available now</p>
+      <h2 data-i18n="a-quiet-place-to.a44f4c">A quiet place to read</h2>
+      <p data-i18n="everything-here-works-today.40d987">Everything here works today, on the device in your hand.</p>
+    </div>
+
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-icon">📖</div>
+        <h3 class="feature-title" data-i18n="the-whole-bible-offline.18a85e">The whole Bible, offline</h3>
+        <p class="feature-description" data-i18n="the-american-standard-version.b8d7a4">
+          The American Standard Version, the Berean Standard Bible and the King James Version — all public domain, all stored on your device, with full-text search. No signal needed, anywhere in the world.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">📜</div>
+        <h3 class="feature-title" data-i18n="set-the-way-it.444ce2">Set the way it was written</h3>
+        <p class="feature-description" data-i18n="the-words-of-christ.c6c665">
+          The words of Christ in red, section headings, poetry laid out as poetry, and footnotes a tap away.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🔤</div>
+        <h3 class="feature-title" data-i18n="reading-comfort.cbbb63">Reading comfort</h3>
+        <p class="feature-description" data-i18n="seven-typefaces-adjustable-size.3f53bc">
+          Seven typefaces, adjustable size and line spacing, and five themes — Auto, Light, Sepia, Dark and Black. Read in paragraphs or verse by verse, with full Dynamic Type support.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🙌</div>
+        <h3 class="feature-title" data-i18n="hands-free-reading.279c00">Hands-free reading</h3>
+        <p class="feature-description" data-i18n="auto-scroll-keeps-the.e753e5">
+          Auto-scroll keeps the text moving at your pace and carries on into the next chapter — an accessibility feature for anyone who finds scrolling by hand difficult, or simply wants to read without touching the screen.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🧭</div>
+        <h3 class="feature-title" data-i18n="go-straight-there.7c40de">Go straight there</h3>
+        <p class="feature-description" data-i18n="type-jn-3-16.ee05d2">
+          Type “jn 3 16” or “rom 8:28-39” to jump to a passage, or search for any word or phrase.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🖍️</div>
+        <h3 class="feature-title" data-i18n="highlights-and-notes.c16ff9">Highlights and notes</h3>
+        <p class="feature-description" data-i18n="highlight-in-five-colors.eb0a84">
+          Highlight in five colors. Attach a note to one or more passages — a Sunday sermon on Romans 8:1–17, say — and see it inline beside the verse and gathered in the Notes panel.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">☁️</div>
+        <h3 class="feature-title" data-i18n="private-icloud-sync.dcabcd">Private iCloud sync</h3>
+        <p class="feature-description" data-i18n="your-highlights-and-notes.9e0f41">
+          Your highlights and notes follow you across iPhone, iPad and Mac through your own private iCloud. No account, no server — I never see your data.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🔓</div>
+        <h3 class="feature-title" data-i18n="open-source.6cc336">Open source</h3>
+        <p class="feature-description" data-i18n="every-line-of-code.0797fb">
+          Every line of code is public under the AGPL-3.0 license. Read it, check it, or build it yourself.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Screenshots Section -->
+  <section id="screenshots" class="section">
+    <div class="section-header">
+      <p class="section-subtitle" data-i18n="see-it.620c9c">See it</p>
+      <h2 data-i18n="screenshots.597b63">Screenshots</h2>
+    </div>
+
+    <div class="screenshots-grid">
+      <div class="screenshot-item">
+        <img src="assets/images/shot-reading.png" alt="Psalm 23 in the American Standard Version on the Sepia theme" loading="lazy" width="660" height="1434">
+      </div>
+      <div class="screenshot-item">
+        <img src="assets/images/shot-comfort.png" alt="Reading options: five themes, text size, line spacing, paragraph or verse-by-verse layout, and typeface" loading="lazy" width="660" height="1434">
+      </div>
+    </div>
+    <p class="screenshots-caption" data-i18n="psalm-23-in-the.1e0f7e">Psalm 23 in the American Standard Version on the Sepia theme, and the reading options behind the Aa button.</p>
+  </section>
+
+  <!-- Roadmap -->
+  <section id="on-the-way" class="section roadmap">
+    <div class="section-header">
+      <p class="section-subtitle" data-i18n="on-the-way.7884d3">On the way</p>
+      <h2 data-i18n="what-s-coming.6a3f58">What's coming</h2>
+      <p data-i18n="being-built-now-and.f37881">Being built now, and not in the app yet. They'll ship when they're ready.</p>
+    </div>
+
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-icon">🖼️</div>
+        <h3 class="feature-title" data-i18n="verse-images-worth-sharing.215c64">Verse images worth sharing</h3>
+        <p class="feature-description" data-i18n="make-a-beautiful-image.4df149">
+          Make a beautiful image of a verse right on your device. Share links rebuild the image in the browser from the link itself — nothing is stored on a server.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🎧</div>
+        <h3 class="feature-title" data-i18n="listen.c518fb">Listen</h3>
+        <p class="feature-description" data-i18n-html="hear-any-chapter-read.b40fe9">
+          Hear any chapter read aloud with the system voices, or hand it off to <a href="/apps/mi-speaks/">Mi Speaks</a> for its Studio voices.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🗺️</div>
+        <h3 class="feature-title" data-i18n="study-mode.08a731">Study mode</h3>
+        <p class="feature-description" data-i18n="cross-references-maps-and.184f76">
+          Cross-references, maps and timelines of the biblical periods, charts, and classic Reformed commentary — a toggle away when you want to dig deeper, out of sight when you just want to read.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">📷</div>
+        <h3 class="feature-title" data-i18n="camera-notes.91ff1a">Camera notes</h3>
+        <p class="feature-description" data-i18n="snap-the-sermon-slide.cf0596">
+          Snap the sermon slide at church. On-device text recognition titles your note and links the passages it mentions.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">📚</div>
+        <h3 class="feature-title" data-i18n="more-translations.1c0903">More translations</h3>
+        <p class="feature-description" data-i18n="we-re-requesting-licenses.06f2fd">
+          We're requesting licenses from the publishers of the CSB, ESV, NKJV and NASB. Each will be added only if its license is granted.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🕯️</div>
+        <h3 class="feature-title" data-i18n="heir-mode.c8fded">Heir mode</h3>
+        <p class="feature-description" data-i18n="share-a-read-only.8c0ea6">
+          Share a read-only copy of your notes and highlights with your family, or export them as a keepsake — a digital “Dad's Bible” to hand down.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section id="faq" class="faq-section">
+    <div class="section-header">
+      <p class="section-subtitle" data-i18n="got-questions.8ecca3">Got Questions?</p>
+      <h2 data-i18n="frequently-asked-questions.d790b4">Frequently Asked Questions</h2>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        <span data-i18n="is-it-really-free.f1f5ae">Is it really free?</span>
+        <span class="faq-icon">▼</span>
+      </button>
+      <div class="faq-answer">
+        <p data-i18n="yes-no-ads-no.bf78fd">
+          Yes. No ads, no in-app purchases, no subscriptions. Scripture Alone is free, and it will stay free.
+        </p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        <span data-i18n="what-data-do-you.d389a9">What data do you collect?</span>
+        <span class="faq-icon">▼</span>
+      </button>
+      <div class="faq-answer">
+        <p data-i18n="none-there-are-no.762c80">
+          None. There are no analytics, no trackers and no accounts. Your highlights and notes stay on your devices and sync only through your own private iCloud, which I can't see.
+        </p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        <span data-i18n="why-the-american-standard.8f4a1a">Why the American Standard Version?</span>
+        <span class="faq-icon">▼</span>
+      </button>
+      <div class="faq-answer">
+        <p data-i18n="it-s-a-careful.2cd1ba">
+          It's a careful, word-for-word translation in the public domain, so it can be given away freely — the Berean Standard Bible and King James Version are included for the same reason. Translations like the CSB, ESV, NKJV and NASB need publisher licenses, which we're requesting.
+        </p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        <span data-i18n="is-it-open-source.ad0a34">Is it open source?</span>
+        <span class="faq-icon">▼</span>
+      </button>
+      <div class="faq-answer">
+        <p data-i18n-html="yes-the-full-source.c48195">
+          Yes. The full source is on <a href="https://github.com/blaineam/Scripture-Alone" target="_blank" rel="noopener noreferrer">GitHub</a> under the AGPL-3.0 license.
+        </p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        <span data-i18n="is-scripture-alone-available.8b64bc">Is Scripture Alone available in the European Union?</span>
+        <span class="faq-icon">▼</span>
+      </button>
+      <div class="faq-answer">
+        <p data-i18n="yes-when-scripture-alone.86db06">Yes. When Scripture Alone arrives on the App Store, it will be available everywhere in the European Union, France included. The source code is open to everyone on GitHub today.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Privacy & security -->
+  <section class="security-callout" id="privacy">
+    <div class="section-header">
+      <p class="section-subtitle" data-i18n="privacy-security.75c011">Privacy &amp; security</p>
+      <h2 data-i18n="nothing-between-you-and.27b4f3">Nothing between you and the text</h2>
+    </div>
+    <div class="security-badges">
+      <div class="security-badge" data-i18n-html="data-not-collected.35f244"><span class="badge-icon">🔒</span> Data Not Collected</div>
+      <div class="security-badge" data-i18n-html="no-accounts.24a135"><span class="badge-icon">👤</span> No accounts</div>
+      <div class="security-badge" data-i18n-html="works-offline.372393"><span class="badge-icon">✈️</span> Works offline</div>
+      <div class="security-badge" data-i18n-html="open-source-agpl-3.ef1e3d"><span class="badge-icon">📖</span> Open source · AGPL-3.0</div>
+    </div>
+    <p class="security-audit-note" data-i18n="no-ads-no-analytics.490c17">No ads. No analytics. No third-party SDKs. Your notes travel only through your own iCloud.</p>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-links">
+        <a href="../" class="footer-link" data-i18n="all-apps.429449">All Apps</a>
+        <a href="../pinline/" class="footer-link">Pinline</a>
+        <a href="../enter-space/" class="footer-link">Enter Space</a>
+        <a href="../blip/" class="footer-link">Blip</a>
+        <a href="../ari-helper/" class="footer-link">Ari Helper</a>
+        <a href="../sami/" class="footer-link">Sami</a>
+        <a href="../tilebreak/" class="footer-link">Tilebreak</a>
+        <a href="../mi-speaks/" class="footer-link">Mi Speaks</a>
+        <a href="../embr/" class="footer-link">Embr</a>
+        <a href="../deepsi/" class="footer-link">DeepSi</a>
+        <a href="../luma-editor/" class="footer-link">Luma Editor</a>
+        <a href="../wise-flyer/" class="footer-link">Wise Flyer</a>
+        <a href="../glint/" class="footer-link">Glint</a>
+        <a href="/privacy/" class="footer-link" data-i18n="privacy.cf0148">Privacy</a>
+        <a href="/terms/" class="footer-link" data-i18n="terms.a55a27">Terms</a>
+        <a href="/support/" class="footer-link" data-i18n="support.f32d5a">Support</a>
+        <a href="/" class="footer-link" data-i18n="portfolio.036b18">Portfolio</a>
+      </div>
+
+      <div class="footer-social-links">
+        <a href="https://x.com/apps_by_blaine" class="social-icon-link" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)">
+          <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+          </svg>
+        </a>
+        <a href="https://www.instagram.com/apps.by.blaine/" class="social-icon-link" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+          <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+          </svg>
+        </a>
+        <a href="https://www.youtube.com/@AppsByBlaine" class="social-icon-link" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+          <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+          </svg>
+        </a>
+      </div>
+      <p style="color: var(--text-muted); margin-top: var(--spacing-md);" data-i18n-html="blaine-miller-all-rights.b327c2">
+        © <span id="year"></span> Blaine Miller. All rights reserved.
+      </p>
+    </div>
+  </footer>
+
+  <script src="../app-showcase.js"></script>
+</body>
+</html>
