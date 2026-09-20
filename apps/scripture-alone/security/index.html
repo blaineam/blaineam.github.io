@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How a Licensed Translation Stays Safe in an Open-Source Bible — Scripture Alone</title>
+  <meta name="description" content="Scripture Alone ships the American Standard Version as a signed, encrypted package — the same format a licensed translation would use. The format, the implementation, the measurements, and an honest account of what it cannot do.">
+  <meta property="og:title" content="How a Licensed Translation Stays Safe in an Open-Source Bible">
+  <meta property="og:description" content="A format, an implementation and a set of tests — not assurances. Including what the design cannot do.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://wemiller.com/apps/scripture-alone/security/">
+  <meta property="og:image" content="https://wemiller.com/apps/scripture-alone/assets/images/poster.jpg?v=3146f274">
+  <link rel="stylesheet" href="../../app-showcase.css">
+  <style>
+    :root {
+      --app-primary: #22234F;
+      --app-secondary: #7A527E;
+      --app-accent: #EFAE70;
+      --primary-color: #4A3F7C;
+      --secondary-color: #7A527E;
+      --sa-ink: #4A3D7C;
+      --sa-sun: #B8662A;
+      --sa-cream: #FBF1DF;
+      --sa-sky: linear-gradient(172deg, #22234F 0%, #36305F 42%, #5A4271 72%, #7A527E 100%);
+      --sa-serif: ui-serif, "New York", "Iowan Old Style", "Palatino", Georgia, "Times New Roman", serif;
+      --sa-rule: rgba(74, 61, 124, 0.18);
+      --sa-paper: #FFFDF8;
+      --sa-quiet: #6B6480;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --primary-color: #B4A8EC;
+        --secondary-color: #C9A3CB;
+        --sa-ink: #D5CAF6;
+        --sa-sun: #F2BE85;
+        --sa-rule: rgba(213, 202, 246, 0.22);
+        --sa-paper: #17162A;
+        --sa-quiet: #A79FC0;
+      }
+    }
+
+    body { background: var(--sa-paper); }
+
+    /* ---- Masthead ------------------------------------------------------ */
+    .paper-hero {
+      background:
+        radial-gradient(circle at 78% 30%, rgba(249, 223, 166, 0.26) 0%, rgba(239, 174, 112, 0.10) 22%, transparent 48%),
+        radial-gradient(circle at 8% 92%, rgba(122, 82, 126, 0.45) 0%, transparent 55%),
+        var(--sa-sky);
+      color: #fff;
+      padding: clamp(3.5rem, 9vw, 7rem) 1.25rem clamp(3rem, 7vw, 5rem);
+      text-align: center;
+    }
+    .paper-kicker {
+      font-size: 0.78rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(249, 223, 166, 0.85);
+      margin-bottom: 1.4rem;
+    }
+    .paper-kicker a { color: inherit; text-decoration: none; border-bottom: 1px solid rgba(249,223,166,0.4); }
+    .paper-kicker a:hover { border-bottom-color: rgba(249,223,166,0.9); }
+    .paper-title {
+      font-family: var(--sa-serif);
+      font-weight: 600;
+      /* app-showcase.css clips a gradient into h1; the product page defeats it the same way. */
+      background: none;
+      -webkit-background-clip: border-box;
+      -webkit-text-fill-color: var(--sa-cream);
+      color: var(--sa-cream);
+      font-size: clamp(2.1rem, 6vw, 4.1rem);
+      line-height: 1.08;
+      letter-spacing: -0.015em;
+      margin: 0 auto 1.3rem;
+      max-width: 17ch;
+      text-wrap: balance;
+    }
+    .paper-standfirst {
+      font-family: var(--sa-serif);
+      font-size: clamp(1.05rem, 2.2vw, 1.4rem);
+      line-height: 1.6;
+      color: rgba(255, 255, 255, 0.84);
+      max-width: 46ch;
+      margin: 0 auto;
+      text-wrap: pretty;
+    }
+    .paper-byline {
+      margin-top: 2.2rem;
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    /* ---- Column -------------------------------------------------------- */
+    .paper { max-width: 44rem; margin: 0 auto; padding: 0 1.25rem; }
+    .paper section { padding: clamp(2.6rem, 6vw, 4.2rem) 0; border-bottom: 1px solid var(--sa-rule); }
+    .paper section:last-of-type { border-bottom: none; }
+
+    .section-number {
+      font-family: var(--sa-serif);
+      font-size: 0.8rem;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--sa-sun);
+      margin-bottom: 0.9rem;
+    }
+    .paper h2 {
+      font-family: var(--sa-serif);
+      font-weight: 600;
+      background: none;
+      -webkit-text-fill-color: var(--primary-color);
+      font-size: clamp(1.6rem, 3.6vw, 2.4rem);
+      line-height: 1.18;
+      color: var(--primary-color);
+      margin: 0 0 1.1rem;
+      text-wrap: balance;
+    }
+    .paper h3 {
+      font-family: var(--sa-serif);
+      font-size: 1.12rem;
+      color: var(--primary-color);
+      margin: 2rem 0 0.6rem;
+    }
+    .paper p {
+      font-size: 1.02rem;
+      line-height: 1.72;
+      color: var(--text-color, #2c2c34);
+      margin: 0 0 1.1rem;
+      text-wrap: pretty;
+    }
+    @media (prefers-color-scheme: dark) { .paper p { color: #D7D3E4; } }
+    .paper a { color: var(--sa-ink); }
+
+    /* The opening paragraph of the argument gets a drop cap. */
+    .lede::first-letter {
+      font-family: var(--sa-serif);
+      float: left;
+      font-size: 3.6em;
+      line-height: 0.82;
+      padding: 0.08em 0.1em 0 0;
+      color: var(--sa-sun);
+    }
+
+    /* ---- Pull quote ---------------------------------------------------- */
+    .pull {
+      font-family: var(--sa-serif);
+      font-size: clamp(1.3rem, 3vw, 1.85rem);
+      line-height: 1.34;
+      color: var(--primary-color);
+      border-left: 3px solid var(--sa-sun);
+      padding: 0.35em 0 0.35em 1.1em;
+      margin: 2.4rem 0;
+      text-wrap: balance;
+    }
+    .pull cite { display: block; font-size: 0.72em; font-style: normal; color: var(--sa-quiet); margin-top: 0.7em; letter-spacing: 0.04em; }
+
+    /* ---- Claim cards --------------------------------------------------- */
+    .claims { display: grid; gap: 1px; background: var(--sa-rule); border: 1px solid var(--sa-rule); border-radius: 14px; overflow: hidden; margin: 2rem 0; }
+    .claim { background: var(--sa-paper); padding: 1.4rem 1.5rem; }
+    .claim h4 { font-family: var(--sa-serif); font-size: 1.05rem; margin: 0 0 0.45rem; color: var(--primary-color); }
+    .claim p { font-size: 0.95rem; line-height: 1.6; margin: 0; color: var(--sa-quiet); }
+    @media (min-width: 40rem) { .claims { grid-template-columns: 1fr 1fr; } }
+
+    /* ---- Format diagram ------------------------------------------------ */
+    .wire { margin: 2rem 0; border: 1px solid var(--sa-rule); border-radius: 14px; overflow: hidden; }
+    .wire-row { display: grid; grid-template-columns: 5.5rem 1fr auto; gap: 0.75rem; align-items: baseline;
+                padding: 0.72rem 1rem; border-bottom: 1px solid var(--sa-rule); font-size: 0.88rem; }
+    .wire-row:last-child { border-bottom: none; }
+    .wire-off { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; color: var(--sa-quiet); font-size: 0.8rem; }
+    .wire-name { font-weight: 600; color: var(--primary-color); }
+    .wire-size { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; color: var(--sa-quiet); font-size: 0.78rem; white-space: nowrap; }
+    .wire-row.is-body { background: linear-gradient(90deg, rgba(239,174,112,0.14), transparent); }
+
+    pre.code {
+      background: rgba(34, 35, 79, 0.05);
+      border: 1px solid var(--sa-rule);
+      border-radius: 12px;
+      padding: 1rem 1.1rem;
+      overflow-x: auto;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 0.8rem;
+      line-height: 1.6;
+      color: var(--primary-color);
+      margin: 1.4rem 0;
+    }
+    @media (prefers-color-scheme: dark) { pre.code { background: rgba(213, 202, 246, 0.07); } }
+
+    /* ---- Attack / permission tables ------------------------------------ */
+    table.sa { width: 100%; border-collapse: collapse; margin: 1.6rem 0; font-size: 0.93rem; }
+    table.sa th { text-align: left; font-family: var(--sa-serif); font-weight: 600; color: var(--primary-color);
+                  border-bottom: 2px solid var(--sa-rule); padding: 0.6rem 0.5rem 0.6rem 0; }
+    table.sa td { border-bottom: 1px solid var(--sa-rule); padding: 0.65rem 0.5rem 0.65rem 0; vertical-align: top; color: var(--sa-quiet); line-height: 1.55; }
+    table.sa td:first-child { color: var(--primary-color); font-weight: 500; white-space: nowrap; padding-right: 1.2rem; }
+    .wrapx { overflow-x: auto; }
+
+    /* ---- Honest box ---------------------------------------------------- */
+    .plainly {
+      border: 1px solid var(--sa-rule);
+      border-left: 3px solid var(--sa-quiet);
+      border-radius: 12px;
+      padding: 1.3rem 1.4rem;
+      margin: 2rem 0;
+      background: rgba(107, 100, 128, 0.05);
+    }
+    .plainly h4 { font-family: var(--sa-serif); margin: 0 0 0.6rem; color: var(--primary-color); font-size: 1.02rem; }
+    .plainly p { font-size: 0.95rem; margin: 0 0 0.7rem; }
+    .plainly p:last-child { margin-bottom: 0; }
+
+    /* ---- Measured figures ---------------------------------------------- */
+    .figures { display: grid; grid-template-columns: repeat(auto-fit, minmax(8.5rem, 1fr)); gap: 1px; background: var(--sa-rule);
+               border: 1px solid var(--sa-rule); border-radius: 14px; overflow: hidden; margin: 2rem 0; }
+    .figure { background: var(--sa-paper); padding: 1.2rem 1rem; text-align: center; }
+    .figure b { display: block; font-family: var(--sa-serif); font-size: 1.9rem; color: var(--sa-sun); line-height: 1.1; }
+    .figure span { display: block; font-size: 0.8rem; color: var(--sa-quiet); margin-top: 0.4rem; line-height: 1.4; }
+
+    /* ---- Closing ------------------------------------------------------- */
+    .closing { text-align: center; padding: clamp(3rem, 7vw, 5rem) 1.25rem; }
+    .closing h2 { border: none; }
+    .closing .btn-row { display: flex; gap: 0.8rem; justify-content: center; flex-wrap: wrap; margin-top: 1.6rem; }
+    .sa-btn {
+      display: inline-block; padding: 0.8rem 1.5rem; border-radius: 999px; text-decoration: none;
+      font-size: 0.95rem; font-weight: 500; border: 1px solid var(--sa-rule); color: var(--primary-color);
+    }
+    .sa-btn.primary { background: var(--primary-color); color: #fff; border-color: transparent; }
+    .sa-btn:hover { opacity: 0.88; }
+  </style>
+</head>
+<body>
+
+  <header class="paper-hero">
+    <div class="paper-kicker"><a href="../">Scripture Alone</a> · A proposal to publishers</div>
+    <h1 class="paper-title">How a licensed translation stays safe in an open-source Bible</h1>
+    <p class="paper-standfirst">
+      Our source code is public. The reasonable question a publisher asks next is how their text could
+      possibly be safe in it. This is the answer — a format, an implementation and a set of tests,
+      including an honest account of what it cannot do.
+    </p>
+    <div class="paper-byline">Blaine Miller · Updated September 2026</div>
+  </header>
+
+  <main class="paper">
+
+    <section>
+      <div class="section-number">The claim</div>
+      <h2>Stated precisely, so it can be checked</h2>
+      <p class="lede">
+        A licensed translation ships as a signed, encrypted package. The app can read it. A person
+        holding the file cannot read it without the key. And the publisher decides — in data the app
+        enforces, not in a PDF in a drawer — what may be done with the text once it is open.
+      </p>
+      <div class="claims">
+        <div class="claim">
+          <h4>The plaintext never exists as a file</h4>
+          <p>Chapters are decrypted one at a time, in memory, on demand. A whole Bible in the clear never lands on disk, and the decryption interface is shaped so that it cannot.</p>
+        </div>
+        <div class="claim">
+          <h4>The terms travel with the text</h4>
+          <p>The permission policy sits in a header signed by the publisher's own key. Edit the policy and the signature fails; the package stops opening.</p>
+        </div>
+        <div class="claim">
+          <h4>The publisher holds the keys</h4>
+          <p>The packaging tool runs on the publisher's machine with the publisher's keys. We never receive the plaintext and never hold the key that decrypts it.</p>
+        </div>
+        <div class="claim">
+          <h4>Search doesn't undo any of it</h4>
+          <p>The index is sealed exactly like the text. A search opens one or two of 256 encrypted buckets and decrypts only the chapters its hits are in. There is no plaintext index.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-number">The objection</div>
+      <h2>Why open source is the stronger position, not the weaker one</h2>
+      <p>
+        The instinct that public source makes text less safe is understandable, and it is the
+        opposite of how cryptography is assessed. <strong>Kerckhoffs's principle</strong>, the
+        foundation of the field since 1883, holds that a system must stay secure when everything
+        about it except the key is public. Every cipher a publisher already relies on — the TLS in
+        front of their storefront, the disk encryption on their staff's laptops, Apple's Secure
+        Enclave — is public in exactly this sense.
+      </p>
+      <blockquote class="pull">
+        A scheme that needs its design kept quiet is one that has not been examined.
+      </blockquote>
+      <h3>The practical consequence</h3>
+      <p>
+        <strong>A closed-source Bible app is in the identical position.</strong> Any app that reads a
+        licensed translation offline must put a key on the reader's device. That is true of every
+        major Bible app on the App Store. The difference is not whether a key is on the device — it
+        is whether anyone outside can confirm what the app does with it.
+      </p>
+      <p>
+        <strong>A fork gets the code, not the text.</strong> The repository contains no content key
+        and no signing key, and the packaging tool refuses to run against a key inside the working
+        tree. Anyone may clone Scripture Alone; nobody who does can decrypt a licensed package,
+        because the secret was never in the thing they cloned.
+      </p>
+      <p>
+        The security of this design rests on the key and the signature. That is the correct place
+        for it to rest.
+      </p>
+    </section>
+
+    <section>
+      <div class="section-number">The format</div>
+      <h2>One file, <code>.sabible</code></h2>
+      <div class="wire">
+        <div class="wire-row"><span class="wire-off">0</span><span class="wire-name">magic <code>"SABIBLE\0"</code></span><span class="wire-size">8 bytes</span></div>
+        <div class="wire-row"><span class="wire-off">8</span><span class="wire-name">version</span><span class="wire-size">u16 BE</span></div>
+        <div class="wire-row"><span class="wire-off">10</span><span class="wire-name">header length</span><span class="wire-size">u32 BE</span></div>
+        <div class="wire-row"><span class="wire-off">14</span><span class="wire-name">header — JSON, plaintext</span><span class="wire-size">variable</span></div>
+        <div class="wire-row"><span class="wire-off">·</span><span class="wire-name">signature — Ed25519 over the header bytes</span><span class="wire-size">64 bytes</span></div>
+        <div class="wire-row is-body"><span class="wire-off">·</span><span class="wire-name">body — per-chapter AEAD-sealed blobs</span><span class="wire-size">to end</span></div>
+      </div>
+      <p>
+        <strong>The header is plaintext on purpose.</strong> Anyone may see what a package claims to
+        be, who signed it and under what terms, without holding any key. Secrecy of the terms was
+        never the goal; integrity of them is. Here is the header of the package this app actually
+        ships, printed with no key at all:
+      </p>
+      <pre class="code">{
+  "format": 1,
+  "packageID": "3AABF641-8B15-417A-A2F0-BEA8815FD949",
+  "translation": { "id": "ASV", "name": "American Standard Version", … },
+  "policy": { "allowCopy": true, "allowShare": true, "allowVerseImages": true,
+              "allowNotesExport": true, "allowExternalHandoff": true,
+              "allowOfflineStorage": true, "maxQuotationVerses": 9223372036854775807 },
+  "crypto": { "cipher": "AES-256-GCM", "signature": "Ed25519",
+              "aad": "sabible-chapter-v1",
+              "keyID": "00b63e297da6049dce75d3e984b74b72",
+              "publisherKeyID": "9f8568f961afc58850ba30326f20f8c2" },
+  "index": { "aad": "sabible-index-v1", "buckets": 256, "entries": [ … ] },
+  "chapters": [ { "book": 1, "chapter": 1, "verses": 31, "offset": 0, … }, … ]
+}</pre>
+      <p>
+        Every permission there is <code>true</code> because that package is the American Standard
+        Version, which is public domain — sealing it must not cost its readers anything. A licensed
+        package is where those fields earn their keep.
+      </p>
+      <h3>What each chapter is sealed against</h3>
+      <p>
+        Each chapter is sealed separately with AES-256-GCM, and its authenticated associated data
+        binds the package id, the translation id, the chapter, and a SHA-256 of the header. Four
+        attacks therefore fail loudly instead of silently:
+      </p>
+      <div class="wrapx">
+      <table class="sa">
+        <tr><th>Attack</th><th>Result</th></tr>
+        <tr><td>Edit the policy</td><td>Signature fails; the package does not open.</td></tr>
+        <tr><td>Re-sign with another key</td><td>The key isn't pinned; refused before its terms are read.</td></tr>
+        <tr><td>Move a chapter between packages</td><td>The package id in the sealed data no longer matches; the seal fails.</td></tr>
+        <tr><td>Replay a chapter across a terms change</td><td>The header hash in the sealed data no longer matches; the seal fails.</td></tr>
+      </table>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-number">Enforcement</div>
+      <h2>The terms reach the buttons, not just the file</h2>
+      <p>
+        A permission that only the file format understands is a promise. These are read from the
+        signed header and enforced at the control a reader actually touches:
+      </p>
+      <div class="wrapx">
+      <table class="sa">
+        <tr><th>Policy field</th><th>What the app does when it is false</th></tr>
+        <tr><td>allowCopy</td><td>Copy is disabled in the selection bar.</td></tr>
+        <tr><td>allowShare</td><td>Share text and share links are withheld.</td></tr>
+        <tr><td>allowVerseImages</td><td>No verse image can be rendered.</td></tr>
+        <tr><td>allowNotesExport</td><td>Exporting notes with their verses is refused, and says why.</td></tr>
+        <tr><td>allowExternalHandoff</td><td>The text is never handed to another app to render or speak.</td></tr>
+        <tr><td>allowOfflineStorage</td><td>The package is not copied into the library at all.</td></tr>
+        <tr><td>maxQuotationVerses</td><td>Copy and share disable past the cap, naming the limit.</td></tr>
+        <tr><td>expires</td><td>Past the date the package refuses to open.</td></tr>
+      </table>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-number">Search</div>
+      <h2>Sealed, and measured rather than asserted</h2>
+      <p>
+        A packaged translation is fully searchable — phrases included — with no plaintext index at
+        any point. Postings carry word positions, so a phrase is an adjacency check rather than a
+        scan, and they are bucketed by a keyed hash and sealed like chapters. A hashed-token index
+        left in the clear would, for a Bible, let someone align frequencies against a public edition
+        until every hash was identified. That is precisely what we did not build.
+      </p>
+      <div class="figures">
+        <div class="figure"><b>1</b><span>bucket of 256 opened by the commonest word in scripture</span></div>
+        <div class="figure"><b>≤30</b><span>chapters of 1,189 decrypted for that search</span></div>
+        <div class="figure"><b>0</b><span>chapters decrypted by a search with no matches</span></div>
+        <div class="figure"><b>16</b><span>size classes the 256 buckets fall into, after padding</span></div>
+      </div>
+      <p>
+        What remains visible to someone without the key is the size of 256 buckets. Recovering
+        word frequencies from that is a 256-way subset-sum over tens of thousands of unknowns, and
+        its answer would be "bucket 37 probably holds <em>the</em>", which decrypts nothing. Padding
+        every bucket to the largest would cost 6.5× the index size; we measured that rather than
+        guessing, and the padding quantum is a signed header parameter a publisher can change.
+      </p>
+    </section>
+
+    <section>
+      <div class="section-number">Honesty</div>
+      <h2>What this does not do</h2>
+      <div class="plainly">
+        <h4>The key is on the device, and a determined attacker can recover it</h4>
+        <p>
+          The content key is derived with HKDF from a seed injected at build time, then sealed to a
+          Secure Enclave key generated on that device and marked this-device-only. The keychain
+          holds ciphertext. That closes every route that actually happens — a copied keychain, a
+          device backup, a file-system dump — and it does not hide the seed from someone
+          disassembling the binary. Nothing on a general-purpose computer does.
+        </p>
+        <p>
+          This raises the floor, not the ceiling, and it is the same floor a closed-source app
+          stands on. We would rather describe it accurately than imply a ceiling that doesn't exist.
+        </p>
+      </div>
+      <div class="plainly">
+        <h4>A search leaks its own pattern to someone watching the device</h4>
+        <p>
+          Which buckets a query opens is visible to something observing file access on a device it
+          controls. That is inherent to any encrypted index not read in full, and reading it in full
+          would mean decrypting the whole index per keystroke. It reveals that two searches were for
+          the same word, not what the word was.
+        </p>
+      </div>
+      <div class="plainly">
+        <h4>The analogue hole is always open</h4>
+        <p>
+          Any reader can screenshot a page, and a patient one can script scrolling and run OCR. That
+          is true of every Bible app, every e-reader, and every printed book with a photocopier next
+          to it.
+        </p>
+      </div>
+      <blockquote class="pull">
+        This design gives you the same protection a closed-source app gives you, plus the ability to
+        verify it, plus enforcement of your specific terms in code rather than in correspondence.
+        <cite>— and not protection against a determined adversary, because nothing is</cite>
+      </blockquote>
+    </section>
+
+    <section>
+      <div class="section-number">The proof</div>
+      <h2>It isn't a demonstration. It's the translation you open by default.</h2>
+      <p>
+        The obvious way to prove a format is to ship a sample beside the real translations. We did
+        that first, and it proves only that a code path compiles.
+      </p>
+      <p>
+        So the American Standard Version now ships <em>as</em> the package — no plaintext database in
+        the app to fall back on, and it is the translation Scripture Alone opens by default. Every
+        reader, on every launch, derives the content key, unwraps it from the Secure Enclave,
+        verifies an Ed25519 signature and reads chapters decrypted one at a time. Searching it
+        searches the sealed index. If any of that broke, the app would not open on a fresh install.
+      </p>
+      <p>
+        That is a stronger claim than a demonstration can make, and it is the reason to prefer it. A
+        sample nobody selects proves the code compiles. A default translation proves the format
+        survives contact with real use — real size, every chapter, every search, on every device,
+        for as long as the app is in the store.
+      </p>
+      <h3>Two claims, deliberately kept on separate artefacts</h3>
+      <p>
+        The shipped package permits everything, because its text is public domain and its readers
+        must lose nothing. That a package can <em>forbid</em> things — and that the app obeys, at the
+        control the reader touches — is proved separately, against packages built to forbid them.
+        Proving both with one artefact would let a weakness in either hide behind the other.
+      </p>
+    </section>
+
+    <section>
+      <div class="section-number">For your engineers</div>
+      <h2>What to read, and what is still open</h2>
+      <p>
+        Four files carry the whole claim: <code>TranslationPackage.swift</code> — where the part
+        worth reading is the sequence of checks performed when a package is opened, and the two
+        private functions that open a sealed box — together with <code>PackagePolicy.swift</code>,
+        <code>PackageSearchIndex.swift</code> and <code>TranslationRights.swift</code>, plus the
+        packaging tool. The format is implemented twice, in two languages, so a divergence shows up
+        as a failing test rather than as a package that won't open on your desk.
+      </p>
+      <p>
+        Still open, so nobody discovers it later: the attested key-delivery route (a small endpoint
+        that releases a key only to a genuine build, which we will build if your terms need it) is
+        specified but not written; there is no watermarking, which we can add and would describe to
+        you as a deterrent rather than a protection; and no package has yet had to hold two
+        publishers' keys at once, though the design is namespaced for it.
+      </p>
+    </section>
+
+  </main>
+
+  <section class="closing">
+    <h2>Read the whole thing</h2>
+    <p style="max-width: 38rem; margin: 0 auto; color: var(--sa-quiet); line-height: 1.7;">
+      The full paper includes the complete format specification, the leakage analysis in detail, both
+      key-delivery options, and the table of every test that asserts these properties by name.
+    </p>
+    <div class="btn-row">
+      <a class="sa-btn primary" href="https://github.com/blaineam/Scripture-Alone/blob/main/docs/encrypted-translations.md">The full white paper</a>
+      <a class="sa-btn" href="https://github.com/blaineam/Scripture-Alone">Source on GitHub</a>
+      <a class="sa-btn" href="../">Back to Scripture Alone</a>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container" style="text-align:center">
+      <div class="footer-links">
+        <a href="../" class="footer-link">Scripture Alone</a>
+        <a href="/privacy/" class="footer-link">Privacy</a>
+        <a href="/terms/" class="footer-link">Terms</a>
+        <a href="/support/" class="footer-link">Support</a>
+        <a href="/" class="footer-link">Portfolio</a>
+      </div>
+      <p style="color: var(--text-muted); margin-top: var(--spacing-md);">
+        © <span id="year"></span> Blaine Miller. All rights reserved.
+      </p>
+    </div>
+  </footer>
+
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>
