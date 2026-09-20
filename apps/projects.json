@@ -8,10 +8,10 @@
       "title": "Scripture Alone",
       "tagline": "The Word, and nothing in the way",
       "page_url": "/apps/scripture-alone/",
-      "app_store_url": null,
+      "app_store_url": "https://apps.apple.com/us/app/scripture-alone-bible/id6813729762",
       "source_url": "https://github.com/blaineam/Scripture-Alone",
       "icon_url": "/apps/scripture-alone/assets/images/icon.png",
-      "status": "coming-soon",
+      "status": "live",
       "price": "free",
       "note": "A free, open-source (AGPL-3.0) Bible for iPhone, iPad, Mac (the iPad app on Apple silicon) and Apple Watch — the ASV, BSB and KJV offline on device with full-text search and words of Christ in red; highlights, favorites and multi-passage notes (exported as PDF, Markdown or text); camera sermon notes with on-device text recognition; Listen with system voices or Mi Speaks Studio voices; Study mode with cross-references and Calvin, Gill and Jamieson-Fausset-Brown commentary; offline maps, a timeline and charts; verse images and share links that rebuild the card in the browser from the URL fragment; widgets; a standalone Watch app; Legacy Bible keepsakes; and private iCloud sync. No ads, no trackers, no accounts. Coming soon to the App Store."
     },
