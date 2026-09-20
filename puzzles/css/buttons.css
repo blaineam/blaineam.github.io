@@ -70,6 +70,6 @@ a.right {
 }
 
 a.help {
-    background: url(../images/help.png) 10px 6px no-repeat #f3f3f3;
+    background: url(../images/help.png?v=87da5bf5) 10px 6px no-repeat #f3f3f3;
     padding-left: 30px;
 }

@@ -107,7 +107,7 @@ div#game-options div.styled-select {
     height: 28px;
     margin-right: 10px;
     overflow: hidden;
-    background: url(../images/arrow.png) right no-repeat #f3f3f3;
+    background: url(../images/arrow.png?v=5dec0f3a) right no-repeat #f3f3f3;
     border: 1px solid #333;
 }
 
@@ -131,7 +131,7 @@ div#game-options div.styled-select {
 }
 
 #game-options #create .add {
-    background: url(../images/plus.png)  10px 6px no-repeat #f3f3f3;
+    background: url(../images/plus.png?v=39c3710b)  10px 6px no-repeat #f3f3f3;
     padding-left: 30px;
 }
 /*== Modal window ==*/
