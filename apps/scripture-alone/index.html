@@ -80,27 +80,6 @@
     .faq-section h2 { font-family: var(--sa-serif); }
     .btn-buy { box-shadow: 0 4px 15px rgba(34, 35, 79, 0.35); }
 
-    /* Coming Soon — non-interactive placeholders until Scripture Alone is on
-       the App Store (same treatment SightQuick used before its launch). */
-    .btn-coming-soon,
-    .floating-coming-soon {
-      cursor: default;
-      pointer-events: none;
-      background: var(--bg-card) !important;
-      border: 1px solid rgba(122, 82, 126, 0.55) !important;
-      color: var(--sa-ink) !important;
-      box-shadow: 0 0 24px rgba(34, 35, 79, 0.18) !important;
-      letter-spacing: 0.04em;
-    }
-    .hero .btn-coming-soon {
-      background: rgba(251, 241, 223, 0.12) !important;
-      border-color: rgba(249, 223, 166, 0.55) !important;
-      color: var(--sa-cream) !important;
-    }
-    .btn-coming-soon::before,
-    .floating-coming-soon::before { content: "✦ "; color: var(--sa-sun); }
-    .hero .btn-coming-soon::before { color: #F9DFA6; }
-
     .hero-cta { flex-wrap: wrap; gap: var(--spacing-sm); }
     .btn-source {
       display: inline-flex;
@@ -170,7 +149,7 @@
     #shared-verse { display: none; }
     .sa-share-pending #shared-verse,
     .sa-sharing #shared-verse { display: flex; }
-    .sa-sharing .floating-coming-soon { display: none; }
+    .sa-sharing .floating-appstore { display: none; }
 
     .sa-share {
       background:
@@ -309,7 +288,7 @@
         <li><a href="#on-the-way" class="nav-link" data-i18n="on-the-way.9b601c">On the Way</a></li>
         <li><a href="#screenshots" class="nav-link" data-i18n="screenshots.597b63">Screenshots</a></li>
         <li><a href="#faq" class="nav-link" data-i18n="faq.03688b">FAQ</a></li>
-        <li><span class="btn-buy btn-coming-soon" data-i18n="coming-soon.04d2fd">Coming Soon</span></li>
+        <li><a href="https://apps.apple.com/us/app/scripture-alone-bible/id6813729762" target="_blank" rel="noopener noreferrer" class="btn-buy">App Store</a></li>
       </ul>
     </div>
   </nav>
@@ -347,7 +326,7 @@
           A free, open-source Bible for iPhone, iPad and Mac, with its own Apple Watch app. Three complete translations live on your device, so you can read, study, listen and take notes anywhere in the world — with or without a connection.
         </p>
         <div class="hero-cta">
-          <span class="btn-buy btn-coming-soon" data-i18n="coming-soon-to-the.557a3b">Coming soon to the App Store</span>
+          <a href="https://apps.apple.com/us/app/scripture-alone-bible/id6813729762" target="_blank" rel="noopener noreferrer" class="btn-buy" data-i18n="download-on-the-app.a9096a">Download on the App Store</a>
           <a href="https://github.com/blaineam/Scripture-Alone" class="btn-source" target="_blank" rel="noopener noreferrer" data-i18n="source-on-github.c60f2f">Source on GitHub</a>
         </div>
         <p class="sa-mission" data-i18n="free-forever-no-ads.ca5514">Free forever. No ads, no trackers, no accounts. Built to help people study God's word and grow closer to Christ.</p>
@@ -361,10 +340,11 @@
     </div>
   </section>
 
-  <!-- Floating Coming Soon Badge -->
-  <span class="floating-appstore floating-coming-soon">
-    <span data-i18n="coming-soon.04d2fd">Coming Soon</span>
-  </span>
+  <!-- Floating App Store button -->
+  <a href="https://apps.apple.com/us/app/scripture-alone-bible/id6813729762" target="_blank" rel="noopener noreferrer" class="floating-appstore">
+    <span class="floating-appstore-icon"></span>
+    <span data-i18n="download-on-app-store.cf50c2">Download on App Store</span>
+  </a>
 
   <!-- Features Section -->
   <section id="features" class="section">
@@ -697,7 +677,7 @@
         <span class="faq-icon">▼</span>
       </button>
       <div class="faq-answer">
-        <p data-i18n="yes-when-scripture-alone.86db06">Yes. When Scripture Alone arrives on the App Store, it will be available everywhere in the European Union, France included. The source code is open to everyone on GitHub today.</p>
+        <p data-i18n="yes-scripture-alone-is.9112b8">Yes. Scripture Alone is on the App Store everywhere in the European Union, France included. The source code is open to everyone on GitHub.</p>
       </div>
     </div>
 
