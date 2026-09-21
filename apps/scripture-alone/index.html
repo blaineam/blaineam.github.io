@@ -79,6 +79,8 @@
     .section-header h2,
     .faq-section h2 { font-family: var(--sa-serif); }
     .btn-buy { box-shadow: 0 4px 15px rgba(34, 35, 79, 0.35); }
+    /* Two-word labels ("App Store") wrapped onto two lines at mid widths. */
+    .nav-links .nav-link, .nav-links .btn-buy { white-space: nowrap; }
 
     .hero-cta { flex-wrap: wrap; gap: var(--spacing-sm); }
     .btn-source {
@@ -285,7 +287,6 @@
       <button class="mobile-menu-toggle">☰</button>
       <ul class="nav-links">
         <li><a href="#features" class="nav-link" data-i18n="features.fc338f">Features</a></li>
-        <li><a href="#on-the-way" class="nav-link" data-i18n="on-the-way.9b601c">On the Way</a></li>
         <li><a href="#screenshots" class="nav-link" data-i18n="screenshots.597b63">Screenshots</a></li>
         <li><a href="#faq" class="nav-link" data-i18n="faq.03688b">FAQ</a></li>
         <li><a href="https://apps.apple.com/us/app/scripture-alone-bible/id6813729762" target="_blank" rel="noopener noreferrer" class="btn-buy">App Store</a></li>
@@ -322,8 +323,8 @@
       <div class="hero-text">
         <p class="hero-subtitle" data-i18n="scripture-alone.c923df">📖 Scripture Alone</p>
         <h1 class="hero-title" data-i18n="the-word-and-nothing.59b9cc">The Word, and nothing in the way.</h1>
-        <p class="hero-description" data-i18n="a-free-open-source.04b934">
-          A free, open-source Bible for iPhone, iPad and Mac, with its own Apple Watch app. Three complete translations live on your device, so you can read, study, listen and take notes anywhere in the world — with or without a connection.
+        <p class="hero-description" data-i18n="a-free-open-source.93993c">
+          A free, open-source Bible for iPhone, iPad and Mac, with its own Apple Watch app. The American Standard Version is on your device from the start and two more translations are a single download away, so you can read, study, listen and take notes anywhere in the world — with or without a connection.
         </p>
         <div class="hero-cta">
           <a href="https://apps.apple.com/us/app/scripture-alone-bible/id6813729762" target="_blank" rel="noopener noreferrer" class="btn-buy" data-i18n="download-on-the-app.a9096a">Download on the App Store</a>
@@ -358,8 +359,8 @@
       <div class="feature-card">
         <div class="feature-icon">📖</div>
         <h3 class="feature-title" data-i18n="the-whole-bible-offline.18a85e">The whole Bible, offline</h3>
-        <p class="feature-description" data-i18n="the-american-standard-version.b8d7a4">
-          The American Standard Version, the Berean Standard Bible and the King James Version — all public domain, all stored on your device, with full-text search. No signal needed, anywhere in the world.
+        <p class="feature-description" data-i18n="the-american-standard-version.331aee">
+          The American Standard Version is on your device from the moment the app installs, so it reads offline before you ever connect. The Berean Standard Bible and the King James Version download once, the first time you choose one, and are yours offline from then on. All three are public domain, with full-text search.
         </p>
       </div>
 
@@ -423,8 +424,8 @@
       <div class="feature-card">
         <div class="feature-icon">🔎</div>
         <h3 class="feature-title" data-i18n="study-mode.08a731">Study mode</h3>
-        <p class="feature-description" data-i18n="a-toggle-away-tap.774cf2">
-          A toggle away: tap a verse and the Study panel follows, with ranked cross-references (one tap there and back) and classic commentary from John Calvin, John Gill and Jamieson‑Fausset‑Brown. Out of sight when you just want to read.
+        <p class="feature-description" data-i18n="a-toggle-away-tap.8c147a">
+          A toggle away: tap a verse and the Study panel follows, with ranked cross-references (one tap there and back) and classic commentary from John Calvin, John Gill and Jamieson‑Fausset‑Brown. The commentary downloads the first time you open it; cross-references are there from the start.
         </p>
       </div>
 
@@ -447,8 +448,8 @@
       <div class="feature-card">
         <div class="feature-icon">⌚</div>
         <h3 class="feature-title" data-i18n="widgets-and-apple-watch.efef3c">Widgets and Apple Watch</h3>
-        <p class="feature-description" data-i18n="verse-of-the-day.54e7cf">
-          Verse of the Day and Favorites &amp; Notes widgets for the Home and Lock Screens, and an Apple Watch app with its own offline ASV, your favorites and notes, and a complication with the day's reference.
+        <p class="feature-description" data-i18n="verse-of-the-day.bc6058">
+          Verse of the Day and Favorites &amp; Notes widgets for the Home and Lock Screens, and an Apple Watch app with the ASV, BSB and KJV offline — it follows the translation you're reading on your iPhone — plus your favorites and notes, and a complication with the day's reference.
         </p>
       </div>
 
@@ -473,6 +474,49 @@
         <h3 class="feature-title" data-i18n="open-source.6cc336">Open source</h3>
         <p class="feature-description" data-i18n="every-line-of-code.0797fb">
           Every line of code is public under the AGPL-3.0 license. Read it, check it, or build it yourself.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">📚</div>
+        <h3 class="feature-title" data-i18n="more-translations.1c0903">More translations</h3>
+        <p class="feature-description" data-i18n="dozens-more-are-free.b28663">
+          Dozens more are free from eBible.org, downloaded only when you choose one, and you can open a USFM file or an ePub you already own. The ESV, CSB, NKJV and NASB can't be given away by anyone, so they're read with your own free key from the publisher. Licenses to carry those offline are still being sought.
+        </p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔐</div>
+        <h3 class="feature-title" data-i18n="encrypted-and-provably-so.2387ba">Encrypted, and provably so</h3>
+        <p class="feature-description" data-i18n-html="the-american-standard-version.ebc980">
+          The American Standard Version ships sealed: signed by a key the app pins, decrypted a chapter at a time, searchable without its text ever lying in the open on your device. It's the format a publisher's own translation would travel in — <a href="security/">read how it works</a>.
+        </p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">⚖️</div>
+        <h3 class="feature-title" data-i18n="two-translations-at-once.1736f5">Two translations at once</h3>
+        <p class="feature-description" data-i18n="put-any-two-side.7c4144">
+          Put any two side by side, verse for verse, and see where they part company — including a translation you read online with your own key.
+        </p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔠</div>
+        <h3 class="feature-title" data-i18n="the-words-underneath.02fab0">The words underneath</h3>
+        <p class="feature-description" data-i18n="tap-a-verse-for.021f01">
+          Tap a verse for the Hebrew or Greek behind it, word by word, with parsing, Strong's numbers and a lexicon entry for each. It works in every translation, and downloads once the first time you open it.
+        </p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📥</div>
+        <h3 class="feature-title" data-i18n="bring-your-notes-with.d346d0">Bring your notes with you</h3>
+        <p class="feature-description" data-i18n="years-of-notes-in.6859a3">
+          Years of notes in another Bible app don't have to be left behind. Import a Life Bible (formerly Tecarta) export directly, or paste notes or a CSV from anywhere else. Importing twice is safe — anything already there is left alone.
+        </p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">👨‍👩‍👧</div>
+        <h3 class="feature-title" data-i18n="live-family-sharing.a34cc6">Live family sharing</h3>
+        <p class="feature-description" data-i18n="share-your-notes-and.6116ef">
+          Share your notes and highlights with family as you keep adding to them, not only as a keepsake file.
         </p>
       </div>
     </div>
@@ -518,48 +562,6 @@
         <img src="assets/images/frame-themes.png?v=f7facee5" alt="The reader in one of its five themes" width="1040" height="2152" loading="lazy">
         <figcaption data-i18n="five-reading-themes.275ab8">Five reading themes</figcaption>
       </figure>
-      <div class="feature-card">
-        <div class="feature-icon">📚</div>
-        <h3 class="feature-title" data-i18n="more-translations.1c0903">More translations</h3>
-        <p class="feature-description" data-i18n="dozens-more-are-free.b28663">
-          Dozens more are free from eBible.org, downloaded only when you choose one, and you can open a USFM file or an ePub you already own. The ESV, CSB, NKJV and NASB can't be given away by anyone, so they're read with your own free key from the publisher. Licenses to carry those offline are still being sought.
-        </p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">🔐</div>
-        <h3 class="feature-title" data-i18n="encrypted-and-provably-so.2387ba">Encrypted, and provably so</h3>
-        <p class="feature-description" data-i18n-html="the-american-standard-version.ebc980">
-          The American Standard Version ships sealed: signed by a key the app pins, decrypted a chapter at a time, searchable without its text ever lying in the open on your device. It's the format a publisher's own translation would travel in — <a href="security/">read how it works</a>.
-        </p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">⚖️</div>
-        <h3 class="feature-title" data-i18n="two-translations-at-once.1736f5">Two translations at once</h3>
-        <p class="feature-description" data-i18n="put-any-two-side.7c4144">
-          Put any two side by side, verse for verse, and see where they part company — including a translation you read online with your own key.
-        </p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">🔠</div>
-        <h3 class="feature-title" data-i18n="the-words-underneath.02fab0">The words underneath</h3>
-        <p class="feature-description" data-i18n="tap-a-verse-for.3b3397">
-          Tap a verse for the Hebrew or Greek behind it, word by word, with parsing, Strong's numbers and a lexicon entry for each. It works in every translation, and it's in the app, so it reads offline like everything else.
-        </p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">📥</div>
-        <h3 class="feature-title" data-i18n="bring-your-notes-with.d346d0">Bring your notes with you</h3>
-        <p class="feature-description" data-i18n="years-of-notes-in.6859a3">
-          Years of notes in another Bible app don't have to be left behind. Import a Life Bible (formerly Tecarta) export directly, or paste notes or a CSV from anywhere else. Importing twice is safe — anything already there is left alone.
-        </p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">👨‍👩‍👧</div>
-        <h3 class="feature-title" data-i18n="live-family-sharing.a34cc6">Live family sharing</h3>
-        <p class="feature-description" data-i18n="share-your-notes-and.6116ef">
-          Share your notes and highlights with family as you keep adding to them, not only as a keepsake file.
-        </p>
-      </div>
     </div>
   </section>
 
@@ -648,8 +650,8 @@
         <span class="faq-icon">▼</span>
       </button>
       <div class="faq-answer">
-        <p data-i18n="yes-the-watch-app.a55a96">
-          Yes. The watch app carries its own copy of the American Standard Version, so it reads offline even without your iPhone nearby. It has the Verse of the Day, your favorites and notes, can read a passage aloud, and puts the day's reference on your watch face.
+        <p data-i18n="yes-the-watch-app.14dc16">
+          Yes. The watch app carries its own copies of the American Standard Version, the Berean Standard Bible and the King James Version, so it reads offline even without your iPhone nearby, and it follows the translation you're reading on your iPhone — including one you imported. It has the Verse of the Day, your favorites and notes, can read a passage aloud, and puts the day's reference on your watch face.
         </p>
       </div>
     </div>
