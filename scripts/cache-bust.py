@@ -102,7 +102,9 @@ def pages(scope: str | None) -> list[Path]:
         return [base]
     found = [p for p in base.rglob("*.html") if not is_mirrored(p)]
     found += [p for p in base.rglob("*.css") if not is_mirrored(p)]
-    return sorted(p for p in found if "node_modules" not in p.parts)
+    # .claude/ holds other sessions' git worktrees — whole checkouts of this site. Walking into
+    # them rewrote dozens of files in someone else's working tree.
+    return sorted(p for p in found if "node_modules" not in p.parts and ".claude" not in p.parts)
 
 
 def main(argv: list[str]) -> int:
