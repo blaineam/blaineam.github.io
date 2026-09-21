@@ -85,7 +85,10 @@ function parseApps() {
   let m;
   while ((m = cardRe.exec(html)) !== null) {
     const slug = m[1];
-    const rel = m[2];
+    // The src carries a cache-busting query (`icon.png?v=eed78469`) once
+    // scripts/cache-bust.py has run, and that is not part of the filename.
+    // Without stripping it every Pages deploy fails with "Icon not found".
+    const rel = m[2].split(/[?#]/)[0];
     const iconPath = path.join(APPS_DIR, rel);
     if (!fs.existsSync(iconPath)) {
       throw new Error(`Icon not found for ${slug}: ${iconPath}`);
