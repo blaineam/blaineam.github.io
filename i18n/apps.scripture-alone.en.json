@@ -60,6 +60,7 @@
   "more-translations.1c0903": "More translations",
   "no-accounts.24a135": "<span class=\"badge-icon\">👤</span> No accounts",
   "no-ads-no-analytics.490c17": "No ads. No analytics. No third-party SDKs. Your notes travel only through your own iCloud.",
+  "no-google-play-download.8a9d61": "No Google Play? <a href=\"https://github.com/blaineam/Scripture-Alone/releases/tag/android-v1.0.0-beta.1\" target=\"_blank\" rel=\"noopener noreferrer\">Download the APK from GitHub</a>, with every translation and study tool built in. It doesn't update itself, and it can't be updated by the Google Play version, so read the notes there first.",
   "none-there-are-no.762c80": "None. There are no analytics, no trackers and no accounts. Your highlights and notes stay on your devices and sync only through your own private iCloud, which I can't see.",
   "nothing-between-you-and.27b4f3": "Nothing between you and the text",
   "on-the-way.7884d3": "On the way",
