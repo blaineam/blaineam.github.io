@@ -329,6 +329,7 @@
         <div class="hero-cta">
           <a href="https://apps.apple.com/us/app/scripture-alone-bible/id6813729762" target="_blank" rel="noopener noreferrer" class="btn-buy" data-i18n="download-on-the-app.a9096a">Download on the App Store</a>
           <a href="https://github.com/blaineam/Scripture-Alone" class="btn-source" target="_blank" rel="noopener noreferrer" data-i18n="source-on-github.c60f2f">Source on GitHub</a>
+          <a href="#android-beta" class="btn-source" data-i18n="android-beta.3940f1">Android beta</a>
         </div>
         <p class="sa-mission" data-i18n="free-forever-no-ads.ca5514">Free forever. No ads, no trackers, no accounts. Built to help people study God's word and grow closer to Christ.</p>
       </div>
@@ -656,6 +657,21 @@
       </div>
     </div>
 
+    <div class="faq-item" id="android-beta">
+      <button class="faq-question">
+        <span data-i18n="is-there-an-android.2b6378">Is there an Android version?</span>
+        <span class="faq-icon">▼</span>
+      </button>
+      <div class="faq-answer">
+        <p data-i18n="yes-in-a-closed.b8b573">
+          Yes, in a closed beta on Google Play: a native app for Android phones and tablets, with its own Wear OS app. Your highlights and notes stay on the device, since there's no iCloud on Android.
+        </p>
+        <p data-i18n-html="to-join-join-the.9646c8">
+          To join, <a href="https://groups.google.com/g/scripture-alone-android-beta" target="_blank" rel="noopener noreferrer">join the beta group</a>, then <a href="https://play.google.com/apps/testing/com.blainemiller.scripturealone" target="_blank" rel="noopener noreferrer">opt in on Google Play</a> with the same Google account and install it from there. If Google Play says the test isn't available yet, the first build is still in Google's review, so try again in a day or two.
+        </p>
+      </div>
+    </div>
+
     <div class="faq-item">
       <button class="faq-question">
         <span data-i18n="why-the-american-standard.8f4a1a">Why the American Standard Version?</span>
@@ -762,5 +778,15 @@
   </footer>
 
   <script src="../app-showcase.js"></script>
+  <script>
+    // "Android beta" in the hero jumps to its FAQ answer; open it rather than leave it folded.
+    function saOpenAndroidBeta() {
+      if (location.hash !== '#android-beta') return;
+      const item = document.getElementById('android-beta');
+      if (item) item.classList.add('active');
+    }
+    window.addEventListener('hashchange', saOpenAndroidBeta);
+    saOpenAndroidBeta();
+  </script>
 </body>
 </html>
