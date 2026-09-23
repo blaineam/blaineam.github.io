@@ -205,6 +205,10 @@ and let the mirror carry it over.
   localized badge artwork only (never redraw it), one SVG per language under
   `apps/_shared/badges/app-store/<lang>.svg`, swapped per language the same way.
   Until then the styled pill button is correct.
+- **No store listing** (a shelved app like Aperion, whose one route is its open-source
+  successor on GitHub): the primary button links there instead and carries a bare
+  `data-cta` attribute, at the hero and at the close, so `check-app-page.py` counts it
+  as the download. Never fake a store button for an app that isn't in a store.
 - Secondary routes (source code, beta, Android, Mac) are **quiet text links** under
   the button (`.sa-alt-links`), separated by a middot.
 - Paid apps: say the price model plainly in the trust beat or FAQ; any story about

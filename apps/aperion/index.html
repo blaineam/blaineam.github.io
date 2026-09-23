@@ -14,607 +14,382 @@
   <link rel="icon" type="image/png" href="assets/images/icon.png?v=71bdcd44">
   <link rel="stylesheet" href="../app-showcase.css">
   <style>
-    /* Aperion — Deep Space Theme */
+    /* Aperion — the icon's night: black sky, a white eight-point star and a
+       dark-blue sphere at its heart. The page reads like a field notebook: serif
+       display type, starlight accents, and the Orion Nebula's faint rose low in
+       the hero. */
     :root {
-      --app-primary: #6366f1;
-      --app-secondary: #8b5cf6;
-      --app-accent: #22d3ee;
-      --app-gold: #fbbf24;
-      --app-deep: #0a0a1f;
-      --app-deeper: #050514;
+      --app-primary: #070A16;      /* the sky */
+      --app-secondary: #1B2748;    /* the sphere */
+      --app-accent: #C9D8FF;       /* starlight */
+      --primary-color: #1E2A55;    /* headlines on paper */
+      --secondary-color: #3D4F8C;
+      --ap-ink: #2E3F80;
+      --ap-accent-text: #8A3E62;   /* nebula rose, deepened for light ground */
+      --ap-display: ui-serif, "New York", "Iowan Old Style", "Palatino", Georgia, "Times New Roman", serif;
+      --ap-body-face: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+      --ap-display-weight: 600;
+      --ap-paper: #FAFAFC;
+      --ap-paper-2: #F0F1F6;
+      --ap-rule: rgba(30, 42, 85, 0.14);
+      --ap-quiet: #5C6178;
+      --ap-body: #2F3347;
+      --ap-shadow: drop-shadow(0 30px 40px rgba(7, 10, 22, 0.26)) drop-shadow(0 6px 10px rgba(7, 10, 22, 0.12));
+      --ap-hero-bg: radial-gradient(1.5px 1.5px at 14% 22%, rgba(255,255,255,0.9) 50%, transparent 51%), radial-gradient(1px 1px at 31% 12%, rgba(255,255,255,0.7) 50%, transparent 51%), radial-gradient(1px 1px at 66% 20%, rgba(255,255,255,0.8) 50%, transparent 51%), radial-gradient(1.5px 1.5px at 84% 30%, rgba(255,255,255,0.9) 50%, transparent 51%), radial-gradient(1px 1px at 9% 64%, rgba(255,255,255,0.6) 50%, transparent 51%), radial-gradient(1px 1px at 93% 58%, rgba(255,255,255,0.6) 50%, transparent 51%), radial-gradient(1px 1px at 48% 6%, rgba(255,255,255,0.7) 50%, transparent 51%), radial-gradient(ellipse 55% 40% at 50% 100%, rgba(214, 112, 160, 0.22) 0%, rgba(120, 90, 200, 0.10) 45%, transparent 75%), linear-gradient(175deg, #03040B 0%, #070A16 45%, #141D3A 100%);
+      --ap-hero-ink: #F4F6FF;
+      --ap-hero-kicker: rgba(201, 216, 255, 0.9);
+      --ap-cta-bg: linear-gradient(180deg, #FFFFFF, #D9E3FF);
+      --ap-cta-ink: #0B1026;
+      --ap-float: linear-gradient(135deg, #141D3A, #2A3866);
+      --ap-btn-shadow: 0 10px 28px rgba(7, 10, 22, 0.30);
+      --ap-ornament: linear-gradient(90deg, #C9D8FF, #D670A0);
+      --bg-primary: var(--ap-paper);
+      --bg-secondary: var(--ap-paper-2);
+      --text-primary: #12162B;
+      --text-secondary: var(--ap-body);
+      --text-muted: var(--ap-quiet);
+      --glass-bg: rgba(250, 250, 252, 0.8);
+      --glass-border: rgba(30, 42, 85, 0.10);
+      --glass-shadow: none;
+      --ap-measure: 1120px;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --primary-color: #C9D8FF;
+        --secondary-color: #9FB2E8;
+        --ap-ink: #C9D8FF;
+        --ap-accent-text: #EFA3C6;
+        --ap-paper: #05070F;
+        --ap-paper-2: #0B1020;
+        --ap-rule: rgba(201, 216, 255, 0.14);
+        --ap-quiet: #9DA3BD;
+        --ap-body: #D5D8E6;
+        --ap-shadow: drop-shadow(0 30px 44px rgba(0, 0, 0, 0.65)) drop-shadow(0 6px 10px rgba(0, 0, 0, 0.3));
+        --text-primary: #EEF1FA;
+        --glass-bg: rgba(5, 7, 15, 0.8);
+        --glass-border: rgba(201, 216, 255, 0.08);
+      }
     }
 
-    /* Shelved — this app was never released, so every download CTA is a
-       non-interactive marker instead of a link. */
-    .btn-shelved,
-    .pricing-shelved {
-      cursor: default;
-      pointer-events: none;
-      background: rgba(148, 163, 184, 0.16) !important;
-      border: 1px solid rgba(148, 163, 184, 0.45) !important;
-      color: #d7dce6 !important;
-      box-shadow: none !important;
-      letter-spacing: 0.04em;
-    }
+    body { background: var(--ap-paper); }
+    .btn-buy { box-shadow: var(--ap-btn-shadow); }
+    .nav-links .nav-link, .nav-links .btn-buy { white-space: nowrap; }
+    .floating-appstore { background: var(--ap-float); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.30); }
 
-    .btn-shelved::before,
-    .pricing-shelved::before {
-      content: "▪ ";
-      color: #94a3b8;
-    }
-
-    /* The one live CTA left on the page: the firmware patcher that replaced it. */
-    .floating-patcher {
-      animation: none;
-      background: linear-gradient(135deg, #334155, #1e293b) !important;
-      border: 1px solid rgba(148, 163, 184, 0.45) !important;
-      box-shadow: 0 8px 30px rgba(15, 23, 42, 0.55) !important;
-      font-size: 1rem;
-    }
-
-    .floating-patcher:hover {
-      box-shadow: 0 12px 40px rgba(15, 23, 42, 0.7) !important;
-    }
-
-    /* Shelved notice — the first thing anyone landing here should read. */
-    .shelved-notice {
-      max-width: 720px;
-      margin: 0 0 1.75rem;
-      padding: 1.1rem 1.35rem;
-      border-radius: 16px;
-      background: rgba(15, 23, 42, 0.55);
-      border: 1px solid rgba(148, 163, 184, 0.35);
-      color: #cbd5e1;
-      font-size: 0.98rem;
-      line-height: 1.6;
-      text-align: left;
-    }
-
-    .shelved-notice strong {
-      color: #f1f5f9;
-    }
-
-    .shelved-notice a {
-      color: var(--app-accent);
-      text-decoration: underline;
-      text-underline-offset: 3px;
-    }
-
-    .shelved-tag {
-      display: inline-block;
-      margin-bottom: 0.6rem;
-      padding: 0.3rem 0.85rem;
-      border-radius: 99px;
-      background: rgba(148, 163, 184, 0.18);
-      border: 1px solid rgba(148, 163, 184, 0.45);
-      color: #e2e8f0;
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 0.12em;
+    /* ---- Shared type ---------------------------------------------------- */
+    .ap-eyebrow {
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
+      color: var(--ap-accent-text);
+      margin: 0 0 1rem;
     }
+    .ap-eyebrow .ap-num {
+      font-family: var(--ap-display);
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      margin-right: 0.8em;
+      opacity: 0.85;
+    }
+    .ap-display {
+      font-family: var(--ap-display);
+      font-weight: var(--ap-display-weight);
+      background: none;
+      -webkit-text-fill-color: currentColor;
+      color: var(--primary-color);
+      font-size: clamp(2.1rem, 5.2vw, 3.6rem);
+      line-height: 1.06;
+      letter-spacing: -0.02em;
+      margin: 0 0 1.4rem;
+      text-wrap: balance;
+    }
+    .ap-lede {
+      font-family: var(--ap-body-face);
+      font-size: clamp(1.12rem, 1.9vw, 1.36rem);
+      line-height: 1.62;
+      color: var(--ap-body);
+      margin: 0 0 1.2rem;
+      text-wrap: pretty;
+    }
+    .ap-lede a, .faq-answer a { color: var(--ap-ink); }
 
-    /* Everything below the notice describes what the app did, in past tense. */
-    .past-tense-note {
-      max-width: 760px;
-      margin: 0 auto 2.5rem;
+    /* ---- Hero ----------------------------------------------------------- */
+    .ap-hero {
+      position: relative;
+      background: var(--ap-hero-bg);
+      color: #fff;
       text-align: center;
-      color: var(--text-secondary);
-      font-size: 0.95rem;
-    }
-
-    /* Cosmic hero with animated starfield */
-    .hero {
-      background:
-        radial-gradient(ellipse at 25% 30%, rgba(99, 102, 241, 0.35) 0%, transparent 55%),
-        radial-gradient(ellipse at 80% 70%, rgba(139, 92, 246, 0.30) 0%, transparent 55%),
-        radial-gradient(ellipse at 50% 100%, rgba(34, 211, 238, 0.20) 0%, transparent 60%),
-        linear-gradient(135deg, #050514 0%, #0a0a1f 40%, #1a103d 100%);
-      color: white;
-      position: relative;
-      overflow: hidden;
-      min-height: 100vh;
-    }
-
-    /* Layered starfields */
-    .starfield {
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
+      padding: calc(76px + clamp(3rem, 8vw, 6rem)) 16px 0;
       overflow: hidden;
     }
-
-    .stars-small,
-    .stars-medium,
-    .stars-large {
-      position: absolute;
-      inset: 0;
-      background-repeat: repeat;
+    .ap-hero-icon {
+      width: 84px;
+      height: 84px;
+      display: block;
+      margin: 0 auto 1.4rem;
+      border-radius: 22%;
+      filter: drop-shadow(0 14px 26px rgba(0, 0, 0, 0.45));
     }
-
-    .stars-small {
-      background-image:
-        radial-gradient(1px 1px at 20% 30%, white, transparent),
-        radial-gradient(1px 1px at 60% 70%, rgba(255,255,255,0.85), transparent),
-        radial-gradient(1px 1px at 50% 50%, white, transparent),
-        radial-gradient(1px 1px at 80% 10%, rgba(255,255,255,0.6), transparent),
-        radial-gradient(1px 1px at 90% 60%, white, transparent),
-        radial-gradient(1px 1px at 33% 80%, rgba(255,255,255,0.7), transparent),
-        radial-gradient(1px 1px at 15% 90%, white, transparent),
-        radial-gradient(1px 1px at 70% 25%, rgba(255,255,255,0.8), transparent);
-      background-size: 250px 250px;
-      animation: drift 240s linear infinite;
-      opacity: 0.9;
-    }
-
-    .stars-medium {
-      background-image:
-        radial-gradient(1.5px 1.5px at 10% 20%, rgba(255,255,255,0.95), transparent),
-        radial-gradient(1.5px 1.5px at 70% 60%, white, transparent),
-        radial-gradient(1.5px 1.5px at 40% 90%, rgba(255,255,255,0.85), transparent),
-        radial-gradient(1.5px 1.5px at 85% 15%, white, transparent),
-        radial-gradient(1.5px 1.5px at 25% 65%, rgba(255,255,255,0.9), transparent);
-      background-size: 400px 400px;
-      animation: drift 360s linear infinite reverse;
-      opacity: 0.8;
-    }
-
-    .stars-large {
-      background-image:
-        radial-gradient(2.5px 2.5px at 30% 40%, white, transparent),
-        radial-gradient(2px 2px at 75% 20%, rgba(34, 211, 238, 0.95), transparent),
-        radial-gradient(2px 2px at 50% 80%, rgba(251, 191, 36, 0.95), transparent),
-        radial-gradient(2.5px 2.5px at 90% 50%, white, transparent),
-        radial-gradient(2px 2px at 18% 75%, rgba(167, 139, 250, 0.9), transparent);
-      background-size: 600px 600px;
-      animation: drift 480s linear infinite, twinkle 4s ease-in-out infinite;
-      opacity: 0.95;
-    }
-
-    @keyframes drift {
-      from { transform: translateY(0); }
-      to { transform: translateY(-2000px); }
-    }
-
-    @keyframes twinkle {
-      0%, 100% { opacity: 0.95; }
-      50% { opacity: 0.55; }
-    }
-
-    /* Slow parallax nebula glow */
-    .nebula-glow {
-      position: absolute;
-      inset: -20%;
-      background:
-        radial-gradient(circle at 30% 30%, rgba(139, 92, 246, 0.25) 0%, transparent 25%),
-        radial-gradient(circle at 70% 60%, rgba(99, 102, 241, 0.25) 0%, transparent 30%),
-        radial-gradient(circle at 50% 80%, rgba(34, 211, 238, 0.18) 0%, transparent 25%);
-      filter: blur(60px);
-      animation: nebulaShift 30s ease-in-out infinite alternate;
-      pointer-events: none;
-    }
-
-    @keyframes nebulaShift {
-      from { transform: translate(0, 0) rotate(0deg); }
-      to { transform: translate(40px, -30px) rotate(20deg); }
-    }
-
-    .hero-content {
-      position: relative;
-      z-index: 2;
-    }
-
-    .hero-title,
-    .hero-subtitle {
-      color: white;
-      -webkit-text-fill-color: white;
-    }
-
-    .hero-title {
-      background: linear-gradient(135deg, #fff 0%, #c7d2fe 50%, #a5f3fc 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      text-shadow: 0 0 60px rgba(167, 139, 250, 0.4);
-    }
-
-    .hero-subtitle {
-      letter-spacing: 0.25em;
+    .ap-hero-kicker {
+      font-size: 0.82rem;
+      letter-spacing: 0.26em;
       text-transform: uppercase;
-      color: var(--app-accent);
-      -webkit-text-fill-color: var(--app-accent);
-      font-weight: 600;
+      color: var(--ap-hero-kicker);
+      margin: 0 0 1.2rem;
     }
-
-    .hero-description {
-      color: rgba(255, 255, 255, 0.85);
-      max-width: 580px;
+    .ap-hero h1 {
+      font-family: var(--ap-display);
+      font-weight: var(--ap-display-weight);
+      background: none;
+      -webkit-background-clip: border-box;
+      background-clip: border-box;
+      -webkit-text-fill-color: var(--ap-hero-ink);
+      color: var(--ap-hero-ink);
+      font-size: clamp(2.6rem, 8.4vw, 6.2rem);
+      line-height: 1.02;
+      letter-spacing: -0.025em;
+      max-width: 13ch;
+      margin: 0 auto 1.6rem;
+      text-wrap: balance;
     }
-
-    /* Hero icon with cosmic ring */
-    .hero-icon-wrap {
-      position: relative;
-      display: inline-block;
-      padding: 60px;
+    .ap-hero-standfirst {
+      font-family: var(--ap-body-face);
+      font-size: clamp(1.08rem, 2vw, 1.34rem);
+      line-height: 1.6;
+      color: rgba(255, 255, 255, 0.86);
+      max-width: 44ch;
+      margin: 0 auto 2.2rem;
+      text-wrap: pretty;
     }
-
-    .hero-icon-wrap::before,
-    .hero-icon-wrap::after {
-      content: '';
-      position: absolute;
-      border-radius: 50%;
-      border: 1px solid rgba(167, 139, 250, 0.4);
-      pointer-events: none;
-    }
-
-    .hero-icon-wrap::before {
-      inset: 30px;
-      animation: orbit 24s linear infinite;
-      border-top-color: rgba(34, 211, 238, 0.9);
-      border-right-color: rgba(34, 211, 238, 0.4);
-    }
-
-    .hero-icon-wrap::after {
-      inset: 0;
-      animation: orbit 60s linear infinite reverse;
-      border-top-color: rgba(251, 191, 36, 0.7);
-      border-left-color: rgba(251, 191, 36, 0.3);
-    }
-
-    @keyframes orbit {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
-
-    .hero-icon {
-      width: 280px;
-      height: 280px;
-      border-radius: 64px;
-      box-shadow:
-        0 30px 80px rgba(99, 102, 241, 0.5),
-        0 0 120px rgba(139, 92, 246, 0.4),
-        inset 0 1px 0 rgba(255, 255, 255, 0.1);
-      animation: floatIcon 6s ease-in-out infinite;
-      position: relative;
-      z-index: 2;
-    }
-
-    @keyframes floatIcon {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-12px); }
-    }
-
-    /* Cosmic CTA */
-    .hero-cta .btn-buy {
-      background: linear-gradient(135deg, var(--app-primary), var(--app-secondary));
-      box-shadow: 0 10px 40px rgba(99, 102, 241, 0.5);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-    }
-
-    .hero-cta .btn-buy:hover {
-      box-shadow: 0 15px 60px rgba(139, 92, 246, 0.7);
-    }
-
-    /* Platform pills row */
-    .platform-pills {
+    .ap-cta {
       display: flex;
-      gap: 0.5rem;
       flex-wrap: wrap;
-      margin-top: 1.5rem;
-      margin-bottom: 1.5rem;
+      justify-content: center;
+      gap: 0.75rem;
     }
-
-    .platform-pill {
-      padding: 0.4rem 0.95rem;
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.18);
-      border-radius: 99px;
-      color: rgba(255, 255, 255, 0.95);
-      font-size: 0.85rem;
-      font-weight: 600;
-      letter-spacing: 0.02em;
-      backdrop-filter: blur(10px);
+    .ap-cta .btn-buy {
+      background: var(--ap-cta-bg);
+      color: var(--ap-cta-ink);
+      padding: 0.8rem 1.5rem;
+      border-radius: 999px;
+      min-height: 44px;
     }
-
-    /* Cosmic feature card accents */
-    .feature-card {
-      position: relative;
+    .ap-hero-device {
+      margin: clamp(3rem, 7vw, 4.5rem) auto 0;
+      width: clamp(230px, 34vw, 380px);
+      height: clamp(250px, 36vw, 420px);
       overflow: hidden;
     }
+    .ap-hero-device img { display: block; width: 100%; height: auto; }
 
-    .feature-card::before {
-      content: '';
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: radial-gradient(circle, rgba(99, 102, 241, 0.08) 0%, transparent 60%);
-      opacity: 0;
-      transition: opacity 0.4s ease;
-      pointer-events: none;
-    }
-
-    .feature-card:hover::before {
-      opacity: 1;
-    }
-
-    .feature-icon {
-      background: linear-gradient(135deg, var(--app-primary), var(--app-secondary));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    /* Hardware table */
-    .hw-table-wrap {
+    /* ---- Statement ------------------------------------------------------ */
+    .ap-statement {
       max-width: 900px;
       margin: 0 auto;
-      overflow-x: auto;
+      padding: clamp(4rem, 10vw, 7.5rem) 16px;
+      text-align: center;
+    }
+    .ap-statement p {
+      font-family: var(--ap-display);
+      font-size: clamp(1.5rem, 3.6vw, 2.5rem);
+      line-height: 1.3;
+      color: var(--primary-color);
+      margin: 0;
+      text-wrap: balance;
+    }
+    .ap-ornament {
+      display: block;
+      width: 44px;
+      height: 4px;
+      margin: 0 auto 1.8rem;
+      border-radius: 4px;
+      background: var(--ap-ornament);
     }
 
-    .hw-table {
-      width: 100%;
-      border-collapse: separate;
-      border-spacing: 0;
-      background: var(--bg-card);
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius-lg);
-      overflow: hidden;
-      box-shadow: 0 4px 20px var(--shadow-color);
-    }
-
-    .hw-table th,
-    .hw-table td {
-      padding: 1rem 1.25rem;
-      text-align: left;
-      border-bottom: 1px solid var(--border-color);
-    }
-
-    .hw-table tr:last-child th,
-    .hw-table tr:last-child td {
-      border-bottom: none;
-    }
-
-    .hw-table thead th {
-      background: linear-gradient(135deg, rgba(99, 102, 241, 0.15), rgba(139, 92, 246, 0.15));
-      font-weight: 700;
-      color: var(--text-primary);
-      font-size: 0.95rem;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-
-    .hw-table tbody th {
-      width: 32%;
-      color: var(--text-primary);
-      font-weight: 700;
-    }
-
-    .hw-table tbody td {
-      color: var(--text-secondary);
-    }
-
-    .hw-table tbody tr:hover {
-      background: rgba(99, 102, 241, 0.05);
-    }
-
-    .hw-pill {
-      display: inline-block;
-      padding: 0.15rem 0.5rem;
-      background: rgba(99, 102, 241, 0.12);
-      color: var(--app-primary);
-      border-radius: 6px;
-      font-size: 0.85rem;
-      font-weight: 600;
-      margin-right: 0.25rem;
-    }
-
-    /* Workflow / how it works */
-    .workflow-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 1.5rem;
-      max-width: 1100px;
+    /* ---- Stories -------------------------------------------------------- */
+    .ap-chapter {
+      max-width: var(--ap-measure);
       margin: 0 auto;
-      counter-reset: step;
+      padding: clamp(4rem, 9vw, 7rem) 16px;
+      border-top: 1px solid var(--ap-rule);
+      scroll-margin-top: 70px;
     }
-
-    .workflow-step {
-      position: relative;
-      padding: 2rem 1.5rem 1.5rem;
-      background: var(--bg-card);
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius-md);
-      counter-increment: step;
-      transition: all var(--transition-base);
-      box-shadow: 0 4px 20px var(--shadow-color);
-    }
-
-    .workflow-step::before {
-      content: counter(step);
-      position: absolute;
-      top: -1.25rem;
-      left: 1.5rem;
-      width: 2.5rem;
-      height: 2.5rem;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--app-primary), var(--app-secondary));
-      color: white;
-      display: flex;
+    .ap-spread {
+      display: grid;
+      gap: clamp(2.5rem, 6vw, 5rem);
       align-items: center;
+    }
+    .ap-copy { max-width: 34rem; }
+    @media (min-width: 900px) {
+      .ap-spread { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); }
+      .ap-chapter.is-flipped .ap-copy { order: 2; }
+    }
+    .ap-figure { margin: 0 auto; width: min(72vw, 340px); text-align: center; }
+    .ap-figure.is-tablet { width: min(78vw, 480px); }
+    .ap-figure img { display: block; width: 100%; height: auto; filter: var(--ap-shadow); }
+    .ap-figure figcaption {
+      font-size: 0.88rem;
+      line-height: 1.45;
+      color: var(--ap-quiet);
+      margin-top: 1.1rem;
+    }
+    .ap-figure figcaption::before {
+      content: "";
+      display: block;
+      width: 18px;
+      height: 1px;
+      margin: 0 auto 0.6rem;
+      background: var(--ap-accent-text);
+    }
+
+    /* Secondary routes: quiet text links under the one button. */
+    .ap-alt-links {
+      display: flex;
+      flex-wrap: wrap;
       justify-content: center;
-      font-weight: 800;
-      font-size: 1.1rem;
-      box-shadow: 0 6px 16px rgba(99, 102, 241, 0.4);
-    }
-
-    .workflow-step:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 12px 40px rgba(99, 102, 241, 0.18);
-      border-color: rgba(99, 102, 241, 0.4);
-    }
-
-    .workflow-step h3 {
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: var(--text-primary);
-      margin: 0.5rem 0 0.5rem;
-    }
-
-    .workflow-step p {
-      color: var(--text-secondary);
+      gap: 0.7rem;
+      margin: 1.1rem 0 0;
       font-size: 0.95rem;
-      line-height: 1.55;
+      color: rgba(255, 255, 255, 0.6);
+    }
+    .ap-alt-links a { color: rgba(255, 255, 255, 0.88); text-decoration: none; border-bottom: 1px solid rgba(255, 255, 255, 0.3); }
+    .ap-alt-links a:hover { border-bottom-color: rgba(255, 255, 255, 0.8); }
+    .ap-closing .ap-alt-links { color: var(--ap-quiet); }
+    .ap-closing .ap-alt-links a { color: var(--ap-ink); border-bottom-color: var(--ap-rule); }
+
+    /* ---- Trust beat ----------------------------------------------------- */
+    .ap-privacy {
+      background: var(--ap-hero-bg);
+      color: #fff;
+      padding: clamp(4.5rem, 10vw, 8rem) 16px;
+      scroll-margin-top: 60px;
+    }
+    .ap-privacy-inner { max-width: var(--ap-measure); margin: 0 auto; }
+    .ap-privacy .ap-eyebrow { color: var(--ap-hero-kicker); text-align: center; }
+    .ap-privacy .ap-display {
+      color: var(--ap-hero-ink);
+      -webkit-text-fill-color: var(--ap-hero-ink);
+      text-align: center;
+      font-size: clamp(2.3rem, 6.4vw, 4.6rem);
+      max-width: 14ch;
+      margin: 0 auto 3rem;
+    }
+    .ap-privacy .security-badges {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+      gap: 0;
+      max-width: none;
+      padding: 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.22);
+    }
+    .ap-privacy .security-badge {
+      background: none;
+      border: none;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.22);
+      border-radius: 0;
+      box-shadow: none;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+      color: #fff;
+      font-family: var(--ap-body-face);
+      font-size: 1.12rem;
+      padding: 1.1rem 0.4rem;
+      justify-content: center;
+    }
+    .ap-privacy .security-badge:hover { transform: none; }
+    .ap-privacy .security-audit-note {
+      text-align: center;
+      font-family: var(--ap-body-face);
+      font-size: clamp(1.1rem, 2.2vw, 1.3rem);
+      color: rgba(255, 255, 255, 0.9);
+      max-width: 36ch;
+      padding: 0;
+      margin: 2.6rem auto 0;
+    }
+    .ap-privacy-link { text-align: center; margin: 1.4rem 0 0; }
+    .ap-privacy-link a { color: var(--ap-hero-kicker); text-decoration: none; border-bottom: 1px solid rgba(255, 255, 255, 0.35); }
+    .ap-privacy-link a::after { content: " →"; }
+
+    /* ---- FAQ: a ruled list ---------------------------------------------- */
+    .faq-section { max-width: 820px; padding: clamp(4rem, 9vw, 6rem) 16px; }
+    .faq-section .ap-eyebrow, .faq-section h2 { text-align: center; }
+    .faq-section h2 {
+      font-family: var(--ap-display);
+      font-weight: var(--ap-display-weight);
+      color: var(--primary-color);
+      font-size: clamp(1.9rem, 4vw, 2.8rem);
+      margin: 0 0 2.5rem;
+    }
+    .faq-item {
+      background: none;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+      border: none;
+      border-top: 1px solid var(--ap-rule);
+      border-radius: 0;
       margin: 0;
     }
-
-    /* Pricing */
-    .pricing-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      max-width: 460px;
-      margin: 2rem auto 0;
+    .faq-item:last-child { border-bottom: 1px solid var(--ap-rule); }
+    .faq-question {
+      font-family: var(--ap-body-face);
+      font-size: 1.15rem;
+      font-weight: 600;
+      padding: 1.25rem 0;
+      gap: 1rem;
     }
+    .faq-question:hover { color: var(--ap-accent-text); }
+    .faq-icon { font-size: 0.8rem; color: var(--ap-accent-text); }
+    .faq-answer { padding: 0; }
+    .faq-item.active .faq-answer { padding: 0 0 1.4rem; }
+    .faq-answer p { font-size: 1rem; line-height: 1.68; color: var(--ap-body); }
 
-    .pricing-card {
-      background: var(--bg-card);
-      backdrop-filter: blur(20px) saturate(180%);
-      border: 2px solid var(--app-primary);
-      border-radius: var(--radius-lg);
-      padding: 2.5rem 2rem;
+    /* ---- Closing -------------------------------------------------------- */
+    .ap-closing {
       text-align: center;
-      box-shadow: 0 12px 40px rgba(99, 102, 241, 0.25);
-      position: relative;
-      overflow: hidden;
+      padding: clamp(4.5rem, 10vw, 7rem) 16px;
+      background: var(--ap-paper-2);
+      border-top: 1px solid var(--ap-rule);
+    }
+    .ap-closing img { width: 96px; height: 96px; display: block; margin: 0 auto 1.6rem; border-radius: 22%; filter: drop-shadow(0 16px 26px rgba(0, 0, 0, 0.28)); }
+    .ap-closing .ap-display { font-size: clamp(2rem, 5vw, 3.4rem); max-width: 14ch; margin: 0 auto 1.8rem; }
+    .ap-closing .btn-buy { background: var(--ap-float); color: #fff; padding: 0.8rem 1.5rem; border-radius: 999px; min-height: 44px; }
+    .footer { margin-top: 0; }
+
+    /* ---- Reveal: only when motion is welcome ----------------------------- */
+    .ap-motion [data-reveal] {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.9s ease, transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1);
+    }
+    .ap-motion [data-reveal].is-in { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) {
+      .floating-appstore, .faq-item, .hero-text { animation: none; }
     }
 
-    .pricing-card::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at 50% 0%, rgba(139, 92, 246, 0.15), transparent 60%);
-      pointer-events: none;
+    @media (max-width: 600px) {
+      .ap-hero-icon { width: 68px; height: 68px; }
+      .ap-cta { flex-direction: column; align-items: stretch; max-width: 22rem; margin: 0 auto; }
+      .ap-cta a { justify-content: center; }
     }
-
-    .pricing-badge {
-      display: inline-block;
-      padding: 0.35rem 1rem;
-      background: linear-gradient(135deg, var(--app-primary), var(--app-secondary));
-      color: white;
-      border-radius: 99px;
-      font-size: 0.8rem;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      margin-bottom: 1rem;
-    }
-
-    .pricing-card h3 {
-      font-size: 1.4rem;
-      font-weight: 700;
-      color: var(--text-primary);
-      margin-bottom: 0.5rem;
-    }
-
-    .pricing-price {
-      font-size: 3.5rem;
-      font-weight: 800;
-      background: linear-gradient(135deg, var(--app-primary), var(--app-secondary));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      line-height: 1;
-      margin: 0.75rem 0 0.25rem;
-    }
-
-    .pricing-period {
-      font-size: 1rem;
-      color: var(--text-secondary);
-      font-weight: 500;
-      margin-bottom: 1.25rem;
-    }
-
-    .pricing-features {
-      text-align: left;
-      max-width: 280px;
-      margin: 1.5rem auto;
-      list-style: none;
-      padding: 0;
-    }
-
-    .pricing-features li {
-      padding: 0.4rem 0;
-      color: var(--text-secondary);
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-      font-size: 0.95rem;
-    }
-
-    .pricing-features li::before {
-      content: '✓';
-      color: var(--app-primary);
-      font-weight: 800;
-      font-size: 1.05rem;
-    }
-
-    .pricing-cta {
-      display: inline-block;
-      padding: 0.85rem 2rem;
-      background: linear-gradient(135deg, var(--app-primary), var(--app-secondary));
-      color: white;
-      text-decoration: none;
-      border-radius: 99px;
-      font-weight: 700;
-      box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
-      transition: all var(--transition-base);
-      margin-top: 0.5rem;
-    }
-
-    .pricing-cta:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 30px rgba(99, 102, 241, 0.6);
-    }
-
-    /* Floating download button cosmic style */
-    .floating-appstore {
-      background: linear-gradient(135deg, var(--app-primary), var(--app-secondary));
-      box-shadow: 0 8px 32px rgba(99, 102, 241, 0.45);
-    }
-
-    /* Section subtitles in cosmic accent */
-    .section-subtitle {
-      color: var(--app-primary);
-    }
-
-    /* Magazine sections cosmic frame */
-    .magazine-image {
-      position: relative;
-      border-radius: var(--radius-lg);
-      overflow: hidden;
-    }
-
-    .magazine-image::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      border-radius: var(--radius-lg);
-      box-shadow: inset 0 0 80px rgba(99, 102, 241, 0.15);
-      pointer-events: none;
-    }
-
-    /* Hero responsive tuning */
-    @media (max-width: 900px) {
-      .hero-icon {
-        width: 200px;
-        height: 200px;
-        border-radius: 48px;
-      }
-      .hero-icon-wrap {
-        padding: 40px;
-      }
-    }
+    /* Break CJK headlines at phrase boundaries, not mid-word, where supported. */
+    .ap-hero h1, .ap-display, .ap-statement p { word-break: auto-phrase; }
+    /* `ch` is the width of a Latin zero; a CJK glyph is two of them. Measure CJK in em. */
+    :lang(ja) .ap-hero h1, :lang(zh) .ap-hero h1, :lang(ko) .ap-hero h1 { max-width: 9em; }
+    /* Korean breaks inside words unless told to keep them whole. */
+    :lang(ko) .ap-hero h1, :lang(ko) .ap-display, :lang(ko) .ap-statement p, :lang(ko) .ap-lede, :lang(ko) .ap-hero-standfirst { word-break: keep-all; }
+    :lang(ja) .ap-privacy .ap-display, :lang(zh) .ap-privacy .ap-display, :lang(ko) .ap-privacy .ap-display,
+    :lang(ja) .ap-closing .ap-display, :lang(zh) .ap-closing .ap-display, :lang(ko) .ap-closing .ap-display { max-width: 10em; }
+    :lang(ja) .ap-hero-standfirst, :lang(zh) .ap-hero-standfirst, :lang(ko) .ap-hero-standfirst,
+    :lang(ja) .security-audit-note, :lang(zh) .security-audit-note, :lang(ko) .security-audit-note { max-width: 26em; }
+    /* The floating button points at the firmware patcher, so it drops the store glyph. */
+    .ap-floating { animation: none; }
+    /* "Astrophotography" is one long word: a wider measure and a smaller ceiling keep
+       it whole on desktop, and the longer European forms may hyphenate on a phone. */
+    .ap-hero h1 { font-size: clamp(2.2rem, 7vw, 5.2rem); max-width: 16ch; }
+    :lang(fr) .ap-hero h1, :lang(de) .ap-hero h1, :lang(es) .ap-hero h1, :lang(it) .ap-hero h1, :lang(pt) .ap-hero h1 { hyphens: auto; -webkit-hyphens: auto; }
+    /* CJK: break only at the zero-width spaces the dictionaries put between phrases. */
+    :lang(ja) .ap-hero h1, :lang(zh) .ap-hero h1, :lang(ja) .ap-closing .ap-display, :lang(zh) .ap-closing .ap-display { word-break: keep-all; }
   </style>
   <link rel="alternate" hreflang="x-default" href="https://wemiller.com/apps/aperion/">
   <link rel="alternate" hreflang="en" href="https://wemiller.com/apps/aperion/">
@@ -640,416 +415,130 @@
       </a>
       <button class="mobile-menu-toggle">☰</button>
       <ul class="nav-links">
-        <li><a href="#status" class="nav-link" data-i18n="why-it-s-shelved.b6ad2a">Why It's Shelved</a></li>
         <li><a href="#features" class="nav-link" data-i18n="features.fc338f">Features</a></li>
-        <li><a href="#workflow" class="nav-link" data-i18n="workflow.d7a484">Workflow</a></li>
-        <li><a href="#hardware" class="nav-link" data-i18n="hardware.b76ab6">Hardware</a></li>
         <li><a href="#faq" class="nav-link" data-i18n="faq.03688b">FAQ</a></li>
-        <li><span class="btn-buy btn-shelved" data-i18n="shelved.166266">Shelved</span></li>
+        <li><a href="https://github.com/blaineam/benro-polaris-firmware-patcher" target="_blank" rel="noopener noreferrer" class="btn-buy">GitHub</a></li>
       </ul>
     </div>
   </nav>
 
-  <!-- Hero Section -->
-  <section class="hero">
-    <div class="starfield">
-      <div class="stars-small"></div>
-      <div class="stars-medium"></div>
-      <div class="stars-large"></div>
+  <!-- Hero: the app never shipped, so the one button is the open-source firmware
+       patcher that replaced it. -->
+  <header class="ap-hero" id="about">
+    <img class="ap-hero-icon" src="assets/images/icon.png?v=71bdcd44" alt="Aperion App Icon" width="1024" height="1024">
+    <p class="ap-hero-kicker">Aperion</p>
+    <h1 data-i18n="deep-sky-astrophotography-shelved.dc58e9">Deep-sky astrophotography, shelved.</h1>
+    <p class="ap-hero-standfirst" data-i18n="one-app-drove-a.45249e">One app drove a tracking mount, a camera and an offline plate solver. It never shipped, and the idea lives on in open-source firmware.</p>
+    <div class="ap-cta">
+      <a href="https://github.com/blaineam/benro-polaris-firmware-patcher" target="_blank" rel="noopener noreferrer" class="btn-buy" data-cta data-i18n="get-the-firmware-patcher.5fd1a9">Get the Firmware Patcher</a>
     </div>
-    <div class="nebula-glow"></div>
-
-    <div class="hero-content">
-      <div class="hero-text">
-        <p class="hero-subtitle" data-i18n="aperion.7270c3">✦ Aperion</p>
-        <h1 class="hero-title" data-i18n="deep-sky-astrophotography-shelved.ea929c">Deep-Sky Astrophotography, Shelved</h1>
-        <p class="hero-description" data-i18n="one-app-drove-your.439ea9">
-          One app drove your tracking mount, mirrorless camera, and offline plate solver — auto-align in seconds, live stacks, mosaic planning, and motion timelapses from an iPhone, iPad, Mac, or Apple Watch. It never shipped, and it isn't coming. This page stays up as the write-up.
-        </p>
-
-        <div class="shelved-notice">
-          <span class="shelved-tag" data-i18n="shelved-never-released.969a02">Shelved · never released</span>
-          <p data-i18n-html="aperion-drove-a-benro.be2d1a">
-            Aperion drove a <strong>Benro Polaris</strong> mount and a Canon body from an unofficial, reverse-engineered
-            control path. Getting that approved for the App Store — by Benro or by Apple — was never a realistic bet, and
-            my Polaris is long out of warranty, so there was nothing left to protect by staying on the sanctioned side of
-            the fence. Patching the mount's own firmware turned out to be the better fix: the automation runs
-            <strong>on the device</strong>, so the Polaris can shoot all night without my phone tethered to it and without
-            an app babysitting the session. That work lives on in the open-source
-            <a href="https://github.com/blaineam/benro-polaris-firmware-patcher" target="_blank" rel="noopener noreferrer">Benro Polaris Firmware Patcher</a>.
-          </p>
-        </div>
-
-        <div class="platform-pills">
-          <span class="platform-pill">iPhone</span>
-          <span class="platform-pill">iPad</span>
-          <span class="platform-pill">Mac</span>
-          <span class="platform-pill">Apple Watch</span>
-        </div>
-
-        <span class="os-ready-badge" data-i18n-html="built-against-ios-27.7dfe29"><span class="badge-icon">✓</span> Built against iOS 27 / iPadOS 27 / macOS 27 / watchOS 27</span>
-
-        <div class="hero-cta">
-          <span class="btn-buy btn-shelved" data-i18n="shelved-not-available.ec3c27">Shelved — Not Available</span>
-        </div>
-      </div>
-      <div class="hero-image">
-        <div class="hero-icon-wrap">
-          <img src="assets/images/icon.png?v=71bdcd44" alt="Aperion App Icon" class="hero-icon">
-        </div>
-      </div>
+    <p class="ap-alt-links">
+      <a href="#shelved" data-i18n="why-it-was-shelved.132e93">Why it was shelved</a>
+    </p>
+    <div class="ap-hero-device">
+      <img src="assets/screens/en/01-camera-800.webp?v=025d5588"
+           srcset="assets/screens/en/01-camera-400.webp?v=72351bc5 400w, assets/screens/en/01-camera-800.webp?v=025d5588 800w"
+           sizes="(max-width: 676px) 230px, (max-width: 1117px) 34vw, 380px" width="800" height="1655" fetchpriority="high" data-i18n-src
+           alt="The camera screen framing the Orion Nebula, with mount and camera status along the top" data-i18n-attr="alt:the-camera-screen-framing.777820">
     </div>
-  </section>
+  </header>
 
   <!-- Floating CTA — points at the firmware patcher that replaced this app -->
-  <a class="floating-appstore floating-patcher" href="https://github.com/blaineam/benro-polaris-firmware-patcher" target="_blank" rel="noopener noreferrer">
-    <span class="floating-appstore-icon">🛠️</span>
+  <a class="floating-appstore ap-floating" href="https://github.com/blaineam/benro-polaris-firmware-patcher" target="_blank" rel="noopener noreferrer">
+    <span class="floating-appstore-icon" aria-hidden="true">🛠️</span>
     <span data-i18n="get-the-firmware-patcher.5fd1a9">Get the Firmware Patcher</span>
   </a>
 
-  <!-- Features Section -->
-  <section id="features" class="section">
-    <div class="section-header">
-      <p class="section-subtitle" data-i18n="what-it-did.ad97ed">What it did</p>
-      <h2 data-i18n="three-tools-one-source.ee4658">Three Tools, One Source of Truth</h2>
-      <p data-i18n="no-swapping-between-the.74ddb8">No swapping between the Polaris app, Canon's control utility, and a plate-solving service. Aperion unified the entire capture loop.</p>
-    </div>
-
-    <p class="past-tense-note" data-i18n-html="everything-below-describes-the.dfc9ea">
-      Everything below describes the app as it was built. It was never released, and none of it is available to download —
-      see <a href="#status">why it's shelved</a>.
-    </p>
-
-    <div class="feature-grid">
-      <div class="feature-card">
-        <div class="feature-icon">🎯</div>
-        <h3 class="feature-title" data-i18n="integrated-mount-camera.99dfa3">Integrated Mount + Camera</h3>
-        <p class="feature-description" data-i18n="one-screen-drives-the.4247e6">
-          One screen drives the Benro Polaris mount over BLE + TCP and a Canon EOS body over CCAPI. Joystick, shutter, ISO wheels, and target picker all live together.
-        </p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">🛰️</div>
-        <h3 class="feature-title" data-i18n="offline-plate-solving.9e67f7">Offline Plate Solving</h3>
-        <p class="feature-description" data-i18n="the-same-astrometry-net.7796aa">
-          The same astrometry.net algorithm that powers every serious astrophotography tool, running 100 % on-device. Bundled star-index files, no internet, no API round-trips — solves finish in under a second on the mount's air-gapped Wi-Fi.
-        </p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">🎯</div>
-        <h3 class="feature-title" data-i18n="auto-align.888505">Auto-Align</h3>
-        <p class="feature-description" data-i18n="shoot-solve-sync-nudge.46023a">
-          Shoot → solve → sync → nudge, on repeat, until your target is centered. No two-star alignment walk. Sun, Moon, and planets resolved via live ephemeris.
-        </p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">🌌</div>
-        <h3 class="feature-title" data-i18n="live-stacking.57fb8d">Live Stacking</h3>
-        <p class="feature-description" data-i18n="translation-aligned-integration-with.c895b1">
-          Translation-aligned integration with on-device star detection. The build-up preview updates every frame so you can watch faint nebulosity emerge in real time.
-        </p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">🧩</div>
-        <h3 class="feature-title" data-i18n="mosaic-planner.8459d2">Mosaic Planner</h3>
-        <p class="feature-description" data-i18n="set-two-corners-from.0b250e">
-          Set two corners from the joystick and Aperion walks the rectangular grid for you with configurable overlap. Capture wide-field panels of the Milky Way without doing the trig.
-        </p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">🎬</div>
-        <h3 class="feature-title" data-i18n="motion-timelapses.b2251c">Motion Timelapses</h3>
-        <p class="feature-description" data-i18n="linear-pan-between-start.2b2433">
-          Linear pan between start and end poses at your chosen frame rate. Optional sidereal tracking pins the stars while the foreground drifts.
-        </p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">📱</div>
-        <h3 class="feature-title" data-i18n="ar-sky-chart.df2a38">AR Sky Chart</h3>
-        <p class="feature-description" data-i18n="point-your-phone-at.17f719">
-          Point your phone at the sky and see labeled targets overlaid via ARKit. Tap a galaxy or nebula to slew the mount and start the capture.
-        </p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">⌚</div>
-        <h3 class="feature-title" data-i18n="apple-watch-companion.c710a1">Apple Watch Companion</h3>
-        <p class="feature-description" data-i18n="full-mount-joystick-camera.19f906">
-          Full mount joystick, camera-setting wheels, plate-solve trigger, and a zoomable preview — right on your wrist. Works over Bluetooth even when your phone is on the mount's hotspot.
-        </p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">🖥️</div>
-        <h3 class="feature-title" data-i18n="mac-on-the-big.0a9d4a">Mac on the Big Canvas</h3>
-        <p class="feature-description" data-i18n="same-source-tree-same.3f940e">
-          Same source tree, same controls, larger workspace. Review the night's gallery, reprocess RAW frames, and rebuild stacks at desktop scale.
-        </p>
-      </div>
-    </div>
+  <section class="ap-statement">
+    <span class="ap-ornament" aria-hidden="true"></span>
+    <p data-i18n="never-released-and-not.ce6e55">Never released, and not coming. This page stays up as the write-up.</p>
   </section>
 
-  <!-- Workflow / How It Works -->
-  <section id="workflow" class="section">
-    <div class="section-header">
-      <p class="section-subtitle" data-i18n="how-auto-align-works.a83812">How auto-align works</p>
-      <h2 data-i18n="from-tap-to-framed.0faf37">From Tap to Framed in Seconds</h2>
-      <p data-i18n="the-closed-loop-that.21a3c0">The closed loop that replaces the two-star alignment walk most mounts still demand.</p>
-    </div>
-
-    <div class="workflow-grid">
-      <div class="workflow-step">
-        <h3 data-i18n="pick-a-target.7bf77a">Pick a target</h3>
-        <p data-i18n="browse-the-catalog-the.a7ff59">Browse the catalog, the AR sky chart, or visible-tonight filtered by altitude.</p>
-      </div>
-      <div class="workflow-step">
-        <h3 data-i18n="capture-a-frame.8470bd">Capture a frame</h3>
-        <p data-i18n="aperion-triggers-the-camera.f8cd4b">Aperion triggers the camera over CCAPI and pulls the JPEG preview down the network.</p>
-      </div>
-      <div class="workflow-step">
-        <h3 data-i18n="solve-offline.f3e823">Solve offline</h3>
-        <p data-i18n="the-bundled-star-pattern.e4f132">The bundled star-pattern matcher figures out exactly where the camera is pointing — no internet required.</p>
-      </div>
-      <div class="workflow-step">
-        <h3 data-i18n="sync-nudge.04a521">Sync &amp; nudge</h3>
-        <p data-i18n="the-mount-syncs-to.c12065">The mount syncs to the solved coordinate and slews the residual error. Loop until the target is centered.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Magazine-style sections -->
-  <section class="section">
-    <div class="magazine-section">
-      <div class="magazine-content">
-        <h2 data-i18n="plate-solving-that-actually.a151d0">Plate Solving That Actually Works in the Field</h2>
-        <p data-i18n="most-plate-solving-workflows.6d9dc2">
-          Most plate-solving workflows assume you have a reliable internet connection at your dark site.
-          You don't. Aperion ships the catalog and the pattern matcher inside the app and runs the
-          solve on the device's neural and CPU cores.
-        </p>
-        <p data-i18n="that-means-the-loop.dfe0b5">
-          That means the loop closes in seconds even when you're tethered to the mount's
-          air-gapped Wi-Fi hotspot — the only network you actually have at 11pm in a national forest.
-        </p>
-      </div>
-      <div class="magazine-image">
-        <div style="background: radial-gradient(circle at 50% 50%, #1a103d, #050514); min-height: 380px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden;">
-          <div class="starfield">
-            <div class="stars-small" style="opacity: 0.5;"></div>
-            <div class="stars-large" style="opacity: 0.7;"></div>
-          </div>
-          <div style="position: relative; z-index: 1; width: 70%; max-width: 280px; aspect-ratio: 1; border: 2px dashed rgba(34, 211, 238, 0.6); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: rgba(34, 211, 238, 0.95); font-family: 'SF Mono', monospace; font-size: 0.85rem; text-align: center; padding: 1rem; line-height: 1.6;">
-            <div data-i18n-html="solved-ra-5h-35m.12580a">
-              SOLVED<br>
-              <span style="color: white; font-size: 1.2rem; font-weight: 700;">RA 5h 35m 17s</span><br>
-              <span style="color: white; font-size: 1.2rem; font-weight: 700;">Dec −5° 23′</span><br>
-              <span style="color: rgba(251, 191, 36, 0.9); font-size: 0.9rem;">M42 — Orion Nebula</span>
-            </div>
-          </div>
+  <!-- Three stories, in the past tense: what the app did. -->
+  <main id="features">
+    <section class="ap-chapter" id="align">
+      <div class="ap-spread">
+        <div class="ap-copy" data-reveal>
+          <p class="ap-eyebrow"><span class="ap-num">01</span><span data-i18n="align.c83b0e">Align</span></p>
+          <h2 class="ap-display" data-i18n="framed-in-seconds.dbdb6e">Framed in seconds</h2>
+          <p class="ap-lede" data-i18n="aperion-shot-a-frame.4a3569">Aperion shot a frame, plate-solved it on the device and nudged the mount until the target sat in the middle. No internet, and no two-star alignment.</p>
         </div>
+        <figure class="ap-figure is-tablet" data-reveal>
+          <img src="assets/screens/en/camera-960.webp?v=a523c9c3"
+               srcset="assets/screens/en/camera-480.webp?v=28af8ff3 480w, assets/screens/en/camera-960.webp?v=a523c9c3 960w"
+               sizes="(max-width: 615px) 78vw, 480px" width="960" height="1253" loading="lazy" decoding="async" data-i18n-src
+               alt="The camera screen on iPad, with joysticks for the mount and the Align and Solve buttons" data-i18n-attr="alt:the-camera-screen-on.d9bb5c">
+          <figcaption data-i18n="the-same-controls-on.248e48">The same controls on iPad</figcaption>
+        </figure>
       </div>
-    </div>
+    </section>
 
-    <div class="magazine-section reverse">
-      <div class="magazine-content">
-        <h2 data-i18n="the-watch-you-already.84c866">The Watch You Already Wear, Now in Charge</h2>
-        <p data-i18n="walk-away-from-the.ae66f4">
-          Walk away from the tripod. The Apple Watch companion gives you the full mount joystick, ISO and shutter
-          wheels, lens picker, framing-corner capture, plate-solve trigger, and a zoomable live preview of both
-          the raw viewfinder and the in-progress stack.
-        </p>
-        <p data-i18n="pairing-happens-automatically-over.76150d">
-          Pairing happens automatically over WatchConnectivity even when the phone is joined to the mount's
-          offline Wi-Fi network — a surprisingly hard problem that Aperion just handles.
-        </p>
-      </div>
-      <div class="magazine-image">
-        <div style="background: linear-gradient(135deg, #050514, #1a103d); min-height: 380px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden;">
-          <div class="starfield"><div class="stars-small" style="opacity: 0.4;"></div></div>
-          <div style="position: relative; z-index: 1; width: 200px; height: 240px; background: #000; border-radius: 40px; border: 4px solid #2a2a3e; padding: 16px; display: flex; flex-direction: column; gap: 8px; box-shadow: 0 20px 50px rgba(0,0,0,0.5);">
-            <div style="background: rgba(99, 102, 241, 0.2); border-radius: 12px; padding: 8px; color: white; font-size: 0.7rem; text-align: center;">M31 · +47°</div>
-            <div style="background: rgba(255,255,255,0.05); border-radius: 12px; flex: 1; display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.4); font-size: 0.65rem;" data-i18n="live-preview.8f2e7b">live preview</div>
-            <div style="display: flex; gap: 6px;">
-              <div style="flex: 1; background: rgba(34, 211, 238, 0.25); border-radius: 8px; padding: 6px; text-align: center; color: white; font-size: 0.65rem; font-weight: 700;" data-i18n="solve.a37fce">SOLVE</div>
-              <div style="flex: 1; background: rgba(239, 68, 68, 0.6); border-radius: 8px; padding: 6px; text-align: center; color: white; font-size: 0.65rem; font-weight: 700;" data-i18n="fire.f4a67a">FIRE</div>
-            </div>
-          </div>
+    <section class="ap-chapter is-flipped" id="targets">
+      <div class="ap-spread">
+        <div class="ap-copy" data-reveal>
+          <p class="ap-eyebrow"><span class="ap-num">02</span><span data-i18n="targets.d35260">Targets</span></p>
+          <h2 class="ap-display" data-i18n="tonight-s-sky-ranked.e0b4fc">Tonight's sky, ranked</h2>
+          <p class="ap-lede" data-i18n="every-messier-object-plus.7ef679">Every Messier object, plus the Sun, Moon and planets, with how high each one climbs tonight and when it's best to shoot.</p>
         </div>
+        <figure class="ap-figure" data-reveal>
+          <img src="assets/screens/en/02-targets-800.webp?v=91f1b2be"
+               srcset="assets/screens/en/02-targets-400.webp?v=9338cd26 400w, assets/screens/en/02-targets-800.webp?v=91f1b2be 800w"
+               sizes="(max-width: 472px) 72vw, 340px" width="800" height="1655" loading="lazy" decoding="async" data-i18n-src
+               alt="The target list, sorted by altitude, with rise, best and set times" data-i18n-attr="alt:the-target-list-sorted.7011f8">
+        </figure>
       </div>
-    </div>
+    </section>
 
-    <div class="magazine-section">
-      <div class="magazine-content">
-        <h2 data-i18n="mosaics-motion-without-the.aeaaca">Mosaics &amp; Motion, Without the Spreadsheet</h2>
-        <p data-i18n="frame-your-two-corners.c889ac">
-          Frame your two corners from the joystick. Aperion computes the tile grid, the overlap, and walks
-          the mount through every panel — capturing each frame with the same exposure ladder.
-        </p>
-        <p data-i18n="for-motion-timelapses-set.84cbb0">
-          For motion timelapses, set a start pose and an end pose, pick a duration and frame rate, and let
-          the linear interpolator drive the mount. Toggle sidereal tracking to keep the stars pinned while
-          the landscape rolls beneath them.
-        </p>
-      </div>
-      <div class="magazine-image">
-        <div style="background: linear-gradient(135deg, #050514, #1a103d); min-height: 380px; padding: 2rem; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden;">
-          <div class="starfield"><div class="stars-small" style="opacity: 0.4;"></div></div>
-          <div style="position: relative; z-index: 1; display: grid; grid-template-columns: repeat(4, 1fr); grid-template-rows: repeat(3, 1fr); gap: 4px; width: 80%; max-width: 360px; aspect-ratio: 4/3;">
-            <div style="background: rgba(99, 102, 241, 0.4); border: 1px solid rgba(167, 139, 250, 0.6); border-radius: 4px;"></div>
-            <div style="background: rgba(99, 102, 241, 0.5); border: 1px solid rgba(167, 139, 250, 0.6); border-radius: 4px;"></div>
-            <div style="background: rgba(99, 102, 241, 0.6); border: 1px solid rgba(167, 139, 250, 0.6); border-radius: 4px;"></div>
-            <div style="background: rgba(99, 102, 241, 0.4); border: 1px solid rgba(167, 139, 250, 0.6); border-radius: 4px;"></div>
-            <div style="background: rgba(139, 92, 246, 0.5); border: 1px solid rgba(167, 139, 250, 0.6); border-radius: 4px;"></div>
-            <div style="background: rgba(139, 92, 246, 0.7); border: 1px solid rgba(34, 211, 238, 0.95); border-radius: 4px; box-shadow: 0 0 16px rgba(34, 211, 238, 0.5);"></div>
-            <div style="background: rgba(139, 92, 246, 0.6); border: 1px solid rgba(167, 139, 250, 0.6); border-radius: 4px;"></div>
-            <div style="background: rgba(139, 92, 246, 0.4); border: 1px solid rgba(167, 139, 250, 0.6); border-radius: 4px;"></div>
-            <div style="background: rgba(99, 102, 241, 0.4); border: 1px solid rgba(167, 139, 250, 0.6); border-radius: 4px;"></div>
-            <div style="background: rgba(99, 102, 241, 0.5); border: 1px solid rgba(167, 139, 250, 0.6); border-radius: 4px;"></div>
-            <div style="background: rgba(99, 102, 241, 0.5); border: 1px solid rgba(167, 139, 250, 0.6); border-radius: 4px;"></div>
-            <div style="background: rgba(99, 102, 241, 0.3); border: 1px solid rgba(167, 139, 250, 0.6); border-radius: 4px;"></div>
-          </div>
+    <section class="ap-chapter" id="sessions">
+      <div class="ap-spread">
+        <div class="ap-copy" data-reveal>
+          <p class="ap-eyebrow"><span class="ap-num">03</span><span data-i18n="sessions.e11e37">Sessions</span></p>
+          <h2 class="ap-display" data-i18n="sessions-that-ran-themselves.29265a">Sessions that ran themselves</h2>
+          <p class="ap-lede" data-i18n="single-frames-live-stacks.3fb9f7">Single frames, live stacks, mosaics and motion timelapses, with tracking that could switch on the moment a target locked.</p>
         </div>
+        <figure class="ap-figure" data-reveal>
+          <img src="assets/screens/en/03-plan-800.webp?v=78b74377"
+               srcset="assets/screens/en/03-plan-400.webp?v=abb827d4 400w, assets/screens/en/03-plan-800.webp?v=78b74377 800w"
+               sizes="(max-width: 472px) 72vw, 340px" width="800" height="1655" loading="lazy" decoding="async" data-i18n-src
+               alt="Capture settings, with tracking set to engage when a target locks" data-i18n-attr="alt:capture-settings-with-tracking.0a9c7a">
+        </figure>
       </div>
-    </div>
-  </section>
+    </section>
+  </main>
 
-  <!-- Hardware Section -->
-  <section id="hardware" class="section">
-    <div class="section-header">
-      <p class="section-subtitle" data-i18n="know-your-gear.8966c4">Know your gear</p>
-      <h2 data-i18n="hardware-compatibility.b40f7c">Hardware Compatibility</h2>
-      <p data-i18n="aperion-runs-end-to.1071e8">Aperion runs end-to-end on this stack — and degrades gracefully without it.</p>
-    </div>
-
-    <div class="hw-table-wrap">
-      <table class="hw-table">
-        <thead>
-          <tr>
-            <th data-i18n="piece.bdc89e">Piece</th>
-            <th data-i18n="minimum.5d398e">Minimum</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th data-i18n="mount.25ee09">Mount</th>
-            <td data-i18n-html="benro-polaris-ble-wake.8378b2"><span class="hw-pill">Benro Polaris</span> BLE wake + TCP 9090 rocker protocol</td>
-          </tr>
-          <tr>
-            <th data-i18n="camera.4da9c9">Camera</th>
-            <td data-i18n-html="canon-eos-with-ccapi.b8d755"><span class="hw-pill">Canon EOS</span> with CCAPI — tested on R5 Mark II (firmware 1.2)</td>
-          </tr>
-          <tr>
-            <th data-i18n="other-cameras.d4c879">Other cameras</th>
-            <td data-i18n-html="libgphoto2-nikon-sony-fuji.bf09d4"><span class="hw-pill">libgphoto2</span> Nikon, Sony, Fuji, Olympus over USB tether — anything gphoto2 supports</td>
-          </tr>
-          <tr>
-            <th>iPhone</th>
-            <td data-i18n="ios-26-a15-or.c99a97">iOS 26, A15 or newer (ARKit orientation tracking)</td>
-          </tr>
-          <tr>
-            <th>Apple Watch</th>
-            <td data-i18n="watchos-11-series-6.bcab7e">watchOS 11, Series 6 or newer</td>
-          </tr>
-          <tr>
-            <th>Mac</th>
-            <td data-i18n="macos-26-apple-silicon.94a121">macOS 26, Apple Silicon</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <p style="text-align: center; max-width: 720px; margin: 2rem auto 0; color: var(--text-secondary); font-size: 0.95rem;" data-i18n="no-mount-a-plain.e6a792">
-      No mount? A plain tripod works too. The slew and goto controls politely grey themselves out; capture, offline plate solving, live stacks, and the AR sky chart all still run as expected.
-    </p>
-  </section>
-
-  <!-- Status Section — why the app was shelved -->
-  <section id="status" class="section">
-    <div class="section-header">
-      <p class="section-subtitle" data-i18n="status.bae7d5">Status</p>
-      <h2 data-i18n="why-aperion-was-shelved.90d068">Why Aperion Was Shelved</h2>
-      <p data-i18n="it-was-planned-as.9c2e53">It was planned as a $9.99 universal purchase. It never shipped, and it isn't going to.</p>
-    </div>
-
-    <div class="pricing-grid">
-      <div class="pricing-card">
-        <div class="pricing-badge" data-i18n="shelved.166266">Shelved</div>
-        <h3>Aperion</h3>
-        <div class="pricing-price">—</div>
-        <div class="pricing-period" data-i18n="never-released-no-longer.a72daf">never released · no longer maintained</div>
-        <ul class="pricing-features">
-          <li data-i18n="app-store-approval-was.0c8cdb">App Store approval was never a realistic bet</li>
-          <li data-i18n="mount-control-relied-on.3d8d76">Mount control relied on an unofficial protocol</li>
-          <li data-i18n="neither-benro-nor-apple.cacbe4">Neither Benro nor Apple had reason to bless it</li>
-          <li data-i18n="my-polaris-is-out.c166b5">My Polaris is out of warranty — nothing to risk</li>
-          <li data-i18n="a-firmware-patch-solves.cd67be">A firmware patch solves it on the device instead</li>
-          <li data-i18n="the-mount-can-now.3d6e4a">The mount can now shoot all night unattended</li>
-          <li data-i18n="that-work-is-open.1d5cd2">That work is open source and free</li>
-        </ul>
-        <span class="pricing-cta pricing-shelved" data-i18n="not-available.4028c0">Not Available</span>
+  <!-- Trust: why there's no download, and where to go instead. -->
+  <section class="ap-privacy" id="shelved">
+    <div class="ap-privacy-inner" data-reveal>
+      <p class="ap-eyebrow" data-i18n="status.bae7d5">Status</p>
+      <h2 class="ap-display" data-i18n="it-lives-on-in.a95013">It lives on in the mount</h2>
+      <div class="security-badges">
+        <div class="security-badge" data-i18n-html="open-source.1ed783"><span class="badge-icon">🛠️</span> Open source</div>
+        <div class="security-badge" data-i18n-html="free.0a9944"><span class="badge-icon">🆓</span> Free</div>
+        <div class="security-badge" data-i18n-html="runs-on-the-mount.1fc9d3"><span class="badge-icon">🔭</span> Runs on the mount</div>
+        <div class="security-badge" data-i18n-html="no-phone-tethered.a44dbb"><span class="badge-icon">📵</span> No phone tethered</div>
       </div>
-    </div>
-
-    <div style="max-width: 760px; margin: 2.5rem auto 0; color: var(--text-secondary); line-height: 1.75;">
-      <p style="margin-bottom: 1.1rem;" data-i18n="aperion-talked-to-the.41ff89">
-        Aperion talked to the Benro Polaris over a reverse-engineered BLE + TCP protocol. That is fine for a personal
-        tool and a hard sell as a shipping product: the control path is undocumented, unsupported, and could break with
-        any mount firmware update, and getting it sanctioned — by Benro, or through App Store review — was never a bet
-        worth building a release around. Since my own Polaris is well past its warranty period, there was also nothing
-        left to protect by staying on the sanctioned side of that line.
-      </p>
-      <p style="margin-bottom: 1.1rem;" data-i18n-html="patching-the-mount-s.2c4290">
-        Patching the mount's firmware directly turned out to be the better workaround. The intelligence lives
-        <strong style="color: var(--text-primary);">on the device</strong> rather than in a phone app, so the Polaris
-        runs a full session — slews, dwells, shutter triggers — without my phone tethered to it and without an app
-        driving it all night. No dead battery, no dropped BLE link at 3 a.m., no session lost because a phone locked up.
-      </p>
-      <p data-i18n-html="so-aperion-is-shelved.c7aa28">
-        So Aperion is shelved: no longer maintained, never released, and removed from the
-        <a href="../" style="color: var(--app-accent);">apps directory</a>. Its goal lives on in the open-source
-        <a href="https://github.com/blaineam/benro-polaris-firmware-patcher" target="_blank" rel="noopener noreferrer" style="color: var(--app-accent);">Benro Polaris Firmware Patcher</a>,
-        which is free and does the job better.
-      </p>
+      <p class="security-audit-note" data-i18n="aperion-relied-on-an.e13ba1">Aperion relied on an unofficial control path that neither Benro nor App Review had reason to bless. Patching the mount's own firmware turned out to be the better fix.</p>
+      <p class="ap-privacy-link"><a href="https://github.com/blaineam/benro-polaris-firmware-patcher" target="_blank" rel="noopener noreferrer" data-i18n="benro-polaris-firmware-patcher.7496a0">Benro Polaris Firmware Patcher</a></p>
     </div>
   </section>
 
-  <!-- FAQ Section -->
+  <!-- FAQ: short and folded. -->
   <section id="faq" class="faq-section">
-    <div class="section-header">
-      <p class="section-subtitle" data-i18n="got-questions.8ecca3">Got Questions?</p>
-      <h2 data-i18n="frequently-asked-questions.d790b4">Frequently Asked Questions</h2>
-    </div>
+    <p class="ap-eyebrow" data-i18n="got-questions.8ecca3">Got Questions?</p>
+    <h2 data-i18n="frequently-asked-questions.d790b4">Frequently Asked Questions</h2>
 
+    <div class="faq-list">
     <div class="faq-item">
       <button class="faq-question">
-        <span data-i18n="do-i-need-a.cc8f92">Do I need a Benro Polaris mount to use Aperion?</span>
+        <span data-i18n="can-i-download-or.1035b0">Can I download or buy Aperion?</span>
         <span class="faq-icon">▼</span>
       </button>
       <div class="faq-answer">
-        <p data-i18n="no-the-mount-control.6b53c3">
-          No. The mount-control features need a Polaris (over BLE + TCP), but Aperion still runs great on a plain tripod — you get capture,
-          offline plate solving, live stacking, and the AR sky chart. The slew and goto controls simply grey themselves out until a
-          compatible mount is connected.
-        </p>
-      </div>
-    </div>
-
-    <div class="faq-item">
-      <button class="faq-question">
-        <span data-i18n="which-cameras-work-with.c7b15b">Which cameras work with Aperion?</span>
-        <span class="faq-icon">▼</span>
-      </button>
-      <div class="faq-answer">
-        <p data-i18n="canon-eos-bodies-that.944adf">
-          Canon EOS bodies that support CCAPI (tested on the R5 Mark II with firmware 1.2) are the first-class path
-          and connect over the mount's Wi-Fi hotspot. Other bodies — Nikon, Sony, Fuji, Olympus — connect via
-          libgphoto2 over USB tether. The iPhone's own camera is also a supported capture source.
+        <p data-i18n-html="no-it-was-planned.0243c2">
+          No. It was planned as a one-time $9.99 universal purchase, but it never reached the App Store and it has
+          been shelved — it isn't maintained and there's no build to install. If you want Polaris automation today,
+          use the <a href="https://github.com/blaineam/benro-polaris-firmware-patcher" target="_blank" rel="noopener noreferrer">Benro Polaris Firmware Patcher</a>
+          instead. It's open source, it's free, and it runs on the mount itself.
         </p>
       </div>
     </div>
@@ -1064,27 +553,6 @@
           Yes. The star catalog and the pattern matcher are bundled inside the app and run on-device. There are no
           astrometry.net round-trips, no API keys, and no rate limits. Solves work on the mount's air-gapped Wi-Fi
           network at a remote dark site with no cellular signal.
-        </p>
-      </div>
-    </div>
-
-    <div class="faq-item">
-      <button class="faq-question">
-        <span data-i18n="what-s-the-plate.29b409">What's the plate-solver built on?</span>
-        <span class="faq-icon">▼</span>
-      </button>
-      <div class="faq-answer">
-        <p data-i18n="the-same-algorithm-as.097d58">
-          The same algorithm as the astrometry.net project — the quad-hash pattern matcher with Bayesian odds-ratio scoring
-          that backs the nova.astrometry.net web service and every serious astro tool that calls out to it. Aperion runs
-          the core engine 100 % on-device.
-        </p>
-        <p data-i18n="the-only-substitution-is.68bc87">
-          The only substitution is the linear-algebra layer: astrometry.net's upstream build vendors GNU GSL (GPL v3),
-          which isn't compatible with the App Store's distribution terms. Aperion swaps that subset for a permissively-licensed
-          shim (3-clause BSD) backed by Apple's Accelerate framework — LAPACK for LU / QR / SVD, CBLAS for dense matrix
-          multiply. Every component in the final binary ships under a permissive license; the full list is surfaced in the
-          app's Settings → About &amp; open source.
         </p>
       </div>
     </div>
@@ -1106,6 +574,20 @@
 
     <div class="faq-item">
       <button class="faq-question">
+        <span data-i18n="which-cameras-work-with.c7b15b">Which cameras work with Aperion?</span>
+        <span class="faq-icon">▼</span>
+      </button>
+      <div class="faq-answer">
+        <p data-i18n="canon-eos-bodies-that.944adf">
+          Canon EOS bodies that support CCAPI (tested on the R5 Mark II with firmware 1.2) are the first-class path
+          and connect over the mount's Wi-Fi hotspot. Other bodies — Nikon, Sony, Fuji, Olympus — connect via
+          libgphoto2 over USB tether. The iPhone's own camera is also a supported capture source.
+        </p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
         <span data-i18n="how-does-the-apple.fd8a4b">How does the Apple Watch companion stay connected at the mount?</span>
         <span class="faq-icon">▼</span>
       </button>
@@ -1118,97 +600,17 @@
         </p>
       </div>
     </div>
-
-    <div class="faq-item">
-      <button class="faq-question">
-        <span data-i18n="what-does-the-live.f100f1">What does the live stacking actually do?</span>
-        <span class="faq-icon">▼</span>
-      </button>
-      <div class="faq-answer">
-        <p data-i18n="as-frames-come-in.25516e">
-          As frames come in from the camera, Aperion detects stars, computes the translation between frames,
-          aligns and integrates them on-device, and updates the build-up preview in real time. You see faint
-          nebulosity emerge over the course of the session instead of waiting until you get home to find out
-          you missed focus or had a bad guide.
-        </p>
-      </div>
-    </div>
-
-    <div class="faq-item">
-      <button class="faq-question">
-        <span data-i18n="can-i-plan-a.594f38">Can I plan a mosaic visually instead of doing the math?</span>
-        <span class="faq-icon">▼</span>
-      </button>
-      <div class="faq-answer">
-        <p data-i18n="yes-use-the-joystick.c253fe">
-          Yes. Use the joystick to frame the top-left corner of the area you want, capture it, then frame the
-          bottom-right corner and capture that too. Aperion computes the rectangular grid, applies your chosen
-          overlap percentage, and walks the mount through every tile with the same exposure settings.
-        </p>
-      </div>
-    </div>
-
-    <div class="faq-item">
-      <button class="faq-question">
-        <span data-i18n="does-motion-timelapse-track.1dbd97">Does motion timelapse track the stars?</span>
-        <span class="faq-icon">▼</span>
-      </button>
-      <div class="faq-answer">
-        <p data-i18n="optionally-by-default-the.9b6f3b">
-          Optionally. By default the mount linearly interpolates between your start and end poses at the chosen
-          frame rate and duration. Toggle sidereal tracking on and the mount counter-rotates earth's spin while
-          panning, so the stars stay pinned in the frame and the foreground drifts beneath them.
-        </p>
-      </div>
-    </div>
-
-    <div class="faq-item">
-      <button class="faq-question">
-        <span data-i18n="can-i-download-or.1035b0">Can I download or buy Aperion?</span>
-        <span class="faq-icon">▼</span>
-      </button>
-      <div class="faq-answer">
-        <p data-i18n-html="no-it-was-planned.0243c2">
-          No. It was planned as a one-time $9.99 universal purchase, but it never reached the App Store and it has
-          been shelved — it isn't maintained and there's no build to install. If you want Polaris automation today,
-          use the <a href="https://github.com/blaineam/benro-polaris-firmware-patcher" target="_blank" rel="noopener noreferrer">Benro Polaris Firmware Patcher</a>
-          instead. It's open source, it's free, and it runs on the mount itself.
-        </p>
-      </div>
-    </div>
-
-    <div class="faq-item">
-      <button class="faq-question">
-        <span data-i18n="what-about-the-sun.835d12">What about the Sun, Moon, and planets?</span>
-        <span class="faq-icon">▼</span>
-      </button>
-      <div class="faq-answer">
-        <p data-i18n="the-sun-moon-and.c4d280">
-          The Sun, Moon, and planets are resolved against a live ephemeris instead of a stale catalog file, so
-          their positions are always current. They appear in the target picker and the AR sky chart with
-          visibility windows for tonight at your location.
-        </p>
-      </div>
     </div>
   </section>
 
-  <!-- Footer -->
-
-  <!-- Security Hardening Callout -->
-  <section class="security-callout">
-    <div class="section-header">
-      <p class="section-subtitle" data-i18n="security-privacy.67a15f">Security &amp; Privacy</p>
-      <h2 data-i18n="hardened-by-design.084a16">Hardened by Design</h2>
+  <!-- Closing: the promise again, and the one button. -->
+  <section class="ap-closing">
+    <img src="assets/images/icon.png?v=71bdcd44" alt="" width="1024" height="1024" loading="lazy">
+    <h2 class="ap-display" data-i18n="deep-sky-astrophotography-shelved.dc58e9">Deep-sky astrophotography, shelved.</h2>
+    <div class="ap-cta">
+      <a href="https://github.com/blaineam/benro-polaris-firmware-patcher" target="_blank" rel="noopener noreferrer" class="btn-buy" data-cta data-i18n="get-the-firmware-patcher.5fd1a9">Get the Firmware Patcher</a>
     </div>
-    <div class="security-badges">
-      <div class="security-badge" data-i18n-html="on-device-capture-solve.f7b8da"><span class="badge-icon">&#x1f4f7;</span> On-Device Capture &amp; Solve</div>
-      <div class="security-badge" data-i18n-html="no-telemetry.ff5909"><span class="badge-icon">&#x1f50c;</span> No Telemetry</div>
-      <div class="security-badge" data-i18n-html="local-network-only.e66350"><span class="badge-icon">&#x1f512;</span> Local Network Only</div>
-      <div class="security-badge" data-i18n-html="memory-safe-swift.ecb239"><span class="badge-icon">&#x2705;</span> Memory-Safe Swift</div>
-    </div>
-    <p class="security-audit-note" data-i18n="all-capture-plate-solving.ecf1eb">All capture, plate solving, and stacking happens on your device — no servers, no accounts.</p>
   </section>
-
   <footer class="footer">
     <div class="footer-content">
       <div class="footer-links">
@@ -1257,5 +659,21 @@
   </footer>
 
   <script src="../app-showcase.js"></script>
+  <script>
+    // A quiet reveal as each story arrives — only when motion is welcome, and
+    // only once JavaScript is known to be running, so nothing can stay hidden.
+    (function () {
+      if (!('IntersectionObserver' in window)) return;
+      if (!window.matchMedia('(prefers-reduced-motion: no-preference)').matches) return;
+      document.documentElement.classList.add('ap-motion');
+      const io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); }
+        });
+      }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+      document.querySelectorAll('[data-reveal]').forEach(function (el) { io.observe(el); });
+    })();
+
+  </script>
 </body>
 </html>

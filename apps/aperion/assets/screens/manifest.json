@@ -1,0 +1,40 @@
+{
+  "_comment": "Written by scripts/sync-app-screens.py; read by i18n/i18n.js. files: <lang>/<name> → content hash (the ?v= stamp). sizes: <scene> → [width, height] of the largest file, for the img tag.",
+  "langs": [
+    "en"
+  ],
+  "files": {
+    "en/01-camera-400.webp": "72351bc5",
+    "en/01-camera-800.webp": "025d5588",
+    "en/02-targets-400.webp": "9338cd26",
+    "en/02-targets-800.webp": "91f1b2be",
+    "en/03-plan-400.webp": "abb827d4",
+    "en/03-plan-800.webp": "78b74377",
+    "en/camera-480.webp": "28af8ff3",
+    "en/camera-960.webp": "a523c9c3"
+  },
+  "sizes": {
+    "01-camera": [
+      800,
+      1655
+    ],
+    "02-targets": [
+      800,
+      1655
+    ],
+    "03-plan": [
+      800,
+      1655
+    ],
+    "camera": [
+      960,
+      1253
+    ]
+  },
+  "inputs": {
+    "en/01-camera": "b2362ee9e6da6be946dc4b8a06653ee157cf7e84",
+    "en/02-targets": "b23de938456e88f53d0c5145b675ca6e3d632d59",
+    "en/03-plan": "b937ec5340dadba9f49207d0d8dfe8ce07c25ad6",
+    "en/camera": "40f465bc159b8663c5b18a914d905749d02e093b"
+  }
+}
