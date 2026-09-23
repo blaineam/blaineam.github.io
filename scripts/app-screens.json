@@ -131,5 +131,22 @@
         "widths": [400, 800]
       }
     ]
+  },
+  "deepsi": {
+    "repo": "Deepsi/Deepsi",
+    "renders": [
+      {
+        "device": "iphone",
+        "captures": "screenshots/iphone-6.9",
+        "scenes": ["01-live-blue", "02-live-alt", "03-gallery"],
+        "widths": [400, 800]
+      },
+      {
+        "device": "ipad",
+        "captures": "screenshots/ipad-13",
+        "scenes": ["live-blue"],
+        "widths": [480, 960]
+      }
+    ]
   }
 }
