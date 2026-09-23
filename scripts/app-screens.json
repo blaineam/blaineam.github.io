@@ -78,5 +78,23 @@
         "widths": [720, 1440]
       }
     ]
+  },
+  "mi-speaks": {
+    "repo": "Mi Speaks/Mi Speaks",
+    "renders": [
+      {
+        "device": "iphone",
+        "captures": "screenshots/iphone-6.9",
+        "scenes": ["01-editor", "02-voices", "03-page", "04-chapters"],
+        "widths": [400, 800]
+      },
+      {
+        "device": "watch",
+        "captures": "screenshots/watch-46mm",
+        "scenes": ["01-player"],
+        "widths": [220, 440],
+        "scale": 2
+      }
+    ]
   }
 }

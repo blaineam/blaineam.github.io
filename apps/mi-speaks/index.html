@@ -10,73 +10,10 @@
   <meta property="og:type" content="app">
   <meta property="og:url" content="https://wemiller.com/apps/mi-speaks/">
   <meta property="og:image" content="https://wemiller.com/apps/mi-speaks/assets/images/poster.jpg?v=ad4eadd3">
-  <link rel="stylesheet" href="../app-showcase.css">
-  <style>
-    /* Mi Speaks Specific Styling */
-    :root {
-      --app-primary: #ff69f0;
-      --app-secondary: #ff1ad9;
-      --app-accent: #ffa8ff;
-    }
-
-    .hero {
-      background: linear-gradient(135deg, var(--app-primary) 0%, var(--app-secondary) 100%);
-      color: white;
-    }
-
-    .hero-title,
-    .hero-subtitle {
-      color: white;
-      -webkit-text-fill-color: white;
-    }
-
-    .hero-description {
-      color: rgba(255, 255, 255, 0.9);
-    }
-  
-    .voice-samples { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.25rem; max-width: 900px; margin: 0 auto; }
-    .voice-sample { margin: 0; padding: 1rem 1.15rem; border-radius: 14px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,105,240,0.18); }
-    .voice-sample figcaption { display: flex; align-items: baseline; gap: .5rem; margin-bottom: .6rem; }
-    .voice-sample figcaption strong { font-size: 1.05rem; }
-    .voice-sample figcaption span { font-size: .8rem; opacity: .6; }
-    .voice-sample audio { width: 100%; }
-    .voice-samples-note { max-width: 700px; margin: 1.75rem auto 0; text-align: center; font-size: .9rem; opacity: .65; }
-
-    /* Secondary hero CTA — sends people to the samples before the App Store,
-       because hearing it is the pitch. */
-    .btn-secondary {
-      display: inline-flex; align-items: center; gap: .5rem;
-      padding: 0.9rem 1.6rem; border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.55);
-      color: #fff; text-decoration: none; font-weight: 600;
-      transition: background .2s ease, border-color .2s ease, transform .2s ease;
-    }
-    .btn-secondary:hover { background: rgba(255,255,255,0.14); border-color: #fff; transform: translateY(-2px); }
-
-    .section-note { max-width: 620px; margin: .6rem auto 0; font-size: .95rem; opacity: .7; }
-
-    /* The device renders come out of Monkr on a transparent canvas, so they
-       float instead of sitting in a card with its own background. */
-    .hero-phone img, .magazine-image img { background: none; box-shadow: none; }
-    .screenshots-grid .screenshot-item {
-      background: none; box-shadow: none; overflow: visible; margin: 0;
-    }
-    .screenshots-grid .screenshot-item:hover { transform: translateY(-8px); box-shadow: none; }
-  </style>
-  <link rel="alternate" hreflang="x-default" href="https://wemiller.com/apps/mi-speaks/">
-  <link rel="alternate" hreflang="en" href="https://wemiller.com/apps/mi-speaks/">
-  <link rel="alternate" hreflang="zh-Hans" href="https://wemiller.com/apps/mi-speaks/?lang=zh-Hans">
-  <link rel="alternate" hreflang="ja" href="https://wemiller.com/apps/mi-speaks/?lang=ja">
-  <link rel="alternate" hreflang="de" href="https://wemiller.com/apps/mi-speaks/?lang=de">
-  <link rel="alternate" hreflang="fr" href="https://wemiller.com/apps/mi-speaks/?lang=fr">
-  <link rel="alternate" hreflang="es" href="https://wemiller.com/apps/mi-speaks/?lang=es">
-  <link rel="alternate" hreflang="ko" href="https://wemiller.com/apps/mi-speaks/?lang=ko">
-  <link rel="alternate" hreflang="pt-BR" href="https://wemiller.com/apps/mi-speaks/?lang=pt-BR">
-  <link rel="alternate" hreflang="it" href="https://wemiller.com/apps/mi-speaks/?lang=it">
-  <script src="/i18n/i18n.js" defer data-page="apps.mi-speaks" data-pos="bottom-left"></script>
   <!-- Safari on iPhone and iPad shows a native "Get" bar for the app. -->
   <meta name="apple-itunes-app" content="app-id=6451395651">
   <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#2A0A33">
   <link rel="canonical" href="https://wemiller.com/apps/mi-speaks/">
   <script type="application/ld+json">
   {
@@ -92,6 +29,400 @@
     "author": { "@type": "Person", "name": "Blaine Miller" }
   }
   </script>
+  <link rel="stylesheet" href="../app-showcase.css">
+  <style>
+    /* Mi Speaks — the icon's magenta, set on a night-plum ground like a stage
+       before the voice starts. Pink for the one thing to press and for the
+       word being spoken; clean paper between the dark bands. */
+    :root {
+      --app-primary: #ff69f0;
+      --app-secondary: #ff1ad9;
+      --app-accent: #ffa8ff;
+      --primary-color: #7A0F6E;    /* deep magenta: headlines on paper */
+      --secondary-color: #ff1ad9;
+      --ms-accent-ink: #B0128F;
+      --ms-hero: linear-gradient(170deg, #1C0622 0%, #2A0A33 45%, #4A0E4A 100%);
+      --ms-hero-glow: radial-gradient(ellipse 60% 45% at 50% 100%, rgba(255, 105, 240, 0.28) 0%, transparent 70%), radial-gradient(ellipse 45% 40% at 10% 10%, rgba(255, 26, 217, 0.16) 0%, transparent 70%);
+      --ms-hero-ink: #FFF3FC;
+      --ms-hero-em: #FFA8FF;
+      --ms-hero-kicker: rgba(255, 168, 255, 0.9);
+      --ms-btn: linear-gradient(180deg, #FF8AF4, #FF3FE0);
+      --ms-btn-ink: #2A0026;
+      --ms-glow: rgba(255, 26, 217, 0.30);
+      --ms-display: system-ui, -apple-system, "SF Pro Display", "Segoe UI", sans-serif;
+      --ms-paper: #FFFFFF;
+      --ms-paper-2: #FBF1FA;
+      --ms-rule: rgba(74, 14, 74, 0.12);
+      --ms-quiet: #6E5A6C;
+      --ms-body: #3A2A38;
+      --ms-shadow: drop-shadow(0 30px 40px rgba(74, 14, 74, 0.20)) drop-shadow(0 6px 10px rgba(74, 14, 74, 0.10));
+      --bg-primary: var(--ms-paper);
+      --bg-secondary: var(--ms-paper-2);
+      --text-primary: #1F0F1D;
+      --text-secondary: var(--ms-body);
+      --text-muted: var(--ms-quiet);
+      --glass-bg: rgba(255, 255, 255, 0.8);
+      --glass-border: rgba(74, 14, 74, 0.10);
+      --glass-shadow: none;
+      --ms-measure: 1120px;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --primary-color: #FFA8FF;
+        --secondary-color: #FF69F0;
+        --ms-accent-ink: #FF8AF4;
+        --ms-paper: #140818;
+        --ms-paper-2: #1D0C22;
+        --ms-rule: rgba(255, 168, 255, 0.14);
+        --ms-quiet: #B69BB3;
+        --ms-body: #E6D7E4;
+        --ms-shadow: drop-shadow(0 30px 44px rgba(0, 0, 0, 0.6)) drop-shadow(0 6px 10px rgba(0, 0, 0, 0.35));
+        --text-primary: #FBEFF9;
+        --glass-bg: rgba(20, 8, 24, 0.8);
+        --glass-border: rgba(255, 168, 255, 0.08);
+      }
+    }
+    .btn-buy { box-shadow: 0 4px 15px rgba(42, 10, 51, 0.30); }
+
+    /* ---- Hear it: five voices, one tap each ------------------------------ */
+    .ms-hear { max-width: 900px; margin: 0 auto; padding: clamp(4rem, 10vw, 7rem) 16px; text-align: center; scroll-margin-top: 60px; }
+    :lang(ja) .ms-hear .ms-display, :lang(zh) .ms-hear .ms-display, :lang(ko) .ms-hear .ms-display { font-size: clamp(1.7rem, 4.4vw, 3rem); }
+    .ms-hear .ms-display { margin-bottom: 2rem; }
+    .ms-voices { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.6rem; }
+    .ms-voice {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      min-height: 44px; padding: 0.55rem 1.1rem 0.55rem 0.7rem;
+      border-radius: 999px; border: 1px solid var(--ms-rule);
+      background: var(--ms-paper-2); color: var(--text-primary);
+      font: 500 1rem/1.2 var(--ms-display); cursor: pointer;
+      transition: border-color .2s ease, background .2s ease;
+    }
+    .ms-voice:hover, .ms-voice:focus-visible { border-color: var(--ms-accent-ink); }
+    .ms-voice:focus-visible { outline: 3px solid var(--ms-accent-ink); outline-offset: 2px; }
+    .ms-voice-icon {
+      width: 28px; height: 28px; border-radius: 50%;
+      display: inline-grid; place-items: center;
+      background: var(--ms-btn); color: var(--ms-btn-ink); font-size: 0.72rem;
+    }
+    .ms-voice .ms-voice-accent { color: var(--ms-quiet); font-size: 0.85rem; }
+    .ms-voice.is-playing { border-color: var(--ms-accent-ink); }
+    .ms-hear-note { margin: 1.4rem auto 0; max-width: 40ch; font-size: 0.92rem; color: var(--ms-quiet); }
+
+    body { background: var(--ms-paper); }
+    .nav-links .nav-link, .nav-links .btn-buy { white-space: nowrap; }
+    .floating-appstore { background: var(--ms-hero); box-shadow: 0 10px 30px var(--ms-glow); }
+
+    /* ---- Shared type ---------------------------------------------------- */
+    .ms-eyebrow {
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--ms-accent-ink);
+      margin: 0 0 1rem;
+    }
+    .ms-eyebrow .ms-num {
+      font-family: var(--ms-display);
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      margin-right: 0.8em;
+      opacity: 0.85;
+    }
+    .ms-display {
+      font-family: var(--ms-display);
+      font-weight: 700;
+      background: none;
+      -webkit-text-fill-color: currentColor;
+      color: var(--primary-color);
+      font-size: clamp(2.1rem, 5.2vw, 3.6rem);
+      line-height: 1.06;
+      letter-spacing: -0.02em;
+      margin: 0 0 1.4rem;
+      text-wrap: balance;
+    }
+    .ms-lede {
+      font-size: clamp(1.12rem, 1.9vw, 1.36rem);
+      line-height: 1.62;
+      color: var(--ms-body);
+      margin: 0 0 1.2rem;
+      text-wrap: pretty;
+    }
+    .ms-lede a, .faq-answer a { color: var(--ms-accent-ink); }
+
+    /* ---- Hero ----------------------------------------------------------- */
+    .ms-hero {
+      position: relative;
+      background: var(--ms-hero-glow), var(--ms-hero);
+      color: #fff;
+      text-align: center;
+      padding: calc(76px + clamp(3rem, 8vw, 6rem)) 16px 0;
+      overflow: hidden;
+    }
+    .ms-hero-icon {
+      width: 84px;
+      height: 84px;
+      display: block;
+      margin: 0 auto 1.4rem;
+      filter: drop-shadow(0 14px 26px rgba(0, 0, 0, 0.45));
+    }
+    .ms-hero-kicker {
+      font-size: 0.82rem;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      color: var(--ms-hero-kicker);
+      margin: 0 0 1.2rem;
+    }
+    .ms-hero h1 {
+      font-family: var(--ms-display);
+      font-weight: 700;
+      background: none;
+      -webkit-background-clip: border-box;
+      background-clip: border-box;
+      -webkit-text-fill-color: var(--ms-hero-ink);
+      color: var(--ms-hero-ink);
+      font-size: clamp(2.6rem, 8.4vw, 6.2rem);
+      line-height: 1.02;
+      letter-spacing: -0.025em;
+      max-width: 13ch;
+      margin: 0 auto 1.6rem;
+      text-wrap: balance;
+    }
+    .ms-hero h1 em { font-style: normal; -webkit-text-fill-color: var(--ms-hero-em); color: var(--ms-hero-em); }
+    .ms-hero-standfirst {
+      font-size: clamp(1.08rem, 2vw, 1.34rem);
+      line-height: 1.6;
+      color: rgba(255, 255, 255, 0.84);
+      max-width: 44ch;
+      margin: 0 auto 2.2rem;
+      text-wrap: pretty;
+    }
+    .ms-cta {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.75rem;
+    }
+    .ms-cta .btn-buy {
+      background: var(--ms-btn);
+      color: var(--ms-btn-ink);
+      padding: 0.8rem 1.5rem;
+      min-height: 44px;
+      border-radius: 999px;
+      box-shadow: 0 10px 28px var(--ms-glow);
+    }
+    .ms-hero-device {
+      margin: clamp(3rem, 7vw, 4.5rem) auto 0;
+      width: clamp(230px, 34vw, 380px);
+      height: clamp(250px, 36vw, 420px);
+      overflow: hidden;
+    }
+    .ms-hero-device img { display: block; width: 100%; height: auto; }
+
+    /* ---- Statement ------------------------------------------------------ */
+    .ms-statement {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: clamp(4rem, 10vw, 7.5rem) 16px;
+      text-align: center;
+    }
+    .ms-statement p {
+      font-family: var(--ms-display);
+      font-size: clamp(1.5rem, 3.6vw, 2.5rem);
+      line-height: 1.3;
+      color: var(--primary-color);
+      margin: 0;
+      text-wrap: balance;
+    }
+    .ms-ornament {
+      display: block;
+      width: 44px;
+      height: 4px;
+      margin: 0 auto 1.8rem;
+      border-radius: 4px;
+      background: var(--ms-btn);
+    }
+
+    /* ---- Stories -------------------------------------------------------- */
+    .ms-chapter {
+      max-width: var(--ms-measure);
+      margin: 0 auto;
+      padding: clamp(4rem, 9vw, 7rem) 16px;
+      border-top: 1px solid var(--ms-rule);
+      scroll-margin-top: 70px;
+    }
+    .ms-spread {
+      display: grid;
+      gap: clamp(2.5rem, 6vw, 5rem);
+      align-items: center;
+    }
+    .ms-copy { max-width: 34rem; }
+    @media (min-width: 900px) {
+      .ms-spread { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); }
+      .ms-chapter.is-flipped .ms-copy { order: 2; }
+    }
+    .ms-figure { margin: 0 auto; width: min(72vw, 340px); text-align: center; }
+    .ms-figure.is-watch { width: min(56vw, 240px); }
+    .ms-figure img { display: block; width: 100%; height: auto; filter: var(--ms-shadow); }
+    .ms-figure figcaption {
+      font-size: 0.88rem;
+      line-height: 1.45;
+      color: var(--ms-quiet);
+      margin-top: 1.1rem;
+    }
+    .ms-figure figcaption::before {
+      content: "";
+      display: block;
+      width: 18px;
+      height: 1px;
+      margin: 0 auto 0.6rem;
+      background: var(--ms-accent-ink);
+    }
+
+    /* Secondary routes: quiet text links under the one button. */
+    .ms-alt-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.7rem;
+      margin: 1.1rem 0 0;
+      font-size: 0.95rem;
+      color: rgba(255, 255, 255, 0.6);
+    }
+    .ms-alt-links a { color: rgba(255, 255, 255, 0.88); text-decoration: none; border-bottom: 1px solid rgba(255, 255, 255, 0.3); }
+    .ms-alt-links a:hover { border-bottom-color: rgba(255, 255, 255, 0.8); }
+    .ms-closing .ms-alt-links { color: var(--ms-quiet); }
+    .ms-closing .ms-alt-links a { color: var(--ms-accent-ink); border-bottom-color: var(--ms-rule); }
+
+    /* ---- Trust beat ----------------------------------------------------- */
+    .ms-trust {
+      background: var(--ms-hero-glow), var(--ms-hero);
+      color: var(--ms-hero-ink);
+      padding: clamp(4.5rem, 10vw, 8rem) 16px;
+      scroll-margin-top: 60px;
+    }
+    .ms-trust-inner { max-width: var(--ms-measure); margin: 0 auto; }
+    .ms-trust .ms-eyebrow { color: var(--ms-hero-kicker); text-align: center; }
+    .ms-trust .ms-display {
+      color: var(--ms-hero-ink);
+      -webkit-text-fill-color: var(--ms-hero-ink);
+      text-align: center;
+      font-size: clamp(2.3rem, 6.4vw, 4.6rem);
+      max-width: 14ch;
+      margin: 0 auto 3rem;
+    }
+    .ms-trust .security-badges {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+      gap: 0;
+      max-width: none;
+      padding: 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    .ms-trust .security-badge {
+      background: none;
+      border: none;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 0;
+      box-shadow: none;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+      color: var(--ms-hero-ink);
+      font-size: 1.08rem;
+      padding: 1.1rem 0.4rem;
+      justify-content: center;
+    }
+    .ms-trust .security-badge:hover { transform: none; }
+    .ms-trust .security-audit-note {
+      text-align: center;
+      font-size: clamp(1.1rem, 2.2vw, 1.3rem);
+      color: rgba(255, 255, 255, 0.9);
+      max-width: 38ch;
+      padding: 0;
+      margin: 2.6rem auto 0;
+    }
+    .ms-trust-link { text-align: center; margin: 1.4rem 0 0; }
+    .ms-trust-link a { color: var(--ms-hero-em); text-decoration: none; border-bottom: 1px solid rgba(255, 255, 255, 0.35); }
+    .ms-trust-link a::after { content: " →"; }
+    .ms-trust-link a:hover { border-bottom-color: var(--ms-hero-em); }
+
+    /* ---- FAQ: a ruled list ---------------------------------------------- */
+    .faq-section { max-width: 820px; padding: clamp(4rem, 9vw, 6rem) 16px; }
+    .faq-section .ms-eyebrow, .faq-section h2 { text-align: center; }
+    .faq-section h2 {
+      font-family: var(--ms-display);
+      font-weight: 700;
+      background: none;
+      -webkit-text-fill-color: currentColor;
+      color: var(--primary-color);
+      font-size: clamp(1.9rem, 4vw, 2.8rem);
+      margin: 0 0 2.5rem;
+    }
+    .faq-item {
+      background: none;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+      border: none;
+      border-top: 1px solid var(--ms-rule);
+      border-radius: 0;
+      margin: 0;
+    }
+    .faq-item:last-child { border-bottom: 1px solid var(--ms-rule); }
+    .faq-question { font-size: 1.1rem; font-weight: 600; padding: 1.25rem 0; gap: 1rem; }
+    .faq-question:hover { color: var(--ms-accent-ink); }
+    .faq-icon { font-size: 0.8rem; color: var(--ms-accent-ink); }
+    .faq-answer { padding: 0; }
+    .faq-item.active .faq-answer { padding: 0 0 1.4rem; }
+    .faq-answer p { font-size: 1rem; line-height: 1.68; color: var(--ms-body); }
+
+    /* ---- Closing -------------------------------------------------------- */
+    .ms-closing {
+      text-align: center;
+      padding: clamp(4.5rem, 10vw, 7rem) 16px;
+      background: var(--ms-paper-2);
+      border-top: 1px solid var(--ms-rule);
+    }
+    .ms-closing img { width: 96px; height: 96px; display: block; margin: 0 auto 1.6rem; filter: drop-shadow(0 16px 26px rgba(0, 0, 0, 0.25)); }
+    .ms-closing .ms-display { font-size: clamp(2rem, 5vw, 3.4rem); max-width: 14ch; margin: 0 auto 2rem; }
+    .ms-closing .ms-display em { font-style: normal; color: var(--ms-accent-ink); -webkit-text-fill-color: var(--ms-accent-ink); }
+    .ms-closing .btn-buy { background: var(--ms-hero); color: #fff; padding: 0.8rem 1.5rem; min-height: 44px; border-radius: 999px; box-shadow: 0 10px 28px var(--ms-glow); }
+    .footer { margin-top: 0; }
+
+    /* ---- Reveal: only when motion is welcome ----------------------------- */
+    .ms-motion [data-reveal] {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.9s ease, transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1);
+    }
+    .ms-motion [data-reveal].is-in { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) {
+      .floating-appstore, .faq-item, .hero-text { animation: none; }
+    }
+
+    @media (max-width: 600px) {
+      .ms-hero-icon { width: 68px; height: 68px; }
+      .ms-cta { flex-direction: column; align-items: stretch; max-width: 22rem; margin: 0 auto; }
+      .ms-cta a { justify-content: center; }
+    }
+    /* Break CJK headlines at phrase boundaries, not mid-word, where supported. */
+    .ms-hero h1, .ms-display, .ms-statement p { word-break: auto-phrase; }
+    /* `ch` is the width of a Latin zero; a CJK glyph is two of them. Measure CJK in em. */
+    :lang(ja) .ms-hero h1, :lang(zh) .ms-hero h1, :lang(ko) .ms-hero h1 { max-width: 9em; }
+    :lang(ja) .ms-trust .ms-display, :lang(zh) .ms-trust .ms-display, :lang(ko) .ms-trust .ms-display,
+    :lang(ja) .ms-closing .ms-display, :lang(zh) .ms-closing .ms-display, :lang(ko) .ms-closing .ms-display { max-width: 10em; }
+    :lang(ja) .ms-hero-standfirst, :lang(zh) .ms-hero-standfirst, :lang(ko) .ms-hero-standfirst,
+    :lang(ja) .security-audit-note, :lang(zh) .security-audit-note, :lang(ko) .security-audit-note { max-width: 26em; }
+  </style>
+  <link rel="alternate" hreflang="x-default" href="https://wemiller.com/apps/mi-speaks/">
+  <link rel="alternate" hreflang="en" href="https://wemiller.com/apps/mi-speaks/">
+  <link rel="alternate" hreflang="zh-Hans" href="https://wemiller.com/apps/mi-speaks/?lang=zh-Hans">
+  <link rel="alternate" hreflang="ja" href="https://wemiller.com/apps/mi-speaks/?lang=ja">
+  <link rel="alternate" hreflang="de" href="https://wemiller.com/apps/mi-speaks/?lang=de">
+  <link rel="alternate" hreflang="fr" href="https://wemiller.com/apps/mi-speaks/?lang=fr">
+  <link rel="alternate" hreflang="es" href="https://wemiller.com/apps/mi-speaks/?lang=es">
+  <link rel="alternate" hreflang="ko" href="https://wemiller.com/apps/mi-speaks/?lang=ko">
+  <link rel="alternate" hreflang="pt-BR" href="https://wemiller.com/apps/mi-speaks/?lang=pt-BR">
+  <link rel="alternate" hreflang="it" href="https://wemiller.com/apps/mi-speaks/?lang=it">
+  <script src="/i18n/i18n.js" defer data-page="apps.mi-speaks" data-pos="bottom-left"></script>
 </head>
 <body>
   <!-- Navigation -->
@@ -106,290 +437,141 @@
       <button class="mobile-menu-toggle">☰</button>
       <ul class="nav-links">
         <li><a href="#hear-it" class="nav-link" data-i18n="hear-it.51c9d3">Hear It</a></li>
-        <li><a href="#whats-new" class="nav-link" data-i18n="what-s-new.a2efe2">What's New</a></li>
         <li><a href="#features" class="nav-link" data-i18n="features.fc338f">Features</a></li>
-        <li><a href="#screenshots" class="nav-link" data-i18n="screenshots.597b63">Screenshots</a></li>
         <li><a href="#faq" class="nav-link" data-i18n="faq.03688b">FAQ</a></li>
-        <li><a href="https://apps.apple.com/us/app/mi-speaks/id6451395651" class="btn-buy" target="_blank" rel="noopener noreferrer" data-i18n="download-on-app-store.cf50c2">Download on App Store</a></li>
+        <li><a href="https://apps.apple.com/us/app/mi-speaks/id6451395651" target="_blank" rel="noopener noreferrer" class="btn-buy">App Store</a></li>
       </ul>
     </div>
   </nav>
 
-  <!-- Hero Section -->
-  <section class="hero">
-    <div class="hero-content">
-      <div class="hero-text">
-        <p class="hero-subtitle" data-i18n="mi-speaks.6c9a62">🎤 Mi Speaks</p>
-        <h1 class="hero-title" data-i18n="a-voice-you-will.2a89c7">A voice you will actually want to listen to</h1>
-        <p class="hero-description" data-i18n="mi-speaks-reads-articles.2bbb34">
-          Mi Speaks reads articles, books and PDFs aloud in twenty-eight neural Studio Voices — generated entirely on your iPhone. No account, no upload, no signal. Follow along word by word, right on the page it came from.
-        </p>
-        <span class="os-ready-badge" data-i18n-html="ready-for-ios-27.75e4d6"><span class="badge-icon">✓</span> Ready for iOS 27 / iPadOS 27 / watchOS 27</span>
-        <div class="hero-cta">
-          <a href="https://apps.apple.com/us/app/mi-speaks/id6451395651" class="btn-buy" target="_blank" rel="noopener noreferrer" data-i18n="download-now.6d56a8">Download Now</a>
-          <a href="#hear-it" class="btn-secondary" data-i18n="hear-a-voice-first.af2287">Hear a voice first</a>
-        </div>
-      </div>
-      <div class="hero-image">
-        <div class="hero-phone">
-          <img src="assets/images/device-reader.webp?v=48d96c58"
-               alt="Mi Speaks on an iPhone, reading a book on its own PDF page with the spoken word highlighted"
-               class="phone-mockup" loading="eager">
-        </div>
-      </div>
+  <!-- Hero: the promise, one download button, and a book being read on its own page. -->
+  <header class="ms-hero">
+    <img class="ms-hero-icon" src="assets/images/icon.png?v=4598cf6b" alt="Mi Speaks App Icon" width="1024" height="1024">
+    <p class="ms-hero-kicker">Mi Speaks</p>
+    <h1 data-i18n="a-voice-you-will.2a89c7">A voice you will actually want to listen to</h1>
+    <p class="ms-hero-standfirst" data-i18n="mi-speaks-reads-articles.d6e43e">Mi Speaks reads articles, books and PDFs aloud, word by word, entirely on your iPhone.</p>
+    <div class="ms-cta">
+      <a href="https://apps.apple.com/us/app/mi-speaks/id6451395651" target="_blank" rel="noopener noreferrer" class="btn-buy" data-i18n="download-on-the-app.a9096a">Download on the App Store</a>
     </div>
-  </section>
-
-  <!-- Hear It Section -->
-  <section id="hear-it" class="section">
-    <div class="section-header">
-      <p class="section-subtitle" data-i18n="studio-voices.378ad1">Studio Voices</p>
-      <h2 data-i18n="hear-it-for-yourself.5398d7">Hear it for yourself</h2>
-      <p data-i18n="twenty-eight-neural-voices.eb2f6a">Twenty-eight neural voices, generated entirely on your iPhone. Nothing is uploaded, and they work in airplane mode.</p>
-      <p class="section-note" data-i18n="five-of-them-same.82d47a">Five of them, same passage, straight off a phone. Press play.</p>
+    <p class="ms-alt-links">
+      <a href="#hear-it" data-i18n="hear-a-voice-first.af2287">Hear a voice first</a>
+    </p>
+    <div class="ms-hero-device">
+      <img src="assets/screens/en/03-page-800.webp?v=999d395a"
+           srcset="assets/screens/en/03-page-400.webp?v=df3ad884 400w, assets/screens/en/03-page-800.webp?v=999d395a 800w"
+           sizes="(max-width: 676px) 230px, (max-width: 1117px) 34vw, 380px" width="800" height="1655" fetchpriority="high" data-i18n-src
+           alt="A book read on its own PDF page, the spoken word highlighted" data-i18n-attr="alt:a-book-read-on.f97529">
     </div>
+  </header>
 
-    <div class="voice-samples">
-      <figure class="voice-sample">
-        <figcaption><strong data-i18n="heart.2a3733">Heart</strong> <span data-i18n="american.ee70dc">American</span></figcaption>
-        <audio controls preload="none" src="assets/audio/af_heart.m4a"></audio>
-      </figure>
-      <figure class="voice-sample">
-        <figcaption><strong data-i18n="bella.d9cef0">Bella</strong> <span data-i18n="american.ee70dc">American</span></figcaption>
-        <audio controls preload="none" src="assets/audio/af_bella.m4a"></audio>
-      </figure>
-      <figure class="voice-sample">
-        <figcaption><strong data-i18n="michael.f8c38b">Michael</strong> <span data-i18n="american.ee70dc">American</span></figcaption>
-        <audio controls preload="none" src="assets/audio/am_michael.m4a"></audio>
-      </figure>
-      <figure class="voice-sample">
-        <figcaption><strong data-i18n="emma.409ae7">Emma</strong> <span data-i18n="british.e0f542">British</span></figcaption>
-        <audio controls preload="none" src="assets/audio/bf_emma.m4a"></audio>
-      </figure>
-      <figure class="voice-sample">
-        <figcaption><strong data-i18n="george.9e8c55">George</strong> <span data-i18n="british.e0f542">British</span></figcaption>
-        <audio controls preload="none" src="assets/audio/bm_george.m4a"></audio>
-      </figure>
-    </div>
-
-    <p class="voice-samples-note" data-i18n="every-clip-on-this.f51d66">Every clip on this page was generated on-device by the same engine that ships in the app. Studio Voices are part of Premium and need a one-time download.</p>
-  </section>
-
-  <!-- Floating App Store Button -->
-  <a href="https://apps.apple.com/us/app/mi-speaks/id6451395651" class="floating-appstore" target="_blank" rel="noopener noreferrer">
+  <!-- Floating App Store button -->
+  <a href="https://apps.apple.com/us/app/mi-speaks/id6451395651" target="_blank" rel="noopener noreferrer" class="floating-appstore">
     <span class="floating-appstore-icon"></span>
     <span data-i18n="download-on-app-store.cf50c2">Download on App Store</span>
   </a>
 
-  <!-- What's New Section -->
-  <section id="whats-new" class="section">
-    <div class="section-header">
-      <p class="section-subtitle" data-i18n="just-shipped.243f10">Just Shipped</p>
-      <h2 data-i18n="mi-speaks-2-0.1b81e7">Mi Speaks 2.0</h2>
-      <p data-i18n="neural-studio-voices-imported.d06009">Neural Studio Voices, imported books on their own page, chapter navigation, and audio prepared before you need it</p>
+  <!-- Hearing it is the pitch: five voices, one tap each. -->
+  <section class="ms-hear" id="hear-it">
+    <p class="ms-eyebrow" data-i18n="studio-voices.378ad1">Studio Voices</p>
+    <h2 class="ms-display" data-i18n="hear-it-for-yourself.5398d7">Hear it for yourself</h2>
+    <div class="ms-voices">
+      <button type="button" class="ms-voice" data-src="assets/audio/af_heart.m4a"><span class="ms-voice-icon" aria-hidden="true">▶</span><strong data-i18n="heart.2a3733">Heart</strong><span class="ms-voice-accent" data-i18n="american.ee70dc">American</span></button>
+      <button type="button" class="ms-voice" data-src="assets/audio/af_bella.m4a"><span class="ms-voice-icon" aria-hidden="true">▶</span><strong data-i18n="bella.d9cef0">Bella</strong><span class="ms-voice-accent" data-i18n="american.ee70dc">American</span></button>
+      <button type="button" class="ms-voice" data-src="assets/audio/am_michael.m4a"><span class="ms-voice-icon" aria-hidden="true">▶</span><strong data-i18n="michael.f8c38b">Michael</strong><span class="ms-voice-accent" data-i18n="american.ee70dc">American</span></button>
+      <button type="button" class="ms-voice" data-src="assets/audio/bf_emma.m4a"><span class="ms-voice-icon" aria-hidden="true">▶</span><strong data-i18n="emma.409ae7">Emma</strong><span class="ms-voice-accent" data-i18n="british.e0f542">British</span></button>
+      <button type="button" class="ms-voice" data-src="assets/audio/bm_george.m4a"><span class="ms-voice-icon" aria-hidden="true">▶</span><strong data-i18n="george.9e8c55">George</strong><span class="ms-voice-accent" data-i18n="british.e0f542">British</span></button>
     </div>
-
-    <div class="feature-grid">
-      <div class="feature-card">
-        <div class="feature-icon">🎙️</div>
-        <h3 class="feature-title" data-i18n="studio-voices.378ad1">Studio Voices</h3>
-        <p class="feature-description" data-i18n="twenty-eight-neural-voices.899e23">
-          Twenty-eight neural voices, American and British, produced on your iPhone by an eighty-two-million-parameter model. They breathe, they phrase, and they stop sounding like a phone reading to you. Part of Premium, with a one-time download.
-        </p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">📖</div>
-        <h3 class="feature-title" data-i18n="your-book-on-its.3a3c23">Your book, on its own page</h3>
-        <p class="feature-description" data-i18n="import-a-pdf-and.05fcc5">
-          Import a PDF and read it where it actually lives: the real page, the real layout, with the spoken word lit up exactly where it sits. Turn it off and you are back to plain sentences — it is a mode, not a takeover.
-        </p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">🔖</div>
-        <h3 class="feature-title" data-i18n="jump-to-any-chapter.6b7753">Jump to any chapter</h3>
-        <p class="feature-description" data-i18n="mi-speaks-reads-a.209fd0">
-          Mi Speaks reads a PDF's own table of contents, and when a book has none it finds the headings from the page layout. A four-hundred-page import becomes a list you can move around in — and the skip buttons on your lock screen move chapter by chapter.
-        </p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">✈️</div>
-        <h3 class="feature-title" data-i18n="ready-before-you-are.0c350f">Ready before you are</h3>
-        <p class="feature-description" data-i18n="prepare-a-whole-document.ec2ba7">
-          Prepare a whole document once and every sentence is already rendered to audio. It keeps playing with the screen locked, in a tunnel, on a plane. Your place follows you to your iPad and Apple Watch, and prepared documents are sent to the watch on their own — so it reads them in the same Studio Voice.
-        </p>
-      </div>
-    </div>
+    <p class="ms-hear-note" data-i18n="five-of-them-same.82d47a">Five of them, same passage, straight off a phone. Press play.</p>
   </section>
 
-  <!-- Features Section -->
-  <section id="features" class="section">
-    <div class="section-header">
-      <p class="section-subtitle" data-i18n="why-choose-mi-speaks.4a25ba">Why Choose Mi Speaks</p>
-      <h2 data-i18n="empowering-features.e6aa06">Empowering Features</h2>
-      <p data-i18n="affordable-private-text-to.36ac6d">Affordable, private text-to-speech that runs entirely on your device</p>
-    </div>
-
-    <div class="feature-grid">
-      <div class="feature-card">
-        <div class="feature-icon">🎙️</div>
-        <h3 class="feature-title" data-i18n="studio-voices-or-any.a03d7c">Studio Voices, or any voice you own</h3>
-        <p class="feature-description" data-i18n="twenty-eight-neural-studio.78d344">
-          Twenty-eight neural Studio Voices, plus every system voice already on your device — including Apple's Enhanced and Premium downloads and your own Personal Voice. Mi Speaks tells you which is which, so you are never handed the worst one by default.
-        </p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">📄</div>
-        <h3 class="feature-title" data-i18n="import-from-anywhere.cb4f3c">Import from Anywhere</h3>
-        <p class="feature-description" data-i18n="share-a-pdf-from.e98080">
-          Share a PDF from Files, Safari or Mail and it opens as the real document, with its pages, highlighting and chapters. Paste text from any app, or photograph a page and Mi Speaks reads the words off it.
-        </p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">⏯️</div>
-        <h3 class="feature-title" data-i18n="background-playback.efc5fb">Background Playback</h3>
-        <p class="feature-description" data-i18n="keep-listening-in-another.a95c5b">
-          Keep listening in another app or with the screen locked, with play, pause and skip on the lock screen. If a Studio Voice passage isn't prepared yet, it carries on in your own system voice — the reading never just stops.
-        </p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">📍</div>
-        <h3 class="feature-title" data-i18n="highlight-follow.60299c">Highlight & Follow</h3>
-        <p class="feature-description" data-i18n="follow-along-with-highlighted.2309b6">
-          Follow along with highlighted text as Mi Speaks reads, making it easier to read and comprehend content.
-        </p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">💡</div>
-        <h3 class="feature-title" data-i18n="helpful-tips.f194b3">Helpful Tips</h3>
-        <p class="feature-description" data-i18n="built-in-helpful-tips.a104d6">
-          Built-in helpful tips guide you through features and help you get the most out of Mi Speaks.
-        </p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">🔒</div>
-        <h3 class="feature-title" data-i18n="zero-data-collection.939efa">Zero Data Collection</h3>
-        <p class="feature-description" data-i18n="complete-privacy-all-processing.b37baf">
-          Complete privacy—all processing happens on your device. No data is collected, tracked, or sent anywhere. Affordable and privacy-focused.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Magazine-style Feature Sections -->
-  <section class="section">
-    <div class="magazine-section">
-      <div class="magazine-content">
-        <h2 data-i18n="listen-to-anything.98f2db">Listen to Anything</h2>
-        <p data-i18n="transform-any-written-content.0d5682">
-          Transform any written content into natural-sounding speech. Import text from images, PDFs, web pages,
-          or type directly into the app. Mi Speaks makes all your content accessible through audio.
-        </p>
-        <p data-i18n="perfect-for-reading-articles.f2b09e">
-          Perfect for reading articles while commuting, listening to documents while working out,
-          or helping with accessibility needs.
-        </p>
-      </div>
-      <div class="magazine-image">
-        <img src="assets/images/device-voices.webp?v=50ad0b3c"
-             alt="The Mi Speaks voice picker on an iPhone, showing the Studio Voices section" loading="lazy">
-      </div>
-    </div>
-
-    <div class="magazine-section reverse">
-      <div class="magazine-content">
-        <h2 data-i18n="free-is-a-real.33ccd1">Free is a real app, not a demo</h2>
-        <p data-i18n="there-is-no-length.989103">
-          There is no length limit on the free tier. Paste a whole article, import a whole book, and listen to all of it
-          with any voice on your device — no trial countdown, no truncation, no paywall in the middle of a chapter.
-          Free keeps three saved speeches, each with its own place marked.
-        </p>
-        <p data-i18n="premium-adds-the-twenty.32e758">
-          Premium adds the twenty-eight Studio Voices, an unlimited library synced across your devices, audio export,
-          and Turbo playback speeds. $4.99 a month, $39.99 a year, or $99.99 once and kept.
-        </p>
-        <div style="margin-top: var(--spacing-lg);">
-          <a href="https://apps.apple.com/us/app/mi-speaks/id6451395651" class="btn-buy" target="_blank" rel="noopener noreferrer" data-i18n="download-free-then-try.21f9b8">Download free, then try Premium free for 7 days</a>
+  <!-- Four stories: one idea, one headline, two sentences at most, one device. -->
+  <main id="features">
+    <section class="ms-chapter" id="voices">
+      <div class="ms-spread">
+        <div class="ms-copy" data-reveal>
+          <p class="ms-eyebrow"><span class="ms-num">01</span><span data-i18n="studio-voices.378ad1">Studio Voices</span></p>
+          <h2 class="ms-display" data-i18n="twenty-eight-voices-that.6a7af9">Twenty-eight voices that sound human</h2>
+          <p class="ms-lede" data-i18n="american-and-british-neural.1cf4d1">American and British neural voices, generated on your iPhone and at home in airplane mode. Studio Voices come with Premium, an in-app purchase.</p>
         </div>
+        <figure class="ms-figure" data-reveal>
+          <img src="assets/screens/en/02-voices-800.webp?v=8b21e40c"
+               srcset="assets/screens/en/02-voices-400.webp?v=9d9738fe 400w, assets/screens/en/02-voices-800.webp?v=8b21e40c 800w"
+               sizes="(max-width: 472px) 72vw, 340px" width="800" height="1655" loading="lazy" decoding="async" data-i18n-src
+               alt="The voice picker, listing the Studio Voices" data-i18n-attr="alt:the-voice-picker-listing.b66301">
+        </figure>
       </div>
-      <div class="magazine-image">
-        <img src="assets/images/device-chapters.webp?v=cd10f2a9"
-             alt="Chapter navigation in Mi Speaks, listing the detected headings of an imported book" loading="lazy">
-      </div>
-    </div>
+    </section>
 
-    <div class="magazine-section">
-      <div class="magazine-content">
-        <h2 data-i18n="nothing-leaves-your-device.a74da2">Nothing leaves your device</h2>
-        <p data-i18n="every-voice-runs-locally.1555ee">
-          Every voice runs locally. Your text is never uploaded, never sent to a server to be spoken, and never needs
-          an account — which also means Mi Speaks works the same in airplane mode as it does on Wi-Fi.
-        </p>
-        <p data-i18n="there-is-one-real.bf3cef">
-          There is one real limit, and it is not the network: generating a neural voice uses the graphics processor, and
-          iOS will not run that while an app is off screen. Tap Prepare Full Document and every sentence is rendered up
-          front, so the Studio Voice reads to the end with the screen locked, in another app, or on a flight. Skip that
-          step and nothing stops: any passage that isn't ready yet is read in your own system voice, and Mi Speaks offers
-          to prepare the document for next time.
-        </p>
+    <section class="ms-chapter is-flipped" id="read-along">
+      <div class="ms-spread">
+        <div class="ms-copy" data-reveal>
+          <p class="ms-eyebrow"><span class="ms-num">02</span><span data-i18n="read-along.cd3a58">Read along</span></p>
+          <h2 class="ms-display" data-i18n="every-word-lit-as.0a8b0b">Every word, lit as it's spoken</h2>
+          <p class="ms-lede" data-i18n="paste-text-share-from.f6d439">Paste text, share from any app or photograph a page. Reading is free, any length, with no time limit.</p>
+        </div>
+        <figure class="ms-figure" data-reveal>
+          <img src="assets/screens/en/01-editor-800.webp?v=48fad7c9"
+               srcset="assets/screens/en/01-editor-400.webp?v=4deb7f86 400w, assets/screens/en/01-editor-800.webp?v=48fad7c9 800w"
+               sizes="(max-width: 472px) 72vw, 340px" width="800" height="1655" loading="lazy" decoding="async" data-i18n-src
+               alt="Text ready to be read aloud, with import tools above and the player below" data-i18n-attr="alt:text-ready-to-be.8934ad">
+        </figure>
       </div>
-      <div class="magazine-image">
-        <img src="assets/images/device-editor.webp?v=2061efb1"
-             alt="The Mi Speaks editor on an iPhone with a Studio Voice selected, ready to prepare the full document" loading="lazy">
+    </section>
+
+    <section class="ms-chapter" id="chapters">
+      <div class="ms-spread">
+        <div class="ms-copy" data-reveal>
+          <p class="ms-eyebrow"><span class="ms-num">03</span><span data-i18n="books.4a7fdd">Books</span></p>
+          <h2 class="ms-display" data-i18n="jump-to-any-chapter.6b7753">Jump to any chapter</h2>
+          <p class="ms-lede" data-i18n="mi-speaks-reads-a.2ea59c">Mi Speaks reads a PDF's own table of contents, or finds the headings from the page layout. Skip chapters right from the lock screen.</p>
+        </div>
+        <figure class="ms-figure" data-reveal>
+          <img src="assets/screens/en/04-chapters-800.webp?v=687d99ab"
+               srcset="assets/screens/en/04-chapters-400.webp?v=be241e69 400w, assets/screens/en/04-chapters-800.webp?v=687d99ab 800w"
+               sizes="(max-width: 472px) 72vw, 340px" width="800" height="1655" loading="lazy" decoding="async" data-i18n-src
+               alt="A book's chapter headings, found from the page layout" data-i18n-attr="alt:a-book-s-chapter.c305c4">
+        </figure>
       </div>
+    </section>
+
+    <section class="ms-chapter is-flipped" id="watch">
+      <div class="ms-spread">
+        <div class="ms-copy" data-reveal>
+          <p class="ms-eyebrow"><span class="ms-num">04</span><span>Apple Watch</span></p>
+          <h2 class="ms-display" data-i18n="keep-listening-on-your.815f95">Keep listening on your wrist</h2>
+          <p class="ms-lede" data-i18n="your-place-follows-you.aa3b11">Your place follows you to Apple Watch. With Premium, an in-app purchase, documents prepared on iPhone play there in the same Studio voice.</p>
+        </div>
+        <figure class="ms-figure is-watch" data-reveal>
+          <img src="assets/screens/en/01-player-440.webp?v=b18618a6"
+               srcset="assets/screens/en/01-player-220.webp?v=3c9057d3 220w, assets/screens/en/01-player-440.webp?v=b18618a6 440w"
+               sizes="(max-width: 428px) 56vw, 240px" width="440" height="716" loading="lazy" decoding="async" data-i18n-src
+               alt="Mi Speaks reading on Apple Watch, the spoken word highlighted" data-i18n-attr="alt:mi-speaks-reading-on.d8e697">
+        </figure>
+      </div>
+    </section>
+  </main>
+
+  <!-- Trust: one beat — private, offline, and what's free. -->
+  <section class="ms-trust" id="privacy">
+    <div class="ms-trust-inner" data-reveal>
+      <p class="ms-eyebrow" data-i18n="security-privacy.67a15f">Security &amp; Privacy</p>
+      <h2 class="ms-display" data-i18n="nothing-leaves-your-device.a74da2">Nothing leaves your device</h2>
+      <div class="security-badges">
+        <div class="security-badge" data-i18n-html="works-offline.372393"><span class="badge-icon">✈️</span> Works offline</div>
+        <div class="security-badge" data-i18n-html="no-account.cbf191"><span class="badge-icon">👤</span> No account</div>
+        <div class="security-badge" data-i18n-html="nothing-uploaded.441401"><span class="badge-icon">🔒</span> Nothing uploaded</div>
+        <div class="security-badge" data-i18n-html="free-to-read-any.217fbd"><span class="badge-icon">📖</span> Free to read, any length</div>
+      </div>
+      <p class="security-audit-note" data-i18n="reading-is-free-with.dab2cd">Reading is free with no time limit. Premium is an optional in-app purchase, with a 7-day free trial.</p>
     </div>
   </section>
 
-  <!-- Screenshots Section -->
-  <section id="screenshots" class="section">
-    <div class="section-header">
-      <p class="section-subtitle" data-i18n="see-it-in-action.8c8d28">See It In Action</p>
-      <h2 data-i18n="screenshots.597b63">Screenshots</h2>
-      <p data-i18n="iphone-ipad-and-apple.038fee">iPhone, iPad and Apple Watch — the same library, the same place in it</p>
-    </div>
-
-    <div class="screenshots-grid">
-      <figure class="screenshot-item">
-        <img src="assets/images/frame-iphone-editor.webp?v=ae2fb55f" loading="lazy"
-             alt="Mi Speaks on iPhone: sample text in the editor with a Studio Voice selected">
-      </figure>
-      <figure class="screenshot-item">
-        <img src="assets/images/frame-iphone-voices.webp?v=c63b1dfe" loading="lazy"
-             alt="Mi Speaks on iPhone: the Studio Voices section of the voice picker">
-      </figure>
-      <figure class="screenshot-item">
-        <img src="assets/images/frame-iphone-page.webp?v=f78f6f51" loading="lazy"
-             alt="Mi Speaks on iPhone: an imported book on its own page with the spoken word highlighted">
-      </figure>
-      <figure class="screenshot-item">
-        <img src="assets/images/frame-iphone-chapters.webp?v=aa26443e" loading="lazy"
-             alt="Mi Speaks on iPhone: the chapter list detected from an imported book">
-      </figure>
-      <figure class="screenshot-item">
-        <img src="assets/images/frame-ipad-page.webp?v=49ac6a68" loading="lazy"
-             alt="Mi Speaks on iPad: a book on its own page, read along word by word">
-      </figure>
-      <figure class="screenshot-item">
-        <img src="assets/images/frame-watch-player.webp?v=ef1f908d" loading="lazy"
-             alt="Mi Speaks on Apple Watch, highlighting each word as it is spoken">
-      </figure>
-    </div>
-  </section>
-
-  <!-- FAQ Section -->
+  <!-- FAQ: short, folded, and the EU note last. -->
   <section id="faq" class="faq-section">
-    <div class="section-header">
-      <p class="section-subtitle" data-i18n="got-questions.8ecca3">Got Questions?</p>
-      <h2 data-i18n="frequently-asked-questions.d790b4">Frequently Asked Questions</h2>
-    </div>
+    <p class="ms-eyebrow" data-i18n="got-questions.8ecca3">Got Questions?</p>
+    <h2 data-i18n="frequently-asked-questions.d790b4">Frequently Asked Questions</h2>
 
+    <div class="faq-list">
     <div class="faq-item">
       <button class="faq-question">
         <span data-i18n="what-can-i-listen.482923">What can I listen to with Mi Speaks?</span>
@@ -397,37 +579,7 @@
       </button>
       <div class="faq-answer">
         <p data-i18n="mi-speaks-can-read.079199">
-          Mi Speaks can read any written content including text you type, content from other apps, text extracted from images,
-          and PDF files. Perfect for articles, documents, emails, books, and more.
-        </p>
-      </div>
-    </div>
-
-    <div class="faq-item">
-      <button class="faq-question">
-        <span data-i18n="does-it-work-offline.eac3a5">Does it work offline?</span>
-        <span class="faq-icon">▼</span>
-      </button>
-      <div class="faq-answer">
-        <p data-i18n="yes-completely-every-voice.c29d4e">
-          Yes, completely. Every voice runs on the device — the system voices are already there, and the Studio Voices
-          are a one-time download you keep. Nothing needs a connection after that. The one thing worth knowing is that
-          generating a neural voice needs the graphics processor, which iOS only allows while the app is on screen — so
-          Prepare Full Document renders everything up front, and then a long read plays to the end however you put your
-          phone away.
-        </p>
-      </div>
-    </div>
-
-    <div class="faq-item">
-      <button class="faq-question">
-        <span data-i18n="can-i-use-different.b24d35">Can I use different voices?</span>
-        <span class="faq-icon">▼</span>
-      </button>
-      <div class="faq-answer">
-        <p data-i18n="absolutely-mi-speaks-works.647c20">
-          Absolutely! Mi Speaks works with any voice installed on your device. You can download additional voices
-          in your device's Settings app to access different languages, accents, and voice styles.
+          Mi Speaks can read any written content including text you type, content from other apps, text extracted from images, and PDF files. Perfect for articles, documents, emails, books, and more.
         </p>
       </div>
     </div>
@@ -438,52 +590,27 @@
         <span class="faq-icon">▼</span>
       </button>
       <div class="faq-answer">
-        <p data-i18n="premium-adds-the-twenty.d4eb83">
-          Premium adds the twenty-eight neural Studio Voices, an unlimited library of saved speeches synced across your
-          devices via iCloud Drive, audio export to a file, and Turbo playback speeds. It is sold monthly ($4.99), yearly ($39.99), or as a
-          one-time lifetime purchase ($99.99). Free is not time-limited and has no length limit: any text, any system voice, three
-          saved speeches.
-        </p>
+        <p data-i18n="premium-adds-the-twenty.d4eb83">Premium adds the twenty-eight neural Studio Voices, an unlimited library of saved speeches synced across your devices via iCloud Drive, audio export to a file, and Turbo playback speeds. It is sold monthly ($4.99), yearly ($39.99), or as a one-time lifetime purchase ($99.99). Free is not time-limited and has no length limit: any text, any system voice, three saved speeches.</p>
       </div>
     </div>
 
-    <div class="faq-item">
-      <button class="faq-question">
-        <span data-i18n="can-i-import-text.83b6aa">Can I import text from images?</span>
-        <span class="faq-icon">▼</span>
-      </button>
-      <div class="faq-answer">
-        <p data-i18n="yes-mi-speaks-includes.7a0f2a">
-          Yes! Mi Speaks includes powerful text recognition that can extract text from images and PDF files,
-          making it easy to listen to content from photos, documents, and scanned materials.
-        </p>
-      </div>
-    </div>
-
-    <div class="faq-item">
-      <button class="faq-question">
-        <span data-i18n="does-it-highlight-text.8717e1">Does it highlight text as it reads?</span>
-        <span class="faq-icon">▼</span>
-      </button>
-      <div class="faq-answer">
-        <p data-i18n="yes-mi-speaks-highlights.298462">
-          Yes! Mi Speaks highlights and follows spoken words as it reads, making it easier to follow along,
-          improve comprehension, and learn new content.
-        </p>
-      </div>
-    </div>
     <div class="faq-item">
       <button class="faq-question">
         <span data-i18n="what-are-studio-voices.a8efa6">What are Studio Voices, and why is there a download?</span>
         <span class="faq-icon">▼</span>
       </button>
       <div class="faq-answer">
-        <p data-i18n="studio-voices-are-neural.3f3a44">
-          Studio Voices are neural voices: instead of stitching together recorded fragments, an eighty-two-million-parameter
-          model generates the waveform from the text, which is why the phrasing and breath sound human. The model and its
-          voice packs are about 325 MB, downloaded once over Wi-Fi and then kept on the device. Nothing is sent anywhere
-          afterwards — or during, beyond fetching the files themselves.
-        </p>
+        <p data-i18n="studio-voices-are-neural.3f3a44">Studio Voices are neural voices: instead of stitching together recorded fragments, an eighty-two-million-parameter model generates the waveform from the text, which is why the phrasing and breath sound human. The model and its voice packs are about 325 MB, downloaded once over Wi-Fi and then kept on the device. Nothing is sent anywhere afterwards — or during, beyond fetching the files themselves.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        <span data-i18n="does-it-keep-reading.ff50dd">Does it keep reading with the screen locked?</span>
+        <span class="faq-icon">▼</span>
+      </button>
+      <div class="faq-answer">
+        <p data-i18n="yes-tap-prepare-full.918c5a">Yes. Tap Prepare Full Document and every sentence is rendered up front, so a Studio Voice reads to the end with the screen locked, in another app or on a flight. Anything not yet prepared is read in your system voice, so the reading never stops.</p>
       </div>
     </div>
 
@@ -493,11 +620,7 @@
         <span class="faq-icon">▼</span>
       </button>
       <div class="faq-answer">
-        <p data-i18n="no-every-voice-system.4a3674">
-          No. Every voice, system and Studio alike, runs on your device, and Mi Speaks has no account to sign in to. If you
-          turn on Premium's library sync, your saved speeches travel through your own iCloud Drive — Apple's, not mine. I
-          never see them.
-        </p>
+        <p data-i18n="no-every-voice-system.4a3674">No. Every voice, system and Studio alike, runs on your device, and Mi Speaks has no account to sign in to. If you turn on Premium's library sync, your saved speeches travel through your own iCloud Drive — Apple's, not mine. I never see them.</p>
       </div>
     </div>
 
@@ -510,25 +633,17 @@
         <p data-i18n="yes-mi-speaks-is.888a80">Yes. Mi Speaks is on the App Store everywhere in the European Union, France included. It's available in every App Store territory Apple offers.</p>
       </div>
     </div>
+    </div>
   </section>
 
-  <!-- Footer -->
-
-  <!-- Security Hardening Callout -->
-  <section class="security-callout">
-    <div class="section-header">
-      <p class="section-subtitle" data-i18n="security-privacy.67a15f">Security &amp; Privacy</p>
-      <h2 data-i18n="hardened-by-design.084a16">Hardened by Design</h2>
+  <!-- Closing: the promise again, and the one button. -->
+  <section class="ms-closing">
+    <img src="assets/images/icon.png?v=4598cf6b" alt="" width="1024" height="1024" loading="lazy">
+    <h2 class="ms-display" data-i18n="a-voice-you-will.2a89c7">A voice you will actually want to listen to</h2>
+    <div class="ms-cta">
+      <a href="https://apps.apple.com/us/app/mi-speaks/id6451395651" target="_blank" rel="noopener noreferrer" class="btn-buy" data-i18n="download-on-the-app.a9096a">Download on the App Store</a>
     </div>
-    <div class="security-badges">
-      <div class="security-badge" data-i18n-html="input-validation.5de1a2"><span class="badge-icon">&#x1f50d;</span> Input Validation</div>
-      <div class="security-badge" data-i18n-html="secure-audio-pipeline.cbbd41"><span class="badge-icon">&#x1f3a4;</span> Secure Audio Pipeline</div>
-      <div class="security-badge" data-i18n-html="privacy-first-design.1bbae3"><span class="badge-icon">&#x1f512;</span> Privacy-First Design</div>
-      <div class="security-badge" data-i18n-html="app-sandbox.b85ecb"><span class="badge-icon">&#x2705;</span> App Sandbox</div>
-    </div>
-    <p class="security-audit-note" data-i18n="comprehensive-security-audit-complet.9f66b8">Comprehensive security audit completed April 2026</p>
   </section>
-
   <footer class="footer">
     <div class="footer-content">
       <div class="footer-links">
@@ -576,5 +691,44 @@
   </footer>
 
   <script src="../app-showcase.js"></script>
+  <script>
+    // A quiet reveal as each story arrives — only when motion is welcome, and
+    // only once JavaScript is known to be running, so nothing can stay hidden.
+    (function () {
+      if (!('IntersectionObserver' in window)) return;
+      if (!window.matchMedia('(prefers-reduced-motion: no-preference)').matches) return;
+      document.documentElement.classList.add('ms-motion');
+      const io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); }
+        });
+      }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+      document.querySelectorAll('[data-reveal]').forEach(function (el) { io.observe(el); });
+    })();
+  </script>
+  <script>
+    // One voice at a time: a tap plays that sample, a second tap stops it.
+    (function () {
+      var audio = null, current = null;
+      function reset() { if (current) { current.classList.remove('is-playing'); current.querySelector('.ms-voice-icon').textContent = '▶'; } current = null; }
+      document.querySelectorAll('.ms-voice').forEach(function (btn) {
+        btn.setAttribute('aria-pressed', 'false');
+        btn.addEventListener('click', function () {
+          var same = current === btn;
+          if (audio) { audio.pause(); }
+          if (current) current.setAttribute('aria-pressed', 'false');
+          reset();
+          if (same) return;
+          audio = new Audio(btn.dataset.src);
+          audio.addEventListener('ended', function () { if (current === btn) { btn.setAttribute('aria-pressed', 'false'); reset(); } });
+          audio.play();
+          current = btn;
+          btn.classList.add('is-playing');
+          btn.setAttribute('aria-pressed', 'true');
+          btn.querySelector('.ms-voice-icon').textContent = '❚❚';
+        });
+      });
+    })();
+  </script>
 </body>
 </html>
