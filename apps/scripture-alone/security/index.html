@@ -75,6 +75,8 @@
       max-width: 17ch;
       text-wrap: balance;
     }
+    /* Japanese headings break at phrase boundaries rather than mid-word. */
+    :lang(ja) .paper-title, :lang(ja) .paper h2 { word-break: auto-phrase; }
     .paper-standfirst {
       font-family: var(--sa-serif);
       font-size: clamp(1.05rem, 2.2vw, 1.4rem);
@@ -224,54 +226,65 @@
     .sa-btn.primary { background: var(--primary-color); color: #fff; border-color: transparent; }
     .sa-btn:hover { opacity: 0.88; }
   </style>
+  <link rel="alternate" hreflang="x-default" href="https://wemiller.com/apps/scripture-alone/security/">
+  <link rel="alternate" hreflang="en" href="https://wemiller.com/apps/scripture-alone/security/">
+  <link rel="alternate" hreflang="zh-Hans" href="https://wemiller.com/apps/scripture-alone/security/?lang=zh-Hans">
+  <link rel="alternate" hreflang="ja" href="https://wemiller.com/apps/scripture-alone/security/?lang=ja">
+  <link rel="alternate" hreflang="de" href="https://wemiller.com/apps/scripture-alone/security/?lang=de">
+  <link rel="alternate" hreflang="fr" href="https://wemiller.com/apps/scripture-alone/security/?lang=fr">
+  <link rel="alternate" hreflang="es" href="https://wemiller.com/apps/scripture-alone/security/?lang=es">
+  <link rel="alternate" hreflang="ko" href="https://wemiller.com/apps/scripture-alone/security/?lang=ko">
+  <link rel="alternate" hreflang="pt-BR" href="https://wemiller.com/apps/scripture-alone/security/?lang=pt-BR">
+  <link rel="alternate" hreflang="it" href="https://wemiller.com/apps/scripture-alone/security/?lang=it">
+  <script src="/i18n/i18n.js" defer data-page="apps.scripture-alone.security" data-pos="bottom-left"></script>
 </head>
 <body>
 
   <header class="paper-hero">
-    <div class="paper-kicker"><a href="../">Scripture Alone</a> · A proposal to publishers</div>
-    <h1 class="paper-title">How a licensed translation stays safe in an open-source Bible</h1>
-    <p class="paper-standfirst">
+    <div class="paper-kicker" data-i18n-html="scripture-alone-a-proposal.7e1c4d"><a href="../">Scripture Alone</a> · A proposal to publishers</div>
+    <h1 class="paper-title" data-i18n="how-a-licensed-translation.780486">How a licensed translation stays safe in an open-source Bible</h1>
+    <p class="paper-standfirst" data-i18n="our-source-code-is.6e066f">
       Our source code is public. The reasonable question a publisher asks next is how their text could
       possibly be safe in it. This is the answer — a format, an implementation and a set of tests,
       including an honest account of what it cannot do.
     </p>
-    <div class="paper-byline">Blaine Miller · Updated September 2026</div>
+    <div class="paper-byline" data-i18n="blaine-miller-updated-september.ce78ac">Blaine Miller · Updated September 2026</div>
   </header>
 
   <main class="paper">
 
     <section>
-      <div class="section-number">The claim</div>
-      <h2>Stated precisely, so it can be checked</h2>
-      <p class="lede">
+      <div class="section-number" data-i18n="the-claim.84a171">The claim</div>
+      <h2 data-i18n="stated-precisely-so-it.cb9102">Stated precisely, so it can be checked</h2>
+      <p class="lede" data-i18n="a-licensed-translation-ships.dfa869">
         A licensed translation ships as a signed, encrypted package. The app can read it. A person
         holding the file cannot read it without the key. And the publisher decides — in data the app
         enforces, not in a PDF in a drawer — what may be done with the text once it is open.
       </p>
       <div class="claims">
         <div class="claim">
-          <h4>The plaintext never exists as a file</h4>
-          <p>Chapters are decrypted one at a time, in memory, on demand. A whole Bible in the clear never lands on disk, and the decryption interface is shaped so that it cannot.</p>
+          <h4 data-i18n="the-plaintext-never-exists.3409e4">The plaintext never exists as a file</h4>
+          <p data-i18n="chapters-are-decrypted-one.1a6c08">Chapters are decrypted one at a time, in memory, on demand. A whole Bible in the clear never lands on disk, and the decryption interface is shaped so that it cannot.</p>
         </div>
         <div class="claim">
-          <h4>The terms travel with the text</h4>
-          <p>The permission policy sits in a header signed by the publisher's own key. Edit the policy and the signature fails; the package stops opening.</p>
+          <h4 data-i18n="the-terms-travel-with.5672c6">The terms travel with the text</h4>
+          <p data-i18n="the-permission-policy-sits.30ca4d">The permission policy sits in a header signed by the publisher's own key. Edit the policy and the signature fails; the package stops opening.</p>
         </div>
         <div class="claim">
-          <h4>The publisher holds the keys</h4>
-          <p>The packaging tool runs on the publisher's machine with the publisher's keys. We never receive the plaintext and never hold the key that decrypts it.</p>
+          <h4 data-i18n="the-publisher-holds-the.f61c24">The publisher holds the keys</h4>
+          <p data-i18n="the-packaging-tool-runs.f3aa89">The packaging tool runs on the publisher's machine with the publisher's keys. We never receive the plaintext and never hold the key that decrypts it.</p>
         </div>
         <div class="claim">
-          <h4>Search doesn't undo any of it</h4>
-          <p>The index is sealed exactly like the text. A search opens one or two of 256 encrypted buckets and decrypts only the chapters its hits are in. There is no plaintext index.</p>
+          <h4 data-i18n="search-doesn-t-undo.8033cc">Search doesn't undo any of it</h4>
+          <p data-i18n="the-index-is-sealed.aef9bf">The index is sealed exactly like the text. A search opens one or two of 256 encrypted buckets and decrypts only the chapters its hits are in. There is no plaintext index.</p>
         </div>
       </div>
     </section>
 
     <section>
-      <div class="section-number">The objection</div>
-      <h2>Why open source is the stronger position, not the weaker one</h2>
-      <p>
+      <div class="section-number" data-i18n="the-objection.718bc2">The objection</div>
+      <h2 data-i18n="why-open-source-is.8da00b">Why open source is the stronger position, not the weaker one</h2>
+      <p data-i18n-html="the-instinct-that-public.adf1fe">
         The instinct that public source makes text less safe is understandable, and it is the
         opposite of how cryptography is assessed. <strong>Kerckhoffs's principle</strong>, the
         foundation of the field since 1883, holds that a system must stay secure when everything
@@ -279,40 +292,40 @@
         front of their storefront, the disk encryption on their staff's laptops, Apple's Secure
         Enclave — is public in exactly this sense.
       </p>
-      <blockquote class="pull">
+      <blockquote class="pull" data-i18n="a-scheme-that-needs.74006d">
         A scheme that needs its design kept quiet is one that has not been examined.
       </blockquote>
-      <h3>The practical consequence</h3>
-      <p>
+      <h3 data-i18n="the-practical-consequence.c8e256">The practical consequence</h3>
+      <p data-i18n-html="a-closed-source-bible.c65136">
         <strong>A closed-source Bible app is in the identical position.</strong> Any app that reads a
         licensed translation offline must put a key on the reader's device. That is true of every
         major Bible app on the App Store. The difference is not whether a key is on the device — it
         is whether anyone outside can confirm what the app does with it.
       </p>
-      <p>
+      <p data-i18n-html="a-fork-gets-the.e413bc">
         <strong>A fork gets the code, not the text.</strong> The repository contains no content key
         and no signing key, and the packaging tool refuses to run against a key inside the working
         tree. Anyone may clone Scripture Alone; nobody who does can decrypt a licensed package,
         because the secret was never in the thing they cloned.
       </p>
-      <p>
+      <p data-i18n="the-security-of-this.02c1f3">
         The security of this design rests on the key and the signature. That is the correct place
         for it to rest.
       </p>
     </section>
 
     <section>
-      <div class="section-number">The format</div>
-      <h2>One file, <code>.sabible</code></h2>
+      <div class="section-number" data-i18n="the-format.165e23">The format</div>
+      <h2 data-i18n-html="one-file-sabible.24a02c">One file, <code>.sabible</code></h2>
       <div class="wire">
-        <div class="wire-row"><span class="wire-off">0</span><span class="wire-name">magic <code>"SABIBLE\0"</code></span><span class="wire-size">8 bytes</span></div>
-        <div class="wire-row"><span class="wire-off">8</span><span class="wire-name">version</span><span class="wire-size">u16 BE</span></div>
-        <div class="wire-row"><span class="wire-off">10</span><span class="wire-name">header length</span><span class="wire-size">u32 BE</span></div>
-        <div class="wire-row"><span class="wire-off">14</span><span class="wire-name">header — JSON, plaintext</span><span class="wire-size">variable</span></div>
-        <div class="wire-row"><span class="wire-off">·</span><span class="wire-name">signature — Ed25519 over the header bytes</span><span class="wire-size">64 bytes</span></div>
-        <div class="wire-row is-body"><span class="wire-off">·</span><span class="wire-name">body — per-chapter AEAD-sealed blobs</span><span class="wire-size">to end</span></div>
+        <div class="wire-row"><span class="wire-off">0</span><span class="wire-name" data-i18n-html="magic-sabible-0.8e4a93">magic <code>"SABIBLE\0"</code></span><span class="wire-size" data-i18n="8-bytes.523aca">8 bytes</span></div>
+        <div class="wire-row"><span class="wire-off">8</span><span class="wire-name" data-i18n="version.c69227">version</span><span class="wire-size" data-i18n="u16-be.9d97c7">u16 BE</span></div>
+        <div class="wire-row"><span class="wire-off">10</span><span class="wire-name" data-i18n="header-length.d2f8ef">header length</span><span class="wire-size" data-i18n="u32-be.23fa57">u32 BE</span></div>
+        <div class="wire-row"><span class="wire-off">14</span><span class="wire-name" data-i18n="header-json-plaintext.06d9f6">header — JSON, plaintext</span><span class="wire-size" data-i18n="variable.b46d01">variable</span></div>
+        <div class="wire-row"><span class="wire-off">·</span><span class="wire-name" data-i18n="signature-ed25519-over-the.c368e0">signature — Ed25519 over the header bytes</span><span class="wire-size" data-i18n="64-bytes.8dc855">64 bytes</span></div>
+        <div class="wire-row is-body"><span class="wire-off">·</span><span class="wire-name" data-i18n="body-per-chapter-aead.309de4">body — per-chapter AEAD-sealed blobs</span><span class="wire-size" data-i18n="to-end.8042fa">to end</span></div>
       </div>
-      <p>
+      <p data-i18n-html="the-header-is-plaintext.5be923">
         <strong>The header is plaintext on purpose.</strong> Anyone may see what a package claims to
         be, who signed it and under what terms, without holding any key. Secrecy of the terms was
         never the goal; integrity of them is. Here is the header of the package this app actually
@@ -332,54 +345,54 @@
   "index": { "aad": "sabible-index-v1", "buckets": 256, "entries": [ … ] },
   "chapters": [ { "book": 1, "chapter": 1, "verses": 31, "offset": 0, … }, … ]
 }</pre>
-      <p>
+      <p data-i18n-html="every-permission-there-is.32d0ce">
         Every permission there is <code>true</code> because that package is the American Standard
         Version, which is public domain — sealing it must not cost its readers anything. A licensed
         package is where those fields earn their keep.
       </p>
-      <h3>What each chapter is sealed against</h3>
-      <p>
+      <h3 data-i18n="what-each-chapter-is.70ec40">What each chapter is sealed against</h3>
+      <p data-i18n="each-chapter-is-sealed.a8b821">
         Each chapter is sealed separately with AES-256-GCM, and its authenticated associated data
         binds the package id, the translation id, the chapter, and a SHA-256 of the header. Four
         attacks therefore fail loudly instead of silently:
       </p>
       <div class="wrapx">
       <table class="sa">
-        <tr><th>Attack</th><th>Result</th></tr>
-        <tr><td>Edit the policy</td><td>Signature fails; the package does not open.</td></tr>
-        <tr><td>Re-sign with another key</td><td>The key isn't pinned; refused before its terms are read.</td></tr>
-        <tr><td>Move a chapter between packages</td><td>The package id in the sealed data no longer matches; the seal fails.</td></tr>
-        <tr><td>Replay a chapter across a terms change</td><td>The header hash in the sealed data no longer matches; the seal fails.</td></tr>
+        <tr><th data-i18n="attack.1b81f2">Attack</th><th data-i18n="result.5faa59">Result</th></tr>
+        <tr><td data-i18n="edit-the-policy.44f13a">Edit the policy</td><td data-i18n="signature-fails-the-package.7bb419">Signature fails; the package does not open.</td></tr>
+        <tr><td data-i18n="re-sign-with-another.3d1ba3">Re-sign with another key</td><td data-i18n="the-key-isn-t.548435">The key isn't pinned; refused before its terms are read.</td></tr>
+        <tr><td data-i18n="move-a-chapter-between.47f9ff">Move a chapter between packages</td><td data-i18n="the-package-id-in.67ef86">The package id in the sealed data no longer matches; the seal fails.</td></tr>
+        <tr><td data-i18n="replay-a-chapter-across.3315df">Replay a chapter across a terms change</td><td data-i18n="the-header-hash-in.93de93">The header hash in the sealed data no longer matches; the seal fails.</td></tr>
       </table>
       </div>
     </section>
 
     <section>
-      <div class="section-number">Enforcement</div>
-      <h2>The terms reach the buttons, not just the file</h2>
-      <p>
+      <div class="section-number" data-i18n="enforcement.2ef3df">Enforcement</div>
+      <h2 data-i18n="the-terms-reach-the.ce6532">The terms reach the buttons, not just the file</h2>
+      <p data-i18n="a-permission-that-only.ce7fac">
         A permission that only the file format understands is a promise. These are read from the
         signed header and enforced at the control a reader actually touches:
       </p>
       <div class="wrapx">
       <table class="sa">
-        <tr><th>Policy field</th><th>What the app does when it is false</th></tr>
-        <tr><td>allowCopy</td><td>Copy is disabled in the selection bar.</td></tr>
-        <tr><td>allowShare</td><td>Share text and share links are withheld.</td></tr>
-        <tr><td>allowVerseImages</td><td>No verse image can be rendered.</td></tr>
-        <tr><td>allowNotesExport</td><td>Exporting notes with their verses is refused, and says why.</td></tr>
-        <tr><td>allowExternalHandoff</td><td>The text is never handed to another app to render or speak.</td></tr>
-        <tr><td>allowOfflineStorage</td><td>The package is not copied into the library at all.</td></tr>
-        <tr><td>maxQuotationVerses</td><td>Copy and share disable past the cap, naming the limit.</td></tr>
-        <tr><td>expires</td><td>Past the date the package refuses to open.</td></tr>
+        <tr><th data-i18n="policy-field.e718a9">Policy field</th><th data-i18n="what-the-app-does.212635">What the app does when it is false</th></tr>
+        <tr><td data-i18n="allowcopy.bc431f">allowCopy</td><td data-i18n="copy-is-disabled-in.8b0fd9">Copy is disabled in the selection bar.</td></tr>
+        <tr><td data-i18n="allowshare.91f13f">allowShare</td><td data-i18n="share-text-and-share.a42f41">Share text and share links are withheld.</td></tr>
+        <tr><td data-i18n="allowverseimages.4dd29b">allowVerseImages</td><td data-i18n="no-verse-image-can.2dba26">No verse image can be rendered.</td></tr>
+        <tr><td data-i18n="allownotesexport.354cd2">allowNotesExport</td><td data-i18n="exporting-notes-with-their.ee5080">Exporting notes with their verses is refused, and says why.</td></tr>
+        <tr><td data-i18n="allowexternalhandoff.110b3b">allowExternalHandoff</td><td data-i18n="the-text-is-never.ce0c86">The text is never handed to another app to render or speak.</td></tr>
+        <tr><td data-i18n="allowofflinestorage.30efff">allowOfflineStorage</td><td data-i18n="the-package-is-not.6c66c3">The package is not copied into the library at all.</td></tr>
+        <tr><td data-i18n="maxquotationverses.878634">maxQuotationVerses</td><td data-i18n="copy-and-share-disable.6e9e6a">Copy and share disable past the cap, naming the limit.</td></tr>
+        <tr><td data-i18n="expires.ac3c39">expires</td><td data-i18n="past-the-date-the.13ea10">Past the date the package refuses to open.</td></tr>
       </table>
       </div>
     </section>
 
     <section>
-      <div class="section-number">Search</div>
-      <h2>Sealed, and measured rather than asserted</h2>
-      <p>
+      <div class="section-number" data-i18n="search.bce064">Search</div>
+      <h2 data-i18n="sealed-and-measured-rather.60876c">Sealed, and measured rather than asserted</h2>
+      <p data-i18n="a-packaged-translation-is.8d2b01">
         A packaged translation is fully searchable — phrases included — with no plaintext index at
         any point. Postings carry word positions, so a phrase is an adjacency check rather than a
         scan, and they are bucketed by a keyed hash and sealed like chapters. A hashed-token index
@@ -387,12 +400,12 @@
         until every hash was identified. That is precisely what we did not build.
       </p>
       <div class="figures">
-        <div class="figure"><b>1</b><span>bucket of 256 opened by the commonest word in scripture</span></div>
-        <div class="figure"><b>≤30</b><span>chapters of 1,189 decrypted for that search</span></div>
-        <div class="figure"><b>0</b><span>chapters decrypted by a search with no matches</span></div>
-        <div class="figure"><b>16</b><span>size classes the 256 buckets fall into, after padding</span></div>
+        <div class="figure"><b>1</b><span data-i18n="bucket-of-256-opened.f56314">bucket of 256 opened by the commonest word in scripture</span></div>
+        <div class="figure"><b>≤30</b><span data-i18n="chapters-of-1-189.87f3ea">chapters of 1,189 decrypted for that search</span></div>
+        <div class="figure"><b>0</b><span data-i18n="chapters-decrypted-by-a.352bfa">chapters decrypted by a search with no matches</span></div>
+        <div class="figure"><b>16</b><span data-i18n="size-classes-the-256.0e507c">size classes the 256 buckets fall into, after padding</span></div>
       </div>
-      <p>
+      <p data-i18n-html="what-remains-visible-to.cb83a4">
         What remains visible to someone without the key is the size of 256 buckets. Recovering
         word frequencies from that is a 256-way subset-sum over tens of thousands of unknowns, and
         its answer would be "bucket 37 probably holds <em>the</em>", which decrypts nothing. Padding
@@ -402,25 +415,25 @@
     </section>
 
     <section>
-      <div class="section-number">Honesty</div>
-      <h2>What this does not do</h2>
+      <div class="section-number" data-i18n="honesty.0e1a82">Honesty</div>
+      <h2 data-i18n="what-this-does-not.478c21">What this does not do</h2>
       <div class="plainly">
-        <h4>The key is on the device, and a determined attacker can recover it</h4>
-        <p>
+        <h4 data-i18n="the-key-is-on.713b39">The key is on the device, and a determined attacker can recover it</h4>
+        <p data-i18n="the-content-key-is.47e572">
           The content key is derived with HKDF from a seed injected at build time, then sealed to a
           Secure Enclave key generated on that device and marked this-device-only. The keychain
           holds ciphertext. That closes every route that actually happens — a copied keychain, a
           device backup, a file-system dump — and it does not hide the seed from someone
           disassembling the binary. Nothing on a general-purpose computer does.
         </p>
-        <p>
+        <p data-i18n="this-raises-the-floor.b63b91">
           This raises the floor, not the ceiling, and it is the same floor a closed-source app
           stands on. We would rather describe it accurately than imply a ceiling that doesn't exist.
         </p>
       </div>
       <div class="plainly">
-        <h4>A search leaks its own pattern to someone watching the device</h4>
-        <p>
+        <h4 data-i18n="a-search-leaks-its.4f67d1">A search leaks its own pattern to someone watching the device</h4>
+        <p data-i18n="which-buckets-a-query.f58c18">
           Which buckets a query opens is visible to something observing file access on a device it
           controls. That is inherent to any encrypted index not read in full, and reading it in full
           would mean decrypting the whole index per keystroke. It reveals that two searches were for
@@ -428,14 +441,14 @@
         </p>
       </div>
       <div class="plainly">
-        <h4>The analogue hole is always open</h4>
-        <p>
+        <h4 data-i18n="the-analogue-hole-is.bbe4b4">The analogue hole is always open</h4>
+        <p data-i18n="any-reader-can-screenshot.e1809b">
           Any reader can screenshot a page, and a patient one can script scrolling and run OCR. That
           is true of every Bible app, every e-reader, and every printed book with a photocopier next
           to it.
         </p>
       </div>
-      <blockquote class="pull">
+      <blockquote class="pull" data-i18n-html="this-design-gives-you.b00859">
         This design gives you the same protection a closed-source app gives you, plus the ability to
         verify it, plus enforcement of your specific terms in code rather than in correspondence.
         <cite>— and not protection against a determined adversary, because nothing is</cite>
@@ -443,27 +456,27 @@
     </section>
 
     <section>
-      <div class="section-number">The proof</div>
-      <h2>It isn't a demonstration. It's the translation you open by default.</h2>
-      <p>
+      <div class="section-number" data-i18n="the-proof.87415a">The proof</div>
+      <h2 data-i18n="it-isn-t-a.f99971">It isn't a demonstration. It's the translation you open by default.</h2>
+      <p data-i18n="the-obvious-way-to.d0eac9">
         The obvious way to prove a format is to ship a sample beside the real translations. We did
         that first, and it proves only that a code path compiles.
       </p>
-      <p>
+      <p data-i18n-html="so-the-american-standard.ee8e39">
         So the American Standard Version now ships <em>as</em> the package — no plaintext database in
         the app to fall back on, and it is the translation Scripture Alone opens by default. Every
         reader, on every launch, derives the content key, unwraps it from the Secure Enclave,
         verifies an Ed25519 signature and reads chapters decrypted one at a time. Searching it
         searches the sealed index. If any of that broke, the app would not open on a fresh install.
       </p>
-      <p>
+      <p data-i18n="that-is-a-stronger.9c0808">
         That is a stronger claim than a demonstration can make, and it is the reason to prefer it. A
         sample nobody selects proves the code compiles. A default translation proves the format
         survives contact with real use — real size, every chapter, every search, on every device,
         for as long as the app is in the store.
       </p>
-      <h3>Two claims, deliberately kept on separate artefacts</h3>
-      <p>
+      <h3 data-i18n="two-claims-deliberately-kept.9017dc">Two claims, deliberately kept on separate artefacts</h3>
+      <p data-i18n-html="the-shipped-package-permits.8fad40">
         The shipped package permits everything, because its text is public domain and its readers
         must lose nothing. That a package can <em>forbid</em> things — and that the app obeys, at the
         control the reader touches — is proved separately, against packages built to forbid them.
@@ -472,9 +485,9 @@
     </section>
 
     <section>
-      <div class="section-number">For your engineers</div>
-      <h2>What to read, and what is still open</h2>
-      <p>
+      <div class="section-number" data-i18n="for-your-engineers.546e61">For your engineers</div>
+      <h2 data-i18n="what-to-read-and.cc7fef">What to read, and what is still open</h2>
+      <p data-i18n-html="four-files-carry-the.4f3b8d">
         Four files carry the whole claim: <code>TranslationPackage.swift</code> — where the part
         worth reading is the sequence of checks performed when a package is opened, and the two
         private functions that open a sealed box — together with <code>PackagePolicy.swift</code>,
@@ -482,7 +495,7 @@
         packaging tool. The format is implemented twice, in two languages, so a divergence shows up
         as a failing test rather than as a package that won't open on your desk.
       </p>
-      <p>
+      <p data-i18n="still-open-so-nobody.8a788e">
         Still open, so nobody discovers it later: the attested key-delivery route (a small endpoint
         that releases a key only to a genuine build, which we will build if your terms need it) is
         specified but not written; there is no watermarking, which we can add and would describe to
@@ -494,15 +507,15 @@
   </main>
 
   <section class="closing">
-    <h2>Read the whole thing</h2>
-    <p style="max-width: 38rem; margin: 0 auto; color: var(--sa-quiet); line-height: 1.7;">
+    <h2 data-i18n="read-the-whole-thing.a77ac8">Read the whole thing</h2>
+    <p style="max-width: 38rem; margin: 0 auto; color: var(--sa-quiet); line-height: 1.7;" data-i18n="the-full-paper-includes.055049">
       The full paper includes the complete format specification, the leakage analysis in detail, both
       key-delivery options, and the table of every test that asserts these properties by name.
     </p>
     <div class="btn-row">
-      <a class="sa-btn primary" href="https://github.com/blaineam/Scripture-Alone/blob/main/docs/encrypted-translations.md">The full white paper</a>
-      <a class="sa-btn" href="https://github.com/blaineam/Scripture-Alone">Source on GitHub</a>
-      <a class="sa-btn" href="../">Back to Scripture Alone</a>
+      <a class="sa-btn primary" href="https://github.com/blaineam/Scripture-Alone/blob/main/docs/encrypted-translations.md" data-i18n="the-full-white-paper.2b5f62">The full white paper</a>
+      <a class="sa-btn" href="https://github.com/blaineam/Scripture-Alone" data-i18n="source-on-github.c60f2f">Source on GitHub</a>
+      <a class="sa-btn" href="../" data-i18n="back-to-scripture-alone.ce2014">Back to Scripture Alone</a>
     </div>
   </section>
 
@@ -510,12 +523,12 @@
     <div class="container" style="text-align:center">
       <div class="footer-links">
         <a href="../" class="footer-link">Scripture Alone</a>
-        <a href="/privacy/" class="footer-link">Privacy</a>
-        <a href="/terms/" class="footer-link">Terms</a>
-        <a href="/support/" class="footer-link">Support</a>
-        <a href="/" class="footer-link">Portfolio</a>
+        <a href="/privacy/" class="footer-link" data-i18n="privacy.cf0148">Privacy</a>
+        <a href="/terms/" class="footer-link" data-i18n="terms.a55a27">Terms</a>
+        <a href="/support/" class="footer-link" data-i18n="support.f32d5a">Support</a>
+        <a href="/" class="footer-link" data-i18n="portfolio.036b18">Portfolio</a>
       </div>
-      <p style="color: var(--text-muted); margin-top: var(--spacing-md);">
+      <p style="color: var(--text-muted); margin-top: var(--spacing-md);" data-i18n-html="blaine-miller-all-rights.b327c2">
         © <span id="year"></span> Blaine Miller. All rights reserved.
       </p>
     </div>
