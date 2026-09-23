@@ -81,5 +81,7 @@
   "yes-each-board-is.243716": "是的。每一局棋盘都先模拟一次完整可行的通关过程（逆向消除法）生成，再按得出的顺序发牌。即使中途洗牌，新的布局也会重新生成为有解的牌局。",
   "yes-native-ipad-support.59fa42": "是的——原生支持 iPad，竖屏、横屏皆可。棋盘会放大以填满更大的屏幕，牌面尺寸、堆叠层高和侧壁厚度都按比例调整，视觉效果始终如一。",
   "zero-third-party-dependencies.a096e5": "零第三方依赖。基于 Swift 6 构建，采用严格并发。",
-  "is-tilebreak-available-in.5a1587": "Tilebreak 在欧盟可以下载吗？"
+  "is-tilebreak-available-in.5a1587": "Tilebreak 在欧盟可以下载吗？",
+  "every-screen-in-your.c3d32d": "每个界面都说你的语言",
+  "the-in-game-controls.ff13e1": "游戏内按钮、计分栏、结算画面、成就、新手教程，以及所有布局、主题和牌面的名称，现已翻译为 Tilebreak 支持的全部九种语言。"
 }

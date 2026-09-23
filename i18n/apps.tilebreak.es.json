@@ -81,5 +81,7 @@
   "yes-each-board-is.243716": "Sí. Cada tablero se genera simulando primero una partida válida (el método de eliminación inversa) y repartiendo después las fichas en el orden resultante. Incluso al barajar a mitad de partida, el nuevo tablero se regenera para que tenga solución.",
   "yes-native-ipad-support.59fa42": "Sí: compatibilidad nativa con el iPad en vertical y horizontal. El tablero se amplía para llenar la pantalla grande con un tamaño de ficha, una elevación de pila y una profundidad de paredes proporcionales, de modo que el aspecto se mantiene coherente.",
   "zero-third-party-dependencies.a096e5": "Cero dependencias de terceros. Creado con Swift 6 y concurrencia estricta.",
-  "is-tilebreak-available-in.5a1587": "¿Tilebreak está disponible en la Unión Europea?"
+  "is-tilebreak-available-in.5a1587": "¿Tilebreak está disponible en la Unión Europea?",
+  "every-screen-in-your.c3d32d": "Cada pantalla en tu idioma",
+  "the-in-game-controls.ff13e1": "Los controles de la partida, el marcador, la pantalla final, los logros, el tutorial y el nombre de cada diseño, tema y juego de fichas ya están traducidos a los nueve idiomas de Tilebreak."
 }

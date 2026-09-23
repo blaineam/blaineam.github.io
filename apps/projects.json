@@ -155,9 +155,12 @@
       "title": "Tilebreak",
       "tagline": "Match. Combo. Clear. Polished Mahjong solitaire",
       "page_url": "/apps/tilebreak/",
-      "app_store_url": null,
+      "app_store_url": "https://apps.apple.com/us/app/tile-break-mahjong/id6772609707",
       "icon_url": "/apps/tilebreak/assets/images/icon.png",
-      "released": "2026-05"
+      "released": "2026-05",
+      "updated": "2026-09",
+      "version": "1.5.3",
+      "status": "live"
     },
     {
       "id": "blip",

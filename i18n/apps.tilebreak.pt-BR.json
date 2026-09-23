@@ -81,5 +81,7 @@
   "yes-each-board-is.243716": "Sim. Cada tabuleiro é gerado simulando primeiro uma partida válida do início ao fim (o método de remoção reversa) e depois distribuindo as peças na ordem resultante. Mesmo após um embaralhamento no meio do jogo, o novo layout é regenerado para continuar solucionável.",
   "yes-native-ipad-support.59fa42": "Sim — suporte nativo ao iPad em retrato e paisagem. O tabuleiro aumenta para preencher a tela maior, com tamanho de peça, elevação das pilhas e profundidade das paredes laterais proporcionais, mantendo o visual consistente.",
   "zero-third-party-dependencies.a096e5": "Zero dependências de terceiros. Feito em Swift 6 com concorrência estrita.",
-  "is-tilebreak-available-in.5a1587": "O Tilebreak está disponível na União Europeia?"
+  "is-tilebreak-available-in.5a1587": "O Tilebreak está disponível na União Europeia?",
+  "every-screen-in-your.c3d32d": "Todas as telas no seu idioma",
+  "the-in-game-controls.ff13e1": "Os controles do jogo, o placar, a tela de fim de partida, as conquistas, o tutorial e o nome de cada layout, tema e conjunto de peças agora estão traduzidos para os nove idiomas que o Tilebreak oferece."
 }

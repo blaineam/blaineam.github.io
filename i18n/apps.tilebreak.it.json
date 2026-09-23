@@ -81,5 +81,7 @@
   "yes-each-board-is.243716": "Sì. Ogni tabellone viene generato simulando prima una partita valida (il metodo della rimozione inversa) e distribuendo poi le tessere nell'ordine risultante. Anche dopo un rimescolamento a metà partita, la nuova disposizione viene rigenerata in modo da essere risolvibile.",
   "yes-native-ipad-support.59fa42": "Sì — supporto nativo per iPad sia in verticale sia in orizzontale. Il tabellone si ingrandisce per riempire lo schermo più grande con dimensione delle tessere, rialzo delle pile e profondità delle pareti laterali proporzionali, così l'aspetto resta coerente.",
   "zero-third-party-dependencies.a096e5": "Zero dipendenze di terze parti. Sviluppata in Swift 6 con concorrenza rigorosa.",
-  "is-tilebreak-available-in.5a1587": "Tilebreak è disponibile nell'Unione europea?"
+  "is-tilebreak-available-in.5a1587": "Tilebreak è disponibile nell'Unione europea?",
+  "every-screen-in-your.c3d32d": "Ogni schermata nella tua lingua",
+  "the-in-game-controls.ff13e1": "I comandi di gioco, il tabellone dei punti, la schermata di fine partita, gli obiettivi, il tutorial e il nome di ogni disposizione, tema e set di tessere sono ora tradotti in tutte le nove lingue supportate da Tilebreak."
 }
