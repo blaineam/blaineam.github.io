@@ -1,0 +1,40 @@
+{
+  "_comment": "Written by scripts/sync-app-screens.py; read by i18n/i18n.js. files: <lang>/<name> → content hash (the ?v= stamp). sizes: <scene> → [width, height] of the largest file, for the img tag.",
+  "langs": [
+    "en"
+  ],
+  "files": {
+    "en/01-live-blue-400.webp": "4d1ce849",
+    "en/01-live-blue-800.webp": "79feb6da",
+    "en/02-live-alt-400.webp": "3d804c12",
+    "en/02-live-alt-800.webp": "a01e9930",
+    "en/03-gallery-400.webp": "b629dd06",
+    "en/03-gallery-800.webp": "84e25852",
+    "en/live-blue-480.webp": "275bd8c2",
+    "en/live-blue-960.webp": "f6af4445"
+  },
+  "sizes": {
+    "01-live-blue": [
+      800,
+      1655
+    ],
+    "02-live-alt": [
+      800,
+      1655
+    ],
+    "03-gallery": [
+      800,
+      1655
+    ],
+    "live-blue": [
+      960,
+      1253
+    ]
+  },
+  "inputs": {
+    "en/01-live-blue": "bd6932301860d8480587b72648a34e2c25c0c9ea",
+    "en/02-live-alt": "41de7fb4d628fd5d0bdea880d6489e6843b4781b",
+    "en/03-gallery": "e94fbb4945fb93193710687648a03ea0e53a751b",
+    "en/live-blue": "71f79b0a4e3a4cc4cd564430bce15806a26686ed"
+  }
+}
