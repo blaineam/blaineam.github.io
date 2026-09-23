@@ -18,7 +18,9 @@
   <link rel="stylesheet" href="../app-showcase.css">
   <style>
     /* Scripture Alone — the icon's dawn: an indigo sky warming to plum, a white
-       open book for the horizon and a warm sun rising from its fold. */
+       open book for the horizon and a warm sun rising from its fold. The page
+       itself is set like the security article: paper, serif display type, a
+       sun-colored eyebrow, hairline rules — chapters instead of a card wall. */
     :root {
       --app-primary: #22234F;      /* night indigo, top of the sky */
       --app-secondary: #7A527E;    /* plum, the sky at the horizon */
@@ -30,6 +32,22 @@
       --sa-cream: #FBF1DF;         /* the page of the book */
       --sa-sky: linear-gradient(172deg, #22234F 0%, #36305F 42%, #5A4271 72%, #7A527E 100%);
       --sa-serif: ui-serif, "New York", "Iowan Old Style", "Palatino", Georgia, "Times New Roman", serif;
+      --sa-paper: #FFFDF8;
+      --sa-paper-2: #F7F1E6;
+      --sa-rule: rgba(74, 61, 124, 0.16);
+      --sa-quiet: #6B6480;
+      --sa-body: #3A3548;
+      --sa-shadow: drop-shadow(0 30px 40px rgba(34, 28, 70, 0.22)) drop-shadow(0 6px 10px rgba(34, 28, 70, 0.10));
+      /* The shared stylesheet's neutrals, re-toned to paper and indigo. */
+      --bg-primary: var(--sa-paper);
+      --bg-secondary: var(--sa-paper-2);
+      --text-primary: #23203A;
+      --text-secondary: var(--sa-body);
+      --text-muted: var(--sa-quiet);
+      --glass-bg: rgba(255, 253, 248, 0.78);
+      --glass-border: rgba(74, 61, 124, 0.10);
+      --glass-shadow: none;
+      --sa-measure: 1120px;
     }
     @media (prefers-color-scheme: dark) {
       :root {
@@ -37,115 +55,468 @@
         --secondary-color: #C9A3CB;
         --sa-ink: #D5CAF6;
         --sa-sun: #F2BE85;
+        --sa-paper: #17162A;
+        --sa-paper-2: #1E1C35;
+        --sa-rule: rgba(213, 202, 246, 0.16);
+        --sa-quiet: #A79FC0;
+        --sa-body: #D7D3E4;
+        --sa-shadow: drop-shadow(0 30px 44px rgba(0, 0, 0, 0.55)) drop-shadow(0 6px 10px rgba(0, 0, 0, 0.30));
+        --text-primary: #EFEBF8;
+        --glass-bg: rgba(23, 22, 42, 0.78);
+        --glass-border: rgba(213, 202, 246, 0.08);
       }
     }
 
-    .hero {
-      background:
-        radial-gradient(circle at 78% 34%, rgba(249, 223, 166, 0.26) 0%, rgba(239, 174, 112, 0.10) 22%, transparent 48%),
-        radial-gradient(circle at 10% 90%, rgba(122, 82, 126, 0.45) 0%, transparent 55%),
-        var(--sa-sky);
-      color: white;
-    }
-    .hero-subtitle {
-      color: rgba(249, 223, 166, 0.85);
-      -webkit-text-fill-color: rgba(249, 223, 166, 0.85);
-      letter-spacing: 0.5px;
-    }
-    .hero-title {
-      font-family: var(--sa-serif);
-      font-weight: 600;
-      color: var(--sa-cream);
-      -webkit-text-fill-color: var(--sa-cream);
-      background: none;
-    }
-    .hero-description { color: rgba(255, 255, 255, 0.9); }
-    .sa-mission {
-      color: rgba(251, 241, 223, 0.85);
-      font-family: var(--sa-serif);
-      font-style: italic;
-      font-size: 1.1rem;
-      line-height: 1.6;
-      margin-top: var(--spacing-md);
-    }
-    /* The icon already carries its own rounded shape and transparent corners. */
-    .hero .phone-mockup {
-      border-radius: 0;
-      box-shadow: none;
-      filter: drop-shadow(0 26px 48px rgba(12, 10, 36, 0.55));
-    }
-
-    .section-subtitle { color: var(--sa-ink); }
-    .section-header h2,
-    .faq-section h2 { font-family: var(--sa-serif); }
-    .btn-buy { box-shadow: 0 4px 15px rgba(34, 35, 79, 0.35); }
+    body { background: var(--sa-paper); }
+    .btn-buy { box-shadow: 0 4px 15px rgba(34, 35, 79, 0.30); }
     /* Two-word labels ("App Store") wrapped onto two lines at mid widths. */
     .nav-links .nav-link, .nav-links .btn-buy { white-space: nowrap; }
+    .floating-appstore {
+      background: linear-gradient(135deg, #36305F, #7A527E);
+      box-shadow: 0 10px 30px rgba(34, 35, 79, 0.40);
+    }
 
-    .hero-cta { flex-wrap: wrap; gap: var(--spacing-sm); }
+    /* ---- Shared type ---------------------------------------------------- */
+    .sa-eyebrow {
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--sa-sun);
+      margin: 0 0 1rem;
+    }
+    .sa-eyebrow .sa-num {
+      font-family: var(--sa-serif);
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      margin-right: 0.8em;
+      opacity: 0.85;
+    }
+    .sa-display {
+      font-family: var(--sa-serif);
+      font-weight: 600;
+      background: none;
+      -webkit-text-fill-color: currentColor;
+      color: var(--primary-color);
+      font-size: clamp(2.1rem, 5.2vw, 3.6rem);
+      line-height: 1.06;
+      letter-spacing: -0.02em;
+      margin: 0 0 1.4rem;
+      text-wrap: balance;
+    }
+    .sa-lede {
+      font-family: var(--sa-serif);
+      font-size: clamp(1.12rem, 1.9vw, 1.36rem);
+      line-height: 1.62;
+      color: var(--sa-body);
+      margin: 0 0 1.2rem;
+      text-wrap: pretty;
+    }
+    .sa-lede a, .sa-detail a, .sa-aside a, .faq-answer a { color: var(--sa-ink); }
+
+    /* ---- Hero ----------------------------------------------------------- */
+    .sa-hero {
+      position: relative;
+      background:
+        radial-gradient(ellipse 60% 42% at 50% 100%, rgba(249, 223, 166, 0.30) 0%, rgba(239, 174, 112, 0.10) 45%, transparent 75%),
+        radial-gradient(circle at 8% 88%, rgba(122, 82, 126, 0.45) 0%, transparent 55%),
+        var(--sa-sky);
+      color: #fff;
+      text-align: center;
+      padding: calc(76px + clamp(3rem, 8vw, 6rem)) 16px 0;
+      overflow: hidden;
+    }
+    .sa-hero-icon {
+      width: 84px;
+      height: 84px;
+      display: block;
+      margin: 0 auto 1.4rem;
+      filter: drop-shadow(0 14px 26px rgba(12, 10, 36, 0.55));
+    }
+    .sa-hero-kicker {
+      font-size: 0.82rem;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      color: rgba(249, 223, 166, 0.88);
+      margin: 0 0 1.2rem;
+    }
+    .sa-hero h1 {
+      font-family: var(--sa-serif);
+      font-weight: 600;
+      background: none;
+      -webkit-background-clip: border-box;
+      background-clip: border-box;
+      -webkit-text-fill-color: var(--sa-cream);
+      color: var(--sa-cream);
+      font-size: clamp(2.6rem, 8.4vw, 6.2rem);
+      line-height: 1.02;
+      letter-spacing: -0.025em;
+      max-width: 13ch;
+      margin: 0 auto 1.6rem;
+      text-wrap: balance;
+    }
+    .sa-hero-standfirst {
+      font-family: var(--sa-serif);
+      font-size: clamp(1.08rem, 2vw, 1.34rem);
+      line-height: 1.6;
+      color: rgba(255, 255, 255, 0.84);
+      max-width: 44ch;
+      margin: 0 auto 2.2rem;
+      text-wrap: pretty;
+    }
+    .sa-cta {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.75rem;
+    }
+    .sa-cta .btn-buy {
+      background: linear-gradient(180deg, #F9DFA6, #EFAE70);
+      color: #2A1E3E;
+      padding: 0.8rem 1.5rem;
+      border-radius: 999px;
+      box-shadow: 0 10px 28px rgba(239, 174, 112, 0.30);
+    }
     .btn-source {
       display: inline-flex;
       align-items: center;
-      gap: var(--spacing-xs);
-      padding: var(--spacing-xs) var(--spacing-md);
-      border-radius: var(--radius-lg);
-      border: 1px solid rgba(251, 241, 223, 0.55);
+      padding: 0.8rem 1.4rem;
+      border-radius: 999px;
+      border: 1px solid rgba(251, 241, 223, 0.5);
       color: var(--sa-cream);
       text-decoration: none;
       font-weight: 600;
-      transition: all var(--transition-fast);
+      transition: background var(--transition-fast), transform var(--transition-fast);
     }
-    .btn-source:hover {
-      background: rgba(251, 241, 223, 0.12);
-      transform: translateY(-2px);
+    .btn-source:hover { background: rgba(251, 241, 223, 0.12); transform: translateY(-2px); }
+    /* The reader rises out of the sky like the sun out of the book. */
+    .sa-hero-device {
+      margin: clamp(3rem, 7vw, 4.5rem) auto 0;
+      width: clamp(230px, 34vw, 380px);
+      height: clamp(250px, 36vw, 420px);
+      overflow: hidden;
+    }
+    .sa-hero-device img { display: block; width: 100%; height: auto; }
+    .sa-hero-caption {
+      text-align: center;
+      font-size: 0.9rem;
+      color: var(--sa-quiet);
+      margin: 1rem 16px 0;
     }
 
-    .feature-description a { color: var(--sa-ink); }
-
-    /* Roadmap cards read as "not yet": a dashed edge, a quieter ground. */
-    .roadmap .feature-card {
-      border-style: dashed;
-      background: transparent;
-    }
-
-    /* Screenshots: Monkr device frames, transparent PNGs, so the shadow follows
-       the device outline (drop-shadow) instead of a rectangle. A swipeable row
-       that snaps; wide screens see four at a time. */
-    .sa-shots {
-      display: flex;
-      gap: clamp(16px, 3vw, 32px);
-      overflow-x: auto;
-      scroll-snap-type: x mandatory;
-      overscroll-behavior-x: contain;
-      padding: var(--spacing-md) max(16px, calc((100% - 1160px) / 2)) var(--spacing-lg);
-      margin-top: var(--spacing-lg);
-      scrollbar-width: thin;
-      -webkit-overflow-scrolling: touch;
-    }
-    .sa-shot {
-      flex: 0 0 auto;
-      width: clamp(160px, 42vw, 220px);
-      margin: 0;
-      scroll-snap-align: center;
+    /* ---- Statement ------------------------------------------------------ */
+    .sa-statement {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: clamp(4rem, 10vw, 7.5rem) 16px;
       text-align: center;
     }
-    .sa-shot img {
+    .sa-statement p {
+      font-family: var(--sa-serif);
+      font-size: clamp(1.5rem, 3.6vw, 2.5rem);
+      line-height: 1.3;
+      color: var(--primary-color);
+      margin: 0;
+      text-wrap: balance;
+    }
+    .sa-ornament {
       display: block;
-      width: 100%;
-      height: auto;
-      filter: drop-shadow(0 18px 28px rgba(20, 16, 50, 0.28));
-    }
-    .sa-shot figcaption {
-      margin-top: var(--spacing-sm);
-      font-size: 0.92rem;
-      color: var(--text-secondary);
-      line-height: 1.4;
-    }
-    @media (prefers-color-scheme: dark) {
-      .sa-shot img { filter: drop-shadow(0 18px 30px rgba(0, 0, 0, 0.55)); }
+      width: 44px;
+      height: 22px;
+      margin: 0 auto 1.8rem;
+      border-radius: 44px 44px 0 0;
+      background: radial-gradient(circle at 50% 100%, #F9DFA6 0%, #EFAE70 60%, #B8662A 100%);
+      opacity: 0.9;
     }
 
-    .faq-answer a { color: var(--sa-ink); }
+    /* ---- Contents ------------------------------------------------------- */
+    .sa-intro {
+      max-width: var(--sa-measure);
+      margin: 0 auto;
+      padding: 0 16px clamp(2rem, 5vw, 3rem);
+      border-top: 1px solid var(--sa-rule);
+      padding-top: clamp(3rem, 7vw, 5rem);
+      display: grid;
+      gap: 2rem;
+    }
+    .sa-intro .sa-display { margin-bottom: 0.8rem; }
+    .sa-intro p.sa-lede { color: var(--sa-quiet); margin: 0; }
+    .sa-contents {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(10.5rem, 1fr));
+      border-top: 1px solid var(--sa-rule);
+    }
+    .sa-contents li { border-bottom: 1px solid var(--sa-rule); }
+    .sa-contents a {
+      display: flex;
+      gap: 0.8em;
+      align-items: baseline;
+      padding: 0.85rem 0.2rem;
+      color: var(--text-primary);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color var(--transition-fast);
+    }
+    .sa-contents a:hover { color: var(--sa-sun); }
+    .sa-contents .sa-num { font-family: var(--sa-serif); color: var(--sa-sun); font-size: 0.9rem; }
+    @media (min-width: 900px) {
+      .sa-intro { grid-template-columns: 1fr 1fr; align-items: end; column-gap: 4rem; }
+    }
+
+    /* ---- Chapters ------------------------------------------------------- */
+    .sa-chapter {
+      max-width: var(--sa-measure);
+      margin: 0 auto;
+      padding: clamp(4rem, 9vw, 7rem) 16px;
+      border-top: 1px solid var(--sa-rule);
+      scroll-margin-top: 70px;
+    }
+    .sa-spread {
+      display: grid;
+      gap: clamp(2.5rem, 6vw, 5rem);
+      align-items: center;
+    }
+    .sa-copy { max-width: 34rem; }
+    @media (min-width: 900px) {
+      .sa-spread { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); }
+      .sa-chapter.is-flipped .sa-copy { order: 2; }
+    }
+
+    .sa-figures {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      gap: clamp(1rem, 3vw, 2.2rem);
+      margin: 0;
+    }
+    .sa-figure { margin: 0; flex: 0 1 260px; text-align: center; }
+    .sa-figure:nth-child(2) { margin-top: clamp(2rem, 6vw, 4.5rem); }
+    .sa-figure.is-solo { flex-basis: 320px; }
+    .sa-figure img { display: block; width: 100%; height: auto; filter: var(--sa-shadow); }
+    .sa-figure figcaption, .sa-hero-caption {
+      font-size: 0.88rem;
+      line-height: 1.45;
+      color: var(--sa-quiet);
+      margin-top: 1.1rem;
+    }
+    .sa-figure figcaption::before, .sa-hero-caption::before {
+      content: "";
+      display: block;
+      width: 18px;
+      height: 1px;
+      margin: 0 auto 0.6rem;
+      background: var(--sa-sun);
+    }
+
+    /* Secondary features: a quiet ruled list, not another row of cards. */
+    .sa-details {
+      display: grid;
+      gap: 0 clamp(2rem, 4vw, 3.5rem);
+      margin-top: clamp(3rem, 7vw, 4.5rem);
+    }
+    @media (min-width: 700px) { .sa-details { grid-template-columns: 1fr 1fr; } }
+    @media (min-width: 1000px) { .sa-details.is-three { grid-template-columns: 1fr 1fr 1fr; } }
+    .sa-detail { border-top: 1px solid var(--sa-rule); padding: 1.3rem 0 1.4rem; }
+    .sa-detail h3 {
+      font-family: var(--sa-serif);
+      font-size: 1.18rem;
+      font-weight: 600;
+      color: var(--primary-color);
+      margin: 0 0 0.45rem;
+      letter-spacing: -0.005em;
+    }
+    .sa-detail p { font-size: 0.98rem; line-height: 1.62; color: var(--sa-body); margin: 0; }
+
+    /* Listen | Share — a two-page spread. */
+    .sa-diptych { display: grid; gap: clamp(4rem, 8vw, 5rem) clamp(2rem, 5vw, 4.5rem); }
+    @media (min-width: 900px) {
+      .sa-diptych { grid-template-columns: 1fr 1fr; }
+      .sa-diptych > article + article { border-left: 1px solid var(--sa-rule); padding-left: clamp(2rem, 5vw, 4.5rem); }
+    }
+    .sa-diptych .sa-display { font-size: clamp(1.8rem, 3.6vw, 2.6rem); }
+    .sa-diptych .sa-figures { margin-top: 2.5rem; }
+    .sa-diptych .sa-figure { flex-basis: 250px; }
+
+    /* Family: a centered, quieter page. */
+    .sa-centered { text-align: center; }
+    .sa-centered .sa-copy { max-width: 40rem; margin: 0 auto; }
+    .sa-centered .sa-details { max-width: 40rem; margin-left: auto; margin-right: auto; grid-template-columns: 1fr; text-align: center; }
+
+    .sa-devices {
+      font-family: var(--sa-serif);
+      font-size: clamp(1.4rem, 3vw, 2rem);
+      line-height: 1.5;
+      color: var(--sa-quiet);
+      display: flex;
+      flex-direction: column;
+      gap: 0.1em;
+    }
+    .sa-devices span { border-bottom: 1px solid var(--sa-rule); padding: 0.35em 0; }
+    .sa-devices span:last-child { color: var(--sa-sun); }
+
+    /* The security article, set as a teaser. */
+    .sa-aside {
+      border: 1px solid var(--sa-rule);
+      border-left: 3px solid var(--sa-sun);
+      border-radius: 14px;
+      padding: 1.5rem 1.6rem;
+      background: var(--sa-paper-2);
+      margin-top: clamp(2.5rem, 6vw, 3.5rem);
+    }
+    .sa-aside h3 { font-family: var(--sa-serif); font-size: 1.3rem; color: var(--primary-color); margin: 0 0 0.5rem; }
+    .sa-aside p { font-size: 1rem; line-height: 1.65; color: var(--sa-body); margin: 0; }
+
+    /* ---- Privacy: the night sky again ----------------------------------- */
+    .sa-privacy {
+      background:
+        radial-gradient(ellipse 50% 40% at 50% 0%, rgba(249, 223, 166, 0.16) 0%, transparent 70%),
+        var(--sa-sky);
+      color: var(--sa-cream);
+      padding: clamp(4.5rem, 10vw, 8rem) 16px;
+      scroll-margin-top: 60px;
+    }
+    .sa-privacy-inner { max-width: var(--sa-measure); margin: 0 auto; }
+    .sa-privacy .sa-eyebrow { color: rgba(249, 223, 166, 0.9); text-align: center; }
+    .sa-privacy .sa-display {
+      color: var(--sa-cream);
+      -webkit-text-fill-color: var(--sa-cream);
+      text-align: center;
+      font-size: clamp(2.3rem, 6.4vw, 4.6rem);
+      max-width: 14ch;
+      margin: 0 auto 3rem;
+    }
+    .sa-privacy .security-badges {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+      gap: 0;
+      max-width: none;
+      padding: 0;
+      border-top: 1px solid rgba(251, 241, 223, 0.22);
+    }
+    .sa-privacy .security-badge {
+      background: none;
+      border: none;
+      border-bottom: 1px solid rgba(251, 241, 223, 0.22);
+      border-radius: 0;
+      box-shadow: none;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+      color: var(--sa-cream);
+      font-family: var(--sa-serif);
+      font-size: 1.12rem;
+      padding: 1.1rem 0.4rem;
+      justify-content: center;
+    }
+    .sa-privacy .security-badge:hover { transform: none; }
+    .sa-privacy-body {
+      display: grid;
+      gap: 2rem 4rem;
+      margin-top: 3rem;
+      align-items: start;
+    }
+    @media (min-width: 800px) { .sa-privacy-body { grid-template-columns: 1fr 1fr; } }
+    .sa-privacy h3 { font-family: var(--sa-serif); font-size: 1.3rem; color: #F9DFA6; margin: 0 0 0.5rem; }
+    .sa-privacy p { color: rgba(251, 241, 223, 0.82); font-size: 1.02rem; line-height: 1.65; margin: 0; }
+    .sa-privacy .security-audit-note {
+      text-align: left;
+      font-family: var(--sa-serif);
+      font-style: italic;
+      font-size: 1.15rem;
+      color: rgba(251, 241, 223, 0.9);
+      padding: 0;
+      margin: 0;
+    }
+
+    /* ---- On the way ------------------------------------------------------ */
+    .sa-roadmap {
+      max-width: var(--sa-measure);
+      margin: 0 auto;
+      padding: clamp(3.5rem, 8vw, 5.5rem) 16px 0;
+      display: grid;
+      gap: 1.5rem 4rem;
+    }
+    @media (min-width: 800px) { .sa-roadmap { grid-template-columns: 1fr 1fr; } }
+    .sa-roadmap h2 { font-family: var(--sa-serif); font-size: clamp(1.6rem, 3vw, 2.2rem); color: var(--primary-color); margin: 0 0 0.6rem; }
+    .sa-roadmap > div > p { color: var(--sa-quiet); font-size: 1rem; margin: 0; }
+    .sa-roadmap .sa-detail { border: 1px dashed var(--sa-rule); border-radius: 14px; padding: 1.3rem 1.5rem; }
+
+    /* ---- FAQ: a ruled list ---------------------------------------------- */
+    .faq-section { max-width: 820px; padding: clamp(4rem, 9vw, 6rem) 16px; }
+    .faq-section .sa-eyebrow, .faq-section h2 { text-align: center; }
+    .faq-section h2 {
+      font-family: var(--sa-serif);
+      font-weight: 600;
+      color: var(--primary-color);
+      font-size: clamp(1.9rem, 4vw, 2.8rem);
+      margin: 0 0 2.5rem;
+    }
+    .faq-item {
+      background: none;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+      border: none;
+      border-top: 1px solid var(--sa-rule);
+      border-radius: 0;
+      margin: 0;
+    }
+    .faq-item:last-child { border-bottom: 1px solid var(--sa-rule); }
+    .faq-question {
+      font-family: var(--sa-serif);
+      font-size: 1.15rem;
+      font-weight: 600;
+      padding: 1.25rem 0;
+      gap: 1rem;
+    }
+    .faq-question:hover { color: var(--sa-sun); }
+    .faq-icon { font-size: 0.8rem; color: var(--sa-sun); }
+    .faq-answer { padding: 0; }
+    .faq-item.active .faq-answer { padding: 0 0 1.4rem; }
+    .faq-answer p { font-size: 1rem; line-height: 1.68; color: var(--sa-body); }
+
+    /* ---- Closing -------------------------------------------------------- */
+    .sa-closing {
+      text-align: center;
+      padding: clamp(4.5rem, 10vw, 7rem) 16px;
+      background:
+        radial-gradient(ellipse 55% 60% at 50% 100%, rgba(239, 174, 112, 0.18) 0%, transparent 70%),
+        var(--sa-paper-2);
+      border-top: 1px solid var(--sa-rule);
+    }
+    .sa-closing img { width: 96px; height: 96px; display: block; margin: 0 auto 1.6rem; filter: drop-shadow(0 16px 26px rgba(34, 28, 70, 0.28)); }
+    .sa-closing .sa-display { font-size: clamp(2rem, 5vw, 3.4rem); max-width: 14ch; margin: 0 auto 1.4rem; }
+    .sa-closing p.sa-lede { max-width: 40ch; margin: 0 auto 2rem; color: var(--sa-quiet); }
+    .sa-closing .btn-buy { background: var(--sa-sky); color: #fff; padding: 0.8rem 1.5rem; border-radius: 999px; box-shadow: 0 10px 28px rgba(34, 35, 79, 0.28); }
+    .sa-closing .btn-source { color: var(--primary-color); border-color: var(--sa-rule); }
+    .sa-closing .btn-source:hover { background: rgba(122, 82, 126, 0.08); }
+    .footer { margin-top: 0; }
+
+    /* ---- Reveal: only when motion is welcome ----------------------------- */
+    .sa-motion [data-reveal] {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.9s ease, transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1);
+    }
+    .sa-motion [data-reveal].is-in { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) {
+      .floating-appstore, .faq-item, .hero-text { animation: none; }
+      .btn-source, .sa-contents a { transition: none; }
+      .btn-source:hover { transform: none; }
+    }
+
+    @media (max-width: 600px) {
+      .sa-hero-icon { width: 68px; height: 68px; }
+      .sa-cta { flex-direction: column; align-items: stretch; max-width: 22rem; margin: 0 auto; }
+      .sa-cta a { justify-content: center; }
+      .sa-figures { gap: 0.9rem; }
+      .sa-figure figcaption { font-size: 0.8rem; }
+    }
+    .sa-details.is-single { grid-template-columns: 1fr; margin-top: 2.2rem; }
+    /* Break CJK headlines at phrase boundaries, not mid-word, where supported. */
+    .sa-hero h1, .sa-display, .sa-statement p, .sa-detail h3 { word-break: auto-phrase; }
+    .sa-copy.is-wide { max-width: 46rem; }
 
     /* ---- Share link: a verse card rebuilt from #s=… ---------------------- */
     #shared-verse { display: none; }
@@ -287,7 +658,6 @@
       <button class="mobile-menu-toggle">☰</button>
       <ul class="nav-links">
         <li><a href="#features" class="nav-link" data-i18n="features.fc338f">Features</a></li>
-        <li><a href="#screenshots" class="nav-link" data-i18n="screenshots.597b63">Screenshots</a></li>
         <li><a href="#faq" class="nav-link" data-i18n="faq.03688b">FAQ</a></li>
         <li><a href="https://apps.apple.com/us/app/scripture-alone-bible/id6813729762" target="_blank" rel="noopener noreferrer" class="btn-buy">App Store</a></li>
       </ul>
@@ -317,30 +687,24 @@
     </div>
   </section>
 
-  <!-- Hero Section -->
-  <section class="hero" id="about">
-    <div class="hero-content">
-      <div class="hero-text">
-        <p class="hero-subtitle" data-i18n="scripture-alone.c923df">📖 Scripture Alone</p>
-        <h1 class="hero-title" data-i18n="the-word-and-nothing.59b9cc">The Word, and nothing in the way.</h1>
-        <p class="hero-description" data-i18n="a-free-open-source.93993c">
-          A free, open-source Bible for iPhone, iPad and Mac, with its own Apple Watch app. The American Standard Version is on your device from the start and two more translations are a single download away, so you can read, study, listen and take notes anywhere in the world — with or without a connection.
-        </p>
-        <div class="hero-cta">
-          <a href="https://apps.apple.com/us/app/scripture-alone-bible/id6813729762" target="_blank" rel="noopener noreferrer" class="btn-buy" data-i18n="download-on-the-app.a9096a">Download on the App Store</a>
-          <a href="https://github.com/blaineam/Scripture-Alone" class="btn-source" target="_blank" rel="noopener noreferrer" data-i18n="source-on-github.c60f2f">Source on GitHub</a>
-          <a href="#android-beta" class="btn-source" data-i18n="android-beta.3940f1">Android beta</a>
-        </div>
-        <p class="sa-mission" data-i18n="free-forever-no-ads.ca5514">Free forever. No ads, no trackers, no accounts. Built to help people study God's word and grow closer to Christ.</p>
-      </div>
-      <div class="hero-image">
-        <div class="hero-phone">
-          <img src="assets/images/icon.png?v=5ef7dc50" alt="Scripture Alone App Icon" class="phone-mockup" width="1024" height="1024"
-               onerror="this.style.background='linear-gradient(172deg, #22234F, #7A527E)'; this.style.borderRadius='22%'; this.style.minHeight='300px'; this.style.minWidth='300px';">
-        </div>
-      </div>
+  <!-- Hero: one headline, the icon, and the reader rising out of the dawn. -->
+  <header class="sa-hero" id="about">
+    <img class="sa-hero-icon" src="assets/images/icon.png?v=5ef7dc50" alt="Scripture Alone App Icon" width="1024" height="1024">
+    <p class="sa-hero-kicker">Scripture Alone</p>
+    <h1 data-i18n="the-word-and-nothing.59b9cc">The Word, and nothing in the way.</h1>
+    <p class="sa-hero-standfirst" data-i18n="a-free-open-source.93993c">
+      A free, open-source Bible for iPhone, iPad and Mac, with its own Apple Watch app. The American Standard Version is on your device from the start and two more translations are a single download away, so you can read, study, listen and take notes anywhere in the world — with or without a connection.
+    </p>
+    <div class="sa-cta">
+      <a href="https://apps.apple.com/us/app/scripture-alone-bible/id6813729762" target="_blank" rel="noopener noreferrer" class="btn-buy" data-i18n="download-on-the-app.a9096a">Download on the App Store</a>
+      <a href="https://github.com/blaineam/Scripture-Alone" class="btn-source" target="_blank" rel="noopener noreferrer" data-i18n="source-on-github.c60f2f">Source on GitHub</a>
+      <a href="#android-beta" class="btn-source" data-i18n="android-beta.3940f1">Android beta</a>
     </div>
-  </section>
+    <div class="sa-hero-device">
+      <img src="assets/images/frame-reader.png?v=716d983a" alt="John 3 in the American Standard Version, the words of Christ in red and a highlighted verse" width="1040" height="2152">
+    </div>
+  </header>
+  <p class="sa-hero-caption" data-i18n="red-letters-and-your.33addb">Red letters and your highlights</p>
 
   <!-- Floating App Store button -->
   <a href="https://apps.apple.com/us/app/scripture-alone-bible/id6813729762" target="_blank" rel="noopener noreferrer" class="floating-appstore">
@@ -348,255 +712,298 @@
     <span data-i18n="download-on-app-store.cf50c2">Download on App Store</span>
   </a>
 
-  <!-- Features Section -->
-  <section id="features" class="section">
-    <div class="section-header">
-      <p class="section-subtitle" data-i18n="available-now.bb374a">Available now</p>
-      <h2 data-i18n="a-quiet-place-to.a44f4c">A quiet place to read</h2>
-      <p data-i18n="everything-here-works-today.40d987">Everything here works today, on the device in your hand.</p>
+  <section class="sa-statement">
+    <span class="sa-ornament" aria-hidden="true"></span>
+    <p data-i18n="free-forever-no-ads.ca5514">Free forever. No ads, no trackers, no accounts. Built to help people study God's word and grow closer to Christ.</p>
+  </section>
+
+  <main id="features">
+    <!-- Contents: the chapters below, like the front of a magazine. -->
+    <div class="sa-intro">
+      <div>
+        <p class="sa-eyebrow" data-i18n="available-now.bb374a">Available now</p>
+        <h2 class="sa-display" data-i18n="a-quiet-place-to.a44f4c">A quiet place to read</h2>
+        <p class="sa-lede" data-i18n="everything-here-works-today.40d987">Everything here works today, on the device in your hand.</p>
+      </div>
+      <ol class="sa-contents">
+        <li><a href="#reading"><span class="sa-num">01</span><span data-i18n="reading.cffa2a">Reading</span></a></li>
+        <li><a href="#study"><span class="sa-num">02</span><span data-i18n="study.14143a">Study</span></a></li>
+        <li><a href="#notes"><span class="sa-num">03</span><span data-i18n="notes-sermon-slides.49a1b0">Notes &amp; sermon slides</span></a></li>
+        <li><a href="#listen"><span class="sa-num">04</span><span data-i18n="listen.c518fb">Listen</span></a></li>
+        <li><a href="#share"><span class="sa-num">05</span><span data-i18n="share.09ca55">Share</span></a></li>
+        <li><a href="#watch"><span class="sa-num">06</span><span>Apple Watch</span></a></li>
+        <li><a href="#family"><span class="sa-num">07</span><span data-i18n="family.4efb6c">Family</span></a></li>
+        <li><a href="#translations"><span class="sa-num">08</span><span data-i18n="translations.8ad830">Translations</span></a></li>
+        <li><a href="#privacy"><span class="sa-num">09</span><span data-i18n="privacy-security.75c011">Privacy &amp; security</span></a></li>
+      </ol>
     </div>
 
-    <div class="feature-grid">
-      <div class="feature-card">
-        <div class="feature-icon">📖</div>
-        <h3 class="feature-title" data-i18n="the-whole-bible-offline.18a85e">The whole Bible, offline</h3>
-        <p class="feature-description" data-i18n="the-american-standard-version.331aee">
-          The American Standard Version is on your device from the moment the app installs, so it reads offline before you ever connect. The Berean Standard Bible and the King James Version download once, the first time you choose one, and are yours offline from then on. All three are public domain, with full-text search.
-        </p>
+    <!-- 01 Reading -->
+    <section class="sa-chapter" id="reading">
+      <div class="sa-spread">
+        <div class="sa-copy" data-reveal>
+          <p class="sa-eyebrow"><span class="sa-num">01</span><span data-i18n="reading.cffa2a">Reading</span></p>
+          <h2 class="sa-display" data-i18n="the-whole-bible-offline.18a85e">The whole Bible, offline</h2>
+          <p class="sa-lede" data-i18n="the-american-standard-version.331aee">
+            The American Standard Version is on your device from the moment the app installs, so it reads offline before you ever connect. The Berean Standard Bible and the King James Version download once, the first time you choose one, and are yours offline from then on. All three are public domain, with full-text search.
+          </p>
+        </div>
+        <div class="sa-figures" data-reveal>
+          <figure class="sa-figure">
+            <img src="assets/images/frame-themes.png?v=f7facee5" alt="The reader in one of its five themes" width="1040" height="2152" loading="lazy">
+            <figcaption data-i18n="five-reading-themes.275ab8">Five reading themes</figcaption>
+          </figure>
+          <figure class="sa-figure">
+            <img src="assets/images/frame-jump.png?v=83af764d" alt="Typing a reference to jump straight to a passage" width="1040" height="2152" loading="lazy">
+            <figcaption data-i18n="jump-to-any-passage.98b325">Jump to any passage</figcaption>
+          </figure>
+        </div>
       </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">📜</div>
-        <h3 class="feature-title" data-i18n="set-the-way-it.444ce2">Set the way it was written</h3>
-        <p class="feature-description" data-i18n="the-words-of-christ.c6c665">
-          The words of Christ in red, section headings, poetry laid out as poetry, and footnotes a tap away.
-        </p>
+      <div class="sa-details">
+        <div class="sa-detail">
+          <h3 data-i18n="set-the-way-it.444ce2">Set the way it was written</h3>
+          <p data-i18n="the-words-of-christ.c6c665">
+            The words of Christ in red, section headings, poetry laid out as poetry, and footnotes a tap away.
+          </p>
+        </div>
+        <div class="sa-detail">
+          <h3 data-i18n="reading-comfort.cbbb63">Reading comfort</h3>
+          <p data-i18n="seven-typefaces-adjustable-size.16f95c">
+            Seven typefaces, adjustable size and line spacing, five themes — Auto, Light, Sepia, Dark and Black — and an accent color of your choosing. Read in paragraphs or verse by verse, with full Dynamic Type support.
+          </p>
+        </div>
+        <div class="sa-detail">
+          <h3 data-i18n="go-straight-there.7c40de">Go straight there</h3>
+          <p data-i18n="type-jn-3-16.ee05d2">
+            Type “jn 3 16” or “rom 8:28-39” to jump to a passage, or search for any word or phrase.
+            Recent chapters and recent searches are waiting when you come back.
+          </p>
+        </div>
+        <div class="sa-detail">
+          <h3 data-i18n="hands-free-reading.279c00">Hands-free reading</h3>
+          <p data-i18n="auto-scroll-keeps-the.e753e5">
+            Auto-scroll keeps the text moving at your pace and carries on into the next chapter — an accessibility feature for anyone who finds scrolling by hand difficult, or simply wants to read without touching the screen.
+          </p>
+        </div>
       </div>
+    </section>
 
-      <div class="feature-card">
-        <div class="feature-icon">🔤</div>
-        <h3 class="feature-title" data-i18n="reading-comfort.cbbb63">Reading comfort</h3>
-        <p class="feature-description" data-i18n="seven-typefaces-adjustable-size.16f95c">
-          Seven typefaces, adjustable size and line spacing, five themes — Auto, Light, Sepia, Dark and Black — and an accent color of your choosing. Read in paragraphs or verse by verse, with full Dynamic Type support.
-        </p>
+    <!-- 02 Study -->
+    <section class="sa-chapter is-flipped" id="study">
+      <div class="sa-spread">
+        <div class="sa-copy" data-reveal>
+          <p class="sa-eyebrow"><span class="sa-num">02</span><span data-i18n="study.14143a">Study</span></p>
+          <h2 class="sa-display" data-i18n="study-mode.08a731">Study mode</h2>
+          <p class="sa-lede" data-i18n="a-toggle-away-tap.8c147a">
+            A toggle away: tap a verse and the Study panel follows, with ranked cross-references (one tap there and back) and classic commentary from John Calvin, John Gill and Jamieson‑Fausset‑Brown. The commentary downloads the first time you open it; cross-references are there from the start.
+          </p>
+        </div>
+        <div class="sa-figures" data-reveal>
+          <figure class="sa-figure">
+            <img src="assets/images/frame-study.png?v=eda00179" alt="The Study panel with cross-references and commentary for the selected verse" width="1040" height="2152" loading="lazy">
+            <figcaption data-i18n="cross-references-and-commentary.85bec1">Cross-references and commentary</figcaption>
+          </figure>
+          <figure class="sa-figure">
+            <img src="assets/images/frame-maps.png?v=e9ab9bb6" alt="An offline map of the places named in Acts 13" width="1040" height="2152" loading="lazy">
+            <figcaption data-i18n="a-map-for-every.acab82">A map for every chapter</figcaption>
+          </figure>
+        </div>
       </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">🙌</div>
-        <h3 class="feature-title" data-i18n="hands-free-reading.279c00">Hands-free reading</h3>
-        <p class="feature-description" data-i18n="auto-scroll-keeps-the.e753e5">
-          Auto-scroll keeps the text moving at your pace and carries on into the next chapter — an accessibility feature for anyone who finds scrolling by hand difficult, or simply wants to read without touching the screen.
-        </p>
+      <div class="sa-details is-three">
+        <div class="sa-detail">
+          <h3 data-i18n="maps-timeline-and-charts.0233c4">Maps, timeline and charts</h3>
+          <p data-i18n="each-chapter-s-era.4b0bd3">
+            Each chapter's era on a timeline of the biblical periods, an offline map of the places it names, and charts of the kings of Israel and Judah, Paul's journeys, the twelve tribes and the feasts of Israel.
+          </p>
+        </div>
+        <div class="sa-detail">
+          <h3 data-i18n="the-words-underneath.02fab0">The words underneath</h3>
+          <p data-i18n="tap-a-verse-for.021f01">
+            Tap a verse for the Hebrew or Greek behind it, word by word, with parsing, Strong's numbers and a lexicon entry for each. It works in every translation, and downloads once the first time you open it.
+          </p>
+        </div>
+        <div class="sa-detail">
+          <h3 data-i18n="two-translations-at-once.1736f5">Two translations at once</h3>
+          <p data-i18n="put-any-two-side.7c4144">
+            Put any two side by side, verse for verse, and see where they part company — including a translation you read online with your own key.
+          </p>
+        </div>
       </div>
+    </section>
 
-      <div class="feature-card">
-        <div class="feature-icon">🧭</div>
-        <h3 class="feature-title" data-i18n="go-straight-there.7c40de">Go straight there</h3>
-        <p class="feature-description" data-i18n="type-jn-3-16.ee05d2">
-          Type “jn 3 16” or “rom 8:28-39” to jump to a passage, or search for any word or phrase.
-          Recent chapters and recent searches are waiting when you come back.
-        </p>
+    <!-- 03 Notes & sermon slides -->
+    <section class="sa-chapter" id="notes">
+      <div class="sa-spread">
+        <div class="sa-copy" data-reveal>
+          <p class="sa-eyebrow"><span class="sa-num">03</span><span data-i18n="notes-sermon-slides.49a1b0">Notes &amp; sermon slides</span></p>
+          <h2 class="sa-display" data-i18n="camera-notes.91ff1a">Camera notes</h2>
+          <p class="sa-lede" data-i18n="photograph-the-sermon-slide.813c96">
+            Photograph the sermon slide and on-device text recognition starts your note: titled from the slide, linked to every passage on it, its points ready as bullets. The photo is discarded unless you keep it.
+          </p>
+          <div class="sa-details is-single">
+            <div class="sa-detail">
+              <h3 data-i18n="highlights-notes-and-favorites.30f023">Highlights, notes and favorites</h3>
+              <p data-i18n="highlight-in-five-colors.0d2ff8">
+                Highlight in five colors, heart the verses you return to, and attach a note to one or more passages — a Sunday sermon on Romans 8:1–17, say. Export your notes as a PDF, Markdown or plain text.
+              </p>
+            </div>
+            <div class="sa-detail">
+              <h3 data-i18n="bring-your-notes-with.d346d0">Bring your notes with you</h3>
+              <p data-i18n="years-of-notes-in.6859a3">
+                Years of notes in another Bible app don't have to be left behind. Import a Life Bible (formerly Tecarta) export directly, or paste notes or a CSV from anywhere else. Importing twice is safe — anything already there is left alone.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="sa-figures" data-reveal>
+          <figure class="sa-figure is-solo">
+            <img src="assets/images/frame-sermon-notes.png?v=6d4f4b13" alt="A sermon slide read into a note, linked to the passages on it" width="1040" height="2152" loading="lazy">
+            <figcaption data-i18n="from-sermon-slide-to.3da176">From sermon slide to note</figcaption>
+          </figure>
+        </div>
       </div>
+    </section>
 
-      <div class="feature-card">
-        <div class="feature-icon">🖍️</div>
-        <h3 class="feature-title" data-i18n="highlights-notes-and-favorites.30f023">Highlights, notes and favorites</h3>
-        <p class="feature-description" data-i18n="highlight-in-five-colors.0d2ff8">
-          Highlight in five colors, heart the verses you return to, and attach a note to one or more passages — a Sunday sermon on Romans 8:1–17, say. Export your notes as a PDF, Markdown or plain text.
-        </p>
+    <!-- 04 Listen · 05 Share -->
+    <section class="sa-chapter">
+      <div class="sa-diptych">
+        <article id="listen" data-reveal>
+          <p class="sa-eyebrow"><span class="sa-num">04</span><span data-i18n="listen.c518fb">Listen</span></p>
+          <h2 class="sa-display" data-i18n="listen-along.233446">Listen along</h2>
+          <p class="sa-lede" data-i18n-html="hear-any-chapter-read.f4ef56">
+            Hear any chapter read aloud with your device's voices, Premium and Personal Voice included, the spoken verse marked as it goes, with a sleep timer and lock-screen controls. On iPhone and iPad, <a href="/apps/mi-speaks/">Mi Speaks</a> subscribers can hand a chapter to its Studio voices.
+          </p>
+          <div class="sa-figures">
+            <figure class="sa-figure">
+              <img src="assets/images/frame-listen.png?v=888eb959" alt="The listen bar reading the chapter aloud, the spoken verse marked" width="1040" height="2152" loading="lazy">
+            </figure>
+          </div>
+        </article>
+        <article id="share" data-reveal>
+          <p class="sa-eyebrow"><span class="sa-num">05</span><span data-i18n="share.09ca55">Share</span></p>
+          <h2 class="sa-display" data-i18n="verse-images-worth-sharing.215c64">Verse images worth sharing</h2>
+          <p class="sa-lede" data-i18n="design-a-verse-image.0a20c5">
+            Design a verse image on your device from eight templates, or send a link that rebuilds the card in any browser from the link itself — nothing is stored on a server.
+          </p>
+          <div class="sa-figures">
+            <figure class="sa-figure">
+              <img src="assets/images/frame-share.png?v=6ed6c1f3" alt="Designing a verse image from one of eight templates" width="1040" height="2152" loading="lazy">
+              <figcaption data-i18n="design-a-verse-image.1cbe44">Design a verse image</figcaption>
+            </figure>
+          </div>
+        </article>
       </div>
+    </section>
 
-      <div class="feature-card">
-        <div class="feature-icon">📷</div>
-        <h3 class="feature-title" data-i18n="camera-notes.91ff1a">Camera notes</h3>
-        <p class="feature-description" data-i18n="photograph-the-sermon-slide.813c96">
-          Photograph the sermon slide and on-device text recognition starts your note: titled from the slide, linked to every passage on it, its points ready as bullets. The photo is discarded unless you keep it.
-        </p>
+    <!-- 06 Apple Watch, widgets and sync -->
+    <section class="sa-chapter is-flipped" id="watch">
+      <div class="sa-spread">
+        <div class="sa-copy" data-reveal>
+          <p class="sa-eyebrow"><span class="sa-num">06</span><span>Apple Watch</span></p>
+          <h2 class="sa-display" data-i18n="widgets-and-apple-watch.efef3c">Widgets and Apple Watch</h2>
+          <p class="sa-lede" data-i18n="verse-of-the-day.bc6058">
+            Verse of the Day and Favorites &amp; Notes widgets for the Home and Lock Screens, and an Apple Watch app with the ASV, BSB and KJV offline — it follows the translation you're reading on your iPhone — plus your favorites and notes, and a complication with the day's reference.
+          </p>
+          <div class="sa-details is-single">
+            <div class="sa-detail">
+              <h3 data-i18n="private-icloud-sync.dcabcd">Private iCloud sync</h3>
+              <p data-i18n="your-highlights-notes-and.4c0001">
+                Your highlights, notes and favorites follow you across iPhone, iPad, Mac and Apple Watch through your own private iCloud. No account, no server — I never see your data.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="sa-devices" aria-hidden="true" data-reveal>
+          <span>iPhone</span>
+          <span>iPad</span>
+          <span>Mac</span>
+          <span>Apple Watch</span>
+        </div>
       </div>
+    </section>
 
-      <div class="feature-card">
-        <div class="feature-icon">🎧</div>
-        <h3 class="feature-title" data-i18n="listen.c518fb">Listen</h3>
-        <p class="feature-description" data-i18n-html="hear-any-chapter-read.f4ef56">
-          Hear any chapter read aloud with your device's voices, Premium and Personal Voice included, the spoken verse marked as it goes, with a sleep timer and lock-screen controls. On iPhone and iPad, <a href="/apps/mi-speaks/">Mi Speaks</a> subscribers can hand a chapter to its Studio voices.
-        </p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">🔎</div>
-        <h3 class="feature-title" data-i18n="study-mode.08a731">Study mode</h3>
-        <p class="feature-description" data-i18n="a-toggle-away-tap.8c147a">
-          A toggle away: tap a verse and the Study panel follows, with ranked cross-references (one tap there and back) and classic commentary from John Calvin, John Gill and Jamieson‑Fausset‑Brown. The commentary downloads the first time you open it; cross-references are there from the start.
-        </p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">🗺️</div>
-        <h3 class="feature-title" data-i18n="maps-timeline-and-charts.0233c4">Maps, timeline and charts</h3>
-        <p class="feature-description" data-i18n="each-chapter-s-era.4b0bd3">
-          Each chapter's era on a timeline of the biblical periods, an offline map of the places it names, and charts of the kings of Israel and Judah, Paul's journeys, the twelve tribes and the feasts of Israel.
-        </p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">🖼️</div>
-        <h3 class="feature-title" data-i18n="verse-images-worth-sharing.215c64">Verse images worth sharing</h3>
-        <p class="feature-description" data-i18n="design-a-verse-image.0a20c5">
-          Design a verse image on your device from eight templates, or send a link that rebuilds the card in any browser from the link itself — nothing is stored on a server.
-        </p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">⌚</div>
-        <h3 class="feature-title" data-i18n="widgets-and-apple-watch.efef3c">Widgets and Apple Watch</h3>
-        <p class="feature-description" data-i18n="verse-of-the-day.bc6058">
-          Verse of the Day and Favorites &amp; Notes widgets for the Home and Lock Screens, and an Apple Watch app with the ASV, BSB and KJV offline — it follows the translation you're reading on your iPhone — plus your favorites and notes, and a complication with the day's reference.
-        </p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">🕯️</div>
-        <h3 class="feature-title" data-i18n="keepsake-bible.88016e">Keepsake Bible</h3>
-        <p class="feature-description" data-i18n="make-a-keepsake-of.5d6bbd">
+    <!-- 07 Family -->
+    <section class="sa-chapter sa-centered" id="family">
+      <div class="sa-copy" data-reveal>
+        <span class="sa-ornament" aria-hidden="true"></span>
+        <p class="sa-eyebrow"><span class="sa-num">07</span><span data-i18n="family.4efb6c">Family</span></p>
+        <h2 class="sa-display" data-i18n="keepsake-bible.88016e">Keepsake Bible</h2>
+        <p class="sa-lede" data-i18n="make-a-keepsake-of.5d6bbd">
           Make a keepsake of your highlights and notes for your family: one file, optionally protected with a passphrase, that they open and read as you marked it — a digital “Dad's Bible” to hand down.
         </p>
       </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">☁️</div>
-        <h3 class="feature-title" data-i18n="private-icloud-sync.dcabcd">Private iCloud sync</h3>
-        <p class="feature-description" data-i18n="your-highlights-notes-and.4c0001">
-          Your highlights, notes and favorites follow you across iPhone, iPad, Mac and Apple Watch through your own private iCloud. No account, no server — I never see your data.
-        </p>
+      <div class="sa-details">
+        <div class="sa-detail">
+          <h3 data-i18n="live-family-sharing.a34cc6">Live family sharing</h3>
+          <p data-i18n="share-your-notes-and.6116ef">
+            Share your notes and highlights with family as you keep adding to them, not only as a keepsake file.
+          </p>
+        </div>
       </div>
+    </section>
 
-      <div class="feature-card">
-        <div class="feature-icon">🔓</div>
-        <h3 class="feature-title" data-i18n="open-source.6cc336">Open source</h3>
-        <p class="feature-description" data-i18n="every-line-of-code.0797fb">
-          Every line of code is public under the AGPL-3.0 license. Read it, check it, or build it yourself.
-        </p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">📚</div>
-        <h3 class="feature-title" data-i18n="more-translations.1c0903">More translations</h3>
-        <p class="feature-description" data-i18n="browse-the-openly-licensed.da6cd3">
+    <!-- 08 Translations -->
+    <section class="sa-chapter" id="translations">
+      <div class="sa-copy is-wide" data-reveal>
+        <p class="sa-eyebrow"><span class="sa-num">08</span><span data-i18n="translations.8ad830">Translations</span></p>
+        <h2 class="sa-display" data-i18n="more-translations.1c0903">More translations</h2>
+        <p class="sa-lede" data-i18n="browse-the-openly-licensed.da6cd3">
           Browse the openly licensed translations eBible.org publishes, in your own language first, and download only the ones you choose — or open a USFM file or a DRM-free ePub you already own. The ESV, CSB, NKJV and NASB can't be given away by anyone, so they're read with your own free key from the publisher. Licenses to carry those offline are still being sought.
         </p>
       </div>
-      <div class="feature-card">
-        <div class="feature-icon">🔐</div>
-        <h3 class="feature-title" data-i18n="encrypted-and-provably-so.2387ba">Encrypted, and provably so</h3>
-        <p class="feature-description" data-i18n-html="the-american-standard-version.ebc980">
+      <div class="sa-aside" data-reveal>
+        <h3 data-i18n="encrypted-and-provably-so.2387ba">Encrypted, and provably so</h3>
+        <p data-i18n-html="the-american-standard-version.ebc980">
           The American Standard Version ships sealed: signed by a key the app pins, decrypted a chapter at a time, searchable without its text ever lying in the open on your device. It's the format a publisher's own translation would travel in — <a href="security/">read how it works</a>.
         </p>
       </div>
-      <div class="feature-card">
-        <div class="feature-icon">⚖️</div>
-        <h3 class="feature-title" data-i18n="two-translations-at-once.1736f5">Two translations at once</h3>
-        <p class="feature-description" data-i18n="put-any-two-side.7c4144">
-          Put any two side by side, verse for verse, and see where they part company — including a translation you read online with your own key.
-        </p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">🔠</div>
-        <h3 class="feature-title" data-i18n="the-words-underneath.02fab0">The words underneath</h3>
-        <p class="feature-description" data-i18n="tap-a-verse-for.021f01">
-          Tap a verse for the Hebrew or Greek behind it, word by word, with parsing, Strong's numbers and a lexicon entry for each. It works in every translation, and downloads once the first time you open it.
-        </p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">📥</div>
-        <h3 class="feature-title" data-i18n="bring-your-notes-with.d346d0">Bring your notes with you</h3>
-        <p class="feature-description" data-i18n="years-of-notes-in.6859a3">
-          Years of notes in another Bible app don't have to be left behind. Import a Life Bible (formerly Tecarta) export directly, or paste notes or a CSV from anywhere else. Importing twice is safe — anything already there is left alone.
-        </p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">👨‍👩‍👧</div>
-        <h3 class="feature-title" data-i18n="live-family-sharing.a34cc6">Live family sharing</h3>
-        <p class="feature-description" data-i18n="share-your-notes-and.6116ef">
-          Share your notes and highlights with family as you keep adding to them, not only as a keepsake file.
-        </p>
-      </div>
-    </div>
-  </section>
+    </section>
+  </main>
 
-  <!-- Screenshots Section: Monkr device frames (scripts/render-site-frames.py) -->
-  <section id="screenshots" class="section">
-    <div class="section-header">
-      <p class="section-subtitle" data-i18n="see-it.620c9c">See it</p>
-      <h2 data-i18n="screenshots.597b63">Screenshots</h2>
-    </div>
-
-    <div class="sa-shots">
-      <figure class="sa-shot">
-        <img src="assets/images/frame-reader.png?v=716d983a" alt="John 3 in the American Standard Version, the words of Christ in red and a highlighted verse" width="1040" height="2152" loading="lazy">
-        <figcaption data-i18n="red-letters-and-your.33addb">Red letters and your highlights</figcaption>
-      </figure>
-      <figure class="sa-shot">
-        <img src="assets/images/frame-jump.png?v=83af764d" alt="Typing a reference to jump straight to a passage" width="1040" height="2152" loading="lazy">
-        <figcaption data-i18n="jump-to-any-passage.98b325">Jump to any passage</figcaption>
-      </figure>
-      <figure class="sa-shot">
-        <img src="assets/images/frame-study.png?v=eda00179" alt="The Study panel with cross-references and commentary for the selected verse" width="1040" height="2152" loading="lazy">
-        <figcaption data-i18n="cross-references-and-commentary.85bec1">Cross-references and commentary</figcaption>
-      </figure>
-      <figure class="sa-shot">
-        <img src="assets/images/frame-maps.png?v=e9ab9bb6" alt="An offline map of the places named in Acts 13" width="1040" height="2152" loading="lazy">
-        <figcaption data-i18n="a-map-for-every.acab82">A map for every chapter</figcaption>
-      </figure>
-      <figure class="sa-shot">
-        <img src="assets/images/frame-sermon-notes.png?v=6d4f4b13" alt="A sermon slide read into a note, linked to the passages on it" width="1040" height="2152" loading="lazy">
-        <figcaption data-i18n="from-sermon-slide-to.3da176">From sermon slide to note</figcaption>
-      </figure>
-      <figure class="sa-shot">
-        <img src="assets/images/frame-listen.png?v=888eb959" alt="The listen bar reading the chapter aloud, the spoken verse marked" width="1040" height="2152" loading="lazy">
-        <figcaption data-i18n="listen-along.233446">Listen along</figcaption>
-      </figure>
-      <figure class="sa-shot">
-        <img src="assets/images/frame-share.png?v=6ed6c1f3" alt="Designing a verse image from one of eight templates" width="1040" height="2152" loading="lazy">
-        <figcaption data-i18n="design-a-verse-image.1cbe44">Design a verse image</figcaption>
-      </figure>
-      <figure class="sa-shot">
-        <img src="assets/images/frame-themes.png?v=f7facee5" alt="The reader in one of its five themes" width="1040" height="2152" loading="lazy">
-        <figcaption data-i18n="five-reading-themes.275ab8">Five reading themes</figcaption>
-      </figure>
+  <!-- 09 Privacy & security -->
+  <section class="sa-privacy" id="privacy">
+    <div class="sa-privacy-inner" data-reveal>
+      <p class="sa-eyebrow"><span class="sa-num">09</span><span data-i18n="privacy-security.75c011">Privacy &amp; security</span></p>
+      <h2 class="sa-display" data-i18n="nothing-between-you-and.27b4f3">Nothing between you and the text</h2>
+      <div class="security-badges">
+        <div class="security-badge" data-i18n-html="data-not-collected.35f244"><span class="badge-icon">🔒</span> Data Not Collected</div>
+        <div class="security-badge" data-i18n-html="no-accounts.24a135"><span class="badge-icon">👤</span> No accounts</div>
+        <div class="security-badge" data-i18n-html="works-offline.372393"><span class="badge-icon">✈️</span> Works offline</div>
+        <div class="security-badge" data-i18n-html="open-source-agpl-3.ef1e3d"><span class="badge-icon">📖</span> Open source · AGPL-3.0</div>
+      </div>
+      <div class="sa-privacy-body">
+        <p class="security-audit-note" data-i18n="no-ads-no-analytics.490c17">No ads. No analytics. No third-party SDKs. Your notes travel only through your own iCloud.</p>
+        <div>
+          <h3 data-i18n="open-source.6cc336">Open source</h3>
+          <p data-i18n="every-line-of-code.0797fb">
+            Every line of code is public under the AGPL-3.0 license. Read it, check it, or build it yourself.
+          </p>
+        </div>
+      </div>
     </div>
   </section>
 
   <!-- Roadmap -->
-  <section id="on-the-way" class="section roadmap">
-    <div class="section-header">
-      <p class="section-subtitle" data-i18n="on-the-way.7884d3">On the way</p>
+  <section id="on-the-way" class="sa-roadmap">
+    <div>
+      <p class="sa-eyebrow" data-i18n="on-the-way.7884d3">On the way</p>
       <h2 data-i18n="what-s-coming.6a3f58">What's coming</h2>
       <p data-i18n="being-built-now-and.f37881">Being built now, and not in the app yet. They'll ship when they're ready.</p>
     </div>
-
-    <div class="feature-grid">
-
-
-
-
-
-      <div class="feature-card">
-        <div class="feature-icon">📱</div>
-        <h3 class="feature-title" data-i18n="made-for-iphone-duo.bead80">Made for iPhone Duo</h3>
-        <p class="feature-description" data-i18n="layouts-that-know-about.4b0f61">
-          Layouts that know about the fold, so the text and the Study panel make the most of iPhone Duo's larger screen.
-        </p>
-      </div>
+    <div class="sa-detail">
+      <h3 data-i18n="made-for-iphone-duo.bead80">Made for iPhone Duo</h3>
+      <p data-i18n="layouts-that-know-about.4b0f61">
+        Layouts that know about the fold, so the text and the Study panel make the most of iPhone Duo's larger screen.
+      </p>
     </div>
   </section>
 
   <!-- FAQ Section -->
   <section id="faq" class="faq-section">
-    <div class="section-header">
-      <p class="section-subtitle" data-i18n="got-questions.8ecca3">Got Questions?</p>
-      <h2 data-i18n="frequently-asked-questions.d790b4">Frequently Asked Questions</h2>
-    </div>
+    <p class="sa-eyebrow" data-i18n="got-questions.8ecca3">Got Questions?</p>
+    <h2 data-i18n="frequently-asked-questions.d790b4">Frequently Asked Questions</h2>
 
+    <div class="faq-list">
     <div class="faq-item">
       <button class="faq-question">
         <span data-i18n="is-it-really-free.f1f5ae">Is it really free?</span>
@@ -689,6 +1096,16 @@
 
     <div class="faq-item">
       <button class="faq-question">
+        <span data-i18n="can-i-add-another-translation.4b1e7a">Can I add another translation myself?</span>
+        <span class="faq-icon">▼</span>
+      </button>
+      <div class="faq-answer">
+        <p data-i18n-html="yes-for-translations-that.0ed3fa">Yes, for translations that are openly licensed. Scripture Alone can open a USFM file or a DRM-free ePub, and it can fetch the free catalogue published by <a href="https://ebible.org/" rel="noopener">eBible.org</a> when you ask it to, with your own language first — nothing is downloaded unless you tap. Imported translations stay on your device. This is an interim arrangement: requests to license the major modern translations are with their publishers, and if those are granted the translations will simply be in the app, and this may go away.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
         <span data-i18n="is-it-open-source.ad0a34">Is it open source?</span>
         <span class="faq-icon">▼</span>
       </button>
@@ -708,33 +1125,19 @@
         <p data-i18n="yes-scripture-alone-is.9112b8">Yes. Scripture Alone is on the App Store everywhere in the European Union, France included. The source code is open to everyone on GitHub.</p>
       </div>
     </div>
-
-    <div class="faq-item">
-      <button class="faq-question">
-        <span data-i18n="can-i-add-another-translation.4b1e7a">Can I add another translation myself?</span>
-        <span class="faq-icon">▼</span>
-      </button>
-      <div class="faq-answer">
-        <p data-i18n-html="yes-for-translations-that.0ed3fa">Yes, for translations that are openly licensed. Scripture Alone can open a USFM file or a DRM-free ePub, and it can fetch the free catalogue published by <a href="https://ebible.org/" rel="noopener">eBible.org</a> when you ask it to, with your own language first — nothing is downloaded unless you tap. Imported translations stay on your device. This is an interim arrangement: requests to license the major modern translations are with their publishers, and if those are granted the translations will simply be in the app, and this may go away.</p>
-      </div>
     </div>
   </section>
 
-  <!-- Privacy & security -->
-  <section class="security-callout" id="privacy">
-    <div class="section-header">
-      <p class="section-subtitle" data-i18n="privacy-security.75c011">Privacy &amp; security</p>
-      <h2 data-i18n="nothing-between-you-and.27b4f3">Nothing between you and the text</h2>
+  <!-- Closing -->
+  <section class="sa-closing">
+    <img src="assets/images/icon.png?v=5ef7dc50" alt="" width="1024" height="1024" loading="lazy">
+    <h2 class="sa-display" data-i18n="the-word-and-nothing.59b9cc">The Word, and nothing in the way.</h2>
+    <div class="sa-cta">
+      <a href="https://apps.apple.com/us/app/scripture-alone-bible/id6813729762" target="_blank" rel="noopener noreferrer" class="btn-buy" data-i18n="download-on-the-app.a9096a">Download on the App Store</a>
+      <a href="https://github.com/blaineam/Scripture-Alone" class="btn-source" target="_blank" rel="noopener noreferrer" data-i18n="source-on-github.c60f2f">Source on GitHub</a>
+      <a href="#android-beta" class="btn-source" data-i18n="android-beta.3940f1">Android beta</a>
     </div>
-    <div class="security-badges">
-      <div class="security-badge" data-i18n-html="data-not-collected.35f244"><span class="badge-icon">🔒</span> Data Not Collected</div>
-      <div class="security-badge" data-i18n-html="no-accounts.24a135"><span class="badge-icon">👤</span> No accounts</div>
-      <div class="security-badge" data-i18n-html="works-offline.372393"><span class="badge-icon">✈️</span> Works offline</div>
-      <div class="security-badge" data-i18n-html="open-source-agpl-3.ef1e3d"><span class="badge-icon">📖</span> Open source · AGPL-3.0</div>
-    </div>
-    <p class="security-audit-note" data-i18n="no-ads-no-analytics.490c17">No ads. No analytics. No third-party SDKs. Your notes travel only through your own iCloud.</p>
   </section>
-
   <footer class="footer">
     <div class="footer-content">
       <div class="footer-links">
@@ -782,7 +1185,8 @@
 
   <script src="../app-showcase.js"></script>
   <script>
-    // "Android beta" in the hero jumps to its FAQ answer; open it rather than leave it folded.
+    // "Android beta" jumps to its FAQ answer; open it rather than leave it folded.
+    // The shared smooth-scroll swallows the hash change, so listen for the click too.
     function saOpenAndroidBeta() {
       if (location.hash !== '#android-beta') return;
       const item = document.getElementById('android-beta');
@@ -790,6 +1194,26 @@
     }
     window.addEventListener('hashchange', saOpenAndroidBeta);
     saOpenAndroidBeta();
+    document.querySelectorAll('a[href="#android-beta"]').forEach(function (a) {
+      a.addEventListener('click', function () {
+        const item = document.getElementById('android-beta');
+        if (item) item.classList.add('active');
+      });
+    });
+
+    // A quiet reveal as each chapter arrives — only when motion is welcome, and
+    // only once JavaScript is known to be running, so nothing can stay hidden.
+    (function () {
+      if (!('IntersectionObserver' in window)) return;
+      if (!window.matchMedia('(prefers-reduced-motion: no-preference)').matches) return;
+      document.documentElement.classList.add('sa-motion');
+      const io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); }
+        });
+      }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+      document.querySelectorAll('[data-reveal]').forEach(function (el) { io.observe(el); });
+    })();
   </script>
 </body>
 </html>
