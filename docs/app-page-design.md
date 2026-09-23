@@ -132,8 +132,11 @@ Every story render is a transparent Monkr device frame, in the reader's language
 - `device` picks the app's `*-web-<device>.monkr`, or derives a transparent,
   caption-free one from `*-<device>.monkr`. Add `"scale": 2` for small canvases
   (the watch). Widths are the 1x and 2x of the CSS display width. When the
-  project's name doesn't follow the pattern (`Ridgeshot-iPhone.monkr`,
-  `Pineline-ipad.monkr`), name it: `"project": "docs/appstore-screenshots/<file>.monkr"`.
+  project's name doesn't follow the pattern (`Ridgeshot-iPhone.monkr`; the glob is
+  case-sensitive), name it: `"project": "docs/appstore-screenshots/<file>.monkr"` — it
+  gets the same transparent, caption-free treatment. Scene names are the manifest's keys,
+  so one scene can't come from two devices; `find_scene` also matches a unique substring,
+  so an iPad render of `02-gameplay-olympic` can be listed as `"gameplay-olympic"`.
 
 ```sh
 python3 scripts/sync-app-screens.py kern          # renders, writes WebP + manifest, runs cache-bust

@@ -96,5 +96,17 @@
         "scale": 2
       }
     ]
+  },
+  "ridgeshot": {
+    "repo": "Ridgeshot",
+    "renders": [
+      {
+        "device": "iphone",
+        "project": "docs/appstore-screenshots/Ridgeshot-iPhone.monkr",
+        "captures": "screenshots/iphone-6.9",
+        "scenes": ["01-menu", "02-scope-aim", "03-gameplay-olympic", "04-gameplay-animals", "05-results"],
+        "widths": [400, 800]
+      }
+    ]
   }
 }
