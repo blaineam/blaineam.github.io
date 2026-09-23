@@ -4,52 +4,396 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pano Owl - Stitch Any Panorama, in 360</title>
-  <meta name="description" content="Capture, stitch, correct, and view panoramas in immersive 360. A modern Metal-powered panorama studio for iPhone, iPad & Mac — true 360° equirectangular output, HDR, gigapixel stitching, guided capture, and an in-app 360 viewer.">
+  <meta name="description" content="Capture, stitch, correct, and view panoramas in immersive 360. A Metal-powered panorama studio for iPhone, iPad &amp; Mac: guided capture, true 360° equirectangular output, HDR, gigapixel stitching, and an in-app 360 viewer.">
   <meta property="og:title" content="Pano Owl - Stitch Any Panorama, in 360">
-  <meta property="og:description" content="Capture, stitch, correct, and view panoramas in immersive 360. True 360° equirectangular output, HDR, gigapixel stitching, guided capture, and an in-app 360 viewer.">
+  <meta property="og:description" content="Capture, stitch, correct, and view panoramas in immersive 360. Guided capture, true 360° output, HDR, gigapixel stitching, and an in-app 360 viewer.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://wemiller.com/apps/pano-owl/">
   <meta property="og:image" content="https://wemiller.com/apps/pano-owl/assets/images/poster.jpg?v=27ec0a87">
   <link rel="stylesheet" href="../app-showcase.css">
   <style>
-    /* Pano Owl palette — the refreshed violet → royal-blue app identity. */
     :root {
-      --app-primary: #8b6bff;        /* violet */
-      --app-secondary: #2948dc;      /* royal blue */
-      --app-accent: #6b48dc;         /* mid accent */
+      /* Pano Owl: night-violet sky falling to royal blue, the icon's two colours. */
+      --app-primary: #8B6BFF;
+      --app-secondary: #2948DC;
+      --app-accent: #6B48DC;
+      --primary-color: #241A66;
+      --secondary-color: #2948DC;
+      --po-display-face: system-ui, -apple-system, "Segoe UI", sans-serif;
+      --po-text-face: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      --po-paper: #F7F6FD;
+      --po-paper-2: #EEEBFB;
+      --po-body: #2F2B4E;
+      --po-quiet: #5D5885;
+      --po-rule: rgba(36, 26, 102, 0.12);
+      --po-accent-ink: #5236D0;
+      --po-ornament: linear-gradient(90deg, #8B6BFF, #2948DC);
+      --po-shadow: drop-shadow(0 30px 40px rgba(22, 16, 64, 0.26)) drop-shadow(0 6px 10px rgba(22, 16, 64, 0.10));
+      --po-hero-bg: radial-gradient(circle at 22% 18%, rgba(139, 107, 255, 0.22) 0%, transparent 55%), radial-gradient(circle at 82% 72%, rgba(41, 72, 220, 0.20) 0%, transparent 55%), linear-gradient(160deg, #0E0B1A 0%, #2A1E74 55%, #1D3BD6 100%);
+      --po-hero-ink: #FFFFFF;
+      --po-hero-kicker: #C4B4FF;
+      --po-button: linear-gradient(180deg, #FFFFFF, #E6E0FF);
+      --po-button-ink: #241A66;
+      --po-button-glow: rgba(139, 107, 255, 0.40);
+      --po-focus: #C4B4FF;
+      --po-closing-bg: radial-gradient(ellipse 55% 60% at 50% 100%, rgba(139, 107, 255, 0.16) 0%, transparent 70%), var(--po-paper-2);
+      --text-primary: #1A1440;
+      --glass-bg: rgba(247, 246, 253, 0.8);
+      --glass-border: rgba(36, 26, 102, 0.08);
+      --po-measure: 1120px;
+      --bg-primary: var(--po-paper);
+      --bg-secondary: var(--po-paper-2);
+      --text-secondary: var(--po-body);
+      --text-muted: var(--po-quiet);
+      --glass-shadow: none;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --primary-color: #C4B4FF;
+        --po-paper: #0D0B1C;
+        --po-paper-2: #15122C;
+        --po-body: #DAD7EE;
+        --po-quiet: #A7A2C8;
+        --po-rule: rgba(218, 215, 238, 0.13);
+        --po-accent-ink: #A993FF;
+        --po-shadow: drop-shadow(0 30px 44px rgba(0, 0, 0, 0.55)) drop-shadow(0 6px 10px rgba(0, 0, 0, 0.30));
+        --po-closing-bg: radial-gradient(ellipse 55% 60% at 50% 100%, rgba(139, 107, 255, 0.20) 0%, transparent 70%), var(--po-paper-2);
+        --text-primary: #F2F0FB;
+        --glass-bg: rgba(13, 11, 28, 0.8);
+        --glass-border: rgba(218, 215, 238, 0.08);
+      }
     }
 
-    .hero {
-      background:
-        radial-gradient(circle at 22% 18%, rgba(139, 107, 255, 0.22) 0%, transparent 55%),
-        radial-gradient(circle at 82% 72%, rgba(41, 72, 220, 0.20) 0%, transparent 55%),
-        linear-gradient(160deg, #0e0b1a 0%, #2a1e74 55%, #1d3bd6 100%);
-      color: white;
+    body { background: var(--po-paper); }
+    .nav-links .nav-link, .nav-links .btn-buy { white-space: nowrap; }
+    .floating-appstore {
+      background: var(--po-button);
+      color: var(--po-button-ink);
+      box-shadow: 0 10px 30px var(--po-button-glow);
     }
 
-    .hero-title,
-    .hero-subtitle { color: white; -webkit-text-fill-color: white; }
-
-    .hero-title {
-      background: linear-gradient(135deg, #b9a4ff 0%, #5a78ff 100%);
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
-      text-shadow: 0 0 60px rgba(139, 107, 255, 0.28);
-    }
-
-    .hero-subtitle {
-      color: var(--app-primary);
-      letter-spacing: 0.18em;
+    /* ---- Shared type ---------------------------------------------------- */
+    .po-eyebrow {
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
+      color: var(--po-accent-ink);
+      margin: 0 0 1rem;
+    }
+    .po-eyebrow .po-num {
+      font-family: var(--po-display-face);
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      margin-right: 0.8em;
+      opacity: 0.85;
+    }
+    .po-display {
+      font-family: var(--po-display-face);
+      font-weight: 700;
+      background: none;
+      -webkit-text-fill-color: currentColor;
+      color: var(--primary-color);
+      font-size: clamp(2.1rem, 5.2vw, 3.6rem);
+      line-height: 1.06;
+      letter-spacing: -0.02em;
+      margin: 0 0 1.4rem;
+      text-wrap: balance;
+    }
+    .po-lede {
+      font-family: var(--po-text-face);
+      font-size: clamp(1.12rem, 1.9vw, 1.36rem);
+      line-height: 1.62;
+      color: var(--po-body);
+      margin: 0 0 1.2rem;
+      text-wrap: pretty;
+    }
+    .po-lede a, .faq-answer a { color: var(--po-accent-ink); }
+
+    /* ---- Hero ----------------------------------------------------------- */
+    .po-hero {
+      position: relative;
+      background: var(--po-hero-bg);
+      color: #fff;
+      text-align: center;
+      padding: calc(76px + clamp(3rem, 8vw, 6rem)) 16px 0;
+      overflow: hidden;
+    }
+    .po-hero-icon {
+      width: 84px;
+      height: 84px;
+      display: block;
+      margin: 0 auto 1.4rem;
+      border-radius: 22%;
+      filter: drop-shadow(0 14px 26px rgba(0, 0, 0, 0.45));
+    }
+    .po-hero-kicker {
+      font-size: 0.82rem;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      color: var(--po-hero-kicker);
+      margin: 0 0 1.2rem;
+    }
+    .po-hero h1 {
+      font-family: var(--po-display-face);
+      font-weight: 700;
+      background: none;
+      -webkit-background-clip: border-box;
+      background-clip: border-box;
+      -webkit-text-fill-color: var(--po-hero-ink);
+      color: var(--po-hero-ink);
+      font-size: clamp(2.6rem, 8.4vw, 6.2rem);
+      line-height: 1.02;
+      letter-spacing: -0.025em;
+      max-width: 13ch;
+      margin: 0 auto 1.6rem;
+      text-wrap: balance;
+    }
+    .po-hero-standfirst {
+      font-family: var(--po-text-face);
+      font-size: clamp(1.08rem, 2vw, 1.34rem);
+      line-height: 1.6;
+      color: rgba(255, 255, 255, 0.86);
+      max-width: 44ch;
+      margin: 0 auto 2.2rem;
+      text-wrap: pretty;
+    }
+    .po-cta {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.75rem;
+    }
+    .po-cta .btn-buy {
+      background: var(--po-button);
+      color: var(--po-button-ink);
+      padding: 0.8rem 1.5rem;
+      min-height: 44px;
+      border-radius: 999px;
+      box-shadow: 0 10px 28px var(--po-button-glow);
+    }
+    .po-cta .btn-buy:focus-visible, .po-alt-links a:focus-visible { outline: 3px solid var(--po-focus); outline-offset: 3px; }
+    /* The app rises out of the hero. */
+    .po-hero-device {
+      margin: clamp(3rem, 7vw, 4.5rem) auto 0;
+      width: clamp(230px, 34vw, 380px);
+      height: clamp(250px, 36vw, 420px);
+      overflow: hidden;
+    }
+    .po-hero-device img { display: block; width: 100%; height: auto; }
+    .po-hero-device.is-wide {
+      width: min(92vw, 820px);
+      height: clamp(200px, 40vw, 420px);
     }
 
-    .hero-description { color: rgba(255, 255, 255, 0.85); }
-
-    .hero-image .phone-mockup {
-      border-radius: 28%;
-      box-shadow: 0 24px 70px rgba(0, 0, 0, 0.5);
+    /* ---- Statement ------------------------------------------------------ */
+    .po-statement {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: clamp(4rem, 10vw, 7.5rem) 16px;
+      text-align: center;
     }
+    .po-statement p {
+      font-family: var(--po-display-face);
+      font-size: clamp(1.5rem, 3.6vw, 2.5rem);
+      font-weight: 600;
+      line-height: 1.3;
+      color: var(--primary-color);
+      margin: 0;
+      text-wrap: balance;
+    }
+    .po-ornament {
+      display: block;
+      width: 44px;
+      height: 4px;
+      margin: 0 auto 1.8rem;
+      border-radius: 4px;
+      background: var(--po-ornament);
+    }
+
+    /* ---- Chapters ------------------------------------------------------- */
+    .po-chapter {
+      max-width: var(--po-measure);
+      margin: 0 auto;
+      padding: clamp(4rem, 9vw, 7rem) 16px;
+      border-top: 1px solid var(--po-rule);
+      scroll-margin-top: 70px;
+    }
+    .po-spread {
+      display: grid;
+      gap: clamp(2.5rem, 6vw, 5rem);
+      align-items: center;
+    }
+    .po-copy { max-width: 34rem; }
+    @media (min-width: 900px) {
+      .po-spread { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); }
+      .po-chapter.is-flipped .po-copy { order: 2; }
+    }
+
+    /* One device per story, sized like a photograph on the page, not a thumbnail. */
+    .po-figure { margin: 0 auto; width: min(72vw, 340px); text-align: center; }
+    .po-figure.is-tablet { width: min(92vw, 720px); max-width: 100%; }
+    .po-figure.is-watch { width: min(56vw, 240px); }
+    .po-figure img { display: block; width: 100%; height: auto; filter: var(--po-shadow); }
+    .po-figure figcaption {
+      font-size: 0.88rem;
+      line-height: 1.45;
+      color: var(--po-quiet);
+      margin-top: 1.1rem;
+    }
+    .po-figure figcaption::before {
+      content: "";
+      display: block;
+      width: 18px;
+      height: 1px;
+      margin: 0 auto 0.6rem;
+      background: var(--po-accent-ink);
+    }
+
+    /* Secondary routes: quiet text links under the one button. */
+    .po-alt-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.7rem;
+      margin: 1.1rem 0 0;
+      font-size: 0.95rem;
+      color: rgba(255, 255, 255, 0.66);
+    }
+    .po-alt-links a { color: rgba(255, 255, 255, 0.9); text-decoration: none; border-bottom: 1px solid rgba(255, 255, 255, 0.34); }
+    .po-alt-links a:hover { border-bottom-color: rgba(255, 255, 255, 0.8); }
+    .po-closing .po-alt-links { color: var(--po-quiet); }
+    .po-closing .po-alt-links a { color: var(--po-accent-ink); border-bottom-color: var(--po-rule); }
+
+    /* ---- Trust ---------------------------------------------------------- */
+    .po-privacy {
+      background: var(--po-hero-bg);
+      color: var(--po-hero-ink);
+      padding: clamp(4.5rem, 10vw, 8rem) 16px;
+      scroll-margin-top: 60px;
+    }
+    .po-privacy-inner { max-width: var(--po-measure); margin: 0 auto; }
+    .po-privacy .po-eyebrow { color: var(--po-hero-kicker); text-align: center; }
+    .po-privacy .po-display {
+      color: var(--po-hero-ink);
+      -webkit-text-fill-color: var(--po-hero-ink);
+      text-align: center;
+      font-size: clamp(2.3rem, 6.4vw, 4.6rem);
+      max-width: 14ch;
+      margin: 0 auto 3rem;
+    }
+    .po-privacy .security-badges {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+      gap: 0;
+      max-width: none;
+      padding: 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    .po-privacy .security-badge {
+      background: none;
+      border: none;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 0;
+      box-shadow: none;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+      color: var(--po-hero-ink);
+      font-family: var(--po-display-face);
+      font-size: 1.12rem;
+      padding: 1.1rem 0.4rem;
+      justify-content: center;
+    }
+    .po-privacy .security-badge:hover { transform: none; }
+    .po-privacy .security-audit-note {
+      text-align: center;
+      font-family: var(--po-text-face);
+      font-style: italic;
+      font-size: clamp(1.1rem, 2.2vw, 1.3rem);
+      color: rgba(255, 255, 255, 0.9);
+      max-width: 36ch;
+      padding: 0;
+      margin: 2.6rem auto 0;
+    }
+    .po-privacy-link { text-align: center; margin: 1.4rem 0 0; }
+    .po-privacy-link a { color: var(--po-hero-kicker); text-decoration: none; border-bottom: 1px solid currentColor; }
+    .po-privacy-link a::after { content: " \2192"; }
+
+    /* ---- FAQ: a ruled list ---------------------------------------------- */
+    .faq-section { max-width: 820px; padding: clamp(4rem, 9vw, 6rem) 16px; }
+    .faq-section .po-eyebrow, .faq-section h2 { text-align: center; }
+    .faq-section h2 {
+      font-family: var(--po-display-face);
+      font-weight: 700;
+      background: none;
+      -webkit-text-fill-color: currentColor;
+      color: var(--primary-color);
+      font-size: clamp(1.9rem, 4vw, 2.8rem);
+      margin: 0 0 2.5rem;
+    }
+    .faq-item {
+      background: none;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+      border: none;
+      border-top: 1px solid var(--po-rule);
+      border-radius: 0;
+      margin: 0;
+    }
+    .faq-item:last-child { border-bottom: 1px solid var(--po-rule); }
+    .faq-question {
+      font-family: var(--po-display-face);
+      font-size: 1.15rem;
+      font-weight: 600;
+      padding: 1.25rem 0;
+      gap: 1rem;
+    }
+    .faq-question:hover { color: var(--po-accent-ink); }
+    .faq-question:focus-visible { outline: 2px solid var(--po-accent-ink); outline-offset: 2px; }
+    .faq-icon { font-size: 0.8rem; color: var(--po-accent-ink); }
+    .faq-answer { padding: 0; }
+    .faq-item.active .faq-answer { padding: 0 0 1.4rem; }
+    .faq-answer p { font-size: 1rem; line-height: 1.68; color: var(--po-body); }
+
+    /* ---- Closing -------------------------------------------------------- */
+    .po-closing {
+      text-align: center;
+      padding: clamp(4.5rem, 10vw, 7rem) 16px;
+      background: var(--po-closing-bg);
+      border-top: 1px solid var(--po-rule);
+    }
+    .po-closing img { width: 96px; height: 96px; display: block; margin: 0 auto 1.6rem; border-radius: 22%; filter: drop-shadow(0 16px 26px rgba(0, 0, 0, 0.28)); }
+    .po-closing .po-display { font-size: clamp(2rem, 5vw, 3.4rem); max-width: 14ch; margin: 0 auto 2rem; }
+    .footer { margin-top: 0; }
+
+    /* ---- Reveal: only when motion is welcome ----------------------------- */
+    .po-motion [data-reveal] {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.9s ease, transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1);
+    }
+    .po-motion [data-reveal].is-in { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) {
+      .floating-appstore, .faq-item, .hero-text { animation: none; }
+      .btn-buy:hover, .floating-appstore:hover { transform: none; }
+    }
+
+    @media (max-width: 600px) {
+      .po-hero-icon { width: 68px; height: 68px; }
+      .po-cta { flex-direction: column; align-items: stretch; max-width: 22rem; margin: 0 auto; }
+      .po-cta a { justify-content: center; }
+    }
+    /* Break CJK headlines at phrase boundaries, not mid-word, where supported. */
+    .po-hero h1, .po-display, .po-statement p { word-break: auto-phrase; }
+    /* `ch` is the width of a Latin zero; a CJK glyph is two of them. Measure CJK in em. */
+    :lang(ja) .po-hero h1, :lang(zh) .po-hero h1, :lang(ko) .po-hero h1 { max-width: 9em; }
+    /* Korean breaks inside words unless told to keep them whole. */
+    :lang(ko) .po-hero h1, :lang(ko) .po-display, :lang(ko) .po-statement p, :lang(ko) .po-lede, :lang(ko) .po-hero-standfirst { word-break: keep-all; }
+    :lang(ja) .po-privacy .po-display, :lang(zh) .po-privacy .po-display, :lang(ko) .po-privacy .po-display,
+    :lang(ja) .po-closing .po-display, :lang(zh) .po-closing .po-display, :lang(ko) .po-closing .po-display { max-width: 10em; }
+    :lang(ja) .po-hero-standfirst, :lang(zh) .po-hero-standfirst, :lang(ko) .po-hero-standfirst,
+    :lang(ja) .security-audit-note, :lang(zh) .security-audit-note, :lang(ko) .security-audit-note { max-width: 26em; }
+
   </style>
   <link rel="alternate" hreflang="x-default" href="https://wemiller.com/apps/pano-owl/">
   <link rel="alternate" hreflang="en" href="https://wemiller.com/apps/pano-owl/">
@@ -75,247 +419,163 @@
       <button class="mobile-menu-toggle">☰</button>
       <ul class="nav-links">
         <li><a href="#features" class="nav-link" data-i18n="features.fc338f">Features</a></li>
-        <li><a href="#how-it-works" class="nav-link" data-i18n="how-it-works.8cecc8">How It Works</a></li>
-        <li><a href="#screenshots" class="nav-link" data-i18n="screenshots.597b63">Screenshots</a></li>
         <li><a href="#faq" class="nav-link" data-i18n="faq.03688b">FAQ</a></li>
         <li><a href="https://apps.apple.com/us/app/pano-owl/id1560273409" class="btn-buy" target="_blank" rel="noopener noreferrer" data-i18n="download-on-app-store.cf50c2">Download on App Store</a></li>
       </ul>
     </div>
   </nav>
 
-  <section class="hero">
-    <div class="hero-content">
-      <div class="hero-text">
-        <p class="hero-subtitle" data-i18n="pano-owl.331329">🦉 Pano Owl</p>
-        <h1 class="hero-title" data-i18n="stitch-any-panorama-in.31877f">Stitch Any Panorama, in 360.</h1>
-        <p class="hero-description" data-i18n="the-one-stop-shop.e64553">
-          The one-stop shop for panoramas — capture, stitch, correct, and view in immersive 360°. Rebuilt from the ground up on a modern Metal pipeline that reliably combines any number of photos into a single seamless panorama, while preserving the quality of your originals.
-        </p>
-        <span class="os-ready-badge" data-i18n-html="ready-for-ios-27.4543d0"><span class="badge-icon">✓</span> Ready for iOS 27 / iPadOS 27 / macOS 27</span>
-        <div class="hero-cta">
-          <a href="https://apps.apple.com/us/app/pano-owl/id1560273409" class="btn-buy" target="_blank" rel="noopener noreferrer" data-i18n="download-now.6d56a8">Download Now</a>
-        </div>
-      </div>
-      <div class="hero-image">
-        <div class="hero-phone">
-          <img src="assets/images/icon.png?v=81288b89" alt="Pano Owl App Icon" class="phone-mockup"
-               onerror="this.style.background='linear-gradient(135deg, #8b6bff, #2948dc)'; this.style.minHeight='600px';">
-        </div>
-      </div>
+  <!-- Hero: the promise, one download button, and the app rising out of it. -->
+  <header class="po-hero" id="about">
+    <img class="po-hero-icon" src="assets/images/icon.png?v=81288b89" alt="Pano Owl App Icon" width="1024" height="1024">
+    <p class="po-hero-kicker">Pano Owl</p>
+    <h1 data-i18n="stitch-any-panorama-in.31877f">Stitch Any Panorama, in 360.</h1>
+    <p class="po-hero-standfirst" data-i18n="capture-stitch-and-step.79b37a">Capture, stitch and step inside your panoramas, on a Metal engine that keeps the full detail of your originals.</p>
+    <div class="po-cta">
+      <a href="https://apps.apple.com/us/app/pano-owl/id1560273409" target="_blank" rel="noopener noreferrer" class="btn-buy" data-i18n="download-on-the-app.a9096a">Download on the App Store</a>
     </div>
-  </section>
+    <div class="po-hero-device">
+      <img src="assets/screens/en/02-viewer-800.webp?v=7e667aaf"
+               srcset="assets/screens/en/02-viewer-400.webp?v=1b8e6a41 400w, assets/screens/en/02-viewer-800.webp?v=7e667aaf 800w"
+               sizes="(max-width: 676px) 230px, (max-width: 1117px) 34vw, 380px" width="800" height="1655" fetchpriority="high" data-i18n-src
+               alt="A finished panorama in the immersive 360 viewer" data-i18n-attr="alt:a-finished-panorama-in.10b54c">
+    </div>
+  </header>
 
-  <a href="https://apps.apple.com/us/app/pano-owl/id1560273409" class="floating-appstore" target="_blank" rel="noopener noreferrer">
+  <!-- Floating App Store button -->
+  <a href="https://apps.apple.com/us/app/pano-owl/id1560273409" target="_blank" rel="noopener noreferrer" class="floating-appstore">
     <span class="floating-appstore-icon"></span>
     <span data-i18n="download-on-app-store.cf50c2">Download on App Store</span>
   </a>
 
-  <section id="features" class="section">
-    <div class="section-header">
-      <p class="section-subtitle" data-i18n="everything-panoramas.7b21cf">Everything Panoramas</p>
-      <h2 data-i18n="one-app-every-pano.ff64c5">One App, Every Pano</h2>
-      <p data-i18n="modern-metal-stitching-from.ad14fe">Modern Metal stitching — from a quick eye-level sweep to a full 360° gigapixel scene</p>
-    </div>
+  <section class="po-statement">
+    <span class="po-ornament" aria-hidden="true"></span>
+    <p data-i18n="from-a-quick-sweep.2ff7b8">From a quick sweep to a full 360° gigapixel scene.</p>
+  </section>
 
-    <div class="feature-grid">
-      <div class="feature-card">
-        <div class="feature-icon">🎯</div>
-        <h3 class="feature-title" data-i18n="guided-capture.becb3c">Guided Capture</h3>
-        <p class="feature-description" data-i18n="on-screen-motion-guidance.492deb">
-          On-screen motion guidance walks you through every frame and auto-captures when you're on target. Use any lens — including telephoto — and on-device blur detection flags soft shots to re-take on the spot.
-        </p>
+  <!-- Stories: one idea, one headline, two sentences at most, one device. -->
+  <main id="features">
+    <section class="po-chapter" id="capture">
+      <div class="po-spread">
+        <div class="po-copy" data-reveal>
+          <p class="po-eyebrow"><span class="po-num">01</span><span data-i18n="capture.772a4b">Capture</span></p>
+          <h2 class="po-display" data-i18n="aim-at-the-dot.6b641d">Aim at the Dot. It Shoots Itself.</h2>
+          <p class="po-lede" data-i18n="guided-capture-pins-a.4165ed">Guided capture pins a grid of targets in the space around you and fires each frame the moment you're on one. Drift, and it throws the frame away.</p>
+        </div>
+        <figure class="po-figure" data-reveal>
+          <img src="assets/screens/en/01-capture-800.webp?v=d1e8a354"
+               srcset="assets/screens/en/01-capture-400.webp?v=2f6a4147 400w, assets/screens/en/01-capture-800.webp?v=d1e8a354 800w"
+               sizes="(max-width: 472px) 72vw, 340px" width="800" height="1655" loading="lazy" decoding="async" data-i18n-src
+               alt="Guided capture, with a target dot and the aiming ring over a forest" data-i18n-attr="alt:guided-capture-with-a.cf803c">
+        </figure>
       </div>
+    </section>
 
-      <div class="feature-card">
-        <div class="feature-icon">🌐</div>
-        <h3 class="feature-title" data-i18n="true-360-equirectangular.eba5e4">True 360° Equirectangular</h3>
-        <p class="feature-description" data-i18n="planar-cylindrical-and-real.067afd">
-          Planar, cylindrical, and real spherical (equirectangular) projections. Partial arcs to full 360 — stitch whatever you shoot. Exports carry standard GPano metadata so they render correctly in web viewers, Photos, and on Apple Vision Pro.
-        </p>
+    <section class="po-chapter is-flipped" id="stitch">
+      <div class="po-spread">
+        <div class="po-copy" data-reveal>
+          <p class="po-eyebrow"><span class="po-num">02</span><span data-i18n="stitch.0bb861">Stitch</span></p>
+          <h2 class="po-display" data-i18n="planar-cylindrical-or-a.4ab663">Planar, Cylindrical, or a Full 360</h2>
+          <p class="po-lede" data-i18n="pick-a-projection-and.cedb35">Pick a projection and Pano Owl blends any number of photos, even frames from a video, into one seamless panorama. Its resolution isn't capped by your device's memory.</p>
+        </div>
+        <figure class="po-figure" data-reveal>
+          <img src="assets/screens/en/04-stitch-800.webp?v=973a0031"
+               srcset="assets/screens/en/04-stitch-400.webp?v=e2145be6 400w, assets/screens/en/04-stitch-800.webp?v=973a0031 800w"
+               sizes="(max-width: 472px) 72vw, 340px" width="800" height="1655" loading="lazy" decoding="async" data-i18n-src
+               alt="The Stitch screen, with projection choices and auto-crop options" data-i18n-attr="alt:the-stitch-screen-with.e3f4ca">
+        </figure>
       </div>
+    </section>
 
-      <div class="feature-card">
-        <div class="feature-icon">🧠</div>
-        <h3 class="feature-title" data-i18n="gigapixel-memory-bounded.9d7219">Gigapixel, Memory-Bounded</h3>
-        <p class="feature-description" data-i18n="an-out-of-core.b8f0d4">
-          An out-of-core tiled engine stitches huge, high-resolution panoramas that wouldn't fit in memory — RAM stays bounded no matter how big the panorama gets. No more downscaling to make it fit.
-        </p>
+    <section class="po-chapter" id="view">
+      <div class="po-spread">
+        <div class="po-copy" data-reveal>
+          <p class="po-eyebrow"><span class="po-num">03</span><span data-i18n="view.69bd4e">View</span></p>
+          <h2 class="po-display" data-i18n="step-inside-your-panorama.8a1f7b">Step Inside Your Panorama</h2>
+          <p class="po-lede" data-i18n="tap-any-panorama-and.9e40a4">Tap any panorama and look around by dragging or moving your device. Every export carries 360 metadata, so Photos, web viewers and Apple Vision Pro see it as a 360.</p>
+        </div>
+        <figure class="po-figure is-tablet" data-reveal>
+          <img src="assets/screens/en/03-library-1440.webp?v=12cad2fb"
+               srcset="assets/screens/en/03-library-720.webp?v=a68ae6b1 720w, assets/screens/en/03-library-1440.webp?v=12cad2fb 1440w"
+               sizes="(max-width: 782px) 92vw, 720px" width="1440" height="1879" loading="lazy" decoding="async" data-i18n-src
+               alt="The panorama library on iPad, a grid of 360 panoramas" data-i18n-attr="alt:the-panorama-library-on.723ad8">
+        </figure>
       </div>
+    </section>
 
-      <div class="feature-card">
-        <div class="feature-icon">🌗</div>
-        <h3 class="feature-title" data-i18n="hdr-deghosting.8e776b">HDR &amp; Deghosting</h3>
-        <p class="feature-description" data-i18n="fuse-exposure-brackets-into.d16ce0">
-          Fuse exposure brackets into one perfectly exposed image, and keep moving objects from doubling into ghosts at the seams. Reliable blends, even in tricky light.
-        </p>
-      </div>
+  </main>
 
-      <div class="feature-card">
-        <div class="feature-icon">🔭</div>
-        <h3 class="feature-title" data-i18n="immersive-360-viewer.1898a3">Immersive 360 Viewer</h3>
-        <p class="feature-description" data-i18n="look-around-your-panoramas.e510ed">
-          Look around your panoramas right in the app — drag, or move your device to glance around the scene. Open any panorama from your photo library and step inside it.
-        </p>
+  <!-- Trust: one beat, then out of the way. -->
+  <section class="po-privacy" id="privacy">
+    <div class="po-privacy-inner" data-reveal>
+      <p class="po-eyebrow" data-i18n="private-by-design.fec57b">Private by Design</p>
+      <h2 class="po-display" data-i18n="your-photos-stay-yours.93a5b3">Your Photos Stay Yours</h2>
+      <div class="security-badges">
+        <div class="security-badge" data-i18n-html="on-device-stitching.60f746"><span class="badge-icon">&#x1f5bc;&#xfe0f;</span> On-Device Stitching</div>
+        <div class="security-badge" data-i18n-html="privacy-manifest.5063fd"><span class="badge-icon">&#x1f4cb;</span> Privacy Manifest</div>
+        <div class="security-badge" data-i18n-html="app-sandbox.b85ecb"><span class="badge-icon">&#x2705;</span> App Sandbox</div>
+        <div class="security-badge" data-i18n-html="works-offline.4504f3"><span class="badge-icon">&#x1f4f6;</span> Works Offline</div>
       </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">🎚️</div>
-        <h3 class="feature-title" data-i18n="correct-crop.e45311">Correct &amp; Crop</h3>
-        <p class="feature-description" data-i18n="straighten-the-horizon-drag.f45b01">
-          Straighten the horizon, drag the corners to fix distortion, and fine-tune the crop. Turn a video into a panorama — Pano Owl extracts the cleanest frames for you.
-        </p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">🗂️</div>
-        <h3 class="feature-title" data-i18n="multiple-panoramas-at-once.339176">Multiple Panoramas at Once</h3>
-        <p class="feature-description" data-i18n="drop-in-a-mixed.c46238">
-          Drop in a mixed pile of photos and Pano Owl detects and stitches each separate panorama on its own — no need to sort your shots first.
-        </p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">📍</div>
-        <h3 class="feature-title" data-i18n="location-heading.7b57cc">Location &amp; Heading</h3>
-        <p class="feature-description" data-i18n="capture-saves-gps-altitude.96817e">
-          Capture saves GPS, altitude, and compass heading with your panorama, written as standard metadata so web and Vision Pro viewers orient it correctly.
-        </p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">💻</div>
-        <h3 class="feature-title" data-i18n="iphone-ipad-mac.56fd62">iPhone, iPad &amp; Mac</h3>
-        <p class="feature-description" data-i18n="the-same-metal-engine.1b225e">
-          The same Metal engine on every device. Capture on iPhone, then stitch gigapixel scenes and batch your library on the Mac.
-        </p>
-      </div>
+      <p class="security-audit-note" data-i18n="no-tracking-no-ads.5e7933">No tracking. No ads. Your panoramas are stitched right on your device.</p>
     </div>
   </section>
 
-  <section id="how-it-works" class="section">
-    <div class="magazine-section">
-      <div class="magazine-content">
-        <h2 data-i18n="aim-auto-capture-done.3b32cb">Aim. Auto-Capture. Done.</h2>
-        <p data-i18n="mount-your-phone-follow.ab3968">
-          Mount your phone, follow the on-screen targets, and Pano Owl fires each frame the moment you're on point — sized to your lens, with the right overlap. Blurry frame? It catches it and asks for a re-take, right there.
-        </p>
-        <p data-i18n="capture-now-stitch-later.cdd42f">
-          Capture now, stitch later. Your location and compass heading ride along with every shot.
-        </p>
-      </div>
-      <div class="magazine-image">
-        <img src="assets/images/screenshot-2.png?v=1cdec520" alt="Guided capture and stitch options"
-             onerror="this.style.background='linear-gradient(135deg, #2a1e74, #1d3bd6)'; this.style.minHeight='400px'; this.style.display='block';">
-      </div>
-    </div>
-
-    <div class="magazine-section reverse">
-      <div class="magazine-content">
-        <h2 data-i18n="stitch-without-limits.3b424a">Stitch Without Limits</h2>
-        <p data-i18n="choose-planar-cylindrical-or.622212">
-          Choose planar, cylindrical, or true 360° spherical. Pano Owl matches features across any number of frames, warps them on the GPU, and blends a seamless result — preserving the detail of your originals.
-        </p>
-        <p data-i18n="a-tiled-out-of.71fc17">
-          A tiled, out-of-core engine means resolution isn't capped by your device's memory. Gigapixel scenes, on a phone.
-        </p>
-      </div>
-      <div class="magazine-image">
-        <img src="assets/images/screenshot-1.png?v=e7f18f72" alt="Pano Owl library"
-             onerror="this.style.background='linear-gradient(135deg, #8b6bff, #2948dc)'; this.style.minHeight='400px'; this.style.display='block';">
-      </div>
-    </div>
-
-    <div class="magazine-section">
-      <div class="magazine-content">
-        <h2 data-i18n="step-inside-your-panorama.8a1f7b">Step Inside Your Panorama</h2>
-        <p data-i18n="finished-a-sphere-look.943628">
-          Finished a sphere? Look around it immersively in the app — drag or move your device to glance in any direction. Open existing panoramas from your library to relive them in 360.
-        </p>
-        <p data-i18n="every-export-carries-gpano.8f8266">
-          Every export carries GPano metadata, so the same file looks right in web viewers, the Photos app, and on Apple Vision Pro.
-        </p>
-      </div>
-      <div class="magazine-image">
-        <img src="assets/images/screenshot-3.png?v=6105a6fe" alt="Immersive 360 viewer"
-             onerror="this.style.background='linear-gradient(135deg, #6b48dc, #1d3bd6)'; this.style.minHeight='400px'; this.style.display='block';">
-      </div>
-    </div>
-  </section>
-
-  <section id="screenshots" class="section">
-    <div class="section-header">
-      <p class="section-subtitle" data-i18n="see-it-in-action.8c8d28">See It In Action</p>
-      <h2 data-i18n="screenshots.597b63">Screenshots</h2>
-      <p data-i18n="your-panorama-library-the.1c4c99">Your panorama library, the stitch studio, and the immersive 360 viewer</p>
-    </div>
-
-    <div class="screenshots-grid">
-      <div class="screenshot-item">
-        <img src="assets/images/screenshot-1.png?v=e7f18f72" alt="Library"
-             onerror="this.style.background='linear-gradient(135deg, #2a1e74, #1d3bd6)'; this.style.minHeight='500px'; this.style.display='block';">
-      </div>
-      <div class="screenshot-item">
-        <img src="assets/images/screenshot-2.png?v=1cdec520" alt="Stitch studio"
-             onerror="this.style.background='linear-gradient(135deg, #8b6bff, #2948dc)'; this.style.minHeight='500px'; this.style.display='block';">
-      </div>
-      <div class="screenshot-item">
-        <img src="assets/images/screenshot-3.png?v=6105a6fe" alt="360 viewer"
-             onerror="this.style.background='linear-gradient(135deg, #6b48dc, #1d3bd6)'; this.style.minHeight='500px'; this.style.display='block';">
-      </div>
-      <div class="screenshot-item">
-        <img src="assets/images/screenshot-4.png?v=ab4c4da3" alt="Stitch studio"
-             onerror="this.style.background='linear-gradient(135deg, #1d3bd6, #8b6bff)'; this.style.minHeight='500px'; this.style.display='block';">
-      </div>
-    </div>
-  </section>
-
+  <!-- FAQ: short, folded, and the EU note last. -->
   <section id="faq" class="faq-section">
-    <div class="section-header">
-      <p class="section-subtitle" data-i18n="got-questions.8ecca3">Got Questions?</p>
-      <h2 data-i18n="frequently-asked-questions.d790b4">Frequently Asked Questions</h2>
+    <p class="po-eyebrow" data-i18n="got-questions.8ecca3">Got Questions?</p>
+    <h2 data-i18n="frequently-asked-questions.d790b4">Frequently Asked Questions</h2>
+
+    <div class="faq-list">
+    <div class="faq-item">
+      <button class="faq-question">
+        <span data-i18n="how-many-photos-can.f52fc3">How many photos can I stitch?</span>
+        <span class="faq-icon">▼</span>
+      </button>
+      <div class="faq-answer">
+        <p data-i18n="as-many-as-you.87a61d">As many as you like. Pano Owl matches features across the whole set, and its out-of-core tiled engine keeps memory bounded — so the output resolution isn't capped by your device. From a two-shot sweep to a full 360° gigapixel scene.</p>
+      </div>
     </div>
 
     <div class="faq-item">
-      <button class="faq-question"><span data-i18n="how-many-photos-can.f52fc3">How many photos can I stitch?</span><span class="faq-icon">▼</span></button>
-      <div class="faq-answer"><p data-i18n="as-many-as-you.87a61d">
-        As many as you like. Pano Owl matches features across the whole set, and its out-of-core tiled engine keeps memory bounded — so the output resolution isn't capped by your device. From a two-shot sweep to a full 360° gigapixel scene.
-      </p></div>
+      <button class="faq-question">
+        <span data-i18n="does-it-do-real.e7cb66">Does it do real 360° panoramas?</span>
+        <span class="faq-icon">▼</span>
+      </button>
+      <div class="faq-answer">
+        <p data-i18n="yes-true-equirectangular-spherical.b0a5b8">Yes — true equirectangular (spherical) output, plus cylindrical and planar. Partial arcs and full 360 both work. Exports include standard GPano metadata, so they render correctly in web viewers, the Photos app, and on Apple Vision Pro.</p>
+      </div>
     </div>
 
     <div class="faq-item">
-      <button class="faq-question"><span data-i18n="does-it-do-real.e7cb66">Does it do real 360° panoramas?</span><span class="faq-icon">▼</span></button>
-      <div class="faq-answer"><p data-i18n="yes-true-equirectangular-spherical.b0a5b8">
-        Yes — true equirectangular (spherical) output, plus cylindrical and planar. Partial arcs and full 360 both work. Exports include standard GPano metadata, so they render correctly in web viewers, the Photos app, and on Apple Vision Pro.
-      </p></div>
+      <button class="faq-question">
+        <span data-i18n="can-i-turn-a.0f6ea7">Can I turn a video into a panorama?</span>
+        <span class="faq-icon">▼</span>
+      </button>
+      <div class="faq-answer">
+        <p data-i18n="yes-pick-a-video.3efcb6">Yes. Pick a video and Pano Owl extracts the cleanest, well-spaced frames automatically, then stitches them like any other set.</p>
+      </div>
     </div>
 
     <div class="faq-item">
-      <button class="faq-question"><span data-i18n="what-kind-of-capture.56eab8">What kind of capture works best?</span><span class="faq-icon">▼</span></button>
-      <div class="faq-answer"><p data-i18n="either-rotational-pivoting-on.ee603b">
-        Either rotational (pivoting on a tripod or in your hand) or a flat scan across a subject. The guided capture mode tracks your motion and auto-captures each frame with the right overlap, and flags blurry shots so you can re-take them.
-      </p></div>
+      <button class="faq-question">
+        <span data-i18n="what-devices-does-it.b7b7b0">What devices does it run on?</span>
+        <span class="faq-icon">▼</span>
+      </button>
+      <div class="faq-answer">
+        <p data-i18n="iphone-and-ipad-with.e11fbb">iPhone and iPad, with a native Mac app sharing the same Metal engine for heavier gigapixel work. Guided camera capture is on iPhone &amp; iPad; stitching, correcting, and viewing work everywhere.</p>
+      </div>
     </div>
 
     <div class="faq-item">
-      <button class="faq-question"><span data-i18n="can-i-turn-a.0f6ea7">Can I turn a video into a panorama?</span><span class="faq-icon">▼</span></button>
-      <div class="faq-answer"><p data-i18n="yes-pick-a-video.3efcb6">
-        Yes. Pick a video and Pano Owl extracts the cleanest, well-spaced frames automatically, then stitches them like any other set.
-      </p></div>
+      <button class="faq-question">
+        <span data-i18n="what-does-it-cost.ed90bc">What does it cost?</span>
+        <span class="faq-icon">▼</span>
+      </button>
+      <div class="faq-answer">
+        <p data-i18n="pano-owl-is-a.9e0eee">Pano Owl is a one-time purchase on the App Store. There's no subscription, no ads and no in-app purchase.</p>
+      </div>
     </div>
 
-    <div class="faq-item">
-      <button class="faq-question"><span data-i18n="does-it-keep-the.34976f">Does it keep the quality of my originals?</span><span class="faq-icon">▼</span></button>
-      <div class="faq-answer"><p data-i18n="the-pipeline-works-in.21fc4f">
-        The pipeline works in high bit depth and warps at full resolution, so you keep the detail of your source photos rather than downscaling to fit memory. You can also straighten, drag-to-correct distortion, and adjust the crop before exporting.
-      </p></div>
-    </div>
-
-    <div class="faq-item">
-      <button class="faq-question"><span data-i18n="what-devices-does-it.b7b7b0">What devices does it run on?</span><span class="faq-icon">▼</span></button>
-      <div class="faq-answer"><p data-i18n="iphone-and-ipad-with.e11fbb">
-        iPhone and iPad, with a native Mac app sharing the same Metal engine for heavier gigapixel work. Guided camera capture is on iPhone &amp; iPad; stitching, correcting, and viewing work everywhere.
-      </p></div>
-    </div>
     <div class="faq-item">
       <button class="faq-question">
         <span data-i18n="is-pano-owl-available.48236b">Is Pano Owl available in the European Union?</span>
@@ -325,22 +585,18 @@
         <p data-i18n="yes-pano-owl-is.29e000">Yes. Pano Owl is on the App Store everywhere in the European Union, France included. It's available in every App Store territory Apple offers.</p>
       </div>
     </div>
+
+    </div>
   </section>
 
-  <section class="security-callout">
-    <div class="section-header">
-      <p class="section-subtitle" data-i18n="private-by-design.fec57b">Private by Design</p>
-      <h2 data-i18n="your-photos-stay-yours.93a5b3">Your Photos Stay Yours</h2>
+  <!-- Closing: the promise again, and the one button. -->
+  <section class="po-closing">
+    <img src="assets/images/icon.png?v=81288b89" alt="" width="1024" height="1024" loading="lazy">
+    <h2 class="po-display" data-i18n="stitch-any-panorama-in.31877f">Stitch Any Panorama, in 360.</h2>
+    <div class="po-cta">
+      <a href="https://apps.apple.com/us/app/pano-owl/id1560273409" target="_blank" rel="noopener noreferrer" class="btn-buy" data-i18n="download-on-the-app.a9096a">Download on the App Store</a>
     </div>
-    <div class="security-badges">
-      <div class="security-badge" data-i18n-html="on-device-stitching.60f746"><span class="badge-icon">&#x1f5bc;&#xfe0f;</span> On-Device Stitching</div>
-      <div class="security-badge" data-i18n-html="privacy-manifest.5063fd"><span class="badge-icon">&#x1f4cb;</span> Privacy Manifest</div>
-      <div class="security-badge" data-i18n-html="app-sandbox.b85ecb"><span class="badge-icon">&#x2705;</span> App Sandbox</div>
-      <div class="security-badge" data-i18n-html="works-offline.4504f3"><span class="badge-icon">&#x1f4f6;</span> Works Offline</div>
-    </div>
-    <p class="security-audit-note" data-i18n="no-tracking-no-ads.5e7933">No tracking. No ads. Your panoramas are stitched right on your device.</p>
   </section>
-
   <footer class="footer">
     <div class="footer-content">
       <div class="footer-links">
@@ -388,5 +644,20 @@
   </footer>
 
   <script src="../app-showcase.js"></script>
+  <script>
+    // A quiet reveal as each chapter arrives — only when motion is welcome, and
+    // only once JavaScript is known to be running, so nothing can stay hidden.
+    (function () {
+      if (!('IntersectionObserver' in window)) return;
+      if (!window.matchMedia('(prefers-reduced-motion: no-preference)').matches) return;
+      document.documentElement.classList.add('po-motion');
+      const io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); }
+        });
+      }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+      document.querySelectorAll('[data-reveal]').forEach(function (el) { io.observe(el); });
+    })();
+  </script>
 </body>
 </html>
