@@ -17,5 +17,16 @@
         "scale": 2
       }
     ]
+  },
+  "kern": {
+    "repo": "Kern",
+    "renders": [
+      {
+        "device": "iphone",
+        "captures": "screenshots/iphone-6.9",
+        "scenes": ["01-home-ocean", "02-wheel-sunset", "03-search-forest", "04-chain-library", "06-home-midnight", "05-complete-printshop"],
+        "widths": [400, 800]
+      }
+    ]
   }
 }
