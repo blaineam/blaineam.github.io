@@ -50,5 +50,16 @@
         "widths": [400, 800]
       }
     ]
+  },
+  "luma-editor": {
+    "repo": "Luma/Luma",
+    "renders": [
+      {
+        "device": "iphone",
+        "captures": "screenshots/iphone-6.9",
+        "scenes": ["03-adjust", "02-editor", "07-curves", "04-masks", "06-retouch", "08-culling"],
+        "widths": [400, 800]
+      }
+    ]
   }
 }
