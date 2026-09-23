@@ -176,5 +176,16 @@
         "widths": [400, 800]
       }
     ]
+  },
+  "revela": {
+    "repo": "Revela",
+    "renders": [
+      {
+        "device": "iphone",
+        "captures": "screenshots/iphone-6.9",
+        "scenes": ["02-fridge", "03-camera", "04-shelf", "05-envelope", "07-lab"],
+        "widths": [400, 800]
+      }
+    ]
   }
 }
