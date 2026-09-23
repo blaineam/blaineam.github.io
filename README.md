@@ -22,18 +22,20 @@ Apple Watch. Just imagine what we can build together!
 ## Apps
 
 **20 apps on the App Store**, spanning iOS, iPadOS, macOS, tvOS, and watchOS — plus
-**Lathe**, an open-source media engine and free Mac app distributed on GitHub. The
+**Lathe**, an open-source media engine and free Mac app distributed on GitHub, and two
+free web apps, **Tom** and **Monkr**, that run entirely in your browser. The
 [`/apps`](https://wemiller.com/apps) showcase renders a curated order; the home page
 lists them chronologically. [`apps/projects.json`](apps/projects.json) is the
 source of truth for app metadata; the showcase's display order is hand-curated.
 
-**Haven**, **Blip**, **Glint**, **Lathe**, **DeepSi**, **Zap!** and **Scripture Alone**
-(coming soon) are free — no ads, no tracking, no subscriptions. Their development is funded through
+**Haven**, **Blip**, **Glint**, **Lathe**, **DeepSi**, **Zap!**, **Scripture Alone**
+(coming soon), **Tom** and **Monkr** are free — no ads, no tracking, no subscriptions. Their development is funded through
 [GitHub Sponsors](https://github.com/sponsors/blaineam), [Ko-fi](https://ko-fi.com/wemiller),
 and one-time tips; see the [Support](https://wemiller.com/support) page.
 
 | App | What it does | Released |
 |-----|--------------|----------|
+| **Tom** | A music machine — dial in a melody in seconds or snap a whole song together like Lego; seeded, royalty-free, web + CLI ([tom.wemiller.com](https://tom.wemiller.com), [source](https://github.com/blaineam/Tom)) | September 2026 |
 | **Scripture Alone** | A free, private, offline Bible for iPhone, iPad, Mac and Apple Watch — open source (AGPL-3.0); share links rebuild verse cards in the browser | Coming soon |
 | **Lathe** | Open-source media engine behind Sami, and a free Mac downloader (not on the App Store; [download](https://github.com/blaineam/Lathe/releases/latest)) | September 2026 |
 | **Kern** | Handle letters with care — word puzzles in living worlds | August 2026 |
@@ -47,6 +49,7 @@ and one-time tips; see the [Support](https://wemiller.com/support) page.
 | **Tilebreak** | Match. Combo. Clear. Polished Mahjong solitaire | May 2026 |
 | **Blip** | Featherlight system monitor for Mac & iPhone | April 2026 |
 | **Glint** | Brightness & volume for any display | April 2026 |
+| **Monkr** | Beautiful device mockups in seconds, in your browser — the framing behind every App Store screenshot here ([monkr.wemiller.com](https://monkr.wemiller.com), [source](https://github.com/blaineam/Monkr)) | April 2026 |
 | **Sami** | Smart media optimizer | February 2026 |
 | **Enter Space** | Local-feeling access to every cloud you use | June 2025 |
 | **Luma Editor** | Match your photo style | January 2025 |
@@ -73,7 +76,7 @@ shares a consistent look.
 | [Puzzles](https://wemiller.com/puzzles) | Interactive puzzles and brain teasers |
 | [Speed Test](https://wemiller.com/speedtest) | In-browser network speed test |
 | [Pay](https://wemiller.com/pay) | Simple payment / tip page |
-| [Support](https://wemiller.com/support) | Fund future development of the free apps (Haven, Blip, Glint, Lathe) via GitHub Sponsors, Ko-fi, or a one-time tip |
+| [Support](https://wemiller.com/support) | Fund future development of the free apps (Haven, Blip, Glint, Lathe, DeepSi, Zap!, Scripture Alone, Tom, Monkr) via GitHub Sponsors, Ko-fi, or a one-time tip |
 
 ---
 

@@ -290,8 +290,7 @@
       margin: 0 auto;
     }
 
-    /* Four free apps: one row when they fit, otherwise two by two, never
-       three and a lonely fourth. */
+    /* Nine free apps: three by three when they fit, otherwise two across. */
     .free-apps-grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -301,7 +300,7 @@
     }
 
     @media (min-width: 1100px) {
-      .free-apps-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+      .free-apps-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
     }
     @media (max-width: 560px) {
       .free-apps-grid { grid-template-columns: 1fr; }
@@ -361,6 +360,22 @@
       color: var(--text-secondary);
       margin: 0;
       font-size: 0.95rem;
+    }
+
+    /* Web apps run in the browser rather than installing from a store. */
+    .web-badge {
+      display: inline-block;
+      margin-left: 0.4em;
+      padding: 0.1em 0.55em;
+      border: 1px solid currentColor;
+      border-radius: 999px;
+      color: var(--primary-color);
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      line-height: 1.4;
+      text-transform: uppercase;
+      vertical-align: middle;
     }
 
     .free-apps-cta {
@@ -677,7 +692,7 @@
   <!-- Free apps · support future development -->
   <section class="free-apps-section" id="support">
     <h2 class="free-apps-title" data-i18n="free-apps-support-future.bde25b">Free apps · support future development</h2>
-    <p class="free-apps-lede" data-i18n="these-seven-are-free.697755">These seven are free — no ads, no tracking, no subscription. If they earn a place on your devices, you can help fund what comes next.</p>
+    <p class="free-apps-lede" data-i18n="these-nine-are-free.ca0221">These nine are free — no ads, no tracking, no subscription. If they earn a place on your devices, you can help fund what comes next.</p>
 
     <div class="free-apps-grid">
       <a href="haven/" class="free-app-card">
@@ -714,6 +729,16 @@
         <span class="free-app-icon"><img src="scripture-alone/assets/images/icon.png?v=5ef7dc50" alt="Scripture Alone App Icon"></span>
         <span class="free-app-name">Scripture Alone</span>
         <span class="free-app-tagline" data-i18n="a-private-offline-bible.a3470e">A private, offline Bible — coming soon</span>
+      </a>
+      <a href="https://tom.wemiller.com" class="free-app-card" target="_blank" rel="noopener">
+        <span class="free-app-icon"><img src="_shared/icons/tom.svg?v=c631f7f1" alt="Tom App Icon"></span>
+        <span class="free-app-name">Tom <span class="web-badge" data-i18n="web.a8323a">Web</span></span>
+        <span class="free-app-tagline" data-i18n="a-music-machine-melodies.7120bc">A music machine — melodies in seconds, songs like Lego</span>
+      </a>
+      <a href="https://monkr.wemiller.com" class="free-app-card" target="_blank" rel="noopener">
+        <span class="free-app-icon"><img src="_shared/icons/monkr.png?v=cf335919" alt="Monkr App Icon"></span>
+        <span class="free-app-name">Monkr <span class="web-badge" data-i18n="web.a8323a">Web</span></span>
+        <span class="free-app-tagline" data-i18n="beautiful-device-mockups-in.ea039d">Beautiful device mockups in seconds</span>
       </a>
     </div>
 
