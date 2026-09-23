@@ -165,5 +165,16 @@
         "widths": [720, 1440]
       }
     ]
+  },
+  "wise-flyer": {
+    "repo": "Wise Flyer/Wise Flyer",
+    "renders": [
+      {
+        "device": "iphone",
+        "captures": "screenshots/iphone-6.9",
+        "scenes": ["01-prepare", "02-gameplay", "03-attack", "04-gameover"],
+        "widths": [400, 800]
+      }
+    ]
   }
 }
