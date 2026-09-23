@@ -1,0 +1,40 @@
+{
+  "_comment": "Written by scripts/sync-app-screens.py; read by i18n/i18n.js. files: <lang>/<name> → content hash (the ?v= stamp). sizes: <scene> → [width, height] of the largest file, for the img tag.",
+  "langs": [
+    "en"
+  ],
+  "files": {
+    "en/01-prepare-400.webp": "16def137",
+    "en/01-prepare-800.webp": "30213a68",
+    "en/02-gameplay-400.webp": "1ce84f81",
+    "en/02-gameplay-800.webp": "968d2ba1",
+    "en/03-attack-400.webp": "5e154622",
+    "en/03-attack-800.webp": "0a27ad61",
+    "en/04-gameover-400.webp": "21f31272",
+    "en/04-gameover-800.webp": "507f1c6c"
+  },
+  "sizes": {
+    "01-prepare": [
+      800,
+      1655
+    ],
+    "02-gameplay": [
+      800,
+      1655
+    ],
+    "03-attack": [
+      800,
+      1655
+    ],
+    "04-gameover": [
+      800,
+      1655
+    ]
+  },
+  "inputs": {
+    "en/01-prepare": "44327180c6ccaab28331aa5742875e1151eb2678",
+    "en/02-gameplay": "951f3434953de24c20c9ae9e128ec0e9b4cfa4a1",
+    "en/03-attack": "a5c856f501ea5660dae4e486062bfa1210b5ac28",
+    "en/04-gameover": "ebf6d5d5b50269714213dfba9255f1ceedb3847a"
+  }
+}

@@ -3,36 +3,382 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Wise Flyer - Can You Top the Leaderboard?</title>
-  <meta name="description" content="Tap to fly through endless obstacles in this addictive owl flying game. Unique graphics, simple mechanics, amazing soundtrack, and competitive leaderboard. Do you have what it takes?">
-  <meta property="og:title" content="Wise Flyer - Can You Top the Leaderboard?">
-  <meta property="og:description" content="Tap to fly through endless obstacles in this addictive owl flying game. Unique graphics, simple mechanics, amazing soundtrack, and competitive leaderboard. Do you have what it takes?">
+  <title>Wise Flyer - One Tap, One Owl, One More Try</title>
+  <meta name="description" content="Tap to keep a barn owl in the air and slip between the spiked pipes. Challenge friends to ATTACK over Game Center or iMessage, earn medals, and climb the Game Center leaderboard. No ads, no in-app purchases.">
+  <meta property="og:title" content="Wise Flyer - One Tap, One Owl, One More Try">
+  <meta property="og:description" content="One tap. One owl. One more try. An owl flying game for iPhone and iPad with ATTACK challenges, medals and a Game Center leaderboard.">
   <meta property="og:type" content="app">
   <meta property="og:url" content="https://wemiller.com/apps/wise-flyer/">
   <meta property="og:image" content="https://wemiller.com/apps/wise-flyer/assets/images/poster.jpg?v=bc4d06f2">
   <link rel="stylesheet" href="../app-showcase.css">
   <style>
-    /* Wise Flyer Specific Styling */
+    /* Wise Flyer — the icon's night: a navy sky full of stars, a cream barn owl,
+       and the yellow windows of the city below. The buttons are those windows. */
     :root {
-      --app-primary: #4facfe;
-      --app-secondary: #00f2fe;
-      --app-accent: #43e97b;
+      --app-primary: #0B1747;      /* the night sky */
+      --app-secondary: #1E3380;    /* the sky near the horizon */
+      --app-accent: #F5D547;       /* lit windows */
+      --primary-color: #1D2E78;    /* headlines on paper */
+      --secondary-color: #3A56B5;
+      --wf-ink: #24399A;
+      --wf-accent-text: #8A6300;   /* window yellow, deepened for light ground */
+      --wf-display: ui-rounded, "SF Pro Rounded", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+      --wf-body-face: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+      --wf-display-weight: 800;
+      --wf-paper: #FBFAF5;
+      --wf-paper-2: #F2F0E6;
+      --wf-rule: rgba(29, 46, 120, 0.14);
+      --wf-quiet: #5D6178;
+      --wf-body: #30344A;
+      --wf-shadow: drop-shadow(0 30px 40px rgba(11, 23, 71, 0.24)) drop-shadow(0 6px 10px rgba(11, 23, 71, 0.10));
+      --wf-hero-bg: radial-gradient(1.5px 1.5px at 12% 18%, rgba(255,255,255,0.9) 50%, transparent 51%), radial-gradient(1px 1px at 28% 42%, rgba(255,255,255,0.8) 50%, transparent 51%), radial-gradient(1.5px 1.5px at 71% 14%, rgba(255,255,255,0.9) 50%, transparent 51%), radial-gradient(1px 1px at 86% 36%, rgba(255,255,255,0.7) 50%, transparent 51%), radial-gradient(1px 1px at 55% 28%, rgba(255,255,255,0.7) 50%, transparent 51%), radial-gradient(1.5px 1.5px at 38% 8%, rgba(255,255,255,0.8) 50%, transparent 51%), radial-gradient(1px 1px at 92% 64%, rgba(255,255,255,0.6) 50%, transparent 51%), radial-gradient(1px 1px at 6% 58%, rgba(255,255,255,0.6) 50%, transparent 51%), radial-gradient(ellipse 60% 40% at 50% 100%, rgba(245, 213, 71, 0.16) 0%, transparent 75%), linear-gradient(175deg, #060D2E 0%, #0B1747 50%, #1E3380 100%);
+      --wf-hero-ink: #FFFFFF;
+      --wf-hero-kicker: rgba(245, 213, 71, 0.92);
+      --wf-cta-bg: linear-gradient(180deg, #FFE37A, #F5C930);
+      --wf-cta-ink: #1A1400;
+      --wf-float: linear-gradient(135deg, #0B1747, #1E3380);
+      --wf-btn-shadow: 0 10px 28px rgba(11, 23, 71, 0.30);
+      --wf-ornament: linear-gradient(90deg, #F5D547, #FF9F43);
+      --bg-primary: var(--wf-paper);
+      --bg-secondary: var(--wf-paper-2);
+      --text-primary: #141A36;
+      --text-secondary: var(--wf-body);
+      --text-muted: var(--wf-quiet);
+      --glass-bg: rgba(251, 250, 245, 0.8);
+      --glass-border: rgba(29, 46, 120, 0.10);
+      --glass-shadow: none;
+      --wf-measure: 1120px;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --primary-color: #AFC0FF;
+        --secondary-color: #8FA3E8;
+        --wf-ink: #C2CEFF;
+        --wf-accent-text: #F5D547;
+        --wf-paper: #070C24;
+        --wf-paper-2: #0C1433;
+        --wf-rule: rgba(175, 192, 255, 0.15);
+        --wf-quiet: #A0A6C4;
+        --wf-body: #D6D9EA;
+        --wf-shadow: drop-shadow(0 30px 44px rgba(0, 0, 0, 0.6)) drop-shadow(0 6px 10px rgba(0, 0, 0, 0.3));
+        --text-primary: #EEF0FA;
+        --glass-bg: rgba(7, 12, 36, 0.8);
+        --glass-border: rgba(175, 192, 255, 0.08);
+      }
     }
 
-    .hero {
-      background: linear-gradient(135deg, var(--app-primary) 0%, var(--app-secondary) 100%);
-      color: white;
+    body { background: var(--wf-paper); }
+    .btn-buy { box-shadow: var(--wf-btn-shadow); }
+    .nav-links .nav-link, .nav-links .btn-buy { white-space: nowrap; }
+    .floating-appstore { background: var(--wf-float); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.30); }
+
+    /* ---- Shared type ---------------------------------------------------- */
+    .wf-eyebrow {
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--wf-accent-text);
+      margin: 0 0 1rem;
+    }
+    .wf-eyebrow .wf-num {
+      font-family: var(--wf-display);
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      margin-right: 0.8em;
+      opacity: 0.85;
+    }
+    .wf-display {
+      font-family: var(--wf-display);
+      font-weight: var(--wf-display-weight);
+      background: none;
+      -webkit-text-fill-color: currentColor;
+      color: var(--primary-color);
+      font-size: clamp(2.1rem, 5.2vw, 3.6rem);
+      line-height: 1.06;
+      letter-spacing: -0.02em;
+      margin: 0 0 1.4rem;
+      text-wrap: balance;
+    }
+    .wf-lede {
+      font-family: var(--wf-body-face);
+      font-size: clamp(1.12rem, 1.9vw, 1.36rem);
+      line-height: 1.62;
+      color: var(--wf-body);
+      margin: 0 0 1.2rem;
+      text-wrap: pretty;
+    }
+    .wf-lede a, .faq-answer a { color: var(--wf-ink); }
+
+    /* ---- Hero ----------------------------------------------------------- */
+    .wf-hero {
+      position: relative;
+      background: var(--wf-hero-bg);
+      color: #fff;
+      text-align: center;
+      padding: calc(76px + clamp(3rem, 8vw, 6rem)) 16px 0;
+      overflow: hidden;
+    }
+    .wf-hero-icon {
+      width: 84px;
+      height: 84px;
+      display: block;
+      margin: 0 auto 1.4rem;
+      border-radius: 22%;
+      filter: drop-shadow(0 14px 26px rgba(0, 0, 0, 0.45));
+    }
+    .wf-hero-kicker {
+      font-size: 0.82rem;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      color: var(--wf-hero-kicker);
+      margin: 0 0 1.2rem;
+    }
+    .wf-hero h1 {
+      font-family: var(--wf-display);
+      font-weight: var(--wf-display-weight);
+      background: none;
+      -webkit-background-clip: border-box;
+      background-clip: border-box;
+      -webkit-text-fill-color: var(--wf-hero-ink);
+      color: var(--wf-hero-ink);
+      font-size: clamp(2.6rem, 8.4vw, 6.2rem);
+      line-height: 1.02;
+      letter-spacing: -0.025em;
+      max-width: 13ch;
+      margin: 0 auto 1.6rem;
+      text-wrap: balance;
+    }
+    .wf-hero-standfirst {
+      font-family: var(--wf-body-face);
+      font-size: clamp(1.08rem, 2vw, 1.34rem);
+      line-height: 1.6;
+      color: rgba(255, 255, 255, 0.86);
+      max-width: 44ch;
+      margin: 0 auto 2.2rem;
+      text-wrap: pretty;
+    }
+    .wf-cta {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.75rem;
+    }
+    .wf-cta .btn-buy {
+      background: var(--wf-cta-bg);
+      color: var(--wf-cta-ink);
+      padding: 0.8rem 1.5rem;
+      border-radius: 999px;
+      min-height: 44px;
+    }
+    .wf-hero-device {
+      margin: clamp(3rem, 7vw, 4.5rem) auto 0;
+      width: clamp(230px, 34vw, 380px);
+      height: clamp(250px, 36vw, 420px);
+      overflow: hidden;
+    }
+    .wf-hero-device img { display: block; width: 100%; height: auto; }
+
+    /* ---- Statement ------------------------------------------------------ */
+    .wf-statement {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: clamp(4rem, 10vw, 7.5rem) 16px;
+      text-align: center;
+    }
+    .wf-statement p {
+      font-family: var(--wf-display);
+      font-size: clamp(1.5rem, 3.6vw, 2.5rem);
+      line-height: 1.3;
+      color: var(--primary-color);
+      margin: 0;
+      text-wrap: balance;
+    }
+    .wf-ornament {
+      display: block;
+      width: 44px;
+      height: 4px;
+      margin: 0 auto 1.8rem;
+      border-radius: 4px;
+      background: var(--wf-ornament);
     }
 
-    .hero-title,
-    .hero-subtitle {
-      color: white;
-      -webkit-text-fill-color: white;
+    /* ---- Stories -------------------------------------------------------- */
+    .wf-chapter {
+      max-width: var(--wf-measure);
+      margin: 0 auto;
+      padding: clamp(4rem, 9vw, 7rem) 16px;
+      border-top: 1px solid var(--wf-rule);
+      scroll-margin-top: 70px;
+    }
+    .wf-spread {
+      display: grid;
+      gap: clamp(2.5rem, 6vw, 5rem);
+      align-items: center;
+    }
+    .wf-copy { max-width: 34rem; }
+    @media (min-width: 900px) {
+      .wf-spread { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); }
+      .wf-chapter.is-flipped .wf-copy { order: 2; }
+    }
+    .wf-figure { margin: 0 auto; width: min(72vw, 340px); text-align: center; }
+    .wf-figure.is-tablet { width: min(78vw, 480px); }
+    .wf-figure img { display: block; width: 100%; height: auto; filter: var(--wf-shadow); }
+    .wf-figure figcaption {
+      font-size: 0.88rem;
+      line-height: 1.45;
+      color: var(--wf-quiet);
+      margin-top: 1.1rem;
+    }
+    .wf-figure figcaption::before {
+      content: "";
+      display: block;
+      width: 18px;
+      height: 1px;
+      margin: 0 auto 0.6rem;
+      background: var(--wf-accent-text);
     }
 
-    .hero-description {
+    /* Secondary routes: quiet text links under the one button. */
+    .wf-alt-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.7rem;
+      margin: 1.1rem 0 0;
+      font-size: 0.95rem;
+      color: rgba(255, 255, 255, 0.6);
+    }
+    .wf-alt-links a { color: rgba(255, 255, 255, 0.88); text-decoration: none; border-bottom: 1px solid rgba(255, 255, 255, 0.3); }
+    .wf-alt-links a:hover { border-bottom-color: rgba(255, 255, 255, 0.8); }
+    .wf-closing .wf-alt-links { color: var(--wf-quiet); }
+    .wf-closing .wf-alt-links a { color: var(--wf-ink); border-bottom-color: var(--wf-rule); }
+
+    /* ---- Trust beat ----------------------------------------------------- */
+    .wf-privacy {
+      background: var(--wf-hero-bg);
+      color: #fff;
+      padding: clamp(4.5rem, 10vw, 8rem) 16px;
+      scroll-margin-top: 60px;
+    }
+    .wf-privacy-inner { max-width: var(--wf-measure); margin: 0 auto; }
+    .wf-privacy .wf-eyebrow { color: var(--wf-hero-kicker); text-align: center; }
+    .wf-privacy .wf-display {
+      color: var(--wf-hero-ink);
+      -webkit-text-fill-color: var(--wf-hero-ink);
+      text-align: center;
+      font-size: clamp(2.3rem, 6.4vw, 4.6rem);
+      max-width: 14ch;
+      margin: 0 auto 3rem;
+    }
+    .wf-privacy .security-badges {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+      gap: 0;
+      max-width: none;
+      padding: 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.22);
+    }
+    .wf-privacy .security-badge {
+      background: none;
+      border: none;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.22);
+      border-radius: 0;
+      box-shadow: none;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+      color: #fff;
+      font-family: var(--wf-body-face);
+      font-size: 1.12rem;
+      padding: 1.1rem 0.4rem;
+      justify-content: center;
+    }
+    .wf-privacy .security-badge:hover { transform: none; }
+    .wf-privacy .security-audit-note {
+      text-align: center;
+      font-family: var(--wf-body-face);
+      font-size: clamp(1.1rem, 2.2vw, 1.3rem);
       color: rgba(255, 255, 255, 0.9);
+      max-width: 36ch;
+      padding: 0;
+      margin: 2.6rem auto 0;
     }
+    .wf-privacy-link { text-align: center; margin: 1.4rem 0 0; }
+    .wf-privacy-link a { color: var(--wf-hero-kicker); text-decoration: none; border-bottom: 1px solid rgba(255, 255, 255, 0.35); }
+    .wf-privacy-link a::after { content: " →"; }
+
+    /* ---- FAQ: a ruled list ---------------------------------------------- */
+    .faq-section { max-width: 820px; padding: clamp(4rem, 9vw, 6rem) 16px; }
+    .faq-section .wf-eyebrow, .faq-section h2 { text-align: center; }
+    .faq-section h2 {
+      font-family: var(--wf-display);
+      font-weight: var(--wf-display-weight);
+      color: var(--primary-color);
+      font-size: clamp(1.9rem, 4vw, 2.8rem);
+      margin: 0 0 2.5rem;
+    }
+    .faq-item {
+      background: none;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+      border: none;
+      border-top: 1px solid var(--wf-rule);
+      border-radius: 0;
+      margin: 0;
+    }
+    .faq-item:last-child { border-bottom: 1px solid var(--wf-rule); }
+    .faq-question {
+      font-family: var(--wf-body-face);
+      font-size: 1.15rem;
+      font-weight: 600;
+      padding: 1.25rem 0;
+      gap: 1rem;
+    }
+    .faq-question:hover { color: var(--wf-accent-text); }
+    .faq-icon { font-size: 0.8rem; color: var(--wf-accent-text); }
+    .faq-answer { padding: 0; }
+    .faq-item.active .faq-answer { padding: 0 0 1.4rem; }
+    .faq-answer p { font-size: 1rem; line-height: 1.68; color: var(--wf-body); }
+
+    /* ---- Closing -------------------------------------------------------- */
+    .wf-closing {
+      text-align: center;
+      padding: clamp(4.5rem, 10vw, 7rem) 16px;
+      background: var(--wf-paper-2);
+      border-top: 1px solid var(--wf-rule);
+    }
+    .wf-closing img { width: 96px; height: 96px; display: block; margin: 0 auto 1.6rem; border-radius: 22%; filter: drop-shadow(0 16px 26px rgba(0, 0, 0, 0.28)); }
+    .wf-closing .wf-display { font-size: clamp(2rem, 5vw, 3.4rem); max-width: 14ch; margin: 0 auto 1.8rem; }
+    .wf-closing .btn-buy { background: var(--wf-float); color: #fff; padding: 0.8rem 1.5rem; border-radius: 999px; min-height: 44px; }
+    .footer { margin-top: 0; }
+
+    /* ---- Reveal: only when motion is welcome ----------------------------- */
+    .wf-motion [data-reveal] {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.9s ease, transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1);
+    }
+    .wf-motion [data-reveal].is-in { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) {
+      .floating-appstore, .faq-item, .hero-text { animation: none; }
+    }
+
+    @media (max-width: 600px) {
+      .wf-hero-icon { width: 68px; height: 68px; }
+      .wf-cta { flex-direction: column; align-items: stretch; max-width: 22rem; margin: 0 auto; }
+      .wf-cta a { justify-content: center; }
+    }
+    /* Break CJK headlines at phrase boundaries, not mid-word, where supported. */
+    .wf-hero h1, .wf-display, .wf-statement p { word-break: auto-phrase; }
+    /* `ch` is the width of a Latin zero; a CJK glyph is two of them. Measure CJK in em. */
+    :lang(ja) .wf-hero h1, :lang(zh) .wf-hero h1, :lang(ko) .wf-hero h1 { max-width: 9em; }
+    /* Korean breaks inside words unless told to keep them whole. */
+    :lang(ko) .wf-hero h1, :lang(ko) .wf-display, :lang(ko) .wf-statement p, :lang(ko) .wf-lede, :lang(ko) .wf-hero-standfirst { word-break: keep-all; }
+    :lang(ja) .wf-privacy .wf-display, :lang(zh) .wf-privacy .wf-display, :lang(ko) .wf-privacy .wf-display,
+    :lang(ja) .wf-closing .wf-display, :lang(zh) .wf-closing .wf-display, :lang(ko) .wf-closing .wf-display { max-width: 10em; }
+    :lang(ja) .wf-hero-standfirst, :lang(zh) .wf-hero-standfirst, :lang(ko) .wf-hero-standfirst,
+    :lang(ja) .security-audit-note, :lang(zh) .security-audit-note, :lang(ko) .security-audit-note { max-width: 26em; }
+
   </style>
   <link rel="alternate" hreflang="x-default" href="https://wemiller.com/apps/wise-flyer/">
   <link rel="alternate" hreflang="en" href="https://wemiller.com/apps/wise-flyer/">
@@ -58,227 +404,114 @@
       </a>
       <button class="mobile-menu-toggle">☰</button>
       <ul class="nav-links">
-        <li><a href="#whats-new" class="nav-link" data-i18n="what-s-new.a2efe2">What's New</a></li>
         <li><a href="#features" class="nav-link" data-i18n="features.fc338f">Features</a></li>
-        <li><a href="#screenshots" class="nav-link" data-i18n="screenshots.597b63">Screenshots</a></li>
         <li><a href="#faq" class="nav-link" data-i18n="faq.03688b">FAQ</a></li>
-        <li><a href="https://apps.apple.com/us/app/wise-flyer/id853900499" class="btn-buy" target="_blank" rel="noopener noreferrer" data-i18n="download-on-app-store.cf50c2">Download on App Store</a></li>
+        <li><a href="https://apps.apple.com/us/app/wise-flyer/id853900499" target="_blank" rel="noopener noreferrer" class="btn-buy">App Store</a></li>
       </ul>
     </div>
   </nav>
 
-  <!-- Hero Section -->
-  <section class="hero">
-    <div class="hero-content">
-      <div class="hero-text">
-        <p class="hero-subtitle" data-i18n="wise-flyer.4a39f5">🦉 Wise Flyer</p>
-        <h1 class="hero-title" data-i18n="can-you-top-the.e79af8">Can You Top the Leaderboard?</h1>
-        <p class="hero-description" data-i18n="tap-to-fly-through.b265b8">
-          Tap to fly through endless obstacles in this addictive owl flying game inspired by a popular bird classic. Featuring unique graphics, simple tap mechanics, endless scrolling gameplay, an amazing soundtrack, and a competitive leaderboard. Do you have what it takes to stay on top?
-        </p>
-        <span class="os-ready-badge" data-i18n-html="ready-for-ios-27.e06c8c"><span class="badge-icon">✓</span> Ready for iOS 27 / iPadOS 27</span>
-        <div class="hero-cta">
-          <a href="https://apps.apple.com/us/app/wise-flyer/id853900499" class="btn-buy" target="_blank" rel="noopener noreferrer" data-i18n="download-now.6d56a8">Download Now</a>
-        </div>
-      </div>
-      <div class="hero-image">
-        <div class="hero-phone">
-          <!-- Replace with actual app screenshot -->
-          <img src="assets/images/icon.png?v=52899f44" alt="Wise Flyer App Icon" class="phone-mockup"
-               onerror="this.src='assets/images/hero-mockup.png'; this.onerror=function(){this.style.background='linear-gradient(135deg, #4facfe, #00f2fe)'; this.style.minHeight='600px';};">
-        </div>
-      </div>
+  <!-- Hero: the promise, one download button, and the owl rising out of the night sky. -->
+  <header class="wf-hero" id="about">
+    <img class="wf-hero-icon" src="assets/images/icon.png?v=52899f44" alt="Wise Flyer App Icon" width="1024" height="1024">
+    <p class="wf-hero-kicker">Wise Flyer</p>
+    <h1 data-i18n="one-tap-one-owl.f6ca91">One tap. One owl. One more try.</h1>
+    <p class="wf-hero-standfirst" data-i18n="tap-to-keep-a.337c1f">Tap to keep a barn owl in the air, slip through the gaps between the spiked pipes, and see how far you get.</p>
+    <div class="wf-cta">
+      <a href="https://apps.apple.com/us/app/wise-flyer/id853900499" target="_blank" rel="noopener noreferrer" class="btn-buy" data-i18n="download-on-the-app.a9096a">Download on the App Store</a>
     </div>
-  </section>
+    <div class="wf-hero-device">
+      <img src="assets/screens/en/01-prepare-800.webp?v=30213a68"
+           srcset="assets/screens/en/01-prepare-400.webp?v=16def137 400w, assets/screens/en/01-prepare-800.webp?v=30213a68 800w"
+           sizes="(max-width: 676px) 230px, (max-width: 1117px) 34vw, 380px" width="800" height="1655" fetchpriority="high" data-i18n-src
+           alt="The owl waiting to take off over a city at night" data-i18n-attr="alt:the-owl-waiting-to.9abf0f">
+    </div>
+  </header>
 
-  <!-- Floating App Store Button -->
-  <a href="https://apps.apple.com/us/app/wise-flyer/id853900499" class="floating-appstore" target="_blank" rel="noopener noreferrer">
+  <!-- Floating App Store button -->
+  <a href="https://apps.apple.com/us/app/wise-flyer/id853900499" target="_blank" rel="noopener noreferrer" class="floating-appstore">
     <span class="floating-appstore-icon"></span>
     <span data-i18n="download-on-app-store.cf50c2">Download on App Store</span>
   </a>
 
-  <!-- What's New Section -->
-  <section id="whats-new" class="section">
-    <div class="section-header">
-      <p class="section-subtitle" data-i18n="just-shipped.243f10">Just Shipped</p>
-      <h2 data-i18n="what-s-new-in.4ce061">What's New in Wise Flyer</h2>
-      <p data-i18n="window-friendly-flying-fairer.7f54ad">Window-friendly flying, fairer scores, and smoother ghosts</p>
-    </div>
+  <section class="wf-statement">
+    <span class="wf-ornament" aria-hidden="true"></span>
+    <p data-i18n="simple-to-learn-challenging.9258cc">Simple to learn, challenging to master, impossible to put down</p>
+  </section>
 
-    <div class="feature-grid">
-      <div class="feature-card">
-        <div class="feature-icon">📲</div>
-        <h3 class="feature-title" data-i18n="fits-any-window.856d37">Fits Any Window</h3>
-        <p class="feature-description" data-i18n="the-game-and-attack.8f5441">
-          The game and Attack-mode HUD now scale by the window, not the device — so a small iPad window renders perfectly in Split View, Stage Manager, and iPad windowing.
-        </p>
+  <!-- Three stories: one idea, one headline, two sentences at most, one device. -->
+  <main id="features">
+    <section class="wf-chapter" id="fly">
+      <div class="wf-spread">
+        <div class="wf-copy" data-reveal>
+          <p class="wf-eyebrow"><span class="wf-num">01</span><span data-i18n="fly.873c7d">Fly</span></p>
+          <h2 class="wf-display" data-i18n="tap-to-soar.540220">Tap to soar</h2>
+          <p class="wf-lede" data-i18n="each-tap-lifts-the.25380d">Each tap lifts the owl, and gravity does the rest. Every gate you clear is a point, and the pipes never run out.</p>
+        </div>
+        <figure class="wf-figure" data-reveal>
+          <img src="assets/screens/en/02-gameplay-800.webp?v=968d2ba1"
+               srcset="assets/screens/en/02-gameplay-400.webp?v=1ce84f81 400w, assets/screens/en/02-gameplay-800.webp?v=968d2ba1 800w"
+               sizes="(max-width: 472px) 72vw, 340px" width="800" height="1655" loading="lazy" decoding="async" data-i18n-src
+               alt="The owl flying between spiked pipes, the score behind it" data-i18n-attr="alt:the-owl-flying-between.a8640f">
+        </figure>
       </div>
+    </section>
 
-      <div class="feature-card">
-        <div class="feature-icon">🎯</div>
-        <h3 class="feature-title" data-i18n="fairer-scores-smoother-ghosts.ccba01">Fairer Scores, Smoother Ghosts</h3>
-        <p class="feature-description" data-i18n="your-local-best-score.16fb62">
-          Your local best score is no longer overwritten when Game Center is off, ghost replays in Attack mode play back noticeably smoother, and leaderboards open through the latest Game Center experience.
-        </p>
+    <section class="wf-chapter is-flipped" id="attack">
+      <div class="wf-spread">
+        <div class="wf-copy" data-reveal>
+          <p class="wf-eyebrow"><span class="wf-num">02</span><span data-i18n="attack.df86d4">ATTACK</span></p>
+          <h2 class="wf-display" data-i18n="challenge-a-friend.a5c81a">Challenge a friend</h2>
+          <p class="wf-lede" data-i18n="take-turns-trying-to.68181e">Take turns trying to beat each other's score. Miss and you earn a letter, and the first to spell ATTACK loses.</p>
+        </div>
+        <figure class="wf-figure" data-reveal>
+          <img src="assets/screens/en/03-attack-800.webp?v=0a27ad61"
+               srcset="assets/screens/en/03-attack-400.webp?v=5e154622 400w, assets/screens/en/03-attack-800.webp?v=0a27ad61 800w"
+               sizes="(max-width: 472px) 72vw, 340px" width="800" height="1655" loading="lazy" decoding="async" data-i18n-src
+               alt="ATTACK mode with a match waiting for your turn" data-i18n-attr="alt:attack-mode-with-a.2ce6b8">
+          <figcaption data-i18n="over-game-center-or.021695">Over Game Center or iMessage</figcaption>
+        </figure>
       </div>
+    </section>
+
+    <section class="wf-chapter" id="medals">
+      <div class="wf-spread">
+        <div class="wf-copy" data-reveal>
+          <p class="wf-eyebrow"><span class="wf-num">03</span><span data-i18n="medals.ec2855">Medals</span></p>
+          <h2 class="wf-display" data-i18n="earn-your-medal.fca46c">Earn your medal</h2>
+          <p class="wf-lede" data-i18n="bronze-at-5-silver.4a0dcc">Bronze at 5, silver at 15, gold at 30 and platinum at 50. Your best score goes on the Game Center leaderboard.</p>
+        </div>
+        <figure class="wf-figure" data-reveal>
+          <img src="assets/screens/en/04-gameover-800.webp?v=507f1c6c"
+               srcset="assets/screens/en/04-gameover-400.webp?v=21f31272 400w, assets/screens/en/04-gameover-800.webp?v=507f1c6c 800w"
+               sizes="(max-width: 472px) 72vw, 340px" width="800" height="1655" loading="lazy" decoding="async" data-i18n-src
+               alt="The game over card with a medal, the score and the best score" data-i18n-attr="alt:the-game-over-card.e13cc6">
+        </figure>
+      </div>
+    </section>
+  </main>
+
+  <!-- Trust: one beat, then out of the way. -->
+  <section class="wf-privacy" id="price">
+    <div class="wf-privacy-inner" data-reveal>
+      <p class="wf-eyebrow" data-i18n="price.3e8248">Price</p>
+      <h2 class="wf-display" data-i18n="one-price-and-that.cc577b">One price, and that's it</h2>
+      <div class="security-badges">
+        <div class="security-badge" data-i18n-html="no-ads.d3e318"><span class="badge-icon">🚫</span> No ads</div>
+        <div class="security-badge" data-i18n-html="no-in-app-purchases.08a39e"><span class="badge-icon">🛒</span> No in-app purchases</div>
+        <div class="security-badge" data-i18n-html="plays-offline.1527d4"><span class="badge-icon">✈️</span> Plays offline</div>
+        <div class="security-badge" data-i18n-html="game-center.48d9bb"><span class="badge-icon">🏆</span> Game Center</div>
+      </div>
+      <p class="security-audit-note" data-i18n="wise-flyer-is-a.68e6a8">Wise Flyer is a one-time purchase on the App Store. No subscriptions, nothing to unlock.</p>
     </div>
   </section>
 
-  <!-- Features Section -->
-  <section id="features" class="section">
-    <div class="section-header">
-      <p class="section-subtitle" data-i18n="why-choose-wise-flyer.9d540b">Why Choose Wise Flyer</p>
-      <h2 data-i18n="addictive-gameplay.0c4b17">Addictive Gameplay</h2>
-      <p data-i18n="simple-to-learn-challenging.9258cc">Simple to learn, challenging to master, impossible to put down</p>
-    </div>
-
-    <div class="feature-grid">
-      <div class="feature-card">
-        <div class="feature-icon">🎮</div>
-        <h3 class="feature-title" data-i18n="simple-tap-mechanics.aca4f3">Simple Tap Mechanics</h3>
-        <p class="feature-description" data-i18n="easy-to-learn-hard.7a4a1b">
-          Easy to learn, hard to master. Just tap to flap and navigate through obstacles. Perfect for quick gaming sessions or extended play.
-        </p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">🎨</div>
-        <h3 class="feature-title" data-i18n="unique-graphics.b74a88">Unique Graphics</h3>
-        <p class="feature-description" data-i18n="beautiful-distinctive-art-style.712389">
-          Beautiful, distinctive art style featuring a charming owl character. Stand out visuals that make every flight memorable.
-        </p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">∞</div>
-        <h3 class="feature-title" data-i18n="endless-scrolling.d39947">Endless Scrolling</h3>
-        <p class="feature-description" data-i18n="infinitely-scrolling-gameplay-means.c5b6b1">
-          Infinitely scrolling gameplay means the challenge never ends. How far can you fly? Test your skills and push your limits.
-        </p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">🎵</div>
-        <h3 class="feature-title" data-i18n="amazing-soundtrack.0e9d20">Amazing Soundtrack</h3>
-        <p class="feature-description" data-i18n="immersive-music-and-satisfying.f0bb58">
-          Immersive music and satisfying sound effects enhance every moment. The perfect audio backdrop for your flying adventure.
-        </p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">🏆</div>
-        <h3 class="feature-title" data-i18n="global-leaderboard.177649">Global Leaderboard</h3>
-        <p class="feature-description" data-i18n="compete-with-players-worldwide.5193da">
-          Compete with players worldwide on the leaderboard. Climb the ranks and prove you're the wisest flyer of them all.
-        </p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">⚔️</div>
-        <h3 class="feature-title" data-i18n="attack-mode.4a15d9">ATTACK Mode</h3>
-        <p class="feature-description" data-i18n="challenge-your-friends-head.43a4ee">
-          Challenge your friends head-to-head through iMessage and GameCenter. Send attacks, defend your score, and prove who's the ultimate flyer.
-        </p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">⚡</div>
-        <h3 class="feature-title" data-i18n="instant-action.7f273f">Instant Action</h3>
-        <p class="feature-description" data-i18n="jump-right-into-the.b62243">
-          Jump right into the action with no complex menus or tutorials. Perfect for quick gaming sessions whenever you have a moment.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Magazine-style Feature Sections -->
-  <section class="section">
-    <div class="magazine-section">
-      <div class="magazine-content">
-        <h2 data-i18n="tap-to-soar.82b1b4">Tap to Soar</h2>
-        <p data-i18n="inspired-by-the-classic.0a1528">
-          Inspired by the classic bird flying game you know and love, Wise Flyer brings its own unique
-          charm with beautiful owl graphics and smooth, addictive gameplay.
-        </p>
-        <p data-i18n="the-simple-tap-mechanic.47d4fc">
-          The simple tap mechanic makes it easy to pick up but challenging to master. Navigate through
-          obstacles, collect points, and see how far you can fly in this endless adventure.
-        </p>
-      </div>
-      <div class="magazine-image">
-        <!-- Replace with actual screenshot -->
-        <img src="assets/images/feature-1.png?v=38475743" alt="Gameplay"
-             onerror="this.style.background='linear-gradient(135deg, #4facfe, #00f2fe)'; this.style.minHeight='400px'; this.style.display='block';">
-      </div>
-    </div>
-
-    <div class="magazine-section reverse">
-      <div class="magazine-content">
-        <h2 data-i18n="compete-globally.55a59f">Compete Globally</h2>
-        <p data-i18n="think-you-re-good.653a07">
-          Think you're good? Prove it on the global leaderboard. Compare your high scores with players
-          from around the world and climb your way to the top.
-        </p>
-        <p data-i18n="the-competition-is-fierce.d796b4">
-          The competition is fierce, but the glory is worth it. Do you have what it takes to become
-          the ultimate Wise Flyer and dominate the leaderboard?
-        </p>
-      </div>
-      <div class="magazine-image">
-        <!-- Replace with actual screenshot -->
-        <img src="assets/images/feature-2.png?v=9c9da623" alt="Leaderboard"
-             onerror="this.style.background='linear-gradient(135deg, #00f2fe, #43e97b)'; this.style.minHeight='400px'; this.style.display='block';">
-      </div>
-    </div>
-
-    <div class="magazine-section">
-      <div class="magazine-content">
-        <h2 data-i18n="endless-entertainment.3f8091">Endless Entertainment</h2>
-        <p data-i18n="with-infinitely-scrolling-gameplay.099be7">
-          With infinitely scrolling gameplay and procedurally generated obstacles, no two flights are
-          the same. Every session brings new challenges and opportunities to beat your high score.
-        </p>
-        <p data-i18n="the-perfect-game-for.1af40a">
-          The perfect game for commutes, waiting rooms, or any time you need a quick gaming fix.
-          Pick it up for 30 seconds or 30 minutes—it's always ready when you are.
-        </p>
-      </div>
-      <div class="magazine-image">
-        <!-- Replace with actual screenshot -->
-        <img src="assets/images/feature-3.png?v=5822593e" alt="Endless Fun"
-             onerror="this.style.background='linear-gradient(135deg, #4facfe, #43e97b)'; this.style.minHeight='400px'; this.style.display='block';">
-      </div>
-    </div>
-  </section>
-
-  <!-- Screenshots Section -->
-  <section id="screenshots" class="section">
-    <div class="section-header">
-      <p class="section-subtitle" data-i18n="see-it-in-action.8c8d28">See It In Action</p>
-      <h2 data-i18n="screenshots.597b63">Screenshots</h2>
-      <p data-i18n="experience-the-addictive-gameplay.0cd30c">Experience the addictive gameplay</p>
-    </div>
-
-    <div class="screenshots-grid">
-      <!-- Replace these with actual screenshots -->
-      <div class="screenshot-item">
-        <img src="assets/images/frame-prepare-v2.png?v=71c0645c" alt="Setting up a run"
-             onerror="this.style.background='linear-gradient(135deg, #4facfe, #00f2fe)'; this.style.minHeight='500px'; this.style.display='block';">
-      </div>
-      <div class="screenshot-item">
-        <img src="assets/images/frame-gameplay-v2.png?v=54ddbb07" alt="Mid-flight"
-             onerror="this.style.background='linear-gradient(135deg, #00f2fe, #43e97b)'; this.style.minHeight='500px'; this.style.display='block';">
-      </div>
-    </div>
-  </section>
-
-  <!-- FAQ Section -->
+  <!-- FAQ: short, folded, and the EU note last. -->
   <section id="faq" class="faq-section">
-    <div class="section-header">
-      <p class="section-subtitle" data-i18n="got-questions.8ecca3">Got Questions?</p>
-      <h2 data-i18n="frequently-asked-questions.d790b4">Frequently Asked Questions</h2>
-    </div>
+    <p class="wf-eyebrow" data-i18n="got-questions.8ecca3">Got Questions?</p>
+    <h2 data-i18n="frequently-asked-questions.d790b4">Frequently Asked Questions</h2>
 
+    <div class="faq-list">
     <div class="faq-item">
       <button class="faq-question">
         <span data-i18n="how-do-i-play.f07bc7">How do I play Wise Flyer?</span>
@@ -307,19 +540,6 @@
 
     <div class="faq-item">
       <button class="faq-question">
-        <span data-i18n="is-wise-flyer-similar.08e201">Is Wise Flyer similar to other bird games?</span>
-        <span class="faq-icon">▼</span>
-      </button>
-      <div class="faq-answer">
-        <p data-i18n="wise-flyer-is-inspired.fa95a1">
-          Wise Flyer is inspired by the classic bird flying game genre but features unique graphics with a charming
-          owl character, distinctive visual style, and its own personality. If you loved those games, you'll love this!
-        </p>
-      </div>
-    </div>
-
-    <div class="faq-item">
-      <button class="faq-question">
         <span data-i18n="can-i-play-offline.897eb4">Can I play offline?</span>
         <span class="faq-icon">▼</span>
       </button>
@@ -333,30 +553,14 @@
 
     <div class="faq-item">
       <button class="faq-question">
-        <span data-i18n="is-the-game-truly.a793a7">Is the game truly endless?</span>
+        <span data-i18n="does-it-run-on.3addd5">Does it run on iPad?</span>
         <span class="faq-icon">▼</span>
       </button>
       <div class="faq-answer">
-        <p data-i18n="yes-the-scrolling-is.f7335d">
-          Yes! The scrolling is infinite and obstacles are continuously generated. The game only ends when you
-          hit an obstacle. How far can you fly? The only limit is your skill!
-        </p>
+        <p data-i18n="yes-wise-flyer-runs.9f9eec">Yes. Wise Flyer runs on iPhone and iPad, and the game scales to fit any window, including Split View and Stage Manager.</p>
       </div>
     </div>
 
-    <div class="faq-item">
-      <button class="faq-question">
-        <span data-i18n="what-makes-wise-flyer.67cec0">What makes Wise Flyer special?</span>
-        <span class="faq-icon">▼</span>
-      </button>
-      <div class="faq-answer">
-        <p data-i18n="beautiful-unique-graphics-featuring.41cde2">
-          Beautiful unique graphics featuring an adorable owl, smooth gameplay, an amazing soundtrack, competitive
-          leaderboard, and that perfect "just one more try" addictiveness. It's simple, fun, and incredibly hard
-          to put down!
-        </p>
-      </div>
-    </div>
     <div class="faq-item">
       <button class="faq-question">
         <span data-i18n="is-wise-flyer-available.ed6ae7">Is Wise Flyer available in the European Union?</span>
@@ -366,25 +570,17 @@
         <p data-i18n="yes-wise-flyer-is.1a458a">Yes. Wise Flyer is on the App Store everywhere in the European Union, France included. It's available in every App Store territory Apple offers except Indonesia.</p>
       </div>
     </div>
+    </div>
   </section>
 
-  <!-- Footer -->
-
-  <!-- Security Hardening Callout -->
-  <section class="security-callout">
-    <div class="section-header">
-      <p class="section-subtitle" data-i18n="security-privacy.67a15f">Security &amp; Privacy</p>
-      <h2 data-i18n="hardened-by-design.084a16">Hardened by Design</h2>
+  <!-- Closing: the promise again, and the one button. -->
+  <section class="wf-closing">
+    <img src="assets/images/icon.png?v=52899f44" alt="" width="1024" height="1024" loading="lazy">
+    <h2 class="wf-display" data-i18n="one-tap-one-owl.f6ca91">One tap. One owl. One more try.</h2>
+    <div class="wf-cta">
+      <a href="https://apps.apple.com/us/app/wise-flyer/id853900499" target="_blank" rel="noopener noreferrer" class="btn-buy" data-i18n="download-on-the-app.a9096a">Download on the App Store</a>
     </div>
-    <div class="security-badges">
-      <div class="security-badge" data-i18n-html="privacy-manifest.5063fd"><span class="badge-icon">&#x1f4cb;</span> Privacy Manifest</div>
-      <div class="security-badge" data-i18n-html="input-validation.5de1a2"><span class="badge-icon">&#x1f50d;</span> Input Validation</div>
-      <div class="security-badge" data-i18n-html="gamekit-security.9e6fc1"><span class="badge-icon">&#x1f3ae;</span> GameKit Security</div>
-      <div class="security-badge" data-i18n-html="app-sandbox.b85ecb"><span class="badge-icon">&#x2705;</span> App Sandbox</div>
-    </div>
-    <p class="security-audit-note" data-i18n="comprehensive-security-audit-complet.9f66b8">Comprehensive security audit completed April 2026</p>
   </section>
-
   <footer class="footer">
     <div class="footer-content">
       <div class="footer-links">
@@ -432,5 +628,21 @@
   </footer>
 
   <script src="../app-showcase.js"></script>
+  <script>
+    // A quiet reveal as each story arrives — only when motion is welcome, and
+    // only once JavaScript is known to be running, so nothing can stay hidden.
+    (function () {
+      if (!('IntersectionObserver' in window)) return;
+      if (!window.matchMedia('(prefers-reduced-motion: no-preference)').matches) return;
+      document.documentElement.classList.add('wf-motion');
+      const io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); }
+        });
+      }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+      document.querySelectorAll('[data-reveal]').forEach(function (el) { io.observe(el); });
+    })();
+
+  </script>
 </body>
 </html>
