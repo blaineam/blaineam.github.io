@@ -148,5 +148,22 @@
         "widths": [480, 960]
       }
     ]
+  },
+  "pano-owl": {
+    "repo": "Pano Owl",
+    "renders": [
+      {
+        "device": "iphone",
+        "captures": "screenshots/iphone-6.9",
+        "scenes": ["02-viewer", "01-capture", "04-stitch"],
+        "widths": [400, 800]
+      },
+      {
+        "device": "ipad",
+        "captures": "screenshots/ipad-13",
+        "scenes": ["03-library"],
+        "widths": [720, 1440]
+      }
+    ]
   }
 }
