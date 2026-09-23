@@ -187,5 +187,22 @@
         "widths": [400, 800]
       }
     ]
+  },
+  "aperion": {
+    "repo": "Aperion",
+    "renders": [
+      {
+        "device": "iphone",
+        "captures": "docs/appstore-screenshots/iphone/raw",
+        "scenes": ["01-camera", "02-targets", "03-plan"],
+        "widths": [400, 800]
+      },
+      {
+        "device": "ipad",
+        "captures": "docs/appstore-screenshots/ipad/raw",
+        "scenes": ["camera"],
+        "widths": [480, 960]
+      }
+    ]
   }
 }

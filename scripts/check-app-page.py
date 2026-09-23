@@ -9,7 +9,8 @@ Hard failures (exit 1):
     data-i18n / data-i18n-html / data-i18n-attr key in the page is missing from them
   * an <img> without width and height, or a below-the-hero <img> without loading="lazy"
   * an <img data-i18n-src> whose English files aren't in its screens manifest
-  * an App Store / Play link missing from the hero or from the end of the page
+  * an App Store / Play link (or a `data-cta` anchor, for pages with no store listing)
+    missing from the hero or from the end of the page
 
 Warnings (printed, exit 0) — the spec's copy budget:
   * more than 5 story sections (<section> inside <main>)
@@ -158,7 +159,10 @@ def check(slug: str) -> int:
                     errors.append(f"{bare} not in {mpath.relative_to(ROOT)} — run scripts/sync-app-screens.py")
 
     # --- CTA at hero and at the end ------------------------------------------------------
-    links = [n for n in nodes if n.tag == "a" and STORE.search(n.attrs.get("href", ""))]
+    # A store link, or — for a page with no store listing (a shelved app, a direct
+    # download) — an anchor the page marks as its primary download with `data-cta`.
+    links = [n for n in nodes if n.tag == "a"
+             and (STORE.search(n.attrs.get("href", "")) or "data-cta" in n.attrs)]
     main = next((n for n in nodes if n.tag == "main"), None)
     if hero and not any(id(l) in in_hero for l in links):
         errors.append("no App Store / Play link in the hero")
