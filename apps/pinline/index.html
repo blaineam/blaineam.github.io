@@ -390,6 +390,8 @@
     .pl-hero h1, .pl-display, .pl-statement p { word-break: auto-phrase; }
     /* `ch` is the width of a Latin zero; a CJK glyph is two of them. Measure CJK in em. */
     :lang(ja) .pl-hero h1, :lang(zh) .pl-hero h1, :lang(ko) .pl-hero h1 { max-width: 9em; }
+    /* Korean breaks inside words unless told to keep them whole. */
+    :lang(ko) .pl-hero h1, :lang(ko) .pl-display, :lang(ko) .pl-statement p, :lang(ko) .pl-lede, :lang(ko) .pl-hero-standfirst { word-break: keep-all; }
     :lang(ja) .pl-privacy .pl-display, :lang(zh) .pl-privacy .pl-display, :lang(ko) .pl-privacy .pl-display,
     :lang(ja) .pl-closing .pl-display, :lang(zh) .pl-closing .pl-display, :lang(ko) .pl-closing .pl-display { max-width: 10em; }
     :lang(ja) .pl-hero-standfirst, :lang(zh) .pl-hero-standfirst, :lang(ko) .pl-hero-standfirst,

@@ -388,6 +388,8 @@
     .tb-hero h1, .tb-display, .tb-statement p { word-break: auto-phrase; }
     /* `ch` is the width of a Latin zero; a CJK glyph is two of them. Measure CJK in em. */
     :lang(ja) .tb-hero h1, :lang(zh) .tb-hero h1, :lang(ko) .tb-hero h1 { max-width: 9em; }
+    /* Korean breaks inside words unless told to keep them whole. */
+    :lang(ko) .tb-hero h1, :lang(ko) .tb-display, :lang(ko) .tb-statement p, :lang(ko) .tb-lede, :lang(ko) .tb-hero-standfirst { word-break: keep-all; }
     :lang(ja) .tb-privacy .tb-display, :lang(zh) .tb-privacy .tb-display, :lang(ko) .tb-privacy .tb-display,
     :lang(ja) .tb-closing .tb-display, :lang(zh) .tb-closing .tb-display, :lang(ko) .tb-closing .tb-display { max-width: 10em; }
     :lang(ja) .tb-hero-standfirst, :lang(zh) .tb-hero-standfirst, :lang(ko) .tb-hero-standfirst,

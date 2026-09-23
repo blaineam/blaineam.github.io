@@ -389,6 +389,8 @@
     .rs-hero h1, .rs-display, .rs-statement p { word-break: auto-phrase; }
     /* `ch` is the width of a Latin zero; a CJK glyph is two of them. Measure CJK in em. */
     :lang(ja) .rs-hero h1, :lang(zh) .rs-hero h1, :lang(ko) .rs-hero h1 { max-width: 9em; }
+    /* Korean breaks inside words unless told to keep them whole. */
+    :lang(ko) .rs-hero h1, :lang(ko) .rs-display, :lang(ko) .rs-statement p, :lang(ko) .rs-lede, :lang(ko) .rs-hero-standfirst { word-break: keep-all; }
     :lang(ja) .rs-privacy .rs-display, :lang(zh) .rs-privacy .rs-display, :lang(ko) .rs-privacy .rs-display,
     :lang(ja) .rs-closing .rs-display, :lang(zh) .rs-closing .rs-display, :lang(ko) .rs-closing .rs-display { max-width: 10em; }
     :lang(ja) .rs-hero-standfirst, :lang(zh) .rs-hero-standfirst, :lang(ko) .rs-hero-standfirst,
