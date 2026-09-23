@@ -1,34 +1,62 @@
 {
-  "applinks": {
-    "details": [
-      {
-        "appIDs": ["8ZVSPZYSVF.com.blaineam.kith"],
-        "components": [
-          {
-            "/": "/apps/haven/*",
-            "comment": "Invite links and post links (https://wemiller.com/apps/haven/#…) open Haven. The payload rides in the URL fragment, which iOS matches on the device — it is never sent to this host."
-          },
-          {
-            "/": "/apps/haven",
-            "comment": "The bare page without a trailing slash."
-          }
+    "applinks": {
+        "details": [
+            {
+                "appIDs": [
+                    "8ZVSPZYSVF.com.blaineam.kith"
+                ],
+                "components": [
+                    {
+                        "/": "/apps/haven/*",
+                        "comment": "Invite links and post links (https://wemiller.com/apps/haven/#…) open Haven. The payload rides in the URL fragment, which iOS matches on the device — it is never sent to this host."
+                    },
+                    {
+                        "/": "/apps/haven",
+                        "comment": "The bare page without a trailing slash."
+                    }
+                ]
+            },
+            {
+                "appIDs": [
+                    "8ZVSPZYSVF.com.blainemiller.ScriptureAlone"
+                ],
+                "components": [
+                    {
+                        "/": "/apps/scripture-alone",
+                        "#": "s=*",
+                        "comment": "Share link without a trailing slash"
+                    },
+                    {
+                        "/": "/apps/scripture-alone/*",
+                        "#": "s=*",
+                        "comment": "Share link: the verse rides in the fragment"
+                    },
+                    {
+                        "/": "/apps/scripture-alone",
+                        "?": {
+                            "ref": "*"
+                        },
+                        "comment": "A verse by reference: ?ref=John.3.16 (OSIS), a stored key range, or a plain reference in any of the app's languages. Without the app, the product page opens."
+                    },
+                    {
+                        "/": "/apps/scripture-alone/*",
+                        "?": {
+                            "ref": "*"
+                        },
+                        "comment": "The same, with a trailing slash."
+                    },
+                    {
+                        "/": "/apps/scripture-alone",
+                        "#": "ref=*",
+                        "comment": "A verse by reference in the fragment (#ref=John.3.16) — matched on the device, never sent to this host."
+                    },
+                    {
+                        "/": "/apps/scripture-alone/*",
+                        "#": "ref=*",
+                        "comment": "The same, with a trailing slash."
+                    }
+                ]
+            }
         ]
-      },
-      {
-        "appIDs": ["8ZVSPZYSVF.com.blainemiller.ScriptureAlone"],
-        "components": [
-          {
-            "/": "/apps/scripture-alone",
-            "#": "s=*",
-            "comment": "Share link without a trailing slash"
-          },
-          {
-            "/": "/apps/scripture-alone/*",
-            "#": "s=*",
-            "comment": "Share link: the verse rides in the fragment"
-          }
-        ]
-      }
-    ]
-  }
+    }
 }
