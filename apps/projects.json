@@ -205,9 +205,9 @@
       "icon_url": "/apps/sami/assets/images/icon.png",
       "released": "2026-02",
       "updated": "2026-09",
-      "version": "1.4.3",
+      "version": "2.0.3",
       "status": "live",
-      "note": "Smart photo, video & PDF optimizer that reclaims storage with quality-aware compression — watched folders on the Mac, network-aware throttling for NAS and cloud drives, background continued processing, and fully scriptable from Shortcuts. v1.4.3 live; the next version adds a bulk tag editor, Flash capture, Live Photo conversions and AVIF/WebP/AV1/MP3 output, built on Lathe."
+      "note": "Media toolbox built on Lathe: a quality-aware photo, video & PDF optimizer with a visually lossless mode, plus Convert & Combine, a bulk tag editor, Live Photo tools and Flash movie capture, with AVIF/WebP/AV1/MP3 output. Watched folders on the Mac, network-aware throttling for NAS and cloud drives, fully scriptable from Shortcuts, and translated into nine languages."
     },
     {
       "id": "enter-space",
@@ -231,10 +231,10 @@
       "app_store_url": "https://apps.apple.com/us/app/luma-editor/id6741085424",
       "icon_url": "/apps/luma-editor/assets/images/icon.png",
       "released": "2025-01",
-      "updated": "2026-08",
-      "version": "1.6.0",
+      "updated": "2026-09",
+      "version": "2.0.2",
       "status": "live",
-      "note": "Photo editor that matches a look you like and applies it to your shots — with Vision-named one-tap styles and Siri-driven edits via Shortcuts. Universal on iPhone, iPad & Mac."
+      "note": "Non-destructive photo editor that matches a look you admire and hands it back as real sliders — tone curves, an eight-band colour mixer, split toning, black & white, masks, crop and lens correction, retouch, burst culling, presets and video, right inside the Photos app. Universal on iPhone, iPad & Mac, in nine languages."
     },
     {
       "id": "embr",
