@@ -12,6 +12,20 @@
  *
  * Special keys: "_title" (document.title), "_meta.description".
  *
+ * Localized screenshots
+ * ---------------------
+ * An <img> or <picture><source> carrying a bare `data-i18n-src` attribute is
+ * swapped to the visitor's language. The baked-in English URL names the
+ * locale as a path segment — `…/screens/en/01-reader-800.webp` — and every
+ * URL in src and srcset has that segment replaced by the active language.
+ * Availability comes from `…/screens/manifest.json`, written by
+ * scripts/sync-app-screens.py next to the images, so a locale that has no
+ * render yet keeps English without a 404 ever being requested. The manifest
+ * also carries each file's content hash, which becomes the `?v=` stamp.
+ * Swaps are all-or-nothing per element: if any candidate in its srcset is
+ * missing for the language, the element stays English. og:image is never
+ * touched. See docs/app-page-design.md.
+ *
  * Language resolution: ?lang= URL param → localStorage → navigator.language,
  * falling back to English. An explicit choice (param or switcher) persists.
  *
@@ -155,6 +169,97 @@
         detail: { lang: lang, dict: dict }
       }));
     } catch (e) { /* CustomEvent unsupported: non-fatal */ }
+  }
+
+  /* ---- localized screenshots ------------------------------------------ */
+
+  var SCREEN_SELECTOR = 'img[data-i18n-src], source[data-i18n-src]';
+  var SCREEN_SEGMENT = '/screens/en/';
+  var manifestCache = {};
+
+  // The manifest that describes a screenshot URL: `<prefix>/screens/manifest.json`.
+  function manifestUrl(url) {
+    var at = url.indexOf(SCREEN_SEGMENT);
+    if (at < 0) return null;
+    try {
+      return new URL(url.slice(0, at) + '/screens/manifest.json', document.baseURI).href;
+    } catch (e) { return null; }
+  }
+
+  function loadManifest(href) {
+    if (!manifestCache[href]) {
+      manifestCache[href] = fetch(href)
+        .then(function (res) {
+          if (!res.ok) throw new Error('no screens manifest');
+          return res.json();
+        })
+        .catch(function () { return null; });
+    }
+    return manifestCache[href];
+  }
+
+  // One URL for `lang`, or null when the manifest does not list that file.
+  function localizeUrl(url, lang, files) {
+    var at = url.indexOf(SCREEN_SEGMENT);
+    if (at < 0) return url; // not a screenshot URL: leave it alone
+    var rest = url.slice(at + SCREEN_SEGMENT.length).split('?')[0].split('#')[0];
+    var hash = files[lang + '/' + rest];
+    if (!hash) return null;
+    return url.slice(0, at) + '/screens/' + lang + '/' + rest + '?v=' + hash;
+  }
+
+  function localizeSrcset(srcset, lang, files) {
+    var parts = srcset.split(','), out = [];
+    for (var i = 0; i < parts.length; i++) {
+      var bits = parts[i].trim().split(/\s+/);
+      if (!bits[0]) continue;
+      var url = localizeUrl(bits[0], lang, files);
+      if (url === null) return null;
+      bits[0] = url;
+      out.push(bits.join(' '));
+    }
+    return out.join(', ');
+  }
+
+  // Swap every tagged screenshot to `lang`, falling back to the baked-in
+  // English per element. Safe to call again with another language: the
+  // English originals are remembered on first touch.
+  function applyScreens(lang) {
+    var nodes = document.querySelectorAll(SCREEN_SELECTOR);
+    if (!nodes.length) return;
+    for (var i = 0; i < nodes.length; i++) {
+      (function (node) {
+        if (!node._i18nScreen) {
+          node._i18nScreen = {
+            src: node.getAttribute('src'),
+            srcset: node.getAttribute('srcset')
+          };
+        }
+        var orig = node._i18nScreen;
+        var probe = orig.src || (orig.srcset || '').trim().split(/\s+/)[0] || '';
+        var href = manifestUrl(probe);
+        if (!href) return;
+        var restore = function () {
+          if (orig.srcset !== null && node.getAttribute('srcset') !== orig.srcset) node.setAttribute('srcset', orig.srcset);
+          if (orig.src !== null && node.getAttribute('src') !== orig.src) node.setAttribute('src', orig.src);
+        };
+        if (lang === 'en') { restore(); return; }
+        loadManifest(href).then(function (manifest) {
+          var files = manifest && manifest.files;
+          if (!files) { restore(); return; }
+          var srcset = orig.srcset !== null ? localizeSrcset(orig.srcset, lang, files) : null;
+          var src = orig.src !== null ? localizeUrl(orig.src, lang, files) : null;
+          if ((orig.srcset !== null && srcset === null) || (orig.src !== null && src === null)) {
+            restore();
+            return;
+          }
+          // srcset before src, so the browser never picks a candidate from
+          // the old set against the new fallback.
+          if (srcset !== null) node.setAttribute('srcset', srcset);
+          if (src !== null) node.setAttribute('src', src);
+        });
+      })(nodes[i]);
+    }
   }
 
   function switchTo(lang) {
@@ -482,6 +587,10 @@
   function init() {
     var lang = resolveLang();
     buildSwitcher(lang);
+    // Screenshots don't wait on the dictionary: a page with renders but a
+    // missing or failed dictionary still shows its own language's screens.
+    applyScreens(lang);
+    window.wemillerI18n = { lang: lang, applyScreens: applyScreens };
     if (lang === 'en') {
       document.documentElement.setAttribute('lang', 'en');
       return;
