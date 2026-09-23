@@ -108,5 +108,16 @@
         "widths": [400, 800]
       }
     ]
+  },
+  "enter-space": {
+    "repo": "Enter Space/Enter Space",
+    "renders": [
+      {
+        "device": "iphone",
+        "captures": "screenshots/iphone-6.9",
+        "scenes": ["04-home", "02-photos", "03-theater", "06-timeportal", "07-doppel", "09-codeeditor"],
+        "widths": [400, 800]
+      }
+    ]
   }
 }
