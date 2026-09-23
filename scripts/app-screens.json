@@ -252,5 +252,23 @@
         "scale": 2
       }
     ]
+  },
+  "embr": {
+    "repo": "Embr/Embr",
+    "renders": [
+      {
+        "device": "iphone",
+        "captures": "screenshots/iphone-17-pro",
+        "scenes": ["01-hero-dark", "02-payoff", "03-addpayment"],
+        "widths": [400, 800]
+      },
+      {
+        "device": "watch",
+        "captures": "screenshots/watch-46mm",
+        "scenes": ["01-dashboard"],
+        "widths": [220, 440],
+        "scale": 2
+      }
+    ]
   }
 }
