@@ -215,5 +215,24 @@
         "widths": [400, 800]
       }
     ]
+  },
+  "tri-add": {
+    "repo": "Tri-Add",
+    "renders": [
+      {
+        "device": "iphone",
+        "project": "docs/appstore-screenshots/TriAdd-iphone.monkr",
+        "captures": "screenshots/iphone-6.9",
+        "scenes": ["02-menu", "01-play", "03-tutorial"],
+        "widths": [400, 800]
+      },
+      {
+        "device": "watch",
+        "captures": "screenshots/watch-46mm",
+        "scenes": ["01-board"],
+        "widths": [220, 440],
+        "scale": 2
+      }
+    ]
   }
 }
