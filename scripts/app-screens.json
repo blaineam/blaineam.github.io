@@ -234,5 +234,23 @@
         "scale": 2
       }
     ]
+  },
+  "ari-helper": {
+    "repo": "Ari/Ari",
+    "renders": [
+      {
+        "device": "iphone",
+        "captures": "screenshots/iphone-6.9",
+        "scenes": ["08-image", "09-vision", "02-live-camera", "03-photo-studio", "04-film-studio"],
+        "widths": [400, 800]
+      },
+      {
+        "device": "watch",
+        "captures": "screenshots/watch-46mm",
+        "scenes": ["01-chat"],
+        "widths": [220, 440],
+        "scale": 2
+      }
+    ]
   }
 }
