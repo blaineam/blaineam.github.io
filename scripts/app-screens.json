@@ -204,5 +204,16 @@
         "widths": [480, 960]
       }
     ]
+  },
+  "sightquick": {
+    "repo": "SightQuick",
+    "renders": [
+      {
+        "device": "iphone",
+        "captures": "screenshots/iphone-6.9",
+        "scenes": ["01-home", "03-generate", "02-results", "05-settings"],
+        "widths": [400, 800]
+      }
+    ]
   }
 }
