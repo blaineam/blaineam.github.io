@@ -12,43 +12,390 @@
   <meta property="og:image" content="https://wemiller.com/apps/tilebreak/assets/images/poster.jpg?v=1b818ab8">
   <link rel="stylesheet" href="../app-showcase.css">
   <style>
-    /* Tilebreak — match the icon's deep-indigo → hot-orange burst palette */
     :root {
-      --app-primary: #2a1769;    /* deep indigo */
-      --app-secondary: #ff8e34;  /* burst orange */
-      --app-accent:    #ffd23f;  /* spark yellow */
-    }
-
-    .hero {
-      background:
-        radial-gradient(ellipse at 50% 45%, rgba(255, 142, 52, 0.45) 0%, transparent 55%),
+      /* Tilebreak — the icon's burst: deep indigo, hot orange, spark yellow. */
+      --app-primary: #2a1769;
+      --app-secondary: #ff8e34;
+      --app-accent: #ffd23f;
+      --primary-color: #2a1769;
+      --secondary-color: #ff8e34;
+      --tb-display-face: ui-rounded, "SF Pro Rounded", system-ui, -apple-system, "Segoe UI", sans-serif;
+      --tb-text-face: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      --tb-paper: #FFFBF5;
+      --tb-paper-2: #FAF1E6;
+      --tb-body: #3A3350;
+      --tb-quiet: #6B6480;
+      --tb-rule: rgba(42, 23, 105, 0.12);
+      --tb-accent-ink: #B34E0C;
+      --tb-ornament: linear-gradient(90deg, #ffd23f, #ff8e34);
+      --tb-shadow: drop-shadow(0 30px 40px rgba(42, 23, 105, 0.22)) drop-shadow(0 6px 10px rgba(42, 23, 105, 0.10));
+      --tb-hero-bg:
+        radial-gradient(ellipse 70% 45% at 50% 62%, rgba(255, 142, 52, 0.42) 0%, transparent 60%),
         linear-gradient(160deg, #1a0d4a 0%, #2a1769 45%, #0d0626 100%);
-      color: white;
+      --tb-hero-ink: #FFFFFF;
+      --tb-hero-kicker: #FFD23F;
+      --tb-button: linear-gradient(180deg, #FFD23F, #FFB13A);
+      --tb-button-ink: #2a1769;
+      --tb-button-glow: rgba(255, 170, 60, 0.35);
+      --tb-focus: #FFD23F;
+      --tb-closing-bg:
+        radial-gradient(ellipse 55% 60% at 50% 100%, rgba(255, 142, 52, 0.16) 0%, transparent 70%),
+        var(--tb-paper-2);
+      --bg-primary: var(--tb-paper);
+      --bg-secondary: var(--tb-paper-2);
+      --text-primary: #1E1245;
+      --text-secondary: var(--tb-body);
+      --text-muted: var(--tb-quiet);
+      --glass-bg: rgba(255, 251, 245, 0.8);
+      --glass-border: rgba(42, 23, 105, 0.08);
+      --glass-shadow: none;
     }
-    .hero-title,
-    .hero-subtitle { color: white; -webkit-text-fill-color: white; }
-    .hero-description { color: rgba(255, 255, 255, 0.92); }
-    .hero-subtitle { letter-spacing: 0.5px; }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --primary-color: #FFD9A8;
+        --tb-paper: #120A2E;
+        --tb-paper-2: #1A1040;
+        --tb-body: #DCD6EA;
+        --tb-quiet: #A9A1C4;
+        --tb-rule: rgba(255, 217, 168, 0.14);
+        --tb-accent-ink: #FFA95E;
+        --tb-shadow: drop-shadow(0 30px 44px rgba(0, 0, 0, 0.55)) drop-shadow(0 6px 10px rgba(0, 0, 0, 0.30));
+        --tb-closing-bg:
+          radial-gradient(ellipse 55% 60% at 50% 100%, rgba(255, 142, 52, 0.18) 0%, transparent 70%),
+          var(--tb-paper-2);
+        --text-primary: #F4EEFF;
+        --glass-bg: rgba(18, 10, 46, 0.8);
+        --glass-border: rgba(255, 217, 168, 0.08);
+      }
+      --tb-measure: 1120px;
+    }
 
-    /* Tile-like hero icon — float + subtle glow */
-    .hero-phone .phone-mockup {
+    body { background: var(--tb-paper); }
+    /* Two-word labels ("App Store") wrapped onto two lines at mid widths. */
+    .nav-links .nav-link, .nav-links .btn-buy { white-space: nowrap; }
+    .floating-appstore {
+      background: var(--tb-button);
+      color: var(--tb-button-ink);
+      box-shadow: 0 10px 30px var(--tb-button-glow);
+    }
+
+    /* ---- Shared type ---------------------------------------------------- */
+    .tb-eyebrow {
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--tb-accent-ink);
+      margin: 0 0 1rem;
+    }
+    .tb-eyebrow .tb-num {
+      font-family: var(--tb-display-face);
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      margin-right: 0.8em;
+      opacity: 0.85;
+    }
+    .tb-display {
+      font-family: var(--tb-display-face);
+      font-weight: 600;
+      background: none;
+      -webkit-text-fill-color: currentColor;
+      color: var(--primary-color);
+      font-size: clamp(2.1rem, 5.2vw, 3.6rem);
+      line-height: 1.06;
+      letter-spacing: -0.02em;
+      margin: 0 0 1.4rem;
+      text-wrap: balance;
+    }
+    .tb-lede {
+      font-family: var(--tb-text-face);
+      font-size: clamp(1.12rem, 1.9vw, 1.36rem);
+      line-height: 1.62;
+      color: var(--tb-body);
+      margin: 0 0 1.2rem;
+      text-wrap: pretty;
+    }
+    .tb-lede a, .faq-answer a { color: var(--tb-accent-ink); }
+
+    /* ---- Hero ----------------------------------------------------------- */
+    .tb-hero {
+      position: relative;
+      background: var(--tb-hero-bg);
+      color: #fff;
+      text-align: center;
+      padding: calc(76px + clamp(3rem, 8vw, 6rem)) 16px 0;
+      overflow: hidden;
+    }
+    .tb-hero-icon {
+      width: 84px;
+      height: 84px;
+      display: block;
+      margin: 0 auto 1.4rem;
       border-radius: 22%;
-      box-shadow:
-        0 30px 80px rgba(255, 142, 52, 0.35),
-        0 10px 30px rgba(0, 0, 0, 0.5);
-      animation: tile-bob 4.5s ease-in-out infinite;
+      filter: drop-shadow(0 14px 26px rgba(0, 0, 0, 0.45));
     }
-    @keyframes tile-bob {
-      0%, 100% { transform: translateY(0); }
-      50%      { transform: translateY(-10px); }
+    .tb-hero-kicker {
+      font-size: 0.82rem;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      color: var(--tb-hero-kicker);
+      margin: 0 0 1.2rem;
+    }
+    .tb-hero h1 {
+      font-family: var(--tb-display-face);
+      font-weight: 600;
+      background: none;
+      -webkit-background-clip: border-box;
+      background-clip: border-box;
+      -webkit-text-fill-color: var(--tb-hero-ink);
+      color: var(--tb-hero-ink);
+      font-size: clamp(2.6rem, 8.4vw, 6.2rem);
+      line-height: 1.02;
+      letter-spacing: -0.025em;
+      max-width: 13ch;
+      margin: 0 auto 1.6rem;
+      text-wrap: balance;
+    }
+    .tb-hero-standfirst {
+      font-family: var(--tb-text-face);
+      font-size: clamp(1.08rem, 2vw, 1.34rem);
+      line-height: 1.6;
+      color: rgba(255, 255, 255, 0.84);
+      max-width: 44ch;
+      margin: 0 auto 2.2rem;
+      text-wrap: pretty;
+    }
+    .tb-cta {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.75rem;
+    }
+    .tb-cta .btn-buy {
+      background: var(--tb-button);
+      color: var(--tb-button-ink);
+      padding: 0.8rem 1.5rem;
+      min-height: 44px;
+      border-radius: 999px;
+      box-shadow: 0 10px 28px var(--tb-button-glow);
+    }
+    .tb-cta .btn-buy:focus-visible, .tb-alt-links a:focus-visible { outline: 3px solid var(--tb-focus); outline-offset: 3px; }
+    /* The app rises out of the hero. */
+    .tb-hero-device {
+      margin: clamp(3rem, 7vw, 4.5rem) auto 0;
+      width: clamp(230px, 34vw, 380px);
+      height: clamp(250px, 36vw, 420px);
+      overflow: hidden;
+    }
+    .tb-hero-device img { display: block; width: 100%; height: auto; }
+
+    /* ---- Statement ------------------------------------------------------ */
+    .tb-statement {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: clamp(4rem, 10vw, 7.5rem) 16px;
+      text-align: center;
+    }
+    .tb-statement p {
+      font-family: var(--tb-display-face);
+      font-size: clamp(1.5rem, 3.6vw, 2.5rem);
+      line-height: 1.3;
+      color: var(--primary-color);
+      margin: 0;
+      text-wrap: balance;
+    }
+    .tb-ornament {
+      display: block;
+      width: 44px;
+      height: 4px;
+      margin: 0 auto 1.8rem;
+      border-radius: 4px;
+      background: var(--tb-ornament);
     }
 
-    /* Feature icons in this app's palette */
-    .feature-icon {
-      background: linear-gradient(135deg, var(--app-secondary) 0%, var(--app-accent) 100%);
-      -webkit-background-clip: text;
-      background-clip: text;
+    /* ---- Chapters ------------------------------------------------------- */
+    .tb-chapter {
+      max-width: var(--tb-measure);
+      margin: 0 auto;
+      padding: clamp(4rem, 9vw, 7rem) 16px;
+      border-top: 1px solid var(--tb-rule);
+      scroll-margin-top: 70px;
     }
+    .tb-spread {
+      display: grid;
+      gap: clamp(2.5rem, 6vw, 5rem);
+      align-items: center;
+    }
+    .tb-copy { max-width: 34rem; }
+    @media (min-width: 900px) {
+      .tb-spread { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); }
+      .tb-chapter.is-flipped .tb-copy { order: 2; }
+    }
+
+    /* One device per story, sized like a photograph on the page, not a thumbnail. */
+    .tb-figure { margin: 0 auto; width: min(72vw, 340px); text-align: center; }
+    .tb-figure.is-tablet { width: min(92vw, 720px); }
+    .tb-figure img { display: block; width: 100%; height: auto; filter: var(--tb-shadow); }
+    .tb-figure figcaption {
+      font-size: 0.88rem;
+      line-height: 1.45;
+      color: var(--tb-quiet);
+      margin-top: 1.1rem;
+    }
+    .tb-figure figcaption::before {
+      content: "";
+      display: block;
+      width: 18px;
+      height: 1px;
+      margin: 0 auto 0.6rem;
+      background: var(--tb-accent-ink);
+    }
+
+    /* Secondary routes: quiet text links under the one button. */
+    .tb-alt-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.7rem;
+      margin: 1.1rem 0 0;
+      font-size: 0.95rem;
+      color: rgba(255, 255, 255, 0.6);
+    }
+    .tb-alt-links a { color: rgba(255, 255, 255, 0.86); text-decoration: none; border-bottom: 1px solid rgba(255, 255, 255, 0.3); }
+    .tb-alt-links a:hover { border-bottom-color: rgba(255, 255, 255, 0.8); }
+    .tb-closing .tb-alt-links { color: var(--tb-quiet); }
+    .tb-closing .tb-alt-links a { color: var(--tb-accent-ink); border-bottom-color: var(--tb-rule); }
+
+    /* ---- Trust ---------------------------------------------------------- */
+    .tb-privacy {
+      background: var(--tb-hero-bg);
+      color: var(--tb-hero-ink);
+      padding: clamp(4.5rem, 10vw, 8rem) 16px;
+      scroll-margin-top: 60px;
+    }
+    .tb-privacy-inner { max-width: var(--tb-measure); margin: 0 auto; }
+    .tb-privacy .tb-eyebrow { color: var(--tb-hero-kicker); text-align: center; }
+    .tb-privacy .tb-display {
+      color: var(--tb-hero-ink);
+      -webkit-text-fill-color: var(--tb-hero-ink);
+      text-align: center;
+      font-size: clamp(2.3rem, 6.4vw, 4.6rem);
+      max-width: 14ch;
+      margin: 0 auto 3rem;
+    }
+    .tb-privacy .security-badges {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+      gap: 0;
+      max-width: none;
+      padding: 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    .tb-privacy .security-badge {
+      background: none;
+      border: none;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 0;
+      box-shadow: none;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+      color: var(--tb-hero-ink);
+      font-family: var(--tb-display-face);
+      font-size: 1.12rem;
+      padding: 1.1rem 0.4rem;
+      justify-content: center;
+    }
+    .tb-privacy .security-badge:hover { transform: none; }
+    .tb-privacy .security-audit-note {
+      text-align: center;
+      font-family: var(--tb-text-face);
+      font-style: italic;
+      font-size: clamp(1.1rem, 2.2vw, 1.3rem);
+      color: rgba(255, 255, 255, 0.88);
+      max-width: 36ch;
+      padding: 0;
+      margin: 2.6rem auto 0;
+    }
+    .tb-privacy-link { text-align: center; margin: 1.4rem 0 0; }
+    .tb-privacy-link a { color: var(--tb-hero-kicker); text-decoration: none; border-bottom: 1px solid currentColor; }
+    .tb-privacy-link a::after { content: " →"; }
+
+    /* ---- FAQ: a ruled list ---------------------------------------------- */
+    .faq-section { max-width: 820px; padding: clamp(4rem, 9vw, 6rem) 16px; }
+    .faq-section .tb-eyebrow, .faq-section h2 { text-align: center; }
+    .faq-section h2 {
+      font-family: var(--tb-display-face);
+      font-weight: 600;
+      background: none;
+      -webkit-text-fill-color: currentColor;
+      color: var(--primary-color);
+      font-size: clamp(1.9rem, 4vw, 2.8rem);
+      margin: 0 0 2.5rem;
+    }
+    .faq-item {
+      background: none;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+      border: none;
+      border-top: 1px solid var(--tb-rule);
+      border-radius: 0;
+      margin: 0;
+    }
+    .faq-item:last-child { border-bottom: 1px solid var(--tb-rule); }
+    .faq-question {
+      font-family: var(--tb-display-face);
+      font-size: 1.15rem;
+      font-weight: 600;
+      padding: 1.25rem 0;
+      gap: 1rem;
+    }
+    .faq-question:hover { color: var(--tb-accent-ink); }
+    .faq-question:focus-visible { outline: 2px solid var(--tb-accent-ink); outline-offset: 2px; }
+    .faq-icon { font-size: 0.8rem; color: var(--tb-accent-ink); }
+    .faq-answer { padding: 0; }
+    .faq-item.active .faq-answer { padding: 0 0 1.4rem; }
+    .faq-answer p { font-size: 1rem; line-height: 1.68; color: var(--tb-body); }
+
+    /* ---- Closing -------------------------------------------------------- */
+    .tb-closing {
+      text-align: center;
+      padding: clamp(4.5rem, 10vw, 7rem) 16px;
+      background: var(--tb-closing-bg);
+      border-top: 1px solid var(--tb-rule);
+    }
+    .tb-closing img { width: 96px; height: 96px; display: block; margin: 0 auto 1.6rem; border-radius: 22%; filter: drop-shadow(0 16px 26px rgba(0, 0, 0, 0.28)); }
+    .tb-closing .tb-display { font-size: clamp(2rem, 5vw, 3.4rem); max-width: 14ch; margin: 0 auto 2rem; }
+    .footer { margin-top: 0; }
+
+    /* ---- Reveal: only when motion is welcome ----------------------------- */
+    .tb-motion [data-reveal] {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.9s ease, transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1);
+    }
+    .tb-motion [data-reveal].is-in { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) {
+      .floating-appstore, .faq-item, .hero-text { animation: none; }
+      .btn-buy:hover, .floating-appstore:hover { transform: none; }
+    }
+
+    @media (max-width: 600px) {
+      .tb-hero-icon { width: 68px; height: 68px; }
+      .tb-cta { flex-direction: column; align-items: stretch; max-width: 22rem; margin: 0 auto; }
+      .tb-cta a { justify-content: center; }
+    }
+    /* Break CJK headlines at phrase boundaries, not mid-word, where supported. */
+    .tb-hero h1, .tb-display, .tb-statement p { word-break: auto-phrase; }
+    /* `ch` is the width of a Latin zero; a CJK glyph is two of them. Measure CJK in em. */
+    :lang(ja) .tb-hero h1, :lang(zh) .tb-hero h1, :lang(ko) .tb-hero h1 { max-width: 9em; }
+    :lang(ja) .tb-privacy .tb-display, :lang(zh) .tb-privacy .tb-display, :lang(ko) .tb-privacy .tb-display,
+    :lang(ja) .tb-closing .tb-display, :lang(zh) .tb-closing .tb-display, :lang(ko) .tb-closing .tb-display { max-width: 10em; }
+    :lang(ja) .tb-hero-standfirst, :lang(zh) .tb-hero-standfirst, :lang(ko) .tb-hero-standfirst,
+    :lang(ja) .security-audit-note, :lang(zh) .security-audit-note, :lang(ko) .security-audit-note { max-width: 26em; }
+
+    .tb-hero h1, .tb-display, .faq-section h2 { font-weight: 800; letter-spacing: -0.03em; }
+    .tb-statement p { font-weight: 700; }
+
   </style>
   <link rel="alternate" hreflang="x-default" href="https://wemiller.com/apps/tilebreak/">
   <link rel="alternate" hreflang="en" href="https://wemiller.com/apps/tilebreak/">
@@ -63,7 +410,6 @@
   <script src="/i18n/i18n.js" defer data-page="apps.tilebreak" data-pos="bottom-left"></script>
 </head>
 <body>
-  <!-- Navigation -->
   <nav class="app-nav">
     <div class="nav-container">
       <a href="../" class="nav-logo nav-brand" title="← Apps" aria-label="← Apps"
@@ -74,270 +420,153 @@
       </a>
       <button class="mobile-menu-toggle">☰</button>
       <ul class="nav-links">
-        <li><a href="#whats-new" class="nav-link" data-i18n="what-s-new.a2efe2">What's New</a></li>
         <li><a href="#features" class="nav-link" data-i18n="features.fc338f">Features</a></li>
-        <li><a href="#screenshots" class="nav-link" data-i18n="screenshots.597b63">Screenshots</a></li>
         <li><a href="#faq" class="nav-link" data-i18n="faq.03688b">FAQ</a></li>
         <li><a href="https://apps.apple.com/us/app/tile-break-mahjong/id6772609707" class="btn-buy" target="_blank" rel="noopener noreferrer" data-i18n="download-on-app-store.cf50c2">Download on App Store</a></li>
       </ul>
     </div>
   </nav>
 
-  <!-- Hero -->
-  <section class="hero">
-    <div class="hero-content">
-      <div class="hero-text">
-        <p class="hero-subtitle" data-i18n="tilebreak.cb8cd3">🀄 Tilebreak</p>
-        <h1 class="hero-title" data-i18n="match-combo-clear.dee858">Match. Combo. Clear.</h1>
-        <p class="hero-description" data-i18n="a-polished-modern-mahjong.92d9ba">
-          A polished modern Mahjong solitaire for iPhone and iPad.
-          Tap two matching free tiles to break the pair, build a combo, and clear the board.
-          Every deal is provably solvable. No ads. No tracking. Plays offline.
-        </p>
-        <span class="os-ready-badge" data-i18n-html="ready-for-ios-27.e06c8c"><span class="badge-icon">✓</span> Ready for iOS 27 / iPadOS 27</span>
-        <div class="hero-cta">
-          <a href="https://apps.apple.com/us/app/tile-break-mahjong/id6772609707" class="btn-buy" target="_blank" rel="noopener noreferrer" data-i18n="download-now.6d56a8">Download Now</a>
-        </div>
-      </div>
-      <div class="hero-image">
-        <div class="hero-phone">
-          <img src="assets/images/icon.png?v=45460b08" alt="Tilebreak app icon" class="phone-mockup"
-               onerror="this.style.background='linear-gradient(135deg, #2a1769, #ff8e34)'; this.style.minHeight='300px'; this.style.minWidth='300px';">
-        </div>
-      </div>
+  <!-- Hero: the promise, one download button, and the app rising out of it. -->
+  <header class="tb-hero" id="about">
+    <img class="tb-hero-icon" src="assets/images/icon.png?v=45460b08" alt="Tilebreak App Icon" width="1024" height="1024">
+    <p class="tb-hero-kicker">Tilebreak</p>
+    <h1 data-i18n="match-combo-clear.dee858">Match. Combo. Clear.</h1>
+    <p class="tb-hero-standfirst" data-i18n="a-polished-modern-mahjong.68954c">A polished, modern Mahjong solitaire for iPhone and iPad, where every deal can be cleared.</p>
+    <div class="tb-cta">
+      <a href="https://apps.apple.com/us/app/tile-break-mahjong/id6772609707" target="_blank" rel="noopener noreferrer" class="btn-buy" data-i18n="download-on-the-app.a9096a">Download on the App Store</a>
     </div>
-  </section>
+    <div class="tb-hero-device">
+      <img src="assets/screens/en/09-home-modes-800.webp?v=2f40e427"
+               srcset="assets/screens/en/09-home-modes-400.webp?v=d167068f 400w, assets/screens/en/09-home-modes-800.webp?v=2f40e427 800w"
+               sizes="(max-width: 676px) 230px, (max-width: 1117px) 34vw, 380px" width="800" height="1657" fetchpriority="high" data-i18n-src
+               alt="The Tilebreak home screen, with Classic and Arcade modes and the Play button" data-i18n-attr="alt:the-tilebreak-home-screen.115501">
+    </div>
+  </header>
 
   <!-- Floating App Store button -->
-  <a href="https://apps.apple.com/us/app/tile-break-mahjong/id6772609707" class="floating-appstore" target="_blank" rel="noopener noreferrer">
+  <a href="https://apps.apple.com/us/app/tile-break-mahjong/id6772609707" target="_blank" rel="noopener noreferrer" class="floating-appstore">
     <span class="floating-appstore-icon"></span>
     <span data-i18n="download-on-app-store.cf50c2">Download on App Store</span>
   </a>
 
-  <!-- What's New Section -->
-  <section id="whats-new" class="section">
-    <div class="section-header">
-      <p class="section-subtitle" data-i18n="just-shipped.243f10">Just Shipped</p>
-      <h2 data-i18n="what-s-new-in.1fe267">What's New in Tilebreak</h2>
-      <p data-i18n="a-more-flexible-ipad.e48cc8">A more flexible iPad experience and modernized Game Center</p>
-    </div>
+  <section class="tb-statement">
+    <span class="tb-ornament" aria-hidden="true"></span>
+    <p data-i18n="the-mahjong-solitaire-that.dd3f45">The Mahjong solitaire that never deals you a lost cause.</p>
+  </section>
 
-    <div class="feature-grid">
-      <div class="feature-card">
-        <div class="feature-icon">📲</div>
-        <h3 class="feature-title" data-i18n="resize-it-your-way.5417a7">Resize It Your Way</h3>
-        <p class="feature-description" data-i18n="the-window-resizes-freely.8bd34e">
-          The window resizes freely in Split View, Stage Manager, and iPad windowing — the home screen, tutorial, and title hero all adapt to the window instead of the device, so small windows stay tidy.
-        </p>
+  <!-- Stories: one idea, one headline, two sentences at most, one device. -->
+  <main id="features">
+    <section class="tb-chapter" id="solvable">
+      <div class="tb-spread">
+        <div class="tb-copy" data-reveal>
+          <p class="tb-eyebrow"><span class="tb-num">01</span><span data-i18n="always-solvable.638a65">Always solvable</span></p>
+          <h2 class="tb-display" data-i18n="every-deal-can-be.99d696">Every deal can be won</h2>
+          <p class="tb-lede" data-i18n="every-board-is-dealt.b8917b">Every board is dealt from a simulated play-through, so it can always be cleared. Even a shuffle mid-game re-rolls into a solvable layout.</p>
+        </div>
+        <figure class="tb-figure" data-reveal>
+          <img src="assets/screens/en/02-classic-garden-800.webp?v=13f8aba2"
+               srcset="assets/screens/en/02-classic-garden-400.webp?v=4742ba4f 400w, assets/screens/en/02-classic-garden-800.webp?v=13f8aba2 800w"
+               sizes="(max-width: 472px) 72vw, 340px" width="800" height="1657" loading="lazy" decoding="async" data-i18n-src
+               alt="The Garden layout in Classic mode, with traditional Mahjong tiles" data-i18n-attr="alt:the-garden-layout-in.0205bb">
+        </figure>
       </div>
+    </section>
 
-      <div class="feature-card">
-        <div class="feature-icon">🏆</div>
-        <h3 class="feature-title" data-i18n="modernized-game-center.41dc5c">Modernized Game Center</h3>
-        <p class="feature-description" data-i18n="leaderboards-and-the-dashboard.4ea0bb">
-          Leaderboards and the dashboard now open through the latest Game Center experience, keeping score sheets quick and current.
-        </p>
+    <section class="tb-chapter is-flipped" id="modes">
+      <div class="tb-spread">
+        <div class="tb-copy" data-reveal>
+          <p class="tb-eyebrow"><span class="tb-num">02</span><span data-i18n="two-modes.ed5749">Two modes</span></p>
+          <h2 class="tb-display" data-i18n="classic-or-a-coffee.f14ad3">Classic, or a coffee break</h2>
+          <p class="tb-lede" data-i18n="classic-is-the-full.12a3f1">Classic is the full 144-tile set across seven layouts. Arcade is sixteen shorter boards with bigger tiles, sized for a quick clear.</p>
+        </div>
+        <figure class="tb-figure" data-reveal>
+          <img src="assets/screens/en/01-arcade-blossom-800.webp?v=9b9f68ed"
+               srcset="assets/screens/en/01-arcade-blossom-400.webp?v=75e050fe 400w, assets/screens/en/01-arcade-blossom-800.webp?v=9b9f68ed 800w"
+               sizes="(max-width: 472px) 72vw, 340px" width="800" height="1657" loading="lazy" decoding="async" data-i18n-src
+               alt="An Arcade board with large, colorful tiles" data-i18n-attr="alt:an-arcade-board-with.3ca14a">
+        </figure>
       </div>
+    </section>
 
-      <div class="feature-card">
-        <div class="feature-icon">🌐</div>
-        <h3 class="feature-title" data-i18n="every-screen-in-your.c3d32d">Every Screen in Your Language</h3>
-        <p class="feature-description" data-i18n="the-in-game-controls.ff13e1">
-          The in-game controls, scoreboard, end-of-game summary, achievements, tutorial and every layout, theme and tile-set name are now translated into all nine languages Tilebreak supports.
-        </p>
+    <section class="tb-chapter" id="style">
+      <div class="tb-spread">
+        <div class="tb-copy" data-reveal>
+          <p class="tb-eyebrow"><span class="tb-num">03</span><span data-i18n="themes.94d518">Themes</span></p>
+          <h2 class="tb-display" data-i18n="pick-a-layout-pick.2cec53">Pick a layout. Pick a style.</h2>
+          <p class="tb-lede" data-i18n="six-themes-and-four.5dcba0">Six themes and four tile face sets, mixed however you like. Each theme plays its own generated music and switches the moment you do.</p>
+        </div>
+        <figure class="tb-figure" data-reveal>
+          <img src="assets/screens/en/03-arcade-torii-800.webp?v=beb3bc0a"
+               srcset="assets/screens/en/03-arcade-torii-400.webp?v=03881647 400w, assets/screens/en/03-arcade-torii-800.webp?v=beb3bc0a 800w"
+               sizes="(max-width: 472px) 72vw, 340px" width="800" height="1657" loading="lazy" decoding="async" data-i18n-src
+               alt="An Arcade board with the Animals face set on a dark theme" data-i18n-attr="alt:an-arcade-board-with.e3ca82">
+        </figure>
       </div>
+    </section>
+
+    <section class="tb-chapter is-flipped" id="scoring">
+      <div class="tb-spread">
+        <div class="tb-copy" data-reveal>
+          <p class="tb-eyebrow"><span class="tb-num">04</span><span data-i18n="scoring.a6e081">Scoring</span></p>
+          <h2 class="tb-display" data-i18n="a-real-challenge-not.1d6241">A real challenge, not a slot machine.</h2>
+          <p class="tb-lede" data-i18n="combo-streaks-multiply-your.df068a">Combo streaks multiply your score up to 5×, and a hint or a misaimed tap breaks the streak. The end screen puts your personal best beside every stat.</p>
+        </div>
+        <figure class="tb-figure" data-reveal>
+          <img src="assets/screens/en/05-endgame-800.webp?v=0e6d51f9"
+               srcset="assets/screens/en/05-endgame-400.webp?v=e7e28b27 400w, assets/screens/en/05-endgame-800.webp?v=0e6d51f9 800w"
+               sizes="(max-width: 472px) 72vw, 340px" width="800" height="1657" loading="lazy" decoding="async" data-i18n-src
+               alt="The end-of-game summary, with the score, time and best combo" data-i18n-attr="alt:the-end-of-game.4f3635">
+        </figure>
+      </div>
+    </section>
+
+    <section class="tb-chapter" id="game-center">
+      <div class="tb-spread">
+        <div class="tb-copy" data-reveal>
+          <p class="tb-eyebrow"><span class="tb-num">05</span><span>Game Center</span></p>
+          <h2 class="tb-display" data-i18n="six-leaderboards-19-achievements.8800fa">Six leaderboards, 19 achievements</h2>
+          <p class="tb-lede" data-i18n="scores-are-split-by.de47c9">Scores are split by mode, so every board ranks fairly. Achievements are kept on your device first, so they count even if you never sign in.</p>
+        </div>
+        <figure class="tb-figure" data-reveal>
+          <img src="assets/screens/en/08-scores-arcade-800.webp?v=77844c4b"
+               srcset="assets/screens/en/08-scores-arcade-400.webp?v=ccb9d5a3 400w, assets/screens/en/08-scores-arcade-800.webp?v=77844c4b 800w"
+               sizes="(max-width: 472px) 72vw, 340px" width="800" height="1657" loading="lazy" decoding="async" data-i18n-src
+               alt="The Arcade high-score list" data-i18n-attr="alt:the-arcade-high-score.d8e4ce">
+        </figure>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Trust: one beat, then out of the way. -->
+  <section class="tb-privacy" id="privacy">
+    <div class="tb-privacy-inner" data-reveal>
+      <p class="tb-eyebrow" data-i18n="privacy-security.75c011">Privacy &amp; security</p>
+      <h2 class="tb-display" data-i18n="built-clean.a00f77">Built clean</h2>
+      <div class="security-badges">
+        <div class="security-badge" data-i18n-html="no-ads-no-sdks.182f4a"><span class="badge-icon">🚫</span> No ads, no SDKs</div>
+        <div class="security-badge" data-i18n-html="no-tracking.a4906b"><span class="badge-icon">🔍</span> No tracking</div>
+        <div class="security-badge" data-i18n-html="gamekit-only.58b497"><span class="badge-icon">🎮</span> GameKit only</div>
+        <div class="security-badge" data-i18n-html="plays-offline.1527d4"><span class="badge-icon">✈️</span> Plays offline</div>
+      </div>
+      <p class="security-audit-note" data-i18n="no-ads-no-analytics.fc6343">No ads, no analytics, no required sign-in. The whole game plays in airplane mode.</p>
     </div>
   </section>
 
-  <!-- Features -->
-  <section id="features" class="section">
-    <div class="section-header">
-      <p class="section-subtitle" data-i18n="what-s-inside.eac83d">What's inside</p>
-      <h2 data-i18n="built-for-the-long.c2083b">Built for the long game</h2>
-      <p data-i18n="seven-layouts-six-themes.7f28c6">Seven layouts, six themes, four face sets, two rule variants — and not a single ad in sight</p>
-    </div>
-
-    <div class="feature-grid">
-      <div class="feature-card">
-        <div class="feature-icon">🧩</div>
-        <h3 class="feature-title" data-i18n="always-solvable.638a65">Always solvable</h3>
-        <p class="feature-description" data-i18n="every-board-is-generated.e84b6f">
-          Every board is generated via reverse-removal — we simulate a valid play-through first, then deal the tiles into the resulting order. No more random shuffles that lock you out two minutes in.
-        </p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">🗺️</div>
-        <h3 class="feature-title" data-i18n="seven-layouts.040c5c">Seven layouts</h3>
-        <p class="feature-description" data-i18n="garden-pyramid-turtle-cross.d358a0">
-          Garden, Pyramid, Turtle, Cross, Diamond, Tower, and Bricks. Each one is 144 tiles tuned for portrait phones and reads beautifully on iPad.
-        </p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">🎨</div>
-        <h3 class="feature-title" data-i18n="six-themes-four-face.026673">Six themes, four face sets</h3>
-        <p class="feature-description" data-i18n="mix-ivory-jade-midnight.2487a6">
-          Mix Ivory, Jade, Midnight, Cherry, Lantern, or Cyber with Classic Mahjong, Icons, Garden, or Animals tile faces. Live-switch any of it from Settings without dropping your game.
-        </p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">🎵</div>
-        <h3 class="feature-title" data-i18n="procedural-soundtrack.eac86e">Procedural soundtrack</h3>
-        <p class="feature-description" data-i18n="each-theme-ships-with.f3a164">
-          Each theme ships with its own non-repetitive procedural music engine driven by AVAudio's sample-accurate scheduler. Respects your silent switch.
-        </p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">🔥</div>
-        <h3 class="feature-title" data-i18n="combo-time-scoring.642279">Combo + time scoring</h3>
-        <p class="feature-description" data-i18n="fast-clears-multiply-your.ca23f4">
-          Fast clears multiply your score. Combo streaks stack up to 5×. A misaimed tap breaks the streak — so does using a hint, but only if you cash it in.
-        </p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">🏆</div>
-        <h3 class="feature-title" data-i18n="game-center-leaderboards.bde791">Game Center leaderboards</h3>
-        <p class="feature-description" data-i18n="three-global-leaderboards-best.1474f8">
-          Three global leaderboards: best single-game score, fastest clear, and longest combo. End-of-game screen shows your personal record next to each stat and highlights a new best in gold.
-        </p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">📵</div>
-        <h3 class="feature-title" data-i18n="offline-ad-free.c7f5c4">Offline, ad-free</h3>
-        <p class="feature-description" data-i18n="no-ads-no-tracking.84fde3">
-          No ads. No tracking. No analytics. No required sign-in. Plays everywhere, including airplane mode. Game Center features need a connection but the core game does not.
-        </p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">🤝</div>
-        <h3 class="feature-title" data-i18n="challenge-a-friend.a5c81a">Challenge a friend</h3>
-        <p class="feature-description" data-i18n="after-a-win-send.36e5f6">
-          After a win, send a real native Game Center challenge tied to your actual leaderboard entry. They get an in-game banner with the score to beat.
-        </p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">🔋</div>
-        <h3 class="feature-title" data-i18n="light-on-battery.e5f620">Light on battery</h3>
-        <p class="feature-description" data-i18n="swiftui-spritekit-hybrid-60.08b000">
-          SwiftUI + SpriteKit hybrid, 60 fps cap, zero third-party SDKs. Stack lift, side walls, and shadows are all proportional so the board scales cleanly from iPhone mini to iPad 13".
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Magazine sections -->
-  <section class="section">
-    <div class="magazine-section">
-      <div class="magazine-content">
-        <h2 data-i18n="pick-a-layout-pick.2cec53">Pick a layout. Pick a style.</h2>
-        <p data-i18n="tilebreak-ships-with-seven.74135b">
-          Tilebreak ships with seven board layouts — from the classic Garden, to a brick-stacked Pyramid, to a Latin Cross that fans out across the screen. Whichever you pick, the deal is provably solvable.
-        </p>
-        <p data-i18n="combine-any-layout-with.e305c7">
-          Combine any layout with one of six themes and four face sets. Want Classic Mahjong tiles on a midnight background with a lo-fi soundtrack? Done. Want full-color animal emoji on a synthwave Cyber theme? Also done.
-        </p>
-      </div>
-      <div class="magazine-image">
-        <img src="assets/images/frame-garden.jpg?v=e02e0c7a" alt="Garden layout with Classic tiles on the Ivory theme"
-             onerror="this.style.background='linear-gradient(135deg, #2a1769, #ff8e34)'; this.style.minHeight='400px'; this.style.display='block';">
-      </div>
-    </div>
-
-    <div class="magazine-section reverse">
-      <div class="magazine-content">
-        <h2 data-i18n="a-real-challenge-not.1d6241">A real challenge, not a slot machine.</h2>
-        <p data-i18n="time-and-combo-both.418814">
-          Time and combo both matter. A fast clear with a long streak posts a serious score. A slow clear with broken combos posts a fine one. Used a hint? Took an undo? You'll see the deduction.
-        </p>
-        <p data-i18n="the-end-screen-pulls.d68b12">
-          The end screen pulls your personal best from Game Center and shows it next to every stat. Beat your record and the row goes gold — there's no ambiguity about whether you crushed it.
-        </p>
-      </div>
-      <div class="magazine-image">
-        <img src="assets/images/frame-pyramid.jpg?v=fc673b06" alt="Pyramid layout with Animals face set on Cyber theme"
-             onerror="this.style.background='linear-gradient(135deg, #ff8e34, #ffd23f)'; this.style.minHeight='400px'; this.style.display='block';">
-      </div>
-    </div>
-
-    <div class="magazine-section">
-      <div class="magazine-content">
-        <h2 data-i18n="made-with-care-shipped.2a813f">Made with care, shipped with care.</h2>
-        <p data-i18n="tilebreak-is-hand-built.a623b2">
-          Tilebreak is hand-built in SwiftUI and SpriteKit — no Unity, no third-party SDKs, no analytics, no ads. The classic Mahjong tile faces are drawn procedurally in CoreGraphics so they look crisp at any tile size.
-        </p>
-        <p data-i18n="the-app-icon-is.62d542">
-          The app icon is procedural too: two matching Red Dragon tiles flanking a burst of sparks, generated by a Swift script so it can be tweaked and re-rendered in seconds. The whole thing is iOS 26 native and built against Swift 6 strict concurrency.
-        </p>
-      </div>
-      <div class="magazine-image">
-        <img src="assets/images/frame-diamond.jpg?v=1b99be41" alt="Diamond layout with Garden face set on Cherry theme"
-             onerror="this.style.background='linear-gradient(135deg, #2a1769, #ffd23f)'; this.style.minHeight='400px'; this.style.display='block';">
-      </div>
-    </div>
-  </section>
-
-  <!-- Screenshots -->
-  <section id="screenshots" class="section">
-    <div class="section-header">
-      <p class="section-subtitle" data-i18n="see-it-in-action.f7bd04">See it in action</p>
-      <h2 data-i18n="screenshots.597b63">Screenshots</h2>
-      <p data-i18n="captured-on-iphone-17.4ec539">Captured on iPhone 17 Pro Max</p>
-    </div>
-
-    <div class="screenshots-grid">
-      <div class="screenshot-item">
-        <img src="assets/images/frame-welcome.jpg?v=c8a3fa84" alt="Tilebreak welcome screen with floating hero tiles">
-      </div>
-      <div class="screenshot-item">
-        <img src="assets/images/frame-garden.jpg?v=e02e0c7a" alt="Garden layout · Ivory theme · Classic Mahjong tiles">
-      </div>
-      <div class="screenshot-item">
-        <img src="assets/images/frame-diamond.jpg?v=1b99be41" alt="Diamond layout · Cherry theme · Garden face set">
-      </div>
-      <div class="screenshot-item">
-        <img src="assets/images/frame-pyramid.jpg?v=fc673b06" alt="Pyramid layout · Cyber theme · Animals face set">
-      </div>
-      <div class="screenshot-item">
-        <img src="assets/images/frame-cross.jpg?v=acbb6512" alt="Cross layout · Lantern theme · Symbols face set">
-      </div>
-    </div>
-  </section>
-
-  <!-- FAQ -->
+  <!-- FAQ: short, folded, and the EU note last. -->
   <section id="faq" class="faq-section">
-    <div class="section-header">
-      <p class="section-subtitle" data-i18n="got-questions.001f6d">Got questions?</p>
-      <h2 data-i18n="faq.03688b">FAQ</h2>
-    </div>
+    <p class="tb-eyebrow" data-i18n="got-questions.001f6d">Got questions?</p>
+    <h2 data-i18n="faq.03688b">FAQ</h2>
 
+    <div class="faq-list">
     <div class="faq-item">
       <button class="faq-question">
         <span data-i18n="how-do-you-match.dcdeb6">How do you match tiles?</span>
         <span class="faq-icon">▼</span>
       </button>
       <div class="faq-answer">
-        <p data-i18n="tap-two-matching-tiles.494962">
-          Tap two matching tiles to remove them. A tile is "free" if nothing is stacked on top of it and at least one of its left or right sides is open. Most tiles need an exact match — under American rules, any flower matches any flower and any season matches any season.
-        </p>
-      </div>
-    </div>
-
-    <div class="faq-item">
-      <button class="faq-question">
-        <span data-i18n="is-every-board-actually.26b8bd">Is every board actually solvable?</span>
-        <span class="faq-icon">▼</span>
-      </button>
-      <div class="faq-answer">
-        <p data-i18n="yes-each-board-is.243716">
-          Yes. Each board is generated by simulating a valid play-through first (the reverse-removal method) and then dealing the tiles into the resulting order. Even after a shuffle mid-game, the new layout is regenerated to be solvable.
-        </p>
+        <p data-i18n="tap-two-matching-tiles.494962">Tap two matching tiles to remove them. A tile is "free" if nothing is stacked on top of it and at least one of its left or right sides is open. Most tiles need an exact match — under American rules, any flower matches any flower and any season matches any season.</p>
       </div>
     </div>
 
@@ -347,9 +576,7 @@
         <span class="faq-icon">▼</span>
       </button>
       <div class="faq-answer">
-        <p data-i18n="american-the-default-follows.de8dc1">
-          American (the default) follows the modern western convention: any flower matches any flower, any season matches any season. Strict requires an exact identity match for every tile — and because flowers/seasons only ship as singles, Strict mode drops them from the pool entirely and substitutes extra winds so every tile has a partner.
-        </p>
+        <p data-i18n="american-the-default-follows.de8dc1">American (the default) follows the modern western convention: any flower matches any flower, any season matches any season. Strict requires an exact identity match for every tile — and because flowers/seasons only ship as singles, Strict mode drops them from the pool entirely and substitutes extra winds so every tile has a partner.</p>
       </div>
     </div>
 
@@ -359,21 +586,7 @@
         <span class="faq-icon">▼</span>
       </button>
       <div class="faq-answer">
-        <p data-i18n="no-to-both-tilebreak.6a1a5a">
-          No to both. Tilebreak is a one-time purchase. There are no ads, no in-app purchases, no required sign-in, and no tracking. Game Center is opt-in for leaderboards and challenges.
-        </p>
-      </div>
-    </div>
-
-    <div class="faq-item">
-      <button class="faq-question">
-        <span data-i18n="does-it-play-offline.0694d1">Does it play offline?</span>
-        <span class="faq-icon">▼</span>
-      </button>
-      <div class="faq-answer">
-        <p data-i18n="completely-the-full-game.310580">
-          Completely. The full game works in airplane mode. Leaderboard submission and challenges sync up the next time you're online.
-        </p>
+        <p data-i18n="no-to-both-tilebreak.6a1a5a">No to both. Tilebreak is a one-time purchase. There are no ads, no in-app purchases, no required sign-in, and no tracking. Game Center is opt-in for leaderboards and challenges.</p>
       </div>
     </div>
 
@@ -383,9 +596,7 @@
         <span class="faq-icon">▼</span>
       </button>
       <div class="faq-answer">
-        <p data-i18n="yes-native-ipad-support.59fa42">
-          Yes — native iPad support in both portrait and landscape. The board scales up to fill the bigger screen with proportional tile size, stack lift, and side-wall depth so the visual stays consistent.
-        </p>
+        <p data-i18n="yes-native-ipad-support.59fa42">Yes — native iPad support in both portrait and landscape. The board scales up to fill the bigger screen with proportional tile size, stack lift, and side-wall depth so the visual stays consistent.</p>
       </div>
     </div>
 
@@ -395,11 +606,10 @@
         <span class="faq-icon">▼</span>
       </button>
       <div class="faq-answer">
-        <p data-i18n="a-procedural-engine-there.5380f9">
-          A procedural engine — there are no pre-recorded tracks. Each theme has its own character (Ivory is plucky, Midnight is brooding, Cyber is synthwave) and the engine schedules notes through AVAudio with sample-accurate timing so it never stutters. Toggleable from Settings, respects the silent switch.
-        </p>
+        <p data-i18n="a-procedural-engine-there.5380f9">A procedural engine — there are no pre-recorded tracks. Each theme has its own character (Ivory is plucky, Midnight is brooding, Cyber is synthwave) and the engine schedules notes through AVAudio with sample-accurate timing so it never stutters. Toggleable from Settings, respects the silent switch.</p>
       </div>
     </div>
+
     <div class="faq-item">
       <button class="faq-question">
         <span data-i18n="is-tilebreak-available-in.5a1587">Is Tilebreak available in the European Union?</span>
@@ -409,24 +619,17 @@
         <p data-i18n="yes-tilebreak-is-on.0e9e99">Yes. Tilebreak is on the App Store everywhere in the European Union, France included. It's available in every App Store territory Apple offers.</p>
       </div>
     </div>
+    </div>
   </section>
 
-  <!-- Security -->
-  <section class="security-callout">
-    <div class="section-header">
-      <p class="section-subtitle" data-i18n="privacy-security.75c011">Privacy &amp; security</p>
-      <h2 data-i18n="built-clean.a00f77">Built clean</h2>
+  <!-- Closing: the promise again, and the one button. -->
+  <section class="tb-closing">
+    <img src="assets/images/icon.png?v=45460b08" alt="" width="1024" height="1024" loading="lazy">
+    <h2 class="tb-display" data-i18n="match-combo-clear.dee858">Match. Combo. Clear.</h2>
+    <div class="tb-cta">
+      <a href="https://apps.apple.com/us/app/tile-break-mahjong/id6772609707" target="_blank" rel="noopener noreferrer" class="btn-buy" data-i18n="download-on-the-app.a9096a">Download on the App Store</a>
     </div>
-    <div class="security-badges">
-      <div class="security-badge" data-i18n-html="no-ads-no-sdks.182f4a"><span class="badge-icon">🚫</span> No ads, no SDKs</div>
-      <div class="security-badge" data-i18n-html="no-tracking.a4906b"><span class="badge-icon">🔍</span> No tracking</div>
-      <div class="security-badge" data-i18n-html="privacy-manifest.e8ed85"><span class="badge-icon">📋</span> Privacy Manifest</div>
-      <div class="security-badge" data-i18n-html="gamekit-only.58b497"><span class="badge-icon">🎮</span> GameKit only</div>
-      <div class="security-badge" data-i18n-html="plays-offline.1527d4"><span class="badge-icon">✈️</span> Plays offline</div>
-    </div>
-    <p class="security-audit-note" data-i18n="zero-third-party-dependencies.a096e5">Zero third-party dependencies. Built on Swift 6 with strict concurrency.</p>
   </section>
-
   <footer class="footer">
     <div class="footer-content">
       <div class="footer-links">
@@ -473,5 +676,20 @@
   </footer>
 
   <script src="../app-showcase.js"></script>
+  <script>
+    // A quiet reveal as each chapter arrives — only when motion is welcome, and
+    // only once JavaScript is known to be running, so nothing can stay hidden.
+    (function () {
+      if (!('IntersectionObserver' in window)) return;
+      if (!window.matchMedia('(prefers-reduced-motion: no-preference)').matches) return;
+      document.documentElement.classList.add('tb-motion');
+      const io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); }
+        });
+      }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+      document.querySelectorAll('[data-reveal]').forEach(function (el) { io.observe(el); });
+    })();
+  </script>
 </body>
 </html>

@@ -39,5 +39,16 @@
         "widths": [400, 800]
       }
     ]
+  },
+  "tilebreak": {
+    "repo": "Tilebreak",
+    "renders": [
+      {
+        "device": "iphone",
+        "captures": "screenshots/iphone-6.9",
+        "scenes": ["09-home-modes", "02-classic-garden", "01-arcade-blossom", "03-arcade-torii", "05-endgame", "08-scores-arcade"],
+        "widths": [400, 800]
+      }
+    ]
   }
 }
