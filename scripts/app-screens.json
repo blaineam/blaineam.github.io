@@ -61,5 +61,22 @@
         "widths": [400, 800]
       }
     ]
+  },
+  "pinline": {
+    "repo": "Pinline",
+    "renders": [
+      {
+        "device": "iphone",
+        "captures": "screenshots/iphone-6.9",
+        "scenes": ["02-gameplay-olympic", "03-gameplay-animals", "04-results"],
+        "widths": [400, 800]
+      },
+      {
+        "device": "ipad",
+        "captures": "screenshots/ipad-13",
+        "scenes": ["gameplay-olympic"],
+        "widths": [720, 1440]
+      }
+    ]
   }
 }

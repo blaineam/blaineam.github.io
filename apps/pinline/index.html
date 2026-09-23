@@ -12,52 +12,398 @@
   <meta property="og:image" content="https://wemiller.com/apps/pinline/assets/images/poster.jpg?v=7963fa7d">
   <link rel="stylesheet" href="../app-showcase.css">
   <style>
-    /* Pinline-specific palette — pulled from the in-game peep-green accent +
-       sunset orange title gradient + dusk-blue sky stops. Keeps the page's
-       hero / accent / CTA hues consistent with what the player sees on
-       launch. */
     :root {
-      --app-primary: #C7F232;        /* fluorescent peep-green */
-      --app-secondary: #FF6D2A;      /* orange pin */
-      --app-accent: #2641A6;         /* deep dusk blue */
+      /* Pinline — dusk over the range: navy sky, a sunset-orange horizon,
+         the fluorescent peep-green of the sight. */
+      --app-primary: #C7F232;
+      --app-secondary: #FF6D2A;
+      --app-accent: #2641A6;
+      --primary-color: #1A2858;
+      --secondary-color: #FF6D2A;
+      --pl-display-face: ui-rounded, "SF Pro Rounded", system-ui, -apple-system, "Segoe UI", sans-serif;
+      --pl-text-face: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      --pl-paper: #F8F9FC;
+      --pl-paper-2: #EEF1F8;
+      --pl-body: #2F3650;
+      --pl-quiet: #5E6680;
+      --pl-rule: rgba(26, 40, 88, 0.12);
+      --pl-accent-ink: #BE3F0B;
+      --pl-ornament: linear-gradient(90deg, #C7F232, #FF6D2A);
+      --pl-shadow: drop-shadow(0 30px 40px rgba(15, 23, 48, 0.24)) drop-shadow(0 6px 10px rgba(15, 23, 48, 0.10));
+      --pl-hero-bg:
+        radial-gradient(circle at 22% 14%, rgba(199, 242, 50, 0.16) 0%, transparent 50%),
+        radial-gradient(ellipse 80% 40% at 50% 100%, rgba(255, 109, 42, 0.40) 0%, transparent 70%),
+        linear-gradient(170deg, #0F1730 0%, #1A2858 58%, #6A4A5A 100%);
+      --pl-hero-ink: #FFFFFF;
+      --pl-hero-kicker: #C7F232;
+      --pl-button: linear-gradient(180deg, #FFD24D, #FF8A3D);
+      --pl-button-ink: #1A1430;
+      --pl-button-glow: rgba(255, 138, 61, 0.35);
+      --pl-focus: #C7F232;
+      --pl-closing-bg:
+        radial-gradient(ellipse 55% 60% at 50% 100%, rgba(255, 109, 42, 0.14) 0%, transparent 70%),
+        var(--pl-paper-2);
+      --bg-primary: var(--pl-paper);
+      --bg-secondary: var(--pl-paper-2);
+      --text-primary: #141D40;
+      --text-secondary: var(--pl-body);
+      --text-muted: var(--pl-quiet);
+      --glass-bg: rgba(248, 249, 252, 0.8);
+      --glass-border: rgba(26, 40, 88, 0.08);
+      --glass-shadow: none;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --primary-color: #FFD24D;
+        --pl-paper: #0E1428;
+        --pl-paper-2: #141C36;
+        --pl-body: #D6DBEA;
+        --pl-quiet: #A2AAC4;
+        --pl-rule: rgba(214, 219, 234, 0.13);
+        --pl-accent-ink: #FF9A5E;
+        --pl-shadow: drop-shadow(0 30px 44px rgba(0, 0, 0, 0.55)) drop-shadow(0 6px 10px rgba(0, 0, 0, 0.30));
+        --pl-closing-bg:
+          radial-gradient(ellipse 55% 60% at 50% 100%, rgba(255, 109, 42, 0.18) 0%, transparent 70%),
+          var(--pl-paper-2);
+        --text-primary: #F1F4FB;
+        --glass-bg: rgba(14, 20, 40, 0.8);
+        --glass-border: rgba(214, 219, 234, 0.08);
+      }
+      --pl-measure: 1120px;
     }
 
-    .hero {
-      background:
-        radial-gradient(circle at 25% 15%, rgba(199, 242, 50, 0.20) 0%, transparent 55%),
-        radial-gradient(circle at 80% 70%, rgba(255, 109, 42, 0.18) 0%, transparent 55%),
-        linear-gradient(160deg, #0F1730 0%, #1A2858 55%, #C77035 100%);
-      color: white;
+    body { background: var(--pl-paper); }
+    /* Two-word labels ("App Store") wrapped onto two lines at mid widths. */
+    .nav-links .nav-link, .nav-links .btn-buy { white-space: nowrap; }
+    .floating-appstore {
+      background: var(--pl-button);
+      color: var(--pl-button-ink);
+      box-shadow: 0 10px 30px var(--pl-button-glow);
     }
 
-    .hero-title,
-    .hero-subtitle {
-      color: white;
-      -webkit-text-fill-color: white;
+    /* ---- Shared type ---------------------------------------------------- */
+    .pl-eyebrow {
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--pl-accent-ink);
+      margin: 0 0 1rem;
+    }
+    .pl-eyebrow .pl-num {
+      font-family: var(--pl-display-face);
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      margin-right: 0.8em;
+      opacity: 0.85;
+    }
+    .pl-display {
+      font-family: var(--pl-display-face);
+      font-weight: 600;
+      background: none;
+      -webkit-text-fill-color: currentColor;
+      color: var(--primary-color);
+      font-size: clamp(2.1rem, 5.2vw, 3.6rem);
+      line-height: 1.06;
+      letter-spacing: -0.02em;
+      margin: 0 0 1.4rem;
+      text-wrap: balance;
+    }
+    .pl-lede {
+      font-family: var(--pl-text-face);
+      font-size: clamp(1.12rem, 1.9vw, 1.36rem);
+      line-height: 1.62;
+      color: var(--pl-body);
+      margin: 0 0 1.2rem;
+      text-wrap: pretty;
+    }
+    .pl-lede a, .faq-answer a { color: var(--pl-accent-ink); }
+
+    /* ---- Hero ----------------------------------------------------------- */
+    .pl-hero {
+      position: relative;
+      background: var(--pl-hero-bg);
+      color: #fff;
+      text-align: center;
+      padding: calc(76px + clamp(3rem, 8vw, 6rem)) 16px 0;
+      overflow: hidden;
+    }
+    .pl-hero-icon {
+      width: 84px;
+      height: 84px;
+      display: block;
+      margin: 0 auto 1.4rem;
+      border-radius: 22%;
+      filter: drop-shadow(0 14px 26px rgba(0, 0, 0, 0.45));
+    }
+    .pl-hero-kicker {
+      font-size: 0.82rem;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      color: var(--pl-hero-kicker);
+      margin: 0 0 1.2rem;
+    }
+    .pl-hero h1 {
+      font-family: var(--pl-display-face);
+      font-weight: 600;
+      background: none;
+      -webkit-background-clip: border-box;
+      background-clip: border-box;
+      -webkit-text-fill-color: var(--pl-hero-ink);
+      color: var(--pl-hero-ink);
+      font-size: clamp(2.6rem, 8.4vw, 6.2rem);
+      line-height: 1.02;
+      letter-spacing: -0.025em;
+      max-width: 13ch;
+      margin: 0 auto 1.6rem;
+      text-wrap: balance;
+    }
+    .pl-hero-standfirst {
+      font-family: var(--pl-text-face);
+      font-size: clamp(1.08rem, 2vw, 1.34rem);
+      line-height: 1.6;
+      color: rgba(255, 255, 255, 0.84);
+      max-width: 44ch;
+      margin: 0 auto 2.2rem;
+      text-wrap: pretty;
+    }
+    .pl-cta {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.75rem;
+    }
+    .pl-cta .btn-buy {
+      background: var(--pl-button);
+      color: var(--pl-button-ink);
+      padding: 0.8rem 1.5rem;
+      min-height: 44px;
+      border-radius: 999px;
+      box-shadow: 0 10px 28px var(--pl-button-glow);
+    }
+    .pl-cta .btn-buy:focus-visible, .pl-alt-links a:focus-visible { outline: 3px solid var(--pl-focus); outline-offset: 3px; }
+    /* The app rises out of the hero. */
+    .pl-hero-device {
+      margin: clamp(3rem, 7vw, 4.5rem) auto 0;
+      width: clamp(230px, 34vw, 380px);
+      height: clamp(250px, 36vw, 420px);
+      overflow: hidden;
+    }
+    .pl-hero-device img { display: block; width: 100%; height: auto; }
+
+    /* ---- Statement ------------------------------------------------------ */
+    .pl-statement {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: clamp(4rem, 10vw, 7.5rem) 16px;
+      text-align: center;
+    }
+    .pl-statement p {
+      font-family: var(--pl-display-face);
+      font-size: clamp(1.5rem, 3.6vw, 2.5rem);
+      line-height: 1.3;
+      color: var(--primary-color);
+      margin: 0;
+      text-wrap: balance;
+    }
+    .pl-ornament {
+      display: block;
+      width: 44px;
+      height: 4px;
+      margin: 0 auto 1.8rem;
+      border-radius: 4px;
+      background: var(--pl-ornament);
     }
 
-    .hero-title {
+    /* ---- Chapters ------------------------------------------------------- */
+    .pl-chapter {
+      max-width: var(--pl-measure);
+      margin: 0 auto;
+      padding: clamp(4rem, 9vw, 7rem) 16px;
+      border-top: 1px solid var(--pl-rule);
+      scroll-margin-top: 70px;
+    }
+    .pl-spread {
+      display: grid;
+      gap: clamp(2.5rem, 6vw, 5rem);
+      align-items: center;
+    }
+    .pl-copy { max-width: 34rem; }
+    @media (min-width: 900px) {
+      .pl-spread { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); }
+      .pl-chapter.is-flipped .pl-copy { order: 2; }
+    }
+
+    /* One device per story, sized like a photograph on the page, not a thumbnail. */
+    .pl-figure { margin: 0 auto; width: min(72vw, 340px); text-align: center; }
+    .pl-figure.is-tablet { width: min(92vw, 720px); max-width: 100%; }
+    .pl-figure img { display: block; width: 100%; height: auto; filter: var(--pl-shadow); }
+    .pl-figure figcaption {
+      font-size: 0.88rem;
+      line-height: 1.45;
+      color: var(--pl-quiet);
+      margin-top: 1.1rem;
+    }
+    .pl-figure figcaption::before {
+      content: "";
+      display: block;
+      width: 18px;
+      height: 1px;
+      margin: 0 auto 0.6rem;
+      background: var(--pl-accent-ink);
+    }
+
+    /* Secondary routes: quiet text links under the one button. */
+    .pl-alt-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.7rem;
+      margin: 1.1rem 0 0;
+      font-size: 0.95rem;
+      color: rgba(255, 255, 255, 0.6);
+    }
+    .pl-alt-links a { color: rgba(255, 255, 255, 0.86); text-decoration: none; border-bottom: 1px solid rgba(255, 255, 255, 0.3); }
+    .pl-alt-links a:hover { border-bottom-color: rgba(255, 255, 255, 0.8); }
+    .pl-closing .pl-alt-links { color: var(--pl-quiet); }
+    .pl-closing .pl-alt-links a { color: var(--pl-accent-ink); border-bottom-color: var(--pl-rule); }
+
+    /* ---- Trust ---------------------------------------------------------- */
+    .pl-privacy {
+      background: var(--pl-hero-bg);
+      color: var(--pl-hero-ink);
+      padding: clamp(4.5rem, 10vw, 8rem) 16px;
+      scroll-margin-top: 60px;
+    }
+    .pl-privacy-inner { max-width: var(--pl-measure); margin: 0 auto; }
+    .pl-privacy .pl-eyebrow { color: var(--pl-hero-kicker); text-align: center; }
+    .pl-privacy .pl-display {
+      color: var(--pl-hero-ink);
+      -webkit-text-fill-color: var(--pl-hero-ink);
+      text-align: center;
+      font-size: clamp(2.3rem, 6.4vw, 4.6rem);
+      max-width: 14ch;
+      margin: 0 auto 3rem;
+    }
+    .pl-privacy .security-badges {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+      gap: 0;
+      max-width: none;
+      padding: 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    .pl-privacy .security-badge {
+      background: none;
+      border: none;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 0;
+      box-shadow: none;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+      color: var(--pl-hero-ink);
+      font-family: var(--pl-display-face);
+      font-size: 1.12rem;
+      padding: 1.1rem 0.4rem;
+      justify-content: center;
+    }
+    .pl-privacy .security-badge:hover { transform: none; }
+    .pl-privacy .security-audit-note {
+      text-align: center;
+      font-family: var(--pl-text-face);
+      font-style: italic;
+      font-size: clamp(1.1rem, 2.2vw, 1.3rem);
+      color: rgba(255, 255, 255, 0.88);
+      max-width: 36ch;
+      padding: 0;
+      margin: 2.6rem auto 0;
+    }
+    .pl-privacy-link { text-align: center; margin: 1.4rem 0 0; }
+    .pl-privacy-link a { color: var(--pl-hero-kicker); text-decoration: none; border-bottom: 1px solid currentColor; }
+    .pl-privacy-link a::after { content: " →"; }
+
+    /* ---- FAQ: a ruled list ---------------------------------------------- */
+    .faq-section { max-width: 820px; padding: clamp(4rem, 9vw, 6rem) 16px; }
+    .faq-section .pl-eyebrow, .faq-section h2 { text-align: center; }
+    .faq-section h2 {
+      font-family: var(--pl-display-face);
+      font-weight: 600;
+      background: none;
+      -webkit-text-fill-color: currentColor;
+      color: var(--primary-color);
+      font-size: clamp(1.9rem, 4vw, 2.8rem);
+      margin: 0 0 2.5rem;
+    }
+    .faq-item {
+      background: none;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+      border: none;
+      border-top: 1px solid var(--pl-rule);
+      border-radius: 0;
+      margin: 0;
+    }
+    .faq-item:last-child { border-bottom: 1px solid var(--pl-rule); }
+    .faq-question {
+      font-family: var(--pl-display-face);
+      font-size: 1.15rem;
+      font-weight: 600;
+      padding: 1.25rem 0;
+      gap: 1rem;
+    }
+    .faq-question:hover { color: var(--pl-accent-ink); }
+    .faq-question:focus-visible { outline: 2px solid var(--pl-accent-ink); outline-offset: 2px; }
+    .faq-icon { font-size: 0.8rem; color: var(--pl-accent-ink); }
+    .faq-answer { padding: 0; }
+    .faq-item.active .faq-answer { padding: 0 0 1.4rem; }
+    .faq-answer p { font-size: 1rem; line-height: 1.68; color: var(--pl-body); }
+
+    /* ---- Closing -------------------------------------------------------- */
+    .pl-closing {
+      text-align: center;
+      padding: clamp(4.5rem, 10vw, 7rem) 16px;
+      background: var(--pl-closing-bg);
+      border-top: 1px solid var(--pl-rule);
+    }
+    .pl-closing img { width: 96px; height: 96px; display: block; margin: 0 auto 1.6rem; border-radius: 22%; filter: drop-shadow(0 16px 26px rgba(0, 0, 0, 0.28)); }
+    .pl-closing .pl-display { font-size: clamp(2rem, 5vw, 3.4rem); max-width: 14ch; margin: 0 auto 2rem; }
+    .footer { margin-top: 0; }
+
+    /* ---- Reveal: only when motion is welcome ----------------------------- */
+    .pl-motion [data-reveal] {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.9s ease, transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1);
+    }
+    .pl-motion [data-reveal].is-in { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) {
+      .floating-appstore, .faq-item, .hero-text { animation: none; }
+      .btn-buy:hover, .floating-appstore:hover { transform: none; }
+    }
+
+    @media (max-width: 600px) {
+      .pl-hero-icon { width: 68px; height: 68px; }
+      .pl-cta { flex-direction: column; align-items: stretch; max-width: 22rem; margin: 0 auto; }
+      .pl-cta a { justify-content: center; }
+    }
+    /* Break CJK headlines at phrase boundaries, not mid-word, where supported. */
+    .pl-hero h1, .pl-display, .pl-statement p { word-break: auto-phrase; }
+    /* `ch` is the width of a Latin zero; a CJK glyph is two of them. Measure CJK in em. */
+    :lang(ja) .pl-hero h1, :lang(zh) .pl-hero h1, :lang(ko) .pl-hero h1 { max-width: 9em; }
+    :lang(ja) .pl-privacy .pl-display, :lang(zh) .pl-privacy .pl-display, :lang(ko) .pl-privacy .pl-display,
+    :lang(ja) .pl-closing .pl-display, :lang(zh) .pl-closing .pl-display, :lang(ko) .pl-closing .pl-display { max-width: 10em; }
+    :lang(ja) .pl-hero-standfirst, :lang(zh) .pl-hero-standfirst, :lang(ko) .pl-hero-standfirst,
+    :lang(ja) .security-audit-note, :lang(zh) .security-audit-note, :lang(ko) .security-audit-note { max-width: 26em; }
+
+    .pl-hero h1, .pl-display, .faq-section h2 { font-weight: 800; letter-spacing: -0.03em; }
+    .pl-hero h1 {
       background: linear-gradient(135deg, #FFD24D 0%, #FF6D2A 100%);
       -webkit-background-clip: text;
       background-clip: text;
       -webkit-text-fill-color: transparent;
-      text-shadow: 0 0 60px rgba(199, 242, 50, 0.25);
     }
+    .pl-statement p { font-weight: 700; }
 
-    .hero-subtitle {
-      color: var(--app-primary);
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-    }
-
-    .hero-description {
-      color: rgba(255, 255, 255, 0.85);
-    }
-
-    .hero-image .phone-mockup {
-      border-radius: 28%;
-      box-shadow: 0 24px 70px rgba(0, 0, 0, 0.5);
-    }
   </style>
   <link rel="alternate" hreflang="x-default" href="https://wemiller.com/apps/pinline/">
   <link rel="alternate" hreflang="en" href="https://wemiller.com/apps/pinline/">
@@ -72,7 +418,6 @@
   <script src="/i18n/i18n.js" defer data-page="apps.pinline" data-pos="bottom-left"></script>
 </head>
 <body>
-  <!-- Navigation -->
   <nav class="app-nav">
     <div class="nav-container">
       <a href="../" class="nav-logo nav-brand" title="← Apps" aria-label="← Apps"
@@ -83,266 +428,120 @@
       </a>
       <button class="mobile-menu-toggle">☰</button>
       <ul class="nav-links">
-        <li><a href="#whats-new" class="nav-link" data-i18n="what-s-new.a2efe2">What's New</a></li>
         <li><a href="#features" class="nav-link" data-i18n="features.fc338f">Features</a></li>
-        <li><a href="#how-it-plays" class="nav-link" data-i18n="how-it-plays.65c303">How It Plays</a></li>
-        <li><a href="#screenshots" class="nav-link" data-i18n="screenshots.597b63">Screenshots</a></li>
         <li><a href="#faq" class="nav-link" data-i18n="faq.03688b">FAQ</a></li>
         <li><a href="https://apps.apple.com/us/app/pinline/id6772773442" class="btn-buy" target="_blank" rel="noopener noreferrer" data-i18n="download-on-app-store.cf50c2">Download on App Store</a></li>
       </ul>
     </div>
   </nav>
 
-  <!-- Hero Section -->
-  <section class="hero">
-    <div class="hero-content">
-      <div class="hero-text">
-        <p class="hero-subtitle" data-i18n="pinline.929bc6">🎯 Pinline</p>
-        <h1 class="hero-title" data-i18n="pin-the-line-win.1bd25f">Pin the Line. Win the Match.</h1>
-        <p class="hero-description" data-i18n="1v1-compound-bow-archery.275881">
-          1v1 compound-bow archery built around the things real shooters care about: pin yardages, lateral wind, sway under draw. Pass-and-play on one device, challenge a friend over iMessage, or matchmake on Game Center — every arrow is a fresh turn.
-        </p>
-        <span class="os-ready-badge" data-i18n-html="ready-for-ios-27.e06c8c"><span class="badge-icon">✓</span> Ready for iOS 27 / iPadOS 27</span>
-        <div class="hero-cta">
-          <a href="https://apps.apple.com/us/app/pinline/id6772773442" class="btn-buy" target="_blank" rel="noopener noreferrer" data-i18n="download-now.6d56a8">Download Now</a>
-        </div>
-      </div>
-      <div class="hero-image">
-        <div class="hero-phone">
-          <img src="assets/images/icon.png?v=6e174994" alt="Pinline App Icon" class="phone-mockup"
-               onerror="this.src='assets/images/hero-mockup.png'; this.onerror=function(){this.style.background='linear-gradient(135deg, #C7F232, #FF6D2A)'; this.style.minHeight='600px';};">
-        </div>
-      </div>
+  <!-- Hero: the promise, one download button, and the app rising out of it. -->
+  <header class="pl-hero" id="about">
+    <img class="pl-hero-icon" src="assets/images/icon.png?v=6e174994" alt="Pinline App Icon" width="1024" height="1024">
+    <p class="pl-hero-kicker">Pinline</p>
+    <h1 data-i18n="pin-the-line-win.1bd25f">Pin the Line. Win the Match.</h1>
+    <p class="pl-hero-standfirst" data-i18n="one-on-one-compound.0a5ae2">One-on-one compound-bow archery for iPhone and iPad, built on real pin yardages, wind and sway.</p>
+    <div class="pl-cta">
+      <a href="https://apps.apple.com/us/app/pinline/id6772773442" target="_blank" rel="noopener noreferrer" class="btn-buy" data-i18n="download-on-the-app.a9096a">Download on the App Store</a>
     </div>
-  </section>
+    <div class="pl-hero-device">
+      <img src="assets/screens/en/02-gameplay-olympic-800.webp?v=2d7974e1"
+               srcset="assets/screens/en/02-gameplay-olympic-400.webp?v=962fd20b 400w, assets/screens/en/02-gameplay-olympic-800.webp?v=2d7974e1 800w"
+               sizes="(max-width: 676px) 230px, (max-width: 1117px) 34vw, 380px" width="800" height="1655" fetchpriority="high" data-i18n-src
+               alt="A match in progress: both scores, and an Olympic target down range" data-i18n-attr="alt:a-match-in-progress.63fb07">
+    </div>
+  </header>
 
-  <!-- Floating App Store Button -->
-  <a href="https://apps.apple.com/us/app/pinline/id6772773442" class="floating-appstore" target="_blank" rel="noopener noreferrer">
+  <!-- Floating App Store button -->
+  <a href="https://apps.apple.com/us/app/pinline/id6772773442" target="_blank" rel="noopener noreferrer" class="floating-appstore">
     <span class="floating-appstore-icon"></span>
     <span data-i18n="download-on-app-store.cf50c2">Download on App Store</span>
   </a>
 
-  <!-- What's New Section -->
-  <section id="whats-new" class="section">
-    <div class="section-header">
-      <p class="section-subtitle" data-i18n="just-shipped.243f10">Just Shipped</p>
-      <h2 data-i18n="what-s-new-in.31c1d5">What's New in Pinline</h2>
-      <p data-i18n="family-friendly-content-controls.1fde92">Family-friendly content controls and a more flexible iPad experience</p>
-    </div>
+  <section class="pl-statement">
+    <span class="pl-ornament" aria-hidden="true"></span>
+    <p data-i18n="archery-the-way-it.e86a7f">Archery the way it actually feels.</p>
+  </section>
 
-    <div class="feature-grid">
-      <div class="feature-card">
-        <div class="feature-icon">👪</div>
-        <h3 class="feature-title" data-i18n="family-friendly-content-controls.affe86">Family-Friendly Content Controls</h3>
-        <p class="feature-description" data-i18n="the-hunting-style-3d.6c4823">
-          The hunting-style 3D animal targets now unlock only after a one-time, system-verified adult age check — younger players get the full game with the standard targets, in solo play and in every match mode. Online and iMessage matches respect the setting on both sides, so animal targets can never be slipped into a match with an unverified player.
-        </p>
+  <!-- Stories: one idea, one headline, two sentences at most, one device. -->
+  <main id="features">
+    <section class="pl-chapter" id="aim">
+      <div class="pl-spread">
+        <div class="pl-copy" data-reveal>
+          <p class="pl-eyebrow"><span class="pl-num">01</span><span data-i18n="aim.cf4f1f">Aim</span></p>
+          <h2 class="pl-display" data-i18n="tap-hold-release.b190a8">Tap. Hold. Release.</h2>
+          <p class="pl-lede" data-i18n="hold-to-draw-and.d37df0">Hold to draw and the sight closes in. Pick the pin for the distance, aim into the wind, and let go before the sway wins.</p>
+        </div>
+        <figure class="pl-figure" data-reveal>
+          <img src="assets/screens/en/03-gameplay-animals-800.webp?v=8724f816"
+               srcset="assets/screens/en/03-gameplay-animals-400.webp?v=6fc6176e 400w, assets/screens/en/03-gameplay-animals-800.webp?v=8724f816 800w"
+               sizes="(max-width: 472px) 72vw, 340px" width="800" height="1655" loading="lazy" decoding="async" data-i18n-src
+               alt="A 3D animal target down range, with the distance and wind readouts" data-i18n-attr="alt:a-3d-animal-target.275b2f">
+        </figure>
       </div>
+    </section>
 
-      <div class="feature-card">
-        <div class="feature-icon">📲</div>
-        <h3 class="feature-title" data-i18n="ipad-any-way-you.3a62ad">iPad, Any Way You Hold It</h3>
-        <p class="feature-description" data-i18n="every-ipad-orientation-is.e8fa11">
-          Every iPad orientation is supported and the window resizes freely in Split View, Stage Manager, and iPad windowing — shoot a round in whatever layout fits your desk.
-        </p>
+    <section class="pl-chapter is-flipped" id="range">
+      <div class="pl-spread">
+        <div class="pl-copy" data-reveal>
+          <p class="pl-eyebrow"><span class="pl-num">02</span><span data-i18n="range.a16c5b">Range</span></p>
+          <h2 class="pl-display" data-i18n="read-the-range.6c0c0b">Read the Range</h2>
+          <p class="pl-lede" data-i18n="four-ranges-from-an.fad468">Four ranges, from an alpine meadow to a coastal bluff, each with its own light and wind. Shoot the Olympic 10-ring or the kill zones of 3D animals.</p>
+        </div>
+        <figure class="pl-figure is-tablet" data-reveal>
+          <img src="assets/screens/en/gameplay-olympic-1440.webp?v=92c9bbac"
+               srcset="assets/screens/en/gameplay-olympic-720.webp?v=ec98894d 720w, assets/screens/en/gameplay-olympic-1440.webp?v=92c9bbac 1440w"
+               sizes="(max-width: 782px) 92vw, 720px" width="1440" height="1879" loading="lazy" decoding="async" data-i18n-src
+               alt="The range on iPad, with an Olympic target, the distance and the wind" data-i18n-attr="alt:the-range-on-ipad.abe1dc">
+        </figure>
       </div>
+    </section>
+
+    <section class="pl-chapter" id="compete">
+      <div class="pl-spread">
+        <div class="pl-copy" data-reveal>
+          <p class="pl-eyebrow"><span class="pl-num">03</span><span data-i18n="compete.75283c">Compete</span></p>
+          <h2 class="pl-display" data-i18n="three-ways-to-compete.714578">Three Ways to Compete</h2>
+          <p class="pl-lede" data-i18n="pass-the-phone-across.66ba4f">Pass the phone across the couch, send a challenge in iMessage, or find a match on Game Center. First to 30 points wins.</p>
+        </div>
+        <figure class="pl-figure" data-reveal>
+          <img src="assets/screens/en/04-results-800.webp?v=376f1db0"
+               srcset="assets/screens/en/04-results-400.webp?v=8a673c6e 400w, assets/screens/en/04-results-800.webp?v=376f1db0 800w"
+               sizes="(max-width: 472px) 72vw, 340px" width="800" height="1655" loading="lazy" decoding="async" data-i18n-src
+               alt="The match result, with the winner on 30 points" data-i18n-attr="alt:the-match-result-with.6e1f1e">
+        </figure>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Trust: one beat, then out of the way. -->
+  <section class="pl-privacy" id="privacy">
+    <div class="pl-privacy-inner" data-reveal>
+      <p class="pl-eyebrow" data-i18n="security-privacy.67a15f">Security &amp; Privacy</p>
+      <h2 class="pl-display" data-i18n="no-servers-no-telemetry.d0002d">No servers. No telemetry.</h2>
+      <div class="security-badges">
+        <div class="security-badge" data-i18n-html="privacy-manifest.5063fd"><span class="badge-icon">&#x1f4cb;</span> Privacy Manifest</div>
+        <div class="security-badge" data-i18n-html="gamekit-security.9e6fc1"><span class="badge-icon">&#x1f3ae;</span> GameKit Security</div>
+        <div class="security-badge" data-i18n-html="app-sandbox.b85ecb"><span class="badge-icon">&#x2705;</span> App Sandbox</div>
+      </div>
+      <p class="security-audit-note" data-i18n="no-ads-no-tracking.086f2c">No ads, no tracking, no in-app purchases. Game Center relays online matches, and Pinline collects no telemetry.</p>
     </div>
   </section>
 
-  <!-- Features Section -->
-  <section id="features" class="section">
-    <div class="section-header">
-      <p class="section-subtitle" data-i18n="why-pinline-hits-different.254d14">Why Pinline Hits Different</p>
-      <h2 data-i18n="built-for-real-archers.ea4c52">Built for Real Archers</h2>
-      <p data-i18n="compound-bow-mechanics-in.bb8348">Compound-bow mechanics in your pocket — not just a flappy bird with a quiver</p>
-    </div>
-
-    <div class="feature-grid">
-      <div class="feature-card">
-        <div class="feature-icon">🎯</div>
-        <h3 class="feature-title" data-i18n="real-pin-yardages.95584e">Real Pin Yardages</h3>
-        <p class="feature-description" data-i18n="20-30-40-50.1cc5a5">
-          20, 30, 40, 50, 60 yard pins on a fluorescent compound sight. Read the distance, pick your pin, hold steady, release. Wrong pin = wrong elevation, just like the lane.
-        </p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">💨</div>
-        <h3 class="feature-title" data-i18n="lateral-wind-compensation.470925">Lateral Wind Compensation</h3>
-        <p class="feature-description" data-i18n="wind-speed-and-direction.d9678b">
-          Wind speed and direction read out live on the HUD. Aim INTO the wind to drift back to the bull. The flag on the lane tells you where it's blowing.
-        </p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">😤</div>
-        <h3 class="feature-title" data-i18n="sway-under-tension.9364f9">Sway Under Tension</h3>
-        <p class="feature-description" data-i18n="hold-too-long-at.ddeb33">
-          Hold too long at full draw and your pin starts to wander — random anchor, brownian sway, fatigue jerks. Release on the bull or hold for the perfect line. Your call.
-        </p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">🦌</div>
-        <h3 class="feature-title" data-i18n="olympic-3d-animals.28a7ce">Olympic & 3D Animals</h3>
-        <p class="feature-description" data-i18n="paper-olympic-10-ring.a87799">
-          Paper Olympic 10-ring for the classic feel, or 3D animal targets — whitetail, turkey, boar — with painted kill zones and proper heart-shot scoring.
-        </p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">🌅</div>
-        <h3 class="feature-title" data-i18n="atmospheric-range.55a239">Atmospheric Range</h3>
-        <p class="feature-description" data-i18n="forest-alpine-coastal-bluff.dbd3ea">
-          Forest, alpine, coastal bluff, desert canyon. Sunrise, noon, sunset, night. Clear, rain, snow. Every match's range is uniquely generated.
-        </p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">📲</div>
-        <h3 class="feature-title" data-i18n="pass-play.be124b">Pass &amp; Play</h3>
-        <p class="feature-description" data-i18n="two-shooters-one-device.0dcb95">
-          Two shooters, one device. Per-arrow handoff screen, per-player bow color, full match without any sign-in friction. Perfect for couch competition.
-        </p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">💬</div>
-        <h3 class="feature-title" data-i18n="imessage-challenges.fae458">iMessage Challenges</h3>
-        <p class="feature-description" data-i18n="send-a-pinline-bubble.025063">
-          Send a Pinline bubble to a friend. They open it, take their shot, send it back. Each turn is one arrow. Like Wordle's group chat — but with a compound bow.
-        </p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">🎮</div>
-        <h3 class="feature-title" data-i18n="game-center-1v1.afbae9">Game Center 1v1</h3>
-        <p class="feature-description" data-i18n="quick-match-online-or.136d8a">
-          Quick-match online or invite a friend. Asynchronous turn-based — your opponent shoots when they're free, you shoot when you're free, push notifications keep you in sync.
-        </p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">🏆</div>
-        <h3 class="feature-title" data-i18n="global-leaderboard.177649">Global Leaderboard</h3>
-        <p class="feature-description" data-i18n="every-online-win-submits.92e2e7">
-          Every online win submits to the Pinline wins leaderboard. Climb the global ranks one bubble at a time. Bragging rights included.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Magazine-style Feature Sections -->
-  <section id="how-it-plays" class="section">
-    <div class="magazine-section">
-      <div class="magazine-content">
-        <h2 data-i18n="tap-hold-release.b190a8">Tap. Hold. Release.</h2>
-        <p data-i18n="touch-and-hold-to.603ce8">
-          Touch and hold to draw the bow — the compound rig rises into shooting position, the camera crunches in to 10° FOV (the actual angular drop between yardage pins),
-          and your fluorescent peep ring glows around the target.
-        </p>
-        <p data-i18n="drag-while-drawn-to.70079e">
-          Drag while drawn to fine-tune your aim. The bow's response is laggy on purpose — you're fighting a drawn compound bow, not nudging a cursor. Let go to release.
-        </p>
-      </div>
-      <div class="magazine-image">
-        <img src="assets/images/feature-1.png?v=1d6aa0d8" alt="Drawing the bow"
-             onerror="this.style.background='linear-gradient(135deg, #1A2858, #C77035)'; this.style.minHeight='400px'; this.style.display='block';">
-      </div>
-    </div>
-
-    <div class="magazine-section reverse">
-      <div class="magazine-content">
-        <h2 data-i18n="read-the-range.6c0c0b">Read the Range</h2>
-        <p data-i18n="distance-and-target-type.728835">
-          Distance and target type sit on the lower-left HUD. Wind speed + direction sit on the lower-right with a rotating arrow showing exactly where it's blowing — and a flag on the lane confirms it.
-        </p>
-        <p data-i18n="the-20-30-40.f449bd">
-          The 20/30/40/50/60-yard pins stack inside a real compound sight. Picking the wrong pin throws the arc — picking the right one and letting the wind push it back to center is the whole game.
-        </p>
-      </div>
-      <div class="magazine-image">
-        <img src="assets/images/feature-2.png?v=b57415fd" alt="HUD readouts"
-             onerror="this.style.background='linear-gradient(135deg, #C7F232, #1A2858)'; this.style.minHeight='400px'; this.style.display='block';">
-      </div>
-    </div>
-
-    <div class="magazine-section">
-      <div class="magazine-content">
-        <h2 data-i18n="three-ways-to-compete.714578">Three Ways to Compete</h2>
-        <p data-i18n-html="pass-and-play-hand.bda123">
-          <strong>Pass-and-play.</strong> Hand the phone across the couch. A per-arrow handoff screen shows whose bow is up, in their colour. No sign-in, fully offline.
-        </p>
-        <p data-i18n-html="imessage-tap-the-pinline.176a38">
-          <strong>iMessage.</strong> Tap the Pinline iMessage app, send a challenge bubble with a format and target style. Recipient opens, takes one shot, sends the bubble back. Repeat until someone breaks 30.
-        </p>
-        <p data-i18n-html="game-center-quick-match.08f15d">
-          <strong>Game Center.</strong> Quick-match or invite — every arrow ends your turn and pushes to your opponent. They get notified, take their shot, push back. Genuinely async.
-        </p>
-      </div>
-      <div class="magazine-image">
-        <img src="assets/images/feature-3.png?v=d670a749" alt="Multiplayer modes"
-             onerror="this.style.background='linear-gradient(135deg, #FF6D2A, #C7F232)'; this.style.minHeight='400px'; this.style.display='block';">
-      </div>
-    </div>
-  </section>
-
-  <!-- Screenshots Section -->
-  <section id="screenshots" class="section">
-    <div class="section-header">
-      <p class="section-subtitle" data-i18n="see-it-in-action.8c8d28">See It In Action</p>
-      <h2 data-i18n="screenshots.597b63">Screenshots</h2>
-      <p data-i18n="compound-sights-painted-animals.c846a8">Compound sights, painted animals, wind on the flag</p>
-    </div>
-
-    <div class="screenshots-grid">
-      <div class="screenshot-item">
-        <img src="assets/images/frame-menu-v2.png?v=83b66fa7" alt="Main menu"
-             onerror="this.style.background='linear-gradient(135deg, #1A2858, #C77035)'; this.style.minHeight='500px'; this.style.display='block';">
-      </div>
-      <div class="screenshot-item">
-        <img src="assets/images/frame-gameplay-olympic-v2.png?v=6d1991c9" alt="Full draw on the bull"
-             onerror="this.style.background='linear-gradient(135deg, #C7F232, #FF6D2A)'; this.style.minHeight='500px'; this.style.display='block';">
-      </div>
-      <div class="screenshot-item">
-        <img src="assets/images/frame-gameplay-animals-v2.png?v=4e5796e1" alt="3D animal target"
-             onerror="this.style.background='linear-gradient(135deg, #FF6D2A, #2641A6)'; this.style.minHeight='500px'; this.style.display='block';">
-      </div>
-      <div class="screenshot-item">
-        <img src="assets/images/frame-results-v2.png?v=77a36684" alt="Results screen"
-             onerror="this.style.background='linear-gradient(135deg, #2641A6, #C7F232)'; this.style.minHeight='500px'; this.style.display='block';">
-      </div>
-    </div>
-  </section>
-
-  <!-- FAQ Section -->
+  <!-- FAQ: short, folded, and the EU note last. -->
   <section id="faq" class="faq-section">
-    <div class="section-header">
-      <p class="section-subtitle" data-i18n="got-questions.8ecca3">Got Questions?</p>
-      <h2 data-i18n="frequently-asked-questions.d790b4">Frequently Asked Questions</h2>
-    </div>
+    <p class="pl-eyebrow" data-i18n="got-questions.8ecca3">Got Questions?</p>
+    <h2 data-i18n="frequently-asked-questions.d790b4">Frequently Asked Questions</h2>
 
+    <div class="faq-list">
     <div class="faq-item">
       <button class="faq-question">
         <span data-i18n="how-do-i-actually.17122e">How do I actually aim?</span>
         <span class="faq-icon">▼</span>
       </button>
       <div class="faq-answer">
-        <p data-i18n="read-the-distance-on.45d66e">
-          Read the distance on the HUD (e.g. "41 yd"). Pick the matching pin on the compound sight by tapping it — there are pins for 20, 30, 40, 50, and 60 yards. Hold the right pin on the target and release. If there's wind, aim INTO the wind so the arrow drifts back to centre.
-        </p>
-      </div>
-    </div>
-
-    <div class="faq-item">
-      <button class="faq-question">
-        <span data-i18n="why-does-my-pin.cacfb8">Why does my pin wander while I'm holding?</span>
-        <span class="faq-icon">▼</span>
-      </button>
-      <div class="faq-answer">
-        <p data-i18n="that-s-sway-your.189f37">
-          That's sway — your shooter is human, the bow is heavy, and full draw is exhausting. The longer you hold, the more your aim drifts. Release at the right moment or let the auto-release fire after you overdraw. Quick releases are easier; held releases give you precision but punish hesitation.
-        </p>
+        <p data-i18n="read-the-distance-on.45d66e">Read the distance on the HUD (e.g. "41 yd"). Pick the matching pin on the compound sight by tapping it — there are pins for 20, 30, 40, 50, and 60 yards. Hold the right pin on the target and release. If there's wind, aim INTO the wind so the arrow drifts back to centre.</p>
       </div>
     </div>
 
@@ -352,9 +551,7 @@
         <span class="faq-icon">▼</span>
       </button>
       <div class="faq-answer">
-        <p data-i18n="open-a-conversation-in.a6a814">
-          Open a conversation in Messages, tap the Pinline iMessage app, pick a format (Quickfire / Classic / Tournament) and target style (Olympic / 3D Animals), then send. Your friend taps the bubble, takes a single arrow, and sends the updated bubble back. Repeat until the match ends. Each arrow is one bubble — like Wordle, but for archers.
-        </p>
+        <p data-i18n="open-a-conversation-in.a6a814">Open a conversation in Messages, tap the Pinline iMessage app, pick a format (Quickfire / Classic / Tournament) and target style (Olympic / 3D Animals), then send. Your friend taps the bubble, takes a single arrow, and sends the updated bubble back. Repeat until the match ends. Each arrow is one bubble — like Wordle, but for archers.</p>
       </div>
     </div>
 
@@ -364,9 +561,7 @@
         <span class="faq-icon">▼</span>
       </button>
       <div class="faq-answer">
-        <p data-i18n="olympic-is-paper-a.2c0526">
-          Olympic is paper — a 10-ring boss target with concentric scoring rings (10 in the bull, 1 on the edge). 3D Animals rotates between whitetail, turkey, and boar with painted kill zones — heart shot for max points, gut shot for low points, miss for zero. Both modes use the same physics; the targets just look different and have different scoring zones.
-        </p>
+        <p data-i18n="olympic-is-paper-a.2c0526">Olympic is paper — a 10-ring boss target with concentric scoring rings (10 in the bull, 1 on the edge). 3D Animals rotates between whitetail, turkey, and boar with painted kill zones — heart shot for max points, gut shot for low points, miss for zero. Both modes use the same physics; the targets just look different and have different scoring zones.</p>
       </div>
     </div>
 
@@ -376,9 +571,7 @@
         <span class="faq-icon">▼</span>
       </button>
       <div class="faq-answer">
-        <p data-i18n="yes-pass-and-play.3bd176">
-          Yes — Pass-and-play mode is fully offline. Two shooters, one device, no sign-in. Online (Game Center) and iMessage matches obviously need a connection to relay turns, but everything in-game runs locally.
-        </p>
+        <p data-i18n="yes-pass-and-play.3bd176">Yes — Pass-and-play mode is fully offline. Two shooters, one device, no sign-in. Online (Game Center) and iMessage matches obviously need a connection to relay turns, but everything in-game runs locally.</p>
       </div>
     </div>
 
@@ -388,9 +581,7 @@
         <span class="faq-icon">▼</span>
       </button>
       <div class="faq-answer">
-        <p data-i18n="iphone-and-ipad-the.afba02">
-          iPhone and iPad. The game is portrait-only (the SwiftUI peep aperture sizing, FOV crunch, and follow-cam waypoints are tuned for vertical aspect). Built and tuned on iPhone 17 Pro Max; runs smoothly on anything from iPhone 12 forward.
-        </p>
+        <p data-i18n="iphone-and-ipad-on.1df716">iPhone and iPad, on iOS 17 or later. iPhone plays in portrait; on iPad it works in every orientation, including Split View and Stage Manager.</p>
       </div>
     </div>
 
@@ -400,11 +591,10 @@
         <span class="faq-icon">▼</span>
       </button>
       <div class="faq-answer">
-        <p data-i18n="no-pinline-is-a.b217b5">
-          No. Pinline is a one-time purchase. No ads, no tracking, no in-app purchases, no subscriptions. You get the whole game, all modes, all targets, both online flows.
-        </p>
+        <p data-i18n="no-pinline-is-a.b217b5">No. Pinline is a one-time purchase. No ads, no tracking, no in-app purchases, no subscriptions. You get the whole game, all modes, all targets, both online flows.</p>
       </div>
     </div>
+
     <div class="faq-item">
       <button class="faq-question">
         <span data-i18n="is-pinline-available-in.530039">Is Pinline available in the European Union?</span>
@@ -414,23 +604,17 @@
         <p data-i18n="yes-pinline-is-on.4f2d86">Yes. Pinline is on the App Store everywhere in the European Union, France included. It's available in every App Store territory Apple offers.</p>
       </div>
     </div>
+    </div>
   </section>
 
-  <!-- Security &amp; Privacy callout -->
-  <section class="security-callout">
-    <div class="section-header">
-      <p class="section-subtitle" data-i18n="security-privacy.67a15f">Security &amp; Privacy</p>
-      <h2 data-i18n="hardened-by-design.084a16">Hardened by Design</h2>
+  <!-- Closing: the promise again, and the one button. -->
+  <section class="pl-closing">
+    <img src="assets/images/icon.png?v=6e174994" alt="" width="1024" height="1024" loading="lazy">
+    <h2 class="pl-display" data-i18n="pin-the-line-win.1bd25f">Pin the Line. Win the Match.</h2>
+    <div class="pl-cta">
+      <a href="https://apps.apple.com/us/app/pinline/id6772773442" target="_blank" rel="noopener noreferrer" class="btn-buy" data-i18n="download-on-the-app.a9096a">Download on the App Store</a>
     </div>
-    <div class="security-badges">
-      <div class="security-badge" data-i18n-html="privacy-manifest.5063fd"><span class="badge-icon">&#x1f4cb;</span> Privacy Manifest</div>
-      <div class="security-badge" data-i18n-html="input-validation.5de1a2"><span class="badge-icon">&#x1f50d;</span> Input Validation</div>
-      <div class="security-badge" data-i18n-html="gamekit-security.9e6fc1"><span class="badge-icon">&#x1f3ae;</span> GameKit Security</div>
-      <div class="security-badge" data-i18n-html="app-sandbox.b85ecb"><span class="badge-icon">&#x2705;</span> App Sandbox</div>
-    </div>
-    <p class="security-audit-note" data-i18n="no-tracking-no-ads.9ce4d2">No tracking. No ads. No in-app purchases.</p>
   </section>
-
   <footer class="footer">
     <div class="footer-content">
       <div class="footer-links">
@@ -477,5 +661,20 @@
   </footer>
 
   <script src="../app-showcase.js"></script>
+  <script>
+    // A quiet reveal as each chapter arrives — only when motion is welcome, and
+    // only once JavaScript is known to be running, so nothing can stay hidden.
+    (function () {
+      if (!('IntersectionObserver' in window)) return;
+      if (!window.matchMedia('(prefers-reduced-motion: no-preference)').matches) return;
+      document.documentElement.classList.add('pl-motion');
+      const io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); }
+        });
+      }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+      document.querySelectorAll('[data-reveal]').forEach(function (el) { io.observe(el); });
+    })();
+  </script>
 </body>
 </html>
