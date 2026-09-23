@@ -132,6 +132,29 @@ def monkr_render(project: pathlib.Path, shots: list[pathlib.Path], out: pathlib.
     return framed
 
 
+def named_project(path: pathlib.Path, scratch: pathlib.Path) -> pathlib.Path:
+    """A `"project"` override, stripped to a transparent, caption-free frame like the default.
+
+    The override exists for projects whose names don't follow the *-<device>.monkr pattern
+    (Ridgeshot-iPhone.monkr, Pineline-ipad.monkr). Those are App Store projects: used as-is
+    they would bake the store gradient and headline into the page render.
+    """
+    if not path.is_file():
+        raise SystemExit(f"no Monkr project {path}")
+    if "-web-" in path.name:
+        return path
+    project = json.loads(path.read_text())
+    project["background"] = {
+        "type": "transparent", "solidColor": "#000000",
+        "gradientCss": None, "gradientName": None, "imageUrl": None,
+    }
+    project["textOverlay"] = None
+    project["textBlocks"] = []
+    made = scratch / f"web-{path.stem}.monkr"
+    made.write_text(json.dumps(project, indent=2))
+    return made
+
+
 def sync_page(slug: str, page: dict, dest: pathlib.Path, app_dir: pathlib.Path,
               force: bool) -> dict:
     manifest_path = dest / "manifest.json"
@@ -152,7 +175,7 @@ def sync_page(slug: str, page: dict, dest: pathlib.Path, app_dir: pathlib.Path,
 
         with tempfile.TemporaryDirectory() as temporary:
             scratch = pathlib.Path(temporary)
-            project = (app_dir / render["project"]) if render.get("project") \
+            project = named_project(app_dir / render["project"], scratch) if render.get("project") \
                 else FRAMES.transparent_project(app_dir, device, scratch)
             project_hash = sha(project.read_bytes())
 

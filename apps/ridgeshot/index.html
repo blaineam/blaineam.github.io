@@ -12,56 +12,388 @@
   <meta property="og:image" content="https://wemiller.com/apps/ridgeshot/assets/images/poster.jpg?v=c1ce21ae">
   <link rel="stylesheet" href="../app-showcase.css">
   <style>
-    /* Ridgeshot palette — pulled from the in-game forest+brass aesthetic:
-       charcoal forest greens, warm amber dusk horizon, brass center-dot
-       reticle illumination. Keeps the page's hero / accent / CTA hues
-       consistent with what the player sees on launch. */
     :root {
-      --app-primary: #C7973A;        /* brass */
-      --app-secondary: #9E5A2A;      /* copper */
-      --app-accent: #1A2A22;         /* deep charcoal forest green */
+      /* Ridgeshot — last light on the ridge: timber green, dusk, brass metalwork. */
+      --app-primary: #1f4a3a;
+      --app-secondary: #0d1f1a;
+      --app-accent: #cda154;
+      --primary-color: #1F3A2F;
+      --secondary-color: #cda154;
+      --rs-display-face: ui-serif, "New York", "Iowan Old Style", "Palatino", Georgia, "Times New Roman", serif;
+      --rs-text-face: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      --rs-paper: #FAF8F2;
+      --rs-paper-2: #F1EDE2;
+      --rs-body: #34403A;
+      --rs-quiet: #5F6A63;
+      --rs-rule: rgba(31, 58, 47, 0.13);
+      --rs-accent-ink: #875812;
+      --rs-ornament: linear-gradient(90deg, #E8C47A, #A77A2E);
+      --rs-shadow: drop-shadow(0 30px 40px rgba(13, 31, 26, 0.24)) drop-shadow(0 6px 10px rgba(13, 31, 26, 0.10));
+      --rs-hero-bg:
+        radial-gradient(ellipse 80% 42% at 50% 100%, rgba(205, 161, 84, 0.42) 0%, transparent 70%),
+        radial-gradient(circle at 85% 12%, rgba(122, 86, 130, 0.30) 0%, transparent 55%),
+        linear-gradient(172deg, #0d1f1a 0%, #16332A 48%, #1f4a3a 78%, #5C5236 100%);
+      --rs-hero-ink: #F7EFDD;
+      --rs-hero-kicker: #E8C47A;
+      --rs-button: linear-gradient(180deg, #F0D08A, #CDA154);
+      --rs-button-ink: #13241E;
+      --rs-button-glow: rgba(205, 161, 84, 0.34);
+      --rs-focus: #F0D08A;
+      --rs-closing-bg:
+        radial-gradient(ellipse 55% 60% at 50% 100%, rgba(205, 161, 84, 0.18) 0%, transparent 70%),
+        var(--rs-paper-2);
+      --bg-primary: var(--rs-paper);
+      --bg-secondary: var(--rs-paper-2);
+      --text-primary: #13241E;
+      --text-secondary: var(--rs-body);
+      --text-muted: var(--rs-quiet);
+      --glass-bg: rgba(250, 248, 242, 0.8);
+      --glass-border: rgba(31, 58, 47, 0.08);
+      --glass-shadow: none;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --primary-color: #E8C47A;
+        --rs-paper: #0B1714;
+        --rs-paper-2: #10211C;
+        --rs-body: #D5DDD8;
+        --rs-quiet: #A0ADA6;
+        --rs-rule: rgba(232, 196, 122, 0.14);
+        --rs-accent-ink: #DDB56C;
+        --rs-shadow: drop-shadow(0 30px 44px rgba(0, 0, 0, 0.55)) drop-shadow(0 6px 10px rgba(0, 0, 0, 0.30));
+        --rs-closing-bg:
+          radial-gradient(ellipse 55% 60% at 50% 100%, rgba(205, 161, 84, 0.16) 0%, transparent 70%),
+          var(--rs-paper-2);
+        --text-primary: #F2F0E8;
+        --glass-bg: rgba(11, 23, 20, 0.8);
+        --glass-border: rgba(232, 196, 122, 0.08);
+      }
+      --rs-measure: 1120px;
     }
 
-    .hero {
-      background:
-        radial-gradient(circle at 50% 78%, rgba(250, 200, 118, 0.28) 0%, transparent 50%),
-        radial-gradient(circle at 25% 25%, rgba(199, 151, 58, 0.12) 0%, transparent 55%),
-        linear-gradient(180deg, #1A2A33 0%, #2D2452 38%, #5E3957 65%, #B27551 88%, #DC8D4A 100%);
-      color: white;
+    body { background: var(--rs-paper); }
+    /* Two-word labels ("App Store") wrapped onto two lines at mid widths. */
+    .nav-links .nav-link, .nav-links .btn-buy { white-space: nowrap; }
+    .floating-appstore {
+      background: var(--rs-button);
+      color: var(--rs-button-ink);
+      box-shadow: 0 10px 30px var(--rs-button-glow);
     }
 
-    .hero-title,
-    .hero-subtitle {
-      color: white;
-      -webkit-text-fill-color: white;
-    }
-
-    .hero-title {
-      background: linear-gradient(135deg, #F0E8D4 0%, #C7973A 55%, #9E5A2A 100%);
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
-      text-shadow: 0 0 60px rgba(199, 151, 58, 0.28);
-    }
-
-    .hero-subtitle {
-      color: var(--app-primary);
-      letter-spacing: 0.22em;
+    /* ---- Shared type ---------------------------------------------------- */
+    .rs-eyebrow {
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
+      color: var(--rs-accent-ink);
+      margin: 0 0 1rem;
+    }
+    .rs-eyebrow .rs-num {
+      font-family: var(--rs-display-face);
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      margin-right: 0.8em;
+      opacity: 0.85;
+    }
+    .rs-display {
+      font-family: var(--rs-display-face);
+      font-weight: 600;
+      background: none;
+      -webkit-text-fill-color: currentColor;
+      color: var(--primary-color);
+      font-size: clamp(2.1rem, 5.2vw, 3.6rem);
+      line-height: 1.06;
+      letter-spacing: -0.02em;
+      margin: 0 0 1.4rem;
+      text-wrap: balance;
+    }
+    .rs-lede {
+      font-family: var(--rs-text-face);
+      font-size: clamp(1.12rem, 1.9vw, 1.36rem);
+      line-height: 1.62;
+      color: var(--rs-body);
+      margin: 0 0 1.2rem;
+      text-wrap: pretty;
+    }
+    .rs-lede a, .faq-answer a { color: var(--rs-accent-ink); }
+
+    /* ---- Hero ----------------------------------------------------------- */
+    .rs-hero {
+      position: relative;
+      background: var(--rs-hero-bg);
+      color: #fff;
+      text-align: center;
+      padding: calc(76px + clamp(3rem, 8vw, 6rem)) 16px 0;
+      overflow: hidden;
+    }
+    .rs-hero-icon {
+      width: 84px;
+      height: 84px;
+      display: block;
+      margin: 0 auto 1.4rem;
+      border-radius: 22%;
+      filter: drop-shadow(0 14px 26px rgba(0, 0, 0, 0.45));
+    }
+    .rs-hero-kicker {
+      font-size: 0.82rem;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      color: var(--rs-hero-kicker);
+      margin: 0 0 1.2rem;
+    }
+    .rs-hero h1 {
+      font-family: var(--rs-display-face);
+      font-weight: 600;
+      background: none;
+      -webkit-background-clip: border-box;
+      background-clip: border-box;
+      -webkit-text-fill-color: var(--rs-hero-ink);
+      color: var(--rs-hero-ink);
+      font-size: clamp(2.6rem, 8.4vw, 6.2rem);
+      line-height: 1.02;
+      letter-spacing: -0.025em;
+      max-width: 13ch;
+      margin: 0 auto 1.6rem;
+      text-wrap: balance;
+    }
+    .rs-hero-standfirst {
+      font-family: var(--rs-text-face);
+      font-size: clamp(1.08rem, 2vw, 1.34rem);
+      line-height: 1.6;
+      color: rgba(255, 255, 255, 0.84);
+      max-width: 44ch;
+      margin: 0 auto 2.2rem;
+      text-wrap: pretty;
+    }
+    .rs-cta {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.75rem;
+    }
+    .rs-cta .btn-buy {
+      background: var(--rs-button);
+      color: var(--rs-button-ink);
+      padding: 0.8rem 1.5rem;
+      min-height: 44px;
+      border-radius: 999px;
+      box-shadow: 0 10px 28px var(--rs-button-glow);
+    }
+    .rs-cta .btn-buy:focus-visible, .rs-alt-links a:focus-visible { outline: 3px solid var(--rs-focus); outline-offset: 3px; }
+    /* The app rises out of the hero. */
+    .rs-hero-device {
+      margin: clamp(3rem, 7vw, 4.5rem) auto 0;
+      width: clamp(230px, 34vw, 380px);
+      height: clamp(250px, 36vw, 420px);
+      overflow: hidden;
+    }
+    .rs-hero-device img { display: block; width: 100%; height: auto; }
+
+    /* ---- Statement ------------------------------------------------------ */
+    .rs-statement {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: clamp(4rem, 10vw, 7.5rem) 16px;
+      text-align: center;
+    }
+    .rs-statement p {
+      font-family: var(--rs-display-face);
+      font-size: clamp(1.5rem, 3.6vw, 2.5rem);
+      line-height: 1.3;
+      color: var(--primary-color);
+      margin: 0;
+      text-wrap: balance;
+    }
+    .rs-ornament {
+      display: block;
+      width: 44px;
+      height: 4px;
+      margin: 0 auto 1.8rem;
+      border-radius: 4px;
+      background: var(--rs-ornament);
     }
 
-    .hero-description {
-      color: rgba(255, 255, 255, 0.86);
+    /* ---- Chapters ------------------------------------------------------- */
+    .rs-chapter {
+      max-width: var(--rs-measure);
+      margin: 0 auto;
+      padding: clamp(4rem, 9vw, 7rem) 16px;
+      border-top: 1px solid var(--rs-rule);
+      scroll-margin-top: 70px;
+    }
+    .rs-spread {
+      display: grid;
+      gap: clamp(2.5rem, 6vw, 5rem);
+      align-items: center;
+    }
+    .rs-copy { max-width: 34rem; }
+    @media (min-width: 900px) {
+      .rs-spread { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); }
+      .rs-chapter.is-flipped .rs-copy { order: 2; }
     }
 
-    .hero-image .phone-mockup {
-      border-radius: 28%;
-      box-shadow: 0 24px 70px rgba(0, 0, 0, 0.55);
+    /* One device per story, sized like a photograph on the page, not a thumbnail. */
+    .rs-figure { margin: 0 auto; width: min(72vw, 340px); text-align: center; }
+    .rs-figure.is-tablet { width: min(92vw, 720px); max-width: 100%; }
+    .rs-figure img { display: block; width: 100%; height: auto; filter: var(--rs-shadow); }
+    .rs-figure figcaption {
+      font-size: 0.88rem;
+      line-height: 1.45;
+      color: var(--rs-quiet);
+      margin-top: 1.1rem;
+    }
+    .rs-figure figcaption::before {
+      content: "";
+      display: block;
+      width: 18px;
+      height: 1px;
+      margin: 0 auto 0.6rem;
+      background: var(--rs-accent-ink);
     }
 
-    .magazine-content h2 {
-      color: var(--app-primary);
+    /* Secondary routes: quiet text links under the one button. */
+    .rs-alt-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.7rem;
+      margin: 1.1rem 0 0;
+      font-size: 0.95rem;
+      color: rgba(255, 255, 255, 0.6);
     }
+    .rs-alt-links a { color: rgba(255, 255, 255, 0.86); text-decoration: none; border-bottom: 1px solid rgba(255, 255, 255, 0.3); }
+    .rs-alt-links a:hover { border-bottom-color: rgba(255, 255, 255, 0.8); }
+    .rs-closing .rs-alt-links { color: var(--rs-quiet); }
+    .rs-closing .rs-alt-links a { color: var(--rs-accent-ink); border-bottom-color: var(--rs-rule); }
+
+    /* ---- Trust ---------------------------------------------------------- */
+    .rs-privacy {
+      background: var(--rs-hero-bg);
+      color: var(--rs-hero-ink);
+      padding: clamp(4.5rem, 10vw, 8rem) 16px;
+      scroll-margin-top: 60px;
+    }
+    .rs-privacy-inner { max-width: var(--rs-measure); margin: 0 auto; }
+    .rs-privacy .rs-eyebrow { color: var(--rs-hero-kicker); text-align: center; }
+    .rs-privacy .rs-display {
+      color: var(--rs-hero-ink);
+      -webkit-text-fill-color: var(--rs-hero-ink);
+      text-align: center;
+      font-size: clamp(2.3rem, 6.4vw, 4.6rem);
+      max-width: 14ch;
+      margin: 0 auto 3rem;
+    }
+    .rs-privacy .security-badges {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+      gap: 0;
+      max-width: none;
+      padding: 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    .rs-privacy .security-badge {
+      background: none;
+      border: none;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 0;
+      box-shadow: none;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+      color: var(--rs-hero-ink);
+      font-family: var(--rs-display-face);
+      font-size: 1.12rem;
+      padding: 1.1rem 0.4rem;
+      justify-content: center;
+    }
+    .rs-privacy .security-badge:hover { transform: none; }
+    .rs-privacy .security-audit-note {
+      text-align: center;
+      font-family: var(--rs-text-face);
+      font-style: italic;
+      font-size: clamp(1.1rem, 2.2vw, 1.3rem);
+      color: rgba(255, 255, 255, 0.88);
+      max-width: 36ch;
+      padding: 0;
+      margin: 2.6rem auto 0;
+    }
+    .rs-privacy-link { text-align: center; margin: 1.4rem 0 0; }
+    .rs-privacy-link a { color: var(--rs-hero-kicker); text-decoration: none; border-bottom: 1px solid currentColor; }
+    .rs-privacy-link a::after { content: " →"; }
+
+    /* ---- FAQ: a ruled list ---------------------------------------------- */
+    .faq-section { max-width: 820px; padding: clamp(4rem, 9vw, 6rem) 16px; }
+    .faq-section .rs-eyebrow, .faq-section h2 { text-align: center; }
+    .faq-section h2 {
+      font-family: var(--rs-display-face);
+      font-weight: 600;
+      background: none;
+      -webkit-text-fill-color: currentColor;
+      color: var(--primary-color);
+      font-size: clamp(1.9rem, 4vw, 2.8rem);
+      margin: 0 0 2.5rem;
+    }
+    .faq-item {
+      background: none;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+      border: none;
+      border-top: 1px solid var(--rs-rule);
+      border-radius: 0;
+      margin: 0;
+    }
+    .faq-item:last-child { border-bottom: 1px solid var(--rs-rule); }
+    .faq-question {
+      font-family: var(--rs-display-face);
+      font-size: 1.15rem;
+      font-weight: 600;
+      padding: 1.25rem 0;
+      gap: 1rem;
+    }
+    .faq-question:hover { color: var(--rs-accent-ink); }
+    .faq-question:focus-visible { outline: 2px solid var(--rs-accent-ink); outline-offset: 2px; }
+    .faq-icon { font-size: 0.8rem; color: var(--rs-accent-ink); }
+    .faq-answer { padding: 0; }
+    .faq-item.active .faq-answer { padding: 0 0 1.4rem; }
+    .faq-answer p { font-size: 1rem; line-height: 1.68; color: var(--rs-body); }
+
+    /* ---- Closing -------------------------------------------------------- */
+    .rs-closing {
+      text-align: center;
+      padding: clamp(4.5rem, 10vw, 7rem) 16px;
+      background: var(--rs-closing-bg);
+      border-top: 1px solid var(--rs-rule);
+    }
+    .rs-closing img { width: 96px; height: 96px; display: block; margin: 0 auto 1.6rem; border-radius: 22%; filter: drop-shadow(0 16px 26px rgba(0, 0, 0, 0.28)); }
+    .rs-closing .rs-display { font-size: clamp(2rem, 5vw, 3.4rem); max-width: 14ch; margin: 0 auto 2rem; }
+    .footer { margin-top: 0; }
+
+    /* ---- Reveal: only when motion is welcome ----------------------------- */
+    .rs-motion [data-reveal] {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.9s ease, transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1);
+    }
+    .rs-motion [data-reveal].is-in { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) {
+      .floating-appstore, .faq-item, .hero-text { animation: none; }
+      .btn-buy:hover, .floating-appstore:hover { transform: none; }
+    }
+
+    @media (max-width: 600px) {
+      .rs-hero-icon { width: 68px; height: 68px; }
+      .rs-cta { flex-direction: column; align-items: stretch; max-width: 22rem; margin: 0 auto; }
+      .rs-cta a { justify-content: center; }
+    }
+    /* Break CJK headlines at phrase boundaries, not mid-word, where supported. */
+    .rs-hero h1, .rs-display, .rs-statement p { word-break: auto-phrase; }
+    /* `ch` is the width of a Latin zero; a CJK glyph is two of them. Measure CJK in em. */
+    :lang(ja) .rs-hero h1, :lang(zh) .rs-hero h1, :lang(ko) .rs-hero h1 { max-width: 9em; }
+    :lang(ja) .rs-privacy .rs-display, :lang(zh) .rs-privacy .rs-display, :lang(ko) .rs-privacy .rs-display,
+    :lang(ja) .rs-closing .rs-display, :lang(zh) .rs-closing .rs-display, :lang(ko) .rs-closing .rs-display { max-width: 10em; }
+    :lang(ja) .rs-hero-standfirst, :lang(zh) .rs-hero-standfirst, :lang(ko) .rs-hero-standfirst,
+    :lang(ja) .security-audit-note, :lang(zh) .security-audit-note, :lang(ko) .security-audit-note { max-width: 26em; }
+
   </style>
   <link rel="alternate" hreflang="x-default" href="https://wemiller.com/apps/ridgeshot/">
   <link rel="alternate" hreflang="en" href="https://wemiller.com/apps/ridgeshot/">
@@ -76,7 +408,6 @@
   <script src="/i18n/i18n.js" defer data-page="apps.ridgeshot" data-pos="bottom-left"></script>
 </head>
 <body>
-  <!-- Navigation -->
   <nav class="app-nav">
     <div class="nav-container">
       <a href="../" class="nav-logo nav-brand" title="← Apps" aria-label="← Apps"
@@ -87,213 +418,136 @@
       </a>
       <button class="mobile-menu-toggle">☰</button>
       <ul class="nav-links">
-        <li><a href="#whats-new" class="nav-link" data-i18n="what-s-new.a2efe2">What's New</a></li>
         <li><a href="#features" class="nav-link" data-i18n="features.fc338f">Features</a></li>
-        <li><a href="#how-it-plays" class="nav-link" data-i18n="how-it-plays.65c303">How It Plays</a></li>
         <li><a href="#faq" class="nav-link" data-i18n="faq.03688b">FAQ</a></li>
         <li><a href="https://apps.apple.com/us/app/ridgeshot/id6774483008" class="btn-buy" target="_blank" rel="noopener noreferrer" data-i18n="download-on-app-store.cf50c2">Download on App Store</a></li>
       </ul>
     </div>
   </nav>
 
-  <!-- Hero Section -->
-  <section class="hero">
-    <div class="hero-content">
-      <div class="hero-text">
-        <p class="hero-subtitle" data-i18n="ridgeshot.846970">🎯 Ridgeshot</p>
-        <h1 class="hero-title" data-i18n="press-settle-break.aa9098">Press. Settle. Break.</h1>
-        <p class="hero-description" data-i18n="long-range-rifle-marksman.0faa9b">
-          Long-range rifle marksman in your pocket. A second-focal-plane Christmas-tree reticle, real bullet drop out to 800 yards, walking 3D wildlife, and 1v1 matches you can send through a Messages bubble. Quiet, patient, classy.
-        </p>
-        <span class="os-ready-badge" data-i18n-html="ready-for-ios-27.e06c8c"><span class="badge-icon">✓</span> Ready for iOS 27 / iPadOS 27</span>
-        <div class="hero-cta">
-          <a href="https://apps.apple.com/us/app/ridgeshot/id6774483008" class="btn-buy" target="_blank" rel="noopener noreferrer" data-i18n="download-now.6d56a8">Download Now</a>
-        </div>
-      </div>
-      <div class="hero-image">
-        <div class="hero-phone">
-          <img src="assets/images/app-icon.png?v=98814371" alt="Ridgeshot App Icon" class="phone-mockup"
-               onerror="this.style.background='radial-gradient(circle, #C7973A 0%, #1A2A22 80%)'; this.style.minHeight='320px'; this.style.aspectRatio='1'; this.style.borderRadius='22%'; this.style.display='block';">
-        </div>
-      </div>
+  <!-- Hero: the promise, one download button, and the app rising out of it. -->
+  <header class="rs-hero" id="about">
+    <img class="rs-hero-icon" src="assets/images/app-icon.png?v=98814371" alt="Ridgeshot App Icon" width="1024" height="1024">
+    <p class="rs-hero-kicker">Ridgeshot</p>
+    <h1 data-i18n="press-settle-break.aa9098">Press. Settle. Break.</h1>
+    <p class="rs-hero-standfirst" data-i18n="a-long-range-marksman.13544d">A long-range marksman game for iPhone and iPad, with honest ballistics out to 800 yards.</p>
+    <div class="rs-cta">
+      <a href="https://apps.apple.com/us/app/ridgeshot/id6774483008" target="_blank" rel="noopener noreferrer" class="btn-buy" data-i18n="download-on-the-app.a9096a">Download on the App Store</a>
     </div>
-  </section>
+    <div class="rs-hero-device">
+      <img src="assets/screens/en/01-menu-800.webp?v=a9a8e802"
+               srcset="assets/screens/en/01-menu-400.webp?v=554ef2c1 400w, assets/screens/en/01-menu-800.webp?v=a9a8e802 800w"
+               sizes="(max-width: 676px) 230px, (max-width: 1117px) 34vw, 380px" width="800" height="1655" fetchpriority="high" data-i18n-src
+               alt="The Ridgeshot menu, with target styles, match formats and ways to play" data-i18n-attr="alt:the-ridgeshot-menu-with.a5dba0">
+    </div>
+  </header>
 
-  <!-- Floating App Store Button -->
-  <a href="https://apps.apple.com/us/app/ridgeshot/id6774483008" class="floating-appstore" target="_blank" rel="noopener noreferrer">
+  <!-- Floating App Store button -->
+  <a href="https://apps.apple.com/us/app/ridgeshot/id6774483008" target="_blank" rel="noopener noreferrer" class="floating-appstore">
     <span class="floating-appstore-icon"></span>
     <span data-i18n="download-on-app-store.cf50c2">Download on App Store</span>
   </a>
 
-  <!-- What's New Section -->
-  <section id="whats-new" class="section">
-    <div class="section-header">
-      <p class="section-subtitle" data-i18n="just-shipped.243f10">Just Shipped</p>
-      <h2 data-i18n="what-s-new-in.b84aad">What's New in Ridgeshot</h2>
-      <p data-i18n="family-friendly-content-controls.1fde92">Family-friendly content controls and a more flexible iPad experience</p>
-    </div>
+  <section class="rs-statement">
+    <span class="rs-ornament" aria-hidden="true"></span>
+    <p data-i18n="one-shot-one-breath.0f9f62">One shot. One breath. One ridgeline lit by the last hour of daylight.</p>
+  </section>
 
-    <div class="feature-grid">
-      <div class="feature-card">
-        <div class="feature-icon">👪</div>
-        <h3 class="feature-title" data-i18n="family-friendly-content-controls.affe86">Family-Friendly Content Controls</h3>
-        <p class="feature-description" data-i18n="the-3d-animals-mode.660671">
-          The 3D Animals mode now unlocks only after a one-time, system-verified adult age check — younger players get the full game with Olympic, Steel Plates, and Bottle Blast. Online and iMessage matches respect the setting on both sides, so animal targets can never be slipped into a match with an unverified player.
-        </p>
+  <!-- Stories: one idea, one headline, two sentences at most, one device. -->
+  <main id="features">
+    <section class="rs-chapter" id="scope">
+      <div class="rs-spread">
+        <div class="rs-copy" data-reveal>
+          <p class="rs-eyebrow"><span class="rs-num">01</span><span data-i18n="scope.4651a3">Scope</span></p>
+          <h2 class="rs-display" data-i18n="pick-your-holdover.3e7318">Pick Your Holdover</h2>
+          <p class="rs-lede" data-i18n="a-second-focal-plane.54158b">A second-focal-plane scope with a Christmas-tree reticle, marked from 100 out to 800 yards. Tap the hash for your range and hold it on the target.</p>
+        </div>
+        <figure class="rs-figure" data-reveal>
+          <img src="assets/screens/en/02-scope-aim-800.webp?v=27a878fc"
+               srcset="assets/screens/en/02-scope-aim-400.webp?v=cd66b02f 400w, assets/screens/en/02-scope-aim-800.webp?v=27a878fc 800w"
+               sizes="(max-width: 472px) 72vw, 340px" width="800" height="1655" loading="lazy" decoding="async" data-i18n-src
+               alt="Looking through the scope, the reticle&#x27;s yardage hashes on a distant target" data-i18n-attr="alt:looking-through-the-scope.801f8b">
+        </figure>
       </div>
+    </section>
 
-      <div class="feature-card">
-        <div class="feature-icon">📲</div>
-        <h3 class="feature-title" data-i18n="ipad-any-way-you.3a62ad">iPad, Any Way You Hold It</h3>
-        <p class="feature-description" data-i18n="every-ipad-orientation-is.af32b5">
-          Every iPad orientation is supported and the window resizes freely in Split View, Stage Manager, and iPad windowing — glass a ridge in whatever layout fits your desk.
-        </p>
+    <section class="rs-chapter is-flipped" id="ballistics">
+      <div class="rs-spread">
+        <div class="rs-copy" data-reveal>
+          <p class="rs-eyebrow"><span class="rs-num">02</span><span data-i18n="ballistics.3d1ebc">Ballistics</span></p>
+          <h2 class="rs-display" data-i18n="real-bullet-drop.fd3116">Real Bullet Drop</h2>
+          <p class="rs-lede" data-i18n="past-300-yards-the.0693df">Past 300 yards the round falls, and the wind pushes it sideways. Read the flag, settle your breath, and break the shot between breaths.</p>
+        </div>
+        <figure class="rs-figure" data-reveal>
+          <img src="assets/screens/en/03-gameplay-olympic-800.webp?v=c17a6aa0"
+               srcset="assets/screens/en/03-gameplay-olympic-400.webp?v=b1d2b307 400w, assets/screens/en/03-gameplay-olympic-800.webp?v=c17a6aa0 800w"
+               sizes="(max-width: 472px) 72vw, 340px" width="800" height="1655" loading="lazy" decoding="async" data-i18n-src
+               alt="An Olympic ring target on the range, with the distance and wind readouts" data-i18n-attr="alt:an-olympic-ring-target.50db41">
+        </figure>
       </div>
+    </section>
+
+    <section class="rs-chapter" id="targets">
+      <div class="rs-spread">
+        <div class="rs-copy" data-reveal>
+          <p class="rs-eyebrow"><span class="rs-num">03</span><span data-i18n="targets.d35260">Targets</span></p>
+          <h2 class="rs-display" data-i18n="paper-steel-or-wildlife.362dd2">Paper, steel or wildlife</h2>
+          <p class="rs-lede" data-i18n="shoot-olympic-rings-steel.eeab73">Shoot Olympic rings, steel plates and bottles, or 3D wildlife that walks the range. Animal targets unlock only after a one-time adult age check.</p>
+        </div>
+        <figure class="rs-figure" data-reveal>
+          <img src="assets/screens/en/04-gameplay-animals-800.webp?v=f6ef645b"
+               srcset="assets/screens/en/04-gameplay-animals-400.webp?v=0d6bb5f5 400w, assets/screens/en/04-gameplay-animals-800.webp?v=f6ef645b 800w"
+               sizes="(max-width: 472px) 72vw, 340px" width="800" height="1655" loading="lazy" decoding="async" data-i18n-src
+               alt="A 3D animal target in the scope on a sunlit range" data-i18n-attr="alt:a-3d-animal-target.184bd1">
+        </figure>
+      </div>
+    </section>
+
+    <section class="rs-chapter is-flipped" id="compete">
+      <div class="rs-spread">
+        <div class="rs-copy" data-reveal>
+          <p class="rs-eyebrow"><span class="rs-num">04</span><span data-i18n="compete.75283c">Compete</span></p>
+          <h2 class="rs-display" data-i18n="one-bubble-at-a.aa58bc">One Bubble at a Time</h2>
+          <p class="rs-lede" data-i18n="send-a-match-through.a4aef5">Send a match through iMessage and your friend shoots inside the bubble. Or hand the phone across the couch, or find an opponent on Game Center.</p>
+        </div>
+        <figure class="rs-figure" data-reveal>
+          <img src="assets/screens/en/05-results-800.webp?v=744f7cec"
+               srcset="assets/screens/en/05-results-400.webp?v=4374daaa 400w, assets/screens/en/05-results-800.webp?v=744f7cec 800w"
+               sizes="(max-width: 472px) 72vw, 340px" width="800" height="1655" loading="lazy" decoding="async" data-i18n-src
+               alt="The match result, with the winner on 30 points" data-i18n-attr="alt:the-match-result-with.6e1f1e">
+        </figure>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Trust: one beat, then out of the way. -->
+  <section class="rs-privacy" id="privacy">
+    <div class="rs-privacy-inner" data-reveal>
+      <p class="rs-eyebrow" data-i18n="security-privacy.67a15f">Security &amp; Privacy</p>
+      <h2 class="rs-display" data-i18n="no-servers-no-telemetry.d0002d">No servers. No telemetry.</h2>
+      <div class="security-badges">
+        <div class="security-badge" data-i18n-html="privacy-manifest.5063fd"><span class="badge-icon">&#x1f4cb;</span> Privacy Manifest</div>
+        <div class="security-badge" data-i18n-html="gamekit-security.9e6fc1"><span class="badge-icon">&#x1f3ae;</span> GameKit Security</div>
+        <div class="security-badge" data-i18n-html="app-sandbox.b85ecb"><span class="badge-icon">&#x2705;</span> App Sandbox</div>
+      </div>
+      <p class="security-audit-note" data-i18n="no-ads-no-tracking.b6dfd8">No ads, no tracking, no in-app purchases. Game Center relays online matches, and Ridgeshot collects no telemetry.</p>
     </div>
   </section>
 
-  <!-- Features Section -->
-  <section id="features" class="section">
-    <div class="section-header">
-      <p class="section-subtitle" data-i18n="why-ridgeshot-reads-right.4a3f8a">Why Ridgeshot Reads Right</p>
-      <h2 data-i18n="built-for-the-long.f0026b">Built for the Long Shot</h2>
-      <p data-i18n="eight-things-every-ridgeshot.6e8aa6">Eight things every Ridgeshot player learns to love</p>
-    </div>
-
-    <div class="feature-grid">
-      <div class="feature-card">
-        <div class="feature-icon">🎯</div>
-        <h3 class="feature-title" data-i18n="sfp-christmas-tree-reticle.c070bc">SFP Christmas-Tree Reticle</h3>
-        <p class="feature-description" data-i18n="a-real-second-focal.5c6ee4">
-          A real second-focal-plane scope picture — etched crosshair, illuminated brass center dot, and a Christmas-tree subtension with yardage hashes from the close zero out to 800. Tap a hash to lock your holdover.
-        </p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">📐</div>
-        <h3 class="feature-title" data-i18n="real-bullet-drop.fd3116">Real Bullet Drop</h3>
-        <p class="feature-description" data-i18n="flatter-than-an-arrow.02121b">
-          Flatter than an arrow, never flat. Your shot tracks a continuous-angle ballistic model from the muzzle to impact — pick the wrong holdover and the round passes high or low exactly where the tree said it would.
-        </p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">💨</div>
-        <h3 class="feature-title" data-i18n="wind-patience.657adb">Wind &amp; Patience</h3>
-        <p class="feature-description" data-i18n="live-wind-speed-and.641867">
-          Live wind speed and heading on the HUD. A flag on the lane confirms it. Hold too long and your reticle starts to wander — controlled breath, clean break, or wait for the next pass. Your call.
-        </p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">🦌</div>
-        <h3 class="feature-title" data-i18n="walking-wildlife.16bfe9">Walking Wildlife</h3>
-        <p class="feature-description" data-i18n="olympic-concentric-ring-targets.e4494c">
-          Olympic concentric-ring targets, or 3D whitetail, elk, turkey, and boar that wander through the scene with their own gait and pauses. Sometimes a trunk slides into your sight picture — that's the wilderness reading right.
-        </p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">🌲</div>
-        <h3 class="feature-title" data-i18n="atmospheric-range.55a239">Atmospheric Range</h3>
-        <p class="feature-description" data-i18n="alpine-meadow-forest-clearing.d8e55e">
-          Alpine meadow, forest clearing, coastal bluff, desert canyon. Sunrise, noon, sunset, night. Clear, rain, snow. Every match's range is uniquely seeded — no two ridgelines twice.
-        </p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">💬</div>
-        <h3 class="feature-title" data-i18n="imessage-challenges.fae458">iMessage Challenges</h3>
-        <p class="feature-description" data-i18n="send-a-ridgeshot-bubble.f3c2b6">
-          Send a Ridgeshot bubble to a friend. They open it, take their shot, send it back. Each turn is one round. The whole match lives in your conversation — no app switch, no sign-in.
-        </p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">🎮</div>
-        <h3 class="feature-title" data-i18n="game-center-1v1.afbae9">Game Center 1v1</h3>
-        <p class="feature-description" data-i18n="quick-match-online-or.9b4095">
-          Quick-match online or invite a friend. Asynchronous turn-based — your opponent shoots when they're free, you shoot when you're free. Push notifications keep you in sync without keeping you tethered.
-        </p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">🏆</div>
-        <h3 class="feature-title" data-i18n="five-leaderboards.d30300">Five Leaderboards</h3>
-        <p class="feature-description" data-i18n="total-wins-longest-confirmed.4da08f">
-          Total wins, longest confirmed shot, season high score, rolling accuracy, and Olympic 10-ring count. Five different ways to be measurably better than the rest. Climb whichever one suits you.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Magazine-style Feature Sections -->
-  <section id="how-it-plays" class="section">
-    <div class="magazine-section">
-      <div class="magazine-content">
-        <h2 data-i18n="press-settle-break.aa9098">Press. Settle. Break.</h2>
-        <p data-i18n="touch-and-hold-to.ffe36c">
-          Touch and hold to shoulder the rifle — the wood stock comes up, the support hand finds the forend, the scope picture zooms to a 10° FOV (the actual angular span of a long-range optic), and the reticle settles into your view.
-        </p>
-        <p data-i18n="drag-while-settled-to.305aa0">
-          Drag while settled to fine-tune your aim. The rifle responds with a touch of mass on purpose — you're squeezing a trigger, not nudging a cursor. Lift to break the shot.
-        </p>
-      </div>
-      <div class="magazine-image">
-        <img src="assets/images/mockup-scope.jpg?v=97943fa9" alt="Scope picture settling on an Olympic boss"
-             onerror="this.style.background='linear-gradient(135deg, #1A2A33, #B27551)'; this.style.minHeight='400px'; this.style.display='block';">
-      </div>
-    </div>
-
-    <div class="magazine-section reverse">
-      <div class="magazine-content">
-        <h2 data-i18n="pick-your-holdover.3e7318">Pick Your Holdover</h2>
-        <p data-i18n="distance-and-target-type.812873">
-          Distance and target type sit on the lower-left HUD. Wind speed and direction sit on the lower-right with a rotating arrow showing exactly which way it's blowing — and a flag on the lane confirms it.
-        </p>
-        <p data-i18n="the-christmas-tree-gives.073d27">
-          The Christmas tree gives you yardage hashes from 100 out to 800. Tap the one that matches your range, place it on the heart or the X, and let the wind decide if you need to drift a little. That last decision is the whole game.
-        </p>
-      </div>
-      <div class="magazine-image">
-        <img src="assets/images/mockup-animals.jpg?v=8402285b" alt="HUD over an Alpine Meadow sunrise tracking a wild boar"
-             onerror="this.style.background='linear-gradient(135deg, #C7973A, #1A2A22)'; this.style.minHeight='400px'; this.style.display='block';">
-      </div>
-    </div>
-
-    <div class="magazine-section">
-      <div class="magazine-content">
-        <h2 data-i18n="one-bubble-at-a.aa58bc">One Bubble at a Time</h2>
-        <p data-i18n="send-a-ridgeshot-bubble.14146f">
-          Send a Ridgeshot bubble. Your friend opens it inside Messages, takes their shot from inside the bubble, and sends it back. No app to install on their end — just the iMessage extension, which downloads silently the first time someone receives a match from you.
-        </p>
-        <p data-i18n="pass-and-play-works.1093fd">
-          Pass-and-play works the same way on a single device. Two shooters, one screen, alternating turns. The kind of match you can finish on a porch before the sun is fully down.
-        </p>
-      </div>
-      <div class="magazine-image">
-        <img src="assets/images/mockup-results.jpg?v=2f91744c" alt="Match-end results screen showing a 30–22 win"
-             onerror="this.style.background='linear-gradient(135deg, #2D2452, #9E5A2A)'; this.style.minHeight='400px'; this.style.display='block';">
-      </div>
-    </div>
-  </section>
-
-  <!-- FAQ Section -->
+  <!-- FAQ: short, folded, and the EU note last. -->
   <section id="faq" class="faq-section">
-    <div class="section-header">
-      <p class="section-subtitle" data-i18n="got-questions.8ecca3">Got Questions?</p>
-      <h2 data-i18n="frequently-asked-questions.d790b4">Frequently Asked Questions</h2>
-    </div>
+    <p class="rs-eyebrow" data-i18n="got-questions.8ecca3">Got Questions?</p>
+    <h2 data-i18n="frequently-asked-questions.d790b4">Frequently Asked Questions</h2>
 
+    <div class="faq-list">
     <div class="faq-item">
       <button class="faq-question">
         <span data-i18n="how-do-i-read.1d682d">How do I read the Christmas-tree reticle?</span>
         <span class="faq-icon">▼</span>
       </button>
       <div class="faq-answer">
-        <p data-i18n="glance-at-the-lower.8f61c6">
-          Glance at the lower-left HUD for the range — say "412 yd." Look at the vertical stadia under the crosshair: each hash is labelled in yards. Tap the 400 hash to lock it as your aim point, then place that hash on the heart (or the X-ring). If wind is pushing left, drift your hold a touch right so the round walks back to centre. Same idea as real long-range glass — your eye lives on the target, the tree does the math.
-        </p>
+        <p data-i18n="the-christmas-tree-gives.073d27">The Christmas tree gives you yardage hashes from 100 out to 800. Tap the one that matches your range, place it on the heart or the X, and let the wind decide if you need to drift a little. That last decision is the whole game.</p>
       </div>
     </div>
 
@@ -303,9 +557,7 @@
         <span class="faq-icon">▼</span>
       </button>
       <div class="faq-answer">
-        <p data-i18n="that-s-natural-sway.6ce413">
-          That's natural sway — pulse, breath, fatigue, and a rifle that weighs more than your forearm. The longer you hold, the wider your reticle wanders. Break the shot at the natural pause between breaths, or wait, settle again, and try the next cycle. Snap-shooters can lift early for a quick break; precision shooters can hold longer for a tighter window if they trust their settle. Both work — pick your style.
-        </p>
+        <p data-i18n="that-s-natural-sway.6ce413">That's natural sway — pulse, breath, fatigue, and a rifle that weighs more than your forearm. The longer you hold, the wider your reticle wanders. Break the shot at the natural pause between breaths, or wait, settle again, and try the next cycle. Snap-shooters can lift early for a quick break; precision shooters can hold longer for a tighter window if they trust their settle. Both work — pick your style.</p>
       </div>
     </div>
 
@@ -315,9 +567,7 @@
         <span class="faq-icon">▼</span>
       </button>
       <div class="faq-answer">
-        <p data-i18n="open-a-conversation-in.69ee20">
-          Open a conversation in Messages, tap the Ridgeshot iMessage app, pick a format (Quickfire / Classic / Long Course) and a target style (Olympic paper / 3D wildlife), then send. Your friend taps the bubble, takes a single round, and sends the updated bubble back. Each round is one bubble — like Wordle, but for marksmen. The match lives entirely in your thread.
-        </p>
+        <p data-i18n="open-a-conversation-in.69ee20">Open a conversation in Messages, tap the Ridgeshot iMessage app, pick a format (Quickfire / Classic / Long Course) and a target style (Olympic paper / 3D wildlife), then send. Your friend taps the bubble, takes a single round, and sends the updated bubble back. Each round is one bubble — like Wordle, but for marksmen. The match lives entirely in your thread.</p>
       </div>
     </div>
 
@@ -327,9 +577,7 @@
         <span class="faq-icon">▼</span>
       </button>
       <div class="faq-answer">
-        <p data-i18n="yes-pass-and-play.81d0c1">
-          Yes — pass-and-play is fully offline. Two shooters, one device, no sign-in. Game Center matchmaking and iMessage challenges obviously need a connection to relay turns, but the whole simulation — ballistics, wind, animals, weather — runs on-device. No server round-trips per shot, no waiting for a leaderboard sync to take your next round.
-        </p>
+        <p data-i18n="yes-pass-and-play.81d0c1">Yes — pass-and-play is fully offline. Two shooters, one device, no sign-in. Game Center matchmaking and iMessage challenges obviously need a connection to relay turns, but the whole simulation — ballistics, wind, animals, weather — runs on-device. No server round-trips per shot, no waiting for a leaderboard sync to take your next round.</p>
       </div>
     </div>
 
@@ -339,9 +587,7 @@
         <span class="faq-icon">▼</span>
       </button>
       <div class="faq-answer">
-        <p data-i18n="iphone-and-ipad-universal.6b4998">
-          iPhone and iPad. Universal app — same purchase covers both. The game is portrait-only because the FOV crunch, reticle subtension spacing, and follow-cam waypoints are tuned for a vertical aspect. Built and tuned on iPhone 17 Pro Max; runs smoothly back to iPhone 12 and any iPad with iOS 17 or later.
-        </p>
+        <p data-i18n="iphone-and-ipad-on.ba556d">iPhone and iPad, on iOS 17 or later, with one purchase covering both. iPhone plays in portrait; on iPad it works in every orientation, including Split View and Stage Manager.</p>
       </div>
     </div>
 
@@ -351,11 +597,10 @@
         <span class="faq-icon">▼</span>
       </button>
       <div class="faq-answer">
-        <p data-i18n="no-ridgeshot-is-a.e60b7b">
-          No. Ridgeshot is a one-time purchase. No ads, no tracking, no in-app purchases, no subscriptions. You get every range, every target, every weather state, both online flows, and all five leaderboards.
-        </p>
+        <p data-i18n="no-ridgeshot-is-a.e60b7b">No. Ridgeshot is a one-time purchase. No ads, no tracking, no in-app purchases, no subscriptions. You get every range, every target, every weather state, both online flows, and all five leaderboards.</p>
       </div>
     </div>
+
     <div class="faq-item">
       <button class="faq-question">
         <span data-i18n="is-ridgeshot-available-in.5fc13e">Is Ridgeshot available in the European Union?</span>
@@ -365,23 +610,17 @@
         <p data-i18n="yes-ridgeshot-is-on.cf0a86">Yes. Ridgeshot is on the App Store everywhere in the European Union, France included. It's available in every App Store territory Apple offers.</p>
       </div>
     </div>
+    </div>
   </section>
 
-  <!-- Security &amp; Privacy callout -->
-  <section class="security-callout">
-    <div class="section-header">
-      <p class="section-subtitle" data-i18n="security-privacy.67a15f">Security &amp; Privacy</p>
-      <h2 data-i18n="hardened-by-design.084a16">Hardened by Design</h2>
+  <!-- Closing: the promise again, and the one button. -->
+  <section class="rs-closing">
+    <img src="assets/images/app-icon.png?v=98814371" alt="" width="1024" height="1024" loading="lazy">
+    <h2 class="rs-display" data-i18n="press-settle-break.aa9098">Press. Settle. Break.</h2>
+    <div class="rs-cta">
+      <a href="https://apps.apple.com/us/app/ridgeshot/id6774483008" target="_blank" rel="noopener noreferrer" class="btn-buy" data-i18n="download-on-the-app.a9096a">Download on the App Store</a>
     </div>
-    <div class="security-badges">
-      <div class="security-badge" data-i18n-html="privacy-manifest.5063fd"><span class="badge-icon">&#x1f4cb;</span> Privacy Manifest</div>
-      <div class="security-badge" data-i18n-html="input-validation.5de1a2"><span class="badge-icon">&#x1f50d;</span> Input Validation</div>
-      <div class="security-badge" data-i18n-html="gamekit-security.9e6fc1"><span class="badge-icon">&#x1f3ae;</span> GameKit Security</div>
-      <div class="security-badge" data-i18n-html="app-sandbox.b85ecb"><span class="badge-icon">&#x2705;</span> App Sandbox</div>
-    </div>
-    <p class="security-audit-note" data-i18n="no-tracking-no-ads.9ce4d2">No tracking. No ads. No in-app purchases.</p>
   </section>
-
   <footer class="footer">
     <div class="footer-content">
       <div class="footer-links">
@@ -429,5 +668,20 @@
   </footer>
 
   <script src="../app-showcase.js"></script>
+  <script>
+    // A quiet reveal as each chapter arrives — only when motion is welcome, and
+    // only once JavaScript is known to be running, so nothing can stay hidden.
+    (function () {
+      if (!('IntersectionObserver' in window)) return;
+      if (!window.matchMedia('(prefers-reduced-motion: no-preference)').matches) return;
+      document.documentElement.classList.add('rs-motion');
+      const io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); }
+        });
+      }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+      document.querySelectorAll('[data-reveal]').forEach(function (el) { io.observe(el); });
+    })();
+  </script>
 </body>
 </html>
