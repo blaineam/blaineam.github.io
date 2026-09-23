@@ -28,7 +28,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 
 # Rsynced from the app repos on a schedule; see scripts/../.github/workflows/mirror-app-docs.yml.
-MIRRORED = {"apps/haven", "apps/blip", "apps/glint"}
+MIRRORED = {"apps/haven", "apps/blip", "apps/glint", "apps/lathe"}
 
 SUFFIXES = {".png", ".jpg", ".jpeg", ".webp", ".gif", ".svg", ".ico", ".avif"}
 
