@@ -407,6 +407,8 @@
     .ms-hero h1, .ms-display, .ms-statement p { word-break: auto-phrase; }
     /* `ch` is the width of a Latin zero; a CJK glyph is two of them. Measure CJK in em. */
     :lang(ja) .ms-hero h1, :lang(zh) .ms-hero h1, :lang(ko) .ms-hero h1 { max-width: 9em; }
+    /* Korean breaks inside words unless told to keep them whole. */
+    :lang(ko) .ms-hero h1, :lang(ko) .ms-display, :lang(ko) .ms-statement p, :lang(ko) .ms-lede { word-break: keep-all; }
     :lang(ja) .ms-trust .ms-display, :lang(zh) .ms-trust .ms-display, :lang(ko) .ms-trust .ms-display,
     :lang(ja) .ms-closing .ms-display, :lang(zh) .ms-closing .ms-display, :lang(ko) .ms-closing .ms-display { max-width: 10em; }
     :lang(ja) .ms-hero-standfirst, :lang(zh) .ms-hero-standfirst, :lang(ko) .ms-hero-standfirst,
