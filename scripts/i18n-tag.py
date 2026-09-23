@@ -49,7 +49,7 @@ SKIP_EXACT = {s.lower() for s in [
     "Enter Space", "Haven", "Ari", "Ari Helper", "Sami", "Pano Owl", "Blip",
     "Glint", "Lathe", "Tilebreak", "Tri-Add", "Zap", "Zap!", "Kern", "Embr", "Mi Speaks", "Revela",
     "Ridgeshot", "SightQuick", "Pinline", "Luma Editor", "Wise Flyer",
-    "DeepSi", "Scripture Alone", "Doppel", "Time Portal", "Space Inspector", "Git Mirror",
+    "DeepSi", "Scripture Alone", "Tom", "Doppel", "Time Portal", "Space Inspector", "Git Mirror",
     "Theater", "rclone", "WebDAV", "SFTP", "SMB", "Samba", "FTP", "S3",
     "FSKit", "Dropbox", "Google Drive", "OneDrive", "pCloud", "Box", "Mega",
     "Backblaze B2", "Azure Files", "Azure Blob Storage",

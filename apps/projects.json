@@ -4,6 +4,22 @@
   "note": "Source of truth for app metadata. apps/index.html renders its OWN custom display order; this file is the chronological list.",
   "apps": [
     {
+      "id": "tom",
+      "title": "Tom",
+      "tagline": "A music machine — melodies in seconds, songs like Lego",
+      "platform": "web",
+      "page_url": "https://tom.wemiller.com",
+      "app_store_url": null,
+      "source_url": "https://github.com/blaineam/Tom",
+      "icon_url": "/apps/_shared/icons/tom.svg",
+      "released": "2026-09",
+      "updated": "2026-09",
+      "version": "0.5.0",
+      "status": "live",
+      "price": "free",
+      "note": "A free, open-source (MIT) music machine that runs entirely in the browser, plus a CLI. Dial in a melody in seconds or snap a whole song together from blocks like Lego — every note generated from a seed, so the same seed always makes the same music, and it's all royalty-free. Exports WAV, MIDI and JSON; a share link's hashtag is the whole song. Scores Monkr's animated mockups with jingles that land on the end card."
+    },
+    {
       "id": "scripture-alone",
       "title": "Scripture Alone",
       "tagline": "The Word, and nothing in the way",
@@ -164,6 +180,21 @@
       "app_store_url": null,
       "icon_url": "/apps/glint/assets/images/icon.png",
       "released": "2026-04"
+    },
+    {
+      "id": "monkr",
+      "title": "Monkr",
+      "tagline": "Beautiful device mockups in seconds",
+      "platform": "web",
+      "page_url": "https://monkr.wemiller.com",
+      "app_store_url": null,
+      "source_url": "https://github.com/blaineam/Monkr",
+      "icon_url": "/apps/_shared/icons/monkr.png",
+      "released": "2026-04",
+      "updated": "2026-09",
+      "status": "live",
+      "price": "free",
+      "note": "A free, open-source (MIT) device mockup generator that runs entirely in the browser — nothing is uploaded. Frames App Store screenshots and animates mockups into video, with a CLI that powers the App Store screenshot pipeline behind every app here."
     },
     {
       "id": "sami",

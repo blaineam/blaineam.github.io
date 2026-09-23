@@ -4,10 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Support future development - Blaine Miller</title>
-  <meta name="description" content="Haven, Blip, Glint, Lathe, DeepSi, Zap! and Scripture Alone are free — no ads, no tracking, no subscriptions. Help fund what comes next through GitHub Sponsors, Ko-fi or a one-time tip.">
+  <meta name="description" content="Haven, Blip, Glint, Lathe, DeepSi, Zap!, Scripture Alone, Tom and Monkr are free — no ads, no tracking, no subscriptions. Help fund what comes next through GitHub Sponsors, Ko-fi or a one-time tip.">
   <link rel="canonical" href="https://wemiller.com/support/">
   <meta property="og:title" content="Support future development - Blaine Miller">
-  <meta property="og:description" content="Haven, Blip, Glint, Lathe, DeepSi, Zap! and Scripture Alone are free — no ads, no tracking, no subscriptions. Help fund what comes next through GitHub Sponsors, Ko-fi or a one-time tip.">
+  <meta property="og:description" content="Haven, Blip, Glint, Lathe, DeepSi, Zap!, Scripture Alone, Tom and Monkr are free — no ads, no tracking, no subscriptions. Help fund what comes next through GitHub Sponsors, Ko-fi or a one-time tip.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://wemiller.com/support/">
   <meta property="og:image" content="https://wemiller.com/apps/apps-by-blaine-miller.jpg?v=3e80cc5c">
@@ -297,6 +297,26 @@
       font-size: 0.95rem;
     }
 
+    /* Web apps run in the browser rather than installing from a store. */
+    .web-badge {
+      display: inline-block;
+      margin-left: 0.4em;
+      padding: 0.1em 0.55em;
+      border: 1px solid currentColor;
+      border-radius: 999px;
+      color: var(--primary-color);
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      line-height: 1.4;
+      text-transform: uppercase;
+      vertical-align: middle;
+    }
+
+    .free-app-name .web-badge {
+      font-family: inherit;
+    }
+
     @media (max-width: 768px) {
       .support-hero {
         padding-top: calc(70px + var(--spacing-xl));
@@ -343,9 +363,9 @@
   <!-- Hero + the three ways -->
   <section class="support-hero">
     <div class="support-container">
-      <p class="support-eyebrow" data-i18n="haven-blip-glint-lathe.93a56a">Haven, Blip, Glint, Lathe, DeepSi, Zap! and Scripture Alone are free</p>
+      <p class="support-eyebrow" data-i18n="haven-blip-glint-lathe.e360fb">Haven, Blip, Glint, Lathe, DeepSi, Zap!, Scripture Alone, Tom and Monkr are free</p>
       <h1 class="support-title" data-i18n="support-future-development.921741">Support future development</h1>
-      <p class="support-intro" data-i18n="haven-blip-glint-lathe.11a7b9">Haven, Blip, Glint, Lathe, DeepSi, Zap! and Scripture Alone are free — no ads, no tracking, no subscriptions. If they earn a place on your devices, you can help fund what comes next.</p>
+      <p class="support-intro" data-i18n="haven-blip-glint-lathe.6ab90f">Haven, Blip, Glint, Lathe, DeepSi, Zap!, Scripture Alone, Tom and Monkr are free — no ads, no tracking, no subscriptions. If they earn a place on your devices, you can help fund what comes next.</p>
 
       <div class="support-grid">
         <!-- GitHub Sponsors -->
@@ -451,6 +471,22 @@
         <span class="free-app-tagline" data-i18n="a-private-offline-bible.127da7">A private, offline Bible</span>
         <span class="free-app-where" data-i18n="free-and-open-source.672f8f">Free and open source — coming soon to the App Store</span>
         <span class="free-app-cta" data-i18n="learn-more.140c43">Learn More →</span>
+      </a>
+
+      <a href="https://tom.wemiller.com" class="free-app" target="_blank" rel="noopener">
+        <span class="free-app-icon"><img src="/apps/_shared/icons/tom.svg?v=c631f7f1" alt="Tom App Icon"></span>
+        <span class="free-app-name">Tom <span class="web-badge" data-i18n="web.a8323a">Web</span></span>
+        <span class="free-app-tagline" data-i18n="a-music-machine-melodies.7120bc">A music machine — melodies in seconds, songs like Lego</span>
+        <span class="free-app-where" data-i18n="free-and-open-source.058d1f">Free and open source, right in your browser</span>
+        <span class="free-app-cta" data-i18n="try-it.b69103">Try it →</span>
+      </a>
+
+      <a href="https://monkr.wemiller.com" class="free-app" target="_blank" rel="noopener">
+        <span class="free-app-icon"><img src="/apps/_shared/icons/monkr.png?v=cf335919" alt="Monkr App Icon"></span>
+        <span class="free-app-name">Monkr <span class="web-badge" data-i18n="web.a8323a">Web</span></span>
+        <span class="free-app-tagline" data-i18n="beautiful-device-mockups-in.ea039d">Beautiful device mockups in seconds</span>
+        <span class="free-app-where" data-i18n="free-and-open-source.058d1f">Free and open source, right in your browser</span>
+        <span class="free-app-cta" data-i18n="try-it.b69103">Try it →</span>
       </a>
     </div>
   </section>
