@@ -82,6 +82,8 @@
   "tl.threndr.desc": "As our final project in college, I wanted to build something great in our condensed 8-week course. So I threw together another custom e-commerce site. To my surprise, our professor said we were the only team to build something this ready for production.",
   "tl.tile-break.date": "May, 2026",
   "tl.tile-break.desc": "Polished modern Mahjong solitaire for iPhone and iPad. Every board is provably solvable, the soundtrack is fully procedural (one per theme), and Game Center carries leaderboards plus native challenges. Seven layouts, six themes, four tile face sets, two rule variants — no ads, no tracking, plays offline.",
+  "tl.tom.date": "September, 2026",
+  "tl.tom.desc": "A music machine that runs entirely in your browser, and on the command line. Dial in a melody in seconds — style, key, tempo, swing, shape — or snap a whole song together from blocks like Lego, and let Auto build, finish or re-roll whatever you haven't locked. Every note comes from a seed, so the same seed always makes the same music, and because Tom writes all of it, it's royalty-free: no samples, no licenses, no Content ID claims. Exports WAV, MIDI and JSON, and a share link's hashtag is the whole song. Free and open source under MIT.",
   "tl.topo.date": "July, 2022",
   "tl.topo.desc": "My grandfather used to collect topographical maps, and after all these years, we decided to scan them, and I threw together a quick website to enjoy them on.",
   "tl.tri-add.date": "May, 2014",
