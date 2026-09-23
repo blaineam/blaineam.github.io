@@ -23,6 +23,11 @@ pages per language.
   dispatches an `i18n:applied` event pages can hook (index.html uses it to
   re-sync the radial-menu labels).
 - **Languages:** `en` plus `zh-Hans, ja, de, fr, es, ko, pt-BR, it`.
+- **Screenshots** follow the language too: an `<img data-i18n-src>` whose URLs
+  sit under `…/screens/en/` is swapped to `…/screens/<lang>/` when that page's
+  `assets/screens/manifest.json` lists the files, and stays English otherwise.
+  The renders and manifest come from `scripts/sync-app-screens.py` (config in
+  `scripts/app-screens.json`); see [app-page-design.md](app-page-design.md) §4.
 - **SEO:** every localized page carries `hreflang` alternates pointing at its
   `?lang=<code>` variants plus `x-default`. No new URLs exist, so
   `sitemap.xml` is unchanged.

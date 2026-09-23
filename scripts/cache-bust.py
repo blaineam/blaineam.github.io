@@ -40,6 +40,8 @@ SITE_ORIGINS = ("https://wemiller.com/", "https://www.wemiller.com/")
 
 # src="…", href="…", content="…" and url(…) — the attribute forms this site actually uses.
 ATTRIBUTE = re.compile(r"""(?P<prefix>(?:src|href|content)\s*=\s*["'])(?P<url>[^"'>]+?)(?P<suffix>["'])""")
+# srcset="a.webp 400w, b.webp 800w" — a comma-separated list, each URL stamped on its own.
+SRCSET = re.compile(r"""(?P<prefix>srcset\s*=\s*["'])(?P<value>[^"'>]+)(?P<suffix>["'])""")
 CSS_URL = re.compile(r"""(?P<prefix>url\(\s*['"]?)(?P<url>[^)'"]+?)(?P<suffix>['"]?\s*\))""")
 
 
@@ -91,6 +93,16 @@ def rewrite(text: str, page: Path) -> tuple[str, int]:
             changed += 1
         return f"{match.group('prefix')}{rebuilt}{match.group('suffix')}"
 
+    candidate = re.compile(r"(?P<prefix>^|,)(?P<space>\s*)(?P<url>[^\s,]+)")
+
+    def replace_srcset(match: re.Match[str]) -> str:
+        def one(m: re.Match[str]) -> str:
+            inner = replace(re.match(r"(?P<prefix>)(?P<url>.+)(?P<suffix>)", m.group("url")))
+            return f"{m.group('prefix')}{m.group('space')}{inner}"
+        value = candidate.sub(one, match.group("value"))
+        return f"{match.group('prefix')}{value}{match.group('suffix')}"
+
+    text = SRCSET.sub(replace_srcset, text)
     text = ATTRIBUTE.sub(replace, text)
     text = CSS_URL.sub(replace, text)
     return text, changed

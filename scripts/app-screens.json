@@ -1,0 +1,21 @@
+{
+  "_comment": "Per-page screenshot config for scripts/sync-app-screens.py. repo is relative to ~/Documents/mine/Personal/Apps. Each render names a device (matches the app's *-<device>.monkr / *-web-<device>.monkr), the raw capture dir (English at its root, ASC-locale subdirs beside it), the scenes the page uses (filename stems, page order), and the output widths in px (1x, 2x of the CSS display width). scale renders small Monkr canvases (the watch) at 2x before resizing.",
+  "scripture-alone": {
+    "repo": "Scripture Alone",
+    "renders": [
+      {
+        "device": "iphone",
+        "captures": "screenshots/iphone-6.9",
+        "scenes": ["01-reader", "08-themes", "03-study", "05-sermon-notes", "06-listen"],
+        "widths": [400, 800]
+      },
+      {
+        "device": "watch",
+        "captures": "screenshots/watch-46mm",
+        "scenes": ["02-verse"],
+        "widths": [220, 440],
+        "scale": 2
+      }
+    ]
+  }
+}
