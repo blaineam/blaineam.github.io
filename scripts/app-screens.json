@@ -119,5 +119,17 @@
         "widths": [400, 800]
       }
     ]
+  },
+  "zap": {
+    "repo": "Zap",
+    "renders": [
+      {
+        "device": "iphone",
+        "project": "docs/appstore-screenshots/Zap-iphone.monkr",
+        "captures": "screenshots/iphone-6.9",
+        "scenes": ["01-menu", "03-question", "04-draw", "02-categories", "05-results"],
+        "widths": [400, 800]
+      }
+    ]
   }
 }

@@ -4,28 +4,396 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Zap - Electric Trivia Duels</title>
-  <meta name="description" content="Press-your-luck trivia for iPhone & iPad: win the trivia race, then flip cards to bank points — but don't draw a Zap. Duel friends over Game Center or right inside iMessage. 21 categories, 5,000+ questions, updated over the air.">
+  <meta name="description" content="Press-your-luck trivia for iPhone &amp; iPad: win the trivia race, then flip cards to bank points, but don&#x27;t draw a Zap. Duel friends on Game Center or in iMessage. 27 categories, 5,000+ questions, in 9 languages.">
   <meta property="og:title" content="Zap - Electric Trivia Duels">
-  <meta property="og:description" content="Trivia meets press-your-luck: race to answer, then flip cards to bank points without getting Zapped. Duel friends over Game Center or iMessage. 21 categories, 5,000+ questions.">
+  <meta property="og:description" content="Trivia meets press-your-luck: race to answer, then flip cards to bank points without getting Zapped. Duel friends on Game Center or in iMessage. 27 categories, 5,000+ questions.">
   <meta property="og:type" content="game">
   <meta property="og:url" content="https://wemiller.com/apps/zap/">
-  <meta property="og:image" content="https://wemiller.com/apps/zap/assets/images/icon.png?v=da6a6707">
+  <meta property="og:image" content="https://wemiller.com/apps/zap/assets/images/poster.jpg?v=c874bc40">
   <link rel="stylesheet" href="../app-showcase.css">
   <style>
-    /* Zap palette — electric yellow primary, electric blue secondary, storm
-       navy base. Matches the in-app brand the player sees on launch. */
     :root {
-      --app-primary: #FFD400;        /* electric yellow */
-      --app-secondary: #1FB6FF;      /* electric blue */
-      --app-accent: #BF5AF2;         /* electric purple */
+      /* Zap: storm-navy night, electric yellow bolt, electric blue and purple sparks. */
+      --app-primary: #FFD400;
+      --app-secondary: #1FB6FF;
+      --app-accent: #BF5AF2;
+      --primary-color: #1A1340;
+      --secondary-color: #1FB6FF;
+      --zp-display-face: ui-rounded, "SF Pro Rounded", system-ui, -apple-system, "Segoe UI", sans-serif;
+      --zp-text-face: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      --zp-paper: #F7F7FC;
+      --zp-paper-2: #EEEDF8;
+      --zp-body: #2E2A4A;
+      --zp-quiet: #5D5880;
+      --zp-rule: rgba(26, 19, 64, 0.12);
+      --zp-accent-ink: #6B2DB5;
+      --zp-ornament: linear-gradient(90deg, #FFD400, #1FB6FF, #BF5AF2);
+      --zp-shadow: drop-shadow(0 30px 40px rgba(20, 14, 52, 0.26)) drop-shadow(0 6px 10px rgba(20, 14, 52, 0.10));
+      --zp-hero-bg: radial-gradient(circle at 25% 15%, rgba(255, 212, 0, 0.20) 0%, transparent 55%), radial-gradient(circle at 80% 70%, rgba(31, 182, 255, 0.18) 0%, transparent 55%), linear-gradient(160deg, #0B1026 0%, #1A1340 60%, #2A1A5A 100%);
+      --zp-hero-ink: #FFFFFF;
+      --zp-hero-kicker: #FFD400;
+      --zp-button: linear-gradient(180deg, #FFE45C, #FFC400);
+      --zp-button-ink: #1A1340;
+      --zp-button-glow: rgba(255, 212, 0, 0.35);
+      --zp-focus: #FFD400;
+      --zp-closing-bg: radial-gradient(ellipse 55% 60% at 50% 100%, rgba(191, 90, 242, 0.14) 0%, transparent 70%), var(--zp-paper-2);
+      --text-primary: #141032;
+      --glass-bg: rgba(247, 247, 252, 0.8);
+      --glass-border: rgba(26, 19, 64, 0.08);
+      --zp-measure: 1120px;
+      --bg-primary: var(--zp-paper);
+      --bg-secondary: var(--zp-paper-2);
+      --text-secondary: var(--zp-body);
+      --text-muted: var(--zp-quiet);
+      --glass-shadow: none;
     }
-    .hero {
-      background:
-        radial-gradient(circle at 25% 15%, rgba(255, 212, 0, 0.20) 0%, transparent 55%),
-        radial-gradient(circle at 80% 70%, rgba(31, 182, 255, 0.18) 0%, transparent 55%),
-        linear-gradient(160deg, #0B1026 0%, #1A1340 60%, #2A1A5A 100%);
-      color: white;
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --primary-color: #FFD400;
+        --zp-paper: #0C0F24;
+        --zp-paper-2: #141633;
+        --zp-body: #D9D8EC;
+        --zp-quiet: #A6A4C6;
+        --zp-rule: rgba(217, 216, 236, 0.13);
+        --zp-accent-ink: #6FD0FF;
+        --zp-shadow: drop-shadow(0 30px 44px rgba(0, 0, 0, 0.55)) drop-shadow(0 6px 10px rgba(0, 0, 0, 0.30));
+        --zp-closing-bg: radial-gradient(ellipse 55% 60% at 50% 100%, rgba(191, 90, 242, 0.20) 0%, transparent 70%), var(--zp-paper-2);
+        --text-primary: #F2F1FA;
+        --glass-bg: rgba(12, 15, 36, 0.8);
+        --glass-border: rgba(217, 216, 236, 0.08);
+      }
     }
+
+    body { background: var(--zp-paper); }
+    .nav-links .nav-link, .nav-links .btn-buy { white-space: nowrap; }
+    .floating-appstore {
+      background: var(--zp-button);
+      color: var(--zp-button-ink);
+      box-shadow: 0 10px 30px var(--zp-button-glow);
+    }
+
+    /* ---- Shared type ---------------------------------------------------- */
+    .zp-eyebrow {
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--zp-accent-ink);
+      margin: 0 0 1rem;
+    }
+    .zp-eyebrow .zp-num {
+      font-family: var(--zp-display-face);
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      margin-right: 0.8em;
+      opacity: 0.85;
+    }
+    .zp-display {
+      font-family: var(--zp-display-face);
+      font-weight: 700;
+      background: none;
+      -webkit-text-fill-color: currentColor;
+      color: var(--primary-color);
+      font-size: clamp(2.1rem, 5.2vw, 3.6rem);
+      line-height: 1.06;
+      letter-spacing: -0.02em;
+      margin: 0 0 1.4rem;
+      text-wrap: balance;
+    }
+    .zp-lede {
+      font-family: var(--zp-text-face);
+      font-size: clamp(1.12rem, 1.9vw, 1.36rem);
+      line-height: 1.62;
+      color: var(--zp-body);
+      margin: 0 0 1.2rem;
+      text-wrap: pretty;
+    }
+    .zp-lede a, .faq-answer a { color: var(--zp-accent-ink); }
+
+    /* ---- Hero ----------------------------------------------------------- */
+    .zp-hero {
+      position: relative;
+      background: var(--zp-hero-bg);
+      color: #fff;
+      text-align: center;
+      padding: calc(76px + clamp(3rem, 8vw, 6rem)) 16px 0;
+      overflow: hidden;
+    }
+    .zp-hero-icon {
+      width: 84px;
+      height: 84px;
+      display: block;
+      margin: 0 auto 1.4rem;
+      border-radius: 22%;
+      filter: drop-shadow(0 14px 26px rgba(0, 0, 0, 0.45));
+    }
+    .zp-hero-kicker {
+      font-size: 0.82rem;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      color: var(--zp-hero-kicker);
+      margin: 0 0 1.2rem;
+    }
+    .zp-hero h1 {
+      font-family: var(--zp-display-face);
+      font-weight: 700;
+      background: none;
+      -webkit-background-clip: border-box;
+      background-clip: border-box;
+      -webkit-text-fill-color: var(--zp-hero-ink);
+      color: var(--zp-hero-ink);
+      font-size: clamp(2.6rem, 8.4vw, 6.2rem);
+      line-height: 1.02;
+      letter-spacing: -0.025em;
+      max-width: 13ch;
+      margin: 0 auto 1.6rem;
+      text-wrap: balance;
+    }
+    .zp-hero-standfirst {
+      font-family: var(--zp-text-face);
+      font-size: clamp(1.08rem, 2vw, 1.34rem);
+      line-height: 1.6;
+      color: rgba(255, 255, 255, 0.86);
+      max-width: 44ch;
+      margin: 0 auto 2.2rem;
+      text-wrap: pretty;
+    }
+    .zp-cta {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.75rem;
+    }
+    .zp-cta .btn-buy {
+      background: var(--zp-button);
+      color: var(--zp-button-ink);
+      padding: 0.8rem 1.5rem;
+      min-height: 44px;
+      border-radius: 999px;
+      box-shadow: 0 10px 28px var(--zp-button-glow);
+    }
+    .zp-cta .btn-buy:focus-visible, .zp-alt-links a:focus-visible { outline: 3px solid var(--zp-focus); outline-offset: 3px; }
+    /* The app rises out of the hero. */
+    .zp-hero-device {
+      margin: clamp(3rem, 7vw, 4.5rem) auto 0;
+      width: clamp(230px, 34vw, 380px);
+      height: clamp(250px, 36vw, 420px);
+      overflow: hidden;
+    }
+    .zp-hero-device img { display: block; width: 100%; height: auto; }
+    .zp-hero-device.is-wide {
+      width: min(92vw, 820px);
+      height: clamp(200px, 40vw, 420px);
+    }
+
+    /* ---- Statement ------------------------------------------------------ */
+    .zp-statement {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: clamp(4rem, 10vw, 7.5rem) 16px;
+      text-align: center;
+    }
+    .zp-statement p {
+      font-family: var(--zp-display-face);
+      font-size: clamp(1.5rem, 3.6vw, 2.5rem);
+      font-weight: 600;
+      line-height: 1.3;
+      color: var(--primary-color);
+      margin: 0;
+      text-wrap: balance;
+    }
+    .zp-ornament {
+      display: block;
+      width: 44px;
+      height: 4px;
+      margin: 0 auto 1.8rem;
+      border-radius: 4px;
+      background: var(--zp-ornament);
+    }
+
+    /* ---- Chapters ------------------------------------------------------- */
+    .zp-chapter {
+      max-width: var(--zp-measure);
+      margin: 0 auto;
+      padding: clamp(4rem, 9vw, 7rem) 16px;
+      border-top: 1px solid var(--zp-rule);
+      scroll-margin-top: 70px;
+    }
+    .zp-spread {
+      display: grid;
+      gap: clamp(2.5rem, 6vw, 5rem);
+      align-items: center;
+    }
+    .zp-copy { max-width: 34rem; }
+    @media (min-width: 900px) {
+      .zp-spread { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); }
+      .zp-chapter.is-flipped .zp-copy { order: 2; }
+    }
+
+    /* One device per story, sized like a photograph on the page, not a thumbnail. */
+    .zp-figure { margin: 0 auto; width: min(72vw, 340px); text-align: center; }
+    .zp-figure.is-tablet { width: min(92vw, 720px); max-width: 100%; }
+    .zp-figure.is-watch { width: min(56vw, 240px); }
+    .zp-figure img { display: block; width: 100%; height: auto; filter: var(--zp-shadow); }
+    .zp-figure figcaption {
+      font-size: 0.88rem;
+      line-height: 1.45;
+      color: var(--zp-quiet);
+      margin-top: 1.1rem;
+    }
+    .zp-figure figcaption::before {
+      content: "";
+      display: block;
+      width: 18px;
+      height: 1px;
+      margin: 0 auto 0.6rem;
+      background: var(--zp-accent-ink);
+    }
+
+    /* Secondary routes: quiet text links under the one button. */
+    .zp-alt-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.7rem;
+      margin: 1.1rem 0 0;
+      font-size: 0.95rem;
+      color: rgba(255, 255, 255, 0.66);
+    }
+    .zp-alt-links a { color: rgba(255, 255, 255, 0.9); text-decoration: none; border-bottom: 1px solid rgba(255, 255, 255, 0.34); }
+    .zp-alt-links a:hover { border-bottom-color: rgba(255, 255, 255, 0.8); }
+    .zp-closing .zp-alt-links { color: var(--zp-quiet); }
+    .zp-closing .zp-alt-links a { color: var(--zp-accent-ink); border-bottom-color: var(--zp-rule); }
+
+    /* ---- Trust ---------------------------------------------------------- */
+    .zp-privacy {
+      background: var(--zp-hero-bg);
+      color: var(--zp-hero-ink);
+      padding: clamp(4.5rem, 10vw, 8rem) 16px;
+      scroll-margin-top: 60px;
+    }
+    .zp-privacy-inner { max-width: var(--zp-measure); margin: 0 auto; }
+    .zp-privacy .zp-eyebrow { color: var(--zp-hero-kicker); text-align: center; }
+    .zp-privacy .zp-display {
+      color: var(--zp-hero-ink);
+      -webkit-text-fill-color: var(--zp-hero-ink);
+      text-align: center;
+      font-size: clamp(2.3rem, 6.4vw, 4.6rem);
+      max-width: 14ch;
+      margin: 0 auto 3rem;
+    }
+    .zp-privacy .security-badges {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+      gap: 0;
+      max-width: none;
+      padding: 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    .zp-privacy .security-badge {
+      background: none;
+      border: none;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 0;
+      box-shadow: none;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+      color: var(--zp-hero-ink);
+      font-family: var(--zp-display-face);
+      font-size: 1.12rem;
+      padding: 1.1rem 0.4rem;
+      justify-content: center;
+    }
+    .zp-privacy .security-badge:hover { transform: none; }
+    .zp-privacy .security-audit-note {
+      text-align: center;
+      font-family: var(--zp-text-face);
+      font-style: italic;
+      font-size: clamp(1.1rem, 2.2vw, 1.3rem);
+      color: rgba(255, 255, 255, 0.9);
+      max-width: 36ch;
+      padding: 0;
+      margin: 2.6rem auto 0;
+    }
+    .zp-privacy-link { text-align: center; margin: 1.4rem 0 0; }
+    .zp-privacy-link a { color: var(--zp-hero-kicker); text-decoration: none; border-bottom: 1px solid currentColor; }
+    .zp-privacy-link a::after { content: " \2192"; }
+
+    /* ---- FAQ: a ruled list ---------------------------------------------- */
+    .faq-section { max-width: 820px; padding: clamp(4rem, 9vw, 6rem) 16px; }
+    .faq-section .zp-eyebrow, .faq-section h2 { text-align: center; }
+    .faq-section h2 {
+      font-family: var(--zp-display-face);
+      font-weight: 700;
+      background: none;
+      -webkit-text-fill-color: currentColor;
+      color: var(--primary-color);
+      font-size: clamp(1.9rem, 4vw, 2.8rem);
+      margin: 0 0 2.5rem;
+    }
+    .faq-item {
+      background: none;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+      border: none;
+      border-top: 1px solid var(--zp-rule);
+      border-radius: 0;
+      margin: 0;
+    }
+    .faq-item:last-child { border-bottom: 1px solid var(--zp-rule); }
+    .faq-question {
+      font-family: var(--zp-display-face);
+      font-size: 1.15rem;
+      font-weight: 600;
+      padding: 1.25rem 0;
+      gap: 1rem;
+    }
+    .faq-question:hover { color: var(--zp-accent-ink); }
+    .faq-question:focus-visible { outline: 2px solid var(--zp-accent-ink); outline-offset: 2px; }
+    .faq-icon { font-size: 0.8rem; color: var(--zp-accent-ink); }
+    .faq-answer { padding: 0; }
+    .faq-item.active .faq-answer { padding: 0 0 1.4rem; }
+    .faq-answer p { font-size: 1rem; line-height: 1.68; color: var(--zp-body); }
+
+    /* ---- Closing -------------------------------------------------------- */
+    .zp-closing {
+      text-align: center;
+      padding: clamp(4.5rem, 10vw, 7rem) 16px;
+      background: var(--zp-closing-bg);
+      border-top: 1px solid var(--zp-rule);
+    }
+    .zp-closing img { width: 96px; height: 96px; display: block; margin: 0 auto 1.6rem; border-radius: 22%; filter: drop-shadow(0 16px 26px rgba(0, 0, 0, 0.28)); }
+    .zp-closing .zp-display { font-size: clamp(2rem, 5vw, 3.4rem); max-width: 14ch; margin: 0 auto 2rem; }
+    .footer { margin-top: 0; }
+
+    /* ---- Reveal: only when motion is welcome ----------------------------- */
+    .zp-motion [data-reveal] {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.9s ease, transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1);
+    }
+    .zp-motion [data-reveal].is-in { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) {
+      .floating-appstore, .faq-item, .hero-text { animation: none; }
+      .btn-buy:hover, .floating-appstore:hover { transform: none; }
+    }
+
+    @media (max-width: 600px) {
+      .zp-hero-icon { width: 68px; height: 68px; }
+      .zp-cta { flex-direction: column; align-items: stretch; max-width: 22rem; margin: 0 auto; }
+      .zp-cta a { justify-content: center; }
+    }
+    /* Break CJK headlines at phrase boundaries, not mid-word, where supported. */
+    .zp-hero h1, .zp-display, .zp-statement p { word-break: auto-phrase; }
+    /* `ch` is the width of a Latin zero; a CJK glyph is two of them. Measure CJK in em. */
+    :lang(ja) .zp-hero h1, :lang(zh) .zp-hero h1, :lang(ko) .zp-hero h1 { max-width: 9em; }
+    /* Korean breaks inside words unless told to keep them whole. */
+    :lang(ko) .zp-hero h1, :lang(ko) .zp-display, :lang(ko) .zp-statement p, :lang(ko) .zp-lede, :lang(ko) .zp-hero-standfirst { word-break: keep-all; }
+    :lang(ja) .zp-privacy .zp-display, :lang(zh) .zp-privacy .zp-display, :lang(ko) .zp-privacy .zp-display,
+    :lang(ja) .zp-closing .zp-display, :lang(zh) .zp-closing .zp-display, :lang(ko) .zp-closing .zp-display { max-width: 10em; }
+    :lang(ja) .zp-hero-standfirst, :lang(zh) .zp-hero-standfirst, :lang(ko) .zp-hero-standfirst,
+    :lang(ja) .security-audit-note, :lang(zh) .security-audit-note, :lang(ko) .security-audit-note { max-width: 26em; }
+
   </style>
   <link rel="alternate" hreflang="x-default" href="https://wemiller.com/apps/zap/">
   <link rel="alternate" hreflang="en" href="https://wemiller.com/apps/zap/">
@@ -50,156 +418,180 @@
       </a>
       <button class="mobile-menu-toggle">☰</button>
       <ul class="nav-links">
-        <li><a href="#whats-new" class="nav-link" data-i18n="what-s-new.a2efe2">What's New</a></li>
         <li><a href="#features" class="nav-link" data-i18n="features.fc338f">Features</a></li>
-        <li><a href="#how-it-plays" class="nav-link" data-i18n="how-it-plays.65c303">How It Plays</a></li>
-        <li><a href="#screenshots" class="nav-link" data-i18n="screenshots.597b63">Screenshots</a></li>
         <li><a href="#faq" class="nav-link" data-i18n="faq.03688b">FAQ</a></li>
-        <li><a href="https://apps.apple.com/us/app/zap-trivia/id6776907420" class="btn-buy" target="_blank" rel="noopener noreferrer">App Store</a></li>
+        <li><a href="https://apps.apple.com/us/app/zap-trivia/id6776907420" class="btn-buy" target="_blank" rel="noopener noreferrer" data-i18n="download-on-app-store.cf50c2">Download on App Store</a></li>
       </ul>
     </div>
   </nav>
 
-  <section class="hero">
-    <div class="hero-content">
-      <div class="hero-text">
-        <p class="hero-subtitle" data-i18n="zap.1cd56e">⚡ Zap</p>
-        <h1 class="hero-title" data-i18n="race-to-answer-press.122a8c">Race to Answer. Press Your Luck.</h1>
-        <p class="hero-description" data-i18n="trivia-meets-blackjack-win.dea239">
-          Trivia meets blackjack. Win the trivia race, then press your luck on a grid of cards — keep flipping to grow your pot or lock it in, but draw a Zap and you bust. Duel friends over Game Center or right inside an iMessage. 21 categories, 5,000+ questions, delivered fresh over the air.
-        </p>
-        <span class="os-ready-badge" data-i18n-html="ready-for-ios-27.e06c8c"><span class="badge-icon">✓</span> Ready for iOS 27 / iPadOS 27</span>
-        <div class="hero-cta">
-          <a href="https://apps.apple.com/us/app/zap-trivia/id6776907420" class="btn-buy" target="_blank" rel="noopener noreferrer" data-i18n="download-on-the-app.a9096a">Download on the App Store</a>
+  <!-- Hero: the promise, one download button, and the app rising out of it. -->
+  <header class="zp-hero" id="about">
+    <img class="zp-hero-icon" src="assets/images/icon.png?v=da6a6707" alt="Zap App Icon" width="1024" height="1024">
+    <p class="zp-hero-kicker">Zap</p>
+    <h1 data-i18n="race-to-answer-press.122a8c">Race to Answer. Press Your Luck.</h1>
+    <p class="zp-hero-standfirst" data-i18n="trivia-meets-blackjack-win.a0093a">Trivia meets blackjack. Win the race to answer, then flip cards for points, but draw a Zap and you bust.</p>
+    <div class="zp-cta">
+      <a href="https://apps.apple.com/us/app/zap-trivia/id6776907420" target="_blank" rel="noopener noreferrer" class="btn-buy" data-i18n="download-on-the-app.a9096a">Download on the App Store</a>
+    </div>
+    <div class="zp-hero-device">
+      <img src="assets/screens/en/01-menu-800.webp?v=8f16e2a0"
+               srcset="assets/screens/en/01-menu-400.webp?v=f2db5054 400w, assets/screens/en/01-menu-800.webp?v=8f16e2a0 800w"
+               sizes="(max-width: 676px) 230px, (max-width: 1117px) 34vw, 380px" width="800" height="1655" fetchpriority="high" data-i18n-src
+               alt="The Zap main menu with Solo Play, Pass N&#x27; Play and Play Online" data-i18n-attr="alt:the-zap-main-menu.a55b62">
+    </div>
+  </header>
+
+  <!-- Floating App Store button -->
+  <a href="https://apps.apple.com/us/app/zap-trivia/id6776907420" target="_blank" rel="noopener noreferrer" class="floating-appstore">
+    <span class="floating-appstore-icon"></span>
+    <span data-i18n="download-on-app-store.cf50c2">Download on App Store</span>
+  </a>
+
+  <section class="zp-statement">
+    <span class="zp-ornament" aria-hidden="true"></span>
+    <p data-i18n="every-duel-comes-down.5fb93f">Every duel comes down to speed, smarts, and nerve.</p>
+  </section>
+
+  <!-- Stories: one idea, one headline, two sentences at most, one device. -->
+  <main id="features">
+    <section class="zp-chapter" id="race">
+      <div class="zp-spread">
+        <div class="zp-copy" data-reveal>
+          <p class="zp-eyebrow"><span class="zp-num">01</span><span data-i18n="race.6643dc">Race</span></p>
+          <h2 class="zp-display" data-i18n="fastest-right-answer-wins.55f3c3">Fastest Right Answer Wins</h2>
+          <p class="zp-lede" data-i18n="both-players-get-the.bfbe6c">Both players get the same question on the same clock. Answer first and answer right, and the draw is yours.</p>
         </div>
+        <figure class="zp-figure" data-reveal>
+          <img src="assets/screens/en/03-question-800.webp?v=210d7f68"
+               srcset="assets/screens/en/03-question-400.webp?v=c741a30a 400w, assets/screens/en/03-question-800.webp?v=210d7f68 800w"
+               sizes="(max-width: 472px) 72vw, 340px" width="800" height="1655" loading="lazy" decoding="async" data-i18n-src
+               alt="A trivia question with four answers and a countdown timer" data-i18n-attr="alt:a-trivia-question-with.fbb2a9">
+        </figure>
       </div>
-      <div class="hero-image">
-        <div class="hero-phone">
-          <img src="assets/images/icon.png?v=da6a6707" alt="Zap App Icon" class="phone-mockup"
-               onerror="this.style.background='linear-gradient(135deg, #FFD400, #1FB6FF)'; this.style.minHeight='600px';">
+    </section>
+
+    <section class="zp-chapter is-flipped" id="luck">
+      <div class="zp-spread">
+        <div class="zp-copy" data-reveal>
+          <p class="zp-eyebrow"><span class="zp-num">02</span><span data-i18n="luck.1c295a">Luck</span></p>
+          <h2 class="zp-display" data-i18n="flip-bank-or-bust.760572">Flip, Bank, or Bust</h2>
+          <p class="zp-lede" data-i18n="flip-cards-from-a.77e7d5">Flip cards from a shared 3×3 grid to bank 1, 2 or 3 points, then lock your pot or push on. Two Zaps hide in the grid, and one wipes the round.</p>
         </div>
+        <figure class="zp-figure" data-reveal>
+          <img src="assets/screens/en/04-draw-800.webp?v=d287e66b"
+               srcset="assets/screens/en/04-draw-400.webp?v=2e5eccdd 400w, assets/screens/en/04-draw-800.webp?v=d287e66b 800w"
+               sizes="(max-width: 472px) 72vw, 340px" width="800" height="1655" loading="lazy" decoding="async" data-i18n-src
+               alt="The press-your-luck card grid with the round pot and the Lock button" data-i18n-attr="alt:the-press-your-luck.69fdcb">
+        </figure>
       </div>
+    </section>
+
+    <section class="zp-chapter" id="categories">
+      <div class="zp-spread">
+        <div class="zp-copy" data-reveal>
+          <p class="zp-eyebrow"><span class="zp-num">03</span><span data-i18n="categories.6ccb60">Categories</span></p>
+          <h2 class="zp-display" data-i18n="27-categories-5-000.efe67b">27 Categories, 5,000+ Questions</h2>
+          <p class="zp-lede" data-i18n="from-science-and-history.6bd6d1">From science and history to anime, the Bible and six sports. New questions arrive over the air, with no update to install.</p>
+        </div>
+        <figure class="zp-figure" data-reveal>
+          <img src="assets/screens/en/02-categories-800.webp?v=fb271218"
+               srcset="assets/screens/en/02-categories-400.webp?v=0b19a43f 400w, assets/screens/en/02-categories-800.webp?v=fb271218 800w"
+               sizes="(max-width: 472px) 72vw, 340px" width="800" height="1655" loading="lazy" decoding="async" data-i18n-src
+               alt="The category picker, with the question count for each category" data-i18n-attr="alt:the-category-picker-with.1218d6">
+        </figure>
+      </div>
+    </section>
+
+    <section class="zp-chapter is-flipped" id="duel">
+      <div class="zp-spread">
+        <div class="zp-copy" data-reveal>
+          <p class="zp-eyebrow"><span class="zp-num">04</span><span data-i18n="duel.a65733">Duel</span></p>
+          <h2 class="zp-display" data-i18n="duel-anyone-anywhere.9cf14e">Duel Anyone, Anywhere</h2>
+          <p class="zp-lede" data-i18n="pass-the-phone-across.1cc669">Pass the phone across the couch, take turns in iMessage, or play live and turn-based matches on Game Center.</p>
+        </div>
+        <figure class="zp-figure" data-reveal>
+          <img src="assets/screens/en/05-results-800.webp?v=3fcc41c5"
+               srcset="assets/screens/en/05-results-400.webp?v=62a7d2b9 400w, assets/screens/en/05-results-800.webp?v=3fcc41c5 800w"
+               sizes="(max-width: 472px) 72vw, 340px" width="800" height="1655" loading="lazy" decoding="async" data-i18n-src
+               alt="The results screen crowning the winner of a duel" data-i18n-attr="alt:the-results-screen-crowning.303f8d">
+        </figure>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Trust: one beat, then out of the way. -->
+  <section class="zp-privacy" id="privacy">
+    <div class="zp-privacy-inner" data-reveal>
+      <p class="zp-eyebrow" data-i18n="security-privacy.67a15f">Security &amp; Privacy</p>
+      <h2 class="zp-display" data-i18n="free-fair-and-private.ef7575">Free, Fair and Private</h2>
+      <div class="security-badges">
+        <div class="security-badge" data-i18n-html="privacy-manifest.5063fd"><span class="badge-icon">&#x1f4cb;</span> Privacy Manifest</div>
+        <div class="security-badge" data-i18n-html="gamekit-security.9e6fc1"><span class="badge-icon">&#x1f3ae;</span> GameKit Security</div>
+        <div class="security-badge" data-i18n-html="anti-tamper-matches.f68981"><span class="badge-icon">&#x1f512;</span> Anti-Tamper Matches</div>
+        <div class="security-badge" data-i18n-html="app-sandbox.b85ecb"><span class="badge-icon">&#x2705;</span> App Sandbox</div>
+      </div>
+      <p class="security-audit-note" data-i18n="no-tracking-no-ads.9ce4d2">No tracking. No ads. No in-app purchases.</p>
     </div>
   </section>
 
-  <!-- What's New Section -->
-  <section id="whats-new" class="section">
-    <div class="section-header">
-      <p class="section-subtitle" data-i18n="just-shipped.243f10">Just Shipped</p>
-      <h2 data-i18n="what-s-new-in.f0a5cd">What's New in Zap</h2>
-      <p data-i18n="a-more-flexible-ipad.4f5465">A more flexible iPad experience and a round of polish</p>
-    </div>
-
-    <div class="feature-grid">
-      <div class="feature-card">
-        <div class="feature-icon">📲</div>
-        <h3 class="feature-title" data-i18n="ipad-any-way-you.3a62ad">iPad, Any Way You Hold It</h3>
-        <p class="feature-description" data-i18n="zap-resizes-freely-on.324217">
-          Zap resizes freely on iPad — every orientation, Split View, Stage Manager, and iPad windowing all supported, with the menu falling back to scrolling in short windows so nothing ever clips.
-        </p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">✨</div>
-        <h3 class="feature-title" data-i18n="ambiance-that-follows-the.01372e">Ambiance That Follows the Window</h3>
-        <p class="feature-description" data-i18n="the-main-menu-s.a0aef6">
-          The main menu’s spark field now re-spans whenever the window changes size, so the electricity fills the screen no matter how you arrange your workspace.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <section id="features" class="section">
-    <div class="section-header">
-      <p class="section-subtitle" data-i18n="why-zap-feels-different.0b6efb">Why Zap Feels Different</p>
-      <h2 data-i18n="trivia-with-a-charge.cbce9f">Trivia With a Charge</h2>
-      <p data-i18n="speed-matters-every-answer.04f8af">Speed matters, every answer crackles, and your friends are one tap away</p>
-    </div>
-    <div class="feature-grid">
-      <div class="feature-card">
-        <div class="feature-icon">🃏</div>
-        <h3 class="feature-title" data-i18n="press-your-luck.e3e746">Press Your Luck</h3>
-        <p class="feature-description" data-i18n="answer-correctly-and-you.298785">Answer correctly and you earn a draw from a shared 3×3 grid. Flip cards to bank 1, 2, or 3 points — keep going or lock your pot. But two Zaps are hiding, and one bust wipes the round.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">🎯</div>
-        <h3 class="feature-title" data-i18n="21-categories.d9f4c6">21 Categories</h3>
-        <p class="feature-description" data-i18n="general-knowledge-science-history.566f02">General Knowledge, Science, History, Geography, Film & TV, Music, Sports, Video Games, Anime, Bible, and more — over 5,000 questions in all.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">📲</div>
-        <h3 class="feature-title" data-i18n="imessage-duels.e2737a">iMessage Duels</h3>
-        <p class="feature-description" data-i18n="start-a-match-and.e3b0ec">Start a match and answer your turn right inside the conversation — one question per bubble. Send it, your friend answers, back and forth.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">🏆</div>
-        <h3 class="feature-title" data-i18n="game-center-matches.638c3b">Game Center Matches</h3>
-        <p class="feature-description" data-i18n="live-head-to-head.9f4954">Live head-to-head and async turn-based duels with friends or random opponents, plus Most Wins, Solo High Score, Biggest Round, and Lucky Streak leaderboards and 12 achievements.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">👥</div>
-        <h3 class="feature-title" data-i18n="pass-n-play.722a08">Pass N' Play</h3>
-        <p class="feature-description" data-i18n="one-device-two-players.e8ebac">One device, two players, a privacy handoff screen between turns. Perfect for the couch or a road trip.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">🔄</div>
-        <h3 class="feature-title" data-i18n="always-fresh.c116af">Always Fresh</h3>
-        <p class="feature-description" data-i18n="questions-update-over-the.6c5cfa">Questions update over the air from a curated, version-controlled source — new content lands without an App Store update.</p>
-      </div>
-    </div>
-  </section>
-
-  <section id="how-it-plays" class="section">
-    <div class="section-header">
-      <p class="section-subtitle" data-i18n="how-it-plays.65c303">How It Plays</p>
-      <h2 data-i18n="fair-fast-electric.5a2941">Fair, Fast, Electric</h2>
-      <p data-i18n="both-players-get-the.42ba59">Both players get the same questions and the same shuffled card grid — so every duel comes down to speed, smarts, and nerve.</p>
-    </div>
-  </section>
-
-  <section id="screenshots" class="section">
-    <div class="section-header">
-      <p class="section-subtitle" data-i18n="see-it-in-action.8c8d28">See It In Action</p>
-      <h2 data-i18n="screenshots.597b63">Screenshots</h2>
-      <p data-i18n="electric-branding-live-duels.b6adc4">Electric branding, live duels, color-coded categories</p>
-    </div>
-    <div class="screenshots-grid">
-      <div class="screenshot-item"><img src="assets/images/screenshot-1.png?v=6d1127a1" alt="Main menu"
-        onerror="this.style.background='linear-gradient(135deg, #1A1340, #FFD400)'; this.style.minHeight='500px'; this.style.display='block';"></div>
-      <div class="screenshot-item"><img src="assets/images/screenshot-2.png?v=22678f6d" alt="Live question"
-        onerror="this.style.background='linear-gradient(135deg, #FFD400, #1FB6FF)'; this.style.minHeight='500px'; this.style.display='block';"></div>
-      <div class="screenshot-item"><img src="assets/images/screenshot-3.png?v=408dd3b6" alt="Category picker"
-        onerror="this.style.background='linear-gradient(135deg, #1FB6FF, #BF5AF2)'; this.style.minHeight='500px'; this.style.display='block';"></div>
-      <div class="screenshot-item"><img src="assets/images/screenshot-4.png?v=9b218cf2" alt="Play online"
-        onerror="this.style.background='linear-gradient(135deg, #BF5AF2, #FFD400)'; this.style.minHeight='500px'; this.style.display='block';"></div>
-    </div>
-  </section>
-
+  <!-- FAQ: short, folded, and the EU note last. -->
   <section id="faq" class="faq-section">
-    <div class="section-header">
-      <p class="section-subtitle" data-i18n="got-questions.8ecca3">Got Questions?</p>
-      <h2 data-i18n="frequently-asked-questions.d790b4">Frequently Asked Questions</h2>
-    </div>
+    <p class="zp-eyebrow" data-i18n="got-questions.8ecca3">Got Questions?</p>
+    <h2 data-i18n="frequently-asked-questions.d790b4">Frequently Asked Questions</h2>
+
+    <div class="faq-list">
     <div class="faq-item">
-      <button class="faq-question" data-i18n-html="how-does-scoring-work.46b3c2">How does scoring work? <span class="faq-icon">▼</span></button>
-      <div class="faq-answer"><p data-i18n="correct-answers-earn-points.a4fb6f">Correct answers earn points based on the question's difficulty plus a speed bonus that decays as the clock runs. Answer instantly for the full bonus; wrong or timed-out answers score zero.</p></div>
+      <button class="faq-question">
+        <span data-i18n="how-does-scoring-work.637295">How does scoring work?</span>
+        <span class="faq-icon">▼</span>
+      </button>
+      <div class="faq-answer">
+        <p data-i18n="correct-answers-earn-points.a4fb6f">Correct answers earn points based on the question's difficulty plus a speed bonus that decays as the clock runs. Answer instantly for the full bonus; wrong or timed-out answers score zero.</p>
+      </div>
     </div>
+
     <div class="faq-item">
-      <button class="faq-question" data-i18n-html="is-online-play-fair.01cf96">Is online play fair? <span class="faq-icon">▼</span></button>
-      <div class="faq-answer"><p data-i18n="yes-both-players-receive.49ac22">Yes. Both players receive the exact same questions in the same order, derived from a shared random seed — neither side can see the other's questions in advance, and an anti-tamper check guards iMessage matches.</p></div>
+      <button class="faq-question">
+        <span data-i18n="is-online-play-fair.034f92">Is online play fair?</span>
+        <span class="faq-icon">▼</span>
+      </button>
+      <div class="faq-answer">
+        <p data-i18n="yes-both-players-receive.49ac22">Yes. Both players receive the exact same questions in the same order, derived from a shared random seed — neither side can see the other's questions in advance, and an anti-tamper check guards iMessage matches.</p>
+      </div>
     </div>
+
     <div class="faq-item">
-      <button class="faq-question" data-i18n-html="do-i-need-to.f0745d">Do I need to be online? <span class="faq-icon">▼</span></button>
-      <div class="faq-answer"><p data-i18n="no-zap-ships-with.b21075">No. Zap ships with a full offline question set, so Solo and Pass N' Play work anywhere. Online and iMessage duels need a connection, and new questions download in the background when you're online.</p></div>
+      <button class="faq-question">
+        <span data-i18n="do-i-need-to.5d98a2">Do I need to be online?</span>
+        <span class="faq-icon">▼</span>
+      </button>
+      <div class="faq-answer">
+        <p data-i18n="no-zap-ships-with.b21075">No. Zap ships with a full offline question set, so Solo and Pass N' Play work anywhere. Online and iMessage duels need a connection, and new questions download in the background when you're online.</p>
+      </div>
     </div>
+
     <div class="faq-item">
-      <button class="faq-question" data-i18n-html="how-do-new-questions.e084c8">How do new questions arrive? <span class="faq-icon">▼</span></button>
-      <div class="faq-answer"><p data-i18n="over-the-air-questions.fbc6fe">Over the air. Questions are curated and version-controlled, then delivered to the app automatically — so the library grows without waiting on an App Store release.</p></div>
+      <button class="faq-question">
+        <span data-i18n="what-languages-does-zap.fead2b">What languages does Zap speak?</span>
+        <span class="faq-icon">▼</span>
+      </button>
+      <div class="faq-answer">
+        <p data-i18n="nine-english-german-spanish.2d1223">Nine: English, German, Spanish, French, Italian, Japanese, Korean, Brazilian Portuguese and Simplified Chinese. The questions are translated too, in the same order with the same answers, so mixed-language duels stay fair.</p>
+      </div>
     </div>
+
     <div class="faq-item">
-      <button class="faq-question" data-i18n-html="what-does-it-cost.376c32">What does it cost? <span class="faq-icon">▼</span></button>
-      <div class="faq-answer"><p data-i18n="zap-has-no-ads.92302a">Zap has no ads, no tracking, and no in-app purchases.</p></div>
+      <button class="faq-question">
+        <span data-i18n="what-does-it-cost.ed90bc">What does it cost?</span>
+        <span class="faq-icon">▼</span>
+      </button>
+      <div class="faq-answer">
+        <p data-i18n="nothing-zap-is-free.62ba3a">Nothing. Zap is free, with no ads, no tracking and no in-app purchases.</p>
+      </div>
     </div>
+
     <div class="faq-item">
       <button class="faq-question">
         <span data-i18n="is-zap-available-in.3c30da">Is Zap available in the European Union?</span>
@@ -209,22 +601,18 @@
         <p data-i18n="yes-zap-is-on.c4fb56">Yes. Zap is on the App Store everywhere in the European Union, France included. It's available in every App Store territory Apple offers.</p>
       </div>
     </div>
+
+    </div>
   </section>
 
-  <section class="security-callout" id="privacy">
-    <div class="section-header">
-      <p class="section-subtitle" data-i18n="security-privacy.67a15f">Security &amp; Privacy</p>
-      <h2 data-i18n="yours-private.8ada41">Yours, Private</h2>
+  <!-- Closing: the promise again, and the one button. -->
+  <section class="zp-closing">
+    <img src="assets/images/icon.png?v=da6a6707" alt="" width="1024" height="1024" loading="lazy">
+    <h2 class="zp-display" data-i18n="race-to-answer-press.122a8c">Race to Answer. Press Your Luck.</h2>
+    <div class="zp-cta">
+      <a href="https://apps.apple.com/us/app/zap-trivia/id6776907420" target="_blank" rel="noopener noreferrer" class="btn-buy" data-i18n="download-on-the-app.a9096a">Download on the App Store</a>
     </div>
-    <div class="security-badges">
-      <div class="security-badge" data-i18n-html="privacy-manifest.5063fd"><span class="badge-icon">&#x1f4cb;</span> Privacy Manifest</div>
-      <div class="security-badge" data-i18n-html="gamekit-security.9e6fc1"><span class="badge-icon">&#x1f3ae;</span> GameKit Security</div>
-      <div class="security-badge" data-i18n-html="anti-tamper-matches.f68981"><span class="badge-icon">&#x1f512;</span> Anti-Tamper Matches</div>
-      <div class="security-badge" data-i18n-html="app-sandbox.b85ecb"><span class="badge-icon">&#x2705;</span> App Sandbox</div>
-    </div>
-    <p class="security-audit-note" data-i18n="no-tracking-no-ads.9ce4d2">No tracking. No ads. No in-app purchases.</p>
   </section>
-
   <footer class="footer">
     <div class="footer-content">
       <div class="footer-links">
@@ -254,5 +642,20 @@
   </footer>
 
   <script src="../app-showcase.js"></script>
+  <script>
+    // A quiet reveal as each chapter arrives — only when motion is welcome, and
+    // only once JavaScript is known to be running, so nothing can stay hidden.
+    (function () {
+      if (!('IntersectionObserver' in window)) return;
+      if (!window.matchMedia('(prefers-reduced-motion: no-preference)').matches) return;
+      document.documentElement.classList.add('zp-motion');
+      const io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); }
+        });
+      }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+      document.querySelectorAll('[data-reveal]').forEach(function (el) { io.observe(el); });
+    })();
+  </script>
 </body>
 </html>
