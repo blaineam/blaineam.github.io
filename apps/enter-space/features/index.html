@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Features · Enter Space</title>
+  <meta name="description" content="Everything Enter Space does: 100 cloud providers in Finder and Files, Photos and Theater, scheduled sync, Time Portal, encryption, a code editor with Git, and more.">
+  <link rel="canonical" href="https://wemiller.com/apps/enter-space/features/">
+  <meta property="og:title" content="Features · Enter Space">
+  <meta property="og:description" content="Everything Enter Space does: 100 cloud providers in Finder and Files, Photos and Theater, scheduled sync, Time Portal, encryption, a code editor with Git, and more.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://wemiller.com/apps/enter-space/features/">
+  <meta property="og:image" content="https://wemiller.com/apps/enter-space/assets/images/poster.jpg?v=3cc631e8">
+  <meta name="apple-itunes-app" content="app-id=6746350540">
+  <link rel="stylesheet" href="../../app-showcase.css?v=e9909304">
+  <link rel="stylesheet" href="../../_shared/depth.css?v=8787ba38">
+  <style>
+    :root {
+      --app-primary: #4f6bf6;
+      --app-secondary: #6d4df0;
+      --app-accent: #6ee7ff;
+      --primary-color: #2B2F8F;    /* deep indigo: headlines on paper */
+      --secondary-color: #6d4df0;
+      --es-accent-ink: #4B3BC4;
+      --es-hero: linear-gradient(180deg, #0a0a2e 0%, #141451 55%, #21216f 100%);
+      --es-hero-glow: radial-gradient(ellipse 60% 45% at 50% 100%, rgba(110, 231, 255, 0.20) 0%, transparent 70%), radial-gradient(ellipse 45% 40% at 90% 5%, rgba(109, 77, 240, 0.30) 0%, transparent 70%);
+      --es-hero-ink: #F4F6FF;
+      --es-hero-em: #9FEFFF;
+      --es-hero-kicker: rgba(159, 239, 255, 0.9);
+      --es-btn: linear-gradient(180deg, #9FEFFF, #6EE7FF);
+      --es-btn-ink: #0A0A2E;
+      --es-glow: rgba(110, 231, 255, 0.28);
+      --es-display: system-ui, -apple-system, "SF Pro Display", "Segoe UI", sans-serif;
+      --es-paper: #FFFFFF;
+      --es-paper-2: #F2F3FC;
+      --es-rule: rgba(20, 20, 81, 0.12);
+      --es-quiet: #5C5F7E;
+      --es-body: #2C2E48;
+      --es-shadow: drop-shadow(0 30px 40px rgba(20, 20, 81, 0.22)) drop-shadow(0 6px 10px rgba(20, 20, 81, 0.10));
+      --bg-primary: var(--es-paper);
+      --bg-secondary: var(--es-paper-2);
+      --text-primary: #10112E;
+      --text-secondary: var(--es-body);
+      --text-muted: var(--es-quiet);
+      --glass-bg: rgba(255, 255, 255, 0.8);
+      --glass-border: rgba(20, 20, 81, 0.10);
+      --glass-shadow: none;
+      --es-measure: 1120px;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --primary-color: #B7C2FF;
+        --secondary-color: #9FEFFF;
+        --es-accent-ink: #9FEFFF;
+        --es-paper: #0B0B26;
+        --es-paper-2: #121236;
+        --es-rule: rgba(183, 194, 255, 0.14);
+        --es-quiet: #A2A7CC;
+        --es-body: #DADDF2;
+        --es-shadow: drop-shadow(0 30px 44px rgba(0, 0, 0, 0.6)) drop-shadow(0 6px 10px rgba(0, 0, 0, 0.35));
+        --text-primary: #F4F6FF;
+        --glass-bg: rgba(11, 11, 38, 0.8);
+        --glass-border: rgba(183, 194, 255, 0.08);
+      }
+    }
+    .btn-buy { box-shadow: 0 4px 15px rgba(10, 10, 46, 0.30); }
+    :root { --bg-card: var(--es-paper-2); --border-color: var(--es-rule); }
+    body { background: var(--es-paper); }
+    .nav-links .nav-link, .nav-links .btn-buy { white-space: nowrap; }
+    [hidden] { display: none !important; }
+    /* .dp-sr is position:absolute; without a positioned scroll box its static position in
+       off-screen table cells widened the mobile layout viewport to ~612px. */
+    .dp-table-wrap { position: relative; }
+    .es-replaces li span[aria-hidden] { margin-right: 0.35rem; }
+    .dp-card p + p { margin-top: 0.6rem; }
+    .dp-card code { font-size: 0.85em; overflow-wrap: anywhere; }
+    .dp-card .learn-more { font-size: 0.92rem; }
+  </style>
+  <link rel="alternate" hreflang="x-default" href="https://wemiller.com/apps/enter-space/features/">
+  <link rel="alternate" hreflang="en" href="https://wemiller.com/apps/enter-space/features/">
+  <link rel="alternate" hreflang="zh-Hans" href="https://wemiller.com/apps/enter-space/features/?lang=zh-Hans">
+  <link rel="alternate" hreflang="ja" href="https://wemiller.com/apps/enter-space/features/?lang=ja">
+  <link rel="alternate" hreflang="de" href="https://wemiller.com/apps/enter-space/features/?lang=de">
+  <link rel="alternate" hreflang="fr" href="https://wemiller.com/apps/enter-space/features/?lang=fr">
+  <link rel="alternate" hreflang="es" href="https://wemiller.com/apps/enter-space/features/?lang=es">
+  <link rel="alternate" hreflang="ko" href="https://wemiller.com/apps/enter-space/features/?lang=ko">
+  <link rel="alternate" hreflang="pt-BR" href="https://wemiller.com/apps/enter-space/features/?lang=pt-BR">
+  <link rel="alternate" hreflang="it" href="https://wemiller.com/apps/enter-space/features/?lang=it">
+  <script src="/i18n/i18n.js?v=9b769779" defer data-page="apps.enter-space.features" data-pos="bottom-left"></script>
+</head>
+<body>
+  <nav class="app-nav">
+    <div class="nav-container">
+      <a href="../../" class="nav-logo nav-brand" title="← Apps" aria-label="← Apps"
+         data-i18n-attr="title:apps.2d61f2;aria-label:apps.2d61f2">
+        <span class="nav-brand-back" aria-hidden="true">←</span>
+        <img class="nav-brand-icon" src="../assets/images/icon.png?v=eed78469" alt="" width="60" height="60">
+        <span class="nav-brand-name">Enter Space</span>
+      </a>
+      <button class="mobile-menu-toggle" aria-label="Menu">☰</button>
+      <ul class="nav-links">
+        <li><a href="../" class="nav-link" data-i18n="overview.0efc2e">Overview</a></li>
+        <li><a href="../features/" class="nav-link" aria-current="page" data-i18n="features.fc338f">Features</a></li>
+        <li><a href="../pricing/" class="nav-link" data-i18n="pricing.a0d9bb">Pricing</a></li>
+        <li><a href="../faq/" class="nav-link" data-i18n="faq.03688b">FAQ</a></li>
+        <li><a href="https://apps.apple.com/us/app/enter-space/id6746350540" target="_blank" rel="noopener noreferrer" class="btn-buy">App Store</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main>
+    <header class="dp-header">
+      <p class="dp-eyebrow">Enter Space</p>
+      <h1 data-i18n="what-it-actually-does.c9681d">What it actually does</h1>
+      <p class="dp-standfirst" data-i18n="no-tiers-no-add.dde4d2">No tiers, no add-ons, nothing held back for a higher plan.</p>
+      <ul class="dp-jumps">
+        <li><a href="#connect" data-i18n="connect-mount.d563cc">Connect &amp; mount</a></li>
+        <li><a href="#media" data-i18n="photos-media.ad6d1b">Photos &amp; media</a></li>
+        <li><a href="#sync" data-i18n="sync-backup-recovery.f73897">Sync, backup &amp; recovery</a></li>
+        <li><a href="#security" data-i18n="security-privacy.27f69f">Security &amp; privacy</a></li>
+        <li><a href="#developer" data-i18n="developer-tools.4fc1a4">Developer tools</a></li>
+        <li><a href="#devices" data-i18n="across-your-devices.cfb745">Across your devices</a></li>
+      </ul>
+    </header>
+
+    <section class="dp-section" id="one-app">
+      <h2 data-i18n="one-app-instead-of.eb5253">One app instead of eight</h2>
+      <p class="dp-lede" data-i18n="enter-space-is-not.44be7f">Enter Space is not a cloud drive with extras bolted on. It is the mounter, the vault, the media server, the scheduler, the duplicate finder, the space analyzer, the editor and the version history — bought once, on every Apple device you own.</p>
+      <ul class="dp-list es-replaces">
+        <li><span aria-hidden="true">🗄️</span> <span data-i18n="a-cloud-mounter.326f73">A cloud mounter</span></li>
+        <li><span aria-hidden="true">🔐</span> <span data-i18n="an-encrypted-vault.d1db0b">An encrypted vault</span></li>
+        <li><span aria-hidden="true">🍿</span> <span data-i18n="a-media-server.5c2aab">A media server</span></li>
+        <li><span aria-hidden="true">⏱️</span> <span data-i18n="a-backup-scheduler.917cc9">A backup scheduler</span></li>
+        <li><span aria-hidden="true">🪞</span> <span data-i18n="a-duplicate-finder.6c2c01">A duplicate finder</span></li>
+        <li><span aria-hidden="true">🧹</span> <span data-i18n="a-disk-space-analyzer.d75b84">A disk-space analyzer</span></li>
+        <li><span aria-hidden="true">⌨️</span> <span data-i18n="a-code-editor-with.75790f">A code editor with Git</span></li>
+        <li><span aria-hidden="true">🕰️</span> <span data-i18n="a-versioned-file-service.f2b776">A versioned-file service</span></li>
+      </ul>
+      <p class="dp-fine"><a class="learn-more" href="../pricing/" data-i18n="see-plans-and-prices.760c12">See plans and prices</a></p>
+    </section>
+
+    <section class="dp-section" id="connect">
+      <h2 data-i18n="connect-mount.d563cc">Connect &amp; mount</h2>
+      <ul class="dp-grid">
+        <li class="dp-card">
+          <span class="dp-card-icon" aria-hidden="true">🗂️</span>
+          <h3 data-i18n="mount-every-cloud-like.091239">Mount every cloud like a local drive</h3>
+          <p data-i18n="enter-space-integrates-directly.cf0237">Enter Space integrates directly with macOS Finder and iOS Files app through File Provider technology. Access all 100 cloud storage providers as if they were native drives on your device.</p>
+          <p data-i18n="drag-and-drop-files.b40b4c">Drag and drop files, use Spotlight search, and work with your cloud files using any app—just like they're stored locally. Full read and write support for the majority of supported clouds.</p>
+        </li>
+        <li class="dp-card">
+          <span class="dp-card-icon" aria-hidden="true">☁️</span>
+          <h3 data-i18n="100-cloud-providers.92c0c9">100 Cloud Providers</h3>
+          <p data-i18n="connect-to-virtually-any.0dd9ec">Connect to virtually any cloud storage service including Google Drive, Dropbox, OneDrive, iCloud, S3, and 95 more providers all in one place.</p>
+        </li>
+        <li class="dp-card">
+          <span class="dp-card-icon" aria-hidden="true">🗄️</span>
+          <h3 data-i18n="unified-storage-hub.f14791">Unified Storage Hub</h3>
+          <p data-i18n="cloud-remotes-and-local.ebe0b9">Cloud remotes and local folders now live together in one tidy Storage list — combined actions, per-item encryption toggles, and a one-tap sort that flips between alphabetical and most-recently-used.</p>
+        </li>
+        <li class="dp-card">
+          <span class="dp-card-icon" aria-hidden="true">🧭</span>
+          <h3 data-i18n="guided-remote-setup.7ada13">Guided Remote Setup</h3>
+          <p data-i18n="add-and-edit-remote.34bd67">Add and edit remote configurations through a simple, guided visual interface. No command line required—get connected in just a few taps.</p>
+        </li>
+        <li class="dp-card">
+          <span class="dp-card-icon" aria-hidden="true">🌍</span>
+          <h3 data-i18n="serve-configuration.7b6518">Serve Configuration</h3>
+          <p data-i18n="host-your-remote-content.2616d7">Host your remote content locally with the Serve feature supporting WebDAV, NFS, FTP, S3, SFTP, HTTP, DLNA, and Restic. NFS is significantly faster than WebDAV for media playback over encrypted cloud remotes because macOS's NFS client skips the per-file metadata probes Finder's WebDAV client does.</p>
+        </li>
+        <li class="dp-card">
+          <span class="dp-card-icon" aria-hidden="true">💻</span>
+          <h3 data-i18n="mount-helper-app.0814a8">Mount Helper App</h3>
+          <p data-i18n-html="the-optional-enter-space.2abcca">The optional Enter Space Mount Helper App auto-mounts a WebDAV, FTP, or NFS Serve as a local folder with zero password prompts. NFS mounts land under <code>~/Library/Application Support/Enter Space/Mounts/</code> instead of <code>/Volumes/</code> so Spotlight doesn't try to index your entire cloud tree.</p>
+          <a class="learn-more" href="../helper.dmg" download data-i18n="download-helper.7da541">⬇ Download Helper</a>
+        </li>
+        <li class="dp-card">
+          <span class="dp-card-icon" aria-hidden="true">🔒</span>
+          <h3 data-i18n="file-locking-support.7c2b84">File Locking Support</h3>
+          <p data-i18n="lock-files-on-supported.f17e75">Lock files on supported cloud providers to prevent accidental edits or deletions. Keep critical files safe with collaborative locking support.</p>
+        </li>
+        <li class="dp-card">
+          <span class="dp-card-icon" aria-hidden="true">⭐</span>
+          <h3 data-i18n="favorited-folders.d974ee">Favorited Folders</h3>
+          <p data-i18n="pin-your-most-used.cb7496">Pin your most-used folders for instant access. Favorite folders stay front and center across all your devices for quick navigation.</p>
+        </li>
+        <li class="dp-card">
+          <span class="dp-card-icon" aria-hidden="true">📊</span>
+          <h3 data-i18n="storage-space-at-a.d34f0a">Storage Space at a Glance</h3>
+          <p data-i18n="every-storage-location-now.5d70c7">Every storage location now carries a thin used/free capacity bar — cloud remotes and linked local folders alike — color-coded as space runs low, with the full readout a long-press away. Make it yours in Settings: hide the bars or switch them to a calm monochrome.</p>
+        </li>
+        <li class="dp-card">
+          <span class="dp-card-icon" aria-hidden="true">✨</span>
+          <h3 data-i18n="streamlined-menu-bar-home.2861b6">Streamlined Menu Bar &amp; Home</h3>
+          <p data-i18n="a-refreshed-macos-menu.c7a66c">A refreshed macOS menu-bar experience: a quick-add button for new storage, Settings and Help in their own windows that stay out of your way, and a Home tab that puts favorites, recently played media, and scheduled syncs front and center on every device.</p>
+        </li>
+        <li class="dp-card">
+          <span class="dp-card-icon" aria-hidden="true">💽</span>
+          <h3 data-i18n="mount-a-remote-as.36d4b6">Mount a remote as a real volume</h3>
+          <p data-i18n="on-a-mac-a.7f71ec">On a Mac, a file-system extension mounts a remote as a real volume that Finder and Terminal both see. Switch a remote on or off and the volume updates in place.</p>
+          <span class="dp-tag">Mac</span>
+        </li>
+        <li class="dp-card">
+          <span class="dp-card-icon" aria-hidden="true">✍️</span>
+          <h3 data-i18n="rename-many-files-at.634bd0">Rename many files at once</h3>
+          <p data-i18n="select-two-or-more.f2a244">Select two or more files and build the new names from a pattern — the name, a counter, the extension — or find and replace, with a live preview that flags collisions before anything changes.</p>
+        </li>
+      </ul>
+    </section>
+
+    <section class="dp-section" id="media">
+      <h2 data-i18n="photos-media.ad6d1b">Photos &amp; media</h2>
+      <ul class="dp-grid">
+        <li class="dp-card">
+          <span class="dp-card-icon" aria-hidden="true">🖼️</span>
+          <h3 data-i18n="one-photo-library-laid.5c0ef9">One photo library, laid over every cloud</h3>
+          <p data-i18n="an-apple-photos-style.e29b8d">An Apple-Photos-style library over any of your remotes: year/month/day timeline, Places map, Albums, Favorites, and full-text search. Live Photos play on hold, RAW files open as true RAW develops, and 360° shots get an interactive look-around viewer. Everything indexes into a private, encrypted on-device library that syncs to your other devices serverlessly — and any photo, video, or album can be downloaded for fully offline use, encrypted at rest.</p>
+        </li>
+        <li class="dp-card">
+          <span class="dp-card-icon" aria-hidden="true">🍿</span>
+          <h3 data-i18n="a-private-theater-built.f1d63d">A private Theater built from files you already own</h3>
+          <p data-i18n="point-theater-at-your.613d1f">Point Theater at your movie and TV folders and get Netflix-style shelves with artwork and details from TMDB — or no key at all, and it builds your library from your file names. Continue Watching follows you across iPhone, Mac, and Apple TV; episodes auto-advance; resume never spoils. A custom player built for real-world files means audio and subtitle track choices actually switch and are remembered — across resume, episodes, launches, and devices. Download whole seasons for offline viewing, encrypted on-device.</p>
+        </li>
+        <li class="dp-card">
+          <span class="dp-card-icon" aria-hidden="true">🎬</span>
+          <h3 data-i18n="built-in-media-player.6463ce">Built-in Media Player</h3>
+          <p data-i18n="view-photos-watch-videos.c7fca0">View photos, watch videos, and listen to audio directly from your cloud storage with background playback support. Video plays in Enter Space's own player — Liquid Glass controls, AirPlay, playback speed, and audio/subtitle menus that work reliably with multi-track files. Your media, always accessible.</p>
+        </li>
+        <li class="dp-card">
+          <span class="dp-card-icon" aria-hidden="true">🌐</span>
+          <h3 data-i18n="360-180-media-playback.12fb01">360° & 180° Media Playback</h3>
+          <p data-i18n="immerse-yourself-in-360.e28aaa">Immerse yourself in 360° and 180° photos and videos streamed directly from your cloud storage. Explore panoramic and spatial media with intuitive controls.</p>
+        </li>
+        <li class="dp-card">
+          <span class="dp-card-icon" aria-hidden="true">📺</span>
+          <h3 data-i18n="apple-tv-playback.ed55d6">Apple TV Playback</h3>
+          <p data-i18n="stream-your-cloud-stored.c8c930">Stream your cloud-stored media directly to Apple TV. Enjoy your videos, photos, and audio on the big screen with seamless AirPlay integration.</p>
+        </li>
+        <li class="dp-card">
+          <span class="dp-card-icon" aria-hidden="true">🔓</span>
+          <h3 data-i18n="approve-apple-tv-unlocks.48d3d5">Approve Apple TV Unlocks from Your Phone</h3>
+          <p data-i18n="hidden-remotes-stay-hidden.c1090d">Hidden remotes stay hidden on the Apple TV by default. When someone taps "Show Hidden Remotes" on the TV, your iPhone or Mac gets a push notification with Approve / Deny buttons — even if the app's force-quit. Tap Approve, Face ID, done. Each TV is paired by name so an imposter device can't trick you into approving the wrong one. Tap Lock from the phone and the TV snaps back to the locked home grid instantly, even mid-playback.</p>
+        </li>
+        <li class="dp-card">
+          <span class="dp-card-icon" aria-hidden="true">🔃</span>
+          <h3 data-i18n="recently-played-syncing.16a7b8">Recently Played Syncing</h3>
+          <p data-i18n="pick-up-where-you.5d6a0c">Pick up where you left off on any device. Your recently played media syncs across iPhone, iPad, and Mac so you never lose your place.</p>
+        </li>
+        <li class="dp-card">
+          <span class="dp-card-icon" aria-hidden="true">🎞️</span>
+          <h3 data-i18n="swf-media-playback.8f81ee">SWF Media Playback</h3>
+          <p data-i18n="play-legacy-flash-swf.1bcc5b">Play legacy Flash SWF files directly within the app. Revisit classic Flash content and animations without needing a separate player or browser plugin.</p>
+        </li>
+      </ul>
+    </section>
+
+    <section class="dp-section" id="sync">
+      <h2 data-i18n="sync-backup-recovery.f73897">Sync, backup &amp; recovery</h2>
+      <ul class="dp-grid">
+        <li class="dp-card">
+          <span class="dp-card-icon" aria-hidden="true">⏱️</span>
+          <h3 data-i18n="set-the-schedule-once.276789">Set the schedule once, then stop thinking about backups</h3>
+          <p data-i18n="schedule-automated-sync-operations.e46125">Schedule automated sync operations with advanced filtering and incremental backups — a whole folder, or a single file. Supports near realtime file change monitoring so your data syncs moments after it changes. Keep your data safe across all devices with smart, efficient transfers.</p>
+        </li>
+        <li class="dp-card">
+          <span class="dp-card-icon" aria-hidden="true">🕰️</span>
+          <h3 data-i18n="rewind-any-folder-to.ac5f70">Rewind any folder to any moment</h3>
+          <p data-i18n="browse-through-your-version.b498c7">Browse through your version history from any snapshot's point of view. Restore files and folders as needed with intuitive time-travel navigation.</p>
+        </li>
+        <li class="dp-card">
+          <span class="dp-card-icon" aria-hidden="true">📸</span>
+          <h3 data-i18n="photos-library-backup.88ba83">Photos Library Backup</h3>
+          <p data-i18n="back-up-your-entire.9d76da">Back up your entire Photos library to any cloud provider. Protect your precious memories with automated, secure photo backups.</p>
+        </li>
+        <li class="dp-card">
+          <span class="dp-card-icon" aria-hidden="true">🔋</span>
+          <h3 data-i18n="smart-sync-scheduling.8869c2">Smart Sync Scheduling</h3>
+          <p data-i18n="automatically-skip-scheduled-syncs.c490e8">Automatically skip scheduled syncs when on battery power or connected to low-data or costly networks. Save battery life and avoid unexpected data charges.</p>
+        </li>
+        <li class="dp-card">
+          <span class="dp-card-icon" aria-hidden="true">📌</span>
+          <h3 data-i18n="keep-offline.107753">Keep Offline</h3>
+          <p data-i18n="pin-any-folder-of.005d53">Pin any folder of any remote and Enter Space keeps a complete local copy — encrypted at rest — that refreshes automatically in the background. When the remote can't be reached, you can still browse and preview the downloaded copy, with a per-pin Wi-Fi Only toggle to protect your data plan.</p>
+        </li>
+        <li class="dp-card">
+          <span class="dp-card-icon" aria-hidden="true">🧹</span>
+          <h3 data-i18n="storage-cleanup-space-inspector.f52362">Storage Cleanup &amp; Space Inspector</h3>
+          <p data-i18n="drill-into-any-cloud.1acf58">Drill into any cloud or local storage location and see exactly which folders are eating your space. Sorted biggest first, recursive multi-select to clear it all out in one pass.</p>
+        </li>
+        <li class="dp-card">
+          <span class="dp-card-icon" aria-hidden="true">🪞</span>
+          <h3 data-i18n="duplicate-photo-video-audio.ab35aa">Duplicate Photo, Video &amp; Audio Finder</h3>
+          <p data-i18n="spot-near-identical-photos.a4314c">Spot near-identical photos, videos, and audio across every connected cloud. Sees through resizes, format swaps, and re-edits — and warns you when one looks watermarked so you keep the clean original.</p>
+        </li>
+      </ul>
+    </section>
+
+    <section class="dp-section" id="security">
+      <h2 data-i18n="security-privacy.27f69f">Security &amp; privacy</h2>
+      <ul class="dp-grid">
+        <li class="dp-card">
+          <span class="dp-card-icon" aria-hidden="true">🔐</span>
+          <h3 data-i18n="encrypted-before-it-ever.cbeca3">Encrypted before it ever leaves your device</h3>
+          <p data-i18n="your-files-are-encrypted.ce8455">Your files are encrypted on your device before they're uploaded to the cloud. Enter Space uses end-to-end encryption to ensure only you can access your data, even if the cloud provider is compromised.</p>
+          <p data-i18n="built-on-rclone-s.4cbbc4">Built on Rclone's proven open-source technology with years of community testing and security audits. Fast, reliable, and secure cloud access you can trust.</p>
+        </li>
+        <li class="dp-card">
+          <span class="dp-card-icon" aria-hidden="true">🔐</span>
+          <h3 data-i18n="secure-drop.451d6b">Secure Drop</h3>
+          <p data-i18n="share-files-and-folders.f5ad59">Share files and folders with end-to-end encryption built on Rclone's Crypt. Data is encrypted before it leaves your device, and the recipient decrypts it using a web-based decryption tool with a password you share outside of the storage provider — adding an extra layer of privacy even if the shared link is compromised.</p>
+        </li>
+        <li class="dp-card">
+          <span class="dp-card-icon" aria-hidden="true">☁️</span>
+          <h3 data-i18n="icloud-optional-privacy.678a09">iCloud-Optional Privacy</h3>
+          <p data-i18n="default-on-icloud-sync.350460">Default-on iCloud sync replicates your rclone configs, SSH keys, and Personal Access Tokens across your Apple devices. Prefer device-only? One toggle keeps every new credential local.</p>
+        </li>
+        <li class="dp-card">
+          <span class="dp-card-icon" aria-hidden="true">🔗</span>
+          <h3 data-i18n="public-link-creation.6e10b9">Public Link Creation</h3>
+          <p data-i18n="generate-shareable-public-links.d55212">Generate shareable public links for files and folders on supported cloud providers. Share your content instantly without leaving the app.</p>
+        </li>
+        <li class="dp-card">
+          <span class="dp-card-icon" aria-hidden="true">⚡</span>
+          <h3 data-i18n="powered-by-rclone.29633d">Powered by Rclone</h3>
+          <p data-i18n="built-on-the-proven.ec36e2">Built on the proven open-source Rclone CLI with a track record of reliability. Fast, efficient, and communicates directly with cloud providers.</p>
+        </li>
+      </ul>
+    </section>
+
+    <section class="dp-section" id="developer">
+      <h2 data-i18n="developer-tools.4fc1a4">Developer tools</h2>
+      <ul class="dp-grid">
+        <li class="dp-card">
+          <span class="dp-card-icon" aria-hidden="true">✏️</span>
+          <h3 data-i18n="full-featured-code-editor.508d36">Full-Featured Code Editor</h3>
+          <p data-i18n="edit-code-with-syntax.a9b2cb">Edit code with syntax highlighting, code folding, comprehensive find and replace, draft versioning, and follow mode for watching logs in real-time.</p>
+        </li>
+        <li class="dp-card">
+          <span class="dp-card-icon" aria-hidden="true">🌿</span>
+          <h3 data-i18n="git-in-the-code.0856a9">Git in the Code Editor</h3>
+          <p data-i18n="stage-commit-push-pull.6d045f">Stage, commit, push, pull, branch — full Git workflow built into the editor. SSH keys on Mac and HTTPS auto-token on iPhone, so the same SSH-form remote URL just works on every device.</p>
+        </li>
+        <li class="dp-card">
+          <span class="dp-card-icon" aria-hidden="true">🪄</span>
+          <h3>Git Mirror</h3>
+          <p data-i18n="pull-a-remote-folder.cc9c9c">Pull a remote folder down as a local Git working copy, edit with your normal toolchain, push the changes back to the cloud. No mount required, no manual sync.</p>
+        </li>
+        <li class="dp-card">
+          <span class="dp-card-icon" aria-hidden="true">👁️</span>
+          <h3 data-i18n="live-web-preview.bb0c30">Live Web Preview</h3>
+          <p data-i18n="edit-a-webpage-in.ae34a4">Edit a webpage in the editor and watch it render live alongside — every script, image, and stylesheet loading like the real thing. Auto-refreshes the moment you save.</p>
+        </li>
+        <li class="dp-card">
+          <span class="dp-card-icon" aria-hidden="true">💾</span>
+          <h3 data-i18n="auto-saving-editor-drafts.cd7a81">Auto-Saving Editor Drafts</h3>
+          <p data-i18n="switch-tabs-close-the.f3c049">Switch tabs, close the editor, force-quit the app — your unsaved work is captured automatically and waiting for you next time. No "discard changes?" surprises.</p>
+        </li>
+        <li class="dp-card">
+          <span class="dp-card-icon" aria-hidden="true">🔧</span>
+          <h3 data-i18n="custom-environment-variables.aa033b">Custom Environment Variables</h3>
+          <p data-i18n="set-custom-environment-variables.c48005">Set custom environment variables for fine-grained control over Rclone behavior and cloud provider configurations. Tailor your setup to match advanced workflows.</p>
+        </li>
+        <li class="dp-card">
+          <span class="dp-card-icon" aria-hidden="true">⚙️</span>
+          <h3 data-i18n="rclone-cli-integration.9f6596">Rclone CLI Integration</h3>
+          <p data-i18n="optionally-share-your-remote.6da255">Optionally share your remote configurations with the rclone command line through a shared rclone.conf file. Power users can seamlessly switch between the visual interface and terminal workflows.</p>
+        </li>
+        <li class="dp-card">
+          <span class="dp-card-icon" aria-hidden="true">🛠️</span>
+          <h3 data-i18n="in-app-browser-debug.0e11fa">In-App Browser Debug Console</h3>
+          <p data-i18n="inspect-and-debug-web.318577">Inspect and debug web content with a built-in developer console for the in-app browser. View logs, errors, and network activity without leaving the app.</p>
+        </li>
+      </ul>
+    </section>
+
+    <section class="dp-section" id="devices">
+      <h2 data-i18n="across-your-devices.cfb745">Across your devices</h2>
+      <ul class="dp-grid">
+        <li class="dp-card">
+          <span class="dp-card-icon" aria-hidden="true">⌚️</span>
+          <h3 data-i18n="enter-space-on-apple.3c6951">Enter Space on Apple Watch</h3>
+          <p data-i18n="sync-your-cloud-media.997111">Sync your cloud media to your wrist. A media-first Apple Watch companion browses your synced library and plays it back right from the watch — with background audio so your music keeps going. A watch-face photo complication flips through a folder you choose (tap it to open that photo, turn the Digital Crown to zoom), and it adapts to tinted faces so your photos stay legible. Everything's stored encrypted at rest, with the media key delivered securely from your paired iPhone.</p>
+        </li>
+        <li class="dp-card">
+          <span class="dp-card-icon" aria-hidden="true">⌚️</span>
+          <h3 data-i18n="smarter-apple-watch-sync.27b99e">Smarter Apple Watch Sync</h3>
+          <p data-i18n="slideshows-advance-on-their.a9e754">Slideshows advance on their own when a track ends, look-alike photos are de-duplicated before they reach your wrist, VR/360 media is skipped (the watch can't project it), and watch copies are never larger than the original. Background transfers pause while you're watching or listening, so playback stays smooth.</p>
+        </li>
+        <li class="dp-card">
+          <span class="dp-card-icon" aria-hidden="true">🧩</span>
+          <h3 data-i18n="home-lock-screen-widgets.ed046c">Home &amp; Lock Screen Widgets</h3>
+          <p data-i18n="four-starfield-styled-widgets.57f6b5">Four starfield-styled widgets for iPhone, iPad, and Mac: a Photo Slideshow of your favorites, a Storage Dashboard with per-location used/free bars and provider icons, a Bandwidth monitor, and a Sync Status board for your scheduled syncs. Tap any one to jump straight into the app — a widget photo opens that exact frame in the gallery slideshow, a sync opens its run-results detail.</p>
+        </li>
+        <li class="dp-card">
+          <span class="dp-card-icon" aria-hidden="true">🗣️</span>
+          <h3 data-i18n="24-shortcuts-siri-actions.a5a1e4">24 Shortcuts &amp; Siri Actions</h3>
+          <p data-i18n="enter-space-s-whole.1f163f">Enter Space's whole feature surface, automatable: copy, move, rename, upload, download, and share files; recover versions through Time Portal; run Doppel duplicate scans and Space Inspector reports; commit and push Git changes; create and run scheduled syncs — all chainable, with time, location, and Focus triggers via Shortcuts automations. Secrets can never be read or written.</p>
+        </li>
+        <li class="dp-card">
+          <span class="dp-card-icon" aria-hidden="true">☁️</span>
+          <h3 data-i18n="cross-device-icloud-sync.f13f37">Cross-Device iCloud Sync</h3>
+          <p data-i18n="your-apple-watch-favorites.2d73e7">Your Apple Watch favorites and hidden items, your recently-played list, and your exact playback position now follow you from device to device through your private iCloud — pick a track or photo back up right where you left off.</p>
+        </li>
+        <li class="dp-card">
+          <span class="dp-card-icon" aria-hidden="true">🔎</span>
+          <h3 data-i18n="spotlight-full-content-file.b190c6">Spotlight Full-Content File Search</h3>
+          <p data-i18n="find-files-by-what.0f523f">Find files by what's INSIDE them, straight from system Spotlight — text, Markdown, source code, and PDFs in local sources are content-indexed, and cloud sources are searchable by name. Privacy is built in: hidden content is never indexed and encrypted remotes stay out of Spotlight by default, with per-source toggles in Settings.</p>
+        </li>
+        <li class="dp-card">
+          <span class="dp-card-icon" aria-hidden="true">📤</span>
+          <h3 data-i18n="open-anywhere.345457">Open Anywhere</h3>
+          <p data-i18n="right-click-a-file.0a1851">Right-click a file in Finder or share from any app — Enter Space opens it in the code editor, gallery, or sends it via Secure Drop. Native share extensions on iPhone, iPad, and Mac.</p>
+        </li>
+      </ul>
+    </section>
+  </main>
+
+  <!-- Every depth page ends on the download. -->
+  <section class="dp-closing">
+    <h2 data-i18n-html="all-your-cloud-storage.ac8483">All Your Cloud Storage, One Place</h2>
+    <a href="https://apps.apple.com/us/app/enter-space/id6746350540" target="_blank" rel="noopener noreferrer" class="btn-buy" data-i18n="download-on-the-app.a9096a">Download on the App Store</a>
+    <p class="dp-alt"><a href="../" data-i18n="back-to-the-overview.e274c2">Back to the overview</a></p>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-links">
+        <a href="../../" class="footer-link" data-i18n="all-apps.429449">All Apps</a>
+        <a href="../../pinline/" class="footer-link">Pinline</a>
+        <a href="../../blip/" class="footer-link">Blip</a>
+        <a href="../../ari-helper/" class="footer-link">Ari Helper</a>
+        <a href="../../sami/" class="footer-link">Sami</a>
+        <a href="../../tilebreak/" class="footer-link">Tilebreak</a>
+        <a href="../../mi-speaks/" class="footer-link">Mi Speaks</a>
+        <a href="../../embr/" class="footer-link">Embr</a>
+        <a href="../../deepsi/" class="footer-link">DeepSi</a>
+        <a href="../../luma-editor/" class="footer-link">Luma Editor</a>
+        <a href="../../wise-flyer/" class="footer-link">Wise Flyer</a>
+        <a href="../../glint/" class="footer-link">Glint</a>
+        <a href="/privacy/" class="footer-link" data-i18n="privacy.cf0148">Privacy</a>
+        <a href="/terms/" class="footer-link" data-i18n="terms.a55a27">Terms</a>
+        <a href="/support/" class="footer-link" data-i18n="support.f32d5a">Support</a>
+        <a href="/" class="footer-link" data-i18n="portfolio.036b18">Portfolio</a>
+      </div>
+
+      <!-- Social Media Links -->
+      <div class="footer-social-links">
+        <a href="https://x.com/apps_by_blaine" class="social-icon-link" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)">
+          <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+          </svg>
+        </a>
+        <a href="https://www.instagram.com/apps.by.blaine/" class="social-icon-link" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+          <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.6100 4.1009 4.1009.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.1009 4.1009-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.1009-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.1009-4.1009 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.1100 2.759-6.1100 6.1100s2.759 6.163 6.1100 6.163 6.1100-2.759 6.1100-6.163c0-3.403-2.759-6.1100-6.1100-6.1100zm0 10.1100c-2.209 0-4-1.79-4-4 0-2.209 1.7100-4 4-4s4 1.7100 4 4c0 2.21-1.7100 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+          </svg>
+        </a>
+        <a href="https://www.youtube.com/@AppsByBlaine" class="social-icon-link" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+          <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+          </svg>
+        </a>
+      </div>
+
+      <p style="color: var(--text-muted); margin-top: var(--spacing-md);" data-i18n-html="blaine-miller-all-rights.b327c2">
+        © <span id="year"></span> Blaine Miller. All rights reserved.
+      </p>
+    </div>
+  </footer>
+
+  <script src="../../app-showcase.js?v=0ce231d7"></script>
+</body>
+</html>

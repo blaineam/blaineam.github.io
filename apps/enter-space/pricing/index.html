@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pricing · Enter Space</title>
+  <meta name="description" content="Enter Space plans and prices: Monthly, Yearly or a one-time Lifetime purchase, a 7-day free trial, Family Sharing, and how it compares.">
+  <link rel="canonical" href="https://wemiller.com/apps/enter-space/pricing/">
+  <meta property="og:title" content="Pricing · Enter Space">
+  <meta property="og:description" content="Enter Space plans and prices: Monthly, Yearly or a one-time Lifetime purchase, a 7-day free trial, Family Sharing, and how it compares.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://wemiller.com/apps/enter-space/pricing/">
+  <meta property="og:image" content="https://wemiller.com/apps/enter-space/assets/images/poster.jpg?v=3cc631e8">
+  <meta name="apple-itunes-app" content="app-id=6746350540">
+  <link rel="stylesheet" href="../../app-showcase.css?v=e9909304">
+  <link rel="stylesheet" href="../../_shared/depth.css?v=8787ba38">
+  <style>
+    :root {
+      --app-primary: #4f6bf6;
+      --app-secondary: #6d4df0;
+      --app-accent: #6ee7ff;
+      --primary-color: #2B2F8F;    /* deep indigo: headlines on paper */
+      --secondary-color: #6d4df0;
+      --es-accent-ink: #4B3BC4;
+      --es-hero: linear-gradient(180deg, #0a0a2e 0%, #141451 55%, #21216f 100%);
+      --es-hero-glow: radial-gradient(ellipse 60% 45% at 50% 100%, rgba(110, 231, 255, 0.20) 0%, transparent 70%), radial-gradient(ellipse 45% 40% at 90% 5%, rgba(109, 77, 240, 0.30) 0%, transparent 70%);
+      --es-hero-ink: #F4F6FF;
+      --es-hero-em: #9FEFFF;
+      --es-hero-kicker: rgba(159, 239, 255, 0.9);
+      --es-btn: linear-gradient(180deg, #9FEFFF, #6EE7FF);
+      --es-btn-ink: #0A0A2E;
+      --es-glow: rgba(110, 231, 255, 0.28);
+      --es-display: system-ui, -apple-system, "SF Pro Display", "Segoe UI", sans-serif;
+      --es-paper: #FFFFFF;
+      --es-paper-2: #F2F3FC;
+      --es-rule: rgba(20, 20, 81, 0.12);
+      --es-quiet: #5C5F7E;
+      --es-body: #2C2E48;
+      --es-shadow: drop-shadow(0 30px 40px rgba(20, 20, 81, 0.22)) drop-shadow(0 6px 10px rgba(20, 20, 81, 0.10));
+      --bg-primary: var(--es-paper);
+      --bg-secondary: var(--es-paper-2);
+      --text-primary: #10112E;
+      --text-secondary: var(--es-body);
+      --text-muted: var(--es-quiet);
+      --glass-bg: rgba(255, 255, 255, 0.8);
+      --glass-border: rgba(20, 20, 81, 0.10);
+      --glass-shadow: none;
+      --es-measure: 1120px;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --primary-color: #B7C2FF;
+        --secondary-color: #9FEFFF;
+        --es-accent-ink: #9FEFFF;
+        --es-paper: #0B0B26;
+        --es-paper-2: #121236;
+        --es-rule: rgba(183, 194, 255, 0.14);
+        --es-quiet: #A2A7CC;
+        --es-body: #DADDF2;
+        --es-shadow: drop-shadow(0 30px 44px rgba(0, 0, 0, 0.6)) drop-shadow(0 6px 10px rgba(0, 0, 0, 0.35));
+        --text-primary: #F4F6FF;
+        --glass-bg: rgba(11, 11, 38, 0.8);
+        --glass-border: rgba(183, 194, 255, 0.08);
+      }
+    }
+    .btn-buy { box-shadow: 0 4px 15px rgba(10, 10, 46, 0.30); }
+    :root { --bg-card: var(--es-paper-2); --border-color: var(--es-rule); }
+    body { background: var(--es-paper); }
+    .nav-links .nav-link, .nav-links .btn-buy { white-space: nowrap; }
+    [hidden] { display: none !important; }
+    /* .dp-sr is position:absolute; without a positioned scroll box its static position in
+       off-screen table cells widened the mobile layout viewport to ~612px. */
+    .dp-table-wrap { position: relative; }
+    .es-trial { margin: 0 auto 0.6rem; text-align: center; font-size: 1.1rem; color: var(--text-primary); }
+    .es-trial span { font-weight: 700; color: var(--primary-color); }
+    .es-deadline { margin: 0 auto 1.6rem; text-align: center; font-size: 0.95rem; color: var(--text-muted); }
+    .dp-plan-future { font-size: 0.88rem !important; color: var(--text-muted) !important; }
+    .dp-plan-future .strikethrough { font-weight: 600; }
+    .es-assure { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem 1.4rem; margin: 1rem 0 0; padding: 0; list-style: none; font-size: 0.92rem; color: var(--text-secondary); }
+    .es-assure li::before { content: "✓ "; color: var(--primary-color); font-weight: 700; }
+    .dp-compare .check { color: var(--primary-color); font-weight: 700; }
+    .dp-compare .cross { color: var(--text-muted); }
+    .es-scroll-hint { margin: 0.8rem 0 0; text-align: center; font-size: 0.85rem; color: var(--text-muted); }
+    @media (min-width: 760px) { .es-scroll-hint { display: none; } }
+    #questions .learn-more { margin-top: 1.4rem; }
+  </style>
+  <link rel="alternate" hreflang="x-default" href="https://wemiller.com/apps/enter-space/pricing/">
+  <link rel="alternate" hreflang="en" href="https://wemiller.com/apps/enter-space/pricing/">
+  <link rel="alternate" hreflang="zh-Hans" href="https://wemiller.com/apps/enter-space/pricing/?lang=zh-Hans">
+  <link rel="alternate" hreflang="ja" href="https://wemiller.com/apps/enter-space/pricing/?lang=ja">
+  <link rel="alternate" hreflang="de" href="https://wemiller.com/apps/enter-space/pricing/?lang=de">
+  <link rel="alternate" hreflang="fr" href="https://wemiller.com/apps/enter-space/pricing/?lang=fr">
+  <link rel="alternate" hreflang="es" href="https://wemiller.com/apps/enter-space/pricing/?lang=es">
+  <link rel="alternate" hreflang="ko" href="https://wemiller.com/apps/enter-space/pricing/?lang=ko">
+  <link rel="alternate" hreflang="pt-BR" href="https://wemiller.com/apps/enter-space/pricing/?lang=pt-BR">
+  <link rel="alternate" hreflang="it" href="https://wemiller.com/apps/enter-space/pricing/?lang=it">
+  <script src="/i18n/i18n.js?v=9b769779" defer data-page="apps.enter-space.pricing" data-pos="bottom-left"></script>
+</head>
+<body>
+  <nav class="app-nav">
+    <div class="nav-container">
+      <a href="../../" class="nav-logo nav-brand" title="← Apps" aria-label="← Apps"
+         data-i18n-attr="title:apps.2d61f2;aria-label:apps.2d61f2">
+        <span class="nav-brand-back" aria-hidden="true">←</span>
+        <img class="nav-brand-icon" src="../assets/images/icon.png?v=eed78469" alt="" width="60" height="60">
+        <span class="nav-brand-name">Enter Space</span>
+      </a>
+      <button class="mobile-menu-toggle" aria-label="Menu">☰</button>
+      <ul class="nav-links">
+        <li><a href="../" class="nav-link" data-i18n="overview.0efc2e">Overview</a></li>
+        <li><a href="../features/" class="nav-link" data-i18n="features.fc338f">Features</a></li>
+        <li><a href="../pricing/" class="nav-link" aria-current="page" data-i18n="pricing.a0d9bb">Pricing</a></li>
+        <li><a href="../faq/" class="nav-link" data-i18n="faq.03688b">FAQ</a></li>
+        <li><a href="https://apps.apple.com/us/app/enter-space/id6746350540" target="_blank" rel="noopener noreferrer" class="btn-buy">App Store</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main>
+    <header class="dp-header">
+      <p class="dp-eyebrow" data-i18n="simple-transparent-pricing.b25b82">Simple, Transparent Pricing</p>
+      <h1 data-i18n="choose-your-plan.c197d6">Choose Your Plan</h1>
+      <p class="dp-standfirst" data-i18n="every-plan-includes-the.751147">Every plan includes the full Enter Space experience — no features held back</p>
+      <ul class="dp-jumps">
+        <li><a href="#compare" data-i18n="how-enter-space-compares.4a977f">How Enter Space Compares</a></li>
+        <li><a href="#questions" data-i18n="got-questions.8ecca3">Got Questions?</a></li>
+      </ul>
+    </header>
+
+    <section class="dp-section" id="plans">
+      <p class="es-trial" data-i18n-html="start-with-a-free.00ecae">Start with a <span>free 7-day trial</span> — no commitment, full access to everything.</p>
+      <p class="es-deadline" data-until data-i18n="introductory-pricing-ends-october.6a18d0">Introductory pricing ends October 1. Prices go up after that, and no further sale is planned.</p>
+      <div class="dp-plans">
+        <div class="dp-plan">
+          <p class="dp-plan-name" data-i18n="monthly.d31edb">Monthly</p>
+          <p class="dp-price"><span data-until>$7.99</span><span data-from hidden>$9.99</span> <small data-i18n="per-month.d0e619">per month</small></p>
+          <p data-i18n="flexibility-to-subscribe-month.691daf">Flexibility to subscribe month-to-month</p>
+          <p class="dp-plan-future" data-until data-i18n-html="9-99-mo-after.983862"><span class="strikethrough">$9.99/mo</span> after Oct 1</p>
+        </div>
+        <div class="dp-plan is-featured">
+          <span class="dp-plan-badge" data-i18n="best-value.ca89f1">Best Value</span>
+          <p class="dp-plan-name" data-i18n="yearly.7622eb">Yearly</p>
+          <p class="dp-price"><span data-until>$29.99</span><span data-from hidden>$49.99</span> <small data-i18n="per-year.d412fe">per year</small></p>
+          <p data-until data-i18n="save-over-68-compared.2c1795">Save over 68% compared to monthly</p>
+          <p data-from hidden data-i18n="save-over-58-compared.69fd96">Save over 58% compared to monthly</p>
+          <p class="dp-plan-future" data-until data-i18n-html="49-99-yr-after.23b911"><span class="strikethrough">$49.99/yr</span> after Oct 1</p>
+        </div>
+        <div class="dp-plan">
+          <p class="dp-plan-name" data-i18n="lifetime.8d33f3">Lifetime</p>
+          <p class="dp-price"><span data-until>$59.99</span><span data-from hidden>$99.99</span> <small data-i18n="one-time-purchase.8ebbdc">one-time purchase</small></p>
+          <p data-i18n="pay-once-use-forever.87c60c">Pay once, use forever — no recurring fees</p>
+          <p class="dp-plan-future" data-until data-i18n-html="99-99-after-oct.c639b6"><span class="strikethrough">$99.99</span> after Oct 1</p>
+        </div>
+      </div>
+      <p class="dp-fine" data-i18n="all-plans-support-apple.46b41c">All plans support Apple Family Sharing — one subscription covers your entire family.</p>
+      <ul class="es-assure">
+        <li data-i18n="7-days-free-everything.085cfe">7 days free, everything unlocked</li>
+        <li data-i18n="one-purchase-every-apple.7e831d">One purchase, every Apple device</li>
+        <li>Family Sharing</li>
+        <li data-i18n="cancel-anytime-in-the.54bbfd">Cancel anytime in the App Store</li>
+      </ul>
+      <p class="dp-fine" data-i18n="the-entire-app-requires.629506">The entire app requires an active subscription or lifetime purchase — there is no free tier or partial access. US prices shown; the App Store shows yours.</p>
+    </section>
+
+    <section class="dp-section" id="compare">
+      <h2 data-i18n="how-enter-space-compares.4a977f">How Enter Space Compares</h2>
+      <p class="dp-lede" data-i18n="more-features-more-platforms.ad2088">More features, more platforms, flexible pricing</p>
+      <div class="dp-table-wrap">
+        <table class="dp-compare">
+          <caption data-i18n="compared-april-2026-from.383cbd">Compared April 2026 from each product's published pricing and features.</caption>
+          <thead>
+            <tr><th scope="col" data-i18n="feature.ad565d">Feature</th><th scope="col" class="is-us">Enter Space</th><th scope="col" data-i18n="cloudmounter.4cc61e">CloudMounter</th><th scope="col" data-i18n="mountain-duck.ed3961">Mountain Duck</th><th scope="col" data-i18n="file-browser-pro.9f260b">File Browser Pro</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row" data-i18n="price.3e8248">Price</th><td class="is-us"><strong data-until data-i18n="from-7-99-mo.03a4b7">From $7.99/mo</strong><strong data-from hidden data-i18n="from-9-99-mo.983d9e">From $9.99/mo</strong></td><td data-i18n="from-29-99-yr.cade10">From $29.99/yr</td><td data-i18n="49-per-platform.1269bc">$49 per platform</td><td data-i18n="14-99-per-platform.6a6139">$14.99 per platform</td></tr>
+            <tr><th scope="row" data-i18n="free-trial.11d1f9">Free Trial</th><td class="is-us" data-i18n-html="7-days.3723e6"><span class="check">✓</span> 7 days</td><td data-i18n-html="7-days.3723e6"><span class="check">✓</span> 7 days</td><td data-i18n-html="14-days.8ab0c3"><span class="check">✓</span> 14 days</td><td class="no"><span class="dp-sr" data-i18n="no.816c52">No</span></td></tr>
+            <tr><th scope="row" data-i18n="lifetime-option.06548a">Lifetime Option</th><td class="is-us"><span class="check">✓</span> <span data-until>$59.99</span><span data-from hidden>$99.99</span></td><td class="yes"><span class="dp-sr" data-i18n="yes.5397e0">Yes</span></td><td class="yes"><span class="dp-sr" data-i18n="yes.5397e0">Yes</span></td><td class="no"><span class="dp-sr" data-i18n="no.816c52">No</span></td></tr>
+            <tr><th scope="row">Family Sharing</th><td class="is-us yes"><span class="dp-sr" data-i18n="yes.5397e0">Yes</span></td><td class="no"><span class="dp-sr" data-i18n="no.816c52">No</span></td><td class="no"><span class="dp-sr" data-i18n="no.816c52">No</span></td><td class="no"><span class="dp-sr" data-i18n="no.816c52">No</span></td></tr>
+            <tr><th scope="row" data-i18n="licensing.aa636d">Licensing</th><td class="is-us"><strong data-i18n="universal-purchase.f89ab1">Universal purchase</strong></td><td data-i18n="mac-only.858ac5">Mac only</td><td data-i18n="mac-only.858ac5">Mac only</td><td data-i18n="per-platform.f37f69">Per platform</td></tr>
+            <tr><th scope="row" data-i18n="iphone-ipad.0e7acd">iPhone &amp; iPad</th><td class="is-us yes"><span class="dp-sr" data-i18n="yes.5397e0">Yes</span></td><td class="no"><span class="dp-sr" data-i18n="no.816c52">No</span></td><td class="no"><span class="dp-sr" data-i18n="no.816c52">No</span></td><td class="yes"><span class="dp-sr" data-i18n="yes.5397e0">Yes</span></td></tr>
+            <tr><th scope="row">Mac</th><td class="is-us yes"><span class="dp-sr" data-i18n="yes.5397e0">Yes</span></td><td class="yes"><span class="dp-sr" data-i18n="yes.5397e0">Yes</span></td><td class="yes"><span class="dp-sr" data-i18n="yes.5397e0">Yes</span></td><td class="yes"><span class="dp-sr" data-i18n="yes.5397e0">Yes</span></td></tr>
+            <tr><th scope="row">Apple TV</th><td class="is-us yes"><span class="dp-sr" data-i18n="yes.5397e0">Yes</span></td><td class="no"><span class="dp-sr" data-i18n="no.816c52">No</span></td><td class="no"><span class="dp-sr" data-i18n="no.816c52">No</span></td><td class="yes"><span class="dp-sr" data-i18n="yes.5397e0">Yes</span></td></tr>
+            <tr><th scope="row" data-i18n="cloud-providers.36f789">Cloud Providers</th><td class="is-us"><strong>100</strong></td><td>12</td><td>13</td><td>30</td></tr>
+            <tr><th scope="row" data-i18n="finder-files-integration.718ce5">Finder / Files Integration</th><td class="is-us yes"><span class="dp-sr" data-i18n="yes.5397e0">Yes</span></td><td data-i18n-html="finder-only.aa21eb"><span class="check">✓</span> Finder only</td><td data-i18n-html="finder-only.aa21eb"><span class="check">✓</span> Finder only</td><td class="yes"><span class="dp-sr" data-i18n="yes.5397e0">Yes</span></td></tr>
+            <tr><th scope="row" data-i18n="end-to-end-encryption.24c2ac">End-to-End Encryption</th><td class="is-us yes"><span class="dp-sr" data-i18n="yes.5397e0">Yes</span></td><td class="yes"><span class="dp-sr" data-i18n="yes.5397e0">Yes</span></td><td data-i18n-html="cryptomator.156e88"><span class="check">✓</span> Cryptomator</td><td class="no"><span class="dp-sr" data-i18n="no.816c52">No</span></td></tr>
+            <tr><th scope="row" data-i18n="automated-scheduled-sync.e20f2c">Automated Scheduled Sync</th><td class="is-us yes"><span class="dp-sr" data-i18n="yes.5397e0">Yes</span></td><td class="no"><span class="dp-sr" data-i18n="no.816c52">No</span></td><td class="no"><span class="dp-sr" data-i18n="no.816c52">No</span></td><td class="yes"><span class="dp-sr" data-i18n="yes.5397e0">Yes</span></td></tr>
+            <tr><th scope="row" data-i18n="realtime-file-monitoring.8a05a6">Realtime File Monitoring</th><td class="is-us yes"><span class="dp-sr" data-i18n="yes.5397e0">Yes</span></td><td class="no"><span class="dp-sr" data-i18n="no.816c52">No</span></td><td class="no"><span class="dp-sr" data-i18n="no.816c52">No</span></td><td class="no"><span class="dp-sr" data-i18n="no.816c52">No</span></td></tr>
+            <tr><th scope="row" data-i18n="smart-sync-battery-network.7c1654">Smart Sync (Battery / Network)</th><td class="is-us yes"><span class="dp-sr" data-i18n="yes.5397e0">Yes</span></td><td class="no"><span class="dp-sr" data-i18n="no.816c52">No</span></td><td class="no"><span class="dp-sr" data-i18n="no.816c52">No</span></td><td class="no"><span class="dp-sr" data-i18n="no.816c52">No</span></td></tr>
+            <tr><th scope="row" data-i18n="photos-library-backup.88ba83">Photos Library Backup</th><td class="is-us yes"><span class="dp-sr" data-i18n="yes.5397e0">Yes</span></td><td class="no"><span class="dp-sr" data-i18n="no.816c52">No</span></td><td class="no"><span class="dp-sr" data-i18n="no.816c52">No</span></td><td class="no"><span class="dp-sr" data-i18n="no.816c52">No</span></td></tr>
+            <tr><th scope="row" data-i18n="built-in-media-player.6463ce">Built-in Media Player</th><td class="is-us yes"><span class="dp-sr" data-i18n="yes.5397e0">Yes</span></td><td class="no"><span class="dp-sr" data-i18n="no.816c52">No</span></td><td class="no"><span class="dp-sr" data-i18n="no.816c52">No</span></td><td class="yes"><span class="dp-sr" data-i18n="yes.5397e0">Yes</span></td></tr>
+            <tr><th scope="row" data-i18n="code-editor.926f42">Code Editor</th><td class="is-us yes"><span class="dp-sr" data-i18n="yes.5397e0">Yes</span></td><td class="no"><span class="dp-sr" data-i18n="no.816c52">No</span></td><td class="no"><span class="dp-sr" data-i18n="no.816c52">No</span></td><td class="yes"><span class="dp-sr" data-i18n="yes.5397e0">Yes</span></td></tr>
+            <tr><th scope="row" data-i18n="git-management-in-code.73d4f2">Git Management in Code Editor</th><td class="is-us" data-i18n-html="stage-commit-push-branch.e4431a"><span class="check">✓</span> Stage / commit / push / branch</td><td class="no"><span class="dp-sr" data-i18n="no.816c52">No</span></td><td class="no"><span class="dp-sr" data-i18n="no.816c52">No</span></td><td class="no"><span class="dp-sr" data-i18n="no.816c52">No</span></td></tr>
+            <tr><th scope="row" data-i18n="duplicate-photo-video-audio.43144a">Duplicate Photo / Video / Audio Finder</th><td class="is-us yes"><span class="dp-sr" data-i18n="yes.5397e0">Yes</span></td><td class="no"><span class="dp-sr" data-i18n="no.816c52">No</span></td><td class="no"><span class="dp-sr" data-i18n="no.816c52">No</span></td><td class="no"><span class="dp-sr" data-i18n="no.816c52">No</span></td></tr>
+            <tr><th scope="row" data-i18n="storage-cleanup-space-inspector.f52362">Storage Cleanup &amp; Space Inspector</th><td class="is-us yes"><span class="dp-sr" data-i18n="yes.5397e0">Yes</span></td><td class="no"><span class="dp-sr" data-i18n="no.816c52">No</span></td><td class="no"><span class="dp-sr" data-i18n="no.816c52">No</span></td><td class="no"><span class="dp-sr" data-i18n="no.816c52">No</span></td></tr>
+            <tr><th scope="row" data-i18n="custom-environment-variables.aa033b">Custom Environment Variables</th><td class="is-us yes"><span class="dp-sr" data-i18n="yes.5397e0">Yes</span></td><td class="no"><span class="dp-sr" data-i18n="no.816c52">No</span></td><td class="no"><span class="dp-sr" data-i18n="no.816c52">No</span></td><td class="no"><span class="dp-sr" data-i18n="no.816c52">No</span></td></tr>
+            <tr><th scope="row" data-i18n="open-source-engine.1cd74b">Open-Source Engine</th><td class="is-us" data-i18n-html="rclone.53de58"><span class="check">✓</span> Rclone</td><td class="no"><span class="dp-sr" data-i18n="no.816c52">No</span></td><td data-i18n-html="cyberduck.90c9b6"><span class="check">✓</span> Cyberduck</td><td class="no"><span class="dp-sr" data-i18n="no.816c52">No</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="es-scroll-hint" data-i18n="swipe-to-see-all.47040a">← Swipe to see all apps →</p>
+    </section>
+
+    <section class="dp-section" id="questions">
+      <h2 data-i18n="got-questions.8ecca3">Got Questions?</h2>
+      <div class="faq-list">
+          <div class="faq-item">
+            <button class="faq-question">
+              <span data-i18n="can-i-try-enter.93729b">Can I try Enter Space before committing?</span>
+              <span class="faq-icon">▼</span>
+            </button>
+            <div class="faq-answer">
+              <p data-i18n="absolutely-enter-space-offers.202494">Absolutely! Enter Space offers a free 7-day trial with full access to every feature — no restrictions. This gives you plenty of time to connect your cloud accounts, set up syncs, and see how Enter Space fits into your workflow before deciding on a plan.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">
+              <span data-i18n="how-does-pricing-work.6c717e">How does pricing work?</span>
+              <span class="faq-icon">▼</span>
+            </button>
+            <div class="faq-answer">
+              <p data-i18n="enter-space-is-a.3bcc75">Enter Space is a paid app — the entire app requires an active subscription or a one-time lifetime purchase to use. There is no free tier or partially unlocked mode. After your 7-day free trial, you can choose the plan that works best for you:</p>
+              <ul data-until>
+                <li data-i18n-html="monthly-7-99-month.4ec214"><strong>Monthly</strong> — $7.99/month (introductory) · $9.99/month after October 1</li>
+                <li data-i18n-html="yearly-29-99-year.5ce641"><strong>Yearly</strong> — $29.99/year (introductory) · $49.99/year after October 1</li>
+                <li data-i18n-html="lifetime-59-99-one.e3e850"><strong>Lifetime</strong> — $59.99 one-time (introductory) · $99.99 after October 1</li>
+              </ul>
+              <ul data-from hidden>
+                <li data-i18n-html="monthly-9-99-month.78e3f9"><strong>Monthly</strong> — $9.99/month</li>
+                <li data-i18n-html="yearly-49-99-year.bd7fc7"><strong>Yearly</strong> — $49.99/year</li>
+                <li data-i18n-html="lifetime-99-99-one.7c5e38"><strong>Lifetime</strong> — $99.99 one-time</li>
+              </ul>
+              <p data-until data-i18n="the-current-introductory-pricing.c5d41c">The current introductory pricing is available for a limited time, and no additional sales are planned after this period. Pricing is subject to change as features and market conditions evolve. All plans — including subscriptions and the lifetime purchase — support Apple Family Sharing, so one purchase can cover your entire family.</p>
+              <p data-from hidden data-i18n="pricing-is-subject-to.3248b6">Pricing is subject to change as features and market conditions evolve. All plans — including subscriptions and the lifetime purchase — support Apple Family Sharing, so one purchase can cover your entire family.</p>
+              <p data-i18n="us-prices-shown-the.46666e">US prices shown; the App Store shows yours.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">
+              <span data-i18n="what-about-users-who.66d619">What about users who already purchased Enter Space?</span>
+              <span class="faq-icon">▼</span>
+            </button>
+            <div class="faq-answer">
+              <p data-i18n="a-heartfelt-thank-you.6098ec"> A heartfelt thank you to the many early supporters who purchased Enter Space before this pricing change. You believed in the app early on, and that means the world to me. As a token of gratitude, all existing purchasers enjoy Grandfathered access — you will continue to have full, unrestricted access to Enter Space without ever needing to subscribe or make an additional purchase. Your original purchase is honored, no strings attached. </p>
+            </div>
+          </div>
+      </div>
+      <p><a class="learn-more" href="../faq/" data-i18n="see-all-questions.237fee">See all questions</a></p>
+    </section>
+  </main>
+
+  <!-- Every depth page ends on the download. -->
+  <section class="dp-closing">
+    <h2 data-i18n-html="all-your-cloud-storage.ac8483">All Your Cloud Storage, One Place</h2>
+    <a href="https://apps.apple.com/us/app/enter-space/id6746350540" target="_blank" rel="noopener noreferrer" class="btn-buy" data-i18n="download-on-the-app.a9096a">Download on the App Store</a>
+    <p class="dp-alt"><a href="../" data-i18n="back-to-the-overview.e274c2">Back to the overview</a></p>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-links">
+        <a href="../../" class="footer-link" data-i18n="all-apps.429449">All Apps</a>
+        <a href="../../pinline/" class="footer-link">Pinline</a>
+        <a href="../../blip/" class="footer-link">Blip</a>
+        <a href="../../ari-helper/" class="footer-link">Ari Helper</a>
+        <a href="../../sami/" class="footer-link">Sami</a>
+        <a href="../../tilebreak/" class="footer-link">Tilebreak</a>
+        <a href="../../mi-speaks/" class="footer-link">Mi Speaks</a>
+        <a href="../../embr/" class="footer-link">Embr</a>
+        <a href="../../deepsi/" class="footer-link">DeepSi</a>
+        <a href="../../luma-editor/" class="footer-link">Luma Editor</a>
+        <a href="../../wise-flyer/" class="footer-link">Wise Flyer</a>
+        <a href="../../glint/" class="footer-link">Glint</a>
+        <a href="/privacy/" class="footer-link" data-i18n="privacy.cf0148">Privacy</a>
+        <a href="/terms/" class="footer-link" data-i18n="terms.a55a27">Terms</a>
+        <a href="/support/" class="footer-link" data-i18n="support.f32d5a">Support</a>
+        <a href="/" class="footer-link" data-i18n="portfolio.036b18">Portfolio</a>
+      </div>
+
+      <!-- Social Media Links -->
+      <div class="footer-social-links">
+        <a href="https://x.com/apps_by_blaine" class="social-icon-link" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)">
+          <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+          </svg>
+        </a>
+        <a href="https://www.instagram.com/apps.by.blaine/" class="social-icon-link" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+          <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.6100 4.1009 4.1009.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.1009 4.1009-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.1009-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.1009-4.1009 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.1100 2.759-6.1100 6.1100s2.759 6.163 6.1100 6.163 6.1100-2.759 6.1100-6.163c0-3.403-2.759-6.1100-6.1100-6.1100zm0 10.1100c-2.209 0-4-1.79-4-4 0-2.209 1.7100-4 4-4s4 1.7100 4 4c0 2.21-1.7100 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+          </svg>
+        </a>
+        <a href="https://www.youtube.com/@AppsByBlaine" class="social-icon-link" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+          <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+          </svg>
+        </a>
+      </div>
+
+      <p style="color: var(--text-muted); margin-top: var(--spacing-md);" data-i18n-html="blaine-miller-all-rights.b327c2">
+        © <span id="year"></span> Blaine Miller. All rights reserved.
+      </p>
+    </div>
+  </footer>
+
+  <script src="../../app-showcase.js?v=0ce231d7"></script>
+  <script>
+    // Enter Space's App Store prices change on 1 October 2026 (scheduled in App Store Connect).
+    (function () {
+      var after = Date.now() >= Date.parse('2026-10-01T00:00:00-07:00');
+      document.querySelectorAll('[data-until]').forEach(function (el) { el.hidden = after; });
+      document.querySelectorAll('[data-from]').forEach(function (el) { el.hidden = !after; });
+    })();
+  </script>
+</body>
+</html>
