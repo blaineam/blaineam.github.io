@@ -14,7 +14,6 @@
   "frequently-asked-questions.d790b4": "Preguntas frecuentes",
   "got-questions.8ecca3": "¿Tienes dudas?",
   "how-many-photos-can.f52fc3": "¿Cuántas fotos puedo unir?",
-  "iphone-and-ipad-with.e11fbb": "iPhone y iPad, con una app nativa para Mac que comparte el mismo motor Metal para el trabajo más pesado de gigapíxeles. La captura guiada con la cámara está en iPhone y iPad; unir, corregir y visualizar funciona en todas partes.",
   "no-tracking-no-ads.5e7933": "Sin rastreo. Sin anuncios. Tus panorámicas se unen directamente en tu dispositivo.",
   "on-device-stitching.60f746": "<span class=\"badge-icon\">&#x1f5bc;&#xfe0f;</span> Unión en el dispositivo",
   "yes-pano-owl-is.29e000": "Sí. Pano Owl se vende en toda la Unión Europea, Francia incluida. Está disponible en todos los países y regiones del App Store que ofrece Apple.",
@@ -48,5 +47,11 @@
   "tap-any-panorama-and.9e40a4": "Toca cualquier panorámica y mira a tu alrededor arrastrando o moviendo el dispositivo. Cada exportación lleva metadatos 360, para que Fotos, los visores web y Apple Vision Pro la reconozcan como 360.",
   "the-panorama-library-on.723ad8": "La biblioteca de panorámicas en el iPad, una cuadrícula de panorámicas 360",
   "the-stitch-screen-with.e3f4ca": "La pantalla de unión, con las proyecciones y las opciones de recorte automático",
-  "view.69bd4e": "Ver"
+  "view.69bd4e": "Ver",
+  "iphone-and-ipad-on.c22143": "iPhone y iPad, con iOS y iPadOS 26 o posterior. La captura guiada, la unión, las correcciones y el visor 360 funcionan en el propio dispositivo.",
+  "learn-more.824d76": "Más información",
+  "overview.0efc2e": "Resumen",
+  "pricing.a0d9bb": "Precios",
+  "see-all-questions.237fee": "Ver todas las preguntas",
+  "see-plans-and-prices.760c12": "Ver planes y precios"
 }

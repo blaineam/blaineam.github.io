@@ -394,6 +394,7 @@
     :lang(ja) .po-hero-standfirst, :lang(zh) .po-hero-standfirst, :lang(ko) .po-hero-standfirst,
     :lang(ja) .security-audit-note, :lang(zh) .security-audit-note, :lang(ko) .security-audit-note { max-width: 26em; }
 
+    .po-faq-more { margin: 1.6rem 0 0; text-align: center; }
   </style>
   <link rel="alternate" hreflang="x-default" href="https://wemiller.com/apps/pano-owl/">
   <link rel="alternate" hreflang="en" href="https://wemiller.com/apps/pano-owl/">
@@ -418,8 +419,10 @@
       </a>
       <button class="mobile-menu-toggle">☰</button>
       <ul class="nav-links">
-        <li><a href="#features" class="nav-link" data-i18n="features.fc338f">Features</a></li>
-        <li><a href="#faq" class="nav-link" data-i18n="faq.03688b">FAQ</a></li>
+        <li><a href="./" class="nav-link" aria-current="page" data-i18n="overview.0efc2e">Overview</a></li>
+        <li><a href="features/" class="nav-link" data-i18n="features.fc338f">Features</a></li>
+        <li><a href="pricing/" class="nav-link" data-i18n="pricing.a0d9bb">Pricing</a></li>
+        <li><a href="faq/" class="nav-link" data-i18n="faq.03688b">FAQ</a></li>
         <li><a href="https://apps.apple.com/us/app/pano-owl/id1560273409" class="btn-buy" target="_blank" rel="noopener noreferrer" data-i18n="download-on-app-store.cf50c2">Download on App Store</a></li>
       </ul>
     </div>
@@ -461,6 +464,7 @@
           <p class="po-eyebrow"><span class="po-num">01</span><span data-i18n="capture.772a4b">Capture</span></p>
           <h2 class="po-display" data-i18n="aim-at-the-dot.6b641d">Aim at the Dot. It Shoots Itself.</h2>
           <p class="po-lede" data-i18n="guided-capture-pins-a.4165ed">Guided capture pins a grid of targets in the space around you and fires each frame the moment you're on one. Drift, and it throws the frame away.</p>
+          <a class="learn-more" href="features/#capture" data-i18n="learn-more.824d76">Learn more</a>
         </div>
         <figure class="po-figure" data-reveal>
           <img src="assets/screens/en/01-capture-800.webp?v=d1e8a354"
@@ -477,6 +481,7 @@
           <p class="po-eyebrow"><span class="po-num">02</span><span data-i18n="stitch.0bb861">Stitch</span></p>
           <h2 class="po-display" data-i18n="planar-cylindrical-or-a.4ab663">Planar, Cylindrical, or a Full 360</h2>
           <p class="po-lede" data-i18n="pick-a-projection-and.cedb35">Pick a projection and Pano Owl blends any number of photos, even frames from a video, into one seamless panorama. Its resolution isn't capped by your device's memory.</p>
+          <a class="learn-more" href="features/#stitch" data-i18n="learn-more.824d76">Learn more</a>
         </div>
         <figure class="po-figure" data-reveal>
           <img src="assets/screens/en/04-stitch-800.webp?v=973a0031"
@@ -493,6 +498,7 @@
           <p class="po-eyebrow"><span class="po-num">03</span><span data-i18n="view.69bd4e">View</span></p>
           <h2 class="po-display" data-i18n="step-inside-your-panorama.8a1f7b">Step Inside Your Panorama</h2>
           <p class="po-lede" data-i18n="tap-any-panorama-and.9e40a4">Tap any panorama and look around by dragging or moving your device. Every export carries 360 metadata, so Photos, web viewers and Apple Vision Pro see it as a 360.</p>
+          <a class="learn-more" href="features/#view" data-i18n="learn-more.824d76">Learn more</a>
         </div>
         <figure class="po-figure is-tablet" data-reveal>
           <img src="assets/screens/en/03-library-1440.webp?v=12cad2fb"
@@ -517,6 +523,7 @@
         <div class="security-badge" data-i18n-html="works-offline.4504f3"><span class="badge-icon">&#x1f4f6;</span> Works Offline</div>
       </div>
       <p class="security-audit-note" data-i18n="no-tracking-no-ads.5e7933">No tracking. No ads. Your panoramas are stitched right on your device.</p>
+      <a class="learn-more" href="pricing/" data-i18n="see-plans-and-prices.760c12">See plans and prices</a>
     </div>
   </section>
 
@@ -562,7 +569,7 @@
         <span class="faq-icon">▼</span>
       </button>
       <div class="faq-answer">
-        <p data-i18n="iphone-and-ipad-with.e11fbb">iPhone and iPad, with a native Mac app sharing the same Metal engine for heavier gigapixel work. Guided camera capture is on iPhone &amp; iPad; stitching, correcting, and viewing work everywhere.</p>
+        <p data-i18n="iphone-and-ipad-on.c22143">iPhone and iPad, on iOS and iPadOS 26 or later. Guided capture, stitching, correcting and the 360 viewer all run on the device itself.</p>
       </div>
     </div>
 
@@ -587,6 +594,7 @@
     </div>
 
     </div>
+    <p class="po-faq-more"><a class="learn-more" href="faq/" data-i18n="see-all-questions.237fee">See all questions</a></p>
   </section>
 
   <!-- Closing: the promise again, and the one button. -->

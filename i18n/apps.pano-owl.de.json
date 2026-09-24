@@ -14,7 +14,6 @@
   "frequently-asked-questions.d790b4": "Häufig gestellte Fragen",
   "got-questions.8ecca3": "Noch Fragen?",
   "how-many-photos-can.f52fc3": "Wie viele Fotos kann ich zusammenfügen?",
-  "iphone-and-ipad-with.e11fbb": "iPhone und iPad, dazu eine native Mac-App mit derselben Metal-Engine für aufwendigere Gigapixel-Arbeiten. Die geführte Kameraaufnahme gibt es auf iPhone & iPad; Zusammenfügen, Korrigieren und Betrachten funktionieren überall.",
   "no-tracking-no-ads.5e7933": "Kein Tracking. Keine Werbung. Deine Panoramen werden direkt auf deinem Gerät zusammengefügt.",
   "on-device-stitching.60f746": "<span class=\"badge-icon\">&#x1f5bc;&#xfe0f;</span> Stitching auf dem Gerät",
   "yes-pano-owl-is.29e000": "Ja. Pano Owl wird in der gesamten Europäischen Union verkauft, Frankreich eingeschlossen. Die App ist in allen App-Store-Ländern und -Regionen erhältlich, die Apple anbietet.",
@@ -48,5 +47,11 @@
   "tap-any-panorama-and.9e40a4": "Tippe auf ein Panorama und sieh dich um, per Wischen oder indem du dein Gerät bewegst. Jeder Export trägt 360-Metadaten, damit Fotos, Web-Viewer und Apple Vision Pro ihn als 360 erkennen.",
   "the-panorama-library-on.723ad8": "Die Panorama-Mediathek auf dem iPad, ein Raster aus 360-Panoramen",
   "the-stitch-screen-with.e3f4ca": "Der Bildschirm zum Zusammenfügen mit Projektionen und Optionen für automatisches Zuschneiden",
-  "view.69bd4e": "Ansehen"
+  "view.69bd4e": "Ansehen",
+  "iphone-and-ipad-on.c22143": "iPhone und iPad, ab iOS und iPadOS 26. Geführte Aufnahme, Zusammenfügen, Korrigieren und der 360-Viewer laufen alle direkt auf dem Gerät.",
+  "learn-more.824d76": "Mehr erfahren",
+  "overview.0efc2e": "Überblick",
+  "pricing.a0d9bb": "Preise",
+  "see-all-questions.237fee": "Alle Fragen ansehen",
+  "see-plans-and-prices.760c12": "Tarife und Preise ansehen"
 }
