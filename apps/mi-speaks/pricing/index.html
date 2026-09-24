@@ -66,9 +66,6 @@
     /* Cards and hairlines in the page's own paper and rule, in both schemes. */
     :root { --bg-card: var(--ms-paper-2); --border-color: var(--ms-rule); }
     .dp-compare td:not(.yes):not(.no) { font-weight: 500; }
-    /* The screen-reader "Yes"/"No" spans are position:absolute; without a positioned
-       wrapper they escape the scroll box and widen the page on phones. */
-    .dp-table-wrap { position: relative; }
     /* Two plans side by side fit a phone: let the rows wrap instead of scrolling. */
     .dp-compare { min-width: 0; }
     .dp-compare th[scope="row"] { position: static; }
