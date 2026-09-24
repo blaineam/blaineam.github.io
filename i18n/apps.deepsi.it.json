@@ -8,7 +8,6 @@
   "yes-deepsi-is-on.67af63": "Sì. DeepSi è in vendita in tutta l'Unione europea, Francia compresa. È disponibile in tutti i Paesi e le regioni dell'App Store offerti da Apple.",
   "download-on-app-store.cf50c2": "Scarica su App Store",
   "faq.03688b": "FAQ",
-  "features.fc338f": "Funzionalità",
   "frequently-asked-questions.d790b4": "Domande frequenti",
   "got-questions.8ecca3": "Hai domande?",
   "how-does-deepsi-work.e6e2a3": "Come funziona DeepSi al buio?",
@@ -49,5 +48,7 @@
   "works-offline.372393": "<span class=\"badge-icon\">✈️</span> Funziona offline",
   "yes-make-video-from.687050": "Sì. «Crea video dai fotogrammi» trasforma una serie di immagini in un video, «Ottieni ultime catture» passa le tue foto e i tuoi video DeepSi più recenti ad altre azioni, e puoi leggere o cambiare il tema di colore. Chiedi a Siri la tua ultima cattura DeepSi, senza configurare nulla.",
   "your-captures-go-to.deb7a6": "Le tue catture finiscono nella tua libreria Foto e da nessun’altra parte.",
-  "your-deepsi-album.2e02e7": "Il tuo album DeepSi"
+  "your-deepsi-album.2e02e7": "Il tuo album DeepSi",
+  "overview.0efc2e": "Panoramica",
+  "see-all-questions.237fee": "Vedi tutte le domande"
 }
