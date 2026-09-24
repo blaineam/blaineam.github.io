@@ -59,10 +59,11 @@
   /* ---- Chapters ------------------------------------------------------- */
   .hv-chapter { max-width: var(--hv-measure); margin: 0 auto; padding: clamp(4rem, 9vw, 7rem) 16px; border-top: 1px solid var(--hv-rule); }
   .hv-spread { display: grid; gap: clamp(2.5rem, 6vw, 5rem); align-items: center; }
-  .hv-copy { max-width: 34rem; }
+  .hv-copy { max-width: 34rem; margin-inline: auto; }
   @media (min-width: 900px) {
-    .hv-spread { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); }
-    .hv-chapter.is-flipped .hv-spread { grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); }
+    .hv-spread { grid-template-columns: minmax(0, 34rem) minmax(0, max-content); justify-content: center; }
+    .hv-chapter.is-flipped .hv-spread { grid-template-columns: minmax(0, max-content) minmax(0, 34rem); }
+    .hv-spread > figure { max-width: 100%; }
     .hv-chapter.is-flipped .hv-copy { order: 2; }
   }
   .hv-figure { margin: 0 auto; width: min(72vw, 340px); max-width: 100%; text-align: center; }
