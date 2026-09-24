@@ -270,5 +270,51 @@
         "scale": 2
       }
     ]
+  },
+  "blip": {
+    "repo": "Blip",
+    "renders": [
+      {
+        "device": "ipad",
+        "captures": "docs/appstore-screenshots/ipad-13",
+        "scenes": ["02-bench", "03-speed", "04-ping"],
+        "widths": [560, 1120]
+      }
+    ]
+  },
+  "haven": {
+    "repo": "Haven",
+    "renders": [
+      {
+        "device": "iphone",
+        "captures": "apple/screenshots/iphone-6.9",
+        "scenes": ["01-feed", "02-story", "03-thread", "04-call"],
+        "widths": [400, 800]
+      },
+      {
+        "device": "windows",
+        "captures": "desktop/screenshots/windows",
+        "scenes": ["feed"],
+        "widths": [720, 1440]
+      }
+    ]
+  },
+  "embr": {
+    "repo": "Embr/Embr",
+    "renders": [
+      {
+        "device": "iphone",
+        "captures": "screenshots/iphone-17-pro",
+        "scenes": ["01-hero-dark", "02-payoff", "03-addpayment"],
+        "widths": [400, 800]
+      },
+      {
+        "device": "watch",
+        "captures": "screenshots/watch-46mm",
+        "scenes": ["01-dashboard"],
+        "widths": [220, 440],
+        "scale": 2
+      }
+    ]
   }
 }
