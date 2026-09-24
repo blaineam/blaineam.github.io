@@ -221,6 +221,12 @@
     }
     .lm-figure { margin: 0 auto; width: min(72vw, 340px); text-align: center; }
     .lm-figure.is-watch { width: min(56vw, 240px); }
+    /* The Match story: a real before/after, not a device render. */
+    .lm-figure.is-match { width: min(92vw, 560px); max-width: 100%; }
+    .lm-match { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .lm-match .is-result { grid-column: 1 / -1; }
+    .lm-figure .lm-match img { filter: none; border-radius: 8px; }
+    .lm-plate-label { display: block; margin-top: 0.45rem; font-size: 0.8rem; color: var(--lm-quiet); text-align: left; }
     .lm-figure img { display: block; width: 100%; height: auto; filter: var(--lm-shadow); }
     .lm-figure figcaption {
       font-size: 0.88rem;
@@ -441,12 +447,31 @@
           <h2 class="lm-display" data-i18n="borrow-the-look-you.e16dae">Borrow the look you love</h2>
           <p class="lm-lede" data-i18n="pick-a-few-photos.bd1306">Pick a few photos as your styles, then develop a whole shoot at once. Luma matches each picture to the style that suits it best.</p>
         </div>
-        <figure class="lm-figure" data-reveal>
-          <img src="assets/screens/en/02-editor-800.webp?v=f368fa43"
-               srcset="assets/screens/en/02-editor-400.webp?v=e02efc70 400w, assets/screens/en/02-editor-800.webp?v=f368fa43 800w"
-               sizes="(max-width: 472px) 72vw, 340px" width="800" height="1655" loading="lazy" decoding="async" data-i18n-src
-               alt="Developed photos, each shown beside its original and the style it was matched to" data-i18n-attr="alt:developed-photos-each-shown.4b1af7">
-          <figcaption data-i18n="original-style-result.841572">Original, style, result</figcaption>
+        <figure class="lm-figure is-match" data-reveal>
+          <div class="lm-match">
+            <div class="lm-plate">
+              <img src="assets/images/match/night-reference-1024.webp?v=cf4acd72"
+                   srcset="assets/images/match/night-reference-512.webp?v=53885de6 512w, assets/images/match/night-reference-1024.webp?v=cf4acd72 1024w"
+                   sizes="(max-width: 608px) 45vw, 275px" width="1024" height="683" loading="lazy" decoding="async"
+                   alt="A vivid Milky Way above a mountain range, the look to match" data-i18n-attr="alt:a-vivid-milky-way.08423a">
+              <span class="lm-plate-label" data-i18n="the-look-you-want.f86fbd">The look you want</span>
+            </div>
+            <div class="lm-plate">
+              <img src="assets/images/match/night-before-1024.webp?v=3857831c"
+                   srcset="assets/images/match/night-before-512.webp?v=9ee80fe6 512w, assets/images/match/night-before-1024.webp?v=3857831c 1024w"
+                   sizes="(max-width: 608px) 45vw, 275px" width="1024" height="683" loading="lazy" decoding="async"
+                   alt="A dim, brownish night photograph of the Milky Way over a rock" data-i18n-attr="alt:a-dim-brownish-night.119557">
+              <span class="lm-plate-label" data-i18n="your-photo.227fef">Your photo</span>
+            </div>
+            <div class="lm-plate is-result">
+              <img src="assets/images/match/night-after-1024.webp?v=48ed893b"
+                   srcset="assets/images/match/night-after-512.webp?v=4872c40f 512w, assets/images/match/night-after-1024.webp?v=48ed893b 1024w"
+                   sizes="(max-width: 608px) 92vw, 560px" width="1024" height="683" loading="lazy" decoding="async"
+                   alt="The same night photograph after the match: a deep blue sky and a glowing Milky Way" data-i18n-attr="alt:the-same-night-photograph.05c736">
+              <span class="lm-plate-label" data-i18n="what-luma-handed-back.bb4f9f">What Luma handed back</span>
+            </div>
+          </div>
+          <figcaption data-i18n="nothing-retouched-by-hand.73bdf2">Nothing retouched by hand</figcaption>
         </figure>
       </div>
     </section>
