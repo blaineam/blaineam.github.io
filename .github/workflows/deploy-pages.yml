@@ -101,6 +101,11 @@ jobs:
             git push
           fi
 
+      # upload-pages-artifact tars the whole checkout minus .git/.github, so drop what the site
+      # never serves (the poster generator's node_modules, ~17 MB).
+      - name: Drop build-only files from the Pages payload
+        run: rm -rf scripts/node_modules
+
       - name: Configure Pages
         uses: actions/configure-pages@v5
 

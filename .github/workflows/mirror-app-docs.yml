@@ -86,6 +86,8 @@ jobs:
       # Filter rules:
       #   * exclude CNAME — the app's subdomain CNAME would hijack
       #     wemiller.com if copied up.
+      #   * exclude appstore-screenshots/ and *.monkr — App Store source captures (~350 MB) that
+      #     no page references; mirroring them tripled every Pages artifact.
       #   * protect `assets/images/` — the apps grid (apps/index.html) uses
       #     `apps/<slug>/assets/images/icon.png` as the card icon and that
       #     file isn't tracked inside each app's docs/. `protect` (P)
@@ -102,6 +104,7 @@ jobs:
               --exclude='CNAME' \
               --exclude='.git' \
               --exclude='.github' \
+              --exclude='appstore-screenshots/' --exclude='*.monkr' \
               "$src/docs/" "apps/$slug/"
           }
           sync_one blip  .mirror/blip
