@@ -13,7 +13,6 @@
   "does-it-work-on.c5db1d": "支持 iPad 吗？",
   "download-on-app-store.cf50c2": "在 App Store 下载",
   "faq.03688b": "常见问题",
-  "features.fc338f": "功能",
   "gamekit-only.58b497": "<span class=\"badge-icon\">🎮</span> 仅使用 GameKit",
   "got-questions.001f6d": "还有疑问？",
   "how-do-you-match.dcdeb6": "牌要怎么配对？",
@@ -54,5 +53,7 @@
   "the-mahjong-solitaire-that.dd3f45": "从不给你发一副死局的麻将连连看。",
   "the-tilebreak-home-screen.115501": "Tilebreak 主屏幕：经典与街机模式以及“开始”按钮",
   "themes.94d518": "主题",
-  "two-modes.ed5749": "两种模式"
+  "two-modes.ed5749": "两种模式",
+  "overview.0efc2e": "概览",
+  "see-all-questions.237fee": "查看全部问题"
 }

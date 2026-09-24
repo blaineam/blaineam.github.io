@@ -13,7 +13,6 @@
   "does-it-work-on.c5db1d": "iPad でも使えますか？",
   "download-on-app-store.cf50c2": "App Storeでダウンロード",
   "faq.03688b": "よくある質問",
-  "features.fc338f": "機能",
   "gamekit-only.58b497": "<span class=\"badge-icon\">🎮</span> GameKit のみ",
   "got-questions.001f6d": "よくあるご質問",
   "how-do-you-match.dcdeb6": "牌はどうやって揃えるのですか？",
@@ -54,5 +53,7 @@
   "the-mahjong-solitaire-that.dd3f45": "詰んだ盤面を、決して配らない麻雀ソリティア。",
   "the-tilebreak-home-screen.115501": "Tilebreakのホーム画面。クラシックとアーケードのモード、プレイボタン",
   "themes.94d518": "テーマ",
-  "two-modes.ed5749": "2つのモード"
+  "two-modes.ed5749": "2つのモード",
+  "overview.0efc2e": "概要",
+  "see-all-questions.237fee": "すべての質問を見る"
 }

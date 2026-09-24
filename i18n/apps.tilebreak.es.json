@@ -13,7 +13,6 @@
   "does-it-work-on.c5db1d": "¿Funciona en iPad?",
   "download-on-app-store.cf50c2": "Descargar en el App Store",
   "faq.03688b": "Preguntas frecuentes",
-  "features.fc338f": "Funciones",
   "gamekit-only.58b497": "<span class=\"badge-icon\">🎮</span> Solo GameKit",
   "got-questions.001f6d": "¿Tienes dudas?",
   "how-do-you-match.dcdeb6": "¿Cómo se emparejan las fichas?",
@@ -54,5 +53,7 @@
   "the-mahjong-solitaire-that.dd3f45": "El Mahjong solitario que nunca te reparte una partida perdida.",
   "the-tilebreak-home-screen.115501": "La pantalla de inicio de Tilebreak, con los modos Clásico y Arcade y el botón Jugar",
   "themes.94d518": "Temas",
-  "two-modes.ed5749": "Dos modos"
+  "two-modes.ed5749": "Dos modos",
+  "overview.0efc2e": "Resumen",
+  "see-all-questions.237fee": "Ver todas las preguntas"
 }

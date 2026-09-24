@@ -13,7 +13,6 @@
   "does-it-work-on.c5db1d": "iPad에서도 되나요?",
   "download-on-app-store.cf50c2": "App Store에서 다운로드",
   "faq.03688b": "자주 묻는 질문",
-  "features.fc338f": "기능",
   "gamekit-only.58b497": "<span class=\"badge-icon\">🎮</span> GameKit만 사용",
   "got-questions.001f6d": "궁금한 점이 있나요?",
   "how-do-you-match.dcdeb6": "패는 어떻게 맞추나요?",
@@ -54,5 +53,7 @@
   "the-mahjong-solitaire-that.dd3f45": "절대 막힌 판을 내주지 않는 마작 솔리테어.",
   "the-tilebreak-home-screen.115501": "클래식·아케이드 모드와 플레이 버튼이 있는 Tilebreak 홈 화면",
   "themes.94d518": "테마",
-  "two-modes.ed5749": "두 가지 모드"
+  "two-modes.ed5749": "두 가지 모드",
+  "overview.0efc2e": "개요",
+  "see-all-questions.237fee": "모든 질문 보기"
 }
