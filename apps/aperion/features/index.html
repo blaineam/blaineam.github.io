@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Features · Aperion</title>
+  <meta name="description" content="Everything Aperion did: mount and camera control, offline plate solving, auto-align, live stacking, mosaics, the hardware it ran on, and why it was shelved.">
+  <link rel="canonical" href="https://wemiller.com/apps/aperion/features/">
+  <meta property="og:title" content="Features · Aperion">
+  <meta property="og:description" content="Everything Aperion did: mount and camera control, offline plate solving, auto-align, live stacking, mosaics, the hardware it ran on, and why it was shelved.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://wemiller.com/apps/aperion/features/">
+  <meta property="og:image" content="https://wemiller.com/apps/aperion/assets/images/poster.jpg?v=8e5aec67">
+  <link rel="apple-touch-icon" href="../assets/images/icon.png?v=71bdcd44">
+  <link rel="icon" type="image/png" href="../assets/images/icon.png?v=71bdcd44">
+  <link rel="stylesheet" href="../../app-showcase.css?v=e9909304">
+  <link rel="stylesheet" href="../../_shared/depth.css?v=8787ba38">
+  <style>
+    :root {
+      --app-primary: #070A16;      /* the sky */
+      --app-secondary: #1B2748;    /* the sphere */
+      --app-accent: #C9D8FF;       /* starlight */
+      --primary-color: #1E2A55;    /* headlines on paper */
+      --secondary-color: #3D4F8C;
+      --ap-ink: #2E3F80;
+      --ap-accent-text: #8A3E62;   /* nebula rose, deepened for light ground */
+      --ap-display: ui-serif, "New York", "Iowan Old Style", "Palatino", Georgia, "Times New Roman", serif;
+      --ap-body-face: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+      --ap-display-weight: 600;
+      --ap-paper: #FAFAFC;
+      --ap-paper-2: #F0F1F6;
+      --ap-rule: rgba(30, 42, 85, 0.14);
+      --ap-quiet: #5C6178;
+      --ap-body: #2F3347;
+      --ap-shadow: drop-shadow(0 30px 40px rgba(7, 10, 22, 0.26)) drop-shadow(0 6px 10px rgba(7, 10, 22, 0.12));
+      --ap-hero-bg: radial-gradient(1.5px 1.5px at 14% 22%, rgba(255,255,255,0.9) 50%, transparent 51%), radial-gradient(1px 1px at 31% 12%, rgba(255,255,255,0.7) 50%, transparent 51%), radial-gradient(1px 1px at 66% 20%, rgba(255,255,255,0.8) 50%, transparent 51%), radial-gradient(1.5px 1.5px at 84% 30%, rgba(255,255,255,0.9) 50%, transparent 51%), radial-gradient(1px 1px at 9% 64%, rgba(255,255,255,0.6) 50%, transparent 51%), radial-gradient(1px 1px at 93% 58%, rgba(255,255,255,0.6) 50%, transparent 51%), radial-gradient(1px 1px at 48% 6%, rgba(255,255,255,0.7) 50%, transparent 51%), radial-gradient(ellipse 55% 40% at 50% 100%, rgba(214, 112, 160, 0.22) 0%, rgba(120, 90, 200, 0.10) 45%, transparent 75%), linear-gradient(175deg, #03040B 0%, #070A16 45%, #141D3A 100%);
+      --ap-hero-ink: #F4F6FF;
+      --ap-hero-kicker: rgba(201, 216, 255, 0.9);
+      --ap-cta-bg: linear-gradient(180deg, #FFFFFF, #D9E3FF);
+      --ap-cta-ink: #0B1026;
+      --ap-float: linear-gradient(135deg, #141D3A, #2A3866);
+      --ap-btn-shadow: 0 10px 28px rgba(7, 10, 22, 0.30);
+      --ap-ornament: linear-gradient(90deg, #C9D8FF, #D670A0);
+      --bg-primary: var(--ap-paper);
+      --bg-secondary: var(--ap-paper-2);
+      --text-primary: #12162B;
+      --text-secondary: var(--ap-body);
+      --text-muted: var(--ap-quiet);
+      --glass-bg: rgba(250, 250, 252, 0.8);
+      --glass-border: rgba(30, 42, 85, 0.10);
+      --glass-shadow: none;
+      --ap-measure: 1120px;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --primary-color: #C9D8FF;
+        --secondary-color: #9FB2E8;
+        --ap-ink: #C9D8FF;
+        --ap-accent-text: #EFA3C6;
+        --ap-paper: #05070F;
+        --ap-paper-2: #0B1020;
+        --ap-rule: rgba(201, 216, 255, 0.14);
+        --ap-quiet: #9DA3BD;
+        --ap-body: #D5D8E6;
+        --ap-shadow: drop-shadow(0 30px 44px rgba(0, 0, 0, 0.65)) drop-shadow(0 6px 10px rgba(0, 0, 0, 0.3));
+        --text-primary: #EEF1FA;
+        --glass-bg: rgba(5, 7, 15, 0.8);
+        --glass-border: rgba(201, 216, 255, 0.08);
+      }
+    }
+
+    :root { --bg-card: var(--ap-paper-2); --border-color: var(--ap-rule); }
+    body { background: var(--ap-paper); }
+    .dp-header h1, .dp-section > h2, .dp-closing h2 { font-family: var(--ap-display); font-weight: var(--ap-display-weight); }
+    .dp-eyebrow, .dp-card .dp-tag { color: var(--ap-accent-text); }
+    .dp-section a { color: var(--ap-ink); }
+    .dp-lede a { color: var(--ap-ink); }
+    .ap-prose { max-width: 44rem; }
+    .dp-card p + p { margin-top: 0.6rem; }
+    .ap-field { margin-top: 1rem; }
+    .ap-prose p { margin: 0 0 1.1rem; font-size: 1.04rem; line-height: 1.7; color: var(--ap-body); }
+    .ap-hw { min-width: 0; }
+    .ap-hw td { text-align: left; }
+    .hw-pill { display: inline-block; margin-right: 0.35rem; padding: 0.1rem 0.55rem; border-radius: 999px; border: 1px solid var(--ap-rule); font-size: 0.85rem; font-weight: 600; color: var(--ap-ink); }
+    .dp-list .badge-icon { margin-right: 0.4rem; }
+    .dp-closing .btn-buy { background: var(--ap-float); color: #fff; box-shadow: var(--ap-btn-shadow); }
+    .faq-answer p { font-size: 1rem; line-height: 1.68; color: var(--ap-body); }
+    .faq-answer a { color: var(--ap-ink); }
+    :lang(ko) .dp-header h1, :lang(ko) .dp-section > h2 { word-break: keep-all; }
+
+  </style>
+  <link rel="alternate" hreflang="x-default" href="https://wemiller.com/apps/aperion/features/">
+  <link rel="alternate" hreflang="en" href="https://wemiller.com/apps/aperion/features/">
+  <link rel="alternate" hreflang="zh-Hans" href="https://wemiller.com/apps/aperion/features/?lang=zh-Hans">
+  <link rel="alternate" hreflang="ja" href="https://wemiller.com/apps/aperion/features/?lang=ja">
+  <link rel="alternate" hreflang="de" href="https://wemiller.com/apps/aperion/features/?lang=de">
+  <link rel="alternate" hreflang="fr" href="https://wemiller.com/apps/aperion/features/?lang=fr">
+  <link rel="alternate" hreflang="es" href="https://wemiller.com/apps/aperion/features/?lang=es">
+  <link rel="alternate" hreflang="ko" href="https://wemiller.com/apps/aperion/features/?lang=ko">
+  <link rel="alternate" hreflang="pt-BR" href="https://wemiller.com/apps/aperion/features/?lang=pt-BR">
+  <link rel="alternate" hreflang="it" href="https://wemiller.com/apps/aperion/features/?lang=it">
+  <script src="/i18n/i18n.js?v=9b769779" defer data-page="apps.aperion.features" data-pos="bottom-left"></script>
+</head>
+<body>
+  <nav class="app-nav">
+    <div class="nav-container">
+      <a href="../../" class="nav-logo nav-brand" title="← Apps" aria-label="← Apps"
+         data-i18n-attr="title:apps.2d61f2;aria-label:apps.2d61f2">
+        <span class="nav-brand-back" aria-hidden="true">←</span>
+        <img class="nav-brand-icon" src="../assets/images/icon.png?v=71bdcd44" alt="" width="60" height="60">
+        <span class="nav-brand-name">Aperion</span>
+      </a>
+      <button class="mobile-menu-toggle" aria-label="Menu">☰</button>
+      <ul class="nav-links">
+        <li><a href="../" class="nav-link" data-i18n="overview.0efc2e">Overview</a></li>
+        <li><a href="../features/" class="nav-link" aria-current="page" data-i18n="features.fc338f">Features</a></li>
+        <li><a href="../faq/" class="nav-link" data-i18n="faq.03688b">FAQ</a></li>
+        <li><a href="https://github.com/blaineam/benro-polaris-firmware-patcher" target="_blank" rel="noopener noreferrer" class="btn-buy" data-cta>GitHub</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main>
+    <header class="dp-header">
+      <p class="dp-eyebrow">Aperion</p>
+      <h1 data-i18n="everything-aperion-did.11f54b">Everything Aperion did</h1>
+      <p class="dp-standfirst" data-i18n="the-whole-app-as.efffe5">The whole app as it was built: what it did, how auto-align worked, the hardware it ran on, and why it never shipped.</p>
+      <ul class="dp-jumps">
+        <li><a href="#features" data-i18n="features.fc338f">Features</a></li>
+        <li><a href="#workflow" data-i18n="workflow.d7a484">Workflow</a></li>
+        <li><a href="#hardware" data-i18n="hardware.b76ab6">Hardware</a></li>
+        <li><a href="#status" data-i18n="status.bae7d5">Status</a></li>
+      </ul>
+    </header>
+
+    <section class="dp-section" id="features">
+      <h2 data-i18n="three-tools-one-source.ee4658">Three Tools, One Source of Truth</h2>
+      <p class="dp-lede" data-i18n="no-swapping-between-the.74ddb8">No swapping between the Polaris app, Canon's control utility, and a plate-solving service. Aperion unified the entire capture loop.</p>
+      <p class="dp-lede" data-i18n-html="everything-below-describes-the.dfc9ea">Everything below describes the app as it was built. It was never released, and none of it is available to download —
+      see <a href="#status">why it's shelved</a>.</p>
+      <ul class="dp-grid">
+          <li class="dp-card">
+            <span class="dp-card-icon" aria-hidden="true">🎯</span>
+            <h3 data-i18n="integrated-mount-camera.99dfa3">Integrated Mount + Camera</h3>
+            <p data-i18n="one-screen-drives-the.4247e6">One screen drives the Benro Polaris mount over BLE + TCP and a Canon EOS body over CCAPI. Joystick, shutter, ISO wheels, and target picker all live together.</p>
+          </li>
+          <li class="dp-card">
+            <span class="dp-card-icon" aria-hidden="true">🛰️</span>
+            <h3 data-i18n="offline-plate-solving.9e67f7">Offline Plate Solving</h3>
+            <p data-i18n="the-same-astrometry-net.7796aa">The same astrometry.net algorithm that powers every serious astrophotography tool, running 100 % on-device. Bundled star-index files, no internet, no API round-trips — solves finish in under a second on the mount's air-gapped Wi-Fi.</p>
+          </li>
+          <li class="dp-card">
+            <span class="dp-card-icon" aria-hidden="true">🎯</span>
+            <h3 data-i18n="auto-align.888505">Auto-Align</h3>
+            <p data-i18n="shoot-solve-sync-nudge.46023a">Shoot → solve → sync → nudge, on repeat, until your target is centered. No two-star alignment walk. Sun, Moon, and planets resolved via live ephemeris.</p>
+          </li>
+          <li class="dp-card">
+            <span class="dp-card-icon" aria-hidden="true">🌌</span>
+            <h3 data-i18n="live-stacking.57fb8d">Live Stacking</h3>
+            <p data-i18n="translation-aligned-integration-with.c895b1">Translation-aligned integration with on-device star detection. The build-up preview updates every frame so you can watch faint nebulosity emerge in real time.</p>
+          </li>
+          <li class="dp-card">
+            <span class="dp-card-icon" aria-hidden="true">🧩</span>
+            <h3 data-i18n="mosaic-planner.8459d2">Mosaic Planner</h3>
+            <p data-i18n="set-two-corners-from.0b250e">Set two corners from the joystick and Aperion walks the rectangular grid for you with configurable overlap. Capture wide-field panels of the Milky Way without doing the trig.</p>
+          </li>
+          <li class="dp-card">
+            <span class="dp-card-icon" aria-hidden="true">🎬</span>
+            <h3 data-i18n="motion-timelapses.b2251c">Motion Timelapses</h3>
+            <p data-i18n="linear-pan-between-start.2b2433">Linear pan between start and end poses at your chosen frame rate. Optional sidereal tracking pins the stars while the foreground drifts.</p>
+          </li>
+          <li class="dp-card">
+            <span class="dp-card-icon" aria-hidden="true">📱</span>
+            <h3 data-i18n="ar-sky-chart.df2a38">AR Sky Chart</h3>
+            <p data-i18n="point-your-phone-at.17f719">Point your phone at the sky and see labeled targets overlaid via ARKit. Tap a galaxy or nebula to slew the mount and start the capture.</p>
+          </li>
+          <li class="dp-card">
+            <span class="dp-card-icon" aria-hidden="true">⌚</span>
+            <h3 data-i18n="apple-watch-companion.c710a1">Apple Watch Companion</h3>
+            <p data-i18n="full-mount-joystick-camera.19f906">Full mount joystick, camera-setting wheels, plate-solve trigger, and a zoomable preview — right on your wrist. Works over Bluetooth even when your phone is on the mount's hotspot.</p>
+          </li>
+          <li class="dp-card">
+            <span class="dp-card-icon" aria-hidden="true">🖥️</span>
+            <h3 data-i18n="mac-on-the-big.0a9d4a">Mac on the Big Canvas</h3>
+            <p data-i18n="same-source-tree-same.3f940e">Same source tree, same controls, larger workspace. Review the night's gallery, reprocess RAW frames, and rebuild stacks at desktop scale.</p>
+          </li>
+      </ul>
+    </section>
+
+    <section class="dp-section" id="workflow">
+      <h2 data-i18n="from-tap-to-framed.0faf37">From Tap to Framed in Seconds</h2>
+      <p class="dp-lede" data-i18n="the-closed-loop-that.21a3c0">The closed loop that replaces the two-star alignment walk most mounts still demand.</p>
+      <ol class="dp-grid">
+          <li class="dp-card">
+            <span class="dp-card-icon" aria-hidden="true">1</span>
+            <h3 data-i18n="pick-a-target.7bf77a">Pick a target</h3>
+            <p data-i18n="browse-the-catalog-the.a7ff59">Browse the catalog, the AR sky chart, or visible-tonight filtered by altitude.</p>
+          </li>
+          <li class="dp-card">
+            <span class="dp-card-icon" aria-hidden="true">2</span>
+            <h3 data-i18n="capture-a-frame.8470bd">Capture a frame</h3>
+            <p data-i18n="aperion-triggers-the-camera.f8cd4b">Aperion triggers the camera over CCAPI and pulls the JPEG preview down the network.</p>
+          </li>
+          <li class="dp-card">
+            <span class="dp-card-icon" aria-hidden="true">3</span>
+            <h3 data-i18n="solve-offline.f3e823">Solve offline</h3>
+            <p data-i18n="the-bundled-star-pattern.e4f132">The bundled star-pattern matcher figures out exactly where the camera is pointing — no internet required.</p>
+          </li>
+          <li class="dp-card">
+            <span class="dp-card-icon" aria-hidden="true">4</span>
+            <h3 data-i18n="sync-nudge.04a521">Sync &amp; nudge</h3>
+            <p data-i18n="the-mount-syncs-to.c12065">The mount syncs to the solved coordinate and slews the residual error. Loop until the target is centered.</p>
+          </li>
+      </ol>
+      <ul class="dp-grid ap-field">
+          <li class="dp-card">
+            <span class="dp-card-icon" aria-hidden="true">🛰️</span>
+            <h3 data-i18n="plate-solving-that-actually.a151d0">Plate Solving That Actually Works in the Field</h3>
+            <p data-i18n="most-plate-solving-workflows.6d9dc2">Most plate-solving workflows assume you have a reliable internet connection at your dark site.
+          You don't. Aperion ships the catalog and the pattern matcher inside the app and runs the
+          solve on the device's neural and CPU cores.</p>
+            <p data-i18n="that-means-the-loop.dfe0b5">That means the loop closes in seconds even when you're tethered to the mount's
+          air-gapped Wi-Fi hotspot — the only network you actually have at 11pm in a national forest.</p>
+          </li>
+          <li class="dp-card">
+            <span class="dp-card-icon" aria-hidden="true">⌚</span>
+            <h3 data-i18n="the-watch-you-already.84c866">The Watch You Already Wear, Now in Charge</h3>
+            <p data-i18n="walk-away-from-the.ae66f4">Walk away from the tripod. The Apple Watch companion gives you the full mount joystick, ISO and shutter
+          wheels, lens picker, framing-corner capture, plate-solve trigger, and a zoomable live preview of both
+          the raw viewfinder and the in-progress stack.</p>
+            <p data-i18n="pairing-happens-automatically-over.76150d">Pairing happens automatically over WatchConnectivity even when the phone is joined to the mount's
+          offline Wi-Fi network — a surprisingly hard problem that Aperion just handles.</p>
+          </li>
+          <li class="dp-card">
+            <span class="dp-card-icon" aria-hidden="true">🧩</span>
+            <h3 data-i18n="mosaics-motion-without-the.aeaaca">Mosaics &amp; Motion, Without the Spreadsheet</h3>
+            <p data-i18n="frame-your-two-corners.c889ac">Frame your two corners from the joystick. Aperion computes the tile grid, the overlap, and walks
+          the mount through every panel — capturing each frame with the same exposure ladder.</p>
+            <p data-i18n="for-motion-timelapses-set.84cbb0">For motion timelapses, set a start pose and an end pose, pick a duration and frame rate, and let
+          the linear interpolator drive the mount. Toggle sidereal tracking to keep the stars pinned while
+          the landscape rolls beneath them.</p>
+          </li>
+      </ul>
+    </section>
+
+    <section class="dp-section" id="hardware">
+      <h2 data-i18n="hardware-compatibility.b40f7c">Hardware Compatibility</h2>
+      <p class="dp-lede" data-i18n="aperion-runs-end-to.1071e8">Aperion runs end-to-end on this stack — and degrades gracefully without it.</p>
+      <div class="dp-table-wrap">
+        <table class="dp-compare ap-hw">
+          <thead>
+            <tr><th scope="col" data-i18n="piece.bdc89e">Piece</th><th scope="col" data-i18n="minimum.5d398e">Minimum</th></tr>
+          </thead>
+          <tbody>
+              <tr><th scope="row" data-i18n="mount.25ee09">Mount</th><td data-i18n-html="benro-polaris-ble-wake.8378b2"><span class="hw-pill">Benro Polaris</span> BLE wake + TCP 9090 rocker protocol</td></tr>
+              <tr><th scope="row" data-i18n="camera.4da9c9">Camera</th><td data-i18n-html="canon-eos-with-ccapi.b8d755"><span class="hw-pill">Canon EOS</span> with CCAPI — tested on R5 Mark II (firmware 1.2)</td></tr>
+              <tr><th scope="row" data-i18n="other-cameras.d4c879">Other cameras</th><td data-i18n-html="libgphoto2-nikon-sony-fuji.bf09d4"><span class="hw-pill">libgphoto2</span> Nikon, Sony, Fuji, Olympus over USB tether — anything gphoto2 supports</td></tr>
+              <tr><th scope="row">iPhone</th><td data-i18n="ios-26-a15-or.c99a97">iOS 26, A15 or newer (ARKit orientation tracking)</td></tr>
+              <tr><th scope="row">Apple Watch</th><td data-i18n="watchos-11-series-6.bcab7e">watchOS 11, Series 6 or newer</td></tr>
+              <tr><th scope="row">Mac</th><td data-i18n="macos-26-apple-silicon.94a121">macOS 26, Apple Silicon</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="dp-fine" data-i18n="no-mount-a-plain.e6a792">No mount? A plain tripod works too. The slew and goto controls politely grey themselves out; capture, offline plate solving, live stacks, and the AR sky chart all still run as expected.</p>
+    </section>
+
+    <section class="dp-section" id="privacy">
+      <h2 data-i18n="hardened-by-design.084a16">Hardened by Design</h2>
+      <p class="dp-lede" data-i18n="all-capture-plate-solving.ecf1eb">All capture, plate solving, and stacking happens on your device — no servers, no accounts.</p>
+      <ul class="dp-list">
+        <li data-i18n-html="on-device-capture-solve.f7b8da"><span class="badge-icon">&#x1f4f7;</span> On-Device Capture &amp; Solve</li>
+        <li data-i18n-html="no-telemetry.ff5909"><span class="badge-icon">&#x1f50c;</span> No Telemetry</li>
+        <li data-i18n-html="local-network-only.e66350"><span class="badge-icon">&#x1f512;</span> Local Network Only</li>
+        <li data-i18n-html="memory-safe-swift.ecb239"><span class="badge-icon">&#x2705;</span> Memory-Safe Swift</li>
+      </ul>
+    </section>
+
+    <section class="dp-section" id="status">
+      <h2 data-i18n="why-aperion-was-shelved.90d068">Why Aperion Was Shelved</h2>
+      <p class="dp-lede" data-i18n="it-was-planned-as.9c2e53">It was planned as a $9.99 universal purchase. It never shipped, and it isn't going to.</p>
+      <ul class="dp-list">
+        <li data-i18n="app-store-approval-was.0c8cdb">App Store approval was never a realistic bet</li>
+        <li data-i18n="mount-control-relied-on.3d8d76">Mount control relied on an unofficial protocol</li>
+        <li data-i18n="neither-benro-nor-apple.cacbe4">Neither Benro nor Apple had reason to bless it</li>
+        <li data-i18n="my-polaris-is-out.c166b5">My Polaris is out of warranty — nothing to risk</li>
+        <li data-i18n="a-firmware-patch-solves.cd67be">A firmware patch solves it on the device instead</li>
+        <li data-i18n="the-mount-can-now.3d6e4a">The mount can now shoot all night unattended</li>
+        <li data-i18n="that-work-is-open.1d5cd2">That work is open source and free</li>
+      </ul>
+      <div class="ap-prose" style="margin-top: 2rem;">
+        <p data-i18n="aperion-talked-to-the.41ff89">Aperion talked to the Benro Polaris over a reverse-engineered BLE + TCP protocol. That is fine for a personal
+        tool and a hard sell as a shipping product: the control path is undocumented, unsupported, and could break with
+        any mount firmware update, and getting it sanctioned — by Benro, or through App Store review — was never a bet
+        worth building a release around. Since my own Polaris is well past its warranty period, there was also nothing
+        left to protect by staying on the sanctioned side of that line.</p>
+        <p data-i18n-html="patching-the-mount-s.2c4290">Patching the mount's firmware directly turned out to be the better workaround. The intelligence lives
+        <strong style="color: var(--text-primary);">on the device</strong> rather than in a phone app, so the Polaris
+        runs a full session — slews, dwells, shutter triggers — without my phone tethered to it and without an app
+        driving it all night. No dead battery, no dropped BLE link at 3 a.m., no session lost because a phone locked up.</p>
+        <p data-i18n-html="so-aperion-is-shelved.826e6b">So Aperion is shelved: no longer maintained, never released, and removed from the
+        <a href="../../">apps directory</a>. Its goal lives on in the open-source
+        <a href="https://github.com/blaineam/benro-polaris-firmware-patcher" target="_blank" rel="noopener noreferrer">Benro Polaris Firmware Patcher</a>,
+        which is free and does the job better.</p>
+      </div>
+    </section>
+  </main>
+
+  <section class="dp-closing">
+    <h2 data-i18n="deep-sky-astrophotography-shelved.dc58e9">Deep-sky astrophotography, shelved.</h2>
+    <a href="https://github.com/blaineam/benro-polaris-firmware-patcher" target="_blank" rel="noopener noreferrer" class="btn-buy" data-cta data-i18n="get-the-firmware-patcher.5fd1a9">Get the Firmware Patcher</a>
+    <p class="dp-alt"><a href="../" data-i18n="back-to-the-overview.e274c2">Back to the overview</a></p>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-links">
+        <a href="../../" class="footer-link" data-i18n="all-apps.429449">All Apps</a>
+        <a href="../../pinline/" class="footer-link">Pinline</a>
+        <a href="../../enter-space/" class="footer-link">Enter Space</a>
+        <a href="../../blip/" class="footer-link">Blip</a>
+        <a href="../../ari-helper/" class="footer-link">Ari Helper</a>
+        <a href="../../sami/" class="footer-link">Sami</a>
+        <a href="../../tilebreak/" class="footer-link">Tilebreak</a>
+        <a href="../../mi-speaks/" class="footer-link">Mi Speaks</a>
+        <a href="../../embr/" class="footer-link">Embr</a>
+        <a href="../../deepsi/" class="footer-link">DeepSi</a>
+        <a href="../../luma-editor/" class="footer-link">Luma Editor</a>
+        <a href="../../wise-flyer/" class="footer-link">Wise Flyer</a>
+        <a href="../../glint/" class="footer-link">Glint</a>
+        <a href="/privacy/" class="footer-link" data-i18n="privacy.cf0148">Privacy</a>
+        <a href="/terms/" class="footer-link" data-i18n="terms.a55a27">Terms</a>
+        <a href="/support/" class="footer-link" data-i18n="support.f32d5a">Support</a>
+        <a href="/" class="footer-link" data-i18n="portfolio.036b18">Portfolio</a>
+      </div>
+
+      <!-- Social Media Links -->
+      <div class="footer-social-links">
+        <a href="https://x.com/apps_by_blaine" class="social-icon-link" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)">
+          <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+          </svg>
+        </a>
+        <a href="https://www.instagram.com/apps.by.blaine/" class="social-icon-link" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+          <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+          </svg>
+        </a>
+        <a href="https://www.youtube.com/@AppsByBlaine" class="social-icon-link" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+          <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+          </svg>
+        </a>
+      </div>
+
+      <p style="color: var(--text-muted); margin-top: var(--spacing-md);" data-i18n-html="blaine-miller-all-rights.b327c2">
+        © <span id="year"></span> Blaine Miller. All rights reserved.
+      </p>
+    </div>
+  </footer>
+
+  <script src="../../app-showcase.js?v=0ce231d7"></script>
+</body>
+</html>

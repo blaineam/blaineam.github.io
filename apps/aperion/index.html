@@ -355,6 +355,7 @@
     .ap-closing .ap-display { font-size: clamp(2rem, 5vw, 3.4rem); max-width: 14ch; margin: 0 auto 1.8rem; }
     .ap-closing .btn-buy { background: var(--ap-float); color: #fff; padding: 0.8rem 1.5rem; border-radius: 999px; min-height: 44px; }
     .footer { margin-top: 0; }
+    .faq-more { margin: 2rem 0 0; text-align: center; }
 
     /* ---- Reveal: only when motion is welcome ----------------------------- */
     .ap-motion [data-reveal] {
@@ -415,8 +416,9 @@
       </a>
       <button class="mobile-menu-toggle">☰</button>
       <ul class="nav-links">
-        <li><a href="#features" class="nav-link" data-i18n="features.fc338f">Features</a></li>
-        <li><a href="#faq" class="nav-link" data-i18n="faq.03688b">FAQ</a></li>
+        <li><a href="./" class="nav-link" aria-current="page" data-i18n="overview.0efc2e">Overview</a></li>
+        <li><a href="features/" class="nav-link" data-i18n="features.fc338f">Features</a></li>
+        <li><a href="faq/" class="nav-link" data-i18n="faq.03688b">FAQ</a></li>
         <li><a href="https://github.com/blaineam/benro-polaris-firmware-patcher" target="_blank" rel="noopener noreferrer" class="btn-buy">GitHub</a></li>
       </ul>
     </div>
@@ -462,6 +464,7 @@
           <p class="ap-eyebrow"><span class="ap-num">01</span><span data-i18n="align.c83b0e">Align</span></p>
           <h2 class="ap-display" data-i18n="framed-in-seconds.dbdb6e">Framed in seconds</h2>
           <p class="ap-lede" data-i18n="aperion-shot-a-frame.4a3569">Aperion shot a frame, plate-solved it on the device and nudged the mount until the target sat in the middle. No internet, and no two-star alignment.</p>
+          <a class="learn-more" href="features/#workflow" data-i18n="learn-more.824d76">Learn more</a>
         </div>
         <figure class="ap-figure is-tablet" data-reveal>
           <img src="assets/screens/en/camera-960.webp?v=a523c9c3"
@@ -495,6 +498,7 @@
           <p class="ap-eyebrow"><span class="ap-num">03</span><span data-i18n="sessions.e11e37">Sessions</span></p>
           <h2 class="ap-display" data-i18n="sessions-that-ran-themselves.29265a">Sessions that ran themselves</h2>
           <p class="ap-lede" data-i18n="single-frames-live-stacks.3fb9f7">Single frames, live stacks, mosaics and motion timelapses, with tracking that could switch on the moment a target locked.</p>
+          <a class="learn-more" href="features/#features" data-i18n="learn-more.824d76">Learn more</a>
         </div>
         <figure class="ap-figure" data-reveal>
           <img src="assets/screens/en/03-plan-800.webp?v=78b74377"
@@ -601,6 +605,7 @@
       </div>
     </div>
     </div>
+      <p class="faq-more"><a class="learn-more" href="faq/" data-i18n="see-all-questions.237fee">See all questions</a></p>
   </section>
 
   <!-- Closing: the promise again, and the one button. -->
