@@ -378,6 +378,11 @@
     :lang(ja) .lm-closing .lm-display, :lang(zh) .lm-closing .lm-display, :lang(ko) .lm-closing .lm-display { max-width: 10em; }
     :lang(ja) .lm-hero-standfirst, :lang(zh) .lm-hero-standfirst, :lang(ko) .lm-hero-standfirst,
     :lang(ja) .security-audit-note, :lang(zh) .security-audit-note, :lang(ko) .security-audit-note { max-width: 26em; }
+    /* ---- Into the depth pages ------------------------------------------ */
+    .lm-trust-more { margin: 1.2rem 0 0; text-align: center; }
+    .lm-trust .learn-more { color: var(--lm-hero-em, var(--app-accent)); }
+    .faq-more { margin: 1.6rem auto 0; max-width: 800px; text-align: center; }
+    .lm-copy .learn-more { color: var(--lm-accent-ink); }
   </style>
   <link rel="alternate" hreflang="x-default" href="https://wemiller.com/apps/luma-editor/">
   <link rel="alternate" hreflang="en" href="https://wemiller.com/apps/luma-editor/">
@@ -403,8 +408,10 @@
       </a>
       <button class="mobile-menu-toggle">☰</button>
       <ul class="nav-links">
-        <li><a href="#features" class="nav-link" data-i18n="features.fc338f">Features</a></li>
-        <li><a href="#faq" class="nav-link" data-i18n="faq.03688b">FAQ</a></li>
+        <li><a href="./" class="nav-link" aria-current="page" data-i18n="overview.0efc2e">Overview</a></li>
+        <li><a href="features/" class="nav-link" data-i18n="features.fc338f">Features</a></li>
+        <li><a href="pricing/" class="nav-link" data-i18n="pricing.a0d9bb">Pricing</a></li>
+        <li><a href="faq/" class="nav-link" data-i18n="faq.03688b">FAQ</a></li>
         <li><a href="https://apps.apple.com/us/app/luma-editor/id6741085424" target="_blank" rel="noopener noreferrer" class="btn-buy">App Store</a></li>
       </ul>
     </div>
@@ -446,6 +453,7 @@
           <p class="lm-eyebrow"><span class="lm-num">01</span><span data-i18n="match.033520">Match</span></p>
           <h2 class="lm-display" data-i18n="borrow-the-look-you.e16dae">Borrow the look you love</h2>
           <p class="lm-lede" data-i18n="pick-a-few-photos.bd1306">Pick a few photos as your styles, then develop a whole shoot at once. Luma matches each picture to the style that suits it best.</p>
+          <a class="learn-more" href="features/#match" data-i18n="learn-more.824d76">Learn more</a>
         </div>
         <figure class="lm-figure is-match" data-reveal>
           <div class="lm-match">
@@ -482,6 +490,7 @@
           <p class="lm-eyebrow"><span class="lm-num">02</span><span data-i18n="develop.9e4bd0">Develop</span></p>
           <h2 class="lm-display" data-i18n="a-real-editor-underneath.1f9e4b">A real editor underneath</h2>
           <p class="lm-lede" data-i18n="every-match-arrives-as.8ac718">Every match arrives as sliders, tone curves and an eight-band colour mixer you can keep editing. RAW develops from the full sensor data.</p>
+          <a class="learn-more" href="features/#develop" data-i18n="learn-more.824d76">Learn more</a>
         </div>
         <figure class="lm-figure" data-reveal>
           <img src="assets/screens/en/07-curves-800.webp?v=ebfcd281"
@@ -498,6 +507,7 @@
           <p class="lm-eyebrow"><span class="lm-num">03</span><span data-i18n="masks.6c0611">Masks</span></p>
           <h2 class="lm-display" data-i18n="change-just-part-of.f49463">Change just part of it</h2>
           <p class="lm-lede" data-i18n="gradients-light-and-colour.b0d5e4">Gradients, light and colour ranges, or the subject and background found on your device. Each mask gets its own full set of adjustments.</p>
+          <a class="learn-more" href="features/#develop" data-i18n="learn-more.824d76">Learn more</a>
         </div>
         <figure class="lm-figure" data-reveal>
           <img src="assets/screens/en/04-masks-800.webp?v=9dba3019"
@@ -514,6 +524,7 @@
           <p class="lm-eyebrow"><span class="lm-num">04</span><span data-i18n="retouch.d0b8e9">Retouch</span></p>
           <h2 class="lm-display" data-i18n="tap-a-blemish-it.097522">Tap a blemish. It's gone.</h2>
           <p class="lm-lede" data-i18n="luma-rebuilds-the-spot.cec564">Luma rebuilds the spot from the texture around it. Each repair stays an adjustment you can move or remove a month later.</p>
+          <a class="learn-more" href="features/#retouch" data-i18n="learn-more.824d76">Learn more</a>
         </div>
         <figure class="lm-figure" data-reveal>
           <img src="assets/screens/en/06-retouch-800.webp?v=86c9f36e"
@@ -530,6 +541,7 @@
           <p class="lm-eyebrow"><span class="lm-num">05</span><span data-i18n="cull.0094b5">Cull</span></p>
           <h2 class="lm-display" data-i18n="keep-the-best-of.489075">Keep the best of the burst</h2>
           <p class="lm-lede" data-i18n="luma-groups-near-duplicates.86ae84">Luma groups near-duplicates and suggests the keeper by focus, open eyes and exposure. Picks go to a Luma Keepers album, and nothing is ever deleted.</p>
+          <a class="learn-more" href="features/#cull" data-i18n="learn-more.824d76">Learn more</a>
         </div>
         <figure class="lm-figure" data-reveal>
           <img src="assets/screens/en/08-culling-800.webp?v=6a3d5b25"
@@ -553,6 +565,7 @@
         <div class="security-badge" data-i18n-html="iphone-ipad-and-mac.7f395b"><span class="badge-icon">📱</span> iPhone, iPad and Mac</div>
       </div>
       <p class="security-audit-note" data-i18n="14-99-once-in.5d22fd">$14.99 once in the US, with every update included.</p>
+      <p class="lm-trust-more"><a class="learn-more" href="pricing/" data-i18n="see-the-price.01e749">See the price</a></p>
     </div>
   </section>
 
@@ -632,6 +645,7 @@
       </div>
     </div>
     </div>
+    <p class="faq-more"><a class="learn-more" href="faq/" data-i18n="see-all-questions.237fee">See all questions</a></p>
   </section>
 
   <!-- Closing: the promise again, and the one button. -->
