@@ -493,9 +493,14 @@
         .rv-story-lab .rv-spread { max-width: 1088px; margin: 0 auto; }
         .rv-story-lab .rv-eyebrow { color: #e06046; }
         .rv-spread { display: grid; gap: clamp(2.5rem, 6vw, 5rem); align-items: center; }
-        .rv-copy { max-width: 34rem; }
+        .rv-copy { max-width: 34rem; margin-inline: auto; }
+        /* Sized to content and centered as one group (the shared story contract in
+           app-showcase.css, which this page doesn't load): 5fr/6fr tracks left the
+           copy on the left edge and the phone adrift in an oversized right track. */
         @media (min-width: 900px) {
-            .rv-spread { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); }
+            .rv-spread { grid-template-columns: minmax(0, 34rem) minmax(0, max-content); justify-content: center; }
+            .rv-story.is-flipped .rv-spread { grid-template-columns: minmax(0, max-content) minmax(0, 34rem); }
+            .rv-spread > figure { max-width: 100%; }
             .rv-story.is-flipped .rv-copy { order: 2; }
         }
         .rv-eyebrow {

@@ -1020,3 +1020,34 @@ p {
     display: none;
   }
 }
+
+/* ---- Stories: one layout contract for every app page ----------------------
+   Each page prefixes its own classes (.sa-chapter / .sa-spread / .sa-copy,
+   .kn-chapter, …), so these rules match the pattern rather than a name: the
+   layout can't drift page by page, and a page that mistypes its own measure
+   token (Kern, Pinline, Ridgeshot and Tile Break once declared --x-measure
+   outside :root, so it never applied) still gets a centered story.
+
+   The spread is sized to its content and centered as one group — copy column
+   at most 34rem, device column exactly as wide as the device — instead of
+   5fr/6fr tracks that left the copy against the left edge and the phone
+   floating in the middle of an oversized right track. Flipped stories mirror
+   the tracks. Below 900px everything stacks, as each page already does. */
+section[class*="-chapter"] {
+  width: 100%;
+  max-width: var(--story-measure, 1120px);
+  margin-inline: auto;
+}
+/* Stacked (tablet portrait), the copy block centers over the device instead of
+   hugging the left edge of a column that is wider than its 34rem measure. */
+section[class*="-chapter"] > [class*="-spread"] > :not(figure) { margin-inline: auto; }
+@media (min-width: 900px) {
+  section[class*="-chapter"] > [class*="-spread"] {
+    grid-template-columns: minmax(0, 34rem) minmax(0, max-content);
+    justify-content: center;
+  }
+  section[class*="-chapter"].is-flipped > [class*="-spread"] {
+    grid-template-columns: minmax(0, max-content) minmax(0, 34rem);
+  }
+  section[class*="-chapter"] > [class*="-spread"] > figure { max-width: 100%; }
+}
