@@ -33,6 +33,18 @@ PAGES = [
     ]
 ]
 
+# Depth pages (docs/app-page-design.md §2): apps/<slug>/{features,pricing,faq}/index.html, each
+# with its own dictionary i18n/apps.<slug>.<sub>.<lang>.json. Picked up as soon as the file exists.
+DEPTH_PAGES = ("features", "pricing", "faq")
+PAGES += [
+    (f"apps/{slug}/{sub}/index.html", f"apps.{slug}.{sub}",
+     f"https://wemiller.com/apps/{slug}/{sub}/", "bottom-left")
+    for slug in sorted(p.name for p in pathlib.Path(REPO, "apps").iterdir() if p.is_dir())
+    for sub in DEPTH_PAGES
+    if pathlib.Path(REPO, "apps", slug, sub, "index.html").is_file()
+    and slug not in ("haven", "blip", "glint", "lathe")  # mirrored: tagged in their own repos
+]
+
 LANGS = ["zh-Hans", "ja", "de", "fr", "es", "ko", "pt-BR", "it"]
 
 VOID = {"area", "base", "br", "col", "embed", "hr", "img", "input", "link",

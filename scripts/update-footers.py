@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Rewrite the <div class="footer-links"> block on every /apps/<slug>/index.html
-page to the canonical list below. Each page excludes itself (matches existing
+page — and on its depth pages, apps/<slug>/{features,pricing,faq}/index.html —
+to the canonical list below. Each page excludes itself (matches existing
 convention on most pages; normalizes the outliers like Asteroic that didn't
 include themselves, and adds Blip/Glint that previously lived on subdomains).
 
@@ -70,15 +71,19 @@ SITE_LINKS = [
 ]
 
 
-def build_block(self_slug: str) -> str:
+# Depth pages share their landing page's footer, one directory further down.
+DEPTH_PAGES = ("features", "pricing", "faq")
+
+
+def build_block(self_slug: str, up: str = "../") -> str:
     lines = ['<div class="footer-links">',
-             '        <a href="../" class="footer-link" data-i18n="all-apps.429449">All Apps</a>']
+             f'        <a href="{up}" class="footer-link" data-i18n="all-apps.429449">All Apps</a>']
     for slug, label in ORDER:
         if slug == self_slug:
             continue
-        lines.append(f'        <a href="../{slug}/" class="footer-link">{label}</a>')
+        lines.append(f'        <a href="{up}{slug}/" class="footer-link">{label}</a>')
     for slug, label in PAGE_EXTRAS.get(self_slug, []):
-        lines.append(f'        <a href="../{slug}/" class="footer-link">{label}</a>')
+        lines.append(f'        <a href="{up}{slug}/" class="footer-link">{label}</a>')
     for href, label, key in SITE_LINKS:
         lines.append(f'        <a href="{href}" class="footer-link" data-i18n="{key}">{label}</a>')
     lines.append('      </div>')
@@ -96,24 +101,27 @@ def main() -> int:
     for slug in slugs:
         if slug in MIRRORED or slug in BESPOKE:
             continue
-        html_path = APPS / slug / "index.html"
-        if not html_path.exists():
+        if not (APPS / slug / "index.html").exists():
             print(f"skip {slug}: no index.html")
             continue
-        html = html_path.read_text()
-        new_block = build_block(slug)
-        new_html, count = FOOTER_RE.subn(new_block, html, count=1)
-        if count == 0:
-            print(f"WARN {slug}: no <div class=\"footer-links\"> found")
-            continue
-        if new_html == html:
-            print(f"unchanged {slug}")
-        elif args.check:
-            stale.append(slug)
-            print(f"would update {slug}")
-        else:
-            html_path.write_text(new_html)
-            print(f"updated {slug}")
+        targets = [(slug, APPS / slug / "index.html", "../")]
+        targets += [(f"{slug}/{sub}", APPS / slug / sub / "index.html", "../../")
+                    for sub in DEPTH_PAGES if (APPS / slug / sub / "index.html").exists()]
+        for label, html_path, up in targets:
+            html = html_path.read_text()
+            new_block = build_block(slug, up)
+            new_html, count = FOOTER_RE.subn(new_block, html, count=1)
+            if count == 0:
+                print(f"WARN {label}: no <div class=\"footer-links\"> found")
+                continue
+            if new_html == html:
+                print(f"unchanged {label}")
+            elif args.check:
+                stale.append(label)
+                print(f"would update {label}")
+            else:
+                html_path.write_text(new_html)
+                print(f"updated {label}")
     return 1 if stale else 0
 
 

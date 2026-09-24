@@ -1,0 +1,237 @@
+/* Depth pages — apps/<slug>/features/, pricing/, faq/ (docs/app-page-design.md §2).
+ *
+ * The landing page is a funnel and stays short. These pages hold everything a
+ * curious reader drills into: the full feature catalogue, every price and the
+ * comparison chart, the complete FAQ. Grids, tables and long answers are fine
+ * here — the rule is "one topic per page", not "short".
+ *
+ * Load after ../../app-showcase.css. Every colour comes from the tokens the
+ * page already sets for its landing page (--primary-color, --bg-primary,
+ * --text-primary, …), so a depth page is re-toned by pasting the landing
+ * page's :root block — nothing in here names an app.
+ */
+
+:root {
+  --dp-measure: 1120px;
+  --dp-ink: var(--text-primary);
+  --dp-body: var(--text-secondary);
+  --dp-quiet: var(--text-muted);
+  --dp-paper: var(--bg-primary);
+  --dp-paper-2: var(--bg-secondary);
+  --dp-rule: var(--border-color);
+  --dp-accent: var(--primary-color);
+  --dp-card: var(--bg-card);
+}
+
+body { background: var(--dp-paper); }
+
+/* ---- Page header: what this page is, in one line ------------------------ */
+.dp-header {
+  max-width: var(--dp-measure);
+  margin: 0 auto;
+  padding: calc(70px + clamp(2.5rem, 7vw, 5rem)) 16px clamp(2rem, 5vw, 3.5rem);
+  text-align: center;
+}
+.dp-eyebrow {
+  margin: 0 0 0.9rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--dp-accent);
+}
+.dp-header h1 {
+  margin: 0 auto;
+  max-width: 18ch;
+  font-size: clamp(2.3rem, 6vw, 4.2rem);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--dp-ink);
+  text-wrap: balance;
+  word-break: auto-phrase;
+}
+.dp-standfirst {
+  margin: 1.1rem auto 0;
+  max-width: 40rem;
+  font-size: clamp(1.08rem, 1.8vw, 1.3rem);
+  line-height: 1.6;
+  color: var(--dp-body);
+  text-wrap: pretty;
+}
+:lang(ja) .dp-header h1, :lang(zh) .dp-header h1, :lang(ko) .dp-header h1 { max-width: 12em; }
+
+/* In-page jump links: a quiet row of chips, never a table of contents block. */
+.dp-jumps {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+  margin: 1.6rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+.dp-jumps a {
+  display: inline-block;
+  padding: 0.45rem 0.9rem;
+  border: 1px solid var(--dp-rule);
+  border-radius: 999px;
+  font-size: 0.9rem;
+  color: var(--dp-body);
+  text-decoration: none;
+}
+.dp-jumps a:hover, .dp-jumps a:focus-visible { color: var(--dp-ink); border-color: var(--dp-accent); }
+
+/* ---- Sections ------------------------------------------------------------ */
+.dp-section {
+  max-width: var(--dp-measure);
+  margin: 0 auto;
+  padding: clamp(3rem, 7vw, 5rem) 16px;
+  border-top: 1px solid var(--dp-rule);
+  scroll-margin-top: 70px;
+}
+.dp-section > h2 {
+  margin: 0 0 0.6rem;
+  font-size: clamp(1.7rem, 3.6vw, 2.5rem);
+  line-height: 1.12;
+  color: var(--dp-ink);
+  text-wrap: balance;
+}
+.dp-section > .dp-lede {
+  margin: 0 0 2rem;
+  max-width: 44rem;
+  font-size: 1.08rem;
+  line-height: 1.6;
+  color: var(--dp-body);
+}
+
+/* ---- Feature catalogue: cards are welcome here --------------------------- */
+.dp-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 16rem), 1fr));
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.dp-card {
+  padding: 1.35rem 1.35rem 1.45rem;
+  border: 1px solid var(--dp-rule);
+  border-radius: 18px;
+  background: var(--dp-card);
+}
+.dp-card-icon { display: block; font-size: 1.5rem; line-height: 1; margin-bottom: 0.8rem; }
+.dp-card h3 { margin: 0 0 0.45rem; font-size: 1.08rem; line-height: 1.3; color: var(--dp-ink); }
+.dp-card p { margin: 0; font-size: 0.96rem; line-height: 1.55; color: var(--dp-body); }
+.dp-card .dp-tag {
+  display: inline-block;
+  margin-top: 0.7rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--dp-accent);
+}
+
+/* A long plain list (supported providers, file types, languages): columns, not bullets. */
+.dp-list {
+  columns: 14rem auto;
+  column-gap: 2rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.dp-list li {
+  break-inside: avoid;
+  padding: 0.4rem 0;
+  border-bottom: 1px solid var(--dp-rule);
+  color: var(--dp-body);
+}
+
+/* ---- Pricing ------------------------------------------------------------- */
+.dp-plans {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
+  gap: 1rem;
+  align-items: stretch;
+}
+.dp-plan {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding: 1.6rem 1.4rem;
+  border: 1px solid var(--dp-rule);
+  border-radius: 20px;
+  background: var(--dp-card);
+  text-align: center;
+}
+.dp-plan.is-featured { border: 2px solid var(--dp-accent); }
+.dp-plan-badge {
+  align-self: center;
+  padding: 0.2rem 0.7rem;
+  border-radius: 999px;
+  background: var(--dp-accent);
+  color: var(--dp-paper);  /* the page ground: dark on a light accent, light on a dark one */
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+.dp-plan-name { margin: 0; font-size: 1.05rem; font-weight: 600; color: var(--dp-ink); }
+.dp-price { margin: 0.2rem 0 0; font-size: 2.3rem; font-weight: 700; line-height: 1.1; color: var(--dp-ink); }
+.dp-price small { font-size: 0.95rem; font-weight: 500; color: var(--dp-quiet); }
+.dp-plan-was { color: var(--dp-quiet); text-decoration: line-through; font-size: 0.9rem; }
+.dp-plan p:not([class]) { margin: 0; font-size: 0.95rem; line-height: 1.5; color: var(--dp-body); }
+.dp-fine { margin: 1.2rem 0 0; font-size: 0.9rem; line-height: 1.55; color: var(--dp-quiet); text-align: center; }
+
+/* ---- Comparison chart: scrolls inside its box, never the page ------------ */
+.dp-table-wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border: 1px solid var(--dp-rule);
+  border-radius: 16px;
+}
+.dp-compare { width: 100%; min-width: 40rem; border-collapse: collapse; font-size: 0.95rem; }
+.dp-compare caption { padding: 0.8rem; caption-side: bottom; font-size: 0.85rem; color: var(--dp-quiet); }
+.dp-compare th, .dp-compare td {
+  padding: 0.75rem 0.9rem;
+  border-bottom: 1px solid var(--dp-rule);
+  text-align: center;
+  color: var(--dp-body);
+}
+.dp-compare thead th { color: var(--dp-ink); font-weight: 600; background: var(--dp-paper-2); }
+.dp-compare th[scope="row"] {
+  position: sticky;
+  left: 0;
+  text-align: left;
+  font-weight: 500;
+  color: var(--dp-ink);
+  background: var(--dp-paper);
+}
+.dp-compare thead th:first-child { position: sticky; left: 0; z-index: 1; }
+.dp-compare .is-us { background: color-mix(in srgb, var(--dp-accent) 9%, transparent); color: var(--dp-ink); font-weight: 600; }
+.dp-compare .yes::before { content: "✓"; color: var(--dp-accent); font-weight: 700; }
+.dp-compare .no::before { content: "—"; color: var(--dp-quiet); }
+.dp-compare tbody tr:last-child > * { border-bottom: 0; }
+
+/* ---- Complete FAQ: grouped; the accordion is app-showcase.css's .faq-item - */
+.dp-faq-group + .dp-faq-group { margin-top: 2.5rem; }
+.dp-faq-group > h2 { margin: 0 0 1rem; font-size: clamp(1.35rem, 2.6vw, 1.8rem); color: var(--dp-ink); }
+.dp-section .faq-answer ul, .dp-section .faq-answer ol { padding-left: 1.25rem; }
+
+/* ---- Closing CTA — every depth page ends on the download ----------------- */
+.dp-closing {
+  padding: clamp(3.5rem, 8vw, 6rem) 16px;
+  text-align: center;
+  background: var(--dp-paper-2);
+  border-top: 1px solid var(--dp-rule);
+}
+.dp-closing h2 { margin: 0 auto 1.4rem; max-width: 20ch; font-size: clamp(1.8rem, 4vw, 2.8rem); color: var(--dp-ink); text-wrap: balance; }
+.dp-closing .btn-buy { display: inline-flex; align-items: center; min-height: 44px; padding: 0.8rem 1.5rem; border-radius: 999px; }
+.dp-closing .dp-alt { margin: 1rem 0 0; font-size: 0.92rem; color: var(--dp-quiet); }
+.dp-closing .dp-alt a { color: inherit; }
+
+/* Text for screen readers only — the ✓ / — marks in the comparison chart carry a
+   translated "Yes" / "No" inside one of these. */
+.dp-sr {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  margin: -1px; padding: 0; overflow: hidden;
+  clip: rect(0 0 0 0); clip-path: inset(50%);
+  white-space: nowrap; border: 0;
+}

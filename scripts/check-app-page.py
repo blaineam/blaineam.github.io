@@ -1,24 +1,38 @@
 #!/usr/bin/env python3
 """Pre-commit checks for an app page against docs/app-page-design.md.
 
-    python3 scripts/check-app-page.py scripture-alone
-    python3 scripts/check-app-page.py --all
+    python3 scripts/check-app-page.py scripture-alone            # the landing page
+    python3 scripts/check-app-page.py enter-space/pricing        # one depth page
+    python3 scripts/check-app-page.py --all                      # every landing + depth page
 
-Hard failures (exit 1):
-  * the 9 dictionaries i18n/apps.<slug>.<lang>.json don't share one key set, or a
+An app has one LANDING page (apps/<slug>/index.html — the funnel) and optional DEPTH pages
+(apps/<slug>/{features,pricing,faq}/index.html — the detail). Both get the hard checks; only
+the landing page gets the funnel's copy budget, because grids, tables, long lists and long
+answers are what depth pages are for.
+
+Hard failures (exit 1), every page:
+  * the 9 dictionaries i18n/apps.<slug>[.<sub>].<lang>.json don't share one key set, or a
     data-i18n / data-i18n-html / data-i18n-attr key in the page is missing from them
   * an <img> without width and height, or a below-the-hero <img> without loading="lazy"
   * an <img data-i18n-src> whose English files aren't in its screens manifest
-  * an App Store / Play link (or a `data-cta` anchor, for pages with no store listing)
-    missing from the hero or from the end of the page
+  * no App Store / Play link (or `data-cta` anchor, for pages with no store listing) at the
+    end of the page (between </main> and the footer)
+  * landing page: none in the hero either; depth page: none in the app's nav bar
 
-Warnings (printed, exit 0) — the spec's copy budget:
+Warnings, every page:
+  * the app has depth pages but this page's nav doesn't link to all of them (and to the
+    overview, from a depth page), or a depth page doesn't mark itself aria-current="page"
+  * faq/: the last question isn't the EU availability item; pricing/: no price on the page
+  * landing page with a faq/ page: no link from the FAQ teaser to it
+
+Warnings (printed, exit 0), landing page only — the spec's copy budget:
   * more than 5 story sections (<section> inside <main>)
   * a paragraph outside the FAQ and footer over 40 words (CJK: ~2 chars per word)
   * a <ul>/<ol> with more than 4 items outside nav/footer/FAQ (a bullet wall)
   * a grid of 3+ sibling cards with a heading each (a feature wall)
+  * more than 7 FAQ questions (the rest belong on faq/)
   * a web font (Google Fonts link or @font-face), except on the pages in
-    WEBFONT_EXCEPTIONS (docs/app-page-design.md §3 documents each one)
+    WEBFONT_EXCEPTIONS (docs/app-page-design.md §3 documents each one) — every page
 """
 
 from __future__ import annotations
@@ -32,6 +46,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 LANGS = ["en", "zh-Hans", "ja", "de", "fr", "es", "ko", "pt-BR", "it"]
 MIRRORED = {"haven", "blip", "glint", "lathe"}
+DEPTH_PAGES = ("features", "pricing", "faq")
 # Pages whose typefaces ARE the identity; see docs/app-page-design.md §3 "Exceptions".
 WEBFONT_EXCEPTIONS = {"revela"}
 WEBFONT = re.compile(r"fonts\.googleapis\.com|fonts\.gstatic\.com|@font-face")
@@ -100,11 +115,25 @@ def classes(n: Node) -> set[str]:
     return set((n.attrs.get("class") or "").split())
 
 
-def check(slug: str) -> int:
-    page = ROOT / "apps" / slug / "index.html"
+def depth_pages(slug: str) -> list[str]:
+    return [sub for sub in DEPTH_PAGES if (ROOT / "apps" / slug / sub / "index.html").is_file()]
+
+
+def check(target: str) -> int:
+    slug, _, sub = target.strip("/").partition("/")
+    if sub and sub not in DEPTH_PAGES:
+        print(f"{target}: not a depth page ({', '.join(DEPTH_PAGES)}) — not checked")
+        return 0
+    page = ROOT / "apps" / slug / (f"{sub}/index.html" if sub else "index.html")
+    dict_id = f"apps.{slug}.{sub}" if sub else f"apps.{slug}"
+    page_label = target.strip("/")
     if slug in MIRRORED:
         print(f"{slug}: mirrored — check it in its source repo")
         return 0
+    if not page.is_file():
+        print(f"  ✗ {page_label}: {page.relative_to(ROOT)} doesn't exist")
+        return 1
+    siblings = depth_pages(slug)
     src = page.read_text(encoding="utf-8")
     tree = Tree()
     tree.feed(src)
@@ -115,7 +144,7 @@ def check(slug: str) -> int:
     # --- i18n parity ---------------------------------------------------------------------
     dicts = {}
     for lang in LANGS:
-        p = ROOT / "i18n" / f"apps.{slug}.{lang}.json"
+        p = ROOT / "i18n" / f"{dict_id}.{lang}.json"
         if not p.is_file():
             errors.append(f"missing dictionary {p.name}")
             continue
@@ -135,7 +164,8 @@ def check(slug: str) -> int:
                           "(run scripts/i18n-tag.py, then patch the 8 translations)")
 
     # --- images --------------------------------------------------------------------------
-    hero = next((n for n in nodes if n.tag == "header" or "hero" in " ".join(classes(n))), None)
+    hero = next((n for n in nodes if n.tag == "header" or "hero" in " ".join(classes(n))
+                 or "dp-header" in classes(n)), None)
     in_hero = set(id(n) for n in hero.walk()) if hero else set()
     manifests: dict[Path, dict] = {}
     for n in nodes:
@@ -169,7 +199,11 @@ def check(slug: str) -> int:
     links = [n for n in nodes if n.tag == "a"
              and (STORE.search(n.attrs.get("href", "")) or "data-cta" in n.attrs)]
     main = next((n for n in nodes if n.tag == "main"), None)
-    if hero and not any(id(l) in in_hero for l in links):
+    nav = next((n for n in nodes if n.tag == "nav"), None)
+    if sub:
+        if not nav or not any(l.inside(lambda x: x is nav) for l in links):
+            errors.append("no App Store / Play link in the nav bar (a depth page's first CTA)")
+    elif hero and not any(id(l) in in_hero for l in links):
         errors.append("no App Store / Play link in the hero")
     footer = next((n for n in nodes if n.tag == "footer"), None)
     if main:
@@ -187,7 +221,35 @@ def check(slug: str) -> int:
         if not tail_has_cta:
             errors.append("no download link between </main> and the footer (the closing CTA)")
 
+    # --- the app's pages link to each other ----------------------------------------------
+    if siblings and nav:
+        hrefs = {n.attrs.get("href", "").rstrip("/").split("/")[-1] or ".."
+                 for n in nav.walk() if n.tag == "a"}
+        for other in siblings:
+            if other != sub and other not in hrefs:
+                warns.append(f"nav doesn't link to {other}/ (the app's sub-nav lists every page)")
+        if sub and ".." not in hrefs:
+            warns.append("nav doesn't link back to the overview (../)")
+        if sub and not any(n.attrs.get("aria-current") == "page" for n in nav.walk()):
+            warns.append('nav doesn\'t mark this page aria-current="page"')
+    faq_items = [n for n in nodes if "faq-item" in classes(n)]
+    if sub == "faq" and faq_items:
+        last = " ".join(faq_items[-1].all_text().split())
+        if "European Union" not in last:
+            warns.append("the last FAQ item isn't the EU availability question (§6)")
+    if sub == "pricing" and not re.search(r"[$€£¥]\s?\d", src):
+        warns.append("no price on the pricing page")
+    if not sub and "faq" in siblings and "faq/" not in src:
+        warns.append("the FAQ teaser doesn't link to faq/ (\"See all questions →\")")
+
+    if sub:  # depth pages: grids, tables, long lists and long answers are the point
+        if slug not in WEBFONT_EXCEPTIONS and WEBFONT.search(src):
+            warns.append("loads a web font (spec: none)")
+        return report(page_label, errors, warns)
+
     # --- copy budget (warnings) ----------------------------------------------------------
+    if len(faq_items) > 7:
+        warns.append(f"{len(faq_items)} FAQ questions on the landing page (spec: ≤ 7; the rest go on faq/)")
     if main:
         stories = [c for c in main.children if c.tag == "section"]
         if len(stories) > 5:
@@ -212,14 +274,18 @@ def check(slug: str) -> int:
         warns.append("loads a web font (spec: none; add to WEBFONT_EXCEPTIONS + document it "
                      "in docs/app-page-design.md §3 only if the face is the app's identity)")
 
+    return report(page_label, errors, warns)
+
+
+def report(label: str, errors: list[str], warns: list[str]) -> int:
     for e in errors:
-        print(f"  ✗ {slug}: {e}")
+        print(f"  ✗ {label}: {e}")
     for w in warns:
-        print(f"  ! {slug}: {w}")
+        print(f"  ! {label}: {w}")
     if not errors and not warns:
-        print(f"  ✓ {slug}")
+        print(f"  ✓ {label}")
     elif not errors:
-        print(f"  ✓ {slug} (warnings only)")
+        print(f"  ✓ {label} (warnings only)")
     return 1 if errors else 0
 
 
@@ -229,8 +295,9 @@ def main(argv: list[str]) -> int:
         return 2
     slugs = argv
     if argv == ["--all"]:
-        slugs = sorted(p.parent.name for p in (ROOT / "apps").glob("*/index.html")
-                       if p.parent.name not in MIRRORED and not p.parent.name.startswith("_"))
+        apps = sorted(p.parent.name for p in (ROOT / "apps").glob("*/index.html")
+                      if p.parent.name not in MIRRORED and not p.parent.name.startswith("_"))
+        slugs = [t for a in apps for t in [a] + [f"{a}/{sub}" for sub in depth_pages(a)]]
     return max(check(s) for s in slugs)
 
 
