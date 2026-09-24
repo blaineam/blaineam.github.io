@@ -6,8 +6,14 @@
       {
         "device": "iphone",
         "captures": "screenshots/iphone-6.9",
-        "scenes": ["01-reader", "08-themes", "03-study", "05-sermon-notes", "06-listen"],
+        "scenes": ["01-reader", "08-themes", "03-study", "05-sermon-notes"],
         "widths": [400, 800]
+      },
+      {
+        "device": "ipad",
+        "captures": "screenshots/ipad-13",
+        "scenes": ["reader"],
+        "widths": [720, 1440]
       },
       {
         "device": "watch",
