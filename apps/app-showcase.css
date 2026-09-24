@@ -169,10 +169,14 @@ p {
 
    Everything here is sized from the brand's own font-size, so the icon always
    matches the name rather than standing a head taller than it, and the icon is
-   masked to the superellipse iOS draws its icons with — a plain border-radius
-   leaves the corners visibly squarer than the icon beside it in the Dock. */
+   masked to the continuous-corner shape iOS draws its icons with: straight
+   edges, a corner radius of 22.37% of the side, and curvature that eases into
+   each corner instead of starting abruptly (the iOS "corner smoothing 60%"
+   construction). A plain border-radius reads squarer than an iPhone icon; the
+   previous mask — one cubic per quarter, mid-edge to mid-edge — had no straight
+   edge at all and read as a Samsung-style blob. */
 .nav-brand {
-  --squircle: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M0,50 C0,12.5 12.5,0 50,0 C87.5,0 100,12.5 100,50 C100,87.5 87.5,100 50,100 C12.5,100 0,87.5 0,50 Z' fill='%23000'/%3E%3C/svg%3E");
+  --squircle: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M64.21,0c12.53,0 18.79,0 23.58,2.44a22.37,22.37 0 0 1 9.78,9.78c2.44,4.79 2.44,11.05 2.44,23.58L100,64.21c0,12.53 0,18.79 -2.44,23.58a22.37,22.37 0 0 1 -9.78,9.78c-4.79,2.44 -11.05,2.44 -23.58,2.44L35.79,100c-12.53,0 -18.79,0 -23.58,-2.44a22.37,22.37 0 0 1 -9.78,-9.78c-2.44,-4.79 -2.44,-11.05 -2.44,-23.58L0,35.79c0,-12.53 0,-18.79 2.44,-23.58a22.37,22.37 0 0 1 9.78,-9.78c4.79,-2.44 11.05,-2.44 23.58,-2.44Z' fill='%23000'/%3E%3C/svg%3E");
   display: inline-flex;
   align-items: center;
   gap: 0.45em;
