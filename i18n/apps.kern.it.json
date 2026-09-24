@@ -22,7 +22,6 @@
   "it-s-generated-on.879df5": "È generata sul tuo dispositivo — non ci sono tracce in loop. Ogni mondo ha una ricetta (scala, tempo, strumenti), le lettere che selezioni salgono la scala, e una parola valida risolve un accordo proporzionato alla sua lunghezza. Rispetta l'interruttore silenzioso, e dalle impostazioni puoi mixarla con il tuo audio.",
   "yes-kern-is-on.6d0520": "Sì. Kern è in vendita in tutta l'Unione europea, Francia compresa. È disponibile in tutti i Paesi e le regioni dell'App Store offerti da Apple, tranne la Cina continentale e il Vietnam, dove i giochi richiedono una licenza di distribuzione locale che non ho.",
   "kerning-is-the-typographer.0759ec": "Il kerning è il mestiere del tipografo: regolare lo spazio tra coppie di lettere finché una parola non si posa perfetta — il dettaglio più ossessivo e invisibile della tipografia. Un gioco di parole chiamato Kern promette cura a livello di lettera. E se stringi troppo la r e la n, «kerning» si legge «keming» — ecco perché giocare una parola con r-n dentro sblocca un obiettivo con quel nome.",
-  "modes.79f5b2": "Modalità",
   "no-accounts-no-analytics.268b6d": "Niente account. Niente analytics. Niente SDK di terze parti. Nulla lascia il tuo dispositivo, tranne i punteggi che scegli di pubblicare.",
   "no-ads-no-iap.ed9428": "<span class=\"badge-icon\">🚫</span> Niente pubblicità, niente acquisti",
   "no-reactivity-is-cosmetic.173b6d": "No — la reattività è cosmetica per statuto. I mondi cambiano la luce, le tessere, la musica e i gesti, mai la formula. Trovare una parola che appartiene a un mondo alimenta gli obiettivi e il tuo diario per mondo, non il punteggio.",
@@ -58,5 +57,9 @@
   "the-home-screen-in.1855e8": "La schermata iniziale nel mondo Mezzanotte",
   "the-kern-home-screen.d8680d": "La schermata iniziale di Kern, con Ruota, Ricerca e Catena nel mondo Oceano",
   "the-puzzle-complete-card.a99b9a": "La scheda di puzzle completato: par raggiunto e il punteggio",
-  "three-word-games-share.a4ac62": "Tre giochi di parole condividono un unico punteggio equo, in diciotto mondi vivi che reagiscono a ciò che componi."
+  "three-word-games-share.a4ac62": "Tre giochi di parole condividono un unico punteggio equo, in diciotto mondi vivi che reagiscono a ciò che componi.",
+  "features.fc338f": "Funzionalità",
+  "learn-more.824d76": "Scopri di più",
+  "overview.0efc2e": "Panoramica",
+  "see-all-questions.237fee": "Vedi tutte le domande"
 }

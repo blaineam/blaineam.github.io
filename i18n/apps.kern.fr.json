@@ -22,7 +22,6 @@
   "it-s-generated-on.879df5": "Elle est générée sur votre appareil — il n'y a aucune piste en boucle. Chaque monde a une recette (gamme, tempo, instruments), vos sélections de lettres gravissent la gamme, et un mot valide résout un accord à la mesure de sa longueur. Le commutateur silencieux est respecté, et vous pouvez mixer avec votre propre musique depuis les réglages.",
   "yes-kern-is-on.6d0520": "Oui. Kern est en vente dans toute l'Union européenne, France comprise. L'app est disponible dans tous les pays et régions de l'App Store proposés par Apple, sauf en Chine continentale et au Vietnam, où les jeux ont besoin d'une licence de distribution locale que je n'ai pas.",
   "kerning-is-the-typographer.0759ec": "Le crénage (« kerning ») est l'art du typographe : ajuster l'espace entre les paires de lettres jusqu'à ce qu'un mot soit parfaitement posé — le détail le plus obsessionnel et le plus invisible de la typographie. Un jeu de lettres nommé Kern promet un soin à l'échelle de la lettre. Et si l'on serre trop le r et le n, « kerning » se lit « keming » — c'est pourquoi jouer un mot contenant r-n débloque un succès de ce nom.",
-  "modes.79f5b2": "Modes",
   "no-accounts-no-analytics.268b6d": "Pas de compte. Pas d'analytique. Pas de SDK tiers. Rien ne quitte votre appareil, hormis les scores que vous choisissez de publier.",
   "no-ads-no-iap.ed9428": "<span class=\"badge-icon\">🚫</span> Sans pub, sans achats intégrés",
   "no-reactivity-is-cosmetic.173b6d": "Non — la réactivité est cosmétique par principe. Les mondes changent la lumière, les tuiles, la musique et les parades, jamais la formule. Trouver un mot qui appartient à un monde alimente les succès et votre journal par monde, pas votre score.",
@@ -58,5 +57,9 @@
   "the-home-screen-in.1855e8": "L'écran d'accueil dans le monde Minuit",
   "the-kern-home-screen.d8680d": "L'écran d'accueil de Kern, avec Roue, Recherche et Chaîne dans le monde Océan",
   "the-puzzle-complete-card.a99b9a": "La carte de fin de grille : par atteint, et le score",
-  "three-word-games-share.a4ac62": "Trois jeux de lettres partagent un seul score équitable, dans dix-huit mondes vivants qui réagissent à ce que vous épelez."
+  "three-word-games-share.a4ac62": "Trois jeux de lettres partagent un seul score équitable, dans dix-huit mondes vivants qui réagissent à ce que vous épelez.",
+  "features.fc338f": "Fonctionnalités",
+  "learn-more.824d76": "En savoir plus",
+  "overview.0efc2e": "Aperçu",
+  "see-all-questions.237fee": "Voir toutes les questions"
 }

@@ -22,7 +22,6 @@
   "it-s-generated-on.879df5": "Se genera en tu dispositivo: no hay pistas en bucle. Cada mundo tiene una receta (escala, tempo, instrumentos), tus selecciones de letras suben por la escala, y una palabra válida resuelve un acorde a la medida de su longitud. Respeta el interruptor de silencio, y desde Ajustes puedes mezclarla con tu propio audio.",
   "yes-kern-is-on.6d0520": "Sí. Kern se vende en toda la Unión Europea, Francia incluida. Está disponible en todos los países y regiones del App Store que ofrece Apple, salvo China continental y Vietnam, donde los juegos necesitan una licencia de distribución local que no tengo.",
   "kerning-is-the-typographer.0759ec": "El kerning es el oficio del tipógrafo de ajustar el espacio entre pares de letras hasta que una palabra asienta perfecta: el detalle más obsesivo e invisible de la tipografía. Un juego de palabras llamado Kern promete cuidado letra a letra. Y si aprietas demasiado la r y la n, «kerning» se lee «keming» — por eso jugar una palabra con r-n dentro gana un logro con ese nombre.",
-  "modes.79f5b2": "Modos",
   "no-accounts-no-analytics.268b6d": "Sin cuentas. Sin analíticas. Sin SDK de terceros. Nada sale de tu dispositivo salvo las puntuaciones que tú decides publicar.",
   "no-ads-no-iap.ed9428": "<span class=\"badge-icon\">🚫</span> Sin anuncios ni compras",
   "no-reactivity-is-cosmetic.173b6d": "No: la reactividad es cosmética por ley. Los mundos cambian la luz, las fichas, la música y las florituras, nunca la fórmula. Encontrar una palabra que pertenece a un mundo alimenta los logros y tu diario por mundo, no tu puntuación.",
@@ -58,5 +57,9 @@
   "the-home-screen-in.1855e8": "La pantalla de inicio en el mundo Medianoche",
   "the-kern-home-screen.d8680d": "La pantalla de inicio de Kern, con Rueda, Búsqueda y Cadena en el mundo Océano",
   "the-puzzle-complete-card.a99b9a": "La tarjeta de puzle completado: par alcanzado y la puntuación",
-  "three-word-games-share.a4ac62": "Tres juegos de palabras comparten una puntuación justa, en dieciocho mundos vivos que reaccionan a lo que escribes."
+  "three-word-games-share.a4ac62": "Tres juegos de palabras comparten una puntuación justa, en dieciocho mundos vivos que reaccionan a lo que escribes.",
+  "features.fc338f": "Funciones",
+  "learn-more.824d76": "Más información",
+  "overview.0efc2e": "Resumen",
+  "see-all-questions.237fee": "Ver todas las preguntas"
 }
