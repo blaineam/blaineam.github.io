@@ -75,7 +75,9 @@ def main(argv: list[str]) -> int:
             if key in existing:
                 result[key] = existing[key]
                 continue
-            found = next((s[key] for s in sources if key in s), None)
+            # `_title` / `_meta.description` aren't content hashes: every page has them with its
+            # own English, so the landing page's value would be the wrong page's title.
+            found = None if key.startswith("_") else next((s[key] for s in sources if key in s), None)
             if found is None:  # a string another page shares word for word
                 for en_path_other, en_other in current_en.items():
                     if en_other.get(key) == value:
