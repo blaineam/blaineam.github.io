@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FAQ · Enter Space</title>
+  <meta name="description" content="Every question about Enter Space answered, including the full list of supported cloud providers, serve types and sync types.">
+  <link rel="canonical" href="https://wemiller.com/apps/enter-space/faq/">
+  <meta property="og:title" content="FAQ · Enter Space">
+  <meta property="og:description" content="Every question about Enter Space answered, including the full list of supported cloud providers, serve types and sync types.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://wemiller.com/apps/enter-space/faq/">
+  <meta property="og:image" content="https://wemiller.com/apps/enter-space/assets/images/poster.jpg?v=3cc631e8">
+  <meta name="apple-itunes-app" content="app-id=6746350540">
+  <link rel="stylesheet" href="../../app-showcase.css?v=e9909304">
+  <link rel="stylesheet" href="../../_shared/depth.css?v=8787ba38">
+  <style>
+    :root {
+      --app-primary: #4f6bf6;
+      --app-secondary: #6d4df0;
+      --app-accent: #6ee7ff;
+      --primary-color: #2B2F8F;    /* deep indigo: headlines on paper */
+      --secondary-color: #6d4df0;
+      --es-accent-ink: #4B3BC4;
+      --es-hero: linear-gradient(180deg, #0a0a2e 0%, #141451 55%, #21216f 100%);
+      --es-hero-glow: radial-gradient(ellipse 60% 45% at 50% 100%, rgba(110, 231, 255, 0.20) 0%, transparent 70%), radial-gradient(ellipse 45% 40% at 90% 5%, rgba(109, 77, 240, 0.30) 0%, transparent 70%);
+      --es-hero-ink: #F4F6FF;
+      --es-hero-em: #9FEFFF;
+      --es-hero-kicker: rgba(159, 239, 255, 0.9);
+      --es-btn: linear-gradient(180deg, #9FEFFF, #6EE7FF);
+      --es-btn-ink: #0A0A2E;
+      --es-glow: rgba(110, 231, 255, 0.28);
+      --es-display: system-ui, -apple-system, "SF Pro Display", "Segoe UI", sans-serif;
+      --es-paper: #FFFFFF;
+      --es-paper-2: #F2F3FC;
+      --es-rule: rgba(20, 20, 81, 0.12);
+      --es-quiet: #5C5F7E;
+      --es-body: #2C2E48;
+      --es-shadow: drop-shadow(0 30px 40px rgba(20, 20, 81, 0.22)) drop-shadow(0 6px 10px rgba(20, 20, 81, 0.10));
+      --bg-primary: var(--es-paper);
+      --bg-secondary: var(--es-paper-2);
+      --text-primary: #10112E;
+      --text-secondary: var(--es-body);
+      --text-muted: var(--es-quiet);
+      --glass-bg: rgba(255, 255, 255, 0.8);
+      --glass-border: rgba(20, 20, 81, 0.10);
+      --glass-shadow: none;
+      --es-measure: 1120px;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --primary-color: #B7C2FF;
+        --secondary-color: #9FEFFF;
+        --es-accent-ink: #9FEFFF;
+        --es-paper: #0B0B26;
+        --es-paper-2: #121236;
+        --es-rule: rgba(183, 194, 255, 0.14);
+        --es-quiet: #A2A7CC;
+        --es-body: #DADDF2;
+        --es-shadow: drop-shadow(0 30px 44px rgba(0, 0, 0, 0.6)) drop-shadow(0 6px 10px rgba(0, 0, 0, 0.35));
+        --text-primary: #F4F6FF;
+        --glass-bg: rgba(11, 11, 38, 0.8);
+        --glass-border: rgba(183, 194, 255, 0.08);
+      }
+    }
+    .btn-buy { box-shadow: 0 4px 15px rgba(10, 10, 46, 0.30); }
+    :root { --bg-card: var(--es-paper-2); --border-color: var(--es-rule); }
+    body { background: var(--es-paper); }
+    .nav-links .nav-link, .nav-links .btn-buy { white-space: nowrap; }
+    [hidden] { display: none !important; }
+    /* .dp-sr is position:absolute; without a positioned scroll box its static position in
+       off-screen table cells widened the mobile layout viewport to ~612px. */
+    .dp-table-wrap { position: relative; }
+    .dp-faq-group { scroll-margin-top: 80px; }
+    .faq-answer .dp-list { margin: 0.4rem 0 1.2rem; }
+    .faq-answer .dp-list li { font-size: 0.95rem; padding: 0.3rem 0; }
+    .faq-answer code { font-size: 0.85em; overflow-wrap: anywhere; }
+    .faq-answer a { color: var(--primary-color); }
+  </style>
+  <link rel="alternate" hreflang="x-default" href="https://wemiller.com/apps/enter-space/faq/">
+  <link rel="alternate" hreflang="en" href="https://wemiller.com/apps/enter-space/faq/">
+  <link rel="alternate" hreflang="zh-Hans" href="https://wemiller.com/apps/enter-space/faq/?lang=zh-Hans">
+  <link rel="alternate" hreflang="ja" href="https://wemiller.com/apps/enter-space/faq/?lang=ja">
+  <link rel="alternate" hreflang="de" href="https://wemiller.com/apps/enter-space/faq/?lang=de">
+  <link rel="alternate" hreflang="fr" href="https://wemiller.com/apps/enter-space/faq/?lang=fr">
+  <link rel="alternate" hreflang="es" href="https://wemiller.com/apps/enter-space/faq/?lang=es">
+  <link rel="alternate" hreflang="ko" href="https://wemiller.com/apps/enter-space/faq/?lang=ko">
+  <link rel="alternate" hreflang="pt-BR" href="https://wemiller.com/apps/enter-space/faq/?lang=pt-BR">
+  <link rel="alternate" hreflang="it" href="https://wemiller.com/apps/enter-space/faq/?lang=it">
+  <script src="/i18n/i18n.js?v=9b769779" defer data-page="apps.enter-space.faq" data-pos="bottom-left"></script>
+</head>
+<body>
+  <nav class="app-nav">
+    <div class="nav-container">
+      <a href="../../" class="nav-logo nav-brand" title="← Apps" aria-label="← Apps"
+         data-i18n-attr="title:apps.2d61f2;aria-label:apps.2d61f2">
+        <span class="nav-brand-back" aria-hidden="true">←</span>
+        <img class="nav-brand-icon" src="../assets/images/icon.png?v=eed78469" alt="" width="60" height="60">
+        <span class="nav-brand-name">Enter Space</span>
+      </a>
+      <button class="mobile-menu-toggle" aria-label="Menu">☰</button>
+      <ul class="nav-links">
+        <li><a href="../" class="nav-link" data-i18n="overview.0efc2e">Overview</a></li>
+        <li><a href="../features/" class="nav-link" data-i18n="features.fc338f">Features</a></li>
+        <li><a href="../pricing/" class="nav-link" data-i18n="pricing.a0d9bb">Pricing</a></li>
+        <li><a href="../faq/" class="nav-link" aria-current="page" data-i18n="faq.03688b">FAQ</a></li>
+        <li><a href="https://apps.apple.com/us/app/enter-space/id6746350540" target="_blank" rel="noopener noreferrer" class="btn-buy">App Store</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main>
+    <header class="dp-header">
+      <p class="dp-eyebrow" data-i18n="got-questions.8ecca3">Got Questions?</p>
+      <h1 data-i18n="frequently-asked-questions.d790b4">Frequently Asked Questions</h1>
+      <ul class="dp-jumps">
+        <li><a href="#getting-started" data-i18n="getting-started.76e7a3">Getting started</a></li>
+        <li><a href="#features" data-i18n="features.fc338f">Features</a></li>
+        <li><a href="#privacy" data-i18n="security-privacy.27f69f">Security &amp; privacy</a></li>
+        <li><a href="#pricing" data-i18n="pricing-availability.b6b992">Pricing &amp; availability</a></li>
+      </ul>
+    </header>
+
+    <section class="dp-section" id="faq">
+      <div class="dp-faq-group" id="getting-started">
+        <h2 data-i18n="getting-started.76e7a3">Getting started</h2>
+        <div class="faq-list">
+          <div class="faq-item">
+            <button class="faq-question">
+              <span data-i18n="which-cloud-storage-providers.8aad23">Which cloud storage providers are supported?</span>
+              <span class="faq-icon">▼</span>
+            </button>
+            <div class="faq-answer">
+              <p data-i18n="enter-space-supports-all.145cb0">Enter Space supports all of Rclone's well-supported cloud storage providers:</p>
+              <ul class="dp-list">
+                <li data-i18n="1fichier.4f4099">1Fichier</li>
+                <li data-i18n="akamai-netstorage.cc4a89">Akamai NetStorage</li>
+                <li data-i18n="amazon-s3.7b11a4">Amazon S3</li>
+                <li data-i18n="azure-blob.f17e69">Azure Blob</li>
+                <li>Azure Files</li>
+                <li>Backblaze B2</li>
+                <li>Box</li>
+                <li data-i18n="cloudinary.e86e55">Cloudinary</li>
+                <li data-i18n="digi-storage.f93ddb">Digi Storage</li>
+                <li data-i18n="doi-datasets.51f626">DOI datasets</li>
+                <li data-i18n="drime.760687">Drime</li>
+                <li>Dropbox</li>
+                <li data-i18n="filelu.7114d8">Filelu</li>
+                <li data-i18n="filen.8e7a88">Filen</li>
+                <li data-i18n="files-com.f26b85">Files.com</li>
+                <li>FTP</li>
+                <li data-i18n="gofile.2b987c">Gofile</li>
+                <li>Google Cloud Storage</li>
+                <li>Google Drive</li>
+                <li data-i18n="hdfs.6d2a98">HDFS</li>
+                <li data-i18n="hidrive.70dfa4">HiDrive</li>
+                <li data-i18n="http.f40b27">HTTP</li>
+                <li data-i18n="huawei-drive.c1b4b7">Huawei Drive</li>
+                <li data-i18n="imagekit.3e3403">ImageKit</li>
+                <li data-i18n="internet-archive.a77269">Internet Archive</li>
+                <li data-i18n="internxt.3d631d">Internxt</li>
+                <li data-i18n="jottacloud.627695">Jottacloud</li>
+                <li data-i18n="koofr.df0e91">Koofr</li>
+                <li data-i18n="local-disk.5c6b0a">Local Disk</li>
+                <li data-i18n="mail-ru-cloud.4e23e3">Mail.ru Cloud</li>
+                <li>Mega</li>
+                <li data-i18n="microsoft-onedrive.4697a8">Microsoft OneDrive</li>
+                <li data-i18n="opendrive.ee1815">OpenDrive</li>
+                <li data-i18n="openstack-swift.adb151">OpenStack Swift</li>
+                <li data-i18n="oracle-object-storage.22adec">Oracle Object Storage</li>
+                <li>pCloud</li>
+                <li data-i18n="pikpak.5d485c">PikPak</li>
+                <li data-i18n="pixeldrain.e09141">Pixeldrain</li>
+                <li data-i18n="premiumize-me.64b80c">Premiumize.me</li>
+                <li data-i18n="put-io.60d869">Put.io</li>
+                <li data-i18n="qingstor.d284e7">QingStor</li>
+                <li data-i18n="quatrix.298af2">Quatrix</li>
+                <li>Seafile</li>
+                <li>SFTP</li>
+                <li data-i18n="shade.97389d">Shade</li>
+                <li data-i18n="smb-cifs.2e3e58">SMB / CIFS</li>
+                <li data-i18n="storj.ad8c05">Storj</li>
+                <li data-i18n="sugarsync.98c4fb">SugarSync</li>
+                <li data-i18n="uloz-to.236d29">Uloz.to</li>
+                <li>WebDAV</li>
+                <li data-i18n="yandex-disk.71ff55">Yandex Disk</li>
+                <li data-i18n="zoho-workdrive.5b01dc">Zoho WorkDrive</li>
+              </ul>
+              <p data-i18n="s3-compatible-providers.24a8de">S3-compatible providers:</p>
+              <ul class="dp-list">
+                <li data-i18n="alibaba-cloud-oss.548099">Alibaba Cloud OSS</li>
+                <li data-i18n="arvan-cloud.c3fe0f">Arvan Cloud</li>
+                <li data-i18n="aws-s3.d14c09">AWS S3</li>
+                <li data-i18n="bizfly-cloud.4d40d2">Bizfly Cloud</li>
+                <li data-i18n="ceph.973df0">Ceph</li>
+                <li data-i18n="china-mobile-ecloud-eos.ddae18">China Mobile Ecloud EOS</li>
+                <li data-i18n="cloudflare-r2.5b35ba">Cloudflare R2</li>
+                <li data-i18n="cubbit-ds3.0d188a">Cubbit DS3</li>
+                <li data-i18n="digitalocean-spaces.8468fa">DigitalOcean Spaces</li>
+                <li data-i18n="dreamhost.b8031f">Dreamhost</li>
+                <li data-i18n="exaba.c544c4">Exaba</li>
+                <li data-i18n="fastly.006b49">Fastly</li>
+                <li data-i18n="filelu-s5.a7deea">FileLu S5</li>
+                <li>Google Cloud Storage</li>
+                <li data-i18n="hcp.86be45">HCP</li>
+                <li data-i18n="hetzner.008a8c">Hetzner</li>
+                <li data-i18n="huawei-obs.c99777">Huawei OBS</li>
+                <li data-i18n="ibm-cos-s3.2bae3a">IBM COS S3</li>
+                <li data-i18n="idrive-e2.679b7e">IDrive e2</li>
+                <li data-i18n="impossible-cloud.98f51e">Impossible Cloud</li>
+                <li data-i18n="intercolo.209d33">Intercolo</li>
+                <li data-i18n="ionos-cloud.d1a907">IONOS Cloud</li>
+                <li data-i18n="leviia.36f4e6">Leviia</li>
+                <li data-i18n="liara.77af18">Liara</li>
+                <li data-i18n="linode.d82d60">Linode</li>
+                <li data-i18n="magalu.1d850b">Magalu</li>
+                <li data-i18n="mega-s4.0087d8">MEGA S4</li>
+                <li data-i18n="minio.43d317">MinIO</li>
+                <li data-i18n="netease-nos.1e26af">Netease NOS</li>
+                <li data-i18n="outscale.d9aaf3">Outscale</li>
+                <li data-i18n="ovhcloud.6c0296">OVHcloud</li>
+                <li data-i18n="petabox.857a72">Petabox</li>
+                <li data-i18n="pure-storage-flashblade.67e26e">Pure Storage FlashBlade</li>
+                <li data-i18n="qiniu-cloud-kodo.bfae89">Qiniu Cloud (Kodo)</li>
+                <li data-i18n="rabata.0b64d2">Rabata</li>
+                <li data-i18n="rackcorp.3054bc">RackCorp</li>
+                <li data-i18n="scaleway.29ae71">Scaleway</li>
+                <li data-i18n="scality.b76ed5">Scality</li>
+                <li data-i18n="seagate-lyve-cloud.509848">Seagate Lyve Cloud</li>
+                <li data-i18n="seaweedfs.7bf903">SeaweedFS</li>
+                <li data-i18n="selectel.2a82ac">Selectel</li>
+                <li data-i18n="servercore.adbcdb">Servercore</li>
+                <li data-i18n="spectra-logic.1ba4d0">Spectra Logic</li>
+                <li data-i18n="storj.ad8c05">Storj</li>
+                <li data-i18n="synology-c2.89b67f">Synology C2</li>
+                <li data-i18n="tencent-cloud-cos.98bd38">Tencent Cloud COS</li>
+                <li data-i18n="ucloud-us3.afd1c4">UCloud US3</li>
+                <li data-i18n="wasabi.589ca8">Wasabi</li>
+                <li data-i18n="zadara.08ddf9">Zadara</li>
+                <li data-i18n="zata.8418cf">Zata</li>
+                <li data-i18n="zero-services-zero-z3.91ab31">Zero Services (ZERO-Z3)</li>
+                <li data-i18n="any-other-s3-compatible.78b628">Any other S3-compatible storage</li>
+              </ul>
+              <p data-i18n="plus-rclone-wrapper-types.1e73b2">Plus Rclone wrapper types for advanced workflows:</p>
+              <ul class="dp-list">
+                <li data-i18n="alias.042598">Alias</li>
+                <li data-i18n="archive.2621c6">Archive</li>
+                <li data-i18n="combine.30d04e">Combine</li>
+                <li data-i18n="crypt.cef80d">Crypt</li>
+                <li data-i18n="union.72d1bc">Union</li>
+              </ul>
+              <p data-i18n-html="edit-only-providers-configure.867ac3">Edit-only providers (configure via <code>rclone.conf</code>; not shown in the in-app Add Remote picker because of vendor sandbox/auth quirks, but fully editable and usable once present):</p>
+              <ul class="dp-list">
+                <li data-i18n="chunker.b04351">Chunker</li>
+                <li data-i18n="citrix-sharefile.91ef0d">Citrix ShareFile</li>
+                <li data-i18n="compress.f5e41c">Compress</li>
+                <li data-i18n="enterprise-file-fabric.085c46">Enterprise File Fabric</li>
+                <li data-i18n="google-photos.08d5a7">Google Photos</li>
+                <li data-i18n="hasher.fc0f48">Hasher</li>
+                <li data-i18n="icloud-drive.5d3b33">iCloud Drive</li>
+                <li data-i18n="icloud-photos.5b1e78">iCloud Photos</li>
+                <li data-i18n="linkbox.7918c1">Linkbox</li>
+                <li data-i18n="memory.89c8a2">Memory</li>
+                <li data-i18n="proton-drive.8f3d74">Proton Drive</li>
+                <li data-i18n="sia.23ad89">Sia</li>
+              </ul>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">
+              <span data-i18n="can-i-try-enter.93729b">Can I try Enter Space before committing?</span>
+              <span class="faq-icon">▼</span>
+            </button>
+            <div class="faq-answer">
+              <p data-i18n="absolutely-enter-space-offers.202494">Absolutely! Enter Space offers a free 7-day trial with full access to every feature — no restrictions. This gives you plenty of time to connect your cloud accounts, set up syncs, and see how Enter Space fits into your workflow before deciding on a plan.</p>
+              <p data-i18n-html="if-you-run-into.07a3b1">If you run into any issues during your trial (or at any point after subscribing), please don't hesitate to <a href="#" class="obf-mail" data-u="enter-space" data-d="wemiller" data-t="com" style="color: var(--accent);">reach out to me</a>. I'm happy to help troubleshoot and resolve any problems. Fixing issues for you makes the app better for everyone.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">
+              <span data-i18n="how-does-the-files.102e68">How does the Files app integration work?</span>
+              <span class="faq-icon">▼</span>
+            </button>
+            <div class="faq-answer">
+              <p data-i18n="enter-space-uses-apple.2ae262">Enter Space uses Apple's File Provider framework to integrate directly with the Files app on iOS and Finder on macOS. Your cloud storage appears as a location in Files/Finder, allowing you to access files with any app that supports file browsing.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">
+              <span data-i18n="can-i-perform-file.b26009">Can I perform file operations within the app?</span>
+              <span class="faq-icon">▼</span>
+            </button>
+            <div class="faq-answer">
+              <p data-i18n="yes-enter-space-includes.7a89f3">Yes! Enter Space includes basic file operations like copy, move, delete, rename, and create folders directly within the app. You can also use these operations through the Files app integration.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">
+              <span data-i18n="what-is-rclone-and.19e99a">What is Rclone and why is it important?</span>
+              <span class="faq-icon">▼</span>
+            </button>
+            <div class="faq-answer">
+              <p data-i18n="rclone-is-a-battle.194a88">Rclone is a battle-tested open-source command-line tool for managing cloud storage. It's been around for years with a proven track record of reliability and security. Enter Space is built on Rclone, giving you the power of this trusted tool with a beautiful native Apple interface.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="dp-faq-group" id="features">
+        <h2 data-i18n="features.fc338f">Features</h2>
+        <div class="faq-list">
+          <div class="faq-item">
+            <button class="faq-question">
+              <span data-i18n="what-types-of-automated.e82dc4">What types of automated syncs are available?</span>
+              <span class="faq-icon">▼</span>
+            </button>
+            <div class="faq-answer">
+              <p data-i18n="enter-space-offers-several.172ef6">Enter Space offers several types of automated sync operations to keep your data backed up:</p>
+              <ul>
+                <li data-i18n-html="sync-makes-the-destination.3eb83c"><strong>Sync</strong> — Makes the destination match the source, copying new and changed files and deleting files from the destination that are no longer in the source.</li>
+                <li data-i18n-html="copy-copies-new-and.4d30d7"><strong>Copy</strong> — Copies new and changed files from source to destination without deleting anything at the destination.</li>
+                <li data-i18n-html="bisync-two-way-sync.cf8a09"><strong>Bisync</strong> — Two-way sync that keeps both source and destination in sync with each other, propagating changes in both directions.</li>
+                <li data-i18n-html="move-moves-files-from.c56c62"><strong>Move</strong> — Moves files from source to destination, removing them from the source after a successful transfer.</li>
+                <li data-i18n-html="photos-backup-automatically-backs.0ce9f7"><strong>Photos Backup</strong> — Automatically backs up media from your Photos library. Choose to export photos, videos, or both, and optionally preserve metadata via sidecar files. You can export the original unedited version, the edited version, or both. Only new or changed media items are exported, so subsequent runs are fast and incremental.</li>
+              </ul>
+              <p data-i18n="each-scheduled-sync-task.701273">Each scheduled sync task can be configured with a range of options:</p>
+              <ul>
+                <li data-i18n-html="backup-directories-optionally-config.dd54b8"><strong>Backup directories</strong> — Optionally configure a backup directory so that files replaced or deleted during a sync are preserved rather than permanently lost.</li>
+                <li data-i18n-html="filtering-include-or-exclude.58e5c0"><strong>Filtering</strong> — Include or exclude files using path wildcard patterns, modification timestamps, or file sizes. Filters can be applied in an inclusive or exclusive manner, giving you precise control over exactly which files are synced.</li>
+                <li data-i18n-html="schedule-options-set-syncs.cec558"><strong>Schedule options</strong> — Set syncs to run on custom intervals, or use near-realtime file monitoring to sync moments after changes are detected. They can even be triggered from Apple Shortcuts</li>
+                <li data-i18n-html="network-awareness-automatically-skip.6fb496"><strong>Network awareness</strong> — Automatically skip syncs when on battery power, low-data networks</li>
+                <li data-i18n-html="rate-limit-tuning-set.b645af"><strong>Rate-limit tuning</strong> — Set a transactions-per-second cap and low-level retry count to stay within a provider's limits (great for backends like pCloud with dynamic, unpredictable throttling). If a destination keeps rate-limiting, the sync detects the repeated limit and aborts cleanly with a clear message instead of hammering away.</li>
+                <li data-i18n-html="icloud-file-materialization-when.7c7312"><strong>iCloud file materialization</strong> — When syncing iCloud Drive directories, Enter Space will automatically materialize (download) evicted files before the sync runs and re-evict them afterward. This lets you back up your full iCloud Documents even if the files aren't actively present on your device.</li>
+                <li data-i18n-html="duplicate-tasks-quickly-duplicate.f81a76"><strong>Duplicate tasks</strong> — Quickly duplicate an existing scheduled sync task to set up a backup to an additional location. All settings, filters, and options are copied so you can reuse your existing configuration without starting from scratch.</li>
+              </ul>
+              <p data-i18n="enter-space-also-keeps.989b7a">Enter Space also keeps detailed logs from the last 50 scheduled sync executions, so you can review exactly what happened during each run — including files transferred, errors encountered, and overall sync statistics.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">
+              <span data-i18n="what-is-the-serve.ac87c7">What is the Serve feature?</span>
+              <span class="faq-icon">▼</span>
+            </button>
+            <div class="faq-answer">
+              <p data-i18n="the-serve-feature-lets.1e9dfa">The Serve feature lets you spin up a local server that exposes any of your configured remotes using a variety of Rclone serve types — including WebDAV, NFS, FTP, SFTP, HTTP, S3, DLNA, and Restic. This is useful for accessing your cloud files through other apps or devices on your network.</p>
+              <p data-i18n-html="on-macos-webdav-ftp.770c50">On macOS, WebDAV, FTP, and NFS serves can be automatically mounted into your filesystem with the <a href="../helper.dmg">Mount Helper App</a>, giving you an alternative way to browse and manage your cloud files alongside the standard File Provider integration. NFS in particular is dramatically faster than WebDAV for media playback over encrypted cloud remotes because macOS's NFS client doesn't probe every file the way Finder's WebDAV client does — and NFS mounts land under <code>~/Library/Application Support/Enter Space/Mounts/</code> instead of <code>/Volumes/</code> so Spotlight doesn't try to index your entire cloud tree.</p>
+              <p data-i18n="on-a-mac-enter.a7f175">On a Mac, Enter Space can also mount a remote as a real volume through a file-system extension, without the helper — Finder and Terminal both see it, and switching the remote on or off updates the volume in place.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">
+              <span data-i18n="how-does-the-apple.85450d">How does the Apple TV hidden-remotes unlock work?</span>
+              <span class="faq-icon">▼</span>
+            </button>
+            <div class="faq-answer">
+              <p data-i18n-html="apple-tvs-typically-live.dfe906">Apple TVs typically live in shared spaces, so by default any remote you've marked hidden stays hidden on every TV. When someone taps "Show Hidden Remotes" on a TV, an unlock request is sent to your iPhone or Mac and a push notification appears with <strong>Approve</strong> and <strong>Deny</strong> actions — even if the app is force-quit. Tap Approve, authenticate with Face ID / Touch ID, and hidden remotes appear on that one TV for the next 3 hours.</p>
+              <p data-i18n="each-apple-tv-is.0b99b4">Each Apple TV is paired by name. The first time you unlock a TV you're asked to confirm the name it claimed for itself, which then locks on the TV — so another device on your iCloud account can't register a TV with the same name to trick you into approving the wrong one. Confirmed TVs show up cleanly in the unlock list; unconfirmed ones are flagged with an "Unconfirmed" pill.</p>
+              <p data-i18n-html="tap-lock-from-the.4ad63e">Tap <strong>Lock</strong> from the phone or Mac and the TV snaps back to the locked home grid immediately — within seconds — even if someone was mid-playback on hidden content. The lock signal rides Apple's CloudKit infrastructure (no server we operate), with an iCloud-key-value fallback that catches it within a couple of seconds if the push gets delayed.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">
+              <span data-i18n="how-do-i-recover.52f36e">How do I recover my setup on a new or replacement Mac?</span>
+              <span class="faq-icon">▼</span>
+            </button>
+            <div class="faq-answer">
+              <p data-i18n="enter-space-is-designed.23f2f5">Enter Space is designed so that recovering from a lost or broken Mac is as painless as possible. Most of your Enter Space settings are automatically saved to your iCloud account, and sensitive credentials like remote access tokens and passwords are securely stored in your iCloud Keychain.</p>
+              <p data-i18n="the-following-are-persisted.ed33b4">The following are persisted to your iCloud account and will be available on your new device:</p>
+              <ul>
+                <li data-i18n-html="scheduled-sync-tasks-all.5fc3d9"><strong>Scheduled sync tasks</strong> — All of your automated sync configurations, schedules, and filtering rules.</li>
+                <li data-i18n-html="remote-configurations-your-configure.3bd109"><strong>Remote configurations</strong> — Your configured cloud storage remotes and their connection settings.</li>
+                <li data-i18n-html="serve-configurations-any-file.41d228"><strong>Serve configurations</strong> — Any file serving setups you've created (e.g., WebDAV, SFTP, HTTP servers).</li>
+                <li data-i18n-html="secrets-and-credentials-access.6f7d83"><strong>Secrets and credentials</strong> — Access tokens, passwords, and API keys are stored in iCloud Keychain for end-to-end encrypted sync across your devices.</li>
+              </ul>
+              <p data-i18n="when-you-sign-into.3ed033">When you sign into your iCloud account on a new Mac and install Enter Space, your previous settings will be securely restored — in most cases automatically. This means you can get back to a fully working backup setup without manually re-entering credentials or recreating your sync tasks from scratch.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="dp-faq-group" id="privacy">
+        <h2 data-i18n="security-privacy.27f69f">Security &amp; privacy</h2>
+        <div class="faq-list">
+          <div class="faq-item">
+            <button class="faq-question">
+              <span data-i18n="is-my-data-secure.cb1d55">Is my data secure with end-to-end encryption?</span>
+              <span class="faq-icon">▼</span>
+            </button>
+            <div class="faq-answer">
+              <p data-i18n-html="yes-enter-space-can.68ee9d">Yes! Enter Space can use Rclone's Crypt remote wrapper, which is built on XChaCha20-Poly1305 — an encryption algorithm that is highly efficient and that some researchers have attributed as being theoretically <a href="https://crypto.stackexchange.com/questions/79518/is-xchacha20-poly1305-quantum-resistant" target="_blank" rel="noopener noreferrer" style="color: var(--accent);">post-quantum resilient</a>. When using a remote wrapped in the crypt type your files are encrypted entirely on your device before they're uploaded to the cloud, meaning only you can decrypt and access your data — even if the cloud provider or someone else gains access to your cloud account.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">
+              <span data-i18n="how-does-enter-space.ac2e67">How does Enter Space handle my privacy?</span>
+              <span class="faq-icon">▼</span>
+            </button>
+            <div class="faq-answer">
+              <p data-i18n="while-enter-space-can.fddc5a">While Enter Space can connect to over 100 cloud storage providers, the app runs entirely on your device. It connects directly from the app to your configured providers — Enter Space does not monitor, track, or even route your data through any intermediary servers. This means Enter Space has zero insight into how you use the app or what data you store, ensuring the utmost privacy.</p>
+              <p data-i18n="enter-space-provides-the.6bb9d2">Enter Space provides the client, but beyond that it is up to you to use cloud storage providers you trust. Your credentials are stored locally in your device's Keychain (and synced via iCloud Keychain if enabled), and your files travel directly between your device and your chosen provider — never through us.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="dp-faq-group" id="pricing">
+        <h2 data-i18n="pricing-availability.b6b992">Pricing &amp; availability</h2>
+        <div class="faq-list">
+          <div class="faq-item">
+            <button class="faq-question">
+              <span data-i18n="how-does-pricing-work.6c717e">How does pricing work?</span>
+              <span class="faq-icon">▼</span>
+            </button>
+            <div class="faq-answer">
+              <p data-i18n="enter-space-is-a.3bcc75">Enter Space is a paid app — the entire app requires an active subscription or a one-time lifetime purchase to use. There is no free tier or partially unlocked mode. After your 7-day free trial, you can choose the plan that works best for you:</p>
+              <ul data-until>
+                <li data-i18n-html="monthly-7-99-month.4ec214"><strong>Monthly</strong> — $7.99/month (introductory) · $9.99/month after October 1</li>
+                <li data-i18n-html="yearly-29-99-year.5ce641"><strong>Yearly</strong> — $29.99/year (introductory) · $49.99/year after October 1</li>
+                <li data-i18n-html="lifetime-59-99-one.e3e850"><strong>Lifetime</strong> — $59.99 one-time (introductory) · $99.99 after October 1</li>
+              </ul>
+              <ul data-from hidden>
+                <li data-i18n-html="monthly-9-99-month.78e3f9"><strong>Monthly</strong> — $9.99/month</li>
+                <li data-i18n-html="yearly-49-99-year.bd7fc7"><strong>Yearly</strong> — $49.99/year</li>
+                <li data-i18n-html="lifetime-99-99-one.7c5e38"><strong>Lifetime</strong> — $99.99 one-time</li>
+              </ul>
+              <p data-until data-i18n="the-current-introductory-pricing.c5d41c">The current introductory pricing is available for a limited time, and no additional sales are planned after this period. Pricing is subject to change as features and market conditions evolve. All plans — including subscriptions and the lifetime purchase — support Apple Family Sharing, so one purchase can cover your entire family.</p>
+              <p data-from hidden data-i18n="pricing-is-subject-to.3248b6">Pricing is subject to change as features and market conditions evolve. All plans — including subscriptions and the lifetime purchase — support Apple Family Sharing, so one purchase can cover your entire family.</p>
+              <p data-i18n-html="us-prices-shown-the.000d77">US prices shown; the App Store shows yours. <a href="../pricing/">See plans and prices</a></p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">
+              <span data-i18n="what-about-users-who.66d619">What about users who already purchased Enter Space?</span>
+              <span class="faq-icon">▼</span>
+            </button>
+            <div class="faq-answer">
+              <p data-i18n="a-heartfelt-thank-you.6098ec">A heartfelt thank you to the many early supporters who purchased Enter Space before this pricing change. You believed in the app early on, and that means the world to me. As a token of gratitude, all existing purchasers enjoy Grandfathered access — you will continue to have full, unrestricted access to Enter Space without ever needing to subscribe or make an additional purchase. Your original purchase is honored, no strings attached.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">
+              <span data-i18n="is-enter-space-available.0f95d6">Is Enter Space available in the European Union?</span>
+              <span class="faq-icon">▼</span>
+            </button>
+            <div class="faq-answer">
+              <p data-i18n="yes-enter-space-is.1dfac2">Yes. Enter Space is on the App Store everywhere in the European Union, France included. It's available in every App Store territory Apple offers.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Every depth page ends on the download. -->
+  <section class="dp-closing">
+    <h2 data-i18n-html="all-your-cloud-storage.ac8483">All Your Cloud Storage, One Place</h2>
+    <a href="https://apps.apple.com/us/app/enter-space/id6746350540" target="_blank" rel="noopener noreferrer" class="btn-buy" data-i18n="download-on-the-app.a9096a">Download on the App Store</a>
+    <p class="dp-alt"><a href="../" data-i18n="back-to-the-overview.e274c2">Back to the overview</a></p>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-links">
+        <a href="../../" class="footer-link" data-i18n="all-apps.429449">All Apps</a>
+        <a href="../../pinline/" class="footer-link">Pinline</a>
+        <a href="../../blip/" class="footer-link">Blip</a>
+        <a href="../../ari-helper/" class="footer-link">Ari Helper</a>
+        <a href="../../sami/" class="footer-link">Sami</a>
+        <a href="../../tilebreak/" class="footer-link">Tilebreak</a>
+        <a href="../../mi-speaks/" class="footer-link">Mi Speaks</a>
+        <a href="../../embr/" class="footer-link">Embr</a>
+        <a href="../../deepsi/" class="footer-link">DeepSi</a>
+        <a href="../../luma-editor/" class="footer-link">Luma Editor</a>
+        <a href="../../wise-flyer/" class="footer-link">Wise Flyer</a>
+        <a href="../../glint/" class="footer-link">Glint</a>
+        <a href="/privacy/" class="footer-link" data-i18n="privacy.cf0148">Privacy</a>
+        <a href="/terms/" class="footer-link" data-i18n="terms.a55a27">Terms</a>
+        <a href="/support/" class="footer-link" data-i18n="support.f32d5a">Support</a>
+        <a href="/" class="footer-link" data-i18n="portfolio.036b18">Portfolio</a>
+      </div>
+
+      <!-- Social Media Links -->
+      <div class="footer-social-links">
+        <a href="https://x.com/apps_by_blaine" class="social-icon-link" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)">
+          <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+          </svg>
+        </a>
+        <a href="https://www.instagram.com/apps.by.blaine/" class="social-icon-link" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+          <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.6100 4.1009 4.1009.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.1009 4.1009-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.1009-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.1009-4.1009 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.1100 2.759-6.1100 6.1100s2.759 6.163 6.1100 6.163 6.1100-2.759 6.1100-6.163c0-3.403-2.759-6.1100-6.1100-6.1100zm0 10.1100c-2.209 0-4-1.79-4-4 0-2.209 1.7100-4 4-4s4 1.7100 4 4c0 2.21-1.7100 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+          </svg>
+        </a>
+        <a href="https://www.youtube.com/@AppsByBlaine" class="social-icon-link" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+          <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+          </svg>
+        </a>
+      </div>
+
+      <p style="color: var(--text-muted); margin-top: var(--spacing-md);" data-i18n-html="blaine-miller-all-rights.b327c2">
+        © <span id="year"></span> Blaine Miller. All rights reserved.
+      </p>
+    </div>
+  </footer>
+
+  <script src="../../app-showcase.js?v=0ce231d7"></script>
+  <script>
+    // Enter Space's App Store prices change on 1 October 2026 (scheduled in App Store Connect).
+    (function () {
+      var after = Date.now() >= Date.parse('2026-10-01T00:00:00-07:00');
+      document.querySelectorAll('[data-until]').forEach(function (el) { el.hidden = after; });
+      document.querySelectorAll('[data-from]').forEach(function (el) { el.hidden = !after; });
+    })();
+  </script>
+  <script>
+    // Resolve obfuscated mailto links on first use (delegated: i18n.js re-renders the answers).
+    (function () {
+      var at = String.fromCharCode(64);
+      var scheme = String.fromCharCode(109, 97, 105, 108, 116, 111, 58);
+      function bind(e) {
+        var el = e.target.closest && e.target.closest('.obf-mail');
+        if (el) el.setAttribute('href', scheme + el.dataset.u + at + el.dataset.d + '.' + el.dataset.t);
+      }
+      ['mouseover', 'focusin', 'touchstart', 'click'].forEach(function (t) {
+        document.addEventListener(t, bind, { passive: true, capture: true });
+      });
+    })();
+  </script>
+</body>
+</html>

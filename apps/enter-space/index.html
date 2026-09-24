@@ -376,6 +376,11 @@
     :lang(ja) .es-closing .es-display, :lang(zh) .es-closing .es-display, :lang(ko) .es-closing .es-display { max-width: 10em; }
     :lang(ja) .es-hero-standfirst, :lang(zh) .es-hero-standfirst, :lang(ko) .es-hero-standfirst,
     :lang(ja) .security-audit-note, :lang(zh) .security-audit-note, :lang(ko) .security-audit-note { max-width: 26em; }
+    /* ---- Into the depth pages ------------------------------------------ */
+    .es-trust-more { margin: 1.2rem 0 0; text-align: center; }
+    .es-trust .learn-more { color: var(--es-hero-em); }
+    .faq-more { margin: 1.6rem auto 0; max-width: 800px; text-align: center; }
+    .es-copy .learn-more { color: var(--es-accent-ink); }
   </style>
   <link rel="alternate" hreflang="x-default" href="https://wemiller.com/apps/enter-space/">
   <link rel="alternate" hreflang="en" href="https://wemiller.com/apps/enter-space/">
@@ -401,8 +406,10 @@
       </a>
       <button class="mobile-menu-toggle">☰</button>
       <ul class="nav-links">
-        <li><a href="#features" class="nav-link" data-i18n="features.fc338f">Features</a></li>
-        <li><a href="#faq" class="nav-link" data-i18n="faq.03688b">FAQ</a></li>
+        <li><a href="./" class="nav-link" aria-current="page" data-i18n="overview.0efc2e">Overview</a></li>
+        <li><a href="features/" class="nav-link" data-i18n="features.fc338f">Features</a></li>
+        <li><a href="pricing/" class="nav-link" data-i18n="pricing.a0d9bb">Pricing</a></li>
+        <li><a href="faq/" class="nav-link" data-i18n="faq.03688b">FAQ</a></li>
         <li><a href="https://apps.apple.com/us/app/enter-space/id6746350540" target="_blank" rel="noopener noreferrer" class="btn-buy">App Store</a></li>
       </ul>
     </div>
@@ -444,6 +451,7 @@
           <p class="es-eyebrow"><span class="es-num">01</span><span data-i18n="photos.c8b2e8">Photos</span></p>
           <h2 class="es-display" data-i18n="one-photo-library-across.c934a2">One photo library across every cloud</h2>
           <p class="es-lede" data-i18n="enter-space-gathers-the.1ece2c">Enter Space gathers the photos on all your remotes into one timeline, by day, month or year. Search it by place, date or kind.</p>
+          <a class="learn-more" href="features/#media" data-i18n="learn-more.824d76">Learn more</a>
         </div>
         <figure class="es-figure" data-reveal>
           <img src="assets/screens/en/02-photos-800.webp?v=4ad31479"
@@ -460,6 +468,7 @@
           <p class="es-eyebrow"><span class="es-num">02</span><span>Theater</span></p>
           <h2 class="es-display" data-i18n="a-private-theater-for.fce2a4">A private Theater for your media</h2>
           <p class="es-lede" data-i18n="browse-the-films-and.62c71f">Browse the films and shows on any remote with artwork, Continue Watching and suggestions, then play them on iPhone, iPad, Mac or Apple TV.</p>
+          <a class="learn-more" href="features/#media" data-i18n="learn-more.824d76">Learn more</a>
         </div>
         <figure class="es-figure" data-reveal>
           <img src="assets/screens/en/03-theater-800.webp?v=ab8315a4"
@@ -476,6 +485,7 @@
           <p class="es-eyebrow"><span class="es-num">03</span><span>Time Portal</span></p>
           <h2 class="es-display" data-i18n="go-back-to-any.7bf699">Go back to any point in time</h2>
           <p class="es-lede" data-i18n="time-portal-shows-a.fbb036">Time Portal shows a folder as it was at any snapshot, and brings back the file you changed or deleted.</p>
+          <a class="learn-more" href="features/#sync" data-i18n="learn-more.824d76">Learn more</a>
         </div>
         <figure class="es-figure" data-reveal>
           <img src="assets/screens/en/06-timeportal-800.webp?v=e296941b"
@@ -492,6 +502,7 @@
           <p class="es-eyebrow"><span class="es-num">04</span><span>Doppel</span></p>
           <h2 class="es-display" data-i18n="find-the-copies-you.eef03f">Find the copies you forgot</h2>
           <p class="es-lede" data-i18n="doppel-finds-exact-and.b288f5">Doppel finds exact and look-alike photos, videos and music on any remote, and shows how much space each group gives back.</p>
+          <a class="learn-more" href="features/#sync" data-i18n="learn-more.824d76">Learn more</a>
         </div>
         <figure class="es-figure" data-reveal>
           <img src="assets/screens/en/07-doppel-800.webp?v=19ee47e7"
@@ -508,6 +519,7 @@
           <p class="es-eyebrow"><span class="es-num">05</span><span data-i18n="code.adac69">Code</span></p>
           <h2 class="es-display" data-i18n="edit-code-where-it.610bf7">Edit code where it lives</h2>
           <p class="es-lede" data-i18n="a-syntax-highlighting-editor.70f01f">A syntax-highlighting editor with a full git client, SSH keys and live Markdown preview, on files in any cloud.</p>
+          <a class="learn-more" href="features/#developer" data-i18n="learn-more.824d76">Learn more</a>
         </div>
         <figure class="es-figure" data-reveal>
           <img src="assets/screens/en/09-codeeditor-800.webp?v=70762930"
@@ -531,6 +543,7 @@
         <div class="security-badge" data-i18n-html="iphone-ipad-mac-apple.9769a1"><span class="badge-icon">📱</span> iPhone, iPad, Mac, Apple TV, Apple Watch</div>
       </div>
       <p class="security-audit-note" data-i18n="enter-space-is-an.8a81ca">Enter Space is an in-app purchase: monthly, yearly or a one-time Lifetime, with a 7-day free trial.</p>
+      <p class="es-trust-more"><a class="learn-more" href="pricing/" data-i18n="see-plans-and-prices.760c12">See plans and prices</a></p>
     </div>
   </section>
 
@@ -607,6 +620,7 @@
       </div>
     </div>
     </div>
+    <p class="faq-more"><a class="learn-more" href="faq/" data-i18n="see-all-questions.237fee">See all questions</a></p>
   </section>
 
   <!-- Closing: the promise again, and the one button. -->
