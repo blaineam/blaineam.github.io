@@ -19,7 +19,6 @@
   "got-questions.8ecca3": "还有疑问？",
   "hear-a-voice-first.af2287": "先听听声音",
   "hear-it-for-yourself.5398d7": "亲耳听听",
-  "hear-it.51c9d3": "试听",
   "heart.2a3733": "Heart",
   "is-mi-speaks-available.cc6f02": "Mi Speaks 在欧盟可以下载吗？",
   "is-my-text-ever.1114b8": "我的文字会被上传吗？",
@@ -61,5 +60,10 @@
   "text-ready-to-be.8934ad": "准备朗读的文字，上方是导入工具，下方是播放器",
   "the-voice-picker-listing.b66301": "列出 Studio Voices 的语音选择器",
   "twenty-eight-voices-that.6a7af9": "二十八种听起来像真人的声音",
-  "works-offline.372393": "<span class=\"badge-icon\">✈️</span> 可离线运行"
+  "works-offline.372393": "<span class=\"badge-icon\">✈️</span> 可离线运行",
+  "learn-more.824d76": "了解更多",
+  "overview.0efc2e": "概览",
+  "pricing.a0d9bb": "价格",
+  "see-all-questions.237fee": "查看所有问题",
+  "see-plans-and-prices.760c12": "查看方案与价格"
 }

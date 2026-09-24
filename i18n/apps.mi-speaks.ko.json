@@ -19,7 +19,6 @@
   "got-questions.8ecca3": "궁금한 점이 있으신가요?",
   "hear-a-voice-first.af2287": "먼저 목소리를 들어 보세요",
   "hear-it-for-yourself.5398d7": "직접 들어보세요",
-  "hear-it.51c9d3": "들어 보기",
   "heart.2a3733": "하트",
   "is-mi-speaks-available.cc6f02": "Mi Speaks 앱을 유럽연합(EU)에서 받을 수 있나요?",
   "is-my-text-ever.1114b8": "제 텍스트가 업로드되나요?",
@@ -61,5 +60,10 @@
   "text-ready-to-be.8934ad": "읽을 준비가 된 텍스트, 위에는 가져오기 도구, 아래에는 플레이어",
   "the-voice-picker-listing.b66301": "Studio Voices 목록이 있는 음성 선택 화면",
   "twenty-eight-voices-that.6a7af9": "사람처럼 들리는 28가지 목소리",
-  "works-offline.372393": "<span class=\"badge-icon\">✈️</span> 오프라인 동작"
+  "works-offline.372393": "<span class=\"badge-icon\">✈️</span> 오프라인 동작",
+  "learn-more.824d76": "자세히 보기",
+  "overview.0efc2e": "개요",
+  "pricing.a0d9bb": "가격",
+  "see-all-questions.237fee": "모든 질문 보기",
+  "see-plans-and-prices.760c12": "요금제와 가격 보기"
 }

@@ -106,6 +106,7 @@
     }
     .ms-voice .ms-voice-accent { color: var(--ms-quiet); font-size: 0.85rem; }
     .ms-voice.is-playing { border-color: var(--ms-accent-ink); }
+    .ms-faq-more { margin: 1.6rem 0 0; text-align: center; }
     .ms-hear-note { margin: 1.4rem auto 0; max-width: 40ch; font-size: 0.92rem; color: var(--ms-quiet); }
 
     body { background: var(--ms-paper); }
@@ -438,9 +439,10 @@
       </a>
       <button class="mobile-menu-toggle">☰</button>
       <ul class="nav-links">
-        <li><a href="#hear-it" class="nav-link" data-i18n="hear-it.51c9d3">Hear It</a></li>
-        <li><a href="#features" class="nav-link" data-i18n="features.fc338f">Features</a></li>
-        <li><a href="#faq" class="nav-link" data-i18n="faq.03688b">FAQ</a></li>
+        <li><a href="./" class="nav-link" aria-current="page" data-i18n="overview.0efc2e">Overview</a></li>
+        <li><a href="features/" class="nav-link" data-i18n="features.fc338f">Features</a></li>
+        <li><a href="pricing/" class="nav-link" data-i18n="pricing.a0d9bb">Pricing</a></li>
+        <li><a href="faq/" class="nav-link" data-i18n="faq.03688b">FAQ</a></li>
         <li><a href="https://apps.apple.com/us/app/mi-speaks/id6451395651" target="_blank" rel="noopener noreferrer" class="btn-buy">App Store</a></li>
       </ul>
     </div>
@@ -494,6 +496,7 @@
           <p class="ms-eyebrow"><span class="ms-num">01</span><span data-i18n="studio-voices.378ad1">Studio Voices</span></p>
           <h2 class="ms-display" data-i18n="twenty-eight-voices-that.6a7af9">Twenty-eight voices that sound human</h2>
           <p class="ms-lede" data-i18n="american-and-british-neural.1cf4d1">American and British neural voices, generated on your iPhone and at home in airplane mode. Studio Voices come with Premium, an in-app purchase.</p>
+          <a class="learn-more" href="features/#voices" data-i18n="learn-more.824d76">Learn more</a>
         </div>
         <figure class="ms-figure" data-reveal>
           <img src="assets/screens/en/02-voices-800.webp?v=da12197a"
@@ -510,6 +513,7 @@
           <p class="ms-eyebrow"><span class="ms-num">02</span><span data-i18n="read-along.cd3a58">Read along</span></p>
           <h2 class="ms-display" data-i18n="every-word-lit-as.0a8b0b">Every word, lit as it's spoken</h2>
           <p class="ms-lede" data-i18n="paste-text-share-from.f6d439">Paste text, share from any app or photograph a page. Reading is free, any length, with no time limit.</p>
+          <a class="learn-more" href="features/#reading" data-i18n="learn-more.824d76">Learn more</a>
         </div>
         <figure class="ms-figure" data-reveal>
           <img src="assets/screens/en/01-editor-800.webp?v=5bf3ad12"
@@ -526,6 +530,7 @@
           <p class="ms-eyebrow"><span class="ms-num">03</span><span data-i18n="books.4a7fdd">Books</span></p>
           <h2 class="ms-display" data-i18n="jump-to-any-chapter.6b7753">Jump to any chapter</h2>
           <p class="ms-lede" data-i18n="mi-speaks-reads-a.2ea59c">Mi Speaks reads a PDF's own table of contents, or finds the headings from the page layout. Skip chapters right from the lock screen.</p>
+          <a class="learn-more" href="features/#reading" data-i18n="learn-more.824d76">Learn more</a>
         </div>
         <figure class="ms-figure" data-reveal>
           <img src="assets/screens/en/04-chapters-800.webp?v=cea91083"
@@ -542,6 +547,7 @@
           <p class="ms-eyebrow"><span class="ms-num">04</span><span>Apple Watch</span></p>
           <h2 class="ms-display" data-i18n="keep-listening-on-your.815f95">Keep listening on your wrist</h2>
           <p class="ms-lede" data-i18n="your-place-follows-you.aa3b11">Your place follows you to Apple Watch. With Premium, an in-app purchase, documents prepared on iPhone play there in the same Studio voice.</p>
+          <a class="learn-more" href="features/#listening" data-i18n="learn-more.824d76">Learn more</a>
         </div>
         <figure class="ms-figure is-watch" data-reveal>
           <img src="assets/screens/en/01-player-440.webp?v=85f9c1aa"
@@ -565,6 +571,7 @@
         <div class="security-badge" data-i18n-html="free-to-read-any.217fbd"><span class="badge-icon">📖</span> Free to read, any length</div>
       </div>
       <p class="security-audit-note" data-i18n="reading-is-free-with.dab2cd">Reading is free with no time limit. Premium is an optional in-app purchase, with a 7-day free trial.</p>
+      <a class="learn-more" href="pricing/" data-i18n="see-plans-and-prices.760c12">See plans and prices</a>
     </div>
   </section>
 
@@ -636,6 +643,7 @@
       </div>
     </div>
     </div>
+    <p class="ms-faq-more"><a class="learn-more" href="faq/" data-i18n="see-all-questions.237fee">See all questions</a></p>
   </section>
 
   <!-- Closing: the promise again, and the one button. -->
