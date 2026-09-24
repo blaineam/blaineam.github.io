@@ -220,6 +220,23 @@
       .sm-chapter.is-flipped .sm-copy { order: 2; }
     }
     .sm-figure { margin: 0 auto; width: min(72vw, 340px); text-align: center; }
+    /* The one comparison: Sami against an upload website, compact enough for 390px. */
+    .sm-figure.is-compare { width: 100%; max-width: 34rem; text-align: left; }
+    .sm-vs { width: 100%; border-collapse: collapse; font-size: 0.95rem; line-height: 1.4; }
+    .sm-vs th, .sm-vs td { padding: 0.75rem 0.6rem; vertical-align: top; text-align: left; border-top: 1px solid var(--sm-rule); }
+    .sm-vs thead th, .sm-vs thead td { border-top: 0; font-size: 0.76rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--sm-quiet); }
+    .sm-vs thead th.us { color: var(--primary-color); }
+    .sm-vs tbody th { font-weight: 600; color: var(--sm-body); width: 32%; }
+    .sm-vs td { color: var(--sm-quiet); }
+    .sm-vs td.us { color: var(--primary-color); font-weight: 600; }
+    @media (max-width: 599px) {
+      /* The row label becomes a small heading over its two answers. */
+      .sm-vs tr { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); column-gap: 1rem; }
+      .sm-vs thead td { display: none; }
+      .sm-vs tbody th { grid-column: 1 / -1; width: auto; padding-bottom: 0.2rem; font-size: 0.82rem; color: var(--sm-quiet); }
+      .sm-vs tbody td { border-top: 0; padding-top: 0.2rem; }
+      .sm-vs th, .sm-vs td { padding-inline: 0; }
+    }
     .sm-figure.is-watch { width: min(56vw, 240px); }
     .sm-figure img { display: block; width: 100%; height: auto; filter: var(--sm-shadow); }
     .sm-figure figcaption {
@@ -439,7 +456,7 @@
         <div class="sm-copy" data-reveal>
           <p class="sm-eyebrow"><span class="sm-num">01</span><span data-i18n="preview.f1fbb2">Preview</span></p>
           <h2 class="sm-display" data-i18n="see-it-before-you.4ed02f">See it before you keep it</h2>
-          <p class="sm-lede" data-i18n="slide-between-the-original.0569f1">Slide between the original and the optimized copy, with the savings underneath. Nothing changes until you say so.</p>
+          <p class="sm-lede" data-i18n="point-a-task-at.739d74">Point a task at your Photos library, an album or any folder, even on a NAS. Slide between the original and the optimized copy — nothing changes until you say so.</p>
         </div>
         <figure class="sm-figure" data-reveal>
           <img src="assets/screens/en/03-compare-800.webp?v=0348f634"
@@ -451,26 +468,10 @@
       </div>
     </section>
 
-    <section class="sm-chapter is-flipped" id="choose">
+    <section class="sm-chapter is-flipped" id="lossless">
       <div class="sm-spread">
         <div class="sm-copy" data-reveal>
-          <p class="sm-eyebrow"><span class="sm-num">02</span><span data-i18n="your-choice.e7332f">Your choice</span></p>
-          <h2 class="sm-display" data-i18n="you-pick-what-it.77f1e6">You pick what it touches</h2>
-          <p class="sm-lede" data-i18n="point-a-task-at.37a89f">Point a task at your Photos library, an album or any folder, even on a NAS or iCloud Drive. It shows the estimated savings first, and runs only what you select.</p>
-        </div>
-        <figure class="sm-figure" data-reveal>
-          <img src="assets/screens/en/02-preview-800.webp?v=0d3c850b"
-               srcset="assets/screens/en/02-preview-400.webp?v=d0cd325e 400w, assets/screens/en/02-preview-800.webp?v=0d3c850b 800w"
-               sizes="(max-width: 472px) 72vw, 340px" width="800" height="1655" loading="lazy" decoding="async" data-i18n-src
-               alt="The photos a task will work on, each with its size, and the estimated savings" data-i18n-attr="alt:the-photos-a-task.35d7c4">
-        </figure>
-      </div>
-    </section>
-
-    <section class="sm-chapter" id="lossless">
-      <div class="sm-spread">
-        <div class="sm-copy" data-reveal>
-          <p class="sm-eyebrow"><span class="sm-num">03</span><span data-i18n="visually-lossless.5ec750">Visually lossless</span></p>
+          <p class="sm-eyebrow"><span class="sm-num">02</span><span data-i18n="visually-lossless.5ec750">Visually lossless</span></p>
           <h2 class="sm-display" data-i18n="smaller-and-it-looks.3d8b11">Smaller, and it looks the same</h2>
           <p class="sm-lede" data-i18n="tick-one-box-and.d3a408">Tick one box and Sami tries several qualities on each photo and video, keeping the smallest that still looks like the original. If none does, the original stays.</p>
         </div>
@@ -483,10 +484,10 @@
       </div>
     </section>
 
-    <section class="sm-chapter is-flipped" id="toolbox">
+    <section class="sm-chapter" id="toolbox">
       <div class="sm-spread">
         <div class="sm-copy" data-reveal>
-          <p class="sm-eyebrow"><span class="sm-num">04</span><span data-i18n="toolbox.692107">Toolbox</span></p>
+          <p class="sm-eyebrow"><span class="sm-num">03</span><span data-i18n="toolbox.692107">Toolbox</span></p>
           <h2 class="sm-display" data-i18n="more-than-an-optimizer.b735b6">More than an optimizer.</h2>
           <p class="sm-lede" data-i18n="convert-and-combine-files.a9001f">Convert and combine files, tag films and shows with artwork and chapters, take Live Photos apart, and record Flash movies at up to 4K.</p>
         </div>
@@ -500,10 +501,10 @@
       </div>
     </section>
 
-    <section class="sm-chapter" id="automation">
+    <section class="sm-chapter is-flipped" id="automation">
       <div class="sm-spread">
         <div class="sm-copy" data-reveal>
-          <p class="sm-eyebrow"><span class="sm-num">05</span><span data-i18n="automation.a15fde">Automation</span></p>
+          <p class="sm-eyebrow"><span class="sm-num">04</span><span data-i18n="automation.a15fde">Automation</span></p>
           <h2 class="sm-display" data-i18n="then-it-runs-itself.e2c63a">Then it runs itself</h2>
           <p class="sm-lede" data-i18n="schedule-a-task-daily.f7cb9c">Schedule a task daily, weekly or monthly, or run it from Shortcuts and Siri. It can keep a backup of every original, too.</p>
         </div>
@@ -512,6 +513,28 @@
                srcset="assets/screens/en/06-automation-400.webp?v=b6047b83 400w, assets/screens/en/06-automation-800.webp?v=ce02c279 800w"
                sizes="(max-width: 472px) 72vw, 340px" width="800" height="1655" loading="lazy" decoding="async" data-i18n-src
                alt="A task's safety and automation settings: backups, automation and notifications" data-i18n-attr="alt:a-task-s-safety.0d5472">
+        </figure>
+      </div>
+    </section>
+    <section class="sm-chapter" id="compare">
+      <div class="sm-spread">
+        <div class="sm-copy" data-reveal>
+          <p class="sm-eyebrow"><span class="sm-num">05</span><span data-i18n="the-alternatives.72760c">The alternatives</span></p>
+          <h2 class="sm-display" data-i18n="why-not-use-a.6c2b09">Why not use a website, or buy more iCloud?</h2>
+          <p class="sm-lede" data-i18n="online-compressors-upload-your.6b28ca">Online compressors upload your media to someone else's server. A bigger iCloud plan keeps every file at full size, and bills you every month.</p>
+        </div>
+        <figure class="sm-figure is-compare" data-reveal>
+          <table class="sm-vs">
+            <thead>
+              <tr><td></td><th scope="col" class="us">Sami</th><th scope="col" data-i18n="online-compressors.23ff45">Online compressors</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row" data-i18n="where-your-media-goes.1fdf89">Where your media goes</th><td class="us" data-i18n="stays-on-your-device.2bc02f">Stays on your device</td><td data-i18n="uploaded-to-someone-else.df51a7">Uploaded to someone else's server</td></tr>
+              <tr><th scope="row" data-i18n="your-photos-library.411c9c">Your Photos library</th><td class="us" data-i18n="optimized-in-place-by.c6a76c">Optimized in place, by album, age or type</td><td data-i18n="export-upload-download-re.b3102e">Export, upload, download, re-import</td></tr>
+              <tr><th scope="row" data-i18n="thousands-of-files.d8ef12">Thousands of files</th><td class="us" data-i18n="batches-schedules-and-shortcuts.94c0a1">Batches, schedules and Shortcuts</td><td data-i18n="a-few-at-a.3e4fd5">A few at a time, often with limits</td></tr>
+              <tr><th scope="row" data-i18n="what-it-costs.59bd1f">What it costs</th><td class="us" data-i18n="one-purchase-on-every.a818ea">One purchase, on every device</td><td data-i18n="free-with-limits-or.179602">Free with limits, or a subscription</td></tr>
+            </tbody>
+          </table>
         </figure>
       </div>
     </section>
