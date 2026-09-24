@@ -14,7 +14,6 @@
   "frequently-asked-questions.d790b4": "자주 묻는 질문",
   "got-questions.8ecca3": "궁금한 점이 있으신가요?",
   "how-many-photos-can.f52fc3": "사진을 몇 장까지 이어 붙일 수 있나요?",
-  "iphone-and-ipad-with.e11fbb": "iPhone과 iPad, 그리고 더 무거운 기가픽셀 작업을 위해 같은 Metal 엔진을 공유하는 네이티브 Mac 앱까지. 가이드 카메라 촬영은 iPhone과 iPad에서, 스티칭과 보정, 감상은 모든 기기에서 가능합니다.",
   "no-tracking-no-ads.5e7933": "추적 없음. 광고 없음. 파노라마는 기기에서 바로 이어 붙입니다.",
   "on-device-stitching.60f746": "<span class=\"badge-icon\">&#x1f5bc;&#xfe0f;</span> 온디바이스 스티칭",
   "yes-pano-owl-is.29e000": "네. Pano Owl 앱은 프랑스를 포함한 유럽연합(EU) 전역에서 판매하고 있습니다. Apple이 제공하는 모든 국가 및 지역의 App Store에서 이용하실 수 있습니다.",
@@ -48,5 +47,11 @@
   "tap-any-panorama-and.9e40a4": "파노라마를 탭하고 드래그하거나 기기를 움직여 둘러보세요. 내보낸 파일에는 360 메타데이터가 담겨 사진 앱, 웹 뷰어, Apple Vision Pro가 360으로 인식합니다.",
   "the-panorama-library-on.723ad8": "360 파노라마가 격자로 놓인 iPad의 파노라마 보관함",
   "the-stitch-screen-with.e3f4ca": "투영 방식과 자동 자르기 옵션이 있는 스티칭 화면",
-  "view.69bd4e": "감상"
+  "view.69bd4e": "감상",
+  "iphone-and-ipad-on.c22143": "iPhone과 iPad에서, iOS 및 iPadOS 26 이상. 가이드 촬영, 스티칭, 보정, 360 뷰어가 모두 기기 자체에서 실행됩니다.",
+  "learn-more.824d76": "자세히 보기",
+  "overview.0efc2e": "개요",
+  "pricing.a0d9bb": "가격",
+  "see-all-questions.237fee": "모든 질문 보기",
+  "see-plans-and-prices.760c12": "요금제와 가격 보기"
 }

@@ -14,7 +14,6 @@
   "frequently-asked-questions.d790b4": "Questions fréquentes",
   "got-questions.8ecca3": "Des questions ?",
   "how-many-photos-can.f52fc3": "Combien de photos puis-je assembler ?",
-  "iphone-and-ipad-with.e11fbb": "iPhone et iPad, avec une app Mac native qui partage le même moteur Metal pour les travaux gigapixel les plus lourds. La capture guidée à l'appareil photo est disponible sur iPhone et iPad ; l'assemblage, les corrections et la visualisation fonctionnent partout.",
   "no-tracking-no-ads.5e7933": "Aucun suivi. Aucune publicité. Vos panoramas sont assemblés directement sur votre appareil.",
   "on-device-stitching.60f746": "<span class=\"badge-icon\">&#x1f5bc;&#xfe0f;</span> Assemblage sur l'appareil",
   "yes-pano-owl-is.29e000": "Oui. Pano Owl est en vente dans toute l'Union européenne, France comprise. L'app est disponible dans tous les pays et régions de l'App Store proposés par Apple.",
@@ -48,5 +47,11 @@
   "tap-any-panorama-and.9e40a4": "Touchez un panorama et regardez autour de vous en faisant glisser ou en bougeant votre appareil. Chaque export embarque les métadonnées 360, pour que Photos, les visionneuses web et Apple Vision Pro le reconnaissent.",
   "the-panorama-library-on.723ad8": "La photothèque de panoramas sur iPad, une grille de panoramas 360",
   "the-stitch-screen-with.e3f4ca": "L’écran d’assemblage, avec le choix de projection et les options de recadrage automatique",
-  "view.69bd4e": "Visionner"
+  "view.69bd4e": "Visionner",
+  "iphone-and-ipad-on.c22143": "iPhone et iPad, sous iOS et iPadOS 26 ou version ultérieure. La capture guidée, l’assemblage, les corrections et la visionneuse à 360° fonctionnent tous sur l’appareil lui-même.",
+  "learn-more.824d76": "En savoir plus",
+  "overview.0efc2e": "Aperçu",
+  "pricing.a0d9bb": "Tarifs",
+  "see-all-questions.237fee": "Voir toutes les questions",
+  "see-plans-and-prices.760c12": "Voir les formules et les prix"
 }

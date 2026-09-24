@@ -14,7 +14,6 @@
   "frequently-asked-questions.d790b4": "よくある質問",
   "got-questions.8ecca3": "ご質問がありますか？",
   "how-many-photos-can.f52fc3": "何枚の写真をスティッチできますか？",
-  "iphone-and-ipad-with.e11fbb": "iPhone と iPad に対応。さらに同じMetalエンジンを搭載したネイティブ Mac アプリが、より重いギガピクセル作業を引き受けます。ガイド撮影は iPhone と iPad で、スティッチ・補正・表示はすべてのデバイスで利用できます。",
   "no-tracking-no-ads.5e7933": "トラッキングなし。広告なし。パノラマの合成は、すべてデバイス上で行われます。",
   "on-device-stitching.60f746": "<span class=\"badge-icon\">&#x1f5bc;&#xfe0f;</span> デバイス上でスティッチ",
   "yes-pano-owl-is.29e000": "はい。Pano Owlはフランスを含む欧州連合（EU）の全域で販売しています。Appleが提供するすべての国と地域のApp Storeでご利用いただけます。",
@@ -48,5 +47,11 @@
   "tap-any-panorama-and.9e40a4": "パノラマをタップして、ドラッグするかデバイスを動かして見渡しましょう。書き出したファイルには360メタデータが付くので、「写真」、Webビューア、Apple Vision Proでも360として認識されます。",
   "the-panorama-library-on.723ad8": "360パノラマが並ぶ iPad のパノラマライブラリ",
   "the-stitch-screen-with.e3f4ca": "投影法と自動クロップのオプションが並ぶスティッチ画面",
-  "view.69bd4e": "鑑賞"
+  "view.69bd4e": "鑑賞",
+  "iphone-and-ipad-on.c22143": "iPhone と iPad（iOS・iPadOS 26 以降）。ガイド撮影、スティッチ、補正、360 ビューアはすべて端末上で動作します。",
+  "learn-more.824d76": "詳しく見る",
+  "overview.0efc2e": "概要",
+  "pricing.a0d9bb": "価格",
+  "see-all-questions.237fee": "すべての質問を見る",
+  "see-plans-and-prices.760c12": "プランと価格を見る"
 }

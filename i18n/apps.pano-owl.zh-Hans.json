@@ -14,7 +14,6 @@
   "frequently-asked-questions.d790b4": "常见问题解答",
   "got-questions.8ecca3": "还有疑问？",
   "how-many-photos-can.f52fc3": "最多能拼接多少张照片？",
-  "iphone-and-ipad-with.e11fbb": "支持 iPhone 和 iPad，并提供原生 Mac App，共用同一套 Metal 引擎来应对更繁重的十亿像素任务。引导式相机拍摄仅限 iPhone 和 iPad；拼接、校正与浏览则在所有平台上都能使用。",
   "no-tracking-no-ads.5e7933": "无追踪。无广告。你的全景全部在设备上本地拼接。",
   "on-device-stitching.60f746": "<span class=\"badge-icon\">&#x1f5bc;&#xfe0f;</span> 设备端拼接",
   "yes-pano-owl-is.29e000": "是的。Pano Owl 现已在欧盟全境上架销售，法国也包括在内。Apple 提供的所有 App Store 国家和地区均可下载。",
@@ -48,5 +47,11 @@
   "tap-any-panorama-and.9e40a4": "轻点任意一幅全景，拖动屏幕或转动设备即可环顾四周。每次导出都带有 360 元数据，“照片”、网页查看器和 Apple Vision Pro 都能识别为 360 全景。",
   "the-panorama-library-on.723ad8": "iPad 上的全景图库，排满 360 全景",
   "the-stitch-screen-with.e3f4ca": "拼接界面，含投影方式和自动裁切选项",
-  "view.69bd4e": "观看"
+  "view.69bd4e": "观看",
+  "iphone-and-ipad-on.c22143": "iPhone 和 iPad，需 iOS 和 iPadOS 26 或更高版本。引导拍摄、拼接、校正和 360 查看器都在设备本身上运行。",
+  "learn-more.824d76": "了解更多",
+  "overview.0efc2e": "概览",
+  "pricing.a0d9bb": "价格",
+  "see-all-questions.237fee": "查看所有问题",
+  "see-plans-and-prices.760c12": "查看方案与价格"
 }
