@@ -41,7 +41,7 @@
       {
         "device": "iphone",
         "captures": "screenshots/iphone-6.9",
-        "scenes": ["01-tasks", "03-compare", "02-preview", "04-convert", "05-tags", "06-automation"],
+        "scenes": ["01-tasks", "03-compare", "04-convert", "05-tags", "06-automation"],
         "widths": [400, 800]
       }
     ]
