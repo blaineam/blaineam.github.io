@@ -233,6 +233,13 @@
         "widths": [400, 800]
       },
       {
+        "device": "ipad",
+        "project": "docs/appstore-screenshots/TriAdd-ipad.monkr",
+        "captures": "screenshots/ipad-13",
+        "scenes": ["play"],
+        "widths": [720, 1440]
+      },
+      {
         "device": "watch",
         "captures": "screenshots/watch-46mm",
         "scenes": ["01-board"],
