@@ -17,6 +17,8 @@ Warnings (printed, exit 0) — the spec's copy budget:
   * a paragraph outside the FAQ and footer over 40 words (CJK: ~2 chars per word)
   * a <ul>/<ol> with more than 4 items outside nav/footer/FAQ (a bullet wall)
   * a grid of 3+ sibling cards with a heading each (a feature wall)
+  * a web font (Google Fonts link or @font-face), except on the pages in
+    WEBFONT_EXCEPTIONS (docs/app-page-design.md §3 documents each one)
 """
 
 from __future__ import annotations
@@ -30,6 +32,9 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 LANGS = ["en", "zh-Hans", "ja", "de", "fr", "es", "ko", "pt-BR", "it"]
 MIRRORED = {"haven", "blip", "glint", "lathe"}
+# Pages whose typefaces ARE the identity; see docs/app-page-design.md §3 "Exceptions".
+WEBFONT_EXCEPTIONS = {"revela"}
+WEBFONT = re.compile(r"fonts\.googleapis\.com|fonts\.gstatic\.com|@font-face")
 STORE = re.compile(r"apps\.apple\.com|play\.google\.com/store")
 VOID = {"area", "base", "br", "col", "embed", "hr", "img", "input", "link", "meta",
         "param", "source", "track", "wbr"}
@@ -203,6 +208,9 @@ def check(slug: str) -> int:
         if len(carded) >= 3 and not n.inside(skip) and n.tag != "#root":
             warns.append(f"{len(carded)} sibling cards with headings in "
                          f"<{n.tag} class=\"{n.attrs.get('class', '')}\"> — a feature wall?")
+    if slug not in WEBFONT_EXCEPTIONS and WEBFONT.search(src):
+        warns.append("loads a web font (spec: none; add to WEBFONT_EXCEPTIONS + document it "
+                     "in docs/app-page-design.md §3 only if the face is the app's identity)")
 
     for e in errors:
         print(f"  ✗ {slug}: {e}")
