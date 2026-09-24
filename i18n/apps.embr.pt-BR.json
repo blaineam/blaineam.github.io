@@ -9,7 +9,6 @@
   "download-on-app-store.cf50c2": "Baixar na App Store",
   "yes-embr-is-on.d6f25e": "Sim. Embr está à venda em toda a União Europeia, França inclusive. Está disponível em todos os países e regiões da App Store que a Apple oferece.",
   "faq.03688b": "Perguntas frequentes",
-  "features.fc338f": "Recursos",
   "frequently-asked-questions.d790b4": "Perguntas Frequentes",
   "got-questions.8ecca3": "Dúvidas?",
   "how-does-icloud-sync.79b922": "Como funciona a sincronização com o iCloud?",
@@ -45,5 +44,7 @@
   "two-plans-side-by.7133ea": "Dois planos lado a lado",
   "update-it-in-seconds.833344": "Atualize em segundos",
   "updating-a-card-s.1bfabe": "Atualizando o saldo de um cartão pelo painel",
-  "zero-data-collection.e360f7": "<span class=\"badge-icon\">&#x1f512;</span> Zero coleta de dados"
+  "zero-data-collection.e360f7": "<span class=\"badge-icon\">&#x1f512;</span> Zero coleta de dados",
+  "overview.0efc2e": "Visão geral",
+  "see-all-questions.237fee": "Ver todas as perguntas"
 }

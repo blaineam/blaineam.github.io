@@ -9,7 +9,6 @@
   "download-on-app-store.cf50c2": "在 App Store 下载",
   "yes-embr-is-on.d6f25e": "是的。Embr 现已在欧盟全境上架销售，法国也包括在内。Apple 提供的所有 App Store 国家和地区均可下载。",
   "faq.03688b": "常见问题",
-  "features.fc338f": "功能",
   "frequently-asked-questions.d790b4": "常见问题解答",
   "got-questions.8ecca3": "还有疑问？",
   "how-does-icloud-sync.79b922": "iCloud 同步是如何工作的？",
@@ -45,5 +44,7 @@
   "two-plans-side-by.7133ea": "两种方案，并排对比",
   "update-it-in-seconds.833344": "几秒钟就能更新",
   "updating-a-card-s.1bfabe": "在仪表板上更新一张信用卡的余额",
-  "zero-data-collection.e360f7": "<span class=\"badge-icon\">&#x1f512;</span> 零数据收集"
+  "zero-data-collection.e360f7": "<span class=\"badge-icon\">&#x1f512;</span> 零数据收集",
+  "overview.0efc2e": "概览",
+  "see-all-questions.237fee": "查看全部问题"
 }
