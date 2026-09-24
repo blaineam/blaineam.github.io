@@ -22,7 +22,6 @@
   "it-s-generated-on.879df5": "Sie wird auf deinem Gerät generiert — es gibt keine geloopten Titel. Jede Welt hat ein Rezept (Tonleiter, Tempo, Instrumente), deine Buchstabenwahl wandert die Tonleiter hinauf, und ein gültiges Wort löst einen Akkord auf, dessen Größe seiner Länge entspricht. Der Stummschalter wird respektiert, und in den Einstellungen kannst du eigene Musik weiterlaufen lassen.",
   "yes-kern-is-on.6d0520": "Ja. Kern wird in der gesamten Europäischen Union verkauft, Frankreich eingeschlossen. Die App ist in allen App-Store-Ländern und -Regionen erhältlich, die Apple anbietet – außer auf dem chinesischen Festland und in Vietnam, wo Spiele eine lokale Vertriebslizenz brauchen, die ich nicht habe.",
   "kerning-is-the-typographer.0759ec": "Kerning ist die Kunst der Typografen, den Abstand zwischen Buchstabenpaaren so lange zu justieren, bis ein Wort perfekt sitzt — das obsessivste, unsichtbarste Detail der Schriftkunst. Ein Wortspiel namens Kern verspricht Sorgfalt auf Buchstabenebene. Und quetscht man r und n zu eng zusammen, liest sich „kerning“ als „keming“ — weshalb ein Wort mit r-n darin einen Erfolg genau dieses Namens freischaltet.",
-  "modes.79f5b2": "Modi",
   "no-accounts-no-analytics.268b6d": "Keine Konten. Keine Analytik. Keine Dritt-SDKs. Nichts verlässt dein Gerät außer den Punktzahlen, die du selbst einreichst.",
   "no-ads-no-iap.ed9428": "<span class=\"badge-icon\">🚫</span> Keine Werbung, keine In-App-Käufe",
   "no-reactivity-is-cosmetic.173b6d": "Nein — Reaktivität ist per Gesetz kosmetisch. Welten ändern das Licht, die Steine, die Musik und die Gesten, nie die Formel. Ein Wort, das zu einer Welt gehört, speist Erfolge und dein Welten-Journal, nicht deine Punktzahl.",
@@ -58,5 +57,9 @@
   "the-home-screen-in.1855e8": "Der Startbildschirm in der Welt Mitternacht",
   "the-kern-home-screen.d8680d": "Der Kern-Startbildschirm mit Rad, Suche und Kette in der Welt Ozean",
   "the-puzzle-complete-card.a99b9a": "Die Abschlusskarte: Par erreicht, dazu die Punktzahl",
-  "three-word-games-share.a4ac62": "Drei Wortspiele teilen sich eine faire Wertung, in achtzehn lebendigen Welten, die auf deine Wörter reagieren."
+  "three-word-games-share.a4ac62": "Drei Wortspiele teilen sich eine faire Wertung, in achtzehn lebendigen Welten, die auf deine Wörter reagieren.",
+  "features.fc338f": "Funktionen",
+  "learn-more.824d76": "Mehr erfahren",
+  "overview.0efc2e": "Überblick",
+  "see-all-questions.237fee": "Alle Fragen ansehen"
 }
