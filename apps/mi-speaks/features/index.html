@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Features · Mi Speaks</title>
+  <meta name="description" content="Everything Mi Speaks does: twenty-eight on-device Studio Voices, PDFs read on their own page, chapter navigation, background playback and Apple Watch.">
+  <link rel="canonical" href="https://wemiller.com/apps/mi-speaks/features/">
+  <meta property="og:title" content="Features · Mi Speaks">
+  <meta property="og:description" content="Everything Mi Speaks does: twenty-eight on-device Studio Voices, PDFs read on their own page, chapter navigation, background playback and Apple Watch.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://wemiller.com/apps/mi-speaks/features/">
+  <meta property="og:image" content="https://wemiller.com/apps/mi-speaks/assets/images/poster.jpg?v=ad4eadd3">
+  <meta name="apple-itunes-app" content="app-id=6451395651">
+  <link rel="stylesheet" href="../../app-showcase.css?v=e9909304">
+  <link rel="stylesheet" href="../../_shared/depth.css?v=8787ba38">
+  <style>
+    :root {
+      --app-primary: #ff69f0;
+      --app-secondary: #ff1ad9;
+      --app-accent: #ffa8ff;
+      --primary-color: #7A0F6E;    /* deep magenta: headlines on paper */
+      --secondary-color: #ff1ad9;
+      --ms-accent-ink: #B0128F;
+      --ms-hero: linear-gradient(170deg, #1C0622 0%, #2A0A33 45%, #4A0E4A 100%);
+      --ms-hero-glow: radial-gradient(ellipse 60% 45% at 50% 100%, rgba(255, 105, 240, 0.28) 0%, transparent 70%), radial-gradient(ellipse 45% 40% at 10% 10%, rgba(255, 26, 217, 0.16) 0%, transparent 70%);
+      --ms-hero-ink: #FFF3FC;
+      --ms-hero-em: #FFA8FF;
+      --ms-hero-kicker: rgba(255, 168, 255, 0.9);
+      --ms-btn: linear-gradient(180deg, #FF8AF4, #FF3FE0);
+      --ms-btn-ink: #2A0026;
+      --ms-glow: rgba(255, 26, 217, 0.30);
+      --ms-display: system-ui, -apple-system, "SF Pro Display", "Segoe UI", sans-serif;
+      --ms-paper: #FFFFFF;
+      --ms-paper-2: #FBF1FA;
+      --ms-rule: rgba(74, 14, 74, 0.12);
+      --ms-quiet: #6E5A6C;
+      --ms-body: #3A2A38;
+      --ms-shadow: drop-shadow(0 30px 40px rgba(74, 14, 74, 0.20)) drop-shadow(0 6px 10px rgba(74, 14, 74, 0.10));
+      --bg-primary: var(--ms-paper);
+      --bg-secondary: var(--ms-paper-2);
+      --text-primary: #1F0F1D;
+      --text-secondary: var(--ms-body);
+      --text-muted: var(--ms-quiet);
+      --glass-bg: rgba(255, 255, 255, 0.8);
+      --glass-border: rgba(74, 14, 74, 0.10);
+      --glass-shadow: none;
+      --ms-measure: 1120px;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --primary-color: #FFA8FF;
+        --secondary-color: #FF69F0;
+        --ms-accent-ink: #FF8AF4;
+        --ms-paper: #140818;
+        --ms-paper-2: #1D0C22;
+        --ms-rule: rgba(255, 168, 255, 0.14);
+        --ms-quiet: #B69BB3;
+        --ms-body: #E6D7E4;
+        --ms-shadow: drop-shadow(0 30px 44px rgba(0, 0, 0, 0.6)) drop-shadow(0 6px 10px rgba(0, 0, 0, 0.35));
+        --text-primary: #FBEFF9;
+        --glass-bg: rgba(20, 8, 24, 0.8);
+        --glass-border: rgba(255, 168, 255, 0.08);
+      }
+    }
+    /* Cards and hairlines in the page's own paper and rule, in both schemes. */
+    :root { --bg-card: var(--ms-paper-2); --border-color: var(--ms-rule); }
+    .dp-badges { margin-top: 1.5rem; justify-content: center; }
+  </style>
+  <link rel="alternate" hreflang="x-default" href="https://wemiller.com/apps/mi-speaks/features/">
+  <link rel="alternate" hreflang="en" href="https://wemiller.com/apps/mi-speaks/features/">
+  <link rel="alternate" hreflang="zh-Hans" href="https://wemiller.com/apps/mi-speaks/features/?lang=zh-Hans">
+  <link rel="alternate" hreflang="ja" href="https://wemiller.com/apps/mi-speaks/features/?lang=ja">
+  <link rel="alternate" hreflang="de" href="https://wemiller.com/apps/mi-speaks/features/?lang=de">
+  <link rel="alternate" hreflang="fr" href="https://wemiller.com/apps/mi-speaks/features/?lang=fr">
+  <link rel="alternate" hreflang="es" href="https://wemiller.com/apps/mi-speaks/features/?lang=es">
+  <link rel="alternate" hreflang="ko" href="https://wemiller.com/apps/mi-speaks/features/?lang=ko">
+  <link rel="alternate" hreflang="pt-BR" href="https://wemiller.com/apps/mi-speaks/features/?lang=pt-BR">
+  <link rel="alternate" hreflang="it" href="https://wemiller.com/apps/mi-speaks/features/?lang=it">
+  <script src="/i18n/i18n.js?v=9b769779" defer data-page="apps.mi-speaks.features" data-pos="bottom-left"></script>
+</head>
+<body>
+  <nav class="app-nav">
+    <div class="nav-container">
+      <a href="../../" class="nav-logo nav-brand" title="← Apps" aria-label="← Apps"
+         data-i18n-attr="title:apps.2d61f2;aria-label:apps.2d61f2">
+        <span class="nav-brand-back" aria-hidden="true">←</span>
+        <img class="nav-brand-icon" src="../assets/images/icon.png?v=4598cf6b" alt="" width="60" height="60">
+        <span class="nav-brand-name">Mi Speaks</span>
+      </a>
+      <button class="mobile-menu-toggle" aria-label="Menu">☰</button>
+      <ul class="nav-links">
+        <li><a href="../" class="nav-link" data-i18n="overview.0efc2e">Overview</a></li>
+        <li><a href="../features/" class="nav-link" aria-current="page" data-i18n="features.fc338f">Features</a></li>
+        <li><a href="../pricing/" class="nav-link" data-i18n="pricing.a0d9bb">Pricing</a></li>
+        <li><a href="../faq/" class="nav-link" data-i18n="faq.03688b">FAQ</a></li>
+        <li><a href="https://apps.apple.com/us/app/mi-speaks/id6451395651" target="_blank" rel="noopener noreferrer" class="btn-buy">App Store</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main>
+    <header class="dp-header">
+      <p class="dp-eyebrow">Mi Speaks</p>
+      <h1 data-i18n="everything-mi-speaks-does.b2e17f">Everything Mi Speaks does</h1>
+      <p class="dp-standfirst" data-i18n="voices-reading-along-listening.eb0337">Voices, reading along, listening anywhere and privacy, in one place. Premium features are marked as in-app purchases.</p>
+      <ul class="dp-jumps">
+        <li><a href="#voices" data-i18n="studio-voices.378ad1">Studio Voices</a></li>
+        <li><a href="#reading" data-i18n="read-along.cd3a58">Read along</a></li>
+        <li><a href="#listening" data-i18n="listen-anywhere.166f00">Listen anywhere</a></li>
+        <li><a href="#privacy" data-i18n="privacy.cf0148">Privacy</a></li>
+      </ul>
+    </header>
+    <section class="dp-section" id="voices">
+      <h2 data-i18n="studio-voices.378ad1">Studio Voices</h2>
+      <p class="dp-lede" data-i18n="twenty-eight-neural-voices.eb2f6a">Twenty-eight neural voices, generated entirely on your iPhone. Nothing is uploaded, and they work in airplane mode.</p>
+      <ul class="dp-grid">
+        <li class="dp-card">
+          <span class="dp-card-icon" aria-hidden="true">🎙️</span>
+          <h3 data-i18n="studio-voices.378ad1">Studio Voices</h3>
+          <p data-i18n="twenty-eight-neural-voices.899e23">Twenty-eight neural voices, American and British, produced on your iPhone by an eighty-two-million-parameter model. They breathe, they phrase, and they stop sounding like a phone reading to you. Part of Premium, with a one-time download.</p>
+          <span class="dp-tag" data-i18n="in-app-purchase.66bcad">In-app purchase</span>
+        </li>
+        <li class="dp-card">
+          <span class="dp-card-icon" aria-hidden="true">🎚️</span>
+          <h3 data-i18n="blend-a-voice-of.efa3b0">Blend a voice of your own</h3>
+          <p data-i18n="mix-two-studio-voices.15370a">Mix two Studio Voices into a new one that sounds like neither.</p>
+          <span class="dp-tag" data-i18n="in-app-purchase.66bcad">In-app purchase</span>
+        </li>
+        <li class="dp-card">
+          <span class="dp-card-icon" aria-hidden="true">🗣️</span>
+          <h3 data-i18n="studio-voices-or-any.a03d7c">Studio Voices, or any voice you own</h3>
+          <p data-i18n="twenty-eight-neural-studio.78d344">Twenty-eight neural Studio Voices, plus every system voice already on your device — including Apple's Enhanced and Premium downloads and your own Personal Voice. Mi Speaks tells you which is which, so you are never handed the worst one by default.</p>
+        </li>
+        <li class="dp-card">
+          <span class="dp-card-icon" aria-hidden="true">⏩</span>
+          <h3 data-i18n="every-speed-plus-turbo.35be35">Every speed, plus Turbo</h3>
+          <p data-i18n="any-playback-speed-from.d9712d">Any playback speed from 0.5x to 2x, and Turbo when you want to go faster still.</p>
+          <span class="dp-tag" data-i18n="in-app-purchase.66bcad">In-app purchase</span>
+        </li>
+      </ul>
+    </section>
+
+    <section class="dp-section" id="reading">
+      <h2 data-i18n="read-along.cd3a58">Read along</h2>
+      <p class="dp-lede" data-i18n="transform-any-written-content.0d5682">Transform any written content into natural-sounding speech. Import text from images, PDFs, web pages, or type directly into the app. Mi Speaks makes all your content accessible through audio.</p>
+      <ul class="dp-grid">
+        <li class="dp-card">
+          <span class="dp-card-icon" aria-hidden="true">📖</span>
+          <h3 data-i18n="your-book-on-its.3a3c23">Your book, on its own page</h3>
+          <p data-i18n="import-a-pdf-and.05fcc5">Import a PDF and read it where it actually lives: the real page, the real layout, with the spoken word lit up exactly where it sits. Turn it off and you are back to plain sentences — it is a mode, not a takeover.</p>
+        </li>
+        <li class="dp-card">
+          <span class="dp-card-icon" aria-hidden="true">📍</span>
+          <h3 data-i18n="highlight-follow.60299c">Highlight &amp; Follow</h3>
+          <p data-i18n="follow-along-with-highlighted.2309b6">Follow along with highlighted text as Mi Speaks reads, making it easier to read and comprehend content.</p>
+        </li>
+        <li class="dp-card">
+          <span class="dp-card-icon" aria-hidden="true">🔖</span>
+          <h3 data-i18n="jump-to-any-chapter.6b7753">Jump to any chapter</h3>
+          <p data-i18n="mi-speaks-reads-a.209fd0">Mi Speaks reads a PDF's own table of contents, and when a book has none it finds the headings from the page layout. A four-hundred-page import becomes a list you can move around in — and the skip buttons on your lock screen move chapter by chapter.</p>
+        </li>
+        <li class="dp-card">
+          <span class="dp-card-icon" aria-hidden="true">📄</span>
+          <h3 data-i18n="import-from-anywhere.cb4f3c">Import from Anywhere</h3>
+          <p data-i18n="share-a-pdf-from.e98080">Share a PDF from Files, Safari or Mail and it opens as the real document, with its pages, highlighting and chapters. Paste text from any app, or photograph a page and Mi Speaks reads the words off it.</p>
+        </li>
+        <li class="dp-card">
+          <span class="dp-card-icon" aria-hidden="true">💡</span>
+          <h3 data-i18n="helpful-tips.f194b3">Helpful Tips</h3>
+          <p data-i18n="built-in-helpful-tips.a104d6">Built-in helpful tips guide you through features and help you get the most out of Mi Speaks.</p>
+        </li>
+      </ul>
+    </section>
+
+    <section class="dp-section" id="listening">
+      <h2 data-i18n="listen-anywhere.166f00">Listen anywhere</h2>
+      <p class="dp-lede" data-i18n="perfect-for-reading-articles.f2b09e">Perfect for reading articles while commuting, listening to documents while working out, or helping with accessibility needs.</p>
+      <ul class="dp-grid">
+        <li class="dp-card">
+          <span class="dp-card-icon" aria-hidden="true">⏯️</span>
+          <h3 data-i18n="background-playback.efc5fb">Background Playback</h3>
+          <p data-i18n="keep-listening-in-another.a95c5b">Keep listening in another app or with the screen locked, with play, pause and skip on the lock screen. If a Studio Voice passage isn't prepared yet, it carries on in your own system voice — the reading never just stops.</p>
+        </li>
+        <li class="dp-card">
+          <span class="dp-card-icon" aria-hidden="true">✈️</span>
+          <h3 data-i18n="ready-before-you-are.0c350f">Ready before you are</h3>
+          <p data-i18n="prepare-a-whole-document.ec2ba7">Prepare a whole document once and every sentence is already rendered to audio. It keeps playing with the screen locked, in a tunnel, on a plane. Your place follows you to your iPad and Apple Watch, and prepared documents are sent to the watch on their own — so it reads them in the same Studio Voice.</p>
+          <span class="dp-tag" data-i18n="in-app-purchase.66bcad">In-app purchase</span>
+        </li>
+        <li class="dp-card">
+          <span class="dp-card-icon" aria-hidden="true">📚</span>
+          <h3 data-i18n="your-library-everywhere.5992da">Your library, everywhere</h3>
+          <p data-i18n="keep-as-many-documents.3efa4a">Keep as many documents as you like, each with its place marked, in sync across iPhone, iPad and Apple Watch through your iCloud Drive.</p>
+          <span class="dp-tag" data-i18n="in-app-purchase.66bcad">In-app purchase</span>
+        </li>
+        <li class="dp-card">
+          <span class="dp-card-icon" aria-hidden="true">🎧</span>
+          <h3 data-i18n="export-to-an-audio.3357da">Export to an audio file</h3>
+          <p data-i18n="save-any-document-as.36a584">Save any document as an audio file you can keep and play anywhere.</p>
+          <span class="dp-tag" data-i18n="in-app-purchase.66bcad">In-app purchase</span>
+        </li>
+        <li class="dp-card">
+          <span class="dp-card-icon" aria-hidden="true">🔁</span>
+          <h3 data-i18n="resume-reading-widget.a572d2">Resume Reading widget</h3>
+          <p data-i18n="pick-up-where-you.7301a1">Pick up where you stopped from your Home Screen or Lock Screen.</p>
+        </li>
+      </ul>
+    </section>
+
+    <section class="dp-section" id="privacy">
+      <h2 data-i18n="nothing-leaves-your-device.a74da2">Nothing leaves your device</h2>
+      <p class="dp-lede" data-i18n="every-voice-runs-locally.1555ee">Every voice runs locally. Your text is never uploaded, never sent to a server to be spoken, and never needs an account — which also means Mi Speaks works the same in airplane mode as it does on Wi-Fi.</p>
+      <ul class="dp-grid">
+        <li class="dp-card">
+          <span class="dp-card-icon" aria-hidden="true">🔒</span>
+          <h3 data-i18n="zero-data-collection.939efa">Zero Data Collection</h3>
+          <p data-i18n="complete-privacy-all-processing.b37baf">Complete privacy—all processing happens on your device. No data is collected, tracked, or sent anywhere. Affordable and privacy-focused.</p>
+        </li>
+        <li class="dp-card">
+          <span class="dp-card-icon" aria-hidden="true">🛡️</span>
+          <h3 data-i18n="hardened-by-design.084a16">Hardened by Design</h3>
+          <p data-i18n="comprehensive-security-audit-complet.9f66b8">Comprehensive security audit completed April 2026</p>
+        </li>
+      </ul>
+      <div class="security-badges dp-badges">
+        <div class="security-badge" data-i18n-html="input-validation.5de1a2"><span class="badge-icon">&#x1f50d;</span> Input Validation</div>
+        <div class="security-badge" data-i18n-html="secure-audio-pipeline.cbbd41"><span class="badge-icon">&#x1f3a4;</span> Secure Audio Pipeline</div>
+        <div class="security-badge" data-i18n-html="privacy-first-design.1bbae3"><span class="badge-icon">&#x1f512;</span> Privacy-First Design</div>
+        <div class="security-badge" data-i18n-html="app-sandbox.b85ecb"><span class="badge-icon">&#x2705;</span> App Sandbox</div>
+      </div>
+    </section>
+  </main>
+
+  <section class="dp-closing">
+    <h2 data-i18n="a-voice-you-will.2a89c7">A voice you will actually want to listen to</h2>
+    <a href="https://apps.apple.com/us/app/mi-speaks/id6451395651" target="_blank" rel="noopener noreferrer" class="btn-buy" data-i18n="download-on-the-app.a9096a">Download on the App Store</a>
+    <p class="dp-alt"><a href="../" data-i18n="back-to-the-overview.e274c2">Back to the overview</a></p>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-links">
+        <a href="../../" class="footer-link" data-i18n="all-apps.429449">All Apps</a>
+        <a href="../../pinline/" class="footer-link">Pinline</a>
+        <a href="../../enter-space/" class="footer-link">Enter Space</a>
+        <a href="../../blip/" class="footer-link">Blip</a>
+        <a href="../../ari-helper/" class="footer-link">Ari Helper</a>
+        <a href="../../sami/" class="footer-link">Sami</a>
+        <a href="../../tilebreak/" class="footer-link">Tilebreak</a>
+        <a href="../../embr/" class="footer-link">Embr</a>
+        <a href="../../deepsi/" class="footer-link">DeepSi</a>
+        <a href="../../luma-editor/" class="footer-link">Luma Editor</a>
+        <a href="../../wise-flyer/" class="footer-link">Wise Flyer</a>
+        <a href="../../glint/" class="footer-link">Glint</a>
+        <a href="/privacy/" class="footer-link" data-i18n="privacy.cf0148">Privacy</a>
+        <a href="/terms/" class="footer-link" data-i18n="terms.a55a27">Terms</a>
+        <a href="/support/" class="footer-link" data-i18n="support.f32d5a">Support</a>
+        <a href="/" class="footer-link" data-i18n="portfolio.036b18">Portfolio</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../../app-showcase.js?v=0ce231d7"></script>
+</body>
+</html>

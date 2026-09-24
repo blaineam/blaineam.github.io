@@ -19,7 +19,6 @@
   "got-questions.8ecca3": "¿Tienes dudas?",
   "hear-a-voice-first.af2287": "Escucha una voz primero",
   "hear-it-for-yourself.5398d7": "Escúchalo tú mismo",
-  "hear-it.51c9d3": "Escuchar",
   "heart.2a3733": "Heart",
   "is-mi-speaks-available.cc6f02": "¿Mi Speaks está disponible en la Unión Europea?",
   "is-my-text-ever.1114b8": "¿Se sube mi texto en algún momento?",
@@ -61,5 +60,10 @@
   "text-ready-to-be.8934ad": "Texto listo para leerse en voz alta, con las herramientas de importación arriba y el reproductor abajo",
   "the-voice-picker-listing.b66301": "El selector de voz con la lista de Studio Voices",
   "twenty-eight-voices-that.6a7af9": "Veintiocho voces que suenan humanas",
-  "works-offline.372393": "<span class=\"badge-icon\">✈️</span> Funciona sin conexión"
+  "works-offline.372393": "<span class=\"badge-icon\">✈️</span> Funciona sin conexión",
+  "learn-more.824d76": "Más información",
+  "overview.0efc2e": "Resumen",
+  "pricing.a0d9bb": "Precios",
+  "see-all-questions.237fee": "Ver todas las preguntas",
+  "see-plans-and-prices.760c12": "Ver planes y precios"
 }

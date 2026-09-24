@@ -19,7 +19,6 @@
   "got-questions.8ecca3": "ご質問がありますか？",
   "hear-a-voice-first.af2287": "まずは声を聴いてみる",
   "hear-it-for-yourself.5398d7": "ぜひ聴いてみてください",
-  "hear-it.51c9d3": "聴いてみる",
   "heart.2a3733": "Heart",
   "is-mi-speaks-available.cc6f02": "Mi Speaks は欧州連合（EU）で入手できますか？",
   "is-my-text-ever.1114b8": "テキストがアップロードされることはありますか？",
@@ -61,5 +60,10 @@
   "text-ready-to-be.8934ad": "読み上げを待つテキスト。上に読み込みツール、下にプレーヤー",
   "the-voice-picker-listing.b66301": "Studio Voices が並ぶ音声の選択画面",
   "twenty-eight-voices-that.6a7af9": "人の声に聞こえる、28の声",
-  "works-offline.372393": "<span class=\"badge-icon\">✈️</span> オフラインで動作"
+  "works-offline.372393": "<span class=\"badge-icon\">✈️</span> オフラインで動作",
+  "learn-more.824d76": "詳しく見る",
+  "overview.0efc2e": "概要",
+  "pricing.a0d9bb": "価格",
+  "see-all-questions.237fee": "すべての質問を見る",
+  "see-plans-and-prices.760c12": "プランと価格を見る"
 }

@@ -19,7 +19,6 @@
   "got-questions.8ecca3": "Noch Fragen?",
   "hear-a-voice-first.af2287": "Erst mal reinhören",
   "hear-it-for-yourself.5398d7": "Hören Sie selbst",
-  "hear-it.51c9d3": "Anhören",
   "heart.2a3733": "Heart",
   "is-mi-speaks-available.cc6f02": "Ist Mi Speaks in der Europäischen Union erhältlich?",
   "is-my-text-ever.1114b8": "Wird mein Text jemals hochgeladen?",
@@ -61,5 +60,10 @@
   "text-ready-to-be.8934ad": "Text, bereit zum Vorlesen, mit den Import-Werkzeugen oben und dem Player unten",
   "the-voice-picker-listing.b66301": "Die Stimmenauswahl mit den Studio Voices",
   "twenty-eight-voices-that.6a7af9": "Achtundzwanzig Stimmen, die menschlich klingen",
-  "works-offline.372393": "<span class=\"badge-icon\">✈️</span> Funktioniert offline"
+  "works-offline.372393": "<span class=\"badge-icon\">✈️</span> Funktioniert offline",
+  "learn-more.824d76": "Mehr erfahren",
+  "overview.0efc2e": "Überblick",
+  "pricing.a0d9bb": "Preise",
+  "see-all-questions.237fee": "Alle Fragen ansehen",
+  "see-plans-and-prices.760c12": "Tarife und Preise ansehen"
 }
