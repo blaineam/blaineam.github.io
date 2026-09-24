@@ -66,14 +66,16 @@
   "this-passage-is-too.ce073d": "이 구절은 너무 길어 링크로는 보여 줄 수 없습니다.",
   "this-share-link-is.5d635d": "이 공유 링크가 불완전하거나 손상되어 말씀을 표시할 수 없습니다.",
   "to-join-join-the.9646c8": "참여하려면 먼저 <a href=\"https://groups.google.com/g/scripture-alone-android-beta\" target=\"_blank\" rel=\"noopener noreferrer\">베타 그룹에 가입</a>한 뒤, 같은 Google 계정으로 <a href=\"https://play.google.com/apps/testing/com.blainemiller.scripturealone\" target=\"_blank\" rel=\"noopener noreferrer\">Google Play에서 테스트에 참여</a>하고 그곳에서 설치하세요. Google Play에 테스트를 아직 이용할 수 없다고 나오면 첫 빌드가 아직 Google의 심사 중이니, 하루이틀 뒤에 다시 시도해 주세요.",
+  "until-they-can-be.7d3638": "앱에 포함될 수 있을 때까지는 두 파일이 잘 가져와지는 것으로 확인되었습니다. ESV는 <a href=\"https://store.ligonier.org/the-reformation-study-bible-esv-epub\" target=\"_blank\" rel=\"noopener noreferrer\">Reformation Study Bible의 ePub판</a>, CSB는 출판사가 제공하는 <a href=\"https://csbible.com/wp-content/uploads/2018/03/CSB_Pew_Bible_2nd_Printing.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">예배용 성경 PDF</a>입니다. 번역본 화면의 ‘파일 가져오기…’로 여세요.",
   "verse-of-the-day.25f8d1": "홈 화면과 잠금 화면을 위한 오늘의 말씀 위젯, 그리고 오프라인으로 읽는 Apple Watch 앱. 메모는 나만의 비공개 iCloud를 통해 어디서나 함께합니다.",
   "what-data-do-you.d389a9": "어떤 데이터를 수집하나요?",
+  "where-can-i-get.11aafd": "ESV나 CSB는 어디에서 구해 가져올 수 있나요?",
   "widgets-and-apple-watch.efef3c": "위젯과 Apple Watch",
   "works-offline.372393": "<span class=\"badge-icon\">✈️</span> 오프라인 동작",
-  "yes-for-translations-that.0ed3fa": "네, 공개 라이선스로 배포되는 번역본이라면 가능합니다. Scripture Alone은 USFM 파일이나 DRM 없는 ePub을 열 수 있고, 요청하시면 <a href=\"https://ebible.org/\" rel=\"noopener\">eBible.org</a>에서 공개한 무료 목록을 사용하시는 언어부터 보여 드립니다 — 직접 탭하지 않는 한 아무것도 내려받지 않습니다. 가져온 번역본은 기기 안에만 저장됩니다. 이는 잠정적인 조치입니다. 주요 현대 번역본에 대한 라이선스 요청은 각 출판사에 전달되어 있으며, 승인되면 해당 번역본이 앱에 그대로 포함되고 이 기능은 사라질 수 있습니다.",
   "yes-in-a-closed.b8b573": "네, Google Play에서 비공개 베타로 제공합니다. Android 스마트폰과 태블릿용 네이티브 앱이며, 자체 Wear OS 앱도 함께 제공됩니다. Android에는 iCloud가 없으므로 하이라이트와 메모는 기기에 저장됩니다.",
   "yes-no-ads-no.bf78fd": "네. 광고도, 앱 내 구입도, 구독도 없습니다. Scripture Alone은 무료이며, 앞으로도 무료입니다.",
   "yes-on-any-mac.d853c7": "네, Apple 실리콘을 탑재한 모든 Mac에서 실행됩니다. Mac의 App Store에서 iPad 앱을 설치하면 하이라이트와 메모가 iCloud를 통해 iPhone, iPad와 동기화됩니다.",
+  "yes-scripture-alone-can.230191": "네. Scripture Alone은 직접 소유한 USFM 파일, DRM 없는 ePub, 성경 PDF를 열 수 있고, 요청하면 <a href=\"https://ebible.org/\" rel=\"noopener\">eBible.org</a>에서 공개하는 무료 카탈로그를 사용자 언어 우선으로 가져옵니다. 탭하기 전에는 아무것도 다운로드되지 않습니다. 가져온 번역본은 오직 사용자의 것입니다. 사용자 본인의 비공개 iCloud를 통해 다른 기기로 따라가며, 복사와 공유는 출판사가 공개한 이용 조건을 따릅니다. 이는 임시 방편입니다. 주요 현대 번역본의 라이선스 요청이 각 출판사에 들어가 있으며, 승인되면 해당 번역본이 앱에 기본으로 포함되고 이 방법은 없어질 수 있습니다.",
   "yes-scripture-alone-is.9112b8": "네. Scripture Alone은 프랑스를 포함한 유럽연합 전역의 App Store에서 이용할 수 있습니다. 소스 코드는 GitHub에서 누구에게나 공개되어 있습니다.",
   "your-highlights-and-notes.dc2c5b": "하이라이트와 메모에 헌정의 글을 더해 파일 하나로 묶으세요. 가족이 열어서 당신이 표시한 그대로 읽을 수 있는, 대대로 물려줄 디지털 ‘아버지의 성경’입니다."
 }

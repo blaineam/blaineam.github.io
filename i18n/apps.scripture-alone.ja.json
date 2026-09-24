@@ -66,14 +66,16 @@
   "this-passage-is-too.ce073d": "この箇所は長すぎて、リンクからは表示できません。",
   "this-share-link-is.5d635d": "この共有リンクは不完全か壊れているため、聖句を表示できません。",
   "to-join-join-the.9646c8": "参加するには、まず<a href=\"https://groups.google.com/g/scripture-alone-android-beta\" target=\"_blank\" rel=\"noopener noreferrer\">ベータ版グループに参加</a>し、同じ Google アカウントで<a href=\"https://play.google.com/apps/testing/com.blainemiller.scripturealone\" target=\"_blank\" rel=\"noopener noreferrer\">Google Play のテストに登録</a>してから、Google Play でインストールしてください。「テストはまだ利用できません」と表示される場合は、最初のビルドが Google の審査中です。1〜2 日後にもう一度お試しください。",
+  "until-they-can-be.7d3638": "アプリに収録できるようになるまでの間、次の 2 つのファイルがうまくインポートできることを確認しています。ESV は<a href=\"https://store.ligonier.org/the-reformation-study-bible-esv-epub\" target=\"_blank\" rel=\"noopener noreferrer\">Reformation Study Bible の ePub 版</a>。CSB は出版社が提供している<a href=\"https://csbible.com/wp-content/uploads/2018/03/CSB_Pew_Bible_2nd_Printing.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">礼拝用聖書の PDF</a>。どちらも「翻訳」の「ファイルをインポート…」から開いてください。",
   "verse-of-the-day.25f8d1": "ホーム画面とロック画面に置ける「今日の聖句」ウィジェットと、オフラインで読める Apple Watch アプリ。メモは、あなた自身のプライベートな iCloud を通ってどこへでもついてきます。",
   "what-data-do-you.d389a9": "どんなデータを収集していますか？",
+  "where-can-i-get.11aafd": "ESV や CSB はどこで入手してインポートできますか？",
   "widgets-and-apple-watch.efef3c": "ウィジェットと Apple Watch",
   "works-offline.372393": "<span class=\"badge-icon\">✈️</span> オフラインで動作",
-  "yes-for-translations-that.0ed3fa": "はい、オープンライセンスで公開されている訳であれば可能です。Scripture Alone は USFM ファイルや DRM のない ePub を開けるほか、ご希望に応じて <a href=\"https://ebible.org/\" rel=\"noopener\">eBible.org</a> が公開している無料のカタログを、お使いの言語を先頭にして取得できます。タップしない限り、何もダウンロードされません。読み込んだ訳はお使いのデバイス内に保存されます。これは暫定的な仕組みです。主要な現代訳については各出版社にライセンスを申請中で、許諾が得られればその訳は最初からアプリに収録されるため、この機能はなくなるかもしれません。",
   "yes-in-a-closed.b8b573": "はい。Google Play でクローズドベータを実施中です。Android のスマートフォンとタブレット向けのネイティブアプリで、Wear OS アプリも付いています。Android には iCloud がないため、ハイライトやメモはデバイス内に保存されます。",
   "yes-no-ads-no.bf78fd": "はい。広告も、アプリ内課金も、サブスクリプションもありません。Scripture Alone は無料で、これからもずっと無料です。",
   "yes-on-any-mac.d853c7": "はい、Apple シリコン搭載のすべての Mac で使えます。Mac の App Store から iPad 版アプリをインストールすれば、ハイライトとメモが iCloud を通じて iPhone や iPad と同期します。",
+  "yes-scripture-alone-can.230191": "はい。Scripture Alone は、お持ちの USFM ファイル、DRM フリーの ePub、聖書の PDF を開くことができ、ご依頼があれば <a href=\"https://ebible.org/\" rel=\"noopener\">eBible.org</a> が公開している無料カタログを、あなたの言語を優先して取得します。タップするまで何もダウンロードされません。インポートしたものはあなただけのものです。あなた自身のプライベートな iCloud を通じてほかのデバイスにも届き、コピーや共有は出版社が公表している規定に従います。これは暫定的な措置です。主要な現代訳のライセンスは各出版社に申請中で、認められればそれらの翻訳は最初からアプリに入り、この方法は不要になるかもしれません。",
   "yes-scripture-alone-is.9112b8": "はい。Scripture Alone は、フランスを含む欧州連合のすべての国の App Store でご利用いただけます。ソースコードは GitHub で誰にでも公開されています。",
   "your-highlights-and-notes.dc2c5b": "ハイライトとメモに献辞を添えて、ひとつのファイルに。家族はそれを開き、あなたが印をつけたとおりに読めます — 受け継ぐためのデジタルな「父の聖書」です。"
 }
