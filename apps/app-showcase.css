@@ -1051,3 +1051,24 @@ section[class*="-chapter"] > [class*="-spread"] > :not(figure) { margin-inline: 
   }
   section[class*="-chapter"] > [class*="-spread"] > figure { max-width: 100%; }
 }
+
+/* ---- App sub-navigation ------------------------------------------------------
+   An app with depth pages (features/, pricing/, faq/) turns .nav-links into its
+   product nav: Overview · Features · Pricing · FAQ · the store button, with
+   aria-current="page" on the page you're on (docs/app-page-design.md §2). */
+.nav-link[aria-current="page"] { color: var(--text-primary); font-weight: 600; }
+.nav-link[aria-current="page"]::after { transform: translateX(-50%) scaleX(1); }
+
+/* "Learn more →" from a landing-page story or the FAQ teaser into a depth page. */
+.learn-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35em;
+  margin-top: 1rem;
+  font-weight: 600;
+  color: var(--primary-color);
+  text-decoration: none;
+}
+.learn-more::after { content: "→"; transition: transform 0.15s ease; }
+.learn-more:hover::after { transform: translateX(3px); }
+@media (prefers-reduced-motion: reduce) { .learn-more::after { transition: none; } }

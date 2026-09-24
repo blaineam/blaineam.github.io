@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<!--
+  Depth-page skeleton — copy to apps/<slug>/<features|pricing|faq>/index.html.
+  See docs/app-page-design.md §2 (multi-page model) and §11 (depth pages).
+
+  Replace every {{…}}. Keep only the sections this page is about: a features/
+  page has the header, one or more .dp-section grids/lists and the closing; a
+  pricing/ page has the plans, the comparison chart and a short pricing FAQ; a
+  faq/ page has grouped .faq-items (the EU availability item last).
+
+  Then:
+    1. copy the landing page's <style> :root token block (light + dark) into the
+       <style> below — depth.css takes every colour from those tokens;
+    2. add the page to scripts/i18n-tag.py (automatic for features/pricing/faq)
+       and run `python3 scripts/i18n-tag.py apps.<slug>.<sub>`; hand-write the 8
+       translations (reuse the pre-redesign keys — §12);
+    3. `python3 scripts/update-footers.py`, `python3 scripts/cache-bust.py`,
+       `python3 scripts/check-app-page.py <slug>/<sub>`.
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex"><!-- template only: delete on a real page -->
+  <title>{{Features}} · {{App Name}}</title>
+  <meta name="description" content="{{One sentence about this page.}}">
+  <link rel="canonical" href="https://wemiller.com/apps/{{slug}}/{{sub}}/">
+  <meta property="og:title" content="{{Features}} · {{App Name}}">
+  <meta property="og:description" content="{{One sentence about this page.}}">
+  <meta property="og:url" content="https://wemiller.com/apps/{{slug}}/{{sub}}/">
+  <meta property="og:image" content="https://wemiller.com/apps/{{slug}}/assets/images/poster.jpg">
+  <meta name="apple-itunes-app" content="app-id={{id}}">
+  <link rel="stylesheet" href="../../app-showcase.css">
+  <link rel="stylesheet" href="../../_shared/depth.css">
+  <style>
+    /* {{Paste the landing page's :root token block and its dark-mode override here.}} */
+  </style>
+  <!-- No i18n <script> here: scripts/i18n-tag.py injects it (data-page="apps.<slug>.<sub>")
+       together with the hreflang alternates the first time it tags this page. -->
+</head>
+<body>
+  <!-- The app's product nav: the brand still goes back to /apps/; the links are
+       the app's pages, aria-current on this one; the store button last. -->
+  <nav class="app-nav">
+    <div class="nav-container">
+      <a href="../../" class="nav-logo nav-brand" title="← Apps" aria-label="← Apps"
+         data-i18n-attr="title:apps.2d61f2;aria-label:apps.2d61f2">
+        <span class="nav-brand-back" aria-hidden="true">←</span>
+        <img class="nav-brand-icon" src="../assets/images/icon.png" alt="" width="60" height="60">
+        <span class="nav-brand-name">{{App Name}}</span>
+      </a>
+      <button class="mobile-menu-toggle" aria-label="Menu">☰</button>
+      <ul class="nav-links">
+        <li><a href="../" class="nav-link" data-i18n="overview.0efc2e">Overview</a></li>
+        <li><a href="../features/" class="nav-link" aria-current="page" data-i18n="features.fc338f">Features</a></li>
+        <li><a href="../pricing/" class="nav-link" data-i18n="pricing.a0d9bb">Pricing</a></li>
+        <li><a href="../faq/" class="nav-link" data-i18n="faq.03688b">FAQ</a></li>
+        <li><a href="https://apps.apple.com/us/app/{{name}}/id{{id}}" target="_blank" rel="noopener noreferrer" class="btn-buy">App Store</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main>
+    <header class="dp-header">
+      <p class="dp-eyebrow">{{App Name}}</p>
+      <h1>{{Everything {{App Name}} does.}}</h1>
+      <p class="dp-standfirst">{{One or two sentences that frame the page.}}</p>
+      <ul class="dp-jumps">
+        <li><a href="#{{group-1}}">{{Group one}}</a></li>
+        <li><a href="#{{group-2}}">{{Group two}}</a></li>
+      </ul>
+    </header>
+
+    <!-- features/: one section per group; cards are fine here. -->
+    <section class="dp-section" id="{{group-1}}">
+      <h2>{{Group one}}</h2>
+      <p class="dp-lede">{{What this group of features is for.}}</p>
+      <ul class="dp-grid">
+        <li class="dp-card">
+          <span class="dp-card-icon" aria-hidden="true">{{emoji}}</span>
+          <h3>{{Feature}}</h3>
+          <p>{{What it does for you, in a sentence or two.}}</p>
+          <span class="dp-tag">{{In-app purchase / Mac only / New in 2.0 — optional}}</span>
+        </li>
+      </ul>
+    </section>
+
+    <!-- A long plain list (providers, file types, languages). -->
+    <section class="dp-section" id="{{group-2}}">
+      <h2>{{Supported providers}}</h2>
+      <ul class="dp-list">
+        <li>{{Item}}</li>
+      </ul>
+    </section>
+
+    <!-- pricing/: every plan, with the real price. -->
+    <section class="dp-section" id="plans">
+      <h2>{{Choose your plan}}</h2>
+      <div class="dp-plans">
+        <div class="dp-plan">
+          <p class="dp-plan-name">{{Monthly}}</p>
+          <p class="dp-price">{{$0.00}} <small>{{/ month}}</small></p>
+          <p>{{Who it suits.}}</p>
+        </div>
+        <div class="dp-plan is-featured">
+          <span class="dp-plan-badge">{{Best value}}</span>
+          <p class="dp-plan-name">{{Yearly}}</p>
+          <p class="dp-price">{{$0.00}} <small>{{/ year}}</small></p>
+          <p>{{Who it suits.}}</p>
+        </div>
+      </div>
+      <p class="dp-fine">{{Trial, Family Sharing, where prices are set (US prices shown; the App Store shows yours).}}</p>
+    </section>
+
+    <!-- pricing/: the comparison chart. Scrolls inside .dp-table-wrap, never the page. -->
+    <section class="dp-section" id="compare">
+      <h2>{{How {{App Name}} compares}}</h2>
+      <div class="dp-table-wrap">
+        <table class="dp-compare">
+          <thead>
+            <tr><th scope="col">{{Feature}}</th><th scope="col" class="is-us">{{App Name}}</th><th scope="col">{{Alternative}}</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">{{Price}}</th><td class="is-us">{{$0.00}}</td><td>{{$0.00}}</td></tr>
+            <tr><th scope="row">{{Capability}}</th><td class="is-us yes"><span class="dp-sr">{{Yes}}</span></td><td class="no"><span class="dp-sr">{{No}}</span></td></tr>
+          </tbody>
+          <caption>{{Compared {{month year}} from each product's published pricing.}}</caption>
+        </table>
+      </div>
+    </section>
+
+    <!-- faq/: the complete FAQ, grouped; long answers welcome; EU availability last. -->
+    <section class="dp-section" id="faq">
+      <div class="dp-faq-group">
+        <h2>{{Getting started}}</h2>
+        <div class="faq-list">
+          <div class="faq-item">
+            <button class="faq-question">
+              <span>{{Question?}}</span>
+              <span class="faq-icon">▼</span>
+            </button>
+            <div class="faq-answer">
+              <p>{{As long as the question needs.}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Every depth page ends on the download. -->
+  <section class="dp-closing">
+    <h2>{{The landing page's H1 promise}}</h2>
+    <a href="https://apps.apple.com/us/app/{{name}}/id{{id}}" target="_blank" rel="noopener noreferrer" class="btn-buy" data-i18n="download-on-the-app.a9096a">Download on the App Store</a>
+    <p class="dp-alt"><a href="../">{{Back to the overview}}</a></p>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <!-- scripts/update-footers.py fills this in; never hand-edit. -->
+      <div class="footer-links">
+      </div>
+    </div>
+  </footer>
+
+  <script src="../../app-showcase.js"></script>
+</body>
+</html>
