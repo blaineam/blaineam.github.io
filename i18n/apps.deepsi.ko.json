@@ -8,7 +8,6 @@
   "yes-deepsi-is-on.67af63": "네. DeepSi 앱은 프랑스를 포함한 유럽연합(EU) 전역에서 판매하고 있습니다. Apple이 제공하는 모든 국가 및 지역의 App Store에서 이용하실 수 있습니다.",
   "download-on-app-store.cf50c2": "App Store에서 다운로드",
   "faq.03688b": "자주 묻는 질문",
-  "features.fc338f": "기능",
   "frequently-asked-questions.d790b4": "자주 묻는 질문",
   "got-questions.8ecca3": "궁금한 점이 있으신가요?",
   "how-does-deepsi-work.e6e2a3": "DeepSi는 어두운 곳에서 어떻게 작동하나요?",
@@ -49,5 +48,7 @@
   "works-offline.372393": "<span class=\"badge-icon\">✈️</span> 오프라인 동작",
   "yes-make-video-from.687050": "네. ‘프레임으로 동영상 만들기’는 이미지 묶음을 동영상으로 만들고, ‘최근 촬영 가져오기’는 최근 DeepSi 사진과 동영상을 다른 동작에 넘겨 줍니다. 컬러 테마를 읽거나 바꿀 수도 있습니다. 설정 없이 Siri에게 최신 DeepSi 촬영을 요청하세요.",
   "your-captures-go-to.deb7a6": "촬영한 것은 사진 보관함에만 저장되고 다른 곳으로는 가지 않습니다.",
-  "your-deepsi-album.2e02e7": "나의 DeepSi 앨범"
+  "your-deepsi-album.2e02e7": "나의 DeepSi 앨범",
+  "overview.0efc2e": "개요",
+  "see-all-questions.237fee": "모든 질문 보기"
 }

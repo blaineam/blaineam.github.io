@@ -8,7 +8,6 @@
   "yes-deepsi-is-on.67af63": "はい。DeepSiはフランスを含む欧州連合（EU）の全域で販売しています。Appleが提供するすべての国と地域のApp Storeでご利用いただけます。",
   "download-on-app-store.cf50c2": "App Storeでダウンロード",
   "faq.03688b": "よくある質問",
-  "features.fc338f": "機能",
   "frequently-asked-questions.d790b4": "よくある質問",
   "got-questions.8ecca3": "ご質問がありますか？",
   "how-does-deepsi-work.e6e2a3": "DeepSiは暗闇でどのように動作しますか？",
@@ -49,5 +48,7 @@
   "works-offline.372393": "<span class=\"badge-icon\">✈️</span> オフラインで動作",
   "yes-make-video-from.687050": "はい。「フレームからビデオを作成」は画像のセットからビデオを作り、「最新の撮影を取得」は最近のDeepSiの写真やビデオをほかのアクションに渡します。カラーテーマの読み取りや変更もできます。設定なしで、Siriに最新のDeepSiの撮影を頼めます。",
   "your-captures-go-to.deb7a6": "撮影したものは「写真」ライブラリに保存され、それ以外のどこにも送られません。",
-  "your-deepsi-album.2e02e7": "DeepSiアルバム"
+  "your-deepsi-album.2e02e7": "DeepSiアルバム",
+  "overview.0efc2e": "概要",
+  "see-all-questions.237fee": "すべての質問を見る"
 }
