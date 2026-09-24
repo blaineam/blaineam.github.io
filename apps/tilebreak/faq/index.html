@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FAQ · Tilebreak</title>
+  <meta name="description" content="Every question about Tilebreak, answered.">
+  <link rel="canonical" href="https://wemiller.com/apps/tilebreak/faq/">
+  <meta property="og:title" content="FAQ · Tilebreak">
+  <meta property="og:description" content="Every question about Tilebreak, answered.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://wemiller.com/apps/tilebreak/faq/">
+  <meta property="og:image" content="https://wemiller.com/apps/tilebreak/assets/images/poster.jpg?v=1b818ab8">
+  <meta name="apple-itunes-app" content="app-id=6772609707">
+  <link rel="apple-touch-icon" href="../assets/images/icon.png?v=45460b08">
+  <link rel="icon" type="image/png" href="../assets/images/icon.png?v=45460b08">
+  <link rel="stylesheet" href="../../app-showcase.css?v=e9909304">
+  <link rel="stylesheet" href="../../_shared/depth.css?v=8787ba38">
+  <style>
+    :root {
+      --tb-measure: 1120px;
+      /* Tilebreak — the icon's burst: deep indigo, hot orange, spark yellow. */
+      --app-primary: #2a1769;
+      --app-secondary: #ff8e34;
+      --app-accent: #ffd23f;
+      --primary-color: #2a1769;
+      --secondary-color: #ff8e34;
+      --tb-display-face: ui-rounded, "SF Pro Rounded", system-ui, -apple-system, "Segoe UI", sans-serif;
+      --tb-text-face: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      --tb-paper: #FFFBF5;
+      --tb-paper-2: #FAF1E6;
+      --tb-body: #3A3350;
+      --tb-quiet: #6B6480;
+      --tb-rule: rgba(42, 23, 105, 0.12);
+      --tb-accent-ink: #B34E0C;
+      --tb-ornament: linear-gradient(90deg, #ffd23f, #ff8e34);
+      --tb-shadow: drop-shadow(0 30px 40px rgba(42, 23, 105, 0.22)) drop-shadow(0 6px 10px rgba(42, 23, 105, 0.10));
+      --tb-hero-bg:
+        radial-gradient(ellipse 70% 45% at 50% 62%, rgba(255, 142, 52, 0.42) 0%, transparent 60%),
+        linear-gradient(160deg, #1a0d4a 0%, #2a1769 45%, #0d0626 100%);
+      --tb-hero-ink: #FFFFFF;
+      --tb-hero-kicker: #FFD23F;
+      --tb-button: linear-gradient(180deg, #FFD23F, #FFB13A);
+      --tb-button-ink: #2a1769;
+      --tb-button-glow: rgba(255, 170, 60, 0.35);
+      --tb-focus: #FFD23F;
+      --tb-closing-bg:
+        radial-gradient(ellipse 55% 60% at 50% 100%, rgba(255, 142, 52, 0.16) 0%, transparent 70%),
+        var(--tb-paper-2);
+      --bg-primary: var(--tb-paper);
+      --bg-secondary: var(--tb-paper-2);
+      --text-primary: #1E1245;
+      --text-secondary: var(--tb-body);
+      --text-muted: var(--tb-quiet);
+      --glass-bg: rgba(255, 251, 245, 0.8);
+      --glass-border: rgba(42, 23, 105, 0.08);
+      --glass-shadow: none;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --primary-color: #FFD9A8;
+        --tb-paper: #120A2E;
+        --tb-paper-2: #1A1040;
+        --tb-body: #DCD6EA;
+        --tb-quiet: #A9A1C4;
+        --tb-rule: rgba(255, 217, 168, 0.14);
+        --tb-accent-ink: #FFA95E;
+        --tb-shadow: drop-shadow(0 30px 44px rgba(0, 0, 0, 0.55)) drop-shadow(0 6px 10px rgba(0, 0, 0, 0.30));
+        --tb-closing-bg:
+          radial-gradient(ellipse 55% 60% at 50% 100%, rgba(255, 142, 52, 0.18) 0%, transparent 70%),
+          var(--tb-paper-2);
+        --text-primary: #F4EEFF;
+        --glass-bg: rgba(18, 10, 46, 0.8);
+        --glass-border: rgba(255, 217, 168, 0.08);
+      }
+    }
+
+    :root { --bg-card: var(--tb-paper-2); --border-color: var(--tb-rule); }
+    body { background: var(--tb-paper); }
+    .dp-header h1, .dp-section > h2, .dp-faq-group > h2, .dp-closing h2 { font-family: var(--tb-display-face); }
+    .dp-eyebrow, .dp-card .dp-tag { color: var(--tb-accent-ink); }
+    .dp-section a { color: var(--tb-accent-ink); }
+    .dp-card p + p { margin-top: 0.6rem; }
+    .dp-list .badge-icon { margin-right: 0.4rem; }
+    :lang(ko) .dp-header h1, :lang(ko) .dp-section > h2 { word-break: keep-all; }
+/* ---- FAQ: a ruled list ---------------------------------------------- */
+    .faq-section { max-width: 820px; padding: clamp(4rem, 9vw, 6rem) 16px; }
+    .faq-section .tb-eyebrow, .faq-section h2 { text-align: center; }
+    .faq-section h2 {
+      font-family: var(--tb-display-face);
+      font-weight: 600;
+      background: none;
+      -webkit-text-fill-color: currentColor;
+      color: var(--primary-color);
+      font-size: clamp(1.9rem, 4vw, 2.8rem);
+      margin: 0 0 2.5rem;
+    }
+    .faq-item {
+      background: none;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+      border: none;
+      border-top: 1px solid var(--tb-rule);
+      border-radius: 0;
+      margin: 0;
+    }
+    .faq-item:last-child { border-bottom: 1px solid var(--tb-rule); }
+    .faq-question {
+      font-family: var(--tb-display-face);
+      font-size: 1.15rem;
+      font-weight: 600;
+      padding: 1.25rem 0;
+      gap: 1rem;
+    }
+    .faq-question:hover { color: var(--tb-accent-ink); }
+    .faq-question:focus-visible { outline: 2px solid var(--tb-accent-ink); outline-offset: 2px; }
+    .faq-icon { font-size: 0.8rem; color: var(--tb-accent-ink); }
+    .faq-answer { padding: 0; }
+    .faq-item.active .faq-answer { padding: 0 0 1.4rem; }
+    .faq-answer p { font-size: 1rem; line-height: 1.68; color: var(--tb-body); }
+
+    
+  </style>
+  <link rel="alternate" hreflang="x-default" href="https://wemiller.com/apps/tilebreak/faq/">
+  <link rel="alternate" hreflang="en" href="https://wemiller.com/apps/tilebreak/faq/">
+  <link rel="alternate" hreflang="zh-Hans" href="https://wemiller.com/apps/tilebreak/faq/?lang=zh-Hans">
+  <link rel="alternate" hreflang="ja" href="https://wemiller.com/apps/tilebreak/faq/?lang=ja">
+  <link rel="alternate" hreflang="de" href="https://wemiller.com/apps/tilebreak/faq/?lang=de">
+  <link rel="alternate" hreflang="fr" href="https://wemiller.com/apps/tilebreak/faq/?lang=fr">
+  <link rel="alternate" hreflang="es" href="https://wemiller.com/apps/tilebreak/faq/?lang=es">
+  <link rel="alternate" hreflang="ko" href="https://wemiller.com/apps/tilebreak/faq/?lang=ko">
+  <link rel="alternate" hreflang="pt-BR" href="https://wemiller.com/apps/tilebreak/faq/?lang=pt-BR">
+  <link rel="alternate" hreflang="it" href="https://wemiller.com/apps/tilebreak/faq/?lang=it">
+  <script src="/i18n/i18n.js?v=9b769779" defer data-page="apps.tilebreak.faq" data-pos="bottom-left"></script>
+</head>
+<body>
+  <nav class="app-nav">
+    <div class="nav-container">
+      <a href="../../" class="nav-logo nav-brand" title="← Apps" aria-label="← Apps"
+         data-i18n-attr="title:apps.2d61f2;aria-label:apps.2d61f2">
+        <span class="nav-brand-back" aria-hidden="true">←</span>
+        <img class="nav-brand-icon" src="../assets/images/icon.png?v=45460b08" alt="" width="60" height="60">
+        <span class="nav-brand-name">Tilebreak</span>
+      </a>
+      <button class="mobile-menu-toggle" aria-label="Menu">☰</button>
+      <ul class="nav-links">
+        <li><a href="../" class="nav-link" data-i18n="overview.0efc2e">Overview</a></li>
+        <li><a href="../faq/" class="nav-link" aria-current="page" data-i18n="faq.03688b">FAQ</a></li>
+        <li><a href="https://apps.apple.com/us/app/tile-break-mahjong/id6772609707" target="_blank" rel="noopener noreferrer" class="btn-buy">App Store</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main>
+    <header class="dp-header">
+      <p class="dp-eyebrow">Tilebreak</p>
+      <h1 data-i18n="frequently-asked-questions.d790b4">Frequently Asked Questions</h1>
+      <p class="dp-standfirst" data-i18n="every-question-about-tilebreak.b3504a">Every question about Tilebreak, answered.</p>
+    </header>
+
+    <section class="dp-section" id="faq">
+      <div class="faq-list">
+          <div class="faq-item">
+            <button class="faq-question">
+              <span data-i18n="how-do-you-match.dcdeb6">How do you match tiles?</span>
+              <span class="faq-icon">▼</span>
+            </button>
+            <div class="faq-answer">
+              <p data-i18n="tap-two-matching-tiles.494962">Tap two matching tiles to remove them. A tile is "free" if nothing is stacked on top of it and at least one of its left or right sides is open. Most tiles need an exact match — under American rules, any flower matches any flower and any season matches any season.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">
+              <span data-i18n="is-every-board-actually.26b8bd">Is every board actually solvable?</span>
+              <span class="faq-icon">▼</span>
+            </button>
+            <div class="faq-answer">
+              <p data-i18n="yes-each-board-is.243716">
+          Yes. Each board is generated by simulating a valid play-through first (the reverse-removal method) and then dealing the tiles into the resulting order. Even after a shuffle mid-game, the new layout is regenerated to be solvable.
+        </p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">
+              <span data-i18n="what-s-the-difference.34bd31">What's the difference between American and Strict rules?</span>
+              <span class="faq-icon">▼</span>
+            </button>
+            <div class="faq-answer">
+              <p data-i18n="american-the-default-follows.de8dc1">American (the default) follows the modern western convention: any flower matches any flower, any season matches any season. Strict requires an exact identity match for every tile — and because flowers/seasons only ship as singles, Strict mode drops them from the pool entirely and substitutes extra winds so every tile has a partner.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">
+              <span data-i18n="are-there-ads-or.cc7da0">Are there ads or in-app purchases?</span>
+              <span class="faq-icon">▼</span>
+            </button>
+            <div class="faq-answer">
+              <p data-i18n="no-to-both-tilebreak.6a1a5a">No to both. Tilebreak is a one-time purchase. There are no ads, no in-app purchases, no required sign-in, and no tracking. Game Center is opt-in for leaderboards and challenges.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">
+              <span data-i18n="does-it-play-offline.0694d1">Does it play offline?</span>
+              <span class="faq-icon">▼</span>
+            </button>
+            <div class="faq-answer">
+              <p data-i18n="completely-the-full-game.310580">
+          Completely. The full game works in airplane mode. Leaderboard submission and challenges sync up the next time you're online.
+        </p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">
+              <span data-i18n="does-it-work-on.c5db1d">Does it work on iPad?</span>
+              <span class="faq-icon">▼</span>
+            </button>
+            <div class="faq-answer">
+              <p data-i18n="yes-native-ipad-support.59fa42">Yes — native iPad support in both portrait and landscape. The board scales up to fill the bigger screen with proportional tile size, stack lift, and side-wall depth so the visual stays consistent.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">
+              <span data-i18n="what-s-the-music.cd7ddb">What's the music?</span>
+              <span class="faq-icon">▼</span>
+            </button>
+            <div class="faq-answer">
+              <p data-i18n="a-procedural-engine-there.5380f9">A procedural engine — there are no pre-recorded tracks. Each theme has its own character (Ivory is plucky, Midnight is brooding, Cyber is synthwave) and the engine schedules notes through AVAudio with sample-accurate timing so it never stutters. Toggleable from Settings, respects the silent switch.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">
+              <span data-i18n="is-tilebreak-available-in.5a1587">Is Tilebreak available in the European Union?</span>
+              <span class="faq-icon">▼</span>
+            </button>
+            <div class="faq-answer">
+              <p data-i18n="yes-tilebreak-is-on.0e9e99">Yes. Tilebreak is on the App Store everywhere in the European Union, France included. It's available in every App Store territory Apple offers.</p>
+            </div>
+          </div>
+      </div>
+    </section>
+  </main>
+
+  <section class="dp-closing">
+    <h2 data-i18n="match-combo-clear.dee858">Match. Combo. Clear.</h2>
+    <a href="https://apps.apple.com/us/app/tile-break-mahjong/id6772609707" target="_blank" rel="noopener noreferrer" class="btn-buy" data-i18n="download-on-the-app.a9096a">Download on the App Store</a>
+    <p class="dp-alt"><a href="../" data-i18n="back-to-the-overview.e274c2">Back to the overview</a></p>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-links">
+        <a href="../../" class="footer-link" data-i18n="all-apps.429449">All Apps</a>
+        <a href="../../pinline/" class="footer-link">Pinline</a>
+        <a href="../../enter-space/" class="footer-link">Enter Space</a>
+        <a href="../../blip/" class="footer-link">Blip</a>
+        <a href="../../ari-helper/" class="footer-link">Ari Helper</a>
+        <a href="../../sami/" class="footer-link">Sami</a>
+        <a href="../../mi-speaks/" class="footer-link">Mi Speaks</a>
+        <a href="../../embr/" class="footer-link">Embr</a>
+        <a href="../../deepsi/" class="footer-link">DeepSi</a>
+        <a href="../../luma-editor/" class="footer-link">Luma Editor</a>
+        <a href="../../wise-flyer/" class="footer-link">Wise Flyer</a>
+        <a href="../../glint/" class="footer-link">Glint</a>
+        <a href="/privacy/" class="footer-link" data-i18n="privacy.cf0148">Privacy</a>
+        <a href="/terms/" class="footer-link" data-i18n="terms.a55a27">Terms</a>
+        <a href="/support/" class="footer-link" data-i18n="support.f32d5a">Support</a>
+        <a href="/" class="footer-link" data-i18n="portfolio.036b18">Portfolio</a>
+      </div>
+
+      <div class="footer-social-links">
+        <a href="https://x.com/apps_by_blaine" class="social-icon-link" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)">
+          <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+          </svg>
+        </a>
+        <a href="https://www.instagram.com/apps.by.blaine/" class="social-icon-link" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+          <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+          </svg>
+        </a>
+        <a href="https://www.youtube.com/@AppsByBlaine" class="social-icon-link" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+          <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+          </svg>
+        </a>
+      </div>
+
+      <p style="color: var(--text-muted); margin-top: var(--spacing-md);" data-i18n-html="blaine-miller-all-rights.b327c2">
+        © <span id="year"></span> Blaine Miller. All rights reserved.
+      </p>
+    </div>
+  </footer>
+
+  <script src="../../app-showcase.js?v=0ce231d7"></script>
+</body>
+</html>

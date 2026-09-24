@@ -13,7 +13,6 @@
   "does-it-work-on.c5db1d": "Fonctionne-t-il sur iPad ?",
   "download-on-app-store.cf50c2": "Télécharger sur l'App Store",
   "faq.03688b": "FAQ",
-  "features.fc338f": "Fonctionnalités",
   "gamekit-only.58b497": "<span class=\"badge-icon\">🎮</span> GameKit uniquement",
   "got-questions.001f6d": "Des questions ?",
   "how-do-you-match.dcdeb6": "Comment associer les tuiles ?",
@@ -54,5 +53,7 @@
   "the-mahjong-solitaire-that.dd3f45": "Le Mahjong solitaire qui ne vous distribue jamais une partie perdue d'avance.",
   "the-tilebreak-home-screen.115501": "L'écran d'accueil de Tilebreak, avec les modes Classique et Arcade et le bouton Jouer",
   "themes.94d518": "Thèmes",
-  "two-modes.ed5749": "Deux modes"
+  "two-modes.ed5749": "Deux modes",
+  "overview.0efc2e": "Aperçu",
+  "see-all-questions.237fee": "Voir toutes les questions"
 }
