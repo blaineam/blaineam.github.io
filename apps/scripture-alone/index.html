@@ -239,6 +239,7 @@
     /* One device per story, sized like a photograph on the page, not a thumbnail. */
     .sa-figure { margin: 0 auto; width: min(72vw, 340px); text-align: center; }
     .sa-figure.is-watch { width: min(56vw, 240px); }
+    .sa-figure.is-tablet { width: min(92vw, 720px); max-width: 100%; }
     .sa-figure img { display: block; width: 100%; height: auto; filter: var(--sa-shadow); }
     .sa-figure figcaption, .sa-hero-caption {
       font-size: 0.88rem;
@@ -657,18 +658,19 @@
       </div>
     </section>
 
-    <section class="sa-chapter is-flipped" id="listen">
+    <section class="sa-chapter is-flipped" id="keepsake">
       <div class="sa-spread">
         <div class="sa-copy" data-reveal>
-          <p class="sa-eyebrow"><span class="sa-num">04</span><span data-i18n="listen.c518fb">Listen</span></p>
-          <h2 class="sa-display" data-i18n="listen-along.233446">Listen along</h2>
-          <p class="sa-lede" data-i18n="hear-any-chapter-read.e9ba6c">Hear any chapter read aloud in your device's voices, the spoken verse marked as it goes.</p>
+          <p class="sa-eyebrow"><span class="sa-num">04</span><span data-i18n="family.4efb6c">Family</span></p>
+          <h2 class="sa-display" data-i18n="keepsake-bible.88016e">Keepsake Bible</h2>
+          <p class="sa-lede" data-i18n="your-highlights-and-notes.dc2c5b">Your highlights and notes, with a dedication, in one file your family can open and read just as you marked it — a digital “Dad's Bible” to hand down.</p>
         </div>
-        <figure class="sa-figure" data-reveal>
-          <img src="assets/screens/en/06-listen-800.webp?v=deb63646"
-               srcset="assets/screens/en/06-listen-400.webp?v=7506ce8a 400w, assets/screens/en/06-listen-800.webp?v=deb63646 800w"
-               sizes="(max-width: 472px) 72vw, 340px" width="800" height="1655" loading="lazy" decoding="async" data-i18n-src
-               alt="The listen bar reading the chapter aloud, the spoken verse marked" data-i18n-attr="alt:the-listen-bar-reading.04700f">
+        <figure class="sa-figure is-tablet" data-reveal>
+          <img src="assets/screens/en/reader-1440.webp?v=b1a6dabf"
+               srcset="assets/screens/en/reader-720.webp?v=637185f8 720w, assets/screens/en/reader-1440.webp?v=b1a6dabf 1440w"
+               sizes="(max-width: 782px) 92vw, 720px" width="1440" height="1880" loading="lazy" decoding="async" data-i18n-src
+               alt="A highlighted passage with a note, on iPad" data-i18n-attr="alt:a-highlighted-passage-with.8705dc">
+          <figcaption data-i18n="kept-just-as-you.d657c0">Kept just as you marked it</figcaption>
         </figure>
       </div>
     </section>
