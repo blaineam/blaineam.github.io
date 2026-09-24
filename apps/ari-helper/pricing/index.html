@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pricing · Ari Helper</title>
+  <meta name="description" content="Ari Helper is one $24.99 purchase for iPhone, iPad, Mac and Apple Watch, with every update included — bring your own keys for cloud models.">
+  <link rel="canonical" href="https://wemiller.com/apps/ari-helper/pricing/">
+  <meta property="og:title" content="Pricing · Ari Helper">
+  <meta property="og:description" content="Ari Helper is one $24.99 purchase for iPhone, iPad, Mac and Apple Watch, with every update included — bring your own keys for cloud models.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://wemiller.com/apps/ari-helper/pricing/">
+  <meta property="og:image" content="https://wemiller.com/apps/ari-helper/assets/images/poster.jpg?v=c9a46ac2">
+  <meta name="apple-itunes-app" content="app-id=6480045555">
+  <link rel="stylesheet" href="../../app-showcase.css?v=e9909304">
+  <link rel="stylesheet" href="../../_shared/depth.css?v=8787ba38">
+  <style>
+    :root {
+      /* Ari Helper: the icon's pink-to-coral glow over a near-black plum night. */
+      --app-primary: #F093FB;
+      --app-secondary: #F5576C;
+      --app-accent: #FFA8A8;
+      --primary-color: #1A1419;
+      --secondary-color: #F5576C;
+      --ah-display-face: ui-serif, "New York", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+      --ah-text-face: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+      --ah-paper: #F7F3F1;
+      --ah-paper-2: #EFE8E5;
+      --ah-body: #3E353C;
+      --ah-quiet: #655A62;
+      --ah-rule: rgba(26, 20, 25, 0.14);
+      --ah-accent-ink: #B8283F;
+      --ah-ornament: linear-gradient(90deg, #F093FB, #F5576C);
+      --ah-shadow: drop-shadow(0 30px 40px rgba(26, 20, 25, 0.24)) drop-shadow(0 6px 10px rgba(26, 20, 25, 0.10));
+      --ah-hero-bg: radial-gradient(ellipse 70% 50% at 50% 0%, rgba(240, 147, 251, 0.22) 0%, transparent 65%), radial-gradient(ellipse 60% 45% at 50% 100%, rgba(245, 87, 108, 0.30) 0%, transparent 70%), linear-gradient(180deg, #0F0B12 0%, #19141C 100%);
+      --ah-hero-ink: #F6EFF4;
+      --ah-hero-kicker: #F7B4FC;
+      --ah-button: linear-gradient(120deg, #F093FB 0%, #F5576C 100%);
+      --ah-button-ink: #1A0E14;
+      --ah-button-glow: rgba(245, 87, 108, 0.35);
+      --ah-focus: #F7B4FC;
+      --ah-closing-bg: radial-gradient(ellipse 55% 60% at 50% 100%, rgba(245, 87, 108, 0.14) 0%, transparent 70%), var(--ah-paper-2);
+      --text-primary: #1A1419;
+      --glass-bg: rgba(247, 243, 241, 0.8);
+      --glass-border: rgba(26, 20, 25, 0.08);
+      --ah-measure: 1120px;
+      --bg-primary: var(--ah-paper);
+      --bg-secondary: var(--ah-paper-2);
+      --text-secondary: var(--ah-body);
+      --text-muted: var(--ah-quiet);
+      --glass-shadow: none;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --primary-color: #F7B4FC;
+        --ah-paper: #18131A;
+        --ah-paper-2: #211A23;
+        --ah-body: #E3DAE0;
+        --ah-quiet: #B0A4AD;
+        --ah-rule: rgba(243, 236, 241, 0.14);
+        --ah-accent-ink: #FF8A9A;
+        --ah-shadow: drop-shadow(0 30px 44px rgba(0, 0, 0, 0.55)) drop-shadow(0 6px 10px rgba(0, 0, 0, 0.30));
+        --ah-closing-bg: radial-gradient(ellipse 55% 60% at 50% 100%, rgba(245, 87, 108, 0.18) 0%, transparent 70%), var(--ah-paper-2);
+        --text-primary: #F3ECF1;
+        --glass-bg: rgba(24, 19, 26, 0.8);
+        --glass-border: rgba(243, 236, 241, 0.08);
+      }
+    }
+    :root { --bg-card: var(--ah-paper-2); --border-color: var(--ah-rule); }
+    body { background: var(--ah-paper); }
+    .nav-links .nav-link, .nav-links .btn-buy { white-space: nowrap; }
+    [hidden] { display: none !important; }
+    /* .dp-sr is position:absolute; without a positioned scroll box its static position in
+       off-screen table cells widened the mobile layout viewport to ~612px. */
+    .dp-table-wrap { position: relative; }
+    .dp-closing .btn-buy, .dp-plan .btn-buy { background: var(--ah-hero); color: #fff; box-shadow: 0 10px 28px var(--ah-glow); }
+    .ah-one { max-width: 30rem; margin: 0 auto; grid-template-columns: 1fr; }
+    .ah-plan-fine { margin: 0; font-size: 0.92rem; color: var(--text-muted); }
+    .ah-includes { margin: 0.8rem 0 1.2rem; padding: 0; list-style: none; text-align: left; }
+    .ah-includes li { padding: 0.45rem 0 0.45rem 1.6rem; position: relative; border-top: 1px solid var(--border-color); color: var(--text-secondary); }
+    .ah-includes li::before { content: "✓"; position: absolute; left: 0.2rem; color: var(--primary-color); font-weight: 700; }
+    .ah-plan-cta { align-self: center; display: inline-flex; min-height: 44px; align-items: center; padding: 0.8rem 1.5rem; border-radius: 999px; }
+    .dp-compare.ah-compare { min-width: 28rem; }
+    .dp-compare caption { caption-side: bottom; text-align: left; }
+    #questions .learn-more { margin-top: 1.4rem; }
+    .dp-closing .btn-buy, .dp-plan .btn-buy { background: var(--ah-button); color: var(--ah-button-ink); box-shadow: 0 10px 28px var(--ah-button-glow); }
+  </style>
+  <link rel="alternate" hreflang="x-default" href="https://wemiller.com/apps/ari-helper/pricing/">
+  <link rel="alternate" hreflang="en" href="https://wemiller.com/apps/ari-helper/pricing/">
+  <link rel="alternate" hreflang="zh-Hans" href="https://wemiller.com/apps/ari-helper/pricing/?lang=zh-Hans">
+  <link rel="alternate" hreflang="ja" href="https://wemiller.com/apps/ari-helper/pricing/?lang=ja">
+  <link rel="alternate" hreflang="de" href="https://wemiller.com/apps/ari-helper/pricing/?lang=de">
+  <link rel="alternate" hreflang="fr" href="https://wemiller.com/apps/ari-helper/pricing/?lang=fr">
+  <link rel="alternate" hreflang="es" href="https://wemiller.com/apps/ari-helper/pricing/?lang=es">
+  <link rel="alternate" hreflang="ko" href="https://wemiller.com/apps/ari-helper/pricing/?lang=ko">
+  <link rel="alternate" hreflang="pt-BR" href="https://wemiller.com/apps/ari-helper/pricing/?lang=pt-BR">
+  <link rel="alternate" hreflang="it" href="https://wemiller.com/apps/ari-helper/pricing/?lang=it">
+  <script src="/i18n/i18n.js?v=9b769779" defer data-page="apps.ari-helper.pricing" data-pos="bottom-left"></script>
+</head>
+<body>
+  <nav class="app-nav">
+    <div class="nav-container">
+      <a href="../../" class="nav-logo nav-brand" title="← Apps" aria-label="← Apps"
+         data-i18n-attr="title:apps.2d61f2;aria-label:apps.2d61f2">
+        <span class="nav-brand-back" aria-hidden="true">←</span>
+        <img class="nav-brand-icon" src="../assets/images/icon.png?v=a2c46a74" alt="" width="60" height="60">
+        <span class="nav-brand-name">Ari Helper</span>
+      </a>
+      <button class="mobile-menu-toggle" aria-label="Menu">☰</button>
+      <ul class="nav-links">
+        <li><a href="../" class="nav-link" data-i18n="overview.0efc2e">Overview</a></li>
+        <li><a href="../features/" class="nav-link" data-i18n="features.fc338f">Features</a></li>
+        <li><a href="../pricing/" class="nav-link" aria-current="page" data-i18n="pricing.a0d9bb">Pricing</a></li>
+        <li><a href="../faq/" class="nav-link" data-i18n="faq.03688b">FAQ</a></li>
+        <li><a href="https://apps.apple.com/us/app/ari-helper/id6480045555" target="_blank" rel="noopener noreferrer" class="btn-buy">App Store</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main>
+    <header class="dp-header">
+      <p class="dp-eyebrow" data-i18n="pricing.a0d9bb">Pricing</p>
+      <h1 data-i18n="pay-once-bring-your.0f124d">Pay once. Bring your own keys.</h1>
+    </header>
+
+    <section class="dp-section" id="price">
+      <div class="dp-plans ah-one">
+        <div class="dp-plan is-featured">
+          <p class="dp-plan-name">Ari Helper</p>
+          <p class="dp-price">$24.99</p>
+          <p class="ah-plan-fine" data-i18n="one-purchase-in-the.6d3d06">One purchase in the US, for iPhone, iPad, Mac and Apple Watch. Prices vary by country.</p>
+          <ul class="ah-includes">
+            <li data-i18n="chat-with-on-device.abc577">Chat with on-device, self-hosted and cloud models</li>
+            <li data-i18n="photo-studio-in-the.d566e4">Photo Studio, in the app and inside Photos</li>
+            <li data-i18n="film-studio-with-a.e3c3ba">Film Studio, with a clean-up pass for any video</li>
+            <li data-i18n="code-sessions-and-dispatch.d7c182">Code Sessions and Dispatch on the Mac</li>
+            <li data-i18n="every-future-update-no.1a36a4">Every future update — no subscription, no account</li>
+          </ul>
+          <a class="btn-buy ah-plan-cta" href="https://apps.apple.com/us/app/ari-helper/id6480045555" target="_blank" rel="noopener noreferrer" data-i18n="download-on-app-store.cf50c2">Download on App Store</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="dp-section" id="compare">
+      <h2 data-i18n="what-the-alternatives-cost.9cd29f">What the alternatives cost</h2>
+      <div class="dp-table-wrap">
+        <table class="dp-compare ah-compare">
+          <caption data-i18n="us-prices-as-listed.1ed3da">US prices as listed by each developer in September 2026. They do different things — Private LLM is chat only, Photomator edits photos, Topaz enhances video, Remini restores photos. This shows what each costs, not that they are the same. Cloud models you use with your own keys are billed by their providers.</caption>
+          <thead>
+            <tr><th scope="col" data-i18n="app.fc4a69">App</th><th scope="col" data-i18n="to-own-it.bc879d">To own it</th><th scope="col" data-i18n="or-by-subscription.75aae2">Or by subscription</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row" class="is-us">Ari Helper</th><td class="is-us">$24.99</td><td class="is-us">—</td></tr>
+            <tr><th scope="row" data-i18n="photomator.5d5700">Photomator</th><td>$119.99</td><td data-i18n="29-99-a-year.d39893">$29.99 a year</td></tr>
+            <tr><th scope="row" data-i18n="topaz-video-ai.751ff2">Topaz Video AI</th><td>—</td><td data-i18n="299-a-year.cb12a1">$299 a year</td></tr>
+            <tr><th scope="row" data-i18n="remini.daf340">Remini</th><td>—</td><td data-i18n="from-6-99-a.86b88f">from $6.99 a week</td></tr>
+            <tr><th scope="row" data-i18n="private-llm.663769">Private LLM</th><td>$4.99</td><td>—</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="dp-section" id="questions">
+      <h2 data-i18n="got-questions.8ecca3">Got Questions?</h2>
+      <div class="faq-list">
+          <div class="faq-item">
+            <button class="faq-question">
+              <span data-i18n="does-ari-helper-require.b22f7e">Does Ari Helper require a subscription?</span>
+              <span class="faq-icon">▼</span>
+            </button>
+            <div class="faq-answer">
+              <p data-i18n="no-ari-helper-is.5ac3b6">No. Ari Helper is one purchase that covers iPhone, iPad, Mac and Apple Watch, including future updates. Cloud providers you connect with your own API keys bill you directly for what you use.</p>
+            </div>
+          </div>
+      </div>
+      <p><a class="learn-more" href="../faq/" data-i18n="see-all-questions.237fee">See all questions</a></p>
+    </section>
+  </main>
+
+  <!-- Every depth page ends on the download. -->
+  <section class="dp-closing">
+    <h2 data-i18n="ask-anything-point-at.7655dd">Ask anything. Point at anything.</h2>
+    <a href="https://apps.apple.com/us/app/ari-helper/id6480045555" target="_blank" rel="noopener noreferrer" class="btn-buy" data-i18n="download-on-the-app.a9096a">Download on the App Store</a>
+    <p class="dp-alt"><a href="../" data-i18n="back-to-the-overview.e274c2">Back to the overview</a></p>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-links">
+        <a href="../../" class="footer-link" data-i18n="all-apps.429449">All Apps</a>
+        <a href="../../pinline/" class="footer-link">Pinline</a>
+        <a href="../../enter-space/" class="footer-link">Enter Space</a>
+        <a href="../../blip/" class="footer-link">Blip</a>
+        <a href="../../sami/" class="footer-link">Sami</a>
+        <a href="../../tilebreak/" class="footer-link">Tilebreak</a>
+        <a href="../../mi-speaks/" class="footer-link">Mi Speaks</a>
+        <a href="../../embr/" class="footer-link">Embr</a>
+        <a href="../../deepsi/" class="footer-link">DeepSi</a>
+        <a href="../../luma-editor/" class="footer-link">Luma Editor</a>
+        <a href="../../wise-flyer/" class="footer-link">Wise Flyer</a>
+        <a href="../../glint/" class="footer-link">Glint</a>
+        <a href="/privacy/" class="footer-link" data-i18n="privacy.cf0148">Privacy</a>
+        <a href="/terms/" class="footer-link" data-i18n="terms.a55a27">Terms</a>
+        <a href="/support/" class="footer-link" data-i18n="support.f32d5a">Support</a>
+        <a href="/" class="footer-link" data-i18n="portfolio.036b18">Portfolio</a>
+      </div>
+
+      <div class="footer-social-links">
+        <a href="https://x.com/apps_by_blaine" class="social-icon-link" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)">
+          <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+          </svg>
+        </a>
+        <a href="https://www.instagram.com/apps.by.blaine/" class="social-icon-link" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+          <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+          </svg>
+        </a>
+        <a href="https://www.youtube.com/@AppsByBlaine" class="social-icon-link" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+          <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+          </svg>
+        </a>
+      </div>
+
+      <p style="color: var(--text-muted); margin-top: var(--spacing-md);" data-i18n-html="blaine-miller-all-rights.b327c2">
+        © <span id="year"></span> Blaine Miller. All rights reserved.
+      </p>
+    </div>
+  </footer>
+
+  <script src="../../app-showcase.js?v=0ce231d7"></script>
+</body>
+</html>
