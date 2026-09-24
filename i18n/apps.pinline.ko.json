@@ -9,7 +9,6 @@
   "can-i-play-offline.897eb4": "오프라인에서도 플레이할 수 있나요?",
   "download-on-app-store.cf50c2": "App Store에서 다운로드",
   "faq.03688b": "자주 묻는 질문",
-  "features.fc338f": "기능",
   "frequently-asked-questions.d790b4": "자주 묻는 질문",
   "gamekit-security.9e6fc1": "<span class=\"badge-icon\">&#x1f3ae;</span> GameKit 보안",
   "got-questions.8ecca3": "궁금한 점이 있으신가요?",
@@ -49,5 +48,7 @@
   "pass-the-phone-across.66ba4f": "소파 건너편으로 휴대폰을 건네거나, iMessage로 도전장을 보내거나, Game Center에서 상대를 찾으세요. 먼저 30점을 내는 쪽이 이깁니다.",
   "range.a16c5b": "사로",
   "the-match-result-with.6e1f1e": "30점으로 승리한 경기 결과",
-  "the-range-on-ipad.abe1dc": "올림픽 표적과 거리, 바람이 보이는 iPad의 사로"
+  "the-range-on-ipad.abe1dc": "올림픽 표적과 거리, 바람이 보이는 iPad의 사로",
+  "overview.0efc2e": "개요",
+  "see-all-questions.237fee": "모든 질문 보기"
 }

@@ -9,7 +9,6 @@
   "can-i-play-offline.897eb4": "可以离线游玩吗？",
   "download-on-app-store.cf50c2": "在 App Store 下载",
   "faq.03688b": "常见问题",
-  "features.fc338f": "功能",
   "frequently-asked-questions.d790b4": "常见问题解答",
   "gamekit-security.9e6fc1": "<span class=\"badge-icon\">&#x1f3ae;</span> GameKit 安全机制",
   "got-questions.8ecca3": "还有疑问？",
@@ -49,5 +48,7 @@
   "pass-the-phone-across.66ba4f": "把手机递给沙发上的对手，在 iMessage 里发起挑战，或在 Game Center 上匹配对局。先得 30 分者获胜。",
   "range.a16c5b": "靶场",
   "the-match-result-with.6e1f1e": "比赛结果，获胜者拿到 30 分",
-  "the-range-on-ipad.abe1dc": "iPad 上的靶场：奥运靶、距离和风"
+  "the-range-on-ipad.abe1dc": "iPad 上的靶场：奥运靶、距离和风",
+  "overview.0efc2e": "概览",
+  "see-all-questions.237fee": "查看全部问题"
 }

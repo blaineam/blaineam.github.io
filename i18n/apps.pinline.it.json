@@ -9,7 +9,6 @@
   "can-i-play-offline.897eb4": "Posso giocare offline?",
   "download-on-app-store.cf50c2": "Scarica su App Store",
   "faq.03688b": "FAQ",
-  "features.fc338f": "Funzionalità",
   "frequently-asked-questions.d790b4": "Domande frequenti",
   "gamekit-security.9e6fc1": "<span class=\"badge-icon\">&#x1f3ae;</span> Sicurezza GameKit",
   "got-questions.8ecca3": "Hai domande?",
@@ -49,5 +48,7 @@
   "pass-the-phone-across.66ba4f": "Passa il telefono dall'altra parte del divano, manda una sfida in iMessage o trova una partita su Game Center. Vince chi arriva prima a 30 punti.",
   "range.a16c5b": "Campo",
   "the-match-result-with.6e1f1e": "Il risultato della partita, con il vincitore a 30 punti",
-  "the-range-on-ipad.abe1dc": "Il campo su iPad, con un bersaglio olimpico, la distanza e il vento"
+  "the-range-on-ipad.abe1dc": "Il campo su iPad, con un bersaglio olimpico, la distanza e il vento",
+  "overview.0efc2e": "Panoramica",
+  "see-all-questions.237fee": "Vedi tutte le domande"
 }

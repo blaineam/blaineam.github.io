@@ -9,7 +9,6 @@
   "can-i-play-offline.897eb4": "¿Puedo jugar sin conexión?",
   "download-on-app-store.cf50c2": "Descargar en el App Store",
   "faq.03688b": "Preguntas frecuentes",
-  "features.fc338f": "Funciones",
   "frequently-asked-questions.d790b4": "Preguntas frecuentes",
   "gamekit-security.9e6fc1": "<span class=\"badge-icon\">&#x1f3ae;</span> Seguridad de GameKit",
   "got-questions.8ecca3": "¿Tienes dudas?",
@@ -49,5 +48,7 @@
   "pass-the-phone-across.66ba4f": "Pasa el móvil al otro lado del sofá, envía un reto por iMessage o busca una partida en Game Center. Gana quien llegue primero a 30 puntos.",
   "range.a16c5b": "Campo",
   "the-match-result-with.6e1f1e": "El resultado de la partida, con el ganador en 30 puntos",
-  "the-range-on-ipad.abe1dc": "El campo en iPad, con una diana olímpica, la distancia y el viento"
+  "the-range-on-ipad.abe1dc": "El campo en iPad, con una diana olímpica, la distancia y el viento",
+  "overview.0efc2e": "Resumen",
+  "see-all-questions.237fee": "Ver todas las preguntas"
 }
