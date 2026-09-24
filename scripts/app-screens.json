@@ -74,7 +74,7 @@
       {
         "device": "iphone",
         "captures": "screenshots/iphone-6.9",
-        "scenes": ["02-gameplay-olympic", "03-gameplay-animals", "04-results"],
+        "scenes": ["01-menu", "02-gameplay-olympic", "03-gameplay-animals", "04-results"],
         "widths": [400, 800]
       },
       {
