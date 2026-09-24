@@ -52,6 +52,6 @@
   "the-ridgeshot-menu-with.a5dba0": "The Ridgeshot menu, with target styles, match formats and ways to play",
   "what-devices-does-it.b7b7b0": "What devices does it run on?",
   "why-does-my-reticle.ea9a33": "Why does my reticle drift while I'm holding?",
-  "yes-pass-and-play.81d0c1": "Yes — pass-and-play is fully offline. Two shooters, one device, no sign-in. Game Center matchmaking and iMessage challenges obviously need a connection to relay turns, but the whole simulation — ballistics, wind, animals, weather — runs on-device. No server round-trips per shot, no waiting for a leaderboard sync to take your next round.",
+  "yes-pass-and-play.f31404": "Yes — pass-and-play is fully offline. Two shooters, one device, no sign-in. Game Center matchmaking and iMessage challenges need a connection to relay turns, but the whole simulation — ballistics, wind, animals, weather — runs on-device.",
   "yes-ridgeshot-is-on.cf0a86": "Yes. Ridgeshot is on the App Store everywhere in the European Union, France included. It's available in every App Store territory Apple offers."
 }
