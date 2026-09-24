@@ -397,6 +397,11 @@
     .ah-hero h1 { font-weight: 600; font-size: clamp(2.6rem, 7vw, 5.2rem); max-width: 15ch; }
     .ah-hero h1 em, .ah-display em { font-style: italic; }
 
+    /* ---- Into the depth pages ------------------------------------------ */
+    .ah-trust-more { margin: 1.2rem 0 0; text-align: center; color: var(--ah-hero-kicker); }
+    .ah-privacy .learn-more { color: var(--ah-hero-kicker); margin: 0 0.4rem; }
+    .faq-more { margin: 1.6rem auto 0; max-width: 800px; text-align: center; }
+    .ah-copy .learn-more { color: var(--ah-accent-ink); }
   </style>
   <link rel="alternate" hreflang="x-default" href="https://wemiller.com/apps/ari-helper/">
   <link rel="alternate" hreflang="en" href="https://wemiller.com/apps/ari-helper/">
@@ -421,9 +426,11 @@
       </a>
       <button class="mobile-menu-toggle">☰</button>
       <ul class="nav-links">
-        <li><a href="#features" class="nav-link" data-i18n="features.fc338f">Features</a></li>
-        <li><a href="#faq" class="nav-link" data-i18n="faq.03688b">FAQ</a></li>
-        <li><a href="https://apps.apple.com/us/app/ari-helper/id6480045555" class="btn-buy" target="_blank" rel="noopener noreferrer" data-i18n="download-on-app-store.cf50c2">Download on App Store</a></li>
+        <li><a href="./" class="nav-link" aria-current="page" data-i18n="overview.0efc2e">Overview</a></li>
+        <li><a href="features/" class="nav-link" data-i18n="features.fc338f">Features</a></li>
+        <li><a href="pricing/" class="nav-link" data-i18n="pricing.a0d9bb">Pricing</a></li>
+        <li><a href="faq/" class="nav-link" data-i18n="faq.03688b">FAQ</a></li>
+        <li><a href="https://apps.apple.com/us/app/ari-helper/id6480045555" class="btn-buy" target="_blank" rel="noopener noreferrer">App Store</a></li>
       </ul>
     </div>
   </nav>
@@ -464,6 +471,7 @@
           <p class="ah-eyebrow"><span class="ah-num">01</span><span data-i18n="chat.2ced57">Chat</span></p>
           <h2 class="ah-display" data-i18n="any-model-one-conversation.dfabb6">Any model. One conversation.</h2>
           <p class="ah-lede" data-i18n="start-a-question-with.f0ab06">Start a question with Apple Intelligence, send the follow-up to Claude, and ask a model on your own Mac for a second opinion — in the same thread, with the same attachments.</p>
+          <a class="learn-more" href="features/#chat" data-i18n="learn-more.824d76">Learn more</a>
         </div>
         <figure class="ah-figure" data-reveal>
           <img src="assets/screens/en/09-vision-800.webp?v=211a185e"
@@ -480,6 +488,7 @@
           <p class="ah-eyebrow"><span class="ah-num">02</span><span data-i18n="look.b8db51">Look</span></p>
           <h2 class="ah-display" data-i18n="point-the-camera-ask.8a70fd">Point the camera. Ask out loud.</h2>
           <p class="ah-lede" data-i18n="look-at-something-turns.d0b0ca">Look at Something turns the camera into a conversation. Ari sends what you see to the model you've chosen, captions the answer under the picture, and reads it to you.</p>
+          <a class="learn-more" href="features/#look" data-i18n="learn-more.824d76">Learn more</a>
         </div>
         <figure class="ah-figure" data-reveal>
           <img src="assets/screens/en/02-live-camera-800.webp?v=b48a4e1c"
@@ -496,6 +505,7 @@
           <p class="ah-eyebrow"><span class="ah-num">03</span><span data-i18n="photo-studio.627ce0">Photo Studio</span></p>
           <h2 class="ah-display" data-i18n="brush-over-it-watch.2a1039">Brush over it. Watch it go.</h2>
           <p class="ah-lede" data-i18n="paint-over-what-s.80c3dd">Paint over what's wrong and pick a tool: remove, repair, denoise, colorize or enlarge. The restoration models run on your device.</p>
+          <a class="learn-more" href="features/#photo-studio" data-i18n="learn-more.824d76">Learn more</a>
         </div>
         <figure class="ah-figure" data-reveal>
           <img src="assets/screens/en/03-photo-studio-800.webp?v=53232efa"
@@ -512,6 +522,7 @@
           <p class="ah-eyebrow"><span class="ah-num">04</span><span data-i18n="film-studio.4c6de3">Film Studio</span></p>
           <h2 class="ah-display" data-i18n="write-a-film-one.7c29d5">Write a film one shot at a time.</h2>
           <p class="ah-lede" data-i18n="write-a-film-as.cfcc01">Write a film as a list of shots, render each with the video model you choose, and keep the takes that work. Clean up restores any video you open.</p>
+          <a class="learn-more" href="features/#film-studio" data-i18n="learn-more.824d76">Learn more</a>
         </div>
         <figure class="ah-figure" data-reveal>
           <img src="assets/screens/en/04-film-studio-800.webp?v=57ea3edf"
@@ -528,6 +539,7 @@
           <p class="ah-eyebrow"><span class="ah-num">05</span><span data-i18n="everywhere.2f2b74">Everywhere</span></p>
           <h2 class="ah-display" data-i18n="start-on-your-wrist.796abb">Start on your wrist. Finish at your desk.</h2>
           <p class="ah-lede" data-i18n="one-purchase-covers-iphone.aceb72">One purchase covers iPhone, iPad, Mac and Apple Watch, and conversations sync through iCloud. Dictate on your wrist; let the Mac take the heavy work.</p>
+          <a class="learn-more" href="features/#everywhere" data-i18n="learn-more.824d76">Learn more</a>
         </div>
         <figure class="ah-figure is-watch" data-reveal>
           <img src="assets/screens/en/01-chat-440.webp?v=91e375c4"
@@ -552,6 +564,7 @@
         <div class="security-badge" data-i18n-html="security-audit.8ee777"><span class="badge-icon">&#x2705;</span> Security audit</div>
       </div>
       <p class="security-audit-note" data-i18n="local-models-keep-every.08f8a3">Local models keep every word on your device. Cloud providers see only what you send them, with your own keys.</p>
+      <p class="ah-trust-more"><a class="learn-more" href="features/#privacy" data-i18n="learn-more.824d76">Learn more</a> · <a class="learn-more" href="pricing/" data-i18n="see-the-price.01e749">See the price</a></p>
     </div>
   </section>
 
@@ -620,8 +633,8 @@
         <p data-i18n="yes-ari-helper-is.0f9dc6">Yes. Ari Helper is on the App Store everywhere in the European Union, France included. It's available in every App Store territory Apple offers except mainland China, which has its own rules for apps that generate AI content.</p>
       </div>
     </div>
-
     </div>
+    <p class="faq-more"><a class="learn-more" href="faq/" data-i18n="see-all-questions.237fee">See all questions</a></p>
   </section>
 
   <!-- Closing: the promise again, and the one button. -->

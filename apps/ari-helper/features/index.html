@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Features · Ari Helper</title>
+  <meta name="description" content="Everything Ari Helper does: any model in one conversation, Look at Something, Apple Watch and Mac, Photo Studio, Film Studio, Luma Editor and privacy.">
+  <link rel="canonical" href="https://wemiller.com/apps/ari-helper/features/">
+  <meta property="og:title" content="Features · Ari Helper">
+  <meta property="og:description" content="Everything Ari Helper does: any model in one conversation, Look at Something, Apple Watch and Mac, Photo Studio, Film Studio, Luma Editor and privacy.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://wemiller.com/apps/ari-helper/features/">
+  <meta property="og:image" content="https://wemiller.com/apps/ari-helper/assets/images/poster.jpg?v=c9a46ac2">
+  <meta name="apple-itunes-app" content="app-id=6480045555">
+  <link rel="stylesheet" href="../../app-showcase.css?v=e9909304">
+  <link rel="stylesheet" href="../../_shared/depth.css?v=8787ba38">
+  <style>
+    :root {
+      /* Ari Helper: the icon's pink-to-coral glow over a near-black plum night. */
+      --app-primary: #F093FB;
+      --app-secondary: #F5576C;
+      --app-accent: #FFA8A8;
+      --primary-color: #1A1419;
+      --secondary-color: #F5576C;
+      --ah-display-face: ui-serif, "New York", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+      --ah-text-face: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+      --ah-paper: #F7F3F1;
+      --ah-paper-2: #EFE8E5;
+      --ah-body: #3E353C;
+      --ah-quiet: #655A62;
+      --ah-rule: rgba(26, 20, 25, 0.14);
+      --ah-accent-ink: #B8283F;
+      --ah-ornament: linear-gradient(90deg, #F093FB, #F5576C);
+      --ah-shadow: drop-shadow(0 30px 40px rgba(26, 20, 25, 0.24)) drop-shadow(0 6px 10px rgba(26, 20, 25, 0.10));
+      --ah-hero-bg: radial-gradient(ellipse 70% 50% at 50% 0%, rgba(240, 147, 251, 0.22) 0%, transparent 65%), radial-gradient(ellipse 60% 45% at 50% 100%, rgba(245, 87, 108, 0.30) 0%, transparent 70%), linear-gradient(180deg, #0F0B12 0%, #19141C 100%);
+      --ah-hero-ink: #F6EFF4;
+      --ah-hero-kicker: #F7B4FC;
+      --ah-button: linear-gradient(120deg, #F093FB 0%, #F5576C 100%);
+      --ah-button-ink: #1A0E14;
+      --ah-button-glow: rgba(245, 87, 108, 0.35);
+      --ah-focus: #F7B4FC;
+      --ah-closing-bg: radial-gradient(ellipse 55% 60% at 50% 100%, rgba(245, 87, 108, 0.14) 0%, transparent 70%), var(--ah-paper-2);
+      --text-primary: #1A1419;
+      --glass-bg: rgba(247, 243, 241, 0.8);
+      --glass-border: rgba(26, 20, 25, 0.08);
+      --ah-measure: 1120px;
+      --bg-primary: var(--ah-paper);
+      --bg-secondary: var(--ah-paper-2);
+      --text-secondary: var(--ah-body);
+      --text-muted: var(--ah-quiet);
+      --glass-shadow: none;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --primary-color: #F7B4FC;
+        --ah-paper: #18131A;
+        --ah-paper-2: #211A23;
+        --ah-body: #E3DAE0;
+        --ah-quiet: #B0A4AD;
+        --ah-rule: rgba(243, 236, 241, 0.14);
+        --ah-accent-ink: #FF8A9A;
+        --ah-shadow: drop-shadow(0 30px 44px rgba(0, 0, 0, 0.55)) drop-shadow(0 6px 10px rgba(0, 0, 0, 0.30));
+        --ah-closing-bg: radial-gradient(ellipse 55% 60% at 50% 100%, rgba(245, 87, 108, 0.18) 0%, transparent 70%), var(--ah-paper-2);
+        --text-primary: #F3ECF1;
+        --glass-bg: rgba(24, 19, 26, 0.8);
+        --glass-border: rgba(243, 236, 241, 0.08);
+      }
+    }
+    :root { --bg-card: var(--ah-paper-2); --border-color: var(--ah-rule); }
+    body { background: var(--ah-paper); }
+    .nav-links .nav-link, .nav-links .btn-buy { white-space: nowrap; }
+    [hidden] { display: none !important; }
+    /* .dp-sr is position:absolute; without a positioned scroll box its static position in
+       off-screen table cells widened the mobile layout viewport to ~612px. */
+    .dp-table-wrap { position: relative; }
+    .dp-closing .btn-buy, .dp-plan .btn-buy { background: var(--ah-hero); color: #fff; box-shadow: 0 10px 28px var(--ah-glow); }
+    .dp-card p + p { margin-top: 0.6rem; }
+    .dp-card .dp-step { display: block; margin-bottom: 0.4rem; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--primary-color); }
+    .dp-section > .dp-eyebrow { margin: 0 0 0.5rem; font-size: 0.8rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--primary-color); }
+    .dp-points { margin: 0; padding: 0; list-style: none; display: grid; gap: 0.2rem; max-width: 52rem; }
+    .dp-points li { padding: 0.8rem 0; border-top: 1px solid var(--border-color); color: var(--text-secondary); line-height: 1.6; }
+    .dp-points li b { color: var(--text-primary); }
+    ol.dp-points { counter-reset: step; margin-top: 1.6rem; }
+    ol.dp-points li { counter-increment: step; padding-left: 2.2rem; position: relative; }
+    ol.dp-points li::before { content: counter(step); position: absolute; left: 0; top: 0.8rem; font-weight: 700; color: var(--primary-color); }
+    .dp-points a, .dp-card a { color: var(--primary-color); }
+    .ah-chips { margin: 0 0 1.6rem; }
+    .ah-sub { margin: 2.2rem 0 0.4rem; font-size: 1.3rem; color: var(--text-primary); }
+    .ah-duo-icon { display: block; width: 48px; height: 48px; border-radius: 11px; margin-bottom: 0.8rem; }
+    .dp-header .dp-standfirst + .dp-standfirst { margin-top: 0.8rem; font-size: 1.02rem; }
+    .dp-closing .btn-buy, .dp-plan .btn-buy { background: var(--ah-button); color: var(--ah-button-ink); box-shadow: 0 10px 28px var(--ah-button-glow); }
+  </style>
+  <link rel="alternate" hreflang="x-default" href="https://wemiller.com/apps/ari-helper/features/">
+  <link rel="alternate" hreflang="en" href="https://wemiller.com/apps/ari-helper/features/">
+  <link rel="alternate" hreflang="zh-Hans" href="https://wemiller.com/apps/ari-helper/features/?lang=zh-Hans">
+  <link rel="alternate" hreflang="ja" href="https://wemiller.com/apps/ari-helper/features/?lang=ja">
+  <link rel="alternate" hreflang="de" href="https://wemiller.com/apps/ari-helper/features/?lang=de">
+  <link rel="alternate" hreflang="fr" href="https://wemiller.com/apps/ari-helper/features/?lang=fr">
+  <link rel="alternate" hreflang="es" href="https://wemiller.com/apps/ari-helper/features/?lang=es">
+  <link rel="alternate" hreflang="ko" href="https://wemiller.com/apps/ari-helper/features/?lang=ko">
+  <link rel="alternate" hreflang="pt-BR" href="https://wemiller.com/apps/ari-helper/features/?lang=pt-BR">
+  <link rel="alternate" hreflang="it" href="https://wemiller.com/apps/ari-helper/features/?lang=it">
+  <script src="/i18n/i18n.js?v=9b769779" defer data-page="apps.ari-helper.features" data-pos="bottom-left"></script>
+</head>
+<body>
+  <nav class="app-nav">
+    <div class="nav-container">
+      <a href="../../" class="nav-logo nav-brand" title="← Apps" aria-label="← Apps"
+         data-i18n-attr="title:apps.2d61f2;aria-label:apps.2d61f2">
+        <span class="nav-brand-back" aria-hidden="true">←</span>
+        <img class="nav-brand-icon" src="../assets/images/icon.png?v=a2c46a74" alt="" width="60" height="60">
+        <span class="nav-brand-name">Ari Helper</span>
+      </a>
+      <button class="mobile-menu-toggle" aria-label="Menu">☰</button>
+      <ul class="nav-links">
+        <li><a href="../" class="nav-link" data-i18n="overview.0efc2e">Overview</a></li>
+        <li><a href="../features/" class="nav-link" aria-current="page" data-i18n="features.fc338f">Features</a></li>
+        <li><a href="../pricing/" class="nav-link" data-i18n="pricing.a0d9bb">Pricing</a></li>
+        <li><a href="../faq/" class="nav-link" data-i18n="faq.03688b">FAQ</a></li>
+        <li><a href="https://apps.apple.com/us/app/ari-helper/id6480045555" target="_blank" rel="noopener noreferrer" class="btn-buy">App Store</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main>
+    <header class="dp-header">
+      <p class="dp-eyebrow">Ari Helper</p>
+      <h1 data-i18n="your-ai-should-work.a97097">Your AI should work for you, not the other way round.</h1>
+      <p class="dp-standfirst" data-i18n="most-ai-apps-choose.f087b3">Most AI apps choose the model, keep your conversations and charge by the month. Ari does the opposite. It runs the model you pick — one on your iPhone, one on the Mac under your desk, or one from any provider you have a key for — and keeps what you say on your devices.</p>
+      <p class="dp-standfirst" data-i18n="so-you-can-ask.03251b">So you can ask about a recipe on your wrist, send a long document to Claude from your iPhone, and let the Mac finish the heavy lifting overnight — then point the camera at a plant you can't name, or clean up the photos from the weekend, without anything leaving your hands.</p>
+      <ul class="dp-jumps">
+        <li><a href="#chat" data-i18n="chat.2ced57">Chat</a></li>
+        <li><a href="#look" data-i18n="look-at-something.ae9580">Look at Something</a></li>
+        <li><a href="#everywhere" data-i18n="everywhere.2f2b74">Everywhere</a></li>
+        <li><a href="#photo-studio" data-i18n="photo-studio.627ce0">Photo Studio</a></li>
+        <li><a href="#film-studio" data-i18n="film-studio.4c6de3">Film Studio</a></li>
+        <li><a href="#luma" data-i18n="better-together.341e8d">Better together</a></li>
+        <li><a href="#privacy" data-i18n="privacy.cf0148">Privacy</a></li>
+      </ul>
+    </header>
+
+    <section class="dp-section" id="chat">
+      <p class="dp-eyebrow" data-i18n="chat.2ced57">Chat</p>
+      <h2 data-i18n="any-model-one-conversation.dfabb6">Any model. One conversation.</h2>
+      <p class="dp-lede" data-i18n="start-a-question-with.f0ab06">Start a question with Apple Intelligence, send the follow-up to Claude, and ask a model on your own Mac for a second opinion — in the same thread, with the same attachments.</p>
+      <ul class="dp-list ah-chips">
+        <li data-i18n="apple-intelligence.be36d6">Apple Intelligence</li>
+        <li data-i18n="gemma-4-on-device.d09ffa">Gemma 4 on device</li>
+        <li data-i18n="ollama.4d75d4">Ollama</li>
+        <li data-i18n="lm-studio.d5b29f">LM Studio</li>
+        <li data-i18n="vllm.49e2a9">vLLM</li>
+        <li data-i18n="llama-cpp.5c58ce">llama.cpp</li>
+        <li data-i18n="openai.a19ee5">OpenAI</li>
+        <li data-i18n="anthropic-claude.6d891d">Anthropic Claude</li>
+        <li data-i18n="google-gemini.2f9610">Google Gemini</li>
+        <li data-i18n="xai-grok.de30f4">xAI Grok</li>
+        <li data-i18n="aws-bedrock.92dac8">AWS Bedrock</li>
+        <li data-i18n="draw-things.4bfd45">Draw Things</li>
+      </ul>
+      <ul class="dp-points">
+        <li data-i18n-html="private-by-default-on.ef6f93"><b>Private by default.</b> On-device models run on Apple silicon with MLX and need no network. Your prompts don't leave the device.</li>
+        <li data-i18n-html="your-own-server-point.986451"><b>Your own server.</b> Point Ari at Ollama or any OpenAI-compatible server by entering its address.</li>
+        <li data-i18n-html="your-own-keys-cloud.d37a4c"><b>Your own keys.</b> Cloud providers are billed to your account at their prices. Ari takes no cut and keeps no copy.</li>
+        <li data-i18n-html="it-reads-what-you.bcd325"><b>It reads what you share.</b> Attach photos, PDFs and source files; Ari reads text and objects in pictures on device, so Spotlight finds a conversation by what was in its images.</li>
+        <li data-i18n-html="pictures-from-a-sentence.de074d"><b>Pictures from a sentence.</b> Generate images on device, through Draw Things, or with GPT Image, Imagen and Grok Imagine.</li>
+        <li data-i18n-html="spoken-back-to-you.3bfc4d"><b>Spoken back to you.</b> Replies can be read aloud with a natural voice, and a conversation can be hands-free from start to finish.</li>
+      </ul>
+    </section>
+
+    <section class="dp-section" id="look">
+      <p class="dp-eyebrow" data-i18n="look-at-something.ae9580">Look at Something</p>
+      <h2 data-i18n="point-the-camera-ask.8a70fd">Point the camera. Ask out loud.</h2>
+      <p class="dp-lede" data-i18n="look-at-something-turns.434b73">Look at Something turns the camera into a conversation. Ari sends what you see to the model you've chosen — on device, self-hosted or in the cloud — captions the answer under the picture, and reads it to you.</p>
+      <ul class="dp-points">
+        <li data-i18n-html="talk-don-t-type.0fdebc"><b>Talk, don't type.</b> Ask a question and Ari listens, answers, then listens again, so you can keep going with your hands full.</li>
+        <li data-i18n-html="keep-looking-turn-it.681a30"><b>Keep looking.</b> Turn it on and Ari follows along as you move, describing what's in front of you.</li>
+        <li data-i18n-html="one-press-away-start.2a5d62"><b>One press away.</b> Start it from the button beside the microphone, the Lock Screen, Control Center, the Action Button or Siri.</li>
+        <li data-i18n-html="any-model-you-trust.0cdf50"><b>Any model you trust.</b> Keep it on device for privacy, or send it to a stronger vision model when you need one.</li>
+      </ul>
+    </section>
+
+    <section class="dp-section" id="everywhere">
+      <p class="dp-eyebrow" data-i18n="everywhere.2f2b74">Everywhere</p>
+      <h2 data-i18n="start-on-your-wrist.796abb">Start on your wrist. Finish at your desk.</h2>
+      <p class="dp-lede" data-i18n="ari-works-the-same.ea48bb">Ari works the same on iPhone, iPad and Mac, and one purchase covers them all. Conversations and films sync through iCloud. When two of your devices share a Wi-Fi network, a conversation reaches the other one in about a second.</p>
+      <ul class="dp-grid">
+        <li class="dp-card">
+          <h3>Apple Watch</h3>
+          <p data-i18n="dictate-from-the-ask.46979e">Dictate from the Ask Ari complication and watch the answer stream in from your iPhone, spoken if you like.</p>
+        </li>
+        <li class="dp-card">
+          <h3>Mac</h3>
+          <p data-i18n="code-sessions-give-a.7a4a56">Code Sessions give a model tools to read, edit, search, run git and the shell, browse and use MCP servers inside a project folder.</p>
+        </li>
+        <li class="dp-card">
+          <h3 data-i18n="dispatch.840e1b">Dispatch</h3>
+          <p data-i18n="send-heavy-prompts-from.b9fe01">Send heavy prompts from your iPhone to your Mac, and let the Mac decide when to run them.</p>
+        </li>
+        <li class="dp-card">
+          <h3 data-i18n="siri-and-shortcuts.00486c">Siri and Shortcuts</h3>
+          <p data-i18n="ask-ari-generate-pictures.81db53">Ask Ari, generate pictures, read PDFs and dispatch work from a full Shortcuts catalog.</p>
+        </li>
+      </ul>
+    </section>
+
+    <section class="dp-section" id="photo-studio">
+      <p class="dp-eyebrow" data-i18n="photo-studio.627ce0">Photo Studio</p>
+      <h2 data-i18n="brush-over-it-watch.2a1039">Brush over it. Watch it go.</h2>
+      <p class="dp-lede" data-i18n="photo-studio-is-a.f2db97">Photo Studio is a canvas editor with on-device models behind it. Paint over what's wrong and pick a tool, or select nothing and treat the whole photograph. Every step is kept, so going back three edits takes one tap.</p>
+      <ul class="dp-points">
+        <li data-i18n-html="heal-and-remove-brush.c9183b"><b>Heal and remove.</b> Brush roughly over a leash, a sign or a stranger; Ari fits the stroke to the object and fills the gap.</li>
+        <li data-i18n-html="repair-denoise-sharpen-colorize.e426e3"><b>Repair, denoise, sharpen, colorize, upscale.</b> On a selection or the whole photograph, with a strength slider for color.</li>
+        <li data-i18n-html="describe-it-instead-say.4df21b"><b>Describe it instead.</b> Say what should be in the selection and a generative model paints it in.</li>
+        <li data-i18n-html="inside-photos-the-same.a0d13b"><b>Inside Photos.</b> The same tools, from the Edit screen of the Photos app.</li>
+        <li data-i18n-html="downloaded-once-each-model.0569fc"><b>Downloaded once.</b> Each model downloads the first time you use it. Nothing is uploaded.</li>
+      </ul>
+    </section>
+
+    <section class="dp-section" id="film-studio">
+      <p class="dp-eyebrow" data-i18n="film-studio.4c6de3">Film Studio</p>
+      <h2 data-i18n="write-a-film-one.7c29d5">Write a film one shot at a time.</h2>
+      <p class="dp-lede" data-i18n="film-studio-is-laid.2dd49c">Film Studio is laid out like an editing suite. Write a film as a list of shots, render each with the video model you choose, keep the takes that work, and watch the cut come together above the timeline. Films sync through iCloud, so a scene started on the Mac is there on the iPhone.</p>
+      <ul class="dp-grid">
+        <li class="dp-card">
+          <h3 data-i18n="write.4a4893">Write</h3>
+          <p data-i18n="describe-each-shot-and.7e6cf9">Describe each shot and how long it runs. Narration and a still to start from are optional.</p>
+        </li>
+        <li class="dp-card">
+          <h3 data-i18n="render.b2e402">Render</h3>
+          <p data-i18n="each-shot-is-rendered.e7164d">Each shot is rendered on its own, with the settings its model needs, and shows a live preview while it works.</p>
+        </li>
+      </ul>
+      <h3 class="ah-sub" data-i18n="clean-up-any-video.451250">Clean up any video, not just your own.</h3>
+      <p class="dp-lede" data-i18n="the-clean-up-menu.b64471">The Clean up menu runs a whole restoration pass on one shot, on the finished cut, or on any video file you open. Ari runs each step in the order that works best.</p>
+      <ul class="dp-list ah-chips">
+        <li data-i18n="de-interlace.a4376f">De-interlace</li>
+        <li data-i18n="remove-film-grain.2a7356">Remove film grain</li>
+        <li data-i18n="reduce-noise.d2f6c3">Reduce noise</li>
+        <li data-i18n="sharpen.f4777f">Sharpen</li>
+        <li data-i18n="add-color.c29d05">Add color</li>
+        <li data-i18n="upscale-4.82051e">Upscale ×4</li>
+        <li data-i18n="more-frames.a40f3a">More frames</li>
+      </ul>
+      <ul class="dp-points">
+        <li data-i18n-html="grain-is-removed-across.a52cf7"><b>Grain is removed across frames.</b> Grain changes from one frame to the next and the picture doesn't, so Ari can tell them apart without guessing.</li>
+        <li data-i18n-html="colour-stays-put-a.1a4db5"><b>Colour stays put.</b> A cleaned clip keeps its colours and its rotation.</li>
+      </ul>
+    </section>
+
+    <section class="dp-section" id="luma">
+      <p class="dp-eyebrow" data-i18n="better-together.341e8d">Better together</p>
+      <h2 data-i18n="luma-develops-ari-imagines.73b475">Luma develops. Ari imagines.</h2>
+      <p class="dp-lede" data-i18n="luma-editor-grades-a.13163f">Luma Editor grades a photograph with real sliders and never makes up content. When something needs to go, Luma sends the photo to Ari's Photo Studio, and Ari sends it back with your grade still applied.</p>
+      <ul class="dp-grid">
+        <li class="dp-card">
+          <img class="ah-duo-icon" src="../assets/images/icon.png?v=a2c46a74" alt="" width="48" height="48" loading="lazy">
+          <h3>Ari Helper</h3>
+          <p data-i18n="the-studio-removes-objects.bb0ca2">The studio. Removes objects, repairs, cleans up and enlarges, on your device.</p>
+        </li>
+        <li class="dp-card">
+          <img class="ah-duo-icon" src="../../luma-editor/assets/images/icon.png?v=73260b1a" alt="" width="48" height="48" loading="lazy">
+          <h3>Luma Editor</h3>
+          <p data-i18n="the-darkroom-matches-the.2a7d99">The darkroom. Matches the look of a photograph you admire and gives it back as adjustments you can keep editing.</p>
+          <p><a href="../../luma-editor/" data-i18n="meet-luma-editor.33c593">Meet Luma Editor →</a></p>
+        </li>
+      </ul>
+      <ol class="dp-points">
+        <li data-i18n-html="grade-in-luma-open.1e2e3b"><b>Grade in Luma.</b> Open the Retouch tab on the photo you are working on.</li>
+        <li data-i18n-html="remove-something-in-ari.015aec"><b>Remove Something in Ari.</b> Luma hands the untouched photo, at full size, to Photo Studio.</li>
+        <li data-i18n-html="brush-it-out-paint.09c42b"><b>Brush it out.</b> Paint over what should go; Ari fits the stroke to the object and fills it in.</li>
+        <li data-i18n-html="save-to-luma-editor.bc4552"><b>Save to Luma Editor.</b> You're back in Luma with the object gone and your grade unchanged.</li>
+      </ol>
+    </section>
+
+    <section class="dp-section" id="privacy">
+      <p class="dp-eyebrow" data-i18n="privacy.cf0148">Privacy</p>
+      <h2 data-i18n="you-decide-who-hears.6b0110">You decide who hears what.</h2>
+      <ul class="dp-points">
+        <li data-i18n-html="private-conversations-encrypted-on.a055e8"><b>Private conversations.</b> Encrypted on the device and behind Face ID. Their pictures stay out of Spotlight, and they travel between your devices still encrypted.</li>
+        <li data-i18n-html="fortress-mode-limit-ari.cabbef"><b>Fortress Mode.</b> Limit Ari to the providers you trust. Organisations can require it with an MDM profile.</li>
+        <li data-i18n-html="aws-bedrock-including-govcloud.7d8f75"><b>AWS Bedrock, including GovCloud and FIPS endpoints,</b> for teams with rules to follow.</li>
+        <li data-i18n-html="marked-pictures-images-ari.80451c"><b>Marked pictures.</b> Images Ari generates carry an invisible watermark that survives compression. <a href="../watermark/">Check a picture</a> in your browser.</li>
+      </ul>
+    </section>
+  </main>
+
+  <!-- Every depth page ends on the download. -->
+  <section class="dp-closing">
+    <h2 data-i18n="ask-anything-point-at.7655dd">Ask anything. Point at anything.</h2>
+    <a href="https://apps.apple.com/us/app/ari-helper/id6480045555" target="_blank" rel="noopener noreferrer" class="btn-buy" data-i18n="download-on-the-app.a9096a">Download on the App Store</a>
+    <p class="dp-alt"><a href="../" data-i18n="back-to-the-overview.e274c2">Back to the overview</a></p>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-links">
+        <a href="../../" class="footer-link" data-i18n="all-apps.429449">All Apps</a>
+        <a href="../../pinline/" class="footer-link">Pinline</a>
+        <a href="../../enter-space/" class="footer-link">Enter Space</a>
+        <a href="../../blip/" class="footer-link">Blip</a>
+        <a href="../../sami/" class="footer-link">Sami</a>
+        <a href="../../tilebreak/" class="footer-link">Tilebreak</a>
+        <a href="../../mi-speaks/" class="footer-link">Mi Speaks</a>
+        <a href="../../embr/" class="footer-link">Embr</a>
+        <a href="../../deepsi/" class="footer-link">DeepSi</a>
+        <a href="../../luma-editor/" class="footer-link">Luma Editor</a>
+        <a href="../../wise-flyer/" class="footer-link">Wise Flyer</a>
+        <a href="../../glint/" class="footer-link">Glint</a>
+        <a href="/privacy/" class="footer-link" data-i18n="privacy.cf0148">Privacy</a>
+        <a href="/terms/" class="footer-link" data-i18n="terms.a55a27">Terms</a>
+        <a href="/support/" class="footer-link" data-i18n="support.f32d5a">Support</a>
+        <a href="/" class="footer-link" data-i18n="portfolio.036b18">Portfolio</a>
+      </div>
+
+      <div class="footer-social-links">
+        <a href="https://x.com/apps_by_blaine" class="social-icon-link" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)">
+          <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+          </svg>
+        </a>
+        <a href="https://www.instagram.com/apps.by.blaine/" class="social-icon-link" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+          <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+          </svg>
+        </a>
+        <a href="https://www.youtube.com/@AppsByBlaine" class="social-icon-link" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+          <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+          </svg>
+        </a>
+      </div>
+
+      <p style="color: var(--text-muted); margin-top: var(--spacing-md);" data-i18n-html="blaine-miller-all-rights.b327c2">
+        © <span id="year"></span> Blaine Miller. All rights reserved.
+      </p>
+    </div>
+  </footer>
+
+  <script src="../../app-showcase.js?v=0ce231d7"></script>
+</body>
+</html>

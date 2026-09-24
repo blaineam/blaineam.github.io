@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FAQ · Ari Helper</title>
+  <meta name="description" content="Every question about Ari Helper answered: models, the live camera, sync, sharing, Draw Things, Photo and Film Studio, Luma Editor, privacy, the watermark and price.">
+  <link rel="canonical" href="https://wemiller.com/apps/ari-helper/faq/">
+  <meta property="og:title" content="FAQ · Ari Helper">
+  <meta property="og:description" content="Every question about Ari Helper answered: models, the live camera, sync, sharing, Draw Things, Photo and Film Studio, Luma Editor, privacy, the watermark and price.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://wemiller.com/apps/ari-helper/faq/">
+  <meta property="og:image" content="https://wemiller.com/apps/ari-helper/assets/images/poster.jpg?v=c9a46ac2">
+  <meta name="apple-itunes-app" content="app-id=6480045555">
+  <link rel="stylesheet" href="../../app-showcase.css?v=e9909304">
+  <link rel="stylesheet" href="../../_shared/depth.css?v=8787ba38">
+  <style>
+    :root {
+      /* Ari Helper: the icon's pink-to-coral glow over a near-black plum night. */
+      --app-primary: #F093FB;
+      --app-secondary: #F5576C;
+      --app-accent: #FFA8A8;
+      --primary-color: #1A1419;
+      --secondary-color: #F5576C;
+      --ah-display-face: ui-serif, "New York", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+      --ah-text-face: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+      --ah-paper: #F7F3F1;
+      --ah-paper-2: #EFE8E5;
+      --ah-body: #3E353C;
+      --ah-quiet: #655A62;
+      --ah-rule: rgba(26, 20, 25, 0.14);
+      --ah-accent-ink: #B8283F;
+      --ah-ornament: linear-gradient(90deg, #F093FB, #F5576C);
+      --ah-shadow: drop-shadow(0 30px 40px rgba(26, 20, 25, 0.24)) drop-shadow(0 6px 10px rgba(26, 20, 25, 0.10));
+      --ah-hero-bg: radial-gradient(ellipse 70% 50% at 50% 0%, rgba(240, 147, 251, 0.22) 0%, transparent 65%), radial-gradient(ellipse 60% 45% at 50% 100%, rgba(245, 87, 108, 0.30) 0%, transparent 70%), linear-gradient(180deg, #0F0B12 0%, #19141C 100%);
+      --ah-hero-ink: #F6EFF4;
+      --ah-hero-kicker: #F7B4FC;
+      --ah-button: linear-gradient(120deg, #F093FB 0%, #F5576C 100%);
+      --ah-button-ink: #1A0E14;
+      --ah-button-glow: rgba(245, 87, 108, 0.35);
+      --ah-focus: #F7B4FC;
+      --ah-closing-bg: radial-gradient(ellipse 55% 60% at 50% 100%, rgba(245, 87, 108, 0.14) 0%, transparent 70%), var(--ah-paper-2);
+      --text-primary: #1A1419;
+      --glass-bg: rgba(247, 243, 241, 0.8);
+      --glass-border: rgba(26, 20, 25, 0.08);
+      --ah-measure: 1120px;
+      --bg-primary: var(--ah-paper);
+      --bg-secondary: var(--ah-paper-2);
+      --text-secondary: var(--ah-body);
+      --text-muted: var(--ah-quiet);
+      --glass-shadow: none;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --primary-color: #F7B4FC;
+        --ah-paper: #18131A;
+        --ah-paper-2: #211A23;
+        --ah-body: #E3DAE0;
+        --ah-quiet: #B0A4AD;
+        --ah-rule: rgba(243, 236, 241, 0.14);
+        --ah-accent-ink: #FF8A9A;
+        --ah-shadow: drop-shadow(0 30px 44px rgba(0, 0, 0, 0.55)) drop-shadow(0 6px 10px rgba(0, 0, 0, 0.30));
+        --ah-closing-bg: radial-gradient(ellipse 55% 60% at 50% 100%, rgba(245, 87, 108, 0.18) 0%, transparent 70%), var(--ah-paper-2);
+        --text-primary: #F3ECF1;
+        --glass-bg: rgba(24, 19, 26, 0.8);
+        --glass-border: rgba(243, 236, 241, 0.08);
+      }
+    }
+    :root { --bg-card: var(--ah-paper-2); --border-color: var(--ah-rule); }
+    body { background: var(--ah-paper); }
+    .nav-links .nav-link, .nav-links .btn-buy { white-space: nowrap; }
+    [hidden] { display: none !important; }
+    /* .dp-sr is position:absolute; without a positioned scroll box its static position in
+       off-screen table cells widened the mobile layout viewport to ~612px. */
+    .dp-table-wrap { position: relative; }
+    .dp-closing .btn-buy, .dp-plan .btn-buy { background: var(--ah-hero); color: #fff; box-shadow: 0 10px 28px var(--ah-glow); }
+    .dp-faq-group { scroll-margin-top: 80px; }
+    .faq-answer .dp-list { margin: 0.4rem 0 1.2rem; }
+    .faq-answer .dp-list li { font-size: 0.95rem; padding: 0.3rem 0; }
+    .faq-answer code { font-size: 0.85em; overflow-wrap: anywhere; }
+    .faq-answer a { color: var(--primary-color); }
+    .dp-closing .btn-buy, .dp-plan .btn-buy { background: var(--ah-button); color: var(--ah-button-ink); box-shadow: 0 10px 28px var(--ah-button-glow); }
+  </style>
+  <link rel="alternate" hreflang="x-default" href="https://wemiller.com/apps/ari-helper/faq/">
+  <link rel="alternate" hreflang="en" href="https://wemiller.com/apps/ari-helper/faq/">
+  <link rel="alternate" hreflang="zh-Hans" href="https://wemiller.com/apps/ari-helper/faq/?lang=zh-Hans">
+  <link rel="alternate" hreflang="ja" href="https://wemiller.com/apps/ari-helper/faq/?lang=ja">
+  <link rel="alternate" hreflang="de" href="https://wemiller.com/apps/ari-helper/faq/?lang=de">
+  <link rel="alternate" hreflang="fr" href="https://wemiller.com/apps/ari-helper/faq/?lang=fr">
+  <link rel="alternate" hreflang="es" href="https://wemiller.com/apps/ari-helper/faq/?lang=es">
+  <link rel="alternate" hreflang="ko" href="https://wemiller.com/apps/ari-helper/faq/?lang=ko">
+  <link rel="alternate" hreflang="pt-BR" href="https://wemiller.com/apps/ari-helper/faq/?lang=pt-BR">
+  <link rel="alternate" hreflang="it" href="https://wemiller.com/apps/ari-helper/faq/?lang=it">
+  <script src="/i18n/i18n.js?v=9b769779" defer data-page="apps.ari-helper.faq" data-pos="bottom-left"></script>
+</head>
+<body>
+  <nav class="app-nav">
+    <div class="nav-container">
+      <a href="../../" class="nav-logo nav-brand" title="← Apps" aria-label="← Apps"
+         data-i18n-attr="title:apps.2d61f2;aria-label:apps.2d61f2">
+        <span class="nav-brand-back" aria-hidden="true">←</span>
+        <img class="nav-brand-icon" src="../assets/images/icon.png?v=a2c46a74" alt="" width="60" height="60">
+        <span class="nav-brand-name">Ari Helper</span>
+      </a>
+      <button class="mobile-menu-toggle" aria-label="Menu">☰</button>
+      <ul class="nav-links">
+        <li><a href="../" class="nav-link" data-i18n="overview.0efc2e">Overview</a></li>
+        <li><a href="../features/" class="nav-link" data-i18n="features.fc338f">Features</a></li>
+        <li><a href="../pricing/" class="nav-link" data-i18n="pricing.a0d9bb">Pricing</a></li>
+        <li><a href="../faq/" class="nav-link" aria-current="page" data-i18n="faq.03688b">FAQ</a></li>
+        <li><a href="https://apps.apple.com/us/app/ari-helper/id6480045555" target="_blank" rel="noopener noreferrer" class="btn-buy">App Store</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main>
+    <header class="dp-header">
+      <p class="dp-eyebrow" data-i18n="got-questions.8ecca3">Got Questions?</p>
+      <h1 data-i18n="frequently-asked-questions.d790b4">Frequently Asked Questions</h1>
+      <ul class="dp-jumps">
+        <li><a href="#chat" data-i18n="chat.2ced57">Chat</a></li>
+        <li><a href="#studios" data-i18n="photo-studio.627ce0">Photo Studio</a></li>
+        <li><a href="#privacy" data-i18n="privacy.cf0148">Privacy</a></li>
+        <li><a href="#pricing" data-i18n="pricing-availability.b6b992">Pricing &amp; availability</a></li>
+      </ul>
+    </header>
+
+    <section class="dp-section" id="faq">
+      <div class="dp-faq-group" id="chat">
+        <h2 data-i18n="chat.2ced57">Chat</h2>
+        <div class="faq-list">
+          <div class="faq-item">
+            <button class="faq-question">
+              <span data-i18n="what-ai-models-can.762d0d">What AI models can I use with Ari Helper?</span>
+              <span class="faq-icon">▼</span>
+            </button>
+            <div class="faq-answer">
+              <p data-i18n="apple-intelligence-on-device.9be2aa">Apple Intelligence; on-device models you download inside Ari, such as Gemma 4; models on your own network through Ollama or any OpenAI-compatible server (LM Studio, vLLM, llama.cpp, LiteLLM); and OpenAI, Anthropic Claude, Google Gemini, xAI Grok and AWS Bedrock with your own keys. Images come from on-device models, Draw Things, GPT Image, Imagen or Grok Imagine.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">
+              <span data-i18n="how-does-the-live.951b68">How does the live camera work?</span>
+              <span class="faq-icon">▼</span>
+            </button>
+            <div class="faq-answer">
+              <p data-i18n="open-look-at-something.89449e">Open Look at Something from the button beside the microphone, the Lock Screen, Control Center, the Action Button or Siri, point the camera and ask a question out loud or in text. Ari sends the frame to whichever model you've chosen, captions the answer under the picture and can read it to you, then listens for your next question. Turn on Keep looking and it follows along as you move. With an on-device model, nothing leaves your iPhone.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">
+              <span data-i18n="how-does-conversation-sync.876cdf">How does conversation sync work?</span>
+              <span class="faq-icon">▼</span>
+            </button>
+            <div class="faq-answer">
+              <p data-i18n="conversations-sync-across-all.2f9544">Conversations sync across all your Apple devices via iCloud. Start a chat on your iPhone and continue it on your iPad or Mac seamlessly. When two of your devices are awake on the same Wi-Fi, Ari also hands the conversation straight across the local network, so it lands in about a second instead of waiting for the next iCloud round trip.</p>
+              <p data-i18n="the-pictures-and-files.22ac31">The pictures and files in a conversation travel the same way, not just their names—the receiving device asks only for what it's missing, and every file is verified against a hash before it's kept. Anything over 16 MB is deliberately left to iCloud, which resumes and survives a quit. iCloud remains the system of record either way: a device that's asleep, on cellular, or on another network catches up exactly as it always has. If you'd rather everything went through the cloud, the local link can be switched off in Settings → API Settings → Direct Device Link.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">
+              <span data-i18n="can-i-share-conversations.a8722e">Can I share conversations with others?</span>
+              <span class="faq-icon">▼</span>
+            </button>
+            <div class="faq-answer">
+              <p data-i18n="yes-you-can-share.13d3cb">Yes! You can share conversations as beautiful images or HTML files, perfect for sharing insights, code snippets, or creative content with friends and colleagues.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">
+              <span data-i18n="what-is-draw-things.f5a47a">What is Draw Things integration?</span>
+              <span class="faq-icon">▼</span>
+            </button>
+            <div class="faq-answer">
+              <p data-i18n="draw-things-is-an.79777f">Draw Things is an on-device image generation app. Connect Ari Helper to a Draw Things server to generate images privately on your device or network. View and enjoy generated images in Ari's built-in gallery slideshow.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="dp-faq-group" id="studios">
+        <h2 data-i18n="photo-studio.627ce0">Photo Studio</h2>
+        <div class="faq-list">
+          <div class="faq-item">
+            <button class="faq-question">
+              <span data-i18n="what-can-photo-studio.1a29c3">What can Photo Studio and Film Studio do?</span>
+              <span class="faq-icon">▼</span>
+            </button>
+            <div class="faq-answer">
+              <p data-i18n="photo-studio-removes-objects.253b57">Photo Studio removes objects you brush over, repairs scratches and creases, reduces noise, sharpens slight camera shake, adds color to black-and-white photos and enlarges pictures four times. It can also repaint a selection from a description. Film Studio renders a film shot by shot with the video model you choose, and cleans up any video: de-interlacing, grain and noise removal, sharpening, color, upscaling and extra frames. Face restoration is not included yet — none of the models tested were good enough.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">
+              <span data-i18n="do-the-photo-and.797e1f">Do the photo and film tools upload my pictures?</span>
+              <span class="faq-icon">▼</span>
+            </button>
+            <div class="faq-answer">
+              <p data-i18n="no-the-restoration-models.7e7645">No. The restoration models download from their public hosts the first time you use them, then run on your device. The only exception is repainting from a description, which uses the provider you pick and follows that provider's privacy policy.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">
+              <span data-i18n="how-does-ari-work.a9ce41">How does Ari work with Luma Editor?</span>
+              <span class="faq-icon">▼</span>
+            </button>
+            <div class="faq-answer">
+              <p data-i18n="when-both-apps-are.bf3fe4">When both apps are installed, Luma's Retouch tab offers Remove Something in Ari. Luma sends the untouched photo to Photo Studio; after you remove what you need, Save to Luma Editor returns you to Luma with the object gone and your grade still applied.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">
+              <span data-i18n="can-i-tell-whether.15df7c">Can I tell whether a picture came from Ari Helper?</span>
+              <span class="faq-icon">▼</span>
+            </button>
+            <div class="faq-answer">
+              <p data-i18n-html="yes-ari-helper-adds.e07bf7">Yes. Ari Helper adds an invisible mark to the pictures it generates, carried by the image itself rather than by metadata that a re-save would strip, and it survives ordinary compression. <a href="../watermark/">Check a picture here</a> — it runs in your browser and nothing is uploaded.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="dp-faq-group" id="privacy">
+        <h2 data-i18n="privacy.cf0148">Privacy</h2>
+        <div class="faq-list">
+          <div class="faq-item">
+            <button class="faq-question">
+              <span data-i18n="is-my-data-private.ac57e0">Is my data private when using local models?</span>
+              <span class="faq-icon">▼</span>
+            </button>
+            <div class="faq-answer">
+              <p data-i18n="yes-when-using-local.7d1876">Yes! When using local on-device models or Ollama on your network, no data leaves your device or local network. Private mode with biometric lock adds extra security for sensitive conversations.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">
+              <span data-i18n="how-does-ari-helper.306a01">How does Ari Helper protect my privacy and security?</span>
+              <span class="faq-icon">▼</span>
+            </button>
+            <div class="faq-answer">
+              <p data-i18n="ari-helper-is-built.f17bb6">Ari Helper is built with multiple layers of privacy and security protections to give you full control over your data:</p>
+              <ul>
+                <li data-i18n-html="on-device-models-run.0ff0d1"><strong>On-device models</strong> — Run AI models entirely on your device using Apple's MLX framework. Your prompts and responses never leave your device, giving you complete privacy with zero external dependencies.</li>
+                <li data-i18n-html="fortress-mode-lock-down.2900b6"><strong>Fortress Mode</strong> — Lock down the app to only allow connections to secure, vetted model platforms. When enabled, Ari Helper restricts which providers can be used, ensuring your sensitive prompts are only sent to trusted endpoints. IT administrators can also enforce Fortress Mode across an organization via Apple MDM profiles.</li>
+                <li data-i18n-html="confirmation-dialogs-before-sending.f86ec0"><strong>Confirmation dialogs</strong> — Before sending prompts to external providers, Ari Helper can present confirmation dialogs so you always have a chance to review what's being sent and to which provider before any data leaves your device.</li>
+                <li data-i18n-html="encrypted-private-conversations-sens.fe38ec"><strong>Encrypted Private Conversations</strong> — Sensitive chats can be encrypted and locked behind biometric authentication (Face ID or Touch ID). Private conversations are encrypted on device, so even if someone has access to your device they cannot read them without your biometric approval.</li>
+                <li data-i18n-html="encrypted-local-sync-when.36cd3d"><strong>Encrypted local sync</strong> — When a conversation moves directly between your own devices over Wi-Fi, a private conversation crosses the link as exactly the encrypted bytes it is on disk; nothing is decrypted in transit, and the key that opens it never leaves your iCloud keychain. The link itself is TLS, and only devices signed in to your own iCloud account can complete the handshake.</li>
+              </ul>
+              <p data-i18n="whether-you-re-running.ddec8d">Whether you're running models entirely on device, connecting to a self-hosted Ollama instance on your network, or using a cloud provider — Ari Helper gives you the tools to choose the privacy level that's right for each conversation.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="dp-faq-group" id="pricing">
+        <h2 data-i18n="pricing-availability.b6b992">Pricing &amp; availability</h2>
+        <div class="faq-list">
+          <div class="faq-item">
+            <button class="faq-question">
+              <span data-i18n="does-ari-helper-require.b22f7e">Does Ari Helper require a subscription?</span>
+              <span class="faq-icon">▼</span>
+            </button>
+            <div class="faq-answer">
+              <p data-i18n="no-ari-helper-is.5ac3b6">No. Ari Helper is one purchase that covers iPhone, iPad, Mac and Apple Watch, including future updates. Cloud providers you connect with your own API keys bill you directly for what you use.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">
+              <span data-i18n="is-ari-helper-available.e70f87">Is Ari Helper available in the European Union?</span>
+              <span class="faq-icon">▼</span>
+            </button>
+            <div class="faq-answer">
+              <p data-i18n="yes-ari-helper-is.0f9dc6">Yes. Ari Helper is on the App Store everywhere in the European Union, France included. It's available in every App Store territory Apple offers except mainland China, which has its own rules for apps that generate AI content.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Every depth page ends on the download. -->
+  <section class="dp-closing">
+    <h2 data-i18n="ask-anything-point-at.7655dd">Ask anything. Point at anything.</h2>
+    <a href="https://apps.apple.com/us/app/ari-helper/id6480045555" target="_blank" rel="noopener noreferrer" class="btn-buy" data-i18n="download-on-the-app.a9096a">Download on the App Store</a>
+    <p class="dp-alt"><a href="../" data-i18n="back-to-the-overview.e274c2">Back to the overview</a></p>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-links">
+        <a href="../../" class="footer-link" data-i18n="all-apps.429449">All Apps</a>
+        <a href="../../pinline/" class="footer-link">Pinline</a>
+        <a href="../../enter-space/" class="footer-link">Enter Space</a>
+        <a href="../../blip/" class="footer-link">Blip</a>
+        <a href="../../sami/" class="footer-link">Sami</a>
+        <a href="../../tilebreak/" class="footer-link">Tilebreak</a>
+        <a href="../../mi-speaks/" class="footer-link">Mi Speaks</a>
+        <a href="../../embr/" class="footer-link">Embr</a>
+        <a href="../../deepsi/" class="footer-link">DeepSi</a>
+        <a href="../../luma-editor/" class="footer-link">Luma Editor</a>
+        <a href="../../wise-flyer/" class="footer-link">Wise Flyer</a>
+        <a href="../../glint/" class="footer-link">Glint</a>
+        <a href="/privacy/" class="footer-link" data-i18n="privacy.cf0148">Privacy</a>
+        <a href="/terms/" class="footer-link" data-i18n="terms.a55a27">Terms</a>
+        <a href="/support/" class="footer-link" data-i18n="support.f32d5a">Support</a>
+        <a href="/" class="footer-link" data-i18n="portfolio.036b18">Portfolio</a>
+      </div>
+
+      <div class="footer-social-links">
+        <a href="https://x.com/apps_by_blaine" class="social-icon-link" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)">
+          <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+          </svg>
+        </a>
+        <a href="https://www.instagram.com/apps.by.blaine/" class="social-icon-link" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+          <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+          </svg>
+        </a>
+        <a href="https://www.youtube.com/@AppsByBlaine" class="social-icon-link" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+          <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+          </svg>
+        </a>
+      </div>
+
+      <p style="color: var(--text-muted); margin-top: var(--spacing-md);" data-i18n-html="blaine-miller-all-rights.b327c2">
+        © <span id="year"></span> Blaine Miller. All rights reserved.
+      </p>
+    </div>
+  </footer>
+
+  <script src="../../app-showcase.js?v=0ce231d7"></script>
+</body>
+</html>
