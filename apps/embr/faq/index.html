@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FAQ · Embr</title>
+  <meta name="description" content="Every question about Embr, answered.">
+  <link rel="canonical" href="https://wemiller.com/apps/embr/faq/">
+  <meta property="og:title" content="FAQ · Embr">
+  <meta property="og:description" content="Every question about Embr, answered.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://wemiller.com/apps/embr/faq/">
+  <meta property="og:image" content="https://wemiller.com/apps/embr/assets/images/poster.jpg?v=fcd8151c">
+  <meta name="apple-itunes-app" content="app-id=6727006089">
+  <link rel="apple-touch-icon" href="../assets/images/icon.png?v=78c2fd44">
+  <link rel="icon" type="image/png" href="../assets/images/icon.png?v=78c2fd44">
+  <link rel="stylesheet" href="../../app-showcase.css?v=e9909304">
+  <link rel="stylesheet" href="../../_shared/depth.css?v=8787ba38">
+  <style>
+    :root {
+      /* Embr: an ember glow, rose-red to gold, over charcoal. */
+      --app-primary: #FA709A;
+      --app-secondary: #FEE140;
+      --app-accent: #FF6B6B;
+      --primary-color: #2A1218;
+      --secondary-color: #FF6B6B;
+      --em-display-face: system-ui, -apple-system, "Segoe UI", sans-serif;
+      --em-text-face: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      --em-paper: #FCF8F6;
+      --em-paper-2: #F6EEEA;
+      --em-body: #3B3134;
+      --em-quiet: #675B5E;
+      --em-rule: rgba(42, 18, 24, 0.12);
+      --em-accent-ink: #C0283F;
+      --em-ornament: linear-gradient(90deg, #FA709A, #FEE140);
+      --em-shadow: drop-shadow(0 30px 40px rgba(42, 18, 24, 0.22)) drop-shadow(0 6px 10px rgba(42, 18, 24, 0.10));
+      --em-hero-bg: radial-gradient(ellipse 70% 50% at 50% 100%, rgba(250, 112, 154, 0.36) 0%, transparent 70%), radial-gradient(circle at 80% 20%, rgba(254, 225, 64, 0.14) 0%, transparent 50%), linear-gradient(180deg, #120C0E 0%, #1E1316 60%, #2E1518 100%);
+      --em-hero-ink: #FFFFFF;
+      --em-hero-kicker: #FFB08A;
+      --em-button: linear-gradient(120deg, #FA709A 0%, #FEE140 100%);
+      --em-button-ink: #2A1218;
+      --em-button-glow: rgba(250, 112, 154, 0.38);
+      --em-focus: #FFB08A;
+      --em-closing-bg: radial-gradient(ellipse 55% 60% at 50% 100%, rgba(250, 112, 154, 0.14) 0%, transparent 70%), var(--em-paper-2);
+      --text-primary: #2A1218;
+      --glass-bg: rgba(252, 248, 246, 0.8);
+      --glass-border: rgba(42, 18, 24, 0.08);
+      --em-measure: 1120px;
+      --bg-primary: var(--em-paper);
+      --bg-secondary: var(--em-paper-2);
+      --text-secondary: var(--em-body);
+      --text-muted: var(--em-quiet);
+      --glass-shadow: none;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --primary-color: #FFB08A;
+        --em-paper: #140E10;
+        --em-paper-2: #1D1417;
+        --em-body: #E4DADC;
+        --em-quiet: #B3A6A9;
+        --em-rule: rgba(228, 218, 220, 0.13);
+        --em-accent-ink: #FF8FA8;
+        --em-shadow: drop-shadow(0 30px 44px rgba(0, 0, 0, 0.55)) drop-shadow(0 6px 10px rgba(0, 0, 0, 0.30));
+        --em-closing-bg: radial-gradient(ellipse 55% 60% at 50% 100%, rgba(250, 112, 154, 0.18) 0%, transparent 70%), var(--em-paper-2);
+        --text-primary: #F6EEF0;
+        --glass-bg: rgba(20, 14, 16, 0.8);
+        --glass-border: rgba(228, 218, 220, 0.08);
+      }
+    }
+
+    :root { --bg-card: var(--em-paper-2); --border-color: var(--em-rule); }
+    body { background: var(--em-paper); }
+    .dp-header h1, .dp-section > h2, .dp-faq-group > h2, .dp-closing h2 { font-family: var(--em-display-face); }
+    .dp-eyebrow, .dp-card .dp-tag { color: var(--em-accent-ink); }
+    .dp-section a { color: var(--em-accent-ink); }
+    .dp-card p + p { margin-top: 0.6rem; }
+    .dp-list .badge-icon { margin-right: 0.4rem; }
+    :lang(ko) .dp-header h1, :lang(ko) .dp-section > h2 { word-break: keep-all; }
+/* ---- FAQ: a ruled list ---------------------------------------------- */
+    .faq-section { max-width: 820px; padding: clamp(4rem, 9vw, 6rem) 16px; }
+    .faq-section .em-eyebrow, .faq-section h2 { text-align: center; }
+    .faq-section h2 {
+      font-family: var(--em-display-face);
+      font-weight: 700;
+      background: none;
+      -webkit-text-fill-color: currentColor;
+      color: var(--primary-color);
+      font-size: clamp(1.9rem, 4vw, 2.8rem);
+      margin: 0 0 2.5rem;
+    }
+    .faq-item {
+      background: none;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+      border: none;
+      border-top: 1px solid var(--em-rule);
+      border-radius: 0;
+      margin: 0;
+    }
+    .faq-item:last-child { border-bottom: 1px solid var(--em-rule); }
+    .faq-question {
+      font-family: var(--em-display-face);
+      font-size: 1.15rem;
+      font-weight: 600;
+      padding: 1.25rem 0;
+      gap: 1rem;
+    }
+    .faq-question:hover { color: var(--em-accent-ink); }
+    .faq-question:focus-visible { outline: 2px solid var(--em-accent-ink); outline-offset: 2px; }
+    .faq-icon { font-size: 0.8rem; color: var(--em-accent-ink); }
+    .faq-answer { padding: 0; }
+    .faq-item.active .faq-answer { padding: 0 0 1.4rem; }
+    .faq-answer p { font-size: 1rem; line-height: 1.68; color: var(--em-body); }
+
+    
+  </style>
+  <link rel="alternate" hreflang="x-default" href="https://wemiller.com/apps/embr/faq/">
+  <link rel="alternate" hreflang="en" href="https://wemiller.com/apps/embr/faq/">
+  <link rel="alternate" hreflang="zh-Hans" href="https://wemiller.com/apps/embr/faq/?lang=zh-Hans">
+  <link rel="alternate" hreflang="ja" href="https://wemiller.com/apps/embr/faq/?lang=ja">
+  <link rel="alternate" hreflang="de" href="https://wemiller.com/apps/embr/faq/?lang=de">
+  <link rel="alternate" hreflang="fr" href="https://wemiller.com/apps/embr/faq/?lang=fr">
+  <link rel="alternate" hreflang="es" href="https://wemiller.com/apps/embr/faq/?lang=es">
+  <link rel="alternate" hreflang="ko" href="https://wemiller.com/apps/embr/faq/?lang=ko">
+  <link rel="alternate" hreflang="pt-BR" href="https://wemiller.com/apps/embr/faq/?lang=pt-BR">
+  <link rel="alternate" hreflang="it" href="https://wemiller.com/apps/embr/faq/?lang=it">
+  <script src="/i18n/i18n.js?v=9b769779" defer data-page="apps.embr.faq" data-pos="bottom-left"></script>
+</head>
+<body>
+  <nav class="app-nav">
+    <div class="nav-container">
+      <a href="../../" class="nav-logo nav-brand" title="← Apps" aria-label="← Apps"
+         data-i18n-attr="title:apps.2d61f2;aria-label:apps.2d61f2">
+        <span class="nav-brand-back" aria-hidden="true">←</span>
+        <img class="nav-brand-icon" src="../assets/images/icon.png?v=78c2fd44" alt="" width="60" height="60">
+        <span class="nav-brand-name">Embr</span>
+      </a>
+      <button class="mobile-menu-toggle" aria-label="Menu">☰</button>
+      <ul class="nav-links">
+        <li><a href="../" class="nav-link" data-i18n="overview.0efc2e">Overview</a></li>
+        <li><a href="../faq/" class="nav-link" aria-current="page" data-i18n="faq.03688b">FAQ</a></li>
+        <li><a href="https://apps.apple.com/us/app/embr-burn-your-debts/id6727006089" target="_blank" rel="noopener noreferrer" class="btn-buy">App Store</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main>
+    <header class="dp-header">
+      <p class="dp-eyebrow">Embr</p>
+      <h1 data-i18n="frequently-asked-questions.d790b4">Frequently Asked Questions</h1>
+      <p class="dp-standfirst" data-i18n="every-question-about-embr.99e83b">Every question about Embr, answered.</p>
+    </header>
+
+    <section class="dp-section" id="faq">
+      <div class="faq-list">
+          <div class="faq-item">
+            <button class="faq-question">
+              <span data-i18n="how-does-embr-help.6c35e5">How does Embr help me plan debt payoff?</span>
+              <span class="faq-icon">▼</span>
+            </button>
+            <div class="faq-answer">
+              <p data-i18n="embr-is-a-debt.d77812">
+          Embr is a debt payoff estimation tool that helps you visualize when you'll be debt-free. Enter your debts and
+          try various payment schedules to see how different scenarios affect your timeline. The burn visualization makes
+          tracking progress satisfying and motivating.
+        </p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">
+              <span data-i18n="does-embr-collect-my.e7c901">Does Embr collect my financial data?</span>
+              <span class="faq-icon">▼</span>
+            </button>
+            <div class="faq-answer">
+              <p data-i18n="no-embr-collects-zero.b453dc">No! Embr collects zero data. Everything runs on your device with complete privacy. No tracking, no servers, no sharing your financial information with anyone. Your debt details stay completely private.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">
+              <span data-i18n="what-payment-schedules-does.535453">What payment schedules does Embr support?</span>
+              <span class="faq-icon">▼</span>
+            </button>
+            <div class="faq-answer">
+              <p data-i18n="embr-supports-various-payment.f49fcf">
+          Embr supports various payment schedules to help you estimate different debt payoff scenarios. Adjust payment
+          amounts and frequencies to find the plan that works best for your budget and timeline.
+        </p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">
+              <span data-i18n="how-accurate-are-the.e13f38">How accurate are the payoff plans?</span>
+              <span class="faq-icon">▼</span>
+            </button>
+            <div class="faq-answer">
+              <p data-i18n="embr-s-payoff-math.a1ed14">Embr's payoff math was checked by an accountant, and it factors in each debt's interest rate and any extra payments. Treat the dates as a plan to aim for, since real balances change as you pay.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">
+              <span data-i18n="does-embr-require-a.803f87">Does Embr require a subscription?</span>
+              <span class="faq-icon">▼</span>
+            </button>
+            <div class="faq-answer">
+              <p data-i18n="no-embr-is-a.d397ef">No! Embr is a one-time purchase that works across all your Apple devices—iPhone, iPad, and Mac. Buy once and use forever with no recurring subscription fees.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">
+              <span data-i18n="how-does-icloud-sync.79b922">How does iCloud sync work?</span>
+              <span class="faq-icon">▼</span>
+            </button>
+            <div class="faq-answer">
+              <p data-i18n="your-debt-plans-and.bc13ba">Your debt plans and progress sync seamlessly across all your Apple devices via iCloud. Monitor your debt payoff journey from your iPhone, check progress on your iPad, or plan at your Mac—always in sync.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">
+              <span data-i18n="what-makes-the-burn.0f420d">What makes the burn visualization special?</span>
+              <span class="faq-icon">▼</span>
+            </button>
+            <div class="faq-answer">
+              <p data-i18n="embr-s-unique-burn.c21148">
+          Embr's unique burn visualization shows your debts literally burning away as you make payments. The visual
+          feedback is oddly satisfying and keeps you motivated throughout your debt-free journey. Simple and clean
+          UI makes the whole experience enjoyable.
+        </p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">
+              <span data-i18n="is-embr-available-in.4e04e1">Is Embr available in the European Union?</span>
+              <span class="faq-icon">▼</span>
+            </button>
+            <div class="faq-answer">
+              <p data-i18n="yes-embr-is-on.d6f25e">Yes. Embr is on the App Store everywhere in the European Union, France included. It's available in every App Store territory Apple offers.</p>
+            </div>
+          </div>
+      </div>
+    </section>
+  </main>
+
+  <section class="dp-closing">
+    <h2 data-i18n="plan-your-path-to.deca93">Plan Your Path to Debt Freedom</h2>
+    <a href="https://apps.apple.com/us/app/embr-burn-your-debts/id6727006089" target="_blank" rel="noopener noreferrer" class="btn-buy" data-i18n="download-on-the-app.a9096a">Download on the App Store</a>
+    <p class="dp-alt"><a href="../" data-i18n="back-to-the-overview.e274c2">Back to the overview</a></p>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-links">
+        <a href="../../" class="footer-link" data-i18n="all-apps.429449">All Apps</a>
+        <a href="../../pinline/" class="footer-link">Pinline</a>
+        <a href="../../enter-space/" class="footer-link">Enter Space</a>
+        <a href="../../blip/" class="footer-link">Blip</a>
+        <a href="../../ari-helper/" class="footer-link">Ari Helper</a>
+        <a href="../../sami/" class="footer-link">Sami</a>
+        <a href="../../tilebreak/" class="footer-link">Tilebreak</a>
+        <a href="../../mi-speaks/" class="footer-link">Mi Speaks</a>
+        <a href="../../deepsi/" class="footer-link">DeepSi</a>
+        <a href="../../luma-editor/" class="footer-link">Luma Editor</a>
+        <a href="../../wise-flyer/" class="footer-link">Wise Flyer</a>
+        <a href="../../glint/" class="footer-link">Glint</a>
+        <a href="/privacy/" class="footer-link" data-i18n="privacy.cf0148">Privacy</a>
+        <a href="/terms/" class="footer-link" data-i18n="terms.a55a27">Terms</a>
+        <a href="/support/" class="footer-link" data-i18n="support.f32d5a">Support</a>
+        <a href="/" class="footer-link" data-i18n="portfolio.036b18">Portfolio</a>
+      </div>
+
+      <!-- Social Media Links -->
+      <div class="footer-social-links">
+        <a href="https://x.com/apps_by_blaine" class="social-icon-link" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)">
+          <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+          </svg>
+        </a>
+        <a href="https://www.instagram.com/apps.by.blaine/" class="social-icon-link" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+          <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+          </svg>
+        </a>
+        <a href="https://www.youtube.com/@AppsByBlaine" class="social-icon-link" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+          <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+          </svg>
+        </a>
+      </div>
+
+      <p style="color: var(--text-muted); margin-top: var(--spacing-md);" data-i18n-html="blaine-miller-all-rights.b327c2">
+        © <span id="year"></span> Blaine Miller. All rights reserved.
+      </p>
+    </div>
+  </footer>
+
+  <script src="../../app-showcase.js?v=0ce231d7"></script>
+</body>
+</html>

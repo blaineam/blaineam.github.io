@@ -9,7 +9,6 @@
   "download-on-app-store.cf50c2": "App Storeでダウンロード",
   "yes-embr-is-on.d6f25e": "はい。Embrはフランスを含む欧州連合（EU）の全域で販売しています。Appleが提供するすべての国と地域のApp Storeでご利用いただけます。",
   "faq.03688b": "よくある質問",
-  "features.fc338f": "機能",
   "frequently-asked-questions.d790b4": "よくある質問",
   "got-questions.8ecca3": "ご質問がありますか？",
   "how-does-icloud-sync.79b922": "iCloud 同期はどのように機能しますか？",
@@ -45,5 +44,7 @@
   "two-plans-side-by.7133ea": "2つのプランを並べて",
   "update-it-in-seconds.833344": "数秒で更新",
   "updating-a-card-s.1bfabe": "ダッシュボードからカードの残高を更新しているところ",
-  "zero-data-collection.e360f7": "<span class=\"badge-icon\">&#x1f512;</span> データ収集ゼロ"
+  "zero-data-collection.e360f7": "<span class=\"badge-icon\">&#x1f512;</span> データ収集ゼロ",
+  "overview.0efc2e": "概要",
+  "see-all-questions.237fee": "すべての質問を見る"
 }
