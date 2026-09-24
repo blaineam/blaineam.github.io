@@ -149,6 +149,12 @@ jobs:
       - name: Inject the back-to-apps pill
         run: python3 scripts/inject-back-to-apps.py
 
+      # `?v=<content hash>` on every image/script/stylesheet URL — including the pill just injected.
+      # The sources are stamped in their own repos; this catches anything they missed (Lathe's
+      # docs/ is generated) so a year-cached stale i18n.js can never outlive a change again.
+      - name: Stamp cache busters on the mirrored sites
+        run: python3 scripts/cache-bust.py --mirrored apps/blip apps/glint apps/haven apps/lathe
+
       - name: Commit mirrored docs
         run: |
           set -euo pipefail
