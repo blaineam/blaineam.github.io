@@ -181,6 +181,7 @@ body { background: var(--dp-paper); }
 
 /* ---- Comparison chart: scrolls inside its box, never the page ------------ */
 .dp-table-wrap {
+  position: relative; /* keeps visually-hidden cells from widening the phone layout (~612px) */
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
   border: 1px solid var(--dp-rule);
