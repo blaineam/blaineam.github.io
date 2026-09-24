@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FAQ · Luma Editor</title>
+  <meta name="description" content="Every question about Luma Editor answered: style matching, editing, retouch, culling, LUT export, video, the Photos extension, Ari Helper and price.">
+  <link rel="canonical" href="https://wemiller.com/apps/luma-editor/faq/">
+  <meta property="og:title" content="FAQ · Luma Editor">
+  <meta property="og:description" content="Every question about Luma Editor answered: style matching, editing, retouch, culling, LUT export, video, the Photos extension, Ari Helper and price.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://wemiller.com/apps/luma-editor/faq/">
+  <meta property="og:image" content="https://wemiller.com/apps/luma-editor/assets/images/poster.jpg?v=9f102ee5">
+  <meta name="apple-itunes-app" content="app-id=6741085424">
+  <link rel="stylesheet" href="../../app-showcase.css?v=e9909304">
+  <link rel="stylesheet" href="../../_shared/depth.css?v=8787ba38">
+  <style>
+    :root {
+      --app-primary: #26b3bf;
+      --app-secondary: #e0a25a;
+      --app-accent: #26b3bf;
+      --primary-color: #1B3F44;    /* deep teal-ink: headlines on paper */
+      --secondary-color: #e0a25a;
+      --lm-accent-ink: #9A5A14;    /* the amber safelight, deepened for paper */
+      --lm-hero: linear-gradient(180deg, #0d0c0b 0%, #171512 60%, #0d0c0b 100%);
+      --lm-hero-glow: radial-gradient(ellipse 60% 45% at 50% 100%, rgba(224, 162, 90, 0.20) 0%, transparent 70%), radial-gradient(ellipse 50% 40% at 90% 0%, rgba(38, 179, 191, 0.18) 0%, transparent 70%);
+      --lm-hero-ink: #F3EEE6;
+      --lm-hero-em: #F0BD7E;
+      --lm-hero-kicker: rgba(240, 189, 126, 0.88);
+      --lm-btn: linear-gradient(180deg, #3fcad5, #26b3bf);
+      --lm-btn-ink: #06282B;
+      --lm-glow: rgba(38, 179, 191, 0.28);
+      --lm-display: ui-serif, "New York", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+      --lm-paper: #F7F4EE;
+      --lm-paper-2: #EDE8DF;
+      --lm-rule: rgba(22, 19, 15, 0.14);
+      --lm-quiet: #6A6258;
+      --lm-body: #3A342D;
+      --lm-shadow: drop-shadow(0 30px 40px rgba(22, 19, 15, 0.24)) drop-shadow(0 6px 10px rgba(22, 19, 15, 0.10));
+      --bg-primary: var(--lm-paper);
+      --bg-secondary: var(--lm-paper-2);
+      --text-primary: #16130F;
+      --text-secondary: var(--lm-body);
+      --text-muted: var(--lm-quiet);
+      --glass-bg: rgba(247, 244, 238, 0.8);
+      --glass-border: rgba(22, 19, 15, 0.10);
+      --glass-shadow: none;
+      --lm-measure: 1120px;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --primary-color: #7FD8E0;
+        --secondary-color: #F0BD7E;
+        --lm-accent-ink: #F0BD7E;
+        --lm-paper: #151311;
+        --lm-paper-2: #1D1A17;
+        --lm-rule: rgba(240, 235, 227, 0.14);
+        --lm-quiet: #A89F93;
+        --lm-body: #DDD6CB;
+        --lm-shadow: drop-shadow(0 30px 44px rgba(0, 0, 0, 0.6)) drop-shadow(0 6px 10px rgba(0, 0, 0, 0.35));
+        --text-primary: #F0EBE3;
+        --glass-bg: rgba(21, 19, 17, 0.8);
+        --glass-border: rgba(240, 235, 227, 0.08);
+      }
+    }
+    .btn-buy { box-shadow: 0 4px 15px rgba(13, 12, 11, 0.30); }
+    :root { --bg-card: var(--lm-paper-2); --border-color: var(--lm-rule); }
+    body { background: var(--lm-paper); }
+    .nav-links .nav-link, .nav-links .btn-buy { white-space: nowrap; }
+    [hidden] { display: none !important; }
+    /* .dp-sr is position:absolute; without a positioned scroll box its static position in
+       off-screen table cells widened the mobile layout viewport to ~612px. */
+    .dp-table-wrap { position: relative; }
+    .dp-closing .btn-buy, .dp-plan .btn-buy { background: var(--lm-hero); color: #fff; box-shadow: 0 10px 28px var(--lm-glow); }
+    .dp-faq-group { scroll-margin-top: 80px; }
+    .faq-answer .dp-list { margin: 0.4rem 0 1.2rem; }
+    .faq-answer .dp-list li { font-size: 0.95rem; padding: 0.3rem 0; }
+    .faq-answer code { font-size: 0.85em; overflow-wrap: anywhere; }
+    .faq-answer a { color: var(--primary-color); }
+  </style>
+  <link rel="alternate" hreflang="x-default" href="https://wemiller.com/apps/luma-editor/faq/">
+  <link rel="alternate" hreflang="en" href="https://wemiller.com/apps/luma-editor/faq/">
+  <link rel="alternate" hreflang="zh-Hans" href="https://wemiller.com/apps/luma-editor/faq/?lang=zh-Hans">
+  <link rel="alternate" hreflang="ja" href="https://wemiller.com/apps/luma-editor/faq/?lang=ja">
+  <link rel="alternate" hreflang="de" href="https://wemiller.com/apps/luma-editor/faq/?lang=de">
+  <link rel="alternate" hreflang="fr" href="https://wemiller.com/apps/luma-editor/faq/?lang=fr">
+  <link rel="alternate" hreflang="es" href="https://wemiller.com/apps/luma-editor/faq/?lang=es">
+  <link rel="alternate" hreflang="ko" href="https://wemiller.com/apps/luma-editor/faq/?lang=ko">
+  <link rel="alternate" hreflang="pt-BR" href="https://wemiller.com/apps/luma-editor/faq/?lang=pt-BR">
+  <link rel="alternate" hreflang="it" href="https://wemiller.com/apps/luma-editor/faq/?lang=it">
+  <script src="/i18n/i18n.js?v=9b769779" defer data-page="apps.luma-editor.faq" data-pos="bottom-left"></script>
+</head>
+<body>
+  <nav class="app-nav">
+    <div class="nav-container">
+      <a href="../../" class="nav-logo nav-brand" title="← Apps" aria-label="← Apps"
+         data-i18n-attr="title:apps.2d61f2;aria-label:apps.2d61f2">
+        <span class="nav-brand-back" aria-hidden="true">←</span>
+        <img class="nav-brand-icon" src="../assets/images/icon.png?v=73260b1a" alt="" width="60" height="60">
+        <span class="nav-brand-name">Luma Editor</span>
+      </a>
+      <button class="mobile-menu-toggle" aria-label="Menu">☰</button>
+      <ul class="nav-links">
+        <li><a href="../" class="nav-link" data-i18n="overview.0efc2e">Overview</a></li>
+        <li><a href="../features/" class="nav-link" data-i18n="features.fc338f">Features</a></li>
+        <li><a href="../pricing/" class="nav-link" data-i18n="pricing.a0d9bb">Pricing</a></li>
+        <li><a href="../faq/" class="nav-link" aria-current="page" data-i18n="faq.03688b">FAQ</a></li>
+        <li><a href="https://apps.apple.com/us/app/luma-editor/id6741085424" target="_blank" rel="noopener noreferrer" class="btn-buy">App Store</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main>
+    <header class="dp-header">
+      <p class="dp-eyebrow" data-i18n="got-questions.8ecca3">Got Questions?</p>
+      <h1 data-i18n="frequently-asked-questions.d790b4">Frequently Asked Questions</h1>
+      <ul class="dp-jumps">
+        <li><a href="#photos" data-i18n="inside-photos.6b61ef">Inside Photos</a></li>
+        <li><a href="#match" data-i18n="match.033520">Match</a></li>
+        <li><a href="#develop" data-i18n="develop.9e4bd0">Develop</a></li>
+        <li><a href="#pricing" data-i18n="pricing-availability.b6b992">Pricing &amp; availability</a></li>
+      </ul>
+    </header>
+
+    <section class="dp-section" id="faq">
+      <div class="dp-faq-group" id="photos">
+        <h2 data-i18n="inside-photos.6b61ef">Inside Photos</h2>
+        <div class="faq-list">
+          <div class="faq-item">
+            <button class="faq-question">
+              <span data-i18n="does-it-work-with.2fe73c">Does it work with my Photos library?</span>
+              <span class="faq-icon">▼</span>
+            </button>
+            <div class="faq-answer">
+              <p data-i18n="yes-and-inside-it.11f9fe">Yes, and inside it. Luma adds itself to the Photos editing screen — tap Edit, then the extensions button, then Luma — so the whole editor, your saved styles and your presets are available on a photo or video without leaving Photos.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">
+              <span data-i18n="are-edits-permanent.b1705e">Are edits permanent?</span>
+              <span class="faq-icon">▼</span>
+            </button>
+            <div class="faq-answer">
+              <p data-i18n="no-luma-edits-non.7d9ff4">No. Luma edits non-destructively through the Photos library: your original file is never touched, Revert to Original always works, edits sync through iCloud Photos, and reopening a photo in Luma restores every slider exactly where you left it rather than starting again from the rendered result.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">
+              <span data-i18n="does-luma-work-on.a47b59">Does Luma work on video?</span>
+              <span class="faq-icon">▼</span>
+            </button>
+            <div class="faq-answer">
+              <p data-i18n="yes-from-the-photos.40ae4a">Yes, from the Photos editing screen. Open a clip, tap Edit, then the extensions button, then Luma, and the framing, tone, colour, curves, colour mixer and gradient and range masks all apply to every frame. Content-aware masks are left out of motion — a segmentation recomputed per frame visibly crawls, and approximating it would look worse than not offering it.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">
+              <span data-i18n="which-languages-does-luma.f32b8f">Which languages does Luma Editor speak?</span>
+              <span class="faq-icon">▼</span>
+            </button>
+            <div class="faq-answer">
+              <p data-i18n="nine-every-screen-and.115f6b">Nine. Every screen, and the App Store listing, is in English, Simplified Chinese, Japanese, German, French, Spanish, Korean, Brazilian Portuguese and Italian, and Luma follows the language your device is set to.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="dp-faq-group" id="match">
+        <h2 data-i18n="match.033520">Match</h2>
+        <div class="faq-list">
+          <div class="faq-item">
+            <button class="faq-question">
+              <span data-i18n="how-does-luma-editor.e924f8">How does Luma Editor match photo styles?</span>
+              <span class="faq-icon">▼</span>
+            </button>
+            <div class="faq-answer">
+              <p data-i18n="luma-measures-how-the.16c5cd">Luma measures how the photo you picked actually looks — its tonal distribution, its colour balance, how it treats each family of hues, what it does in the shadows and the highlights — and then solves for the adjustments that move your photo there. The answer comes back as sliders, curves and a colour mixer you can go on editing, not as a finished picture.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">
+              <span data-i18n="can-i-fine-tune.813f47">Can I fine-tune a match afterwards?</span>
+              <span class="faq-icon">▼</span>
+            </button>
+            <div class="faq-answer">
+              <p data-i18n="that-is-the-point.42317c">That is the point of it. Every match lands as ordinary adjustments — Light, Color, Detail, Effects, tone curves, the colour mixer, split toning — and you can change any of them, add masks, crop, retouch, and undo step by step. The Intensity control scales the adjustments themselves rather than fading a finished picture over your original, so the sliders stay meaningful at any setting.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">
+              <span data-i18n="can-i-edit-photos.d6c2b7">Can I edit photos in bulk?</span>
+              <span class="faq-icon">▼</span>
+            </button>
+            <div class="faq-answer">
+              <p data-i18n="yes-develop-a-whole.a0c3a0">Yes. Develop a whole shoot at once and Luma matches each photo to the closest style, so the results are consistent without one preset being forced onto pictures it does not suit. Save a look as a named preset, or copy a look from one photo and paste it onto the next.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="dp-faq-group" id="develop">
+        <h2 data-i18n="develop.9e4bd0">Develop</h2>
+        <div class="faq-list">
+          <div class="faq-item">
+            <button class="faq-question">
+              <span data-i18n="what-about-retouching.49173b">What about retouching?</span>
+              <span class="faq-icon">▼</span>
+            </button>
+            <div class="faq-answer">
+              <p data-i18n="tap-a-blemish-and.6e8340">Tap a blemish and it goes. Luma finds clean skin or sky nearby to replace it with, and you can drag the source somewhere else if you disagree. Spots are stored as adjustments rather than painted into the picture, so a repair can be moved, resized or removed months later like any other slider.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">
+              <span data-i18n="what-does-culling-do.36d82a">What does culling do?</span>
+              <span class="faq-icon">▼</span>
+            </button>
+            <div class="faq-answer">
+              <p data-i18n="it-handles-the-part.c0bb06">It handles the part of a burst nobody enjoys. Luma groups the near-duplicates, measures each frame for focus, face capture quality and clipping, and suggests which one to keep — then files the picks into a Luma Keepers album, best first, so you can find them in Photos afterwards. Every pick is a suggestion you can change, and nothing is ever deleted.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">
+              <span data-i18n="what-are-luts-and.ad0f3e">What are LUTs and how do I use them?</span>
+              <span class="faq-icon">▼</span>
+            </button>
+            <div class="faq-answer">
+              <p data-i18n="luts-lookup-tables-are.f85b9f">LUTs (Lookup Tables) are colour grading presets that other apps can read. Luma generates a real 3D LUT (.cube) from your edit by running an identity lattice through its own renderer, so what you export matches what is on screen — ready for Final Cut Pro, Premiere Pro and DaVinci Resolve. You can also export as Camera Raw XMP for Lightroom. Neither format can carry masks or retouching, and Luma tells you when an export is leaving something behind.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">
+              <span data-i18n="how-does-luma-work.92641e">How does Luma work with Ari Helper?</span>
+              <span class="faq-icon">▼</span>
+            </button>
+            <div class="faq-answer">
+              <p data-i18n="when-both-apps-are.c7b315">When both apps are installed, Luma's Retouch tab offers Remove Something in Ari. Luma sends the untouched photo to Ari's Photo Studio, you remove what you need with Ari's on-device models, and Save to Luma Editor brings you back with the object gone and your grade still applied. Luma itself never invents content; that part happens in Ari, where it is visible.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="dp-faq-group" id="pricing">
+        <h2 data-i18n="pricing-availability.b6b992">Pricing &amp; availability</h2>
+        <div class="faq-list">
+          <div class="faq-item">
+            <button class="faq-question">
+              <span data-i18n="how-much-does-luma.b487cb">How much does Luma Editor cost?</span>
+              <span class="faq-icon">▼</span>
+            </button>
+            <div class="faq-answer">
+              <p data-i18n-html="luma-editor-is-one.eac853">Luma Editor is one purchase: $14.99 in the US, and the App Store shows the price where you are. It covers iPhone, iPad and Mac, every update is included, and there is no subscription and no in-app purchase. <a href="../pricing/">See the price</a></p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">
+              <span data-i18n="is-luma-editor-available.7b7ea5">Is Luma Editor available in the European Union?</span>
+              <span class="faq-icon">▼</span>
+            </button>
+            <div class="faq-answer">
+              <p data-i18n="yes-luma-editor-is.3b1eca">Yes. Luma Editor is on the App Store everywhere in the European Union, France included. It's available in every App Store territory Apple offers.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Every depth page ends on the download. -->
+  <section class="dp-closing">
+    <h2 data-i18n="match-a-look-keep.1134b2">Match a Look. Keep Every Slider.</h2>
+    <a href="https://apps.apple.com/us/app/luma-editor/id6741085424" target="_blank" rel="noopener noreferrer" class="btn-buy" data-i18n="download-on-the-app.a9096a">Download on the App Store</a>
+    <p class="dp-alt"><a href="../" data-i18n="back-to-the-overview.e274c2">Back to the overview</a></p>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-links">
+        <a href="../../" class="footer-link" data-i18n="all-apps.429449">All Apps</a>
+        <a href="../../pinline/" class="footer-link">Pinline</a>
+        <a href="../../enter-space/" class="footer-link">Enter Space</a>
+        <a href="../../blip/" class="footer-link">Blip</a>
+        <a href="../../ari-helper/" class="footer-link">Ari Helper</a>
+        <a href="../../sami/" class="footer-link">Sami</a>
+        <a href="../../tilebreak/" class="footer-link">Tilebreak</a>
+        <a href="../../mi-speaks/" class="footer-link">Mi Speaks</a>
+        <a href="../../embr/" class="footer-link">Embr</a>
+        <a href="../../deepsi/" class="footer-link">DeepSi</a>
+        <a href="../../wise-flyer/" class="footer-link">Wise Flyer</a>
+        <a href="../../glint/" class="footer-link">Glint</a>
+        <a href="/privacy/" class="footer-link" data-i18n="privacy.cf0148">Privacy</a>
+        <a href="/terms/" class="footer-link" data-i18n="terms.a55a27">Terms</a>
+        <a href="/support/" class="footer-link" data-i18n="support.f32d5a">Support</a>
+        <a href="/" class="footer-link" data-i18n="portfolio.036b18">Portfolio</a>
+      </div>
+
+      <div class="footer-social-links">
+        <a href="https://x.com/apps_by_blaine" class="social-icon-link" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)">
+          <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+          </svg>
+        </a>
+        <a href="https://www.instagram.com/apps.by.blaine/" class="social-icon-link" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+          <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+          </svg>
+        </a>
+        <a href="https://www.youtube.com/@AppsByBlaine" class="social-icon-link" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+          <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+          </svg>
+        </a>
+      </div>
+
+      <p style="color: var(--text-muted); margin-top: var(--spacing-md);" data-i18n-html="blaine-miller-all-rights.b327c2">
+        © <span id="year"></span> Blaine Miller. All rights reserved.
+      </p>
+    </div>
+  </footer>
+
+  <script src="../../app-showcase.js?v=0ce231d7"></script>
+</body>
+</html>
