@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FAQ · Pinline</title>
+  <meta name="description" content="Every question about Pinline, answered.">
+  <link rel="canonical" href="https://wemiller.com/apps/pinline/faq/">
+  <meta property="og:title" content="FAQ · Pinline">
+  <meta property="og:description" content="Every question about Pinline, answered.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://wemiller.com/apps/pinline/faq/">
+  <meta property="og:image" content="https://wemiller.com/apps/pinline/assets/images/poster.jpg?v=7963fa7d">
+  <meta name="apple-itunes-app" content="app-id=6772773442">
+  <link rel="apple-touch-icon" href="../assets/images/icon.png?v=6e174994">
+  <link rel="icon" type="image/png" href="../assets/images/icon.png?v=6e174994">
+  <link rel="stylesheet" href="../../app-showcase.css?v=e9909304">
+  <link rel="stylesheet" href="../../_shared/depth.css?v=8787ba38">
+  <style>
+    :root {
+      --pl-measure: 1120px;
+      /* Pinline — dusk over the range: navy sky, a sunset-orange horizon,
+         the fluorescent peep-green of the sight. */
+      --app-primary: #C7F232;
+      --app-secondary: #FF6D2A;
+      --app-accent: #2641A6;
+      --primary-color: #1A2858;
+      --secondary-color: #FF6D2A;
+      --pl-display-face: ui-rounded, "SF Pro Rounded", system-ui, -apple-system, "Segoe UI", sans-serif;
+      --pl-text-face: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      --pl-paper: #F8F9FC;
+      --pl-paper-2: #EEF1F8;
+      --pl-body: #2F3650;
+      --pl-quiet: #5E6680;
+      --pl-rule: rgba(26, 40, 88, 0.12);
+      --pl-accent-ink: #BE3F0B;
+      --pl-ornament: linear-gradient(90deg, #C7F232, #FF6D2A);
+      --pl-shadow: drop-shadow(0 30px 40px rgba(15, 23, 48, 0.24)) drop-shadow(0 6px 10px rgba(15, 23, 48, 0.10));
+      --pl-hero-bg:
+        radial-gradient(circle at 22% 14%, rgba(199, 242, 50, 0.16) 0%, transparent 50%),
+        radial-gradient(ellipse 80% 40% at 50% 100%, rgba(255, 109, 42, 0.40) 0%, transparent 70%),
+        linear-gradient(170deg, #0F1730 0%, #1A2858 58%, #6A4A5A 100%);
+      --pl-hero-ink: #FFFFFF;
+      --pl-hero-kicker: #C7F232;
+      --pl-button: linear-gradient(180deg, #FFD24D, #FF8A3D);
+      --pl-button-ink: #1A1430;
+      --pl-button-glow: rgba(255, 138, 61, 0.35);
+      --pl-focus: #C7F232;
+      --pl-closing-bg:
+        radial-gradient(ellipse 55% 60% at 50% 100%, rgba(255, 109, 42, 0.14) 0%, transparent 70%),
+        var(--pl-paper-2);
+      --bg-primary: var(--pl-paper);
+      --bg-secondary: var(--pl-paper-2);
+      --text-primary: #141D40;
+      --text-secondary: var(--pl-body);
+      --text-muted: var(--pl-quiet);
+      --glass-bg: rgba(248, 249, 252, 0.8);
+      --glass-border: rgba(26, 40, 88, 0.08);
+      --glass-shadow: none;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --primary-color: #FFD24D;
+        --pl-paper: #0E1428;
+        --pl-paper-2: #141C36;
+        --pl-body: #D6DBEA;
+        --pl-quiet: #A2AAC4;
+        --pl-rule: rgba(214, 219, 234, 0.13);
+        --pl-accent-ink: #FF9A5E;
+        --pl-shadow: drop-shadow(0 30px 44px rgba(0, 0, 0, 0.55)) drop-shadow(0 6px 10px rgba(0, 0, 0, 0.30));
+        --pl-closing-bg:
+          radial-gradient(ellipse 55% 60% at 50% 100%, rgba(255, 109, 42, 0.18) 0%, transparent 70%),
+          var(--pl-paper-2);
+        --text-primary: #F1F4FB;
+        --glass-bg: rgba(14, 20, 40, 0.8);
+        --glass-border: rgba(214, 219, 234, 0.08);
+      }
+    }
+
+    :root { --bg-card: var(--pl-paper-2); --border-color: var(--pl-rule); }
+    body { background: var(--pl-paper); }
+    .dp-header h1, .dp-section > h2, .dp-faq-group > h2, .dp-closing h2 { font-family: var(--pl-display-face); }
+    .dp-eyebrow, .dp-card .dp-tag { color: var(--pl-accent-ink); }
+    .dp-section a { color: var(--pl-accent-ink); }
+    .dp-card p + p { margin-top: 0.6rem; }
+    .dp-list .badge-icon { margin-right: 0.4rem; }
+    :lang(ko) .dp-header h1, :lang(ko) .dp-section > h2 { word-break: keep-all; }
+/* ---- FAQ: a ruled list ---------------------------------------------- */
+    .faq-section { max-width: 820px; padding: clamp(4rem, 9vw, 6rem) 16px; }
+    .faq-section .pl-eyebrow, .faq-section h2 { text-align: center; }
+    .faq-section h2 {
+      font-family: var(--pl-display-face);
+      font-weight: 600;
+      background: none;
+      -webkit-text-fill-color: currentColor;
+      color: var(--primary-color);
+      font-size: clamp(1.9rem, 4vw, 2.8rem);
+      margin: 0 0 2.5rem;
+    }
+    .faq-item {
+      background: none;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+      border: none;
+      border-top: 1px solid var(--pl-rule);
+      border-radius: 0;
+      margin: 0;
+    }
+    .faq-item:last-child { border-bottom: 1px solid var(--pl-rule); }
+    .faq-question {
+      font-family: var(--pl-display-face);
+      font-size: 1.15rem;
+      font-weight: 600;
+      padding: 1.25rem 0;
+      gap: 1rem;
+    }
+    .faq-question:hover { color: var(--pl-accent-ink); }
+    .faq-question:focus-visible { outline: 2px solid var(--pl-accent-ink); outline-offset: 2px; }
+    .faq-icon { font-size: 0.8rem; color: var(--pl-accent-ink); }
+    .faq-answer { padding: 0; }
+    .faq-item.active .faq-answer { padding: 0 0 1.4rem; }
+    .faq-answer p { font-size: 1rem; line-height: 1.68; color: var(--pl-body); }
+
+    
+  </style>
+  <link rel="alternate" hreflang="x-default" href="https://wemiller.com/apps/pinline/faq/">
+  <link rel="alternate" hreflang="en" href="https://wemiller.com/apps/pinline/faq/">
+  <link rel="alternate" hreflang="zh-Hans" href="https://wemiller.com/apps/pinline/faq/?lang=zh-Hans">
+  <link rel="alternate" hreflang="ja" href="https://wemiller.com/apps/pinline/faq/?lang=ja">
+  <link rel="alternate" hreflang="de" href="https://wemiller.com/apps/pinline/faq/?lang=de">
+  <link rel="alternate" hreflang="fr" href="https://wemiller.com/apps/pinline/faq/?lang=fr">
+  <link rel="alternate" hreflang="es" href="https://wemiller.com/apps/pinline/faq/?lang=es">
+  <link rel="alternate" hreflang="ko" href="https://wemiller.com/apps/pinline/faq/?lang=ko">
+  <link rel="alternate" hreflang="pt-BR" href="https://wemiller.com/apps/pinline/faq/?lang=pt-BR">
+  <link rel="alternate" hreflang="it" href="https://wemiller.com/apps/pinline/faq/?lang=it">
+  <script src="/i18n/i18n.js?v=9b769779" defer data-page="apps.pinline.faq" data-pos="bottom-left"></script>
+</head>
+<body>
+  <nav class="app-nav">
+    <div class="nav-container">
+      <a href="../../" class="nav-logo nav-brand" title="← Apps" aria-label="← Apps"
+         data-i18n-attr="title:apps.2d61f2;aria-label:apps.2d61f2">
+        <span class="nav-brand-back" aria-hidden="true">←</span>
+        <img class="nav-brand-icon" src="../assets/images/icon.png?v=6e174994" alt="" width="60" height="60">
+        <span class="nav-brand-name">Pinline</span>
+      </a>
+      <button class="mobile-menu-toggle" aria-label="Menu">☰</button>
+      <ul class="nav-links">
+        <li><a href="../" class="nav-link" data-i18n="overview.0efc2e">Overview</a></li>
+        <li><a href="../faq/" class="nav-link" aria-current="page" data-i18n="faq.03688b">FAQ</a></li>
+        <li><a href="https://apps.apple.com/us/app/pinline/id6772773442" target="_blank" rel="noopener noreferrer" class="btn-buy">App Store</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main>
+    <header class="dp-header">
+      <p class="dp-eyebrow">Pinline</p>
+      <h1 data-i18n="frequently-asked-questions.d790b4">Frequently Asked Questions</h1>
+      <p class="dp-standfirst" data-i18n="every-question-about-pinline.ad8789">Every question about Pinline, answered.</p>
+    </header>
+
+    <section class="dp-section" id="faq">
+      <div class="faq-list">
+          <div class="faq-item">
+            <button class="faq-question">
+              <span data-i18n="how-do-i-actually.17122e">How do I actually aim?</span>
+              <span class="faq-icon">▼</span>
+            </button>
+            <div class="faq-answer">
+              <p data-i18n="read-the-distance-on.45d66e">Read the distance on the HUD (e.g. "41 yd"). Pick the matching pin on the compound sight by tapping it — there are pins for 20, 30, 40, 50, and 60 yards. Hold the right pin on the target and release. If there's wind, aim INTO the wind so the arrow drifts back to centre.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">
+              <span data-i18n="why-does-my-pin.cacfb8">Why does my pin wander while I'm holding?</span>
+              <span class="faq-icon">▼</span>
+            </button>
+            <div class="faq-answer">
+              <p data-i18n="that-s-sway-your.189f37">
+          That's sway — your shooter is human, the bow is heavy, and full draw is exhausting. The longer you hold, the more your aim drifts. Release at the right moment or let the auto-release fire after you overdraw. Quick releases are easier; held releases give you precision but punish hesitation.
+        </p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">
+              <span data-i18n="how-does-the-imessage.0b81f1">How does the iMessage version work?</span>
+              <span class="faq-icon">▼</span>
+            </button>
+            <div class="faq-answer">
+              <p data-i18n="open-a-conversation-in.a6a814">Open a conversation in Messages, tap the Pinline iMessage app, pick a format (Quickfire / Classic / Tournament) and target style (Olympic / 3D Animals), then send. Your friend taps the bubble, takes a single arrow, and sends the updated bubble back. Repeat until the match ends. Each arrow is one bubble — like Wordle, but for archers.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">
+              <span data-i18n="what-s-the-difference.fbcba9">What's the difference between Olympic and 3D Animals?</span>
+              <span class="faq-icon">▼</span>
+            </button>
+            <div class="faq-answer">
+              <p data-i18n="olympic-is-paper-a.2c0526">Olympic is paper — a 10-ring boss target with concentric scoring rings (10 in the bull, 1 on the edge). 3D Animals rotates between whitetail, turkey, and boar with painted kill zones — heart shot for max points, gut shot for low points, miss for zero. Both modes use the same physics; the targets just look different and have different scoring zones.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">
+              <span data-i18n="can-i-play-offline.897eb4">Can I play offline?</span>
+              <span class="faq-icon">▼</span>
+            </button>
+            <div class="faq-answer">
+              <p data-i18n="yes-pass-and-play.3bd176">Yes — Pass-and-play mode is fully offline. Two shooters, one device, no sign-in. Online (Game Center) and iMessage matches obviously need a connection to relay turns, but everything in-game runs locally.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">
+              <span data-i18n="what-devices-does-it.b7b7b0">What devices does it run on?</span>
+              <span class="faq-icon">▼</span>
+            </button>
+            <div class="faq-answer">
+              <p data-i18n="iphone-and-ipad-on.1df716">iPhone and iPad, on iOS 17 or later. iPhone plays in portrait; on iPad it works in every orientation, including Split View and Stage Manager.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">
+              <span data-i18n="are-there-in-app.e18c19">Are there in-app purchases or ads?</span>
+              <span class="faq-icon">▼</span>
+            </button>
+            <div class="faq-answer">
+              <p data-i18n="no-pinline-is-a.b217b5">No. Pinline is a one-time purchase. No ads, no tracking, no in-app purchases, no subscriptions. You get the whole game, all modes, all targets, both online flows.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">
+              <span data-i18n="is-pinline-available-in.530039">Is Pinline available in the European Union?</span>
+              <span class="faq-icon">▼</span>
+            </button>
+            <div class="faq-answer">
+              <p data-i18n="yes-pinline-is-on.4f2d86">Yes. Pinline is on the App Store everywhere in the European Union, France included. It's available in every App Store territory Apple offers.</p>
+            </div>
+          </div>
+      </div>
+    </section>
+  </main>
+
+  <section class="dp-closing">
+    <h2 data-i18n="pin-the-line-win.1bd25f">Pin the Line. Win the Match.</h2>
+    <a href="https://apps.apple.com/us/app/pinline/id6772773442" target="_blank" rel="noopener noreferrer" class="btn-buy" data-i18n="download-on-the-app.a9096a">Download on the App Store</a>
+    <p class="dp-alt"><a href="../" data-i18n="back-to-the-overview.e274c2">Back to the overview</a></p>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-links">
+        <a href="../../" class="footer-link" data-i18n="all-apps.429449">All Apps</a>
+        <a href="../../enter-space/" class="footer-link">Enter Space</a>
+        <a href="../../blip/" class="footer-link">Blip</a>
+        <a href="../../ari-helper/" class="footer-link">Ari Helper</a>
+        <a href="../../sami/" class="footer-link">Sami</a>
+        <a href="../../tilebreak/" class="footer-link">Tilebreak</a>
+        <a href="../../mi-speaks/" class="footer-link">Mi Speaks</a>
+        <a href="../../embr/" class="footer-link">Embr</a>
+        <a href="../../deepsi/" class="footer-link">DeepSi</a>
+        <a href="../../luma-editor/" class="footer-link">Luma Editor</a>
+        <a href="../../wise-flyer/" class="footer-link">Wise Flyer</a>
+        <a href="../../glint/" class="footer-link">Glint</a>
+        <a href="/privacy/" class="footer-link" data-i18n="privacy.cf0148">Privacy</a>
+        <a href="/terms/" class="footer-link" data-i18n="terms.a55a27">Terms</a>
+        <a href="/support/" class="footer-link" data-i18n="support.f32d5a">Support</a>
+        <a href="/" class="footer-link" data-i18n="portfolio.036b18">Portfolio</a>
+      </div>
+
+      <div class="footer-social-links">
+        <a href="https://x.com/apps_by_blaine" class="social-icon-link" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)">
+          <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+          </svg>
+        </a>
+        <a href="https://www.instagram.com/apps.by.blaine/" class="social-icon-link" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+          <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+          </svg>
+        </a>
+        <a href="https://www.youtube.com/@AppsByBlaine" class="social-icon-link" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+          <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+          </svg>
+        </a>
+      </div>
+
+      <p style="color: var(--text-muted); margin-top: var(--spacing-md);" data-i18n-html="blaine-miller-all-rights.b327c2">
+        © <span id="year"></span> Blaine Miller. All rights reserved.
+      </p>
+    </div>
+  </footer>
+
+  <script src="../../app-showcase.js?v=0ce231d7"></script>
+</body>
+</html>

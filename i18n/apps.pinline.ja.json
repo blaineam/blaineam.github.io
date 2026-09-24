@@ -9,7 +9,6 @@
   "can-i-play-offline.897eb4": "オフラインでもプレイできますか？",
   "download-on-app-store.cf50c2": "App Storeでダウンロード",
   "faq.03688b": "よくある質問",
-  "features.fc338f": "機能",
   "frequently-asked-questions.d790b4": "よくある質問",
   "gamekit-security.9e6fc1": "<span class=\"badge-icon\">&#x1f3ae;</span> GameKit のセキュリティ",
   "got-questions.8ecca3": "ご質問がありますか？",
@@ -49,5 +48,7 @@
   "pass-the-phone-across.66ba4f": "ソファの向こうにiPhoneを手渡すか、iMessageで挑戦状を送るか、Game Centerで対戦相手を見つけるか。先に30点を取った方の勝ちです。",
   "range.a16c5b": "射場",
   "the-match-result-with.6e1f1e": "試合結果。勝者は30点",
-  "the-range-on-ipad.abe1dc": "iPadの射場。オリンピック標的と距離、風"
+  "the-range-on-ipad.abe1dc": "iPadの射場。オリンピック標的と距離、風",
+  "overview.0efc2e": "概要",
+  "see-all-questions.237fee": "すべての質問を見る"
 }
