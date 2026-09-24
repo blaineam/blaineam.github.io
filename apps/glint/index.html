@@ -121,10 +121,11 @@
         /* ---- Chapters ------------------------------------------------------- */
         .gl-chapter { max-width: var(--gl-measure); margin: 0 auto; padding: clamp(4rem, 9vw, 7rem) 16px; border-top: 1px solid var(--gl-rule); }
         .gl-spread { display: grid; gap: clamp(2.5rem, 6vw, 5rem); align-items: center; }
-        .gl-copy { max-width: 34rem; }
+        .gl-copy { max-width: 34rem; margin-inline: auto; }
         @media (min-width: 900px) {
-            .gl-spread { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); }
-            .gl-chapter.is-flipped .gl-spread { grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); }
+            .gl-spread { grid-template-columns: minmax(0, 34rem) minmax(0, max-content); justify-content: center; }
+            .gl-chapter.is-flipped .gl-spread { grid-template-columns: minmax(0, max-content) minmax(0, 34rem); }
+    .gl-spread > figure { max-width: 100%; }
             .gl-chapter.is-flipped .gl-copy { order: 2; }
         }
         .gl-figure { margin: 0 auto; width: min(92vw, 520px); max-width: 100%; text-align: center; }
