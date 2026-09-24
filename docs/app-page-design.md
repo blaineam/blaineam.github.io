@@ -21,7 +21,7 @@ the download button or is cut.
 | 2 | **Statement** *(optional)* | one serif sentence, centered | ≤ 25 words. The app's reason for being, not a feature. |
 | 3–7 | **Stories** — 3 to 5 | eyebrow (`01` + one word) · H2 · lede · **one** device render (+ optional short caption) | One idea per story. One headline. ≤ 2 sentences, ≤ 40 words. Alternate copy left/right (`is-flipped`) from 900px up; stack below. |
 | 8 | **Trust beat** — exactly one | H2 · ≤ 4 short badges in a single row · one sentence · optional one link | Privacy / price / open source — whatever the objection is for this app. Not a second feature list. |
-| 9 | **FAQ** | ≤ 7 collapsed questions | Answers ≤ 60 words unless they carry instructions (install steps). Legal/availability notes go here, **last** (see §6). |
+| 9 | **FAQ** | ≤ 7 collapsed questions | Answers may be as long as the question needs — availability/DSA, privacy and data handling, how a technical feature works, pricing/IAP. The brevity rules are for the hero and stories, not the FAQ; tighten an answer only when it's padded or repeats itself. Legal/availability notes go here, **last** (see §6). |
 | 10 | **Closing CTA** | icon · the H1 promise again · the same download button · the same quiet links | The last thing before the footer is a download button. |
 | — | Footer | generated | Never hand-edit; `scripts/update-footers.py`. |
 
@@ -83,6 +83,16 @@ Use a page prefix (`--sa-`, `--kn-`, …) for page tokens and classes so
 
 A display face that suits the app (the reference uses the system serif stack
 `ui-serif, "New York", …`); system UI sans for everything else. **No web fonts.**
+
+**Exceptions to "no web fonts"** — granted only when the typeface *is* the app's
+identity, listed here and in `WEBFONT_EXCEPTIONS` in `scripts/check-app-page.py`
+(which otherwise warns on any Google Fonts link or `@font-face`):
+
+| Page | Faces | Why |
+|------|-------|-----|
+| `apps/revela` | Alfa Slab One, Special Elite, Pacifico (+ Inter) | Owner's call (2026-09-23): Revela is a film camera and the slab/typewriter/script faces give the page its film-box, darkroom-label look — they are the brand, so they stay. Keep the `@import` to one request with `display=swap`. |
+
+Mirrored pages (`apps/lathe`, …) follow their source repo and aren't checked here.
 
 **CJK measure.** `ch` is the width of a Latin zero and a CJK glyph is two of them,
 so every `max-width: …ch` on a headline or paragraph needs an `em` override for
@@ -264,7 +274,7 @@ not how it's built. Cut adjectives before cutting facts.
 - First load at 390px (HTML + CSS + JS + above-the-fold images): **≤ 400 KB**;
   whole page scrolled to the end: **≤ 1.2 MB**.
 - Story render at 400w ≤ 70 KB, at 800w ≤ 170 KB (WebP q82 lands there for phone frames; the reference page is 20–65 KB and 50–160 KB); hero ≤ 170 KB.
-- No new JS libraries, no web fonts, no video autoplay above the fold.
+- No new JS libraries, no web fonts (Revela excepted, §3), no video autoplay above the fold.
 - Repo: WebP only for renders; no multi-MB PNGs committed.
 
 ## 10. Before you commit
