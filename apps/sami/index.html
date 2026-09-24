@@ -389,6 +389,11 @@
     :lang(ja) .sm-closing .sm-display, :lang(zh) .sm-closing .sm-display, :lang(ko) .sm-closing .sm-display { max-width: 10em; }
     :lang(ja) .sm-hero-standfirst, :lang(zh) .sm-hero-standfirst, :lang(ko) .sm-hero-standfirst,
     :lang(ja) .security-audit-note, :lang(zh) .security-audit-note, :lang(ko) .security-audit-note { max-width: 26em; }
+    /* ---- Into the depth pages ------------------------------------------ */
+    .sm-trust-more { margin: 1.2rem 0 0; text-align: center; }
+    .sm-trust .learn-more { color: var(--sm-hero-em); }
+    .faq-more { margin: 1.6rem auto 0; max-width: 800px; text-align: center; }
+    .sm-copy .learn-more { color: var(--sm-accent-ink); }
   </style>
   <link rel="alternate" hreflang="x-default" href="https://wemiller.com/apps/sami/">
   <link rel="alternate" hreflang="en" href="https://wemiller.com/apps/sami/">
@@ -414,8 +419,10 @@
       </a>
       <button class="mobile-menu-toggle">☰</button>
       <ul class="nav-links">
-        <li><a href="#features" class="nav-link" data-i18n="features.fc338f">Features</a></li>
-        <li><a href="#faq" class="nav-link" data-i18n="faq.03688b">FAQ</a></li>
+        <li><a href="./" class="nav-link" aria-current="page" data-i18n="overview.0efc2e">Overview</a></li>
+        <li><a href="features/" class="nav-link" data-i18n="features.fc338f">Features</a></li>
+        <li><a href="pricing/" class="nav-link" data-i18n="pricing.a0d9bb">Pricing</a></li>
+        <li><a href="faq/" class="nav-link" data-i18n="faq.03688b">FAQ</a></li>
         <li><a href="https://apps.apple.com/us/app/sami-media-optimizer/id6758907995" target="_blank" rel="noopener noreferrer" class="btn-buy">App Store</a></li>
       </ul>
     </div>
@@ -457,6 +464,7 @@
           <p class="sm-eyebrow"><span class="sm-num">01</span><span data-i18n="preview.f1fbb2">Preview</span></p>
           <h2 class="sm-display" data-i18n="see-it-before-you.4ed02f">See it before you keep it</h2>
           <p class="sm-lede" data-i18n="point-a-task-at.739d74">Point a task at your Photos library, an album or any folder, even on a NAS. Slide between the original and the optimized copy — nothing changes until you say so.</p>
+          <a class="learn-more" href="features/#how" data-i18n="learn-more.824d76">Learn more</a>
         </div>
         <figure class="sm-figure" data-reveal>
           <img src="assets/screens/en/03-compare-800.webp?v=0348f634"
@@ -474,6 +482,7 @@
           <p class="sm-eyebrow"><span class="sm-num">02</span><span data-i18n="visually-lossless.5ec750">Visually lossless</span></p>
           <h2 class="sm-display" data-i18n="smaller-and-it-looks.3d8b11">Smaller, and it looks the same</h2>
           <p class="sm-lede" data-i18n="tick-one-box-and.d3a408">Tick one box and Sami tries several qualities on each photo and video, keeping the smallest that still looks like the original. If none does, the original stays.</p>
+          <a class="learn-more" href="features/#new" data-i18n="learn-more.824d76">Learn more</a>
         </div>
         <figure class="sm-figure" data-reveal>
           <img src="assets/screens/en/04-convert-800.webp?v=bf0957dc"
@@ -490,6 +499,7 @@
           <p class="sm-eyebrow"><span class="sm-num">03</span><span data-i18n="toolbox.692107">Toolbox</span></p>
           <h2 class="sm-display" data-i18n="more-than-an-optimizer.b735b6">More than an optimizer.</h2>
           <p class="sm-lede" data-i18n="convert-and-combine-files.a9001f">Convert and combine files, tag films and shows with artwork and chapters, take Live Photos apart, and record Flash movies at up to 4K.</p>
+          <a class="learn-more" href="features/#new" data-i18n="learn-more.824d76">Learn more</a>
         </div>
         <figure class="sm-figure" data-reveal>
           <img src="assets/screens/en/05-tags-800.webp?v=99e7f7d4"
@@ -507,6 +517,7 @@
           <p class="sm-eyebrow"><span class="sm-num">04</span><span data-i18n="automation.a15fde">Automation</span></p>
           <h2 class="sm-display" data-i18n="then-it-runs-itself.e2c63a">Then it runs itself</h2>
           <p class="sm-lede" data-i18n="schedule-a-task-daily.f7cb9c">Schedule a task daily, weekly or monthly, or run it from Shortcuts and Siri. It can keep a backup of every original, too.</p>
+          <a class="learn-more" href="features/#all" data-i18n="learn-more.824d76">Learn more</a>
         </div>
         <figure class="sm-figure" data-reveal>
           <img src="assets/screens/en/06-automation-800.webp?v=ce02c279"
@@ -522,6 +533,7 @@
           <p class="sm-eyebrow"><span class="sm-num">05</span><span data-i18n="the-alternatives.72760c">The alternatives</span></p>
           <h2 class="sm-display" data-i18n="why-not-use-a.6c2b09">Why not use a website, or buy more iCloud?</h2>
           <p class="sm-lede" data-i18n="online-compressors-upload-your.6b28ca">Online compressors upload your media to someone else's server. A bigger iCloud plan keeps every file at full size, and bills you every month.</p>
+          <a class="learn-more" href="pricing/#compare" data-i18n="learn-more.824d76">Learn more</a>
         </div>
         <figure class="sm-figure is-compare" data-reveal>
           <table class="sm-vs">
@@ -552,6 +564,7 @@
         <div class="security-badge" data-i18n-html="no-account-no-ads.014cc6"><span class="badge-icon">👤</span> No account, no ads</div>
       </div>
       <p class="security-audit-note" data-i18n="14-99-once-in.5d22fd">$14.99 once in the US, with every update included.</p>
+      <p class="sm-trust-more"><a class="learn-more" href="pricing/" data-i18n="see-the-price.01e749">See the price</a></p>
       <p class="sm-trust-link"><a href="../lathe/" data-i18n="built-on-lathe-the.38bd93">Built on Lathe, the open-source media engine</a></p>
     </div>
   </section>
@@ -647,6 +660,7 @@
       </div>
     </div>
     </div>
+    <p class="faq-more"><a class="learn-more" href="faq/" data-i18n="see-all-questions.237fee">See all questions</a></p>
   </section>
 
   <!-- Closing: the promise again, and the one button. -->
