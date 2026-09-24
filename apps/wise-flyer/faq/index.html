@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FAQ · Wise Flyer</title>
+  <meta name="description" content="Every question about Wise Flyer, answered.">
+  <link rel="canonical" href="https://wemiller.com/apps/wise-flyer/faq/">
+  <meta property="og:title" content="FAQ · Wise Flyer">
+  <meta property="og:description" content="Every question about Wise Flyer, answered.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://wemiller.com/apps/wise-flyer/faq/">
+  <meta property="og:image" content="https://wemiller.com/apps/wise-flyer/assets/images/poster.jpg?v=bc4d06f2">
+  <meta name="apple-itunes-app" content="app-id=853900499">
+  <link rel="apple-touch-icon" href="../assets/images/icon.png?v=52899f44">
+  <link rel="icon" type="image/png" href="../assets/images/icon.png?v=52899f44">
+  <link rel="stylesheet" href="../../app-showcase.css?v=e9909304">
+  <link rel="stylesheet" href="../../_shared/depth.css?v=8787ba38">
+  <style>
+    :root {
+      --app-primary: #0B1747;      /* the night sky */
+      --app-secondary: #1E3380;    /* the sky near the horizon */
+      --app-accent: #F5D547;       /* lit windows */
+      --primary-color: #1D2E78;    /* headlines on paper */
+      --secondary-color: #3A56B5;
+      --wf-ink: #24399A;
+      --wf-accent-text: #8A6300;   /* window yellow, deepened for light ground */
+      --wf-display: ui-rounded, "SF Pro Rounded", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+      --wf-body-face: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+      --wf-display-weight: 800;
+      --wf-paper: #FBFAF5;
+      --wf-paper-2: #F2F0E6;
+      --wf-rule: rgba(29, 46, 120, 0.14);
+      --wf-quiet: #5D6178;
+      --wf-body: #30344A;
+      --wf-shadow: drop-shadow(0 30px 40px rgba(11, 23, 71, 0.24)) drop-shadow(0 6px 10px rgba(11, 23, 71, 0.10));
+      --wf-hero-bg: radial-gradient(1.5px 1.5px at 12% 18%, rgba(255,255,255,0.9) 50%, transparent 51%), radial-gradient(1px 1px at 28% 42%, rgba(255,255,255,0.8) 50%, transparent 51%), radial-gradient(1.5px 1.5px at 71% 14%, rgba(255,255,255,0.9) 50%, transparent 51%), radial-gradient(1px 1px at 86% 36%, rgba(255,255,255,0.7) 50%, transparent 51%), radial-gradient(1px 1px at 55% 28%, rgba(255,255,255,0.7) 50%, transparent 51%), radial-gradient(1.5px 1.5px at 38% 8%, rgba(255,255,255,0.8) 50%, transparent 51%), radial-gradient(1px 1px at 92% 64%, rgba(255,255,255,0.6) 50%, transparent 51%), radial-gradient(1px 1px at 6% 58%, rgba(255,255,255,0.6) 50%, transparent 51%), radial-gradient(ellipse 60% 40% at 50% 100%, rgba(245, 213, 71, 0.16) 0%, transparent 75%), linear-gradient(175deg, #060D2E 0%, #0B1747 50%, #1E3380 100%);
+      --wf-hero-ink: #FFFFFF;
+      --wf-hero-kicker: rgba(245, 213, 71, 0.92);
+      --wf-cta-bg: linear-gradient(180deg, #FFE37A, #F5C930);
+      --wf-cta-ink: #1A1400;
+      --wf-float: linear-gradient(135deg, #0B1747, #1E3380);
+      --wf-btn-shadow: 0 10px 28px rgba(11, 23, 71, 0.30);
+      --wf-ornament: linear-gradient(90deg, #F5D547, #FF9F43);
+      --bg-primary: var(--wf-paper);
+      --bg-secondary: var(--wf-paper-2);
+      --text-primary: #141A36;
+      --text-secondary: var(--wf-body);
+      --text-muted: var(--wf-quiet);
+      --glass-bg: rgba(251, 250, 245, 0.8);
+      --glass-border: rgba(29, 46, 120, 0.10);
+      --glass-shadow: none;
+      --wf-measure: 1120px;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --primary-color: #AFC0FF;
+        --secondary-color: #8FA3E8;
+        --wf-ink: #C2CEFF;
+        --wf-accent-text: #F5D547;
+        --wf-paper: #070C24;
+        --wf-paper-2: #0C1433;
+        --wf-rule: rgba(175, 192, 255, 0.15);
+        --wf-quiet: #A0A6C4;
+        --wf-body: #D6D9EA;
+        --wf-shadow: drop-shadow(0 30px 44px rgba(0, 0, 0, 0.6)) drop-shadow(0 6px 10px rgba(0, 0, 0, 0.3));
+        --text-primary: #EEF0FA;
+        --glass-bg: rgba(7, 12, 36, 0.8);
+        --glass-border: rgba(175, 192, 255, 0.08);
+      }
+    }
+
+    :root { --bg-card: var(--wf-paper-2); --border-color: var(--wf-rule); }
+    body { background: var(--wf-paper); }
+    .dp-header h1, .dp-section > h2, .dp-faq-group > h2, .dp-closing h2 { font-family: var(--wf-display); }
+    .dp-eyebrow, .dp-card .dp-tag { color: var(--wf-accent-text); }
+    .dp-section a { color: var(--wf-accent-text); }
+    .dp-card p + p { margin-top: 0.6rem; }
+    .dp-list .badge-icon { margin-right: 0.4rem; }
+    :lang(ko) .dp-header h1, :lang(ko) .dp-section > h2 { word-break: keep-all; }
+    .dp-closing .btn-buy { background: var(--wf-float); color: #fff; padding: 0.8rem 1.5rem; border-radius: 999px; min-height: 44px; }
+/* ---- FAQ: a ruled list ---------------------------------------------- */
+    .faq-section { max-width: 820px; padding: clamp(4rem, 9vw, 6rem) 16px; }
+    .faq-section .wf-eyebrow, .faq-section h2 { text-align: center; }
+    .faq-section h2 {
+      font-family: var(--wf-display);
+      font-weight: var(--wf-display-weight);
+      color: var(--primary-color);
+      font-size: clamp(1.9rem, 4vw, 2.8rem);
+      margin: 0 0 2.5rem;
+    }
+    .faq-item {
+      background: none;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+      border: none;
+      border-top: 1px solid var(--wf-rule);
+      border-radius: 0;
+      margin: 0;
+    }
+    .faq-item:last-child { border-bottom: 1px solid var(--wf-rule); }
+    .faq-question {
+      font-family: var(--wf-body-face);
+      font-size: 1.15rem;
+      font-weight: 600;
+      padding: 1.25rem 0;
+      gap: 1rem;
+    }
+    .faq-question:hover { color: var(--wf-accent-text); }
+    .faq-icon { font-size: 0.8rem; color: var(--wf-accent-text); }
+    .faq-answer { padding: 0; }
+    .faq-item.active .faq-answer { padding: 0 0 1.4rem; }
+    .faq-answer p { font-size: 1rem; line-height: 1.68; color: var(--wf-body); }
+
+    
+  </style>
+  <link rel="alternate" hreflang="x-default" href="https://wemiller.com/apps/wise-flyer/faq/">
+  <link rel="alternate" hreflang="en" href="https://wemiller.com/apps/wise-flyer/faq/">
+  <link rel="alternate" hreflang="zh-Hans" href="https://wemiller.com/apps/wise-flyer/faq/?lang=zh-Hans">
+  <link rel="alternate" hreflang="ja" href="https://wemiller.com/apps/wise-flyer/faq/?lang=ja">
+  <link rel="alternate" hreflang="de" href="https://wemiller.com/apps/wise-flyer/faq/?lang=de">
+  <link rel="alternate" hreflang="fr" href="https://wemiller.com/apps/wise-flyer/faq/?lang=fr">
+  <link rel="alternate" hreflang="es" href="https://wemiller.com/apps/wise-flyer/faq/?lang=es">
+  <link rel="alternate" hreflang="ko" href="https://wemiller.com/apps/wise-flyer/faq/?lang=ko">
+  <link rel="alternate" hreflang="pt-BR" href="https://wemiller.com/apps/wise-flyer/faq/?lang=pt-BR">
+  <link rel="alternate" hreflang="it" href="https://wemiller.com/apps/wise-flyer/faq/?lang=it">
+  <script src="/i18n/i18n.js?v=9b769779" defer data-page="apps.wise-flyer.faq" data-pos="bottom-left"></script>
+</head>
+<body>
+  <nav class="app-nav">
+    <div class="nav-container">
+      <a href="../../" class="nav-logo nav-brand" title="← Apps" aria-label="← Apps"
+         data-i18n-attr="title:apps.2d61f2;aria-label:apps.2d61f2">
+        <span class="nav-brand-back" aria-hidden="true">←</span>
+        <img class="nav-brand-icon" src="../assets/images/icon.png?v=52899f44" alt="" width="60" height="60">
+        <span class="nav-brand-name">Wise Flyer</span>
+      </a>
+      <button class="mobile-menu-toggle" aria-label="Menu">☰</button>
+      <ul class="nav-links">
+        <li><a href="../" class="nav-link" data-i18n="overview.0efc2e">Overview</a></li>
+        <li><a href="../faq/" class="nav-link" aria-current="page" data-i18n="faq.03688b">FAQ</a></li>
+        <li><a href="https://apps.apple.com/us/app/wise-flyer/id853900499" target="_blank" rel="noopener noreferrer" class="btn-buy">App Store</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main>
+    <header class="dp-header">
+      <p class="dp-eyebrow">Wise Flyer</p>
+      <h1 data-i18n="frequently-asked-questions.d790b4">Frequently Asked Questions</h1>
+      <p class="dp-standfirst" data-i18n="every-question-about-wise.8a9110">Every question about Wise Flyer, answered.</p>
+    </header>
+
+    <section class="dp-section" id="faq">
+      <div class="faq-list">
+          <div class="faq-item">
+            <button class="faq-question">
+              <span data-i18n="how-do-i-play.f07bc7">How do I play Wise Flyer?</span>
+              <span class="faq-icon">▼</span>
+            </button>
+            <div class="faq-answer">
+              <p data-i18n="simply-tap-the-screen.e5f71a">
+          Simply tap the screen to make the owl flap and fly upward. Release to let gravity bring you down.
+          Navigate through obstacles by timing your taps carefully. It's easy to learn but challenging to master!
+        </p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">
+              <span data-i18n="how-does-the-leaderboard.74f2b8">How does the leaderboard work?</span>
+              <span class="faq-icon">▼</span>
+            </button>
+            <div class="faq-answer">
+              <p data-i18n="the-global-leaderboard-tracks.39934e">
+          The global leaderboard tracks high scores from players around the world. Your best score is automatically
+          submitted, and you can see where you rank against other players. Climb the ranks by improving your skills!
+        </p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">
+              <span data-i18n="is-wise-flyer-similar.08e201">Is Wise Flyer similar to other bird games?</span>
+              <span class="faq-icon">▼</span>
+            </button>
+            <div class="faq-answer">
+              <p data-i18n="wise-flyer-is-inspired.fa95a1">
+          Wise Flyer is inspired by the classic bird flying game genre but features unique graphics with a charming
+          owl character, distinctive visual style, and its own personality. If you loved those games, you'll love this!
+        </p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">
+              <span data-i18n="can-i-play-offline.897eb4">Can I play offline?</span>
+              <span class="faq-icon">▼</span>
+            </button>
+            <div class="faq-answer">
+              <p data-i18n="yes-wise-flyer-can.52a69d">
+          Yes! Wise Flyer can be played completely offline. Leaderboard features require an internet connection,
+          but the core gameplay works anywhere, anytime.
+        </p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">
+              <span data-i18n="is-the-game-truly.a793a7">Is the game truly endless?</span>
+              <span class="faq-icon">▼</span>
+            </button>
+            <div class="faq-answer">
+              <p data-i18n="yes-the-scrolling-is.f7335d">
+          Yes! The scrolling is infinite and obstacles are continuously generated. The game only ends when you
+          hit an obstacle. How far can you fly? The only limit is your skill!
+        </p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">
+              <span data-i18n="what-makes-wise-flyer.67cec0">What makes Wise Flyer special?</span>
+              <span class="faq-icon">▼</span>
+            </button>
+            <div class="faq-answer">
+              <p data-i18n="beautiful-unique-graphics-featuring.41cde2">
+          Beautiful unique graphics featuring an adorable owl, smooth gameplay, an amazing soundtrack, competitive
+          leaderboard, and that perfect "just one more try" addictiveness. It's simple, fun, and incredibly hard
+          to put down!
+        </p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">
+              <span data-i18n="does-it-run-on.3addd5">Does it run on iPad?</span>
+              <span class="faq-icon">▼</span>
+            </button>
+            <div class="faq-answer">
+              <p data-i18n="yes-wise-flyer-runs.9f9eec">Yes. Wise Flyer runs on iPhone and iPad, and the game scales to fit any window, including Split View and Stage Manager.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">
+              <span data-i18n="is-wise-flyer-available.ed6ae7">Is Wise Flyer available in the European Union?</span>
+              <span class="faq-icon">▼</span>
+            </button>
+            <div class="faq-answer">
+              <p data-i18n="yes-wise-flyer-is.1a458a">Yes. Wise Flyer is on the App Store everywhere in the European Union, France included. It's available in every App Store territory Apple offers except Indonesia.</p>
+            </div>
+          </div>
+      </div>
+    </section>
+  </main>
+
+  <section class="dp-closing">
+    <h2 data-i18n="one-tap-one-owl.f6ca91">One tap. One owl. One more try.</h2>
+    <a href="https://apps.apple.com/us/app/wise-flyer/id853900499" target="_blank" rel="noopener noreferrer" class="btn-buy" data-i18n="download-on-the-app.a9096a">Download on the App Store</a>
+    <p class="dp-alt"><a href="../" data-i18n="back-to-the-overview.e274c2">Back to the overview</a></p>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-links">
+        <a href="../../" class="footer-link" data-i18n="all-apps.429449">All Apps</a>
+        <a href="../../pinline/" class="footer-link">Pinline</a>
+        <a href="../../enter-space/" class="footer-link">Enter Space</a>
+        <a href="../../blip/" class="footer-link">Blip</a>
+        <a href="../../ari-helper/" class="footer-link">Ari Helper</a>
+        <a href="../../sami/" class="footer-link">Sami</a>
+        <a href="../../tilebreak/" class="footer-link">Tilebreak</a>
+        <a href="../../mi-speaks/" class="footer-link">Mi Speaks</a>
+        <a href="../../embr/" class="footer-link">Embr</a>
+        <a href="../../deepsi/" class="footer-link">DeepSi</a>
+        <a href="../../luma-editor/" class="footer-link">Luma Editor</a>
+        <a href="../../glint/" class="footer-link">Glint</a>
+        <a href="/privacy/" class="footer-link" data-i18n="privacy.cf0148">Privacy</a>
+        <a href="/terms/" class="footer-link" data-i18n="terms.a55a27">Terms</a>
+        <a href="/support/" class="footer-link" data-i18n="support.f32d5a">Support</a>
+        <a href="/" class="footer-link" data-i18n="portfolio.036b18">Portfolio</a>
+      </div>
+
+      <!-- Social Media Links -->
+      <div class="footer-social-links">
+        <a href="https://x.com/apps_by_blaine" class="social-icon-link" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)">
+          <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+          </svg>
+        </a>
+        <a href="https://www.instagram.com/apps.by.blaine/" class="social-icon-link" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+          <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+          </svg>
+        </a>
+        <a href="https://www.youtube.com/@AppsByBlaine" class="social-icon-link" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+          <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+          </svg>
+        </a>
+      </div>
+
+      <p style="color: var(--text-muted); margin-top: var(--spacing-md);" data-i18n-html="blaine-miller-all-rights.b327c2">
+        © <span id="year"></span> Blaine Miller. All rights reserved.
+      </p>
+    </div>
+  </footer>
+
+  <script src="../../app-showcase.js?v=0ce231d7"></script>
+</body>
+</html>
