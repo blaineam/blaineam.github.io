@@ -3,15 +3,15 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Blaine Miller - Sr. Software Engineer</title>
-  <meta name="description" content="I enjoy finding unique solutions with tech. Photographing the world around me is fun. Just imagine what we can build together!">
+  <title>Blaine Miller — Senior Software Engineer</title>
+  <meta name="description" content="Senior software engineer with a current Secret clearance: real-time data platforms, Kubernetes and 20+ shipped apps. Open to senior and principal roles.">
   <meta name="viewport" content="initial-scale = 1.0,minimum-scale = 1.0">
   <meta property="og:type" content="profile">
-  <meta property="og:title" content="Blaine Miller - Sr. Software Engineer">
+  <meta property="og:title" content="Blaine Miller — Senior Software Engineer">
   <meta property="og:url" content="https://www.wemiller.com">
   <meta property="og:image" content="https://www.wemiller.com/profile.jpg?v=e8036801">
   <meta property="og:image:secure_url" content="https://www.wemiller.com/profile.jpg?v=e8036801">
-  <meta property="og:description" content="I enjoy finding unique solutions with tech. Photographing the world around me is fun. Just imagine what we can build together!">
+  <meta property="og:description" content="Senior software engineer with a current Secret clearance: real-time data platforms, Kubernetes and 20+ shipped apps. Open to senior and principal roles.">
   <meta property="profile:first_name" content="Blaine">
   <meta property="profile:last_name" content="Miller">
   <link rel="apple-touch-icon" href="profile.jpg?v=e8036801">
@@ -1113,6 +1113,71 @@
         border-radius: 50px;
         padding: 2px 8px;
     }
+  
+    /* Front-page hook: a clearance badge, a one-line pitch and three pills
+       that each open a deeper part of the site. */
+    #summary .hook-badge {
+      display: inline-block;
+      margin: 2px 0 8px;
+      padding: 2px 12px;
+      border-radius: 999px;
+      font-size: 0.85em;
+      letter-spacing: 0.02em;
+      background: var(--bg-color-half);
+    }
+
+    #summary p {
+      text-wrap: balance;
+    }
+
+    #summary .hook-lead {
+      font-size: 1.1em;
+      font-weight: 600;
+    }
+
+    #summary .hook-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+      margin: 12px 0 10px;
+    }
+
+    #summary .hook-pill {
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 0.9em;
+      font-weight: 600;
+      background: var(--bg-color-half);
+      transition: background var(--trans-dur) var(--trans-timing), transform var(--trans-dur) var(--trans-timing);
+    }
+
+    #summary .hook-pill:hover,
+    #summary .hook-pill:focus-visible {
+      background: var(--bg-hover-color);
+      transform: translateY(-1px);
+    }
+
+    #summary .hook-pill::after {
+      content: " \2192";
+    }
+
+    #summary .hook-aside {
+      font-size: 0.85em;
+      opacity: 0.8;
+    }
+
+    @media only screen and (max-width: 700px) {
+      #summary .hook-links {
+        gap: 6px;
+        margin: 8px 0 6px;
+      }
+
+      #summary .hook-pill {
+        padding: 4px 10px;
+        font-size: 0.8rem;
+      }
+    }
   </style>
   <link rel="alternate" hreflang="x-default" href="https://wemiller.com/">
   <link rel="alternate" hreflang="en" href="https://wemiller.com/">
@@ -1364,11 +1429,16 @@
           <div class="liquidGlass fill-space">
             <div class="invisible-scroll">
               <h1 data-i18n="hello-i-m-blaine.854c20">Hello, I'm Blaine Miller</h1>
-              <h2 data-i18n="a-senior-software-engineer.3680d2">A Senior Software Engineer</h2>
-              <p data-i18n="with-14-years-of.3554bb">with 14+ Years of Professional Experience</p>
-              <p data-i18n="and-several-side-projects.62f3b8">and several side projects I was involved in</p>
-              <p data-i18n="i-also-enjoy-photographing.575cda">I also enjoy photographing my travels</p>
-              <p data-i18n="just-imagine-what-we.9a8b25">Just imagine what we can build together!</p>
+              <h2 data-i18n="hook.title">Senior Software Engineer</h2>
+              <p class="hook-badge" data-i18n="hook.clearance">Current Secret Clearance</p>
+              <p class="hook-lead" data-i18n="hook.lead">I build real-time data platforms by day and ship my own apps by night.</p>
+              <p data-i18n="hook.years">14+ years, from the first byte ingested to the App Store.</p>
+              <nav class="hook-links" aria-label="Start here">
+                <a class="hook-pill" href="#projects" onclick="document.getElementById('projects-toggle').click();return false;" data-i18n="hook.built">See what I've built</a>
+                <a class="hook-pill" href="apps/" data-i18n="hook.apps">20+ apps shipped</a>
+                <a class="hook-pill" href="https://www.linkedin.com/in/millerblaine/" target="_blank" rel="noopener" data-i18n="hook.hire">Open to senior &amp; principal roles</a>
+              </nav>
+              <p class="hook-aside" data-i18n="hook.photos">I also photograph the night sky — tap ⋯ for photos and panoramas.</p>
             </div>
           </div>
         </div>
@@ -3113,9 +3183,14 @@
       "name": "Blaine Miller",
       "image": "https://www.wemiller.com/profile.jpg",
       "url": "https://www.wemiller.com",
-      "jobTitle": "Sr. Software Engineer",
+      "jobTitle": "Senior Software Engineer",
+      "email": "mailto:blaine@wemiller.com",
+      "address": { "@type": "PostalAddress", "addressLocality": "Bakersfield", "addressRegion": "CA", "addressCountry": "US" },
+      "knowsAbout": ["Kubernetes", "Apache Kafka", "ClickHouse", "AWS", "RF signal processing", "iOS development", "Swift"],
       "sameAs": [
-        "https://www.linkedin.com/in/millerblaine/"
+        "https://www.linkedin.com/in/millerblaine/",
+        "https://github.com/blaineam",
+        "https://www.producthunt.com/@blaineam"
       ]
     }
   </script>
