@@ -1,5 +1,5 @@
 {
-  "_meta.description": "Uma Bíblia gratuita e de código aberto para iPhone, iPad, Mac e Apple Watch. Leia offline na ASV, BSB ou KJV, estude com referências cruzadas, comentários e mapas, ouça, faça anotações do sermão, compartilhe imagens de versículos e sincronize com privacidade pelo seu próprio iCloud — sem anúncios, sem rastreadores, sem contas.",
+  "_meta.description": "Uma Bíblia gratuita e de código aberto para iPhone, iPad, Mac e Apple Watch. Leia offline na NASB 2020, NASB 1995, ASV, BSB ou KJV, estude com referências cruzadas, comentários e mapas, ouça, faça anotações do sermão, compartilhe imagens de versículos e sincronize com privacidade pelo seu próprio iCloud — sem anúncios, sem rastreadores, sem contas.",
   "_title": "Scripture Alone - Uma Bíblia gratuita e privada",
   "a-free-open-source.7d8e3d": "Uma Bíblia gratuita e de código aberto para iPhone, iPad e Mac, com aplicativo próprio para Apple Watch.",
   "a-highlighted-passage-with.8705dc": "Um trecho destacado com uma anotação, no iPad",
@@ -58,8 +58,8 @@
   "support.f32d5a": "Apoiar",
   "tap-a-verse-and.9c68ca": "Toque em um versículo e o painel de Estudo acompanha, com referências cruzadas ordenadas por relevância e comentários clássicos de John Calvin, John Gill e Jamieson‑Fausset‑Brown.",
   "terms.a55a27": "Termos",
-  "the-american-standard-version.81139c": "A American Standard Version já fica no seu dispositivo desde o momento em que o app é instalado. A Berean Standard Bible e a King James Version estão a um download de distância.",
   "the-link-carries-the.8f367c": "O link leva o próprio versículo, depois do “#” no endereço. Os navegadores nunca enviam essa parte a um servidor, então este site nunca vê o que você compartilhou: a página recria o cartão direto no navegador. Se o Scripture Alone estiver instalado, o link abre a passagem no app.",
+  "the-new-american-standard.bad575": "A New American Standard Bible — NASB 2020 já fica no seu dispositivo desde o momento em que o app é instalado, com permissão de <a href=\"https://www.lockman.org\">The Lockman Foundation</a>. A NASB 1995, a American Standard Version, a Berean Standard Bible e a King James Version estão a um download de distância.",
   "the-reader-in-one.2bf614": "O leitor em um dos seus cinco temas",
   "the-study-panel-with.408165": "O painel de Estudo com referências cruzadas e comentários do versículo selecionado",
   "the-whole-bible-offline.18a85e": "A Bíblia inteira, offline",

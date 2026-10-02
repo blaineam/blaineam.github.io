@@ -1,5 +1,5 @@
 {
-  "_meta.description": "一款适用于 iPhone、iPad、Mac 和 Apple Watch 的免费开源圣经。离线阅读 ASV、BSB 或 KJV，借助串珠经文、注释和地图查考，聆听朗读，记录讲道笔记，分享经文图片，并通过你自己的 iCloud 私密同步——无广告、无追踪器、无需账户。",
+  "_meta.description": "一款适用于 iPhone、iPad、Mac 和 Apple Watch 的免费开源圣经。离线阅读 NASB 2020、NASB 1995、ASV、BSB 或 KJV，借助串珠经文、注释和地图查考，聆听朗读，记录讲道笔记，分享经文图片，并通过你自己的 iCloud 私密同步——无广告、无追踪器、无需账户。",
   "_title": "Scripture Alone - 免费、私密的圣经",
   "a-free-open-source.7d8e3d": "一款免费、开源的圣经应用，支持 iPhone、iPad 和 Mac，并配有专属的 Apple Watch 应用。",
   "a-highlighted-passage-with.8705dc": "iPad 上带有笔记的高亮经文",
@@ -58,8 +58,8 @@
   "support.f32d5a": "支持",
   "tap-a-verse-and.9c68ca": "点按某节经文，研读面板随即跟进，提供按相关度排序的交叉引用，以及 John Calvin、John Gill 和 Jamieson‑Fausset‑Brown 的经典注释。",
   "terms.a55a27": "条款",
-  "the-american-standard-version.81139c": "American Standard Version 在应用安装完成的那一刻就已存放在你的设备上。Berean Standard Bible 和 King James Version 只需一次下载即可获得。",
   "the-link-carries-the.8f367c": "链接本身就携带着经文，放在地址中的“#”之后。浏览器从不把这一部分发送给服务器，所以本网站永远看不到你分享了什么：页面会直接在浏览器中重建卡片。如果安装了 Scripture Alone，链接会改为在 App 中打开这段经文。",
+  "the-new-american-standard.bad575": "New American Standard Bible — NASB 2020 在应用安装完成的那一刻就已存放在你的设备上，经 <a href=\"https://www.lockman.org\">The Lockman Foundation</a> 许可收录。NASB 1995、American Standard Version、Berean Standard Bible 和 King James Version 只需一次下载即可获得。",
   "the-reader-in-one.2bf614": "阅读器的五种主题之一",
   "the-study-panel-with.408165": "研读面板显示所选经文的交叉引用和注释",
   "the-whole-bible-offline.18a85e": "整本圣经，离线可读",
