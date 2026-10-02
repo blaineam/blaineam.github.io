@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>How a Licensed Translation Stays Safe in an Open-Source Bible — Scripture Alone</title>
-  <meta name="description" content="Scripture Alone ships the American Standard Version as a signed, encrypted package — the same format a licensed translation would use. The format, the implementation, the measurements, and an honest account of what it cannot do.">
+  <meta name="description" content="Scripture Alone ships the NASB 2020, the NASB 1995 and the American Standard Version as signed, encrypted packages. The format, the implementation, the measurements, and an honest account of what it cannot do.">
   <meta property="og:title" content="How a Licensed Translation Stays Safe in an Open-Source Bible">
   <meta property="og:description" content="A format, an implementation and a set of tests — not assurances. Including what the design cannot do.">
   <meta property="og:type" content="article">
@@ -272,7 +272,7 @@
         </div>
         <div class="claim">
           <h4 data-i18n="the-publisher-holds-the.f61c24">The publisher holds the keys</h4>
-          <p data-i18n="the-packaging-tool-runs.f3aa89">The packaging tool runs on the publisher's machine with the publisher's keys. We never receive the plaintext and never hold the key that decrypts it.</p>
+          <p data-i18n="the-packaging-tool-runs.b309fa">The packaging tool runs on the publisher's machine with the publisher's keys, or — as with the NASB 2020 and NASB 1995, which The Lockman Foundation entrusted to us — on ours, offline, outside this repository. The text never enters the repository, and the key never leaves the build.</p>
         </div>
         <div class="claim">
           <h4 data-i18n="search-doesn-t-undo.8033cc">Search doesn't undo any of it</h4>
@@ -345,11 +345,7 @@
   "index": { "aad": "sabible-index-v1", "buckets": 256, "entries": [ … ] },
   "chapters": [ { "book": 1, "chapter": 1, "verses": 31, "offset": 0, … }, … ]
 }</pre>
-      <p data-i18n-html="every-permission-there-is.32d0ce">
-        Every permission there is <code>true</code> because that package is the American Standard
-        Version, which is public domain — sealing it must not cost its readers anything. A licensed
-        package is where those fields earn their keep.
-      </p>
+      <p data-i18n-html="every-permission-there-is.232d81">Every permission there is <code>true</code> because that package is the American Standard Version, which is public domain — sealing it must not cost its readers anything. The NASB 2020's and NASB 1995's packages are where those fields earn their keep: they turn off the hand-off to recorded voices, as their licences require.</p>
       <h3 data-i18n="what-each-chapter-is.70ec40">What each chapter is sealed against</h3>
       <p data-i18n="each-chapter-is-sealed.a8b821">
         Each chapter is sealed separately with AES-256-GCM, and its authenticated associated data
@@ -462,13 +458,7 @@
         The obvious way to prove a format is to ship a sample beside the real translations. We did
         that first, and it proves only that a code path compiles.
       </p>
-      <p data-i18n-html="so-the-american-standard.ee8e39">
-        So the American Standard Version now ships <em>as</em> the package — no plaintext database in
-        the app to fall back on, and it is the translation Scripture Alone opens by default. Every
-        reader, on every launch, derives the content key, unwraps it from the Secure Enclave,
-        verifies an Ed25519 signature and reads chapters decrypted one at a time. Searching it
-        searches the sealed index. If any of that broke, the app would not open on a fresh install.
-      </p>
+      <p data-i18n-html="so-the-american-standard.1017ac">So the American Standard Version ships <em>as</em> the package — no plaintext database in the app to fall back on — and the NASB 2020, the translation Scripture Alone opens by default, travels the same way. Every reader, on every launch, derives the content key, unwraps it from the Secure Enclave, verifies an Ed25519 signature and reads chapters decrypted one at a time. Searching it searches the sealed index. If any of that broke, the app would not open on a fresh install.</p>
       <p data-i18n="that-is-a-stronger.9c0808">
         That is a stronger claim than a demonstration can make, and it is the reason to prefer it. A
         sample nobody selects proves the code compiles. A default translation proves the format

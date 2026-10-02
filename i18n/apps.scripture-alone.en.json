@@ -1,5 +1,5 @@
 {
-  "_meta.description": "A free, open-source Bible for iPhone, iPad, Mac and Apple Watch. Read offline in the ASV, BSB or KJV, study with cross-references, commentary and maps, listen, take sermon notes, share verse images, and sync privately through your own iCloud — no ads, no trackers, no accounts.",
+  "_meta.description": "A free, open-source Bible for iPhone, iPad, Mac and Apple Watch. Read offline in the NASB 2020, NASB 1995, ASV, BSB or KJV, study with cross-references, commentary and maps, listen, take sermon notes, share verse images, and sync privately through your own iCloud — no ads, no trackers, no accounts.",
   "_title": "Scripture Alone - A Free, Private Bible",
   "a-free-open-source.7d8e3d": "A free, open-source Bible for iPhone, iPad and Mac, with its own Apple Watch app.",
   "a-highlighted-passage-with.8705dc": "A highlighted passage with a note, on iPad",
@@ -58,8 +58,8 @@
   "support.f32d5a": "Support",
   "tap-a-verse-and.9c68ca": "Tap a verse and the Study panel follows, with ranked cross-references and classic commentary from John Calvin, John Gill and Jamieson‑Fausset‑Brown.",
   "terms.a55a27": "Terms",
-  "the-american-standard-version.81139c": "The American Standard Version is on your device from the moment the app installs. The Berean Standard Bible and the King James Version are one download away.",
   "the-link-carries-the.8f367c": "The link carries the verse itself, after the “#” in the address. Browsers never send that part to a server, so this site never sees what you shared: the page rebuilds the card right in the browser. If Scripture Alone is installed, the link opens the passage in the app instead.",
+  "the-new-american-standard.bad575": "The New American Standard Bible — NASB 2020 is on your device from the moment the app installs, by permission of <a href=\"https://www.lockman.org\">The Lockman Foundation</a>. The NASB 1995, the American Standard Version, the Berean Standard Bible and the King James Version are one download away.",
   "the-reader-in-one.2bf614": "The reader in one of its five themes",
   "the-study-panel-with.408165": "The Study panel with cross-references and commentary for the selected verse",
   "the-whole-bible-offline.18a85e": "The whole Bible, offline",

@@ -20,7 +20,7 @@
   "is-scripture-alone-available.8b64bc": "Scripture Alone は欧州連合で利用できますか？",
   "is-scripture-alone-in.a326a4": "Scripture Alone は私の言語に対応していますか？",
   "is-there-an-android.2b6378": "Android 版はありますか？",
-  "it-s-a-careful.2cd1ba": "丁寧な逐語訳で、パブリックドメインなので自由に無償で届けられます。Berean Standard Bible と King James Version を収録しているのも同じ理由です。CSB、ESV、NKJV、NASB などの訳には出版社のライセンスが必要で、現在申請中です。",
+  "it-s-a-careful.c4fea7": "丁寧な逐語訳で、The Lockman Foundation から収録の許可を得ています。NASB 1995 も並べて収録しています。American Standard Version、Berean Standard Bible、King James Version はパブリックドメインなので、これらも収録しています。CSB、ESV、NKJV などの訳には出版社のライセンスが必要で、現在申請中です。",
   "no-google-play-download.8a9d61": "Google Play を使えない場合は、すべての訳と学習ツールを内蔵した <a href=\"https://github.com/blaineam/Scripture-Alone/releases/tag/android-v1.0.0-beta.8\" target=\"_blank\" rel=\"noopener noreferrer\">APK を GitHub からダウンロード</a>できます。自動では更新されず、Google Play 版で上書き更新することもできないため、先にそちらの注意書きをお読みください。",
   "none-there-are-no.762c80": "何も集めません。解析も、トラッカーも、アカウントもありません。ハイライトとメモはあなたのデバイスに残り、あなた自身のプライベートな iCloud を通じてのみ同期されます。私には見えません。",
   "overview.0efc2e": "概要",
@@ -38,7 +38,7 @@
   "until-they-can-be.7d3638": "アプリに収録できるようになるまでの間、次の 2 つのファイルがうまくインポートできることを確認しています。ESV は<a href=\"https://store.ligonier.org/the-reformation-study-bible-esv-epub\" target=\"_blank\" rel=\"noopener noreferrer\">Reformation Study Bible の ePub 版</a>。CSB は出版社が提供している<a href=\"https://csbible.com/wp-content/uploads/2018/03/CSB_Pew_Bible_2nd_Printing.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">礼拝用聖書の PDF</a>。どちらも「翻訳」の「ファイルをインポート…」から開いてください。",
   "what-data-do-you.d389a9": "どんなデータを収集していますか？",
   "where-can-i-get.11aafd": "ESV や CSB はどこで入手してインポートできますか？",
-  "why-the-american-standard.8f4a1a": "なぜ American Standard Version なのですか？",
+  "why-the-nasb-2020.1f959a": "なぜ NASB 2020 なのですか？",
   "yes-in-a-closed.b8b573": "はい。Google Play でクローズドベータを実施中です。Android のスマートフォンとタブレット向けのネイティブアプリで、Wear OS アプリも付いています。Android には iCloud がないため、ハイライトやメモはデバイス内に保存されます。",
   "yes-no-ads-no.bf78fd": "はい。広告も、アプリ内課金も、サブスクリプションもありません。Scripture Alone は無料で、これからもずっと無料です。",
   "yes-on-any-mac.d853c7": "はい、Apple シリコン搭載のすべての Mac で使えます。Mac の App Store から iPad 版アプリをインストールすれば、ハイライトとメモが iCloud を通じて iPhone や iPad と同期します。",
@@ -46,5 +46,5 @@
   "yes-scripture-alone-can.230191": "はい。Scripture Alone は、お持ちの USFM ファイル、DRM フリーの ePub、聖書の PDF を開くことができ、ご依頼があれば <a href=\"https://ebible.org/\" rel=\"noopener\">eBible.org</a> が公開している無料カタログを、あなたの言語を優先して取得します。タップするまで何もダウンロードされません。インポートしたものはあなただけのものです。あなた自身のプライベートな iCloud を通じてほかのデバイスにも届き、コピーや共有は出版社が公表している規定に従います。これは暫定的な措置です。主要な現代訳のライセンスは各出版社に申請中で、認められればそれらの翻訳は最初からアプリに入り、この方法は不要になるかもしれません。",
   "yes-scripture-alone-is.9112b8": "はい。Scripture Alone は、フランスを含む欧州連合のすべての国の App Store でご利用いただけます。ソースコードは GitHub で誰にでも公開されています。",
   "yes-the-full-source.c48195": "はい。すべてのソースコードが AGPL-3.0 ライセンスで <a href=\"https://github.com/blaineam/Scripture-Alone\" target=\"_blank\" rel=\"noopener noreferrer\">GitHub</a> に公開されています。",
-  "yes-the-watch-app.14dc16": "はい。Apple Watch アプリは American Standard Version、Berean Standard Bible、King James Version を単体で内蔵しているため、iPhone が近くになくてもオフラインで読めます。さらに、インポートした訳も含めて iPhone で読んでいる訳に追随します。今日の聖句やお気に入り・メモを表示でき、箇所を読み上げたり、今日の聖句の箇所を文字盤に表示したりできます。"
+  "yes-the-watch-app.e5d160": "はい。Apple Watch アプリは NASB 2020 を単体で内蔵しているため、iPhone が近くになくてもオフラインで読めます。さらに、iPhone で読んでいる訳に追随し、インポートした訳も含めてほかの訳は iPhone から送られます。今日の聖句やお気に入り・メモを表示でき、箇所を読み上げたり、今日の聖句の箇所を文字盤に表示したりできます。"
 }

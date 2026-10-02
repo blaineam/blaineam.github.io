@@ -1,5 +1,5 @@
 {
-  "_meta.description": "iPhone、iPad、Mac、Apple Watch 向けの無料オープンソース聖書アプリ。ASV、BSB、KJV をオフラインで読み、相互参照・注解・地図で学び、朗読を聞き、説教ノートをとり、聖句の画像を共有し、あなた自身の iCloud でプライベートに同期。広告なし、トラッカーなし、アカウント不要。",
+  "_meta.description": "iPhone、iPad、Mac、Apple Watch 向けの無料オープンソース聖書アプリ。NASB 2020、NASB 1995、ASV、BSB、KJV をオフラインで読み、相互参照・注解・地図で学び、朗読を聞き、説教ノートをとり、聖句の画像を共有し、あなた自身の iCloud でプライベートに同期。広告なし、トラッカーなし、アカウント不要。",
   "_title": "Scripture Alone - 無料でプライベートな聖書",
   "a-free-open-source.7d8e3d": "iPhone、iPad、Mac に対応した無料・オープンソースの聖書アプリ。Apple Watch 用アプリも付属しています。",
   "a-highlighted-passage-with.8705dc": "iPad で、ハイライトとメモがついた箇所",
@@ -58,8 +58,8 @@
   "support.f32d5a": "応援する",
   "tap-a-verse-and.9c68ca": "節をタップすれば Study パネルが追随し、関連度順に並んだクロスリファレンスと、ジャン・カルヴァン、ジョン・ギル、ジェイミソン‑フォーセット‑ブラウンによる古典的な注解が表示されます。",
   "terms.a55a27": "利用規約",
-  "the-american-standard-version.81139c": "American Standard Version はアプリをインストールした時点で端末に入っています。Berean Standard Bible と King James Version も、ダウンロード1回で追加できます。",
   "the-link-carries-the.8f367c": "リンクには聖句そのものが、アドレスの「#」の後ろに入っています。ブラウザはこの部分をサーバーに送らないので、このサイトがあなたの共有した内容を目にすることはありません。ページはブラウザの中でカードを再現します。Scripture Alone がインストールされていれば、リンクはアプリでその箇所を開きます。",
+  "the-new-american-standard.bad575": "New American Standard Bible — NASB 2020 は、<a href=\"https://www.lockman.org\">The Lockman Foundation</a> の許可を得て、アプリをインストールした時点で端末に入っています。NASB 1995、American Standard Version、Berean Standard Bible、King James Version も、ダウンロード1回で追加できます。",
   "the-reader-in-one.2bf614": "5 つのテーマのひとつで表示したリーダー",
   "the-study-panel-with.408165": "選んだ節のクロスリファレンスと注解を表示した Study パネル",
   "the-whole-bible-offline.18a85e": "聖書まるごと、オフラインで",

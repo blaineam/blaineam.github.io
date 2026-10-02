@@ -20,7 +20,7 @@
   "is-scripture-alone-available.8b64bc": "Scripture Alone을 유럽연합에서도 이용할 수 있나요?",
   "is-scripture-alone-in.a326a4": "Scripture Alone이 내 언어를 지원하나요?",
   "is-there-an-android.2b6378": "Android 버전도 있나요?",
-  "it-s-a-careful.2cd1ba": "정확한 직역본이면서 퍼블릭 도메인이라 자유롭게 나눌 수 있습니다. Berean Standard Bible과 King James Version을 담은 것도 같은 이유입니다. CSB, ESV, NKJV, NASB 같은 번역본은 출판사의 라이선스가 필요하며, 현재 요청하고 있습니다.",
+  "it-s-a-careful.c4fea7": "정확한 직역본이며, The Lockman Foundation이 이 역본과 함께 NASB 1995를 수록하도록 허가해 주었습니다. American Standard Version, Berean Standard Bible, King James Version은 퍼블릭 도메인이라 함께 담았습니다. CSB, ESV, NKJV 같은 번역본은 출판사의 라이선스가 필요하며, 현재 요청하고 있습니다.",
   "no-google-play-download.8a9d61": "Google Play를 쓸 수 없나요? 모든 역본과 공부 도구가 들어 있는 <a href=\"https://github.com/blaineam/Scripture-Alone/releases/tag/android-v1.0.0-beta.8\" target=\"_blank\" rel=\"noopener noreferrer\">APK를 GitHub에서 내려받으세요</a>. 스스로 업데이트되지 않으며 Google Play 버전으로 업데이트할 수도 없으니, 먼저 그곳의 안내를 읽어 주세요.",
   "none-there-are-no.762c80": "아무것도 수집하지 않습니다. 분석도, 추적기도, 계정도 없습니다. 하이라이트와 메모는 내 기기에 머물고, 제가 볼 수 없는 나만의 비공개 iCloud를 통해서만 동기화됩니다.",
   "overview.0efc2e": "개요",
@@ -38,7 +38,7 @@
   "until-they-can-be.7d3638": "앱에 포함될 수 있을 때까지는 두 파일이 잘 가져와지는 것으로 확인되었습니다. ESV는 <a href=\"https://store.ligonier.org/the-reformation-study-bible-esv-epub\" target=\"_blank\" rel=\"noopener noreferrer\">Reformation Study Bible의 ePub판</a>, CSB는 출판사가 제공하는 <a href=\"https://csbible.com/wp-content/uploads/2018/03/CSB_Pew_Bible_2nd_Printing.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">예배용 성경 PDF</a>입니다. 번역본 화면의 ‘파일 가져오기…’로 여세요.",
   "what-data-do-you.d389a9": "어떤 데이터를 수집하나요?",
   "where-can-i-get.11aafd": "ESV나 CSB는 어디에서 구해 가져올 수 있나요?",
-  "why-the-american-standard.8f4a1a": "왜 American Standard Version인가요?",
+  "why-the-nasb-2020.1f959a": "왜 NASB 2020인가요?",
   "yes-in-a-closed.b8b573": "네, Google Play에서 비공개 베타로 제공합니다. Android 스마트폰과 태블릿용 네이티브 앱이며, 자체 Wear OS 앱도 함께 제공됩니다. Android에는 iCloud가 없으므로 하이라이트와 메모는 기기에 저장됩니다.",
   "yes-no-ads-no.bf78fd": "네. 광고도, 앱 내 구입도, 구독도 없습니다. Scripture Alone은 무료이며, 앞으로도 무료입니다.",
   "yes-on-any-mac.d853c7": "네, Apple 실리콘을 탑재한 모든 Mac에서 실행됩니다. Mac의 App Store에서 iPad 앱을 설치하면 하이라이트와 메모가 iCloud를 통해 iPhone, iPad와 동기화됩니다.",
@@ -46,5 +46,5 @@
   "yes-scripture-alone-can.230191": "네. Scripture Alone은 직접 소유한 USFM 파일, DRM 없는 ePub, 성경 PDF를 열 수 있고, 요청하면 <a href=\"https://ebible.org/\" rel=\"noopener\">eBible.org</a>에서 공개하는 무료 카탈로그를 사용자 언어 우선으로 가져옵니다. 탭하기 전에는 아무것도 다운로드되지 않습니다. 가져온 번역본은 오직 사용자의 것입니다. 사용자 본인의 비공개 iCloud를 통해 다른 기기로 따라가며, 복사와 공유는 출판사가 공개한 이용 조건을 따릅니다. 이는 임시 방편입니다. 주요 현대 번역본의 라이선스 요청이 각 출판사에 들어가 있으며, 승인되면 해당 번역본이 앱에 기본으로 포함되고 이 방법은 없어질 수 있습니다.",
   "yes-scripture-alone-is.9112b8": "네. Scripture Alone은 프랑스를 포함한 유럽연합 전역의 App Store에서 이용할 수 있습니다. 소스 코드는 GitHub에서 누구에게나 공개되어 있습니다.",
   "yes-the-full-source.c48195": "네. 전체 소스 코드가 AGPL-3.0 라이선스로 <a href=\"https://github.com/blaineam/Scripture-Alone\" target=\"_blank\" rel=\"noopener noreferrer\">GitHub</a>에 공개되어 있습니다.",
-  "yes-the-watch-app.14dc16": "네. 워치 앱은 American Standard Version, Berean Standard Bible, King James Version을 자체적으로 담고 있어 iPhone이 가까이 없어도 오프라인으로 읽을 수 있고, iPhone에서 읽고 있는 역본을 — 직접 가져온 역본까지 — 그대로 따라갑니다. 오늘의 말씀과 즐겨찾기·메모를 볼 수 있고, 본문을 소리 내어 읽어주며, 오늘의 장절을 워치 페이스에 표시합니다."
+  "yes-the-watch-app.e5d160": "네. 워치 앱은 NASB 2020을 자체적으로 담고 있어 iPhone이 가까이 없어도 오프라인으로 읽을 수 있고, iPhone에서 읽고 있는 역본을 그대로 따라갑니다. 직접 가져온 역본을 포함해 다른 역본은 iPhone이 보내 줍니다. 오늘의 말씀과 즐겨찾기·메모를 볼 수 있고, 본문을 소리 내어 읽어주며, 오늘의 장절을 워치 페이스에 표시합니다."
 }
