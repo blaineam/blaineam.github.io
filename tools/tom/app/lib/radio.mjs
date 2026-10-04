@@ -4,9 +4,9 @@
 // session seed. Track n of a station is a pure function of (station, seed, n),
 // and every track is an ordinary auto-built song with its own #song: link, so
 // a track you like can be shared or opened in the composer unchanged.
-import { rng } from './rng.mjs?v=eb92a81a';
-import { STYLES, STYLE_IDS } from './styles.mjs?v=eb92a81a';
-import { randomTag, songFromTag } from './share.mjs?v=eb92a81a';
+import { rng } from './rng.mjs?v=d0289590';
+import { STYLES, STYLE_IDS } from './styles.mjs?v=d0289590';
+import { randomTag, songFromTag } from './share.mjs?v=d0289590';
 
 export const MIX = 'mix';
 export const STATIONS = [...STYLE_IDS, MIX];
@@ -41,7 +41,7 @@ export function radioTrack(station, seed, n, { styles } = {}) {
   const key = r.chance(0.35) ? s.key : r.pick(KEYS);
   const bpm = Math.round(s.bpm * r.float(0.94, 1.06));
   const length = r.chance(0.8) ? 'full' : 'short';
-  return songFromTag(tag, { length, style, key, bpm, gen: 2 });
+  return songFromTag(tag, { length, style, key, bpm, gen: 3 });
 }
 
 /** "mellow-gecko-42" → "Mellow Gecko 42". */

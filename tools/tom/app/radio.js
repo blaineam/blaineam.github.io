@@ -17,9 +17,9 @@
 // The lock screen and CarPlay get previous/next track buttons (not ±10 s):
 // Previous restarts a song past its first few seconds, otherwise it goes back
 // (the last song stays rendered, so that's instant).
-import { radioTrack, trackTitle, stationName, MIX } from './lib/radio.mjs?v=eb92a81a';
-import { STYLES } from './lib/styles.mjs?v=eb92a81a';
-import { encodeWav } from './lib/wav.mjs?v=eb92a81a';
+import { radioTrack, trackTitle, stationName, MIX } from './lib/radio.mjs?v=d0289590';
+import { STYLES } from './lib/styles.mjs?v=d0289590';
+import { encodeWav } from './lib/wav.mjs?v=d0289590';
 
 const AHEAD = 2;              // songs kept rendered beyond the one playing
 const RENDER_TIMEOUT = 150e3; // a full song renders in seconds; this means the worker is gone
@@ -57,7 +57,7 @@ export function createRadio({ onChange = () => {}, onTrack = () => {} } = {}) {
   let worker = null, reqId = 0;
   const pending = new Map();
   function spawn() {
-    worker = new Worker(new URL('./worker.js?v=eb92a81a', import.meta.url), { type: 'module' });
+    worker = new Worker(new URL('./worker.js?v=d0289590', import.meta.url), { type: 'module' });
     worker.onmessage = (e) => { const p = pending.get(e.data.id); if (!p) return; pending.delete(e.data.id); e.data.ok ? p.resolve(e.data) : p.reject(new Error(e.data.error)); };
     worker.onerror = (e) => { e.preventDefault?.(); radioLog('renderer error', e.message || ''); resetWorker(new Error(e.message || 'The renderer stopped')); };
   }
@@ -314,10 +314,14 @@ export function createRadio({ onChange = () => {}, onTrack = () => {} } = {}) {
     onChange();
   }
   function stop() { if (s.status === 'playing' || s.status === 'tuning') pause(); }
+  /** Jump within the song playing (the scrub bar). */
+  function seek(t) { if (s.current && audio.duration > 0) { audio.currentTime = Math.max(0, Math.min(t, audio.duration - 0.05)); positionState(); } }
+  /** 0–1. iOS ignores this (a media element there always plays at the device volume). */
+  function setVolume(v) { audio.volume = Math.max(0, Math.min(1, v)); }
 
   return {
     state: s,
-    tune, pause, resume, skip, previous, stop, playSong, setStyles,
+    tune, pause, resume, skip, previous, stop, playSong, setStyles, seek, setVolume,
     get canGoBack() { return back.length > 0 || (!!s.current && audio.currentTime > RESTART_AFTER); },
     get active() { return s.status === 'playing' || s.status === 'tuning'; },
     get position() { return s.current ? audio.currentTime || 0 : 0; },

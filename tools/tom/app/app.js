@@ -1,20 +1,21 @@
 // Tom — web music machine. Melody Machine, Lego-style Composer and Radio, all
 // driven by the same engine as the CLI (rendered in a Web Worker).
-import { STYLES, STYLE_IDS } from './lib/styles.mjs?v=eb92a81a';
-import { SCALES, CONTOUR_NAMES, chord, parseKey, noteName, spell, parseProgression, layoutChords } from './lib/theory.mjs?v=eb92a81a';
+import { STYLES, STYLE_IDS } from './lib/styles.mjs?v=d0289590';
+import { SCALES, CONTOUR_NAMES, parseKey, noteName, spell, parseProgression, layoutChords, chordName } from './lib/theory.mjs?v=d0289590';
+import { SOUNDS, SOUND_IDS, PALETTES, SLOTS, SLOT_NAMES } from './lib/sounds.mjs?v=d0289590';
 import {
   BLOCK_TYPES, BLOCK_ORDER, DRUM_LEVELS, FORMS, makeBlock, emptySong, autoSong, autoFill, autoBlock,
   melodySong, validate,
-} from './lib/blueprint.mjs?v=eb92a81a';
-import { blockMelody, timeline, resolve } from './lib/arrange.mjs?v=eb92a81a';
-import { rng } from './lib/rng.mjs?v=eb92a81a';
-import { encodeWav } from './lib/wav.mjs?v=eb92a81a';
-import { toMidi } from './lib/midi.mjs?v=eb92a81a';
-import { tagOf, randomTag, melodyFromTag, melodyHash, songHash, songFromTag, decodeShare } from './lib/share.mjs?v=eb92a81a';
-import { STATIONS, MIX, stationName } from './lib/radio.mjs?v=eb92a81a';
-import { createRadio, radioLog, radioLogText, clearRadioLog } from './radio.js?v=eb92a81a';
+} from './lib/blueprint.mjs?v=d0289590';
+import { blockMelody, timeline, resolve } from './lib/arrange.mjs?v=d0289590';
+import { rng } from './lib/rng.mjs?v=d0289590';
+import { encodeWav } from './lib/wav.mjs?v=d0289590';
+import { toMidi } from './lib/midi.mjs?v=d0289590';
+import { tagOf, randomTag, melodyFromTag, melodyHash, songHash, songFromTag, decodeShare } from './lib/share.mjs?v=d0289590';
+import { STATIONS, MIX, stationName } from './lib/radio.mjs?v=d0289590';
+import { createRadio, radioLog, radioLogText, clearRadioLog } from './radio.js?v=d0289590';
 
-export const VERSION = '0.8.1';
+export const VERSION = '0.10.0';
 const BUILD = new URL(import.meta.url).searchParams.get('v'); // the deploy's commit, stamped by scripts/stamp.mjs
 
 const $ = (s, el = document) => el.querySelector(s);
@@ -31,9 +32,17 @@ const h = (tag, attrs = {}, ...kids) => {
 };
 const KEYS = ['C', 'C#', 'D', 'Eb', 'E', 'F', 'F#', 'G', 'Ab', 'A', 'Bb', 'B'];
 const PRESETS = {
-  major: [['1-5-6-4', 'I–V–vi–IV · anthem'], ['1-6-4-5', 'I–vi–IV–V · doo-wop'], ['6-4-1-5', 'vi–IV–I–V · heartfelt'], ['1-4-5-1', 'I–IV–V–I · classic'], ['4-5-1-6', 'IV–V–I–vi · lift'], ['2-5-1-6', 'ii–V–I–vi · jazzy'], ['1-3-4-5', 'I–iii–IV–V · bright']],
-  minor: [['6-7-1-1', 'VI–VII–i · synthwave'], ['1-6-3-7', 'i–VI–III–VII · epic'], ['1-4-6-5', 'i–iv–VI–v · moody'], ['6-4-1-5', 'VI–iv–i–v · drift'], ['4-6-7-7', 'iv–VI–VII · rise'], ['1-7-6-7', 'i–VII–VI–VII · run']],
+  major: [['1-5-6-4', 'I–V–vi–IV · anthem'], ['1-6-4-5', 'I–vi–IV–V · doo-wop'], ['6-4-1-5', 'vi–IV–I–V · heartfelt'], ['1-4-5-1', 'I–IV–V–I · classic'], ['4-5-1-6', 'IV–V–I–vi · lift'], ['2-5-1-6', 'ii–V–I–vi · jazzy'], ['1-3-4-5', 'I–iii–IV–V · bright'],
+    ['Imaj7-vi7-ii7-V7', 'Imaj7–vi7–ii7–V7 · smooth'], ['ii7-V7-Imaj7-Imaj7', 'ii7–V7–Imaj7 · jazz turnaround'], ['IVmaj7-iii7-vi7-ii7', 'IVmaj7–iii7–vi7–ii7 · lo-fi'], ['IVmaj7-V7-iii7-vi', 'IVmaj7–V7–iii7–vi · royal road'],
+    ['Iadd9-V-vi-IVadd9', 'Iadd9–V–vi–IVadd9 · shimmer'], ['vi-IV-I-Vsus4', 'vi–IV–I–Vsus4 · hanging'], ['I-V/vi-vi-IV', 'I–III–vi–IV · tearjerker'], ['I-iii-IV-IVm', 'I–iii–IV–iv · bittersweet'],
+    ['I-bVII-IV-I', 'I–♭VII–IV–I · rock'], ['I-bVI-bVII-I', 'I–♭VI–♭VII–I · heroic'], ['I-V/V-IV-I', 'I–II–IV–I · country'], ['I-V7/IV-IV-IVm', 'I–I7–IV–iv · gospel'],
+    ['I-V-vi-iii-IV-I-IV-V', 'I–V–vi–iii–IV–I–IV–V · Pachelbel']],
+  minor: [['6-7-1-1', 'VI–VII–i · synthwave'], ['1-6-3-7', 'i–VI–III–VII · epic'], ['1-4-6-5', 'i–iv–VI–v · moody'], ['6-4-1-5', 'VI–iv–i–v · drift'], ['4-6-7-7', 'iv–VI–VII · rise'], ['1-7-6-7', 'i–VII–VI–VII · run'],
+    ['i-iv-V7-i', 'i–iv–V7–i · classic minor'], ['i-VII-VI-V7', 'i–VII–VI–V7 · flamenco'], ['i-VI-iv-V7', 'i–VI–iv–V7 · drama'], ['i7-iv7-VII-IIImaj7', 'i7–iv7–VII–IIImaj7 · smooth'],
+    ['VImaj7-VII-i7-i7', 'VImaj7–VII–i7 · night drive'], ['iadd9-VI-III-VII', 'iadd9–VI–III–VII · shimmer'], ['i-III-VII-IVM', 'i–III–VII–IV · dorian'], ['i-bII-VII-i', 'i–♭II–VII–i · dark'],
+    ['i9-IV9', 'i9–IV9 · funk vamp'], ['i7-VImaj7-iv7-v7', 'i7–VImaj7–iv7–v7 · late night']],
 };
+const CHORD_HELP = 'Degrees 1–7 or I–VII, plus colors: Imaj7, ii7, V7, IVadd9, Vsus4, IVm (minor iv), bVII (borrowed), V/V (secondary). Add :2 for two beats.';
 const CONTOUR_PATHS = { arch: 'M2 12 Q13 -4 24 12', rise: 'M2 12 L24 2', fall: 'M2 2 L24 12', wave: 'M2 7 Q7 -1 13 7 T24 7', flat: 'M2 7 L24 7' };
 const LAYER_LABELS = { pad: 'Chords', arp: 'Arp', bass: 'Bass', lead: 'Melody', counter: 'Counter', bells: 'Bells', octaves: 'Octaves', riser: 'Riser', crash: 'Crash' };
 const LAYER_ABBR = { pad: 'CH', arp: 'AR', bass: 'BS', lead: 'MEL', counter: 'CTR', bells: 'BEL', octaves: '8VA', riser: 'RSR' };
@@ -55,7 +64,7 @@ const state = {
 };
 
 // ─── rendering (worker) + playback ──────────────────────────────────────────
-const worker = new Worker(new URL('./worker.js?v=eb92a81a', import.meta.url), { type: 'module' });
+const worker = new Worker(new URL('./worker.js?v=d0289590', import.meta.url), { type: 'module' });
 let reqId = 0;
 const pending = new Map();
 worker.onmessage = (e) => { const p = pending.get(e.data.id); if (p) { pending.delete(e.data.id); e.data.ok ? p.resolve(e.data) : p.reject(new Error(e.data.error)); } };
@@ -72,35 +81,78 @@ async function renderCached(bp) {
   return result;
 }
 
-let ac = null, src = null, playing = null;
+// ─── volume: one level for every mode ───
+const vol = { level: store.get('volume', 0.8), muted: store.get('muted', false) };
+const gain = () => (vol.muted ? 0 : vol.level ** 2); // squared, so the slider feels even to the ear
+// iOS plays media elements (Radio) at the device volume only, and ignores .volume.
+const mediaVolume = (() => { try { const a = new Audio(); a.volume = 0.5; return a.volume === 0.5; } catch { return false; } })();
+function applyVolume() {
+  if (master) master.gain.setTargetAtTime(gain(), ac.currentTime, 0.015);
+  radio.setVolume(gain());
+  const v = $('#volume'), m = $('#mute'), radioView = state.view === 'radio' && !mediaVolume;
+  v.value = vol.level;
+  v.disabled = radioView;
+  v.title = radioView ? 'On this device, Radio plays at the volume you set with its buttons' : `Volume ${Math.round(vol.level * 100)}%`;
+  m.textContent = vol.muted || !vol.level ? '🔇' : vol.level < 0.5 ? '🔉' : '🔊';
+  m.setAttribute('aria-pressed', String(vol.muted));
+  m.setAttribute('aria-label', vol.muted ? 'Unmute' : 'Mute');
+  m.disabled = radioView;
+}
+$('#volume').addEventListener('input', (e) => { vol.level = Number(e.target.value); vol.muted = false; store.set('volume', vol.level); store.set('muted', false); applyVolume(); });
+$('#mute').addEventListener('click', () => { vol.muted = !vol.muted; if (!vol.muted && !vol.level) vol.level = 0.5; store.set('muted', vol.muted); store.set('volume', vol.level); applyVolume(); });
+
+// ─── the scrub bar: drag to jump (while stopped, it sets where Play starts) ───
+let scrubbing = false;
+const scrub = $('#scrub');
+const scrubTotal = () => (state.view === 'radio' ? radio.duration : playing ? playing.duration : currentDuration());
+scrub.addEventListener('pointerdown', () => { scrubbing = true; });
+for (const ev of ['pointerup', 'pointercancel', 'change', 'blur']) scrub.addEventListener(ev, () => { scrubbing = false; });
+scrub.addEventListener('input', (e) => {
+  const t = Number(e.target.value) * scrubTotal();
+  if (state.view === 'radio') { radio.seek(t); drawRadio(); } else seekTo(t);
+});
+
+// Playback runs on Web Audio: every source goes through its own gain (for
+// click-free cuts) into one master gain (the volume). The composer plays
+// block by block: a source runs on through the rendered song by itself, and
+// only where the next block isn't the following one (a loop going round) is
+// the jump scheduled, a moment ahead, as a short crossfade. Seeking (the
+// scrub bar) is the same crossfade, now.
+let ac = null, master = null, playing = null, schedTimer = 0;
+let cue = 0; // where Play starts, set by dragging the scrub bar while stopped
+const FADE = 0.006, LOOKAHEAD = 0.25;
 // Rendering takes a moment, so a press of Play is pending until its audio is
 // ready. Stop (or switching tabs) bumps the token, and a render that finishes
 // for an old token never starts: only one source can ever be playing.
 let playToken = 0, loading = false;
-async function startPlayback(bp, { loop = false, view = state.view } = {}) {
+/** What the engine renders: the loop marks only steer playback, so they don't re-render. */
+const renderable = (bp) => (bp.blocks.some((b) => 'loop' in b) || 'loop' in bp ? { ...bp, loop: undefined, blocks: bp.blocks.map(({ loop, ...b }) => b) } : bp);
+async function startPlayback(bp, { loop = false, view = state.view, from = cue } = {}) {
   stopPlayback();
   radio.stop();
   const my = playToken;
   loading = true; setPlayButton(true);
   ac ??= new AudioContext(); // created inside the tap, so Safari lets it start
+  if (!master) { master = ac.createGain(); master.gain.value = gain(); master.connect(ac.destination); }
   const resumed = ac.state === 'suspended' ? ac.resume() : null;
   let r;
-  try { r = await renderCached(bp); await resumed; } finally { if (my === playToken) loading = false; }
+  try { r = await renderCached(renderable(bp)); await resumed; } finally { if (my === playToken) loading = false; }
   if (my !== playToken) return;
   const buf = ac.createBuffer(2, r.L.length, r.sampleRate);
   buf.copyToChannel(r.L, 0); buf.copyToChannel(r.R, 1);
-  src = ac.createBufferSource();
-  src.buffer = buf; src.loop = loop; src.connect(ac.destination);
-  src.onended = () => { if (playing && !loop) stopPlayback(); };
-  src.start();
-  playing = { t0: ac.currentTime, duration: r.duration, loop, view, bp };
+  playing = { duration: r.duration, loop, view, bp, buf, bounds: loop ? null : blockBounds(bp, r.duration), seg: null, next: null };
+  // In loop mode, Play goes straight to the loop (unless you scrubbed somewhere).
+  const loops = view === 'compose' ? loopedBlocks() : [];
+  if (!from && loops.length) from = playing.bounds[loops[0]][0];
+  seekTo(from);
   setPlayButton(true);
+  schedTimer ||= setInterval(schedule, 40);
   requestAnimationFrame(tick);
 }
 function stopPlayback() {
   playToken++; loading = false;
-  if (src) { src.onended = null; try { src.stop(); } catch { /* already stopped */ } src = null; }
-  playing = null;
+  if (playing) for (const seg of [playing.seg, playing.next]) if (seg) { seg.src.onended = null; try { seg.src.stop(); } catch { /* not started */ } }
+  playing = null; cue = 0;
   setPlayButton(state.view === 'radio' && radio.active);
   $('#playhead').hidden = true;
   drawRoll();
@@ -110,24 +162,96 @@ function setPlayButton(on) {
   const b = $('#play'), label = on ? (state.view === 'radio' ? 'Pause' : 'Stop') : 'Play';
   b.classList.toggle('on', on); $('.ico', b).textContent = on ? (state.view === 'radio' ? '❚❚' : '■') : '▶'; $('.lbl', b).textContent = label; b.setAttribute('aria-label', label);
 }
+
+/** Each block's [start, end) in the rendered song; the last runs to the end of the audio. */
+function blockBounds(bp, duration) {
+  const { starts } = timeline(bp);
+  return starts.map((s, i) => [s, i + 1 < starts.length ? starts[i + 1] : duration]);
+}
+/** Indices of the blocks marked 🔁, when loop mode is on. */
+function loopedBlocks() {
+  return state.song.loop ? state.song.blocks.flatMap((b, i) => (b.loop && b.type !== 'hit' ? [i] : [])) : [];
+}
+/** The block that plays after block k: the next looped one inside the loop, otherwise the next in line (-1: the end). */
+function following(k) {
+  const loops = playing.view === 'compose' ? loopedBlocks() : [];
+  const at = loops.indexOf(k);
+  if (at >= 0) return loops[(at + 1) % loops.length];
+  if (k + 1 < playing.bounds.length) return k + 1;
+  return loops.length ? loops[0] : -1; // played on past the loop: back round to it
+}
+function voice(offset, when, fadeIn) {
+  const src = ac.createBufferSource(), g = ac.createGain();
+  src.buffer = playing.buf; src.loop = playing.loop;
+  src.connect(g); g.connect(master);
+  if (fadeIn) { g.gain.setValueAtTime(0, when); g.gain.linearRampToValueAtTime(1, when + FADE); }
+  src.start(when, offset);
+  const seg = { src, g, ctxAt: when, songAt: offset };
+  src.onended = () => { if (playing && current() === seg) stopPlayback(); };
+  return seg;
+}
+function fadeOut(seg, when) {
+  seg.src.onended = null;
+  const g = seg.g.gain;
+  g.cancelScheduledValues(when); g.setValueAtTime(g.value, when); g.linearRampToValueAtTime(0, when + FADE);
+  try { seg.src.stop(when + FADE + 0.005); } catch { /* already stopped */ }
+}
+/** The source that's sounding now (a scheduled jump takes over when its time comes). */
+function current() {
+  const p = playing;
+  if (p.next && ac.currentTime >= p.next.ctxAt) { p.seg = p.next; p.next = null; }
+  return p.seg;
+}
 function position() {
-  if (!playing) return 0;
-  const t = ac.currentTime - playing.t0;
+  if (!playing) return cue;
+  const s = current(), t = s ? s.songAt + Math.max(0, ac.currentTime - s.ctxAt) : 0;
   return playing.loop ? t % playing.duration : Math.min(t, playing.duration);
+}
+/** Jump playback (or, when stopped, where Play will start) to t seconds. */
+function seekTo(t) {
+  const total = playing ? playing.duration : currentDuration();
+  t = Math.max(0, Math.min(t, Math.max(0, total - 0.05)));
+  if (!playing) {
+    cue = t;
+    updateClock(t);
+    if (state.view === 'melody') drawRoll(t);
+    else if (state.view === 'compose') movePlayhead(t, state.song);
+    return;
+  }
+  const p = playing, now = ac.currentTime;
+  if (p.next) { fadeOut(p.next, now); p.next = null; }
+  if (p.seg) fadeOut(p.seg, now);
+  p.seg = voice(t, now, t > 0 || !!p.seg);
+}
+/** A moment before a block ends, line up the jump to whichever block comes next, if it isn't the following one. */
+function schedule() {
+  const p = playing;
+  if (!p) { clearInterval(schedTimer); schedTimer = 0; return; }
+  if (!p.bounds || p.next || !p.seg) return;
+  const t = position(), k = p.bounds.findLastIndex(([s]) => t >= s);
+  if (k < 0) return;
+  const to = following(k), end = p.bounds[k][1];
+  if (to === k + 1 || to < 0 || end - t > LOOKAHEAD) return;
+  const s = p.seg, when = Math.max(ac.currentTime, s.ctxAt + (end - s.songAt));
+  fadeOut(s, when);
+  p.next = voice(p.bounds[to][0], when, true);
 }
 function tick() {
   if (!playing) return;
   const t = position();
   updateClock(t);
   if (playing.view === 'melody') drawRoll(t);
-  else if (playing.view === 'compose') movePlayhead(t);
+  else if (playing.view === 'compose') movePlayhead(t, playing.bp);
   requestAnimationFrame(tick);
 }
 const fmt = (s) => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, '0')}`;
 function updateClock(t) {
-  if (state.view === 'radio') { $('#clock').textContent = `${fmt(radio.position)} / ${fmt(radio.duration)}`; return; }
-  const total = playing ? playing.duration : currentDuration();
+  const total = state.view === 'radio' ? radio.duration : playing ? playing.duration : currentDuration();
+  if (state.view === 'radio') t = radio.position;
   $('#clock').textContent = `${fmt(t)} / ${fmt(total)}`;
+  const sc = $('#scrub');
+  sc.disabled = !total;
+  if (!scrubbing) sc.value = total ? Math.min(1, t / total) : 0;
 }
 function currentDuration() {
   if (state.view === 'radio') return radio.duration;
@@ -163,7 +287,7 @@ function renderMelodyControls() {
   const m = state.melody;
   document.documentElement.style.setProperty('--style', STYLES[m.style].color);
   segmented($('#m-style'), Object.entries(STYLES).map(([id, s]) => [id, s.name, swatch()]), m.style, (v) => {
-    const s = STYLES[v]; Object.assign(state.melody, { style: v, key: s.key, mode: s.mode, bpm: Math.round(s.bpm), progression: '' }); changedMelody();
+    const s = STYLES[v]; Object.assign(state.melody, { style: v, key: s.key, mode: s.mode, bpm: Math.round(s.bpm), progression: '', sound: '' }); changedMelody();
   }, { color: (v) => STYLES[v].color });
   fillSelect($('#m-key'), KEYS.map((k) => [k, k]), m.key);
   fillSelect($('#m-mode'), Object.keys(SCALES).map((k) => [k, k]), m.mode);
@@ -175,7 +299,9 @@ function renderMelodyControls() {
   segmented($('#m-form'), FORMS.map((f) => [f, f]), m.form, (v) => set({ form: v }));
   segmented($('#m-octave'), [[0, 'Low'], [1, 'Mid'], [2, 'High']], m.octave, (v) => set({ octave: v }));
   const presets = /minor|dorian/.test(m.mode) ? PRESETS.minor : PRESETS.major;
-  fillSelect($('#m-prog'), [['', `Style default (${STYLES[m.style].progressions.chorus || STYLES[m.style].progressions.default})`], ...presets], m.progression);
+  fillSelect($('#m-prog'), [['', `Style default (${STYLES[m.style].progressions.chorus || STYLES[m.style].progressions.default})`], ...presets, ...(m.progression && !presets.some(([p]) => p === m.progression) ? [[m.progression, `${m.progression} · yours`]] : [])], m.progression);
+  $('#m-prog-text').value = m.progression || '';
+  $('#m-sound').replaceChildren(soundSelect(m.style, 'lead', m.sound, (v) => set({ sound: v })));
   segmented($('#m-backing'), [['chords', 'Chords'], ['bass', 'Bass']], null, (v) => set({ [v]: !m[v] }));
   [...$('#m-backing').children].forEach((b, i) => b.setAttribute('aria-pressed', String(i === 0 ? m.chords : m.bass)));
   segmented($('#m-drums'), ['none', 'light', 'half', 'full'].map((d) => [d, d]), m.drums, (v) => set({ drums: v }));
@@ -196,10 +322,21 @@ function changedMelody() {
   melodyTimer = setTimeout(() => { if (playing?.view === 'melody' || (loading && state.view === 'melody')) startPlayback(melodyBlueprint(), { loop: true, view: 'melody' }); else renderCached(melodyBlueprint()).catch(showError); }, 180);
 }
 
-function chordLabel(root, S, degree) {
-  const ch = chord(root, S, degree);
-  const third = (ch[1] - ch[0] + 12) % 12, fifth = (ch[2] - ch[0] + 12) % 12;
-  return spell(ch[0], root, S) + (fifth === 6 ? '°' : third === 3 ? 'm' : '');
+const chordLabel = (root, S, spec) => chordName(root, S, spec, (m) => spell(m, root, S));
+/** A progression the user typed, or null (with a toast saying why). */
+function checkProgression(text) {
+  const v = text.trim().replace(/[–—]/g, '-').replace(/♭/g, 'b');
+  if (!v) return '';
+  try { parseProgression(v); return v; } catch (e) { toast(`${e.message}. ${CHORD_HELP}`); return null; }
+}
+/** Sound menu for one slot: the style's own voice, what suits the style, then everything else. */
+function soundSelect(style, slot, value, pick) {
+  const p = PALETTES[style] || {}, fits = p[slot] || [];
+  const opt = (id, label) => h('option', { value: id, selected: id === (value || '') }, label);
+  return h('select', { 'aria-label': `${SLOT_NAMES[slot]} sound`, on: { change: (e) => pick(e.target.value) } },
+    opt('', `${p.own?.[slot] ?? 'Style'} (style's own)`),
+    h('optgroup', { label: `Suits ${STYLES[style].name}` }, fits.map((id) => opt(id, SOUNDS[id].name))),
+    h('optgroup', { label: 'More sounds' }, SOUND_IDS.filter((id) => !fits.includes(id)).map((id) => opt(id, SOUNDS[id].name))));
 }
 
 function drawRoll(t = null) {
@@ -218,7 +355,7 @@ function drawRoll(t = null) {
   // chords
   const spans = layoutChords(parseProgression(bp.blocks[0].progression || STYLES[bp.style].progressions.chorus || STYLES[bp.style].progressions.default), bp.blocks[0].bars);
   g.font = '600 11px "JetBrains Mono", monospace'; g.fillStyle = 'rgba(159,242,184,.7)';
-  for (const s of spans) g.fillText(chordLabel(r.root, r.scale, s.degree), x(s.start) + 4, H - 8);
+  for (const s of spans) g.fillText(chordLabel(r.root, r.scale, s), x(s.start) + 4, H - 8);
   // notes
   const now = t == null ? -1 : (t / (60 / r.bpm));
   for (const n of notes) {
@@ -248,14 +385,20 @@ function renderComposer() {
   document.documentElement.style.setProperty('--style', st.color);
   $('#c-title').value = s.title || '';
   segmented($('#c-style'), Object.entries(STYLES).map(([id, x]) => [id, x.name, swatch()]), s.style, (v) => {
-    const x = STYLES[v]; Object.assign(state.song, { style: v, key: x.key, mode: x.mode, bpm: Math.round(x.bpm) }); songChanged();
+    const x = STYLES[v]; Object.assign(state.song, { style: v, key: x.key, mode: x.mode, bpm: Math.round(x.bpm) }); delete state.song.sounds; songChanged();
   }, { color: (v) => STYLES[v].color });
   fillSelect($('#c-key'), KEYS.map((k) => [k, k]), s.key);
   fillSelect($('#c-mode'), Object.keys(SCALES).map((k) => [k, k]), s.mode);
   $('#c-bpm').value = Math.round(s.bpm);
+  $('#c-sounds').replaceChildren(...SLOTS.map((slot) => h('label', { class: 'mini' }, SLOT_NAMES[slot], soundSelect(s.style, slot, s.sounds?.[slot], (v) => {
+    const next = { ...s.sounds, [slot]: v || undefined };
+    for (const k of Object.keys(next)) if (!next[k]) delete next[k];
+    if (Object.keys(next).length) s.sounds = next; else delete s.sounds;
+    songChanged();
+  }))));
   let dur = 0; try { dur = timeline(s).duration; } catch { /* empty */ }
   $('#c-length').textContent = `${s.blocks.length} blocks · ${fmt(dur)}`;
-  renderPalette(); renderTimeline(); renderInspector(); updateClock(position());
+  renderPalette(); renderLoopBar(); renderTimeline(); renderInspector(); updateClock(position());
 }
 
 function renderPalette() {
@@ -273,7 +416,7 @@ function renderPalette() {
 }
 
 function insertBlock(type, at = null) {
-  const b = autoBlock(makeBlock(type), rng(randSeed()), state.song);
+  const b = autoBlock(makeBlock(type), rng(randSeed()), state.song, { rich: true });
   const blocks = state.song.blocks;
   let i = at ?? (blocks.findIndex((x) => x.id === state.selected) + 1 || blocks.length);
   const hitAt = blocks.findIndex((x) => x.type === 'hit');
@@ -291,8 +434,9 @@ function renderTimeline() {
     const t = BLOCK_TYPES[b.type];
     const L = { ...t.layers, ...b.layers };
     const on = Object.keys(LAYER_ABBR).filter((k) => L[k]);
+    const looped = b.loop && b.type !== 'hit';
     const el = h('div', {
-      class: `brick${b.locked ? ' locked' : ''}`, role: 'button', tabindex: '0', draggable: 'true',
+      class: `brick${b.locked ? ' locked' : ''}${looped ? ` looped${state.song.loop ? ' live' : ''}` : ''}`, role: 'button', tabindex: '0', draggable: 'true',
       'aria-selected': String(b.id === state.selected), 'aria-label': `${t.label}, ${b.type === 'hit' ? 'ending' : b.bars + ' bars'}`,
       style: { '--c': t.color, width: `${b.type === 'hit' ? 80 : Math.max(84, b.bars * 10)}px` },
       on: {
@@ -311,10 +455,39 @@ function renderTimeline() {
     },
     h('span', { class: 'b-name' }, t.label),
     h('span', { class: 'b-bars' }, b.type === 'hit' ? `${Number(b.tail ?? 2.35).toFixed(1)}s` : `${b.bars} bars${L.drums && L.drums !== 'none' ? ` · ${L.drums}` : ''}`),
-    h('span', { class: 'b-layers' }, on.map((k) => h('i', {}, LAYER_ABBR[k]))));
+    h('span', { class: 'b-layers' }, on.map((k) => h('i', {}, LAYER_ABBR[k]))),
+    b.type !== 'hit' && h('button', {
+      class: 'b-loop', type: 'button', draggable: 'false', 'aria-pressed': String(!!b.loop),
+      'aria-label': `Loop ${t.label}`, title: b.loop ? 'Looping: tap to take it out of the loop' : 'Loop this block',
+      on: { click: (e) => { e.stopPropagation(); toggleBlockLoop(b); }, keydown: (e) => e.stopPropagation() },
+    }, '🔁'));
     return el;
   }));
 }
+// ─── loops: blocks marked 🔁 play round in order while loop mode is on ───
+function loopChanged() {
+  store.set('song', state.song);
+  renderLoopBar(); renderTimeline(); renderInspector();
+  if (playing?.view === 'compose') movePlayhead(position(), playing.bp);
+}
+function toggleBlockLoop(b) {
+  b.loop = !b.loop;
+  if (!b.loop) delete b.loop;
+  else state.song.loop = true; // marking a block turns loop mode on
+  loopChanged();
+}
+function renderLoopBar() {
+  const n = state.song.blocks.filter((b) => b.loop && b.type !== 'hit').length, on = !!state.song.loop;
+  const btn = $('#c-loop');
+  btn.setAttribute('aria-pressed', String(on));
+  btn.textContent = `🔁 Loop ${on ? 'on' : 'off'}`;
+  $('#c-loop-help').textContent = !n
+    ? 'Tap 🔁 on any blocks to loop them: they play in order, then round again, until you turn it off.'
+    : on ? `Looping ${n === 1 ? '1 block' : `${n} blocks`}, in order, round and round. Tap 🔁 on a block to add or drop it.`
+      : `${n === 1 ? '1 block is' : `${n} blocks are`} marked 🔁. Turn Loop on to play them round.`;
+}
+$('#c-loop').addEventListener('click', () => { state.song.loop = !state.song.loop; if (!state.song.loop) delete state.song.loop; loopChanged(); });
+
 function dropAt(e, index) {
   const nt = e.dataTransfer.getData('text/tom-new');
   if (nt) return insertBlock(nt, index);
@@ -334,9 +507,10 @@ function removeBlock(id) {
   state.song.blocks = state.song.blocks.filter((x) => x.id !== id); songChanged({ keepSelection: false });
 }
 
-function movePlayhead(t) {
+function movePlayhead(t, bp) {
   const ph = $('#playhead'), bricks = [...$('#timeline').children];
-  const { starts, duration } = timeline(playing.bp);
+  if (!bp.blocks.length) { ph.hidden = true; return; }
+  const { starts, duration } = timeline(bp);
   let i = starts.findIndex((s, k) => t >= s && (k === starts.length - 1 || t < starts[k + 1]));
   if (i < 0 || !bricks[i]) { ph.hidden = true; return; }
   const end = i === starts.length - 1 ? duration : starts[i + 1];
@@ -373,13 +547,15 @@ function renderInspector() {
     const presets = /minor|dorian/.test(state.song.mode) ? PRESETS.minor : PRESETS.major;
     const st = STYLES[state.song.style];
     const progSel = h('select', { on: { change: (e) => upd({ progression: e.target.value || undefined }) } });
-    fillSelect(progSel, [['', `Style default (${st.progressions[b.type] || st.progressions.default})`], ...presets, ...(b.progression && !presets.some(([p]) => p === b.progression) ? [[b.progression, b.progression]] : [])], b.progression || '');
+    fillSelect(progSel, [['', `Style default (${st.progressions[b.type] || st.progressions.default})`], ...presets, ...(b.progression && !presets.some(([p]) => p === b.progression) ? [[b.progression, `${b.progression} · yours`]] : [])], b.progression || '');
+    const progText = h('input', { class: 'prog-text', value: b.progression || '', placeholder: 'or type chords: Imaj7-vi7-ii7-V7', title: CHORD_HELP, 'aria-label': 'Type your own chords', autocomplete: 'off', spellcheck: 'false',
+      on: { change: (e) => { const v = checkProgression(e.target.value); if (v !== null) upd({ progression: v || undefined }); } } });
     const layerSeg = h('div', { class: 'seg' }, ...Object.keys(LAYER_LABELS).map((k) => h('button', {
       class: 'chip', type: 'button', 'aria-pressed': String(!!L[k]), on: { click: () => updL({ [k]: !L[k] }) },
     }, LAYER_LABELS[k])));
     kids.push(
       field('Length', stepper(b.bars, 1, 32, 1, (v) => `${v} bars`, (v) => upd({ bars: v }))),
-      field('Chords', progSel),
+      field('Chords', progSel, progText),
       h('div', { class: 'dial wide' }, h('span', { class: 'dial-label' }, 'Layers'), layerSeg),
       field('Drums', seg(DRUM_LEVELS.map((d) => [d, d]), L.drums || 'none', (v) => updL({ drums: v }))),
       field('Filter sweep', seg([['none', 'none'], ['rise', 'open up'], ['fall', 'close down']], L.filter || 'none', (v) => updL({ filter: v === 'none' ? undefined : v }))),
@@ -393,8 +569,9 @@ function renderInspector() {
   }
   kids.push(h('div', { class: 'actions' },
     h('button', { class: 'btn', type: 'button', on: { click: () => soloBlock(b) } }, '▶ Play this block'),
-    b.type !== 'hit' && h('button', { class: 'btn', type: 'button', disabled: b.locked, on: { click: () => { Object.assign(b, autoBlock({ ...b, locked: false }, rng(randSeed()), state.song), { locked: false }); songChanged(); } } }, '✨ Surprise me'),
+    b.type !== 'hit' && h('button', { class: 'btn', type: 'button', disabled: b.locked, on: { click: () => { Object.assign(b, autoBlock({ ...b, locked: false }, rng(randSeed()), state.song, { rich: true }), { locked: false }); songChanged(); } } }, '✨ Surprise me'),
     h('button', { class: 'btn', type: 'button', 'aria-pressed': String(!!b.locked), on: { click: () => upd({ locked: !b.locked }) } }, b.locked ? 'Unlock' : 'Lock'),
+    b.type !== 'hit' && h('button', { class: 'btn', type: 'button', 'aria-pressed': String(!!b.loop), on: { click: () => toggleBlockLoop(b) } }, b.loop ? '🔁 Looping' : '🔁 Loop'),
     h('button', { class: 'btn', type: 'button', on: { click: () => moveBlock(b.id, -1) } }, '←'),
     h('button', { class: 'btn', type: 'button', on: { click: () => moveBlock(b.id, 1) } }, '→'),
     h('button', { class: 'btn', type: 'button', on: { click: () => { const i = state.song.blocks.indexOf(b); const copy = { ...structuredClone(b), id: `${b.id}c${Date.now().toString(36)}`, locked: false }; state.song.blocks.splice(i + 1, 0, copy); state.selected = copy.id; songChanged(); } } }, 'Duplicate'),
@@ -409,6 +586,7 @@ function soloBlock(b) {
 
 // ─── Radio ──────────────────────────────────────────────────────────────────
 const radio = createRadio({ onChange: () => { renderRadio(); if (radio.active) stopPlayback(); }, onTrack: remember });
+applyVolume();
 
 // Which styles the Mix plays (null = all), kept between visits like the station.
 state.mixStyles = store.get('mixStyles', null);
@@ -659,6 +837,7 @@ function switchView(v) {
   }
   // The radio keeps playing while you browse the other tabs; their Play button takes over from it.
   setPlayButton(v === 'radio' && radio.active);
+  applyVolume();
   if (v === 'melody') { renderMelodyControls(); drawRoll(); } else if (v === 'compose') renderComposer(); else renderRadio();
   updateClock(0);
   syncHash();
@@ -684,6 +863,7 @@ $('#m-density').addEventListener('change', (e) => set({ density: Number(e.target
 $('#m-sync').addEventListener('input', (e) => { $('#m-sync-v').textContent = Math.round(e.target.value * 100) + '%'; });
 $('#m-sync').addEventListener('change', (e) => set({ syncopation: Number(e.target.value) }));
 $('#m-prog').addEventListener('change', (e) => set({ progression: e.target.value }));
+$('#m-prog-text').addEventListener('change', (e) => { const v = checkProgression(e.target.value); if (v !== null) set({ progression: v }); });
 $('#to-composer').addEventListener('click', () => {
   const m = state.melody;
   if (!state.song.blocks.length) Object.assign(state.song, { style: m.style, key: m.key, mode: m.mode, bpm: m.bpm });
@@ -698,15 +878,15 @@ $('#c-title').addEventListener('change', (e) => { state.song.title = e.target.va
 $('#c-key').addEventListener('change', (e) => { state.song.key = e.target.value; songChanged(); });
 $('#c-mode').addEventListener('change', (e) => { state.song.mode = e.target.value; songChanged(); });
 $('#c-bpm').addEventListener('change', (e) => { state.song.bpm = Math.min(200, Math.max(50, Number(e.target.value) || 100)); songChanged(); });
-$('#auto-song').addEventListener('click', () => { const tag = randomTag(); state.song = songFromTag(tag, { length: $('#auto-length').value, style: state.song.style, gen: 2 }); songChanged({ keepSelection: false, edited: false }); toast(`✨ A fresh song: ${showTag(tag)}`); });
-$('#auto-finish').addEventListener('click', () => { state.song = autoFill(state.song, { seed: randSeed(), length: $('#auto-length').value }); songChanged(); toast('✨ Finished the arrangement'); });
+$('#auto-song').addEventListener('click', () => { const tag = randomTag(); state.song = songFromTag(tag, { length: $('#auto-length').value, style: state.song.style, gen: 3 }); songChanged({ keepSelection: false, edited: false }); toast(`✨ A fresh song: ${showTag(tag)}`); });
+$('#auto-finish').addEventListener('click', () => { state.song = autoFill(state.song, { seed: randSeed(), length: $('#auto-length').value, rich: true }); songChanged(); toast('✨ Finished the arrangement'); });
 $('#auto-block').addEventListener('click', () => {
   const b = state.song.blocks.find((x) => x.id === state.selected);
   if (!b) return toast('Select a block first');
   if (b.locked) return toast('That block is locked');
-  Object.assign(b, autoBlock(b, rng(randSeed()), state.song)); songChanged();
+  Object.assign(b, autoBlock(b, rng(randSeed()), state.song, { rich: true })); songChanged();
 });
-$('#auto-all').addEventListener('click', () => { const r = rng(randSeed()); state.song.blocks = state.song.blocks.map((b) => autoBlock(b, r, state.song)); songChanged(); toast('✨ Re-rolled every unlocked block'); });
+$('#auto-all').addEventListener('click', () => { const r = rng(randSeed()); state.song.blocks = state.song.blocks.map((b) => autoBlock(b, r, state.song, { rich: true })); songChanged(); toast('✨ Re-rolled every unlocked block'); });
 $('#clear-song').addEventListener('click', () => { state.song = { ...emptySong(state.song.style), title: 'Untitled' }; songChanged({ keepSelection: false }); });
 
 const tlWrap = $('.timeline-wrap');

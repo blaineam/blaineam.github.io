@@ -18,7 +18,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;800&family=JetBrains+Mono:wght@500;700&display=swap">
-<link rel="stylesheet" href="styles.css?v=eb92a81a">
+<link rel="stylesheet" href="styles.css?v=d0289590">
 </head>
 <body>
 <div class="machine">
@@ -35,7 +35,14 @@
     </nav>
     <div class="transport">
       <button id="play" class="btn play" aria-label="Play"><span class="ico">▶</span><span class="lbl">Play</span></button>
-      <span class="lcd" id="clock" aria-live="off">0:00 / 0:00</span>
+      <div class="lcd scrubber">
+        <span id="clock" aria-live="off">0:00 / 0:00</span>
+        <input type="range" id="scrub" min="0" max="1" step="0.0005" value="0" aria-label="Position (drag to jump)">
+      </div>
+      <div class="volume">
+        <button class="btn mute" id="mute" type="button" aria-label="Mute" aria-pressed="false">🔊</button>
+        <input type="range" id="volume" min="0" max="1" step="0.01" aria-label="Volume">
+      </div>
       <div class="menu">
         <button class="btn" id="export-btn" aria-haspopup="true" aria-expanded="false">Export ▾</button>
         <div class="menu-list" id="export-menu" hidden>
@@ -78,7 +85,9 @@
       <div class="dial wide"><span class="dial-label">Shape</span><div class="seg" id="m-contour"></div></div>
       <div class="dial"><span class="dial-label">Phrase form</span><div class="seg" id="m-form"></div></div>
       <div class="dial"><span class="dial-label">Register</span><div class="seg" id="m-octave"></div></div>
-      <div class="dial"><label class="dial-label" for="m-prog">Chords</label><select id="m-prog"></select></div>
+      <div class="dial"><label class="dial-label" for="m-prog">Chords</label><select id="m-prog"></select>
+        <input id="m-prog-text" class="prog-text" placeholder="or type chords: Imaj7-vi7-ii7-V7" aria-label="Type your own chords" autocomplete="off" spellcheck="false"></div>
+      <div class="dial"><span class="dial-label">Sound</span><div id="m-sound"></div></div>
       <div class="dial"><span class="dial-label">Backing</span><div class="seg" id="m-backing"></div></div>
       <div class="dial"><span class="dial-label">Drums</span><div class="seg" id="m-drums"></div></div>
     </section>
@@ -93,6 +102,7 @@
       <label class="mini">Mode <select id="c-mode"></select></label>
       <label class="mini">BPM <input id="c-bpm" type="number" min="50" max="200" class="num"></label>
       <span class="lcd-text" id="c-length"></span>
+      <div class="sounds" id="c-sounds" aria-label="Sounds"></div>
     </section>
 
     <section class="panel auto-bar" aria-label="Auto">
@@ -107,6 +117,10 @@
 
     <section class="board">
       <div class="palette" aria-label="Blocks — click or drag onto the timeline" id="palette"></div>
+      <div class="loop-bar">
+        <button class="chip" id="c-loop" type="button" aria-pressed="false">🔁 Loop off</button>
+        <span class="help" id="c-loop-help"></span>
+      </div>
       <div class="timeline-wrap">
         <div class="timeline" id="timeline" aria-label="Song timeline"></div>
         <div class="playhead" id="playhead" hidden></div>
@@ -178,10 +192,22 @@
   </footer>
 </div>
 
-<script type="module" src="app.js?v=eb92a81a"></script>
+<script type="module" src="app.js?v=d0289590"></script>
 <script data-tools-shell>
   /* Added by the portfolio's mirror (scripts/inject-tool-shell.py). */
   (function () {
+    var moved = /^#tom-import=([A-Za-z0-9_-]+)(?:\|(.*))?$/.exec(location.hash);
+    if (moved) {
+      try {
+        var packed = moved[1].replace(/-/g, '+').replace(/_/g, '/');
+        while (packed.length % 4) packed += '=';
+        var saved = JSON.parse(decodeURIComponent(escape(atob(packed))));
+        for (var key in saved) {
+          if (key.indexOf('tom') === 0 && localStorage.getItem(key) === null) localStorage.setItem(key, saved[key]);
+        }
+      } catch (e) { /* nothing usable to bring over */ }
+      history.replaceState(null, '', location.pathname + location.search + (moved[2] ? '#' + moved[2] : ''));
+    }
     try { localStorage.setItem('tools.tom.entered', '1'); } catch (e) {}
     function add() {
       var anchor = document.querySelector('footer a[href*="github.com/blaineam/Tom"]');

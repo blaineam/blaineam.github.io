@@ -9,7 +9,12 @@ one small inline script before </body> of the app's page. It:
     `tools.<slug>.entered`), so the marketing page at /tools/<slug>/ sends
     returning visitors straight into the app;
   * adds an "About <Name>" link back to that page (`../?about`, which the
-    marketing page never redirects away from) next to the app's GitHub link.
+    marketing page never redirects away from) next to the app's GitHub link;
+  * takes in what the app saved on its old address. tom.wemiller.com forwards
+    returning visitors with their `tom*` localStorage entries in the fragment
+    (`#tom-import=<base64url JSON>|<original hash>`); this fills in only keys
+    the new origin doesn't have yet and restores the original hash before the
+    app (a deferred module script) reads it.
 
 The link is built at runtime on purpose: Tom's service worker crawls the
 page's literal src/href attributes when it installs, and a literal link to the
@@ -31,6 +36,18 @@ APPS = {
 SCRIPT = """<script {marker}>
   /* Added by the portfolio's mirror (scripts/inject-tool-shell.py). */
   (function () {{
+    var moved = /^#{slug}-import=([A-Za-z0-9_-]+)(?:\\|(.*))?$/.exec(location.hash);
+    if (moved) {{
+      try {{
+        var packed = moved[1].replace(/-/g, '+').replace(/_/g, '/');
+        while (packed.length % 4) packed += '=';
+        var saved = JSON.parse(decodeURIComponent(escape(atob(packed))));
+        for (var key in saved) {{
+          if (key.indexOf('{slug}') === 0 && localStorage.getItem(key) === null) localStorage.setItem(key, saved[key]);
+        }}
+      }} catch (e) {{ /* nothing usable to bring over */ }}
+      history.replaceState(null, '', location.pathname + location.search + (moved[2] ? '#' + moved[2] : ''));
+    }}
     try {{ localStorage.setItem('tools.{slug}.entered', '1'); }} catch (e) {{}}
     function add() {{
       var anchor = document.querySelector('{selector}');

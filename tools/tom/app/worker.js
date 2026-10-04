@@ -1,6 +1,6 @@
 // Renders songs off the main thread so the UI never stutters.
-import { render } from './lib/arrange.mjs?v=eb92a81a';
-import { encodeWav } from './lib/wav.mjs?v=eb92a81a';
+import { render } from './lib/arrange.mjs?v=d0289590';
+import { encodeWav } from './lib/wav.mjs?v=d0289590';
 
 self.onmessage = (e) => {
   const { id, bp, wav } = e.data;
