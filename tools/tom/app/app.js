@@ -1,19 +1,19 @@
 // Tom — web music machine. Melody Machine, Lego-style Composer and Radio, all
 // driven by the same engine as the CLI (rendered in a Web Worker).
-import { STYLES, STYLE_IDS } from './lib/styles.mjs?v=d0289590';
-import { SCALES, CONTOUR_NAMES, parseKey, noteName, spell, parseProgression, layoutChords, chordName } from './lib/theory.mjs?v=d0289590';
-import { SOUNDS, SOUND_IDS, PALETTES, SLOTS, SLOT_NAMES } from './lib/sounds.mjs?v=d0289590';
+import { STYLES, STYLE_IDS } from './lib/styles.mjs?v=957369d2';
+import { SCALES, CONTOUR_NAMES, parseKey, noteName, spell, parseProgression, layoutChords, chordName } from './lib/theory.mjs?v=957369d2';
+import { SOUNDS, SOUND_IDS, PALETTES, SLOTS, SLOT_NAMES } from './lib/sounds.mjs?v=957369d2';
 import {
   BLOCK_TYPES, BLOCK_ORDER, DRUM_LEVELS, FORMS, makeBlock, emptySong, autoSong, autoFill, autoBlock,
   melodySong, validate,
-} from './lib/blueprint.mjs?v=d0289590';
-import { blockMelody, timeline, resolve } from './lib/arrange.mjs?v=d0289590';
-import { rng } from './lib/rng.mjs?v=d0289590';
-import { encodeWav } from './lib/wav.mjs?v=d0289590';
-import { toMidi } from './lib/midi.mjs?v=d0289590';
-import { tagOf, randomTag, melodyFromTag, melodyHash, songHash, songFromTag, decodeShare } from './lib/share.mjs?v=d0289590';
-import { STATIONS, MIX, stationName } from './lib/radio.mjs?v=d0289590';
-import { createRadio, radioLog, radioLogText, clearRadioLog } from './radio.js?v=d0289590';
+} from './lib/blueprint.mjs?v=957369d2';
+import { blockMelody, timeline, resolve } from './lib/arrange.mjs?v=957369d2';
+import { rng } from './lib/rng.mjs?v=957369d2';
+import { encodeWav } from './lib/wav.mjs?v=957369d2';
+import { toMidi } from './lib/midi.mjs?v=957369d2';
+import { tagOf, randomTag, melodyFromTag, melodyHash, songHash, songFromTag, decodeShare } from './lib/share.mjs?v=957369d2';
+import { STATIONS, MIX, stationName } from './lib/radio.mjs?v=957369d2';
+import { createRadio, radioLog, radioLogText, clearRadioLog } from './radio.js?v=957369d2';
 
 export const VERSION = '0.10.0';
 const BUILD = new URL(import.meta.url).searchParams.get('v'); // the deploy's commit, stamped by scripts/stamp.mjs
@@ -64,7 +64,7 @@ const state = {
 };
 
 // ─── rendering (worker) + playback ──────────────────────────────────────────
-const worker = new Worker(new URL('./worker.js?v=d0289590', import.meta.url), { type: 'module' });
+const worker = new Worker(new URL('./worker.js?v=957369d2', import.meta.url), { type: 'module' });
 let reqId = 0;
 const pending = new Map();
 worker.onmessage = (e) => { const p = pending.get(e.data.id); if (p) { pending.delete(e.data.id); e.data.ok ? p.resolve(e.data) : p.reject(new Error(e.data.error)); } };

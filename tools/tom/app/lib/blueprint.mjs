@@ -8,10 +8,10 @@
 //
 // Auto modes build whole songs, finish partial ones, or re-roll one block,
 // always leaving locked blocks alone.
-import { rng, seedOf } from './rng.mjs?v=d0289590';
-import { STYLES } from './styles.mjs?v=d0289590';
-import { CONTOUR_NAMES } from './theory.mjs?v=d0289590';
-import { pickSounds } from './sounds.mjs?v=d0289590';
+import { rng, seedOf } from './rng.mjs?v=957369d2';
+import { STYLES } from './styles.mjs?v=957369d2';
+import { CONTOUR_NAMES } from './theory.mjs?v=957369d2';
+import { pickSounds } from './sounds.mjs?v=957369d2';
 
 export const LAYER_NAMES = ['pad', 'arp', 'bass', 'drums', 'lead', 'counter', 'bells', 'octaves', 'riser', 'crash', 'filter'];
 export const DRUM_LEVELS = ['none', 'light', 'half', 'full', 'build'];

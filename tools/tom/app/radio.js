@@ -17,9 +17,9 @@
 // The lock screen and CarPlay get previous/next track buttons (not ±10 s):
 // Previous restarts a song past its first few seconds, otherwise it goes back
 // (the last song stays rendered, so that's instant).
-import { radioTrack, trackTitle, stationName, MIX } from './lib/radio.mjs?v=d0289590';
-import { STYLES } from './lib/styles.mjs?v=d0289590';
-import { encodeWav } from './lib/wav.mjs?v=d0289590';
+import { radioTrack, trackTitle, stationName, MIX } from './lib/radio.mjs?v=957369d2';
+import { STYLES } from './lib/styles.mjs?v=957369d2';
+import { encodeWav } from './lib/wav.mjs?v=957369d2';
 
 const AHEAD = 2;              // songs kept rendered beyond the one playing
 const RENDER_TIMEOUT = 150e3; // a full song renders in seconds; this means the worker is gone
@@ -57,7 +57,7 @@ export function createRadio({ onChange = () => {}, onTrack = () => {} } = {}) {
   let worker = null, reqId = 0;
   const pending = new Map();
   function spawn() {
-    worker = new Worker(new URL('./worker.js?v=d0289590', import.meta.url), { type: 'module' });
+    worker = new Worker(new URL('./worker.js?v=957369d2', import.meta.url), { type: 'module' });
     worker.onmessage = (e) => { const p = pending.get(e.data.id); if (!p) return; pending.delete(e.data.id); e.data.ok ? p.resolve(e.data) : p.reject(new Error(e.data.error)); };
     worker.onerror = (e) => { e.preventDefault?.(); radioLog('renderer error', e.message || ''); resetWorker(new Error(e.message || 'The renderer stopped')); };
   }

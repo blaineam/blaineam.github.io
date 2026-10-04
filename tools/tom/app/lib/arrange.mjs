@@ -7,13 +7,13 @@
 import {
   SR, Bus, samples, sidechain, reverbInPlace, echoInPlace, master, scale, mul, expdec,
   lowpass, highpass, noise, addInto,
-} from './dsp.mjs?v=d0289590';
-import * as I from './instruments.mjs?v=d0289590';
-import { STYLES, buildRoll } from './styles.mjs?v=d0289590';
-import { SCALES, parseKey, chord, chordOf, parseProgression, layoutChords, generateMelody } from './theory.mjs?v=d0289590';
-import { slotVoice } from './sounds.mjs?v=d0289590';
-import { rng } from './rng.mjs?v=d0289590';
-import { BLOCK_TYPES, melodyDefaults } from './blueprint.mjs?v=d0289590';
+} from './dsp.mjs?v=957369d2';
+import * as I from './instruments.mjs?v=957369d2';
+import { STYLES, buildRoll } from './styles.mjs?v=957369d2';
+import { SCALES, parseKey, chord, chordOf, parseProgression, layoutChords, generateMelody } from './theory.mjs?v=957369d2';
+import { slotVoice } from './sounds.mjs?v=957369d2';
+import { rng } from './rng.mjs?v=957369d2';
+import { BLOCK_TYPES, melodyDefaults } from './blueprint.mjs?v=957369d2';
 
 export const DEFAULT_TAIL = 2.35;
 
