@@ -196,18 +196,12 @@ jobs:
           # in next time) and link back to the marketing page from the app's footer.
           python3 scripts/inject-tool-shell.py
 
-      # Canonicalize the landing pages: the app repos still reference
-      # their old <slug>.wemiller.com subdomains in canonical / og / schema
-      # tags. We flip them to the new /apps/<slug>/ path at mirror time
-      # so the app repos don't need any edits.
+      # Canonicalize the mirrored sites: the app repos may still name their old
+      # <slug>.wemiller.com subdomains (which now only redirect here) in canonical / og /
+      # hreflang tags. Every such URL is flipped to /apps/<slug>/ at mirror time, and a page
+      # with no rel=canonical gets one naming its address here.
       - name: Rewrite subdomain URLs → /apps/<slug>/
-        run: |
-          set -euo pipefail
-          for slug in blip glint; do
-            f="apps/$slug/index.html"
-            [ -f "$f" ] || continue
-            sed -i "s|https://$slug.wemiller.com/|https://wemiller.com/apps/$slug/|g" "$f"
-          done
+        run: python3 scripts/canonicalize-mirrored.py blip glint haven lathe
 
       # The mirrored sites have no portfolio navigation of their own — they
       # are each app's site, hosted here. This adds one small pill (icon,
