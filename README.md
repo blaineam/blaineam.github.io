@@ -95,6 +95,43 @@ to GitHub Pages via two GitHub Actions workflows:
 `apps/projects.json` is the single source of truth for app metadata; the `/apps`
 showcase and home-page timeline are hand-curated views kept in step with it.
 
+### Store-link campaigns
+
+Every App Store, Google Play and Microsoft Store link carries the store's own campaign
+parameters, naming the page it sits on, so App Store Connect, Play Console and Partner
+Center can report which page sent a visitor. Nothing is tracked on the site or in the apps;
+these are plain URL parameters the stores define.
+
+| Store | Added to the link | Example (on `/apps/enter-space/pricing/`) |
+|---|---|---|
+| App Store | `pt=<provider token>&ct=wm-<page>&mt=8` | `ct=wm-enter-space-pricing` |
+| Google Play | `referrer=utm_source%3Dwemiller.com%26utm_medium%3Dwebsite%26utm_campaign%3D<page>` | `utm_campaign%3Denter-space-pricing` |
+| Microsoft Store | `cid=wm-<page>` | `cid=wm-enter-space-pricing` |
+
+[`scripts/store-links.py`](scripts/store-links.py) writes them, deriving the page name from
+the path (`wm-home`, `wm-apps`, `wm-tools-ark`, …; shortened with a hash past Apple's
+40-character limit). It covers every HTML page, the i18n dictionaries, `apps/projects.json`
+and this README, and re-running it changes nothing. Both workflows run it, the mirrored app
+sites included, so their source repos never carry the tags. Write bare store URLs in new
+pages; the deploy tags them.
+
+```sh
+python3 scripts/store-links.py            # tag everything outside the mirrored sites
+python3 scripts/store-links.py --check    # exit 1 if a link is untagged or stale
+```
+
+**Adding the App Store provider token.** Apple ignores `ct` until the link also carries
+`pt`, so until the token is set the links carry `ct` and `mt` alone. The token is the number
+in any campaign link that App Store Connect generates (App Analytics → Campaigns → Generate a
+Campaign Link). Change one line in [`scripts/store-links.json`](scripts/store-links.json):
+
+```json
+  "appStoreProviderToken": "123456789",
+```
+
+Push it and the deploy re-tags every page, mirrored sites too, and commits the result. To see
+it locally first, run `python3 scripts/store-links.py`.
+
 ### Images
 
 The photography — the home-page slideshow (`slides/`), the panoramas

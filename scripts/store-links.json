@@ -1,0 +1,20 @@
+{
+  "appStoreProviderToken": "",
+  "campaignPrefix": "wm-",
+  "maxCampaignLength": 40,
+  "playReferrer": {
+    "utm_source": "wemiller.com",
+    "utm_medium": "website"
+  },
+  "slugOverrides": {
+    "apps/projects.json": "apps",
+    "README.md": "readme"
+  },
+  "_scheme": [
+    "Every store link carries the slug of the page it sits on: the path with index.html, .html and a leading apps/ dropped, slashes as dashes; the home page is 'home', /apps/ is 'apps'.",
+    "App Store: ?pt=<appStoreProviderToken>&ct=<campaignPrefix><slug>&mt=8 (pt is left out while the token is empty; ct is shortened with a hash past maxCampaignLength).",
+    "Google Play: &referrer=utm_source=<utm_source>&utm_medium=<utm_medium>&utm_campaign=<slug>, URL-encoded.",
+    "Microsoft Store: ?cid=<campaignPrefix><slug>.",
+    "Paste the numeric provider token above, then run python3 scripts/store-links.py (the deploy workflow also runs it on every push)."
+  ]
+}

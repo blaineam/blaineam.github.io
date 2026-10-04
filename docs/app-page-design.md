@@ -361,7 +361,8 @@ rsynced from their repos and would be overwritten. Render into the source repo
   use the equivalent wording for their store. Depth pages: the sub-nav's store
   button and the closing button.
 - Link to `https://apps.apple.com/us/app/<name>/id<id>`;
-  `target="_blank" rel="noopener noreferrer"`.
+  `target="_blank" rel="noopener noreferrer"`. Write the bare URL:
+  `scripts/store-links.py` adds the campaign parameters (`ct=wm-<page>`) on deploy.
 - **Official badges**: only Apple's own localized badge artwork if ever added,
   swapped per language. Until then the styled pill button is correct.
 - **No store listing** (Aperion): the primary button links to its successor on

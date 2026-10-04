@@ -184,6 +184,13 @@ jobs:
       - name: Stamp cache busters on the mirrored sites
         run: python3 scripts/cache-bust.py --mirrored apps/blip apps/glint apps/haven apps/lathe
 
+      # Campaign parameters on the mirrored sites' store links (and Haven's i18n dictionaries,
+      # whose strings carry the same links), so the commit below matches what deploy publishes.
+      - name: Tag store links on the mirrored sites
+        run: |
+          python3 scripts/store-links.py --mirrored apps/blip apps/glint apps/haven apps/lathe tools/tom/app
+          python3 scripts/store-links.py --mirrored --check apps/blip apps/glint apps/haven apps/lathe tools/tom/app
+
       - name: Commit mirrored docs
         run: |
           set -euo pipefail

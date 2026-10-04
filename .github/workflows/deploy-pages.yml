@@ -68,6 +68,19 @@ jobs:
       - name: Re-stamp image, script and stylesheet cache busters
         run: python3 scripts/cache-bust.py --mirrored
 
+      # Store-native campaign parameters on every App Store / Google Play / Microsoft Store link
+      # (`ct=wm-<page>` and the provider token from scripts/store-links.json; Play's `referrer`;
+      # Microsoft's `cid`), so the store consoles report which page sent each visitor. The mirrored
+      # app sites are tagged here too — their repos never carry the tags. Pasting the provider token
+      # into store-links.json and pushing is all it takes to re-tag every page.
+      - name: Tag store links with their page's campaign
+        run: python3 scripts/store-links.py --mirrored
+
+      # The rewrite must be a fixed point: a second pass that would change anything means the
+      # tagger double-tags or disagrees with itself, and that should fail the deploy, not ship.
+      - name: Check store-link tags
+        run: python3 scripts/store-links.py --mirrored --check
+
       # Commit and push any regenerated poster files + cache update
       # back to `main`. This is the step the repo was missing —
       # previously posters only lived inside the Pages artifact, so:
@@ -94,10 +107,12 @@ jobs:
                   apps/*/assets/images/poster.jpg
           # Pages whose `?v=` stamps the re-stamp step just refreshed.
           git add -u '*.html' '*.css' 2>/dev/null || true
+          # Store links the tagging step just rewrote outside HTML.
+          git add -u 'i18n/*.json' 'apps/*/i18n/*.json' apps/projects.json README.md 2>/dev/null || true
           if git diff --cached --quiet; then
             echo "No poster changes to commit."
           else
-            git commit -m "chore(posters): regenerate and re-stamp via CI [skip ci]"
+            git commit -m "chore(posters): regenerate, re-stamp and tag store links via CI [skip ci]"
             git push
           fi
 
