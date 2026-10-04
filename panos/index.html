@@ -416,17 +416,19 @@
         window.currentUrl = window.location.href.replace("index.html", "");
             $(document).ready(function(){
                 var N = 8;
-                var urls = Array.from({length: N}, (_, index) => "panoramas/bmp-pano-sphere-" + (index + 1) + ".jpg").reverse();
+                var urls = Array.from({length: N}, (_, index) => "panoramas/bmp-pano-sphere-" + (index + 1) + ".avif").reverse();
                 for ( var i = 0; i < urls.length; i++ ) {
                     url = urls[i];
                     $('.gallery').append('<a data-fancybox="sphere-gallery" data-fancybox data-type="iframe" data-src="pannellum/pannellum.htm#panorama=../' + url + '&amp;autoLoad=true"  href="#"><img loading="lazy" src="' + (url.replace('sphere-','sphere-thumb-')) + '" /> </a>');
                 }
 
                 var N = 99;
-                var urls = Array.from({length: N}, (_, index) => "panoramas/bmp-pano-" + (index + 1) + ".jpg").reverse();
+                // AVIF, except pano 95: at 65,500 px wide it is past what browsers will decode
+                // as AVIF (32,768 px a side), so it stays a JPEG. Its thumbnail is AVIF like the rest.
+                var urls = Array.from({length: N}, (_, index) => "panoramas/bmp-pano-" + (index + 1) + (index + 1 === 95 ? ".jpg" : ".avif")).reverse();
                 for ( var i = 0; i < urls.length; i++ ) {
                     url = urls[i];
-                    $('.gallery').append('<a data-fancybox="pano-gallery" data-fancybox data-type="image" data-src="'+ url + '"  href="#"><img loading="lazy" src="' + (url.replace('pano-','pano-thumb-')) + '" /> </a>');
+                    $('.gallery').append('<a data-fancybox="pano-gallery" data-fancybox data-type="image" data-src="'+ url + '"  href="#"><img loading="lazy" src="' + (url.replace('pano-','pano-thumb-').replace(/\.jpg$/, '.avif')) + '" /> </a>');
                 }
             });
         </script>

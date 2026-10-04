@@ -95,6 +95,29 @@ to GitHub Pages via two GitHub Actions workflows:
 `apps/projects.json` is the single source of truth for app metadata; the `/apps`
 showcase and home-page timeline are hand-curated views kept in step with it.
 
+### Images
+
+The photography — the home-page slideshow (`slides/`), the panoramas
+(`panos/panoramas/`), the photo journals (`books/media/`) and the timeline icons
+(`projects/`) — is AVIF, encoded with
+[Lathe](https://github.com/blaineam/Lathe)'s `lathe-image`: each picture at
+the lowest quality whose result still matches the original by structural
+similarity, rather than one quality for everything.
+
+```sh
+# photographs: SSIM ≥ 0.97 overall and ≥ 0.92 in the worst 32×32 region
+find slides -name '*.jpg' | lathe-image --min-ssim 0.97 --min-region-ssim 0.92 --metadata strip -
+# icons for the 30 px timeline slot
+lathe-image --min-ssim 0.98 --min-region-ssim 0.95 --max-side 128 --metadata strip projects/*.png
+```
+
+The galleries build their URLs in JavaScript, so a gallery is all AVIF or not at all. The
+exception is `bmp-pano-95.jpg`: at 65,500 px wide it is past what browsers will
+decode as AVIF, so the panorama page asks for that one as a JPEG. `og:image`
+posters, favicons and app icons stay JPEG/PNG — social crawlers and home-screen
+icons don't all read AVIF. App-page screenshots are still WebP, from
+`scripts/sync-app-screens.py`.
+
 ### Local preview
 
 ```sh
