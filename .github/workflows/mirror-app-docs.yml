@@ -241,6 +241,9 @@ jobs:
             echo "No upstream doc changes — nothing to mirror."
           else
             git commit -m "chore(mirror): sync blip/glint/haven/lathe sites → /apps, tom + monkr → /tools [skip ci]"
+            # deploy-pages commits regenerated posters to main too; a run that lands while this one
+            # is building would otherwise reject the push. Only generated files on both sides.
+            git pull --rebase origin main
             git push
             # A push made with GITHUB_TOKEN (and [skip ci]) starts no workflow, so the mirror
             # would only go live with the next human push. A dispatch is allowed to start one.
