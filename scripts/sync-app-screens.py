@@ -11,9 +11,9 @@ eight in ASC-locale subdirectories beside it:
 
 This script frames those raw captures through the app's transparent web Monkr project (the same
 one scripts/render-site-frames.py uses: store frame, no gradient, no store caption — the page says
-it in its own type), trims the canvas, and writes WebP at the page's 1x and 2x widths:
+it in its own type), trims the canvas, and writes AVIF at the page's 1x and 2x widths:
 
-    apps/<slug>/assets/screens/<lang>/<scene>-<width>.webp
+    apps/<slug>/assets/screens/<lang>/<scene>-<width>.avif
     apps/<slug>/assets/screens/manifest.json
 
 The manifest lists every file with its content hash. i18n/i18n.js reads it to swap a tagged
@@ -27,6 +27,13 @@ gradient and headline baked in. On a page they read as an advert pasted into an 
     python3 scripts/sync-app-screens.py scripture-alone   # one page
     python3 scripts/sync-app-screens.py scripture-alone --force   # re-render even if unchanged
     python3 scripts/sync-app-screens.py --list            # which app repos have per-locale captures
+
+The AVIF is written by Lathe's `lathe-image` (github.com/blaineam/Lathe), each file at the lowest
+quality whose result still matches the lossless render by structural similarity — so a flat
+settings screen gets fewer bytes than a photo-heavy one. Build it once and put it on PATH, or
+point LATHE_IMAGE at it:
+
+    swift build -c release --product lathe-image --package-path ~/Documents/scripts/Lathe
 
 Idempotent: each output records a hash of its inputs (capture bytes, Monkr project, widths) in
 the manifest, and is only re-rendered when that changes. Re-running after an app's localized
@@ -43,8 +50,8 @@ from __future__ import annotations
 import argparse
 import hashlib
 import importlib.util
-import io
 import json
+import os
 import pathlib
 import shutil
 import subprocess
@@ -66,7 +73,19 @@ ASC_TO_SITE = {
 }
 SITE_LANGS = ["en", *ASC_TO_SITE.values()]
 
-WEBP_QUALITY = 82
+# The SSIM bounds lathe-image searches against: whole picture, and its worst 32 × 32 region.
+# Set where the WebP q82 these replaced measured against the same lossless renders (0.985–0.996
+# overall, 0.91–0.96 in the worst region), so the move to AVIF saves bytes, not fidelity.
+AVIF_MIN_SSIM = 0.98
+AVIF_MIN_REGION_SSIM = 0.93
+# The highest quality the search may pick. Past it, the region bound is being chased into
+# near-black noise — a star field, a dark gradient — that WebP q82 had already lost: Luma's
+# Adjust screen sits at 0.88 there from q0.7 to q0.9 and only passes at q0.96, at twice the
+# WebP's bytes with no visible difference. A render that can't pass below the ceiling is
+# encoded at it.
+AVIF_QUALITY_CEILING = 0.8
+ENCODER = (f"lathe-image avif ssim>={AVIF_MIN_SSIM}/{AVIF_MIN_REGION_SSIM} "
+           f"q<={AVIF_QUALITY_CEILING}")
 
 
 def _frames_module():
@@ -104,12 +123,61 @@ def find_scene(directory: pathlib.Path, scene: str) -> pathlib.Path | None:
     return matches[0] if len(matches) == 1 else None
 
 
-def webp_bytes(image: Image.Image, width: int) -> bytes:
+def lathe_image() -> str:
+    found = os.environ.get("LATHE_IMAGE") or shutil.which("lathe-image")
+    default = pathlib.Path.home() / "Documents/scripts/Lathe/.build/release/lathe-image"
+    if not found and default.is_file():
+        found = str(default)
+    if not found:
+        raise SystemExit("needs Lathe's lathe-image on PATH or in LATHE_IMAGE — build it with "
+                         "`swift build -c release --product lathe-image` in the Lathe repo")
+    return found
+
+
+def avif_encode(pngs: list[pathlib.Path]) -> dict[pathlib.Path, tuple[pathlib.Path, list[int]]]:
+    """Each lossless PNG → (an AVIF beside it, its [width, height]), via lathe-image.
+
+    Fails loudly on any miss. The size is the AVIF's own: lathe-image crops an odd edge so the
+    file decodes in every browser, so it can be a pixel short of the PNG.
+    """
+    written: dict[pathlib.Path, tuple[pathlib.Path, list[int]]] = {}
+
+    def run(arguments: list[str], batch: list[pathlib.Path]) -> list[pathlib.Path]:
+        """Encodes `batch`; returns the inputs no quality in range could pass."""
+        result = subprocess.run([lathe_image(), *arguments, "--metadata", "strip", "-"],
+                                input="\n".join(str(p) for p in batch),
+                                capture_output=True, text=True)
+        unmet = []
+        for line in result.stdout.splitlines():
+            report = json.loads(line)
+            source = pathlib.Path(report["source"])
+            if report["status"] == "no-quality":
+                unmet.append(source)
+            elif report["status"] == "written":
+                written[source] = (pathlib.Path(report["output"]),
+                                   [report["width"], report["height"]])
+            else:
+                raise SystemExit(f"lathe-image: {source}: {report['status']} "
+                                 f"{report.get('error') or ''}")
+        if result.returncode != 0:
+            sys.stderr.write(result.stderr)
+            raise SystemExit("lathe-image failed")
+        return unmet
+
+    unmet = run(["--min-ssim", str(AVIF_MIN_SSIM), "--min-region-ssim", str(AVIF_MIN_REGION_SSIM),
+                 "--range", f"0.4-{AVIF_QUALITY_CEILING}"], pngs)
+    if unmet:
+        run(["--quality", str(AVIF_QUALITY_CEILING)], unmet)
+    if len(written) != len(pngs):
+        raise SystemExit("lathe-image did not encode every render")
+    return written
+
+
+def resized_png(image: Image.Image, width: int, path: pathlib.Path) -> pathlib.Path:
     height = round(image.height * width / image.width)
     resized = image.resize((width, height), Image.LANCZOS) if width != image.width else image
-    buffer = io.BytesIO()
-    resized.save(buffer, "WEBP", quality=WEBP_QUALITY, method=6, alpha_quality=90)
-    return buffer.getvalue()
+    resized.save(path, "PNG")
+    return path
 
 
 def monkr_render(project: pathlib.Path, shots: list[pathlib.Path], out: pathlib.Path,
@@ -193,8 +261,8 @@ def sync_page(slug: str, page: dict, dest: pathlib.Path, app_dir: pathlib.Path,
                                          "— it is a framed render, not a capture")
                     key = f"{lang}/{scene}"
                     fingerprint = sha(shot.read_bytes() + project_hash.encode()
-                                      + json.dumps([widths, scale]).encode())
-                    outputs = [dest / lang / f"{scene}-{w}.webp" for w in widths]
+                                      + json.dumps([widths, scale, ENCODER]).encode())
+                    outputs = [dest / lang / f"{scene}-{w}.avif" for w in widths]
                     if (not force and inputs.get(key) == fingerprint
                             and all(p.is_file() for p in outputs)):
                         skipped += 1
@@ -207,7 +275,8 @@ def sync_page(slug: str, page: dict, dest: pathlib.Path, app_dir: pathlib.Path,
                 out.mkdir()
                 framed = monkr_render(project, [s for _, s, _ in todo], out, scale)
                 (dest / lang).mkdir(parents=True, exist_ok=True)
-                for (scene, _shot, fingerprint), png in zip(todo, framed):
+                sized: list[tuple[str, int, pathlib.Path]] = []
+                for (scene, _shot, _fingerprint), png in zip(todo, framed):
                     with Image.open(png) as image:
                         image = image.convert("RGBA")
                         box = image.getbbox()
@@ -217,12 +286,20 @@ def sync_page(slug: str, page: dict, dest: pathlib.Path, app_dir: pathlib.Path,
                             if w > image.width:
                                 raise SystemExit(f"{slug}: {scene} is {image.width}px wide, "
                                                  f"can't make {w}px — lower the width or raise scale")
-                            data = webp_bytes(image, w)
-                            name = f"{lang}/{scene}-{w}.webp"
-                            (dest / name).write_bytes(data)
-                            files[name] = sha(data)[:8]
-                        big = widths[-1]
-                        sizes[scene] = [big, round(image.height * big / image.width)]
+                            sized.append((scene, w, resized_png(image, w, out / f"{scene}-{w}.png")))
+                encoded = avif_encode([png for _, _, png in sized])
+                for scene, w, png in sized:
+                    avif, size = encoded[png]
+                    data = avif.read_bytes()
+                    name = f"{lang}/{scene}-{w}.avif"
+                    (dest / name).write_bytes(data)
+                    files[name] = sha(data)[:8]
+                    # The WebP this render replaces, from before the site moved to AVIF.
+                    files.pop(f"{lang}/{scene}-{w}.webp", None)
+                    (dest / lang / f"{scene}-{w}.webp").unlink(missing_ok=True)
+                    if w == widths[-1]:
+                        sizes[scene] = size
+                for scene, _shot, fingerprint in todo:
                     inputs[f"{lang}/{scene}"] = fingerprint
                     written += 1
                     print(f"  ✓ {slug} {lang:7} {scene}")
@@ -240,7 +317,7 @@ def sync_page(slug: str, page: dict, dest: pathlib.Path, app_dir: pathlib.Path,
     if not manifest_path.is_file() or manifest_path.read_text() != text:
         dest.mkdir(parents=True, exist_ok=True)
         manifest_path.write_text(text)
-    total = sum(p.stat().st_size for p in dest.rglob("*.webp"))
+    total = sum(p.stat().st_size for p in dest.rglob("*.avif"))
     print(f"{slug}: {written} rendered, {skipped} unchanged; "
           f"{len(files)} files, {total / 1024:.0f} KB across {', '.join(manifest['langs'])}")
     return manifest

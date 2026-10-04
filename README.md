@@ -115,8 +115,12 @@ The galleries build their URLs in JavaScript, so a gallery is all AVIF or not at
 exception is `bmp-pano-95.jpg`: at 65,500 px wide it is past what browsers will
 decode as AVIF, so the panorama page asks for that one as a JPEG. `og:image`
 posters, favicons and app icons stay JPEG/PNG — social crawlers and home-screen
-icons don't all read AVIF. App-page screenshots are still WebP, from
-`scripts/sync-app-screens.py`.
+icons don't all read AVIF.
+
+App-page screenshots are AVIF too. `scripts/sync-app-screens.py` frames each locale's raw
+capture through Monkr and hands the lossless render to `lathe-image` (SSIM ≥ 0.98 overall,
+≥ 0.93 in the worst region, quality capped at 0.8), so a re-sync stays AVIF. Put `lathe-image`
+on PATH or point `LATHE_IMAGE` at it.
 
 ### Local preview
 

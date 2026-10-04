@@ -4,37 +4,37 @@
     "en"
   ],
   "files": {
-    "en/01-camera-400.webp": "72351bc5",
-    "en/01-camera-800.webp": "025d5588",
-    "en/02-targets-400.webp": "9338cd26",
-    "en/02-targets-800.webp": "91f1b2be",
-    "en/03-plan-400.webp": "abb827d4",
-    "en/03-plan-800.webp": "78b74377",
-    "en/camera-480.webp": "28af8ff3",
-    "en/camera-960.webp": "a523c9c3"
+    "en/01-camera-400.avif": "3a0dae33",
+    "en/01-camera-800.avif": "6fa95be2",
+    "en/02-targets-400.avif": "5ff8cc3c",
+    "en/02-targets-800.avif": "30143a12",
+    "en/03-plan-400.avif": "2fb8f818",
+    "en/03-plan-800.avif": "6b71edbe",
+    "en/camera-480.avif": "a4e461e2",
+    "en/camera-960.avif": "21e67ef6"
   },
   "sizes": {
     "01-camera": [
       800,
-      1655
+      1654
     ],
     "02-targets": [
       800,
-      1655
+      1654
     ],
     "03-plan": [
       800,
-      1655
+      1654
     ],
     "camera": [
       960,
-      1253
+      1252
     ]
   },
   "inputs": {
-    "en/01-camera": "b2362ee9e6da6be946dc4b8a06653ee157cf7e84",
-    "en/02-targets": "b23de938456e88f53d0c5145b675ca6e3d632d59",
-    "en/03-plan": "b937ec5340dadba9f49207d0d8dfe8ce07c25ad6",
-    "en/camera": "40f465bc159b8663c5b18a914d905749d02e093b"
+    "en/01-camera": "018184784fbeafca5cdc6aa39b0977fd90b5ed93",
+    "en/02-targets": "ab09fd8b54a3b6c7ed36ebc6fb10db9c738b6b62",
+    "en/03-plan": "04704fd28b987abeda49fddbf0e3475283572da0",
+    "en/camera": "05e3c1b43a0c360c1ef462ceab2a119340af5f8e"
   }
 }
