@@ -158,7 +158,7 @@
   <h1 data-i18n-html="a-private-home-for.a0aa8b">A private home<br /><span class="h-grad">for your people.</span></h1>
   <p class="hv-hero-standfirst" data-i18n="photos-stories-messages-and.5a148f">Photos, stories, messages and calls with the people you love. End-to-end encrypted, peer to peer, and free, with no one in the middle.</p>
   <div class="hv-cta">
-    <a class="btn hv-get" id="hero-download" href="https://apps.apple.com/app/id6782147901" data-cta data-i18n="download-haven.5a76dc">Download Haven</a>
+    <a class="btn hv-get" id="hero-download" href="https://apps.apple.com/app/id6782147901?ct=wm-haven&mt=8" data-cta data-i18n="download-haven.5a76dc">Download Haven</a>
   </div>
   <p class="hv-alt-links">
     <a href="#download" data-i18n="every-platform.97f0d9">Every platform</a>
@@ -304,14 +304,14 @@
 <section class="hv-closing" id="download">
   <h2 class="hv-display" data-i18n-html="a-private-home-for.a0aa8b">A private home<br /><span class="h-grad">for your people.</span></h2>
   <div class="hv-cta">
-    <a class="btn hv-get" id="closing-download" href="https://apps.apple.com/app/id6782147901" data-cta data-i18n="download-haven.5a76dc">Download Haven</a>
+    <a class="btn hv-get" id="closing-download" href="https://apps.apple.com/app/id6782147901?ct=wm-haven&mt=8" data-cta data-i18n="download-haven.5a76dc">Download Haven</a>
   </div>
   <p class="hv-platforms" id="hv-platforms">
     <span data-i18n="also-on.f4c9f3">Also on</span>
-    <a data-dl="ios" href="https://apps.apple.com/app/id6782147901" rel="noopener" data-i18n="iphone-ipad.0e7acd">iPhone &amp; iPad</a><span class="hv-sep" aria-hidden="true">·</span>
-    <a data-dl="macos" href="https://apps.apple.com/app/id6782147901" rel="noopener">Mac</a><span class="hv-sep" aria-hidden="true">·</span>
-    <a data-dl="android" href="https://play.google.com/store/apps/details?id=com.blaineam.haven" rel="noopener" data-i18n="android.1928f9">Android</a><span class="hv-sep" aria-hidden="true">·</span>
-    <a data-dl="windows" href="https://apps.microsoft.com/store/detail/9NKTFH1MF4LM" rel="noopener" data-i18n="windows.26d9c2">Windows</a><span class="hv-sep" aria-hidden="true">·</span>
+    <a data-dl="ios" href="https://apps.apple.com/app/id6782147901?ct=wm-haven&mt=8" rel="noopener" data-i18n="iphone-ipad.0e7acd">iPhone &amp; iPad</a><span class="hv-sep" aria-hidden="true">·</span>
+    <a data-dl="macos" href="https://apps.apple.com/app/id6782147901?ct=wm-haven&mt=8" rel="noopener">Mac</a><span class="hv-sep" aria-hidden="true">·</span>
+    <a data-dl="android" href="https://play.google.com/store/apps/details?id=com.blaineam.haven&referrer=utm_source%3Dwemiller.com%26utm_medium%3Dwebsite%26utm_campaign%3Dhaven" rel="noopener" data-i18n="android.1928f9">Android</a><span class="hv-sep" aria-hidden="true">·</span>
+    <a data-dl="windows" href="https://apps.microsoft.com/detail/9NKTFH1MF4LM?cid=wm-haven" rel="noopener" data-i18n="windows.26d9c2">Windows</a><span class="hv-sep" aria-hidden="true">·</span>
     <a data-dl="linux" href="https://github.com/blaineam/haven/releases/latest" rel="noopener" data-i18n="linux.83ad85">Linux</a><span class="hv-sep" aria-hidden="true">·</span>
     <a data-dl="steamdeck" href="https://github.com/blaineam/haven/releases/latest" rel="noopener" data-i18n="steam-deck.2e7e57">Steam Deck</a><span class="hv-sep" aria-hidden="true">·</span>
     <a data-dl="relay" href="relay/" data-i18n="relay.9f537f">Relay</a>
@@ -367,17 +367,17 @@ var DOWNLOADS = {
   APPLE_BETA_URL: "",        /* TODO: paste public TestFlight invite URL only if external testing reopens */
   // App Store product URL — iOS + macOS both ship here. Deliberately version-free: the live
   // build is whatever the store is serving (PROGRESS.md carries the per-platform state).
-  APP_STORE_URL: "https://apps.apple.com/app/id6782147901",
-  MAC_APP_STORE_URL: "https://apps.apple.com/app/id6782147901",
+  APP_STORE_URL: "https://apps.apple.com/app/id6782147901?ct=wm-haven&mt=8",
+  MAC_APP_STORE_URL: "https://apps.apple.com/app/id6782147901?ct=wm-haven&mt=8",
   // Android: store-only. The GUI app is no longer attached to GitHub releases — it ships
   // through Google Play, where it is now LIVE. The listing URL below wins wherever an Android
   // download is offered (hero button + Android card). Empty it again only if the listing is
   // ever pulled — the card then falls back to an honest "coming soon" instead of a dead link.
-  PLAY_BETA_URL: "https://play.google.com/store/apps/details?id=com.blaineam.haven",
+  PLAY_BETA_URL: "https://play.google.com/store/apps/details?id=com.blaineam.haven&referrer=utm_source%3Dwemiller.com%26utm_medium%3Dwebsite%26utm_campaign%3Dhaven",
   // Windows: store-only now. The GUI installers are no longer attached to GitHub releases — the
   // app ships through the Microsoft Store, where it is now LIVE. The store URL below wins wherever
   // a Windows download is offered (hero button + Windows card).
-  WINDOWS_STORE_URL: "https://apps.microsoft.com/store/detail/9NKTFH1MF4LM",
+  WINDOWS_STORE_URL: "https://apps.microsoft.com/detail/9NKTFH1MF4LM?cid=wm-haven",
   // Desktop / Linux / relay builds are served from the latest GitHub release and
   // resolved automatically by the download script below — no fixed URL needed.
   GITHUB_RELEASE_URL: "https://github.com/blaineam/haven/releases/latest"
