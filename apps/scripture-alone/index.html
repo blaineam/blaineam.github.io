@@ -269,7 +269,6 @@
     .sa-alt-links a:hover { border-bottom-color: rgba(251, 241, 223, 0.8); }
     .sa-closing .sa-alt-links { color: var(--sa-quiet); }
     .sa-closing .sa-alt-links a { color: var(--sa-ink); border-bottom-color: var(--sa-rule); }
-    .sa-alt-links + .sa-alt-links { margin-top: 0.7rem; }
 
     /* ---- Privacy: the night sky again ----------------------------------- */
     .sa-privacy {
@@ -360,6 +359,145 @@
     .faq-answer { padding: 0; }
     .faq-item.active .faq-answer { padding: 0 0 1.4rem; }
     .faq-answer p { font-size: 1rem; line-height: 1.68; color: var(--sa-body); }
+
+    /* ---- User Guide: a book you can pick up ------------------------------
+       Drawn, not photographed: the PDF's warm cover, a spine on the left,
+       page edges on the right, and two of the page's own renders peeking up
+       from the bottom (localized like every other render). The book keeps
+       its warm colours in dark mode; the copy beside it uses the tokens. */
+    .sa-guide {
+      border-top: 1px solid var(--sa-rule);
+      padding: clamp(4rem, 9vw, 6.5rem) 16px;
+      scroll-margin-top: 70px;
+    }
+    .sa-guide-inner {
+      max-width: 860px;
+      margin: 0 auto;
+      display: grid;
+      gap: clamp(2.6rem, 6vw, 4.5rem);
+      align-items: center;
+      justify-items: center;
+      text-align: center;
+    }
+    .sa-guide-copy { max-width: 30rem; }
+    .sa-guide-copy .sa-display { font-size: clamp(1.9rem, 4vw, 2.8rem); margin-bottom: 1rem; }
+    .sa-guide-copy .sa-lede { margin-bottom: 1.8rem; }
+    .sa-guide-cta { margin: 0; }
+    .sa-guide-cta a {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5em;
+      padding: 0.75rem 1.4rem;
+      border-radius: 999px;
+      border: 1.5px solid var(--sa-ink);
+      color: var(--sa-ink);
+      font-weight: 600;
+      text-decoration: none;
+      transition: background-color 0.2s ease, color 0.2s ease;
+    }
+    .sa-guide-cta a::after { content: "↓"; font-weight: 400; }
+    .sa-guide-cta a:hover { background: var(--sa-ink); color: var(--sa-paper); }
+    .sa-guide-cta a:focus-visible { outline: 3px solid var(--sa-sun); outline-offset: 3px; }
+    @media (min-width: 760px) {
+      .sa-guide-inner { grid-template-columns: auto minmax(0, 1fr); justify-items: start; text-align: left; }
+    }
+
+    .sa-book-stage { perspective: 1400px; padding: 0 12px 12px 0; }
+    .sa-book {
+      position: relative;
+      display: block;
+      width: clamp(196px, 24vw, 236px);
+      aspect-ratio: 2 / 3;
+      container-type: inline-size;
+      text-decoration: none;
+      transform: rotateY(-14deg) rotateX(2deg);
+      transform-origin: 40% 50%;
+      transition: transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
+      filter: drop-shadow(0 26px 30px rgba(74, 38, 12, 0.26)) drop-shadow(0 5px 8px rgba(74, 38, 12, 0.16));
+    }
+    .sa-book-stage:hover .sa-book,
+    .sa-guide-inner:has(.sa-guide-cta a:hover) .sa-book { transform: none; }
+    /* The block of pages behind the cover: stacked off-white edges, right and bottom. */
+    .sa-book-pages {
+      position: absolute;
+      inset: 3px 0 0 6px;
+      border-radius: 2px 8px 8px 2px;
+      background: #F6EEDD;
+      box-shadow:
+        2px 2px 0 #FBF6EB, 3px 3px 0 #DCCDB2,
+        5px 5px 0 #FBF6EB, 6px 6px 0 #D6C6A9,
+        8px 8px 0 #F7EFDF, 9px 9px 0 #CDBB9C;
+    }
+    .sa-book-cover {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      border-radius: 3px 9px 9px 3px;
+      background:
+        radial-gradient(circle at 80% 70%, rgba(255, 250, 236, 0.95) 0%, rgba(255, 240, 210, 0.6) 9%, rgba(255, 226, 178, 0.2) 22%, transparent 36%),
+        linear-gradient(170deg, #fbe7c8 0%, #f2c58f 38%, #b86a2c 100%);
+      padding: 15cqw 10cqw 0 17cqw;
+      text-align: left;
+    }
+    /* The spine, and the crease where the cover hinges. */
+    .sa-book-cover::before {
+      content: "";
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: 7.5cqw;
+      background: linear-gradient(90deg, rgba(92, 44, 12, 0.55), rgba(120, 60, 20, 0.30) 70%, rgba(120, 60, 20, 0.18));
+      z-index: 2;
+    }
+    .sa-book-cover::after {
+      content: "";
+      position: absolute;
+      inset: 0 auto 0 7.5cqw;
+      width: 1.2cqw;
+      background: linear-gradient(90deg, rgba(255, 246, 228, 0.65), rgba(255, 246, 228, 0));
+      z-index: 2;
+    }
+    .sa-book-eyebrow {
+      display: block;
+      font-size: 4.4cqw;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #8A4A1C;
+      margin-bottom: 3.5cqw;
+    }
+    .sa-book-title {
+      display: block;
+      font-family: var(--sa-serif);
+      font-weight: 700;
+      font-size: 11.5cqw;
+      line-height: 1.04;
+      letter-spacing: -0.01em;
+      color: #3A1F0E;
+      text-wrap: balance;
+    }
+    .sa-book-shots {
+      position: absolute;
+      left: 12cqw;
+      right: 30cqw;
+      bottom: 0;
+      display: flex;
+      justify-content: center;
+      gap: 4cqw;
+    }
+    .sa-book-shots img {
+      width: 32cqw;
+      height: auto;
+      margin-bottom: -32cqw;
+      filter: drop-shadow(0 6px 10px rgba(74, 30, 8, 0.32));
+    }
+    .sa-book-shots img + img { margin-bottom: -41cqw; }
+    @media (prefers-color-scheme: dark) {
+      .sa-book { filter: drop-shadow(0 26px 34px rgba(0, 0, 0, 0.55)) drop-shadow(0 5px 8px rgba(0, 0, 0, 0.35)); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .sa-book { transform: none; transition: none; }
+    }
+    :lang(ja) .sa-book-eyebrow, :lang(zh) .sa-book-eyebrow, :lang(ko) .sa-book-eyebrow { letter-spacing: 0.12em; }
 
     /* ---- Closing -------------------------------------------------------- */
     .sa-closing {
@@ -811,6 +949,31 @@
     <p class="sa-faq-more"><a class="learn-more" href="faq/" data-i18n="see-all-questions.237fee">See all questions</a></p>
   </section>
 
+  <!-- The User Guide: after the questions, before the button — for the reader
+       who wants the whole picture. A book, not a feature list. -->
+  <section class="sa-guide" id="user-guide">
+    <div class="sa-guide-inner">
+      <div class="sa-book-stage" data-reveal>
+        <a class="sa-book" href="https://github.com/blaineam/Scripture-Alone/releases/download/user-guide/UserGuide-en.pdf" target="_blank" rel="noopener" aria-hidden="true" tabindex="-1" data-i18n-attr="href:https-github-com-blaineam.64d2ce">
+          <span class="sa-book-pages"></span>
+          <span class="sa-book-cover">
+            <span class="sa-book-eyebrow" data-i18n="user-guide.bec249">User Guide</span>
+            <span class="sa-book-title" data-i18n="scripture-alone-bible.4a7c30">Scripture Alone Bible</span>
+            <span class="sa-book-shots">
+              <img src="assets/screens/en/01-reader-400.avif?v=3024d0c8" width="400" height="828" alt="" loading="lazy" decoding="async" data-i18n-src>
+              <img src="assets/screens/en/03-study-400.avif?v=702fa56f" width="400" height="828" alt="" loading="lazy" decoding="async" data-i18n-src>
+            </span>
+          </span>
+        </a>
+      </div>
+      <div class="sa-guide-copy" data-reveal>
+        <h2 class="sa-display" data-i18n="the-user-guide.91067d">The User Guide</h2>
+        <p class="sa-lede" data-i18n="an-illustrated-guide-to.2803be">An illustrated guide to every feature, in your language. It’s in the app too, under Aa › User Guide.</p>
+        <p class="sa-guide-cta" data-i18n-html="download-the-pdf.604a1a"><a href="https://github.com/blaineam/Scripture-Alone/releases/download/user-guide/UserGuide-en.pdf" target="_blank" rel="noopener">Download the PDF</a></p>
+      </div>
+    </div>
+  </section>
+
   <!-- Closing: the promise again, and the one button. -->
   <section class="sa-closing">
     <img src="assets/images/icon.png?v=5ef7dc50" alt="" width="1024" height="1024" loading="lazy">
@@ -823,7 +986,6 @@
       <span aria-hidden="true">·</span>
       <a href="#android-beta" data-i18n="android-beta.3940f1">Android beta</a>
     </p>
-    <p class="sa-alt-links" data-i18n-html="user-guide-pdf.59e82e"><a href="https://github.com/blaineam/Scripture-Alone/releases/download/user-guide/UserGuide-en.pdf" target="_blank" rel="noopener">User Guide (PDF)</a></p>
   </section>
   <footer class="footer">
     <div class="footer-content">
