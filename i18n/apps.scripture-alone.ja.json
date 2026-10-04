@@ -69,7 +69,7 @@
   "this-passage-is-too.ce073d": "この箇所は長すぎて、リンクからは表示できません。",
   "this-share-link-is.5d635d": "この共有リンクは不完全か壊れているため、聖句を表示できません。",
   "to-join-join-the.9646c8": "参加するには、まず<a href=\"https://groups.google.com/g/scripture-alone-android-beta\" target=\"_blank\" rel=\"noopener noreferrer\">ベータ版グループに参加</a>し、同じ Google アカウントで<a href=\"https://play.google.com/apps/testing/com.blainemiller.scripturealone\" target=\"_blank\" rel=\"noopener noreferrer\">Google Play のテストに登録</a>してから、Google Play でインストールしてください。「テストはまだ利用できません」と表示される場合は、最初のビルドが Google の審査中です。1〜2 日後にもう一度お試しください。",
-  "user-guide-pdf.53a4d1": "<a href=\"guide/UserGuide-ja.pdf\" target=\"_blank\" rel=\"noopener\">ユーザガイド（PDF）</a>",
+  "user-guide-pdf.59e82e": "<a href=\"https://github.com/blaineam/Scripture-Alone/releases/download/user-guide/UserGuide-ja.pdf\" target=\"_blank\" rel=\"noopener\">ユーザガイド（PDF）</a>",
   "verse-of-the-day.25f8d1": "ホーム画面とロック画面に置ける「今日の聖句」ウィジェットと、オフラインで読める Apple Watch アプリ。メモは、あなた自身のプライベートな iCloud を通ってどこへでもついてきます。",
   "what-data-do-you.d389a9": "どんなデータを収集していますか？",
   "widgets-and-apple-watch.efef3c": "ウィジェットと Apple Watch",
