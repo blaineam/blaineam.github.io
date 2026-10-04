@@ -28,6 +28,20 @@ function initFAQ() {
       }
     });
   });
+
+  // A link to one question (…/faq/#esv-csb) opens it and brings it into view.
+  function openFromHash() {
+    const id = decodeURIComponent(window.location.hash.slice(1));
+    const target = id && document.getElementById(id);
+    if (!target || !target.classList.contains('faq-item')) return;
+    faqItems.forEach(other => other.classList.remove('active'));
+    target.classList.add('active');
+    // After the page's entrance animations have settled, or they move it again.
+    setTimeout(() => target.scrollIntoView({ block: 'center', behavior: 'smooth' }), 400);
+  }
+  window.addEventListener('hashchange', openFromHash);
+  if (document.readyState === 'complete') openFromHash();
+  else window.addEventListener('load', openFromHash);
 }
 
 // Mobile Menu Toggle
