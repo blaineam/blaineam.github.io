@@ -81,6 +81,17 @@ jobs:
           ref: main
           persist-credentials: false
 
+      # Tom's web app (web/ + the engine in lib/) is served at /tools/tom/app/; the
+      # marketing page at /tools/tom/ is authored here. tom.wemiller.com now only
+      # redirects to these paths.
+      - name: Mirror Tom web app
+        uses: actions/checkout@v4
+        with:
+          repository: blaineam/Tom
+          path: .mirror/tom
+          ref: main
+          persist-credentials: false
+
       # rsync with --delete keeps the mirror exactly in sync: if the app
       # repo renames/drops a file in docs/, the portfolio loses it too.
       # Filter rules:
@@ -130,6 +141,21 @@ jobs:
             .mirror/haven/web/ apps/haven/
           cp .mirror/haven/relay/install.sh .mirror/haven/relay/install.ps1 apps/haven/relay/
 
+          # Tom: the same layout its own Pages build used (web/ at the root, lib/ beside
+          # it), every relative module URL stamped with the commit by Tom's own
+          # scripts/stamp.mjs (its service worker relies on that format, so the
+          # portfolio's cache-bust.py leaves tools/tom/app alone). ~0.4 MB, no audio
+          # files: Tom renders every note on the device.
+          mkdir -p tools/tom/app
+          rsync -av --delete --filter='P lib/' \
+            --exclude='CNAME' --exclude='.git' --exclude='.github' \
+            .mirror/tom/web/ tools/tom/app/
+          rsync -av --delete --exclude='*.test.mjs' .mirror/tom/lib/ tools/tom/app/lib/
+          node .mirror/tom/scripts/stamp.mjs tools/tom/app "$(git -C .mirror/tom rev-parse --short=8 HEAD)"
+          # Remember that the visitor entered the app (so /tools/tom/ sends them straight
+          # in next time) and link back to the marketing page from the app's footer.
+          python3 scripts/inject-tool-shell.py
+
       # Canonicalize the landing pages: the app repos still reference
       # their old <slug>.wemiller.com subdomains in canonical / og / schema
       # tags. We flip them to the new /apps/<slug>/ path at mirror time
@@ -163,10 +189,10 @@ jobs:
           set -euo pipefail
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add apps/blip apps/glint apps/haven apps/lathe
+          git add apps/blip apps/glint apps/haven apps/lathe tools/tom/app
           if git diff --cached --quiet; then
             echo "No upstream doc changes — nothing to mirror."
           else
-            git commit -m "chore(mirror): sync blip/glint/haven/lathe sites → /apps [skip ci]"
+            git commit -m "chore(mirror): sync blip/glint/haven/lathe sites → /apps, tom → /tools [skip ci]"
             git push
           fi

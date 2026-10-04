@@ -9,6 +9,9 @@ Pages not in ORDER that still carry the canonical list (CANONICAL_EXTRA) are
 rewritten too; pages with a deliberately shorter or reordered footer (BESPOKE)
 and the mirrored app dirs (MIRRORED) are never touched.
 
+The /tools/ pages (TOOL_PAGES) get their own footer: the tools, then All Apps
+and the same site links, each page leaving out its own tool.
+
 Usage: update-footers.py [--check]
   --check   report pages whose footer would change and exit 1; write nothing
 """
@@ -90,6 +93,34 @@ def build_block(self_slug: str, up: str = "../") -> str:
     return "\n".join(lines)
 
 
+# /tools/: (page, the tool it belongs to — left out of its own footer).
+TOOLS = [
+    ("/tools/ark/",   "ARK"),
+    ("/tools/monkr/", "Monkr"),
+    ("/tools/tom/",   "Tom"),
+]
+TOOL_PAGES = [
+    ("tools/index.html",              None),
+    ("tools/ark/index.html",          "/tools/ark/"),
+    ("tools/ark/features/index.html", None),
+    ("tools/monkr/index.html",        "/tools/monkr/"),
+    ("tools/tom/index.html",          "/tools/tom/"),
+]
+
+
+def build_tools_block(self_href) -> str:
+    lines = ['<div class="footer-links">',
+             '        <a href="/tools/" class="footer-link" data-i18n="all-tools.a3a7e7">All Tools</a>']
+    for href, label in TOOLS:
+        if href != self_href:
+            lines.append(f'        <a href="{href}" class="footer-link">{label}</a>')
+    lines.append('        <a href="/apps/" class="footer-link" data-i18n="all-apps.429449">All Apps</a>')
+    for href, label, key in SITE_LINKS:
+        lines.append(f'        <a href="{href}" class="footer-link" data-i18n="{key}">{label}</a>')
+    lines.append('      </div>')
+    return "\n".join(lines)
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
     parser.add_argument("--check", action="store_true",
@@ -122,6 +153,23 @@ def main() -> int:
             else:
                 html_path.write_text(new_html)
                 print(f"updated {label}")
+    for rel, self_href in TOOL_PAGES:
+        html_path = ROOT / rel
+        if not html_path.exists():
+            print(f"skip {rel}: missing")
+            continue
+        html = html_path.read_text()
+        new_html, count = FOOTER_RE.subn(build_tools_block(self_href), html, count=1)
+        if count == 0:
+            print(f"WARN {rel}: no <div class=\"footer-links\"> found")
+        elif new_html == html:
+            print(f"unchanged {rel}")
+        elif args.check:
+            stale.append(rel)
+            print(f"would update {rel}")
+        else:
+            html_path.write_text(new_html)
+            print(f"updated {rel}")
     return 1 if stale else 0
 
 

@@ -33,6 +33,16 @@ PAGES = [
     ]
 ]
 
+# The developer-toolkit pages under /tools/ (tools/<slug>/app/ is a mirrored web app, not tagged).
+PAGES += [
+    ("tools/index.html", "tools", "https://wemiller.com/tools/", "bottom-left"),
+    ("tools/ark/index.html", "tools.ark", "https://wemiller.com/tools/ark/", "bottom-left"),
+    ("tools/ark/features/index.html", "tools.ark.features",
+     "https://wemiller.com/tools/ark/features/", "bottom-left"),
+    ("tools/monkr/index.html", "tools.monkr", "https://wemiller.com/tools/monkr/", "bottom-left"),
+    ("tools/tom/index.html", "tools.tom", "https://wemiller.com/tools/tom/", "bottom-left"),
+]
+
 # Depth pages (docs/app-page-design.md §2): apps/<slug>/{features,pricing,faq}/index.html, each
 # with its own dictionary i18n/apps.<slug>.<sub>.<lang>.json. Picked up as soon as the file exists.
 DEPTH_PAGES = ("features", "pricing", "faq")
@@ -76,6 +86,9 @@ SKIP_EXACT = {s.lower() for s in [
     "Blaine Miller", "Aperion", "Asteroic", "Monkr", "GitHub", "LinkedIn",
     "iOS", "iPadOS", "macOS", "watchOS", "visionOS", "Apple", "Swift",
     "SwiftUI", "MOA", "MIL", "TestFlight", "✨ Ari Helper",
+    # the /tools/ crew and the platforms named there
+    "ARK", "Rocket", "Soren", "Knox", "Levi", "Hopps", "Claude", "Claude Code",
+    "Google Play", "Microsoft Store", "Cloudflare", "Tailscale", "YouTube", "Product Hunt",
 ]}
 
 WS = re.compile(r"\s+")
@@ -190,6 +203,8 @@ HAS_LETTERS = re.compile(r"[A-Za-z]{2}")
 
 def collect_units(src, node, units):
     if node.tag in SKIP_SUBTREE:
+        return
+    if node.attrs.get("translate") == "no":  # code samples, command output, tool names
         return
     attrs = node.attrs
     if "data-i18n" in attrs or "data-i18n-html" in attrs:

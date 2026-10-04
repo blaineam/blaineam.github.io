@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ARK · The app-pipeline suite · Blaine Miller</title>
+  <meta name="description" content="ARK carries an app from a green test run to the App Store, Google Play and the Microsoft Store: QA, security audits, screenshots, eight languages and release, then measures what happens next.">
+  <link rel="canonical" href="https://wemiller.com/tools/ark/">
+  <meta property="og:title" content="ARK · The app-pipeline suite">
+  <meta property="og:description" content="ARK carries an app from a green test run to the App Store, Google Play and the Microsoft Store: QA, security audits, screenshots, eight languages and release, then measures what happens next.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://wemiller.com/tools/ark/">
+  <meta name="theme-color" content="#0b1220">
+  <link rel="icon" href="assets/icon.svg?v=d2b16fcf" type="image/svg+xml">
+  <link rel="stylesheet" href="../../apps/app-showcase.css?v=7832b316">
+  <link rel="stylesheet" href="../_shared/tools.css?v=da920de9">
+  <link rel="alternate" hreflang="x-default" href="https://wemiller.com/tools/ark/">
+  <link rel="alternate" hreflang="en" href="https://wemiller.com/tools/ark/">
+  <link rel="alternate" hreflang="zh-Hans" href="https://wemiller.com/tools/ark/?lang=zh-Hans">
+  <link rel="alternate" hreflang="ja" href="https://wemiller.com/tools/ark/?lang=ja">
+  <link rel="alternate" hreflang="de" href="https://wemiller.com/tools/ark/?lang=de">
+  <link rel="alternate" hreflang="fr" href="https://wemiller.com/tools/ark/?lang=fr">
+  <link rel="alternate" hreflang="es" href="https://wemiller.com/tools/ark/?lang=es">
+  <link rel="alternate" hreflang="ko" href="https://wemiller.com/tools/ark/?lang=ko">
+  <link rel="alternate" hreflang="pt-BR" href="https://wemiller.com/tools/ark/?lang=pt-BR">
+  <link rel="alternate" hreflang="it" href="https://wemiller.com/tools/ark/?lang=it">
+  <script src="/i18n/i18n.js?v=9b769779" defer data-page="tools.ark" data-pos="bottom-left"></script>
+</head>
+<body>
+  <nav class="app-nav">
+    <div class="nav-container">
+      <a href="../" class="nav-logo nav-brand" title="← Tools" aria-label="← Tools"
+         data-i18n-attr="title:tools.0c1465;aria-label:tools.0c1465">
+        <span class="nav-brand-back" aria-hidden="true">←</span>
+        <img class="nav-brand-icon" src="assets/icon.svg?v=d2b16fcf" alt="" width="60" height="60">
+        <span class="nav-brand-name">ARK</span>
+      </a>
+      <button class="mobile-menu-toggle" aria-label="Menu">☰</button>
+      <ul class="nav-links">
+        <li><a href="./" class="nav-link" aria-current="page" data-i18n="overview.0efc2e">Overview</a></li>
+        <li><a href="features/" class="nav-link" data-i18n="the-crew.f55c37">The crew</a></li>
+        <li><a href="../" class="btn-buy" data-i18n="all-tools.b390ab">All tools</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <header class="tl-hero">
+    <img class="tl-hero-icon" src="assets/icon.svg?v=d2b16fcf" alt="" width="120" height="120">
+    <p class="tl-hero-kicker">ARK</p>
+    <h1 data-i18n-html="from-green-tests-to.7374c1">From green tests to <em>every store</em></h1>
+    <p class="tl-hero-standfirst" data-i18n="ark-is-my-app.39af56">ARK is my app-pipeline suite: seven small tools that test, audit, frame, translate and release every app I make, then watch how it lands.</p>
+    <div class="tl-cta">
+      <a href="features/" class="btn-buy" data-i18n="meet-the-crew.597642">Meet the crew</a>
+    </div>
+    <p class="tl-alt-links"><span data-i18n="currently-private-open-sourcing.b9210e">Currently private, open-sourcing planned</span></p>
+  </header>
+
+  <section class="tl-statement">
+    <span class="tl-ornament" aria-hidden="true"></span>
+    <p data-i18n="one-vessel-all-the.764b96">One vessel, all the animals, built to ship.</p>
+  </section>
+
+  <!-- The pipeline, station by station, and the loop back. -->
+  <div class="tl-pipeline-wrap">
+    <ol class="tl-pipeline" data-reveal>
+      <li class="tl-station"><span class="tl-station-emoji" aria-hidden="true">🛠️</span><span class="tl-station-name" data-i18n="build.bbd80c">Build</span><span class="tl-station-verb" data-i18n="your-change.7c3681">your change</span></li>
+      <li class="tl-station"><span class="tl-station-emoji" aria-hidden="true">🦉</span><span class="tl-station-name">Soren</span><span class="tl-station-verb" data-i18n="tests-every-platform.dfda4f">tests every platform</span></li>
+      <li class="tl-station"><span class="tl-station-emoji" aria-hidden="true">🦊</span><span class="tl-station-name">Knox</span><span class="tl-station-verb" data-i18n="audits-security.e7441d">audits security</span></li>
+      <li class="tl-station"><span class="tl-station-emoji" aria-hidden="true">🐵</span><span class="tl-station-name">Monkr</span><span class="tl-station-verb" data-i18n="frames-screenshots.f7b759">frames screenshots</span></li>
+      <li class="tl-station"><span class="tl-station-emoji" aria-hidden="true">🐆</span><span class="tl-station-name">Levi</span><span class="tl-station-verb" data-i18n="translates-into-eight-languages.88f77f">translates into eight languages</span></li>
+      <li class="tl-station"><span class="tl-station-emoji" aria-hidden="true">🦝</span><span class="tl-station-name">Rocket</span><span class="tl-station-verb" data-i18n="ships-to-three-stores.ddfc69">ships to three stores</span></li>
+      <li class="tl-station is-new" data-badge="New" data-i18n-attr="data-badge:new.6403f2"><span class="tl-station-emoji" aria-hidden="true">🐰</span><span class="tl-station-name">Hopps</span><span class="tl-station-verb" data-i18n="measures-what-happens.e2d8f8">measures what happens</span></li>
+    </ol>
+    <p class="tl-loop" data-i18n-html="what-hopps-learns-becomes.d8a045"><span aria-hidden="true">↺</span>What Hopps learns becomes the next change.</p>
+  </div>
+
+  <main>
+    <section class="tl-chapter" id="soren">
+      <div class="tl-spread">
+        <div class="tl-copy" data-reveal>
+          <p class="tl-eyebrow"><span class="tl-mascot" aria-hidden="true">🦉</span><span>Soren</span></p>
+          <h2 class="tl-display" data-i18n="nothing-ships-red.1f0829">Nothing ships red</h2>
+          <p class="tl-lede" data-i18n="soren-runs-every-test.d92cdc">Soren runs every test suite on every platform, from Xcode to Rust, Gradle and Node. A release waits until the whole board is green.</p>
+        </div>
+        <figure class="tl-figure" data-reveal>
+          <div class="tl-term" translate="no">
+            <div class="tl-term-bar">soren</div>
+<pre><span class="c">soren run MyApp</span>
+  core      cargo            <span class="ok">✓ 412 passed</span>
+  ios       xcodebuild-test  <span class="ok">✓ 268 passed</span>
+  macos     xcodebuild-test  <span class="ok">✓ 251 passed</span>
+  android   gradle           <span class="ok">✓ 189 passed</span>
+  web       node             <span class="ok">✓ 74 passed</span>
+<span class="ok">5/5 suites green</span> <span class="q">· exit 0</span></pre>
+          </div>
+        </figure>
+      </div>
+    </section>
+
+    <section class="tl-chapter is-flipped" id="knox">
+      <div class="tl-spread">
+        <div class="tl-copy" data-reveal>
+          <p class="tl-eyebrow"><span class="tl-mascot" aria-hidden="true">🦊</span><span>Knox</span></p>
+          <h2 class="tl-display" data-i18n="a-security-review-on.7dea6a">A security review on every release</h2>
+          <p class="tl-lede" data-i18n="knox-reads-the-real.045437">Knox reads the real source, domain by domain, from the threat model to the supply chain, and ranks what it finds. A new high-severity finding stops the line.</p>
+        </div>
+        <figure class="tl-figure" data-reveal>
+          <div class="tl-term" translate="no">
+            <div class="tl-term-bar">knox</div>
+<pre><span class="c">knox audit MyApp</span>
+<span class="q">threat model → auth → crypto → injection → supply chain</span>
+  crit 0 · high 0 · med 2 · low 3
+<span class="q">report: reports/MyApp/2026-10-03.md</span>
+<span class="c">knox diff MyApp</span>
+  new 1 · fixed 4 · persisting 4
+<span class="ok">no new critical or high findings</span> <span class="q">· exit 0</span></pre>
+          </div>
+        </figure>
+      </div>
+    </section>
+
+    <section class="tl-chapter" id="shots">
+      <div class="tl-spread">
+        <div class="tl-copy" data-reveal>
+          <p class="tl-eyebrow"><span class="tl-mascot" aria-hidden="true">🐵🐆</span><span translate="no">Monkr &amp; Levi</span></p>
+          <h2 class="tl-display" data-i18n="framed-and-fluent-in.b03479">Framed, and fluent in eight languages</h2>
+          <p class="tl-lede" data-i18n="monkr-turns-fresh-captures.4947d6">Monkr turns fresh captures into framed store screenshots. Levi fills every gap in the Big 8 languages, then proves nothing is missing.</p>
+        </div>
+        <figure class="tl-figure" data-reveal>
+          <div class="tl-term" translate="no">
+            <div class="tl-term-bar">rocket · levi</div>
+<pre><span class="c">rocket shots MyApp</span>
+  capture → Monkr frame → review  <span class="ok">✓ 40 images</span>
+<span class="c">levi translate MyApp</span>
+  zh-Hans ja de fr es ko pt-BR it  <span class="ok">✓ 0 gaps</span>
+<span class="c">levi lint MyApp --ci</span>
+<span class="ok">placeholders, lengths, glossary ✓</span> <span class="q">· exit 0</span></pre>
+          </div>
+        </figure>
+      </div>
+    </section>
+
+    <section class="tl-chapter is-flipped" id="rocket">
+      <div class="tl-spread">
+        <div class="tl-copy" data-reveal>
+          <p class="tl-eyebrow"><span class="tl-mascot" aria-hidden="true">🦝</span><span>Rocket</span></p>
+          <h2 class="tl-display" data-i18n="one-command-three-stores.53ca98">One command, three stores</h2>
+          <p class="tl-lede" data-i18n="rocket-drafts-the-release.69740e">Rocket drafts the release, pushes the listing, uploads the build and submits it to the App Store, Google Play and the Microsoft Store.</p>
+        </div>
+        <figure class="tl-figure" data-reveal>
+          <div class="tl-term" translate="no">
+            <div class="tl-term-bar">rocket</div>
+<pre><span class="c">rocket release MyApp 1.2.0</span>
+  draft → meta → build → shots  <span class="ok">✓ ready</span>
+<span class="c">rocket submit MyApp 1.2.0 --store all</span>
+  App Store          <span class="ok">✓ waiting for review</span>
+  Google Play        <span class="ok">✓ production, 10% rollout</span>
+  Microsoft Store    <span class="ok">✓ in certification</span></pre>
+          </div>
+        </figure>
+      </div>
+    </section>
+
+    <section class="tl-chapter" id="hopps">
+      <div class="tl-spread">
+        <div class="tl-copy" data-reveal>
+          <p class="tl-eyebrow"><span class="tl-mascot" aria-hidden="true">🐰</span><span data-i18n="hopps-new.8e6f05">Hopps · New</span></p>
+          <h2 class="tl-display" data-i18n="then-it-watches-and.ce9e15">Then it watches, and loops back</h2>
+          <p class="tl-lede" data-i18n="hopps-gathers-what-the.a8dd0e">Hopps gathers what the stores, the website and social channels report into one private dashboard. Every ticket and suggestion has a Fix with Claude button.</p>
+          <a class="learn-more" href="features/#hopps" data-i18n="learn-more.824d76">Learn more</a>
+        </div>
+        <figure class="tl-figure" data-reveal>
+          <div class="tl-dash">
+            <div class="tl-dash-tile">
+              <span class="tl-dash-label" data-i18n="rating.6437b7">Rating</span>
+              <span class="tl-dash-value" translate="no">4.8 <small>▲ 0.1</small></span>
+              <svg class="tl-spark" viewBox="0 0 100 28" aria-hidden="true"><polyline fill="none" stroke="#6EE7A0" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" points="0,22 14,20 28,21 42,15 56,16 70,10 84,8 100,5"/></svg>
+            </div>
+            <div class="tl-dash-tile">
+              <span class="tl-dash-label" data-i18n="page-views.faee7c">Page views</span>
+              <span class="tl-dash-value" translate="no">12.4k <small>▲ 18%</small></span>
+              <svg class="tl-spark" viewBox="0 0 100 28" aria-hidden="true"><polyline fill="none" stroke="#FFC66B" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" points="0,24 14,19 28,22 42,17 56,12 70,14 84,7 100,4"/></svg>
+            </div>
+            <div class="tl-dash-tile is-wide tl-ticket">
+              <div>
+                <span class="tl-dash-label" data-i18n="support-ticket.0fd82d">Support ticket</span>
+                <p data-i18n="the-german-tagline-is.ad9846">The German tagline is cut off on the iPad screenshots.</p>
+              </div>
+              <span class="tl-fix" data-i18n="fix-with-claude.2dc598">Fix with Claude</span>
+            </div>
+          </div>
+        </figure>
+      </div>
+    </section>
+  </main>
+
+  <section class="tl-trust">
+    <div class="tl-trust-inner" data-reveal>
+      <p class="tl-eyebrow" data-i18n="how-it-s-built.d08685">How it's built</p>
+      <h2 class="tl-display" data-i18n="made-for-agents-gated.618fb5">Made for agents. Gated for people.</h2>
+      <div class="security-badges">
+        <div class="security-badge" data-i18n-html="zero-dependencies.ce4282"><span class="badge-icon">🧰</span> Zero dependencies</div>
+        <div class="security-badge" data-i18n-html="every-gate-is-an.13c8c7"><span class="badge-icon">🚦</span> Every gate is an exit code</div>
+        <div class="security-badge" data-i18n-html="ai-drafts-you-publish.8b9b43"><span class="badge-icon">✍️</span> AI drafts, you publish</div>
+        <div class="security-badge" data-i18n-html="local-first.9515f3"><span class="badge-icon">🏠</span> Local-first</div>
+      </div>
+      <p class="tl-trust-note" data-i18n="ark-is-private-for.a76f48">ARK is private for now, and open-sourcing is planned. Monkr and Tom are open source today.</p>
+      <p class="tl-trust-more"><a class="learn-more" href="features/" data-i18n="meet-the-crew.597642">Meet the crew</a></p>
+    </div>
+  </section>
+
+  <section id="faq" class="faq-section">
+    <p class="tl-eyebrow" data-i18n="got-questions.8ecca3">Got Questions?</p>
+    <h2 data-i18n="frequently-asked-questions.d790b4">Frequently Asked Questions</h2>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-question"><span data-i18n="can-i-use-ark.438e7e">Can I use ARK?</span><span class="faq-icon">▼</span></button>
+        <div class="faq-answer">
+          <p data-i18n-html="not-yet-ark-is.1db989">Not yet. ARK is private while it's prepared for release, and open-sourcing is planned. Two of its tools are already free and open source: <a href="../monkr/">Monkr</a> for screenshots and <a href="../tom/">Tom</a> for music.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question"><span data-i18n="does-ark-need-claude.e93766">Does ARK need Claude?</span><span class="faq-icon">▼</span></button>
+        <div class="faq-answer">
+          <p data-i18n="no-every-tool-is.1f1c36">No. Every tool is a plain command-line program you can run by hand. The AI steps, Knox's audits, Levi's translations and Hopps's fixes, work best with Claude Code, and they always write files for a person to review.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question"><span data-i18n="which-platforms-and-stores.5f7e76">Which platforms and stores does it cover?</span><span class="faq-icon">▼</span></button>
+        <div class="faq-answer">
+          <p data-i18n="apple-s-platforms-through.cb19ee">Apple's platforms through the App Store, Android through Google Play, and Windows through the Microsoft Store. Soren also tests Rust, Gradle and Node projects, and Levi covers String Catalogs, store listings, Android resources and web dictionaries.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question"><span data-i18n="does-hopps-put-tracking.4a648e">Does Hopps put tracking in my apps?</span><span class="faq-icon">▼</span></button>
+        <div class="faq-answer">
+          <p data-i18n="no-hopps-only-reads.6b9cd1">No. Hopps only reads what the stores, Cloudflare and the social platforms already report. There are no tracking SDKs in the apps, and the dashboard runs on your own Mac, reachable only over your private Tailscale network.</p>
+        </div>
+      </div>
+    </div>
+    <p class="faq-more"><a class="learn-more" href="features/" data-i18n="see-every-tool.45b8c4">See every tool</a></p>
+  </section>
+
+  <section class="tl-closing">
+    <img class="tl-closing-icon" src="assets/icon.svg?v=d2b16fcf" alt="" width="120" height="120" loading="lazy">
+    <h2 class="tl-display" data-i18n-html="from-green-tests-to.7374c1">From green tests to <em>every store</em></h2>
+    <div class="tl-cta">
+      <a href="features/" class="btn-buy" data-i18n="meet-the-crew.597642">Meet the crew</a>
+    </div>
+    <p class="tl-alt-links"><a href="../monkr/">Monkr</a><span aria-hidden="true">·</span><a href="../tom/">Tom</a></p>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <!-- scripts/update-footers.py fills this in; never hand-edit. -->
+      <div class="footer-links">
+        <a href="/tools/" class="footer-link" data-i18n="all-tools.a3a7e7">All Tools</a>
+        <a href="/tools/monkr/" class="footer-link">Monkr</a>
+        <a href="/tools/tom/" class="footer-link">Tom</a>
+        <a href="/apps/" class="footer-link" data-i18n="all-apps.429449">All Apps</a>
+        <a href="/privacy/" class="footer-link" data-i18n="privacy.cf0148">Privacy</a>
+        <a href="/terms/" class="footer-link" data-i18n="terms.a55a27">Terms</a>
+        <a href="/support/" class="footer-link" data-i18n="support.f32d5a">Support</a>
+        <a href="/" class="footer-link" data-i18n="portfolio.036b18">Portfolio</a>
+      </div>
+      <!-- Social Media Links -->
+      <div class="footer-social-links">
+        <a href="https://x.com/apps_by_blaine" class="social-icon-link" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)">
+          <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+          </svg>
+        </a>
+        <a href="https://www.instagram.com/apps.by.blaine/" class="social-icon-link" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+          <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.6100 4.1009 4.1009.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.1009 4.1009-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.1009-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.1009-4.1009 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.1100 2.759-6.1100 6.1100s2.759 6.163 6.1100 6.163 6.1100-2.759 6.1100-6.163c0-3.403-2.759-6.1100-6.1100-6.1100zm0 10.1100c-2.209 0-4-1.79-4-4 0-2.209 1.7100-4 4-4s4 1.7100 4 4c0 2.21-1.7100 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+          </svg>
+        </a>
+        <a href="https://www.youtube.com/@AppsByBlaine" class="social-icon-link" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+          <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+          </svg>
+        </a>
+      </div>
+
+      <p style="color: var(--text-muted); margin-top: var(--spacing-md);" data-i18n-html="blaine-miller-all-rights.b327c2">
+        © <span id="year"></span> Blaine Miller. All rights reserved.
+      </p>
+    </div>
+  </footer>
+  <script src="../../apps/app-showcase.js?v=0ce231d7"></script>
+  <script src="../_shared/tools.js?v=a08a2a7f"></script>
+</body>
+</html>

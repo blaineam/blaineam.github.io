@@ -39,6 +39,10 @@ ROOT = Path(__file__).resolve().parent.parent
 # Rsynced from the app repos on a schedule; see scripts/../.github/workflows/mirror-app-docs.yml.
 MIRRORED = {"apps/haven", "apps/blip", "apps/glint", "apps/lathe"}
 
+# Mirrored web apps that stamp their own module URLs (Tom's scripts/stamp.mjs writes ?v=<commit>,
+# and its service worker reads that format back). Never stamped here, even with --mirrored.
+SELF_STAMPED = {"tools/tom/app"}
+
 IMAGE_SUFFIXES = {".png", ".jpg", ".jpeg", ".webp", ".gif", ".svg", ".ico", ".avif"}
 # Our own scripts and stylesheets: served with the same year-long lifetime as images.
 CODE_SUFFIXES = {".js", ".mjs", ".css"}
@@ -149,6 +153,9 @@ def pages(scope: str | None, include_mirrored: bool = False) -> list[Path]:
             p.relative_to(ROOT)
         except ValueError:
             return True  # a source repo outside this site; nothing in it is mirrored
+        relative = p.relative_to(ROOT).as_posix()
+        if any(relative.startswith(f"{d}/") for d in SELF_STAMPED):
+            return False
         return include_mirrored or not is_mirrored(p)
 
     sheets = sorted(p for p in base.rglob("*.css") if keep(p))

@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    // Returning visitors and song links go straight into the app at app/.
+    // ?about (the app's "About Tom" link) always shows this page.
+    (function () {
+      if (/[?&]about(?:[=&]|$)/.test(location.search)) return;
+      var go = location.hash.length > 1;
+      try { go = go || localStorage.getItem('tools.tom.entered') === '1'; } catch (e) { /* private mode */ }
+      if (go) location.replace('app/' + location.hash);
+    })();
+  </script>
+  <title>Tom · Music machine · Blaine Miller</title>
+  <meta name="description" content="Tom is a free, open-source music machine: dial in a melody in seconds, snap a song together like Lego, or tune in to endless radio. Royalty-free, and it all runs on your device.">
+  <link rel="canonical" href="https://wemiller.com/tools/tom/">
+  <meta property="og:title" content="Tom · Music machine">
+  <meta property="og:description" content="Tom is a free, open-source music machine: dial in a melody in seconds, snap a song together like Lego, or tune in to endless radio. Royalty-free, and it all runs on your device.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://wemiller.com/tools/tom/">
+  <meta property="og:image" content="https://wemiller.com/tools/tom/assets/og.jpg?v=34fdc598">
+  <meta name="theme-color" content="#14161b">
+  <link rel="icon" href="assets/gecko.svg?v=1c545570" type="image/svg+xml">
+  <link rel="stylesheet" href="../../apps/app-showcase.css?v=7832b316">
+  <link rel="stylesheet" href="../_shared/tools.css?v=da920de9">
+  <style>
+    /* Tom: the app's own dark panel, its LCD green and its yellow Play button. */
+    :root {
+      --tl-hero: linear-gradient(180deg, #14161b 0%, #1a1e26 60%, #1d2028 100%);
+      --tl-hero-glow: radial-gradient(ellipse 60% 45% at 50% 100%, rgba(159, 242, 184, 0.14) 0%, transparent 70%),
+                      radial-gradient(ellipse 40% 40% at 88% 6%, rgba(179, 107, 255, 0.22) 0%, transparent 70%);
+      --tl-hero-em: #9FF2B8;
+      --tl-hero-kicker: rgba(159, 242, 184, 0.9);
+      --tl-btn: linear-gradient(180deg, #FFE07A, #FFD23F);
+      --tl-btn-ink: #1A1400;
+      --tl-glow: rgba(255, 210, 63, 0.28);
+      --tl-accent-ink: #1F7A43;
+      --tl-term-cmd: #FFD23F;
+      --tl-term-ok: #9FF2B8;
+      --primary-color: #14161B;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --tl-accent-ink: #9FF2B8;
+        --tl-paper: #101216;
+        --tl-paper-2: #171a20;
+        --tl-card: #1d2028;
+        --primary-color: #EEF0F5;
+      }
+    }
+  </style>
+  <link rel="alternate" hreflang="x-default" href="https://wemiller.com/tools/tom/">
+  <link rel="alternate" hreflang="en" href="https://wemiller.com/tools/tom/">
+  <link rel="alternate" hreflang="zh-Hans" href="https://wemiller.com/tools/tom/?lang=zh-Hans">
+  <link rel="alternate" hreflang="ja" href="https://wemiller.com/tools/tom/?lang=ja">
+  <link rel="alternate" hreflang="de" href="https://wemiller.com/tools/tom/?lang=de">
+  <link rel="alternate" hreflang="fr" href="https://wemiller.com/tools/tom/?lang=fr">
+  <link rel="alternate" hreflang="es" href="https://wemiller.com/tools/tom/?lang=es">
+  <link rel="alternate" hreflang="ko" href="https://wemiller.com/tools/tom/?lang=ko">
+  <link rel="alternate" hreflang="pt-BR" href="https://wemiller.com/tools/tom/?lang=pt-BR">
+  <link rel="alternate" hreflang="it" href="https://wemiller.com/tools/tom/?lang=it">
+  <script src="/i18n/i18n.js?v=9b769779" defer data-page="tools.tom" data-pos="bottom-left"></script>
+</head>
+<body>
+  <nav class="app-nav">
+    <div class="nav-container">
+      <a href="../" class="nav-logo nav-brand" title="← Tools" aria-label="← Tools"
+         data-i18n-attr="title:tools.0c1465;aria-label:tools.0c1465">
+        <span class="nav-brand-back" aria-hidden="true">←</span>
+        <img class="nav-brand-icon" src="assets/gecko.svg?v=1c545570" alt="" width="60" height="60">
+        <span class="nav-brand-name">Tom</span>
+      </a>
+      <button class="mobile-menu-toggle" aria-label="Menu">☰</button>
+      <ul class="nav-links">
+        <li><a href="./" class="nav-link" aria-current="page" data-i18n="overview.0efc2e">Overview</a></li>
+        <li><a href="https://github.com/blaineam/Tom" class="nav-link" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+        <li><a href="app/" class="btn-buy" data-enter-app="tom" data-i18n="open-tom.f0d51e">Open Tom</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <header class="tl-hero">
+    <img class="tl-hero-icon" src="assets/gecko.svg?v=1c545570" alt="" width="120" height="120">
+    <p class="tl-hero-kicker" data-i18n="tom-music-machine.8eebad">Tom · Music machine</p>
+    <h1 data-i18n-html="music-in-seconds-yours.dcf57c">Music in seconds. <em>Yours to keep.</em></h1>
+    <p class="tl-hero-standfirst" data-i18n="dial-in-a-melody.b34016">Dial in a melody, snap a song together like Lego, or tune in to endless radio. Royalty-free, and it all runs in your browser.</p>
+    <div class="tl-cta">
+      <a href="app/" class="btn-buy" data-enter-app="tom" data-i18n="open-tom.f0d51e">Open Tom</a>
+    </div>
+    <p class="tl-alt-links"><span data-i18n="free-and-open-source.9c820d">Free and open source (MIT)</span><span aria-hidden="true">·</span><a href="https://github.com/blaineam/Tom" target="_blank" rel="noopener noreferrer" data-i18n="source-on-github.c60f2f">Source on GitHub</a></p>
+  </header>
+
+  <section class="tl-statement">
+    <span class="tl-ornament" aria-hidden="true"></span>
+    <p data-i18n="every-note-comes-from.db74fd">Every note comes from a seed, so the same seed always makes the same music.</p>
+  </section>
+
+  <main>
+    <section class="tl-chapter" id="melody">
+      <div class="tl-spread">
+        <div class="tl-copy" data-reveal>
+          <p class="tl-eyebrow"><span class="tl-num">01</span><span data-i18n="melody-machine.a26427">Melody Machine</span></p>
+          <h2 class="tl-display" data-i18n="a-melody-dialed-in.323758">A melody, dialed in</h2>
+          <p class="tl-lede" data-i18n="pick-a-style-key.0f911c">Pick a style, key, tempo, swing and shape, and Tom writes the melody. Turning a dial keeps the seed, so you shape it instead of starting over.</p>
+        </div>
+        <figure class="tl-figure" data-reveal>
+          <div class="tl-window">
+            <img src="assets/melody-1440.avif?v=dd764030" srcset="assets/melody-720.avif?v=c3ef2824 720w, assets/melody-1440.avif?v=dd764030 1440w"
+                 sizes="(max-width: 608px) 92vw, 560px" width="1440" height="900" loading="lazy" decoding="async"
+                 alt="The Melody Machine: a piano roll above style, key, tempo and shape controls" data-i18n-attr="alt:the-melody-machine-a.4ad90b">
+          </div>
+        </figure>
+      </div>
+    </section>
+
+    <section class="tl-chapter is-flipped" id="composer">
+      <div class="tl-spread">
+        <div class="tl-copy" data-reveal>
+          <p class="tl-eyebrow"><span class="tl-num">02</span><span data-i18n="composer.10c35d">Composer</span></p>
+          <h2 class="tl-display" data-i18n="songs-that-snap-together.53bf53">Songs that snap together</h2>
+          <p class="tl-lede" data-i18n="drop-intro-verse-chorus.81dd17">Drop intro, verse, chorus and ending blocks on a timeline, or let Auto build, finish or re-roll whatever you haven't locked.</p>
+        </div>
+        <figure class="tl-figure" data-reveal>
+          <div class="tl-window">
+            <img src="assets/composer-1440.avif?v=15fb4598" srcset="assets/composer-720.avif?v=240e3117 720w, assets/composer-1440.avif?v=15fb4598 1440w"
+                 sizes="(max-width: 608px) 92vw, 560px" width="1440" height="900" loading="lazy" decoding="async"
+                 alt="The Composer: colored song blocks arranged on a timeline" data-i18n-attr="alt:the-composer-colored-song.b5c3a3">
+          </div>
+        </figure>
+      </div>
+    </section>
+
+    <section class="tl-chapter" id="radio">
+      <div class="tl-spread">
+        <div class="tl-copy" data-reveal>
+          <p class="tl-eyebrow"><span class="tl-num">03</span><span data-i18n="radio.b11bf1">Radio</span></p>
+          <h2 class="tl-display" data-i18n="radio-that-never-repeats.3cdc44">Radio that never repeats</h2>
+          <p class="tl-lede" data-i18n="pick-a-station-and.5f19f1">Pick a station and Tom writes an endless run of new songs. On iPhone it keeps playing with the screen locked.</p>
+        </div>
+        <figure class="tl-figure" data-reveal>
+          <div class="tl-window">
+            <img src="assets/radio-1440.avif?v=745e1e66" srcset="assets/radio-720.avif?v=45e12a59 720w, assets/radio-1440.avif?v=745e1e66 1440w"
+                 sizes="(max-width: 608px) 92vw, 560px" width="1440" height="900" loading="lazy" decoding="async"
+                 alt="Tom Radio: a grid of stations, from Synthwave to Country" data-i18n-attr="alt:tom-radio-a-grid.036808">
+          </div>
+        </figure>
+      </div>
+    </section>
+
+    <section class="tl-chapter is-flipped" id="royalty-free">
+      <div class="tl-spread">
+        <div class="tl-copy" data-reveal>
+          <p class="tl-eyebrow"><span class="tl-num">04</span><span data-i18n="royalty-free.9897af">Royalty-free</span></p>
+          <h2 class="tl-display" data-i18n="no-samples-no-claims.84574a">No samples. No claims.</h2>
+          <p class="tl-lede" data-i18n="tom-writes-every-note.c89000">Tom writes every note itself, so there's nothing to license and nothing to get flagged. A share link's hashtag is the whole song.</p>
+        </div>
+        <figure class="tl-figure" data-reveal>
+          <div class="tl-term" translate="no">
+            <div class="tl-term-bar">share links</div>
+<pre><span class="q"># a melody: the tag picks style, key, tempo and shape</span>
+wemiller.com/tools/tom/app/<span class="ok">#sunset-drive</span>
+<span class="q"># the same tag, a couple of dials turned</span>
+wemiller.com/tools/tom/app/<span class="ok">#sunset-drive&amp;style=chip&amp;busy=0.8</span>
+<span class="q"># a whole song, or a radio station</span>
+wemiller.com/tools/tom/app/<span class="ok">#song:road-trip</span>
+wemiller.com/tools/tom/app/<span class="ok">#radio:jazz&amp;play</span></pre>
+          </div>
+        </figure>
+      </div>
+    </section>
+
+    <section class="tl-chapter" id="cli">
+      <div class="tl-spread">
+        <div class="tl-copy" data-reveal>
+          <p class="tl-eyebrow"><span class="tl-num">05</span><span data-i18n="command-line.f6fe35">Command line</span></p>
+          <h2 class="tl-display" data-i18n="on-the-command-line.97e7b3">On the command line, too</h2>
+          <p class="tl-lede" data-i18n="the-same-engine-runs.ff460c">The same engine runs in Node: render WAV and MIDI from a seed, or score a Monkr video with a jingle that lands on the beat.</p>
+        </div>
+        <figure class="tl-figure" data-reveal>
+          <div class="tl-term" translate="no">
+            <div class="tl-term-bar">tom</div>
+<pre><span class="c">tom styles</span>
+  synthwave · pop · chip · lofi · marimba · jazz · …
+<span class="c">tom song --style chip --seed 1 --length short --out song.wav --midi</span>
+  <span class="ok">✓ song.wav · song.mid</span>
+<span class="c">monkr animate short.monkr --out short.mp4 --music synthwave</span>
+  <span class="ok">✓ short.mp4, scored by Tom</span></pre>
+          </div>
+        </figure>
+      </div>
+    </section>
+  </main>
+
+  <section class="tl-trust">
+    <div class="tl-trust-inner" data-reveal>
+      <p class="tl-eyebrow" data-i18n="free-and-open-source.768751">Free and open source</p>
+      <h2 class="tl-display" data-i18n="nothing-leaves-your-device.a74da2">Nothing leaves your device</h2>
+      <div class="security-badges">
+        <div class="security-badge" data-i18n-html="mit-license.10a221"><span class="badge-icon">🔓</span> MIT license</div>
+        <div class="security-badge" data-i18n-html="works-offline.42667a"><span class="badge-icon">📴</span> Works offline</div>
+        <div class="security-badge" data-i18n-html="no-account.69db92"><span class="badge-icon">🙅</span> No account</div>
+        <div class="security-badge" data-i18n-html="royalty-free.5bd989"><span class="badge-icon">🎵</span> Royalty-free</div>
+      </div>
+      <p class="tl-trust-note" data-i18n="add-tom-to-your.59ef0c">Add Tom to your Home Screen and it opens like an app, with or without a connection.</p>
+      <p class="tl-trust-more"><a class="learn-more" href="https://github.com/blaineam/Tom" target="_blank" rel="noopener noreferrer" data-i18n="source-on-github.c60f2f">Source on GitHub</a></p>
+    </div>
+  </section>
+
+  <section id="faq" class="faq-section">
+    <p class="tl-eyebrow" data-i18n="got-questions.8ecca3">Got Questions?</p>
+    <h2 data-i18n="frequently-asked-questions.d790b4">Frequently Asked Questions</h2>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-question"><span data-i18n="can-i-use-tom.f6a069">Can I use Tom's music in my videos and apps?</span><span class="faq-icon">▼</span></button>
+        <div class="faq-answer"><p data-i18n="yes-tom-writes-every.aed212">Yes. Tom writes every note itself from a seed, with no samples, so what you make is yours to use, royalty-free.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question"><span data-i18n="does-it-work-offline.eac3a5">Does it work offline?</span><span class="faq-icon">▼</span></button>
+        <div class="faq-answer"><p data-i18n="yes-everything-renders-in.b80924">Yes. Everything renders in your browser. After your first visit Tom works offline, and on iPhone or iPad you can add it to your Home Screen.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question"><span data-i18n="what-can-i-export.ec745a">What can I export?</span><span class="faq-icon">▼</span></button>
+        <div class="faq-answer"><p data-i18n="wav-audio-midi-for.f3ae6e">WAV audio, MIDI for your music software, and a song file you can open again later. A share link carries the whole song in its hashtag.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question"><span data-i18n="can-siri-start-a.17fa06">Can Siri start a station?</span><span class="faq-icon">▼</span></button>
+        <div class="faq-answer"><p data-i18n="yes-a-radio-start.6cb191">Yes. A radio start link opens a station and plays it. Put it in a Shortcut's Open URLs action and ask Siri; iOS needs one tap before a web page can play sound.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="tl-closing">
+    <img class="tl-closing-icon" src="assets/gecko.svg?v=1c545570" alt="" width="120" height="120" loading="lazy">
+    <h2 class="tl-display" data-i18n-html="music-in-seconds-yours.dcf57c">Music in seconds. <em>Yours to keep.</em></h2>
+    <div class="tl-cta">
+      <a href="app/" class="btn-buy" data-enter-app="tom" data-i18n="open-tom.f0d51e">Open Tom</a>
+    </div>
+    <p class="tl-alt-links"><a href="../ark/" data-i18n="part-of-ark.316cab">Part of ARK</a><span aria-hidden="true">·</span><a href="https://github.com/blaineam/Tom" target="_blank" rel="noopener noreferrer" data-i18n="source-on-github.c60f2f">Source on GitHub</a></p>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <!-- scripts/update-footers.py fills this in; never hand-edit. -->
+      <div class="footer-links">
+        <a href="/tools/" class="footer-link" data-i18n="all-tools.a3a7e7">All Tools</a>
+        <a href="/tools/ark/" class="footer-link">ARK</a>
+        <a href="/tools/monkr/" class="footer-link">Monkr</a>
+        <a href="/apps/" class="footer-link" data-i18n="all-apps.429449">All Apps</a>
+        <a href="/privacy/" class="footer-link" data-i18n="privacy.cf0148">Privacy</a>
+        <a href="/terms/" class="footer-link" data-i18n="terms.a55a27">Terms</a>
+        <a href="/support/" class="footer-link" data-i18n="support.f32d5a">Support</a>
+        <a href="/" class="footer-link" data-i18n="portfolio.036b18">Portfolio</a>
+      </div>
+      <!-- Social Media Links -->
+      <div class="footer-social-links">
+        <a href="https://x.com/apps_by_blaine" class="social-icon-link" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)">
+          <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+          </svg>
+        </a>
+        <a href="https://www.instagram.com/apps.by.blaine/" class="social-icon-link" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+          <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.6100 4.1009 4.1009.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.1009 4.1009-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.1009-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.1009-4.1009 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.1100 2.759-6.1100 6.1100s2.759 6.163 6.1100 6.163 6.1100-2.759 6.1100-6.163c0-3.403-2.759-6.1100-6.1100-6.1100zm0 10.1100c-2.209 0-4-1.79-4-4 0-2.209 1.7100-4 4-4s4 1.7100 4 4c0 2.21-1.7100 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+          </svg>
+        </a>
+        <a href="https://www.youtube.com/@AppsByBlaine" class="social-icon-link" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+          <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+          </svg>
+        </a>
+      </div>
+
+      <p style="color: var(--text-muted); margin-top: var(--spacing-md);" data-i18n-html="blaine-miller-all-rights.b327c2">
+        © <span id="year"></span> Blaine Miller. All rights reserved.
+      </p>
+    </div>
+  </footer>
+  <script src="../../apps/app-showcase.js?v=0ce231d7"></script>
+  <script src="../_shared/tools.js?v=a08a2a7f"></script>
+</body>
+</html>
