@@ -103,6 +103,9 @@ jobs:
           path: .mirror/monkr
           ref: main
           persist-credentials: false
+          # Full commit history (blobs are still fetched lazily): the build names itself after
+          # the last commit that touched the app, so an unchanged app rebuilds byte-identical.
+          fetch-depth: 0
           sparse-checkout-cone-mode: false
           sparse-checkout: |
             /*
