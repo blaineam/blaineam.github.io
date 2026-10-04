@@ -40,8 +40,9 @@ ROOT = Path(__file__).resolve().parent.parent
 MIRRORED = {"apps/haven", "apps/blip", "apps/glint", "apps/lathe"}
 
 # Mirrored web apps that stamp their own module URLs (Tom's scripts/stamp.mjs writes ?v=<commit>,
-# and its service worker reads that format back). Never stamped here, even with --mirrored.
-SELF_STAMPED = {"tools/tom/app"}
+# and its service worker reads that format back; SvelteKit names Monkr's by content hash). Never
+# stamped here, even with --mirrored.
+SELF_STAMPED = {"tools/tom/app", "tools/monkr/app"}
 
 IMAGE_SUFFIXES = {".png", ".jpg", ".jpeg", ".webp", ".gif", ".svg", ".ico", ".avif"}
 # Our own scripts and stylesheets: served with the same year-long lifetime as images.

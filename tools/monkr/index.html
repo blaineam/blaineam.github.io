@@ -4,14 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script>
-    // Returning visitors go straight to the app. It stays on its own origin
-    // (monkr.wemiller.com), where people's saved projects already live.
+    // Returning visitors go straight to the app (the app sets the flag).
     // ?about (the app's "About" link) always shows this page.
     (function () {
       if (/[?&]about(?:[=&]|$)/.test(location.search)) return;
       var go = false;
       try { go = localStorage.getItem('tools.monkr.entered') === '1'; } catch (e) { /* private mode */ }
-      if (go) location.replace('https://monkr.wemiller.com/');
+      if (go) location.replace('app/' + location.hash);
     })();
   </script>
   <title>Monkr · Device mockups · Blaine Miller</title>
@@ -77,7 +76,7 @@
       <ul class="nav-links">
         <li><a href="./" class="nav-link" aria-current="page" data-i18n="overview.0efc2e">Overview</a></li>
         <li><a href="https://github.com/blaineam/Monkr" class="nav-link" target="_blank" rel="noopener noreferrer">GitHub</a></li>
-        <li><a href="https://monkr.wemiller.com/" class="btn-buy" data-enter-app="monkr" data-i18n="open-monkr.18779d">Open Monkr</a></li>
+        <li><a href="app/" class="btn-buy" data-enter-app="monkr" data-i18n="open-monkr.18779d">Open Monkr</a></li>
       </ul>
     </div>
   </nav>
@@ -88,7 +87,7 @@
     <h1 data-i18n-html="beautiful-mockups-in-seconds.987bfa">Beautiful mockups <em>in seconds</em></h1>
     <p class="tl-hero-standfirst" data-i18n="drop-in-a-screenshot.47f121">Drop in a screenshot, pick a device and a background, and download a polished mockup. Free, open source, and it never leaves your browser.</p>
     <div class="tl-cta">
-      <a href="https://monkr.wemiller.com/" class="btn-buy" data-enter-app="monkr" data-i18n="open-monkr.18779d">Open Monkr</a>
+      <a href="app/" class="btn-buy" data-enter-app="monkr" data-i18n="open-monkr.18779d">Open Monkr</a>
     </div>
     <p class="tl-alt-links"><span data-i18n="free-and-open-source.9c820d">Free and open source (MIT)</span><span aria-hidden="true">·</span><a href="https://github.com/blaineam/Monkr" target="_blank" rel="noopener noreferrer" data-i18n="source-on-github.c60f2f">Source on GitHub</a></p>
     <div class="tl-hero-figure">
@@ -227,7 +226,7 @@
     <img class="tl-closing-icon" src="assets/icon.avif?v=8c265a51" alt="" width="192" height="192" loading="lazy">
     <h2 class="tl-display" data-i18n-html="beautiful-mockups-in-seconds.987bfa">Beautiful mockups <em>in seconds</em></h2>
     <div class="tl-cta">
-      <a href="https://monkr.wemiller.com/" class="btn-buy" data-enter-app="monkr" data-i18n="open-monkr.18779d">Open Monkr</a>
+      <a href="app/" class="btn-buy" data-enter-app="monkr" data-i18n="open-monkr.18779d">Open Monkr</a>
     </div>
     <p class="tl-alt-links"><a href="../ark/" data-i18n="part-of-ark.316cab">Part of ARK</a><span aria-hidden="true">·</span><a href="https://github.com/blaineam/Monkr" target="_blank" rel="noopener noreferrer" data-i18n="source-on-github.c60f2f">Source on GitHub</a></p>
   </section>

@@ -30,6 +30,7 @@ on:
 
 permissions:
   contents: write
+  actions: write   # start deploy-pages after a mirror commit (see the last step)
 
 concurrency:
   group: mirror-app-docs
@@ -92,6 +93,37 @@ jobs:
           ref: main
           persist-credentials: false
 
+      # Monkr's app shell is built here (SvelteKit, base /tools/monkr/app) and served at
+      # /tools/monkr/app/. Its device frames and backgrounds (~145 MB) stay on
+      # monkr.wemiller.com and load cross-origin, so they're left out of the checkout too.
+      - name: Check out Monkr (without its media)
+        uses: actions/checkout@v4
+        with:
+          repository: blaineam/Monkr
+          path: .mirror/monkr
+          ref: main
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /*
+            !/static/devices/
+            !/static/backgrounds/
+
+      - name: Set up Node for the Monkr build
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: .mirror/monkr/package-lock.json
+
+      - name: Build the Monkr app shell
+        working-directory: .mirror/monkr
+        env:
+          PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: '1'
+        run: |
+          npm ci --no-audit --no-fund
+          ./scripts/build-portfolio.sh
+
       # rsync with --delete keeps the mirror exactly in sync: if the app
       # repo renames/drops a file in docs/, the portfolio loses it too.
       # Filter rules:
@@ -152,6 +184,11 @@ jobs:
             .mirror/tom/web/ tools/tom/app/
           rsync -av --delete --exclude='*.test.mjs' .mirror/tom/lib/ tools/tom/app/lib/
           node .mirror/tom/scripts/stamp.mjs tools/tom/app "$(git -C .mirror/tom rev-parse --short=8 HEAD)"
+          # Monkr: the built shell only (~0.6 MB; scripts/build-portfolio.sh drops the media).
+          # SvelteKit names its bundles by content hash, so cache-bust.py leaves it alone too.
+          mkdir -p tools/monkr/app
+          rsync -av --delete --exclude='devices/' --exclude='backgrounds/' --exclude='CNAME' \
+            .mirror/monkr/build-portfolio/ tools/monkr/app/
           # Remember that the visitor entered the app (so /tools/tom/ sends them straight
           # in next time) and link back to the marketing page from the app's footer.
           python3 scripts/inject-tool-shell.py
@@ -188,18 +225,23 @@ jobs:
       # whose strings carry the same links), so the commit below matches what deploy publishes.
       - name: Tag store links on the mirrored sites
         run: |
-          python3 scripts/store-links.py --mirrored apps/blip apps/glint apps/haven apps/lathe tools/tom/app
-          python3 scripts/store-links.py --mirrored --check apps/blip apps/glint apps/haven apps/lathe tools/tom/app
+          python3 scripts/store-links.py --mirrored apps/blip apps/glint apps/haven apps/lathe tools/tom/app tools/monkr/app
+          python3 scripts/store-links.py --mirrored --check apps/blip apps/glint apps/haven apps/lathe tools/tom/app tools/monkr/app
 
       - name: Commit mirrored docs
         run: |
           set -euo pipefail
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add apps/blip apps/glint apps/haven apps/lathe tools/tom/app
+          git add apps/blip apps/glint apps/haven apps/lathe tools/tom/app tools/monkr/app
           if git diff --cached --quiet; then
             echo "No upstream doc changes — nothing to mirror."
           else
-            git commit -m "chore(mirror): sync blip/glint/haven/lathe sites → /apps, tom → /tools [skip ci]"
+            git commit -m "chore(mirror): sync blip/glint/haven/lathe sites → /apps, tom + monkr → /tools [skip ci]"
             git push
+            # A push made with GITHUB_TOKEN (and [skip ci]) starts no workflow, so the mirror
+            # would only go live with the next human push. A dispatch is allowed to start one.
+            gh workflow run deploy-pages.yml --ref main
           fi
+        env:
+          GH_TOKEN: ${{ github.token }}
