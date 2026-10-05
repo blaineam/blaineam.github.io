@@ -1,0 +1,22 @@
+/* Shared look for the /tools/ Open Graph posters (1200×630), matching tools.css. */
+* { box-sizing: border-box; margin: 0; }
+html, body { width: 1200px; height: 630px; overflow: hidden; }
+body {
+  font-family: system-ui, -apple-system, "SF Pro Display", sans-serif; color: #F5F7FB;
+  background:
+    radial-gradient(ellipse 70% 60% at 50% 115%, rgba(255,181,71,.28) 0%, transparent 70%),
+    radial-gradient(ellipse 45% 40% at 85% 0%, rgba(57,135,229,.22) 0%, transparent 70%),
+    linear-gradient(180deg, #0b1220 0%, #10223a 55%, #163454 100%);
+  -webkit-font-smoothing: antialiased; position: relative;
+}
+/* faint stars, like the hero */
+body::before { content: ""; position: absolute; inset: 0; opacity: .5;
+  background-image: radial-gradient(1.2px 1.2px at 12% 18%, #fff 50%, transparent 51%), radial-gradient(1px 1px at 27% 8%, #fff 50%, transparent 51%),
+    radial-gradient(1.4px 1.4px at 44% 22%, #fff 50%, transparent 51%), radial-gradient(1px 1px at 63% 12%, #fff 50%, transparent 51%),
+    radial-gradient(1.2px 1.2px at 78% 26%, #fff 50%, transparent 51%), radial-gradient(1px 1px at 92% 14%, #fff 50%, transparent 51%),
+    radial-gradient(1px 1px at 6% 44%, #fff 50%, transparent 51%), radial-gradient(1.3px 1.3px at 96% 40%, #fff 50%, transparent 51%); }
+.kicker { font: 700 22px/1 ui-monospace, "SF Mono", Menlo, monospace; letter-spacing: .32em; text-transform: uppercase; color: rgba(255,198,107,.95); }
+h1 { text-wrap: balance; font-weight: 800; letter-spacing: -.035em; line-height: 1.02; }
+h1 em { font-style: normal; color: #FFC66B; }
+.byline { position: absolute; right: 44px; bottom: 34px; font: 600 20px/1 system-ui; color: rgba(245,247,251,.6); letter-spacing: .01em; }
+.byline b { color: rgba(245,247,251,.9); font-weight: 700; }
