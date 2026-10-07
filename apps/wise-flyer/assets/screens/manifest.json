@@ -4,37 +4,37 @@
     "en"
   ],
   "files": {
-    "en/01-prepare-400.avif": "818712bb",
-    "en/01-prepare-800.avif": "bdcbaf4f",
-    "en/02-gameplay-400.avif": "8f5dbfc6",
-    "en/02-gameplay-800.avif": "45bdaa3e",
-    "en/03-attack-400.avif": "b22abd0d",
-    "en/03-attack-800.avif": "1c1fee6a",
-    "en/04-gameover-400.avif": "13069b85",
-    "en/04-gameover-800.avif": "5171bcea"
+    "en/01-prepare-400.webp": "f7cf4b8e",
+    "en/01-prepare-800.webp": "756979b5",
+    "en/02-gameplay-400.webp": "f1ecfd08",
+    "en/02-gameplay-800.webp": "fdeb534c",
+    "en/03-attack-400.webp": "943947ec",
+    "en/03-attack-800.webp": "7efcc692",
+    "en/04-gameover-400.webp": "9ad7ced6",
+    "en/04-gameover-800.webp": "dfef1d30"
   },
   "sizes": {
     "01-prepare": [
       800,
-      1654
+      1655
     ],
     "02-gameplay": [
       800,
-      1654
+      1655
     ],
     "03-attack": [
       800,
-      1654
+      1655
     ],
     "04-gameover": [
       800,
-      1654
+      1655
     ]
   },
   "inputs": {
-    "en/01-prepare": "9b86cd2429fa0207653e09b979ad11b02ec97fdf",
-    "en/02-gameplay": "204499b020d6194541d58762838b9f43fbc1100c",
-    "en/03-attack": "87b21ff510ec70848bc63273cfb8ead5de140fab",
-    "en/04-gameover": "93f77d75e4bb7dcc47dd45e426ed1810fc2567d2"
+    "en/01-prepare": "42fff5e443844d535adbfe6a4ba5625443ea367d",
+    "en/02-gameplay": "2831fb2d7422d95ff4a75e631974b5f49bd1dff9",
+    "en/03-attack": "851866676af929cd6af54d52e445fa97e8b7bd0c",
+    "en/04-gameover": "7b6433c5c9e935a7e4517d5b9e1e861510027816"
   }
 }

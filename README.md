@@ -136,27 +136,31 @@ it locally first, run `python3 scripts/store-links.py`.
 
 The photography — the home-page slideshow (`slides/`), the panoramas
 (`panos/panoramas/`), the photo journals (`books/media/`) and the timeline icons
-(`projects/`) — is AVIF, encoded with
+(`projects/`) — is WebP, encoded with
 [Lathe](https://github.com/blaineam/Lathe)'s `lathe-image`: each picture at
 the lowest quality whose result still matches the original by structural
 similarity, rather than one quality for everything.
 
+**Not AVIF.** Safari in Lockdown Mode decodes only JPEG, PNG, GIF and WebP (WebKit's
+`UTIRegistry.mm`, `lockdownSupportedImageTypes`); AVIF and JPEG XL are broken images
+there. The site was AVIF for a few days in October 2026 and went back for that reason.
+
 ```sh
 # photographs: SSIM ≥ 0.97 overall and ≥ 0.92 in the worst 32×32 region
-find slides -name '*.jpg' | lathe-image --min-ssim 0.97 --min-region-ssim 0.92 --metadata strip -
+find slides -name '*.jpg' | lathe-image --format webp --min-ssim 0.97 --min-region-ssim 0.92 --metadata strip -
 # icons for the 30 px timeline slot
-lathe-image --min-ssim 0.98 --min-region-ssim 0.95 --max-side 128 --metadata strip projects/*.png
+lathe-image --format webp --min-ssim 0.98 --min-region-ssim 0.95 --max-side 128 --metadata strip projects/*.png
 ```
 
-The galleries build their URLs in JavaScript, so a gallery is all AVIF or not at all. The
-exception is `bmp-pano-95.jpg`: at 65,500 px wide it is past what browsers will
-decode as AVIF, so the panorama page asks for that one as a JPEG. `og:image`
+The galleries build their URLs in JavaScript, so a gallery is all WebP or not at all. The
+exceptions are the five panoramas wider than WebP's 16,383 px limit (`bmp-pano-2`, `-16`,
+`-75`, `-85` and `-95`): the panorama page asks for those as JPEGs. `og:image`
 posters, favicons and app icons stay JPEG/PNG — social crawlers and home-screen
-icons don't all read AVIF.
+icons don't all read WebP.
 
-App-page screenshots are AVIF too. `scripts/sync-app-screens.py` frames each locale's raw
+App-page screenshots are WebP too. `scripts/sync-app-screens.py` frames each locale's raw
 capture through Monkr and hands the lossless render to `lathe-image` (SSIM ≥ 0.98 overall,
-≥ 0.93 in the worst region, quality capped at 0.8), so a re-sync stays AVIF. Put `lathe-image`
+≥ 0.93 in the worst region, quality capped at 0.82), so a re-sync stays WebP. Put `lathe-image`
 on PATH or point `LATHE_IMAGE` at it.
 
 ### Local preview
