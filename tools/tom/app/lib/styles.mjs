@@ -4,8 +4,8 @@
 //
 // Layer hooks receive `ctx` (see arrange.mjs) and play through ctx.play /
 // ctx.drum, which both synthesize and log MIDI events.
-import * as I from './instruments.mjs?v=12601b47';
-import { scale, mul, expdec, samples } from './dsp.mjs?v=12601b47';
+import * as I from './instruments.mjs?v=2ad173b0';
+import { scale, mul, expdec, samples } from './dsp.mjs?v=2ad173b0';
 
 const arpOf = (ch) => [...ch, ch[0] + 12];
 

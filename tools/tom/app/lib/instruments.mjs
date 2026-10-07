@@ -4,7 +4,7 @@
 import {
   SR, samples, midiHz, saw, square, sine, tri, noise, adsr, expdec,
   mul, scale, addInto, lowpass, highpass,
-} from './dsp.mjs?v=12601b47';
+} from './dsp.mjs?v=2ad173b0';
 
 // ─── Drums ──────────────────────────────────────────────────────────────────
 

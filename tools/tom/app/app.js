@@ -1,20 +1,20 @@
 // Tom — web music machine. Melody Machine, Lego-style Composer and Radio, all
 // driven by the same engine as the CLI (rendered in a Web Worker).
-import { STYLES, STYLE_IDS } from './lib/styles.mjs?v=12601b47';
-import { SCALES, CONTOUR_NAMES, parseKey, noteName, spell, parseProgression, layoutChords, chordName } from './lib/theory.mjs?v=12601b47';
-import { SOUNDS, SOUND_IDS, PALETTES, SLOTS, SLOT_NAMES } from './lib/sounds.mjs?v=12601b47';
+import { STYLES, STYLE_IDS } from './lib/styles.mjs?v=2ad173b0';
+import { SCALES, CONTOUR_NAMES, parseKey, noteName, spell, parseProgression, layoutChords, chordName } from './lib/theory.mjs?v=2ad173b0';
+import { SOUNDS, SOUND_IDS, PALETTES, SLOTS, SLOT_NAMES } from './lib/sounds.mjs?v=2ad173b0';
 import {
   BLOCK_TYPES, BLOCK_ORDER, DRUM_LEVELS, FORMS, makeBlock, emptySong, autoSong, autoFill, autoBlock,
   melodySong, validate,
-} from './lib/blueprint.mjs?v=12601b47';
-import { blockMelody, timeline, resolve } from './lib/arrange.mjs?v=12601b47';
-import { rng } from './lib/rng.mjs?v=12601b47';
-import { encodeWav } from './lib/wav.mjs?v=12601b47';
-import { webAudio, aacEncodable, encodeAac } from './aac.js?v=12601b47';
-import { toMidi } from './lib/midi.mjs?v=12601b47';
-import { tagOf, randomTag, melodyFromTag, melodyHash, songHash, songFromTag, decodeShare } from './lib/share.mjs?v=12601b47';
-import { STATIONS, MIX, stationName } from './lib/radio.mjs?v=12601b47';
-import { createRadio, radioLog, radioLogText, clearRadioLog } from './radio.js?v=12601b47';
+} from './lib/blueprint.mjs?v=2ad173b0';
+import { blockMelody, timeline, resolve } from './lib/arrange.mjs?v=2ad173b0';
+import { rng } from './lib/rng.mjs?v=2ad173b0';
+import { encodeWav } from './lib/wav.mjs?v=2ad173b0';
+import { webAudio, aacEncodable, encodeAac } from './aac.js?v=2ad173b0';
+import { toMidi } from './lib/midi.mjs?v=2ad173b0';
+import { tagOf, randomTag, melodyFromTag, melodyHash, songHash, songFromTag, decodeShare } from './lib/share.mjs?v=2ad173b0';
+import { STATIONS, MIX, stationName } from './lib/radio.mjs?v=2ad173b0';
+import { createRadio, radioLog, radioLogText, clearRadioLog } from './radio.js?v=2ad173b0';
 
 export const VERSION = '0.10.0';
 const BUILD = new URL(import.meta.url).searchParams.get('v'); // the deploy's commit, stamped by scripts/stamp.mjs
@@ -65,11 +65,11 @@ const state = {
 };
 
 // ─── rendering (worker) + playback ──────────────────────────────────────────
-const worker = new Worker(new URL('./worker.js?v=12601b47', import.meta.url), { type: 'module' });
+const worker = new Worker(new URL('./worker.js?v=2ad173b0', import.meta.url), { type: 'module' });
 let reqId = 0;
 const pending = new Map();
 worker.onmessage = (e) => { const p = pending.get(e.data.id); if (p) { pending.delete(e.data.id); e.data.ok ? p.resolve(e.data) : p.reject(new Error(e.data.error)); } };
-const renderInWorker = (bp) => new Promise((resolve, reject) => { const id = ++reqId; pending.set(id, { resolve, reject }); worker.postMessage({ id, bp }); });
+const renderInWorker = (bp) => new Promise((resolve, reject) => { const id = ++reqId; pending.set(id, { resolve, reject }); worker.postMessage({ id, bp, parallel: !webAudio }); });
 
 const cache = { key: null, result: null };
 async function renderCached(bp) {

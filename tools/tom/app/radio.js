@@ -17,10 +17,10 @@
 // The lock screen and CarPlay get previous/next track buttons (not ±10 s):
 // Previous restarts a song past its first few seconds, otherwise it goes back
 // (the last song stays rendered, so that's instant).
-import { radioTrack, trackTitle, stationName, MIX } from './lib/radio.mjs?v=12601b47';
-import { STYLES } from './lib/styles.mjs?v=12601b47';
-import { encodeWav } from './lib/wav.mjs?v=12601b47';
-import { wavPlayable, encodeAac } from './aac.js?v=12601b47';
+import { radioTrack, trackTitle, stationName, MIX } from './lib/radio.mjs?v=2ad173b0';
+import { STYLES } from './lib/styles.mjs?v=2ad173b0';
+import { encodeWav } from './lib/wav.mjs?v=2ad173b0';
+import { wavPlayable, webAudio, encodeAac } from './aac.js?v=2ad173b0';
 
 const AHEAD = 2;              // songs kept rendered beyond the one playing
 const RENDER_TIMEOUT = 150e3; // a full song renders in seconds; this means the worker is gone
@@ -62,7 +62,7 @@ export function createRadio({ onChange = () => {}, onTrack = () => {} } = {}) {
   let worker = null, reqId = 0;
   const pending = new Map();
   function spawn() {
-    worker = new Worker(new URL('./worker.js?v=12601b47', import.meta.url), { type: 'module' });
+    worker = new Worker(new URL('./worker.js?v=2ad173b0', import.meta.url), { type: 'module' });
     worker.onmessage = (e) => { const p = pending.get(e.data.id); if (!p) return; pending.delete(e.data.id); e.data.ok ? p.resolve(e.data) : p.reject(new Error(e.data.error)); };
     worker.onerror = (e) => { e.preventDefault?.(); radioLog('renderer error', e.message || ''); resetWorker(new Error(e.message || 'The renderer stopped')); };
   }
@@ -79,7 +79,7 @@ export function createRadio({ onChange = () => {}, onTrack = () => {} } = {}) {
       const timer = setTimeout(() => { if (pending.has(id)) resetWorker(new Error('The renderer stalled')); }, RENDER_TIMEOUT);
       pending.set(id, { resolve: (v) => { clearTimeout(timer); resolve(v); }, reject: (e) => { clearTimeout(timer); reject(e); } });
       radioLog('writing', bp.title);
-      worker.postMessage({ id, bp, radio: true, wav: wavPlayable });
+      worker.postMessage({ id, bp, radio: true, wav: wavPlayable, parallel: !webAudio });
     });
   }
 
@@ -94,7 +94,8 @@ export function createRadio({ onChange = () => {}, onTrack = () => {} } = {}) {
   let oneOff = 0;       // bumps for each song asked for by name (history, Previous)
   let userPaused = false; // only a pause the listener asked for stops the station
 
-  const prepare = (n, g) => renderTrack(radioTrack(s.station, s.seed, n, { styles: s.styles }), n, g);
+  // Without Web Audio this is almost surely Lockdown Mode, which also has no JIT: start with a short song.
+  const prepare = (n, g) => renderTrack(radioTrack(s.station, s.seed, n, { styles: s.styles, quickStart: !webAudio }), n, g);
   async function renderTrack(song, n, g) {
     for (let attempt = 0; ; attempt++) {
       try {
