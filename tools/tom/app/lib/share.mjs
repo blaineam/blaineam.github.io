@@ -11,10 +11,10 @@
 //
 // Everything is deterministic: the web app and the CLI decode the same link
 // to the same blueprint, and the same blueprint renders the same audio.
-import { rng } from './rng.mjs?v=957369d2';
-import { STYLES } from './styles.mjs?v=957369d2';
-import { CONTOUR_NAMES } from './theory.mjs?v=957369d2';
-import { FORMS, autoSong, validate } from './blueprint.mjs?v=957369d2';
+import { rng } from './rng.mjs?v=12601b47';
+import { STYLES } from './styles.mjs?v=12601b47';
+import { CONTOUR_NAMES } from './theory.mjs?v=12601b47';
+import { FORMS, autoSong, validate } from './blueprint.mjs?v=12601b47';
 
 // Bare hashtags pick their style from THIS list, frozen at 0.1.0 so links
 // already shared keep their song. New styles are reached with &style=.

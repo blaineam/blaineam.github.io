@@ -3,7 +3,7 @@
 // Each style lists the sounds that suit it; its own voice ('style') comes
 // first. A song carries its picks as `sounds: { lead, counter, bells }`; a song
 // without them plays the style's own voices, exactly as before.
-import * as I from './instruments.mjs?v=957369d2';
+import * as I from './instruments.mjs?v=12601b47';
 
 // voice(m, d, r) → mono samples. `gain` levels each sound against the others;
 // `shift` moves a voice to where it sings best (in semitones).

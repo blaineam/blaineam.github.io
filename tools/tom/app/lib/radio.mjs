@@ -4,9 +4,9 @@
 // session seed. Track n of a station is a pure function of (station, seed, n),
 // and every track is an ordinary auto-built song with its own #song: link, so
 // a track you like can be shared or opened in the composer unchanged.
-import { rng } from './rng.mjs?v=957369d2';
-import { STYLES, STYLE_IDS } from './styles.mjs?v=957369d2';
-import { randomTag, songFromTag } from './share.mjs?v=957369d2';
+import { rng } from './rng.mjs?v=12601b47';
+import { STYLES, STYLE_IDS } from './styles.mjs?v=12601b47';
+import { randomTag, songFromTag } from './share.mjs?v=12601b47';
 
 export const MIX = 'mix';
 export const STATIONS = [...STYLE_IDS, MIX];
