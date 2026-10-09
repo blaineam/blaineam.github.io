@@ -35,7 +35,7 @@ and one-time tips; see the [Support](https://wemiller.com/support) page.
 | App | What it does | Released |
 |-----|--------------|----------|
 | **Tom** | A music machine — dial in a melody in seconds or snap a whole song together like Lego; seeded, royalty-free, web + CLI ([wemiller.com/tools/tom](https://wemiller.com/tools/tom/), [source](https://github.com/blaineam/Tom)) | September 2026 |
-| **Scripture Alone** | A free, private, offline Bible for iPhone, iPad, Mac and Apple Watch — open source (AGPL-3.0); share links rebuild verse cards in the browser | On the App Store; Google Play coming soon |
+| **Scripture Alone** | A free, private, offline Bible for iPhone, iPad, Mac and Apple Watch — open source (AGPL-3.0); share links rebuild verse cards in the browser | On the [App Store](https://apps.apple.com/us/app/scripture-alone-bible/id6813729762?pt=118981620&ct=wm-readme&mt=8) and [Google Play](https://play.google.com/store/apps/details?id=com.blainemiller.scripturealone&referrer=utm_source%3Dwemiller.com%26utm_medium%3Dwebsite%26utm_campaign%3Dreadme) |
 | **Lathe** | Open-source media engine behind Sami, and a free Mac downloader (not on the App Store; [download](https://github.com/blaineam/Lathe/releases/latest)) | September 2026 |
 | **Kern** | Handle letters with care — word puzzles in living worlds | August 2026 |
 | **Revela** | Shoot film. Wait for it — a vintage film camera | July 2026 |
