@@ -1,0 +1,22 @@
+/* Store pick — see store-pick.js. Without JavaScript <html> carries no data-store, so every
+   store button shows and none of the "Also on …" lines do. */
+html[data-store="apple"] [data-store-link="play"],
+html[data-store="play"] [data-store-link="apple"],
+html:not([data-store="apple"]) [data-store-only="apple"],
+html:not([data-store="play"]) [data-store-only="play"] {
+  display: none !important;
+}
+
+/* The quiet second choice under the one big button. */
+.store-also {
+  margin: 0.85rem 0 0;
+  font-size: 0.92rem;
+  text-align: center;
+}
+.store-also a {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 1px;
+}
+.store-also a:hover { opacity: 0.8; }

@@ -15,7 +15,9 @@
        so the product page doesn't flash. share.js takes over from here. */
     if (/(^#|&)s=/.test(location.hash)) document.documentElement.classList.add('sa-share-pending');
   </script>
+  <script src="../_shared/store-pick.js?v=8b731ccb"></script>
   <link rel="stylesheet" href="../app-showcase.css?v=7832b316">
+  <link rel="stylesheet" href="../_shared/store-pick.css?v=5d3901f3">
   <style>
     /* Scripture Alone — the icon's dawn: an indigo sky warming to plum, a white
        open book for the horizon and a warm sun rising from its fold. The page
@@ -269,6 +271,8 @@
     .sa-alt-links a:hover { border-bottom-color: rgba(251, 241, 223, 0.8); }
     .sa-closing .sa-alt-links { color: var(--sa-quiet); }
     .sa-closing .sa-alt-links a { color: var(--sa-ink); border-bottom-color: var(--sa-rule); }
+    .sa-hero .store-also { color: rgba(251, 241, 223, 0.86); }
+    .sa-closing .store-also { color: var(--sa-ink); }
 
     /* ---- Privacy: the night sky again ----------------------------------- */
     .sa-privacy {
@@ -684,8 +688,8 @@
         <li><a href="./" class="nav-link" aria-current="page" data-i18n="overview.0efc2e">Overview</a></li>
         <li><a href="features/" class="nav-link" data-i18n="features.fc338f">Features</a></li>
         <li><a href="faq/" class="nav-link" data-i18n="faq.03688b">FAQ</a></li>
-        <li><a href="https://apps.apple.com/us/app/scripture-alone-bible/id6813729762?pt=118981620&ct=wm-scripture-alone&mt=8" target="_blank" rel="noopener noreferrer" class="btn-buy">App Store</a></li>
-        <li><a href="https://play.google.com/store/apps/details?id=com.blainemiller.scripturealone&referrer=utm_source%3Dwemiller.com%26utm_medium%3Dwebsite%26utm_campaign%3Dscripture-alone" target="_blank" rel="noopener noreferrer" class="btn-buy">Google Play</a></li>
+        <li data-store-link="apple"><a href="https://apps.apple.com/us/app/scripture-alone-bible/id6813729762?pt=118981620&ct=wm-scripture-alone&mt=8" target="_blank" rel="noopener noreferrer" class="btn-buy">App Store</a></li>
+        <li data-store-link="play"><a href="https://play.google.com/store/apps/details?id=com.blainemiller.scripturealone&referrer=utm_source%3Dwemiller.com%26utm_medium%3Dwebsite%26utm_campaign%3Dscripture-alone" target="_blank" rel="noopener noreferrer" class="btn-buy">Google Play</a></li>
       </ul>
     </div>
   </nav>
@@ -720,9 +724,11 @@
     <h1 data-i18n="the-word-and-nothing.59b9cc">The Word, and nothing in the way.</h1>
     <p class="sa-hero-standfirst" data-i18n="a-free-open-source.7d8e3d">A free, open-source Bible for iPhone, iPad and Mac, with its own Apple Watch app.</p>
     <div class="sa-cta">
-      <a href="https://apps.apple.com/us/app/scripture-alone-bible/id6813729762?pt=118981620&ct=wm-scripture-alone&mt=8" target="_blank" rel="noopener noreferrer" class="btn-buy" data-i18n="download-on-the-app.a9096a">Download on the App Store</a>
-      <a href="https://play.google.com/store/apps/details?id=com.blainemiller.scripturealone&referrer=utm_source%3Dwemiller.com%26utm_medium%3Dwebsite%26utm_campaign%3Dscripture-alone" target="_blank" rel="noopener noreferrer" class="btn-buy" data-i18n="get-it-on-google.e240e8">Get it on Google Play</a>
+      <a href="https://apps.apple.com/us/app/scripture-alone-bible/id6813729762?pt=118981620&ct=wm-scripture-alone&mt=8" target="_blank" rel="noopener noreferrer" class="btn-buy" data-store-link="apple" data-i18n="download-on-the-app.a9096a">Download on the App Store</a>
+      <a href="https://play.google.com/store/apps/details?id=com.blainemiller.scripturealone&referrer=utm_source%3Dwemiller.com%26utm_medium%3Dwebsite%26utm_campaign%3Dscripture-alone" target="_blank" rel="noopener noreferrer" class="btn-buy" data-store-link="play" data-i18n="get-it-on-google.e240e8">Get it on Google Play</a>
     </div>
+    <p class="store-also" data-store-only="apple"><a href="https://play.google.com/store/apps/details?id=com.blainemiller.scripturealone&referrer=utm_source%3Dwemiller.com%26utm_medium%3Dwebsite%26utm_campaign%3Dscripture-alone" target="_blank" rel="noopener noreferrer" data-i18n="also-on-google-play.1c8576">Also on Google Play</a></p>
+    <p class="store-also" data-store-only="play"><a href="https://apps.apple.com/us/app/scripture-alone-bible/id6813729762?pt=118981620&ct=wm-scripture-alone&mt=8" target="_blank" rel="noopener noreferrer" data-i18n="also-on-the-app.1a7729">Also on the App Store</a></p>
     <p class="sa-alt-links">
       <a href="https://github.com/blaineam/Scripture-Alone" target="_blank" rel="noopener noreferrer" data-i18n="source-on-github.c60f2f">Source on GitHub</a>
       <span aria-hidden="true">·</span>
@@ -738,9 +744,13 @@
   <p class="sa-hero-caption" data-i18n="red-letters-and-your.33addb">Red letters and your highlights</p>
 
   <!-- Floating App Store button -->
-  <a href="https://apps.apple.com/us/app/scripture-alone-bible/id6813729762?pt=118981620&ct=wm-scripture-alone&mt=8" target="_blank" rel="noopener noreferrer" class="floating-appstore">
+  <a href="https://apps.apple.com/us/app/scripture-alone-bible/id6813729762?pt=118981620&ct=wm-scripture-alone&mt=8" target="_blank" rel="noopener noreferrer" class="floating-appstore" data-store-link="apple">
     <span class="floating-appstore-icon"></span>
     <span data-i18n="download-on-app-store.cf50c2">Download on App Store</span>
+  </a>
+  <a href="https://play.google.com/store/apps/details?id=com.blainemiller.scripturealone&referrer=utm_source%3Dwemiller.com%26utm_medium%3Dwebsite%26utm_campaign%3Dscripture-alone" target="_blank" rel="noopener noreferrer" class="floating-appstore" data-store-only="play">
+    <span class="floating-appstore-icon"></span>
+    <span data-i18n="get-it-on-google.e240e8">Get it on Google Play</span>
   </a>
 
   <section class="sa-statement">
@@ -979,9 +989,11 @@
     <img src="assets/images/icon.png?v=5ef7dc50" alt="" width="1024" height="1024" loading="lazy">
     <h2 class="sa-display" data-i18n="the-word-and-nothing.59b9cc">The Word, and nothing in the way.</h2>
     <div class="sa-cta">
-      <a href="https://apps.apple.com/us/app/scripture-alone-bible/id6813729762?pt=118981620&ct=wm-scripture-alone&mt=8" target="_blank" rel="noopener noreferrer" class="btn-buy" data-i18n="download-on-the-app.a9096a">Download on the App Store</a>
-      <a href="https://play.google.com/store/apps/details?id=com.blainemiller.scripturealone&referrer=utm_source%3Dwemiller.com%26utm_medium%3Dwebsite%26utm_campaign%3Dscripture-alone" target="_blank" rel="noopener noreferrer" class="btn-buy" data-i18n="get-it-on-google.e240e8">Get it on Google Play</a>
+      <a href="https://apps.apple.com/us/app/scripture-alone-bible/id6813729762?pt=118981620&ct=wm-scripture-alone&mt=8" target="_blank" rel="noopener noreferrer" class="btn-buy" data-store-link="apple" data-i18n="download-on-the-app.a9096a">Download on the App Store</a>
+      <a href="https://play.google.com/store/apps/details?id=com.blainemiller.scripturealone&referrer=utm_source%3Dwemiller.com%26utm_medium%3Dwebsite%26utm_campaign%3Dscripture-alone" target="_blank" rel="noopener noreferrer" class="btn-buy" data-store-link="play" data-i18n="get-it-on-google.e240e8">Get it on Google Play</a>
     </div>
+    <p class="store-also" data-store-only="apple"><a href="https://play.google.com/store/apps/details?id=com.blainemiller.scripturealone&referrer=utm_source%3Dwemiller.com%26utm_medium%3Dwebsite%26utm_campaign%3Dscripture-alone" target="_blank" rel="noopener noreferrer" data-i18n="also-on-google-play.1c8576">Also on Google Play</a></p>
+    <p class="store-also" data-store-only="play"><a href="https://apps.apple.com/us/app/scripture-alone-bible/id6813729762?pt=118981620&ct=wm-scripture-alone&mt=8" target="_blank" rel="noopener noreferrer" data-i18n="also-on-the-app.1a7729">Also on the App Store</a></p>
     <p class="sa-alt-links">
       <a href="https://github.com/blaineam/Scripture-Alone" target="_blank" rel="noopener noreferrer" data-i18n="source-on-github.c60f2f">Source on GitHub</a>
       <span aria-hidden="true">·</span>
