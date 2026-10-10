@@ -85,7 +85,7 @@
   "yes-no-ads-no.bf78fd": "네. 광고도, 앱 내 구입도, 구독도 없습니다. Scripture Alone은 무료이며, 앞으로도 무료입니다.",
   "yes-on-any-mac.d853c7": "네, Apple 실리콘을 탑재한 모든 Mac에서 실행됩니다. Mac의 App Store에서 iPad 앱을 설치하면 하이라이트와 메모가 iCloud를 통해 iPhone, iPad와 동기화됩니다.",
   "yes-on-google-play.d9e736": "네, Google Play에서 제공합니다. Android 스마트폰과 태블릿용 네이티브 앱이며, 자체 Wear OS 앱도 함께 제공됩니다. Android에는 iCloud가 없으므로 하이라이트와 메모는 기기에 저장됩니다.",
-  "yes-scripture-alone-can.9c9e86": "네. Scripture Alone은 직접 소유한 USFM 파일, DRM 없는 ePub, 성경 PDF를 열 수 있고, 요청하면 <a href=\"https://ebible.org/\" rel=\"noopener\">eBible.org</a>에서 공개하는 무료 카탈로그를 사용자 언어 우선으로 가져옵니다. 탭하기 전에는 아무것도 다운로드되지 않습니다. 가져온 번역본은 오직 사용자의 것입니다. 사용자 본인의 비공개 iCloud를 통해 다른 기기로 따라가며, 복사와 공유는 출판사가 공개한 이용 조건을 따릅니다. 이는 임시 방편입니다. ESV와 CSB의 라이선스 요청이 각 출판사에 들어가 있으며, 승인되면 해당 번역본이 앱에 기본으로 포함되고 이 방법은 없어질 수 있습니다.",
+  "yes-scripture-alone-can.274d57": "네. Scripture Alone은 직접 소유한 USFM 파일, DRM 없는 ePub, 성경 PDF를 열 수 있고, 요청하면 <a href=\"https://ebible.org/\" rel=\"noopener\">eBible.org</a>에서 공개하는 무료 카탈로그를 사용자 언어 우선으로 가져옵니다. 탭하기 전에는 아무것도 다운로드되지 않습니다. 가져온 번역본은 오직 사용자의 것입니다. 사용자 본인의 비공개 iCloud를 통해 다른 기기로 따라가며, 복사와 공유는 출판사가 공개한 이용 조건을 따릅니다. 이는 임시 방편입니다. ESV, CSB, LSB의 라이선스 요청이 각 출판사에 들어가 있으며, 승인되면 해당 번역본이 앱에 기본으로 포함되고 이 방법은 없어질 수 있습니다.",
   "yes-scripture-alone-is.9112b8": "네. Scripture Alone은 프랑스를 포함한 유럽연합 전역의 App Store에서 이용할 수 있습니다. 소스 코드는 GitHub에서 누구에게나 공개되어 있습니다.",
   "your-highlights-and-notes.dc2c5b": "하이라이트와 메모에 헌정의 글을 더해 파일 하나로 묶으세요. 가족이 열어서 당신이 표시한 그대로 읽을 수 있는, 대대로 물려줄 디지털 ‘아버지의 성경’입니다."
 }
