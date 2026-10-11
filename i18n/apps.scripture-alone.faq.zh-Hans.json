@@ -27,6 +27,7 @@
   "is-there-a-user.f8cff1": "有用户指南吗？",
   "is-there-an-android.2b6378": "有 Android 版本吗？",
   "it-s-a-careful.5d85f3": "它是一部严谨的直译本。The Lockman Foundation 是第一家授权 Scripture Alone 收录译本的出版方，我们感谢它允许收录 NASB 2020，以及与之并列的 NASB 1995。American Standard Version、Berean Standard Bible 和 King James Version 属于公有领域，因此也一并收录。收录 ESV、CSB 和 LSB 的请求已提交给各出版方。",
+  "more-bible-versions-can.f24ef2": "更多圣经译本可在此处找到。",
   "no-google-play-download.8a9d61": "没有 Google Play？可以<a href=\"https://github.com/blaineam/Scripture-Alone/releases/tag/android-v1.0.0-beta.8\" target=\"_blank\" rel=\"noopener noreferrer\">从 GitHub 下载 APK</a>，其中内置所有译本和研读工具。它不会自动更新，也无法通过 Google Play 版本更新，请先阅读那里的说明。",
   "none-there-are-no.762c80": "不收集任何数据。没有分析统计，没有追踪，也没有账户。你的重点和笔记留在你的设备上，只通过你自己的私有 iCloud 同步，我看不到。",
   "not-at-this-time.fee790": "目前不会。NKJV 的授权条款要求定期支付费用，并要求只能通过独立的服务器从美国提供经文，这与一款通过 App Store 和 Google Play 在全球安全分发的免费应用并不相符。你仍可按照用户指南的说明，用自己的免费 API.Bible 密钥在线阅读 NKJV。",

@@ -27,6 +27,7 @@
   "is-there-a-user.f8cff1": "ユーザガイドはありますか？",
   "is-there-an-android.2b6378": "Android 版はありますか？",
   "it-s-a-careful.5d85f3": "丁寧な逐語訳です。The Lockman Foundation は Scripture Alone に初めて翻訳のライセンスを与えてくれた出版社で、NASB 2020 と、それに並べて NASB 1995 を収録する許可をいただいたことに感謝しています。American Standard Version、Berean Standard Bible、King James Version はパブリックドメインなので、これらも収録しています。ESV、CSB、LSB の収録については、各出版社に申請中です。",
+  "more-bible-versions-can.f24ef2": "ほかの聖書の翻訳はこちらにあります。",
   "no-google-play-download.8a9d61": "Google Play を使えない場合は、すべての訳と学習ツールを内蔵した <a href=\"https://github.com/blaineam/Scripture-Alone/releases/tag/android-v1.0.0-beta.8\" target=\"_blank\" rel=\"noopener noreferrer\">APK を GitHub からダウンロード</a>できます。自動では更新されず、Google Play 版で上書き更新することもできないため、先にそちらの注意書きをお読みください。",
   "none-there-are-no.762c80": "何も集めません。解析も、トラッカーも、アカウントもありません。ハイライトとメモはあなたのデバイスに残り、あなた自身のプライベートな iCloud を通じてのみ同期されます。私には見えません。",
   "not-at-this-time.fee790": "現時点では予定していません。NKJV のライセンス条件では、継続的な費用の支払いと、別のサーバーを使って米国内からのみ本文を配信することが求められます。これは、App Store と Google Play を通じて世界中に安全に届けている無料アプリの形には合いません。NKJV は、ユーザガイドの説明に沿ってご自身の無料 API.Bible キーを設定すれば、引き続きオンラインで読めます。",
