@@ -8,6 +8,7 @@
   "ask-anything-point-at.7655dd": "Pergunte qualquer coisa. Aponte para qualquer coisa.",
   "back-to-the-overview.e274c2": "Voltar à visão geral",
   "blaine-miller-all-rights.b327c2": "© <span id=\"year\"></span> Blaine Miller. Todos os direitos reservados.",
+  "can-ari-make-pictures.118d41": "O Ari consegue criar imagens sem o Draw Things?",
   "can-i-share-conversations.a8722e": "Posso compartilhar conversas com outras pessoas?",
   "can-i-tell-whether.15df7c": "Dá para saber se uma imagem veio do Ari Helper?",
   "chat.2ced57": "Chat",
@@ -50,6 +51,7 @@
   "when-both-apps-are.bf3fe4": "Quando os dois apps estão instalados, a aba Retoque do Luma oferece Remover algo no Ari. O Luma envia a foto original para o Photo Studio; depois de remover o que você precisa, Salvar no Luma Editor leva você de volta ao Luma com o objeto removido e sua correção de cor ainda aplicada.",
   "whether-you-re-running.ddec8d": "Seja executando modelos totalmente no dispositivo, conectando-se a uma instância própria do Ollama na sua rede ou usando um provedor na nuvem — o Ari Helper oferece as ferramentas para você escolher o nível de privacidade ideal para cada conversa.",
   "yes-ari-helper-adds.e07bf7": "Sim. O Ari Helper adiciona uma marca invisível às imagens que gera, na própria imagem e não em metadados que um novo salvamento apagaria, e ela resiste à compressão comum. <a href=\"../watermark/\">Verifique uma imagem aqui</a> — roda no seu navegador e nada é enviado.",
+  "yes-ari-helper-can.edbeb5": "Sim. O Ari Helper pode criar imagens inteiramente no seu dispositivo. Baixe um modelo de imagem em \"Explorar modelos\" dentro do Ari, ou traga seu próprio arquivo de modelo Stable Diffusion com \"Importar modelo\", e depois descreva a imagem em qualquer conversa. Depois que o modelo é baixado, seus prompts e suas imagens ficam no dispositivo. O Draw Things e os modelos de imagem na nuvem continuam disponíveis se você preferir.",
   "yes-ari-helper-is.0f9dc6": "Sim. Ari Helper está à venda em toda a União Europeia, França inclusive. Está disponível em todos os países e regiões da App Store que a Apple oferece, exceto a China continental, que tem regras próprias para apps que geram conteúdo com IA.",
   "yes-when-using-local.7d1876": "Sim! Ao usar modelos locais no dispositivo ou o Ollama na sua rede, nenhum dado sai do seu dispositivo nem da sua rede local. O modo privado com bloqueio biométrico adiciona segurança extra para conversas sensíveis.",
   "yes-you-can-share.13d3cb": "Sim! Você pode compartilhar conversas como belas imagens ou arquivos HTML, perfeitos para compartilhar ideias, trechos de código ou conteúdo criativo com amigos e colegas."

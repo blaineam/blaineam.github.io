@@ -8,6 +8,7 @@
   "ask-anything-point-at.7655dd": "Frag alles. Zeig auf alles.",
   "back-to-the-overview.e274c2": "Zurück zum Überblick",
   "blaine-miller-all-rights.b327c2": "© <span id=\"year\"></span> Blaine Miller. Alle Rechte vorbehalten.",
+  "can-ari-make-pictures.118d41": "Kann Ari Bilder ohne Draw Things erzeugen?",
   "can-i-share-conversations.a8722e": "Kann ich Unterhaltungen mit anderen teilen?",
   "can-i-tell-whether.15df7c": "Kann ich erkennen, ob ein Bild von Ari Helper stammt?",
   "chat.2ced57": "Chat",
@@ -50,6 +51,7 @@
   "when-both-apps-are.bf3fe4": "Wenn beide Apps installiert sind, bietet der Tab „Retusche“ in Luma die Option „In Ari etwas entfernen“. Luma schickt das unbearbeitete Foto an Photo Studio; sobald du entfernt hast, was du loswerden willst, bringt dich „In Luma Editor sichern“ zurück zu Luma – das Objekt ist weg, dein Grading weiterhin angewendet.",
   "whether-you-re-running.ddec8d": "Ob Sie Modelle vollständig auf dem Gerät ausführen, sich mit einer selbst gehosteten Ollama-Instanz in Ihrem Netzwerk verbinden oder einen Cloud-Anbieter nutzen – Ari Helper gibt Ihnen die Werkzeuge an die Hand, um für jedes Gespräch das passende Maß an Privatsphäre zu wählen.",
   "yes-ari-helper-adds.e07bf7": "Ja. Ari Helper fügt den Bildern, die es erzeugt, eine unsichtbare Markierung hinzu – im Bild selbst, nicht in Metadaten, die ein erneutes Speichern entfernen würde – und sie übersteht gewöhnliche Kompression. <a href=\"../watermark/\">Prüfen Sie ein Bild hier</a>: Es läuft in Ihrem Browser, nichts wird hochgeladen.",
+  "yes-ari-helper-can.edbeb5": "Ja. Ari Helper kann Bilder komplett auf deinem Gerät erzeugen. Lade in Ari unter „Modelle durchsuchen“ ein Bildmodell herunter oder bring mit „Modell importieren“ deine eigene Stable-Diffusion-Modelldatei mit, und beschreibe das Bild dann in einer beliebigen Unterhaltung. Sobald ein Modell geladen ist, bleiben deine Prompts und Bilder auf dem Gerät. Draw Things und Cloud-Bildmodelle stehen weiterhin zur Wahl, wenn du sie lieber nutzt.",
   "yes-ari-helper-is.0f9dc6": "Ja. Ari Helper wird in der gesamten Europäischen Union verkauft, Frankreich eingeschlossen. Die App ist in allen App-Store-Ländern und -Regionen erhältlich, die Apple anbietet – außer auf dem chinesischen Festland, wo eigene Regeln für Apps mit KI-generierten Inhalten gelten.",
   "yes-when-using-local.7d1876": "Ja! Bei der Nutzung lokaler Modelle auf dem Gerät oder von Ollama in Ihrem Netzwerk verlassen keine Daten Ihr Gerät oder Ihr lokales Netzwerk. Der private Modus mit biometrischer Sperre bietet zusätzliche Sicherheit für vertrauliche Gespräche.",
   "yes-you-can-share.13d3cb": "Ja! Sie können Gespräche als ansprechende Bilder oder HTML-Dateien teilen – ideal, um Erkenntnisse, Code-Schnipsel oder kreative Inhalte mit Freunden und Kollegen zu teilen."

@@ -8,6 +8,7 @@
   "ask-anything-point-at.7655dd": "何でも聞ける。何にでも向けられる。",
   "back-to-the-overview.e274c2": "概要に戻る",
   "blaine-miller-all-rights.b327c2": "© <span id=\"year\"></span> Blaine Miller. 無断転載を禁じます。",
+  "can-ari-make-pictures.118d41": "Draw Thingsなしでも、Ariで画像を作れますか？",
   "can-i-share-conversations.a8722e": "会話を他の人と共有できますか？",
   "can-i-tell-whether.15df7c": "画像が Ari Helper から来たものか分かりますか？",
   "chat.2ced57": "チャット",
@@ -50,6 +51,7 @@
   "when-both-apps-are.bf3fe4": "両方のアプリをインストールしていると、Luma の「レタッチ」タブに Ari の「何かを除去」が表示されます。Luma は未編集の写真を Photo Studio に送り、必要なものを除去したら「Save to Luma Editor」で Luma に戻ります。被写体は消え、あなたのグレーディングはそのまま保たれています。",
   "whether-you-re-running.ddec8d": "すべてをデバイス上で実行する場合も、ネットワーク上の自己ホスト型 Ollama インスタンスに接続する場合も、クラウドプロバイダを利用する場合も——Ari Helper なら、会話ごとに最適なプライバシーレベルを自分で選べます。",
   "yes-ari-helper-adds.e07bf7": "はい。Ari Helper は生成した画像に不可視のマークを付けます。マークは再保存で消えるメタデータではなく画像そのものに入っており、通常の圧縮にも耐えます。<a href=\"../watermark/\">こちらで画像を確認できます</a>。ブラウザ内で処理され、アップロードはされません。",
+  "yes-ari-helper-can.edbeb5": "はい。Ari Helperは、デバイス上だけで画像を作成できます。Ariの「モデルを探す」から画像モデルをダウンロードするか、「モデルを読み込む」で手持ちのStable Diffusionモデルファイルを取り込み、好きな会話で作りたい画像を説明してください。モデルをダウンロードしたあとは、プロンプトも画像もデバイスの外に出ません。Draw Thingsやクラウドの画像モデルも、お好みで引き続き使えます。",
   "yes-ari-helper-is.0f9dc6": "はい。Ari Helperはフランスを含む欧州連合（EU）の全域で販売しています。中国本土を除き、Appleが提供するすべての国と地域のApp Storeでご利用いただけます。中国本土は生成AIコンテンツに独自の規制があるためです。",
   "yes-when-using-local.7d1876": "はい。デバイス上で動作するローカルモデルやネットワーク上の Ollama を使えば、データが端末やローカルネットワークの外に出ることはありません。生体認証ロック付きのプライベートモードなら、機密性の高い会話をさらに安全に守れます。",
   "yes-you-can-share.13d3cb": "はい。会話は美しい画像や HTML ファイルとして共有できます。気づきやコードスニペット、クリエイティブな内容を友人や同僚と共有するのに最適です。"
