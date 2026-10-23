@@ -4,14 +4,14 @@
 <head>
   <meta charset="utf-8">
   <title>Blaine Miller — Senior Software Engineer</title>
-  <meta name="description" content="Senior software engineer with a current Secret clearance: real-time data platforms, Kubernetes and 20+ shipped apps. Open to senior and principal roles.">
+  <meta name="description" content="Senior software engineer: real-time data platforms, Kubernetes and 20+ shipped apps.">
   <meta name="viewport" content="initial-scale = 1.0,minimum-scale = 1.0">
   <meta property="og:type" content="profile">
   <meta property="og:title" content="Blaine Miller — Senior Software Engineer">
   <meta property="og:url" content="https://wemiller.com">
   <meta property="og:image" content="https://wemiller.com/profile.jpg?v=e8036801">
   <meta property="og:image:secure_url" content="https://wemiller.com/profile.jpg?v=e8036801">
-  <meta property="og:description" content="Senior software engineer with a current Secret clearance: real-time data platforms, Kubernetes and 20+ shipped apps. Open to senior and principal roles.">
+  <meta property="og:description" content="Senior software engineer: real-time data platforms, Kubernetes and 20+ shipped apps.">
   <meta property="profile:first_name" content="Blaine">
   <meta property="profile:last_name" content="Miller">
   <link rel="apple-touch-icon" href="profile.jpg?v=e8036801">
@@ -1114,18 +1114,8 @@
         padding: 2px 8px;
     }
   
-    /* Front-page hook: a clearance badge, a one-line pitch and three pills
-       that each open a deeper part of the site. */
-    #summary .hook-badge {
-      display: inline-block;
-      margin: 2px 0 8px;
-      padding: 2px 12px;
-      border-radius: 999px;
-      font-size: 0.85em;
-      letter-spacing: 0.02em;
-      background: var(--bg-color-half);
-    }
-
+    /* Front-page hook: a one-line pitch and a few pills that each open a
+       deeper part of the site. */
     #summary p {
       text-wrap: balance;
     }
@@ -1158,6 +1148,12 @@
       transform: translateY(-1px);
     }
 
+    /* The hiring pill only renders while the nav's data-open-to-work flag
+       (see the markup in #summary) is "true". */
+    #summary .hook-links:not([data-open-to-work="true"]) .hook-pill--hire {
+      display: none;
+    }
+
     #summary .hook-pill::after {
       content: " \2192";
     }
@@ -1176,10 +1172,6 @@
 
       #summary .invisible-scroll {
         line-height: 1.3;
-      }
-
-      #summary .hook-badge {
-        margin: 0 0 4px;
       }
 
       #summary .hook-links {
@@ -1460,13 +1452,14 @@
             <div class="invisible-scroll">
               <h1 data-i18n="hello-i-m-blaine.854c20">Hello, I'm Blaine Miller</h1>
               <h2 data-i18n="hook.title">Senior Software Engineer</h2>
-              <p class="hook-badge" data-i18n="hook.clearance">Current Secret Clearance</p>
               <p class="hook-lead" data-i18n="hook.lead">I build real-time data platforms by day and ship my own apps by night.</p>
               <p data-i18n="hook.years">14+ years, from the first byte ingested to the App Store.</p>
-              <nav class="hook-links" aria-label="Start here">
+              <!-- OPEN TO WORK toggle: set data-open-to-work="true" to show the
+                   "Open to senior & principal roles" pill, "false" to hide it. -->
+              <nav class="hook-links" aria-label="Start here" data-open-to-work="false">
                 <a class="hook-pill" href="#projects" onclick="document.getElementById('projects-toggle').click();return false;" data-i18n="hook.built">See what I've built</a>
                 <a class="hook-pill" href="apps/" data-i18n="hook.apps">20+ apps shipped</a>
-                <a class="hook-pill" href="https://www.linkedin.com/in/millerblaine/" target="_blank" rel="noopener" data-i18n="hook.hire">Open to senior &amp; principal roles</a>
+                <a class="hook-pill hook-pill--hire" href="https://www.linkedin.com/in/millerblaine/" target="_blank" rel="noopener" data-i18n="hook.hire">Open to senior &amp; principal roles</a>
               </nav>
               <p class="hook-aside" data-i18n="hook.photos">I also photograph the night sky — tap ⋯ for photos and panoramas.</p>
             </div>
