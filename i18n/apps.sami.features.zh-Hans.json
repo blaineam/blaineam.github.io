@@ -108,7 +108,7 @@
   "the-mac-with-a.aec35b": "NAS 里堆满素材的 Mac",
   "the-shortcuts-tinkerer.cc5e00": "爱折腾 Shortcuts 的人",
   "tick-one-box-and.376ed7": "勾选一个选项，Sami 便会为每张照片和每段视频选定画质：在看起来与原file一致的前提下，输出体积最小的结果——这是与原file逐一比对得出的，而非凭猜测。若没有任何更小的版本能保持同样的观感，就保留原file。",
-  "titles-artists-artwork-tv.5ff25b": "为视频和音乐添加标题、艺人、封面、剧集与影片信息、章节和字幕。用你自己的 TMDb 和 OpenSubtitles 密钥在线查询详细信息。",
+  "titles-artists-artwork-tv.b5807a": "为视频和音乐添加标题、艺人、封面、剧集与影片信息、章节和字幕。用你自己的 TMDb 和 OpenSubtitles 密钥在线查询详细信息。MP4、M4V、MOV 和 M4A 文件的标签会在几秒内原地写入，影片本身不受影响；在 Mac 上，可以打开整个文件夹，从一个文件复制标签并粘贴到其余文件，还能按标题重命名文件。",
   "trigger-optimizations-from-shortcuts.241296": "通过“快捷指令”自动化触发优化。把 Sami 融入你的工作流程——回到家时、备份之前，或随时按需优化照片。",
   "universal-apple-app.fb0a50": "Apple 通用 App",
   "visually-lossless.5ec750": "视觉无损",
