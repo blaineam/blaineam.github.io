@@ -22,18 +22,20 @@ Apple Watch. Just imagine what we can build together!
 ## Apps
 
 **20 apps on the App Store**, spanning iOS, iPadOS, macOS, tvOS, and watchOS — plus
-**Lathe**, an open-source media engine and free Mac app distributed on GitHub, and two
-free web apps, **Tom** and **Monkr**, that run entirely in your browser. The
+**Lathe**, an open-source media engine and free Mac app distributed on GitHub;
+**Shepherd**, a free, self-hosted, AGPL home-network guardian; and two free web
+apps, **Tom** and **Monkr**, that run entirely in your browser. The
 [`/apps`](https://wemiller.com/apps) showcase renders a curated order; the home page
 lists them chronologically. [`apps/projects.json`](apps/projects.json) is the
 source of truth for app metadata; the showcase's display order is hand-curated.
 
-**Haven**, **Blip**, **Glint**, **Lathe**, **DeepSi**, **Zap!**, **Scripture Alone**, **Tom** and **Monkr** are free — no ads, no tracking, no subscriptions. Their development is funded through
+**Shepherd**, **Haven**, **Blip**, **Glint**, **Lathe**, **DeepSi**, **Zap!**, **Scripture Alone**, **Tom** and **Monkr** are free — no ads, no tracking, no subscriptions. Their development is funded through
 [GitHub Sponsors](https://github.com/sponsors/blaineam), [Ko-fi](https://ko-fi.com/wemiller),
 and one-time tips; see the [Support](https://wemiller.com/support) page.
 
 | App | What it does | Released |
 |-----|--------------|----------|
+| **Shepherd** | A free, self-hosted home-network guardian — DNS filtering, device policy, a live globe HUD, alarms, port/vulnerability scanning, geo-IP blocking; one native binary, AGPL-3.0 ([wemiller.com/apps/shepherd](https://wemiller.com/apps/shepherd/), [source](https://github.com/blaineam/shepherd)) | October 2026 |
 | **Tom** | A music machine — dial in a melody in seconds or snap a whole song together like Lego; seeded, royalty-free, web + CLI ([wemiller.com/tools/tom](https://wemiller.com/tools/tom/), [source](https://github.com/blaineam/Tom)) | September 2026 |
 | **Scripture Alone** | A free, private, offline Bible for iPhone, iPad, Mac and Apple Watch — open source (AGPL-3.0); share links rebuild verse cards in the browser | On the [App Store](https://apps.apple.com/us/app/scripture-alone-bible/id6813729762?pt=118981620&ct=wm-readme&mt=8) and [Google Play](https://play.google.com/store/apps/details?id=com.blainemiller.scripturealone&referrer=utm_source%3Dwemiller.com%26utm_medium%3Dwebsite%26utm_campaign%3Dreadme) |
 | **Lathe** | Open-source media engine behind Sami, and a free Mac downloader (not on the App Store; [download](https://github.com/blaineam/Lathe/releases/latest)) | September 2026 |
@@ -76,7 +78,7 @@ shares a consistent look.
 | [Speed Test](https://wemiller.com/speedtest) | In-browser network speed test |
 | [Pay](https://wemiller.com/pay) | Simple payment / tip page |
 | [Developer Tools](https://wemiller.com/tools/) | ARK, the app-pipeline suite behind every app here, plus Monkr and Tom, free and open source |
-| [Support](https://wemiller.com/support) | Fund future development of the free apps (Haven, Blip, Glint, Lathe, DeepSi, Zap!, Scripture Alone, Tom, Monkr) via GitHub Sponsors, Ko-fi, or a one-time tip |
+| [Support](https://wemiller.com/support) | Fund future development of the free apps (Shepherd, Haven, Blip, Glint, Lathe, DeepSi, Zap!, Scripture Alone, Tom, Monkr) via GitHub Sponsors, Ko-fi, or a one-time tip |
 
 ---
 
@@ -89,7 +91,8 @@ to GitHub Pages via two GitHub Actions workflows:
   regenerates social/poster images ([`scripts/generate-posters.js`](scripts/generate-posters.js)),
   runs footer maintenance, and publishes the site.
 - **[`mirror-app-docs.yml`](.github/workflows/mirror-app-docs.yml)** — automatically mirrors
-  each app's own docs site into `/apps/<slug>/` (Blip, Glint, Haven and Lathe), so
+  each app's own docs site into `/apps/<slug>/` (Blip, Glint, Haven, Lathe and
+  Shepherd), so
   app pages stay in sync from their source repos with no manual copying.
 
 `apps/projects.json` is the single source of truth for app metadata; the `/apps`
