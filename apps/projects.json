@@ -4,6 +4,22 @@
   "note": "Source of truth for app metadata. apps/index.html renders its OWN custom display order; this file is the chronological list.",
   "apps": [
     {
+      "id": "shepherd",
+      "title": "Shepherd",
+      "tagline": "The guardian your home network never had",
+      "platform": "web",
+      "page_url": "/apps/shepherd/",
+      "app_store_url": null,
+      "source_url": "https://github.com/blaineam/shepherd",
+      "icon_url": "/apps/_shared/icons/shepherd.png",
+      "released": "2026-10",
+      "updated": "2026-10",
+      "version": "0.1.0-beta",
+      "status": "live",
+      "price": "free",
+      "note": "A free, open-source (AGPL-3.0-or-later), self-hosted guardian for your home network: DNS filtering against a 95-list catalog, per-device/group/network policy with allowlist mode and scheduled access, a live 3D globe HUD of traffic with replay, automatic device naming and classification, an alarm engine, port and vulnerability scanning, geo-IP country blocking, and portal locking — one native binary for Linux, macOS and Windows, no cloud, no telemetry, no account. Try the real portal UI with synthetic data right on the site."
+    },
+    {
       "id": "tom",
       "title": "Tom",
       "tagline": "A music machine — melodies in seconds, songs like Lego",

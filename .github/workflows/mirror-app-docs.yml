@@ -72,6 +72,18 @@ jobs:
           ref: main
           persist-credentials: false
 
+      # Shepherd's marketing site lives in site/ (not docs/ — the app repo's own docs/ is full of
+      # real developer documentation, INTERCEPT.md/PORTSCAN.md/ROADMAP.md and the like, not a
+      # landing page). Follows the Blip/Glint pattern (a single rsync), not Haven's more complex
+      # one, since Shepherd has no equivalent of Haven's relay install scripts.
+      - name: Mirror Shepherd site
+        uses: actions/checkout@v4
+        with:
+          repository: blaineam/shepherd
+          path: .mirror/shepherd
+          ref: main
+          persist-credentials: false
+
       # Haven's landing site lives in web/ (not docs/), and the site links to the
       # relay install scripts — both mirrored in the Haven block under "Sync into apps/".
       - name: Mirror Haven site
@@ -166,6 +178,15 @@ jobs:
             --exclude='__pycache__/' --exclude='*.md' \
             .mirror/lathe/docs/ apps/lathe/
 
+          # Shepherd: source is site/, not docs/ — the app repo's own docs/ is real developer
+          # documentation (INTERCEPT.md, PORTSCAN.md, ROADMAP.md, ...), not a landing page.
+          # Otherwise the same single-rsync shape sync_one uses for Blip/Glint.
+          mkdir -p apps/shepherd
+          rsync -av --delete \
+            --filter='P assets/images/' \
+            --exclude='CNAME' --exclude='.git' --exclude='.github' \
+            .mirror/shepherd/site/ apps/shepherd/
+
           # Haven: source is web/ (not docs/), plus the relay install scripts the site
           # links to. Protect the portfolio-only extras (card icon, app/, bridge/, relay/).
           mkdir -p apps/haven apps/haven/relay
@@ -201,7 +222,7 @@ jobs:
       # hreflang tags. Every such URL is flipped to /apps/<slug>/ at mirror time, and a page
       # with no rel=canonical gets one naming its address here.
       - name: Rewrite subdomain URLs → /apps/<slug>/
-        run: python3 scripts/canonicalize-mirrored.py blip glint haven lathe
+        run: python3 scripts/canonicalize-mirrored.py blip glint haven lathe shepherd
 
       # The mirrored sites have no portfolio navigation of their own — they
       # are each app's site, hosted here. This adds one small pill (icon,
@@ -216,25 +237,25 @@ jobs:
       # The sources are stamped in their own repos; this catches anything they missed (Lathe's
       # docs/ is generated) so a year-cached stale i18n.js can never outlive a change again.
       - name: Stamp cache busters on the mirrored sites
-        run: python3 scripts/cache-bust.py --mirrored apps/blip apps/glint apps/haven apps/lathe
+        run: python3 scripts/cache-bust.py --mirrored apps/blip apps/glint apps/haven apps/lathe apps/shepherd
 
       # Campaign parameters on the mirrored sites' store links (and Haven's i18n dictionaries,
       # whose strings carry the same links), so the commit below matches what deploy publishes.
       - name: Tag store links on the mirrored sites
         run: |
-          python3 scripts/store-links.py --mirrored apps/blip apps/glint apps/haven apps/lathe tools/tom/app tools/monkr/app
-          python3 scripts/store-links.py --mirrored --check apps/blip apps/glint apps/haven apps/lathe tools/tom/app tools/monkr/app
+          python3 scripts/store-links.py --mirrored apps/blip apps/glint apps/haven apps/lathe apps/shepherd tools/tom/app tools/monkr/app
+          python3 scripts/store-links.py --mirrored --check apps/blip apps/glint apps/haven apps/lathe apps/shepherd tools/tom/app tools/monkr/app
 
       - name: Commit mirrored docs
         run: |
           set -euo pipefail
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add apps/blip apps/glint apps/haven apps/lathe tools/tom/app tools/monkr/app
+          git add apps/blip apps/glint apps/haven apps/lathe apps/shepherd tools/tom/app tools/monkr/app
           if git diff --cached --quiet; then
             echo "No upstream doc changes — nothing to mirror."
           else
-            git commit -m "chore(mirror): sync blip/glint/haven/lathe sites → /apps, tom + monkr → /tools [skip ci]"
+            git commit -m "chore(mirror): sync blip/glint/haven/lathe/shepherd sites → /apps, tom + monkr → /tools [skip ci]"
             # deploy-pages commits regenerated posters to main too; a run that lands while this one
             # is building would otherwise reject the push. Only generated files on both sides.
             git pull --rebase origin main

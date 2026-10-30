@@ -45,7 +45,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 LANGS = ["en", "zh-Hans", "ja", "de", "fr", "es", "ko", "pt-BR", "it"]
-MIRRORED = {"haven", "blip", "glint", "lathe"}
+MIRRORED = {"haven", "blip", "glint", "lathe", "shepherd"}
 DEPTH_PAGES = ("features", "pricing", "faq")
 # Pages whose typefaces ARE the identity; see docs/app-page-design.md §3 "Exceptions".
 WEBFONT_EXCEPTIONS = {"revela"}

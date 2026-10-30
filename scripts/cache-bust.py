@@ -37,7 +37,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 
 # Rsynced from the app repos on a schedule; see scripts/../.github/workflows/mirror-app-docs.yml.
-MIRRORED = {"apps/haven", "apps/blip", "apps/glint", "apps/lathe"}
+MIRRORED = {"apps/haven", "apps/blip", "apps/glint", "apps/lathe", "apps/shepherd"}
 
 # Mirrored web apps that stamp their own module URLs (Tom's scripts/stamp.mjs writes ?v=<commit>,
 # and its service worker reads that format back; SvelteKit names Monkr's by content hash). Never
