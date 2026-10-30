@@ -1,0 +1,633 @@
+// In-browser fake of the management endpoints (devices, groups, catalog and
+// policy, upstreams, history). Used only in demo mode so every screen works
+// with no backend. All data is synthetic; state lives in memory.
+import { ApiError } from './api.js';
+import { parseQuery, matchDevice, sortDevices } from './search.js';
+import { applyBulkLocal, normTag } from './bulk.js';
+import { applyModeLocal } from './wander.js';
+import { buildDevices, fallbackName, DEMO_GROUPS, DEMO_CATALOG, DEMO_SWITCHES, DEMO_PRESETS } from './demodata.js';
+import { GROUP_COLORS } from './devtypes.js';
+import { classifyAddr, isIP } from './upstreams.js';
+import { normalizeDomain, scopeKey } from './scope.js';
+
+const err = (status, msg) => new ApiError(msg, status);
+const delay = (ms) => new Promise((r) => setTimeout(r, ms));
+
+function initialPolicy() {
+  const sc = (kind, id, items, rules = {}, switches = {}, mode = null) => ({
+    scope: { kind, id }, items, rules: { allow: rules.allow || [], block: rules.block || [] },
+    rule_schedules: { allow: {}, block: {} }, switches, mode,
+  });
+  return [
+    sc('network', '', { 'core-ads': true, 'malware-domains': true, 'phishing-watch': true }, { block: ['ads.example.net'], allow: [] }, { 'apple-private-relay': true }),
+    sc('group', 'grp-kids', { instagram: true, tiktok: true, snapchat: true, discord: true, 'adult-core': true, 'gambling-core': true }, {}, { 'safe-search': true }),
+    sc('group', 'grp-guests', { 'tv-telemetry': true }),
+    sc('group', 'grp-work', {}, { allow: ['tools.example.com'] }),
+    sc('device', 'dev-0002', { youtube: true }, { block: ['video.example.com'] }),
+  ];
+}
+
+const LIST_STATUS = {
+  'core-ads': { count: 111958, size_bytes: 2310400, ago: 3 }, 'tracker-shield': { count: 64803, size_bytes: 1405000, ago: 3 },
+  'tv-telemetry': { count: 2297, size_bytes: 51200, ago: 20 }, 'malware-domains': { count: 92411, size_bytes: 1983000, ago: 1 },
+  'phishing-watch': { count: 31204, size_bytes: 700300, ago: 1 }, 'scam-sites': { count: 0, size_bytes: 0, ago: 30, error: 'download failed: timeout after 20s' },
+  cryptojacking: { count: 1790, size_bytes: 39000, ago: 26 }, 'adult-core': { count: 411980, size_bytes: 9100000, ago: 6 }, 'gambling-core': { count: 18188, size_bytes: 402000, ago: 6 },
+};
+
+// MARKETING-SITE DEMO BUILD ADDITION: the shipped demo mgmt fake (above)
+// never implemented /api/alarms - alarmsview.js handles a 404 there
+// gracefully with an "Alarms is not available on this version" card, which
+// is correct behavior against an older real server but makes a poor first
+// impression on a marketing site built specifically to show the feature
+// off. This block is local to the marketing site's copy of this file only
+// (internal/portal/web/js/demomgmt.js, which cmd/shepherd actually embeds,
+// is untouched) and gives the Alarms screen a small, realistic synthetic
+// data set so it demonstrates the real alarm engine's UI faithfully.
+const SEVERITY_ORDER = ['info', 'low', 'medium', 'high', 'critical'];
+
+function initialAlarms(now) {
+  const mk = (id, severity, type, title, body, deviceId, state, agoMin, count = 1) => ({
+    id, severity, type, title, body, device_id: deviceId || '', state, count,
+    last_seen: new Date(now - agoMin * 60000).toISOString(),
+    first_seen: new Date(now - (agoMin + 180) * 60000).toISOString(),
+  });
+  return [
+    mk('al-1', 'critical', 'vulnerability-found', 'Anonymous FTP login allowed', 'A device accepts anonymous FTP logins on port 21.', 'dev-0003', 'new', 6),
+    mk('al-2', 'high', 'vulnerability-found', 'SMBv1 still enabled', 'A device is still answering SMBv1 negotiate requests.', 'dev-0012', 'new', 24),
+    mk('al-3', 'high', 'arp-spoof', 'Gateway MAC address changed', "The gateway's MAC address changed unexpectedly — possible ARP spoofing.", '', 'new', 48),
+    mk('al-4', 'medium', 'port-opened', 'New port opened: 23 (Telnet)', 'A device opened Telnet, a specifically risky port.', 'dev-0010', 'acknowledged', 95, 2),
+    mk('al-5', 'medium', 'new-device', 'New device joined the network', 'An unrecognized device landed in Quarantine and is waiting for review.', 'dev-0038', 'new', 12),
+    mk('al-6', 'high', 'vulnerability-found', 'Outdated OpenSSH build', 'A device is running an OpenSSH version missing a named security fix.', 'dev-0008', 'acknowledged', 210),
+    mk('al-7', 'low', 'upstream-down', 'All DNS upstreams went unhealthy', 'Every configured upstream failed health checks for about 2 minutes.', '', 'resolved', 540),
+    mk('al-8', 'info', 'upstream-recovered', 'Upstream recovered', 'tls://dns1.example.net is healthy again.', '', 'resolved', 538),
+    mk('al-9', 'medium', 'geo-block', 'Blocked a connection to a geo-blocked country', 'A device attempted a connection answered from a blocked country.', 'dev-0004', 'muted', 300, 14),
+    mk('al-10', 'low', 'wandering-shadow', 'Would have been blocked, while wandering', "A device's wandering mode let a tracker domain through unfiltered.", 'dev-0006', 'new', 20, 5),
+  ];
+}
+
+// MARKETING-SITE DEMO BUILD ADDITION: port and vulnerability scanning, and a
+// device's starting findings, matching the alarms above by device id so a
+// visitor who opens, say, dev-0012's drawer after seeing its alarm finds
+// the exact same SMBv1 finding there — the cross-feature cohesion the
+// Devices, Alarms, Ports and Vulnerabilities panels are supposed to show.
+// "Scan now" on any other device has a real (seeded, so repeatable) chance
+// of discovering something new and raising a fresh alarm for it live.
+const RISK_NOTE = {
+  21: 'FTP sends credentials and data unencrypted.', 23: 'Telnet is unencrypted and a common default-credential target.',
+  445: 'SMB exposed beyond the devices that actually need it.', 3389: 'RDP exposed on the LAN is a common ransomware entry point.',
+  5900: 'VNC is often left with a weak or no password.', 2375: 'The Docker API with no TLS/auth means anyone on the LAN can run containers.',
+};
+function strHash(s) { let h = 0; for (let i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) >>> 0; return h; }
+
+function initialPortscan(now) {
+  const mk = (id, ports, agoMin) => [id, { device_id: id, last_scanned: new Date(now - agoMin * 60000).toISOString(), ports }];
+  return new Map([
+    mk('dev-0010', [{ port: 80, open: true, risky: false, risk_note: '', newly_opened: false }, { port: 23, open: true, risky: true, risk_note: RISK_NOTE[23], newly_opened: true }], 95),
+    mk('dev-0008', [{ port: 22, open: true, risky: false, risk_note: '', newly_opened: false }, { port: 9100, open: true, risky: false, risk_note: '', newly_opened: false }], 210),
+    mk('dev-0012', [{ port: 445, open: true, risky: true, risk_note: RISK_NOTE[445], newly_opened: false }], 24),
+    mk('dev-0003', [{ port: 21, open: true, risky: true, risk_note: RISK_NOTE[21], newly_opened: false }], 6),
+  ]);
+}
+
+function initialVulnscan(now) {
+  const mk = (id, findings, agoMin) => [id, { device_id: id, last_scanned: new Date(now - agoMin * 60000).toISOString(), findings: findings.map((f) => ({ active: true, resolved_at: null, ...f })) }];
+  return new Map([
+    mk('dev-0003', [{ severity: 'critical', name: 'Anonymous FTP login allowed', port: 21, description: 'The FTP server accepts the "anonymous" account with no password.', evidence: '230 Login successful (anonymous / <blank>)' }], 6),
+    mk('dev-0012', [{ severity: 'high', name: 'SMBv1 still enabled', port: 445, description: 'The device still negotiates the obsolete, insecure SMBv1 dialect.', evidence: 'SMB1 dialect "NT LM 0.12" negotiated' }], 24),
+    mk('dev-0008', [{ severity: 'high', name: 'Outdated OpenSSH build', port: 22, description: 'This OpenSSH build is missing a named security fix.', evidence: 'banner: SSH-2.0-OpenSSH_7.2' }], 210),
+  ]);
+}
+
+const DISCOVERABLE_VULNS = [
+  { severity: 'high', name: 'Outdated web server banner', port: 8080, description: 'The HTTP banner reports an end-of-life server build.', evidence: 'banner: Server: lighttpd/1.4.28' },
+  { severity: 'critical', name: 'Unauthenticated Docker API', port: 2375, description: 'The Docker remote API answers with no authentication at all.', evidence: 'GET /version succeeded with no credentials' },
+  { severity: 'medium', name: 'Unencrypted FTP control channel', port: 21, description: 'FTP credentials are sent in the clear.', evidence: 'USER/PASS observed unencrypted' },
+];
+const DISCOVERABLE_PORTS = [
+  { port: 3389, risky: true }, { port: 5900, risky: true }, { port: 2375, risky: true }, { port: 8080, risky: false }, { port: 554, risky: false },
+];
+
+function alarmMatches(a, f) {
+  if (f.min_severity && SEVERITY_ORDER.indexOf(a.severity) < SEVERITY_ORDER.indexOf(f.min_severity)) return false;
+  if (f.states && f.states.length && !f.states.includes(a.state)) return false;
+  if (f.text) {
+    const t = f.text;
+    if (!(a.title.toLowerCase().includes(t) || (a.body || '').toLowerCase().includes(t) || (a.device_id || '').toLowerCase().includes(t))) return false;
+  }
+  return true;
+}
+
+export function createDemoMgmt({ count = 38, gen = null, history = 'encrypted', now = () => Date.now() } = {}) {
+  let devices = buildDevices(count, now());
+  let groups = DEMO_GROUPS.map((g) => ({ ...g }));
+  let scopes = initialPolicy();
+  let custom = [{ id: 'cl-1', name: 'Family blocklist', category: 'Ads & Trackers', url: 'https://example.com/family-list.txt', inline: false, count: 412 }];
+  let nextId = 2;
+  let upstreams = [
+    { config: 'tls://dns1.example.net', kind: 'dot', healthy: true, rtt_ms: 14.2, consecutive_failures: 0, last_error: '', queries: 18432, errors: 3 },
+    { config: 'https://dns2.example.org/dns-query', kind: 'doh', healthy: true, rtt_ms: 23.6, consecutive_failures: 0, last_error: '', queries: 9120, errors: 11 },
+    { config: '203.0.113.53', kind: 'udp', healthy: false, rtt_ms: 0, consecutive_failures: 4, last_error: 'read udp: i/o timeout', queries: 412, errors: 380 },
+  ];
+  let bootstrap = ['198.51.100.2', '198.51.100.3'];
+  const hist = { mode: history === 'memory' ? 'memory' : 'encrypted', locked: history === 'locked' || history === 'fresh', initialized: history !== 'fresh' };
+  let lastBulk = 0;
+  // MARKETING-SITE DEMO BUILD ADDITION: see initialAlarms() above. IDs below
+  // 100 are reserved for the seeded alarms (al-1..al-10); live-created ones
+  // start at al-100 so they can never collide with a seed id.
+  let alarms = initialAlarms(now());
+  let alarmRules = [];
+  let alarmNextId = 100;
+  let lastAlarmUndo = null;
+  // MARKETING-SITE DEMO BUILD ADDITION: see initialPortscan/initialVulnscan above.
+  let portscanData = initialPortscan(now());
+  let vulnscanData = initialVulnscan(now());
+  let upstreamDownAlarm = new Map(); // upstream config -> currently-open 'upstream-down' alarm id
+
+  const gname = (id) => (groups.find((g) => g.id === id) || {}).name || id;
+  const withCount = (g) => ({ ...g, count: devices.filter((d) => d.groups.includes(g.id)).length });
+  const dev = (id) => { const d = devices.find((x) => x.id === id); if (!d) throw err(404, 'device not found'); return d; };
+  const setDev = (id, fn) => { const i = devices.findIndex((x) => x.id === id); if (i < 0) throw err(404, 'device not found'); devices[i] = fn(devices[i]); return devices[i]; };
+  const deviceLabel = (id) => { const d = devices.find((x) => x.id === id); return d ? d.name : id; };
+
+  // MARKETING-SITE DEMO BUILD ADDITION: a new alarm a live event (a scan
+  // finding something, an upstream flapping) raises, not a seeded one.
+  function pushAlarm({ severity, type, title, body, deviceId }) {
+    const id = 'al-' + alarmNextId++;
+    const t = now();
+    alarms.unshift({
+      id, severity, type, title, body, device_id: deviceId || '', state: 'new', count: 1,
+      last_seen: new Date(t).toISOString(), first_seen: new Date(t).toISOString(),
+    });
+    return id;
+  }
+
+  // MARKETING-SITE DEMO BUILD ADDITION: makes the Alarms tab feel like a
+  // live system reacting to the network, not a frozen dataset, even if a
+  // visitor never touches the Upstreams or Devices screens. The upstream
+  // seeded unhealthy in `upstreams` above recovers on the very first tick
+  // (guaranteed, not left to chance) so something real visibly happens
+  // within a few seconds of the page loading; later ticks are random and
+  // spaced out so a longer visit doesn't get noisy. See upstreamsview.js's
+  // own 4s poll (unchanged) for why the Upstreams tab picks this up live too.
+  function flapUpstreams() {
+    const healthy = upstreams.filter((u) => u.healthy);
+    const unhealthy = upstreams.filter((u) => !u.healthy);
+    if (unhealthy.length && (healthy.length < 2 || Math.random() < 0.55)) {
+      const u = unhealthy[(Math.random() * unhealthy.length) | 0];
+      u.healthy = true; u.consecutive_failures = 0; u.last_error = '';
+      const openId = upstreamDownAlarm.get(u.config);
+      if (openId) {
+        const i = alarms.findIndex((a) => a.id === openId);
+        if (i >= 0) alarms[i] = { ...alarms[i], state: 'resolved' };
+        upstreamDownAlarm.delete(u.config);
+      }
+      pushAlarm({ severity: 'info', type: 'upstream-recovered', title: 'Upstream recovered', body: u.config + ' is healthy again.' });
+    } else if (healthy.length > 1) {
+      const u = healthy[(Math.random() * healthy.length) | 0];
+      u.healthy = false; u.consecutive_failures = (u.consecutive_failures || 0) + 1; u.last_error = 'read udp: i/o timeout';
+      const id = pushAlarm({ severity: 'high', type: 'upstream-down', title: 'Upstream went unhealthy', body: u.config + ' failed its health check and was marked down.' });
+      upstreamDownAlarm.set(u.config, id);
+    }
+  }
+  function scheduleFlap(delayMs) { setTimeout(() => { flapUpstreams(); scheduleFlap(22000 + Math.random() * 23000); }, delayMs); }
+  scheduleFlap(7000 + Math.random() * 5000);
+
+  function policyDoc() {
+    return {
+      scopes: scopes.map((s) => JSON.parse(JSON.stringify(s))),
+      custom_lists: custom.map((c) => ({ ...c })),
+      lists: [
+        ...DEMO_CATALOG.entries.filter((e) => e.kind === 'list').map((e) => {
+          const st = LIST_STATUS[e.id] || { count: e.approx_entries, size_bytes: 0, ago: 5 };
+          const o = { id: e.id, name: e.name, count: st.count, size_bytes: st.size_bytes, updated: new Date(now() - st.ago * 3600000).toISOString() };
+          if (st.error) o.error = st.error;
+          return o;
+        }),
+        ...custom.map((c) => ({ id: c.id, name: c.name, count: c.count, size_bytes: c.count * 22, updated: new Date(now() - 2 * 3600000).toISOString() })),
+      ],
+      switches: DEMO_SWITCHES.map((s) => ({ ...s })),
+    };
+  }
+
+  function scopeRef(sc) {
+    if (!sc || !['network', 'group', 'device'].includes(sc.kind)) throw err(400, 'invalid scope');
+    const ref = { kind: sc.kind, id: sc.kind === 'network' ? '' : String(sc.id || '') };
+    if (ref.kind !== 'network' && !ref.id) throw err(400, 'scope id required');
+    let s = scopes.find((x) => scopeKey(x.scope) === scopeKey(ref));
+    if (!s) { s = { scope: ref, items: {}, rules: { allow: [], block: [] }, rule_schedules: { allow: {}, block: {} }, switches: {}, mode: null }; scopes.push(s); }
+    if (!s.rule_schedules) s.rule_schedules = { allow: {}, block: {} };
+    return s;
+  }
+
+  function upstreamDoc() {
+    return { upstreams: upstreams.map((u) => ({ ...u })), presets: DEMO_PRESETS.map((p) => ({ ...p })), bootstrap: [...bootstrap] };
+  }
+
+  async function probe(addr) {
+    const c = classifyAddr(addr);
+    await delay(350);
+    if (!c.ok) return { ok: false, rtt_ms: 0, rcode: '', error: c.error };
+    if (/bad|fail|198\.51\.100\.99/.test(addr)) return { ok: false, rtt_ms: 0, rcode: '', error: 'handshake failed: connection timed out (some networks block encrypted DNS)' };
+    let h = 0; for (const ch of addr) h = (h * 31 + ch.charCodeAt(0)) >>> 0;
+    return { ok: true, rtt_ms: 9 + (h % 340) / 10, rcode: 'NOERROR', error: '' };
+  }
+
+  function historyEntries(q) {
+    const to = Date.parse(q.get('to')) || now(), from = Date.parse(q.get('from')) || to - 86400000;
+    const limit = Math.min(5000, Math.max(1, Number(q.get('limit')) || 500));
+    const client = q.get('client') || '', text = (q.get('q') || '').toLowerCase(), action = q.get('action') || '';
+    const out = [];
+    let skipped = 0;
+    if (!gen) return { entries: out, skipped };
+    const last = Math.floor((to - 1) / 60000), first = Math.floor(from / 60000);
+    let scanned = 0;
+    for (let m = last; m >= first && out.length < limit; m--) {
+      if (++scanned > 2200) { skipped = 1; break; }
+      const list = gen._minute(m);
+      for (let i = list.length - 1; i >= 0 && out.length < limit; i--) {
+        const e = list[i];
+        if (e.t < from || e.t >= to) continue;
+        if (client && e.client !== client) continue;
+        if (action && e.action !== action) continue;
+        if (text && !(e.name.toLowerCase().includes(text) || (e.device || '').toLowerCase().includes(text))) continue;
+        out.push({ ...e, dests: e.dests ? e.dests.map((d) => ({ ...d })) : undefined });
+      }
+    }
+    out.reverse();
+    return { entries: out, skipped };
+  }
+
+  // Like the server, clear timers that have run out.
+  function expire() {
+    const t = now();
+    devices = devices.map((d) => (d.wandering && d.wandering_until && Date.parse(d.wandering_until) <= t ? (({ wandering_until, ...rest }) => ({ ...rest, wandering: false }))(d) : d));
+  }
+
+  async function handle(method, path, url, body) {
+    expire();
+    const q = url.searchParams;
+    let m;
+    // ---- devices
+    if (path === '/api/devices' && method === 'GET') {
+      const gnames = (id) => gname(id);
+      const parsed = parseQuery(q.get('q') || '');
+      const t = now();
+      const all = sortDevices(devices.filter((d) => matchDevice(d, parsed, { now: t, groupName: gnames })), q.get('sort') === 'name' ? 'name' : 'recent');
+      const offset = Math.max(0, Number(q.get('offset')) || 0), limit = Math.min(500, Math.max(1, Number(q.get('limit')) || 100));
+      return { devices: all.slice(offset, offset + limit), total: all.length, offset, limit };
+    }
+    if (path === '/api/devices/bulk' && method === 'POST') {
+      const ids = Array.isArray(body.ids) ? body.ids : [];
+      if (!ids.length) throw err(400, 'ids required');
+      if (body.op === 'assign_group' && !groups.some((g) => g.id === body.group_id)) throw err(404, 'group not found');
+      if (!['assign_group', 'remove_group', 'set_excluded', 'set_wandering', 'set_tags', 'delete'].includes(body.op)) throw err(400, 'unknown op');
+      const set = new Set(ids);
+      const have = new Set(devices.map((d) => d.id));
+      const missing = ids.filter((id) => !have.has(id));
+      let changed = 0;
+      if (body.op === 'delete') { const before = devices.length; devices = devices.filter((d) => !set.has(d.id)); changed = before - devices.length; scopes = scopes.filter((s) => !(s.scope.kind === 'device' && set.has(s.scope.id))); }
+      else devices = devices.map((d) => { if (!set.has(d.id)) return d; changed++; return body.op === 'set_wandering' ? applyModeLocal(d, { wandering: !!body.wandering, wandering_minutes: body.wandering_minutes }, now()) : applyBulkLocal(d, body); });
+      lastBulk = changed;
+      return { changed, missing };
+    }
+    if (path === '/api/devices/merge' && method === 'POST') {
+      const target = dev(body.target);
+      for (const sid of body.sources || []) {
+        const s = dev(sid);
+        setDev(target.id, (d) => ({ ...d, ips: [...new Set([...d.ips, ...s.ips])], macs: [...new Set([...d.macs, ...s.macs])], groups: [...new Set([...d.groups, ...s.groups])] }));
+        devices = devices.filter((d) => d.id !== sid);
+      }
+      return dev(target.id);
+    }
+    if ((m = /^\/api\/devices\/([^/]+)$/.exec(path))) {
+      const id = decodeURIComponent(m[1]);
+      if (method === 'GET') return dev(id);
+      if (method === 'DELETE') { dev(id); devices = devices.filter((d) => d.id !== id); return { ok: true }; }
+      if (method === 'PATCH') {
+        return setDev(id, (d) => {
+          const n = { ...d };
+          if (typeof body.alias === 'string') n.alias = body.alias.trim().slice(0, 64);
+          if (typeof body.notes === 'string') n.notes = body.notes.slice(0, 1000);
+          if (typeof body.type === 'string') n.type = body.type;
+          if (typeof body.excluded === 'boolean') n.excluded = body.excluded;
+          if (typeof body.wandering === 'boolean') { const m = applyModeLocal(n, body, now()); n.wandering = m.wandering; n.excluded = m.excluded; if (m.wandering_until) n.wandering_until = m.wandering_until; else delete n.wandering_until; }
+          if (Array.isArray(body.tags)) n.tags = [...new Set(body.tags.map(normTag).filter(Boolean))];
+          n.name = fallbackName(n);
+          return n;
+        });
+      }
+    }
+    // ---- groups
+    if (path === '/api/groups') {
+      if (method === 'GET') return { groups: groups.map(withCount) };
+      if (method === 'POST') {
+        const name = String(body.name || '').trim();
+        if (!name) throw err(400, 'name required');
+        if (groups.some((g) => g.name.toLowerCase() === name.toLowerCase())) throw err(409, 'a group with that name exists');
+        const g = { id: 'grp-' + (nextId++) + '-' + name.toLowerCase().replace(/[^a-z0-9]+/g, '').slice(0, 8), name: name.slice(0, 40), color: body.color || GROUP_COLORS[groups.length % GROUP_COLORS.length] };
+        groups.push(g);
+        return withCount(g);
+      }
+    }
+    if ((m = /^\/api\/groups\/([^/]+)$/.exec(path))) {
+      const id = decodeURIComponent(m[1]);
+      const g = groups.find((x) => x.id === id);
+      if (!g) throw err(404, 'group not found');
+      if (method === 'PATCH') {
+        if (typeof body.name === 'string' && body.name.trim()) {
+          if (groups.some((x) => x.id !== id && x.name.toLowerCase() === body.name.trim().toLowerCase())) throw err(409, 'a group with that name exists');
+          g.name = body.name.trim().slice(0, 40);
+        }
+        if (typeof body.color === 'string') g.color = body.color;
+        return withCount(g);
+      }
+      if (method === 'DELETE') {
+        groups = groups.filter((x) => x.id !== id);
+        devices = devices.map((d) => (d.groups.includes(id) ? { ...d, groups: d.groups.filter((x) => x !== id) } : d));
+        scopes = scopes.filter((s) => !(s.scope.kind === 'group' && s.scope.id === id));
+        return { ok: true };
+      }
+    }
+    // ---- catalog and policy
+    if (path === '/api/catalog' && method === 'GET') return JSON.parse(JSON.stringify(DEMO_CATALOG));
+    if (path === '/api/policy' && method === 'GET') return policyDoc();
+    if (path === '/api/policy/items' && method === 'POST') {
+      const s = scopeRef(body.scope);
+      const known = DEMO_CATALOG.entries.some((e) => e.id === body.item) || custom.some((c) => c.id === body.item);
+      if (!known) throw err(404, 'unknown item');
+      if (body.enabled === null || body.enabled === undefined) delete s.items[body.item]; else s.items[body.item] = !!body.enabled;
+      return policyDoc();
+    }
+    if (path === '/api/policy/rules') {
+      if (method === 'POST') {
+        const s = scopeRef(body.scope);
+        const d = normalizeDomain(body.domain);
+        if (!d) throw err(400, 'not a valid domain');
+        if (body.kind !== 'allow' && body.kind !== 'block') throw err(400, 'kind must be allow or block');
+        const other = body.kind === 'block' ? 'allow' : 'block';
+        s.rules[other] = s.rules[other].filter((x) => x !== d);
+        delete s.rule_schedules[other][d];
+        if (!s.rules[body.kind].includes(d)) s.rules[body.kind].push(d);
+        if (body.schedule) s.rule_schedules[body.kind][d] = body.schedule; else delete s.rule_schedules[body.kind][d];
+        // MARKETING-SITE DEMO BUILD ADDITION: a whole-network rule (no
+        // schedule — a scheduled rule's "sometimes on" nature doesn't map
+        // cleanly onto the generator) actually changes the live feed, the
+        // same way a rule set from the HUD Inspector does. Per-group/
+        // per-device rules are left alone: the generator has no per-scope
+        // traffic model to apply them to.
+        if (gen && s.scope.kind === 'network' && !body.schedule) gen.setOverride(d, body.kind);
+        return policyDoc();
+      }
+      if (method === 'DELETE') {
+        const s = scopeRef({ kind: q.get('scope_kind'), id: q.get('scope_id') || '' });
+        const k = q.get('kind');
+        if (s.rules[k]) s.rules[k] = s.rules[k].filter((x) => x !== q.get('domain'));
+        if (s.rule_schedules[k]) delete s.rule_schedules[k][q.get('domain')];
+        if (gen && s.scope.kind === 'network') gen.setOverride(q.get('domain'), null);
+        return policyDoc();
+      }
+    }
+    if (path === '/api/policy/switches' && method === 'POST') {
+      const s = scopeRef(body.scope);
+      if (!DEMO_SWITCHES.some((x) => x.name === body.name)) throw err(404, 'unknown switch');
+      if (body.enabled === null || body.enabled === undefined) delete s.switches[body.name]; else s.switches[body.name] = !!body.enabled;
+      return policyDoc();
+    }
+    if (path === '/api/policy/mode' && method === 'POST') {
+      const s = scopeRef(body.scope);
+      if (body.mode !== null && body.mode !== 'block' && body.mode !== 'allow') throw err(400, 'mode must be block or allow');
+      s.mode = body.mode;
+      return policyDoc();
+    }
+    if (path === '/api/policy/custom-lists' && method === 'POST') {
+      const name = String(body.name || '').trim();
+      if (!name) throw err(400, 'name required');
+      if (!!body.url === !!body.inline) throw err(400, 'give exactly one of url or inline');
+      if (body.url && !/^https?:\/\//i.test(body.url)) throw err(400, 'url must be http or https');
+      const lines = body.inline ? String(body.inline).split('\n').map((l) => l.trim()).filter((l) => l && !l.startsWith('#')) : [];
+      if (body.inline && !lines.length) throw err(400, 'no domains found in the pasted text');
+      const c = { id: 'cl-' + nextId++, name: name.slice(0, 60), category: body.category || 'Other', count: body.inline ? lines.length : 250 + ((name.length * 37) % 900) };
+      if (body.url) c.url = body.url; else c.inline = true;
+      custom.push(c);
+      return c;
+    }
+    if ((m = /^\/api\/policy\/custom-lists\/([^/]+)$/.exec(path)) && method === 'DELETE') {
+      const id = decodeURIComponent(m[1]);
+      if (!custom.some((c) => c.id === id)) throw err(404, 'list not found');
+      custom = custom.filter((c) => c.id !== id);
+      for (const s of scopes) delete s.items[id];
+      return { ok: true };
+    }
+    if (path === '/api/policy/refresh' && method === 'POST') { await delay(250); return null; }
+    // ---- alarms (MARKETING-SITE DEMO BUILD ADDITION — see initialAlarms() above)
+    if (path === '/api/alarms' && method === 'GET') {
+      const f = { min_severity: q.get('min_severity') || '', states: q.get('states') ? [q.get('states')] : [], text: (q.get('text') || '').toLowerCase() };
+      const offset = Math.max(0, Number(q.get('offset')) || 0), limit = Math.min(200, Math.max(1, Number(q.get('limit')) || 50));
+      const all = alarms.filter((a) => alarmMatches(a, f)).sort((a, b) => Date.parse(b.last_seen) - Date.parse(a.last_seen));
+      return { alarms: all.slice(offset, offset + limit).map((a) => ({ ...a })), total: all.length };
+    }
+    if (path === '/api/alarms/summary' && method === 'GET') {
+      const by_severity = {}, by_state = {};
+      for (const a of alarms) { by_severity[a.severity] = (by_severity[a.severity] || 0) + 1; by_state[a.state] = (by_state[a.state] || 0) + 1; }
+      return { total: alarms.length, by_severity, by_state };
+    }
+    if (path === '/api/alarms/types' && method === 'GET') return { types: [...new Set(alarms.map((a) => a.type))] };
+    if (path === '/api/alarms/rules' && method === 'GET') return { rules: alarmRules.map((r) => ({ ...r })) };
+    if (path === '/api/alarms/rules' && method === 'POST') {
+      const r = { id: 'rule-' + alarmNextId++, name: String(body.name || '').trim() || '(unnamed rule)', match: body.match || {}, reason: body.reason || '', expires_at: null };
+      alarmRules.push(r);
+      return r;
+    }
+    if ((m = /^\/api\/alarms\/rules\/([^/]+)$/.exec(path)) && method === 'DELETE') {
+      alarmRules = alarmRules.filter((r) => r.id !== decodeURIComponent(m[1]));
+      return { ok: true };
+    }
+    if (path === '/api/alarms/bulk' && method === 'POST') {
+      let ids;
+      if (Array.isArray(body.ids)) ids = body.ids;
+      else if (body.all) {
+        const bf = body.filter || {};
+        const ff = { min_severity: bf.min_severity || '', states: bf.states ? [bf.states] : [], text: (bf.text || '').toLowerCase() };
+        ids = alarms.filter((a) => alarmMatches(a, ff)).map((a) => a.id);
+      } else ids = [];
+      const set = new Set(ids);
+      const snapshot = alarms.filter((a) => set.has(a.id)).map((a) => ({ ...a }));
+      let changed = 0;
+      if (body.op === 'delete') {
+        const before = alarms.length;
+        alarms = alarms.filter((a) => !set.has(a.id));
+        changed = before - alarms.length;
+      } else {
+        alarms = alarms.map((a) => {
+          if (!set.has(a.id)) return a;
+          changed++;
+          if (body.op === 'acknowledge') return { ...a, state: 'acknowledged' };
+          if (body.op === 'resolve') return { ...a, state: 'resolved' };
+          if (body.op === 'mute') return { ...a, state: 'muted' };
+          return a;
+        });
+      }
+      const handle = 'undo-' + alarmNextId++;
+      lastAlarmUndo = { handle, op: body.op, snapshot };
+      return { changed, skipped: 0, handle };
+    }
+    if (path === '/api/alarms/undo' && method === 'POST') {
+      if (!lastAlarmUndo || lastAlarmUndo.handle !== body.handle) return { ok: false };
+      const { op, snapshot } = lastAlarmUndo;
+      if (op === 'delete') {
+        const have = new Set(alarms.map((a) => a.id));
+        for (const a of snapshot) if (!have.has(a.id)) alarms.push(a);
+      } else {
+        const byId = new Map(snapshot.map((a) => [a.id, a]));
+        alarms = alarms.map((a) => (byId.has(a.id) ? byId.get(a.id) : a));
+      }
+      lastAlarmUndo = null;
+      return { ok: true };
+    }
+    if ((m = /^\/api\/alarms\/([^/]+)\/mute$/.exec(path)) && method === 'POST') {
+      const id = decodeURIComponent(m[1]);
+      const i = alarms.findIndex((x) => x.id === id);
+      if (i < 0) throw err(404, 'alarm not found');
+      alarms[i] = { ...alarms[i], state: 'muted' };
+      return { ...alarms[i] };
+    }
+    if ((m = /^\/api\/alarms\/([^/]+)$/.exec(path))) {
+      const id = decodeURIComponent(m[1]);
+      if (method === 'GET') { const a = alarms.find((x) => x.id === id); if (!a) throw err(404, 'alarm not found'); return { ...a }; }
+      if (method === 'PATCH') {
+        const i = alarms.findIndex((x) => x.id === id);
+        if (i < 0) throw err(404, 'alarm not found');
+        alarms[i] = { ...alarms[i], state: body.state || alarms[i].state };
+        return { ...alarms[i] };
+      }
+      if (method === 'DELETE') {
+        const before = alarms.length;
+        alarms = alarms.filter((x) => x.id !== id);
+        if (alarms.length === before) throw err(404, 'alarm not found');
+        return { ok: true };
+      }
+    }
+    // ---- portscan / vulnscan (MARKETING-SITE DEMO BUILD ADDITION — see
+    // initialPortscan()/initialVulnscan() above). "Scan now" on a device
+    // with no active finding has a real, seeded (so repeatable per device)
+    // chance of discovering something and raising a matching alarm live —
+    // the point being a visitor can cause this, not just watch it happen.
+    if (path === '/api/portscan' && method === 'GET') return { enabled: true, devices_scanned: portscanData.size };
+    if (path === '/api/portscan/devices' && method === 'GET') return { devices: [...portscanData.values()] };
+    if ((m = /^\/api\/portscan\/devices\/([^/]+)$/.exec(path)) && method === 'GET') {
+      const id = decodeURIComponent(m[1]);
+      return portscanData.get(id) || { device_id: id, last_scanned: null, ports: [] };
+    }
+    if (path === '/api/portscan/scan' && method === 'POST') {
+      await delay(500);
+      const targets = body.device_id ? [body.device_id] : devices.map((d) => d.id);
+      const results = [];
+      for (const id of targets) {
+        if (!devices.some((d) => d.id === id)) continue;
+        let rec = portscanData.get(id) || { device_id: id, last_scanned: null, ports: [] };
+        rec = { ...rec, last_scanned: new Date(now()).toISOString(), ports: rec.ports.map((p) => ({ ...p, newly_opened: false })) };
+        const h = strHash(id + ':port');
+        if (!rec.ports.some((p) => p.risky) && h % 100 < 30) {
+          const pick = DISCOVERABLE_PORTS[h % DISCOVERABLE_PORTS.length];
+          rec.ports.push({ port: pick.port, open: true, risky: pick.risky, risk_note: pick.risky ? (RISK_NOTE[pick.port] || 'Unexpected for a device like this.') : '', newly_opened: true });
+          if (pick.risky) pushAlarm({ severity: 'medium', type: 'port-opened', title: 'New port opened: ' + pick.port, body: deviceLabel(id) + ' opened a specifically risky port during a manual scan.', deviceId: id });
+        }
+        portscanData.set(id, rec);
+        results.push(rec);
+      }
+      return { devices: results };
+    }
+    if (path === '/api/vulnscan' && method === 'GET') return { enabled: true, devices_scanned: vulnscanData.size };
+    if (path === '/api/vulnscan/devices' && method === 'GET') return { devices: [...vulnscanData.values()] };
+    if ((m = /^\/api\/vulnscan\/devices\/([^/]+)$/.exec(path)) && method === 'GET') {
+      const id = decodeURIComponent(m[1]);
+      return vulnscanData.get(id) || { device_id: id, last_scanned: null, findings: [] };
+    }
+    if (path === '/api/vulnscan/scan' && method === 'POST') {
+      await delay(650);
+      const targets = body.device_id ? [body.device_id] : devices.map((d) => d.id);
+      const results = [];
+      for (const id of targets) {
+        if (!devices.some((d) => d.id === id)) continue;
+        let rec = vulnscanData.get(id) || { device_id: id, last_scanned: null, findings: [] };
+        rec = { ...rec, last_scanned: new Date(now()).toISOString() };
+        const h = strHash(id + ':vuln');
+        if (!rec.findings.some((f) => f.active) && h % 100 < 32) {
+          const pick = DISCOVERABLE_VULNS[h % DISCOVERABLE_VULNS.length];
+          rec.findings = [...rec.findings, { ...pick, active: true, resolved_at: null }];
+          pushAlarm({ severity: pick.severity, type: 'vulnerability-found', title: pick.name, body: deviceLabel(id) + ' — found during a manual scan.', deviceId: id });
+        }
+        vulnscanData.set(id, rec);
+        results.push(rec);
+      }
+      return { devices: results };
+    }
+    // ---- upstreams
+    if (path === '/api/upstreams') {
+      if (method === 'GET') return upstreamDoc();
+      if (method === 'POST') {
+        const addr = String(body.addr || '').trim();
+        const c = classifyAddr(addr);
+        if (!c.ok) throw err(400, c.error);
+        if (upstreams.some((u) => u.config === addr)) throw err(409, 'already added');
+        upstreams.push({ config: addr, kind: c.kind, healthy: true, rtt_ms: 12 + (addr.length % 20), consecutive_failures: 0, last_error: '', queries: 0, errors: 0 });
+        return upstreamDoc();
+      }
+      if (method === 'DELETE') {
+        const addr = q.get('addr');
+        if (upstreams.length <= 1) throw err(409, 'cannot remove the last upstream');
+        if (!upstreams.some((u) => u.config === addr)) throw err(404, 'upstream not found');
+        upstreams = upstreams.filter((u) => u.config !== addr);
+        return upstreamDoc();
+      }
+      if (method === 'PUT') {
+        const order = body.addrs || [];
+        const by = new Map(upstreams.map((u) => [u.config, u]));
+        const next = order.map((a) => by.get(a) || (() => { const c = classifyAddr(a); if (!c.ok) throw err(400, c.error); return { config: a, kind: c.kind, healthy: true, rtt_ms: 15, consecutive_failures: 0, last_error: '', queries: 0, errors: 0 }; })());
+        if (!next.length) throw err(400, 'at least one upstream is required');
+        upstreams = next;
+        return upstreamDoc();
+      }
+    }
+    if (path === '/api/upstreams/test' && method === 'POST') return probe(String(body.addr || '').trim());
+    if (path === '/api/upstreams/bootstrap' && method === 'PUT') {
+      const bad = (body.servers || []).filter((s) => !isIP(String(s).replace(/^\[|\]$/g, '')));
+      if (bad.length) throw err(400, 'not an IP address: ' + bad[0]);
+      bootstrap = [...body.servers];
+      return upstreamDoc();
+    }
+    // ---- history
+    if (path === '/api/history' && method === 'GET') {
+      if (hist.mode === 'encrypted' && hist.locked) {
+        const e = err(423, JSON.stringify({ locked: true, source: 'encrypted', entries: [] }));
+        throw e;
+      }
+      const r = historyEntries(q);
+      const n = now();
+      return { entries: r.entries, source: hist.mode, locked: false, oldest: new Date(n - (hist.mode === 'encrypted' ? 7 * 86400000 : 3 * 3600000)).toISOString(), newest: new Date(n).toISOString(), skipped: r.skipped };
+    }
+    if (path === '/api/history/unlock' && method === 'POST') {
+      if (hist.mode !== 'encrypted') throw err(400, 'history is not encrypted, so there is nothing to unlock');
+      const pass = String(body.passphrase || '');
+      await delay(300);
+      if (!hist.initialized) {
+        if (pass.length < 8) throw err(400, 'choose a passphrase of at least 8 characters');
+        hist.initialized = true; hist.locked = false;
+        return { ok: true, locked: false };
+      }
+      if (!pass || pass === 'wrong') throw err(401, 'wrong passphrase');
+      hist.locked = false;
+      return { ok: true, locked: false };
+    }
+    if (path === '/api/demo/history-lock' && method === 'POST') { hist.locked = !!body.locked; return { ...hist }; }
+    return undefined;
+  }
+
+  return {
+    handle,
+    historyState: () => ({ ...hist }),
+    // For the traffic generator: current name, id and wandering state of an address.
+    deviceOf(ip) { expire(); const d = devices.find((x) => x.ips.includes(ip)); return d ? { id: d.id, name: d.name, wandering: !!d.wandering } : null; },
+    get bulkChanged() { return lastBulk; },
+  };
+}
