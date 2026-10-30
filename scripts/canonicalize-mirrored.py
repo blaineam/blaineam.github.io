@@ -15,7 +15,7 @@ import pathlib
 import re
 import sys
 
-DEFAULT_SLUGS = ["blip", "glint", "haven", "lathe"]
+DEFAULT_SLUGS = ["blip", "glint", "haven", "lathe", "shepherd"]
 # Portfolio-only pages inside a mirrored folder (protected from the rsync): not the app's site.
 SKIP = {"haven": ("app/", "bridge/")}
 CANONICAL = re.compile(r"""<link\b[^>]*\brel\s*=\s*["']canonical["']""", re.I)

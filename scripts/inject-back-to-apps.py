@@ -15,7 +15,7 @@ import pathlib
 import sys
 
 TAG = '<script defer src="/apps/_shared/back-to-apps.js"></script>'
-DEFAULT_SLUGS = ["blip", "glint", "haven", "lathe"]
+DEFAULT_SLUGS = ["blip", "glint", "haven", "lathe", "shepherd"]
 
 
 def inject(path: pathlib.Path) -> bool:

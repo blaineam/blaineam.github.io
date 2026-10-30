@@ -49,7 +49,7 @@ BESPOKE = ["pano-owl", "sightquick", "tri-add", "zap", "revela", "lathe"]
 
 # Synced from each app's own repo by mirror-app-docs.yml; an edit here is
 # overwritten within the hour. Change the source repo instead.
-MIRRORED = ["haven", "blip", "glint"]
+MIRRORED = ["haven", "blip", "glint", "shepherd"]
 
 # Page-specific links appended after the app list. Sami runs on Lathe, so
 # its page links there; dropping it would orphan Lathe from the app pages.
