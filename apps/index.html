@@ -301,6 +301,14 @@
 
     @media (min-width: 1100px) {
       .free-apps-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      /* A lone card left over in the last row (count % 3 == 1) spans the
+         row and centers itself, the same technique support/index.html uses
+         for its own 2-column grid's odd-card-out. */
+      .free-apps-grid > .free-app-card:last-child:nth-child(3n+1) {
+        grid-column: 1 / -1;
+        justify-self: center;
+        width: min(100%, calc((100% - 2 * var(--spacing-lg)) / 3));
+      }
     }
     @media (max-width: 560px) {
       .free-apps-grid { grid-template-columns: 1fr; }
@@ -695,11 +703,6 @@
     <p class="free-apps-lede" data-i18n="these-nine-are-free.ca0221">These ten are free — no ads, no tracking, no subscription. If they earn a place on your devices, you can help fund what comes next.</p>
 
     <div class="free-apps-grid">
-      <a href="shepherd/" class="free-app-card">
-        <span class="free-app-icon"><img src="_shared/icons/shepherd.png?v=604df22b" alt="Shepherd App Icon"></span>
-        <span class="free-app-name">Shepherd</span>
-        <span class="free-app-tagline">Self-hosted guardian for your home network</span>
-      </a>
       <a href="haven/" class="free-app-card">
         <span class="free-app-icon"><img src="haven/assets/icon.png?v=c5250083" alt="Haven App Icon"></span>
         <span class="free-app-name">Haven</span>
@@ -744,6 +747,11 @@
         <span class="free-app-icon"><img src="_shared/icons/monkr.png?v=cf335919" alt="Monkr App Icon"></span>
         <span class="free-app-name">Monkr <span class="web-badge" data-i18n="web.a8323a">Web</span></span>
         <span class="free-app-tagline" data-i18n="beautiful-device-mockups-in.ea039d">Beautiful device mockups in seconds</span>
+      </a>
+      <a href="shepherd/" class="free-app-card">
+        <span class="free-app-icon"><img src="_shared/icons/shepherd.png" alt="Shepherd App Icon"></span>
+        <span class="free-app-name">Shepherd <span class="web-badge" data-i18n="web.a8323a">Web</span></span>
+        <span class="free-app-tagline">Self-hosted guardian for your home network</span>
       </a>
     </div>
 
