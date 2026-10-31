@@ -7,7 +7,7 @@
   <title>Shepherd — Live Demo</title>
   <meta name="description" content="Shepherd's real portal UI, running entirely in your browser with synthetic data. No backend, no network calls, nothing leaves this page.">
   <link rel="icon" href="icon.png?v=818e2720">
-  <link rel="stylesheet" href="style.css?v=d0b6bbd8">
+  <link rel="stylesheet" href="style.css?v=f1d157e4">
   <style>
     /* Marketing-site-only: a small "this is a demo" wayfinding bar above the
        real portal chrome. Nothing below this line changes the portal itself. */
@@ -36,6 +36,7 @@
       <button type="button" role="tab" id="tab-devices" aria-selected="false" aria-controls="view-devices">Devices</button>
       <button type="button" role="tab" id="tab-blocking" aria-selected="false" aria-controls="view-blocking">Blocking</button>
       <button type="button" role="tab" id="tab-alarms" aria-selected="false" aria-controls="view-alarms">Alarms</button>
+      <button type="button" role="tab" id="tab-watch" aria-selected="false" aria-controls="view-watch">Watch</button>
       <button type="button" role="tab" id="tab-upstreams" aria-selected="false" aria-controls="view-upstreams">Upstreams</button>
       <button type="button" role="tab" id="tab-history" aria-selected="false" aria-controls="view-history">History</button>
       <button type="button" role="tab" id="tab-accountability" aria-selected="false" aria-controls="view-accountability">Accountability</button>
@@ -185,6 +186,7 @@
   <main id="view-devices" class="page page-fill" role="tabpanel" aria-labelledby="tab-devices" hidden></main>
   <main id="view-blocking" class="page" role="tabpanel" aria-labelledby="tab-blocking" hidden></main>
   <main id="view-alarms" class="page page-fill" role="tabpanel" aria-labelledby="tab-alarms" hidden></main>
+  <main id="view-watch" class="page" role="tabpanel" aria-labelledby="tab-watch" hidden></main>
   <main id="view-upstreams" class="page" role="tabpanel" aria-labelledby="tab-upstreams" hidden></main>
   <main id="view-history" class="page" role="tabpanel" aria-labelledby="tab-history" hidden></main>
   <main id="view-accountability" class="page" role="tabpanel" aria-labelledby="tab-accountability" hidden></main>
@@ -275,7 +277,7 @@
     </div>
   </div>
 
-  <script type="module" src="app.js?v=9ffd1eaf"></script>
+  <script type="module" src="app.js?v=4b7736ea"></script>
   <script defer src="/apps/_shared/back-to-apps.js?v=225cbdcb"></script>
 </body>
 </html>
