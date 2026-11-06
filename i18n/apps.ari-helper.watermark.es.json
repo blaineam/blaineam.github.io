@@ -5,7 +5,7 @@
   "back": "← Ari Helper",
   "back-long": "← Volver a Ari Helper",
   "blocks-agree": "de los bloques coinciden",
-  "caveat": "Una marca encontrada es fiable: lleva una suma de verificación, así que una imagen que da positivo realmente lleva la marca de Ari. Que <em>no</em> se encuentre demuestra mucho menos. Cambiar el tamaño la elimina, una compresión fuerte puede hacerlo, y una imagen hecha casi solo de color plano puede que nunca la llevara: Ari solo marca las partes de una imagen con suficiente detalle para ocultar una marca, y deja intacto el color plano. Tampoco es una firma: indica que una imagen viene de Ari, no quién la hizo.",
+  "caveat": "Una marca encontrada es fiable: lleva una suma de verificación, así que una imagen que da positivo realmente lleva la marca de Ari. Que <em>no</em> se encuentre demuestra mucho menos. Cambiar el tamaño la elimina, una compresión fuerte puede hacerlo, y una imagen hecha casi solo de color plano puede que nunca la llevara: Ari solo marca las partes de una imagen con suficiente detalle para ocultar una marca, y deja intacto el color plano. El identificador que se muestra es de 16 bits, así que distingue dos imágenes marcadas pero no es único: entre unos cientos, dos acabarán compartiendo el mismo. Tampoco es una firma: indica que una imagen viene de Ari, no quién la hizo.",
   "caveat-title": "Qué significa un resultado",
   "drop": "Suelta una imagen aquí, o haz clic para elegir una",
   "drop-hint": "PNG, JPEG, HEIC o cualquier imagen que tu navegador pueda abrir",
