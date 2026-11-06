@@ -299,6 +299,13 @@
     var BLOCK = 8, BITS = 64, TILE = 4, GROUPS = 4;
     var MAGIC = 0xA21C, LEGACY_MAGIC = 0x41524931;
     var ALPHA = 1.0, MIN_TEXTURE = 6, MIN_COVERAGE = 48;
+    // Agreement at which a magic-only legacy reader may answer on its own.
+    // Those payloads carry no checksum, and two of the readers try four
+    // thousand alignments apiece, so the magic word alone is worth about
+    // 10^-6 a picture rather than 2^-32. A genuine legacy mark reads between
+    // 0.94 and 1.00; asking for that as well puts a chance hit out of reach,
+    // and a degraded mark that falls short is still weighed at the end.
+    var LEGACY_CERTAINTY = 0.9;
     var LEGACY_STRENGTH = 16, CANONICAL_SHORT_SIDE = 256;
 
     // JPEG's luminance quantisation table, used as a just-noticeable
@@ -587,15 +594,25 @@
       for (var i = 0, n = w * h; i < n; i++) {
         plane[i] = 0.299 * data[i * 4] + 0.587 * data[i * 4 + 1] + 0.114 * data[i * 4 + 2];
       }
-      var current = readTiled(plane, w, h);
-      if (current) return current;
-      // Only the tiled search is expensive; the legacy readers are one pass
-      // each over a cheap kernel.
-      if (report) report(BLOCK * BLOCK, BLOCK * BLOCK + 1);
+      // Cheapest reader first, which is the opposite of the obvious order.
+      // The tiled reader is the current scheme, but it is the expensive one:
+      // finding nothing means exhausting all 64 grid alignments at a full
+      // transform per block. Running it first made every picture from an
+      // older build pay that bill before the reader that could actually read
+      // it got a turn — eight seconds to recognise a mark plainly there.
+      var raster = readLegacyRaster(plane, w, h);
+      if (raster && raster.confidence >= LEGACY_CERTAINTY) return raster;
+      // Before the scale reader despite costing more: builds 750 and 751
+      // wrote BOTH marks, and answering with the scale one would say the
+      // picture had been resized when it has not.
+      var block = readLegacyBlock(plane, w, h, 'legacy-block');
+      if (block && block.confidence >= LEGACY_CERTAINTY) return block;
+      var scale = readLegacyScale(plane, w, h);
+      if (scale && scale.confidence >= LEGACY_CERTAINTY) return scale;
+
+      var tiled = readTiled(plane, w, h);
       var best = null;
-      [readLegacyBlock(plane, w, h, 'legacy-block'),
-       readLegacyRaster(plane, w, h),
-       readLegacyScale(plane, w, h)].forEach(function (c) {
+      [tiled, raster, block, scale].forEach(function (c) {
         if (c && (!best || c.confidence > best.confidence)) best = c;
       });
       return best;
