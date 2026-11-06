@@ -7,6 +7,7 @@
   "blocks-agree": "of blocks agree",
   "caveat": "A mark that is found is reliable: it carries a checksum, so a picture reporting Ari's mark really does carry it. A mark that is <em>not</em> found proves much less. Resizing a picture removes it, heavy compression can, and a picture made almost entirely of flat colour may never have carried one — Ari only marks the parts of a picture with enough detail to hide a mark, and leaves flat colour untouched. The identifier shown is 16 bits, so it tells two marked pictures apart but is not unique: among a few hundred, two will eventually share one. It is also not a signature — it shows a picture came from Ari, not who made it.",
   "caveat-title": "What a result means",
+  "checking": "Checking…",
   "drop": "Drop a picture here, or click to choose one",
   "drop-hint": "PNG, JPEG, HEIC or any picture your browser can open",
   "explain-found": "This picture carries the invisible mark Ari Helper adds to images it generates.",

@@ -7,6 +7,7 @@
   "blocks-agree": "dos blocos concordam",
   "caveat": "Uma marca encontrada é confiável: ela carrega uma soma de verificação, então uma imagem que acusa a marca do Ari realmente a carrega. <em>Não</em> encontrar a marca prova bem menos. Redimensionar a imagem remove a marca, compressão forte pode removê-la, e uma imagem feita quase só de cor chapada pode nunca tê-la carregado — o Ari só marca as partes de uma imagem com detalhe suficiente para esconder uma marca, e deixa a cor chapada intacta. O identificador mostrado tem 16 bits, então distingue duas imagens marcadas mas não é único: entre algumas centenas, duas acabarão compartilhando o mesmo. Também não é uma assinatura — mostra que a imagem veio do Ari, não quem a fez.",
   "caveat-title": "O que significa o resultado",
+  "checking": "Verificando…",
   "drop": "Solte uma imagem aqui, ou clique para escolher",
   "drop-hint": "PNG, JPEG, HEIC ou qualquer imagem que seu navegador abra",
   "explain-found": "Esta imagem carrega a marca invisível que o Ari Helper adiciona às imagens que gera.",
