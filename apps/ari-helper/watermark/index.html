@@ -208,6 +208,9 @@
           <span id="s-found-why" data-i18n="explain-found">This picture carries the invisible mark Ari Helper adds to images it generates.</span>
           <span id="s-missing-why" data-i18n="explain-missing">This picture does not carry the mark — but see the note below before concluding anything from that.</span>
           <span id="s-agree" data-i18n="blocks-agree">of blocks agree</span>
+          <span id="s-cropped" data-i18n="note-cropped">It has been cropped since it was made.</span>
+          <span id="s-resized" data-i18n="note-resized">It has been resized since it was made.</span>
+          <span id="s-older" data-i18n="note-older">It was marked by an earlier version of Ari.</span>
         </div>
 
         <div class="result" id="result" aria-live="polite">
@@ -241,7 +244,7 @@
 
       <div class="caveat">
         <strong data-i18n="caveat-title">What a result means</strong>
-        <span data-i18n-html="caveat">A mark that is found is reliable: the pattern it looks for does not occur by chance, so a picture reporting Ari's mark really does carry it. A mark that is <em>not</em> found proves much less. Heavy compression, cropping, resizing and screenshots all destroy it, and this says nothing about pictures from any other tool. It is also not a signature — it shows a picture came from Ari, not who made it.</span>
+        <span data-i18n-html="caveat">A mark that is found is reliable: the pattern it looks for does not occur by chance, so a picture reporting Ari's mark really does carry it. A mark that is <em>not</em> found proves much less. Cropping alone and resizing alone are survivable, but both together, shrinking a picture very far, or heavy compression will destroy it, and this says nothing about pictures from any other tool. It is also not a signature — it shows a picture came from Ari, not who made it.</span>
       </div>
 
       <a class="wm-back" href="../" data-i18n="back-long">← Back to Ari Helper</a>
@@ -263,14 +266,30 @@
   <script>
   // The detector, matching the embedder in Ari's InvisibleWatermark.swift.
   //
-  // Plain JavaScript rather than WebAssembly: the work is one 8x8 DCT per block,
-  // which typed arrays do in well under a second for any picture a browser will
-  // open, and a page with no build step is one anybody can read and check
-  // against the app. A wasm blob would be faster at nothing that matters here
-  // and auditable by fewer people.
+  // Plain JavaScript rather than WebAssembly: the work is one kernel per 8x8
+  // block, which typed arrays do in well under a second for any picture a
+  // browser will open, and a page with no build step is one anybody can read
+  // and check against the app. A wasm blob would be faster at nothing that
+  // matters here and auditable by fewer people.
+  //
+  // Ari writes two marks, because no single one survives everything and the
+  // two fail at different things. The BLOCK mark lives in the picture's own
+  // 8x8 grid: it survives any crop, and dies on any resize, because the grid
+  // it is written on stops existing. The SCALE mark lives on the picture
+  // normalised to a fixed short side, which a resize cannot move: it survives
+  // being shrunk to a quarter, and dies on a crop, because a crop changes what
+  // the normalisation is normalising. Either one answering is enough.
   (function () {
     var BLOCK = 8, BITS = 64, MAGIC = 0x41524931;      // "ARI1"
-    var FIRST = 1 * 8 + 3, SECOND = 3 * 8 + 1;          // (u:3,v:1) and (u:1,v:3)
+    var FIRST_U = 3, FIRST_V = 1, SECOND_U = 1, SECOND_V = 3;
+    var CANONICAL_SHORT_SIDE = 256;
+
+    // Agreement at which there is nothing left to look for. Not an
+    // accept/reject threshold — the magic word decides that — only about
+    // stopping early: agreement cannot exceed 1, so a reader this close to it
+    // has already found the best alignment there is. On a large photograph the
+    // searches this saves are seconds of frozen page.
+    var CERTAINTY = 0.98;
 
     var basis = new Float32Array(64);
     for (var f = 0; f < 8; f++) {
@@ -280,62 +299,204 @@
       }
     }
 
-    function dct(samples, out) {
-      var rows = new Float32Array(64), r, c, f, p, sum;
-      for (r = 0; r < 8; r++) {
-        for (f = 0; f < 8; f++) {
-          sum = 0;
-          for (p = 0; p < 8; p++) sum += samples[r * 8 + p] * basis[f * 8 + p];
-          rows[r * 8 + f] = sum;
+    // The one kernel whose inner product with a block is C(3,1) - C(1,3).
+    // Reading needs only that difference, not the other sixty-three
+    // coefficients: 64 multiplies a block instead of the 1024 a full separable
+    // DCT costs. That sixteenfold saving is what makes searching all 64 grid
+    // alignments affordable here.
+    var kernel = new Float32Array(64);
+    for (var r = 0; r < 8; r++) {
+      for (var c = 0; c < 8; c++) {
+        kernel[r * 8 + c] = basis[FIRST_V * 8 + r] * basis[FIRST_U * 8 + c]
+          - basis[SECOND_V * 8 + r] * basis[SECOND_U * 8 + c];
+      }
+    }
+
+    function coefficientDifference(plane, width, x, y) {
+      var sum = 0;
+      for (var r = 0; r < 8; r++) {
+        var start = (y + r) * width + x;
+        for (var c = 0; c < 8; c++) sum += plane[start + c] * kernel[r * 8 + c];
+      }
+      return sum;
+    }
+
+    // Which of the 64 bits a block at these block coordinates carries. Coming
+    // from where the block IS, rather than from how many blocks came before it,
+    // is what makes a crop recoverable: a crop renumbers blocks but only
+    // shifts coordinates.
+    function slot(blockX, blockY) { return (blockY % 8) * 8 + (blockX % 8); }
+
+    function identifierFrom(bits) {
+      var magic = 0, id = 0, s;
+      // >>> 0 keeps these unsigned; << 1 on bit 31 would otherwise go negative.
+      for (s = 0; s < 32; s++) magic = ((magic << 1) | bits[s]) >>> 0;
+      if (magic !== MAGIC) return null;
+      for (s = 32; s < 64; s++) id = ((id << 1) | bits[s]) >>> 0;
+      return id;
+    }
+
+    // Votes per slot for one grid alignment.
+    function tally(plane, width, height, offsetX, offsetY) {
+      var votes = new Int32Array(BITS), counts = new Int32Array(BITS), total = 0;
+      var by, bx, iy, ix, index;
+      for (by = offsetY, iy = 0; by + BLOCK <= height; by += BLOCK, iy++) {
+        for (bx = offsetX, ix = 0; bx + BLOCK <= width; bx += BLOCK, ix++) {
+          index = slot(ix, iy);
+          counts[index]++;
+          votes[index] += coefficientDifference(plane, width, bx, by) > 0 ? 1 : -1;
+          total++;
         }
       }
-      for (c = 0; c < 8; c++) {
-        for (f = 0; f < 8; f++) {
-          sum = 0;
-          for (p = 0; p < 8; p++) sum += rows[p * 8 + c] * basis[f * 8 + p];
-          out[f * 8 + c] = sum;
+      // Every slot has to have been seen, or the bits it holds are guesses.
+      for (var s = 0; s < BITS; s++) if (counts[s] === 0) return null;
+      return { votes: votes, counts: counts, total: total };
+    }
+
+    function agreement(counted, s) {
+      return ((Math.abs(counted.votes[s]) + counted.counts[s]) / 2) / counted.counts[s];
+    }
+
+    // Reads a tiled mark from a plane, searching the grid alignments and tile
+    // phases a crop can produce and keeping the BEST-agreeing one.
+    //
+    // Keeping the best rather than the first match matters twice over: a grid
+    // off by a single row still correlates well enough to spell the magic word,
+    // and reading from such an alignment got one bit of the identifier wrong.
+    // A detector that reports the wrong id is worse than one that reports none.
+    function searchTiled(plane, width, height, kind) {
+      var best = null;
+      for (var dy = 0; dy < BLOCK; dy++) {
+        for (var dx = 0; dx < BLOCK; dx++) {
+          // An untouched picture is read by the first alignment tried, so the
+          // other sixty-three need never happen.
+          if (best && best.confidence >= CERTAINTY) return best;
+          var counted = tally(plane, width, height, dx, dy);
+          if (!counted) continue;
+          // A crop also rotates which tile position the payload starts at.
+          for (var py = 0; py < 8; py++) {
+            for (var px = 0; px < 8; px++) {
+              var bits = new Uint8Array(BITS), confidence = 0, read, written;
+              for (var iy = 0; iy < 8; iy++) {
+                for (var ix = 0; ix < 8; ix++) {
+                  read = iy * 8 + ix;
+                  written = ((iy + py) % 8) * 8 + ((ix + px) % 8);
+                  bits[written] = counted.votes[read] >= 0 ? 1 : 0;
+                  confidence += agreement(counted, read);
+                }
+              }
+              var id = identifierFrom(bits);
+              if (id === null) continue;
+              var candidate = {
+                identifier: id,
+                confidence: confidence / BITS,
+                blocks: counted.total,
+                kind: kind,
+                wasRealigned: dx !== 0 || dy !== 0 || px !== 0 || py !== 0
+              };
+              if (!best || candidate.confidence > best.confidence) best = candidate;
+            }
+          }
         }
       }
+      return best;
+    }
+
+    // The mark as Ari wrote it before 7.1.10, where a block's bit came from its
+    // position in raster order. Kept because pictures marked by earlier builds
+    // are already out there, and a checker that stopped recognising them would
+    // break the one promise this page makes.
+    function readLegacyBlockMark(plane, width, height) {
+      var votes = new Int32Array(BITS), counts = new Int32Array(BITS), index = 0, s;
+      for (var by = 0; by + BLOCK <= height; by += BLOCK) {
+        for (var bx = 0; bx + BLOCK <= width; bx += BLOCK) {
+          s = index % BITS;
+          counts[s]++;
+          votes[s] += coefficientDifference(plane, width, bx, by) > 0 ? 1 : -1;
+          index++;
+        }
+      }
+      if (index < BITS) return null;
+      for (s = 0; s < BITS; s++) if (counts[s] === 0) return null;
+      var counted = { votes: votes, counts: counts, total: index };
+      var bits = new Uint8Array(BITS), confidence = 0;
+      for (s = 0; s < BITS; s++) {
+        bits[s] = votes[s] >= 0 ? 1 : 0;
+        confidence += agreement(counted, s);
+      }
+      var id = identifierFrom(bits);
+      if (id === null) return null;
+      return {
+        identifier: id, confidence: confidence / BITS, blocks: index,
+        kind: 'legacy', wasRealigned: false
+      };
+    }
+
+    // The scale mark's own grid: short side fixed, aspect kept, both
+    // dimensions rounded to whole blocks so the grid does not depend on how
+    // the picture's own dimensions happened to round.
+    function canonicalSize(width, height) {
+      var scale = CANONICAL_SHORT_SIDE / Math.min(width, height);
+      function wholeBlocks(value) {
+        return Math.max(BLOCK * 8, Math.round(value * scale / BLOCK) * BLOCK);
+      }
+      return [wholeBlocks(width), wholeBlocks(height)];
+    }
+
+    // Area average down, which is what a sane resize does, and what makes the
+    // normalisation agree between an original and a shrunken copy of it.
+    function resample(source, sourceWidth, sourceHeight, width, height) {
+      var out = new Float32Array(width * height);
+      for (var y = 0; y < height; y++) {
+        var top = y * sourceHeight / height, bottom = (y + 1) * sourceHeight / height;
+        var firstRow = Math.max(0, Math.min(sourceHeight - 1, Math.floor(top)));
+        var lastRow = Math.max(firstRow, Math.min(sourceHeight - 1, Math.ceil(bottom) - 1));
+        for (var x = 0; x < width; x++) {
+          var left = x * sourceWidth / width, right = (x + 1) * sourceWidth / width;
+          var firstColumn = Math.max(0, Math.min(sourceWidth - 1, Math.floor(left)));
+          var lastColumn = Math.max(firstColumn, Math.min(sourceWidth - 1, Math.ceil(right) - 1));
+          var sum = 0, count = 0;
+          for (var r = firstRow; r <= lastRow; r++) {
+            var start = r * sourceWidth;
+            for (var c = firstColumn; c <= lastColumn; c++) { sum += source[start + c]; count++; }
+          }
+          out[y * width + x] = count > 0 ? sum / count : 0;
+        }
+      }
+      return out;
+    }
+
+    function readScaleMark(plane, width, height) {
+      if (Math.min(width, height) < BLOCK * 8) return null;
+      var size = canonicalSize(width, height);
+      var found = searchTiled(
+        resample(plane, width, height, size[0], size[1]), size[0], size[1], 'scale'
+      );
+      // Whatever alignment the normalised grid needed says nothing about the
+      // picture: it is rounding, not a crop.
+      if (found) found.wasRealigned = false;
+      return found;
     }
 
     function detect(imageData) {
       var w = imageData.width, h = imageData.height, data = imageData.data;
       if (w < BLOCK || h < BLOCK) return null;
 
-      var luma = new Float32Array(w * h);
+      var plane = new Float32Array(w * h);
       for (var i = 0, n = w * h; i < n; i++) {
-        luma[i] = 0.299 * data[i * 4] + 0.587 * data[i * 4 + 1] + 0.114 * data[i * 4 + 2];
+        plane[i] = 0.299 * data[i * 4] + 0.587 * data[i * 4 + 1] + 0.114 * data[i * 4 + 2];
       }
 
-      var votesFor = new Int32Array(BITS), votesAgainst = new Int32Array(BITS);
-      var patch = new Float32Array(64), coef = new Float32Array(64), index = 0;
+      // The ordinary case is a picture nothing has happened to, which the first
+      // reader answers at full agreement on its first alignment.
+      var block = searchTiled(plane, w, h, 'block');
+      if (block && block.confidence >= CERTAINTY) return block;
 
-      // Same traversal order as the embedder: rows of blocks, left to right.
-      for (var by = 0; by + BLOCK <= h; by += BLOCK) {
-        for (var bx = 0; bx + BLOCK <= w; bx += BLOCK) {
-          for (var row = 0; row < BLOCK; row++) {
-            for (var col = 0; col < BLOCK; col++) {
-              patch[row * 8 + col] = luma[(by + row) * w + bx + col];
-            }
-          }
-          dct(patch, coef);
-          var slot = index % BITS;
-          index++;
-          if (coef[FIRST] - coef[SECOND] > 0) votesFor[slot]++; else votesAgainst[slot]++;
-        }
-      }
-      if (index < BITS) return null;
-
-      var magic = 0, id = 0, agreement = 0;
-      for (var s = 0; s < BITS; s++) {
-        var total = votesFor[s] + votesAgainst[s];
-        var bit = votesFor[s] >= votesAgainst[s] ? 1 : 0;
-        agreement += Math.max(votesFor[s], votesAgainst[s]) / total;
-        // >>> 0 keeps these unsigned; << 1 on bit 31 would otherwise go negative.
-        if (s < 32) magic = ((magic << 1) | bit) >>> 0; else id = ((id << 1) | bit) >>> 0;
-      }
-      if (magic !== MAGIC) return null;
-      return { identifier: id, confidence: agreement / BITS, blocks: index };
+      var best = block;
+      [readLegacyBlockMark(plane, w, h), readScaleMark(plane, w, h)].forEach(function (candidate) {
+        if (candidate && (!best || candidate.confidence > best.confidence)) best = candidate;
+      });
+      return best;
     }
 
     // Exposed so the detector can be checked against the app's embedder
@@ -351,12 +512,21 @@
       return element ? element.textContent : '';
     }
 
+    // Which mark answered says what has been done to the picture since Ari
+    // made it, which is worth telling the reader rather than hiding.
+    function history(payload) {
+      if (payload.kind === 'scale') return phrase('s-resized');
+      if (payload.kind === 'legacy') return phrase('s-older');
+      return payload.wasRealigned ? phrase('s-cropped') : '';
+    }
+
     function say(found, payload, picture) {
       result.className = 'result show ' + (found ? 'found' : 'missing');
       document.getElementById('preview').src = picture;
       document.getElementById('verdict').textContent = phrase(found ? 's-found' : 's-missing');
+      var note = found ? history(payload) : '';
       document.getElementById('explain').textContent =
-        phrase(found ? 's-found-why' : 's-missing-why');
+        phrase(found ? 's-found-why' : 's-missing-why') + (note ? ' ' + note : '');
       document.getElementById('meta').textContent = found
         ? 'id ' + payload.identifier.toString(16).toUpperCase().padStart(8, '0')
           + ' · ' + Math.round(payload.confidence * 100) + '% ' + phrase('s-agree')
