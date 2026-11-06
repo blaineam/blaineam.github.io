@@ -115,6 +115,12 @@
     .result.show { display: grid; }
     .result.found { background: rgba(31, 157, 85, .09); border: 1px solid rgba(31, 157, 85, .35); }
     .result.missing { background: rgba(199, 119, 0, .08); border: 1px solid rgba(199, 119, 0, .32); }
+    .result.working { background: rgba(127, 127, 140, .08); border: 1px solid rgba(127, 127, 140, .28); }
+    .result.working h2 .dot { background: var(--wm-ink-soft); animation: wm-pulse 1s ease-in-out infinite; }
+    @keyframes wm-pulse { 0%, 100% { opacity: .35; } 50% { opacity: 1; } }
+    @media (prefers-reduced-motion: reduce) {
+      .result.working h2 .dot { animation: none; opacity: .6; }
+    }
     .result img {
       width: 96px; height: 96px; object-fit: cover; border-radius: 12px; display: block;
       background: var(--wm-paper-2);
@@ -211,6 +217,7 @@
           <span id="s-cropped" data-i18n="note-cropped">It has been cropped since it was made.</span>
           <span id="s-resized" data-i18n="note-resized">It has been resized since it was made.</span>
           <span id="s-older" data-i18n="note-older">It was marked by an earlier version of Ari.</span>
+          <span id="s-checking" data-i18n="checking">Checking…</span>
         </div>
 
         <div class="result" id="result" aria-live="polite">
@@ -275,7 +282,20 @@
   // behind — flat colour is left byte for byte alone — and the payload carries
   // a checksum, so a reading either proves itself or is discarded. Marks from
   // older versions of Ari are still read by the three readers at the bottom.
-  (function () {
+  //
+  // The whole detector lives in one named function so it can be handed to a
+  // Worker as a string, which is what keeps this a single file with no build
+  // step. It runs OFF the main thread, because a picture with no mark is the
+  // slow case: a mark that is there stops the search the moment its checksum
+  // agrees, while a mark that is absent has nothing to stop on and every one
+  // of the 64 grid alignments has to be tried before "no" is trustworthy.
+  // That is seconds of work, and on the main thread it froze the tab for all
+  // of it. Cutting the search short would be the wrong fix — it would turn
+  // cropped pictures into misses — so the search stays exhaustive and moves
+  // instead.
+  function ariWatermarkDetector() {
+    var report = null;
+
     var BLOCK = 8, BITS = 64, TILE = 4, GROUPS = 4;
     var MAGIC = 0xA21C, LEGACY_MAGIC = 0x41524931;
     var ALPHA = 1.0, MIN_TEXTURE = 6, MIN_COVERAGE = 48;
@@ -421,6 +441,7 @@
     function readTiled(plane, width, height) {
       for (var dy = 0; dy < BLOCK; dy++) {
         for (var dx = 0; dx < BLOCK; dx++) {
+          if (report) report(dy * BLOCK + dx, BLOCK * BLOCK + 1);
           var got = gather(plane, width, height, dx, dy);
           var covered = 0;
           for (var i = 0; i < BITS; i++) if (got.counts[i] > 0) covered++;
@@ -568,6 +589,9 @@
       }
       var current = readTiled(plane, w, h);
       if (current) return current;
+      // Only the tiled search is expensive; the legacy readers are one pass
+      // each over a cheap kernel.
+      if (report) report(BLOCK * BLOCK, BLOCK * BLOCK + 1);
       var best = null;
       [readLegacyBlock(plane, w, h, 'legacy-block'),
        readLegacyRaster(plane, w, h),
@@ -576,14 +600,51 @@
       });
       return best;
     }
+    // In a Worker there is no document; wire up messaging and progress.
+    if (typeof document === 'undefined') {
+      report = function (done, total) {
+        self.postMessage({ progress: done / total });
+      };
+      self.onmessage = function (event) {
+        var d = event.data;
+        try {
+          self.postMessage({ done: true, found: detect(d) });
+        } catch (err) {
+          self.postMessage({ done: true, failed: String(err && err.message || err) });
+        }
+      };
+    }
+    return { detect: detect };
+  }
 
-    // Exposed so the detector can be checked against the app's embedder
-    // without a browser — see the cross-check in Ari's repo.
-    window.AriWatermark = { detect: detect };
+  (function () {
+    // One copy on this thread, so the detector stays directly callable — the
+    // cross-check in Ari's repo reads it straight out of this page.
+    var detector = ariWatermarkDetector();
+    window.AriWatermark = { detect: detector.detect };
+
+    // The same function, handed to a Worker as source. No build step, no
+    // second copy of the algorithm to drift from this one.
+    var workerURL = null;
+    function spawn() {
+      if (typeof Worker === 'undefined') return null;
+      try {
+        if (!workerURL) {
+          workerURL = URL.createObjectURL(new Blob(
+            ['(' + ariWatermarkDetector.toString() + ')();'],
+            { type: 'text/javascript' }
+          ));
+        }
+        return new Worker(workerURL);
+      } catch (e) {
+        return null;      // file:// and locked-down CSPs; fall back below.
+      }
+    }
 
     var drop = document.getElementById('drop');
     var file = document.getElementById('file');
     var result = document.getElementById('result');
+    var busy = false;
 
     function phrase(id) {
       var element = document.getElementById(id);
@@ -596,6 +657,14 @@
       if (found.kind === 'legacy-scale') return phrase('s-resized');
       if (found.kind === 'legacy-block' || found.kind === 'legacy-raster') return phrase('s-older');
       return found.wasRealigned ? phrase('s-cropped') : '';
+    }
+
+    function working(fraction) {
+      result.className = 'result show working';
+      document.getElementById('verdict').textContent = phrase('s-checking');
+      document.getElementById('explain').textContent = '';
+      document.getElementById('meta').textContent =
+        fraction > 0 ? Math.round(fraction * 100) + '%' : '';
     }
 
     function say(found, payload, picture) {
@@ -612,6 +681,8 @@
     }
 
     function examine(blob) {
+      if (busy) return;               // one at a time; the search is not cheap
+      busy = true;
       var image = new Image();
       image.onload = function () {
         var canvas = document.createElement('canvas');
@@ -619,17 +690,50 @@
         canvas.height = image.naturalHeight;
         var context = canvas.getContext('2d', { willReadFrequently: true });
         context.drawImage(image, 0, 0);
-        var found = detect(context.getImageData(0, 0, canvas.width, canvas.height));
-        // A small copy for the result, so the object URL can be let go.
+        var pixels = context.getImageData(0, 0, canvas.width, canvas.height);
+
+        // A small copy for the result, taken before the pixels are handed
+        // over, so the object URL can be let go.
         var thumb = document.createElement('canvas');
         var fit = 192 / Math.max(canvas.width, canvas.height);
         thumb.width = Math.max(1, Math.round(canvas.width * Math.min(1, fit)));
         thumb.height = Math.max(1, Math.round(canvas.height * Math.min(1, fit)));
         thumb.getContext('2d').drawImage(canvas, 0, 0, thumb.width, thumb.height);
-        say(!!found, found, thumb.toDataURL('image/jpeg', 0.85));
+        var picture = thumb.toDataURL('image/jpeg', 0.85);
         URL.revokeObjectURL(image.src);
-        result.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+        document.getElementById('preview').src = picture;
+        working(0);
+
+        function finish(found) {
+          busy = false;
+          say(!!found, found, picture);
+          result.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        var worker = spawn();
+        if (!worker) {
+          // No Worker available. Yield once so the working state paints
+          // before the main thread is tied up.
+          setTimeout(function () { finish(detector.detect(pixels)); }, 32);
+          return;
+        }
+        worker.onmessage = function (event) {
+          var m = event.data;
+          if (m && m.progress !== undefined) { working(m.progress); return; }
+          if (m && m.done) { worker.terminate(); finish(m.failed ? null : m.found); }
+        };
+        worker.onerror = function () {
+          worker.terminate();
+          setTimeout(function () { finish(detector.detect(pixels)); }, 32);
+        };
+        // Hand the pixels over rather than copying them.
+        worker.postMessage(
+          { width: pixels.width, height: pixels.height, data: pixels.data },
+          [pixels.data.buffer]
+        );
       };
+      image.onerror = function () { busy = false; };
       image.src = URL.createObjectURL(blob);
     }
 

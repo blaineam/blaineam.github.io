@@ -7,6 +7,7 @@
   "blocks-agree": "dei blocchi concordano",
   "caveat": "Un segno trovato è affidabile: porta un codice di controllo, quindi un'immagine che risulta col segno di Ari lo porta davvero. Se il segno <em>non</em> viene trovato si dimostra molto meno. Ridimensionare l'immagine lo rimuove, una compressione forte può farlo, e un'immagine fatta quasi solo di colore piatto potrebbe non averlo mai portato: Ari segna solo le parti di un'immagine con abbastanza dettaglio per nascondere un segno, e lascia intatto il colore piatto. L'identificatore mostrato è di 16 bit, quindi distingue due immagini segnate ma non è univoco: tra qualche centinaio, due finiranno per condividerlo. Non è nemmeno una firma: mostra che un'immagine viene da Ari, non chi l'ha fatta.",
   "caveat-title": "Cosa significa un risultato",
+  "checking": "Verifica in corso…",
   "drop": "Trascina qui un'immagine, o fai clic per sceglierne una",
   "drop-hint": "PNG, JPEG, HEIC o qualsiasi immagine che il tuo browser sia in grado di aprire",
   "explain-found": "Questa immagine porta il segno invisibile che Ari Helper aggiunge alle immagini che genera.",
