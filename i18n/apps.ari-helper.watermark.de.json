@@ -5,7 +5,7 @@
   "back": "← Ari Helper",
   "back-long": "← Zurück zu Ari Helper",
   "blocks-agree": "der Blöcke stimmen überein",
-  "caveat": "Eine gefundene Markierung ist verlässlich: Das gesuchte Muster entsteht nicht zufällig, ein Bild mit gemeldeter Ari-Markierung trägt sie also wirklich. Wird <em>keine</em> Markierung gefunden, sagt das deutlich weniger. Zuschneiden allein und Skalieren allein übersteht sie, beides zusammen, starkes Verkleinern oder starke Kompression zerstören sie jedoch, und über Bilder aus anderen Werkzeugen sagt dies nichts aus. Es ist auch keine Signatur – es zeigt, dass ein Bild von Ari stammt, nicht wer es gemacht hat.",
+  "caveat": "Eine gefundene Markierung ist verlässlich: Sie trägt eine Prüfsumme, ein Bild mit gemeldeter Ari-Markierung trägt sie also wirklich. Wird <em>keine</em> Markierung gefunden, sagt das deutlich weniger. Eine Größenänderung entfernt sie, starke Kompression kann es, und ein Bild aus fast nur einfarbigen Flächen hat sie möglicherweise nie getragen – Ari markiert nur die Teile eines Bildes mit genug Details, um eine Markierung zu verbergen, und lässt einfarbige Flächen unberührt. Es ist auch keine Signatur – es zeigt, dass ein Bild von Ari stammt, nicht wer es gemacht hat.",
   "caveat-title": "Was ein Ergebnis bedeutet",
   "drop": "Bild hierher ziehen oder klicken, um eines zu wählen",
   "drop-hint": "PNG, JPEG, HEIC oder jedes Bild, das dein Browser öffnen kann",

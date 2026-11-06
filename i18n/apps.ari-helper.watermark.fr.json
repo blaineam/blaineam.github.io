@@ -5,7 +5,7 @@
   "back": "← Ari Helper",
   "back-long": "← Retour à Ari Helper",
   "blocks-agree": "des blocs concordent",
-  "caveat": "Une marque trouvée est fiable : le motif recherché n'apparaît pas par hasard, une image signalée comme portant la marque d'Ari la porte donc réellement. Une marque <em>non</em> trouvée prouve beaucoup moins. Un recadrage seul et un redimensionnement seul ne la détruisent pas, mais les deux ensemble, une forte réduction de taille ou une forte compression si, et cela ne dit rien des images venant d'autres outils. Ce n'est pas non plus une signature — cela montre qu'une image vient d'Ari, pas qui l'a faite.",
+  "caveat": "Une marque trouvée est fiable : elle porte une somme de contrôle, une image signalée comme portant la marque d'Ari la porte donc réellement. Une marque <em>non</em> trouvée prouve beaucoup moins. Un redimensionnement la supprime, une forte compression le peut, et une image faite presque uniquement d'aplats de couleur ne l'a peut-être jamais portée — Ari ne marque que les parties d'une image ayant assez de détail pour dissimuler une marque, et laisse les aplats intacts. Ce n'est pas non plus une signature — cela montre qu'une image vient d'Ari, pas qui l'a faite.",
   "caveat-title": "Ce que signifie un résultat",
   "drop": "Déposez une image ici, ou cliquez pour en choisir une",
   "drop-hint": "PNG, JPEG, HEIC ou toute image que votre navigateur peut ouvrir",
