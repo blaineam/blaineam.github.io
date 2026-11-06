@@ -7,6 +7,6 @@
     "generate-posters": "node generate-posters.js"
   },
   "dependencies": {
-    "sharp": "^0.34.5"
+    "sharp": "^0.35.5"
   }
 }
