@@ -39,9 +39,17 @@ jobs:
           # commit-back step.
 
       - name: Set up Node.js
+        # 24, not 20, because of the npm that ships with each. The sharp
+        # bump in #34 regenerated scripts/package-lock.json with npm 11,
+        # which records an absent optional dependency as a bare
+        # `{"optional": true}` with no version field — seven of them, for
+        # platform-specific libvips builds. npm 10, which node 20 ships,
+        # hands that missing version straight to semver and dies with
+        # `Invalid Version:`, so every deploy since #34 has failed before
+        # reaching the build. sharp 0.35.5 itself wants node >=20.9.
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: "24"
           cache: "npm"
           cache-dependency-path: scripts/package-lock.json
 
