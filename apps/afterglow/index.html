@@ -89,7 +89,7 @@
         .top-links a { color: var(--ink-dim); text-decoration: none; padding: 8px 14px; border-radius: 999px; background: var(--glass); border: 1px solid var(--glass-edge); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
         .top-links a:hover { color: var(--ink); }
 
-        .hero { position: relative; z-index: 6; display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 40px; align-items: center; padding: 110px 0 80px; }
+        .hero { position: relative; z-index: 6; display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 40px; align-items: center; padding: 110px 24px 80px; }
         .hero .wordmark { font-family: -apple-system, BlinkMacSystemFont, system-ui, sans-serif; font-weight: 800; font-size: clamp(2.8rem, 8vw, 5rem); letter-spacing: -0.03em; background: linear-gradient(180deg, #fff 30%, var(--pink)); -webkit-background-clip: text; background-clip: text; color: transparent; }
         .hero h1 { font-size: clamp(1.5rem, 3.4vw, 2.1rem); color: var(--gold); font-weight: 600; margin-top: 6px; }
         .hero .sub { color: var(--ink-dim); font-size: 1.05rem; max-width: 500px; margin-top: 16px; }
@@ -106,28 +106,9 @@
         .cta.ghost { background: var(--glass); color: var(--ink); border: 1px solid var(--glass-edge); box-shadow: none; backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
         .price-note { color: var(--muted); font-size: 0.85rem; margin-top: 12px; }
 
-        /* A glass window, as the app draws them: traffic lights top left, title in the bar. */
-        .window {
-            position: relative;
-            border-radius: 22px;
-            background: var(--glass);
-            border: 1px solid var(--glass-edge);
-            backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
-            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255,255,255,0.18);
-            overflow: hidden;
-        }
-        .window .bar { display: flex; align-items: center; gap: 8px; padding: 12px 16px; border-bottom: 1px solid rgba(255,255,255,0.08); font-family: -apple-system, BlinkMacSystemFont, system-ui, sans-serif; font-weight: 600; font-size: 0.9rem; color: var(--ink-dim); }
-        .window .bar .lights { display: flex; gap: 6px; margin-right: 8px; }
-        .window .bar .lights i { width: 11px; height: 11px; border-radius: 50%; display: block; }
-        .window .bar .lights i:nth-child(1) { background: #ff5f57; }
-        .window .bar .lights i:nth-child(2) { background: #febc2e; }
-        .window .bar .lights i:nth-child(3) { background: #28c840; }
-        .window .body { padding: 18px; }
-        .hero .window { transform: rotate(-3deg); }
-        .hero .window .body { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
-        .tile { aspect-ratio: 1; border-radius: 16px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.1); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; font-size: 0.78rem; color: var(--ink-dim); font-weight: 500; }
-        .tile span { font-size: 1.6rem; line-height: 1; }
-        .tile.on { background: linear-gradient(160deg, rgba(255,110,168,0.35), rgba(176,40,216,0.35)); color: #fff; }
+        .shot { background: rgba(11, 6, 32, 0.82); border: 1px solid var(--glass-edge); border-radius: 18px; overflow: hidden; box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45); }
+        .shot img { display: block; width: 100%; height: auto; }
+        .shot figcaption { padding: 10px 14px 12px; font-size: 0.86rem; color: var(--ink-dim); }
 
         /* ═══════════ STATEMENT ═══════════ */
         .statement { padding: 80px 0 30px; text-align: center; }
@@ -143,28 +124,9 @@
         .story p { color: var(--ink-dim); font-size: 1.02rem; }
         .story p + p { margin-top: 12px; }
         .story .fine { color: var(--muted); font-size: 0.88rem; margin-top: 14px; }
-        .story .window .body { min-height: 230px; display: flex; flex-direction: column; justify-content: center; gap: 12px; }
-        .chips { display: flex; flex-wrap: wrap; gap: 8px; }
-        .chip { padding: 7px 13px; border-radius: 999px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12); font-size: 0.85rem; color: var(--ink); }
-        .chip.hot { background: linear-gradient(90deg, rgba(255,212,92,0.3), rgba(255,110,168,0.3)); }
-        .tabs { display: flex; gap: 6px; flex-wrap: wrap; }
-        .tabs b { padding: 6px 12px; border-radius: 999px; font-weight: 600; font-size: 0.82rem; color: var(--ink-dim); background: rgba(255,255,255,0.06); }
-        .tabs b.on { background: rgba(255,255,255,0.18); color: #fff; }
-        .shelf { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
-        .shelf i { display: block; aspect-ratio: 4/3; border-radius: 12px; background: linear-gradient(160deg, var(--c1), var(--c2)); }
-        .bpm { display: flex; align-items: baseline; gap: 12px; font-family: -apple-system, BlinkMacSystemFont, system-ui, sans-serif; }
-        .bpm b { font-size: 3rem; font-weight: 800; color: var(--gold); line-height: 1; }
-        .bpm span { color: var(--ink-dim); font-weight: 600; }
-        .beat { display: flex; gap: 8px; }
-        .beat i { flex: 1; height: 10px; border-radius: 5px; background: rgba(255,255,255,0.12); }
-        .beat i.on { background: linear-gradient(90deg, var(--pink), var(--violet)); }
         .credit { font-size: 0.85rem; color: var(--muted); }
         .credit a { color: var(--cyan); text-decoration: none; border-bottom: 1px dotted rgba(45,226,230,0.5); }
         .credit a:hover { border-bottom-style: solid; }
-        .address { display: flex; align-items: center; gap: 10px; padding: 10px 14px; border-radius: 999px; background: rgba(0,0,0,0.25); border: 1px solid rgba(255,255,255,0.1); font-size: 0.9rem; color: var(--ink-dim); }
-        .address .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--cyan); box-shadow: 0 0 10px var(--cyan); }
-        .progress { height: 3px; border-radius: 2px; background: linear-gradient(90deg, var(--cyan) 0 68%, rgba(255,255,255,0.1) 68%); }
-        .hands { display: flex; justify-content: space-around; font-size: 2.6rem; }
 
         /* ═══════════ THE VIEWER ═══════════ */
         .viewer { padding: 70px 0; background: linear-gradient(180deg, transparent, rgba(90, 26, 94, 0.25), transparent); }
@@ -211,7 +173,6 @@
 
         @media (max-width: 820px) {
             .hero { grid-template-columns: 1fr; padding-top: 90px; }
-            .hero .window { transform: none; max-width: 420px; }
             .story, .viewer .wrap { grid-template-columns: 1fr; gap: 28px; }
             .story.is-flipped .text { order: 0; }
             .sun { left: 86%; top: 16%; width: 50vw; opacity: 0.5; }
@@ -251,17 +212,7 @@
                 </div>
                 <p class="price-note">Free and open source (Apache-2.0). Built for the iPhone 18 Pro Max.</p>
             </div>
-            <div class="window" aria-hidden="true">
-                <div class="bar"><span class="lights"><i></i><i></i><i></i></span>Launcher</div>
-                <div class="body">
-                    <div class="tile on"><span>🌐</span>Browser</div>
-                    <div class="tile"><span>🖼️</span>Photos</div>
-                    <div class="tile"><span>🏔️</span>Places</div>
-                    <div class="tile"><span>🎮</span>Games</div>
-                    <div class="tile"><span>🎵</span>Music</div>
-                    <div class="tile"><span>⚙️</span>Settings</div>
-                </div>
-            </div>
+            <figure class="shot"><img src="assets/gallery/home.jpg" alt="The launcher, as it looks from inside the viewer" width="1920" height="884" fetchpriority="high"><figcaption>The launcher, from inside the viewer</figcaption></figure>
         </div>
     </header>
 
@@ -280,13 +231,7 @@
                     <p>ARKit gives Afterglow six degrees of freedom, so you can lean in, step round and look behind. The cameras pass your room through, and glass windows float in it with a launcher and a dock at your feet.</p>
                     <p>Hand tracking runs on the Neural Engine. Pinch to select, grab to move, point to aim. No controller, nothing to charge.</p>
                 </div>
-                <div class="window" aria-hidden="true">
-                    <div class="bar"><span class="lights"><i></i><i></i><i></i></span>Passthrough · 6DoF</div>
-                    <div class="body">
-                        <div class="hands">🤏 ✋ 👉</div>
-                        <div class="chips"><span class="chip">Pinch</span><span class="chip">Grab</span><span class="chip">Point</span><span class="chip">Two hands</span><span class="chip hot">Phone view</span></div>
-                    </div>
-                </div>
+                <figure class="shot"><img src="assets/gallery/windows.jpg" alt="The browser and Music hanging side by side" width="1920" height="884" loading="lazy"><figcaption>Windows hang where you leave them. Captured without a camera, so synthwave stands in for your room.</figcaption></figure>
             </section>
 
             <section class="story is-flipped" id="photos">
@@ -296,16 +241,7 @@
                     <p>Spatial photos and videos from an iPhone or Vision Pro play back in stereo. Panoramas wrap round you. 360 photos become the room itself, found automatically across your whole library.</p>
                     <p>Albums, a filmstrip, a scrub bar, and projection you can switch when a file lies about what it is.</p>
                 </div>
-                <div class="window" aria-hidden="true">
-                    <div class="bar"><span class="lights"><i></i><i></i><i></i></span>Photos</div>
-                    <div class="body">
-                        <div class="tabs"><b class="on">Library</b><b>Albums</b><b>Spatial</b><b>Panoramas</b><b>360°</b><b>Videos</b></div>
-                        <div class="shelf">
-                            <i style="--c1:#ff6ea8;--c2:#5a1a5e"></i><i style="--c1:#2de2e6;--c2:#2a0f4a"></i><i style="--c1:#ffd45c;--c2:#b028d8"></i><i style="--c1:#b028d8;--c2:#0b0620"></i>
-                            <i style="--c1:#5a1a5e;--c2:#2de2e6"></i><i style="--c1:#ffd45c;--c2:#ff6ea8"></i><i style="--c1:#2a0f4a;--c2:#ff6ea8"></i><i style="--c1:#2de2e6;--c2:#ffd45c"></i>
-                        </div>
-                    </div>
-                </div>
+                <figure class="shot"><img src="assets/gallery/photo-360.jpg" alt="A 360 photo all around, with its filmstrip below" width="1920" height="884" loading="lazy"><figcaption>A 360 photo all around you, with its filmstrip</figcaption></figure>
             </section>
 
             <section class="story" id="browser">
@@ -315,14 +251,7 @@
                     <p>Browse flat pages in a floating window, then enter immersive WebXR sessions with your hands as the controllers. Pages get head pose, hand joints and pinch events, the way a headset would give them.</p>
                     <p>A native start page, a keyboard you can type on through the lens, and a quiet exit: double-tap the viewer.</p>
                 </div>
-                <div class="window" aria-hidden="true">
-                    <div class="bar"><span class="lights"><i></i><i></i><i></i></span>Browser</div>
-                    <div class="body">
-                        <div class="address"><span class="dot"></span>immersive-web session · hands connected</div>
-                        <div class="progress"></div>
-                        <div class="chips"><span class="chip">immersive-ar</span><span class="chip">immersive-vr</span><span class="chip">hand-tracking</span><span class="chip hot">3DoF ultra-wide passthrough</span></div>
-                    </div>
-                </div>
+                <figure class="shot"><img src="assets/gallery/browser-page.jpg" alt="The browser with its address bar, tabs and a web page" width="1920" height="884" loading="lazy"><figcaption>The browser, with its tabs and text-size controls</figcaption></figure>
             </section>
 
             <section class="story is-flipped" id="places">
@@ -332,15 +261,7 @@
                     <p>Pick a photosphere and the room is gone: a mountain lake, a desert at dusk, a city at night. Bring your own 360 photos and they sit alongside the bundled ones.</p>
                     <p class="fine">Places are stills, with no server behind them. Everything renders on the phone.</p>
                 </div>
-                <div class="window" aria-hidden="true">
-                    <div class="bar"><span class="lights"><i></i><i></i><i></i></span>Places</div>
-                    <div class="body">
-                        <div class="shelf">
-                            <i style="--c1:#1b3a6b;--c2:#8fd3ff"></i><i style="--c1:#5a1a2e;--c2:#ffb36b"></i><i style="--c1:#0b0620;--c2:#b028d8"></i><i style="--c1:#1e4d2b;--c2:#b7e4a0"></i>
-                            <i style="--c1:#3a2c6b;--c2:#ff6ea8"></i><i style="--c1:#6b4a1b;--c2:#ffd45c"></i><i style="--c1:#0f3b4a;--c2:#2de2e6"></i><i style="--c1:#2a0f4a;--c2:#ffd45c"></i>
-                        </div>
-                    </div>
-                </div>
+                <figure class="shot"><img src="assets/gallery/place-world.jpg" alt="A mountain meadow photosphere behind the Places window" width="1920" height="884" loading="lazy"><figcaption>One of twenty-four places to be</figcaption></figure>
             </section>
 
             <section class="story" id="games">
@@ -351,14 +272,7 @@
                     <p>Rhythm plays to real music. Afterglow measures the tempo of your own tracks, and for songs from Apple Music it looks the beat up so the game lands on it.</p>
                     <p class="credit">Song tempo data for the rhythm game is provided by <a href="https://getsongbpm.com" target="_blank" rel="noopener">GetSongBPM</a>.</p>
                 </div>
-                <div class="window" aria-hidden="true">
-                    <div class="bar"><span class="lights"><i></i><i></i><i></i></span>Rhythm</div>
-                    <div class="body">
-                        <div class="bpm"><b>128</b><span>BPM · from the catalogue</span></div>
-                        <div class="beat"><i class="on"></i><i></i><i class="on"></i><i></i><i class="on"></i><i></i><i class="on"></i><i></i></div>
-                        <div class="chips"><span class="chip">Synthwave</span><span class="chip">Techno</span><span class="chip">Lo-fi</span><span class="chip">Drum &amp; bass</span><span class="chip">Chiptune</span></div>
-                    </div>
-                </div>
+                <figure class="shot"><img src="assets/gallery/game-blobs.jpg" alt="Blob monsters coming over the grid" width="1920" height="884" loading="lazy"><figcaption>Blobs: punch to fire</figcaption></figure>
             </section>
         </div>
     </main>
@@ -370,6 +284,7 @@
             <p class="lead">The interface and every experience, from where you stand. Each picture is one eye without the lens warp, unless it says through the lenses.</p>
             <div class="shots">
                 <figure><a href="assets/gallery/home.jpg?v=96947104"><img src="assets/gallery/home.jpg?v=96947104" alt="The launcher" width="1920" height="884" loading="lazy"></a><figcaption>The launcher</figcaption></figure>
+                <figure><a href="assets/gallery/windows.jpg"><img src="assets/gallery/windows.jpg" alt="Windows side by side, where you put them" width="1920" height="884" loading="lazy"></a><figcaption>Windows side by side, where you put them</figcaption></figure>
                 <figure><a href="assets/gallery/browser-page.jpg?v=f1b9ab99"><img src="assets/gallery/browser-page.jpg?v=f1b9ab99" alt="The browser, with its tabs and address bar" width="1920" height="884" loading="lazy"></a><figcaption>The browser, with its tabs and address bar</figcaption></figure>
                 <figure><a href="assets/gallery/files.jpg?v=a1eb4af2"><img src="assets/gallery/files.jpg?v=a1eb4af2" alt="Files: your folders, with a search typed on the keyboard" width="1920" height="884" loading="lazy"></a><figcaption>Files: your folders, with a search typed on the keyboard</figcaption></figure>
                 <figure><a href="assets/gallery/photo-360.jpg?v=0c8b56e1"><img src="assets/gallery/photo-360.jpg?v=0c8b56e1" alt="A 360 photo as the surroundings, with its filmstrip" width="1920" height="884" loading="lazy"></a><figcaption>A 360 photo as the surroundings, with its filmstrip</figcaption></figure>
@@ -411,7 +326,7 @@
                 <p class="fine" style="margin-top:16px;color:var(--muted);font-size:0.88rem">An Apple Watch can also act as a controller: wrist taps and the crown, over a thin connection to the phone.</p>
             </div>
             <div class="banner">
-                <img src="assets/banner.svg?v=4ffd080f" alt="Afterglow: a neon sun over a grid" width="1200" height="360" loading="lazy">
+                <img src="assets/gallery/through-the-lenses.jpg" alt="The phone's screen in the viewer: the launcher, one picture for each eye" width="1920" height="884" loading="lazy">
             </div>
         </div>
     </section>
