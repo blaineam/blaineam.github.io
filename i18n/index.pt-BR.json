@@ -1,8 +1,6 @@
 {
   "_meta.description": "Engenheiro de software sênior: plataformas de dados em tempo real, Kubernetes e mais de 20 apps publicados.",
   "_title": "Blaine Miller — Engenheiro de software sênior",
-  "a-senior-software-engineer.3680d2": "Um Engenheiro de Software Sênior",
-  "and-several-side-projects.62f3b8": "e vários projetos paralelos dos quais participei",
   "for-his-invisible-attributes.f98eec": "Pois desde a criação do mundo os atributos invisíveis de Deus, seu eterno poder e sua natureza divina, têm sido vistos claramente, sendo compreendidos por meio das coisas criadas, de forma que tais pessoas são indesculpáveis. <cite>Romanos 1:20</cite>",
   "hello-i-m-blaine.854c20": "Olá, eu sou o Blaine Miller",
   "hook.apps": "Mais de 20 apps publicados",
@@ -12,8 +10,6 @@
   "hook.photos": "Também fotografo o céu noturno — toque em ⋯ para ver fotos e panoramas.",
   "hook.title": "Engenheiro de software sênior",
   "hook.years": "Mais de 14 anos, do primeiro byte ingerido até a App Store.",
-  "i-also-enjoy-photographing.575cda": "Também gosto de fotografar minhas viagens",
-  "just-imagine-what-we.9a8b25": "Imagine só o que podemos construir juntos!",
   "projects.53e890": "Projetos",
   "radial.apps": "Apps",
   "radial.audio": "Áudio",
@@ -30,6 +26,8 @@
   "tag.best-website-advanced-division-honerable-mention-new-york-city-trade-show": "Menção Honrosa de Melhor Site na Divisão Avançada - Feira de Nova York",
   "tag.innovation-and-impact-award-from-devry-university": "Prêmio de Inovação e Impacto da DeVry University",
   "tag.made-it-to-the-top-50-in-the-developer-app-store-category": "Entrou no top 50 da categoria Developer da App Store",
+  "tl.afterglow.date": "Novembro de 2026",
+  "tl.afterglow.desc": "RV no celular, do jeito certo. Uma plataforma XR nativa que transforma um iPhone em um visor imprimível em um headset de verdade: rastreamento de cabeça 6DoF com ARKit, passthrough estéreo sobreposto à profundidade do LiDAR para que o ambiente tenha profundidade real, rastreamento de mãos no Neural Engine e uma interface de janelas de vidro que flutua no seu ambiente. Um navegador WebKit com uma camada WebXR personalizada dá às páginas acesso às suas mãos, sessões imersivas de RV e RA e testes de colisão com as superfícies reais ao seu redor. Fotos e vídeos espaciais são reproduzidos em estéreo, fotos 360 se tornam o próprio ambiente e doze jogos com gráficos 3D iluminados acontecem à sua volta, do minigolfe aos seus pés a uma montanha-russa com um percurso novo a cada volta. Reescrito de um protótipo em Unity para Swift 6 e Metal com estéreo de passagem única, ajustado para manter a taxa de quadros em um celular. Gratuito e de código aberto (Apache-2.0).",
   "tl.aperion.date": "abril de 2026",
   "tl.aperion.desc": "Um app de astrofotografia de céu profundo, hoje arquivado, para iPhone, iPad, Mac e Apple Watch — ele controlava uma montagem de rastreamento Benro Polaris e um corpo Canon EOS via CCAPI com um plate solver astrometry.net totalmente offline, além de alinhamento automático, empilhamento ao vivo, planejador de mosaicos, timelapses com movimento e uma carta celeste em RA. Seu objetivo central — controle confiável do Polaris + Canon — agora é resolvido de forma mais aberta com a modificação do próprio firmware do Polaris, então o app independente foi aposentado em favor de levar isso para o dispositivo. Veja o <a href=\"https://github.com/blaineam/benro-polaris-firmware-patcher\">Benro Polaris Firmware Patcher</a>, de código aberto.",
   "tl.arcade.date": "fev. de 2024",
@@ -84,6 +82,8 @@
   "tl.sami.desc": "Sami é um otimizador de mídia fácil e divertido de usar, feito para simplificar a compressão de imagens, vídeos e PDFs de acordo com suas regras específicas de meta e otimização. Ele ajuda você a gerenciar com eficiência o espaço do iCloud usado pelo Apple Photos ou por qualquer pasta que você escolher otimizar, aplicando compressão com perdas para alcançar a maior economia possível.",
   "tl.scripture-alone.date": "setembro de 2026",
   "tl.scripture-alone.desc": "Uma Bíblia gratuita e privada para iPhone, iPad, Mac e Apple Watch que vive inteiramente no dispositivo: ASV, BSB e KJV offline com busca em texto completo e as palavras de Cristo em vermelho, destaques e anotações em intervalos de versículos, slides do sermão transformados em anotações pelo reconhecimento de texto no dispositivo, referências cruzadas e comentários clássicos, mapas offline e uma linha do tempo dos períodos bíblicos, e imagens de versículos cujos links recriam o cartão no navegador só a partir do link. Sincronização privada pelo iCloud, sem anúncios, sem contas, código aberto sob a AGPL — já na App Store, e em breve no Google Play.",
+  "tl.shepherd.date": "Outubro de 2026",
+  "tl.shepherd.desc": "Um guardião auto-hospedado para a sua rede doméstica: filtragem de DNS com um catálogo de 95 listas, políticas por dispositivo, grupo e rede com modo de lista de permissões e acesso programado, um HUD com globo 3D ao vivo de cada consulta com reprodução, nomeação e classificação automáticas de dispositivos, um mecanismo de alarmes, varredura de portas e vulnerabilidades e bloqueio de países por geo-IP, tudo atrás de um portal protegido com PIN para navegadores confiáveis. Um único binário nativo para Linux, macOS e Windows — sem nuvem, sem telemetria, sem conta. Gratuito e de código aberto sob a licença AGPL. Experimente a interface real do portal com dados sintéticos aqui mesmo no site.",
   "tl.sightquick.date": "junho de 2026",
   "tl.sightquick.desc": "Imprima um alvo sem grade com código exclusivo, fotografe seu agrupamento e o algoritmo baseado em Vision do SightQuick encontra cada furo de bala e informa exatamente quantos cliques ajustar nas torres da luneta para zerar. Sem achismo, sem contas — apenas um alvo impresso, uma foto e o ajuste preciso. Compras no app de créditos de impressão consumíveis; o primeiro alvo é grátis.",
   "tl.threndr.date": "outubro de 2015",
@@ -101,6 +101,5 @@
   "tl.wise-flyer.date": "Abril de 2014",
   "tl.wise-flyer.desc": "Um jogo sem fim em que você faz uma coruja voar por entre canos elétricos, com uma paisagem sonora excepcional!",
   "tl.zap.date": "Junho de 2026",
-  "tl.zap.desc": "Duelos elétricos de perguntas e respostas, cara a cara, para iPhone e iPad. Desafie um amigo em tempo real ou encare adversários do Game Center — responda mais rápido e com mais precisão para somar pontos antes que o tempo acabe. Centenas de perguntas em várias categorias, com sequências, power-ups e placares de líderes.",
-  "with-14-years-of.3554bb": "com mais de 14 anos de experiência profissional"
+  "tl.zap.desc": "Duelos elétricos de perguntas e respostas, cara a cara, para iPhone e iPad. Desafie um amigo em tempo real ou encare adversários do Game Center — responda mais rápido e com mais precisão para somar pontos antes que o tempo acabe. Centenas de perguntas em várias categorias, com sequências, power-ups e placares de líderes."
 }

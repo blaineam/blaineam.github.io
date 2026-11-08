@@ -1,8 +1,6 @@
 {
   "_meta.description": "Senior software engineer: piattaforme dati in tempo reale, Kubernetes e oltre 20 app pubblicate.",
   "_title": "Blaine Miller — Senior Software Engineer",
-  "a-senior-software-engineer.3680d2": "Un ingegnere del software senior",
-  "and-several-side-projects.62f3b8": "e diversi progetti collaterali a cui ho partecipato",
   "for-his-invisible-attributes.f98eec": "Infatti le sue qualità invisibili, la sua eterna potenza e divinità, si vedono chiaramente fin dalla creazione del mondo, essendo percepite per mezzo delle opere sue; perciò essi sono inescusabili. <cite>Romani 1:20</cite>",
   "hello-i-m-blaine.854c20": "Ciao, sono Blaine Miller",
   "hook.apps": "Oltre 20 app pubblicate",
@@ -12,8 +10,6 @@
   "hook.photos": "Fotografo anche il cielo notturno: tocca ⋯ per foto e panorami.",
   "hook.title": "Senior Software Engineer",
   "hook.years": "Oltre 14 anni, dal primo byte acquisito fino all'App Store.",
-  "i-also-enjoy-photographing.575cda": "Mi piace anche fotografare i miei viaggi",
-  "just-imagine-what-we.9a8b25": "Immagina cosa possiamo costruire insieme!",
   "projects.53e890": "Progetti",
   "radial.apps": "App",
   "radial.audio": "Audio",
@@ -26,10 +22,12 @@
   "romans-1-20.e00c11": "Romani 1:20",
   "summary.12b71c": "Riepilogo",
   "tag.1st-place-advanced-website-california-state-trade-show": "1° posto Sito web avanzato - California State Trade Show",
-  "tag.best-of-class-devry-university": "Best of Class - DeVry University",
+  "tag.best-of-class-devry-university": "Miglior studente del corso - DeVry University",
   "tag.best-website-advanced-division-honerable-mention-new-york-city-trade-show": "Menzione d'onore Miglior sito web divisione avanzata - New York City Trade Show",
   "tag.innovation-and-impact-award-from-devry-university": "Innovation and Impact Award della DeVry University",
   "tag.made-it-to-the-top-50-in-the-developer-app-store-category": "Entrata nella top 50 della categoria Developer dell'App Store",
+  "tl.afterglow.date": "Novembre 2026",
+  "tl.afterglow.desc": "La realtà virtuale su iPhone, fatta come si deve. Una piattaforma XR nativa che trasforma un iPhone inserito in un visore stampabile in un vero headset: tracciamento della testa a 6DoF con ARKit, passthrough stereoscopico sovrapposto alla profondità del LiDAR perché la stanza abbia una profondità reale, tracciamento delle mani sul Neural Engine e un'interfaccia a finestre di vetro sospese nel tuo ambiente. Un browser WebKit con un livello WebXR personalizzato offre alle pagine le tue mani, sessioni immersive di VR e AR e hit test sulle superfici reali intorno a te. Foto e video spaziali vengono riprodotti in stereo, le foto a 360° diventano la stanza e dodici giochi con grafica 3D illuminata si svolgono intorno a te, dal minigolf ai tuoi piedi a un ottovolante con un percorso nuovo a ogni giro. Riscritta da un prototipo Unity in Swift 6 e Metal con stereo single-pass, è ottimizzata per mantenere un frame rate stabile su un telefono. Gratuita e open source (Apache-2.0).",
   "tl.aperion.date": "Aprile 2026",
   "tl.aperion.desc": "Un'app di astrofotografia del cielo profondo per iPhone, iPad, Mac e Apple Watch, ora accantonata: pilotava una montatura di inseguimento Benro Polaris e un corpo macchina Canon EOS tramite CCAPI con un plate solver astrometry.net completamente offline, oltre ad allineamento automatico, stacking live, pianificatore di mosaici, timelapse in movimento e una mappa del cielo in AR. Il suo obiettivo principale — un controllo affidabile di Polaris + Canon — è ora risolto in modo più aperto modificando direttamente il firmware di Polaris, quindi l'app autonoma è stata ritirata per portare tutto sul dispositivo. Scopri il progetto open source <a href=\"https://github.com/blaineam/benro-polaris-firmware-patcher\">Benro Polaris Firmware Patcher</a>.",
   "tl.arcade.date": "Febbraio 2024",
@@ -84,6 +82,8 @@
   "tl.sami.desc": "Sami è un ottimizzatore multimediale semplice e divertente da usare, pensato per snellire la compressione di immagini, video e PDF secondo i tuoi obiettivi e le tue regole di ottimizzazione. Ti aiuta a gestire in modo efficiente lo spazio di archiviazione iCloud occupato da Foto di Apple o da qualsiasi cartella tu scelga di ottimizzare, applicando una compressione con perdita per ottenere il massimo risparmio.",
   "tl.scripture-alone.date": "Settembre 2026",
   "tl.scripture-alone.desc": "Una Bibbia gratuita e privata per iPhone, iPad, Mac e Apple Watch che vive interamente sul dispositivo: ASV, BSB e KJV offline con ricerca a testo completo e le parole di Cristo in rosso, evidenziazioni e note su intervalli di versetti, slide del sermone trasformate in note dal riconoscimento del testo sul dispositivo, riferimenti incrociati e commentari classici, mappe offline e una linea del tempo dei periodi biblici, e immagini di versetti i cui link ricostruiscono la scheda nel browser a partire dal solo link. Sincronizzazione iCloud privata, niente pubblicità, niente account, open source con licenza AGPL — ora sull'App Store, presto anche su Google Play.",
+  "tl.shepherd.date": "Ottobre 2026",
+  "tl.shepherd.desc": "Un guardiano self-hosted per la tua rete domestica: filtro DNS basato su un catalogo di 95 liste, criteri per dispositivo, gruppo e rete con modalità allowlist e accesso programmato, un HUD con globo 3D in tempo reale che mostra ogni query e ne consente il replay, riconoscimento e classificazione automatici dei dispositivi, un motore di allarmi, scansione di porte e vulnerabilità e blocco dei Paesi tramite geo-IP, il tutto dietro un portale protetto con PIN per i browser attendibili. Un unico binario nativo per Linux, macOS e Windows: niente cloud, niente telemetria, nessun account. Gratuito e open source con licenza AGPL. Prova la vera interfaccia del portale con dati sintetici direttamente sul sito.",
   "tl.sightquick.date": "Giugno 2026",
   "tl.sightquick.desc": "Stampa un bersaglio senza griglia con codice univoco, fotografa la tua rosata e l'algoritmo di SightQuick basato su Vision individua ogni foro e ti dice esattamente quanti click regolare sulle torrette per azzerare. Niente supposizioni, niente calcoli: solo un bersaglio stampato, una foto e la regolazione precisa. Acquisti in-app consumabili per i crediti di stampa; il primo bersaglio è gratuito.",
   "tl.threndr.date": "Ottobre 2015",
@@ -101,6 +101,5 @@
   "tl.wise-flyer.date": "Aprile 2014",
   "tl.wise-flyer.desc": "Un gioco senza fine in cui fai volare un gufo tra i tubi elettrici, con un paesaggio sonoro eccezionale!",
   "tl.zap.date": "Giugno 2026",
-  "tl.zap.desc": "Duelli di quiz testa a testa a tutta elettricità per iPhone e iPad. Sfida un amico in tempo reale o affronta gli avversari di Game Center — rispondi più in fretta e con più precisione per accumulare punti prima che scada il tempo. Centinaia di domande in tante categorie, con serie vincenti, potenziamenti e classifiche.",
-  "with-14-years-of.3554bb": "con oltre 14 anni di esperienza professionale"
+  "tl.zap.desc": "Duelli di quiz testa a testa a tutta elettricità per iPhone e iPad. Sfida un amico in tempo reale o affronta gli avversari di Game Center — rispondi più in fretta e con più precisione per accumulare punti prima che scada il tempo. Centinaia di domande in tante categorie, con serie vincenti, potenziamenti e classifiche."
 }

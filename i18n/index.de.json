@@ -1,8 +1,6 @@
 {
   "_meta.description": "Senior Software Engineer: Echtzeit-Datenplattformen, Kubernetes und über 20 veröffentlichte Apps.",
   "_title": "Blaine Miller – Senior Software Engineer",
-  "a-senior-software-engineer.3680d2": "Ein Senior Software Engineer",
-  "and-several-side-projects.62f3b8": "und einige Nebenprojekte, an denen ich beteiligt war",
   "for-his-invisible-attributes.f98eec": "Denn Gottes unsichtbares Wesen, das ist seine ewige Kraft und Gottheit, wird seit der Schöpfung der Welt ersehen aus seinen Werken, sodass sie keine Entschuldigung haben. <cite>Römer 1,20</cite>",
   "hello-i-m-blaine.854c20": "Hallo, ich bin Blaine Miller",
   "hook.apps": "20+ veröffentlichte Apps",
@@ -12,8 +10,6 @@
   "hook.photos": "Ich fotografiere auch den Nachthimmel – tippe auf ⋯ für Fotos und Panoramen.",
   "hook.title": "Senior Software Engineer",
   "hook.years": "Über 14 Jahre – vom ersten eingelesenen Byte bis zum App Store.",
-  "i-also-enjoy-photographing.575cda": "Außerdem fotografiere ich gern meine Reisen",
-  "just-imagine-what-we.9a8b25": "Stell dir nur vor, was wir gemeinsam bauen können!",
   "projects.53e890": "Projekte",
   "radial.apps": "Apps",
   "radial.audio": "Audio",
@@ -30,6 +26,8 @@
   "tag.best-website-advanced-division-honerable-mention-new-york-city-trade-show": "Beste Website, Advanced Division, lobende Erwähnung – New York City Trade Show",
   "tag.innovation-and-impact-award-from-devry-university": "Innovation and Impact Award der DeVry University",
   "tag.made-it-to-the-top-50-in-the-developer-app-store-category": "Platzierung unter den Top 50 der App Store-Kategorie „Entwicklerwerkzeuge“",
+  "tl.afterglow.date": "November 2026",
+  "tl.afterglow.desc": "Phone-VR, endlich richtig gemacht. Eine native XR-Plattform, die ein iPhone in einer druckbaren Halterung zu einem echten Headset macht: 6DoF-Head-Tracking mit ARKit, Stereo-Passthrough über den LiDAR-Tiefendaten, sodass dein Raum seine eigene Tiefe behält, Hand-Tracking auf der Neural Engine und eine Oberfläche aus gläsernen Fenstern, die frei in deinem Raum schweben. Ein WebKit-Browser mit eigener WebXR-Schicht gibt Webseiten Zugriff auf deine Hände, auf immersive VR- und AR-Sessions und auf Hit-Tests mit deinen realen Oberflächen. Räumliche Fotos und Videos laufen in Stereo, 360°-Fotos werden zum Raum, und zwölf Spiele mit beleuchteter 3D-Grafik spielen sich rund um dich herum ab – vom Minigolf zu deinen Füßen bis zur Achterbahn mit neuer Strecke bei jeder Fahrt. Von einem Unity-Prototyp zu Swift 6 und Metal neu geschrieben, mit Single-Pass-Stereo und so abgestimmt, dass die Bildrate auch auf dem Smartphone stabil bleibt. Kostenlos und Open Source (Apache-2.0).",
   "tl.aperion.date": "April 2026",
   "tl.aperion.desc": "Eine inzwischen eingestellte App für Deep-Sky-Astrofotografie für iPhone, iPad, Mac und Apple Watch – sie steuerte eine Benro Polaris-Nachführmontierung und eine Canon EOS-Kamera über CCAPI, mit einem vollständig offline arbeitenden Plate Solver von astrometry.net sowie Auto-Align, Live-Stacking, Mosaikplaner, Motion-Timelapses und einer AR-Sternkarte. Ihr Kernziel – zuverlässige Steuerung von Polaris + Canon – wird inzwischen offener gelöst, indem die Polaris-Firmware selbst gepatcht wird, weshalb die eigenständige App zugunsten dieser Lösung direkt auf dem Gerät eingestellt wurde. Siehe den quelloffenen <a href=\"https://github.com/blaineam/benro-polaris-firmware-patcher\">Benro Polaris Firmware Patcher</a>.",
   "tl.arcade.date": "Februar 2024",
@@ -84,6 +82,8 @@
   "tl.sami.desc": "Sami ist ein einfach und unterhaltsam zu bedienender Medien-Optimierer, der die Komprimierung von Bildern, Videos und PDFs nach Ihren individuellen Ziel- und Optimierungsregeln vereinfacht. Sami hilft Ihnen, den iCloud-Speicherplatz effizient zu verwalten, den Apple Fotos oder ein beliebiger von Ihnen gewählter Ordner belegt, und setzt dabei verlustbehaftete Komprimierung ein, um größtmögliche Einsparungen zu erzielen.",
   "tl.scripture-alone.date": "September 2026",
   "tl.scripture-alone.desc": "Eine kostenlose, private Bibel für iPhone, iPad, Mac und Apple Watch, die ganz auf dem Gerät lebt: ASV, BSB und KJV offline mit Volltextsuche und den Worten Christi in Rot, Markierungen und Notizen zu Versbereichen, Predigtfolien, die die Texterkennung auf dem Gerät in Notizen verwandelt, Querverweise und klassische Kommentare, Offline-Karten und eine Zeitleiste der biblischen Epochen sowie Versbilder, deren geteilte Links die Karte allein aus dem Link im Browser wieder aufbauen. Private iCloud-Synchronisierung, keine Werbung, kein Konto, Open Source unter der AGPL – jetzt im App Store, bald auch bei Google Play.",
+  "tl.shepherd.date": "Oktober 2026",
+  "tl.shepherd.desc": "Ein selbst gehosteter Wächter für dein Heimnetz: DNS-Filterung mit einem Katalog aus 95 Listen, Richtlinien pro Gerät, Gruppe und Netzwerk mit Allowlist-Modus und zeitgesteuertem Zugriff, ein Live-3D-Globus als HUD für jede Anfrage samt Replay, automatische Benennung und Klassifizierung von Geräten, eine Alarm-Engine, Port- und Schwachstellen-Scans sowie Geo-IP-Sperren nach Ländern – alles hinter einem abgesicherten Portal mit PIN für vertrauenswürdige Browser. Eine native Binärdatei für Linux, macOS und Windows – ohne Cloud, ohne Telemetrie, ohne Konto. Kostenlos und Open Source unter der AGPL. Probiere die echte Portal-Oberfläche mit synthetischen Daten direkt auf der Website aus.",
   "tl.sightquick.date": "Juni 2026",
   "tl.sightquick.desc": "Drucken Sie eine eindeutig codierte, rasterlose Zielscheibe aus, fotografieren Sie Ihre Trefferlage – und der Vision-basierte Algorithmus von SightQuick findet jedes Einschussloch und sagt Ihnen genau, wie viele Klicks Sie an Ihren Verstelltürmen zum Einschießen drehen müssen. Kein Raten, kein Rechnen – nur eine gedruckte Zielscheibe, ein Foto und die präzise Korrektur. Verbrauchbare In-App-Käufe für Druck-Guthaben; die erste Zielscheibe ist kostenlos.",
   "tl.threndr.date": "Oktober 2015",
@@ -101,6 +101,5 @@
   "tl.wise-flyer.date": "April 2014",
   "tl.wise-flyer.desc": "Ein endloses Spiel, in dem du eine Eule durch elektrische Rohre fliegen lässt – mit einer außergewöhnlichen Klangkulisse obendrein!",
   "tl.zap.date": "Juni 2026",
-  "tl.zap.desc": "Elektrisierende Quizduelle Kopf an Kopf für iPhone und iPad. Fordere Freunde in Echtzeit heraus oder tritt gegen Game Center-Gegner an – antworte schneller und genauer, um Punkte zu sammeln, bevor die Zeit abläuft. Hunderte Fragen aus vielen Kategorien, dazu Serien, Power-ups und Bestenlisten.",
-  "with-14-years-of.3554bb": "mit über 14 Jahren Berufserfahrung"
+  "tl.zap.desc": "Elektrisierende Quizduelle Kopf an Kopf für iPhone und iPad. Fordere Freunde in Echtzeit heraus oder tritt gegen Game Center-Gegner an – antworte schneller und genauer, um Punkte zu sammeln, bevor die Zeit abläuft. Hunderte Fragen aus vielen Kategorien, dazu Serien, Power-ups und Bestenlisten."
 }

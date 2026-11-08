@@ -1,8 +1,6 @@
 {
   "_meta.description": "Ingénieur logiciel senior : plateformes de données temps réel, Kubernetes et plus de 20 apps publiées.",
   "_title": "Blaine Miller — Ingénieur logiciel senior",
-  "a-senior-software-engineer.3680d2": "Ingénieur logiciel senior",
-  "and-several-side-projects.62f3b8": "et plusieurs projets personnels auxquels j'ai participé",
   "for-his-invisible-attributes.f98eec": "En effet, les perfections invisibles de Dieu, sa puissance éternelle et sa divinité, se voient comme à l'œil, depuis la création du monde, quand on les considère dans ses ouvrages. Ils sont donc inexcusables. <cite>Romains 1:20</cite>",
   "hello-i-m-blaine.854c20": "Bonjour, je suis Blaine Miller",
   "hook.apps": "Plus de 20 apps publiées",
@@ -12,8 +10,6 @@
   "hook.photos": "Je photographie aussi le ciel nocturne : touchez ⋯ pour les photos et panoramas.",
   "hook.title": "Ingénieur logiciel senior",
   "hook.years": "Plus de 14 ans, du premier octet ingéré jusqu'à l'App Store.",
-  "i-also-enjoy-photographing.575cda": "J'aime aussi photographier mes voyages",
-  "just-imagine-what-we.9a8b25": "Imaginez ce que nous pourrions créer ensemble !",
   "projects.53e890": "Projets",
   "radial.apps": "Apps",
   "radial.audio": "Audio",
@@ -30,6 +26,8 @@
   "tag.best-website-advanced-division-honerable-mention-new-york-city-trade-show": "Mention honorable Meilleur site web, division avancée - New York City Trade Show",
   "tag.innovation-and-impact-award-from-devry-university": "Prix Innovation et Impact décerné par DeVry University",
   "tag.made-it-to-the-top-50-in-the-developer-app-store-category": "Classée dans le top 50 de la catégorie Développeur de l'App Store",
+  "tl.afterglow.date": "Novembre 2026",
+  "tl.afterglow.desc": "La VR sur téléphone, enfin bien faite. Une plateforme XR native qui transforme un iPhone glissé dans un visiocasque imprimable en véritable casque : suivi de la tête en 6DoF grâce à ARKit, passthrough stéréo superposé à la profondeur LiDAR pour que la pièce conserve son propre relief, suivi des mains sur le Neural Engine et interface en fenêtres de verre suspendues dans votre pièce. Un navigateur WebKit doté d’une couche WebXR sur mesure offre aux pages vos mains, des sessions immersives en VR et en AR, et des tests de collision avec vos surfaces réelles. Les photos et vidéos spatiales sont lues en stéréo, les photos à 360° deviennent la pièce, et douze jeux aux graphismes 3D éclairés se déroulent autour de vous, du mini-golf à vos pieds aux montagnes russes sur un nouveau parcours à chaque tour. Réécrite d’un prototype Unity vers Swift 6 et Metal avec un rendu stéréo en une seule passe, optimisée pour tenir sa fréquence d’images sur un téléphone. Gratuite et open source (Apache-2.0).",
   "tl.aperion.date": "Avril 2026",
   "tl.aperion.desc": "Une application d'astrophotographie du ciel profond, aujourd'hui mise de côté, pour iPhone, iPad, Mac et Apple Watch — elle pilotait une monture de suivi Benro Polaris et un boîtier Canon EOS via CCAPI avec un solveur astrométrique astrometry.net entièrement hors ligne, en plus de l'alignement automatique, de l'empilement en direct, d'un planificateur de mosaïques, de timelapses en mouvement et d'une carte du ciel en réalité augmentée. Son objectif central — un contrôle fiable de Polaris + Canon — est désormais atteint de façon plus ouverte en modifiant directement le firmware du Polaris : l'application autonome est donc abandonnée au profit d'une solution embarquée. Voir le projet open source <a href=\"https://github.com/blaineam/benro-polaris-firmware-patcher\">Benro Polaris Firmware Patcher</a>.",
   "tl.arcade.date": "Févr. 2024",
@@ -84,6 +82,8 @@
   "tl.sami.desc": "Sami est un optimiseur de médias simple et agréable à utiliser, conçu pour fluidifier la compression de vos images, vidéos et PDF selon vos propres règles de ciblage et d'optimisation. Il vous aide à gérer efficacement l'espace iCloud occupé par Photos d'Apple — ou n'importe quel dossier de votre choix — en appliquant une compression avec perte pour un gain maximal.",
   "tl.scripture-alone.date": "Septembre 2026",
   "tl.scripture-alone.desc": "Une Bible gratuite et privée pour iPhone, iPad, Mac et Apple Watch, qui vit entièrement sur l'appareil : l'ASV, la BSB et la KJV hors ligne avec recherche en texte intégral et les paroles du Christ en rouge, surlignages et notes sur des plages de versets, diapositives de sermon transformées en notes par la reconnaissance de texte sur l'appareil, références croisées et commentaires classiques, cartes hors ligne et frise des périodes bibliques, et images de versets dont les liens de partage reconstruisent la carte dans le navigateur à partir du seul lien. Synchronisation iCloud privée, sans publicité, sans compte, open source sous licence AGPL — disponible sur l'App Store, bientôt sur Google Play.",
+  "tl.shepherd.date": "Octobre 2026",
+  "tl.shepherd.desc": "Un gardien auto-hébergé pour votre réseau domestique : filtrage DNS reposant sur un catalogue de 95 listes, règles par appareil, groupe ou réseau avec mode liste d’autorisation et accès programmés, HUD en direct sur un globe 3D affichant chaque requête avec relecture, nommage et classification automatiques des appareils, moteur d’alarmes, analyse des ports et des vulnérabilités, et blocage par pays via la géolocalisation IP, le tout derrière un portail verrouillé avec code PIN pour les navigateurs de confiance. Un seul binaire natif pour Linux, macOS et Windows — sans cloud, sans télémétrie, sans compte. Gratuit et open source sous licence AGPL. Essayez la véritable interface du portail avec des données synthétiques directement sur le site.",
   "tl.sightquick.date": "Juin 2026",
   "tl.sightquick.desc": "Imprimez une cible sans quadrillage dotée d'un code unique, photographiez votre groupement : l'algorithme de SightQuick, basé sur Vision, repère chaque impact et vous indique exactement combien de clics régler sur vos tourelles pour être à zéro. Aucune approximation, aucun calcul — une cible imprimée, une photo et le réglage précis. Achats intégrés consommables de crédits d'impression ; la première cible est offerte.",
   "tl.threndr.date": "Octobre 2015",
@@ -101,6 +101,5 @@
   "tl.wise-flyer.date": "avril 2014",
   "tl.wise-flyer.desc": "Un jeu sans fin où vous faites voler un hibou à travers des tuyaux électriques, avec un univers sonore d’exception en prime !",
   "tl.zap.date": "juin 2026",
-  "tl.zap.desc": "Des duels de quiz électriques en tête-à-tête sur iPhone et iPad. Défiez un ami en temps réel ou affrontez des adversaires Game Center : répondez plus vite et plus juste pour accumuler les points avant la fin du chrono. Des centaines de questions réparties en catégories, avec des séries, des bonus et des classements.",
-  "with-14-years-of.3554bb": "avec plus de 14 ans d’expérience professionnelle"
+  "tl.zap.desc": "Des duels de quiz électriques en tête-à-tête sur iPhone et iPad. Défiez un ami en temps réel ou affrontez des adversaires Game Center : répondez plus vite et plus juste pour accumuler les points avant la fin du chrono. Des centaines de questions réparties en catégories, avec des séries, des bonus et des classements."
 }

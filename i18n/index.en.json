@@ -1,8 +1,6 @@
 {
   "_meta.description": "Senior software engineer: real-time data platforms, Kubernetes and 20+ shipped apps.",
   "_title": "Blaine Miller — Senior Software Engineer",
-  "a-senior-software-engineer.3680d2": "A Senior Software Engineer",
-  "and-several-side-projects.62f3b8": "and several side projects I was involved in",
   "for-his-invisible-attributes.f98eec": "For his invisible attributes, that is, his eternal power and divine nature, have been clearly seen since the creation of the world, being understood through what he has made. As a result, people are without excuse. <cite>Romans 1:20</cite>",
   "hello-i-m-blaine.854c20": "Hello, I'm Blaine Miller",
   "hook.apps": "20+ apps shipped",
@@ -12,8 +10,6 @@
   "hook.photos": "I also photograph the night sky — tap ⋯ for photos and panoramas.",
   "hook.title": "Senior Software Engineer",
   "hook.years": "14+ years, from the first byte ingested to the App Store.",
-  "i-also-enjoy-photographing.575cda": "I also enjoy photographing my travels",
-  "just-imagine-what-we.9a8b25": "Just imagine what we can build together!",
   "projects.53e890": "Projects",
   "radial.apps": "Apps",
   "radial.audio": "Audio",
@@ -30,6 +26,8 @@
   "tag.best-website-advanced-division-honerable-mention-new-york-city-trade-show": "Best Website Advanced Division Honerable Mention - New York City Trade Show",
   "tag.innovation-and-impact-award-from-devry-university": "Innovation and Impact Award from DeVry University",
   "tag.made-it-to-the-top-50-in-the-developer-app-store-category": "Made it to the top 50 in the Developer App Store Category",
+  "tl.afterglow.date": "November, 2026",
+  "tl.afterglow.desc": "Phone VR, done properly. A native XR platform that turns an iPhone in a printable viewer into a real headset: 6DoF head tracking from ARKit, stereo passthrough laid over the LiDAR depth so the room has its own depth, hand tracking on the Neural Engine, and a glass window interface that hangs in your room. A WebKit browser with a custom WebXR layer gives pages your hands, immersive VR and AR sessions, and hit tests against your real surfaces. Spatial photos and video play in stereo, 360 photos become the room, and twelve games with lit 3D graphics run around you, from mini golf at your feet to a coaster on a new course every ride. Rewritten from a Unity prototype into Swift 6 and Metal with single-pass stereo, tuned to hold its frame rate on a phone. Free and open source (Apache-2.0).",
   "tl.aperion.date": "April, 2026",
   "tl.aperion.desc": "A now-shelved deep-sky astrophotography app for iPhone, iPad, Mac, and Apple Watch — it drove a Benro Polaris tracking mount and a Canon EOS body over CCAPI with a fully offline astrometry.net plate solver, plus auto-align, live stacks, a mosaic planner, motion timelapses, and an AR sky chart. Its core goal — reliable Polaris + Canon control — is now solved more openly by patching the Polaris firmware itself, so the standalone app is retired in favor of taking that on-device. See the open-source <a href=\"https://github.com/blaineam/benro-polaris-firmware-patcher\">Benro Polaris Firmware Patcher</a>.",
   "tl.arcade.date": "Feb, 2024",
@@ -84,6 +82,8 @@
   "tl.sami.desc": "Sami is an easy and fun to use media optimizer designed to streamline the compression of images, videos, and PDFs according to your specific targeting and optimization rules. It helps you efficiently manage iCloud storage space used by Apple Photos or any folder you choose to optimize, applying lossy compression to achieve the greatest savings.",
   "tl.scripture-alone.date": "September, 2026",
   "tl.scripture-alone.desc": "A free, private Bible for iPhone, iPad, Mac and Apple Watch that lives entirely on the device: the ASV, BSB and KJV offline with full-text search and the words of Christ in red, highlights and notes on verse ranges, sermon slides read into notes by on-device text recognition, cross-references and classic commentary, offline maps and a timeline of the biblical periods, and verse images whose share links rebuild the card in the browser from the link alone. Private iCloud sync, no ads, no accounts, open source under the AGPL — on the App Store now, with Google Play coming soon.",
+  "tl.shepherd.date": "October, 2026",
+  "tl.shepherd.desc": "A self-hosted guardian for your home network: DNS filtering against a 95-list catalog, per-device/group/network policy with allowlist mode and scheduled access, a live 3D globe HUD of every query with replay, automatic device naming and classification, an alarm engine, port and vulnerability scanning, and geo-IP country blocking, behind a locked portal with a trusted-browser PIN. One native binary for Linux, macOS and Windows — no cloud, no telemetry, no account. Free and open source under the AGPL. Try the real portal UI with synthetic data right on the site.",
   "tl.sightquick.date": "June, 2026",
   "tl.sightquick.desc": "Print a uniquely-coded, gridless target, photograph your group, and SightQuick's Vision-based algorithm finds every bullet hole and tells you exactly how many clicks to dial on your turrets to zero. No guesswork, no math — just a printed target, a photo, and the precise adjustment. Consumable print-credit IAPs; the first target is free.",
   "tl.threndr.date": "October, 2015",
@@ -101,6 +101,5 @@
   "tl.wise-flyer.date": "April, 2014",
   "tl.wise-flyer.desc": "A never ending game where you make an owl fly through electrical pipes, with an exceptional soundscape as well!",
   "tl.zap.date": "June, 2026",
-  "tl.zap.desc": "Electric head-to-head trivia duels for iPhone and iPad. Challenge a friend in real-time or take on Game Center opponents — answer faster and more accurately to rack up points before the clock runs out. Hundreds of questions across categories, with streaks, power-ups, and leaderboards.",
-  "with-14-years-of.3554bb": "with 14+ Years of Professional Experience"
+  "tl.zap.desc": "Electric head-to-head trivia duels for iPhone and iPad. Challenge a friend in real-time or take on Game Center opponents — answer faster and more accurately to rack up points before the clock runs out. Hundreds of questions across categories, with streaks, power-ups, and leaderboards."
 }

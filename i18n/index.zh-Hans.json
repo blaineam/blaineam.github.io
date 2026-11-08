@@ -1,8 +1,6 @@
 {
   "_meta.description": "高级软件工程师：实时数据平台、Kubernetes，以及 20 多款已上架应用。",
   "_title": "Blaine Miller — 高级软件工程师",
-  "a-senior-software-engineer.3680d2": "一名高级软件工程师",
-  "and-several-side-projects.62f3b8": "以及我参与过的多个业余项目",
   "for-his-invisible-attributes.f98eec": "自从造天地以来，神的永能和神性是明明可知的，虽是眼不能见，但借着所造之物就可以晓得，叫人无可推诿。<cite>罗马书 1:20</cite>",
   "hello-i-m-blaine.854c20": "你好，我是 Blaine Miller",
   "hook.apps": "已上架 20 多款应用",
@@ -12,8 +10,6 @@
   "hook.photos": "我也拍摄夜空 — 点按 ⋯ 查看照片和全景图。",
   "hook.title": "高级软件工程师",
   "hook.years": "14 年以上经验，从摄入的第一个字节到 App Store。",
-  "i-also-enjoy-photographing.575cda": "我也喜欢用照片记录旅途",
-  "just-imagine-what-we.9a8b25": "想象一下，我们能一起创造出什么！",
   "projects.53e890": "项目",
   "radial.apps": "应用",
   "radial.audio": "音频",
@@ -30,6 +26,8 @@
   "tag.best-website-advanced-division-honerable-mention-new-york-city-trade-show": "高级组最佳网站荣誉提名 - 纽约市贸易展",
   "tag.innovation-and-impact-award-from-devry-university": "DeVry University 创新与影响力奖",
   "tag.made-it-to-the-top-50-in-the-developer-app-store-category": "跻身 App Store 开发者类别前 50 名",
+  "tl.afterglow.date": "2026年11月",
+  "tl.afterglow.desc": "真正做对了的手机 VR。这是一个原生 XR 平台，只需一台 iPhone 和一个可打印的观看器，就能变身真正的头显：基于 ARKit 的 6DoF 头部追踪，叠加在 LiDAR 深度数据上的立体透视让房间呈现真实纵深，在神经网络引擎上运行的手部追踪，以及悬浮在你房间中的玻璃窗口界面。内置 WebKit 浏览器和自定义 WebXR 层，让网页能够使用你的双手、运行沉浸式 VR 和 AR 会话，并对你身边的真实表面进行命中测试。空间照片和视频以立体方式播放，360 度照片化作整个房间，十二款拥有光照 3D 画面的游戏在你周围展开，从脚边的迷你高尔夫，到每次乘坐都换新赛道的过山车。从 Unity 原型重写为 Swift 6 与 Metal，采用单通道立体渲染，并经过调校，在手机上也能保持稳定帧率。免费且开源（Apache-2.0）。",
   "tl.aperion.date": "2026年4月",
   "tl.aperion.desc": "一款现已封存的深空天体摄影应用，支持 iPhone、iPad、Mac 和 Apple Watch —— 它通过 CCAPI 驱动 Benro Polaris 跟踪云台与 Canon EOS 机身，内置完全离线的 astrometry.net 星图解算，并提供自动对准、实时叠加、马赛克拼接规划、运动延时摄影和 AR 星图。它的核心目标 —— 稳定可靠地控制 Benro Polaris 与 Canon —— 如今通过直接修补 Benro Polaris 固件以更开放的方式得到了解决，因此这款独立应用就此退役，改为把这项能力放到设备本身上完成。欢迎查看开源项目 <a href=\"https://github.com/blaineam/benro-polaris-firmware-patcher\">Benro Polaris Firmware Patcher</a>。",
   "tl.arcade.date": "2024年2月",
@@ -84,6 +82,8 @@
   "tl.sami.desc": "Sami 是一款简单有趣的媒体优化工具，可按你设定的目标与优化规则，轻松压缩图片、视频和 PDF。它帮你高效管理 Apple Photos 或任意指定文件夹所占用的 iCloud 存储空间，通过有损压缩换来最大幅度的空间节省。",
   "tl.scripture-alone.date": "2026年9月",
   "tl.scripture-alone.desc": "一款适用于 iPhone、iPad、Mac 和 Apple Watch 的免费私密圣经，一切都在设备上完成：离线的 ASV、BSB 和 KJV，支持全文搜索，基督的话以红字显示；可为经文范围划重点、记笔记；借助设备上的文字识别把讲道幻灯片变成笔记；串珠经文与经典注释；离线地图和圣经时代年表；还有经文图片，其分享链接仅凭链接本身即可在浏览器中重建卡片。私密的 iCloud 同步，无广告、无需账户，以 AGPL 开源——现已登陆 App Store，Google Play 版即将推出。",
+  "tl.shepherd.date": "2026年10月",
+  "tl.shepherd.desc": "一款自托管的家庭网络守护程序：基于 95 个列表目录的 DNS 过滤，按设备、群组和网络设定的策略，支持白名单模式和定时访问，以实时 3D 地球 HUD 呈现每一次查询并支持回放，自动为设备命名和分类，还有警报引擎、端口与漏洞扫描以及地理 IP 国家屏蔽，全部置于带受信任浏览器 PIN 码的锁定门户之后。一个原生二进制文件即可运行于 Linux、macOS 和 Windows——无云端、无遥测、无需账户。基于 AGPL 协议，免费且开源。还可以直接在网站上用合成数据试用真实的门户界面。",
   "tl.sightquick.date": "2026年6月",
   "tl.sightquick.desc": "打印一张带专属编码、无需网格的靶纸，拍下你的弹着组，SightQuick 基于 Vision 的算法便会找出每一个弹孔，并准确告诉你瞄准镜旋钮需要转动多少格才能归零。不用猜，也不用算——一张打印靶纸、一张照片，就能得到精确的调整量。打印额度为消耗型内购，首张靶纸免费。",
   "tl.threndr.date": "2015年10月",
@@ -101,6 +101,5 @@
   "tl.wise-flyer.date": "2014 年 4 月",
   "tl.wise-flyer.desc": "一款永无止境的游戏：操控一只猫头鹰穿越electrical管道，还配有出色的音景！",
   "tl.zap.date": "2026 年 6 月",
-  "tl.zap.desc": "为 iPhone 和 iPad 打造的电光火石般的一对一问答对决。实时挑战好友，或迎战 Game Center 对手 —— 答得更快、更准，在倒计时结束前疯狂积分。数百道题目横跨多个类别，还有连胜、道具与排行榜。",
-  "with-14-years-of.3554bb": "拥有 14 年以上专业经验"
+  "tl.zap.desc": "为 iPhone 和 iPad 打造的电光火石般的一对一问答对决。实时挑战好友，或迎战 Game Center 对手 —— 答得更快、更准，在倒计时结束前疯狂积分。数百道题目横跨多个类别，还有连胜、道具与排行榜。"
 }

@@ -27,7 +27,7 @@ PAGES = [
 ] + [
     (f"apps/{slug}/index.html", f"apps.{slug}", f"https://wemiller.com/apps/{slug}/", "bottom-left")
     for slug in [
-        "aperion", "ari-helper", "deepsi", "embr", "enter-space", "kern",
+        "afterglow", "aperion", "ari-helper", "deepsi", "embr", "enter-space", "kern",
         "luma-editor", "mi-speaks", "pano-owl", "pinline", "revela", "ridgeshot",
         "sami", "scripture-alone", "sightquick", "tilebreak", "tri-add", "wise-flyer", "zap",
     ]
