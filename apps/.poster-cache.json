@@ -1,5 +1,5 @@
 {
-  "fingerprint": "76a6f593a1b36486b6d249c8cd135c9803d6f571fc24c47b860c0a72c5fdf5ae",
+  "fingerprint": "2a9ab4677a1476e8cd081be6ff0200724d65a636e8b78746c0a3a6937b78410e",
   "apps": [
     "enter-space",
     "haven",
@@ -21,8 +21,9 @@
     "deepsi",
     "blip",
     "scripture-alone",
+    "afterglow",
     "lathe",
     "glint"
   ],
-  "generatedAt": "2026-11-08T20:25:32.341Z"
+  "generatedAt": "2026-11-08T21:58:08.064Z"
 }
