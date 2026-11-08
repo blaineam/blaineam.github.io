@@ -217,6 +217,17 @@
             .sun { left: 86%; top: 16%; width: 50vw; opacity: 0.5; }
         }
         @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+        /* ═══════════ GALLERY: what it looks like from inside ═══════════ */
+        .gallery { padding: 56px 0 30px; }
+        .gallery h2 { font-size: clamp(1.7rem, 3.4vw, 2.4rem); margin: 8px 0 10px; }
+        .gallery .lead { color: var(--ink-dim); max-width: 640px; }
+        .gallery .kicker { font-weight: 600; color: var(--pink); }
+        .shots { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 18px; margin-top: 26px; }
+        .shots figure { background: var(--glass); border: 1px solid var(--glass-edge); border-radius: 14px; overflow: hidden; }
+        .shots a { display: block; }
+        .shots img { display: block; width: 100%; height: auto; aspect-ratio: 2868 / 1320; object-fit: cover; }
+        .shots figcaption { padding: 9px 12px 11px; font-size: 0.88rem; color: var(--ink-dim); }
+        .gallery .fine { color: var(--muted); font-size: 0.85rem; margin-top: 16px; }
     </style>
 </head>
 <body>
@@ -226,6 +237,7 @@
         <div class="grid" aria-hidden="true"></div>
         <nav class="top-links" aria-label="Page">
             <a href="/apps/">← All Apps</a>
+            <a href="#gallery">See inside ↓</a>
             <a href="#viewer">Print the viewer ↓</a>
         </nav>
         <div class="wrap hero">
@@ -334,8 +346,8 @@
             <section class="story" id="games">
                 <div class="text">
                     <p class="kicker">Games</p>
-                    <h2>Eight games in your own room</h2>
-                    <p>Paint in the air with glowing tubes. Putt eighteen holes of mini golf at your feet. Ride a coaster on a course that is new every time. Shoot blobs, vacuum the floor, wake a toy box, open a portal.</p>
+                    <h2>Twelve games in your own room</h2>
+                    <p>Paint in the air with glowing tubes. Putt eighteen holes of mini golf at your feet. Ride a coaster on a course that is new every time. Shoot blobs, vacuum the floor, wake a toy box, open a portal. Stack a tower on your real table, grow a glowing garden, keep a ball in orbit with your palms, and drive a neon road by looking where you want to go.</p>
                     <p>Rhythm plays to real music. Afterglow measures the tempo of your own tracks, and for songs from Apple Music it looks the beat up so the game lands on it.</p>
                     <p class="credit">Song tempo data for the rhythm game is provided by <a href="https://getsongbpm.com" target="_blank" rel="noopener">GetSongBPM</a>.</p>
                 </div>
@@ -350,6 +362,40 @@
             </section>
         </div>
     </main>
+
+    <section class="gallery" id="gallery">
+        <div class="wrap">
+            <p class="kicker">From inside</p>
+            <h2>See what you'd see</h2>
+            <p class="lead">The interface and every experience, from where you stand. Each picture is one eye without the lens warp, unless it says through the lenses.</p>
+            <div class="shots">
+                <figure><a href="assets/gallery/home.jpg"><img src="assets/gallery/home.jpg" alt="The launcher" width="1920" height="884" loading="lazy"></a><figcaption>The launcher</figcaption></figure>
+                <figure><a href="assets/gallery/browser-page.jpg"><img src="assets/gallery/browser-page.jpg" alt="The browser, with its tabs and address bar" width="1920" height="884" loading="lazy"></a><figcaption>The browser, with its tabs and address bar</figcaption></figure>
+                <figure><a href="assets/gallery/files.jpg"><img src="assets/gallery/files.jpg" alt="Files: your folders, with a search typed on the keyboard" width="1920" height="884" loading="lazy"></a><figcaption>Files: your folders, with a search typed on the keyboard</figcaption></figure>
+                <figure><a href="assets/gallery/photo-360.jpg"><img src="assets/gallery/photo-360.jpg" alt="A 360 photo as the surroundings, with its filmstrip" width="1920" height="884" loading="lazy"></a><figcaption>A 360 photo as the surroundings, with its filmstrip</figcaption></figure>
+                <figure><a href="assets/gallery/place-world.jpg"><img src="assets/gallery/place-world.jpg" alt="Places: twenty-four photospheres to be in" width="1920" height="884" loading="lazy"></a><figcaption>Places: twenty-four photospheres to be in</figcaption></figure>
+                <figure><a href="assets/gallery/settings.jpg"><img src="assets/gallery/settings.jpg" alt="Settings, as a window" width="1920" height="884" loading="lazy"></a><figcaption>Settings, as a window</figcaption></figure>
+                <figure><a href="assets/gallery/games.jpg"><img src="assets/gallery/games.jpg" alt="Twelve games" width="1920" height="884" loading="lazy"></a><figcaption>Twelve games</figcaption></figure>
+                <figure><a href="assets/gallery/game-paint.jpg"><img src="assets/gallery/game-paint.jpg" alt="Paint: ribbons in the air" width="1920" height="884" loading="lazy"></a><figcaption>Paint: ribbons in the air</figcaption></figure>
+                <figure><a href="assets/gallery/game-blobs.jpg"><img src="assets/gallery/game-blobs.jpg" alt="Blobs: punch to fire" width="1920" height="884" loading="lazy"></a><figcaption>Blobs: punch to fire</figcaption></figure>
+                <figure><a href="assets/gallery/game-vacuum.jpg"><img src="assets/gallery/game-vacuum.jpg" alt="Vacuum: clean your real floor" width="1920" height="884" loading="lazy"></a><figcaption>Vacuum: clean your real floor</figcaption></figure>
+                <figure><a href="assets/gallery/game-toys.jpg"><img src="assets/gallery/game-toys.jpg" alt="Toys: a box that comes alive" width="1920" height="884" loading="lazy"></a><figcaption>Toys: a box that comes alive</figcaption></figure>
+                <figure><a href="assets/gallery/game-golf.jpg"><img src="assets/gallery/game-golf.jpg" alt="Mini golf: eighteen holes at your feet" width="1920" height="884" loading="lazy"></a><figcaption>Mini golf: eighteen holes at your feet</figcaption></figure>
+                <figure><a href="assets/gallery/game-coaster.jpg"><img src="assets/gallery/game-coaster.jpg" alt="Coaster: a new course every ride" width="1920" height="884" loading="lazy"></a><figcaption>Coaster: a new course every ride</figcaption></figure>
+                <figure><a href="assets/gallery/game-portal-through.jpg"><img src="assets/gallery/game-portal-through.jpg" alt="Portal: step through to another world" width="1920" height="884" loading="lazy"></a><figcaption>Portal: step through to another world</figcaption></figure>
+                <figure><a href="assets/gallery/game-rhythm.jpg"><img src="assets/gallery/game-rhythm.jpg" alt="Rhythm: to your own music" width="1920" height="884" loading="lazy"></a><figcaption>Rhythm: to your own music</figcaption></figure>
+                <figure><a href="assets/gallery/game-tower.jpg"><img src="assets/gallery/game-tower.jpg" alt="Tower: stack slabs on a real table" width="1920" height="884" loading="lazy"></a><figcaption>Tower: stack slabs on a real table</figcaption></figure>
+                <figure><a href="assets/gallery/game-garden.jpg"><img src="assets/gallery/game-garden.jpg" alt="Glow garden: plants grow where you point" width="1920" height="884" loading="lazy"></a><figcaption>Glow garden: plants grow where you point</figcaption></figure>
+                <figure><a href="assets/gallery/game-pong.jpg"><img src="assets/gallery/game-pong.jpg" alt="Orbital pong: your palms are the paddles" width="1920" height="884" loading="lazy"></a><figcaption>Orbital pong: your palms are the paddles</figcaption></figure>
+                <figure><a href="assets/gallery/game-drive.jpg"><img src="assets/gallery/game-drive.jpg" alt="Skyline drive: steer by looking" width="1920" height="884" loading="lazy"></a><figcaption>Skyline drive: steer by looking</figcaption></figure>
+                <figure><a href="assets/gallery/summary.jpg"><img src="assets/gallery/summary.jpg" alt="Every game ends with a summary" width="1920" height="884" loading="lazy"></a><figcaption>Every game ends with a summary</figcaption></figure>
+                <figure><a href="assets/gallery/webxr-vr.jpg"><img src="assets/gallery/webxr-vr.jpg" alt="WebXR VR, through the lenses, with Exit VR at your feet" width="1920" height="884" loading="lazy"></a><figcaption>WebXR VR, through the lenses, with Exit VR at your feet</figcaption></figure>
+                <figure><a href="assets/gallery/webxr-ar.jpg"><img src="assets/gallery/webxr-ar.jpg" alt="WebXR AR: a page placing a reticle on your floor" width="1920" height="884" loading="lazy"></a><figcaption>WebXR AR: a page placing a reticle on your floor</figcaption></figure>
+                <figure><a href="assets/gallery/through-the-lenses.jpg"><img src="assets/gallery/through-the-lenses.jpg" alt="What the phone's screen really shows" width="1920" height="884" loading="lazy"></a><figcaption>What the phone's screen really shows</figcaption></figure>
+            </div>
+            <p class="fine">Rendered by the app itself in the iPhone Simulator, which has no camera, so its synthwave surroundings stand in for your room. On a phone these float in your real room, in stereo.</p>
+        </div>
+    </section>
 
     <section class="viewer" id="viewer">
         <div class="wrap">
