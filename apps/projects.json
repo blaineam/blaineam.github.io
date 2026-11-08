@@ -4,6 +4,21 @@
   "note": "Source of truth for app metadata. apps/index.html renders its OWN custom display order; this file is the chronological list.",
   "apps": [
     {
+      "id": "afterglow",
+      "title": "Afterglow",
+      "tagline": "Phone VR, done properly",
+      "page_url": "/apps/afterglow/",
+      "app_store_url": null,
+      "source_url": "https://github.com/blaineam/Afterglow",
+      "icon_url": "/apps/afterglow/assets/icon.png",
+      "released": "2026-11",
+      "updated": "2026-11",
+      "version": "1.0.0",
+      "status": "live",
+      "price": "free",
+      "note": "A free, open-source (Apache-2.0) phone XR platform in native Swift and Metal, tuned for iPhone 18 Pro Max in a printable viewer: 6DoF head tracking with ARKit, stereo passthrough laid over LiDAR depth, hand tracking on the Neural Engine, a glass window interface, a WebKit browser with WebXR VR and AR including hit tests, spatial photos and video, 360 places, Apple Watch as a clicker, and twelve games."
+    },
+    {
       "id": "shepherd",
       "title": "Shepherd",
       "tagline": "The guardian your home network never had",

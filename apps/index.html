@@ -247,6 +247,10 @@
       background: linear-gradient(135deg, #fa709a, #fee140);
     }
 
+    .app-card[data-app="afterglow"] .app-icon {
+      background: linear-gradient(135deg, #2a0f4a, #ff6ea8);
+    }
+
     .app-card[data-app="deepsi"] .app-icon {
       background: linear-gradient(135deg, #667eea, #764ba2);
     }
@@ -290,7 +294,7 @@
       margin: 0 auto;
     }
 
-    /* Nine free apps: three by three when they fit, otherwise two across. */
+    /* The free apps: three across when they fit, otherwise two. */
     .free-apps-grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -677,6 +681,14 @@
           <span class="app-cta" data-i18n="learn-more.140c43">Learn More →</span>
         </a>
 
+        <!-- Afterglow -->
+        <a href="afterglow/" class="app-card" data-app="afterglow">
+          <div class="app-icon"><img src="afterglow/assets/icon.png?v=38311270" alt="Afterglow App Icon"></div>
+          <h2 class="app-name">Afterglow</h2>
+          <p class="app-tagline" data-i18n="phone-vr-done-properly.76b65c">Phone VR, done properly</p>
+          <span class="app-cta" data-i18n="learn-more.140c43">Learn More →</span>
+        </a>
+
         <!-- Lathe -->
         <a href="lathe/" class="app-card" data-app="lathe">
           <div class="app-icon"><img src="lathe/assets/images/icon.png?v=efb2233c" alt="Lathe App Icon"></div>
@@ -700,7 +712,7 @@
   <!-- Free apps · support future development -->
   <section class="free-apps-section" id="support">
     <h2 class="free-apps-title" data-i18n="free-apps-support-future.bde25b">Free apps · support future development</h2>
-    <p class="free-apps-lede" data-i18n="these-nine-are-free.ca0221">These ten are free — no ads, no tracking, no subscription. If they earn a place on your devices, you can help fund what comes next.</p>
+    <p class="free-apps-lede" data-i18n="these-eleven-are-free.4fe7d8">These eleven are free — no ads, no tracking, no subscription. If they earn a place on your devices, you can help fund what comes next.</p>
 
     <div class="free-apps-grid">
       <a href="haven/" class="free-app-card">
@@ -737,6 +749,11 @@
         <span class="free-app-icon"><img src="zap/assets/images/icon.png?v=da6a6707" alt="Zap! App Icon"></span>
         <span class="free-app-name">Zap!</span>
         <span class="free-app-tagline" data-i18n="electric-trivia-duels.96a7a2">Electric trivia duels</span>
+      </a>
+      <a href="afterglow/" class="free-app-card">
+        <span class="free-app-icon"><img src="afterglow/assets/icon.png?v=38311270" alt="Afterglow App Icon"></span>
+        <span class="free-app-name">Afterglow</span>
+        <span class="free-app-tagline" data-i18n="phone-vr-done-properly.76b65c">Phone VR, done properly</span>
       </a>
       <a href="../tools/tom/" class="free-app-card">
         <span class="free-app-icon"><img src="_shared/icons/tom.svg?v=c631f7f1" alt="Tom App Icon"></span>
