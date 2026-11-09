@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Afterglow Door Generator</title>
+    <meta name="description" content="Pick your iPhone and download a door for the Afterglow viewer: one PETG print with no TPU, the camera opening cut for your phone, and MagSafe placed over its magnets.">
+    <link rel="icon" type="image/png" sizes="32x32" href="../favicon.png?v=6edfdf39">
+    <link rel="icon" type="image/png" sizes="96x96" href="../favicon-96.png?v=982afb03">
+    <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png?v=8a79d3f0">
+    <link rel="canonical" href="https://wemiller.com/apps/afterglow/door/">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://wemiller.com/apps/afterglow/door/">
+    <meta property="og:title" content="Afterglow Door Generator">
+    <meta property="og:description" content="Pick your iPhone and download a door for the Afterglow viewer, ready to print in one piece.">
+    <meta property="og:image" content="https://wemiller.com/apps/afterglow/assets/og.png?v=a9a28fa2">
+    <meta name="twitter:card" content="summary_large_image">
+    <style>
+        :root {
+            --night: #0b0620;
+            --dusk: #2a0f4a;
+            --mauve: #5a1a5e;
+            --pink: #ff6ea8;
+            --violet: #b028d8;
+            --cyan: #2de2e6;
+            --gold: #ffd45c;
+            --ink: #f3eefb;
+            --ink-dim: #cdbfe6;
+            --muted: #a596c2;
+            --glass: rgba(255, 255, 255, 0.07);
+            --glass-strong: rgba(255, 255, 255, 0.12);
+            --glass-edge: rgba(255, 255, 255, 0.16);
+            --ok: #6ff0c0;
+            --warn: #ffd45c;
+            --bad: #ff8d9e;
+            --sans: -apple-system, BlinkMacSystemFont, system-ui, 'Segoe UI', sans-serif;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        [hidden] { display: none !important; }
+        html { scroll-behavior: smooth; }
+        body { font-family: var(--sans); background: var(--night); color: var(--ink); line-height: 1.55; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+        a { color: var(--cyan); }
+        h1, h2, h3 { line-height: 1.12; letter-spacing: -0.01em; }
+        .wrap { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+        @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+        /* ═══════════ HERO: the same dusk as the Afterglow page ═══════════ */
+        .sky {
+            position: relative; overflow: hidden; padding: 92px 0 150px;
+            background:
+                radial-gradient(ellipse 46% 60% at 78% 40%, rgba(255, 110, 168, 0.28), transparent 70%),
+                linear-gradient(180deg, var(--night) 0%, var(--dusk) 58%, var(--mauve) 100%);
+        }
+        .sun {
+            position: absolute; left: 78%; top: 44%; width: min(32vw, 300px); aspect-ratio: 1;
+            transform: translate(-50%, -50%); border-radius: 50%;
+            background: linear-gradient(180deg, var(--gold) 0%, var(--pink) 50%, var(--violet) 100%);
+            -webkit-mask: linear-gradient(180deg, #000 0 58%, transparent 58% 61%, #000 61% 69%, transparent 69% 73%, #000 73% 80%, transparent 80% 85%, #000 85% 91%, transparent 91%);
+            mask: linear-gradient(180deg, #000 0 58%, transparent 58% 61%, #000 61% 69%, transparent 69% 73%, #000 73% 80%, transparent 80% 85%, #000 85% 91%, transparent 91%);
+            filter: drop-shadow(0 0 36px rgba(255, 110, 168, 0.55)); opacity: 0.9;
+        }
+        .grid {
+            position: absolute; left: -20%; right: -20%; bottom: 0; height: 130px;
+            background:
+                repeating-linear-gradient(90deg, rgba(45, 226, 230, 0.35) 0 1px, transparent 1px 90px),
+                repeating-linear-gradient(180deg, rgba(45, 226, 230, 0.35) 0 1px, transparent 1px 34px);
+            transform: perspective(420px) rotateX(58deg); transform-origin: top;
+            mask-image: linear-gradient(180deg, transparent, #000 40%);
+            -webkit-mask-image: linear-gradient(180deg, transparent, #000 40%);
+        }
+        .top-links { position: absolute; top: 20px; left: 24px; right: 24px; z-index: 8; display: flex; justify-content: space-between; gap: 12px; font-weight: 600; font-size: 0.95rem; }
+        .top-links a { color: var(--ink-dim); text-decoration: none; padding: 8px 14px; border-radius: 999px; background: var(--glass); border: 1px solid var(--glass-edge); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+        .top-links a:hover { color: var(--ink); }
+        .hero { position: relative; z-index: 6; max-width: 620px; }
+        .kicker { font-weight: 600; font-size: 0.8rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--cyan); }
+        .hero h1 { font-size: clamp(2.3rem, 6.4vw, 4rem); font-weight: 800; margin-top: 8px; background: linear-gradient(90deg, var(--gold), var(--pink) 60%, #e58cff); -webkit-background-clip: text; background-clip: text; color: transparent; }
+        .hero p.sub { color: var(--ink-dim); font-size: 1.1rem; margin-top: 14px; max-width: 540px; }
+
+        /* ═══════════ THE TOOL ═══════════ */
+        .tool { position: relative; z-index: 7; margin-top: -92px; display: grid; grid-template-columns: minmax(330px, 410px) minmax(0, 1fr); gap: 20px; align-items: start; }
+        .panel { background: rgba(23, 11, 50, 0.86); border: 1px solid var(--glass-edge); border-radius: 20px; padding: 20px; box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); }
+        .panel + .panel { margin-top: 16px; }
+        .panel h2 { font-size: 0.8rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--cyan); font-weight: 650; margin-bottom: 12px; }
+        .phones { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+        button { font: inherit; color: inherit; cursor: pointer; }
+        .pick { min-height: 46px; padding: 8px 10px; border-radius: 12px; background: var(--glass); border: 1px solid var(--glass-edge); color: var(--ink-dim); font-weight: 600; font-size: 0.93rem; transition: background .15s, color .15s, border-color .15s, box-shadow .15s; }
+        .pick:hover { background: var(--glass-strong); color: var(--ink); }
+        .pick.on { color: var(--night); background: linear-gradient(90deg, var(--gold), var(--pink)); border-color: transparent; box-shadow: 0 6px 22px rgba(255, 110, 168, 0.35); }
+        .pick.wide { grid-column: 1 / -1; }
+        :focus-visible { outline: 2px solid var(--cyan); outline-offset: 2px; }
+
+        .segs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; padding: 4px; border-radius: 14px; background: rgba(0, 0, 0, 0.28); border: 1px solid var(--glass-edge); }
+        .seg { min-height: 40px; padding: 6px 4px; border: 0; border-radius: 10px; background: transparent; color: var(--ink-dim); font-weight: 600; font-size: 0.88rem; }
+        .seg:hover { color: var(--ink); }
+        .seg.on { background: var(--glass-strong); color: var(--gold); box-shadow: inset 0 0 0 1px rgba(255, 212, 92, 0.45); }
+        .note { color: var(--muted); font-size: 0.86rem; margin-top: 10px; }
+
+        form#custom { margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--glass-edge); }
+        form#custom .hint { color: var(--muted); font-size: 0.85rem; }
+        fieldset { border: 0; margin-top: 14px; min-width: 0; }
+        legend { font-weight: 650; font-size: 0.86rem; color: var(--ink); margin-bottom: 8px; padding: 0; }
+        .row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 12px; }
+        label { display: block; font-size: 0.8rem; color: var(--ink-dim); }
+        input[type=number], input[type=text] { width: 100%; margin-top: 3px; padding: 8px 10px; border: 1px solid var(--glass-edge); border-radius: 9px; background: rgba(0, 0, 0, 0.3); color: var(--ink); font: inherit; font-size: 16px; }
+        .full { display: block; margin-top: 12px; }
+
+        .panel.viewer { position: relative; padding: 0; overflow: hidden; }
+        .stage { position: relative; height: clamp(380px, 58vh, 620px); background:
+                radial-gradient(ellipse 60% 44% at 50% 42%, rgba(176, 40, 216, 0.28), transparent 72%),
+                linear-gradient(180deg, #120833, #1d0b3e 62%, #2e1054); }
+        .stage::after { content: ""; position: absolute; left: -30%; right: -30%; bottom: 0; height: 34%; pointer-events: none;
+                background:
+                  repeating-linear-gradient(90deg, rgba(45, 226, 230, 0.22) 0 1px, transparent 1px 64px),
+                  repeating-linear-gradient(180deg, rgba(45, 226, 230, 0.22) 0 1px, transparent 1px 26px);
+                transform: perspective(380px) rotateX(60deg); transform-origin: top;
+                mask-image: linear-gradient(180deg, transparent, #000 70%); -webkit-mask-image: linear-gradient(180deg, transparent, #000 70%); }
+        #view { position: absolute; inset: 0; z-index: 1; touch-action: none; }
+        #view canvas { display: block; width: 100%; height: 100%; }
+        #view-fallback { position: absolute; inset: 0; z-index: 2; display: grid; place-items: center; padding: 24px; text-align: center; color: var(--ink-dim); }
+        .stage-ctl { position: absolute; z-index: 3; top: 14px; left: 14px; right: 14px; display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; pointer-events: none; }
+        .stage-ctl > * { pointer-events: auto; }
+        .stage-tabs { display: inline-flex; gap: 2px; padding: 3px; border-radius: 999px; background: rgba(11, 6, 32, 0.66); border: 1px solid var(--glass-edge); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+        .stage-tabs button { padding: 6px 14px; border: 0; border-radius: 999px; background: transparent; color: var(--ink-dim); font-size: 0.85rem; font-weight: 600; min-height: 32px; }
+        .stage-tabs button.on { background: var(--glass-strong); color: var(--ink); }
+        .ghost-toggle { display: inline-flex; align-items: center; gap: 7px; padding: 7px 13px; border-radius: 999px; background: rgba(11, 6, 32, 0.66); border: 1px solid var(--glass-edge); color: var(--ink-dim); font-size: 0.85rem; font-weight: 600; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); cursor: pointer; }
+        .ghost-toggle input { accent-color: var(--cyan); }
+        .out { padding: 18px 20px 20px; border-top: 1px solid var(--glass-edge); }
+        .status { font-weight: 600; font-size: 0.95rem; color: var(--ink-dim); min-height: 1.5em; }
+        .status.ok { color: var(--ok); } .status.bad { color: var(--bad); } .status.busy { color: var(--gold); }
+        #messages { list-style: none; margin-top: 6px; display: grid; gap: 6px; font-size: 0.88rem; }
+        #messages:empty { display: none; }
+        #messages .err { color: var(--bad); } #messages .warn { color: var(--warn); }
+        .facts { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin-top: 14px; }
+        .fact dt { font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+        .fact dd { font-size: 0.92rem; color: var(--ink); margin-top: 2px; }
+        .dls { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+        .cta { display: inline-block; font-weight: 650; font-size: 0.98rem; padding: 12px 24px; border: 0; border-radius: 999px; color: var(--night); background: linear-gradient(90deg, var(--gold), var(--pink)); box-shadow: 0 8px 26px rgba(255, 110, 168, 0.33); text-decoration: none; transition: transform .15s ease, opacity .15s; }
+        .cta:hover:not(:disabled) { transform: translateY(-2px); }
+        .cta.alt { background: var(--glass); color: var(--ink); border: 1px solid var(--glass-edge); box-shadow: none; }
+        .cta:disabled { opacity: .42; cursor: default; }
+        @media (prefers-reduced-motion: reduce) { .cta, .pick { transition: none; } .cta:hover:not(:disabled) { transform: none; } }
+
+        /* ═══════════ HOW IT FITS ═══════════ */
+        .how { padding: 72px 0 26px; }
+        .how > .wrap > h2 { font-size: clamp(1.6rem, 3.4vw, 2.3rem); margin-bottom: 26px; }
+        .cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+        .card { padding: 22px; border-radius: 18px; background: var(--glass); border: 1px solid var(--glass-edge); }
+        .card h3 { font-size: 1.08rem; color: var(--gold); margin-bottom: 8px; }
+        .card p { color: var(--ink-dim); font-size: 0.96rem; }
+        .print { padding: 26px 0 52px; }
+        .print ul { list-style: none; display: grid; gap: 10px; max-width: 760px; }
+        .print li { padding-left: 24px; position: relative; color: var(--ink-dim); font-size: 0.97rem; }
+        .print li::before { content: ""; position: absolute; left: 0; top: 0.5em; width: 11px; height: 11px; border-radius: 50%; background: linear-gradient(135deg, var(--gold), var(--pink)); }
+        .print h2 { font-size: clamp(1.4rem, 3vw, 1.9rem); margin-bottom: 16px; }
+        .honest { margin-top: 18px; color: var(--muted); font-size: 0.9rem; max-width: 760px; }
+        footer { padding: 30px 0 44px; border-top: 1px solid rgba(255,255,255,0.08); color: var(--muted); font-size: 0.86rem; }
+        footer p + p { margin-top: 8px; }
+        footer a { color: var(--ink-dim); }
+
+        @media (max-width: 960px) {
+            .tool { grid-template-columns: minmax(0, 1fr); }
+            .sun { left: 82%; top: 26%; width: 170px; opacity: 0.55; }
+            .facts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+            .cards { grid-template-columns: minmax(0, 1fr); }
+        }
+        @media (max-width: 600px) {
+            .wrap { padding: 0 16px; }
+            .top-links { left: 16px; right: 16px; }
+            .sky { padding-top: 84px; }
+            .stage { height: 62vh; min-height: 360px; }
+            .panel { padding: 16px; }
+            .out { padding: 16px; }
+            .cta { flex: 1 1 100%; text-align: center; }
+        }
+    </style>
+    <link rel="alternate" hreflang="x-default" href="https://wemiller.com/apps/afterglow/door/">
+    <link rel="alternate" hreflang="en" href="https://wemiller.com/apps/afterglow/door/">
+    <link rel="alternate" hreflang="zh-Hans" href="https://wemiller.com/apps/afterglow/door/?lang=zh-Hans">
+    <link rel="alternate" hreflang="ja" href="https://wemiller.com/apps/afterglow/door/?lang=ja">
+    <link rel="alternate" hreflang="de" href="https://wemiller.com/apps/afterglow/door/?lang=de">
+    <link rel="alternate" hreflang="fr" href="https://wemiller.com/apps/afterglow/door/?lang=fr">
+    <link rel="alternate" hreflang="es" href="https://wemiller.com/apps/afterglow/door/?lang=es">
+    <link rel="alternate" hreflang="ko" href="https://wemiller.com/apps/afterglow/door/?lang=ko">
+    <link rel="alternate" hreflang="pt-BR" href="https://wemiller.com/apps/afterglow/door/?lang=pt-BR">
+    <link rel="alternate" hreflang="it" href="https://wemiller.com/apps/afterglow/door/?lang=it">
+    <script src="/i18n/i18n.js?v=9b769779" defer data-page="apps.afterglow.door" data-pos="bottom-right"></script>
+</head>
+<body>
+    <header class="sky">
+        <div class="sun" aria-hidden="true"></div>
+        <div class="grid" aria-hidden="true"></div>
+        <nav class="top-links" aria-label="Page">
+            <a href="../" data-i18n="afterglow.c0298e">← Afterglow</a>
+            <a href="#how" data-i18n="how-it-fits.ac42f4">How it fits ↓</a>
+        </nav>
+        <div class="wrap">
+            <div class="hero">
+                <p class="kicker" data-i18n="for-the-afterglow-viewer.a429a7">For the Afterglow viewer</p>
+                <h1 data-i18n="door-generator.303f78">Door Generator</h1>
+                <p class="sub" data-i18n="pick-your-iphone-and.a833b0">Pick your iPhone and download its door. One print in PETG, no TPU, with the camera opening and MagSafe placed for your phone.</p>
+            </div>
+        </div>
+    </header>
+
+    <main class="wrap tool">
+        <div>
+            <section class="panel" aria-labelledby="h-phone">
+                <h2 id="h-phone" data-i18n="your-iphone.ce252b">Your iPhone</h2>
+                <div class="phones" id="phones" role="radiogroup" aria-labelledby="h-phone"></div>
+                <form id="custom" hidden novalidate>
+                    <p class="hint" data-i18n="measure-your-phone-with.ca71b8">Measure your phone with calipers, or read the numbers from Apple's dimensional drawing. All sizes are in millimetres.</p>
+                    <label class="full"><span data-i18n="name-for-the-file.a556d8">Name, for the file</span><input type="text" id="f-name"></label>
+                    <fieldset>
+                        <legend><span data-i18n="phone-body.d1f36f">Phone body</span></legend>
+                        <div class="row">
+                            <label><span data-i18n="length.3bade3">Length</span><input type="number" inputmode="decimal" step="0.01" id="f-length"></label>
+                            <label><span data-i18n="width.a58ddf">Width</span><input type="number" inputmode="decimal" step="0.01" id="f-width"></label>
+                            <label><span data-i18n="thickness-without-the-camera.3d1ac1">Thickness, without the camera</span><input type="number" inputmode="decimal" step="0.01" id="f-thickness"></label>
+                            <label><span data-i18n="corner-radius.c7a86e">Corner radius</span><input type="number" inputmode="decimal" step="0.1" id="f-cornerRadius"></label>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <legend><span data-i18n="raised-camera-area-from.b90556">Raised camera area, from the back, camera end up</span></legend>
+                        <div class="row">
+                            <label><span data-i18n="from-the-top-edge.c7c161">From the top edge</span><input type="number" inputmode="decimal" step="0.01" id="f-camera-top"></label>
+                            <label><span data-i18n="from-the-left-edge.875979">From the left edge</span><input type="number" inputmode="decimal" step="0.01" id="f-camera-left"></label>
+                            <label><span data-i18n="width.a58ddf">Width</span><input type="number" inputmode="decimal" step="0.01" id="f-camera-width"></label>
+                            <label><span data-i18n="height.3f608b">Height</span><input type="number" inputmode="decimal" step="0.01" id="f-camera-height"></label>
+                            <label><span data-i18n="corner-radius.c7a86e">Corner radius</span><input type="number" inputmode="decimal" step="0.1" id="f-camera-radius"></label>
+                            <label><span data-i18n="clearance-around-it.87d113">Clearance around it</span><input type="number" inputmode="decimal" step="0.1" id="f-cameraClearance"></label>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <legend><span data-i18n="magsafe-centre-from-the.4520d7">MagSafe centre, from the back</span></legend>
+                        <div class="row">
+                            <label><span data-i18n="from-the-top-edge.c7c161">From the top edge</span><input type="number" inputmode="decimal" step="0.01" id="f-magsafe-top"></label>
+                            <label><span data-i18n="from-the-left-edge.875979">From the left edge</span><input type="number" inputmode="decimal" step="0.01" id="f-magsafe-left"></label>
+                        </div>
+                    </fieldset>
+                    <p class="note" id="limits"></p>
+                </form>
+            </section>
+            <section class="panel" aria-labelledby="h-mag">
+                <h2 id="h-mag" data-i18n="magsafe.feba19">MagSafe</h2>
+                <div class="segs" id="magsafe" role="radiogroup" aria-labelledby="h-mag">
+                    <button type="button" class="seg" data-mode="ring" role="radio" data-i18n="steel-ring.5643eb">Steel ring</button>
+                    <button type="button" class="seg" data-mode="cooler" role="radio" data-i18n="cooler.d3546e">Cooler</button>
+                    <button type="button" class="seg" data-mode="none" role="radio" data-i18n="none.6eef66">None</button>
+                </div>
+                <div id="magsafe-note">
+                    <p class="note" data-for="ring" data-i18n="a-groove-for-a.94b18d">A groove for a stick-on steel ring, centred over this phone's magnets. MagSafe accessories then hold on from outside the door.</p>
+                    <p class="note" data-for="cooler" hidden data-i18n="a-round-opening-over.491df0">A round opening over the magnets, so a magnetic cooler can touch the phone directly.</p>
+                    <p class="note" data-for="none" hidden data-i18n="a-plain-door-with.be8715">A plain door with the dot field running through the middle.</p>
+                </div>
+            </section>
+        </div>
+
+        <section class="panel viewer" aria-label="Preview and download">
+            <div class="stage">
+                <div id="view" aria-hidden="true"></div>
+                <p id="view-fallback" hidden data-i18n="the-3d-preview-needs.70028e">The 3D preview needs WebGL. You can still download your door below.</p>
+                <div class="stage-ctl">
+                    <div class="stage-tabs">
+                        <button type="button" id="view-outer" data-i18n="outside.b7efb7">Outside</button>
+                        <button type="button" id="view-inner" data-i18n="inside.8deed4">Inside</button>
+                    </div>
+                    <label class="ghost-toggle"><input type="checkbox" id="show-phone" checked> <span data-i18n="show-phone.f4d977">Show phone</span></label>
+                </div>
+            </div>
+            <div class="out">
+                <p class="status" id="status" role="status" aria-live="polite"></p>
+                <ul id="messages"></ul>
+                <dl class="facts">
+                    <div class="fact"><dt data-i18n="door-size.84235c">Door size</dt><dd id="fact-size">–</dd></div>
+                    <div class="fact"><dt data-i18n="holds-the-phone.1bc344">Holds the phone</dt><dd id="fact-hold">–</dd></div>
+                    <div class="fact"><dt data-i18n="magsafe.feba19">MagSafe</dt><dd id="fact-mag">–</dd></div>
+                    <div class="fact"><dt data-i18n="filament.99815e">Filament</dt><dd id="fact-weight">–</dd></div>
+                </dl>
+                <div class="dls">
+                    <button type="button" class="cta dl" id="dl-stl" disabled data-i18n="download-stl.1975a0">Download STL</button>
+                    <button type="button" class="cta alt dl" id="dl-3mf" disabled data-i18n="download-3mf.e53a41">Download 3MF</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <section class="how" id="how">
+        <div class="wrap">
+            <h2 data-i18n="designed-for-the-bigger.b38e1b">Designed for the bigger shell</h2>
+            <div class="cards">
+                <div class="card">
+                    <h3 data-i18n="made-for-the-afterglow.a92632">Made for the Afterglow shell</h3>
+                    <p data-i18n="these-doors-fit-the.0e35af">These doors fit the Afterglow remix, 7 mm wider and 12 mm longer than the original viewer. They use its hinge and latch, and they won't fit the original shell.</p>
+                </div>
+                <div class="card">
+                    <h3 data-i18n="no-tpu-one-print.480ccf">No TPU, one print</h3>
+                    <p data-i18n="rigid-anchors-printed-into.3747e5">Rigid anchors printed into the door locate the phone at each corner. There are no soft bumpers to print, change filament for or lose.</p>
+                </div>
+                <div class="card">
+                    <h3 data-i18n="a-front-stop-for.5299c6">A front stop for every size</h3>
+                    <p data-i18n="pro-max-phones-seat.6b4fbd">Pro Max phones seat on the shell's screen shelves. Smaller Pro phones pass inside those shelves, so their doors add four rigid clips that hold the edge of the glass.</p>
+                </div>
+                <div class="card">
+                    <h3 data-i18n="magsafe-where-the-magnets.b2a6df">MagSafe where the magnets are</h3>
+                    <p data-i18n="every-position-comes-from.632cc3">Every position comes from Apple's drawing for that phone. It isn't always the middle: on the iPhone 17 Pro and 18 Pro the magnets sit 2.7 mm toward the USB end.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="print">
+        <div class="wrap">
+            <h2 data-i18n="printing-it.caac2b">Printing it</h2>
+            <ul>
+                <li data-i18n="print-in-petg-outer.88738a">Print in PETG, outer face down, exactly as the file is oriented. No supports.</li>
+                <li data-i18n="use-a-0-2.5cd08b">Use a 0.2 mm layer or finer so the MagSafe groove comes out clean.</li>
+                <li data-i18n="hang-the-door-on.3342ac">Hang the door on the shell with its hinge pin and close it with a hair tie, as usual.</li>
+                <li data-i18n="on-a-clipped-door.c1bf71">On a clipped door, press the phone in screen up until all four clips catch. To take it out, push through the dots from the back.</li>
+            </ul>
+            <p class="honest" data-i18n-html="every-door-here-is.4ac82d">Every door here is checked against the shell's CAD for overlaps. The iPhone 18 Pro Max door shares the design that has been printed. The clips on the smaller phones haven't been printed yet, so try the fit gently on your first one. <a href="https://makerworld.com/en/models/3559894-afterglow-cardboardxr-viewer-for-iphone-18-pro-max#profileId-4073827" target="_blank" rel="noopener noreferrer">Print the shell from MakerWorld</a>.</p>
+        </div>
+    </section>
+
+    <footer>
+        <div class="wrap">
+            <p data-i18n="everything-runs-in-your.c66f5a">Everything runs in your browser. Nothing is uploaded.</p>
+            <p data-i18n-html="door-frame-from-brenpoly.3ea4f4">Door frame from <a href="https://github.com/brenpoly/CardboardXR" target="_blank" rel="noopener noreferrer">brenpoly's CardboardXR door generator</a>, Apache 2.0. The shell is a remix of brenpoly's viewer, CC BY-NC-SA. Phone dimensions from <a href="https://developer.apple.com/accessories/dimensional-drawings/" target="_blank" rel="noopener noreferrer">Apple's dimensional drawings</a>. iPhone and MagSafe are trademarks of Apple Inc. See <a href="NOTICE.md">notices</a>.</p>
+            <p data-i18n-html="2026-blaine-miller-privacy.55277c">© 2026 Blaine Miller · <a href="/privacy/">Privacy</a> · <a href="/apps/">All apps</a> · <a href="/support/">Support</a></p>
+        </div>
+    </footer>
+
+    <!-- Text the script shows. Kept in the page so it is translated with everything else. -->
+    <div id="msgs" hidden>
+        <span data-msg="customSize" data-i18n="custom-size.a68e7a">Custom size</span>
+        <span data-msg="yourPhone" data-i18n="your-phone.c503af">your phone</span>
+        <span data-msg="building" data-i18n="building-your-door.e909b1">Building your door…</span>
+        <span data-msg="ready" data-i18n="door-ready-for-name.716388">Door ready for {name}.</span>
+        <span data-msg="failed" data-i18n="something-went-wrong-while.dc2e0b">Something went wrong while building the door.</span>
+        <span data-msg="fixValues" data-i18n="fix-the-values-above.0872a2">Fix the values above to build a door.</span>
+        <span data-msg="pieces" data-i18n="part-of-this-door.08b59f">Part of this door came out in more than one piece, so it can't be printed. Check the camera and MagSafe numbers.</span>
+        <span data-msg="missing" data-i18n="fill-in-every-size.c587a7">Fill in every size to build a door.</span>
+        <span data-msg="tooWide" data-i18n="v-mm-is-too.31188d">{v} mm is too wide: this shell takes phones up to {max} mm wide.</span>
+        <span data-msg="tooLong" data-i18n="v-mm-is-too.577b7e">{v} mm is too long: this shell takes phones up to {max} mm long.</span>
+        <span data-msg="tooNarrow" data-i18n="v-mm-is-too.fe35c3">{v} mm is too narrow: the clips reach phones at least {min} mm wide.</span>
+        <span data-msg="tooShort" data-i18n="v-mm-is-too.9bc8ca">{v} mm is too short: the clips reach phones at least {min} mm long.</span>
+        <span data-msg="tooThick" data-i18n="v-mm-is-too.a817d6">{v} mm is too thick: the door takes phones up to {max} mm, without the camera.</span>
+        <span data-msg="tooThin" data-i18n="v-mm-is-too.2ab29a">{v} mm is too thin: the door takes phones at least {min} mm thick.</span>
+        <span data-msg="badCorner" data-i18n="the-corner-radius-has.008ac9">The corner radius has to be between {min} and {max} mm.</span>
+        <span data-msg="badCamera" data-i18n="check-the-camera-numbers.a2010e">Check the camera numbers: sizes must be above 0 and nothing can be negative.</span>
+        <span data-msg="cameraOff" data-i18n="the-camera-area-runs.9fe645">The camera area runs past the edge of the phone. Check its numbers.</span>
+        <span data-msg="magsafeOff" data-i18n="that-magsafe-position-runs.93a68c">That MagSafe position runs past the edge of the door.</span>
+        <span data-msg="ringDeep" data-i18n="on-a-phone-this.45fa96">On a phone this thin, the ring sits {v} mm below the door's outer face so it stays close to the magnets.</span>
+        <span data-msg="clipButtons" data-i18n="check-that-the-clips.e1739f">Check that the clips, 14 to 25 mm from each end of the phone, miss your phone's buttons.</span>
+        <span data-msg="limits" data-i18n="this-shell-takes-phones.06b9ed">This shell takes phones up to {w} × {l} mm and {t} mm thick.</span>
+        <span data-msg="holdClips" data-i18n="four-rigid-clips.2f1dae">Four rigid clips</span>
+        <span data-msg="holdShelves" data-i18n="the-shell-s-screen.be4cfb">The shell's screen shelves</span>
+        <span data-msg="magNone" data-i18n="none.6eef66">None</span>
+        <span data-msg="magCentred" data-i18n="centred-on-the-phone.186c1b">Centred on the phone</span>
+        <span data-msg="magOffset" data-i18n="v-mm-toward-the.b61f9a">{v} mm toward the {end}</span>
+        <span data-msg="endUsb" data-i18n="usb-end.11ad40">USB end</span>
+        <span data-msg="endCamera" data-i18n="camera-end.14d427">camera end</span>
+        <span data-msg="weight" data-i18n="about-v-g-of.bdd199">About {v} g of PETG</span>
+    </div>
+
+    <script type="importmap">{"imports":{"three":"./vendor/three.module.js"}}</script>
+    <script type="module" src="app.js?v=11ebac7e"></script>
+</body>
+</html>

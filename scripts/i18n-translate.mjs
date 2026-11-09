@@ -38,7 +38,7 @@ const LANGS = {
 const NEVER_TRANSLATE = [
   'Enter Space', 'Haven', 'Ari', 'Ari Helper', 'Sami', 'Pano Owl', 'Blip', 'Glint', 'Lathe',
   'Tilebreak', 'Tri-Add', 'Zap', 'Embr', 'Mi Speaks', 'Revela', 'Ridgeshot',
-  'SightQuick', 'Pinline', 'Luma Editor', 'Wise Flyer', 'DeepSi',
+  'SightQuick', 'Pinline', 'Luma Editor', 'Wise Flyer', 'DeepSi', 'Afterglow', 'MagSafe', 'PETG', 'TPU', 'STL', '3MF', 'MakerWorld', 'iPhone', 'CardboardXR',
   'Doppel', 'Time Portal', 'Space Inspector', 'Git Mirror', 'Theater',
   'rclone', 'WebDAV', 'SFTP', 'SMB', 'Samba', 'FTP', 'S3', 'FSKit',
   'Dropbox', 'Google Drive', 'OneDrive', 'pCloud', 'Box', 'Mega', 'Backblaze B2',
