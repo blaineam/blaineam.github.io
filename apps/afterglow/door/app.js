@@ -1,6 +1,6 @@
 import * as THREE from './vendor/three.module.js';
 import { OrbitControls } from './vendor/OrbitControls.js';
-import { FRAME, LIMITS, phoneOutlinePts, DESIGN } from './door.js';
+import { FRAME, LIMITS, phoneOutlinePts, DESIGN } from './door.js?v=43930d1b';
 import { PRESETS } from './presets.js';
 
 const $ = (s) => document.querySelector(s);
@@ -176,7 +176,7 @@ function initPreview() {
 }
 
 // ------------------------------------------------------------------ build
-const worker = new Worker(new URL('./worker.js', import.meta.url), { type: 'module' });
+const worker = new Worker(new URL('./worker.js?v=cdb5d36f', import.meta.url), { type: 'module' });
 let seq = 0, lastFiles = null, lastSpec = null, debounce = 0;
 const statusEl = $('#status'), msgEl = $('#messages');
 function setStatus(t, cls = '') { statusEl.textContent = t; statusEl.className = 'status ' + cls; }

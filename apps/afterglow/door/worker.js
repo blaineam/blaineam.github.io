@@ -1,7 +1,7 @@
 // Builds the door off the main thread and returns the preview mesh and the download files.
 import Module from './vendor/manifold.js';
 import { zipSync, strToU8 } from './vendor/fflate.js';
-import { buildDoor, check } from './door.js';
+import { buildDoor, check } from './door.js?v=43930d1b';
 import { toSTL } from './stl.js';
 
 // Manifold's objects live in WebAssembly memory that JavaScript's garbage collector never frees, so each door gets
