@@ -1,6 +1,6 @@
 # Blaine Miller
 
-**Software Engineer** · Apple-platform Developer · Photographer
+**Senior Software Engineer** · Apple-platform Developer · Photographer
 
 [![Website](https://img.shields.io/badge/Website-wemiller.com-blue?style=flat-square)](https://wemiller.com)
 [![Apps](https://img.shields.io/badge/Apps-20%20on%20the%20App%20Store-orange?style=flat-square)](https://wemiller.com/apps)
@@ -13,9 +13,14 @@ GitHub Pages covering my apps, photography, panoramas, books, and more.
 
 ## About
 
-I enjoy finding unique solutions with tech, and photographing the world around me.
-Most of my work lives across the Apple ecosystem — iPhone, iPad, Mac, Apple TV, and
-Apple Watch. Just imagine what we can build together!
+**I build what's missing, the way it should have been.**
+
+A social network for the people I love, with no servers and nobody watching: that's
+[Haven](https://wemiller.com/apps/haven/). Cloud storage that feels like it's on my
+device: that's [Enter Space](https://wemiller.com/apps/enter-space/). 14+ years in,
+the list keeps growing.
+
+I also photograph the night sky.
 
 ---
 
