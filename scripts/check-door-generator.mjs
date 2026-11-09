@@ -14,7 +14,7 @@ import { fileURLToPath } from 'node:url';
 const here = path.dirname(fileURLToPath(import.meta.url));
 const site = path.resolve(here, '../apps/afterglow/door');
 const { default: Module } = await import(path.join(site, 'vendor/manifold.js'));
-const { buildDoor, check, derive, phoneOutlinePts, FRAME, SHELL, DESIGN, holdsWithClips } = await import(path.join(site, 'door.js'));
+const { buildDoor, check, derive, phoneOutlinePts, FRAME, SHELL, DESIGN, LIMITS, holdsWithClips } = await import(path.join(site, 'door.js'));
 const { PRESETS } = await import(path.join(site, 'presets.js'));
 const { toSTL } = await import(path.join(site, 'stl.js'));
 
@@ -51,8 +51,19 @@ function loadSTL(M, file) {
 let failed = 0, ran = 0;
 const pass = (ok, label, detail = '') => { ran++; if (!ok) failed++; console.log(`  ${ok ? 'ok  ' : 'FAIL'} ${label}${detail ? ' — ' + detail : ''}`); };
 
-for (const preset of PRESETS) {
-  for (const mode of ['ring', 'cooler', 'none']) {
+// Phones at the generator's length limit, as a visitor would type them: a Pro Max stretched to the limit, the same
+// outline as a plain rounded rectangle, and a narrower phone that the clips hold. Ring mode only.
+const pm = PRESETS.find((p) => p.id === '18-pro-max'), pro = PRESETS.find((p) => p.id === '18-pro');
+const stretch = (p, length) => ({ ...p, id: undefined, name: `${p.name} stretched to ${length} mm`, length,
+  corner: p.corner.map(([x, y]) => [x, y + (length - p.length) / 2]), magsafe: { mode: 'ring', left: p.width / 2, top: length / 2 } });
+const LIMIT_CASES = [
+  stretch(pm, LIMITS.maxLength),
+  { ...stretch(pm, LIMITS.maxLength), name: `${LIMITS.maxLength} × ${pm.width} mm, 12 mm corners`, corner: undefined, cornerRadius: 12 },
+  stretch(pro, LIMITS.maxLength),
+];
+
+for (const preset of [...PRESETS, ...LIMIT_CASES]) {
+  for (const mode of preset.id ? ['ring', 'cooler', 'none'] : ['ring']) {
     const spec = { ...preset, magsafe: { ...preset.magsafe, mode } };
     const M = await Module(); M.setup();
     console.log(`${preset.name} · MagSafe ${mode}`);

@@ -20,6 +20,7 @@ export const SHELL = {
   bayClear: 0.228,       // the gap the printed iPhone 18 Pro Max door keeps to the bay wall
   screenZ: 8.15,         // the plane the phone's screen lands on: it fixes the lens-to-screen distance
   shelfX: 37.0,          // the screen shelves' inner edge, across, at |y| 68..72
+  shelfY: 68.0,          // where those shelves begin, along: a clip may not reach past it
   shelfSeat: 0.8,        // how far a phone must overlap that edge to seat on the shelves
   rimZ: 10.3,            // nothing may rise past here: the carriage's flange lands just above it
 };
@@ -45,14 +46,14 @@ export const DESIGN = {
   clippedLeg: 12.5, clippedRise: 4.5,
   endLeg: 14,
   // Clips sit between the camera island's corner and the first button, and the mirror of that at the USB end.
-  clip: { from: 14, to: 25, wall: 1.4, lip: 0.6, under: 0.05, top: 9.5 },
+  clip: { from: 14, to: 25, wall: 1.4, lip: 0.6, under: 0.05, top: 9.5, shelfClear: 0.5 },
   ring: { od: 58, id: 44, minDepth: 0.8, skin: 2.0, solid0: 20.5, solid1: 30.5 },  // Apple allows 2.1 mm on the back
   cooler: { d: 60, solid: 1.5 },
   dots: { pitch: 3.4, big: 2.2, small: 1.4, fade: 2.6, inset: 1.0, clearCamera: 2.6, clearEdge: 2.0 },
 };
 
 export const LIMITS = {
-  minWidth: 62, maxWidth: 78.4, minLength: 125, maxLength: 163.5,
+  minWidth: 62, maxWidth: 78.4, minLength: 125, maxLength: 165,
   minThickness: 5.5, maxThickness: 9.15, minCornerR: 4, maxCornerR: 20,
 };
 
@@ -227,7 +228,14 @@ function anchors(M, spec, d, phone, bay, zFrom) {
       : [[sx * xa, sy * ya], [sx * xa, sy * big], [sx * big, sy * big], [sx * big, sy * ya]]]);
     parts.push(M.CrossSection.intersection(band, box));
   }
-  const plan = M.CrossSection.intersection(M.CrossSection.union(parts), bay);
+  let plan = M.CrossSection.intersection(M.CrossSection.union(parts), bay);
+  // A phone longer than about 163.4 mm leaves the bay too little room for the anchors' end walls, and the bay trims
+  // them to slivers no printer can lay down. Drop everything thinner than a wall: the bay's own ends locate the phone.
+  // The 0.05 lets the Pro Max phones keep the 0.797 mm end wall the printed door has.
+  if (SHELL.bayY - SHELL.bayClear - d.L - D.gap < D.minWall - 0.05) {
+    const h = D.minWall / 2 - 0.01;
+    plan = plan.offset(-h, 'Round').offset(h, 'Round');
+  }
   return prism(M, plan, zFrom, d.zBack + rise);
 }
 
@@ -240,10 +248,11 @@ function clips(M, spec, d, zFrom) {
     [u(gap - 0.25), C.top], [u(-C.lip), z + 0.3], [u(-C.lip), z], [u(0), z], [u(gap), z - gap],
   ];
   const sec = new M.CrossSection([prof]);
-  const len = C.to - C.from;
+  // On a phone longer than about 164 mm the clip's outer end would run under the screen shelves, so it stops short.
+  const yOut = Math.min(d.L - C.from, SHELL.shelfY - C.shelfClear), yIn = d.L - C.to, len = yOut - yIn;
   let out = null;
   for (const sy of [1, -1]) {
-    const yMid = sy * (d.L - (C.from + C.to) / 2);
+    const yMid = sy * (yOut + yIn) / 2;
     const one = M.Manifold.extrude(sec, len).rotate([90, 0, 0]).translate([0, yMid + len / 2, 0]);
     for (const m of [one, one.mirror([1, 0, 0])]) out = out ? out.add(m) : m;
   }
