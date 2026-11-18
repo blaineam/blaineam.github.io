@@ -1,0 +1,1 @@
+import{t as e}from"./DJVcKmnZ.js";var t={BASE_URL:`./`,DEV:!1,MODE:`production`,PROD:!0,SSR:!1,VITE_MONKR_LEGACY_ORIGIN:`https://monkr.wemiller.com`,VITE_MONKR_MEDIA_ORIGIN:`https://monkr.wemiller.com`},n=(t.VITE_MONKR_MEDIA_ORIGIN??``).replace(/\/+$/,``);function r(t){return n?n+t:e(t)}var i=(t.VITE_MONKR_LEGACY_ORIGIN??``).replace(/\/+$/,``);export{r as n,i as t};
