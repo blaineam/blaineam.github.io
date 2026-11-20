@@ -1,0 +1,29 @@
+/* Camp 4, the Overlook */
+.overlook-private { padding: 12px 16px; border-radius: 14px; border: 1px dashed var(--wm-line); background: var(--wm-bg-2); font-size: .95rem; }
+.overlook-top { position: sticky; top: var(--wm-nav-h, 64px); z-index: 3; display: flex; align-items: flex-end; gap: 20px; margin: 4px calc(-1 * clamp(18px, 3vw, 32px)) 14px; padding: 8px clamp(18px, 3vw, 32px); background: var(--wm-surface); border-bottom: 1px solid var(--wm-line); }
+.overlook-top .meter { flex: 1; }
+.overlook-stone { scroll-margin-top: calc(var(--wm-nav-h, 64px) + 130px); }
+.overlook-cairn { display: flex; flex-direction: column-reverse; align-items: center; min-width: 110px; min-height: 30px; }
+.overlook-cairn i { display: block; height: 13px; margin-top: 3px; border-radius: 999px; background: linear-gradient(to bottom, color-mix(in srgb, var(--wm-soft) 70%, var(--wm-bg-2)), color-mix(in srgb, var(--wm-soft) 35%, var(--wm-bg-2))); animation: overlook-set .45s var(--wm-ease); }
+@keyframes overlook-set { from { transform: translateY(-18px); opacity: 0; } }
+.overlook-stones { margin: 0 0 16px; padding: 0; list-style: none; display: grid; gap: 12px; }
+.overlook-stone { padding: 16px; border-radius: 18px; border: 1px solid var(--wm-line); background: var(--wm-bg-2); }
+.overlook-stone.is-set { border-color: color-mix(in srgb, var(--wm-green, #5fd3b0) 55%, var(--wm-line)); }
+.overlook-stone__text { margin: 0 0 12px !important; font: 500 1.1rem/1.45 var(--wm-serif); color: var(--wm-ink) !important; max-width: none !important; }
+.overlook-line { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 6px; margin-bottom: 10px; }
+.overlook-line label { display: grid; justify-items: center; gap: 6px; padding: 10px 4px; border-radius: 12px; border: 1px solid var(--wm-line); background: var(--wm-surface); cursor: pointer; text-align: center; }
+.overlook-line label:has(:checked) { border-color: var(--wm-accent); background: color-mix(in srgb, var(--wm-accent) 16%, var(--wm-surface)); }
+.overlook-line label > span { margin: 0 !important; font-size: .8rem !important; font-weight: 600 !important; line-height: 1.25; color: var(--wm-soft) !important; }
+.overlook-line input { accent-color: var(--wm-accent); }
+.overlook-passages { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 8px; margin: 10px 0; }
+.overlook-passages label { display: flex; gap: 10px; align-items: flex-start; padding: 12px 14px; border-radius: 14px; border: 1px solid var(--wm-line); background: var(--wm-bg-2); cursor: pointer; }
+.overlook-passages label:has(:checked) { border-color: var(--wm-accent); background: color-mix(in srgb, var(--wm-accent) 14%, var(--wm-bg-2)); }
+.overlook-passages label > span { margin: 0 !important; display: grid; gap: 2px; }
+.overlook-passages b { font: 600 1rem var(--wm-serif); }
+.overlook-passages small { font-size: .84rem; font-weight: 500; color: var(--wm-faint); }
+.overlook-passages input { margin-top: .3em; accent-color: var(--wm-accent); }
+@media (max-width: 560px) { .overlook-line { grid-template-columns: 1fr; } .overlook-line label { min-height: 44px; align-items: center; grid-template-columns: auto 1fr; justify-items: start; text-align: left; padding: 10px 12px; } }
+@media (prefers-reduced-motion: reduce) { .overlook-cairn i { animation: none; } }
+.overlook-passages a { font-size: .84rem; font-weight: 600; color: var(--wm-accent); }
+.overlook-verse { font: 500 .98rem/1.5 var(--wm-serif); color: var(--wm-soft); quotes: "“" "”"; }
+.overlook-notice { font-size: .78rem !important; }

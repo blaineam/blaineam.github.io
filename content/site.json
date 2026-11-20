@@ -34,8 +34,8 @@
   "tints": { "haven": "#d05be0", "enter-space": "#5b8cff", "shepherd": "#45d6b5", "scripture-alone": "#7fb4ff", "ari-helper": "#9b8cff", "tile-break": "#ff7a90" },
   "_tints_help": "Glow colour of each featured card. Optional.",
 
-  "contingency": { "quietDays": 30, "publicDays": 90, "state": "normal" },
-  "_contingency_help": "How long a silence before each stage of the contingency plan. Read by scripts/contingency-watch.mjs, which only reports. state is \"normal\" or \"contingency\"; only a person ever changes it. In the contingency state the home page shows the note from content/private/contingency-note.md (git-ignored) or the CONTINGENCY_NOTE secret. Preview: node scripts/build-site.mjs --state contingency. See docs/CONTINGENCY.md.",
+  "contingency": { "ownerNudgeDays": [14, 21, 27], "quietDays": 30, "publicDays": 90, "confirmationsNeeded": 3, "reminderEveryDays": 7, "waitDays": 14, "state": "normal" },
+  "_contingency_help": "The contingency plan's calendar, in days since the last heartbeat (docs/CONTINGENCY.md). ownerNudgeDays: when the owner is asked if he is there. quietDays: when the trusted people are told (nothing public). publicDays: when they are asked to confirm. confirmationsNeeded: how many must agree. reminderEveryDays, waitDays: how often they are reminded, and how long one of them can make everyone wait. state is \"normal\" or \"contingency\"; the daily run sets it when enough people have confirmed, and any heartbeat sets it back.",
 
   "luma": { "born": "2020-10-22", "passed": "" },
   "_luma_help": "Luma's birthday. Through October her view counts down to the 22nd, then celebrates. When the day comes, set passed to that date (YYYY-MM-DD): her view becomes a memorial and the countdown stops. Preview: node scripts/build-site.mjs --luma-passed 2035-01-01. Celebrate her birthday after the fact with /?when=luma, or any day with /?v=luma&when=2027-10-22.",
@@ -112,6 +112,7 @@
     "nav.search": "Search",
     "nav.lang": "Language",
     "nav.menu": "Menu",
+    "foot.trail": "Hit the trail",
     "snd.volume": "Volume",
     "nav.sections": "Sections",
     "lb.video": "Video",

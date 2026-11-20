@@ -1,6 +1,6 @@
 /* wemiller.com — shared header and footer for every page that is not the home page.
  *
- *   <script src="/assets/shell.js?v=1e3a5e90" defer data-active="apps"></script>
+ *   <script src="/assets/shell.js?v=6c313b4d" defer data-active="apps"></script>
  *
  * data-active: apps | tools | photos | none   (which header link is the current section)
  * data-footer="off" leaves the footer out, for pages that are a full-screen tool.
@@ -100,6 +100,8 @@
       foot.appendChild(remember('shell.privacy', el('a', { href: '/privacy/' }, 'Privacy')));
       foot.appendChild(document.createTextNode(' · '));
       foot.appendChild(remember('shell.terms', el('a', { href: '/terms/' }, 'Terms')));
+      foot.appendChild(document.createTextNode(' · '));
+      foot.appendChild(remember('shell.trail', el('a', { href: '/trail/' }, 'Hit the trail')));
       document.body.appendChild(foot);
     }
     localize();

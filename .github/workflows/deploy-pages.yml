@@ -16,6 +16,7 @@ on:
       - 'apps/apps-by-blaine-miller.jpg'
       - 'apps/.poster-cache.json'
       - 'og/**'
+      - 'contingency/**'
   workflow_dispatch:
 
 permissions:
@@ -64,6 +65,9 @@ jobs:
       # photo dropped into /slides) is enough; nothing has to be built locally first. With nothing
       # to change it writes nothing.
       - name: Build the home page from /content
+        env:
+          # The note the site shows in the contingency state. Empty in normal times.
+          CONTINGENCY_NOTE: ${{ secrets.CONTINGENCY_NOTE }}
         run: node scripts/build-site.mjs
 
       # Regenerates apps/apps-by-blaine-miller.jpg, every app's

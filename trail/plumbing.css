@@ -1,0 +1,68 @@
+/* The Trail: styles for sending a run (send.js), the register and the map lights (register.js).
+ * Loaded by those modules themselves. Colours come from /assets/shell.css; no yellow or gold. */
+
+/* ---------- sending ---------- */
+.send { text-align: left; margin: 26px 0 0; max-width: 46rem; padding-top: 22px; border-top: 1px solid var(--wm-line); }
+.send h3 { margin: 0 0 .4em; }
+.send h4 { margin: 0 0 .5em; font: 650 1rem/1.4 var(--wm-sans); color: var(--wm-ink); }
+.send p { margin: 0 0 .8em; max-width: none; color: var(--wm-soft); }
+.send__truth { margin: 14px 0; padding: 14px 16px; border-radius: 14px; border: 1px solid var(--wm-line); background: var(--wm-bg-2); }
+.send__truth p:last-child { margin-bottom: 0; }
+.send__truth strong { color: var(--wm-ink); }
+.send__choices { border: 0; padding: 0; margin: 18px 0 8px; min-width: 0; }
+.send__choices legend { padding: 0; margin-bottom: 8px; font-size: .86rem; font-weight: 600; color: var(--wm-soft); }
+.send__choice { display: flex; gap: 12px; align-items: flex-start; padding: 12px 14px; margin-bottom: 8px; border-radius: 14px; border: 1px solid var(--wm-line); background: var(--wm-bg-2); }
+.send__choice:has(:checked) { border-color: var(--wm-accent); background: color-mix(in srgb, var(--wm-accent) 12%, var(--wm-bg-2)); }
+/* trail.css gives every input in .trail a full-width text-box look; a checkbox must not take it */
+.send .send__choices .send__choice input[type="checkbox"] { flex: none; width: 28px; height: 28px; min-height: 0; margin: 0; padding: 0; border: 0; border-radius: 4px; background: none; accent-color: var(--wm-accent); }
+.send__choice > div { flex: 1 1 auto; min-width: 0; }
+.send__choice label { display: block; font-weight: 650; color: var(--wm-ink); cursor: pointer; }
+.send__choice p { margin: 2px 0 0; font-size: .95rem; }
+.send__profile, .send__contact, .send__pv { margin: 14px 0; }
+.send [hidden] { display: none !important; }
+.send label { display: block; margin: 10px 0 6px; font-size: .86rem; font-weight: 600; color: var(--wm-soft); }
+.send .send__choice label { margin: 0; font-size: 1rem; color: var(--wm-ink); }
+.send input:not([type="checkbox"]), .send textarea { width: 100%; box-sizing: border-box; min-height: 48px; padding: 10px 14px; border-radius: 14px; border: 1px solid var(--wm-line); background: var(--wm-bg-2); color: var(--wm-ink); font: 500 1rem/1.5 var(--wm-sans); }
+.send textarea { font: 500 .8rem/1.45 var(--wm-mono); resize: vertical; word-break: break-all; }
+.send__bad { min-height: 0; margin: 4px 0 0 !important; font-weight: 600; color: #ef6f67 !important; }
+.send__bad:empty { display: none; }
+@media (prefers-color-scheme: light) { :root:not([data-theme="dark"]) .send__bad { color: #b3261e !important; } }
+:root[data-theme="light"] .send__bad { color: #b3261e !important; }
+.send .wm-btn[disabled] { opacity: .5; cursor: default; }
+.send__preview { margin: 0 0 8px; padding: 12px 14px; max-height: 18rem; overflow: auto; border-radius: 14px; border: 1px dashed var(--wm-line); background: var(--wm-bg-2); color: var(--wm-ink); font: 500 .95rem/1.7 var(--wm-sans); white-space: pre-wrap; word-break: break-word; }
+.send__closed { margin: 14px 0; padding: 14px 16px; border-radius: 14px; border: 1px solid var(--wm-line); background: var(--wm-surface); }
+.send__see { margin: 12px 0; }
+.send__see summary { cursor: pointer; font-weight: 600; color: var(--wm-soft); min-height: 44px; display: flex; align-items: center; }
+.send__say { min-height: 1.6em; margin: 12px 0 0 !important; font-weight: 600; color: var(--wm-ink) !important; }
+.send__say.is-good { color: var(--wm-green, #5fd3b0) !important; }
+.send .row { justify-content: flex-start; margin-left: 0; margin-right: 0; }
+.send a.wm-btn { text-decoration: none; }
+
+/* ---------- the register ---------- */
+.reg { margin: 36px 0; }
+.reg h2 { margin: 0 0 .3em; font: 500 clamp(1.5rem, 3vw, 2rem)/1.15 var(--wm-serif); color: var(--wm-ink); }
+.reg__lede, .reg__empty { color: var(--wm-soft); max-width: 44rem; margin: 0 0 14px; }
+.reg__scroll { overflow-x: auto; border: 1px solid var(--wm-line); border-radius: 18px; background: var(--wm-surface); }
+.reg__table { width: 100%; border-collapse: collapse; font-size: .95rem; }
+.reg__table th, .reg__table td { padding: 10px 14px; text-align: left; vertical-align: top; border-bottom: 1px solid var(--wm-line); color: var(--wm-soft); white-space: nowrap; }
+.reg__table tbody tr:last-child > * { border-bottom: 0; }
+.reg__table tbody th { font-weight: 500; white-space: normal; min-width: 11rem; }
+.reg__sort { all: unset; cursor: pointer; display: inline-flex; align-items: center; gap: .35em; min-height: 44px; font: 650 .8rem/1.3 var(--wm-sans); letter-spacing: .06em; text-transform: uppercase; color: var(--wm-faint); }
+.reg__sort:hover { color: var(--wm-ink); }
+.reg__sort:focus-visible { outline: 2px solid var(--wm-accent); outline-offset: 3px; border-radius: 6px; }
+.reg__sort::after { content: "↕"; opacity: .45; }
+th[aria-sort="ascending"] .reg__sort::after { content: "↑"; opacity: 1; }
+th[aria-sort="descending"] .reg__sort::after { content: "↓"; opacity: 1; }
+th[aria-sort] .reg__sort { color: var(--wm-ink); }
+.reg__name { font-weight: 650; color: var(--wm-ink); }
+.reg__checked { color: var(--wm-green, #5fd3b0); font-weight: 700; }
+.reg__line { display: block; margin-top: 2px; font-size: .9rem; color: var(--wm-soft); overflow-wrap: anywhere; }
+.reg__sub { color: var(--wm-faint); font-size: .86rem; }
+.reg .note { margin-top: 10px; max-width: 52rem; font-size: .9rem; color: var(--wm-faint); }
+.reg .sr, .send .sr { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+
+/* ---------- other hikers, as lights on the map ---------- */
+.trail-light { fill: var(--wm-ink); opacity: .75; animation: trail-light 4s ease-in-out infinite; }
+.trail-light__more { font: 600 12px var(--wm-sans); fill: var(--wm-faint); }
+@keyframes trail-light { 0%, 100% { opacity: .35; } 50% { opacity: .9; } }
+@media (prefers-reduced-motion: reduce) { .trail-light { animation: none; } }

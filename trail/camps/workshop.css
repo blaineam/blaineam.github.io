@@ -1,0 +1,202 @@
+/* Camp 2, the Workshop */
+
+/* Small print has to be readable in the morning theme too, so the faint ink and the warning
+ * colour are set again here for everything inside a workshop stage. */
+.workshop-body { --ws-warn: #ff9a80; --ws-good: var(--wm-green, #86d9a6); }
+html[data-theme="light"] .workshop-body { --wm-faint: #56614f; --ws-warn: #a3321a; --ws-good: #1f6b45; }
+@media (prefers-color-scheme: light) { html:not([data-theme="dark"]) .workshop-body { --wm-faint: #56614f; --ws-warn: #a3321a; --ws-good: #1f6b45; } }
+
+/* a pinned photograph or button needs the card to clip without becoming a scroll box */
+.stage:has(> .workshop-body) { overflow: clip; }
+
+.workshop-cap { margin: 14px 0 6px !important; font-size: .9rem; color: var(--wm-soft) !important; }
+.workshop-cap code, .workshop-fixed { font: 600 .9rem var(--wm-mono); color: var(--wm-ink); }
+.stage :is(.workshop-chip, .workshop-switch, .workshop-joint, .workshop-part, .workshop-ln, .workshop-term):focus-visible { outline: 2px solid var(--wm-accent); outline-offset: 2px; }
+.workshop-body .wm-btn[aria-disabled="true"] { opacity: .55; cursor: default; }
+.workshop-body .wm-btn[aria-disabled="true"]:active { transform: none; }
+
+/* 1: the one-liner */
+.workshop-term { margin: 0 0 12px; padding: 12px 14px; border-radius: 14px; border: 1px solid var(--wm-line); background: var(--wm-bg); color: var(--wm-ink); font: 500 .86rem/1.55 var(--wm-mono); white-space: pre-wrap; overflow-wrap: anywhere; }
+.workshop-term.is-list { white-space: pre; overflow-x: auto; }
+.workshop-term.is-stale { border-style: dashed; font-family: var(--wm-sans); color: var(--wm-soft); }
+.workshop-body > .row + .workshop-term { margin-top: 14px; }
+.workshop-cmd { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; min-height: 64px; margin: 0 0 10px; padding: 10px 12px; border-radius: 14px; border: 1px dashed var(--wm-accent); background: var(--wm-bg-2); }
+.workshop-line { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; flex: 1 1 60%; min-height: 44px; }
+.workshop-tray { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 8px; min-height: 20px; }
+.workshop-chip { display: grid; gap: 2px; align-content: center; min-height: 44px; min-width: 44px; padding: 8px 12px; border-radius: 12px; border: 1px solid var(--wm-line); background: var(--wm-bg-2); color: var(--wm-ink); text-align: left; cursor: pointer; transition: border-color .2s; }
+.workshop-chip:hover { border-color: var(--wm-accent); }
+.workshop-chip code { font: 600 .9rem var(--wm-mono); white-space: nowrap; }
+.workshop-chip small { font: 500 .76rem/1.3 var(--wm-sans); color: var(--wm-soft); }
+.workshop-chip.is-in { position: relative; margin-left: 16px; padding: 8px 10px; border-color: var(--wm-accent); background: color-mix(in srgb, var(--wm-accent) 16%, var(--wm-bg-2)); touch-action: none; cursor: grab; }
+.workshop-chip.is-in small { display: none; }
+.workshop-chip.is-in::before { content: '|'; position: absolute; left: -14px; top: 50%; transform: translateY(-50%); font: 600 .95rem var(--wm-mono); color: var(--wm-soft); }
+.workshop-line.is-dragging .workshop-chip { cursor: grabbing; }
+
+/* 2: the slow page */
+.workshop-switches { display: grid; gap: 8px; margin: 12px 0; }
+.workshop-switch { display: flex; align-items: center; gap: 12px; min-height: 48px; padding: 10px 14px; border-radius: 14px; border: 1px solid var(--wm-line); background: var(--wm-bg-2); color: var(--wm-ink); text-align: left; cursor: pointer; }
+.workshop-switch > i { flex: 0 0 44px; height: 26px; border-radius: 999px; background: var(--wm-surface-2); border: 1px solid var(--wm-faint); position: relative; transition: background-color .2s; }
+.workshop-switch > i::after { content: ''; position: absolute; top: 2px; left: 2px; width: 20px; height: 20px; border-radius: 50%; background: var(--wm-soft); transition: transform .2s var(--wm-ease), background-color .2s; }
+.workshop-switch[aria-checked="true"] { border-color: var(--wm-accent); }
+.workshop-switch[aria-checked="true"] > i { border-color: var(--wm-accent); background: color-mix(in srgb, var(--wm-accent) 45%, transparent); }
+.workshop-switch[aria-checked="true"] > i::after { transform: translateX(18px); background: var(--wm-accent); }
+.workshop-switch span { display: grid; gap: 2px; margin: 0; }
+.workshop-switch b { font-size: .98rem; }
+.workshop-switch small { font-size: .82rem; line-height: 1.35; color: var(--wm-soft); }
+.workshop-fall { --lab: 104px; position: relative; display: grid; gap: 6px; min-height: 40px; margin: 14px 0 6px; padding: 12px 12px 12px 0; border-radius: 14px; border: 1px solid var(--wm-line); background: var(--wm-bg-2); }
+.workshop-fall-empty { margin: 0 !important; padding: 0 0 0 14px; font-size: .9rem; color: var(--wm-soft) !important; }
+.workshop-bar { display: grid; grid-template-columns: var(--lab) minmax(0, 1fr); align-items: center; }
+.workshop-bar > span { padding: 0 8px 0 12px; font-size: .78rem; line-height: 1.2; color: var(--wm-soft); }
+.workshop-bar > div { position: relative; height: 14px; border-radius: 4px; background: var(--wm-surface); }
+.workshop-bar i { position: absolute; top: 0; bottom: 0; width: 0; border-radius: 4px; background: var(--wm-accent); transition: width 0s linear; }
+.workshop-bar i.is-late { background: repeating-linear-gradient(135deg, var(--wm-faint) 0 4px, transparent 4px 8px); opacity: .8; }
+.workshop-fall.is-run .workshop-bar i { width: var(--w); }
+.workshop-fall:not(.is-run) .workshop-bar i { transition: none !important; }
+.workshop-mark { position: absolute; top: 6px; bottom: 6px; left: calc(var(--lab) + (100% - var(--lab) - 12px) * var(--at)); width: 2px; background: var(--ws-good); opacity: 0; transition: opacity .3s; }
+.workshop-fall.is-run .workshop-mark { opacity: 1; }
+.workshop-read { min-height: 1.5em; margin: 0 !important; font: 600 .86rem/1.5 var(--wm-mono); color: var(--wm-ink) !important; }
+.workshop-book { margin: 0 0 16px; padding: 0; list-style: none; max-height: 190px; overflow-y: auto; border-radius: 12px; border: 1px solid var(--wm-line); }
+.workshop-book li { display: flex; justify-content: space-between; gap: 12px; padding: 7px 12px; font-size: .86rem; color: var(--wm-soft); }
+.workshop-book li.workshop-book-empty { color: var(--wm-soft); }
+.workshop-book li + li { border-top: 1px solid var(--wm-line); }
+.workshop-book b { font: 600 .86rem var(--wm-mono); white-space: nowrap; }
+
+/* 3: the plumbing: copper pipe on a wooden board */
+.workshop-how { margin: 0 0 14px; padding-left: 1.4em; max-width: 46rem; color: var(--wm-soft); font-size: .96rem; }
+.workshop-how li { margin: .25em 0; }
+.workshop-plumb { --cu: #b5653f; --cu-hi: #e39a78; --cu-lo: #7a3e26; --board: #2b1e17; --board-2: #38281f; --chalk: #f5efe3; --chalk-2: #dccbb7; display: grid; gap: 12px; scroll-margin-bottom: 104px; }
+.workshop-works { min-width: 0; }
+.workshop-parts { display: grid; gap: 8px; }
+.workshop-part { position: relative; display: grid; grid-template-columns: 48px minmax(0, 1fr); align-items: center; gap: 10px; min-height: 60px; padding: 8px 12px 8px 8px; border-radius: 14px; border: 2px solid var(--wm-line); background: var(--wm-bg-2); color: var(--wm-ink); text-align: left; cursor: pointer; transition: transform .2s var(--wm-ease), border-color .2s; }
+.workshop-part > span:nth-child(2) { display: grid; gap: 2px; }
+.workshop-part small { font-size: .82rem; line-height: 1.35; color: var(--wm-soft); }
+.workshop-part:hover { border-color: var(--wm-accent); }
+.workshop-part[aria-pressed="true"] { border-color: var(--wm-accent); background: color-mix(in srgb, var(--wm-accent) 16%, var(--wm-bg-2)); transform: translateY(-2px); box-shadow: 0 0 0 3px color-mix(in srgb, var(--wm-accent) 28%, transparent); }
+.workshop-held { display: none; position: absolute; top: -10px; right: 10px; padding: 1px 8px; border-radius: 999px; background: var(--wm-accent); color: var(--wm-accent-ink, #1d0f09); font: 700 .7rem/1.5 var(--wm-sans); font-style: normal; letter-spacing: .04em; }
+.workshop-part[aria-pressed="true"] .workshop-held { display: block; }
+.workshop-plumb.is-busy .workshop-part { opacity: .55; cursor: default; }
+.workshop-go { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; }
+.workshop-go .wm-btn { flex: none; }
+.workshop-hand { flex: 1 1 150px; margin: 0 !important; font-size: .88rem; line-height: 1.35; font-weight: 600; color: var(--wm-ink) !important; }
+
+.workshop-pipe { --wm-accent: #ff8a66; position: relative; display: grid; gap: 4px; padding: 10px; border-radius: 16px; border: 1px solid #1a110c; color: var(--chalk); scroll-margin: 150px 0 16px;
+  background: repeating-linear-gradient(0deg, transparent 0 57px, rgba(0, 0, 0, .28) 57px 58px), linear-gradient(90deg, var(--board), var(--board-2) 50%, var(--board)); }
+.workshop-heads, .workshop-node, .workshop-joint { display: grid; grid-template-columns: 48px minmax(0, 1fr) 72px; column-gap: 8px; align-items: center; }
+.workshop-heads { padding: 0 10px 0 2px; }
+.workshop-heads span { font: 600 .68rem/1.4 var(--wm-sans); letter-spacing: .06em; text-transform: uppercase; color: var(--chalk-2); }
+.workshop-node, .workshop-joint { min-height: 50px; padding: 0 8px 0 0; border-radius: 12px; border: 2px solid transparent; color: var(--chalk); font: 600 .84rem var(--wm-sans); text-align: left; }
+.workshop-node { background: rgba(255, 255, 255, .06); }
+.workshop-node .workshop-cell { grid-column: 2 / 4; }
+.workshop-joint { width: 100%; border: 2px dashed rgba(245, 239, 227, .5); background: none; cursor: pointer; }
+.workshop-joint:hover { background: rgba(255, 255, 255, .05); }
+.workshop-joint.is-fitted { border-style: solid; border-color: #ff8a66; background: rgba(255, 138, 102, .16); }
+.workshop-plumb.has-hand .workshop-joint:not(.is-fitted) { border-color: #ff8a66; animation: workshop-beckon 1s ease-in-out infinite alternate; }
+@keyframes workshop-beckon { to { background-color: rgba(255, 138, 102, .2); } }
+.workshop-plumb.is-busy .workshop-joint { cursor: default; }
+.workshop-plumb.is-busy .workshop-joint .workshop-tag { opacity: .6; }
+.workshop-art { position: relative; align-self: stretch; display: grid; place-items: center; min-height: 44px; }
+.workshop-art svg { position: relative; display: block; }
+.workshop-pipe .workshop-art::before { content: ''; position: absolute; left: calc(50% - 6px); width: 12px; top: -6px; bottom: -6px; background: linear-gradient(90deg, var(--cu-lo), var(--cu-hi) 40%, var(--cu) 70%, var(--cu-lo)); }
+.workshop-node.is-spring .workshop-art::before { top: 50%; }
+.workshop-node.is-ledger .workshop-art::before { bottom: 50%; }
+.workshop-node.is-lanes .workshop-art::before { display: none; }
+.workshop-node.is-lanes .workshop-art svg { position: absolute; top: -6px; left: 0; width: 100%; height: calc(100% + 12px); }
+.workshop-cell { display: grid; gap: 1px; min-width: 0; padding: 2px 0 4px; }
+.workshop-tag { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0 6px; font-size: .8rem; line-height: 1.3; }
+.workshop-tag b { color: var(--chalk); font-weight: 650; }
+.workshop-tag small { font-size: .76rem; font-weight: 500; color: var(--chalk-2); }
+.workshop-bay { display: block; min-height: 24px; border-radius: 7px; background: rgba(0, 0, 0, .32); box-shadow: inset 0 1px 2px rgba(0, 0, 0, .5); }
+.workshop-puddle { display: block; align-self: stretch; margin: 2px 0; min-height: 36px; border-radius: 6px; border-bottom: 2px dashed transparent; }
+.workshop-puddle.is-wet { border-bottom-color: #ff9a80; background: radial-gradient(ellipse at 50% 100%, rgba(229, 103, 79, .4), transparent 72%); }
+.workshop-node.is-lanes .workshop-bay { min-height: 50px; background: linear-gradient(rgba(0, 0, 0, .32) 0 24px, transparent 24px 26px, rgba(0, 0, 0, .32) 26px); }
+.workshop-node.is-ledger .workshop-bay { min-height: 46px; background: rgba(245, 239, 227, .14); }
+.workshop-pkts { position: absolute; inset: 0; pointer-events: none; }
+.workshop-pkts i, .workshop-key i { width: 20px; height: 20px; flex: none; display: grid; place-items: center; border-radius: 50%; background: #ff8a66; color: #1d0f09; font: 700 .72rem var(--wm-mono); font-style: normal; }
+.workshop-pkts i { position: absolute; top: 0; left: 0; transition: transform .34s var(--wm-ease), background-color .2s; }
+.workshop-pkts.is-still i { transition: none; }
+:is(.workshop-pkts, .workshop-key) i.is-ledger { background: #86d9a6; color: #05150f; }
+:is(.workshop-pkts, .workshop-key) i.is-spill { border-radius: 4px; background: #a82c1a; color: #fff; box-shadow: 0 0 0 1.5px #ffb49c; }
+:is(.workshop-pkts, .workshop-key) i.is-caught { border-radius: 4px; background: #dccbb7; color: #1d0f09; text-decoration: line-through; }
+.workshop-key { display: flex; flex-wrap: wrap; gap: 6px 16px; margin: 0; padding: 0; list-style: none; font-size: .84rem; color: var(--wm-soft); }
+.workshop-key li { display: inline-flex; align-items: center; gap: 7px; }
+
+@media (min-width: 860px) {
+  .workshop-plumb { grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); grid-template-rows: auto auto auto 1fr; column-gap: 28px; align-items: start; scroll-margin-bottom: 64px; }
+  .workshop-works { grid-column: 1; grid-row: 1 / 5; }
+  .workshop-parts, .workshop-go, .workshop-key { grid-column: 2; }
+  .workshop-key { margin-top: 6px; }
+}
+@media (max-width: 859px) {
+  /* the button rides along at the top of the screen, so the pipe is in view when it is pressed */
+  .workshop-go { position: sticky; top: calc(var(--wm-nav-h, 60px) + 6px); z-index: 4; margin: 0 -8px; padding: 8px; border-radius: 16px; border: 1px solid var(--wm-line); background: var(--wm-surface); box-shadow: var(--wm-shadow); }
+}
+
+/* 4: the photograph */
+.workshop-dating { display: grid; gap: 4px 28px; }
+.workshop-photo { max-width: 520px; margin: 0 0 12px; border-radius: 6px; padding: 8px 8px 26px; background: #f1ede6; box-shadow: var(--wm-shadow); transform: rotate(-.6deg); }
+.workshop-photo svg { display: block; width: 100%; height: auto; }
+.workshop-clues { min-width: 0; }
+.workshop-looks { margin-top: 0; }
+.workshop-looks .wm-btn[aria-pressed="true"] { border-color: var(--wm-accent); }
+.workshop-looks .wm-btn[aria-pressed="true"]::after { content: '\2713'; font-weight: 700; }
+.workshop-seen { margin: 10px 0 0; padding: 0; list-style: none; display: grid; gap: 6px; }
+.workshop-seen li { padding: 8px 12px; border-left: 3px solid var(--wm-accent); background: var(--wm-bg-2); border-radius: 0 10px 10px 0; font-size: .92rem; color: var(--wm-soft); }
+.workshop-seen li.is-again { animation: workshop-again .9s ease-out; }
+@keyframes workshop-again { from { background: color-mix(in srgb, var(--wm-accent) 35%, var(--wm-bg-2)); } }
+.workshop-almanac { margin: 12px 0 4px; padding: 4px 16px 16px; border-radius: 16px; border: 1px solid var(--wm-line); background: var(--wm-bg-2); min-width: 0; }
+.workshop-almanac .block { margin: 8px 0; }
+.workshop-almanac .block b { font-family: var(--wm-mono); color: var(--wm-ink); }
+.workshop-sun { margin: 0 !important; font-size: .95rem; font-weight: 600; color: var(--wm-ink) !important; }
+.workshop-sketch { color: var(--wm-ink); max-width: 300px; }
+.workshop-sketch svg { display: block; width: 100%; height: auto; }
+
+/* the two dials: a thumb big enough for a thumb, and a round focus ring on it */
+.workshop-body input[type="range"] { -webkit-appearance: none; appearance: none; display: block; width: 100%; height: 44px; margin: 0; padding: 0; background: transparent; cursor: pointer; touch-action: pan-y; }
+.workshop-body input[type="range"]::-webkit-slider-runnable-track { height: 8px; border-radius: 999px; background: color-mix(in srgb, var(--wm-ink) 42%, transparent); }
+.workshop-body input[type="range"]::-moz-range-track { height: 8px; border-radius: 999px; background: color-mix(in srgb, var(--wm-ink) 42%, transparent); }
+.workshop-body input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 30px; height: 30px; margin-top: -11px; border-radius: 50%; border: 3px solid var(--wm-bg-2); background: var(--wm-accent); box-shadow: 0 0 0 1px var(--wm-accent); }
+.workshop-body input[type="range"]::-moz-range-thumb { width: 24px; height: 24px; border-radius: 50%; border: 3px solid var(--wm-bg-2); background: var(--wm-accent); box-shadow: 0 0 0 1px var(--wm-accent); }
+.workshop-body input[type="range"]:focus-visible { outline: none; }
+.workshop-body input[type="range"]:focus-visible::-webkit-slider-thumb { box-shadow: 0 0 0 2px var(--wm-accent), 0 0 0 5px var(--wm-bg-2), 0 0 0 7px var(--wm-ink); }
+.workshop-body input[type="range"]:focus-visible::-moz-range-thumb { box-shadow: 0 0 0 2px var(--wm-accent), 0 0 0 5px var(--wm-bg-2), 0 0 0 7px var(--wm-ink); }
+
+@media (min-width: 860px) {
+  .workshop-dating { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: start; }
+  .workshop-photo, .workshop-clues { grid-column: 1; }
+  .workshop-almanac { grid-column: 2; grid-row: 1 / 3; margin-top: 0; }
+}
+@media (max-width: 859px) and (min-height: 600px) {
+  /* the photograph stays at the top of the screen while the dials are turned underneath it */
+  .workshop-photo { position: sticky; top: calc(var(--wm-nav-h, 60px) + 6px); z-index: 3; max-width: none; padding: 6px 6px 12px; transform: none; }
+  .workshop-photo svg { width: auto; max-width: 100%; max-height: 30vh; margin: 0 auto; }
+}
+
+/* 5: the pull request */
+.workshop-diff { margin: 12px 0 6px; padding: 4px 0 8px; border-radius: 14px; border: 1px solid var(--wm-line); background: var(--wm-bg); overflow: hidden; }
+.workshop-file { margin: 0 !important; padding: 8px 12px; font: 600 .8rem var(--wm-mono); color: var(--wm-soft) !important; border-bottom: 1px solid var(--wm-line); max-width: none !important; }
+.workshop-ln + .workshop-file { margin-top: 8px !important; border-top: 1px solid var(--wm-line); }
+.workshop-ln { display: grid; grid-template-columns: 30px minmax(0, 1fr) auto; align-items: center; width: 100%; min-height: 44px; padding: 3px 10px 3px 0; border: 0; border-left: 4px solid transparent; background: none; color: var(--wm-ink); text-align: left; cursor: pointer; }
+.workshop-ln:focus-visible { outline-offset: -2px !important; }
+.workshop-ln:hover { background: var(--wm-surface); }
+.workshop-ln span { padding-right: 8px; text-align: right; font: 500 .76rem/1.7 var(--wm-mono); color: var(--wm-soft); }
+.workshop-ln code { padding-left: 2ch; text-indent: -2ch; font: 500 .82rem/1.6 var(--wm-mono); white-space: pre-wrap; overflow-wrap: anywhere; }
+.workshop-ln[aria-pressed="true"] { border-left-color: var(--ws-warn); background: color-mix(in srgb, #e5674f 16%, transparent); }
+.workshop-ln[aria-pressed="true"]::after { content: attr(data-mark); margin-left: 8px; padding: 1px 8px; border-radius: 999px; border: 1px solid var(--ws-warn); color: var(--ws-warn); font: 700 .7rem/1.5 var(--wm-sans); }
+.workshop-marks { margin: 0 0 4px !important; font-size: .88rem; font-weight: 600; color: var(--wm-soft) !important; }
+
+@media (max-width: 480px) {
+  .workshop-fall { --lab: 84px; }
+  .workshop-ln code { font-size: .76rem; }
+  .workshop-heads, .workshop-node, .workshop-joint { grid-template-columns: 42px minmax(0, 1fr) 70px; column-gap: 6px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .workshop-chip, .workshop-part, .workshop-switch > i, .workshop-switch > i::after, .workshop-pkts i, .workshop-mark { transition: none; }
+  .workshop-part[aria-pressed="true"] { transform: none; }
+  .workshop-plumb.has-hand .workshop-joint:not(.is-fitted), .workshop-seen li.is-again { animation: none; }
+  .workshop-plumb.has-hand .workshop-joint:not(.is-fitted) { background-color: rgba(255, 138, 102, .2); }
+  .workshop-bar i { transition: none !important; }
+  .workshop-photo { transform: none; }
+}
+
+/* trail.css sizes text boxes without their padding, so they overhang the card on a phone */
+.workshop-body :is(textarea, input:not([type="radio"]):not([type="range"])) { box-sizing: border-box; }

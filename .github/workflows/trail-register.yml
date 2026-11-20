@@ -1,0 +1,81 @@
+name: Trail register
+
+# Rebuilds trail/register.json and trail/lights.json from what hikers chose to make public in
+# their trail issues. See scripts/trail-register.mjs for the rules.
+#
+# Nothing is listed until a person has read it: an issue must carry the approval label
+# (trail/config.json → moderation.approvalLabel, "trail:approved" by default), which only people
+# with write access can add. Adding or removing that label is one of the triggers below.
+#
+# This repository and its logs are public. The script reads only the public block of an issue,
+# never the sealed one, and prints counts only.
+#
+# Issue text is hostile input. Nothing from an issue is ever placed into a `run:` line here:
+# the `if:` below only compares it, and the script fetches the issues itself through the API.
+#
+# People without write access cannot label an issue, so the "trail" label alone would miss
+# almost every hiker. A trail issue is therefore recognised by the marker its body carries
+# (or its title, or the label when the owner adds it).
+
+on:
+  issues:
+    types: [opened, edited, labeled, unlabeled, reopened, deleted]
+  issue_comment:
+    types: [created, edited, deleted]      # a hiker's "remove me"
+  workflow_dispatch:
+
+permissions:
+  contents: write      # commit the two JSON files
+  issues: read
+  actions: write       # ask the Pages workflow to publish them (last step)
+
+concurrency:
+  group: trail-register
+  cancel-in-progress: false
+
+jobs:
+  register:
+    # Off until the owner turns it on: set the repository variable TRAIL_REGISTER to "on"
+    # (Settings → Secrets and variables → Actions → Variables). Until then nothing here runs.
+    if: >-
+      vars.TRAIL_REGISTER == 'on' && (github.event_name == 'workflow_dispatch' ||
+      (!github.event.issue.pull_request && (
+        contains(github.event.issue.labels.*.name, 'trail') ||
+        github.event.action == 'labeled' || github.event.action == 'unlabeled' ||
+        contains(github.event.issue.body, '<!-- trail-run v1 -->') ||
+        startsWith(github.event.issue.title, 'Trail run')
+      )))
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+      - name: Build the register from the public blocks
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: node scripts/trail-register.mjs --ci
+      - name: Commit the register if it changed
+        id: commit
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add trail/register.json trail/lights.json
+          if git diff --cached --quiet; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            git commit -m "chore(trail): update the register [skip ci]"
+            git pull --rebase origin main
+            git push
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+      # A push made with the workflow's own token does not start other workflows, so the site
+      # would not pick the new files up until the next ordinary push. Ask for a deploy.
+      - name: Publish
+        if: steps.commit.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run deploy-pages.yml --ref main

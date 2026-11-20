@@ -1,0 +1,11 @@
+{
+  "_help": "Settings for sending a finished run (trail/send.js). Until publicKey and keyId are filled in, the summit says that sending is not open yet. To fill them in: open /trail/desk/ in the browser you will read runs in, press 'Make my key', and paste the two values it shows here. publicKey is the whole JSON object it shows (kty, n, e, alg); keyId is the 32-character id beside it. repo is where runs arrive as issues, written owner/name, for example blaineam/blaineam.github.io (the register workflow reads the issues of the repository it runs in, so use this one unless you move the workflow too). email is an address for people without a GitHub account; leave it empty to offer no e-mail route. Nothing in this file is secret: a public key can only seal, never open. moderation: nothing becomes public until a person has read it. With required true (the default, also used when this block is missing) the register lists an entry only when its issue carries approvalLabel, a label that only people with write access to the repository can add; the desk page shows what is waiting. Setting required to false publishes every entry that passes the automatic checks, unread.",
+  "publicKey": null,
+  "keyId": "",
+  "repo": "",
+  "email": "",
+  "moderation": {
+    "required": true,
+    "approvalLabel": "trail:approved"
+  }
+}

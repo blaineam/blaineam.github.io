@@ -1,0 +1,26 @@
+/* Camp 5, the Summit */
+.summit-board { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr); gap: 18px; align-items: start; margin: 8px 0 16px; }
+.summit-week { margin: 10px 0 0; padding: 10px; list-style: none; display: grid; gap: 8px; min-height: 260px; align-content: start; border-radius: 16px; border: 2px dashed var(--wm-line); counter-reset: slot; }
+.summit-week:empty::before { content: "Your week is empty."; color: var(--wm-faint); font-size: .92rem; padding: 6px; }
+.summit-slot { display: flex; gap: 6px; align-items: stretch; counter-increment: slot; }
+.summit-slot::before { content: counter(slot); flex: none; width: 26px; display: grid; place-items: center; font: 600 .86rem var(--wm-mono); color: var(--wm-faint); }
+.summit-pile { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 8px; }
+.summit-card { display: grid; gap: 3px; width: 100%; padding: 12px 14px; text-align: left; border-radius: 14px; border: 1px solid var(--wm-line); background: var(--wm-bg-2); color: var(--wm-ink); font: inherit; cursor: pointer; transition: transform .25s var(--wm-ease), border-color .2s; }
+.summit-card:hover { transform: translateY(-2px); border-color: var(--wm-accent); }
+.summit-card b { font-weight: 650; }
+.summit-card span { font-size: .88rem; line-height: 1.4; color: var(--wm-soft); }
+.summit-card small { font: 500 .74rem var(--wm-mono); letter-spacing: .04em; text-transform: uppercase; color: var(--wm-faint); }
+.summit-card.is-in { flex: 1; align-content: center; border-color: color-mix(in srgb, var(--wm-green, #5fd3b0) 60%, var(--wm-line)); background: color-mix(in srgb, var(--wm-green, #5fd3b0) 12%, var(--wm-bg-2)); min-height: calc(46px * var(--n, 1)); }
+.summit-move { display: grid; gap: 4px; }
+.summit-move button { width: 44px; min-height: 44px; border-radius: 10px; border: 1px solid var(--wm-line); background: var(--wm-bg-2); color: var(--wm-ink); cursor: pointer; }
+.summit-move button:disabled { opacity: .35; cursor: default; }
+.summit-choices { display: grid; gap: 8px; margin: 12px 0; }
+.summit-choice { display: flex; gap: 12px; align-items: flex-start; padding: 14px 16px; border-radius: 16px; border: 1px solid var(--wm-line); background: var(--wm-bg-2); cursor: pointer; }
+.summit-choice:has(:checked) { border-color: var(--wm-green, #5fd3b0); background: color-mix(in srgb, var(--wm-green, #5fd3b0) 12%, var(--wm-bg-2)); }
+.summit-choice input { width: 20px; height: 20px; margin-top: 2px; accent-color: var(--wm-green, #5fd3b0); }
+.summit-choice > span { margin: 0 !important; display: grid; gap: 2px; }
+.summit-choice b { font-size: 1.02rem; }
+.summit-choice small { font-size: .9rem; font-weight: 500; color: var(--wm-soft); }
+.summit-send { margin: 14px 0; }
+@media (max-width: 720px) { .summit-board { grid-template-columns: 1fr; } }
+@media (prefers-reduced-motion: reduce) { .summit-card { transition: none; } }

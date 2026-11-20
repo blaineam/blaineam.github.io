@@ -666,7 +666,7 @@ ${site.social.map((s) => `          <li${/^(youtube|instagram|x|twitter)$/i.test
       <footer class="foot">
         <button class="foot__tm" type="button" id="tm-open" data-views="maker photo luma" aria-haspopup="dialog">${I.clock}<span data-i18n="tm.title">${esc(t('tm.title'))}</span></button>
         <button class="foot__tm" type="button" id="off-open" aria-haspopup="dialog" hidden>${I.down}<span data-i18n="off.title">${esc(t('off.title'))}</span></button>
-        <p><span>© <span id="year">${new Date().getFullYear()}</span> ${esc(site.name)}</span> · <span data-i18n="foot.made">${esc(t('foot.made'))}</span> · <a href="/privacy/">Privacy</a> · <a href="/terms/">Terms</a></p>
+        <p><span>© <span id="year">${new Date().getFullYear()}</span> ${esc(site.name)}</span> · <span data-i18n="foot.made">${esc(t('foot.made'))}</span> · <a href="/privacy/">Privacy</a> · <a href="/terms/">Terms</a><span data-views="maker photo luma"> · <a href="/trail/" data-i18n="foot.trail">${esc(t('foot.trail'))}</a></span></p>
       </footer>
     </section>
   </main>
@@ -1172,6 +1172,12 @@ for (const p of photos) {
   const label = p.title || p.alt;
   if (label) entries.push({ k: 'photo', t: label, d: p.caption, u: `/#${p.id}`, x: [p.alt, p.caption, p.tags.join(' ')].join(' ').toLowerCase(), c: p.thumb });
 }
+// The trail's guide is the real dog of the day: Luma first, then whoever is added to future.dogs.real.
+// A later dog may have its own photographs at trail/guide-<name>.webp and trail/guide-<name>-big.webp.
+write('trail/guide.json', JSON.stringify({ dogs: [{ name: 'Luma', born: site.luma.born, passed: site.luma.passed || '' }, ...(site.future?.dogs?.real || [])].map((d) => {
+  const slug = String(d.name).toLowerCase().replace(/[^a-z0-9]+/g, '-'), pic = (f) => (fs.existsSync(path.join(ROOT, 'trail', f)) ? '/trail/' + f : undefined);
+  return { name: d.name, born: d.born || '', passed: d.passed || '', photo: d.name === 'Luma' ? undefined : pic(`guide-${slug}.webp`), photoBig: d.name === 'Luma' ? undefined : pic(`guide-${slug}-big.webp`) };
+}) }, null, 1) + '\n');
 write('search-index.json', JSON.stringify(entries.map((e) => Object.fromEntries(Object.entries(e).filter(([, v]) => v)))) + '\n');
 
 /* ---------- terminal UI ---------- */
