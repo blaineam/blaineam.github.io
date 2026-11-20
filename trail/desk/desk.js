@@ -8,7 +8,7 @@
 import {
   generateKeyPair, exportPrivateKey, importPrivateKey, importPublicKey, sealRun, openRun, readEnvelope,
   readSealedBlock, readPublicBlock, inspectPublicBlock, publicPart, splitToShares, combineShares, decodeShare, CAMP_IDS, PRIVATE_CAMP, BEGIN,
-} from '../seal.js?v=047d6282';
+} from '../seal.js?v=a5c066b7';
 
 const $ = (id) => document.getElementById(id);
 function h(tag, attrs, ...kids) {
