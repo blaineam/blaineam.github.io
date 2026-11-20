@@ -101,6 +101,10 @@ them together.
    | `CONTINGENCY_MAIL` | `{"from":"Name <address>","smtp":{"host":"…","port":465,"user":"…","pass":"…"},"imap":{"host":"…","port":993,"user":"…","pass":"…"}}` |
    | `CONTINGENCY_NOTE` | The note the site shows, as plain text with blank lines between paragraphs |
 
+   The inbox is read, and so is the mailbox's Trash folder (opened read-only): a rule that
+   forwards mail on and deletes the copy leaves replies there, and they still count. Add
+   `"trash": false` inside `"imap"` to read the inbox only.
+
    Until `CONTINGENCY_KEY` is set the daily run does nothing at all.
 4. **Rehearse.** Actions → Contingency watcher → Run workflow → type `yes` for the drill. Every
    letter is sent to Blaine only, marked as a rehearsal.

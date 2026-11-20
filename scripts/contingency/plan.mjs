@@ -46,7 +46,7 @@ export function codeFor(key, cycle, personId, purpose = 'confirm') {
 const norm = (s) => String(s || '').toUpperCase().replace(/[^A-Z0-9]/g, '');
 const address = (s) => { const m = /<([^<>\s]+@[^<>\s]+)>/.exec(s || '') || /([^\s<>"']+@[^\s<>"']+)/.exec(s || ''); return m ? m[1].toLowerCase() : ''; };
 
-export const emptyState = () => ({ v: 1, cycle: '', sent: {}, confirms: {}, waitUntil: '', waitBy: '', told: false, asked: false, flipped: false, lastUid: 0 });
+export const emptyState = () => ({ v: 1, cycle: '', sent: {}, confirms: {}, waitUntil: '', waitBy: '', told: false, asked: false, flipped: false, lastUid: 0, seen: {} });
 
 /**
  * One day's decision.
@@ -68,7 +68,9 @@ export function step(state, { today, last, cfg, people = [], owner = {}, replies
   const reachable = people.filter((p) => p.email);
   let site = null;
 
-  for (const r of replies) s.lastUid = Math.max(s.lastUid, r.uid || 0);
+  // what has been read: the inbox by lastUid, any other folder (the Trash) by its own number in seen
+  s.seen = { ...(state && state.seen) };
+  for (const r of replies) { if (r.box) s.seen[r.box] = Math.max(s.seen[r.box] || 0, r.uid || 0); else s.lastUid = Math.max(s.lastUid, r.uid || 0); }
 
   // ---- a heartbeat: everything returns to normal, and whoever was told hears that too ----
   if (stage === 'normal' || stage === 'unknown') {
@@ -76,11 +78,11 @@ export function step(state, { today, last, cfg, people = [], owner = {}, replies
     if (!soon) {
       if (s.told || s.asked || s.flipped) for (const p of reachable) mail(p, 'all-clear');
       if (s.flipped) site = 'normal';
-      return { state: { ...emptyState(), lastUid: s.lastUid }, outbox, site, stage, days };
+      return { state: { ...emptyState(), lastUid: s.lastUid, seen: s.seen }, outbox, site, stage, days };
     }
   }
   // a new silence starts a new cycle: old codes and confirmations no longer count
-  if (s.cycle !== last) { Object.assign(s, emptyState(), { cycle: last, lastUid: s.lastUid }); }
+  if (s.cycle !== last) { Object.assign(s, emptyState(), { cycle: last, lastUid: s.lastUid, seen: s.seen }); }
 
   // ---- what people wrote back ----
   for (const r of replies) {

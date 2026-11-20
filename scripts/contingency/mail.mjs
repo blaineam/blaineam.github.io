@@ -1,7 +1,8 @@
 /* Contingency plan: sending e-mail and reading replies, with no dependencies.
  *
  *   send(smtp, { from, to, subject, text, replyTo })   one plain-text message over SMTP
- *   inbox(imap, sinceUid, from, { query, bytes })     (query: extra IMAP search terms; bytes: how much of each body to read)
+ *   inbox(imap, sinceUid, from, { query, bytes, seen })   (query: extra IMAP search terms; bytes: how much of each body to read;
+ *                                                       seen: { folder: uid } already read in the Trash folder, which is read too)
  *   inbox(imap, sinceUid, from)                        → [{ uid, from, subject, text }] newer than sinceUid, from those addresses
  *
  * smtp / imap: { host, port, user, pass, secure }. secure defaults to true (TLS from the first
@@ -69,7 +70,7 @@ export async function send(smtp, { from, to, subject, text, replyTo }) {
 /* ---------- IMAP ---------- */
 /** Only messages from the given addresses are looked at at all (when a list is given), and never
  *  more than the newest 200: the rest of the mailbox is none of this plan's business. */
-export async function inbox(imap, sinceUid = 0, from = [], { query = '', bytes = 20000 } = {}) {
+export async function inbox(imap, sinceUid = 0, from = [], { query = '', bytes = 20000, seen = {} } = {}) {
   const sock = await open(imap), rd = reader(sock);
   let n = 0;
   // A command is finished at its tagged line; literals ({123}\r\n + 123 bytes) are skipped whole.
@@ -94,20 +95,43 @@ export async function inbox(imap, sinceUid = 0, from = [], { query = '', bytes =
   try {
     await rd.until((buf) => { const e = buf.indexOf('\r\n'); return e < 0 ? -1 : e + 2; });         // greeting
     await cmd(`LOGIN ${quote(imap.user)} ${quote(imap.pass)}`);
-    await cmd(`SELECT ${imap.box || 'INBOX'}`);
     const who = from.filter((a) => /^[^\s"\\]+@[^\s"\\]+$/.test(a)).map((a) => `FROM ${quote(a)}`);
     const filter = who.length ? ' ' + who.slice(0, -1).map((f) => `OR ${f}`).concat(who.slice(-1)).join(' ') : '';
-    const found = (await cmd(`UID SEARCH UID ${sinceUid + 1}:*${filter}${query ? ' ' + query : ''}`)).toString('latin1');
-    const uids = ((/\* SEARCH([^\r\n]*)/.exec(found) || [])[1] || '').trim().split(/\s+/).filter(Boolean).map(Number).filter((u) => u > sinceUid).sort((a, b) => a - b).slice(-200);
-    for (const uid of uids) {
-      const raw = await cmd(`UID FETCH ${uid} (BODY.PEEK[HEADER.FIELDS (FROM SUBJECT)] BODY.PEEK[TEXT]<0.${bytes}>)`);
-      const parts = []; let i = 0;
-      while (i < raw.length) { const eol = raw.indexOf('\r\n', i); if (eol < 0) break; const lit = /\{(\d+)\}$/.exec(raw.toString('latin1', i, eol)); if (lit) { parts.push(raw.subarray(eol + 2, eol + 2 + Number(lit[1]))); i = eol + 2 + Number(lit[1]); } else i = eol + 2; }
-      const head = (parts[0] || Buffer.alloc(0)).toString('utf8').replace(/\r\n[ \t]+/g, ' ');
-      out.push({ uid, from: (/^From:\s*(.*)$/im.exec(head) || [])[1] || '', subject: (/^Subject:\s*(.*)$/im.exec(head) || [])[1] || '', text: readable(parts[1] || Buffer.alloc(0)) });
+    // the mailbox that is open: what is newer than `since`, newest 200 at most
+    const read = async (since, box) => {
+      const found = (await cmd(`UID SEARCH UID ${since + 1}:*${filter}${query ? ' ' + query : ''}`)).toString('latin1');
+      const uids = ((/\* SEARCH([^\r\n]*)/.exec(found) || [])[1] || '').trim().split(/\s+/).filter(Boolean).map(Number).filter((u) => u > since).sort((a, b) => a - b).slice(-200);
+      for (const uid of uids) {
+        const raw = await cmd(`UID FETCH ${uid} (BODY.PEEK[HEADER.FIELDS (FROM SUBJECT)] BODY.PEEK[TEXT]<0.${bytes}>)`);
+        const parts = []; let i = 0;
+        while (i < raw.length) { const eol = raw.indexOf('\r\n', i); if (eol < 0) break; const lit = /\{(\d+)\}$/.exec(raw.toString('latin1', i, eol)); if (lit) { parts.push(raw.subarray(eol + 2, eol + 2 + Number(lit[1]))); i = eol + 2 + Number(lit[1]); } else i = eol + 2; }
+        const head = (parts[0] || Buffer.alloc(0)).toString('utf8').replace(/\r\n[ \t]+/g, ' ');
+        out.push({ uid, ...(box ? { box } : {}), from: (/^From:\s*(.*)$/im.exec(head) || [])[1] || '', subject: (/^Subject:\s*(.*)$/im.exec(head) || [])[1] || '', text: readable(parts[1] || Buffer.alloc(0)) });
+      }
+    };
+    await cmd(`SELECT ${imap.box || 'INBOX'}`);
+    await read(sinceUid);
+    // Mail that a forwarding rule has already moved to the bin is still mail that arrived: the
+    // server's own Trash folder is read too (found by its \Trash mark, whatever it is called),
+    // opened read-only. Its messages carry `box`, and their numbers are a series of their own.
+    if (imap.trash !== false) {
+      try {
+        const boxes = Array.isArray(imap.boxes) ? imap.boxes : trashIn((await cmd('LIST "" "*"')).toString('latin1'));
+        for (const box of boxes.slice(0, 3)) { await cmd(`EXAMINE ${quote(box)}`); await read(Number(seen[box]) || 0, box); }
+      } catch (e) { /* no such folder, or not allowed: the inbox was read, which is what there is */ }
     }
     await cmd('LOGOUT').catch(() => {});
   } finally { sock.destroy(); }
+  return out;
+}
+
+/** The names of the folders a LIST answer marks as \Trash. */
+export function trashIn(list) {
+  const out = [];
+  for (const line of String(list).split('\r\n')) {
+    const m = /^\* LIST \(([^)]*)\) (?:"[^"]*"|NIL) (?:"((?:[^"\\]|\\.)*)"|(\S+))\s*$/.exec(line);
+    if (m && /\\Trash\b/i.test(m[1])) out.push(m[2] !== undefined ? m[2].replace(/\\(.)/g, '$1') : m[3]);
+  }
   return out;
 }
 

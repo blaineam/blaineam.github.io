@@ -14,7 +14,8 @@
  *   - copy anything else from the message. Not the sender's address, name, subject or signature:
  *     an issue is public. The sender is represented only by a tag (a keyed hash of their address)
  *     so that the register can tell two senders apart and one sender's newest run replaces the old.
- *   - change the mailbox. Messages are read, not marked, moved or deleted. What has been filed is
+ *   - change the mailbox. Messages are read, not marked, moved or deleted. The Trash folder is read
+ *     as well as the inbox, because a rule that forwards mail on and deletes the copy leaves runs there. What has been filed is
  *     known from the issues themselves (each carries the run's own fingerprint).
  *   - print anything but counts. This repository's logs are public.
  *

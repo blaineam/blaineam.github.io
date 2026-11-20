@@ -83,7 +83,7 @@ async function main() {
   let state = emptyState();
   if (fs.existsSync(STATE)) { try { state = unseal(fs.readFileSync(STATE, 'utf8'), key); } catch (e) { throw new Error('The remembered state could not be opened with CONTINGENCY_KEY'); } }
   let replies = [], mailDown = false;
-  if (mail && mail.imap) { try { replies = await inbox(mail.imap, state.lastUid || 0, [who.owner.email, ...who.people.map((p) => p.email)].filter(Boolean)); } catch (e) { mailDown = true; } }
+  if (mail && mail.imap) { try { replies = await inbox(mail.imap, state.lastUid || 0, [who.owner.email, ...who.people.map((p) => p.email)].filter(Boolean), { seen: state.seen || {} }); } catch (e) { mailDown = true; } }
   const r = step(state, { today, last, cfg, people: who.people, owner: who.owner, replies, key });
 
   let failed = 0;
@@ -93,7 +93,7 @@ async function main() {
     try { await send(mail.smtp, { from: mail.from, to: m.to, subject: l.subject, text: l.text }); } catch (e) { failed++; }
   }
   // If the letters could not go out, do not remember having sent them: tomorrow tries again.
-  const keep = failed ? { ...state, lastUid: state.lastUid } : r.state;
+  const keep = failed ? { ...state } : r.state;
   fs.mkdirSync(path.dirname(STATE), { recursive: true });
   fs.writeFileSync(STATE, seal(keep, key));
   if (r.site && !failed) { const text = fs.readFileSync(SITE, 'utf8'), out = setSiteState(text, r.site, today); if (out) fs.writeFileSync(SITE, out); }

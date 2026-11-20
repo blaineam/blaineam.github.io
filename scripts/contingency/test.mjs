@@ -4,7 +4,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import net from 'node:net';
 import { step, emptyState, stageFor, codeFor, addDays, letter, LETTERS, DEFAULTS } from './plan.mjs';
-import { send, inbox, readable } from './mail.mjs';
+import { send, inbox, readable, trashIn } from './mail.mjs';
 import { seal, unseal, setSiteState } from './notify.mjs';
 
 const key = 'test-key', owner = { name: 'Blaine', email: 'owner@example.test' };
@@ -150,13 +150,17 @@ function fakeSmtp(got) {
     });
   });
 }
-function fakeImap(messages) {
+function fakeImap(inboxMail, trash = null) {
   return net.createServer((s) => {
+    let messages = inboxMail;
     s.write('* OK ready\r\n');
     s.on('data', (d) => {
       for (const line of d.toString().split('\r\n').filter(Boolean)) {
         const [tag, ...rest] = line.split(' '), cmd = rest.join(' ');
-        if (/^UID SEARCH/.test(cmd)) s.write(`* SEARCH ${messages.map((m) => m.uid).join(' ')}\r\n${tag} OK done\r\n`);
+        if (/^LIST/.test(cmd)) s.write(`* LIST (\\HasNoChildren) "/" "INBOX"\r\n${trash ? '* LIST (\\HasNoChildren \\Trash) "/" "[Gmail]/Trash"\r\n' : ''}${tag} OK done\r\n`);
+        else if (/^EXAMINE "\[Gmail\]\/Trash"/.test(cmd)) { messages = trash; s.write(`${tag} OK done\r\n`); }
+        else if (/^UID SEARCH/.test(cmd)) { const since = Number(/UID (\d+):/.exec(cmd)[1]); s.write(`* SEARCH ${messages.filter((m) => m.uid >= since).map((m) => m.uid).join(' ')}\r\n${tag} OK done\r\n`); }
+        else if (false) s.write(`* SEARCH ${messages.map((m) => m.uid).join(' ')}\r\n${tag} OK done\r\n`);
         else if (/^UID FETCH/.test(cmd)) {
           const m = messages.find((x) => x.uid === Number(cmd.split(' ')[2])), head = `From: ${m.from}\r\nSubject: Re: hello\r\n\r\n`;
           s.write(`* 1 FETCH (UID ${m.uid} BODY[HEADER.FIELDS (FROM SUBJECT)] {${Buffer.byteLength(head)}}\r\n${head} BODY[TEXT]<0> {${Buffer.byteLength(m.body)}}\r\n${m.body})\r\n${tag} OK done\r\n`);
@@ -192,4 +196,23 @@ test('replies are read from the mailbox, newer ones only, however the mail app e
   for (let d = 0; d <= 90; d++) state = step(state, { today: addDays(last, d), last, cfg, people, owner, key }).state;
   const r = step(state, { today: addDays(last, 91), last, cfg, people, owner, replies: mail, key });
   assert.deepEqual(Object.keys(r.state.confirms), ['a']); assert.equal(r.state.lastUid, 9);
+});
+
+test('a reply that a forwarding rule already moved to the Trash still counts, once', async () => {
+  const last = '2026-01-01', wait = codeFor(key, last, 'a', 'wait');
+  const server = fakeImap([{ uid: 3, from: 'Someone <j@example.test>', body: 'hello' }], [{ uid: 2, from: 'Austin <a@example.test>', body: `Hold on.\r\n\r\n${wait}\r\n` }]), port = await listen(server);
+  const imap = { host: '127.0.0.1', port, user: 'u', pass: 'p', secure: false };
+  assert.deepEqual(trashIn('* LIST (\\HasNoChildren) "/" "INBOX"\r\n* LIST (\\Trash \\HasNoChildren) "/" "[Gmail]/Papelera"\r\n* LIST (\\Trash) "." Deleted\r\nc3 OK'), ['[Gmail]/Papelera', 'Deleted']);
+  const mail = await inbox(imap, 0, []);
+  assert.deepEqual(mail.map((m) => [m.uid, m.box || '']), [[3, ''], [2, '[Gmail]/Trash']]);
+  let state = emptyState();
+  for (let d = 0; d <= 31; d++) state = step(state, { today: addDays(last, d), last, cfg, people, owner, key }).state;
+  const r = step(state, { today: addDays(last, 32), last, cfg, people, owner, replies: mail, key });
+  assert.equal(r.state.waitBy, 'a'); assert.equal(r.state.lastUid, 3); assert.deepEqual(r.state.seen, { '[Gmail]/Trash': 2 });
+  // the next day the same message is not read again, so nobody is told twice
+  const again = await inbox(imap, r.state.lastUid, [], { seen: r.state.seen });
+  assert.equal(again.length, 0);
+  assert.deepEqual(step(r.state, { today: addDays(last, 33), last, cfg, people, owner, replies: again, key }).state.seen, { '[Gmail]/Trash': 2 });
+  assert.equal((await inbox({ ...imap, trash: false }, 0, [])).length, 1);
+  server.close();
 });
