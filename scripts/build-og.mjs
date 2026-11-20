@@ -27,7 +27,7 @@ const host = site.origin.replace(/^https?:\/\//, '');
 const W = 1200, H = 630;
 
 // id → what it says and what is behind it: a photograph, or a drawing made here ('map' is the
-// Work view's contour map, blue or green; 'jigsaw', 'vr', 'speed' and 'space' are below).
+// Work view's contour map, blue or green; 'jigsaw', 'vr', 'speed', 'space' and 'trail' are below).
 const POSTERS = [
   { id: 'home', title: site.name, sub: 'Senior software engineer. Photographer. Building what’s missing.', bg: 'slides/bmp-21.webp' },
   { id: 'work', title: site.name, sub: 'Senior Software Engineer: real-time data platforms, infrastructure and 25+ shipped apps.', bg: 'map' },
@@ -37,6 +37,7 @@ const POSTERS = [
   { id: 'panos', title: 'Panoramas', sub: 'Step inside the photograph and look around.', bg: 'slides/bmp-73.webp' },
   { id: 'puzzles', title: 'Puzzles', sub: 'Any photograph here, cut into a jigsaw.', bg: 'jigsaw', photo: 'slides/bmp-26.webp' },
   { id: 'xr', title: 'In VR', sub: 'The gallery, the panoramas and the apps, around you.', bg: 'vr', photos: ['slides/bmp-17.webp', 'slides/bmp-9.webp', 'slides/bmp-68.webp'] },
+  { id: 'trail', title: 'The Trail', sub: 'Five camps, one summit, and a dog who knows the way.', bg: 'trail', photo: 'trail/luma.webp', tone: 'ember' },
   { id: 'speedtest', title: 'Speed test', sub: 'How fast is this connection, really?', bg: 'speed' },
   { id: 'privacy', title: 'Privacy', sub: 'What this site and these apps do with your data.', bg: 'map', tone: 'green' },
   { id: 'terms', title: 'Terms', sub: 'The plain terms for this site and these apps.', bg: 'map', tone: 'green' },
@@ -170,8 +171,43 @@ function spaceArt() {
   </svg>`;
 }
 
+// The Trail: dusk in the hills, a dotted trail from the trailhead up to a flagged summit, a camp
+// with a lit window at each stop, and the guide waiting on the path.
+function trailArt(photo) {
+  const PX = 1000, top = Math.round(400 - 44 * (0.55 * Math.sin(PX / W * 5 + 2) + 0.3 * Math.sin(PX / W * 11 + 0.6) + 0.15 * Math.sin(PX / W * 23)) - 196);      // where the summit is
+  const r = rng(77), ridge = (base, amp, a, b, peak) => { let d = `M0 ${H}L0 ${base}`; for (let x = 0; x <= W; x += 24) { let y = base - amp * (0.55 * Math.sin(x / W * 5 + a) + 0.3 * Math.sin(x / W * 11 + b) + 0.15 * Math.sin(x / W * 23)); if (peak) y -= peak.h * Math.max(0, 1 - Math.abs(x - peak.x) / peak.w) ** 1.6; d += `L${x} ${y.toFixed(1)}`; } return d + `L${W} ${H}Z`; };
+  const pine = (x, y, k, fill) => `<path fill="${fill}" d="M${x} ${y - 30 * k}l${9 * k} ${13 * k}h${-5 * k}l${8 * k} ${11 * k}h${-9 * k}v${6 * k}h${-6 * k}v${-6 * k}h${-9 * k}l${8 * k} ${-11 * k}h${-5 * k}z"/>`;
+  let far = '', near = '', flies = '';
+  for (let i = 0; i < 46; i++) { const x = 380 + r() * 820; if (Math.abs(x - PX) < 120) continue; far += pine(x.toFixed(0), (372 - 40 * Math.sin(x / W * 5 + 2) + r() * 26).toFixed(0), 0.8 + r() * 0.8, '#15302a'); }
+  for (let i = 0; i < 34; i++) { const x = r() * W; near += pine(x.toFixed(0), (590 + r() * 50).toFixed(0), 1.8 + r() * 1.8, '#081410'); }
+  for (let i = 0; i < 16; i++) flies += `<circle cx="${(420 + r() * 760).toFixed(0)}" cy="${(330 + r() * 240).toFixed(0)}" r="${(1.6 + r() * 1.8).toFixed(1)}" fill="#ffd9c2" opacity="${(0.35 + r() * 0.5).toFixed(2)}"/>`;
+  // the camps along the trail: [x, y, kind]
+  const camps = [[452, 548, 'post'], [612, 470, 'hut'], [770, 438, 'tent'], [900, 350, 'cairn'], [PX, top, 'flag']];
+  const draw = ([x, y, kind]) => `<g transform="translate(${x} ${y})"><circle r="46" fill="#ff8a66" opacity=".2" filter="url(#tglow)"/>${
+    kind === 'post' ? '<rect x="-3" y="-44" width="6" height="46" fill="#3d2a1e"/><path d="M3-42h34l9 9-9 9H3z" fill="#8a5a3c"/>'
+    : kind === 'hut' ? '<path d="M-26 2v-26l26-18 26 18V2z" fill="#8a5a3c"/><path d="M-32-22 0-45l32 23-5 5-27-19-27 19z" fill="#3d2a1e"/><rect x="-8" y="-18" width="16" height="14" rx="2" fill="#ffb08f"/>'
+    : kind === 'tent' ? '<path d="M-30 2 0-44 30 2z" fill="#8a5a3c"/><path d="M-9 2 0-16 9 2z" fill="#ffb08f"/>'
+    : kind === 'cairn' ? '<g fill="#aab3ad"><ellipse cy="-3" rx="24" ry="8"/><ellipse cy="-15" rx="17" ry="7"/><ellipse cy="-26" rx="11" ry="5.5"/><ellipse cy="-35" rx="6.5" ry="4"/></g>'
+    : '<rect x="-2.5" y="-58" width="5" height="60" fill="#1c1410"/><path d="M2.5-58l36 12-36 12z" fill="#ff8a66"/>'}</g>`;
+  return `<svg viewBox="0 0 ${W} ${H}" width="${W}" height="${H}"><defs>
+    <linearGradient id="tsky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0a0f26"/><stop offset=".45" stop-color="#2a2452"/><stop offset=".78" stop-color="#7c3f55"/><stop offset="1" stop-color="#c8603f"/></linearGradient>
+    <filter id="tglow" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="14"/></filter>
+    <clipPath id="tluma"><circle r="34"/></clipPath></defs>
+    <rect width="${W}" height="${H}" fill="url(#tsky)"/>${stars(170, 31, W, 330)}
+    <circle cx="700" cy="104" r="34" fill="#f4efe6"/><circle cx="700" cy="104" r="70" fill="#f4efe6" opacity=".1"/>
+    <path d="${ridge(330, 52, 1.2, 4.1)}" fill="#33305a"/>
+    <path d="${ridge(400, 44, 2, 0.6, { x: PX, w: 330, h: 196 })}" fill="#1b3a33"/>
+    <path d="M${PX} ${top}l36 44-18-8-11 16-14-17-20 10z" fill="#eef2f0"/>${far}
+    <path d="${ridge(540, 30, 3.3, 5.2)}" fill="#0d211b"/>
+    <path d="M452 548C520 560 560 500 612 470S700 462 770 438 850 380 900 350 955 ${top + 90} ${PX} ${top + 2}" fill="none" stroke="#f6ead4" stroke-width="5" stroke-dasharray="1 15" stroke-linecap="round"/>
+    ${camps.map(draw).join('')}
+    ${near}${flies}
+    <g transform="translate(846 404)"><circle r="46" fill="#ff8a66" opacity=".35" filter="url(#tglow)"/><circle r="40" fill="#f6ead4"/><image href="file://${at(photo)}" x="-34" y="-34" width="68" height="68" clip-path="url(#tluma)" preserveAspectRatio="xMidYMid slice"/></g>
+  </svg>`;
+}
+
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;');
-const DRAWN = ['map', 'jigsaw', 'vr', 'speed', 'space'];
+const DRAWN = ['map', 'jigsaw', 'vr', 'speed', 'space', 'trail'];
 const page = (p, n) => `<!doctype html><html lang="en"><meta charset="utf-8"><style>
   @font-face { font-family: Hand; src: url("file://${at('blaine.ttf')}"); }
   * { box-sizing: border-box; margin: 0; }
@@ -180,15 +216,15 @@ const page = (p, n) => `<!doctype html><html lang="en"><meta charset="utf-8"><st
   .bg { position: absolute; inset: 0; ${p.bg === 'map' ? `background: radial-gradient(90% 120% at 82% 8%, ${p.tone === 'green' ? '#12503f 0%, #0a211c 46%' : '#173a73 0%, #0a1730 46%'}, #05080f 100%);` : DRAWN.includes(p.bg) ? 'background: #05080f;' : `background: url("file://${at(p.bg)}") center / cover;`} }
   .bg svg { position: absolute; inset: 0; }
   .bg.map svg { -webkit-mask-image: radial-gradient(95% 110% at 85% 10%, #000 0%, rgba(0,0,0,.6) 45%, transparent 82%); }
-  .shade { position: absolute; inset: 0; background: ${p.bg === 'map' || p.bg === 'vr' ? 'none' : p.bg === 'speed' || p.bg === 'space' ? 'linear-gradient(to right, rgba(5,8,15,.82) 0%, rgba(5,8,15,.5) 36%, rgba(5,8,15,0) 62%)' : 'linear-gradient(to top, rgba(4,7,13,.92) 0%, rgba(4,7,13,.62) 38%, rgba(4,7,13,.12) 72%), linear-gradient(to right, rgba(4,7,13,.5), transparent 60%)'}; }
-  .rule { position: absolute; left: 72px; bottom: 72px; width: 5px; height: ${p.sub ? 232 : 170}px; border-radius: 3px; background: linear-gradient(${p.tone === 'green' ? '#5fd3b0, #8fe0a8' : '#6cb6ff, #5fd3b0'}); }
+  .shade { position: absolute; inset: 0; background: ${p.bg === 'map' || p.bg === 'vr' ? 'none' : p.bg === 'trail' ? 'linear-gradient(to right, rgba(6,10,14,.9) 0%, rgba(6,10,14,.62) 30%, rgba(6,10,14,0) 58%), linear-gradient(to top, rgba(6,10,14,.55) 0%, rgba(6,10,14,0) 40%)' : p.bg === 'speed' || p.bg === 'space' ? 'linear-gradient(to right, rgba(5,8,15,.82) 0%, rgba(5,8,15,.5) 36%, rgba(5,8,15,0) 62%)' : 'linear-gradient(to top, rgba(4,7,13,.92) 0%, rgba(4,7,13,.62) 38%, rgba(4,7,13,.12) 72%), linear-gradient(to right, rgba(4,7,13,.5), transparent 60%)'}; }
+  .rule { position: absolute; left: 72px; bottom: 72px; width: 5px; height: ${p.sub ? 232 : 170}px; border-radius: 3px; background: linear-gradient(${p.tone === 'green' ? '#5fd3b0, #8fe0a8' : p.tone === 'ember' ? '#ff8a66, #86d9a6' : '#6cb6ff, #5fd3b0'}); }
   .copy { position: absolute; left: 102px; right: 96px; bottom: 66px; }
-  .eye { font: 600 22px/1 ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", "DejaVu Sans Mono", monospace; letter-spacing: .16em; text-transform: uppercase; color: ${p.tone === 'green' ? '#9fe3d0' : '#9cc8ff'}; }
+  .eye { font: 600 22px/1 ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", "DejaVu Sans Mono", monospace; letter-spacing: .16em; text-transform: uppercase; color: ${p.tone === 'green' ? '#9fe3d0' : p.tone === 'ember' ? '#ffc2a8' : '#9cc8ff'}; }
   h1 { margin-top: 22px; font: 500 ${p.title.length > 12 ? 104 : 124}px/1 ui-serif, "New York", "Iowan Old Style", Palatino, Georgia, "Noto Serif", "Liberation Serif", "DejaVu Serif", serif; letter-spacing: -.025em; }
   p { margin-top: 22px; max-width: 880px; font-size: 34px; line-height: 1.3; color: rgba(255,255,255,.86); text-wrap: balance; }
   .sign { position: absolute; right: 64px; top: 46px; font: 400 54px/1 Hand, cursive; color: rgba(255,255,255,.9); transform: rotate(-3deg); }
 </style><body>
-  <div class="bg ${p.bg === 'map' ? 'map' : ''}">${p.bg === 'map' ? contours(W, H, 6, 40 + n * 37, 12 + n * 23, p.tone === 'green' ? '#5fd3b0' : '#6cb6ff') : p.bg === 'jigsaw' ? jigsaw(p.photo) : p.bg === 'vr' ? vrScene(p.photos) : p.bg === 'speed' ? speedArt() : p.bg === 'space' ? spaceArt() : ''}</div><div class="shade"></div>
+  <div class="bg ${p.bg === 'map' ? 'map' : ''}">${p.bg === 'map' ? contours(W, H, 6, 40 + n * 37, 12 + n * 23, p.tone === 'green' ? '#5fd3b0' : '#6cb6ff') : p.bg === 'jigsaw' ? jigsaw(p.photo) : p.bg === 'vr' ? vrScene(p.photos) : p.bg === 'speed' ? speedArt() : p.bg === 'space' ? spaceArt() : p.bg === 'trail' ? trailArt(p.photo) : ''}</div><div class="shade"></div>
   ${p.title === site.name ? '' : `<div class="sign">${esc(site.name)}</div>`}
   <div class="rule"></div>
   <div class="copy"><div class="eye">${esc(host)}</div><h1>${esc(p.title)}</h1>${p.sub ? `<p>${esc(p.sub)}</p>` : ''}</div>

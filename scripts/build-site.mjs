@@ -1663,7 +1663,7 @@ if (exists('README.md')) {
 if (exists('sitemap.xml')) {
   const map = read('sitemap.xml');
   let next = map;
-  for (const page of ['/resume/', '/xr/']) {
+  for (const page of ['/resume/', '/xr/', '/trail/']) {
     const loc = `${site.origin}${page}`;
     if (exists(page.slice(1) + 'index.html') && !next.includes(`<loc>${loc}</loc>`)) next = next.replace('</urlset>', `  <url>\n    <loc>${loc}</loc>\n    <changefreq>monthly</changefreq>\n  </url>\n</urlset>`);
   }

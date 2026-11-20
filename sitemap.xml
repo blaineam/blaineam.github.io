@@ -132,4 +132,8 @@
     <loc>https://wemiller.com/xr/</loc>
     <changefreq>monthly</changefreq>
   </url>
+  <url>
+    <loc>https://wemiller.com/trail/</loc>
+    <changefreq>monthly</changefreq>
+  </url>
 </urlset>
