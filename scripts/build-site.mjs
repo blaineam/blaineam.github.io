@@ -274,7 +274,8 @@ if (siteState === 'contingency') {
   const raw = process.env.CONTINGENCY_NOTE || (exists('content/private/contingency-note.md') ? read('content/private/contingency-note.md') : '');
   if (!raw.trim()) throw new Error('contingency.state is "contingency" but there is no note: add content/private/contingency-note.md or the CONTINGENCY_NOTE secret.');
   noteHtml = raw.trim().split(/\n\s*\n/).map((para) => {
-    const text = esc(para.replace(/\s*\n\s*/g, ' ')).replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+    const text = esc(para.replace(/\s*\n\s*/g, ' ')).replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+      .replace(/\[([^\]\n]+)\]\((\/[^)\s]*|https:\/\/[^)\s]+)\)/g, '<a href="$2">$1</a>');   // [words](/page/) or an https address
     return /^#+\s/.test(para) ? `<h2>${text.replace(/^#+\s*/, '')}</h2>` : `<p>${text}</p>`;
   }).join('\n          ');
 }

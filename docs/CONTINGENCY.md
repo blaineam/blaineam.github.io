@@ -99,7 +99,7 @@ them together.
    | `CONTINGENCY_KEY` | A long random string. `openssl rand -hex 32` |
    | `CONTINGENCY_PEOPLE` | `{"owner":{"name":"…","email":"…"},"people":[{"id":"a","name":"…","email":"…"}, …]}` |
    | `CONTINGENCY_MAIL` | `{"from":"Name <address>","smtp":{"host":"…","port":465,"user":"…","pass":"…"},"imap":{"host":"…","port":993,"user":"…","pass":"…"}}` |
-   | `CONTINGENCY_NOTE` | The note the site shows, as plain text with blank lines between paragraphs |
+   | `CONTINGENCY_NOTE` | The note the site shows, as plain text with blank lines between paragraphs. `**bold**` and `[words](/page/)` links work |
 
    The inbox is read, and so is the mailbox's Trash folder (opened read-only): a rule that
    forwards mail on and deletes the copy leaves replies there, and they still count. Add
