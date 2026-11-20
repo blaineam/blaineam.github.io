@@ -93,6 +93,12 @@ jobs:
       # refreshed here rather than by whoever last edited a page.
       # Scripts and stylesheets too (they share the CDN's year-long max-age), and the mirrored app
       # sites as well — their sources are stamped upstream, so this is normally a no-op for them.
+      # The trail's modules load each other, and the CDN keeps scripts for a year, so their
+      # imports carry one shared version stamp. This must run before the pages are re-stamped,
+      # because it changes trail.js.
+      - name: Stamp the trail's own imports
+        run: node scripts/trail-stamp.mjs
+
       - name: Re-stamp image, script and stylesheet cache busters
         run: python3 scripts/cache-bust.py --mirrored
 

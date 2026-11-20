@@ -32,7 +32,7 @@ function resolve() {
 /** The hiker's language, e.g. 'en' or 'pt-BR'. Use it as the locale for dates and numbers. */
 export const lang = resolve();
 /** The trail guide: { name, photo, photoBig }. */
-export const guide = { name: 'Luma', photo: new URL('./luma.webp', import.meta.url).pathname, photoBig: new URL('./luma-stump.webp', import.meta.url).pathname };
+export const guide = { name: 'Luma', photo: new URL('./luma.webp', import.meta.url).pathname + '?v=2', photoBig: new URL('./luma-stump.webp', import.meta.url).pathname + '?v=2' };
 let dict = null;
 
 export function t(text, vars) {
@@ -42,12 +42,12 @@ export function t(text, vars) {
 
 /** Load the dictionary and the guide. Never throws: the trail falls back to English and to Luma. */
 export async function loadWords() {
-  const jobs = [fetch(new URL('./guide.json', import.meta.url)).then((r) => (r.ok ? r.json() : null)).then((g) => {
+  const jobs = [fetch(new URL('./guide.json?v=047d6282', import.meta.url)).then((r) => (r.ok ? r.json() : null)).then((g) => {
     const today = new Date().toISOString().slice(0, 10), dogs = ((g && g.dogs) || []).filter((d) => d && d.name && (!d.born || d.born <= today));
     const here = dogs.filter((d) => !d.passed || d.passed > today).pop() || dogs.pop();      // the youngest still here; else the last one, remembered
     if (here) Object.assign(guide, { name: String(here.name).slice(0, 40) }, here.photo ? { photo: here.photo } : null, here.photoBig ? { photoBig: here.photoBig } : null);
   }).catch(() => {})];
-  if (lang !== 'en') jobs.push(fetch(`/i18n/trail.${lang}.json`).then((r) => (r.ok ? r.json() : null)).then((d) => { dict = d; }).catch(() => {}));
+  if (lang !== 'en') jobs.push(fetch(`/i18n/trail.${lang}.json?v=047d6282`).then((r) => (r.ok ? r.json() : null)).then((d) => { dict = d; }).catch(() => {}));
   await Promise.all(jobs);
   // The site's language switcher changes the page frame in place; the trail is drawn by code, so it starts the page again in the new language (the run is saved).
   document.addEventListener('i18n:applied', (e) => { if (e.detail && e.detail.lang && e.detail.lang !== lang) location.reload(); });
