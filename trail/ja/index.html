@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ja" data-lang="ja">
+<head>
+  <meta charset="utf-8">
+  <title>トレイル · wemiller.com</title>
+  <meta name="description" content="五つのキャンプをめぐる歩き旅のアドベンチャーです。パズルを解き、選択をして、一日の終わりには焚き火を囲みます。案内役はとてもいい子の犬です。無料、9言語対応、インストール不要です。">
+  <link rel="canonical" href="https://wemiller.com/trail/ja/">
+  <link rel="alternate" hreflang="x-default" href="https://wemiller.com/trail/">
+  <link rel="alternate" hreflang="en" href="https://wemiller.com/trail/">
+  <link rel="alternate" hreflang="zh-Hans" href="https://wemiller.com/trail/zh-Hans/">
+  <link rel="alternate" hreflang="ja" href="https://wemiller.com/trail/ja/">
+  <link rel="alternate" hreflang="de" href="https://wemiller.com/trail/de/">
+  <link rel="alternate" hreflang="fr" href="https://wemiller.com/trail/fr/">
+  <link rel="alternate" hreflang="es" href="https://wemiller.com/trail/es/">
+  <link rel="alternate" hreflang="ko" href="https://wemiller.com/trail/ko/">
+  <link rel="alternate" hreflang="pt-BR" href="https://wemiller.com/trail/pt-BR/">
+  <link rel="alternate" hreflang="it" href="https://wemiller.com/trail/it/">
+  <meta property="og:site_name" content="Blaine Miller">
+  <meta property="og:title" content="トレイル：五つのキャンプ、ひとつの山頂">
+  <meta property="og:description" content="どのキャンプにもパズルと選択、そして焚き火があります。案内役はとてもいい子の犬です。無料で、9か国語に対応しています。">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="ja_JP">
+  <meta property="og:url" content="https://wemiller.com/trail/ja/">
+  <meta property="og:image" content="https://wemiller.com/og/trail.jpg?v=82804685">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="満月の下、点線の道が明かりの灯る四つのキャンプを過ぎて旗の立つ山頂へと続き、道の上で白い犬が待っている。">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="トレイル：五つのキャンプ、ひとつの山頂">
+  <meta name="twitter:description" content="どのキャンプにもパズルと選択、そして焚き火があります。案内役はとてもいい子の犬です。無料で、9か国語に対応しています。">
+  <meta name="twitter:image" content="https://wemiller.com/og/trail.jpg?v=82804685">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"トレイル","url":"https://wemiller.com/trail/ja/","description":"五つのキャンプをめぐる歩き旅のアドベンチャーです。パズルを解き、選択をして、一日の終わりには焚き火を囲みます。案内役はとてもいい子の犬です。無料、9言語対応、インストール不要です。","applicationCategory":"GameApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","inLanguage":"ja","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"image":"https://wemiller.com/og/trail.jpg","author":{"@type":"Person","name":"Blaine Miller","url":"https://wemiller.com/"}}</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="dark light">
+  <link rel="icon" type="image/jpeg" href="/assets/avatar.jpg?v=78b5b49b">
+  <link rel="stylesheet" href="/assets/shell.css?v=81bd006b">
+  <script src="/assets/shell.js?v=6f5789f6" defer data-active="work"></script>
+  <script src="/i18n/i18n.js?v=3ef767c6" defer data-page="trail" data-pos="bottom-right"></script>
+  <link rel="stylesheet" href="/trail/trail.css?v=a3319023">
+  <script type="module" src="/trail/trail.js?v=dcee5164"></script>
+</head>
+<body class="wm trail-page" data-time="night">
+  <main id="main">
+  <div class="tr-hero">
+    <svg class="tr-map" id="map" viewBox="0 0 1000 420" preserveAspectRatio="xMidYMax slice" role="img" aria-labelledby="map-t"></svg>
+    <div class="tr-hero__copy wm-wrap">
+      <p class="wm-eyebrow" data-i18n="hero.eyebrow">トレイル</p>
+      <h1 data-i18n="hero.h1">五つのキャンプ。ひとつの山頂。</h1>
+    </div>
+  </div>
+
+  <div class="wm-wrap trail">
+    <!-- Sentences that name the trail guide are written by engine.js (start), in the hiker's language; what is here is only a stand-in until then. -->
+    <p class="trail__lede" id="lede">Lace up. There is a trail through these hills with a puzzle or two at every camp and a fire at the end of each day. Nobody is marking you, and the trail guide knows the way.</p>
+    <h2 class="sr" data-i18n="map.h">いま山道のどこにいるか</h2>
+    <ol class="map__legend" id="map-legend"></ol>
+
+    <!-- signing in at the trailhead -->
+    <section class="card" id="sign" aria-labelledby="sign-h">
+      <span class="sign__luma" id="sign-luma" aria-hidden="true"></span>
+      <h2 id="sign-h" data-i18n="sign.h">登山口のノートに記名する</h2>
+      <p id="sign-p">The trail guide is already waiting by the signpost. Write a trail name in the book to be taken up. The name decides which trail you get: the maps, the numbers and the nights are yours and nobody else's.</p>
+      <form id="sign-form" class="row">
+        <label class="grow"><span data-i18n="sign.label">トレイルネーム</span><input id="handle" maxlength="24" autocomplete="off" spellcheck="false" required placeholder="What should the trail guide call you?"></label>
+        <button class="wm-btn" type="submit" data-i18n="sign.go">歩きはじめる</button>
+      </form>
+      <p class="say" id="sign-say" aria-live="polite"></p>
+    </section>
+
+    <div id="camp" hidden>
+      <div class="camp__head">
+        <p class="wm-eyebrow" id="camp-eyebrow"></p>
+        <h2 id="camp-name"></h2>
+        <p id="camp-intro"></p>
+        <ol class="steps" id="steps"></ol>
+        <p class="resume" id="resume" hidden><button class="wm-btn wm-btn--line" type="button" id="resume-go">Back to where I had got to</button></p>
+      </div>
+
+      <!-- the stage being played: a camp module fills this -->
+      <div id="stage"></div>
+
+      <!-- a camp finished -->
+      <section class="card stage done" id="s-done" aria-labelledby="done-h" hidden>
+        <div class="patch" aria-hidden="true">
+          <svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="56" fill="none" stroke="currentColor" stroke-width="3" stroke-dasharray="3 5"/><circle cx="60" cy="60" r="46" class="patch__in"/><path d="M26 82 48 46l12 16 10-12 24 32z" class="patch__hill"/><path d="M60 30v22M60 30l14 6-14 6" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h3 id="done-h">Patch earned</h3>
+        <p id="done-line"></p>
+        <dl class="tally" id="tally"></dl>
+        <div id="done-extra"></div>
+        <p class="note" id="done-note"></p>
+        <div class="row">
+          <button class="wm-btn" type="button" id="onward" hidden></button>
+          <button class="wm-btn wm-btn--line" type="button" id="export" data-i18n="done.export">この記録をファイルに保存</button>
+          <button class="wm-btn wm-btn--line" type="button" id="again" data-i18n="done.again">別の人としてはじめからやり直す</button>
+        </div>
+      </section>
+
+      <!-- the trail guide: the heading, the button's words and the close label are set by engine.js with the guide's name -->
+      <aside class="luma" id="luma" aria-labelledby="luma-h">
+        <h3 id="luma-h" class="sr">The trail guide</h3>
+        <button type="button" class="luma__btn" id="luma-ask" aria-expanded="false"><span id="luma-face" aria-hidden="true"></span><span id="luma-ask-label">Ask the guide</span></button>
+        <div class="luma__say" id="luma-say" hidden><p id="luma-text" aria-live="polite"></p><button type="button" id="luma-hush" class="luma__hush" aria-label="Close the hint">×</button></div>
+      </aside>
+    </div>
+    <!-- the trail register: people who chose to sign it -->
+    <div id="register"></div>
+  </div>
+  </main>
+</body>
+</html>

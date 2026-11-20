@@ -26,7 +26,8 @@
  * missing for the language, the element stays English. og:image is never
  * touched. See docs/app-page-design.md.
  *
- * Language resolution: ?lang= URL param → localStorage → navigator.language,
+ * Language resolution: ?lang= URL param → <html data-lang> (a page written in one
+ * language) → localStorage → navigator.language,
  * falling back to English. An explicit choice (param or switcher) persists.
  *
  * The script tag configures the page:
@@ -114,6 +115,10 @@
       try { localStorage.setItem(STORE_KEY, fromParam); } catch (e) {}
       return fromParam;
     }
+    // A page written in one language (<html data-lang="de">) is that language, whatever was
+    // chosen elsewhere; only an explicit ?lang= outranks it.
+    var fixed = normalize(document.documentElement.getAttribute('data-lang'));
+    if (fixed) return fixed;
     var stored = null;
     try { stored = localStorage.getItem(STORE_KEY); } catch (e) {}
     var fromStore = normalize(stored);
@@ -268,7 +273,8 @@
     // expanded on the newly chosen language (it collapses on mouse-leave).
     try { sessionStorage.setItem(SWITCHED_KEY, '1'); } catch (e) {}
     var url = new URL(window.location.href);
-    if (lang === 'en') url.searchParams.delete('lang');
+    // On a page written in one language, English has to be asked for like any other.
+    if (lang === 'en' && !document.documentElement.getAttribute('data-lang')) url.searchParams.delete('lang');
     else url.searchParams.set('lang', lang);
     // Full reload: restores baked-in English cleanly and re-runs
     // document.write-driven content in the new language.

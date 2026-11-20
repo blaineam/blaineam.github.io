@@ -102,6 +102,11 @@ jobs:
       - name: Re-stamp image, script and stylesheet cache busters
         run: python3 scripts/cache-bust.py --mirrored
 
+      # The trail has one page per language, so crawlers and link previews that do not run scripts
+      # see translated words. They are copies of trail/index.html, so this runs after the re-stamp.
+      - name: Write the trail's language pages
+        run: node scripts/trail-pages.mjs
+
       # Store-native campaign parameters on every App Store / Google Play / Microsoft Store link
       # (`ct=wm-<page>` and the provider token from scripts/store-links.json; Play's `referrer`;
       # Microsoft's `cid`), so the store consoles report which page sent each visitor. The mirrored

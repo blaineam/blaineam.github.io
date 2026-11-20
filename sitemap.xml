@@ -136,4 +136,36 @@
     <loc>https://wemiller.com/trail/</loc>
     <changefreq>monthly</changefreq>
   </url>
+  <url>
+    <loc>https://wemiller.com/trail/zh-Hans/</loc>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://wemiller.com/trail/ja/</loc>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://wemiller.com/trail/de/</loc>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://wemiller.com/trail/fr/</loc>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://wemiller.com/trail/es/</loc>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://wemiller.com/trail/ko/</loc>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://wemiller.com/trail/pt-BR/</loc>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://wemiller.com/trail/it/</loc>
+    <changefreq>monthly</changefreq>
+  </url>
 </urlset>

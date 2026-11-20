@@ -93,3 +93,11 @@ Rules every stage holds to:
 
 `camps/trailhead.js` is the worked example: a canvas puzzle, a puzzle using the site's sky
 module, a balance with an adversarial crate, a decision and a campfire question.
+
+## A page per language
+
+`trail/<lang>/index.html` (German at `/trail/de/`, and so on) are written by
+`node scripts/trail-pages.mjs` from `trail/index.html` and the dictionaries: the same page with its
+title, description, share card and structured data already translated, for crawlers and link
+previews that do not run scripts. Never edit them by hand. The share card's words are the
+`_og.title`, `_og.description` and `_og.alt` keys. The deploy rewrites the pages after re-stamping.
