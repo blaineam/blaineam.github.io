@@ -44,6 +44,15 @@ const POSTERS = [
   { id: '404', title: 'Not found', sub: 'That page drifted off somewhere.', bg: 'space' },
 ];
 
+// The trail has a page per language (scripts/trail-pages.mjs), and each has its own poster:
+// og/trail-<lang>.jpg, with the trail's name and tagline from that language's dictionary.
+// These are drawn where the fonts are (a Mac has every script; see the deploy for the runner).
+const TRAIL_LANGS = ['zh-Hans', 'ja', 'de', 'fr', 'es', 'ko', 'pt-BR', 'it'];
+for (const l of TRAIL_LANGS) {
+  const d = JSON.parse(fs.readFileSync(at(`i18n/trail.${l}.json`), 'utf8'));
+  if (d['hero.eyebrow'] && d['_og.tagline']) POSTERS.push({ id: `trail-${l}`, title: d['hero.eyebrow'], sub: d['_og.tagline'], bg: 'trail', photo: 'trail/luma.webp', tone: 'ember', lang: l });
+}
+
 /* ---------- the contour map: the same terrain as the Work view's hero ---------- */
 function contours(w, h, cell = 6, ox = 40, oy = 12, ink = '#6cb6ff') {
   const GX = [], GY = [];
@@ -208,7 +217,7 @@ function trailArt(photo) {
 
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;');
 const DRAWN = ['map', 'jigsaw', 'vr', 'speed', 'space', 'trail'];
-const page = (p, n) => `<!doctype html><html lang="en"><meta charset="utf-8"><style>
+const page = (p, n) => `<!doctype html><html lang="${p.lang || 'en'}"><meta charset="utf-8"><style>
   @font-face { font-family: Hand; src: url("file://${at('blaine.ttf')}"); }
   * { box-sizing: border-box; margin: 0; }
   html, body { width: ${W}px; height: ${H}px; overflow: hidden; background: #05080f; color: #fff; -webkit-font-smoothing: antialiased; }

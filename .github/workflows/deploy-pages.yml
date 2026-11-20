@@ -84,8 +84,12 @@ jobs:
       # VR, speed test, privacy, terms, 404) in /og. Each is redrawn only when its recipe or its
       # photograph changed (og/.hashes.json), using the Chrome that ships on the runner, so with
       # nothing changed this writes nothing.
+      # The trail's posters come in nine languages. The runner has no Chinese, Japanese or Korean
+      # fonts, so they are fetched first, but only when something is actually going to be redrawn.
       - name: Draw Open Graph posters for the site's own pages
-        run: node scripts/build-og.mjs
+        run: |
+          node scripts/build-og.mjs --check || { sudo apt-get update -qq && sudo apt-get install -y -qq fonts-noto-cjk; }
+          node scripts/build-og.mjs
 
       # The posters have just been rewritten, so any `?v=` stamp pointing at one is now stale —
       # and og:image is exactly where that matters, since a scraper caches the first fetch of a

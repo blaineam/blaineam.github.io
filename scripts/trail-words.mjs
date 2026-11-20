@@ -42,7 +42,7 @@ for (const file of files) {
 }
 
 // page keys: whatever trail/index.html asks for
-const html = fs.readFileSync(path.join(TRAIL, 'index.html'), 'utf8'), pageKeys = new Set(['_title', '_meta.description', '_og.title', '_og.description', '_og.alt']);      // _og.*: the share card, used by scripts/trail-pages.mjs
+const html = fs.readFileSync(path.join(TRAIL, 'index.html'), 'utf8'), pageKeys = new Set(['_title', '_meta.description', '_og.title', '_og.description', '_og.alt', '_og.tagline']);      // _og.*: the share card (scripts/trail-pages.mjs) and the poster's tagline (scripts/build-og.mjs)
 for (const m of html.matchAll(/data-i18n(?:-html)?="([^"]+)"/g)) pageKeys.add(m[1]);
 for (const m of html.matchAll(/data-i18n-attr="([^"]+)"/g)) for (const pair of m[1].split(';')) { const k = pair.split(':')[1]; if (k) pageKeys.add(k.trim()); }
 

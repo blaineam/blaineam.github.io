@@ -1,7 +1,7 @@
 /* The Trail: what it looks like. The hills, the pines, the camps on the map, the small scene at
  * the top of each stage, the campfire, and Luma. All drawn as inline SVG, coloured by CSS
  * variables so the same drawing is morning, dusk or night (see trail.css: body[data-time]). */
-import { t, guide } from './words.js?v=14a60c19';
+import { t, guide } from './words.js?v=d7f2dad4';
 
 const rnd = (seed) => () => { seed = (seed + 0x6d2b79f5) | 0; let t = Math.imul(seed ^ (seed >>> 15), 1 | seed); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
 const f = (n) => Math.round(n * 10) / 10;

@@ -17,6 +17,7 @@
  */
 import fs from 'node:fs';
 import path from 'node:path';
+import crypto from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -57,6 +58,13 @@ for (const l of LANGS) {
   h = meta(h, 'property', 'og:description', w('_og.description'));
   h = meta(h, 'property', 'og:image:alt', w('_og.alt'));
   h = meta(h, 'property', 'og:url', urlOf(l));
+  // this language's poster, if one has been drawn (scripts/build-og.mjs), stamped by its bytes like scripts/cache-bust.py does
+  const poster = path.join(ROOT, 'og', `trail-${l}.jpg`);
+  if (fs.existsSync(poster)) {
+    const src = `${ORIGIN}/og/trail-${l}.jpg?v=${crypto.createHash('sha1').update(fs.readFileSync(poster)).digest('hex').slice(0, 8)}`;
+    h = meta(h, 'property', 'og:image', src); h = meta(h, 'name', 'twitter:image', src);
+    h = swap(h, /("image":")[^"]*(")/, `$1${ORIGIN}/og/trail-${l}.jpg$2`, 'the structured data image');
+  }
   h = meta(h, 'property', 'og:locale', OG_LOCALE[l]);
   h = meta(h, 'name', 'twitter:title', w('_og.title'));
   h = meta(h, 'name', 'twitter:description', w('_og.description'));

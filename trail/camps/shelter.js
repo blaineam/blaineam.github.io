@@ -4,11 +4,11 @@
  *
  * Almost nothing in this camp is scored. What the hiker wrote, marked and arranged is kept
  * as it was, to be read later by people. */
-import { h } from '../engine.js?v=14a60c19';
-import { t } from '../words.js?v=14a60c19';
-import { decisionStage, fireStage, useCss } from './common.js?v=14a60c19';
+import { h } from '../engine.js?v=d7f2dad4';
+import { t } from '../words.js?v=d7f2dad4';
+import { decisionStage, fireStage, useCss } from './common.js?v=d7f2dad4';
 
-useCss(new URL('./shelter.css?v=14a60c19', import.meta.url));
+useCss(new URL('./shelter.css?v=d7f2dad4', import.meta.url));
 
 const pick = (r, a) => a[Math.floor(r() * a.length)];
 const shuffle = (r, a) => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(r() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
