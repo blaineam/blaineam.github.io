@@ -32,6 +32,15 @@ pages per language.
   `?lang=<code>` variants plus `x-default`. No new URLs exist, so
   `sitemap.xml` is unchanged.
 
+## The home page is generated
+
+`index.html` and `i18n/index.en.json` are written by `node scripts/build-site.mjs` from
+`content/` (strings live in `content/site.json` → `strings`, project copy in
+`content/projects.json`). Do not run `scripts/i18n-tag.py index` on it or edit its dictionary by
+hand: change the content and rebuild. The build lists any key a language is missing; fill those
+with `node scripts/i18n-translate.mjs index`. The timeline keeps its `tl.<slug>.date` /
+`tl.<slug>.desc` keys, so existing translations carry over.
+
 ## Page coverage
 
 Localized (all 8 languages): `index.html` (including the JS-built projects
@@ -40,6 +49,13 @@ timeline — its `document.write` template stamps `tl.<slug>.date` /
 for: aperion, ari-helper, deepsi, embr, enter-space, luma-editor, mi-speaks,
 pano-owl, pinline, revela, ridgeshot, sami, sightquick, tilebreak, tri-add,
 wise-flyer, zap.
+
+Also localized: `books/`, `puzzles/`, `speedtest/`, `privacy/`, `terms/`, `404.html` and
+`dotfiles/` (registered in `scripts/i18n-tag.py`). Text their scripts write lives in a hidden
+`<div id="msgs">` of `data-msg` spans, tagged like any other copy; the script reads it at render
+time and redraws on `i18n:applied`. The shared header/footer from `assets/shell.js` uses one small
+dictionary, `i18n/shell.<lang>.json` (keys `shell.*`, English in `shell.js` and
+`i18n/shell.en.json`), which shell.js loads itself on any page that runs `/i18n/i18n.js`.
 
 ## Excluded: blip, glint, haven (mirror-synced — do NOT edit here)
 

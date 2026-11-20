@@ -1,0 +1,20 @@
+{
+  "_meta.description": "Blaine Millerによるワイドなパノラマ写真と360°写真。写真を開くと、パンやズームをしながら周囲を見渡せます。",
+  "_title": "Blaine Miller 写真 – パノラマギャラリー",
+  "head.eyebrow": "写真",
+  "head.intro": "Blaine Millerによる没入感あふれるパノラマ写真",
+  "head.title": "パノラマギャラリー",
+  "pv.alt360": "360°写真 {n}",
+  "pv.altPano": "パノラマ写真 {n}",
+  "pv.close": "閉じる",
+  "pv.dialog": "パノラマ",
+  "pv.failed": "このパノラマを読み込めませんでした。",
+  "pv.hintLook": "ドラッグで見回す。ピンチまたはスクロールでズーム。",
+  "pv.hintPan": "ドラッグで移動。ピンチまたはスクロールでズーム。",
+  "pv.next": "次のパノラマ",
+  "pv.prev": "前のパノラマ",
+  "pv.title360": "360°写真",
+  "pv.titlePano": "パノラマ写真",
+  "pv.zoomIn": "拡大",
+  "pv.zoomOut": "縮小"
+}

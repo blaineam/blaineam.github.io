@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Step inside · Blaine Miller's portfolio in VR</title>
+  <meta name="description" content="Browse Blaine Miller's photographs, 360° panoramas, apps and work history as a space you stand inside. Works in a VR headset through WebXR, and on a flat screen with mouse, touch or keyboard.">
+  <link rel="canonical" href="https://wemiller.com/xr/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Step inside · Blaine Miller's portfolio in VR">
+  <meta property="og:description" content="Photographs, 360° panoramas, apps and work history as a space you stand inside. In a headset through WebXR, or on a flat screen.">
+  <meta property="og:url" content="https://wemiller.com/xr/">
+  <meta property="og:image" content="https://wemiller.com/og/xr.jpg?v=63b64181">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://wemiller.com/og/xr.jpg?v=63b64181">
+  <meta name="theme-color" content="#070b14">
+  <meta name="color-scheme" content="dark">
+  <link rel="icon" href="/profile.jpg?v=e8036801">
+  <link rel="stylesheet" href="xr.css?v=02633020">
+  <script type="module" src="main.js?v=ab52109e"></script>
+</head>
+<body>
+  <header class="bar">
+    <a class="bar__home" href="/" aria-label="Back to Blaine Miller's home page" data-i18n-attr="aria-label:page.home.aria"><span aria-hidden="true">←</span> Blaine Miller</a>
+    <h1 data-i18n="page.h1">Step inside the portfolio</h1>
+  </header>
+
+  <main id="stage" class="stage">
+    <canvas id="view" tabindex="0" data-i18n-attr="aria-label:page.canvas" aria-label="3D view of the portfolio. Arrow keys look around, 1 to 4 open an area, Enter selects what is in the centre of the view, Escape goes back."></canvas>
+
+    <!-- Shown first; stays in the document so the page reads sensibly before (or without) the 3D view. -->
+    <section id="intro" class="intro" aria-labelledby="intro-h">
+      <div class="card">
+        <h2 id="intro-h" data-i18n="intro.h">A night sky you can walk around in</h2>
+        <p data-i18n-html="intro.p">Tonight's real sky, with one thing in front of you at a time: a <strong>gallery</strong> of photographs with a slideshow, <strong>panoramas</strong> you can stand inside, the <strong>apps</strong> I build, and my <strong>experience</strong> as a timeline. Or choose <strong>Sky only</strong> and use it as a planetarium.</p>
+        <ul class="keys">
+          <li data-i18n-html="intro.k1"><b>Look</b> drag with a mouse or finger, or use the arrow keys</li>
+          <li data-i18n-html="intro.k2"><b>Select</b> click, tap, or press Enter; Tab moves through the items</li>
+          <li data-i18n-html="intro.k3"><b>Go back</b> Escape. <b>Open an area</b> 1, 2, 3, 4. <b>Page</b> comma and full stop. <b>Slideshow</b> Space</li>
+          <li data-i18n-html="intro.k4"><b>In a headset, hands only</b> point and pinch to select, or push a button with a fingertip. Everything stays put unless you drag the Move handle on the control bar, which swings it wherever you like, overhead included</li>
+          <li data-i18n-html="intro.k5"><b>Controllers or a simple viewer</b> point and pull the trigger; or just look at something until the ring fills</li>
+          <li data-i18n-html="intro.k6"><b>The sky</b> is tonight's, for roughly where you are. Point at a planet, the moon or the sun to see what it is</li>
+          <li data-i18n-html="intro.k7"><b>Passthrough</b> where the headset has it, a button inside VR swaps the painted sky for your own room</li>
+        </ul>
+        <p id="vr-note" class="note" data-i18n="intro.checking">Checking for a VR headset…</p>
+        <div class="row">
+          <button id="start" class="btn btn--primary" type="button" data-i18n="intro.start">Start exploring</button>
+          <button id="enter-vr-intro" class="btn btn--green" type="button" data-i18n="vr.enter" hidden>Enter VR</button>
+        </div>
+        <p class="plain" data-i18n-html="intro.plain">Prefer ordinary pages? <a href="/?v=120">Photo gallery</a> · <a href="/panos/">Panoramas</a> · <a href="/apps/">Apps</a></p>
+      </div>
+    </section>
+
+    <!-- Shown instead of the intro when the page is opened with ?enter=1 from a WebXR-capable browser. -->
+    <section id="enter-now" class="intro" aria-labelledby="enter-h" hidden>
+      <div class="card card--enter">
+        <h2 id="enter-h" data-i18n="enter.h">Step inside</h2>
+        <p data-i18n="enter.p">Your browser can show this in VR. A session has to start from a tap or click, so here is the one button.</p>
+        <button id="enter-vr-now" class="btn btn--green btn--huge" type="button" data-i18n="vr.enter">Enter VR</button>
+        <p class="plain"><button id="enter-skip" class="linklike" type="button" data-i18n="enter.skip">Explore on this screen instead</button> · <a href="/" data-i18n="enter.home">Back to the home page</a></p>
+      </div>
+    </section>
+
+    <div id="hud" class="hud" hidden>
+      <nav class="hud__areas" aria-label="Areas" data-i18n-attr="aria-label:hud.areas">
+        <button type="button" data-area="home" aria-pressed="true" data-i18n="hud.overview">Overview</button>
+        <button type="button" data-area="gallery" aria-pressed="false" data-i18n="area.gallery">Gallery</button>
+        <button type="button" data-area="panos" aria-pressed="false" data-i18n="area.panos">Panoramas</button>
+        <button type="button" data-area="apps" aria-pressed="false" data-i18n="area.apps">Apps</button>
+        <button type="button" data-area="experience" aria-pressed="false" data-i18n="area.experience">Experience</button>
+      </nav>
+
+      <div class="hud__tools">
+        <button id="enter-vr" class="btn btn--green" type="button" data-i18n="vr.enter" hidden>Enter VR</button>
+        <button id="motion" class="btn" type="button" aria-pressed="false" data-i18n="hud.motion" hidden>Use motion</button>
+        <button id="guides" class="btn" type="button" aria-pressed="false" data-i18n="btn.guides" hidden>Constellations</button>
+        <button id="lapse" class="btn" type="button" aria-pressed="false" data-i18n="btn.lapse" data-i18n-attr="title:hud.lapse.title" title="Speeds up the sky: press again for faster, and again to stop" hidden>Time-lapse</button>
+        <button id="trails" class="btn" type="button" aria-pressed="false" data-i18n="btn.trails" data-i18n-attr="title:hud.trails.title" title="A long exposure: the stars draw arcs round the pole as the time-lapse runs" hidden>Star trails</button>
+        <button id="sky-only" class="btn" type="button" aria-pressed="false" data-i18n="btn.sky" data-i18n-attr="title:hud.sky.title" title="Hide everything but the sky">Sky only</button>
+        <button id="search-open" class="btn" type="button" aria-pressed="false">Search</button>
+        <button id="tm-open" class="btn" type="button" aria-pressed="false">Time machine</button>
+        <button id="sound" class="btn" type="button" aria-pressed="false" data-i18n="hud.music" data-i18n-attr="title:hud.music.title" title="Ambient music, played live by Tom">Music</button>
+        <input id="volume" class="vol" type="range" min="0" max="100" step="5" value="50" aria-label="Volume">
+        <button id="help" class="btn" type="button" data-i18n="hud.help">Help</button>
+      </div>
+
+      <div id="sets" class="hud__sets" role="group" aria-label="Photo set" data-i18n-attr="aria-label:hud.sets">
+        <button type="button" data-set="all" aria-pressed="true" data-i18n="set.all">All</button>
+        <button type="button" data-set="120" aria-pressed="false" data-i18n="set.120">Landscape &amp; sky</button>
+        <button type="button" data-set="luma" aria-pressed="false" data-i18n="set.luma">Luma</button>
+        <button type="button" data-set="museum" aria-pressed="false" hidden></button>
+      </div>
+
+      <div class="hud__mid">
+        <p id="greet" class="greet" aria-live="polite" hidden></p>
+        <p id="tm-bar" class="tm-bar" hidden><span id="tm-date"></span> <button id="tm-now" class="btn" type="button">Back to the present</button></p>
+        <input id="search-q" class="field" type="search" autocomplete="off" spellcheck="false" hidden>
+        <p id="search-sr" class="sr-only" aria-live="polite"></p>
+        <form id="tm-form" class="tm-form" hidden><input id="tm-input" class="field" type="datetime-local"> <button id="tm-go" class="btn btn--primary" type="submit">Go</button></form>
+      </div>
+
+      <div class="hud__bottom">
+        <section id="info" class="info" aria-label="Selected item" data-i18n-attr="aria-label:hud.selected" hidden>
+          <h2 id="info-title"></h2>
+          <p id="info-text"></p>
+          <p id="info-sr" class="sr-only" aria-live="polite"></p>
+          <p class="info__row">
+            <a id="info-link" class="btn btn--primary" href="/"></a>
+            <button id="info-close" class="btn" type="button" data-i18n="hud.close">Close</button>
+          </p>
+        </section>
+        <div class="pager">
+          <button id="prev" class="btn" type="button" aria-label="Previous" data-i18n="btn.prev">‹ Prev</button>
+          <span id="pos" aria-live="polite"></span>
+          <button id="next" class="btn" type="button" aria-label="Next" data-i18n="btn.next">Next ›</button>
+          <button id="play" class="btn" type="button" aria-pressed="false" data-i18n="btn.slideshow" hidden>▶ Slideshow</button>
+        </div>
+        <p id="status" class="status" aria-live="polite"></p>
+      </div>
+    </div>
+
+    <!-- One real button per item on the current page, so Tab and screen readers reach everything.
+         The 3D view shows which one has focus. -->
+    <ul id="items" class="items" aria-label="Items on this page" data-i18n-attr="aria-label:hud.items"></ul>
+
+    <section id="fallback" class="intro" hidden>
+      <div class="card">
+        <h2 data-i18n="fallback.h">This view needs WebGL, and it is turned off here</h2>
+        <p id="fallback-why" data-i18n="fallback.why">Your browser would not start a 3D context. That is expected in Safari's Lockdown Mode and in some locked-down or older browsers.</p>
+        <p data-i18n="fallback.p">Everything in here is on ordinary pages too:</p>
+        <div class="row">
+          <a class="btn btn--primary" href="/?v=120" data-i18n="fallback.gallery">Photo gallery</a>
+          <a class="btn" href="/panos/" data-i18n="area.panos">Panoramas</a>
+          <a class="btn" href="/apps/" data-i18n="area.apps">Apps</a>
+        </div>
+        <p class="plain"><a href="/" data-i18n="enter.home">Back to the home page</a></p>
+      </div>
+    </section>
+  </main>
+
+  <noscript>
+    <div class="intro intro--static">
+      <div class="card">
+        <h2>This view needs JavaScript</h2>
+        <p>The same content is on ordinary pages: <a href="/?v=120">photo gallery</a>, <a href="/panos/">panoramas</a>, <a href="/apps/">apps</a>, or go <a href="/">back to the home page</a>.</p>
+      </div>
+    </div>
+  </noscript>
+</body>
+</html>

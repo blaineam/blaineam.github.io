@@ -1,109 +1,283 @@
 # Blaine Miller
 
-**Senior Software Engineer** · Apple-platform Developer · Photographer
+**Senior Software Engineer** · Apple-platform Developer · Photographer · Luma's human
 
 [![Website](https://img.shields.io/badge/Website-wemiller.com-blue?style=flat-square)](https://wemiller.com)
-[![Apps](https://img.shields.io/badge/Apps-20%20on%20the%20App%20Store-orange?style=flat-square)](https://wemiller.com/apps)
+[![Apps](https://img.shields.io/badge/Apps-25%2B%20shipped-orange?style=flat-square)](https://wemiller.com/apps)
 [![Pages](https://img.shields.io/badge/GitHub%20Pages-auto--deployed-success?style=flat-square)](https://wemiller.com)
 
-The source for [**wemiller.com**](https://wemiller.com) — a static portfolio hosted on
-GitHub Pages covering my apps, photography, panoramas, books, and more.
+The source for [**wemiller.com**](https://wemiller.com): one static site for the software, the
+photography and the dog.
+
+```sh
+curl -sL wemiller.com/shell | sh      # the whole portfolio, in a terminal
+```
 
 ---
 
-## About
+## What a visitor gets
 
-**I build what's missing, the way it should have been.**
+The home page is **one page with four ways in**. A switch in the hero changes the photograph
+behind it, the headline, and which sections follow, without leaving the page:
 
-A social network for the people I love, with no servers and nobody watching: that's
-[Haven](https://wemiller.com/apps/haven/). Cloud storage that feels like it's on my
-device: that's [Enter Space](https://wemiller.com/apps/enter-space/). 14+ years in,
-the list keeps growing.
+| View | Address | What it shows |
+|---|---|---|
+| **Everything** | [wemiller.com](https://wemiller.com) | "I build what's missing": selected work, every project since 2012, the photographs, Luma |
+| **Work** | [wemiller.com/hire](https://wemiller.com/hire) (`/?mode=hire`) | No photograph, no dog: title and summary, selected work, experience, skills, education and the [resume](https://wemiller.com/resume/) |
+| **Photography** | [120.media](https://120.media) (`/?v=120`) | The full gallery first; software shrinks to one card |
+| **Luma** | [luma.dog](https://luma.dog) (`/?v=luma`) | Luma's photographs first, and her birthday countdown every October |
 
-I also photograph the night sky.
+Whatever the view, the rest is the same page:
+
+- **Selected work**: six featured projects. A card opens an App Store style sheet first (icon,
+  tagline, store buttons, a strip of device-framed screenshots in the visitor's language, the
+  description) with the app's own site one button away. Every app keeps its own sub-site under
+  `/apps/<name>/` or `/tools/<name>/`, with its own design and language set.
+- **Everything, in order**: every project by year. Each row opens in place for the story and the
+  stack, with the same screenshot strip for apps that have one; `/#p-<id>` links straight to one.
+- **Photography**: a masonry gallery with three filters (everything, landscape & sky, Luma) that
+  loads more as you scroll, so there is no "show all" button. A
+  photograph opens full screen with its title and caption, slides between frames with arrow
+  keys and swipes, plays as a slow push-in slideshow, and can be turned into a jigsaw puzzle;
+  `/#bmp-17` links straight to one.
+- **Search**: press <kbd>/</kbd> or <kbd>⌘K</kbd> anywhere on the home page. It searches projects,
+  every page on the site and every photograph ("owl" finds the owls).
+- **Ambient sound**: the speaker in the header tunes in to [Tom](https://wemiller.com/tools/tom/),
+  which composes an endless station of synthwave, lo-fi and rock in the browser. The recorded loop
+  is only a fallback, for when Tom can't load or play. Hover the speaker (or tap it on a phone)
+  for a vertical volume slider; the level is remembered on that device.
+- **Seasons**: the hero gets a little weather by date (snow and a string of Christmas lights running a light show in December, falling leaves in
+  autumn, fireflies in summer, embers in October) and a greeting on the day for New Year, Easter,
+  Memorial Day, June 3, July 4, Halloween, Veterans Day and Christmas. Never in the Work view.
+- **Time machine**: the footer has a time machine. Pick a destination (Christmas, July 4th, Luma's
+  birthday…) or any date and the page warps there: seasons, greetings, Luma's age and her
+  birthday party all behave as if it were that day, with a destination-time readout and a "Back
+  to the present" button. It is all in the address, so a moment can be shared after the fact:
+  `/?when=luma`, `/?when=christmas`, `/?when=2027-10-22`, `/?when=2027-10-22T21:30` (a time of
+  day sets the sky too). A named day means its most recent occurrence. The page also keeps to
+  what existed on that date:
+  - **Into the past**, anything not yet made is gone: apps not released, jobs not started,
+    photographs not taken, and the numbers in the hero, the gallery and search follow.
+  - **Into the future**, the timeline shows the year arrived in and the first years after today
+    as unreadable, flickering placeholders, with a note for the years skipped in between. The
+    dogs change with the years (each lives about twelve, the next arrives when the current one
+    is six): the Luma view takes the names of whoever is alive then, opens on a glitched
+    placeholder instead of a photograph, and dogs who have gone move into a small museum,
+    "The best of doggos", where each card opens that dog's photographs. Stand-in names are
+    used until real ones are added (`content/site.json` → `future.dogs`).
+  - **Past `future.founderFrom`** (2075), the site reads as carried on by others: a founder note
+    replaces the hero and the Work view, experience and contact links are gone.
+  None of this affects the present: without `?when=` the site is exactly today's.
+- **VR mode** ([`/xr/`](https://wemiller.com/xr/)): the photographs, panoramas and apps arranged
+  around the visitor. In a WebXR headset it is immersive, with controller rays or look-and-pinch;
+  on a flat screen it is the same scene by mouse, touch or keyboard. It is the one page that
+  needs WebGL (three.js, vendored in `xr/vendor/`, loaded only there), so in Lockdown Mode it
+  shows links to the gallery and panoramas instead. See [`xr/README.md`](xr/README.md).
+- **Say hello**: email, Haven and Signal links that do not exist in the page source until a
+  person reaches for them, under the real sky for the visitor's own time and place: daylight,
+  twilight, then the actual stars and moon. "Change the sky" opens controls for time, speed,
+  latitude, direction, forced day or night, constellations and long-exposure star trails
+  (see [`assets/sky/README.md`](assets/sky/README.md)).
+- **Nine languages**: English, 简体中文, 日本語, Deutsch, Français, Español, 한국어, Português
+  (Brasil) and Italiano, chosen from the browser and switchable from the globe in the header.
+  That covers the home page down to experience, photograph descriptions and the labels its
+  script writes, the other pages, VR mode and the terminal app.
+- **Link previews**: every page of the site has its own 1200 × 630 Open Graph poster in `/og/`
+  (apps have theirs under `/apps/`), drawn by [`scripts/build-og.mjs`](scripts/build-og.mjs).
+
+Every other page (apps, tools, panoramas, books, puzzles, speed test, dotfiles, support, privacy,
+terms, 404) shares the home page's colours, type, header and footer through
+[`assets/shell.css`](assets/shell.css) and [`assets/shell.js`](assets/shell.js). Individual app
+sites under `/apps/<name>/` keep their own brand.
+
+Design constraints the page holds itself to:
+
+- **Fast on a bad connection.** No framework, no web fonts, no third-party requests. The gallery
+  loads 640 px thumbnails lazily behind colour placeholders; on Save-Data or 2G the hero stays on
+  its small image and stops cycling.
+- **Works in Safari's Lockdown Mode.** System fonts, WebP/JPEG/PNG only, a 2D canvas instead of
+  WebGL. With JavaScript off the page still reads top to bottom in its default view.
+- **Accessible.** Landmarks and a skip link, visible focus, keyboard paths through the switcher,
+  gallery, lightbox and search, alt text on every photograph, and `prefers-reduced-motion`
+  turns every animation off.
+- **Light and dark** follow the system, and the half-moon button in the header overrides it (remembered on that device, and honoured by the other pages).
+- **No ads, no cookies.** The only measurement is Cloudflare's cookieless analytics at the edge;
+  the pages load no third-party scripts.
+- **No yellow.** One blue accent (green in the photography and Luma views).
+
+Old addresses are unchanged: `/`, `/?v=120`, `/?v=luma`, `/#gallery`, `/#projects`, `/apps/…`,
+`/tools/…`, `/panos/`, `/books/`, `/puzzles/`, `/speedtest/`, `/support/`, `/pay/`.
 
 ---
 
-## Apps
+## Editing the site
 
-**20 apps on the App Store**, spanning iOS, iPadOS, macOS, tvOS, and watchOS — plus
-**Afterglow**, a free, open-source phone XR platform;
-**Lathe**, an open-source media engine and free Mac app distributed on GitHub;
-**Shepherd**, a free, self-hosted, AGPL home-network guardian; and two free web
-apps, **Tom** and **Monkr**, that run entirely in your browser. The
-[`/apps`](https://wemiller.com/apps) showcase renders a curated order; the home page
-lists them chronologically. [`apps/projects.json`](apps/projects.json) is the
-source of truth for app metadata; the showcase's display order is hand-curated.
+Everything the home page says lives in four files under [`content/`](content/). Edit one, push,
+and the deploy rebuilds the page. Or use the editor at [`/edit/`](https://wemiller.com/edit/): forms
+with a live preview, on a phone or a laptop. It has no server. You paste a GitHub token limited to
+this repository once per device, it stays in that browser, and only someone whose token can write
+to the repository can save (see [`edit/README.md`](edit/README.md)). To preview first, run `node scripts/build-site.mjs`.
 
-**Afterglow**, **Shepherd**, **Haven**, **Blip**, **Glint**, **Lathe**, **DeepSi**, **Zap!**, **Scripture Alone**, **Tom** and **Monkr** are free — no ads, no tracking, no subscriptions. Their development is funded through
-[GitHub Sponsors](https://github.com/sponsors/blaineam), [Ko-fi](https://ko-fi.com/wemiller),
-and one-time tips; see the [Support](https://wemiller.com/support) page.
+| To do this | Edit |
+|---|---|
+| Change any wording on the home page | [`content/site.json`](content/site.json) → `strings` |
+| Open the site in hire mode by default | `content/site.json` → `"mode": "hire"` |
+| Show the "Open to senior & principal roles" badge | `content/site.json` → `"openToWork": true` |
+| Change a seasonal celebration or its dates | `content/site.json` → `seasons` (visit with `/?when=2026-12-25`) |
+| Luma's birthday | `content/site.json` → `luma.born` (replay with `/?when=luma`) |
+| Change the header links on every other page | [`assets/shell.js`](assets/shell.js) → `LINKS` |
+| Choose the hero photographs of a view | `content/site.json` → `views.<view>.hero` |
+| Choose the six featured projects | `content/site.json` → `featured` |
+| Add or edit a project | [`content/projects.json`](content/projects.json), icon in `projects/` |
+| Give an app without framed screenshots a preview strip | `content/projects.json` → `"gallery": ["apps/<name>/…jpg", …]` |
+| Add a photograph | Drop a `.webp` into `slides/`. That is all; the highest number shows first |
+| Camera and capture date for the photographs | `node scripts/photo-meta.mjs <folder of exported originals>` matches them and writes [`content/photo-meta.json`](content/photo-meta.json); or set `"camera"` / `"taken"` by hand in `content/photos.json` |
+| Add a video | `content/photos.json` → `"video": "https://youtu.be/…"` on a photograph. The photo is the still; YouTube is contacted only when a visitor presses play |
+| Title, caption or alt text for a photograph | [`content/photos.json`](content/photos.json) → `"title"`, `"caption"`, `"alt"` |
+| Put a photograph in the 120.media or luma.dog set | `content/photos.json` → `"tags": ["120"]` or `["luma"]` |
+| Update experience, skills, education | [`content/resume.json`](content/resume.json) |
+| Change the email, Signal or Haven link | `node scripts/build-site.mjs --encode 'mailto:…'`, paste into `content/site.json` → `contact` |
+| Change the social bios | `content/site.json` → `bios` |
 
-| App | What it does | Released |
-|-----|--------------|----------|
-| **Afterglow** | Phone VR, done properly — a free, open-source XR platform for iPhone in a printable viewer: 6DoF, hands, stereo passthrough, a WebXR browser and twelve games (Apache-2.0; [App Store](https://apps.apple.com/us/app/afterglow-xr/id6832358037?pt=118981620&ct=wm-readme&mt=8), [wemiller.com/apps/afterglow](https://wemiller.com/apps/afterglow), [source](https://github.com/blaineam/Afterglow)) | November 2026 |
-| **Shepherd** | A free, self-hosted home-network guardian — DNS filtering, device policy, a live globe HUD, alarms, port/vulnerability scanning, geo-IP blocking; one native binary, AGPL-3.0 ([wemiller.com/apps/shepherd](https://wemiller.com/apps/shepherd/), [source](https://github.com/blaineam/shepherd)) | October 2026 |
-| **Tom** | A music machine — dial in a melody in seconds or snap a whole song together like Lego; seeded, royalty-free, web + CLI ([wemiller.com/tools/tom](https://wemiller.com/tools/tom/), [source](https://github.com/blaineam/Tom)) | September 2026 |
-| **Scripture Alone** | A free, private, offline Bible for iPhone, iPad, Mac and Apple Watch — open source (AGPL-3.0); share links rebuild verse cards in the browser | On the [App Store](https://apps.apple.com/us/app/scripture-alone-bible/id6813729762?pt=118981620&ct=wm-readme&mt=8) and [Google Play](https://play.google.com/store/apps/details?id=com.blainemiller.scripturealone&referrer=utm_source%3Dwemiller.com%26utm_medium%3Dwebsite%26utm_campaign%3Dreadme) |
-| **Lathe** | Open-source media engine behind Sami, and a free Mac downloader (not on the App Store; [download](https://github.com/blaineam/Lathe/releases/latest)) | September 2026 |
-| **Kern** | Handle letters with care — word puzzles in living worlds | August 2026 |
-| **Revela** | Shoot film. Wait for it — a vintage film camera | July 2026 |
-| **Haven** | A private, post-quantum social network for the people you love | July 2026 |
-| **SightQuick** | Zero your rifle scope in minutes | June 2026 |
-| **Zap** | Electric trivia duels | June 2026 |
-| **Tri-Add** | The color-mixing game — a 2014 classic, relaunched | June 2026 |
-| **Ridgeshot** | Long-range rifle marksman | May 2026 |
-| **Pinline** | 1v1 compound-bow archery | May 2026 |
-| **Tilebreak** | Match. Combo. Clear. Polished Mahjong solitaire | May 2026 |
-| **Blip** | Featherlight system monitor for Mac & iPhone | April 2026 |
-| **Glint** | Brightness & volume for any display | April 2026 |
-| **Monkr** | Beautiful device mockups in seconds, in your browser — the framing behind every App Store screenshot here ([wemiller.com/tools/monkr](https://wemiller.com/tools/monkr/), [source](https://github.com/blaineam/Monkr)) | April 2026 |
-| **Sami** | Smart media optimizer | February 2026 |
-| **Enter Space** | Local-feeling access to every cloud you use | June 2025 |
-| **Luma Editor** | Match your photo style | January 2025 |
-| **Embr** | Burn your debts away | October 2024 |
-| **Ari Helper** | All-in-one AI chat app | March 2024 |
-| **Mi Speaks** | Listen to any written content | July 2023 |
-| **DeepSi** | See depth, not light | July 2023 |
-| **Pano Owl** | Stitch any panorama, in 360° | March 2021 |
-| **Wise Flyer** | Top the leaderboard! | April 2014 |
+```sh
+node scripts/build-site.mjs           # rebuild everything below from content/
+node scripts/build-site.mjs --check   # exit 1 if anything generated is stale
+```
 
-App Store screenshots are produced by a shared, automated pipeline (simulator
-capture → device-framed renders → App Store Connect upload), so every listing
-shares a consistent look.
+One command writes:
+
+| Output | What it is |
+|---|---|
+| `index.html` | The home page |
+| `hire/index.html` | Short address for hire mode |
+| `resume/index.html`, `resume/Blaine-Miller-Resume.pdf` | The resume as a page, and the same thing as a one-page PDF (no phone, no email), printed by headless Chrome only when the resume changes. The terminal app's `r` key downloads it |
+| `shell` | The terminal app: full-screen, keyboard-driven panes, meters and a projects-by-year chart, drawn by `sh` + `awk` from [`scripts/tui.template.sh`](scripts/tui.template.sh). The overview carries a year of GitHub contributions (read from the public profile at build time, cached in `profiles/contributions.json`) the photography tab draws real photographs in colour blocks, `/` searches everything, and `m` plays live music from Tom (optional: needs `node` and an audio player, and uses a temporary folder that it removes afterwards). It only draws and opens links |
+| `assets/site.min.js`, `assets/site.min.css` | Minified copies of [`assets/site.js`](assets/site.js) and [`assets/site.css`](assets/site.css), which stay the source. The home page loads these; made with esbuild (`npm ci` in `scripts/`), and without it the page loads the sources as written |
+| `og/*.jpg` | Open Graph posters for the site's own pages, drawn by `node scripts/build-og.mjs` with headless Chrome and redrawn only when a poster's recipe or photograph changes (`og/.hashes.json`). CI runs it too |
+| `app-sheets.json` | What the app preview sheets show, including which screenshots exist in which language |
+| `search-index.json` | Projects, pages (found by scanning every `index.html`) and photographs |
+| `slides/thumbs/`, `projects/lg/` | Thumbnails and featured icons (needs `sharp`: `npm ci` in `scripts/`) |
+| `i18n/index.en.json` | The English dictionary the translations are checked against |
+| `profiles/bios.md` | A bio for each social profile, checked against that platform's length limit |
+| `profiles/github-profile-README.md` | A README for the `blaineam/blaineam` profile repository |
+| The project table below | Between the `apps:start` / `apps:end` markers |
+
+`index.html`, `resume/`, `shell` and the other outputs are generated. Edit `content/`, the template
+in [`scripts/build-site.mjs`](scripts/build-site.mjs), [`assets/site.css`](assets/site.css) or
+[`assets/site.js`](assets/site.js), never the output.
+
+### Resume
+
+[`/resume/`](https://wemiller.com/resume/) is public, so it carries no phone number and shows the
+email only on a click. For the copy you send to people:
+
+```sh
+node scripts/build-site.mjs --pdf     # → out/Blaine Miller Resume.pdf (git-ignored; needs Chrome)
+```
+
+It merges `content/resume.json` → `private` with an optional, git-ignored `content/private.json`
+(`{"phone": "…"}`). The phone number never reaches the site.
+
+**The clearance line is unlisted, not secret.** Add `?cleared` to a link you hand out
+(`wemiller.com/hire?cleared`, `wemiller.com/resume/?cleared`) and the page shows the clearance
+badge and the full summary. Without it they are not shown, and they are stored encoded so that
+neither a search engine nor a text scraper reads them, but anyone who goes looking in the source
+can decode them. Leave `private.badge` and `private.summary` out of `content/resume.json` if that
+is not acceptable.
+
+### Social profiles and the GitHub profile README
+
+The build writes the text; publishing it is a separate, manual step.
+
+```sh
+sh scripts/sync-profiles.sh           # shows what it would change
+sh scripts/sync-profiles.sh --apply   # sets the GitHub bio and pushes the profile README
+```
+
+The other platforms have no usable API for this: copy from [`profiles/bios.md`](profiles/bios.md).
+
+### Translations
+
+New or changed English strings are reported by the build
+(`! i18n/index.de.json is missing 2 string(s): …`). Translate them with
+`node scripts/i18n-translate.mjs index`; see [`docs/LOCALIZATION.md`](docs/LOCALIZATION.md).
 
 ---
+
+## Projects
+
+<!-- apps:start -->
+| Project | What it is | Released |
+|---|---|---|
+| [**Afterglow**](https://wemiller.com/apps/afterglow/) | Phone VR, done properly | November 2026 |
+| [**Shepherd**](https://wemiller.com/apps/shepherd/) | The guardian your home network never had | October 2026 |
+| [**Tom**](https://wemiller.com/tools/tom/) | A music machine — melodies in seconds, songs like Lego | September 2026 |
+| [**Scripture Alone**](https://wemiller.com/apps/scripture-alone/) | The Word, and nothing in the way | September 2026 |
+| [**Lathe**](https://wemiller.com/apps/lathe/) | A free Mac downloader, and the media engine behind Sami | September 2026 |
+| [**Kern**](https://wemiller.com/apps/kern/) | Handle letters with care | August 2026 |
+| [**Revela**](https://wemiller.com/apps/revela/) | Shoot film. Wait for it. | July 2026 |
+| [**Haven**](https://wemiller.com/apps/haven/) | A private, post-quantum social network for the people you love | June 2026 |
+| [**SightQuick**](https://wemiller.com/apps/sightquick/) | Zero your scope in minutes | June 2026 |
+| [**Zap**](https://wemiller.com/apps/zap/) | Electric trivia duels | June 2026 |
+| [**Ridgeshot**](https://wemiller.com/apps/ridgeshot/) | Long-range rifle marksman | May 2026 |
+| [**Pinline**](https://wemiller.com/apps/pinline/) | 1v1 compound-bow archery | May 2026 |
+| [**Tile Break**](https://wemiller.com/apps/tilebreak/) | Match. Combo. Clear. Polished Mahjong solitaire | May 2026 |
+| [**Aperion**](https://wemiller.com/apps/aperion/) | A now-shelved deep-sky astrophotography app for iPhone, iPad, Mac, and Apple Watch — it drove a Benro Polaris tracking mount and a Canon EOS body over CCAPI with a fully offline astrometry.net plate solver, plus auto-align, live stacks, a mosaic planner, motion timelapses, and an AR sky chart. | April 2026 |
+| [**Blip**](https://wemiller.com/apps/blip/) | Featherlight macOS menu bar system monitor | April 2026 |
+| [**Glint**](https://wemiller.com/apps/glint/) | Brightness & volume for any display | April 2026 |
+| [**Monkr**](https://wemiller.com/tools/monkr/) | Beautiful device mockups in seconds | April 2026 |
+| [**Dotfiles**](https://wemiller.com/dotfiles/) | I wanted a more simple easier to deploy and clean shell template to feel more at home and not feel invasive and thus the new take on my dotfiles was born as ironically a single dotfile. | March 2026 |
+| [**Sami**](https://wemiller.com/apps/sami/) | Smart media optimizer | February 2026 |
+| [**Enter Space**](https://wemiller.com/apps/enter-space/) | Local-feeling access to every cloud you use | June 2025 |
+| [**Luma Editor**](https://wemiller.com/apps/luma-editor/) | Match your photo style | January 2025 |
+| [**Embr**](https://wemiller.com/apps/embr/) | Burn your debts away | October 2024 |
+| [**Ari Helper**](https://wemiller.com/apps/ari-helper/) | All-in-one AI chat app | March 2024 |
+| [**Mi Speaks**](https://wemiller.com/apps/mi-speaks/) | Listen to any written content | July 2023 |
+| [**DeepSi**](https://wemiller.com/apps/deepsi/) | See depth, not light | July 2023 |
+| [**Pano Owl**](https://wemiller.com/apps/pano-owl/) | Stitch any panorama, in 360 | March 2021 |
+| [**Tri-Add**](https://wemiller.com/apps/tri-add/) | The color mixing game | May 2014 |
+| [**Wise Flyer**](https://wemiller.com/apps/wise-flyer/) | Top the leaderboard! | April 2014 |
+<!-- apps:end -->
+
+**Afterglow**, **Shepherd**, **Haven**, **Blip**, **Glint**, **Lathe**, **DeepSi**, **Zap!**,
+**Scripture Alone**, **Tom** and **Monkr** are free — no ads, no tracking, no subscriptions. Their
+development is funded through [GitHub Sponsors](https://github.com/sponsors/blaineam),
+[Ko-fi](https://ko-fi.com/wemiller), and one-time tips; see the
+[Support](https://wemiller.com/support) page. [`apps/projects.json`](apps/projects.json) stays the
+source of truth for app metadata and the [`/apps`](https://wemiller.com/apps) showcase.
 
 ## Other sections
 
 | Section | Contents |
 |---------|----------|
-| [Photography](https://wemiller.com/#gallery) | 162-image gallery with category filters (FancyBox) |
 | [360° Panoramas](https://wemiller.com/panos) | 214 interactive panoramas (Pannellum) |
-| [Books](https://wemiller.com/books) | A digital bookshelf (~170 pages) |
+| [Books](https://wemiller.com/books) | Photo journals, page by page |
 | [Puzzles](https://wemiller.com/puzzles) | Interactive puzzles and brain teasers |
 | [Speed Test](https://wemiller.com/speedtest) | In-browser network speed test |
-| [Pay](https://wemiller.com/pay) | Simple payment / tip page |
 | [Developer Tools](https://wemiller.com/tools/) | ARK, the app-pipeline suite behind every app here, plus Monkr and Tom, free and open source |
-| [Support](https://wemiller.com/support) | Fund future development of the free apps (Shepherd, Haven, Blip, Glint, Lathe, DeepSi, Zap!, Scripture Alone, Tom, Monkr) via GitHub Sponsors, Ko-fi, or a one-time tip |
+| [Support](https://wemiller.com/support) | Fund future development of the free apps |
 
 ---
 
 ## How it's built & deployed
 
-A static site with **no build framework** — just HTML, CSS, and vanilla JS — deployed
-to GitHub Pages via two GitHub Actions workflows:
+A static site with **no framework**: HTML, CSS and vanilla JS on GitHub Pages. The only build is
+one dependency-free Node script, and its output is committed, so the repository is always exactly
+what is served.
 
-- **[`deploy-pages.yml`](.github/workflows/deploy-pages.yml)** — on every push to `main`,
-  regenerates social/poster images ([`scripts/generate-posters.js`](scripts/generate-posters.js)),
-  runs footer maintenance, and publishes the site.
-- **[`mirror-app-docs.yml`](.github/workflows/mirror-app-docs.yml)** — automatically mirrors
-  each app's own docs site into `/apps/<slug>/` (Blip, Glint, Haven, Lathe and
-  Shepherd), so
-  app pages stay in sync from their source repos with no manual copying.
+- **[`deploy-pages.yml`](.github/workflows/deploy-pages.yml)** — on every push to `main`: runs
+  `scripts/build-site.mjs`, regenerates social/poster images, re-stamps cache busters, tags store
+  links, commits whatever changed and publishes.
+- **[`mirror-app-docs.yml`](.github/workflows/mirror-app-docs.yml)** — mirrors each app's own docs
+  site into `/apps/<slug>/` (Blip, Glint, Haven, Lathe and Shepherd), so those pages stay in sync
+  with their source repos.
 
-`apps/projects.json` is the single source of truth for app metadata; the `/apps`
-showcase and home-page timeline are hand-curated views kept in step with it.
+### Domains
+
+GitHub Pages serves one custom domain (`wemiller.com`, in `CNAME`). `120.media` and `luma.dog`
+forward to `wemiller.com/?v=120` and `wemiller.com/?v=luma`, which open the photography and Luma
+views. If either hostname is ever pointed at the site directly, `content/site.json` → `domains`
+already maps it to the right view.
 
 ### Store-link campaigns
 
@@ -144,7 +318,7 @@ it locally first, run `python3 scripts/store-links.py`.
 
 ### Images
 
-The photography — the home-page slideshow (`slides/`), the panoramas
+The photography — the home-page gallery (`slides/`), the panoramas
 (`panos/panoramas/`), the photo journals (`books/media/`) and the timeline icons
 (`projects/`) — is WebP, encoded with
 [Lathe](https://github.com/blaineam/Lathe)'s `lathe-image`: each picture at
@@ -162,8 +336,8 @@ find slides -name '*.jpg' | lathe-image --format webp --min-ssim 0.97 --min-regi
 lathe-image --format webp --min-ssim 0.98 --min-region-ssim 0.95 --max-side 128 --metadata strip projects/*.png
 ```
 
-The galleries build their URLs in JavaScript, so a gallery is all WebP or not at all. The
-exceptions are the five panoramas wider than WebP's 16,383 px limit (`bmp-pano-2`, `-16`,
+The panorama and book galleries build their URLs in JavaScript, so a gallery is all WebP or not
+at all. The exceptions are the five panoramas wider than WebP's 16,383 px limit (`bmp-pano-2`, `-16`,
 `-75`, `-85` and `-95`): the panorama page asks for those as JPEGs. `og:image`
 posters, favicons and app icons stay JPEG/PNG — social crawlers and home-screen
 icons don't all read WebP.
@@ -176,21 +350,8 @@ on PATH or point `LATHE_IMAGE` at it.
 ### Local preview
 
 ```sh
-# any static server works, e.g.
-python3 -m http.server 8000
-# then open http://localhost:8000
+python3 -m http.server 8000     # then open http://localhost:8000
 ```
-
----
-
-## Tech stack
-
-- Static HTML / CSS / vanilla JS — hosted on GitHub Pages (`wemiller.com`)
-- Responsive glassmorphic design with light/dark mode
-- [Pannellum](https://pannellum.org) for 360° panorama viewing
-- [FancyBox](https://fancyapps.com/fancybox/) for media galleries
-- Custom CSS animations and a generated poster pipeline
-- GitHub Actions for build, poster generation, doc-mirroring, and deploy
 
 ---
 
@@ -199,6 +360,7 @@ python3 -m http.server 8000
 - [YouTube](https://www.youtube.com/@AppsByBlaine)
 - [Instagram](https://www.instagram.com/apps.by.blaine/)
 - [X](https://x.com/apps_by_blaine)
+- [LinkedIn](https://www.linkedin.com/in/millerblaine/)
 
 ---
 

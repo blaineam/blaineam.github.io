@@ -1,0 +1,303 @@
+# ~/.ashlocal - the zshlocal idea for BusyBox ash: OpenWrt and other small opkg systems
+# that have no zsh and no bash. Strict POSIX sh, so it also loads in dash.
+# Install with (OpenWrt's wget; use curl -fsSL ... -o if you have curl):
+#   wget -q -O ~/.ashlocal https://raw.githubusercontent.com/blaineam/blaineam.github.io/main/dotfiles/ashlocal && echo '[ -f ~/.ashlocal ] && . ~/.ashlocal' >> ~/.profile && . ~/.ashlocal
+# System-wide instead: save it as /etc/profile.d/ashlocal.sh
+# Update with:
+#   wget -q -O ~/.ashlocal https://raw.githubusercontent.com/blaineam/blaineam.github.io/main/dotfiles/ashlocal && . ~/.ashlocal
+#
+# What it does: a two-line prompt (user@host|dir (branch)[status]), the aliases that make
+# sense on a router, and - once, as root, when opkg and enough free space are there - a few
+# small packages. A package the feeds do not carry is skipped, never an error.
+# What it cannot do: POSIX sh has no hook around a command, so there is no command duration
+# in the prompt, and there is no tab-completion tuning.
+#
+# Settings (same names as zshlocal):
+#   ZSHLOCAL_OFFLINE=1        never touch the network or opkg.
+#   touch ~/.ashlocal-offline   the same, as a file, for when setting a variable is awkward.
+#   ZSHLOCAL_OFFLINE=0        skip the connectivity check.
+#   (unset)                   a check of a few seconds decides; when it fails, installs are
+#                             skipped, one line says so, and it is tried again a day later
+#                             (or at once after: rm ~/.ashlocal-setup-skipped).
+#   ZSHLOCAL_PROBE_URL=url    what the check requests (default: downloads.openwrt.org).
+#   ZSHLOCAL_BUNDLE=/path     install the .ipk files of a bundle made by bundle.sh.
+#   ZSHLOCAL_BUNDLE_FORCE=1   use a bundle built for another release or CPU anyway.
+#   ZSHLOCAL_OPKG_PACKAGES    packages to install (default: "htop tree ncdu tmux").
+#   ZSHLOCAL_MIN_FREE_KB      free space required before installing (default: 4096).
+
+# bash and zsh also read ~/.profile; they have zshlocal, so stay out of their way.
+if [ -z "${ZSH_VERSION:-}" ] && [ -z "${BASH_VERSION:-}" ]; then
+
+# --- Setup helpers ---
+
+# Say in one line what was skipped (at most once a day) and remember it.
+_al_skip() {
+  if [ -z "$(find "$HOME/.ashlocal-setup-skipped" -mtime -1 2>/dev/null)" ]; then
+    echo "ashlocal: $1 The prompt and aliases are still set up."
+    : > "$HOME/.ashlocal-setup-skipped" 2>/dev/null
+  fi
+  return 0
+}
+
+# Quick connectivity check, a few seconds at most. Any answer counts as online.
+_al_online() {
+  _al_url="${ZSHLOCAL_PROBE_URL:-http://downloads.openwrt.org/}"
+  if command -v curl >/dev/null 2>&1; then
+    curl -sI -o /dev/null --connect-timeout 3 --max-time 4 "$_al_url" 2>/dev/null
+  elif command -v wget >/dev/null 2>&1; then
+    # BusyBox wget and OpenWrt's uclient-fetch both take -q, --spider and -T seconds.
+    wget -q --spider -T 4 "$_al_url" >/dev/null 2>&1
+  else
+    return 1
+  fi
+}
+
+# "<distro> <release> <arch>", compared with the PLATFORM file bundle.sh writes.
+_al_platform() {
+  echo "$( if [ -r /etc/os-release ]; then . /etc/os-release; fi; echo "${ID:-unknown} ${VERSION_ID:-unknown} ${OPENWRT_ARCH:-$(uname -m)}" )"
+}
+
+# Does a bundle's PLATFORM ($1) fit this machine ($2)? Distro and architecture must be
+# equal; the bundle may name the release more coarsely ("23.05" fits 23.05.3).
+_al_platform_ok() {
+  if [ "$1" = "$2" ]; then
+    return 0
+  fi
+  _al_b_rest="${1#* }"
+  _al_h_rest="${2#* }"
+  if [ "${1%% *}" != "${2%% *}" ] || [ "${_al_b_rest#* }" != "${_al_h_rest#* }" ]; then
+    return 1
+  fi
+  case "${_al_h_rest%% *}" in
+    "${_al_b_rest%% *}".*) return 0 ;;
+  esac
+  return 1
+}
+
+# Free space, in KB, where opkg installs to.
+_al_free_kb() {
+  if [ -d /overlay ]; then
+    df -kP /overlay 2>/dev/null | awk 'END { print $4 + 0 }'
+  else
+    df -kP / 2>/dev/null | awk 'END { print $4 + 0 }'
+  fi
+}
+
+# Install the .ipk files of a bundle, with no network. opkg does not resolve offline:
+# everything a package needs must already be installed or be in the bundle.
+_al_install_bundle() {
+  _al_dir="$1/packages/opkg"
+  if [ ! -d "$1" ]; then
+    _al_skip "bundle $1 is not a directory, so no packages were installed."
+    return 1
+  fi
+  set -- "$_al_dir"/*.ipk
+  if [ ! -e "$1" ]; then
+    _al_skip "the bundle has no .ipk files in $_al_dir, so no packages were installed."
+    return 1
+  fi
+  _al_built=""
+  if [ -r "$_al_dir/PLATFORM" ]; then
+    read -r _al_built < "$_al_dir/PLATFORM"
+  fi
+  _al_here="$(_al_platform)"
+  if [ -n "$_al_built" ] && ! _al_platform_ok "$_al_built" "$_al_here" && [ "${ZSHLOCAL_BUNDLE_FORCE:-}" != "1" ]; then
+    _al_skip "the bundle was built on '$_al_built' but this is '$_al_here', so its packages were not installed (ZSHLOCAL_BUNDLE_FORCE=1 overrides)."
+    return 1
+  fi
+  echo "Installing packages from $_al_dir with opkg (offline)..."
+  if ! opkg install "$@" >/dev/null 2>&1; then
+    # One bad file stops the batch, so go one at a time and keep what works.
+    _al_missed=""
+    for _al_pkg in "$@"; do
+      opkg install "$_al_pkg" >/dev/null 2>&1 || _al_missed="$_al_missed ${_al_pkg##*/}"
+    done
+    if [ -n "$_al_missed" ]; then
+      echo "ashlocal: opkg could not install:$_al_missed (usually a dependency that is not in the bundle)."
+    fi
+  fi
+  return 0
+}
+
+_al_setup() {
+  if [ -f "$HOME/.ashlocal-setup-done" ]; then
+    return 0
+  fi
+  if ! command -v opkg >/dev/null 2>&1; then
+    # No opkg (plain BusyBox, Alpine, a rescue shell): prompt and aliases only.
+    return 0
+  fi
+  if [ "$(id -u 2>/dev/null)" != "0" ]; then
+    _al_skip "opkg needs root, skipped package installs."
+    return 0
+  fi
+
+  _al_bundle="${ZSHLOCAL_BUNDLE:-}"
+  if [ -z "$_al_bundle" ] && [ -r "$HOME/.ashlocal-bundle" ]; then
+    read -r _al_bundle < "$HOME/.ashlocal-bundle"
+  fi
+  if [ -n "$_al_bundle" ]; then
+    if _al_install_bundle "$_al_bundle"; then
+      rm -f "$HOME/.ashlocal-bundle" "$HOME/.ashlocal-setup-skipped"
+      : > "$HOME/.ashlocal-setup-done"
+      echo "Shell setup complete!"
+    fi
+    return 0
+  fi
+
+  _al_offline="${ZSHLOCAL_OFFLINE:-}"
+  if [ -z "$_al_offline" ] && [ -f "$HOME/.ashlocal-offline" ]; then
+    _al_offline=1
+  fi
+  case "$_al_offline" in
+    1|true|yes)
+      _al_skip "offline mode is on (ZSHLOCAL_OFFLINE=1 or ~/.ashlocal-offline), skipped opkg package installs."
+      return 0
+      ;;
+    0|false|no)
+      ;;
+    *)
+      if [ -n "$(find "$HOME/.ashlocal-setup-skipped" -mtime -1 2>/dev/null)" ]; then
+        return 0
+      fi
+      if ! _al_online; then
+        _al_skip "no network, skipped opkg package installs (retries in a day, or now with ZSHLOCAL_OFFLINE=0)."
+        return 0
+      fi
+      ;;
+  esac
+
+  # Small tools only: flash is tiny. git, vim, ffmpeg, imagemagick, rclone and fzf from the
+  # zshlocal set are left out on purpose; add them with ZSHLOCAL_OPKG_PACKAGES if they fit.
+  _al_want=""
+  for _al_pkg in ${ZSHLOCAL_OPKG_PACKAGES:-htop tree ncdu tmux}; do
+    if ! opkg list-installed "$_al_pkg" 2>/dev/null | grep -q .; then
+      _al_want="$_al_want $_al_pkg"
+    fi
+  done
+  if [ -n "$_al_want" ]; then
+    _al_free="$(_al_free_kb)"
+    if [ "${_al_free:-0}" -lt "${ZSHLOCAL_MIN_FREE_KB:-4096}" ] 2>/dev/null; then
+      _al_skip "only ${_al_free:-0} KB free, skipped opkg package installs (ZSHLOCAL_MIN_FREE_KB changes the limit)."
+      return 0
+    fi
+    echo "Installing$_al_want with opkg..."
+    opkg update >/dev/null 2>&1 || true
+    _al_missed=""
+    for _al_pkg in $_al_want; do
+      opkg install "$_al_pkg" >/dev/null 2>&1 || _al_missed="$_al_missed $_al_pkg"
+    done
+    if [ -n "$_al_missed" ]; then
+      echo "ashlocal: not installed (not in the feeds, or no room):$_al_missed"
+    fi
+    hash -r 2>/dev/null || true
+  fi
+
+  rm -f "$HOME/.ashlocal-setup-skipped"
+  : > "$HOME/.ashlocal-setup-done"
+  echo "Shell setup complete!"
+}
+
+# Run setup once. Whatever happens in there, carry on to the prompt and aliases.
+_al_setup || true
+unset _al_b_rest _al_h_rest _al_offline _al_url _al_dir _al_built _al_here _al_missed _al_pkg _al_bundle _al_want _al_free
+
+# --- Prompt: user(cyan)@(red)host(blue)|(red)dir(green) (branch)[status]  newline  -> ---
+# Colours are raw escape bytes and sit on the first line only; the line being edited starts
+# with plain text, so the line editor's width count stays right without \[ \] markers.
+_AL_USER="${USER:-$(id -un 2>/dev/null)}"
+_AL_HOST="$(uname -n 2>/dev/null)"
+_AL_HOST="${_AL_HOST%%.*}"
+_AL_ESC="$(printf '\033')"
+case "${LC_ALL:-${LC_CTYPE:-${LANG:-}}}" in
+  *UTF-8*|*utf-8*|*UTF8*|*utf8*) _AL_DOT="●"; _AL_ARROW="→" ;;
+  *) _AL_DOT="*"; _AL_ARROW="->" ;;
+esac
+
+_al_prompt() {
+  # $1 = exit status of the last command
+  _al_c="${_AL_ESC}[0;36m"
+  _al_r="${_AL_ESC}[0;31m"
+  _al_b="${_AL_ESC}[1;34m"
+  _al_g="${_AL_ESC}[0;32m"
+  _al_p="${_AL_ESC}[0;35m"
+  _al_0="${_AL_ESC}[0m"
+
+  case "$PWD" in
+    "$HOME") _al_dir="~" ;;
+    "$HOME"/*) _al_dir="~${PWD#"$HOME"}" ;;
+    *) _al_dir="$PWD" ;;
+  esac
+
+  _al_branch=""
+  if command -v git >/dev/null 2>&1; then
+    _al_git="$(git symbolic-ref --short -q HEAD 2>/dev/null)"
+    if [ -n "$_al_git" ]; then
+      _al_branch=" ${_al_r}(${_al_p}${_al_git}${_al_r})"
+    fi
+  fi
+
+  if [ "${1:-0}" -eq 0 ] 2>/dev/null; then
+    _al_dot="${_al_g}${_AL_DOT}"
+  else
+    _al_dot="${_al_r}${_AL_DOT}"
+  fi
+
+  printf '%s\n%s ' \
+    "${_al_c}${_AL_USER}${_al_r}@${_al_b}${_AL_HOST}${_al_r}|${_al_g}${_al_dir}${_al_branch}${_al_r}[${_al_dot}${_al_r}]${_al_0}" \
+    "${_AL_ARROW}"
+}
+
+case $- in
+  *i*)
+    # Expanded again before every prompt; $? is the status of the command that just ran.
+    PS1='$(_al_prompt $?)'
+    ;;
+esac
+
+# --- Aliases (only where the tool on this system supports them) ---
+if ls --color=auto -d / >/dev/null 2>&1; then
+  alias ls='ls --color=auto'
+  alias ll='ls -lh --color=auto'
+  alias la='ls -lah --color=auto'
+else
+  alias ll='ls -lh'
+  alias la='ls -lah'
+fi
+
+if echo x | grep --color=auto x >/dev/null 2>&1; then
+  alias grep='grep --color=auto'
+fi
+if diff --color=auto /dev/null /dev/null >/dev/null 2>&1; then
+  alias diff='diff --color=auto'
+fi
+alias c='clear'
+alias ..='cd ..'
+alias ...='cd ../..'
+
+# Tool shortcuts
+if command -v vim >/dev/null 2>&1; then
+  alias v='vim'
+else
+  alias v='vi'
+fi
+if command -v tmux >/dev/null 2>&1; then
+  alias t='tmux'
+fi
+
+# Git aliases, when git is there
+if command -v git >/dev/null 2>&1; then
+  alias g='git'
+  alias ga='git add'
+  alias gs='git status'
+  alias gd='git diff'
+  alias gc='git commit -v'
+  alias gcm='git commit -m'
+  alias gl='git pull'
+  alias gp='git push -u origin HEAD'
+  alias gb='git branch'
+  alias gba='git branch -a'
+  alias gco='git checkout'
+fi
+
+fi

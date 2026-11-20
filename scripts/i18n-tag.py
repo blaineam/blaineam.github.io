@@ -45,6 +45,19 @@ PAGES += [
     ("tools/tom/index.html", "tools.tom", "https://wemiller.com/tools/tom/", "bottom-left"),
 ]
 
+# Site pages outside /apps/ and /tools/ that wear the shared shell (assets/shell.js). The shell's own
+# header/footer strings live in i18n/shell.<lang>.json, which shell.js loads itself.
+PAGES += [
+    ("books/index.html", "books", "https://wemiller.com/books/", "bottom-left"),
+    ("puzzles/index.html", "puzzles", "https://wemiller.com/puzzles/", "bottom-left"),
+    ("panos/index.html", "panos", "https://wemiller.com/panos/", "bottom-right"),
+    ("speedtest/index.html", "speedtest", "https://wemiller.com/speedtest/", "bottom-right"),
+    ("privacy/index.html", "privacy", "https://wemiller.com/privacy/", "bottom-right"),
+    ("terms/index.html", "terms", "https://wemiller.com/terms/", "bottom-right"),
+    ("404.html", "404", "https://wemiller.com/404.html", "bottom-right"),
+    ("dotfiles/index.html", "dotfiles", "https://wemiller.com/dotfiles/", "bottom-right"),
+]
+
 # Depth pages (docs/app-page-design.md §2): apps/<slug>/{features,pricing,faq}/index.html, each
 # with its own dictionary i18n/apps.<slug>.<sub>.<lang>.json. Picked up as soon as the file exists.
 DEPTH_PAGES = ("features", "pricing", "faq")
@@ -203,8 +216,20 @@ def direct_text(src, node):
 HAS_LETTERS = re.compile(r"[A-Za-z]{2}")
 
 
+def existing_attr_units(node, units):
+    for pair in node.attrs.get("data-i18n-attr", "").split(";"):
+        if ":" not in pair:
+            continue
+        aname, akey = pair.split(":", 1)
+        aval = node.attrs.get(aname.strip())
+        if aval:
+            units.append((node, "existing-attr", aval, akey.strip()))
+
+
 def collect_units(src, node, units):
     if node.tag in SKIP_SUBTREE:
+        # an iframe's title or a select's aria-label can still be tagged by hand
+        existing_attr_units(node, units)
         return
     if node.attrs.get("translate") == "no":  # code samples, command output, tool names
         return
@@ -218,15 +243,10 @@ def collect_units(src, node, units):
         else:
             units.append((node, "existing-html", collapse(content),
                           attrs["data-i18n-html"]))
+        existing_attr_units(node, units)  # e.g. a button's text and its title
         return
     if "data-i18n-attr" in attrs:
-        for pair in attrs["data-i18n-attr"].split(";"):
-            if ":" not in pair:
-                continue
-            aname, akey = pair.split(":", 1)
-            aval = attrs.get(aname.strip())
-            if aval:
-                units.append((node, "existing-attr", aval, akey.strip()))
+        existing_attr_units(node, units)
         for c in node.children:
             collect_units(src, c, units)
         return

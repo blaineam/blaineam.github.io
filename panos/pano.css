@@ -1,0 +1,57 @@
+/* wemiller.com — panorama gallery and viewer. Page colours come from /assets/shell.css (--wm-*).
+ * The viewer (.pv) is the home page's photo viewer (.lb in assets/site.css): same dark stage,
+ * same bar and round buttons, same fades. Keep the two in step when one changes. */
+
+/* ---------- gallery ---------- */
+.gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr)); gap: clamp(16px, 2.4vw, 28px); max-width: calc(var(--wm-max) + 2 * var(--wm-pad)); margin: 0 auto; padding: 0 var(--wm-pad); }
+/* tiles: same surface, border and hover lift as .wm-card */
+.gallery a { position: relative; display: block; width: 100%; height: 240px; background: var(--wm-surface); border: 1px solid var(--wm-line); border-radius: 22px; overflow: hidden; cursor: pointer; transition: transform .4s var(--wm-ease), border-color .3s, box-shadow .4s var(--wm-ease); }
+.gallery a:hover { transform: translateY(-4px); border-color: color-mix(in srgb, var(--wm-accent) 50%, var(--wm-line)); box-shadow: var(--wm-shadow); }
+body.wm .gallery a:focus-visible { border-radius: 22px; }
+.gallery a img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .4s var(--wm-ease); }
+.gallery a:hover img { transform: scale(1.04); }
+.pano-360 { position: absolute; left: 12px; bottom: 12px; padding: 5px 11px; border-radius: 999px; background: rgba(4, 8, 14, .78); color: #fff; font: 600 .78rem/1.2 var(--wm-mono, ui-monospace, monospace); letter-spacing: .04em; box-shadow: 0 0 0 1.5px rgba(255, 255, 255, .7); }
+@media (max-width: 768px) { .gallery a { height: 200px; } }
+
+/* ---------- viewer ---------- */
+.pv { position: fixed; inset: 0; z-index: 2000; background: rgba(3, 5, 10, .96); color: #fff; animation: pv-fade .3s ease; }
+.pv[hidden] { display: none; }
+@keyframes pv-fade { from { opacity: 0; } }
+.pv__stage { position: absolute; inset: 0; overflow: hidden; touch-action: none; overscroll-behavior: contain; }
+.pv__slide { position: absolute; inset: 0; overflow: hidden; opacity: 0; transform: translate3d(var(--from, 0), 0, 0) scale(1.03); transition: opacity .7s ease, transform .9s cubic-bezier(.2, .7, .2, 1); cursor: grab; touch-action: none; -webkit-user-select: none; user-select: none; }
+.pv__slide.is-on { opacity: 1; transform: none; }
+.pv__slide.is-out { opacity: 0; transform: translate3d(var(--to, 0), 0, 0) scale(.985); pointer-events: none; }
+.pv__slide.is-held, .pv__gl.is-held { cursor: grabbing; }
+/* wide photograph: sized and placed by viewer.js */
+.pv__flat { position: absolute; left: 0; top: 0; max-width: none; pointer-events: none; -webkit-user-drag: none; will-change: transform; }
+.pv__flat.is-glide { transition: transform .35s cubic-bezier(.2, .7, .2, 1), width .35s cubic-bezier(.2, .7, .2, 1), height .35s cubic-bezier(.2, .7, .2, 1); }
+/* 360° photograph: the canvas fades in over its softened thumbnail */
+.pv__ghost { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: blur(22px) brightness(.7); transform: scale(1.1); pointer-events: none; }
+.pv__gl { position: absolute; inset: 0; width: 100%; height: 100%; display: block; opacity: 0; transition: opacity .6s ease; cursor: grab; touch-action: none; }
+.pv__slide.is-ready .pv__gl { opacity: 1; }
+/* still loading / could not load */
+.pv__slide:not(.is-ready)::after { content: ""; position: absolute; left: 50%; top: 50%; width: 34px; height: 34px; margin: -17px; border-radius: 50%; border: 2.5px solid rgba(255, 255, 255, .25); border-top-color: #fff; animation: pv-spin .9s linear infinite; pointer-events: none; }
+.pv__slide.is-failed::after { content: var(--pv-failed, "This panorama could not be loaded."); width: auto; height: auto; margin: 0; transform: translate(-50%, -50%); border: 0; border-radius: 0; animation: none; white-space: nowrap; font: 1rem var(--wm-sans, system-ui, sans-serif); color: rgba(255, 255, 255, .8); }
+@keyframes pv-spin { to { transform: rotate(360deg); } }
+
+.pv__bar { position: absolute; inset: auto 0 0; display: flex; align-items: center; gap: 4px; padding: 36px max(12px, env(safe-area-inset-right)) calc(10px + env(safe-area-inset-bottom)) max(18px, env(safe-area-inset-left)); background: linear-gradient(to top, rgba(0, 0, 0, .78), transparent); color: #fff; pointer-events: none; font-family: var(--wm-sans, system-ui, sans-serif); }
+.pv__cap { margin: 0 auto 0 0; min-width: 0; font-size: .96rem; line-height: 1.4; }
+.pv__cap strong { font: 500 1.2rem var(--wm-serif, ui-serif, Georgia, serif); display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.pv__cap span { color: rgba(255, 255, 255, .78); }
+.pv__n { font: 500 .8rem var(--wm-mono, ui-monospace, monospace); color: rgba(255, 255, 255, .6); padding: 0 8px; white-space: nowrap; }
+.pv__bar button { flex: none; width: 46px; height: 46px; padding: 0; display: grid; place-items: center; border: 0; border-radius: 50%; background: rgba(255, 255, 255, .1); color: #fff; cursor: pointer; pointer-events: auto; transition: background-color .2s; }
+.pv__bar button:hover { background: rgba(255, 255, 255, .24); }
+.pv__bar button svg { width: 22px; height: 22px; }
+body.wm .pv__bar button:focus-visible, .pv__bar button:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+body.is-locked { overflow: hidden; }
+body.is-locked .i18n-switcher { display: none; }   /* the language switcher would sit on the viewer's buttons */
+/* phone: the hint under the title and the zoom buttons give way (pinch does that job) */
+@media (max-width: 560px) { .pv__cap span, #pv-in, #pv-out { display: none; } .pv__cap strong { font-size: 1.05rem; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .gallery a, .gallery a img { transition: none; }
+  .gallery a:hover, .gallery a:hover img { transform: none; }
+  .pv, .pv__slide:not(.is-ready)::after { animation: none; }
+  .pv__slide, .pv__gl, .pv__flat.is-glide, .pv__bar button { transition: none; }
+  .pv__slide, .pv__slide.is-out { transform: none; }
+}

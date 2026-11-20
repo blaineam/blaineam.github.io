@@ -1,0 +1,747 @@
+[
+  {
+    "id": "afterglow",
+    "title": "Afterglow",
+    "date": "2026-11",
+    "dateLabel": "November, 2026",
+    "tagline": "Phone VR, done properly",
+    "icon": "afterglow.webp",
+    "link": "/apps/afterglow/",
+    "description": "Phone VR, done properly. A native XR platform that turns an iPhone in a printable viewer into a real headset: 6DoF head tracking from ARKit, stereo passthrough laid over the LiDAR depth so the room has its own depth, hand tracking on the Neural Engine, and a glass window interface that hangs in your room. A WebKit browser with a custom WebXR layer gives pages your hands, immersive VR and AR sessions, and hit tests against your real surfaces. Spatial photos and video play in stereo, 360 photos become the room, and twelve games with lit 3D graphics run around you, from mini golf at your feet to a coaster on a new course every ride. Rewritten from a Unity prototype into Swift 6 and Metal with single-pass stereo, tuned to hold its frame rate on a phone. Free and open source (Apache-2.0).",
+    "stack": [
+      "swift 6",
+      "metal",
+      "arkit",
+      "vision",
+      "webkit",
+      "webxr",
+      "avfoundation",
+      "watchos",
+      "ios",
+      "open source"
+    ],
+    "gallery": [
+      "apps/afterglow/assets/gallery/home.jpg",
+      "apps/afterglow/assets/gallery/games.jpg",
+      "apps/afterglow/assets/gallery/game-coaster.jpg",
+      "apps/afterglow/assets/gallery/game-golf.jpg",
+      "apps/afterglow/assets/gallery/game-rhythm.jpg",
+      "apps/afterglow/assets/gallery/photo-360.jpg",
+      "apps/afterglow/assets/gallery/place-world.jpg",
+      "apps/afterglow/assets/gallery/browser-page.jpg"
+    ]
+  },
+  {
+    "id": "shepherd",
+    "title": "Shepherd",
+    "date": "2026-10",
+    "dateLabel": "October, 2026",
+    "tagline": "The guardian your home network never had",
+    "icon": "shepherd.webp",
+    "link": "/apps/shepherd/",
+    "description": "A self-hosted guardian for your home network: DNS filtering against a 95-list catalog, per-device/group/network policy with allowlist mode and scheduled access, a live 3D globe HUD of every query with replay, automatic device naming and classification, an alarm engine, port and vulnerability scanning, and geo-IP country blocking, behind a locked portal with a trusted-browser PIN. One native binary for Linux, macOS and Windows — no cloud, no telemetry, no account. Free and open source under the AGPL. Try the real portal UI with synthetic data right on the site.",
+    "stack": [
+      "go",
+      "dns",
+      "self-hosted",
+      "webgl",
+      "docker",
+      "open source",
+      "linux",
+      "macos",
+      "windows"
+    ],
+    "gallery": [
+      "apps/shepherd/images/hud-demo.jpg",
+      "apps/shepherd/images/hud-replay.jpg"
+    ]
+  },
+  {
+    "id": "tom",
+    "title": "Tom",
+    "date": "2026-09",
+    "dateLabel": "September, 2026",
+    "tagline": "A music machine — melodies in seconds, songs like Lego",
+    "icon": "tom.webp",
+    "link": "/tools/tom/",
+    "description": "A music machine that runs entirely in your browser, and on the command line. Dial in a melody in seconds — style, key, tempo, swing, shape — or snap a whole song together from blocks like Lego, and let Auto build, finish or re-roll whatever you haven't locked. Every note comes from a seed, so the same seed always makes the same music, and because Tom writes all of it, it's royalty-free: no samples, no licenses, no Content ID claims. Exports WAV, MIDI and JSON, and a share link's hashtag is the whole song. Free and open source under MIT.",
+    "stack": [
+      "javascript",
+      "web audio",
+      "web workers",
+      "midi",
+      "node.js",
+      "cli",
+      "open source",
+      "web"
+    ]
+  },
+  {
+    "id": "scripture-alone",
+    "title": "Scripture Alone",
+    "date": "2026-09",
+    "dateLabel": "September, 2026",
+    "tagline": "The Word, and nothing in the way",
+    "icon": "scripture-alone.webp",
+    "link": "/apps/scripture-alone/",
+    "description": "A free, private Bible for iPhone, iPad, Mac and Apple Watch that lives entirely on the device: the ASV, BSB and KJV offline with full-text search and the words of Christ in red, highlights and notes on verse ranges, sermon slides read into notes by on-device text recognition, cross-references and classic commentary, offline maps and a timeline of the biblical periods, and verse images whose share links rebuild the card in the browser from the link alone. Private iCloud sync, no ads, no accounts, open source under the AGPL — on the App Store now, with Google Play coming soon.",
+    "stack": [
+      "swiftui",
+      "swiftdata",
+      "cloudkit",
+      "vision",
+      "widgetkit",
+      "ios",
+      "ipados",
+      "watchos"
+    ]
+  },
+  {
+    "id": "lathe",
+    "title": "Lathe",
+    "date": "2026-09",
+    "dateLabel": "September, 2026",
+    "tagline": "A free Mac downloader, and the media engine behind Sami",
+    "icon": "lathe.webp",
+    "link": "/apps/lathe/",
+    "description": "An open-source media engine for Apple platforms, and a free Mac app built on it. The Swift package encodes, converts, tags and recovers media entirely on the device — HEIC, AVIF, WebP, HEVC, AV1 and MP3, chapters and subtitles, Flash movies — through the system frameworks, with no subprocesses, so the same code runs on an iPhone. The Mac app is a downloader: paste a hundred links or browse signed in, with Tor built in and a hand-off to Sami. Apache-2.0, notarized, and free.",
+    "stack": [
+      "swift 6",
+      "avfoundation",
+      "videotoolbox",
+      "imageio",
+      "wkwebview",
+      "macos",
+      "ios"
+    ]
+  },
+  {
+    "id": "kern",
+    "title": "Kern",
+    "date": "2026-08",
+    "dateLabel": "August, 2026",
+    "tagline": "Handle letters with care",
+    "icon": "kern.webp",
+    "link": "/apps/kern/",
+    "description": "A word game about handling letters with care. Three modes — Wheel, Search, and Chain — share one fair, par-based score inside eighteen living worlds that react to the words you find: long words pulse the board, streaks build the world's energy, and resonant words earn signature flourishes. Music is generated on device so no two sessions sound alike, the whole game runs offline with zero data collection, and Game Center daily leaderboards let the whole world race the same seeded boards with no server involved.",
+    "stack": [
+      "swift 6",
+      "swiftui",
+      "gamekit",
+      "avaudioengine",
+      "ios",
+      "ipados"
+    ]
+  },
+  {
+    "id": "revela",
+    "title": "Revela",
+    "date": "2026-07",
+    "dateLabel": "July, 2026",
+    "tagline": "Shoot film. Wait for it.",
+    "icon": "revela.webp",
+    "link": "/apps/revela/",
+    "description": "A vintage film camera that lives in your phone — not a filter, a whole ritual. Load a roll from a humming mint fridge, shoot it blind in Honest Mode, mail it to the lab, wait real develop times, and tear open the envelope. RAW-first per-stock film science, movie reels at 24/18 fps, an AirPlay projector night, and an earned darkroom where you develop your own library into any stock.",
+    "stack": [
+      "swiftui",
+      "core image",
+      "proraw",
+      "avfoundation",
+      "core haptics",
+      "ios",
+      "ipados"
+    ]
+  },
+  {
+    "id": "haven",
+    "title": "Haven",
+    "date": "2026-06",
+    "dateLabel": "June, 2026",
+    "tagline": "A private, post-quantum social network for the people you love",
+    "icon": "haven.webp",
+    "link": "/apps/haven/",
+    "description": "A private, peer-to-peer, end-to-end encrypted, post-quantum social network for the people you love. No servers, no tracking, no ads, no algorithm; nobody (not even me) can read your messages or hold your keys. Posts, stories, DMs, voice calls, and offline Bluetooth/Wi-Fi mesh sharing, all device-to-device. Also on Mac and the web.",
+    "stack": [
+      "rust",
+      "swiftui",
+      "post-quantum",
+      "iroh p2p",
+      "wasm",
+      "ios",
+      "macos",
+      "web"
+    ]
+  },
+  {
+    "id": "sightquick",
+    "title": "SightQuick",
+    "date": "2026-06",
+    "dateLabel": "June, 2026",
+    "tagline": "Zero your scope in minutes",
+    "icon": "sightquick.webp",
+    "link": "/apps/sightquick/",
+    "description": "Print a uniquely-coded, gridless target, photograph your group, and SightQuick's Vision-based algorithm finds every bullet hole and tells you exactly how many clicks to dial on your turrets to zero. No guesswork, no math — just a printed target, a photo, and the precise adjustment. Consumable print-credit IAPs; the first target is free.",
+    "stack": [
+      "swift 6",
+      "swiftui",
+      "vision",
+      "core ml",
+      "iap",
+      "ios",
+      "iphone only"
+    ]
+  },
+  {
+    "id": "zap",
+    "title": "Zap",
+    "date": "2026-06",
+    "dateLabel": "June, 2026",
+    "tagline": "Electric trivia duels",
+    "icon": "zap.webp",
+    "link": "/apps/zap/",
+    "description": "Electric head-to-head trivia duels for iPhone and iPad. Challenge a friend in real-time or take on Game Center opponents — answer faster and more accurately to rack up points before the clock runs out. Hundreds of questions across categories, with streaks, power-ups, and leaderboards.",
+    "stack": [
+      "swift 6",
+      "swiftui",
+      "gamekit",
+      "ios",
+      "ipados"
+    ]
+  },
+  {
+    "id": "ridgeshot",
+    "title": "Ridgeshot",
+    "date": "2026-05",
+    "dateLabel": "May, 2026",
+    "tagline": "Long-range rifle marksman",
+    "icon": "ridgeshot.webp",
+    "link": "/apps/ridgeshot/",
+    "description": "Polished 1v1 long-range rifle marksman for iPhone and iPad. Second-focal-plane Christmas-tree reticle with hashes from 100 to 800 yards, real bullet drop, lateral wind, settle-under-tension sway, and a SceneKit range that swaps between alpine meadow, forest clearing, coastal bluff and desert canyon. Pass-and-play on one device, asynchronous matches over Game Center, or trade shots one bubble at a time through iMessage — every turn is a single round.",
+    "stack": [
+      "swift 6",
+      "swiftUI",
+      "sceneKit",
+      "gameKit",
+      "messages",
+      "AVAudioEngine",
+      "iOS 26",
+      "ipadOS"
+    ]
+  },
+  {
+    "id": "pinline",
+    "title": "Pinline",
+    "date": "2026-05",
+    "dateLabel": "May, 2026",
+    "tagline": "1v1 compound-bow archery",
+    "icon": "pinline.webp",
+    "link": "/apps/pinline/",
+    "description": "Polished 1v1 compound-bow archery for iPhone and iPad. Real pin yardages (20/30/40/50/60), lateral wind, sway under tension, and a SceneKit range that swaps between forest, alpine, coastal bluff and desert. Pass-and-play on one device, asynchronous matches over Game Center, or trade arrows one bubble at a time through iMessage — every turn is a single arrow.",
+    "stack": [
+      "swift 6",
+      "swiftUI",
+      "sceneKit",
+      "gameKit",
+      "messages",
+      "AVAudioEngine",
+      "iOS 26",
+      "ipadOS"
+    ]
+  },
+  {
+    "id": "tile-break",
+    "title": "Tile Break",
+    "date": "2026-05",
+    "dateLabel": "May, 2026",
+    "tagline": "Match. Combo. Clear. Polished Mahjong solitaire",
+    "icon": "tilebreak.webp",
+    "link": "/apps/tilebreak/",
+    "description": "Polished modern Mahjong solitaire for iPhone and iPad. Every board is provably solvable, the soundtrack is fully procedural (one per theme), and Game Center carries leaderboards plus native challenges. Seven layouts, six themes, four tile face sets, two rule variants — no ads, no tracking, plays offline.",
+    "stack": [
+      "swift 6",
+      "swiftUI",
+      "spriteKit",
+      "AVAudioEngine",
+      "gameKit",
+      "coreGraphics",
+      "iOS 26",
+      "ipadOS"
+    ]
+  },
+  {
+    "id": "aperion",
+    "title": "Aperion",
+    "date": "2026-04",
+    "dateLabel": "April, 2026",
+    "icon": "aperion.webp",
+    "link": "/apps/aperion/",
+    "description": "A now-shelved deep-sky astrophotography app for iPhone, iPad, Mac, and Apple Watch — it drove a Benro Polaris tracking mount and a Canon EOS body over CCAPI with a fully offline astrometry.net plate solver, plus auto-align, live stacks, a mosaic planner, motion timelapses, and an AR sky chart. Its core goal — reliable Polaris + Canon control — is now solved more openly by patching the Polaris firmware itself, so the standalone app is retired in favor of taking that on-device. See the open-source <a href=\"https://github.com/blaineam/benro-polaris-firmware-patcher\">Benro Polaris Firmware Patcher</a>.",
+    "stack": [
+      "swift",
+      "swiftui",
+      "watchos",
+      "arkit",
+      "ble",
+      "ccapi",
+      "plate solving",
+      "ios",
+      "ipados",
+      "macos"
+    ]
+  },
+  {
+    "id": "blip",
+    "title": "Blip",
+    "date": "2026-04",
+    "dateLabel": "April, 2026",
+    "tagline": "Featherlight macOS menu bar system monitor",
+    "icon": "blip.webp",
+    "link": "/apps/blip/",
+    "description": "A featherlight macOS menu bar system monitor for Apple Silicon. Monitors CPU, memory, disk, GPU, network, battery, fans, and thermals with beautiful hover detail panels and historical charts. Zero dependencies, ~2 MB binary, open source under MIT.",
+    "stack": [
+      "swift",
+      "swiftui",
+      "iokit",
+      "smc",
+      "swift charts",
+      "macos",
+      "open source"
+    ]
+  },
+  {
+    "id": "glint",
+    "title": "Glint",
+    "date": "2026-04",
+    "dateLabel": "April, 2026",
+    "tagline": "Brightness & volume for any display",
+    "icon": "glint.webp",
+    "link": "/apps/glint/",
+    "description": "A tiny macOS menu bar app that intercepts your keyboard's brightness and volume keys and sends DDC/CI commands to external monitors. Control the brightness and volume of all your displays with the keys that should have worked all along. Free, open source, under 1 MB.",
+    "stack": [
+      "swift",
+      "iokit",
+      "ddc/ci",
+      "coreaudio",
+      "swiftui",
+      "macos",
+      "open source"
+    ]
+  },
+  {
+    "id": "monkr",
+    "title": "Monkr",
+    "date": "2026-04",
+    "dateLabel": "April, 2026",
+    "tagline": "Beautiful device mockups in seconds",
+    "icon": "monkr.webp",
+    "link": "/tools/monkr/",
+    "description": "A free and open-source mockup generator that runs entirely in your browser. Create beautiful device mockups with customizable backgrounds, scenes, text overlays, and animations. Supports App Store screenshot workflows, animated exports via FFmpeg WASM, and works across iPhone, iPad, Mac, and more.",
+    "stack": [
+      "svelte",
+      "sveltekit",
+      "typescript",
+      "tailwind css",
+      "html-to-image",
+      "ffmpeg wasm",
+      "open source",
+      "web"
+    ]
+  },
+  {
+    "id": "dotfiles",
+    "title": "Dotfiles",
+    "date": "2026-03",
+    "dateLabel": "March, 2026",
+    "icon": "dotfiles.webp",
+    "link": "/dotfiles/",
+    "description": "I wanted a more simple easier to deploy and clean shell template to feel more at home and not feel invasive and thus the new take on my dotfiles was born as ironically a single dotfile.",
+    "stack": [
+      "bash",
+      "zsh",
+      "shell",
+      "terminal",
+      "Linux",
+      "macOS"
+    ]
+  },
+  {
+    "id": "sami",
+    "title": "Sami",
+    "date": "2026-02",
+    "dateLabel": "February, 2026",
+    "tagline": "Smart media optimizer",
+    "icon": "sami.webp",
+    "link": "/apps/sami/",
+    "description": "Sami is an easy and fun to use media optimizer designed to streamline the compression of images, videos, and PDFs according to your specific targeting and optimization rules. It helps you efficiently manage iCloud storage space used by Apple Photos or any folder you choose to optimize, applying lossy compression to achieve the greatest savings.",
+    "stack": [
+      "swift",
+      "swift UI",
+      "iCloud",
+      "Photos Library",
+      "Automation",
+      "xcode",
+      "macOS",
+      "iOS",
+      "ipadOS"
+    ]
+  },
+  {
+    "id": "enter-space",
+    "title": "Enter Space",
+    "date": "2025-06",
+    "dateLabel": "June, 2025",
+    "tagline": "Local-feeling access to every cloud you use",
+    "icon": "enter-space.webp",
+    "link": "/apps/enter-space/",
+    "description": "Enter Space is simply a way to access a wide variety of cloud storage providers such as Google drive, Dropbox, pcloud and many more as if they were stored locally on your device. It directly integrates with the Apple ecosystem using similar technologies that iCloud is built upon.",
+    "stack": [
+      "swift",
+      "swift UI",
+      "iCloud",
+      "Photos Library",
+      "file provider",
+      "In-App File Browsing",
+      "Automation",
+      "rclone",
+      "xcode",
+      "macOS",
+      "iOS",
+      "ipadOS"
+    ]
+  },
+  {
+    "id": "luma-editor",
+    "title": "Luma Editor",
+    "date": "2025-01",
+    "dateLabel": "January, 2025",
+    "tagline": "Match your photo style",
+    "icon": "luma-editor.webp",
+    "link": "/apps/luma-editor/",
+    "description": "An automatic photo editor that uses your own styled photos to develop new photos. It allows photograhers with their own style to duplicate their style onto new photos for rapid sharing to social media or news outlets. It features a clean  interface and is Privacy focused running entirely on device and doesn't collect user data or use any third party libraries. Yes, it was named after my dog, Luma.",
+    "stack": [
+      "swift",
+      "swift UI",
+      "icloud",
+      "photos library",
+      "LUT",
+      "xcode",
+      "macOS",
+      "iOS",
+      "ipadOS"
+    ]
+  },
+  {
+    "id": "embr",
+    "title": "Embr",
+    "date": "2024-10",
+    "dateLabel": "October, 2024",
+    "tagline": "Burn your debts away",
+    "icon": "embr.jpg",
+    "link": "/apps/embr/",
+    "description": "A performant, privacy-focused, and user-friendly debt payoff management application designed to empower you with a comprehensive plan to achieve financial freedom from debts as swiftly as possible. Within this app, you maintain complete control over your financial strategy, ensuring that all your personal information remains securely protected and confidential.",
+    "stack": [
+      "swift",
+      "swift UI",
+      "icloud",
+      "swift charts",
+      "xcode",
+      "macOS",
+      "iOS",
+      "ipadOS"
+    ]
+  },
+  {
+    "id": "ari-helper",
+    "title": "Ari Helper",
+    "date": "2024-03",
+    "dateLabel": "March, 2024",
+    "tagline": "All-in-one AI chat app",
+    "icon": "ari.webp",
+    "link": "/apps/ari-helper/",
+    "description": "An all in one AI and LLM Chat app, with conversation history, code syntax highlighting, documents and images input and image generation with models privately on device, over the network for Ollama and Draw Things or even leveraging the latest cloud models from X.AI, OpenAI, & Anthropic all from a simple ui synced across all of your apple ecosystem devices.",
+    "stack": [
+      "swift",
+      "swift UI",
+      "icloud",
+      "xcode",
+      "macOS",
+      "iOS",
+      "ipadOS",
+      "LLM",
+      "AI",
+      "Local",
+      "Private",
+      "Cloud",
+      "Vision",
+      "Image Generation"
+    ]
+  },
+  {
+    "id": "arcade",
+    "title": "Arcade",
+    "date": "2024-02",
+    "dateLabel": "Feb, 2024",
+    "icon": "arcade.webp",
+    "link": "https://arcade.wemiller.com",
+    "description": "Right before classic game emulators were available on the App Store, I decided to build a web-based library on top of another popular web-based emulator that can play several different systems. The library isn't available publicly but you can see a picture of it from my github for the <a href=\"https://github.com/blaineam/wemulator\">WEmulator repository</a>.",
+    "stack": [
+      "html5",
+      "css3",
+      "js",
+      "web",
+      "open source"
+    ]
+  },
+  {
+    "id": "mi-speaks",
+    "title": "Mi Speaks",
+    "date": "2023-07",
+    "dateLabel": "July, 2023",
+    "tagline": "Listen to any written content",
+    "icon": "mi-speaks.webp",
+    "link": "/apps/mi-speaks/",
+    "description": "Want to listen to that long research paper? This native iOS app allows you to enjoy your written content from anywhere by listening to it. In a rush, use Turbo mode to speed-read anything.",
+    "stack": [
+      "swift",
+      "text to speach",
+      "icloud",
+      "xcode",
+      "macOS",
+      "iOS",
+      "ipadOS"
+    ]
+  },
+  {
+    "id": "deepsi",
+    "title": "DeepSi",
+    "date": "2023-07",
+    "dateLabel": "July, 2023",
+    "tagline": "See depth, not light",
+    "icon": "deepsi.webp",
+    "link": "/apps/deepsi/",
+    "description": "Ever wondered what it would be like if you saw depth instead of lights? This app lets you use your phone’s depth sensors as a camera to capture moments in unique ways or navigate in the dark with ease without illuminating the scene.",
+    "stack": [
+      "swift",
+      "swift UI",
+      "liDAR",
+      "xcode",
+      "macOS",
+      "iOS",
+      "ipadOS"
+    ]
+  },
+  {
+    "id": "lamdi",
+    "title": "Lamdi",
+    "date": "2023-08",
+    "dateLabel": "August, 2023",
+    "icon": "lamdi.webp",
+    "link": "https://apps.apple.com/us/app/lamdi/id6446975599?pt=118981620&ct=wm-home&mt=8",
+    "description": "A mobile app for when you just want to preview that static site you might be working on. It spins up a light web server and allows you to test out your web page from anywhere.",
+    "stack": [
+      "Made it to the top 50 in the Developer App Store Category",
+      "swift",
+      "swift UI",
+      "rclone",
+      "xcode",
+      "macOS",
+      "iOS",
+      "ipadOS"
+    ]
+  },
+  {
+    "id": "pano-owl",
+    "title": "Pano Owl",
+    "date": "2021-03",
+    "dateLabel": "March, 2021",
+    "tagline": "Stitch any panorama, in 360",
+    "icon": "pano-owl.webp",
+    "link": "/apps/pano-owl/",
+    "description": "An immersive 360° panorama viewer and stitcher for iPhone and iPad. Open any wide or panoramic photo from your library and explore it in a fully interactive spherical view — tilt, swipe, or use gyroscope navigation. Supports multi-image stitching for custom panoramas. Originally launched March 2021; a ground-up v2.0 rebuild is in progress.",
+    "stack": [
+      "swift",
+      "swiftui",
+      "metal",
+      "opencv",
+      "scenekit",
+      "ios",
+      "ipados"
+    ]
+  },
+  {
+    "id": "what-a-morning-coffee-co",
+    "title": "What A Morning! Coffee Co.",
+    "date": "2022-04",
+    "dateLabel": "April, 2022",
+    "icon": "wamcoffee.webp",
+    "link": "https://wamcoffee.wemiller.com",
+    "description": "You ever had a random idea and say, “Wow, that would be a great brand\" and then you bring your brand to reality? Just me? OK, that’s what happened with this coffee brand that we did sell real coffee from, and it tasted great!",
+    "stack": [
+      "shopify",
+      "liquid",
+      "ultimate component",
+      "side business",
+      "product"
+    ]
+  },
+  {
+    "id": "topo",
+    "title": "Topo",
+    "date": "2022-07",
+    "dateLabel": "July, 2022",
+    "icon": "topo.webp",
+    "link": "https://topo.wemiller.com",
+    "description": "My grandfather used to collect topographical maps, and after all these years, we decided to scan them, and I threw together a quick website to enjoy them on.",
+    "stack": [
+      "web",
+      "html5",
+      "js",
+      "archive"
+    ]
+  },
+  {
+    "id": "cache",
+    "title": "Cache",
+    "date": "2015-11",
+    "dateLabel": "November, 2015",
+    "icon": "cache.webp",
+    "link": "",
+    "description": "Cache is a social network that allows you to place and find photos and videos in the world around you. It leverages GPS and an online database of content to know when you cross paths with something that was taken at that location where you were. It allows you to see and connect with significant events that happened where you stand. Kind of a neat feature being a location-based social network was a city-localized chat room and what we referred to as Cache Hunting to find nearby Caches.",
+    "stack": [
+      "Innovation and Impact Award from DeVry University",
+      "swift",
+      "xcode",
+      "objective-c",
+      "archive",
+      "php",
+      "flickr",
+      "api",
+      "storyboard",
+      "social network",
+      "geospatial",
+      "media",
+      "images",
+      "video",
+      "filters",
+      "push notifications"
+    ]
+  },
+  {
+    "id": "threndr",
+    "title": "Threndr",
+    "date": "2015-10",
+    "dateLabel": "October, 2015",
+    "icon": "threndr.jpg",
+    "link": "",
+    "description": "As our final project in college, I wanted to build something great in our condensed 8-week course. So I threw together another custom e-commerce site. To my surprise, our professor said we were the only team to build something this ready for production.",
+    "stack": [
+      "php",
+      "senior project",
+      "html5",
+      "stripe",
+      "inventory management",
+      "Best of Class - DeVry University"
+    ]
+  },
+  {
+    "id": "featheread",
+    "title": "Featheread",
+    "date": "2014-10",
+    "dateLabel": "October, 2014",
+    "icon": "featheread.webp",
+    "link": "",
+    "description": "Besides simple company sites for the marketing portion of Cenode, Featheread was quite the deviation. It is defined simply as the YouTube for books. It allows young and aspiring authors to gain an audience. It is a gorgeously custom-designed human interface and a testament to 2 years of dedication to the social network as a whole. It was our first social network preceding Cache.",
+    "stack": [
+      "Innovation and Impact Award from DeVry University",
+      "php",
+      "js",
+      "css",
+      "social network",
+      "pdf",
+      "DRM",
+      "web based",
+      "push notifications"
+    ]
+  },
+  {
+    "id": "tri-add",
+    "title": "Tri-Add",
+    "date": "2014-05",
+    "dateLabel": "May, 2014",
+    "tagline": "The color mixing game",
+    "icon": "tri-add.webp",
+    "link": "/apps/tri-add/",
+    "description": "Some ideas you have to talk about when saying goodbye to a great friend. This was the concept for Tri-Add, named by my friend’s mother. Simply an additive color mixing game that turned out to be not so simple. This was our first go at an original game, and it played with simple sound effects and animation. The premise seems simple, but it got progressively more difficult as you went through the theoretically limitless randomized levels. This app was built when Obj-C was the only language on iOS. Relaunched in 2026 — rebuilt from scratch in Swift 6 / SwiftUI with liquid-glass color mixing, additive & subtractive modes, inversion stages, Game Center, an iMessage extension, and an Apple Watch app.",
+    "stack": [
+      "game",
+      "objective-c",
+      "xcode",
+      "ios",
+      "storyboard"
+    ]
+  },
+  {
+    "id": "wise-flyer",
+    "title": "Wise Flyer",
+    "date": "2014-04",
+    "dateLabel": "April, 2014",
+    "tagline": "Top the leaderboard!",
+    "icon": "wise-flyer.webp",
+    "link": "/apps/wise-flyer/",
+    "description": "A never ending game where you make an owl fly through electrical pipes, with an exceptional soundscape as well!",
+    "stack": [
+      "game",
+      "objective-c",
+      "re-written in swift",
+      "xcode",
+      "ios",
+      "storyboard"
+    ]
+  },
+  {
+    "id": "flat-dash",
+    "title": "Flat Dash",
+    "date": "2013-06",
+    "dateLabel": "June, 2013",
+    "icon": "flat-dash.webp",
+    "link": "",
+    "description": "Cenode, originally named \"Boss Design Labs,\" started with Flat Dash as a proof of concept in our ability to develop useful software applications. It was developed before CarPlay was available. It provided an easy way to quickly navigate your phone and get useful stats such as time, weather, and speed.",
+    "stack": [
+      "utility",
+      "objective-c",
+      "weather api",
+      "xcode",
+      "ios",
+      "storyboard"
+    ]
+  },
+  {
+    "id": "cenode",
+    "title": "Cenode",
+    "date": "2013-06",
+    "dateLabel": "June, 2013",
+    "icon": "cenode.webp",
+    "link": "",
+    "description": "A marketing company that focused on bringing unique software interactions to life on both the web and mobile. From launching YouTube for books to a geospatial passive social network, nothing was too unique to try.",
+    "stack": [
+      "wordpress"
+    ]
+  },
+  {
+    "id": "ripple",
+    "title": "Ripple",
+    "date": "2012-10",
+    "dateLabel": "October, 2012",
+    "icon": "ripple.webp",
+    "link": "",
+    "description": "My first virtual enterprise e-commerce shop that helped our virtual business team win in the international trade show in NY. First though, I won 1st place in the advanced website competition for California, which solidified my desire to build beautiful and useful software going forward.",
+    "stack": [
+      "php",
+      "css3",
+      "js",
+      "responsive",
+      "1st place Advanced Website - California State Trade Show",
+      "Best Website Advanced Division Honerable Mention - New York City Trade Show"
+    ]
+  }
+]

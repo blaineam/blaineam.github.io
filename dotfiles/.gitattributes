@@ -1,0 +1,3 @@
+# cmd.exe wants CRLF line endings, and raw.githubusercontent.com serves the stored bytes,
+# so keep this file exactly as it is on disk.
+cmdlocal.cmd -text

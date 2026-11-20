@@ -1,159 +1,117 @@
-html, body {
+/* Jigsaw page layout. Colours and type come from /assets/shell.css (--wm-* tokens).
+ *
+ * The engine (js/canvas-puzzle.min.js) sizes the canvas as
+ *   body.offsetWidth  x  (body.offsetHeight - 45)
+ * so <body> is given exactly "space left under the header and toolbar, plus 45px".
+ * --pz-bar is the toolbar's measured height, set by the inline script in index.html.
+ */
+:root { --pz-top: calc(var(--wm-nav-h) + var(--pz-bar, 61px)); }
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
     width: 100%;
     height: 100%;
     margin: 0;
     padding: 0;
-    background: #333;
     overflow: hidden;
+    background: var(--wm-bg);
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
 }
 
-.html5-puzzle {
-    font-family: Helvetica, Arial, sans-serif;
+body {
     width: 100%;
-    height: 100%;
+    /* !important: on touch devices the engine may write an inline body height */
+    height: calc(100% - var(--pz-top) + 45px) !important;
+    margin: 0;
+    padding: 0;
     overflow: hidden;
-    /********************/
-    /* board background */
-    /********************/
-    border: 1px solid #aaa;
+    background: var(--wm-bg);
+    color: var(--wm-ink);
+    font: 400 1rem/1.5 var(--wm-sans);
+    -webkit-font-smoothing: antialiased;
 }
 
-.html5-puzzle div,
-.html5-puzzle ul,
-.html5-puzzle li,
-.html5-puzzle canvas { margin: 0; padding: 0; }
+:focus-visible { outline: 2px solid var(--wm-accent); outline-offset: 3px; border-radius: 6px; }
 
 .hide { display: none; }
 
-.clear { clear: both; }
-
-/*== Jigsaw puzzle ==*/
+/*== Jigsaw canvas ==*/
 div#canvas-wrap {
-    width: 100%;
-    height: 100%;
-    background: #333;
+    position: absolute;
+    top: var(--pz-top);
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+    background: var(--wm-bg);
 }
 
-canvas#canvas, canvas#buffer, canvas#image-preview {
+canvas#canvas, canvas#image-preview {
     position: absolute;
-    top: 45px;
+    top: 0;
     left: 0;
 }
 
 canvas#canvas { z-index: 100; }
 
-.loading  #canvas-wrap { background: url(../images/loader.gif) no-repeat center; }
-.loading  canvas { visibility: hidden; }
-
-canvas#buffer { z-index: 70; }
-
 canvas#image-preview.show {
     left: 50%;
     opacity: .5;
-    z-index: 1000;
+    z-index: 200;
     pointer-events: none;
 }
 
-/*== Options bar ==*/
-div#game-options ul {
-    margin: 0 auto;
-}
+/*== Options bar: sits directly under the shared header ==*/
 div#game-options {
-    background: #fff;
+    position: fixed;
+    top: var(--wm-nav-h);
+    left: 0;
+    right: 0;
     z-index: 500;
-    top: 0;
-    left: -20px;
-    position: absolute;
-    border-bottom: 1px solid #000;
-    padding: 5px 10px 5px 30px;
-    width: 100%;
-    height: 32px;
-    -moz-box-shadow: 0 0 5px black;
-    -webkit-box-shadow: 0 0 5px black;
-    box-shadow: 0 0 5px black;
+    padding: 8px max(var(--wm-pad), env(safe-area-inset-right)) 8px max(var(--wm-pad), env(safe-area-inset-left));
+    background: var(--wm-bg-2);
+    border-bottom: 1px solid var(--wm-line);
 }
 
-div#game-options ul li { 
-    float: left;
+div#game-options ul {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    max-width: var(--wm-max);
+    margin: 0 auto;
+    padding: 0;
     list-style: none;
-    line-height: 25px;
 }
 
-div#game-options ul li b {
-    margin: 0 10px;
-}
+div#game-options ul li { margin: 0; padding: 0; min-width: 0; }
+div#game-options ul li:has(.styled-select) { margin-left: auto; }
+div#game-options .clear { display: none; }
 
-/*== Clock ==*/
-#clock {
-    width: 60px;
-    display: block;
-    text-align: center;
-}
+/* The engine shows this (empty) slot when file reading is supported; keep it out of the row. */
+#game-options #create { position: absolute; width: 0; height: 0; overflow: hidden; }
 
-/*== Select ==*/
-div#game-options div.styled-select select {
-    outline: none;
-    background: transparent;
-    width: 125px;
-    padding: 5px;
-    font-size: 13px;
-    border: none;
-    height: 28px;
-    -webkit-appearance: none;
-}
+/*== Create puzzle (dialog content) ==*/
+#image-error { color: var(--wm-accent); margin: 0 10px; display: none; }
+#dnd { display: none; }
 
-div#game-options div.styled-select {
-    width: 100px;
-    height: 28px;
-    margin-right: 10px;
-    overflow: hidden;
-    background: url(../images/arrow.png?v=5dec0f3a) right no-repeat #f3f3f3;
-    border: 1px solid #333;
-}
-
-/*== Share buttons ==*/
-#share-twitter, #share-facebook {
-    text-indent: -10000px;
-    width: 32px;
-    height: 32px;
-    display: block;
-    cursor:pointer;
-}
-
-/*== Crear puzzle ==*/
-#image-error { color: red; margin: 0 10px; display: none; }
-#dnd { display: none }
-
-#game-options #create {
-    display: none;
-    right: 25px;
-    position: absolute;
-}
-
-#game-options #create .add {
-    background: url(../images/plus.png?v=39c3710b)  10px 6px no-repeat #f3f3f3;
-    padding-left: 30px;
-}
-/*== Modal window ==*/
-
+/*== Dialog content ==*/
 div#congrat { text-align: center; }
+div#help { font-size: .95rem; color: var(--wm-soft); }
+div#help ul { margin: 0 0 1em; padding-left: 1.2em; }
+div#help li { margin-bottom: .8em; }
+div#help img { display: block; max-width: 100%; height: auto; margin-top: .5em; border: 1px solid var(--wm-line); border-radius: 12px; }
 
-div#help {
-    font-size: 15px;
+/*== Phones: two tidy rows of four (timer, Border, Middle, All / Shuffle, Preview, Help, pieces) ==*/
+@media screen and (max-width: 560px) {
+    div#game-options { padding-left: max(12px, env(safe-area-inset-left)); padding-right: max(12px, env(safe-area-inset-right)); }
+    div#game-options ul { display: grid; grid-template-columns: repeat(24, minmax(0, 1fr)); gap: 6px; }
+    div#game-options ul li { grid-column: span 6; }
+    div#game-options ul li:nth-child(3) { grid-column: span 7; }
+    div#game-options ul li:nth-child(4),
+    div#game-options ul li:nth-child(5) { grid-column: span 5; }
+    div#game-options ul li:nth-child(7) { grid-column: span 4; }
+    div#game-options ul li:nth-child(8) { grid-column: span 9; margin-left: 0; }
 }
-
-div#help ul { margin-left: 10px; }
-
-/*== mobile ==*/
-@media screen and (max-width: 960px) {
-    div#game-options { left: -30px; }
-    #clock { width: 50px; margin-left: }
-    #SHOW_EDGE, #SHOW_MIDDLE, #SHOW_ALL,#SHOW_FILEPICKER { display: none; }
-}
-
-@media screen and (max-width: 479px) {
-    #SHOW_HELP, #clock { display: none; }
-    #JIGSAW_SHUFFLE { margin-left: 15px; }
-    #SHOW_PREVIEW { margin-right: 10px; }
-}
-

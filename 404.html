@@ -5,6 +5,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#070710">
 <title>404 · Lost in space</title>
+<meta name="description" content="That page is not here. Head back to Blaine Miller's apps, photographs and work.">
+<meta property="og:title" content="404 · Lost in space">
+<meta property="og:description" content="That page is not on the map.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://wemiller.com/">
+<meta property="og:image" content="https://wemiller.com/og/404.jpg?v=78ab70fe">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://wemiller.com/og/404.jpg?v=78ab70fe">
 <script>
 // Haven invite links arrive as /apps/haven/u/<id>#<verify>. GitHub Pages can't serve
 // that dynamic path, so route it back to the Haven page (the #verify fragment rides
@@ -14,88 +24,90 @@
   if (m) { location.replace('/apps/haven/?u=' + m[1] + location.hash); }
 })();
 </script>
+<link rel="stylesheet" href="/assets/shell.css?v=5fe8bc2b">
+<script src="/assets/shell.js?v=3b7c366e" defer data-active="none" data-footer="off"></script>
 <style>
-  :root{
-    --violet:#7C3AED; --pink:#EC4899; --amber:#F59E0B;
-    --bg:#070710; --text:#f3f3fb;
-    --brand:linear-gradient(120deg,var(--violet),var(--pink),var(--amber));
-  }
-  *{margin:0;padding:0;box-sizing:border-box}
+  /* A full-screen scene under the shared header. Colours and type: --wm-* tokens from /assets/shell.css. */
+  *,*::before,*::after{box-sizing:border-box}
   html,body{height:100%;overflow:hidden}
-  body{
-    background:var(--bg); color:var(--text); cursor:crosshair;
-    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",system-ui,sans-serif;
-    background-image:
-      radial-gradient(60% 50% at 18% 12%, rgba(124,58,237,.22), transparent 60%),
-      radial-gradient(55% 45% at 85% 88%, rgba(236,72,153,.20), transparent 60%);
-  }
-  #stars{position:fixed;inset:0;z-index:0;display:block}
-  .scene{position:fixed;inset:0;z-index:1;display:flex;flex-direction:column;
-         align-items:center;justify-content:center;text-align:center;padding:24px;gap:6px;
-         will-change:transform;transition:transform .25s cubic-bezier(.2,.7,.2,1)}
-
-  /* the 404 — the middle 0 is a ringed planet */
-  .four04{display:flex;align-items:center;gap:clamp(6px,2vw,22px);font-weight:900;line-height:.8;
-          font-size:clamp(96px,30vw,300px);letter-spacing:-.04em;
-          filter:drop-shadow(0 18px 60px rgba(236,72,153,.35))}
-  .digit{background:var(--brand);-webkit-background-clip:text;background-clip:text;color:transparent;
-         animation:floaty 6s ease-in-out infinite}
-  .digit.b{animation-delay:-3s}
-  .planet{position:relative;width:clamp(96px,30vw,300px);height:clamp(96px,30vw,300px);flex:0 0 auto}
-  .planet .body{position:absolute;inset:14%;border-radius:50%;
-        background:radial-gradient(circle at 32% 28%, #fff6, transparent 40%),
-                   radial-gradient(circle at 70% 75%, rgba(124,58,237,.9), transparent 60%),
-                   conic-gradient(from 200deg,var(--amber),var(--pink),var(--violet),var(--amber));
-        box-shadow:inset -16px -20px 50px rgba(0,0,0,.55), 0 0 60px rgba(236,72,153,.45);
-        animation:spin 18s linear infinite}
-  .planet .ring{position:absolute;inset:0;border-radius:50%;border:6px solid transparent;
-        border-top-color:rgba(255,255,255,.65);border-bottom-color:rgba(245,158,11,.6);
-        transform:rotateX(74deg) rotateZ(18deg) scale(1.32);
-        box-shadow:0 0 22px rgba(124,58,237,.45);animation:ringspin 9s linear infinite}
-
-  /* astronaut, tethered + drifting */
-  .astro{position:absolute;font-size:clamp(34px,8vw,68px);z-index:2;
-         left:50%;top:24%;transform:translate(-50%,-50%);
-         animation:drift 9s ease-in-out infinite;cursor:grab;-webkit-user-select:none;user-select:none;
-         filter:drop-shadow(0 6px 14px rgba(0,0,0,.5))}
-  .astro:active{cursor:grabbing}
+  html{background:var(--wm-bg);-webkit-text-size-adjust:100%;text-size-adjust:100%}
   /* Tapping and dragging are the whole game here; Safari selects text on a
      drag unless told not to, and only honours the prefixed property. */
-  body{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;-webkit-tap-highlight-color:transparent}
+  body.wm{cursor:crosshair;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;-webkit-tap-highlight-color:transparent}
   a{-webkit-user-drag:none}
+  #stars{position:fixed;inset:0;z-index:0;display:block}
+  .scene{position:fixed;inset:var(--wm-nav-h) 0 0 0;z-index:1;display:flex;flex-direction:column;
+         align-items:center;justify-content:center;text-align:center;padding:24px 16px 40px;gap:6px;
+         will-change:transform;transition:transform .25s var(--wm-ease)}
+
+  /* the 404 — the middle 0 is a ringed planet */
+  .four04{display:flex;align-items:center;gap:clamp(6px,2vw,22px);line-height:.8;
+          font:500 clamp(96px,min(30vw,34vh),300px)/.8 var(--wm-serif);letter-spacing:-.04em;color:var(--wm-ink)}
+  .digit{animation:floaty 6s ease-in-out infinite}
+  .digit.b{animation-delay:-3s}
+  .planet{position:relative;width:clamp(96px,min(30vw,34vh),300px);height:clamp(96px,min(30vw,34vh),300px);flex:0 0 auto}
+  .planet .body{position:absolute;inset:14%;border-radius:50%;
+        background:radial-gradient(circle at 32% 28%, rgba(255,255,255,.4), transparent 40%),
+                   radial-gradient(circle at 70% 75%, rgba(12,34,72,.9), transparent 60%),
+                   conic-gradient(from 200deg,#6cb6ff,#2f6fc0,#16386c,#6cb6ff);
+        box-shadow:inset -16px -20px 50px rgba(0,0,0,.5), var(--wm-shadow);
+        animation:spin 18s linear infinite}
+  .planet .ring{position:absolute;inset:0;border-radius:50%;border:6px solid transparent;
+        border-top-color:color-mix(in srgb,var(--wm-ink) 60%,transparent);
+        border-bottom-color:color-mix(in srgb,var(--wm-accent) 70%,transparent);
+        transform:rotateX(74deg) rotateZ(18deg) scale(1.32);animation:ringspin 9s linear infinite}
+
+  /* astronaut, tethered + drifting */
+  .astro{position:absolute;font:400 clamp(44px,8vw,68px)/1 var(--wm-sans);letter-spacing:0;z-index:2;
+         left:50%;top:24%;transform:translate(-50%,-50%);
+         animation:drift 9s ease-in-out infinite;cursor:grab;-webkit-user-select:none;user-select:none;
+         filter:drop-shadow(0 6px 14px rgba(0,0,0,.35))}
+  .astro:active{cursor:grabbing}
   /* Fixed top-center banner, OUTSIDE the parallax-transformed scene + spinning
      astronaut, so the text never gets rotated, clipped, or mangled. */
-  .bubble{position:fixed;top:20px;left:50%;z-index:30;
-          display:inline-block;white-space:nowrap;
-          font-size:clamp(14px,3.6vw,16px);font-weight:700;line-height:1.35;
-          background:#fff;color:#15151f;padding:9px 18px;border-radius:18px;
-          box-shadow:0 10px 28px rgba(0,0,0,.45);pointer-events:none;
+  .bubble{position:fixed;top:calc(var(--wm-nav-h) + 16px);left:50%;z-index:30;
+          display:inline-block;white-space:nowrap;max-width:calc(100vw - 32px);
+          font:600 clamp(14px,3.6vw,16px)/1.35 var(--wm-sans);
+          background:var(--wm-ink);color:var(--wm-bg);padding:9px 18px;border-radius:18px;
+          box-shadow:var(--wm-shadow);pointer-events:none;
           transform:translateX(-50%) translateY(-16px) scale(.96);opacity:0;
-          transition:transform .26s cubic-bezier(.3,1.5,.5,1),opacity .26s}
+          transition:transform .26s var(--wm-ease),opacity .26s}
   .bubble.show{transform:translateX(-50%) translateY(0) scale(1);opacity:1}
 
-  .lead{font-size:clamp(20px,4.5vw,34px);font-weight:800;margin-top:18px;letter-spacing:-.01em}
-  .sub{font-size:clamp(13px,2.6vw,16px);color:#c9c9e0;opacity:.8;max-width:30ch;margin-top:4px}
+  .lead{font:500 clamp(1.5rem,4.5vw,2.4rem)/1.1 var(--wm-serif);letter-spacing:-.02em;margin-top:18px;text-wrap:balance}
+  .sub{font-size:clamp(.9rem,2.6vw,1.05rem);line-height:1.55;color:var(--wm-soft);max-width:32ch;margin-top:6px}
   .btns{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:22px;z-index:3}
-  .btn{font-size:14px;font-weight:700;text-decoration:none;color:#fff;padding:12px 20px;border-radius:999px;
-       border:1px solid rgba(255,255,255,.16);transition:transform .15s ease, box-shadow .2s ease;cursor:pointer}
-  .btn.primary{background:var(--brand);box-shadow:0 10px 30px rgba(236,72,153,.4);border-color:transparent}
-  .btn:hover{transform:translateY(-2px) scale(1.03);box-shadow:0 14px 34px rgba(124,58,237,.5)}
-  .hint{position:fixed;bottom:14px;left:0;right:0;text-align:center;font-size:11px;color:#8a8aa8;z-index:3;letter-spacing:.04em}
+  .hint{position:fixed;bottom:calc(12px + env(safe-area-inset-bottom));left:16px;right:16px;text-align:center;
+        font:400 .75rem/1.4 var(--wm-sans);color:var(--wm-faint);z-index:3;letter-spacing:.04em;transition:opacity .3s}
+
+  /* the language switcher sits in the bottom-right corner; on a phone lift the hint above it */
+  @media (max-width:768px){.hint{bottom:calc(64px + env(safe-area-inset-bottom))}}
 
   @keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
   @keyframes drift{0%,100%{transform:translate(-50%,-50%) rotate(-8deg)}
                    50%{transform:translate(calc(-50% + 16px),calc(-50% - 18px)) rotate(10deg)}}
   @keyframes spin{to{transform:rotate(360deg)}}
   @keyframes ringspin{to{transform:rotateX(74deg) rotateZ(378deg) scale(1.32)}}
-  @media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}}
+  @media (prefers-reduced-motion: reduce){.scene,.scene *,.bubble,.hint{animation:none!important;transition:none!important}}
 </style>
+  <link rel="alternate" hreflang="x-default" href="https://wemiller.com/404.html">
+  <link rel="alternate" hreflang="en" href="https://wemiller.com/404.html">
+  <link rel="alternate" hreflang="zh-Hans" href="https://wemiller.com/404.html?lang=zh-Hans">
+  <link rel="alternate" hreflang="ja" href="https://wemiller.com/404.html?lang=ja">
+  <link rel="alternate" hreflang="de" href="https://wemiller.com/404.html?lang=de">
+  <link rel="alternate" hreflang="fr" href="https://wemiller.com/404.html?lang=fr">
+  <link rel="alternate" hreflang="es" href="https://wemiller.com/404.html?lang=es">
+  <link rel="alternate" hreflang="ko" href="https://wemiller.com/404.html?lang=ko">
+  <link rel="alternate" hreflang="pt-BR" href="https://wemiller.com/404.html?lang=pt-BR">
+  <link rel="alternate" hreflang="it" href="https://wemiller.com/404.html?lang=it">
+  <script src="/i18n/i18n.js?v=40521faf" defer data-page="404" data-pos="bottom-right"></script>
 </head>
-<body>
+<body class="wm">
 <canvas id="stars"></canvas>
 <div class="bubble" id="bubble"></div>
 
-<div class="scene" id="scene">
+<h1 style="position:absolute;width:1px;height:1px;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap">Page not found</h1>
+<div class="scene" id="scene" role="main">
   <div class="four04">
     <span class="digit">4</span>
     <span class="planet">
@@ -105,19 +117,42 @@
     </span>
     <span class="digit b">4</span>
   </div>
-  <div class="lead">This page floated off into the void.</div>
-  <div class="sub">The link you followed has drifted past the edge of the map. No worries — let's tow you back.</div>
+  <div class="lead" data-i18n="this-page-floated-off.2a575d">This page floated off into the void.</div>
+  <div class="sub" data-i18n="the-link-you-followed.9e929d">The link you followed has drifted past the edge of the map. No worries — let's tow you back.</div>
   <div class="btns">
-    <a class="btn primary" href="/">🛰️ Beam me home</a>
-    <a class="btn" href="/apps/">Explore the apps →</a>
+    <a class="wm-btn" href="/" data-i18n="beam-me-home.fa5a87">🛰️ Beam me home</a>
+    <a class="wm-btn wm-btn--line" href="/apps/" data-i18n="explore-the-apps.8280e4">Explore the apps →</a>
   </div>
 </div>
-<div class="hint" id="hint">tap anywhere for a shooting star · tap the astronaut</div>
+<div class="hint" id="hint" data-i18n="tap-anywhere-for-a.a34147">tap anywhere for a shooting star · tap the astronaut</div>
+
+<!-- What the astronaut says. Kept in the page so it is translated with everything else. -->
+<div id="msgs" hidden>
+  <span data-msg="line" data-i18n="uh-oh.2e6ae1">uh oh.</span>
+  <span data-msg="line" data-i18n="wrong-turn.eb6a7a">wrong turn?</span>
+  <span data-msg="line" data-i18n="send-snacks.146eb0">send snacks 🍪</span>
+  <span data-msg="line" data-i18n="i-m-not-lost.1f8e00">i'm not lost, you are</span>
+  <span data-msg="line" data-i18n="this-isn-t-earth.f317c3">this isn't earth…</span>
+  <span data-msg="line" data-i18n="404-light-years-away.ce5d9d">404 light-years away</span>
+  <span data-msg="line" data-i18n="tell-blaine-i-said.45fea9">tell Blaine i said hi</span>
+  <span data-msg="line" data-i18n="weeeeee.f3e616">weeeeee 🌀</span>
+</div>
 
 <script>
 (function(){
   var c = document.getElementById('stars'), x = c.getContext('2d');
   var W, H, stars = [], shooters = [], DPR = Math.min(2, window.devicePixelRatio || 1);
+  // Still stars, no parallax and no unprompted shooting stars when the visitor asks for less motion.
+  var REDUCE = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // Star colours follow the page: pale stars on navy, soft ink dots on paper.
+  var lightMQ = window.matchMedia ? matchMedia('(prefers-color-scheme: light)') : null;
+  var COL, HEAD, TAIL, DIM;
+  function palette(){
+    if (lightMQ && lightMQ.matches) { COL = ['20,24,33','20,24,33','11,98,196','31,95,168']; HEAD = '20,24,33'; TAIL = '11,98,196'; DIM = 0.4; }
+    else { COL = ['238,242,248','238,242,248','108,182,255','142,197,255']; HEAD = '255,255,255'; TAIL = '108,182,255'; DIM = 1; }
+  }
+  palette();
+  if (lightMQ && lightMQ.addEventListener) lightMQ.addEventListener('change', palette);
   function resize(){
     W = c.width = innerWidth * DPR; H = c.height = innerHeight * DPR;
     c.style.width = innerWidth + 'px'; c.style.height = innerHeight + 'px';
@@ -131,12 +166,11 @@
   }
   addEventListener('resize', resize); resize();
 
-  var COL = ['255,255,255','236,72,153','124,58,237','245,158,11'];
   function star(s){
-    s.t += s.ts; var tw = 0.55 + Math.sin(s.t)*0.45;
+    if (!REDUCE) s.t += s.ts; var tw = 0.55 + Math.sin(s.t)*0.45;
     var col = COL[(s.r*97|0) % COL.length];
     x.beginPath(); x.arc(s.x + px*s.z*40, s.y + py*s.z*40, s.r*s.z*DPR, 0, 7);
-    x.fillStyle = 'rgba('+col+','+(tw*s.z)+')'; x.fill();
+    x.fillStyle = 'rgba('+col+','+(tw*s.z*DIM)+')'; x.fill();
   }
   function spawnShooter(sx, sy){
     var a = Math.PI*0.18 + Math.random()*0.18;
@@ -146,7 +180,7 @@
   function shooter(s){
     s.x += s.vx; s.y += s.vy; s.life -= 0.018;
     var g = x.createLinearGradient(s.x, s.y, s.x - s.vx*5, s.y - s.vy*5);
-    g.addColorStop(0,'rgba(255,255,255,'+s.life+')'); g.addColorStop(1,'rgba(236,72,153,0)');
+    g.addColorStop(0,'rgba('+HEAD+','+s.life+')'); g.addColorStop(1,'rgba('+TAIL+',0)');
     x.strokeStyle = g; x.lineWidth = 2.4*DPR; x.lineCap='round';
     x.beginPath(); x.moveTo(s.x,s.y); x.lineTo(s.x - s.vx*5, s.y - s.vy*5); x.stroke();
   }
@@ -161,11 +195,12 @@
   loop();
 
   // random shooting stars
-  setInterval(function(){ if(Math.random()<0.6) spawnShooter(Math.random()*innerWidth*0.5, Math.random()*innerHeight*0.4); }, 2600);
+  setInterval(function(){ if(!REDUCE && Math.random()<0.6) spawnShooter(Math.random()*innerWidth*0.5, Math.random()*innerHeight*0.4); }, 2600);
 
   // parallax (mouse + gyro)
   var scene = document.getElementById('scene');
   function parallax(nx, ny){
+    if (REDUCE) return;
     tpx = nx; tpy = ny;
     scene.style.transform = 'translate('+(nx*-22)+'px,'+(ny*-22)+'px)';
   }
@@ -180,10 +215,12 @@
 
   // astronaut talks
   var astro = document.getElementById('astro'), bubble = document.getElementById('bubble');
-  var lines = ["uh oh.","wrong turn?","send snacks 🍪","i'm not lost, you are","this isn't earth…","404 light-years away","tell Blaine i said hi","weeeeee 🌀"], li=0, bt;
+  // Read at tap time, so a translated page's lines are the ones shown.
+  function lines(){ return Array.prototype.map.call(document.querySelectorAll('#msgs [data-msg="line"]'), function(n){ return n.textContent; }); }
+  var li=0, bt;
   astro.addEventListener('pointerdown', function(e){
     e.stopPropagation();
-    bubble.textContent = lines[li++ % lines.length]; bubble.classList.add('show');
+    var said = lines(); bubble.textContent = said[li++ % said.length]; bubble.classList.add('show');
     astro.style.animation='none'; void astro.offsetWidth;
     astro.style.transform='translate(-50%,-50%) rotate('+(Math.random()*720-360)+'deg) scale(1.25)';
     setTimeout(function(){ astro.style.transition='transform .8s cubic-bezier(.2,.8,.2,1)';

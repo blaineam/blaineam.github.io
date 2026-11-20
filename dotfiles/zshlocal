@@ -1,9 +1,26 @@
-# ~/.zshlocal - Lightweight shell bootstrap for macOS (brew) or Debian/Ubuntu (apt)
-# Works with both zsh and bash
+# ~/.zshlocal - Lightweight shell bootstrap for macOS (brew), Debian/Ubuntu (apt) and
+# Fedora/RHEL/CentOS/Rocky/Alma/Amazon Linux (dnf, then yum)
+# Works with both zsh and bash, including inside WSL on Windows (it is Linux: apt or dnf).
+# Windows itself has profile.ps1 (PowerShell) and cmdlocal.cmd (Command Prompt).
+# For OpenWrt and other BusyBox/opkg systems use the POSIX sh flavour next to this
+# file: ashlocal.
 # Install with:
 #   curl -fsSL https://raw.githubusercontent.com/blaineam/blaineam.github.io/main/dotfiles/zshlocal -o ~/.zshlocal && echo '[ -f ~/.zshlocal ] && source ~/.zshlocal' >> ~/.zshrc && echo '[ -f ~/.zshlocal ] && source ~/.zshlocal' >> ~/.bashrc
 # Update with:
 #   curl -fsSL https://raw.githubusercontent.com/blaineam/blaineam.github.io/main/dotfiles/zshlocal -o ~/.zshlocal && source ~/.zshlocal
+#
+# Offline and air-gapped machines:
+#   ZSHLOCAL_OFFLINE=1        never touch the network or a package manager; just set up the
+#                             prompt and aliases with the tools that are already there.
+#   touch ~/.zshlocal-offline the same, as a file, for when setting a variable is awkward.
+#   ZSHLOCAL_OFFLINE=0        skip the connectivity check and install as if online.
+#   (unset)                   a check of a few seconds decides; when it fails, installs are
+#                             skipped, one line says so, and it is tried again a day later
+#                             (or at once after: rm ~/.zshlocal-setup-skipped).
+#   ZSHLOCAL_PROBE_URL=url    what the check requests (default: this file on GitHub).
+#   ZSHLOCAL_BUNDLE=/path     install packages from a directory made by bundle.sh instead
+#                             of the network (dpkg -i / dnf install ./*.rpm / rpm -Uvh).
+#   ZSHLOCAL_BUNDLE_FORCE=1   use a bundle built on another release or CPU anyway.
 
 # --- Shell detection and switching ---
 # If zsh is available and we're in bash, switch to zsh
@@ -22,6 +39,170 @@ elif [ -n "$BASH_VERSION" ]; then
   _CURRENT_SHELL="bash"
 fi
 
+# --- Setup helpers (offline detection, root, offline bundles) ---
+
+# Run a command as root: directly when already root, through sudo otherwise.
+_zl_root() {
+  if [ "$(id -u 2>/dev/null)" = "0" ]; then
+    "$@"
+  elif command -v sudo >/dev/null 2>&1; then
+    sudo "$@"
+  else
+    return 1
+  fi
+}
+
+# Quick connectivity check, a few seconds at most. Any HTTP answer counts as online.
+# Point ZSHLOCAL_PROBE_URL at an internal mirror if this machine has one.
+_zl_online() {
+  local url="${ZSHLOCAL_PROBE_URL:-https://raw.githubusercontent.com/blaineam/blaineam.github.io/main/dotfiles/zshlocal}"
+  if command -v curl >/dev/null 2>&1; then
+    curl -sI -o /dev/null --connect-timeout 3 --max-time 4 "$url" 2>/dev/null
+  elif command -v wget >/dev/null 2>&1; then
+    if command -v timeout >/dev/null 2>&1; then
+      timeout 5 wget -q --spider -T 4 "$url" 2>/dev/null
+    else
+      wget -q --spider -T 4 "$url" 2>/dev/null
+    fi
+  else
+    return 1
+  fi
+}
+
+# Say in one line what was skipped (at most once a day) and remember it, so the next
+# shells neither repeat the line nor repeat the connectivity check.
+_zl_skip() {
+  local marker=~/.zshlocal-setup-skipped
+  if [ -z "$(find "$marker" -mtime -1 2>/dev/null)" ]; then
+    echo "zshlocal: $1 The prompt and aliases are still set up."
+    touch "$marker" 2>/dev/null
+  fi
+  return 0
+}
+
+# "<distro> <release> <arch>", compared with the PLATFORM file bundle.sh writes, because
+# packages built for another release or CPU must not be installed.
+_zl_platform() {
+  if [ "$(uname -s)" = "Darwin" ]; then
+    echo "macos $(sw_vers -productVersion 2>/dev/null | cut -d. -f1) $(uname -m)"
+  else
+    echo "$( . /etc/os-release 2>/dev/null; echo "${ID:-unknown} ${VERSION_ID:-unknown}" ) $(uname -m)"
+  fi
+}
+
+# Does a bundle's PLATFORM ($1) fit this machine ($2)? Distro and CPU must be equal. The
+# release may be given more coarsely in the bundle: a bundle made with
+# "bundle.sh --target dnf:rocky:9:x86_64" says "rocky 9 x86_64" and fits Rocky 9.4.
+_zl_platform_ok() {
+  if [ "$1" = "$2" ]; then
+    return 0
+  fi
+  local b_id="${1%% *}"
+  local b_rest="${1#* }"
+  local b_rel="${b_rest%% *}"
+  local b_arch="${b_rest#* }"
+  local h_id="${2%% *}"
+  local h_rest="${2#* }"
+  local h_rel="${h_rest%% *}"
+  local h_arch="${h_rest#* }"
+  if [ "$b_id" != "$h_id" ] || [ "$b_arch" != "$h_arch" ]; then
+    return 1
+  fi
+  case "$h_rel" in
+    "$b_rel".*) return 0 ;;
+  esac
+  return 1
+}
+
+# Install from a bundle made by bundle.sh, with no network at all.
+#   $1 = package manager, $2 = extracted bundle directory.
+#   Returns 0 when the packages went in, 2 when the package manager reported errors,
+#   1 when nothing was attempted.
+# Honest limits: there is no index to resolve against, so only what is in the bundle can be
+# installed. If the bundle lacks a dependency the package manager reports it and stops.
+_zl_install_bundle() {
+  local pm="$1"
+  local dir="$2"
+  local pkgdir=""
+  local ext=""
+  case $pm in
+    apt) pkgdir="$dir/packages/apt"; ext="deb" ;;
+    dnf|yum) pkgdir="$dir/packages/rpm"; ext="rpm" ;;
+    brew) pkgdir="$dir/packages/brew"; ext="" ;;
+  esac
+
+  if [ ! -d "$dir" ]; then
+    _zl_skip "bundle $dir is not a directory, so no packages were installed."
+    return 1
+  fi
+  if [ ! -d "$pkgdir" ]; then
+    _zl_skip "the bundle has no packages for $pm (it was built without them, or for another package manager), so none were installed."
+    return 1
+  fi
+  if [ -n "$ext" ] && [ -z "$(find "$pkgdir" -name "*.$ext" 2>/dev/null | head -n 1)" ]; then
+    _zl_skip "the bundle has no .$ext files in $pkgdir, so no packages were installed."
+    return 1
+  fi
+
+  local built=""
+  if [ -r "$pkgdir/PLATFORM" ]; then
+    read -r built < "$pkgdir/PLATFORM"
+  fi
+  local here="$(_zl_platform)"
+  if [ -n "$built" ] && ! _zl_platform_ok "$built" "$here" && [ "${ZSHLOCAL_BUNDLE_FORCE:-}" != "1" ]; then
+    _zl_skip "the bundle was built on '$built' but this is '$here', so its packages were not installed (ZSHLOCAL_BUNDLE_FORCE=1 overrides)."
+    return 1
+  fi
+
+  if [ "$pm" != "brew" ] && ! _zl_root true >/dev/null 2>&1; then
+    _zl_skip "installing the bundled packages needs root or sudo, so none were installed."
+    return 1
+  fi
+
+  local failed=0
+  echo "Installing packages from $pkgdir with $pm (offline)..."
+  case $pm in
+    apt)
+      # -G never downgrades, -E skips what is already at this version.
+      if ! _zl_root sh -c 'cd "$1" && DEBIAN_FRONTEND=noninteractive dpkg -iGE ./*.deb >/dev/null' sh "$pkgdir"; then
+        failed=2
+        echo "zshlocal: dpkg reported errors. Packages may be left unconfigured if the bundle lacks a dependency; 'sudo dpkg --configure -a' retries, 'sudo apt-get -f install' fixes it once online."
+      fi
+      ;;
+    dnf)
+      # --disablerepo='*' keeps dnf off the network; it resolves among the given files only.
+      if ! _zl_root sh -c 'cd "$1" && dnf install -y -q --disablerepo="*" ./*.rpm' sh "$pkgdir"; then
+        echo "zshlocal: dnf could not install the whole bundle, trying rpm -Uvh..."
+        _zl_root sh -c 'cd "$1" && rpm -Uvh ./*.rpm' sh "$pkgdir" || { failed=2; echo "zshlocal: rpm reported errors, some bundled packages were not installed."; }
+      fi
+      ;;
+    yum)
+      if ! _zl_root sh -c 'cd "$1" && yum install -y -q --disablerepo="*" ./*.rpm' sh "$pkgdir"; then
+        echo "zshlocal: yum could not install the whole bundle, trying rpm -Uvh..."
+        _zl_root sh -c 'cd "$1" && rpm -Uvh ./*.rpm' sh "$pkgdir" || { failed=2; echo "zshlocal: rpm reported errors, some bundled packages were not installed."; }
+      fi
+      ;;
+    brew)
+      # Best effort. Homebrew has no real offline mode: it must already be installed, and the
+      # bottles in the bundle only fit the macOS version and CPU they were fetched for.
+      if ! command -v brew >/dev/null 2>&1; then
+        _zl_skip "Homebrew is not installed and cannot be installed offline, so the bundled bottles were not used."
+        return 1
+      fi
+      local brew_packages=(git tmux htop vim imagemagick ffmpeg rclone ncdu "the_silver_searcher" fzf watch tree bandwhich)
+      for pkg in "${brew_packages[@]}"; do
+        if ! brew list "$pkg" >/dev/null 2>&1; then
+          HOMEBREW_CACHE="$pkgdir" HOMEBREW_NO_AUTO_UPDATE=1 HOMEBREW_API_AUTO_UPDATE_SECS=31536000 \
+            HOMEBREW_CURL_RETRIES=0 HOMEBREW_NO_INSTALL_CLEANUP=1 HOMEBREW_NO_ENV_HINTS=1 \
+            brew install "$pkg" >/dev/null 2>&1 || { failed=2; echo "zshlocal: could not install $pkg from the bundle."; }
+        fi
+      done
+      ;;
+  esac
+  hash -r 2>/dev/null || true
+  return $failed
+}
+
 setup_shell() {
   local done_marker=~/.zshlocal-setup-done
   if [ -f "$done_marker" ]; then
@@ -34,23 +215,85 @@ setup_shell() {
   case $OS in
     Darwin)
       PKGMGR="brew"
-      if ! command -v brew >/dev/null 2>&1; then
-        echo "Installing Homebrew..."
-        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-      fi
       ;;
     Linux)
       if command -v apt >/dev/null 2>&1; then
         PKGMGR="apt"
-        sudo apt update -qq >/dev/null 2>&1 || true
+      elif command -v dnf >/dev/null 2>&1; then
+        PKGMGR="dnf"
+      elif command -v yum >/dev/null 2>&1; then
+        PKGMGR="yum"
+      elif command -v opkg >/dev/null 2>&1; then
+        _zl_skip "opkg systems use the ashlocal flavour instead (same place as zshlocal), so no packages were installed."
+        return 1
       else
-        echo "Unsupported Linux distro (apt not found)"
+        echo "Unsupported Linux distro (apt, dnf or yum not found)"
         return 1
       fi
       ;;
     *)
       echo "Unsupported OS: $OS"
       return 1
+      ;;
+  esac
+
+  # --- Offline bundle: ZSHLOCAL_BUNDLE=/path (or the path the bundle's install.sh left in
+  # ~/.zshlocal-bundle). Nothing below touches the network. ---
+  local bundle="${ZSHLOCAL_BUNDLE:-}"
+  if [ -z "$bundle" ] && [ -r ~/.zshlocal-bundle ]; then
+    read -r bundle < ~/.zshlocal-bundle
+  fi
+  if [ -n "$bundle" ]; then
+    _zl_install_bundle "$PKGMGR" "$bundle"
+    case $? in
+      0)
+        rm -f ~/.zshlocal-bundle ~/.zshlocal-setup-skipped
+        touch "$done_marker"
+        echo "Shell setup complete! Restart your shell or source your rc file."
+        ;;
+      2)
+        # Tried and partly failed: do not retry on every new shell.
+        rm -f ~/.zshlocal-bundle ~/.zshlocal-setup-skipped
+        touch "$done_marker"
+        echo "zshlocal: to try the bundle again, remove ~/.zshlocal-setup-done and start a shell with ZSHLOCAL_BUNDLE=$bundle"
+        ;;
+    esac
+    return 0
+  fi
+
+  # --- Offline: ZSHLOCAL_OFFLINE=1 forces it, ZSHLOCAL_OFFLINE=0 skips the check, otherwise
+  # a quick probe decides. Offline means no installer, no package index, no installs. ---
+  local offline="${ZSHLOCAL_OFFLINE:-}"
+  if [ -z "$offline" ] && [ -f ~/.zshlocal-offline ]; then
+    offline=1
+  fi
+  case "$offline" in
+    1|true|yes)
+      _zl_skip "offline mode is on (ZSHLOCAL_OFFLINE=1 or ~/.zshlocal-offline), skipped $PKGMGR package installs."
+      return 0
+      ;;
+    0|false|no)
+      ;;
+    *)
+      if [ -n "$(find ~/.zshlocal-setup-skipped -mtime -1 2>/dev/null)" ]; then
+        return 0
+      fi
+      if ! _zl_online; then
+        _zl_skip "no network, skipped $PKGMGR package installs (retries in a day, or now with ZSHLOCAL_OFFLINE=0)."
+        return 0
+      fi
+      ;;
+  esac
+
+  case $PKGMGR in
+    brew)
+      if ! command -v brew >/dev/null 2>&1; then
+        echo "Installing Homebrew..."
+        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+      fi
+      ;;
+    apt)
+      sudo apt update -qq >/dev/null 2>&1 || true
       ;;
   esac
 
@@ -80,9 +323,50 @@ setup_shell() {
         # Refresh command hash for new binaries
         hash -r 2>/dev/null || true
         ;;
+      dnf|yum)
+        # Same tools as apt. Names that differ: vim-enhanced, ImageMagick, the_silver_searcher,
+        # procps-ng. dnf/yum refresh their own metadata, so there is no makecache step.
+        local packages=(git tmux htop vim-enhanced ImageMagick ffmpeg rclone ncdu the_silver_searcher fzf procps-ng tree nethogs)
+        local to_install=()
+        for pkg in "${packages[@]}"; do
+          if ! rpm -q "$pkg" >/dev/null 2>&1; then
+            to_install+=("$pkg")
+          fi
+        done
+        if [ ${#to_install[@]} -gt 0 ]; then
+          if ! _zl_root true >/dev/null 2>&1; then
+            _zl_skip "installing packages needs root or sudo, skipped $PKGMGR package installs."
+            return 0
+          fi
+          echo "Installing ${to_install[*]} with $PKGMGR..."
+          # One unknown name fails a whole dnf transaction, so on failure go one at a time
+          # and skip what the enabled repos do not carry.
+          if ! _zl_root "$PKGMGR" install -y -q "${to_install[@]}" >/dev/null 2>&1; then
+            local skipped=""
+            for pkg in "${to_install[@]}"; do
+              if rpm -q "$pkg" >/dev/null 2>&1; then
+                continue
+              fi
+              if _zl_root "$PKGMGR" install -y -q "$pkg" >/dev/null 2>&1; then
+                continue
+              fi
+              # Fedora ships ffmpeg as ffmpeg-free unless RPM Fusion is enabled.
+              if [ "$pkg" = "ffmpeg" ] && _zl_root "$PKGMGR" install -y -q ffmpeg-free >/dev/null 2>&1; then
+                continue
+              fi
+              skipped="$skipped $pkg"
+            done
+            if [ -n "$skipped" ]; then
+              echo "zshlocal: not in the enabled repos, skipped:$skipped (on RHEL-family systems most of these come from EPEL, ffmpeg from RPM Fusion)."
+            fi
+          fi
+        fi
+        hash -r 2>/dev/null || true
+        ;;
     esac
   fi
 
+  rm -f ~/.zshlocal-setup-skipped
   touch "$done_marker"
   echo "Shell setup complete! Restart your shell or source your rc file."
 }
@@ -128,7 +412,7 @@ _fmt_duration() {
   [ -n "$out" ] && printf '%s' "$out"
 }
 
-# --- Custom prompt: user(teal)@(red)host(yellow)|(red)dir(green)(duration●)(red parens)→(purple) typed(white) ---
+# --- Custom prompt: user(teal)@(red)host(violet)|(red)dir(green)(duration●)(red parens)→(purple) typed(white) ---
 if [ "$_CURRENT_SHELL" = "zsh" ]; then
   zmodload zsh/datetime
   setopt PROMPT_SUBST
@@ -168,13 +452,15 @@ if [ "$_CURRENT_SHELL" = "zsh" ]; then
     else
       info="%F{red}[%f${circle}%F{red}]%f"
     fi
+    # Host colour as a raw 256-colour escape (violet), the same one the bash prompt uses.
+    local violet=$'\e[38;5;141m'
     local branch=""
     local git_branch
     git_branch=$(git branch --show-current 2>/dev/null)
     if [ -n "$git_branch" ]; then
       branch=" %F{red}(%f%F{#ff69b4}${git_branch}%f%F{red})%f"
     fi
-    echo "%F{cyan}%n%f%F{red}@%f%F{yellow}%m%f%F{red}|%f%F{green}%~%f${branch}${info}
+    echo "%F{cyan}%n%f%F{red}@%f%{${violet}%}%m%f%F{red}|%f%F{green}%~%f${branch}${info}
 %F{magenta}→%f %F{white}"
   }
 
@@ -200,7 +486,7 @@ elif [ "$_CURRENT_SHELL" = "bash" ]; then
 
     local teal='\033[0;36m'
     local red='\033[0;31m'
-    local yellow='\033[0;33m'
+    local violet='\033[38;5;141m'
     local green='\033[0;32m'
     local purple='\033[0;35m'
     local pink='\033[38;5;206m'
@@ -233,7 +519,7 @@ elif [ "$_CURRENT_SHELL" = "bash" ]; then
       branch=" \[${red}\](\[${pink}\]${git_branch}\[${red}\])\[${reset}\]"
     fi
 
-    PS1="\[${teal}\]\u\[${red}\]@\[${yellow}\]\h\[${red}\]|\[${green}\]\w\[${reset}\]${branch}${info}\n\[${purple}\]→\[${reset}\] \[${white}\]"
+    PS1="\[${teal}\]\u\[${red}\]@\[${violet}\]\h\[${red}\]|\[${green}\]\w\[${reset}\]${branch}${info}\n\[${purple}\]→\[${reset}\] \[${white}\]"
   }
 
   PROMPT_COMMAND='_bash_prompt'
@@ -283,3 +569,30 @@ alias gp='git push -u origin HEAD'
 alias gb='git branch'
 alias gba='git branch -a'
 alias gco='git checkout'
+
+# --- WSL niceties: only inside WSL, only when Windows interop is on, never over an
+# existing command. Nothing here (or above) needs systemd. ---
+if [ -n "${WSL_DISTRO_NAME:-}" ] || grep -qi microsoft /proc/version 2>/dev/null; then
+  if ! command -v open >/dev/null 2>&1; then
+    if command -v wslview >/dev/null 2>&1; then
+      alias open='wslview'
+    elif command -v explorer.exe >/dev/null 2>&1; then
+      # explorer.exe wants a Windows path and always exits 1, so translate and ignore that.
+      _wsl_open() {
+        local target="${1:-.}"
+        case "$target" in
+          *://*) explorer.exe "$target" ;;
+          *) explorer.exe "$(wslpath -w "$target" 2>/dev/null || echo "$target")" ;;
+        esac
+        return 0
+      }
+      alias open='_wsl_open'
+    fi
+  fi
+  if ! command -v pbcopy >/dev/null 2>&1 && command -v clip.exe >/dev/null 2>&1; then
+    alias pbcopy='clip.exe'
+  fi
+  if ! command -v pbpaste >/dev/null 2>&1 && command -v powershell.exe >/dev/null 2>&1; then
+    alias pbpaste="powershell.exe -NoProfile -Command Get-Clipboard | tr -d '\r'"
+  fi
+fi

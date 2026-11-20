@@ -9,3 +9,10 @@ node_modules/
 
 # Poster-generator prototype output — never deployed, never committed.
 apps/.poster-previews/
+
+# Private résumé details and the locally generated PDF (node scripts/build-site.mjs --pdf).
+content/private.json
+out/
+
+# The contingency note and anything else that must not be public before its time.
+content/private/

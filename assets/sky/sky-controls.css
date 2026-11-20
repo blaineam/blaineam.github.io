@@ -1,0 +1,93 @@
+/* sky-controls.css: the optional control bar for sky.js.
+ * Dark glass that stays readable over any sky; system fonts; no yellow or gold; 44px targets.
+ * Restyle through the custom properties on .skyc. */
+.skyc {
+  --skyc-bg: rgba(8, 12, 24, .78);
+  --skyc-line: rgba(255, 255, 255, .2);
+  --skyc-fg: #fff;
+  --skyc-dim: rgba(255, 255, 255, .78);
+  --skyc-accent: #9bbcff;
+  --skyc-field: rgba(255, 255, 255, .1);
+  box-sizing: border-box; margin: 0; padding: 14px 16px 16px;
+  color: var(--skyc-fg); background: var(--skyc-bg);
+  border: 1px solid var(--skyc-line); border-radius: 14px;
+  -webkit-backdrop-filter: blur(14px) saturate(1.2); backdrop-filter: blur(14px) saturate(1.2);
+  font: 14px/1.35 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  color-scheme: dark;
+}
+.skyc *, .skyc *::before, .skyc *::after { box-sizing: border-box; }
+.skyc__read { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 16px; margin-bottom: 12px; }
+.skyc__clock { margin: 0; font-size: 17px; font-weight: 600; font-variant-numeric: tabular-nums; }
+.skyc__status { margin: 0; color: var(--skyc-dim); font-variant-numeric: tabular-nums; }
+.skyc__sr { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+
+.skyc__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px 14px; align-items: end; }
+.skyc__field { display: flex; flex-direction: column; gap: 4px; min-width: 0; margin: 0; padding: 0; border: 0; position: relative; }
+.skyc__field > label, .skyc legend { padding: 0; font-size: 12px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: var(--skyc-dim); }
+.skyc legend { margin-bottom: 4px; }
+.skyc output { position: absolute; top: 0; right: 0; font-size: 12px; color: var(--skyc-dim); font-variant-numeric: tabular-nums; }
+
+.skyc input[type="number"], .skyc input[type="datetime-local"], .skyc select, .skyc__btn {
+  width: 100%; min-width: 0; min-height: 44px; padding: 0 12px;
+  color: var(--skyc-fg); background: var(--skyc-field);
+  border: 1px solid var(--skyc-line); border-radius: 10px;
+  font: inherit; font-size: 16px; /* 16px stops iOS zooming on focus */
+}
+.skyc select option { color: #fff; background: #10172a; }
+.skyc__btn { font-weight: 600; cursor: pointer; background: rgba(155, 188, 255, .2); border-color: rgba(155, 188, 255, .55); }
+.skyc__btn:hover { background: rgba(155, 188, 255, .32); }
+.skyc input[type="range"] { width: 100%; height: 44px; margin: 0; background: transparent; accent-color: var(--skyc-accent); cursor: pointer; }
+
+.skyc__pair { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; min-width: 0; }
+@media (min-width: 421px) { .skyc__pair { grid-column: span 2; } }
+.skyc__btn--plain { width: auto; flex: none; padding: 0 16px; white-space: nowrap; }
+.skyc__btn[aria-pressed="true"] { background: var(--skyc-accent); color: #0a1024; border-color: transparent; }
+.skyc__btn[disabled] { opacity: .6; cursor: progress; }
+.skyc__geo { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--skyc-line); }
+.skyc__geo > div { flex: 1 1 220px; min-width: 0; }
+.skyc__note { margin: 0; font-size: 13px; color: var(--skyc-dim); }
+.skyc__msg { color: var(--skyc-fg); font-weight: 600; }
+.skyc__msg:empty { display: none; }
+
+.skyc__segs { display: flex; border: 1px solid var(--skyc-line); border-radius: 10px; overflow: hidden; }
+.skyc__seg { flex: 1; position: relative; display: flex; }
+.skyc__seg input { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: pointer; }
+.skyc__seg label { flex: 1; display: grid; place-items: center; min-height: 44px; padding: 0 8px; font-weight: 600; color: var(--skyc-dim); background: var(--skyc-field); }
+.skyc__seg + .skyc__seg label { border-left: 1px solid var(--skyc-line); }
+.skyc__seg input:checked + label { color: #0a1024; background: var(--skyc-accent); }
+
+.skyc__toggles { flex-direction: row; flex-wrap: wrap; gap: 4px 14px; }
+.skyc__check { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; }
+.skyc__check input { width: 22px; height: 22px; margin: 0; accent-color: var(--skyc-accent); cursor: pointer; }
+.skyc__check label { padding: 11px 0; cursor: pointer; font-weight: 500; }
+
+.skyc :focus-visible, .skyc__seg input:focus-visible + label { outline: 2px solid #fff; outline-offset: 2px; }
+.skyc__seg input:focus-visible + label { outline-offset: -3px; }
+
+/* the planetarium-mode switch, when createPlanetariumToggle() makes its own button */
+.skyv {
+  position: absolute; left: 50%; bottom: 14px; transform: translateX(-50%); z-index: 2;
+  min-height: 44px; padding: 0 16px; white-space: nowrap;
+  color: #fff; background: rgba(8, 12, 24, .72); border: 1px solid rgba(255, 255, 255, .35); border-radius: 999px;
+  -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+  font: 600 14px/1 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; cursor: pointer;
+}
+.skyv:hover { background: rgba(8, 12, 24, .9); }
+.skyv:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+.skyv[aria-pressed="true"] { background: rgba(155, 188, 255, .9); color: #0a1024; border-color: transparent; }
+
+@media (max-width: 420px) {
+  .skyc { padding: 12px; border-radius: 12px; }
+  .skyc__grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .skyc__now, .skyc__look, .skyc__toggles, .skyc__pair, .skyc__field:has(input[type="datetime-local"]), .skyc__field:has(input[type="range"]) { grid-column: 1 / -1; }
+}
+@media (forced-colors: active) {
+  .skyc__seg input:checked + label { background: Highlight; color: HighlightText; }
+}
+
+/* the date field and the button that travels to it */
+.skyc__when { grid-column: span 2; }
+.skyc__go { display: flex; gap: 6px; }
+.skyc__go input { flex: 1 1 auto; min-width: 0; }
+.skyc__go .skyc__btn { width: auto; flex: none; padding: 0 14px; }
+@media (max-width: 560px) { .skyc__when { grid-column: 1 / -1; } }

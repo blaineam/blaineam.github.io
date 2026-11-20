@@ -1,0 +1,105 @@
+/* wemiller.com — shared shell for every page that is not the home page.
+ *
+ * Gives a page the same colours, type, header and footer as the home page (assets/site.css).
+ * Use: <link rel="stylesheet" href="/assets/shell.css?v=a8116e4d"> and
+ *      <script src="/assets/shell.js?v=3b7c366e" defer data-active="apps"></script>
+ * then style the page with the --wm-* tokens below instead of its own colours.
+ * System fonts only, no yellow or gold anywhere, light and dark follow the system.
+ */
+:root {
+  color-scheme: dark;
+  --wm-bg: #070b14;
+  --wm-bg-2: #0c1220;
+  --wm-surface: rgba(255, 255, 255, .045);
+  --wm-surface-2: rgba(255, 255, 255, .08);
+  --wm-line: rgba(255, 255, 255, .1);
+  --wm-ink: #eef2f8;
+  --wm-soft: #b9c3d6;
+  --wm-faint: #93a0b8;
+  --wm-accent: #6cb6ff;
+  --wm-accent-ink: #04121f;
+  --wm-green: #6fe0c0;
+  --wm-shadow: 0 24px 60px -24px rgba(0, 0, 0, .7);
+  --wm-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", Arial, sans-serif;
+  --wm-serif: ui-serif, "New York", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, "Noto Serif", serif;
+  --wm-mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  --wm-ease: cubic-bezier(.2, .7, .2, 1);
+  --wm-pad: clamp(18px, 4.5vw, 56px);
+  --wm-max: 1180px;
+  --wm-nav-h: 60px;
+}
+/* Light: when the device asks for it (unless the visitor chose dark), or when the visitor chose it. */
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    color-scheme: light;
+    --wm-bg: #f6f3ee;
+    --wm-bg-2: #efeae2;
+    --wm-surface: rgba(20, 24, 33, .04);
+    --wm-surface-2: rgba(20, 24, 33, .07);
+    --wm-line: rgba(20, 24, 33, .12);
+    --wm-ink: #141821;
+    --wm-soft: #414a5b;
+    --wm-faint: #5c6577;
+    --wm-accent: #0b62c4;
+    --wm-accent-ink: #fff;
+    --wm-green: #0b7558;
+    --wm-shadow: 0 24px 50px -28px rgba(30, 30, 50, .35);
+  }
+}
+:root[data-theme="light"] {
+  color-scheme: light;
+  --wm-bg: #f6f3ee;
+  --wm-bg-2: #efeae2;
+  --wm-surface: rgba(20, 24, 33, .04);
+  --wm-surface-2: rgba(20, 24, 33, .07);
+  --wm-line: rgba(20, 24, 33, .12);
+  --wm-ink: #141821;
+  --wm-soft: #414a5b;
+  --wm-faint: #5c6577;
+  --wm-accent: #0b62c4;
+  --wm-accent-ink: #fff;
+  --wm-green: #0b7558;
+  --wm-shadow: 0 24px 50px -28px rgba(30, 30, 50, .35);
+}
+:root[data-theme="dark"] { color-scheme: dark; }
+
+/* Opt-in base: add class="wm" to <body> to take the home page's background and type. */
+body.wm { margin: 0; background: var(--wm-bg); color: var(--wm-ink); font: 400 1.0625rem/1.6 var(--wm-sans); -webkit-font-smoothing: antialiased; padding-top: var(--wm-nav-h); }
+body.wm :focus-visible { outline: 2px solid var(--wm-accent); outline-offset: 3px; }
+
+/* header */
+.wm-nav { position: fixed; inset: 0 0 auto; z-index: 900; height: var(--wm-nav-h); display: flex; align-items: center; gap: 6px; padding: 0 max(var(--wm-pad), env(safe-area-inset-right)) 0 max(var(--wm-pad), env(safe-area-inset-left)); color: var(--wm-ink); background: color-mix(in srgb, var(--wm-bg) 82%, transparent); -webkit-backdrop-filter: blur(18px) saturate(160%); backdrop-filter: blur(18px) saturate(160%); box-shadow: 0 1px 0 var(--wm-line); font: 400 1rem/1.2 var(--wm-sans); }
+.wm-nav a { color: inherit; text-decoration: none; }
+.wm-nav__brand { display: flex; align-items: center; gap: 10px; font-weight: 650; letter-spacing: -.01em; margin-right: auto; min-height: 44px; }
+.wm-nav__brand img { width: 34px; height: 34px; border-radius: 50%; object-fit: cover; box-shadow: 0 0 0 1.5px color-mix(in srgb, currentColor 40%, transparent); }
+.wm-nav__links { display: flex; gap: 2px; }
+.wm-nav__links a { padding: 10px 12px; border-radius: 999px; font-size: .95rem; font-weight: 550; opacity: .86; transition: opacity .2s, background-color .2s; }
+.wm-nav__links a:hover { opacity: 1; background: var(--wm-surface-2); }
+.wm-nav__links a[aria-current="page"] { opacity: 1; color: var(--wm-accent); }
+@media (max-width: 640px) { .wm-nav { padding-inline: 12px; gap: 2px; } .wm-nav__links { gap: 0; } .wm-nav__links a { padding: 10px 6px; font-size: .82rem; } .wm-nav__brand span { display: none; } }
+@media (max-width: 400px) { .wm-nav__links a { padding: 10px 5px; font-size: .78rem; } }
+
+/* page heading */
+.wm-head { max-width: calc(var(--wm-max) + 2 * var(--wm-pad)); margin: 0 auto; padding: clamp(40px, 7vw, 88px) var(--wm-pad) clamp(24px, 4vw, 44px); }
+.wm-eyebrow { font: 650 .82rem/1.4 var(--wm-sans); letter-spacing: .12em; text-transform: uppercase; color: var(--wm-faint); margin: 0 0 1em; }
+.wm-head h1, .wm-h1 { font: 500 clamp(2.2rem, 5.4vw, 4rem)/1.06 var(--wm-serif); letter-spacing: -.022em; margin: 0; text-wrap: balance; color: var(--wm-ink); background: none; -webkit-text-fill-color: currentColor; }
+.wm-head p:not(.wm-eyebrow), .wm-lede { margin: .8em 0 0; max-width: 40rem; color: var(--wm-soft); font-size: clamp(1.05rem, 1.5vw, 1.2rem); line-height: 1.6; }
+.wm-h2 { font: 500 clamp(1.6rem, 3.4vw, 2.4rem)/1.1 var(--wm-serif); letter-spacing: -.02em; margin: 0; }
+.wm-wrap { max-width: calc(var(--wm-max) + 2 * var(--wm-pad)); margin: 0 auto; padding: 0 var(--wm-pad); }
+
+/* surfaces and buttons */
+.wm-card { border: 1px solid var(--wm-line); border-radius: 22px; background: var(--wm-surface); transition: transform .4s var(--wm-ease), border-color .3s, box-shadow .4s var(--wm-ease); }
+a.wm-card:hover, .wm-card--lift:hover { transform: translateY(-4px); border-color: color-mix(in srgb, var(--wm-accent) 50%, var(--wm-line)); box-shadow: var(--wm-shadow); }
+.wm-btn { display: inline-flex; align-items: center; justify-content: center; gap: .55em; min-height: 48px; padding: 0 1.35em; border-radius: 999px; border: 1px solid transparent; font: 600 1rem/1.2 var(--wm-sans); text-decoration: none; cursor: pointer; background: var(--wm-accent); color: var(--wm-accent-ink); transition: transform .25s var(--wm-ease), background-color .25s, border-color .25s; }
+.wm-btn:hover { background: color-mix(in srgb, var(--wm-accent) 86%, #fff); }
+.wm-btn:active { transform: scale(.97); }
+.wm-btn--line { background: var(--wm-surface); color: var(--wm-ink); border-color: var(--wm-line); }
+.wm-btn--line:hover { background: var(--wm-surface-2); border-color: var(--wm-accent); }
+.wm-chip { display: inline-block; padding: .28em .7em; border-radius: 999px; background: var(--wm-surface-2); color: var(--wm-soft); font: 500 .76rem/1.4 var(--wm-mono); }
+
+/* footer */
+.wm-foot { margin-top: clamp(64px, 10vw, 120px); padding: 22px var(--wm-pad) calc(22px + env(safe-area-inset-bottom)); border-top: 1px solid var(--wm-line); text-align: center; font: 400 .86rem/1.6 var(--wm-sans); color: var(--wm-faint); }
+.wm-foot a { color: inherit; text-underline-offset: 3px; }
+
+@media (prefers-reduced-motion: reduce) { .wm-card, .wm-btn { transition: none; } }
+@media print { .wm-nav, .wm-foot { display: none; } body.wm { padding-top: 0; } }

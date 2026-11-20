@@ -1,0 +1,20 @@
+{
+  "_meta.description": "Blaine Miller 拍摄的宽幅全景照片与 360° 照片。打开任意一张即可平移、缩放并环顾四周。",
+  "_title": "Blaine Miller 摄影 · 全景图库",
+  "head.eyebrow": "摄影",
+  "head.intro": "Blaine Miller 的沉浸式全景摄影",
+  "head.title": "全景图库",
+  "pv.alt360": "360° 照片 {n}",
+  "pv.altPano": "全景照片 {n}",
+  "pv.close": "关闭",
+  "pv.dialog": "全景照片",
+  "pv.failed": "无法加载此全景照片。",
+  "pv.hintLook": "拖动以环顾四周，双指捏合或滚动以缩放。",
+  "pv.hintPan": "拖动以平移画面，双指捏合或滚动以缩放。",
+  "pv.next": "下一张全景照片",
+  "pv.prev": "上一张全景照片",
+  "pv.title360": "360° 照片",
+  "pv.titlePano": "全景照片",
+  "pv.zoomIn": "放大",
+  "pv.zoomOut": "缩小"
+}

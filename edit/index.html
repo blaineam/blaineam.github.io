@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="referrer" content="no-referrer">
+  <!-- The page may load only its own files and talk only to api.github.com. -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' blob: data:; connect-src 'self' https://api.github.com; frame-src 'self'; base-uri 'none'; form-action 'none'">
+  <meta name="color-scheme" content="dark light">
+  <meta name="theme-color" content="#070b14" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#f6f3ee" media="(prefers-color-scheme: light)">
+  <title>Edit · wemiller.com</title>
+  <link rel="stylesheet" href="edit.css">
+  <script type="module" src="js/main.js"></script>
+</head>
+<body>
+  <div id="live" class="vh" aria-live="polite"></div>
+  <div id="toasts" class="toasts"></div>
+
+  <main id="gate" class="gate">
+    <div class="gate__card">
+      <p class="eyebrow">wemiller.com</p>
+      <h1>Edit the site</h1>
+      <p class="lede">This page is public, but it can only change anything with a key that GitHub gives to the owner of the repository. There is no server and no password here.</p>
+
+      <p id="gate-error" class="callout callout--bad" role="alert" hidden></p>
+
+      <form id="gate-form" autocomplete="off">
+        <div class="field">
+          <label for="token">GitHub fine-grained token</label>
+          <input id="token" name="token" type="password" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" required placeholder="github_pat_…" aria-describedby="token-hint">
+          <p class="hint" id="token-hint">Kept in this browser only, sent only to api.github.com, and never shown again after you press the button.</p>
+        </div>
+        <button class="btn btn--solid btn--block" id="gate-go" type="submit">Sign in on this device</button>
+      </form>
+
+      <section class="gate__how" aria-labelledby="how-h">
+        <h2 id="how-h">Which token to create</h2>
+        <p><a class="btn btn--solid btn--block" id="gate-new" target="_blank" rel="noopener" href="https://github.com/settings/personal-access-tokens/new?name=wemiller.com+editor&amp;description=Lets+the+editor+at+wemiller.com%2Fedit%2F+save+content+changes.+Contents%3A+read+and+write%2C+on+blaineam%2Fblaineam.github.io+only.&amp;target_name=blaineam&amp;expires_in=90&amp;contents=write">Open GitHub with the token form filled in</a></p>
+        <p class="hint">Opens github.com in a new tab (sign in there if asked). Nothing is sent from this page; the link only carries the settings below.</p>
+        <ol>
+          <li><strong>Already filled in by the link:</strong> the name (“wemiller.com editor”), the description, the resource owner (<span class="mono" id="gate-owner">blaineam</span>), an expiry of 90 days, and <strong>Repository permissions → Contents: “Read and write”</strong>. Change the expiry if you like; GitHub adds “Metadata: Read-only” by itself. Leave every other permission alone.</li>
+          <li><strong>The one thing the link cannot set, so do it by hand:</strong> under <strong>Repository access</strong> choose “Only select repositories” and pick just <strong class="mono" id="gate-repo">blaineam/blaineam.github.io</strong>.</li>
+          <li>Press <strong>Generate token</strong>, copy it, come back to this tab and paste it above. Do this once on each phone or computer.</li>
+        </ol>
+        <details class="rec gate__manual"><summary><span class="rec__sum">Doing it without the link</span></summary>
+          <div class="rec__body"><p>On GitHub open <strong>Settings → Developer settings → Personal access tokens → Fine-grained tokens → Generate new token</strong>. Repository access: “Only select repositories”, just this repository. Permissions → Repository permissions → Contents: “Read and write”, nothing else. Pick an expiry, generate, paste it above.</p></div></details>
+        <p class="callout callout--bad"><strong>Do not use a classic token.</strong> A classic token with the “repo” scope can write to every repository you have, and it would be sitting in this browser. The editor refuses them. A fine-grained token limited to this one repository can do nothing else if it ever leaks, and you can delete it on GitHub at any time.</p>
+        <p class="hint">The editor will work on branch <strong class="mono" id="gate-branch">main</strong>.</p>
+      </section>
+
+      <details class="rec">
+        <summary><span class="rec__sum">Repository and branch</span></summary>
+        <form id="gate-settings" class="rec__body" autocomplete="off">
+          <div class="grid2">
+            <div class="field"><label for="set-owner">Owner</label><input id="set-owner" class="mono" autocapitalize="off" spellcheck="false" required></div>
+            <div class="field"><label for="set-repo">Repository</label><input id="set-repo" class="mono" autocapitalize="off" spellcheck="false" required></div>
+          </div>
+          <div class="field"><label for="set-branch">Branch</label><input id="set-branch" class="mono" autocapitalize="off" spellcheck="false" required>
+            <p class="hint">Point this at a throwaway branch to try the editor without touching the live site.</p></div>
+          <button class="btn" type="submit">Save</button>
+        </form>
+      </details>
+
+      <section id="gate-dry" class="gate__dry" hidden aria-labelledby="dry-h">
+        <h2 id="dry-h">Local dry run</h2>
+        <p class="hint">Offered only on a local development address. It reads the content files from this folder, lets you edit and preview, and shows the exact requests a commit would send to GitHub, without sending any.</p>
+        <button class="btn" type="button" id="gate-dry-go">Open the dry run (nothing is sent)</button>
+      </section>
+    </div>
+  </main>
+
+  <div id="app" class="app" hidden></div>
+
+  <noscript><p class="noscript">The editor needs JavaScript.</p></noscript>
+</body>
+</html>

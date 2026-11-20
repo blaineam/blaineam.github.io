@@ -9,119 +9,39 @@
   <meta property="og:description" content="Check your internet connection speed with a fast, free speed test.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://wemiller.com/speedtest/">
-  <link rel="stylesheet" href="/apps/app-showcase.css?v=7832b316">
+  <meta property="og:image" content="https://wemiller.com/og/speedtest.jpg?v=929c1d9b">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://wemiller.com/og/speedtest.jpg?v=929c1d9b">
+  <link rel="stylesheet" href="/assets/shell.css?v=5fe8bc2b">
+  <script src="/assets/shell.js?v=3b7c366e" defer data-active="none"></script>
   <style>
-    .speedtest-page {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: calc(var(--spacing-2xl) + var(--spacing-lg)) var(--spacing-lg) var(--spacing-2xl);
-      background: linear-gradient(135deg,
-        var(--bg-primary) 0%,
-        var(--bg-secondary) 100%
-      );
-      position: relative;
-      overflow: hidden;
-    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+    body.wm { overflow-x: hidden; }
 
-    /* Floating ambient glows, matching the app hero sections */
-    .speedtest-page::before,
-    .speedtest-page::after {
-      content: '';
-      position: absolute;
-      width: 60%;
-      height: 60%;
-      pointer-events: none;
-      z-index: 0;
-    }
+    .speedtest-page { display: block; }
 
-    .speedtest-page::before {
-      top: -20%;
-      right: -15%;
-      background: radial-gradient(circle, var(--primary-color) 0%, transparent 70%);
-      opacity: 0.12;
-      animation: float 20s ease-in-out infinite;
-    }
+    /* .wm-head p would otherwise restyle the eyebrow as a lede */
+    .wm-head .wm-eyebrow { margin: 0 0 1em; max-width: none; font-size: .82rem; line-height: 1.4; color: var(--wm-faint); }
 
-    .speedtest-page::after {
-      bottom: -20%;
-      left: -15%;
-      background: radial-gradient(circle, var(--secondary-color) 0%, transparent 70%);
-      opacity: 0.12;
-      animation: float 25s ease-in-out infinite reverse;
-    }
-
-    .speedtest-header {
-      text-align: center;
-      max-width: 640px;
-      margin-bottom: var(--spacing-xl);
-      position: relative;
-      z-index: 1;
-      animation: fadeInUp 0.8s ease-out;
-    }
-
-    .speedtest-eyebrow {
-      color: var(--primary-color);
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      font-size: 0.875rem;
-      margin-bottom: var(--spacing-xs);
-    }
-
-    .speedtest-header h1 {
-      font-size: clamp(2rem, 5vw, 3.25rem);
-      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
-      margin-bottom: var(--spacing-sm);
-    }
-
-    .speedtest-header p {
-      font-size: clamp(1rem, 2vw, 1.25rem);
-      color: var(--text-secondary);
-    }
-
-    /* Glassmorphic card holding the widget */
+    /* Card holding the widget */
     .speedtest-card {
-      width: 100%;
-      max-width: 880px;
-      background: var(--glass-bg);
-      backdrop-filter: blur(20px) saturate(180%);
-      -webkit-backdrop-filter: blur(20px) saturate(180%);
-      border: 1px solid var(--glass-border);
-      border-radius: var(--radius-lg);
-      box-shadow: var(--glass-shadow);
-      padding: var(--spacing-sm);
-      position: relative;
-      z-index: 1;
+      padding: clamp(6px, 1.2vw, 12px);
       overflow: hidden;
-      animation: fadeInUp 0.8s ease-out 0.2s both;
-    }
-
-    /* Accent line across the top of the card */
-    .speedtest-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 4px;
-      background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+      box-shadow: var(--wm-shadow);
     }
 
     .speedtest-embed {
+      position: relative;
       width: 100%;
       height: 0;
-      padding-bottom: 56.25%;
       min-height: 420px;
-      position: relative;
-      border-radius: var(--radius-md);
+      padding-bottom: 56.25%;
       overflow: hidden;
-      background: var(--bg-card);
+      border-radius: 14px;
+      background: var(--wm-bg-2);
     }
 
     .speedtest-embed iframe {
@@ -131,62 +51,62 @@
       width: 100%;
       height: 100%;
       min-height: 420px;
-      border: none;
-      overflow: hidden;
+      border: 0;
     }
 
     .speedtest-attribution {
+      margin: 18px 0 0;
       text-align: center;
-      margin-top: var(--spacing-md);
-      font-size: 0.875rem;
-      color: var(--text-muted);
-      position: relative;
-      z-index: 1;
-      animation: fadeInUp 0.8s ease-out 0.4s both;
+      font-size: .875rem;
+      color: var(--wm-faint);
     }
 
     .speedtest-attribution a {
-      color: var(--primary-color);
-      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+      color: var(--wm-accent);
       font-weight: 600;
-      transition: color var(--transition-fast);
-    }
-
-    .speedtest-attribution a:hover {
-      color: var(--secondary-color);
       text-decoration: underline;
+      text-decoration-color: color-mix(in srgb, var(--wm-accent) 40%, transparent);
+      text-underline-offset: 3px;
     }
 
-    @media (max-width: 600px) {
-      .speedtest-page {
-        padding: var(--spacing-xl) var(--spacing-sm) var(--spacing-lg);
-      }
-
-      .speedtest-card {
-        padding: var(--spacing-xs);
-      }
-    }
+    .speedtest-attribution a:hover { text-decoration-color: currentColor; }
   </style>
+  <link rel="alternate" hreflang="x-default" href="https://wemiller.com/speedtest/">
+  <link rel="alternate" hreflang="en" href="https://wemiller.com/speedtest/">
+  <link rel="alternate" hreflang="zh-Hans" href="https://wemiller.com/speedtest/?lang=zh-Hans">
+  <link rel="alternate" hreflang="ja" href="https://wemiller.com/speedtest/?lang=ja">
+  <link rel="alternate" hreflang="de" href="https://wemiller.com/speedtest/?lang=de">
+  <link rel="alternate" hreflang="fr" href="https://wemiller.com/speedtest/?lang=fr">
+  <link rel="alternate" hreflang="es" href="https://wemiller.com/speedtest/?lang=es">
+  <link rel="alternate" hreflang="ko" href="https://wemiller.com/speedtest/?lang=ko">
+  <link rel="alternate" hreflang="pt-BR" href="https://wemiller.com/speedtest/?lang=pt-BR">
+  <link rel="alternate" hreflang="it" href="https://wemiller.com/speedtest/?lang=it">
+  <script src="/i18n/i18n.js?v=40521faf" defer data-page="speedtest" data-pos="bottom-right"></script>
 </head>
-<body>
+<body class="wm">
   <main class="speedtest-page">
-    <div class="speedtest-header">
-      <p class="speedtest-eyebrow">Connection Check</p>
-      <h1>Speed Test</h1>
-      <p>Measure your download, upload, and latency in seconds. No installs, no ads &mdash; just a clean, fast test.</p>
+    <div class="speedtest-header wm-head">
+      <p class="speedtest-eyebrow wm-eyebrow" data-i18n="connection-check.11a8e3">Connection Check</p>
+      <h1 data-i18n="speed-test.5a4882">Speed Test</h1>
+      <p data-i18n="measure-your-download-upload.80990f">Measure your download, upload, and latency in seconds. No installs, no ads &mdash; just a clean, fast test.</p>
     </div>
 
-    <div class="speedtest-card">
+    <div class="wm-wrap">
+    <div class="speedtest-card wm-card">
       <!-- OST Widget code start -->
       <div class="speedtest-embed">
-        <iframe src="//openspeedtest.com/speedtest" title="OpenSpeedtest internet speed test"></iframe>
+        <iframe src="https://openspeedtest.com/speedtest" title="OpenSpeedtest internet speed test" data-i18n-attr="title:iframe.title"></iframe>
       </div>
       <!-- OST Widget code end -->
     </div>
 
-    <p class="speedtest-attribution">
+    <p class="speedtest-attribution" data-i18n-html="provided-by-openspeedtest-com.8762b2">
       Provided by <a href="https://openspeedtest.com" target="_blank" rel="noopener">OpenSpeedtest.com</a>
     </p>
+    </div>
   </main>
 </body>
 </html>

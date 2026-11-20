@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <title>Dotfiles - Shell Bootstrap</title>
-  <meta name="description" content="One-line shell bootstrap for macOS and Linux. Custom prompt, useful aliases, and essential tools.">
+  <meta name="description" content="One-line shell bootstrap for macOS, Linux, Windows and OpenWrt. Custom prompt, useful aliases and essential tools, with an offline mode and a bundle for air-gapped machines.">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta property="og:title" content="Dotfiles - Shell Bootstrap">
   <meta property="og:description" content="One-line installer for a beautiful shell setup with custom prompt, aliases, and tools.">
@@ -19,236 +19,259 @@
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png?v=465bb35d">
   <link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png?v=3d3b9a93">
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png?v=e83629c6">
+  <link rel="stylesheet" href="/assets/shell.css?v=a8116e4d">
+  <script src="/assets/shell.js?v=1e3a5e90" defer data-active="tools"></script>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Outfit:wght@300;500;700&display=swap');
+    /* Dotfiles: the shared shell (header, footer, system fonts) with a synthwave night on top.
+       This page is dark in both colour schemes, and uses pink, violet, blue, cyan and green only. */
+    *, *::before, *::after { box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-
+    /* Re-point the shell's tokens at a night palette. Declared after shell.css, so this also wins
+       over its light-scheme block. */
     :root {
-      --neon-pink: #ff2d95;
-      --neon-cyan: #00f0ff;
-      --neon-purple: #b537f2;
-      --neon-green: #39ff14;
-      --neon-red: #ff3b3b;
-      --neon-yellow: #ffb830;
-      --neon-blue: #4d9dff;
-      --dark-bg: #0a0a1a;
-      --glass-bg: rgba(255, 255, 255, 0.04);
-      --glass-border: rgba(255, 255, 255, 0.08);
-      --glass-shadow: rgba(0, 0, 0, 0.4);
+      color-scheme: dark;
+      --wm-bg: #0a0718;
+      --wm-bg-2: #120c26;
+      --wm-surface: rgba(255, 255, 255, .045);
+      --wm-surface-2: rgba(255, 255, 255, .08);
+      --wm-line: rgba(196, 140, 255, .2);
+      --wm-ink: #f3eeff;
+      --wm-soft: #cdc5ea;
+      --wm-faint: #aca3d0;
+      --wm-accent: #7fd4ff;
+      --wm-accent-ink: #0a0718;
+      --wm-green: #5ff0b0;
+      --wm-shadow: 0 24px 60px -24px rgba(0, 0, 0, .8);
+
+      --neon-pink: #ff4fa3;
+      --neon-magenta: #c44dff;
+      --neon-violet: #6c5cff;
+      --neon-blue: #3aa0ff;
+      --neon-cyan: #5ee7ff;
+      /* Lighter tints of the same four, for text on the dark background. */
+      --neon-text: linear-gradient(90deg, #ff7dbb 0%, #d79bff 45%, #9d94ff 72%, #7cc2ff 100%);
+      --display: ui-rounded, "SF Pro Rounded", "Hiragino Maru Gothic ProN", var(--wm-sans);
+      --sun: clamp(170px, 30vw, 280px);
+      --sky-h: calc(34px + var(--sun) * .86);
     }
 
-    html { scroll-behavior: smooth; }
-
-    body {
-      font-family: 'Outfit', sans-serif;
-      background: var(--dark-bg);
-      color: #e0e0f0;
-      min-height: 100vh;
-      overflow-x: hidden;
-      position: relative;
-    }
-
-    body::before {
-      content: '';
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
+    body.wm {
       background:
-        radial-gradient(ellipse at 20% 50%, rgba(181, 55, 242, 0.15) 0%, transparent 50%),
-        radial-gradient(ellipse at 80% 20%, rgba(0, 240, 255, 0.1) 0%, transparent 50%),
-        radial-gradient(ellipse at 50% 80%, rgba(255, 45, 149, 0.1) 0%, transparent 50%);
-      animation: bgShift 12s ease-in-out infinite alternate;
-      z-index: 0;
+        radial-gradient(60rem 36rem at 12% 38%, rgba(196, 77, 255, .13), transparent 70%),
+        radial-gradient(52rem 32rem at 92% 16%, rgba(58, 160, 255, .11), transparent 70%),
+        radial-gradient(56rem 34rem at 50% 96%, rgba(255, 79, 163, .09), transparent 70%),
+        var(--wm-bg);
+      background-attachment: fixed;
+      overflow-x: clip;
     }
 
-    @keyframes bgShift {
-      0% { opacity: 1; }
-      50% { opacity: 0.6; }
-      100% { opacity: 1; }
-    }
-
-    /* Synthwave Sun */
-    .synthwave-sun {
-      position: fixed;
-      top: 40px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 280px;
-      height: 280px;
-      border-radius: 50%;
-      background: linear-gradient(to bottom, #ffde00 0%, #ff8c00 25%, #ff2d95 60%, #b537f2 100%);
-      z-index: 0;
-      pointer-events: none;
-      -webkit-mask-image: linear-gradient(to bottom,
-        black 0%, black 48%,
-        transparent 48%, transparent 50%,
-        black 50%, black 56%,
-        transparent 56%, transparent 59%,
-        black 59%, black 65%,
-        transparent 65%, transparent 69%,
-        black 69%, black 76%,
-        transparent 76%, transparent 81%,
-        black 81%, black 89%,
-        transparent 89%, transparent 95%,
-        black 95%, black 100%
-      );
-      mask-image: linear-gradient(to bottom,
-        black 0%, black 48%,
-        transparent 48%, transparent 50%,
-        black 50%, black 56%,
-        transparent 56%, transparent 59%,
-        black 59%, black 65%,
-        transparent 65%, transparent 69%,
-        black 69%, black 76%,
-        transparent 76%, transparent 81%,
-        black 81%, black 89%,
-        transparent 89%, transparent 95%,
-        black 95%, black 100%
-      );
-    }
-
-    .synthwave-sun-glow {
-      position: fixed;
-      top: 40px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 400px;
-      height: 400px;
-      border-radius: 50%;
-      background: radial-gradient(ellipse at 50% 50%, rgba(255, 45, 149, 0.35) 0%, rgba(255, 140, 0, 0.15) 40%, transparent 70%);
-      filter: blur(40px);
-      z-index: 0;
-      pointer-events: none;
-    }
-
-    /* Stars */
-    .stars-container {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 50vh;
-      z-index: 0;
-      pointer-events: none;
+    /* ---------- Hero: stars, striped sun, horizon, grid floor ---------- */
+    .wm-head.hero {
+      position: relative;
+      max-width: none;
+      margin: 0;
+      padding: 0;
       overflow: hidden;
+      isolation: isolate;
     }
 
-    .star {
+    .scene { position: absolute; inset: 0; z-index: -1; pointer-events: none; }
+
+    .sky { position: absolute; inset: 0 0 auto; height: var(--sky-h); overflow: hidden; }
+
+    .stars { position: absolute; inset: 0; width: 100%; height: 100%; }
+    .stars-a { animation: twinkle 5s ease-in-out infinite alternate; }
+    .stars-b { animation: twinkle 7s ease-in-out -3s infinite alternate-reverse; }
+    @keyframes twinkle { from { opacity: .35; } to { opacity: 1; } }
+
+    .sun-glow {
       position: absolute;
+      left: 50%;
+      top: calc(34px - var(--sun) * .3);
+      width: calc(var(--sun) * 1.6);
+      aspect-ratio: 1;
+      transform: translateX(-50%);
       border-radius: 50%;
-      background: #fff;
+      background: radial-gradient(circle, rgba(255, 79, 163, .42) 0%, rgba(196, 77, 255, .26) 38%, rgba(58, 160, 255, .1) 58%, transparent 70%);
+      filter: blur(26px);
+      animation: glow-pulse 7s ease-in-out infinite alternate;
     }
+    @keyframes glow-pulse { from { opacity: .7; } to { opacity: 1; } }
 
-    @keyframes twinkle1 {
-      0%, 100% { opacity: 0.2; }
-      50% { opacity: 1; }
+    .sun {
+      position: absolute;
+      left: 50%;
+      top: 34px;
+      width: var(--sun);
+      aspect-ratio: 1;
+      border-radius: 50%;
+      transform: translateX(-50%);
+      background: linear-gradient(180deg, #ff4fa3 0%, #c44dff 40%, #6c5cff 70%, #3aa0ff 100%);
+      -webkit-mask-image: linear-gradient(to bottom,
+        #000 0 46%, transparent 46% 48%,
+        #000 48% 55%, transparent 55% 58%,
+        #000 58% 64%, transparent 64% 68%,
+        #000 68% 74%, transparent 74% 79%,
+        #000 79% 85%, transparent 85% 92%,
+        #000 92% 100%);
+      mask-image: linear-gradient(to bottom,
+        #000 0 46%, transparent 46% 48%,
+        #000 48% 55%, transparent 55% 58%,
+        #000 58% 64%, transparent 64% 68%,
+        #000 68% 74%, transparent 74% 79%,
+        #000 79% 85%, transparent 85% 92%,
+        #000 92% 100%);
+      animation: sun-rise 2.6s cubic-bezier(.2, .7, .2, 1) both, sun-pulse 7s ease-in-out 2.6s infinite alternate;
     }
-    @keyframes twinkle2 {
-      0%, 100% { opacity: 0.6; }
-      30% { opacity: 0.1; }
-      70% { opacity: 0.9; }
+    @keyframes sun-rise {
+      from { transform: translate(-50%, 34%); opacity: .2; }
+      to { transform: translate(-50%, 0); opacity: 1; }
     }
-    @keyframes twinkle3 {
-      0%, 100% { opacity: 0.4; }
-      40% { opacity: 1; }
-      80% { opacity: 0.15; }
-    }
+    @keyframes sun-pulse { from { filter: brightness(1); } to { filter: brightness(1.14) saturate(1.1); } }
 
-    .grid-floor {
-      position: fixed;
-      bottom: 0; left: 0; right: 0;
-      height: 40vh;
-      background:
-        linear-gradient(to top, rgba(181, 55, 242, 0.08), transparent),
-        repeating-linear-gradient(90deg, rgba(181, 55, 242, 0.06) 0px, transparent 1px, transparent 80px),
-        repeating-linear-gradient(0deg, rgba(181, 55, 242, 0.06) 0px, transparent 1px, transparent 80px);
-      transform: perspective(500px) rotateX(45deg);
-      transform-origin: bottom;
-      z-index: 0;
-      pointer-events: none;
-    }
-
-    .container {
-      max-width: 860px;
-      margin: 0 auto;
-      padding: 340px 24px 100px;
-      position: relative;
-      z-index: 1;
-    }
-
-    .container > * {
-      position: relative;
-      z-index: 1;
-    }
-
-    .header {
-      text-align: center;
-      margin-bottom: 36px;
-    }
-
-    .header h1 {
-      font-family: 'Outfit', sans-serif;
-      font-weight: 700;
-      font-size: 3.2em;
-      letter-spacing: -0.02em;
-      background: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple), var(--neon-pink));
-      background-size: 200% 200%;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      animation: gradientText 4s ease infinite;
-      margin-bottom: 12px;
-    }
-
-    @keyframes gradientText {
-      0%, 100% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-    }
-
-    .header p {
-      font-size: 1.15em;
-      font-weight: 300;
-      color: rgba(224, 224, 240, 0.65);
-      max-width: 520px;
-      margin: 0 auto;
-      line-height: 1.6;
-    }
-
-    .glass {
-      background: rgba(10, 10, 26, 0.97);
-      border: 1px solid var(--glass-border);
-      border-radius: 20px;
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
-      box-shadow: 0 8px 32px var(--glass-shadow), inset 0 1px 0 rgba(255,255,255,0.04);
-      padding: 36px;
-      margin-bottom: 28px;
-    }
-
-    .glass h2 {
-      font-family: 'Outfit', sans-serif;
-      font-weight: 500;
-      font-size: 1.5em;
-      margin-bottom: 20px;
-      color: #f0f0ff;
-    }
-
-    .glass h2 .accent {
-      background: linear-gradient(90deg, var(--neon-cyan), var(--neon-purple));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    /* Terminal */
-    .terminal {
-      background: rgba(0, 0, 0, 0.6);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      border-radius: 14px;
+    .floor {
+      position: absolute;
+      inset: var(--sky-h) 0 0;
       overflow: hidden;
-      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5);
-      display: flex;
-      flex-direction: column;
+      perspective: 420px;
+      perspective-origin: 50% 0;
+      background: linear-gradient(to bottom, rgba(196, 77, 255, .2), rgba(108, 92, 255, .05) 45%, transparent 85%);
+    }
+
+    /* The plane: magenta lines running away from you, cyan lines crossing them. */
+    .floor-grid {
+      --cell: 40px;
+      position: absolute;
+      left: -75%;
+      right: -75%;
+      top: 0;
+      height: 620px;
+      transform-origin: 50% 0;
+      transform: rotateX(78deg);
+      background:
+        repeating-linear-gradient(90deg, rgba(255, 79, 163, .8) 0 1.5px, transparent 1.5px var(--cell)),
+        repeating-linear-gradient(0deg, rgba(94, 231, 255, .7) 0 1.5px, transparent 1.5px var(--cell));
+      animation: grid-roll 2.2s linear infinite;
+    }
+    @keyframes grid-roll {
+      from { transform: rotateX(78deg) translateY(0); }
+      to { transform: rotateX(78deg) translateY(40px); }
+    }
+
+    /* Horizon line, and the fade that lets the floor sink into the page. */
+    .floor::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto;
+      height: 2px;
+      z-index: 2;
+      background: linear-gradient(90deg, transparent, #ff4fa3 20%, #c44dff 50%, #5ee7ff 80%, transparent);
+      box-shadow: 0 0 18px 2px rgba(196, 77, 255, .7);
+    }
+    .floor::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background:
+        radial-gradient(ellipse 62% 78% at 50% 46%, rgba(10, 7, 24, .9) 0%, rgba(10, 7, 24, .74) 55%, transparent 100%),
+        linear-gradient(to bottom, transparent 30%, var(--wm-bg) 96%);
+    }
+
+    .hero-copy {
+      position: relative;
+      max-width: 46rem;
+      margin: 0 auto;
+      padding: calc(var(--sky-h) + clamp(26px, 5vw, 44px)) var(--wm-pad) clamp(36px, 6vw, 64px);
+      text-align: center;
+    }
+
+    .wm-head.hero h1 {
+      font: 800 clamp(2.7rem, 9vw, 4.8rem)/1.02 var(--display);
+      letter-spacing: -.02em;
+      width: fit-content;
+      margin: 0 auto;
+      padding-bottom: .08em;
+      color: #f3b6ff;
+      background: var(--neon-text);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 0 16px rgba(196, 77, 255, .5));
+    }
+
+    .wm-head.hero p { margin: .7em auto 0; max-width: 36rem; color: var(--wm-ink); text-shadow: 0 1px 12px rgba(10, 7, 24, .9); }
+
+    .shells { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-top: 1.4em; }
+    .shells .wm-chip {
+      font-size: .82rem;
+      color: #e9dcff;
+      background: rgba(20, 12, 44, .78);
+      border: 1px solid rgba(196, 77, 255, .5);
+      box-shadow: 0 0 12px -4px rgba(196, 77, 255, .8);
+    }
+    .shells .wm-chip.pm { border-color: rgba(94, 231, 255, .45); box-shadow: 0 0 12px -4px rgba(94, 231, 255, .8); }
+
+    /* ---------- Panels ---------- */
+    .stack { display: grid; gap: clamp(16px, 2.4vw, 24px); max-width: 900px; margin: 0 auto; }
+
+    .panel {
+      padding: clamp(18px, 3.4vw, 36px);
+      min-width: 0;
+      background: rgba(16, 10, 36, .86);
+      border-color: rgba(196, 140, 255, .2);
+      box-shadow: var(--wm-shadow);
+    }
+    .panel:hover, .panel:focus-within {
+      border-color: rgba(255, 79, 163, .5);
+      box-shadow: 0 0 0 1px rgba(196, 77, 255, .22), 0 0 38px -12px rgba(196, 77, 255, .75), var(--wm-shadow);
+    }
+
+    .panel > .wm-h2 {
+      font: 700 clamp(1.5rem, 3.2vw, 2.1rem)/1.15 var(--display);
+      letter-spacing: -.01em;
+      width: fit-content;
+      max-width: 100%;
+      margin-bottom: .7em;
+      color: #e3b8ff;
+      background: var(--neon-text);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .panel-note { margin: 0 0 1.4em; max-width: 42rem; color: var(--wm-soft); font-size: 1rem; }
+    .panel-note code, .limits code, .sys-os code { font: .9em var(--wm-mono); color: var(--neon-cyan); overflow-wrap: anywhere; }
+    .panel-note a { color: var(--neon-cyan); text-underline-offset: 3px; }
+    .panel h3.sub { margin: 2em 0 .5em; font: 700 1.08rem/1.3 var(--display); color: var(--wm-ink); }
+
+    /* ---------- Terminal ---------- */
+    .terminal {
+      --t-cyan: #5ee7ff;
+      --t-pink: #ff7dbb;
+      --t-violet: #b9a2ff;
+      --t-magenta: #d98bff;
+      --t-green: #5ff0b0;
+      --t-red: #ff6b8e;
+      --t-ink: #f3eeff;
+      --t-grey: #aca3d0;
+      position: relative;
+      background: #0b0716;
+      color: var(--t-ink);
+      border: 1px solid rgba(196, 77, 255, .45);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 0 0 1px rgba(10, 7, 24, .6), 0 0 44px -14px rgba(196, 77, 255, .8), 0 0 80px -30px rgba(58, 160, 255, .7);
+    }
+
+    /* Faint scanlines over the glass. */
+    .terminal::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: repeating-linear-gradient(to bottom, rgba(255, 255, 255, .03) 0 1px, transparent 1px 3px);
     }
 
     .terminal-bar {
@@ -256,93 +279,76 @@
       align-items: center;
       gap: 8px;
       padding: 12px 16px;
-      background: rgba(255, 255, 255, 0.03);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-      flex-shrink: 0;
-      z-index: 2;
+      background: rgba(255, 255, 255, .03);
+      border-bottom: 1px solid rgba(196, 140, 255, .16);
     }
 
-    .terminal-dot { width: 12px; height: 12px; border-radius: 50%; }
-    .terminal-dot.red { background: #ff5f57; }
-    .terminal-dot.yellow { background: #febc2e; }
-    .terminal-dot.green { background: #28c840; }
+    .terminal-dot { width: 11px; height: 11px; border-radius: 50%; }
+    .terminal-dot:nth-child(1) { background: #ff4fa3; box-shadow: 0 0 8px rgba(255, 79, 163, .8); }
+    .terminal-dot:nth-child(2) { background: #c44dff; box-shadow: 0 0 8px rgba(196, 77, 255, .8); }
+    .terminal-dot:nth-child(3) { background: #3aa0ff; box-shadow: 0 0 8px rgba(58, 160, 255, .8); }
 
     .terminal-title {
       flex: 1;
       text-align: center;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.75em;
-      color: rgba(255, 255, 255, 0.3);
-      margin-right: 48px;
+      font: .78rem/1.2 var(--wm-mono);
+      color: var(--t-grey);
+      margin-right: 49px;
     }
 
     .terminal-body {
-      padding: 20px;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.88em;
-      line-height: 1.8;
+      padding: clamp(14px, 2.6vw, 20px);
+      font: .88rem/1.8 var(--wm-mono);
       height: 320px;
-      overflow-y: hidden;
-      position: relative;
+      overflow: hidden;
+      text-shadow: 0 0 10px rgba(196, 140, 255, .28);
     }
 
-    .prompt-line {
-      white-space: nowrap;
-    }
+    .prompt-line { white-space: pre-wrap; overflow-wrap: anywhere; }
 
-    .p-user { color: #00d4d4; }
-    .p-at { color: #ff3b3b; }
-    .p-host { color: #ffb830; }
-    .p-pipe { color: #ff3b3b; }
-    .p-dir  { color: #39ff14; }
-    .p-branch { color: #ff69b4; }
-    .p-duration { color: #b537f2; }
-    .p-ok { color: #39ff14; }
-    .p-err { color: #ff3b3b; }
-    .p-paren { color: #ff3b3b; }
-    .p-arrow { color: #b537f2; }
-    .p-cmd  { color: #e0e0e0; }
-    .p-output { color: rgba(224, 224, 240, 0.55); display: block; }
+    .p-user { color: var(--t-cyan, #5ee7ff); }
+    .p-at, .p-pipe, .p-paren { color: var(--t-pink, #ff7dbb); }
+    .p-host { color: var(--t-violet, #b9a2ff); }
+    .p-dir, .p-ok { color: var(--t-green, #5ff0b0); }
+    .p-branch { color: var(--t-pink, #ff7dbb); }
+    .p-duration, .p-arrow { color: var(--t-magenta, #d98bff); }
+    .p-err { color: var(--t-red, #ff6b8e); }
+    .p-cmd { color: var(--t-ink, #f3eeff); }
+    .p-output { display: block; color: var(--t-grey, #aca3d0); overflow-wrap: anywhere; }
 
     .cursor {
       display: inline-block;
       width: 8px;
       height: 1.1em;
-      background: #e0e0e0;
+      background: #5ee7ff;
+      box-shadow: 0 0 10px rgba(94, 231, 255, .9);
       vertical-align: text-bottom;
       animation: blink 1s step-end infinite;
     }
 
-    @keyframes blink {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0; }
-    }
+    @keyframes blink { 50% { opacity: 0; } }
 
-    /* Install section */
-    .install-block {
-      position: relative;
-      margin-top: 16px;
-    }
+    /* ---------- Install blocks ---------- */
+    .install-block + .install-block { margin-top: 20px; }
 
     .install-label {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.7em;
-      color: rgba(224, 224, 240, 0.35);
+      font: 650 .72rem/1.4 var(--wm-mono);
+      letter-spacing: .1em;
       text-transform: uppercase;
-      letter-spacing: 0.08em;
+      color: var(--wm-faint);
       margin-bottom: 8px;
     }
 
     .install-cmd {
       display: flex;
       align-items: stretch;
-      background: rgba(0, 0, 0, 0.5);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      border-radius: 10px;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.82em;
+      background: rgba(6, 4, 16, .7);
+      border: 1px solid rgba(196, 140, 255, .24);
+      border-radius: 12px;
       overflow: hidden;
+      transition: border-color .2s, box-shadow .2s;
     }
+    .install-cmd:hover, .install-cmd:focus-within { border-color: rgba(94, 231, 255, .55); box-shadow: 0 0 22px -10px rgba(94, 231, 255, .9); }
 
     .install-cmd-text {
       flex: 1;
@@ -350,259 +356,465 @@
       padding: 14px 16px;
       overflow-x: auto;
       scrollbar-width: thin;
-      scrollbar-color: rgba(181, 55, 242, 0.3) transparent;
+      scrollbar-color: rgba(196, 140, 255, .4) transparent;
     }
 
-    .install-cmd-text::-webkit-scrollbar { height: 4px; }
-    .install-cmd-text::-webkit-scrollbar-track { background: transparent; }
-    .install-cmd-text::-webkit-scrollbar-thumb { background: rgba(181, 55, 242, 0.3); border-radius: 2px; }
-
     .install-cmd-text code {
-      color: var(--neon-cyan);
-      white-space: nowrap;
-      user-select: all;
       display: block;
+      font: .84rem/1.6 var(--wm-mono);
+      color: var(--wm-ink);
+      white-space: nowrap;
+      -webkit-user-select: all;
+      user-select: all;
     }
 
     .copy-btn {
       flex-shrink: 0;
-      background: rgba(181, 55, 242, 0.15);
-      border: none;
-      border-left: 1px solid rgba(255, 255, 255, 0.06);
-      color: var(--neon-purple);
-      padding: 14px 18px;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.85em;
+      min-width: 76px;
+      min-height: 48px;
+      padding: 0 16px;
+      border: 0;
+      border-left: 1px solid rgba(196, 140, 255, .24);
+      background: rgba(196, 77, 255, .16);
+      color: #f0dcff;
+      font: 600 .84rem/1 var(--wm-mono);
       cursor: pointer;
-      transition: all 0.2s;
-      display: flex;
-      align-items: center;
+      transition: background-color .2s, color .2s;
     }
 
-    .copy-btn:hover {
-      background: rgba(181, 55, 242, 0.3);
-      color: #fff;
-    }
+    .copy-btn:hover { background: linear-gradient(135deg, #ff4fa3, #c44dff); color: #14041f; }
+    .copy-btn:focus-visible { outline-offset: -3px; }
+    .copy-btn.copied { background: rgba(95, 240, 176, .14); color: var(--wm-green); }
 
-    .copy-btn.copied {
-      background: rgba(57, 255, 20, 0.15);
-      color: var(--neon-green);
-    }
-
-    /* Features */
-    .features {
+    /* ---------- Supported systems ---------- */
+    .systems { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+    .systems li {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-      margin-top: 8px;
+      grid-template-columns: 7.5rem minmax(0, 1fr) auto;
+      align-items: baseline;
+      gap: 6px 16px;
+      padding: 14px 16px;
+      border: 1px solid rgba(196, 140, 255, .2);
+      border-radius: 12px;
+      background: rgba(255, 255, 255, .03);
     }
+    .sys-pm { font: 650 .95rem/1.3 var(--wm-mono); color: var(--neon-cyan); }
+    .sys-os { color: var(--wm-soft); font-size: .95rem; line-height: 1.5; }
+    .sys-file { font: .8rem/1.3 var(--wm-mono); color: #e9dcff; padding: .25em .6em; border-radius: 999px; border: 1px solid rgba(255, 79, 163, .45); white-space: nowrap; }
+
+    .limits { margin: 0; padding: 0 0 0 1.2em; color: var(--wm-soft); font-size: .95rem; line-height: 1.6; max-width: 44rem; }
+    .limits li + li { margin-top: .5em; }
+    .limits li::marker { color: var(--neon-pink); }
+    .limits strong { color: var(--wm-ink); font-weight: 650; }
+
+    /* ---------- What's included ---------- */
+    .features { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
 
     .feature {
-      background: rgba(255, 255, 255, 0.02);
-      border: 1px solid rgba(255, 255, 255, 0.04);
-      border-radius: 12px;
       padding: 20px;
-      transition: border-color 0.3s, background 0.3s;
+      border: 1px solid rgba(196, 140, 255, .2);
+      border-radius: 14px;
+      background: rgba(255, 255, 255, .03);
+      min-width: 0;
+      transition: border-color .25s, box-shadow .25s, transform .25s;
     }
+    .feature:hover { border-color: rgba(94, 231, 255, .5); box-shadow: 0 0 28px -12px rgba(94, 231, 255, .85); transform: translateY(-2px); }
 
-    .feature:hover {
-      border-color: rgba(181, 55, 242, 0.2);
-      background: rgba(255, 255, 255, 0.04);
-    }
-
-    .feature-icon { font-size: 1.4em; margin-bottom: 8px; }
-
-    .feature h3 {
-      font-weight: 500;
-      font-size: 0.95em;
-      margin-bottom: 4px;
-      color: #f0f0ff;
-    }
-
-    .feature p {
-      font-size: 0.82em;
-      color: rgba(224, 224, 240, 0.5);
-      line-height: 1.5;
-    }
-
-    .shells {
-      display: flex;
-      gap: 10px;
-      margin-top: 16px;
-    }
-
-    .shell-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 6px 14px;
-      border-radius: 999px;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.78em;
-      font-weight: 700;
-      border: 1px solid;
-    }
-
-    .shell-badge.zsh {
-      color: var(--neon-cyan);
-      border-color: rgba(0, 240, 255, 0.25);
-      background: rgba(0, 240, 255, 0.06);
-    }
-
-    .shell-badge.bash {
-      color: var(--neon-green);
-      border-color: rgba(57, 255, 20, 0.25);
-      background: rgba(57, 255, 20, 0.06);
-    }
-
-    .footer {
-      text-align: center;
-      margin-top: 8px;
-      font-size: 0.82em;
-      color: rgba(224, 224, 240, 0.25);
-    }
-
-    .footer a {
-      color: var(--neon-purple);
-      text-decoration: none;
-    }
-    .footer a:hover { text-decoration: underline; }
+    .feature-icon { font: 700 1.3rem/1 var(--wm-mono); color: var(--neon-cyan); text-shadow: 0 0 12px rgba(94, 231, 255, .7); margin-bottom: 12px; }
+    .feature:nth-child(even) .feature-icon { color: #ff7dbb; text-shadow: 0 0 12px rgba(255, 79, 163, .7); }
+    .feature h3 { margin: 0 0 4px; font: 700 1.05rem/1.3 var(--display); color: var(--wm-ink); }
+    .feature p { margin: 0; font-size: .92rem; line-height: 1.55; color: var(--wm-soft); }
+    .feature .prompt-sample { font-family: var(--wm-mono); font-size: .92em; overflow-wrap: anywhere; }
 
     @media (max-width: 600px) {
-      .header h1 { font-size: 2.2em; }
-      .glass { padding: 24px; }
-      .features { grid-template-columns: 1fr; }
-      .container { padding: 240px 16px 80px; }
-      .synthwave-sun {
-        width: 180px;
-        height: 180px;
-        top: 30px;
-      }
-      .synthwave-sun-glow {
-        width: 260px;
-        height: 260px;
-        top: 30px;
-      }
-      .terminal-body {
-        font-size: 0.72em;
+      .features { grid-template-columns: minmax(0, 1fr); }
+      .terminal-body { font-size: .76rem; }
+      .systems li { grid-template-columns: minmax(0, 1fr) auto; }
+      .sys-os { grid-column: 1 / -1; grid-row: 2; }
+      .floor-grid { --cell: 34px; }
+      @keyframes grid-roll {
+        from { transform: rotateX(78deg) translateY(0); }
+        to { transform: rotateX(78deg) translateY(34px); }
       }
     }
-  </style>
-</head>
-<body>
-  <div class="stars-container" id="stars"></div>
-  <div class="synthwave-sun-glow"></div>
-  <div class="synthwave-sun"></div>
-  <div class="grid-floor"></div>
 
-  <div class="container">
-    <div class="header">
-      <h1>dotfiles</h1>
-      <p>One-line shell bootstrap with a custom prompt, essential tools, and handy aliases for macOS and Linux.</p>
-      <div class="shells" style="justify-content: center; margin-top: 20px;">
-        <span class="shell-badge zsh">zsh</span>
-        <span class="shell-badge bash">bash</span>
+    @media (prefers-reduced-motion: reduce) {
+      .stars-a, .stars-b, .sun, .sun-glow, .floor-grid, .cursor { animation: none; }
+      .copy-btn, .install-cmd, .feature { transition: none; }
+      .feature:hover { transform: none; }
+    }
+
+    @media (forced-colors: active) {
+      .wm-head.hero h1, .panel > .wm-h2 { background: none; -webkit-text-fill-color: currentColor; filter: none; }
+    }
+  </style>
+  <link rel="alternate" hreflang="x-default" href="https://wemiller.com/dotfiles/">
+  <link rel="alternate" hreflang="en" href="https://wemiller.com/dotfiles/">
+  <link rel="alternate" hreflang="zh-Hans" href="https://wemiller.com/dotfiles/?lang=zh-Hans">
+  <link rel="alternate" hreflang="ja" href="https://wemiller.com/dotfiles/?lang=ja">
+  <link rel="alternate" hreflang="de" href="https://wemiller.com/dotfiles/?lang=de">
+  <link rel="alternate" hreflang="fr" href="https://wemiller.com/dotfiles/?lang=fr">
+  <link rel="alternate" hreflang="es" href="https://wemiller.com/dotfiles/?lang=es">
+  <link rel="alternate" hreflang="ko" href="https://wemiller.com/dotfiles/?lang=ko">
+  <link rel="alternate" hreflang="pt-BR" href="https://wemiller.com/dotfiles/?lang=pt-BR">
+  <link rel="alternate" hreflang="it" href="https://wemiller.com/dotfiles/?lang=it">
+  <script src="/i18n/i18n.js?v=9b769779" defer data-page="dotfiles" data-pos="bottom-right"></script>
+</head>
+<body class="wm">
+  <header class="wm-head hero">
+    <div class="scene" aria-hidden="true">
+      <div class="sky">
+        <canvas class="stars stars-a"></canvas>
+        <canvas class="stars stars-b"></canvas>
+        <div class="sun-glow"></div>
+        <div class="sun"></div>
+      </div>
+      <div class="floor"><div class="floor-grid"></div></div>
+    </div>
+    <div class="hero-copy">
+      <h1 translate="no">dotfiles</h1>
+      <p data-i18n="one-line-shell-bootstrap.a80064">One-line shell bootstrap with a custom prompt, essential tools, and handy aliases for macOS, Linux, Windows and OpenWrt. Works offline too.</p>
+      <div class="shells" translate="no">
+        <span class="wm-chip">zsh</span>
+        <span class="wm-chip">bash</span>
+        <span class="wm-chip">ash</span>
+        <span class="wm-chip">PowerShell</span>
+        <span class="wm-chip">cmd</span>
+        <span class="wm-chip pm">brew</span>
+        <span class="wm-chip pm">apt</span>
+        <span class="wm-chip pm">dnf</span>
+        <span class="wm-chip pm">yum</span>
+        <span class="wm-chip pm">opkg</span>
+        <span class="wm-chip pm">winget</span>
       </div>
     </div>
+  </header>
+
+  <main class="wm-wrap">
+  <div class="stack">
 
     <!-- Terminal Demo -->
-    <div class="glass">
-      <h2><span class="accent">Live</span> Preview</h2>
-      <div class="terminal">
+    <section class="wm-card panel">
+      <h2 class="wm-h2" data-i18n="live-preview.a62da9">Live Preview</h2>
+      <div class="terminal" translate="no">
         <div class="terminal-bar">
-          <div class="terminal-dot red"></div>
-          <div class="terminal-dot yellow"></div>
-          <div class="terminal-dot green"></div>
+          <div class="terminal-dot"></div>
+          <div class="terminal-dot"></div>
+          <div class="terminal-dot"></div>
           <div class="terminal-title">~/.zshlocal</div>
         </div>
         <div class="terminal-body" id="demo"></div>
       </div>
-    </div>
+    </section>
 
     <!-- Install -->
-    <div class="glass">
-      <h2><span class="accent">Install</span></h2>
-      <p style="color: rgba(224,224,240,0.5); font-size: 0.92em; margin-bottom: 20px;">Run this single command. It downloads the config, sources it from both <code style="color: var(--neon-cyan);">~/.zshrc</code> and <code style="color: var(--neon-green);">~/.bashrc</code>, and auto-detects your shell.</p>
+    <section class="wm-card panel">
+      <h2 class="wm-h2" data-i18n="install.fd6c3e">Install</h2>
+      <p class="panel-note" data-i18n-html="run-this-single-command.749f83">Run this single command. It downloads the config, sources it from both <code>~/.zshrc</code> and <code>~/.bashrc</code>, and auto-detects your shell and package manager: Homebrew, apt, dnf or yum.</p>
 
       <div class="install-block">
-        <div class="install-label">one-line installer</div>
+        <div class="install-label" data-i18n="one-line-installer.a13ae2">one-line installer</div>
         <div class="install-cmd">
-          <div class="install-cmd-text"><code>curl -fsSL https://raw.githubusercontent.com/blaineam/blaineam.github.io/main/dotfiles/zshlocal -o ~/.zshlocal && echo '[ -f ~/.zshlocal ] && source ~/.zshlocal' >> ~/.zshrc && echo '[ -f ~/.zshlocal ] && source ~/.zshlocal' >> ~/.bashrc && source ~/.zshlocal</code></div>
-          <button class="copy-btn" onclick="copyInstall(this)">copy</button>
+          <div class="install-cmd-text" translate="no"><code>curl -fsSL https://raw.githubusercontent.com/blaineam/blaineam.github.io/main/dotfiles/zshlocal -o ~/.zshlocal && echo '[ -f ~/.zshlocal ] && source ~/.zshlocal' >> ~/.zshrc && echo '[ -f ~/.zshlocal ] && source ~/.zshlocal' >> ~/.bashrc && source ~/.zshlocal</code></div>
+          <button type="button" class="copy-btn" onclick="copyInstall(this)" data-i18n="copy.f84e2e">copy</button>
         </div>
       </div>
 
-      <div class="install-block" style="margin-top: 20px;">
-        <div class="install-label">zsh only</div>
+      <div class="install-block">
+        <div class="install-label" data-i18n="zsh-only.87fa8a">zsh only</div>
         <div class="install-cmd">
-          <div class="install-cmd-text"><code>curl -fsSL https://raw.githubusercontent.com/blaineam/blaineam.github.io/main/dotfiles/zshlocal -o ~/.zshlocal && echo '[ -f ~/.zshlocal ] && source ~/.zshlocal' >> ~/.zshrc && source ~/.zshlocal</code></div>
-          <button class="copy-btn" onclick="copyInstall(this)">copy</button>
+          <div class="install-cmd-text" translate="no"><code>curl -fsSL https://raw.githubusercontent.com/blaineam/blaineam.github.io/main/dotfiles/zshlocal -o ~/.zshlocal && echo '[ -f ~/.zshlocal ] && source ~/.zshlocal' >> ~/.zshrc && source ~/.zshlocal</code></div>
+          <button type="button" class="copy-btn" onclick="copyInstall(this)" data-i18n="copy.f84e2e">copy</button>
         </div>
       </div>
 
-      <div class="install-block" style="margin-top: 20px;">
-        <div class="install-label">bash only</div>
+      <div class="install-block">
+        <div class="install-label" data-i18n="bash-only.7c812a">bash only</div>
         <div class="install-cmd">
-          <div class="install-cmd-text"><code>curl -fsSL https://raw.githubusercontent.com/blaineam/blaineam.github.io/main/dotfiles/zshlocal -o ~/.zshlocal && echo '[ -f ~/.zshlocal ] && source ~/.zshlocal' >> ~/.bashrc && source ~/.zshlocal</code></div>
-          <button class="copy-btn" onclick="copyInstall(this)">copy</button>
+          <div class="install-cmd-text" translate="no"><code>curl -fsSL https://raw.githubusercontent.com/blaineam/blaineam.github.io/main/dotfiles/zshlocal -o ~/.zshlocal && echo '[ -f ~/.zshlocal ] && source ~/.zshlocal' >> ~/.bashrc && source ~/.zshlocal</code></div>
+          <button type="button" class="copy-btn" onclick="copyInstall(this)" data-i18n="copy.f84e2e">copy</button>
         </div>
       </div>
 
-      <div class="install-block" style="margin-top: 20px;">
-        <div class="install-label">update</div>
+      <div class="install-block">
+        <div class="install-label" data-i18n="update.0a25ba">update</div>
         <div class="install-cmd">
-          <div class="install-cmd-text"><code>curl -fsSL https://raw.githubusercontent.com/blaineam/blaineam.github.io/main/dotfiles/zshlocal -o ~/.zshlocal && source ~/.zshlocal</code></div>
-          <button class="copy-btn" onclick="copyInstall(this)">copy</button>
+          <div class="install-cmd-text" translate="no"><code>curl -fsSL https://raw.githubusercontent.com/blaineam/blaineam.github.io/main/dotfiles/zshlocal -o ~/.zshlocal && source ~/.zshlocal</code></div>
+          <button type="button" class="copy-btn" onclick="copyInstall(this)" data-i18n="copy.f84e2e">copy</button>
         </div>
       </div>
-    </div>
+
+      <div class="install-block">
+        <div class="install-label" data-i18n="openwrt-busybox-ash-opkg.beea9f">openwrt / busybox ash (opkg)</div>
+        <div class="install-cmd">
+          <div class="install-cmd-text" translate="no"><code>wget -q -O ~/.ashlocal https://raw.githubusercontent.com/blaineam/blaineam.github.io/main/dotfiles/ashlocal &amp;&amp; echo '[ -f ~/.ashlocal ] &amp;&amp; . ~/.ashlocal' &gt;&gt; ~/.profile &amp;&amp; . ~/.ashlocal</code></div>
+          <button type="button" class="copy-btn" onclick="copyInstall(this)" data-i18n="copy.f84e2e">copy</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Windows -->
+    <section class="wm-card panel">
+      <h2 class="wm-h2" translate="no">Windows</h2>
+      <p class="panel-note" data-i18n-html="three-shells-three-files.256f05">Three shells, three files. PowerShell gets the full prompt, Command Prompt gets what cmd is able to draw, and WSL is Linux, so it takes the same <code>zshlocal</code> as everything else.</p>
+
+      <h3 class="sub" translate="no">PowerShell</h3>
+      <p class="panel-note" data-i18n-html="windows-powershell-5-1.f17b2f">Windows PowerShell 5.1 and PowerShell 7, and pwsh on macOS and Linux. Same two-line prompt with git branch, duration and status. PowerShell already uses <code>gc</code>, <code>gl</code>, <code>gp</code> and <code>gcm</code> for its own commands, so those four are <code>gcv</code>, <code>gcmsg</code>, <code>gpull</code> and <code>gpush</code> here.</p>
+      <div class="install-block">
+        <div class="install-label" data-i18n="powershell-install.f402e8">powershell: install</div>
+        <div class="install-cmd">
+          <div class="install-cmd-text" translate="no"><code>iwr https://raw.githubusercontent.com/blaineam/blaineam.github.io/main/dotfiles/profile.ps1 -OutFile "$HOME/.pslocal.ps1" -UseBasicParsing; if (!(Test-Path $PROFILE)) { New-Item -Force -ItemType File $PROFILE | Out-Null }; Add-Content $PROFILE '. "$HOME/.pslocal.ps1"'; . "$HOME/.pslocal.ps1"</code></div>
+          <button type="button" class="copy-btn" onclick="copyInstall(this)" data-i18n="copy.f84e2e">copy</button>
+        </div>
+      </div>
+      <div class="install-block">
+        <div class="install-label" data-i18n="if-windows-says-scripts.f9356f">if windows says scripts are disabled (per user, no admin)</div>
+        <div class="install-cmd">
+          <div class="install-cmd-text" translate="no"><code>Set-ExecutionPolicy -Scope CurrentUser RemoteSigned</code></div>
+          <button type="button" class="copy-btn" onclick="copyInstall(this)" data-i18n="copy.f84e2e">copy</button>
+        </div>
+      </div>
+      <div class="install-block">
+        <div class="install-label" data-i18n="optional-install-git-vim.7e1c4e">optional: install git, vim, fzf and friends (winget, else scoop, else choco)</div>
+        <div class="install-cmd">
+          <div class="install-cmd-text" translate="no"><code>Install-DotfilesTools</code></div>
+          <button type="button" class="copy-btn" onclick="copyInstall(this)" data-i18n="copy.f84e2e">copy</button>
+        </div>
+      </div>
+
+      <h3 class="sub" data-i18n="command-prompt.b59e08">Command Prompt</h3>
+      <p class="panel-note" data-i18n-html="a-coloured-user-host.9c4168">A coloured <code>user@host|path</code> prompt and the aliases as doskey macros, on Windows 10 or later. cmd cannot run anything while it draws its prompt, so there is no git branch and no exit status there; type <code>ec</code> to see the last exit code, or add <a href="https://github.com/chrisant996/clink">Clink</a> if you want a branch. It runs from the <code>AutoRun</code> registry value, stays out of non-interactive <code>cmd /c</code> calls, and installs nothing. <code>AutoRun</code> holds one command and this replaces it, so look first with <code>reg query "HKCU\Software\Microsoft\Command Processor" /v AutoRun</code>.</p>
+      <div class="install-block">
+        <div class="install-label" data-i18n="command-prompt-install.f6fd8d">command prompt: install</div>
+        <div class="install-cmd">
+          <div class="install-cmd-text" translate="no"><code>curl -fsSL https://raw.githubusercontent.com/blaineam/blaineam.github.io/main/dotfiles/cmdlocal.cmd -o "%USERPROFILE%\cmdlocal.cmd" &amp;&amp; reg add "HKCU\Software\Microsoft\Command Processor" /v AutoRun /t REG_SZ /d "\"%USERPROFILE%\cmdlocal.cmd\"" /f</code></div>
+          <button type="button" class="copy-btn" onclick="copyInstall(this)" data-i18n="copy.f84e2e">copy</button>
+        </div>
+      </div>
+      <div class="install-block">
+        <div class="install-label" data-i18n="command-prompt-undo.0b1d2f">command prompt: undo</div>
+        <div class="install-cmd">
+          <div class="install-cmd-text" translate="no"><code>reg delete "HKCU\Software\Microsoft\Command Processor" /v AutoRun /f</code></div>
+          <button type="button" class="copy-btn" onclick="copyInstall(this)" data-i18n="copy.f84e2e">copy</button>
+        </div>
+      </div>
+
+      <h3 class="sub" translate="no">WSL</h3>
+      <p class="panel-note" data-i18n-html="run-the-normal-installer.6cc5e3">Run the normal installer inside your WSL distro. It also adds <code>open</code> (through <code>wslview</code> or Explorer), <code>pbcopy</code> and <code>pbpaste</code> when Windows interop is on, and needs no systemd.</p>
+      <div class="install-block">
+        <div class="install-label" data-i18n="wsl-install-run-inside.5f5477">wsl: install (run inside the distro)</div>
+        <div class="install-cmd">
+          <div class="install-cmd-text" translate="no"><code>curl -fsSL https://raw.githubusercontent.com/blaineam/blaineam.github.io/main/dotfiles/zshlocal -o ~/.zshlocal &amp;&amp; echo '[ -f ~/.zshlocal ] &amp;&amp; source ~/.zshlocal' &gt;&gt; ~/.zshrc &amp;&amp; echo '[ -f ~/.zshlocal ] &amp;&amp; source ~/.zshlocal' &gt;&gt; ~/.bashrc &amp;&amp; source ~/.zshlocal</code></div>
+          <button type="button" class="copy-btn" onclick="copyInstall(this)" data-i18n="copy.f84e2e">copy</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Supported systems -->
+    <section class="wm-card panel">
+      <h2 class="wm-h2" data-i18n="supported-systems.9fe5af">Supported Systems</h2>
+      <p class="panel-note" data-i18n="the-package-manager-is.72f3cf">The package manager is detected for you. A package the system's repositories do not carry is skipped and named, never an error.</p>
+      <ul class="systems">
+        <li><span class="sys-pm" translate="no">Homebrew</span><span class="sys-os" data-i18n="macos-homebrew-itself-is.3b10c8">macOS. Homebrew itself is installed first if it is missing.</span><span class="sys-file" translate="no">zshlocal</span></li>
+        <li><span class="sys-pm" translate="no">apt</span><span class="sys-os" data-i18n="debian-ubuntu-and-their.ab6904">Debian, Ubuntu and their relatives, including inside WSL.</span><span class="sys-file" translate="no">zshlocal</span></li>
+        <li><span class="sys-pm" translate="no">dnf</span><span class="sys-os" data-i18n="fedora-rhel-centos-stream.36f88a">Fedora, RHEL, CentOS Stream, Rocky, Alma, Amazon Linux 2023. On RHEL-family systems htop, ncdu, rclone and a few others need EPEL.</span><span class="sys-file" translate="no">zshlocal</span></li>
+        <li><span class="sys-pm" translate="no">yum</span><span class="sys-os" data-i18n="older-rhel-and-centos.ec5ddc">Older RHEL and CentOS, Amazon Linux 2. Used when dnf is not there.</span><span class="sys-file" translate="no">zshlocal</span></li>
+        <li><span class="sys-pm" translate="no">opkg</span><span class="sys-os" data-i18n="openwrt-and-other-busybox.1eeb6a">OpenWrt and other BusyBox systems with no zsh or bash. Plain POSIX sh, a handful of small packages (htop, tree, ncdu, tmux), and only when there is room for them.</span><span class="sys-file" translate="no">ashlocal</span></li>
+        <li><span class="sys-pm" translate="no">winget</span><span class="sys-os" data-i18n-html="windows-powershell-5-1.731eff">Windows PowerShell 5.1 and PowerShell 7. Tools are installed only when you run <code>Install-DotfilesTools</code>; scoop, then choco, are used when winget is missing.</span><span class="sys-file" translate="no">profile.ps1</span></li>
+        <li><span class="sys-pm" translate="no">cmd</span><span class="sys-os" data-i18n="command-prompt-on-windows.91ae6b">Command Prompt on Windows 10 or later. Prompt and aliases only, no packages.</span><span class="sys-file" translate="no">cmdlocal.cmd</span></li>
+      </ul>
+    </section>
+
+    <!-- Offline -->
+    <section class="wm-card panel">
+      <h2 class="wm-h2" data-i18n="offline-air-gapped.f8f902">Offline &amp; Air-gapped</h2>
+      <p class="panel-note" data-i18n="no-network-is-fine.373caf">No network is fine. Before installing anything the bootstrap makes one check that takes a few seconds at most. If it fails, package installs are skipped, one line says so, and the prompt and aliases are set up with whatever tools are already there. It looks again a day later.</p>
+
+      <h3 class="sub" data-i18n="turn-the-network-off.5d6b33">Turn the network off for good</h3>
+      <p class="panel-note" data-i18n-html="either-of-these-skips.bea9ab">Either of these skips the check and every package manager. Use <code>~/.ashlocal-offline</code> for the ash flavour and <code>~/.pslocal-offline</code> for PowerShell. <code>ZSHLOCAL_OFFLINE=0</code> does the opposite and installs without checking.</p>
+      <div class="install-block">
+        <div class="install-label" data-i18n="offline-as-a-flag.07d7dc">offline, as a flag file</div>
+        <div class="install-cmd">
+          <div class="install-cmd-text" translate="no"><code>touch ~/.zshlocal-offline</code></div>
+          <button type="button" class="copy-btn" onclick="copyInstall(this)" data-i18n="copy.f84e2e">copy</button>
+        </div>
+      </div>
+      <div class="install-block">
+        <div class="install-label" data-i18n="offline-for-one-shell.c1b3dc">offline, for one shell</div>
+        <div class="install-cmd">
+          <div class="install-cmd-text" translate="no"><code>ZSHLOCAL_OFFLINE=1 zsh -l</code></div>
+          <button type="button" class="copy-btn" onclick="copyInstall(this)" data-i18n="copy.f84e2e">copy</button>
+        </div>
+      </div>
+
+      <h3 class="sub" data-i18n="carry-it-to-an.bb9ddb">Carry it to an air-gapped machine</h3>
+      <p class="panel-note" data-i18n-html="build-a-bundle-on.599cb1">Build a bundle on a connected machine that matches the target (same distro release, same CPU), move the one file across, and unpack it. <code>auto</code> adds the packages for that machine's package manager; leave it off to pack the dotfiles alone.</p>
+      <div class="install-block">
+        <div class="install-label" data-i18n="1-connected-machine-build.9bc7ef">1. connected machine: build zshlocal-bundle.tar.gz</div>
+        <div class="install-cmd">
+          <div class="install-cmd-text" translate="no"><code>curl -fsSL https://raw.githubusercontent.com/blaineam/blaineam.github.io/main/dotfiles/bundle.sh | sh -s -- auto</code></div>
+          <button type="button" class="copy-btn" onclick="copyInstall(this)" data-i18n="copy.f84e2e">copy</button>
+        </div>
+      </div>
+      <div class="install-block">
+        <div class="install-label" data-i18n="2-air-gapped-machine.b7b387">2. air-gapped machine: unpack and install</div>
+        <div class="install-cmd">
+          <div class="install-cmd-text" translate="no"><code>tar -xzf zshlocal-bundle.tar.gz &amp;&amp; sh zshlocal-bundle/install.sh</code></div>
+          <button type="button" class="copy-btn" onclick="copyInstall(this)" data-i18n="copy.f84e2e">copy</button>
+        </div>
+      </div>
+      <div class="install-block">
+        <div class="install-label" data-i18n="or-point-a-shell.5af39d">or point a shell at an unpacked bundle yourself</div>
+        <div class="install-cmd">
+          <div class="install-cmd-text" translate="no"><code>ZSHLOCAL_BUNDLE="$PWD/zshlocal-bundle" zsh -l</code></div>
+          <button type="button" class="copy-btn" onclick="copyInstall(this)" data-i18n="copy.f84e2e">copy</button>
+        </div>
+      </div>
+
+      <h3 class="sub" data-i18n="build-for-a-different.a62427">Build for a different machine</h3>
+      <p class="panel-note" data-i18n-html="when-the-connected-machine.9520d2">When the connected machine is not a twin of the target (a Mac or Ubuntu laptop building for a Rocky server, an arm64 box or a router), name the target as <code>family:distro:release:arch</code>. For apt, dnf and yum the packages are downloaded by the target's own package manager inside a container of that distro, so this needs Docker or Podman; without one the script stops and tells you, it never packs the wrong platform. OpenWrt needs no container: the <code>.ipk</code> files come straight from the release's package feed. Add <code>--dry-run</code> to see exactly what would run.</p>
+      <div class="install-block">
+        <div class="install-label" data-i18n="apt-target-debian-12.49b0c4">apt target (debian 12, arm64)</div>
+        <div class="install-cmd">
+          <div class="install-cmd-text" translate="no"><code>curl -fsSL https://raw.githubusercontent.com/blaineam/blaineam.github.io/main/dotfiles/bundle.sh | sh -s -- --target apt:debian:12:arm64</code></div>
+          <button type="button" class="copy-btn" onclick="copyInstall(this)" data-i18n="copy.f84e2e">copy</button>
+        </div>
+      </div>
+      <div class="install-block">
+        <div class="install-label" data-i18n="dnf-target-rocky-9.f800c7">dnf target (rocky 9, x86_64)</div>
+        <div class="install-cmd">
+          <div class="install-cmd-text" translate="no"><code>curl -fsSL https://raw.githubusercontent.com/blaineam/blaineam.github.io/main/dotfiles/bundle.sh | sh -s -- --target dnf:rocky:9:x86_64</code></div>
+          <button type="button" class="copy-btn" onclick="copyInstall(this)" data-i18n="copy.f84e2e">copy</button>
+        </div>
+      </div>
+      <div class="install-block">
+        <div class="install-label" data-i18n="yum-target-amazon-linux.e2311a">yum target (amazon linux 2, x86_64)</div>
+        <div class="install-cmd">
+          <div class="install-cmd-text" translate="no"><code>curl -fsSL https://raw.githubusercontent.com/blaineam/blaineam.github.io/main/dotfiles/bundle.sh | sh -s -- --target yum:amzn:2:x86_64</code></div>
+          <button type="button" class="copy-btn" onclick="copyInstall(this)" data-i18n="copy.f84e2e">copy</button>
+        </div>
+      </div>
+      <div class="install-block">
+        <div class="install-label" data-i18n="opkg-target-openwrt-23.582313">opkg target (openwrt 23.05.3, exact release and architecture)</div>
+        <div class="install-cmd">
+          <div class="install-cmd-text" translate="no"><code>curl -fsSL https://raw.githubusercontent.com/blaineam/blaineam.github.io/main/dotfiles/bundle.sh | sh -s -- --target opkg:openwrt:23.05.3:aarch64_cortex-a53</code></div>
+          <button type="button" class="copy-btn" onclick="copyInstall(this)" data-i18n="copy.f84e2e">copy</button>
+        </div>
+      </div>
+
+      <h3 class="sub" data-i18n="what-a-bundle-can.487453">What a bundle can and cannot do</h3>
+      <ul class="limits">
+        <li data-i18n-html="no-index-no-resolving.0ec28b"><strong>No index, no resolving.</strong> Offline there is nothing to resolve dependencies against. Only what is inside the bundle can be installed, which is why it has to be built on a matching machine. A bundle from another release or CPU is refused unless you set <code>ZSHLOCAL_BUNDLE_FORCE=1</code>.</li>
+        <li data-i18n-html="apt-and-dnf-bundles.1cba21"><strong>apt and dnf</strong> bundles hold the full dependency closure, so they are self-contained but large (hundreds of megabytes). They are installed with <code>dpkg -i</code> and <code>dnf install ./*.rpm</code> with every repository disabled.</li>
+        <li data-i18n-html="yum-yumdownloader-and-opkg.0af7a9"><strong>yum</strong> (<code>yumdownloader</code>) and <strong>opkg</strong> (<code>opkg download</code>) only fetch dependencies the building machine does not already have, so the target needs at least the same base system.</li>
+        <li data-i18n-html="targets-are-recorded-in.4af0f9"><strong>Targets</strong> are recorded in the bundle and checked on the other side: a <code>rocky 9 x86_64</code> bundle installs on Rocky 9.x x86_64 and nowhere else. Another CPU architecture runs under emulation, which is slow and needs qemu/binfmt on Linux (Docker Desktop has it built in). RHEL itself has no default image; pass <code>--image rockylinux:9</code> or similar. For OpenWrt, names the feeds do not carry (libc, kernel modules) are assumed to be in the firmware already.</li>
+        <li data-i18n-html="windows-has-no-package.4fece0"><strong>Windows</strong> has no package bundle. winget, scoop and choco cannot install from one offline, so the bundle carries <code>profile.ps1</code> and <code>cmdlocal.cmd</code> and nothing more.</li>
+        <li data-i18n-html="homebrew-has-no-offline.403703"><strong>Homebrew</strong> has no offline mode. <code>brew fetch</code> saves bottles for one macOS version and CPU, Homebrew must already be installed on the target, and it may still reach for the network. Treat it as best effort.</li>
+      </ul>
+    </section>
 
     <!-- What's Included -->
-    <div class="glass">
-      <h2><span class="accent">What's</span> Included</h2>
+    <section class="wm-card panel">
+      <h2 class="wm-h2" data-i18n="what-s-included.2126f1">What's Included</h2>
       <div class="features">
         <div class="feature">
           <div class="feature-icon">></div>
-          <h3>Custom Prompt</h3>
-          <p><span style="color:#00d4d4">user</span><span style="color:#ff3b3b">@</span><span style="color:#ffb830">host</span><span style="color:#ff3b3b">|</span><span style="color:#39ff14">~/dir</span> <span style="color:#ff3b3b">(</span><span style="color:#ff69b4">main</span><span style="color:#ff3b3b">)</span><span style="color:#ff3b3b">[</span><span style="color:#b537f2">3s</span><span style="color:#39ff14">&#9679;</span><span style="color:#ff3b3b">]</span><br><span style="color:#b537f2">&rarr;</span> with git branch, duration, and exit status</p>
+          <h3 data-i18n="custom-prompt.4da482">Custom Prompt</h3>
+          <p><span class="prompt-sample" translate="no"><span class="p-user">user</span><span class="p-at">@</span><span class="p-host">host</span><span class="p-pipe">|</span><span class="p-dir">~/dir</span> <span class="p-paren">(</span><span class="p-branch">main</span><span class="p-paren">)</span><span class="p-paren">[</span><span class="p-duration">3s</span><span class="p-ok">&#9679;</span><span class="p-paren">]</span></span><br><span class="p-arrow">&rarr;</span> <span data-i18n="with-git-branch-duration.0d2edc">with git branch, duration, and exit status</span></p>
         </div>
         <div class="feature">
           <div class="feature-icon">~</div>
-          <h3>Shell Detection</h3>
-          <p>Auto-switches to zsh if available, falls back to bash gracefully</p>
+          <h3 data-i18n="shell-detection.2a7e07">Shell Detection</h3>
+          <p data-i18n="auto-switches-to-zsh.b44caa">Auto-switches to zsh if available, falls back to bash gracefully</p>
         </div>
         <div class="feature">
           <div class="feature-icon">+</div>
-          <h3>Essential Tools</h3>
-          <p>Installs git, tmux, vim, fzf, htop, ffmpeg, tree, and more via brew or apt</p>
+          <h3 data-i18n="essential-tools.d087bd">Essential Tools</h3>
+          <p data-i18n="installs-git-tmux-vim.f73ece">Installs git, tmux, vim, fzf, htop, ffmpeg, tree, and more via brew, apt, dnf or yum, and winget on request</p>
         </div>
         <div class="feature">
           <div class="feature-icon">&amp;</div>
-          <h3>Git Aliases</h3>
-          <p>Short aliases for common git commands &mdash; ga, gs, gd, gc, gp, gco, and more</p>
+          <h3 data-i18n="git-aliases.e1ef30">Git Aliases</h3>
+          <p data-i18n="short-aliases-for-common.30e5db">Short aliases for common git commands &mdash; ga, gs, gd, gc, gp, gco, and more</p>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">#</div>
+          <h3 data-i18n="works-offline.bb17d8">Works Offline</h3>
+          <p data-i18n="never-hangs-without-a.22c50f">Never hangs without a network: installs are skipped, the shell still comes up, and a bundle carries the packages to air-gapped machines</p>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">$</div>
+          <h3 data-i18n="fits-on-a-router.a783e1">Fits on a Router</h3>
+          <p data-i18n="a-posix-sh-flavour.b938f0">A POSIX sh flavour for OpenWrt and BusyBox ash, with the same prompt idea and only small opkg packages</p>
         </div>
       </div>
-    </div>
-
-    <div class="footer">
-      <a href="/">&larr; wemiller.com</a>
-    </div>
+    </section>
   </div>
+  </main>
 
+  <!-- Text the script writes. Kept in the page so it is translated with everything else. -->
+  <div id="msgs" hidden>
+    <span data-msg="copy" data-i18n="copy.f84e2e">copy</span>
+    <span data-msg="copied" data-i18n="copied.b95bac">copied!</span>
+  </div>
   <script>
+    function msg(key) {
+      const el = document.querySelector('#msgs [data-msg="' + key + '"]');
+      return el ? el.textContent : key;
+    }
     function copyInstall(btn) {
       const code = btn.previousElementSibling.querySelector('code');
       navigator.clipboard.writeText(code.textContent).then(() => {
-        btn.textContent = 'copied!';
+        btn.textContent = msg('copied');
         btn.classList.add('copied');
         setTimeout(() => {
-          btn.textContent = 'copy';
+          btn.textContent = msg('copy');
           btn.classList.remove('copied');
         }, 2000);
       });
     }
 
+    // Starfield: two small 2D canvases over the sky, redrawn when the hero is resized.
+    // Seeded, so the same stars come back every time. White, pink and blue only.
+    (function () {
+      const sky = document.querySelector('.sky');
+      const layers = Array.from(document.querySelectorAll('canvas.stars'));
+      if (!sky || !layers.length) return;
+      const tints = ['#ffffff', '#ffffff', '#ffd3ec', '#d6e6ff', '#e7d4ff'];
+      function draw() {
+        const w = sky.clientWidth, h = sky.clientHeight;
+        if (!w || !h) return;
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        let seed = 20240607;
+        const rnd = () => (seed = (seed * 1664525 + 1013904223) >>> 0) / 4294967296;
+        const count = Math.round(Math.min(220, Math.max(60, w * h / 2600)));
+        layers.forEach((canvas, layer) => {
+          canvas.width = Math.round(w * dpr);
+          canvas.height = Math.round(h * dpr);
+          const ctx = canvas.getContext('2d');
+          if (!ctx) return;
+          ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+          ctx.clearRect(0, 0, w, h);
+          for (let i = 0; i < count / 2; i++) {
+            const x = rnd() * w, y = rnd() * h;
+            const r = .4 + rnd() * rnd() * 1.3;
+            ctx.globalAlpha = (.35 + rnd() * .65) * (1 - .45 * y / h);
+            ctx.fillStyle = tints[Math.floor(rnd() * tints.length)];
+            ctx.beginPath();
+            ctx.arc(x, y, r, 0, Math.PI * 2);
+            ctx.fill();
+          }
+        });
+      }
+      draw();
+      if ('ResizeObserver' in window) new ResizeObserver(draw).observe(sky);
+      else window.addEventListener('resize', draw);
+    })();
+
     const demo = document.getElementById('demo');
+    // With reduced motion the demo is drawn once, with no typing and no loop.
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const wait = ms => reducedMotion ? Promise.resolve() : new Promise(r => setTimeout(r, ms));
     const HOST = 'macbook';
 
     const scenes = [
@@ -661,7 +873,7 @@
         html += ` <span class="p-paren">(</span><span class="p-branch">${branch}</span><span class="p-paren">)</span>`;
       }
       if (!isFirst) {
-        let circle = ok ? `<span class="p-ok">&#9679;</span>` : `<span class="p-err">&#9679;</span>`;
+        let circle = ok ? `<span class="p-ok">&#9679;</span>` : `<span class="p-err">&#9675;</span>`;
         if (duration) {
           html += `<span class="p-paren">[</span><span class="p-duration">${duration}</span>${circle}<span class="p-paren">]</span>`;
         } else {
@@ -673,6 +885,7 @@
     }
 
     function typeText(el, text, speed) {
+      if (reducedMotion) { el.textContent += text; return Promise.resolve(); }
       return new Promise(resolve => {
         let i = 0;
         const interval = setInterval(() => {
@@ -710,7 +923,7 @@
       scrollToBottom();
 
       // Pause before typing — user deciding what to type
-      await new Promise(r => setTimeout(r, 1200));
+      await wait(1200);
 
       await typeText(cmdSpan, scene.cmd, 55);
       scrollToBottom();
@@ -732,7 +945,7 @@
       isFirstPrompt = false;
 
       // Brief pause after output before next prompt appears
-      await new Promise(r => setTimeout(r, 400));
+      await wait(400);
     }
 
     async function clearScreen() {
@@ -749,9 +962,9 @@
       demo.appendChild(line);
       scrollToBottom();
 
-      await new Promise(r => setTimeout(r, 800));
+      await wait(800);
       await typeText(cmdSpan, 'c', 55);
-      await new Promise(r => setTimeout(r, 300));
+      await wait(300);
       cursor.remove();
 
       // Clear the terminal
@@ -782,37 +995,17 @@
         demo.appendChild(endLine);
         scrollToBottom();
 
-        await new Promise(r => setTimeout(r, 2500));
+        if (reducedMotion) return;
+        await wait(2500);
 
         // Clear with the 'c' alias before looping
         await clearScreen();
-        await new Promise(r => setTimeout(r, 600));
+        await wait(600);
       }
     }
 
     runDemo();
 
-    // Generate stars
-    (function() {
-      const container = document.getElementById('stars');
-      const count = 60;
-      const animations = ['twinkle1', 'twinkle2', 'twinkle3'];
-      for (let i = 0; i < count; i++) {
-        const star = document.createElement('div');
-        star.className = 'star';
-        const size = Math.random() * 2.5 + 1;
-        star.style.width = size + 'px';
-        star.style.height = size + 'px';
-        star.style.left = Math.random() * 100 + '%';
-        star.style.top = Math.random() * 100 + '%';
-        const anim = animations[Math.floor(Math.random() * animations.length)];
-        const dur = (Math.random() * 3 + 2).toFixed(1);
-        const delay = (Math.random() * 4).toFixed(1);
-        star.style.animation = anim + ' ' + dur + 's ' + delay + 's ease-in-out infinite';
-        star.style.opacity = Math.random() * 0.6 + 0.2;
-        container.appendChild(star);
-      }
-    })();
   </script>
 </body>
 </html>

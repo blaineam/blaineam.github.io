@@ -1,5 +1,8 @@
 // App Showcase JavaScript - Interactive Features
 
+// Movement is an extra: skipped for anyone who asked the system for less of it.
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
 document.addEventListener('DOMContentLoaded', () => {
   initFAQ();
   initMobileMenu();
@@ -37,7 +40,7 @@ function initFAQ() {
     faqItems.forEach(other => other.classList.remove('active'));
     target.classList.add('active');
     // After the page's entrance animations have settled, or they move it again.
-    setTimeout(() => target.scrollIntoView({ block: 'center', behavior: 'smooth' }), 400);
+    setTimeout(() => target.scrollIntoView({ block: 'center', behavior: reduceMotion ? 'auto' : 'smooth' }), 400);
   }
   window.addEventListener('hashchange', openFromHash);
   if (document.readyState === 'complete') openFromHash();
@@ -117,7 +120,7 @@ function initSmoothScroll() {
 
         window.scrollTo({
           top: targetPosition,
-          behavior: 'smooth'
+          behavior: reduceMotion ? 'auto' : 'smooth'
         });
       }
     });
@@ -165,7 +168,7 @@ if ('IntersectionObserver' in window) {
 // Parallax Effect for Hero Section
 window.addEventListener('scroll', () => {
   const heroImage = document.querySelector('.hero-phone');
-  if (!heroImage) return;
+  if (!heroImage || reduceMotion) return;
 
   const scrolled = window.pageYOffset;
   const rate = scrolled * 0.3;
@@ -211,4 +214,5 @@ staggerAnimation('.feature-card', 100);
 staggerAnimation('.screenshot-item', 100);
 staggerAnimation('.faq-item', 100);
 
-document.getElementById('year').textContent = new Date().getFullYear();
+const yearEl = document.getElementById('year');
+if (yearEl) yearEl.textContent = new Date().getFullYear();

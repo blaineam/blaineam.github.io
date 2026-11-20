@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Sky simulation demo</title>
+<link rel="stylesheet" href="sky-controls.css">
+<style>
+  :root { color-scheme: light dark; --bg: #f4f6fa; --fg: #131722; --dim: #4a5368; --line: #d5dae6; --link: #1f4fd1; }
+  @media (prefers-color-scheme: dark) { :root { --bg: #0a0d16; --fg: #eef1f8; --dim: #aab3c8; --line: #262d40; --link: #9bbcff; } }
+  /* the page follows the simulated sky: sky.js tells us when the sun sets */
+  :root[data-sky="night"] { --bg: #070a12; --fg: #eef1f8; --dim: #aab3c8; --line: #262d40; --link: #9bbcff; }
+  :root[data-sky="day"] { --bg: #f4f6fa; --fg: #131722; --dim: #4a5368; --line: #d5dae6; --link: #1f4fd1; }
+  * { box-sizing: border-box; }
+  body { margin: 0; color: var(--fg); background: var(--bg); font: 16px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; transition: background-color .6s, color .6s; }
+  @media (prefers-reduced-motion: reduce) { body { transition: none; } }
+  header, main, footer { max-width: 1100px; margin: 0 auto; padding: 0 16px; }
+  header { padding-top: 22px; padding-bottom: 14px; }
+  h1 { margin: 0 0 4px; font-size: clamp(1.4rem, 3.4vw, 2rem); font-weight: 650; letter-spacing: -.01em; }
+  header p, footer p { margin: 0; color: var(--dim); }
+  a { color: var(--link); }
+  .stage { position: relative; width: 100%; background: #05080f; }
+  .stage canvas { display: block; width: 100%; height: clamp(240px, 58vh, 640px); }
+  .stage canvas:focus-visible { outline: 3px solid #fff; outline-offset: -3px; }
+  /* a stand-in for the home page's contact block, to show planetarium mode */
+  .over { position: absolute; inset: 0; display: grid; place-content: center; justify-items: center; gap: 14px; padding: 16px; text-align: center; color: #fff; pointer-events: none; }
+  .over > * { pointer-events: auto; }
+  .over h2 { margin: 0; font-size: clamp(2rem, 6vw, 3.6rem); font-weight: 600; letter-spacing: -.02em; text-shadow: 0 2px 18px rgba(0, 0, 0, .55); }
+  .over p { margin: 0; max-width: 34ch; text-shadow: 0 1px 10px rgba(0, 0, 0, .7); }
+  .over .row { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+  .over .pill { display: inline-grid; place-items: center; min-height: 44px; padding: 0 18px; color: #fff; background: rgba(8, 12, 24, .6); border: 1px solid rgba(255, 255, 255, .4); border-radius: 999px; font: inherit; font-weight: 600; }
+  main { padding-top: 16px; padding-bottom: 8px; }
+  .note { margin: 14px 0 0; color: var(--dim); font-size: 14px; }
+  .presets { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0 0; padding: 0; list-style: none; }
+  .presets button { min-height: 44px; padding: 0 14px; color: var(--fg); background: transparent; border: 1px solid var(--line); border-radius: 999px; font: inherit; font-size: 14px; cursor: pointer; }
+  .presets button:hover { border-color: var(--dim); }
+  .presets button:focus-visible { outline: 2px solid var(--link); outline-offset: 2px; }
+  footer { padding-top: 6px; padding-bottom: 40px; font-size: 14px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>The sky, where you are, right now</h1>
+  <p id="where">Working out where you are from your time zone…</p>
+</header>
+
+<div class="stage">
+  <canvas id="sky" role="img" aria-label="Simulated view of the sky above the horizon for the chosen time and place. Drag sideways to look around."></canvas>
+  <div class="over" id="over">
+    <h2>Say hello</h2>
+    <p>Stand-in contact block, like the one on the home page.</p>
+    <div class="row"><button type="button" class="pill">Email</button><button type="button" class="pill">Signal</button></div>
+  </div>
+</div>
+
+<main>
+  <div id="controls"></div>
+  <ul class="presets" aria-label="Try a moment">
+    <li><button type="button" data-t="noon">Midday</button></li>
+    <li><button type="button" data-t="sunset">Around sunset</button></li>
+    <li><button type="button" data-t="dusk">Deep twilight</button></li>
+    <li><button type="button" data-t="midnight">Midnight</button></li>
+    <li><button type="button" data-jump="-365">A year back</button></li>
+    <li><button type="button" data-jump="30">A month ahead</button></li>
+    <li><button type="button" data-place="-41.3,174.8">Wellington, 41° S</button></li>
+    <li><button type="button" data-place="69.7,19">Tromsø, 70° N</button></li>
+    <li><button type="button" data-place="home">Back home</button></li>
+  </ul>
+  <p class="note" id="catalog"></p>
+</main>
+
+<footer>
+  <p>Demo for <code>assets/sky/</code>. Nothing here talks to a server: the place is a guess from the browser's time zone, and you can correct it above or, if you choose, share your location with this page. See <a href="README.md">README.md</a> for the API.</p>
+</footer>
+
+<script type="module">
+  import { createSky } from './sky.js';
+  import { createSkyControls, createPlanetariumToggle } from './sky-controls.js';
+
+  // URL parameters, mainly for testing: ?t=2026-06-21T22:00&lat=-45&lon=170&az=180&mode=night&trails=1&lines=1&rate=600&rm=1&lowdata=1
+  const q = new URLSearchParams(location.search), num = (k) => (q.has(k) && q.get(k) !== '' ? +q.get(k) : undefined);
+  const opts = { drag: false, labels: false, time: q.get('t') || undefined, lat: num('lat'), lon: num('lon'), azimuth: num('az'), mode: q.get('mode') || undefined,
+    trails: q.get('trails') === '1', constellations: q.get('lines') === '1', rate: num('rate'), tilt: num('tilt') };
+  if (q.has('rm')) opts.reducedMotion = q.get('rm') === '1';
+  if (q.has('lowdata')) opts.lowData = q.get('lowdata') === '1';
+
+  const sky = createSky(document.getElementById('sky'), opts);
+  const { model, view } = sky;
+  createSkyControls(sky, { container: document.getElementById('controls') });
+  // planetarium mode: hides the text over the sky, lets you drag it, names the planets; and back again
+  window.skyView = createPlanetariumToggle(sky, { host: document.querySelector('.stage'), hide: '#over' });
+  if (q.get('view') === 'sky') window.skyView.open();
+  window.sky = sky;   // for poking at in the console
+
+  const home = { lat: model.lat, lon: model.lon };
+  const where = document.getElementById('where');
+  function describe() {
+    const lat = Math.abs(model.lat).toFixed(1) + '° ' + (model.lat >= 0 ? 'N' : 'S'), lon = Math.abs(model.lon).toFixed(1) + '° ' + (model.lon >= 0 ? 'E' : 'W');
+    where.textContent = model.locationSource === 'timezone' ? `Guessing ${lat}, ${lon} from your time zone (${model.zone}). Press "Planetarium mode" to clear the text, drag around and see the planets named.`
+      : model.locationSource === 'geolocation' ? `Using the location you shared: ${lat}, ${lon}. It stays in this page.`
+      : model.locationSource === 'given' ? `Showing ${lat}, ${lon}. Press "Planetarium mode" to clear the text, drag around and see the planets named.`
+      : `Could not place your time zone, so this is ${lat}, ${lon}. Set your latitude below.`;
+  }
+  describe();
+  model.on('change', (_, what) => { if (what === 'location') describe(); });
+
+  // a host page reacting to the simulated sun: the page chrome goes dark at sunset
+  const theme = () => { document.documentElement.dataset.sky = model.sky.isDay ? 'day' : 'night'; };
+  theme(); model.on('daynight', theme);
+
+  sky.ready.then(() => {
+    const c = model._catalog, note = document.getElementById('catalog');
+    note.textContent = !c ? 'The star catalog did not load, so only the sun, moon and sky colours are shown.'
+      : c.starter ? `Stars: starter set of ${c.count} hand-entered bright stars with real positions, plus a decorative faint field. Run build-stars.mjs to replace it with a full catalog.`
+      : `Stars: ${c.count} from ${c.source.split(',')[0]}.`;
+  });
+
+  // presets: find the moment on the current simulated date by stepping the sun's altitude
+  function findTime(kind) {
+    const d = new Date(model.time); d.setHours(0, 0, 0, 0);
+    const day0 = d.getTime(), probe = new model.constructor({ lat: model.lat, lon: model.lon, time: day0, catalog: null, filler: false });
+    let best = day0 + 12 * 3600e3, score = Infinity;
+    for (let m = 0; m < 1440; m += 4) {
+      probe.setTime(day0 + m * 60e3);
+      const alt = probe.sun.alt, pm = m > 720;
+      const s = kind === 'noon' ? -alt : kind === 'midnight' ? alt : !pm ? Infinity : Math.abs(alt - (kind === 'sunset' ? 1.5 : -9));
+      if (s < score) { score = s; best = day0 + m * 60e3; }
+    }
+    return best;
+  }
+  document.querySelector('.presets').addEventListener('click', (e) => {
+    const b = e.target.closest('button'); if (!b) return;
+    if (b.dataset.t) {
+      const t = findTime(b.dataset.t);
+      if (b.dataset.t === 'sunset' || b.dataset.t === 'dusk') { const pr = new model.constructor({ lat: model.lat, lon: model.lon, time: t, catalog: null, filler: false }); view.setAzimuth(pr.sun.az); }
+      model.setRate(0); view.travelTo(t);          // the "time machine" effect: the sky winds to the new time
+    } else if (b.dataset.jump) view.travelTo(model.time + b.dataset.jump * 86400e3);
+    else if (b.dataset.place === 'home') model.setLocation(home.lat, home.lon);
+    else { const [la, lo] = b.dataset.place.split(',').map(Number); model.setLocation(la, lo); }
+  });
+</script>
+</body>
+</html>

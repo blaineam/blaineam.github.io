@@ -124,4 +124,12 @@
 </url>
 
 
+  <url>
+    <loc>https://wemiller.com/resume/</loc>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://wemiller.com/xr/</loc>
+    <changefreq>monthly</changefreq>
+  </url>
 </urlset>

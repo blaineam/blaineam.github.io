@@ -1,0 +1,20 @@
+{
+  "_meta.description": "Wide panoramas and 360° photographs by Blaine Miller. Open one to pan, zoom and look around.",
+  "_title": "Blaine Miller Photography Panorama Gallery",
+  "head.eyebrow": "Photography",
+  "head.intro": "Immersive panoramic photography by Blaine Miller",
+  "head.title": "Panorama Gallery",
+  "pv.alt360": "360° photograph {n}",
+  "pv.altPano": "Panorama {n}",
+  "pv.close": "Close",
+  "pv.dialog": "Panorama",
+  "pv.failed": "This panorama could not be loaded.",
+  "pv.hintLook": "Drag to look around. Pinch or scroll to zoom.",
+  "pv.hintPan": "Drag to pan. Pinch or scroll to zoom.",
+  "pv.next": "Next panorama",
+  "pv.prev": "Previous panorama",
+  "pv.title360": "360° photo",
+  "pv.titlePano": "Panorama",
+  "pv.zoomIn": "Zoom in",
+  "pv.zoomOut": "Zoom out"
+}

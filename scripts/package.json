@@ -7,6 +7,7 @@
     "generate-posters": "node generate-posters.js"
   },
   "dependencies": {
+    "esbuild": "^0.28.2",
     "sharp": "^0.35.5"
   }
 }

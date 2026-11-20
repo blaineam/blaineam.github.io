@@ -1,0 +1,183 @@
+/* wemiller.com /xr/ — page shell and flat-screen HUD. Always dark: it is a night sky. */
+:root {
+  --bg: #070b14;
+  --bg-2: #0c1220;
+  --panel: rgba(9, 14, 26, .86);
+  --line: rgba(255, 255, 255, .14);
+  --ink: #eef2f8;
+  --soft: #b9c3d6;
+  --accent: #6cb6ff;
+  --accent-ink: #04121f;
+  --green: #6fe0c0;
+  --sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", Arial, sans-serif;
+  --bar-h: 52px;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  height: 100%;
+  background: var(--bg);
+  color: var(--ink);
+  font: 16px/1.5 var(--sans);
+  -webkit-text-size-adjust: 100%;
+}
+
+body { display: flex; flex-direction: column; overflow: hidden; }
+
+a { color: var(--accent); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 6px; }
+[hidden] { display: none !important; }
+
+/* ---- top bar ---- */
+.bar {
+  flex: 0 0 auto;
+  min-height: var(--bar-h);
+  display: flex;
+  align-items: center;
+  gap: 8px 18px;
+  flex-wrap: wrap;
+  padding: 8px max(16px, env(safe-area-inset-right)) 8px max(16px, env(safe-area-inset-left));
+  border-bottom: 1px solid var(--line);
+  background: var(--bg-2);
+}
+.bar h1 { margin: 0; font-size: 1rem; font-weight: 600; letter-spacing: .01em; color: var(--soft); }
+.bar__home { color: var(--ink); text-decoration: none; font-weight: 600; white-space: nowrap; }
+.bar__home:hover { color: var(--accent); }
+
+/* ---- stage ---- */
+.stage { position: relative; flex: 1 1 auto; min-height: 0; overflow: hidden; }
+#view {
+  position: absolute; inset: 0; width: 100%; height: 100%; display: block;
+  touch-action: none; cursor: grab; outline-offset: -3px;
+  background: radial-gradient(120% 90% at 50% 0%, #0d1730 0%, var(--bg) 60%);
+}
+#view.is-dragging { cursor: grabbing; }
+#view.is-target { cursor: pointer; }
+
+/* ---- buttons ---- */
+.btn, .hud__areas button, .hud__sets button {
+  font: 600 .9rem/1 var(--sans);
+  color: var(--ink);
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 0 16px;
+  min-height: 40px;
+  display: inline-flex; align-items: center; justify-content: center;
+  text-decoration: none;
+  cursor: pointer;
+  -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px);
+}
+.btn:hover, .hud__areas button:hover, .hud__sets button:hover { border-color: var(--accent); }
+.btn[disabled] { opacity: .4; cursor: default; border-color: var(--line); }
+.btn--primary, [aria-pressed="true"] { background: var(--accent) !important; color: var(--accent-ink) !important; border-color: var(--accent) !important; }
+.btn--green { background: var(--green); color: var(--accent-ink); border-color: var(--green); }
+
+/* ---- intro / fallback card ---- */
+.intro {
+  position: absolute; inset: 0; z-index: 5;
+  display: grid; place-items: center;
+  padding: 16px; overflow: auto;
+  background: rgba(7, 11, 20, .72);
+}
+.intro--static { position: static; background: none; }
+.card {
+  width: min(620px, 100%);
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  padding: clamp(20px, 4vw, 34px);
+  box-shadow: 0 24px 60px -24px rgba(0, 0, 0, .8);
+}
+.card h2 { margin: 0 0 10px; font-size: clamp(1.3rem, 3.4vw, 1.8rem); line-height: 1.2; }
+.card p { margin: 0 0 14px; color: var(--soft); }
+.card strong { color: var(--ink); }
+.keys { margin: 0 0 14px; padding: 0; list-style: none; color: var(--soft); font-size: .93rem; }
+.keys li { padding: 5px 0; border-top: 1px solid var(--line); }
+.keys b { color: var(--ink); margin-right: 6px; }
+.note { font-size: .93rem; }
+.row { display: flex; flex-wrap: wrap; gap: 10px; margin: 0 0 14px; }
+.plain { font-size: .9rem; margin-bottom: 0 !important; }
+
+/* ---- HUD ---- */
+.hud { position: absolute; inset: 0; pointer-events: none; z-index: 2; }
+.hud > * { pointer-events: auto; }
+.hud__areas { position: absolute; top: 12px; left: 12px; display: flex; gap: 6px; flex-wrap: wrap; }
+.hud__tools { position: absolute; top: 12px; right: 12px; display: flex; gap: 6px; flex-wrap: wrap; justify-content: flex-end; }
+.hud__sets { position: absolute; top: 62px; left: 12px; display: flex; gap: 6px; flex-wrap: wrap; }
+.hud__sets button { min-height: 34px; font-size: .82rem; padding: 0 12px; }
+
+.hud__bottom {
+  position: absolute; left: 12px; right: 12px; bottom: max(12px, env(safe-area-inset-bottom));
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  pointer-events: none;
+}
+.hud__bottom > * { pointer-events: auto; }
+.pager { display: flex; align-items: center; gap: 10px; }
+#pos {
+  min-width: 7.5em; text-align: center; font-size: .9rem; font-variant-numeric: tabular-nums;
+  padding: 6px 10px; border-radius: 999px; background: var(--panel);
+}
+.status {
+  margin: 0; min-height: 1.5em; max-width: min(640px, 100%);
+  font-size: .88rem; color: var(--ink); text-align: center;
+  padding: 2px 12px; border-radius: 999px; background: var(--panel);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.status:empty { visibility: hidden; }
+
+.info {
+  align-self: flex-start;
+  width: min(440px, 100%);
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 14px 16px;
+  -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px);
+}
+.info h2 { margin: 0 0 4px; font-size: 1.05rem; }
+.info p { margin: 0 0 10px; color: var(--soft); font-size: .92rem; }
+.info__row { display: flex; gap: 8px; flex-wrap: wrap; margin: 0 !important; }
+
+/* ---- per-item buttons: off-screen, but focusable; the 3D view draws the focus ---- */
+.items { position: absolute; left: 0; top: 0; margin: 0; padding: 0; list-style: none; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+.items button { font: inherit; }
+
+@media (max-width: 640px) {
+  .bar h1 { font-size: .9rem; }
+  .hud__sets { top: 108px; }
+  .hud__tools { top: 58px; left: 12px; right: auto; justify-content: flex-start; }
+  .btn, .hud__areas button { padding: 0 13px; }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .btn, .hud__areas button, .hud__sets button { transition: border-color .2s, background-color .2s; }
+}
+
+/* while the intro card is up, the item buttons behind it stay out of the Tab order */
+#intro:not([hidden]) ~ .items, #enter-now:not([hidden]) ~ .items { display: none; }
+
+/* ?enter=1: one unmissable button */
+.card--enter { text-align: center; }
+.btn--huge { font-size: clamp(1.5rem, 6vw, 2.4rem); min-height: 0; padding: .7em 1.6em; margin: 6px 0 18px; }
+.linklike { font: inherit; color: var(--accent); background: none; border: 0; padding: 0; text-decoration: underline; cursor: pointer; }
+
+.sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
+
+/* Sky only: the planetarium, with as little over it as possible */
+.hud.is-sky .hud__areas, .hud.is-sky .hud__bottom { display: none; }
+
+/* search, the time machine, the day's greeting, music volume */
+.hud__mid { position: absolute; left: 50%; top: 112px; transform: translateX(-50%); display: grid; justify-items: center; gap: 8px; width: min(560px, calc(100% - 24px)); pointer-events: none; }
+.hud__mid > * { pointer-events: auto; margin: 0; }
+.greet { font-weight: 700; font-size: 1.05rem; text-align: center; text-shadow: 0 2px 12px rgba(0, 0, 0, .8); }
+.tm-bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 8px 12px; padding: 6px 8px 6px 14px; border-radius: 999px; background: rgba(9, 14, 26, .9); border: 1px solid var(--green, #6fe0c0); color: var(--green, #6fe0c0); font-weight: 600; font-size: .85rem; letter-spacing: .04em; }
+.field { width: 100%; min-height: 44px; padding: 0 16px; border-radius: 999px; border: 1px solid #34486e; background: rgba(9, 14, 26, .94); color: #eef2f8; font: inherit; color-scheme: dark; }
+.field:focus-visible { outline: 2px solid #6cb6ff; outline-offset: 2px; }
+.tm-form { display: flex; gap: 8px; width: 100%; }
+.tm-form .field { flex: 1; min-width: 0; }
+.vol { width: 88px; accent-color: #6cb6ff; align-self: center; }
+.hud.is-sky .hud__mid .field, .hud.is-sky .tm-form { display: none; }

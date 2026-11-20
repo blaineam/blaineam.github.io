@@ -1,0 +1,20 @@
+{
+  "_meta.description": "Blaine Miller의 와이드 파노라마와 360° 사진. 사진을 열어 이동하고 확대하며 주위를 둘러보세요.",
+  "_title": "Blaine Miller 사진 – 파노라마 갤러리",
+  "head.eyebrow": "사진",
+  "head.intro": "Blaine Miller의 몰입감 있는 파노라마 사진",
+  "head.title": "파노라마 갤러리",
+  "pv.alt360": "360° 사진 {n}",
+  "pv.altPano": "파노라마 {n}",
+  "pv.close": "닫기",
+  "pv.dialog": "파노라마",
+  "pv.failed": "파노라마를 불러올 수 없습니다.",
+  "pv.hintLook": "드래그해서 둘러보고, 핀치나 스크롤로 확대/축소하세요.",
+  "pv.hintPan": "드래그해서 이동하고, 핀치나 스크롤로 확대/축소하세요.",
+  "pv.next": "다음 파노라마",
+  "pv.prev": "이전 파노라마",
+  "pv.title360": "360° 사진",
+  "pv.titlePano": "파노라마",
+  "pv.zoomIn": "확대",
+  "pv.zoomOut": "축소"
+}

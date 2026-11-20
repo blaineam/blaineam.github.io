@@ -15,6 +15,7 @@ on:
       - 'apps/**/poster.jpg'
       - 'apps/apps-by-blaine-miller.jpg'
       - 'apps/.poster-cache.json'
+      - 'og/**'
   workflow_dispatch:
 
 permissions:
@@ -57,6 +58,14 @@ jobs:
         working-directory: scripts
         run: npm ci
 
+      # The home page, /resume/, /shell, the search index, photo thumbnails, the English home-page
+      # dictionary, the profile bios and the README's project table all come from /content.
+      # Running it here means a content edit made in the GitHub web editor (a new caption, a new
+      # photo dropped into /slides) is enough; nothing has to be built locally first. With nothing
+      # to change it writes nothing.
+      - name: Build the home page from /content
+        run: node scripts/build-site.mjs
+
       # Regenerates apps/apps-by-blaine-miller.jpg, every app's
       # apps/<slug>/assets/images/poster.jpg, and .poster-cache.json.
       # `--force` is intentional: we always re-run the hue-sampling
@@ -66,6 +75,13 @@ jobs:
       # below is a no-op.
       - name: Regenerate app posters
         run: node scripts/generate-posters.js --force
+
+      # Open Graph posters for the portfolio's own pages (home, Work, resume, panoramas, puzzles,
+      # VR, speed test, privacy, terms, 404) in /og. Each is redrawn only when its recipe or its
+      # photograph changed (og/.hashes.json), using the Chrome that ships on the runner, so with
+      # nothing changed this writes nothing.
+      - name: Draw Open Graph posters for the site's own pages
+        run: node scripts/build-og.mjs
 
       # The posters have just been rewritten, so any `?v=` stamp pointing at one is now stale —
       # and og:image is exactly where that matters, since a scraper caches the first fetch of a
@@ -113,6 +129,11 @@ jobs:
           git add apps/apps-by-blaine-miller.jpg \
                   apps/.poster-cache.json \
                   apps/*/assets/images/poster.jpg
+          git add og
+          # Everything scripts/build-site.mjs derives from /content.
+          git add -A slides
+          git add index.html hire resume shell search-index.json app-sheets.json profiles README.md sitemap.xml assets/site.min.js assets/site.min.css \
+                  i18n/index.en.json slides/thumbs projects/lg projects/shots profiles/contributions.json
           # Pages whose `?v=` stamps the re-stamp step just refreshed.
           git add -u '*.html' '*.css' 2>/dev/null || true
           # Store links the tagging step just rewrote outside HTML.
@@ -123,6 +144,11 @@ jobs:
             git commit -m "chore(posters): regenerate, re-stamp and tag store links via CI [skip ci]"
             git push
           fi
+
+      # The list of pages and small files that sw.js saves so the site opens offline, and the build
+      # stamp that tells browsers a new deploy is out. Last, so it sees every page as it will be served.
+      - name: Build the offline file list
+        run: node scripts/build-offline.mjs
 
       # upload-pages-artifact tars the whole checkout minus .git/.github, so drop what the site
       # never serves (the poster generator's node_modules, ~17 MB).

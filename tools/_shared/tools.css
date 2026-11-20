@@ -5,22 +5,24 @@
  * beat, a short FAQ and a closing CTA; depth pages use /apps/_shared/depth.css.
  *
  * Each page re-tones these through its own :root block (the --tl-* tokens
- * below, light and dark). Classes follow the <prefix>-chapter / -spread /
+ * below, light and dark). The defaults are the site's own navy, blue and green
+ * (the values of /assets/shell.css); the hub at /tools/ loads that sheet and
+ * points every token at it (see "Hub page" at the end). Classes follow the <prefix>-chapter / -spread /
  * -copy / figure pattern so the shared story layout contract in
  * app-showcase.css centres them like every app page.
  */
 
 :root {
-  --tl-hero: linear-gradient(180deg, #0b1220 0%, #10223a 55%, #163454 100%);
-  --tl-hero-glow: radial-gradient(ellipse 60% 45% at 50% 100%, rgba(255, 181, 71, 0.16) 0%, transparent 70%),
-                  radial-gradient(ellipse 45% 40% at 88% 4%, rgba(94, 160, 255, 0.24) 0%, transparent 70%);
-  --tl-hero-ink: #F5F7FB;
-  --tl-hero-em: #FFC66B;
-  --tl-hero-kicker: rgba(255, 198, 107, 0.92);
-  --tl-btn: linear-gradient(180deg, #FFD08A, #FFB547);
-  --tl-btn-ink: #1A1206;
-  --tl-glow: rgba(255, 181, 71, 0.28);
-  --tl-accent-ink: #9A5B00;
+  --tl-hero: linear-gradient(180deg, #070b14 0%, #0c1626 55%, #12233b 100%);
+  --tl-hero-glow: radial-gradient(ellipse 60% 45% at 50% 100%, rgba(111, 224, 192, 0.12) 0%, transparent 70%),
+                  radial-gradient(ellipse 45% 40% at 88% 4%, rgba(108, 182, 255, 0.24) 0%, transparent 70%);
+  --tl-hero-ink: #eef2f8;
+  --tl-hero-em: #6cb6ff;
+  --tl-hero-kicker: rgba(108, 182, 255, 0.92);
+  --tl-btn: #6cb6ff;
+  --tl-btn-ink: #04121f;
+  --tl-glow: rgba(108, 182, 255, 0.28);
+  --tl-accent-ink: #0b62c4;
   --tl-display: system-ui, -apple-system, "SF Pro Display", "Segoe UI", sans-serif;
   --tl-mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
   --tl-paper: #FFFFFF;
@@ -33,10 +35,12 @@
   --tl-term: #0E1420;
   --tl-term-ink: #D8E1F0;
   --tl-term-quiet: #7D8AA3;
-  --tl-term-ok: #6EE7A0;
-  --tl-term-cmd: #FFC66B;
+  --tl-term-ok: #6fe0c0;
+  --tl-term-cmd: #6cb6ff;
+  --tl-term-warn: #f2a2b8;
+  --tl-dot: rgba(255, 255, 255, 0.22);
   --primary-color: #10223A;
-  --secondary-color: #9A5B00;
+  --secondary-color: #0b62c4;
   --bg-primary: var(--tl-paper);
   --bg-secondary: var(--tl-paper-2);
   --bg-card: var(--tl-card);
@@ -51,13 +55,14 @@
 }
 @media (prefers-color-scheme: dark) {
   :root {
-    --tl-accent-ink: #FFC66B;
-    --tl-paper: #0A0F18;
-    --tl-paper-2: #101826;
+    --tl-accent-ink: #6cb6ff;
+    --secondary-color: #6cb6ff;
+    --tl-paper: #070b14;
+    --tl-paper-2: #0c1220;
     --tl-rule: rgba(200, 214, 240, 0.13);
     --tl-quiet: #9AA6BC;
     --tl-body: #D6DDEA;
-    --tl-card: #121B2A;
+    --tl-card: #101828;
     --tl-shadow: 0 30px 60px rgba(0, 0, 0, 0.55), 0 6px 14px rgba(0, 0, 0, 0.35);
     --primary-color: #E3EAF7;
     --text-primary: #F5F7FB;
@@ -252,7 +257,7 @@ code, .tl-code { font-family: var(--tl-mono); font-size: 0.92em; }
 .tl-figure { margin: 0 auto; width: min(92vw, 560px); }
 .tl-figure figcaption { font-size: 0.88rem; line-height: 1.45; color: var(--tl-quiet); margin-top: 1.1rem; text-align: center; }
 
-/* A screenshot in a quiet window frame (web apps). */
+/* A screenshot in a quiet window frame (web apps). The three dots are neutral on purpose. */
 .tl-window {
   border-radius: 14px;
   overflow: hidden;
@@ -265,9 +270,9 @@ code, .tl-code { font-family: var(--tl-mono); font-size: 0.92em; }
   display: block;
   height: 26px;
   background:
-    radial-gradient(circle at 16px 13px, #ff5f57 5px, transparent 5.5px),
-    radial-gradient(circle at 34px 13px, #febc2e 5px, transparent 5.5px),
-    radial-gradient(circle at 52px 13px, #28c840 5px, transparent 5.5px),
+    radial-gradient(circle at 16px 13px, var(--tl-dot) 5px, transparent 5.5px),
+    radial-gradient(circle at 34px 13px, var(--tl-dot) 5px, transparent 5.5px),
+    radial-gradient(circle at 52px 13px, var(--tl-dot) 5px, transparent 5.5px),
     #23272f;
 }
 .tl-window img { display: block; width: 100%; height: auto; }
@@ -300,16 +305,16 @@ code, .tl-code { font-family: var(--tl-mono); font-size: 0.92em; }
   width: 46px;
   height: 10px;
   background:
-    radial-gradient(circle at 5px 5px, #ff5f57 4px, transparent 4.5px),
-    radial-gradient(circle at 21px 5px, #febc2e 4px, transparent 4.5px),
-    radial-gradient(circle at 37px 5px, #28c840 4px, transparent 4.5px);
+    radial-gradient(circle at 5px 5px, var(--tl-dot) 4px, transparent 4.5px),
+    radial-gradient(circle at 21px 5px, var(--tl-dot) 4px, transparent 4.5px),
+    radial-gradient(circle at 37px 5px, var(--tl-dot) 4px, transparent 4.5px);
 }
 .tl-term pre { margin: 0; padding: 1rem 1.1rem 1.15rem; white-space: pre-wrap; word-break: break-word; font: inherit; }
 .tl-term .c { color: var(--tl-term-cmd); }
 .tl-term .c::before { content: "$ "; color: var(--tl-term-quiet); }
 .tl-term .q { color: var(--tl-term-quiet); }
 .tl-term .ok { color: var(--tl-term-ok); }
-.tl-term .warn { color: #FFB86B; }
+.tl-term .warn { color: var(--tl-term-warn); }
 
 /* Hopps: a small, stylised dashboard (not a screenshot). */
 .tl-dash {
@@ -450,9 +455,11 @@ code, .tl-code { font-family: var(--tl-mono); font-size: 0.92em; }
 .dp-section .tl-term { margin-top: 1.4rem; }
 .dp-closing .btn-buy { background: var(--tl-btn); color: var(--tl-btn-ink); }
 
-/* ---- Reveal: only when motion is welcome -------------------------------- */
-.tl-motion [data-reveal] { opacity: 0; transform: translateY(24px); transition: opacity 0.9s ease, transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1); }
-.tl-motion [data-reveal].is-in { opacity: 1; transform: none; }
+/* ---- Reveal: only when motion is welcome --------------------------------
+   Position only. Nothing is ever hidden, so a story that the observer never
+   reaches (a background tab, a print, a crawler) is still there to read. */
+.tl-motion [data-reveal] { transform: translateY(24px); transition: transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1); }
+.tl-motion [data-reveal].is-in { transform: none; }
 @media (prefers-reduced-motion: reduce) {
   .faq-item, .tl-tile { animation: none; transition: none; }
   .tl-tile:hover { transform: none; }
@@ -491,3 +498,157 @@ code, .tl-code { font-family: var(--tl-mono); font-size: 0.92em; }
 /* Japanese headlines carry <wbr> at phrase boundaries; keep-all stops breaks inside words. */
 :lang(ja) .tl-hero h1, :lang(ja) .tl-closing .tl-display { word-break: keep-all; overflow-wrap: anywhere; }
 :lang(ja) .tl-hero h1 { font-size: clamp(2rem, 8vw, 5.4rem); }
+
+/* ---- Hub page (/tools/) --------------------------------------------------
+   <body class="wm tl-hub"> with /assets/shell.css loaded first: the shared
+   header replaces the tools nav, and every token above is re-pointed at the
+   site's --wm-* tokens, so the hub follows the home page in light and dark. */
+body.tl-hub {
+  --tl-paper: var(--wm-bg);
+  --tl-paper-2: var(--wm-bg-2);
+  --tl-rule: var(--wm-line);
+  --tl-quiet: var(--wm-faint);
+  --tl-body: var(--wm-soft);
+  --tl-card: var(--wm-surface);
+  --tl-shadow: var(--wm-shadow);
+  --tl-accent-ink: var(--wm-accent);
+  --tl-btn: var(--wm-accent);
+  --tl-btn-ink: var(--wm-accent-ink);
+  --tl-glow: transparent;
+  --tl-display: var(--wm-serif);
+  --tl-mono: var(--wm-mono);
+  --tl-hero-ink: var(--wm-ink);
+  --tl-hero-em: var(--wm-accent);
+  --tl-hero-kicker: var(--wm-faint);
+  --tl-measure: calc(var(--wm-max) + 2 * var(--wm-pad));
+  --primary-color: var(--wm-ink);
+  --secondary-color: var(--wm-accent);
+  --bg-primary: var(--wm-bg);
+  --bg-secondary: var(--wm-bg-2);
+  --bg-card: var(--wm-surface);
+  --text-primary: var(--wm-ink);
+  --text-secondary: var(--wm-soft);
+  --text-muted: var(--wm-faint);
+  --border-color: var(--wm-line);
+  --glass-bg: var(--wm-surface);
+  --glass-border: var(--wm-line);
+}
+
+.tl-hub .tl-hero {
+  max-width: var(--tl-measure);
+  margin: 0 auto;
+  padding: clamp(40px, 7vw, 88px) var(--wm-pad) 0;
+  background: none;
+  text-align: left;
+  overflow: visible;
+}
+.tl-hub .tl-hero-icon { width: 72px; height: 72px; margin: 0 0 1.4rem; filter: drop-shadow(0 12px 22px rgba(0, 0, 0, 0.35)); }
+.tl-hub .tl-hero-kicker { font: 650 0.82rem/1.4 var(--wm-sans); letter-spacing: 0.12em; margin: 0 0 1em; }
+.tl-hub .tl-hero h1 {
+  font: 500 clamp(2.4rem, 6vw, 4.4rem)/1.06 var(--wm-serif);
+  letter-spacing: -0.022em;
+  max-width: 16ch;
+  margin: 0 0 0.45em;
+  overflow-wrap: break-word;
+}
+.tl-hub .tl-hero h1:lang(ja), .tl-hub .tl-hero h1:lang(zh), .tl-hub .tl-hero h1:lang(ko) { max-width: 12em; }
+.tl-hub .tl-hero h1 em, .tl-hub .tl-closing .tl-display em { font-style: italic; }
+.tl-hub .tl-hero-standfirst {
+  max-width: 40rem;
+  margin: 0 0 1.8rem;
+  color: var(--wm-soft);
+  font-size: clamp(1.05rem, 1.5vw, 1.2rem);
+}
+.tl-hub .tl-cta { justify-content: flex-start; }
+.tl-hub .tl-cta .btn-buy {
+  justify-content: center;
+  min-height: 48px;
+  padding: 0 1.35em;
+  font: 600 1rem/1.2 var(--wm-sans);
+  box-shadow: none;
+  transition: transform 0.25s var(--wm-ease), background-color 0.25s;
+}
+.tl-hub .tl-cta .btn-buy:hover { transform: none; background: color-mix(in srgb, var(--wm-accent) 86%, #fff); }
+.tl-hub .tl-cta .btn-buy:active { transform: scale(0.97); }
+.tl-hub .tl-alt-links { justify-content: flex-start; align-items: center; gap: 0 0.7rem; margin: 0.5rem 0 0; color: var(--wm-faint); }
+.tl-hub .tl-alt-links a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 0.3em;
+  border: 0;
+  color: var(--wm-accent);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: var(--wm-line);
+  text-underline-offset: 4px;
+}
+.tl-hub .tl-alt-links a:hover { text-decoration-color: currentColor; }
+
+/* Tiles: the home page's "Selected work" card. */
+.tl-hub .tl-tiles { padding: clamp(40px, 6vw, 72px) var(--wm-pad) 0; gap: 16px; }
+.tl-hub .tl-tile {
+  gap: 10px;
+  min-width: 0;
+  padding: 26px;
+  border-radius: 26px;
+  color: var(--wm-ink);
+  transition: transform 0.45s var(--wm-ease), border-color 0.3s, box-shadow 0.45s var(--wm-ease);
+}
+.tl-hub .tl-tile:hover, .tl-hub .tl-tile:focus-visible {
+  transform: translateY(-4px);
+  border-color: color-mix(in srgb, var(--wm-accent) 50%, var(--wm-line));
+}
+.tl-hub .tl-tile.is-lead {
+  background: linear-gradient(160deg, color-mix(in srgb, var(--wm-accent) 16%, transparent), transparent 60%), var(--wm-surface);
+  border-color: color-mix(in srgb, var(--wm-accent) 35%, var(--wm-line));
+  color: var(--wm-ink);
+}
+.tl-hub .tl-tile-icon { border-radius: 15px; box-shadow: 0 12px 26px -10px rgba(0, 0, 0, 0.55); }
+.tl-hub .tl-tile h2 { font: 600 1.45rem/1.2 var(--wm-sans); letter-spacing: -0.015em; margin: 0; }
+.tl-hub .tl-tile p, .tl-hub .tl-tile.is-lead p { color: var(--wm-soft); font-size: 1.02rem; line-height: 1.5; }
+.tl-hub .tl-tile .tl-tile-tag { font: 500 0.76rem/1.4 var(--wm-mono); letter-spacing: 0.04em; color: var(--wm-green); }
+.tl-hub .tl-tile.is-lead .tl-tile-tag, .tl-hub .tl-tile.is-lead .learn-more { color: var(--wm-accent); }
+.tl-hub .tl-tile .learn-more { font-size: 0.95rem; }
+
+.tl-hub .tl-closing {
+  margin-top: clamp(64px, 10vw, 120px);
+  padding: clamp(56px, 8vw, 96px) var(--wm-pad);
+}
+.tl-hub .tl-closing .tl-display { font: 500 clamp(2rem, 4.6vw, 3.4rem)/1.08 var(--wm-serif); letter-spacing: -0.02em; max-width: 16ch; }
+.tl-hub .tl-closing .tl-cta { justify-content: center; }
+.tl-hub .tl-closing .btn-buy { padding: 0 1.35em; box-shadow: none; }
+
+/* The footer is the tools footer (scripts/update-footers.py), in the site's colours.
+   The extra room at the bottom keeps the language switcher off the last line. */
+.tl-hub .footer { padding: 28px var(--wm-pad) calc(96px + env(safe-area-inset-bottom)); font-size: 0.86rem; }
+.tl-hub .footer p { font-size: inherit; margin: 0; }
+.tl-hub .footer-links { gap: 0 4px; margin-bottom: 8px; }
+.tl-hub .footer-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 12px;
+  border-radius: 999px;
+  font-size: 0.95rem;
+  transition: color 0.2s, background-color 0.2s;
+}
+.tl-hub .footer-link:hover { color: var(--wm-ink); background: var(--wm-surface-2); }
+.tl-hub .footer-social-links { gap: 8px; margin: 8px 0 16px; }
+.tl-hub .social-icon-link { width: 44px; height: 44px; -webkit-backdrop-filter: none; backdrop-filter: none; }
+.tl-hub .social-icon-link:hover { transform: none; box-shadow: none; border-color: var(--wm-accent); }
+.tl-hub .social-icon-link:hover .social-icon { fill: var(--wm-accent); }
+
+/* Keep each shape's own corners under the focus ring. */
+.tl-hub .tl-tile:focus-visible { border-radius: 26px; }
+.tl-hub .btn-buy:focus-visible, .tl-hub .footer-link:focus-visible { border-radius: 999px; }
+.tl-hub .social-icon-link:focus-visible { border-radius: 50%; }
+
+@media (max-width: 600px) {
+  .tl-hub .tl-hero-icon { width: 64px; height: 64px; }
+  .tl-hub .tl-hero .tl-cta { margin: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tl-hub .tl-tile, .tl-hub .tl-cta .btn-buy, .tl-hub .footer-link { transition: none; }
+  .tl-hub .tl-tile:hover, .tl-hub .tl-tile:focus-visible, .tl-hub .tl-cta .btn-buy:active { transform: none; }
+}

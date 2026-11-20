@@ -30,7 +30,7 @@
  * falling back to English. An explicit choice (param or switcher) persists.
  *
  * The script tag configures the page:
- *   <script src="/i18n/i18n.js" defer
+ *   <script src="/i18n/i18n.js?v=9b769779" defer
  *           data-page="apps.ari-helper"    (dictionary basename)
  *           data-pos="bottom-left"></script>  (switcher corner, optional)
  *

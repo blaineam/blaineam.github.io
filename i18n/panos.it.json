@@ -1,0 +1,20 @@
+{
+  "_meta.description": "Panorami e fotografie a 360° di Blaine Miller. Aprine uno per scorrerlo, ingrandirlo e guardarti intorno.",
+  "_title": "Blaine Miller Fotografia – Galleria di panorami",
+  "head.eyebrow": "Fotografia",
+  "head.intro": "Fotografia panoramica immersiva di Blaine Miller",
+  "head.title": "Galleria di panorami",
+  "pv.alt360": "Foto a 360° {n}",
+  "pv.altPano": "Panorama {n}",
+  "pv.close": "Chiudi",
+  "pv.dialog": "Panorama",
+  "pv.failed": "Impossibile caricare questo panorama.",
+  "pv.hintLook": "Trascina per guardarti intorno. Pizzica o scorri per lo zoom.",
+  "pv.hintPan": "Trascina per scorrere l’immagine. Pizzica o scorri per lo zoom.",
+  "pv.next": "Panorama successivo",
+  "pv.prev": "Panorama precedente",
+  "pv.title360": "Foto a 360°",
+  "pv.titlePano": "Panorama",
+  "pv.zoomIn": "Ingrandisci",
+  "pv.zoomOut": "Riduci"
+}

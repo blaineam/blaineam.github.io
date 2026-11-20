@@ -1,0 +1,113 @@
+{
+  "_help": "Source for /resume/ (public page), the Experience section of the home page in hire mode, and `node scripts/build-site.mjs --pdf` (private PDF). Anything under \"private\" never appears on the site as readable text: the clearance badge and summary are stored encoded, here too (each value is \"enc:\" followed by the output of `node scripts/build-site.mjs --encode 'the text'`), and only shown when the address carries ?cleared (an unlisted link to hand out, not a secret); it only reaches the locally generated PDF, merged with content/private.json (git-ignored) for the phone number.",
+  "name": "Blaine Miller",
+  "title": "Senior Software Engineer",
+  "location": "Bakersfield, CA",
+  "links": ["https://wemiller.com", "https://github.com/blaineam"],
+  "summary": "Senior Software Engineer with 14 years of experience, seeking senior or principal roles in data platforms, infrastructure or mobile.",
+  "private": {
+    "badge": "enc:Pzk0Oyg7PzY5ei4/KDk/CXouND8oKC8Z",
+    "summary": "enc:dD82Mzg1N3ooNXo/KC8uOS8oLik7KDw0M3p2KTcoNTwuOzYqejsuOz56NDN6KT82NSh6NjsqMzk0Mygqeig1eig1MzQ/KXo9NDMxPz8penY/OTQ7KDs/Njl6Lj8oOT8Jei40PygoLzl6O3o+NDt6Pzk0PzMoPyoiP3o8NXopKDs/I3pua3oyLjMteig/PzQzPTQfej8oOy0uPDUJeig1MzQ/CQ=="
+  },
+  "experience": [
+    {
+      "role": "Senior Software Engineer",
+      "company": "Chesapeake Technology International/Parsons",
+      "start": "06/2024",
+      "end": "10/2026",
+      "place": "CA - Remote",
+      "field": "Department of Defense - Electronic Warfare",
+      "bullets": [
+        "Architected and built Python and Bento micro-services utilizing Kafka and Kubernetes FluxCD to facilitate OpenAPI v3 RESTful APIs.",
+        "Developed both backend services and the client applications that consume them. Automated deployments to AWS clusters using FluxCD and templated Helm charts. Designed full end-to-end solutions focused on RF signals, including WiFi, Bluetooth, Cellular, and GPS.",
+        "Developed custom Java plugins for TAKX to integrate new features into existing infrastructure.",
+        "Led the engineering team toward major milestones, coordinating closely with other senior and junior software engineers."
+      ]
+    },
+    {
+      "role": "Software Engineer",
+      "company": "Research Square Company",
+      "start": "07/2020",
+      "end": "05/2024",
+      "place": "Durham, NC · Remote",
+      "field": "Scientific Publishing Services",
+      "bullets": [
+        "Automated a CI/CD process with Cypress and GitHub Actions that improved deployment times from weeks to days and reduced QA times from days to hours.",
+        "Expanded infrastructure and added 100s of features to legacy containerized Laminas & React web applications that utilized AWS SQS, S3, SNS, ECS, EC2 & CloudWatch.",
+        "Designed and developed new C# Blazor, Symfony, OpenAPI RESTful, Next.JS and Chakra UI web applications to exponentially improve manual process efficiency.",
+        "Implemented Terraform to improve the reliability of feature flag deployments by allowing features to be reviewed alongside their deployments.",
+        "Rebuilt Docker base image layers to use Alpine from legacy CentOS layers patching 20-50 security vulnerabilities.",
+        "Migrated cross application communications to use Restful APIs with validation, reducing dead letters and improving developer focus.",
+        "Resolved 50-60 tech debt tasks to improve usability and maintainability of software systems.",
+        "Used Domain Driven Design and Test Driven Design to ensure stable production deployments and code maintainability."
+      ]
+    },
+    {
+      "role": "Software Engineer",
+      "company": "Tyrion Integration Services, Inc.",
+      "start": "03/2017",
+      "end": "05/2020",
+      "place": "Bakersfield, CA · On-Site",
+      "field": "Industrial Automations Integrator",
+      "bullets": [
+        "Developed a custom AngularJS RabbitMQ IIoT cloud dashboard on Azure handling over 1 million data points daily from custom hardware.",
+        "Conducted a cloud infrastructure cleanup that saved the company over $1,000 monthly.",
+        "Provided consultancy for the successful launch of an auction house platform, involving over 12 key project milestones.",
+        "Assisted with integration projects of the cloud solution and the hardware devices in various capacities.",
+        "Wrote digital & searchable device and cloud documentation."
+      ]
+    },
+    {
+      "role": "Computer Programmer",
+      "company": "Construction Specialty Services, LLC",
+      "start": "05/2016",
+      "end": "03/2017",
+      "place": "Bakersfield, CA · On-Site",
+      "field": "Safety Management Software",
+      "bullets": [
+        "Developed 10 front-end interfaces and assisted in back-end infrastructure development for 3 projects.",
+        "Increased website traffic by 20% by optimizing SEO and analyzing system performance."
+      ]
+    }
+  ],
+  "education": [
+    {
+      "degree": "Bachelor's of Science Degree",
+      "detail": "Computer and Information Systems with a focus in Website Development.",
+      "school": "DeVry University",
+      "start": "01/2013",
+      "end": "12/2015"
+    }
+  ],
+  "skills": [
+    { "years": "6 - 14 Years", "items": ["PHP", "MySQL", "JavaScript", "CSS", "HTML", "Git", "Relational Databases"] },
+    { "years": "4 - 6 Years", "items": ["Swift", "Swift UI", "React", "Node.JS", "AWS", "CI/CD", "Docker Containers", "Jira", "Agile Software Development Lifecycle", "REST APIs", "Redis", "TypeScript", "Caching", "SEO", "Quality Assurance", "Java", "MQTT", "Domain Events"] },
+    { "years": "2 - 4 Years", "items": ["Python", "Kafka", "ClickHouse", "Helm", "FluxCD", "Bento", "C#", "Cypress", "Grafana", "Prometheus", "Istio", "Payment Processors", "Azure DevOps", "GraphQL"] }
+  ],
+  "projects": [
+    {
+      "title": "Enter Space",
+      "start": "12/2025",
+      "end": "10/2026",
+      "url": "https://wemiller.com/apps/enter-space/",
+      "text": "Enter Space brings all your cloud storage together into a single, unified app. Easily organize your files, favorite your most-used nested folders for quick access, and seamlessly sync your data across all of your devices using iCloud. Whether you are managing important documents or exploring your personal library, Enter Space provides a smooth and responsive experience.",
+      "built": "Built using Rclone and SwiftUI"
+    },
+    {
+      "title": "Haven",
+      "start": "06/2026",
+      "end": "10/2026",
+      "url": "https://wemiller.com/apps/haven/",
+      "text": "Haven is a private, end-to-end encrypted social network designed for your closest friends and family. It operates without ads, tracking, or subscriptions, ensuring that your shared memories and messages travel directly between devices using post-quantum cryptography. With features like silent post updates and offline sharing, Haven offers a secure, algorithm-free space to connect with the people who matter most.",
+      "built": "Built with modern LLMs driven by Arc, my agent toolchain for automated QA, security audits, localization and App Store releases."
+    },
+    {
+      "title": "Ari Helper",
+      "start": "03/2024",
+      "end": "10/2026",
+      "url": "https://wemiller.com/apps/ari-helper/",
+      "text": "An AI assistant that runs locally on your device using Apple Intelligence and downloadable models like Google's Gemma 4. It supports offline chat, image and document analysis, and system-wide Spotlight search for your conversations. Includes an Apple Watch companion app and Shortcuts integration across iOS and macOS.",
+      "built": "Built with an open source LLM and SwiftUI"
+    }
+  ]
+}
