@@ -1,10 +1,10 @@
 /* Camp 5, the Summit: everything together, and the decision. One bad week to plan, a notice to
  * write, a vote to lose gracefully, a last fire, and then the register: sign it or do not. */
-import { h } from '../engine.js?v=a5c066b7';
-import { decisionStage, fireStage, useCss, keep } from './common.js?v=a5c066b7';
-import { t } from '../words.js?v=a5c066b7';
+import { h } from '../engine.js?v=7f938f7b';
+import { decisionStage, fireStage, useCss, keep } from './common.js?v=7f938f7b';
+import { t } from '../words.js?v=7f938f7b';
 
-useCss(new URL('./summit.css?v=a5c066b7', import.meta.url).href);
+useCss(new URL('./summit.css?v=7f938f7b', import.meta.url).href);
 
 /* ---------- 1: the week ----------
  * A real kind of week for someone looking after an app people rely on. There are more things
@@ -89,7 +89,7 @@ function register(el, ctx) {
     sendArea,
     h('button', { class: 'wm-btn', type: 'button', text: t('Close the tin'), onclick: () => ctx.done() }));
   // send.js asks the same three questions itself (and seals the run), so when it is there it takes over.
-  import('../send.js?v=a5c066b7').then((m) => { if (m.mountSend) { own.remove(); note.remove(); delete ctx.data.choices; m.mountSend(sendArea, { run: ctx.run, save: ctx.save, hiker: ctx.hiker }); } })
+  import('../send.js?v=7f938f7b').then((m) => { if (m.mountSend) { own.remove(); note.remove(); delete ctx.data.choices; m.mountSend(sendArea, { run: ctx.run, save: ctx.save, hiker: ctx.hiker }); } })
     .catch(() => { sendArea.append(h('p', { class: 'note', text: t('Sending a run is not open yet. Your choices are kept with your run on this device.') })); });
 }
 

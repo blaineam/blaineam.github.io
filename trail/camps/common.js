@@ -1,7 +1,7 @@
 /* Stage builders shared by camps: a decision with no right answer, and a campfire question.
  * Both keep what the hiker chose and wrote, in their own words, and never score it. */
-import { h } from '../engine.js?v=a5c066b7';
-import { t } from '../words.js?v=a5c066b7';
+import { h } from '../engine.js?v=7f938f7b';
+import { t } from '../words.js?v=7f938f7b';
 
 /** A decision: a few options, and "what do you say?" in the hiker's own words.
  *  o = { lead: [html…], options: [[value, html], …], ask, placeholder, button, name } */

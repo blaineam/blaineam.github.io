@@ -12,8 +12,8 @@
  * Settings come from trail/config.json. Until a public key is there, sending is "not open yet"
  * and the hiker can still save the run as a file.
  */
-import { t } from './words.js?v=a5c066b7';
-import { sealRun, publicPart, buildIssueUrl, importPublicKey, nameProblem, lineProblem, LIMITS } from './seal.js?v=a5c066b7';   // nameProblem/lineProblem are manners.js's checkName/checkPublic, plus a few disguises
+import { t } from './words.js?v=7f938f7b';
+import { sealRun, publicPart, buildIssueUrl, importPublicKey, nameProblem, lineProblem, LIMITS } from './seal.js?v=7f938f7b';   // nameProblem/lineProblem are manners.js's checkName/checkPublic, plus a few disguises
 
 function h(tag, attrs, ...kids) {
   const e = document.createElement(tag);
@@ -22,7 +22,7 @@ function h(tag, attrs, ...kids) {
   return e;
 }
 let styled = false;
-function style() { if (styled) return; styled = true; document.head.append(h('link', { rel: 'stylesheet', href: new URL('./plumbing.css?v=a5c066b7', import.meta.url).href })); }
+function style() { if (styled) return; styled = true; document.head.append(h('link', { rel: 'stylesheet', href: new URL('./plumbing.css?v=7f938f7b', import.meta.url).href })); }
 
 /** Reads trail/config.json. Returns { open, key, kid, repo, email, why }; never throws. */
 export async function loadConfig(url = new URL('./config.json', import.meta.url)) {

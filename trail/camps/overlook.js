@@ -2,11 +2,11 @@
  * own words, and it is kept for the owner and, later, the people he trusts. Nothing from this
  * camp is ever shown publicly: not on the register, not on the map, not in what is sent in the
  * open. The only public fact is that the camp was reached. */
-import { h } from '../engine.js?v=a5c066b7';
-import { decisionStage, fireStage, useCss, keep } from './common.js?v=a5c066b7';
-import { t, lang } from '../words.js?v=a5c066b7';
+import { h } from '../engine.js?v=7f938f7b';
+import { decisionStage, fireStage, useCss, keep } from './common.js?v=7f938f7b';
+import { t, lang } from '../words.js?v=7f938f7b';
 
-useCss(new URL('./overlook.css?v=a5c066b7', import.meta.url).href);
+useCss(new URL('./overlook.css?v=7f938f7b', import.meta.url).href);
 
 /* The statements. The first seven are what the site's owner holds; the last three are places
  * where people who share them still differ. None is marked right or wrong. */
