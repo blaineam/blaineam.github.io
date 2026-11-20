@@ -6,9 +6,9 @@
  *   { id, name, sub, intro, stages: [{ id, label, hints, mount(el, ctx) }], tally(parts) }
  * See trail/README.md for the contract a stage gets (ctx). */
 
-import { checkName, checkWritten, clean } from './manners.js?v=7f938f7b';
-import { drawMap as drawTrail, vignette, luma } from './scenery.js?v=7f938f7b';
-import { t } from './words.js?v=7f938f7b';
+import { checkName, checkWritten, clean } from './manners.js?v=a318c6b5';
+import { drawMap as drawTrail, vignette, luma } from './scenery.js?v=a318c6b5';
+import { t } from './words.js?v=a318c6b5';
 const lower = (name) => name.charAt(0).toLowerCase() + name.slice(1);                 // "The Summit" → "the Summit", "Le Sommet" → "le Sommet"
 
 const $ = (id) => document.getElementById(id);
