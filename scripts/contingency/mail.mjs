@@ -1,6 +1,7 @@
 /* Contingency plan: sending e-mail and reading replies, with no dependencies.
  *
  *   send(smtp, { from, to, subject, text, replyTo })   one plain-text message over SMTP
+ *   inbox(imap, sinceUid, from, { query, bytes })     (query: extra IMAP search terms; bytes: how much of each body to read)
  *   inbox(imap, sinceUid, from)                        → [{ uid, from, subject, text }] newer than sinceUid, from those addresses
  *
  * smtp / imap: { host, port, user, pass, secure }. secure defaults to true (TLS from the first
@@ -68,7 +69,7 @@ export async function send(smtp, { from, to, subject, text, replyTo }) {
 /* ---------- IMAP ---------- */
 /** Only messages from the given addresses are looked at at all (when a list is given), and never
  *  more than the newest 200: the rest of the mailbox is none of this plan's business. */
-export async function inbox(imap, sinceUid = 0, from = []) {
+export async function inbox(imap, sinceUid = 0, from = [], { query = '', bytes = 20000 } = {}) {
   const sock = await open(imap), rd = reader(sock);
   let n = 0;
   // A command is finished at its tagged line; literals ({123}\r\n + 123 bytes) are skipped whole.
@@ -96,10 +97,10 @@ export async function inbox(imap, sinceUid = 0, from = []) {
     await cmd(`SELECT ${imap.box || 'INBOX'}`);
     const who = from.filter((a) => /^[^\s"\\]+@[^\s"\\]+$/.test(a)).map((a) => `FROM ${quote(a)}`);
     const filter = who.length ? ' ' + who.slice(0, -1).map((f) => `OR ${f}`).concat(who.slice(-1)).join(' ') : '';
-    const found = (await cmd(`UID SEARCH UID ${sinceUid + 1}:*${filter}`)).toString('latin1');
+    const found = (await cmd(`UID SEARCH UID ${sinceUid + 1}:*${filter}${query ? ' ' + query : ''}`)).toString('latin1');
     const uids = ((/\* SEARCH([^\r\n]*)/.exec(found) || [])[1] || '').trim().split(/\s+/).filter(Boolean).map(Number).filter((u) => u > sinceUid).sort((a, b) => a - b).slice(-200);
     for (const uid of uids) {
-      const raw = await cmd(`UID FETCH ${uid} (BODY.PEEK[HEADER.FIELDS (FROM SUBJECT)] BODY.PEEK[TEXT]<0.20000>)`);
+      const raw = await cmd(`UID FETCH ${uid} (BODY.PEEK[HEADER.FIELDS (FROM SUBJECT)] BODY.PEEK[TEXT]<0.${bytes}>)`);
       const parts = []; let i = 0;
       while (i < raw.length) { const eol = raw.indexOf('\r\n', i); if (eol < 0) break; const lit = /\{(\d+)\}$/.exec(raw.toString('latin1', i, eol)); if (lit) { parts.push(raw.subarray(eol + 2, eol + 2 + Number(lit[1]))); i = eol + 2 + Number(lit[1]); } else i = eol + 2; }
       const head = (parts[0] || Buffer.alloc(0)).toString('utf8').replace(/\r\n[ \t]+/g, ' ');
@@ -118,5 +119,5 @@ export function readable(buf) {
   for (const m of raw.matchAll(/(?:^|\r?\n)((?:[A-Za-z0-9+/]{40,}={0,2}\r?\n?){1,})/g)) {
     try { const d = Buffer.from(m[1].replace(/\s+/g, ''), 'base64').toString('utf8'); if (/[\x20-\x7e]{12,}/.test(d)) text += '\n' + d; } catch (e) { /* not base64 after all */ }
   }
-  return text.slice(0, 40000);
+  return text.slice(0, Math.max(40000, buf.length * 2));
 }

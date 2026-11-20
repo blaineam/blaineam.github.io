@@ -1,0 +1,60 @@
+name: Trail mail
+
+# Collects the runs that hikers sent by e-mail (people without a GitHub account) and files each
+# one as an issue, exactly as the "Open GitHub" route on the trail would have. From there the
+# reading desk and the register treat it like any other run. See scripts/trail-mail.mjs.
+#
+# This repository, its issues and its logs are public. Only the sealed text of a run and its
+# validated public part are ever copied out of a message: never the sender's address, name,
+# subject or anything else they wrote. The log prints counts only. The mailbox is read, never
+# changed. The workflow has no key and cannot open a run.
+
+on:
+  schedule:
+    - cron: "41 */6 * * *"     # four times a day; the minute is arbitrary on purpose
+  workflow_dispatch:
+    inputs:
+      dry:
+        description: "Look only: say what would be filed, file nothing (type yes)"
+        required: false
+        default: "no"
+
+permissions:
+  contents: read
+  issues: write        # to file a run, and to pass on a sender's "remove me"
+  actions: write       # to ask the register to rebuild afterwards
+
+concurrency:
+  group: trail-mail
+  cancel-in-progress: false
+
+jobs:
+  collect:
+    # Off until the owner turns it on: set the repository variable TRAIL_MAIL to "on".
+    if: vars.TRAIL_MAIL == 'on'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+      - name: Collect
+        id: collect
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          # The same mailbox and secret the contingency plan uses; TRAIL_MAIL / TRAIL_MAIL_KEY
+          # override them if the trail ever gets a mailbox of its own.
+          TRAIL_MAIL: ${{ secrets.TRAIL_MAIL }}
+          TRAIL_MAIL_KEY: ${{ secrets.TRAIL_MAIL_KEY }}
+          CONTINGENCY_MAIL: ${{ secrets.CONTINGENCY_MAIL }}
+          CONTINGENCY_KEY: ${{ secrets.CONTINGENCY_KEY }}
+          DRY: ${{ github.event_name == 'workflow_dispatch' && inputs.dry == 'yes' && '--dry' || '--ci' }}
+        run: node scripts/trail-mail.mjs "$DRY"
+      # An issue opened with the workflow's own token does not start other workflows, so the
+      # register is asked to rebuild by hand.
+      - name: Rebuild the register
+        if: steps.collect.outputs.changed == 'yes'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run trail-register.yml --ref "${GITHUB_REF_NAME}"

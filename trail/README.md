@@ -25,6 +25,11 @@ language in `i18n/trail.<lang>.json` is missing. A sentence with no translation 
 The guide's name is never written in a sentence: use `{guide}`. The manners check (`manners.js`)
 only knows English words.
 
+Runs arrive as GitHub issues. People without a GitHub account send theirs by e-mail to the
+address in `config.json`; `scripts/trail-mail.mjs` (the "Trail mail" workflow, on when the
+repository variable `TRAIL_MAIL` is `on`) files each sealed run it finds in that mailbox as an
+issue, copying nothing else from the message. `node --test scripts/trail-mail.test.mjs` covers it.
+
 A hiker can go back to any finished stage (the step chips) or camp (the list under the map) to
 mend a slip, and is taken back to where they had got to afterwards.
 

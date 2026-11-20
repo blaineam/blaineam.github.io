@@ -73,16 +73,20 @@ export function buildRegister(issues, { requireApproval = true, approvalLabel = 
   for (const issue of Array.isArray(issues) ? issues : []) {
     if (!issue || typeof issue !== 'object' || issue.pull_request) continue;
     stats.issues++;
-    const number = int(issue.number), author = int(issue.user && issue.user.id);
-    if (!number || !author) continue;
+    const number = int(issue.number), authorId = int(issue.user && issue.user.id);
+    if (!number || !authorId) continue;
     const body = typeof issue.body === 'string' && issue.body.length <= MAX_BODY ? issue.body : '';
+    // A run that came by e-mail is filed by the workflow's own bot (scripts/trail-mail.mjs) with a tag that stands
+    // for the sender, so each sender is their own "account". The tag is only believed on an issue the bot wrote.
+    const mail = issue.user.type === 'Bot' && issue.user.login === 'github-actions[bot]' ? /<!-- trail:mail [0-9a-f]{16} ([0-9a-f]{12}) -->/.exec(body) : null;
+    const author = mail ? 'mail:' + mail[1] : authorId;
     const labels = labelsOf(issue);
     if (!labels.includes('trail') && !body.slice(0, LIMITS.issueBody).includes(MARK.run)) continue;
     stats.trail++;
     // The author's own word, latest first to speak wins. Other people's comments are ignored.
     let removed = false;
     const said = (Array.isArray(issue.comments) ? issue.comments : [])
-      .filter((c) => c && int(c.user && c.user.id) === author && typeof c.body === 'string' && c.body.length < 200)
+      .filter((c) => c && int(c.user && c.user.id) === authorId && typeof c.body === 'string' && c.body.length < 200)
       .sort((a, b) => String(a.created_at || '').localeCompare(String(b.created_at || '')) || int(a.id) - int(b.id));
     for (const c of said) { if (REMOVE.test(c.body)) removed = true; else if (RESTORE.test(c.body)) removed = false; }
     const row = { number, ...readEntry(body), removed, banned: labels.includes('trail-remove'), checked: labels.includes('trail-checked'), approved: labels.includes(approvalLabel) };
