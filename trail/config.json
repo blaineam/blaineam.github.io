@@ -1,8 +1,13 @@
 {
   "_help": "Settings for sending a finished run (trail/send.js). Until publicKey and keyId are filled in, the summit says that sending is not open yet. To fill them in: open /trail/desk/ in the browser you will read runs in, press 'Make my key', and paste the two values it shows here. publicKey is the whole JSON object it shows (kty, n, e, alg); keyId is the 32-character id beside it. repo is where runs arrive as issues, written owner/name, for example blaineam/blaineam.github.io (the register workflow reads the issues of the repository it runs in, so use this one unless you move the workflow too). email is an address for people without a GitHub account; leave it empty to offer no e-mail route. Nothing in this file is secret: a public key can only seal, never open. moderation: nothing becomes public until a person has read it. With required true (the default, also used when this block is missing) the register lists an entry only when its issue carries approvalLabel, a label that only people with write access to the repository can add; the desk page shows what is waiting. Setting required to false publishes every entry that passes the automatic checks, unread.",
-  "publicKey": null,
-  "keyId": "",
-  "repo": "",
+  "publicKey": {
+    "kty": "RSA",
+    "n": "rwCPN1wacj1UbAFJICnjEJm99xKJDzNhS2EYxWGj5-Alz4zNOdH4-rW34qOStzhT1E6ysgitKOPqbwkFM9qhauda4xHlDmO_ewCLTJjEHIhA91FkNXPiYBxqwsGNi_k_ZVuFBI7FkXvvk7yVqDRi3wRr9OS6-LixirfoiYKXn9nZlLaK6GNVVCCkeAIlgDxmhsyt2OZNQuXBkkyxcl1uPNhU77VSJlUhJZzc5jL9u6sW2FUf61KlxDee0E0Sh_AAwUv9vM5qJNPf8mMgchfV8Pz7Lmb7UHoDD9-xNA19hUcSTKX9pcu3L9bTVxryE4QavBiY_1VQ69XYDmbiCVLnSy2KjyhPXCfUy1fFVZE2eLWj1Da7nyraKBEwi--ZxYS_oZUzjXkenWZnjJFexNtZ8tAxwSD8Cgen47MiTWfnDsQkMMLdzOmwIJEuklMcH3nqrncnbuJi7aivNQcDWgb8K43ykhgj7o7V6hIdrZcy07n_mXd8h9G3qHX4VKmK6cSyd7n2_yadiqL-2nJWP3W4C8Owki04HOCEqHGOP2pXYJDANd7ijHP30XY_fL1p3sFEtC0CMOr3gomLCs_aEIyyrfmQhXIfFVV9_xvla9Q-PWN02bPuwxS6B1hx3y_rqfYHxh6QvuttG8pO07CKeWVPgad_mON_fqtbH7sRfSTjIFc",
+    "e": "AQAB",
+    "alg": "RSA-OAEP-256"
+  },
+  "keyId": "5fbcb50e6b279430151255481e9a93aa",
+  "repo": "blaineam/blaineam.github.io",
   "email": "",
   "moderation": {
     "required": true,
