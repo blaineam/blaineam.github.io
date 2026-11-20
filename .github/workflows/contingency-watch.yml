@@ -1,0 +1,73 @@
+name: Contingency watcher
+
+# Once a day: compare today with the last heartbeat, read any replies from the trusted people,
+# send whatever letters are due, and remember where things stand. If enough of them have
+# confirmed, the site's switch is set and the site is rebuilt. See docs/CONTINGENCY.md.
+#
+# This repository and its workflow logs are public. Names, addresses, dates and stages are
+# never printed. What is remembered lives in contingency/state.enc, sealed with a secret and
+# rewritten every day whether or not anything changed, so its history reveals nothing. That
+# daily commit also keeps this scheduled workflow from being switched off for inactivity.
+
+on:
+  schedule:
+    - cron: "17 14 * * *"   # daily, mid-morning Pacific; the minute is arbitrary on purpose
+  workflow_dispatch:
+    inputs:
+      drill:
+        description: "Rehearsal: send every letter to the owner only (type yes)"
+        required: false
+        default: "no"
+
+permissions:
+  contents: write     # to commit the sealed state, and the site's switch when it changes
+  actions: write      # to start the Pages deploy after the switch changes
+
+concurrency:
+  group: contingency-watch
+  cancel-in-progress: false
+
+jobs:
+  watch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      LAST_HEARTBEAT: ${{ vars.LAST_HEARTBEAT }}
+      CONTINGENCY_KEY: ${{ secrets.CONTINGENCY_KEY }}
+      CONTINGENCY_PEOPLE: ${{ secrets.CONTINGENCY_PEOPLE }}
+      CONTINGENCY_MAIL: ${{ secrets.CONTINGENCY_MAIL }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+
+      - name: Rehearsal
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.drill == 'yes' }}
+        run: node scripts/contingency/notify.mjs --drill
+
+      - name: Daily run
+        id: run
+        if: ${{ !(github.event_name == 'workflow_dispatch' && inputs.drill == 'yes') }}
+        run: node scripts/contingency/notify.mjs --ci
+
+      - name: Remember
+        if: ${{ always() && steps.run.outcome != 'skipped' }}
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add contingency/state.enc content/site.json 2>/dev/null || true
+          if git diff --cached --quiet; then echo "Nothing to remember."; exit 0; fi
+          git commit -q -m "chore: daily housekeeping [skip ci]"
+          for attempt in 1 2 3; do
+            if git pull -q --rebase origin "${GITHUB_REF_NAME}" && git push -q origin "HEAD:${GITHUB_REF_NAME}"; then exit 0; fi
+            sleep 5
+          done
+          echo "Could not save today's housekeeping."; exit 1
+
+      # A push made by a workflow does not start other workflows, so the site is rebuilt by hand.
+      - name: Rebuild the site if its switch changed
+        if: ${{ steps.run.outputs.site_changed == 'yes' }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run deploy-pages.yml --ref "${GITHUB_REF_NAME}"
