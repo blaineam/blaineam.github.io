@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="referrer" content="no-referrer">
+  <!-- One stage of the trail, as a hiker met it, shown inside the reading desk. It is given the
+       stage's saved answers by the desk page and sends nothing anywhere: it may load only this
+       site's own files. It never holds the key. -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self'; base-uri 'none'; form-action 'none'">
+  <meta name="color-scheme" content="dark">
+  <title>A stage of the trail</title>
+  <link rel="stylesheet" href="/assets/shell.css?v=5375c402">
+  <link rel="stylesheet" href="../trail.css?v=a3319023">
+  <link rel="stylesheet" href="stage.css?v=00000000">
+  <script type="module" src="stage.js?v=00000000"></script>
+</head>
+<body class="wm trail-page desk-stage" data-time="dusk">
+  <main class="trail" id="main">
+    <div id="stage"><p class="desk-stage__wait" id="wait">Setting the stage…</p></div>
+    <aside class="luma" id="luma" hidden aria-live="polite">
+      <div class="luma__say"><span class="desk-stage__face" id="luma-face" aria-hidden="true"></span><p id="luma-text"></p></div>
+    </aside>
+    <section class="desk-player" id="player" hidden aria-label="Follow along">
+      <div class="desk-player__row">
+        <button type="button" class="wm-btn wm-btn--line" id="p-start">Start</button>
+        <button type="button" class="wm-btn" id="p-play">Follow along</button>
+        <button type="button" class="wm-btn wm-btn--line" id="p-back">Back a step</button>
+        <button type="button" class="wm-btn wm-btn--line" id="p-step">Next step</button>
+        <button type="button" class="wm-btn wm-btn--line" id="p-end">How they left it</button>
+        <label class="desk-player__speed">Pace <select id="p-speed"><option value="1">Unhurried</option><option value="2" selected>Steady</option><option value="5">Brisk</option></select></label>
+      </div>
+      <label class="sr" for="p-seek">Where in the stage</label>
+      <input type="range" id="p-seek" min="0" max="0" value="0" step="1">
+      <p class="desk-player__now" id="p-now" aria-live="polite"></p>
+      <ol class="desk-player__list" id="p-list" aria-label="Every step at this stage"></ol>
+    </section>
+    <p class="desk-stage__note" id="note" hidden></p>
+  </main>
+</body>
+</html>

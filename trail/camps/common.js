@@ -1,7 +1,7 @@
 /* Stage builders shared by camps: a decision with no right answer, and a campfire question.
  * Both keep what the hiker chose and wrote, in their own words, and never score it. */
-import { h } from '../engine.js?v=d7f2dad4';
-import { t } from '../words.js?v=d7f2dad4';
+import { h } from '../engine.js?v=d0703ed6';
+import { t } from '../words.js?v=d0703ed6';
 
 /** A decision: a few options, and "what do you say?" in the hiker's own words.
  *  o = { lead: [html…], options: [[value, html], …], ask, placeholder, button, name } */
@@ -50,7 +50,7 @@ export function fireStage(o) {
 }
 
 /** Keep a half-written answer with the run as it is typed, so switching apps or reloading does not lose it. */
-export function keep(field, ctx, key) { field.addEventListener('input', () => { ctx.data[key] = field.value; }); }
+export function keep(field, ctx, key) { field.dataset.k = key; field.addEventListener('input', () => { ctx.data[key] = field.value; }); }
 
 /** Load a camp's own stylesheet once. */
 export function useCss(url) {

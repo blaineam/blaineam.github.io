@@ -1,8 +1,8 @@
 /* Camp 1, the Trailhead: reason. A route to find, a night to pick, a leaking canister, a
  * decision on the trail and a question at the fire. */
-import { h, rng } from '../engine.js?v=d7f2dad4';
-import { decisionStage, fireStage } from './common.js?v=d7f2dad4';
-import { t, lang } from '../words.js?v=d7f2dad4';
+import { h, rng } from '../engine.js?v=d0703ed6';
+import { decisionStage, fireStage } from './common.js?v=d0703ed6';
+import { t, lang } from '../words.js?v=d0703ed6';
 import { createSky, SkyModel, PLANET_NAMES } from '/assets/sky/sky.js';
 
 /* ---------- 1: the route ---------- */

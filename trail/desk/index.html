@@ -5,9 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="robots" content="noindex, nofollow">
   <meta name="referrer" content="no-referrer">
-  <!-- The page may load only its own files and talk only to api.github.com (to list issues). -->
-  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self' https://api.github.com; base-uri 'none'; form-action 'none'">
-  <meta name="color-scheme" content="dark light">
+  <!-- The page may load only its own files (a stage of the trail is shown in a frame of this same site) and talk only to api.github.com: to list issues and, if a notes repository is named, to share the readers' sealed notes. -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self' https://api.github.com; frame-src 'self'; base-uri 'none'; form-action 'none'">
+  <meta name="color-scheme" content="dark">
   <title>The reading desk · The Trail</title>
   <link rel="stylesheet" href="/assets/shell.css?v=90d43e33">
   <link rel="stylesheet" href="desk.css?v=6b0e6f99">
@@ -17,31 +17,40 @@
   <div id="live" class="vh" role="status" aria-live="polite"></div>
 
   <header class="desk__head">
-    <p class="eyebrow">The Trail</p>
-    <h1>The reading desk</h1>
-    <p class="lede">This page is public, but it can read nothing without a key that is kept in this browser. Runs are opened here, on this device. The key, the shares and everything you read stay here: the only thing this page ever asks the internet for is the list of issues on GitHub.</p>
-    <nav aria-label="On this page"><a href="#key-h">The key</a><a href="#shares-h">Shares</a><a href="#runs-h">Runs</a><a href="#read-h">Reading</a></nav>
+    <img class="desk__luma" src="../luma-stump.webp" alt="" width="260" height="255">
+    <div>
+      <p class="eyebrow">The Trail · the reading desk</p>
+      <h1 id="hello">Welcome back.</h1>
+      <p class="lede">Pull up a chair. Every run here is somebody’s walk: what they tried, what they chose and what they said by the fire. Nobody is being marked. Read them the way you would want yours read.</p>
+      <p class="hint">Everything is opened here, on this device, with a key that never leaves this browser. The only thing this page asks the internet for is GitHub: the list of issues, and the readers’ sealed notes if you share them.</p>
+      <nav aria-label="On this page"><a href="#runs-h">Runs</a><a href="#read-h">Reading</a><a href="#share-h">Notes</a><a href="#key-h">The key</a><a href="#shares-h">Shares</a></nav>
+    </div>
   </header>
 
   <main id="main" class="desk__main">
+    <section class="panel" aria-labelledby="runs-h">
+      <h2 id="runs-h">Runs</h2>
+      <div id="runs"></div>
+    </section>
+
+    <section class="panel panel--read" aria-labelledby="read-h">
+      <h2 id="read-h">Reading</h2>
+      <div id="read"><p class="hint">Choose a run above and sit down with it here.</p></div>
+    </section>
+
+    <section class="panel" aria-labelledby="share-h">
+      <h2 id="share-h">Notes between readers</h2>
+      <div id="share"></div>
+    </section>
+
     <section class="panel" aria-labelledby="key-h">
-      <h2 id="key-h">1. The key</h2>
+      <h2 id="key-h">The key</h2>
       <div id="key"></div>
     </section>
 
     <section class="panel" aria-labelledby="shares-h">
-      <h2 id="shares-h">2. Shares for four people</h2>
+      <h2 id="shares-h">Shares for four people</h2>
       <div id="shares"></div>
-    </section>
-
-    <section class="panel" aria-labelledby="runs-h">
-      <h2 id="runs-h">3. Runs</h2>
-      <div id="runs"></div>
-    </section>
-
-    <section class="panel" aria-labelledby="read-h">
-      <h2 id="read-h">4. Reading</h2>
-      <div id="read"><p class="hint">Open a run from the list above to read it here.</p></div>
     </section>
   </main>
 

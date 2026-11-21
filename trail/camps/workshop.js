@@ -4,11 +4,11 @@
  * Every puzzle is generated from the hiker's seed by a pure function (make…) and judged by
  * running what the hiker built through the same small simulator the generator used to prove
  * the puzzle can be solved. Nothing is compared against an answer written here. */
-import { h } from '../engine.js?v=d7f2dad4';
-import { t, lang } from '../words.js?v=d7f2dad4';
-import { decisionStage, fireStage, useCss } from './common.js?v=d7f2dad4';
+import { h } from '../engine.js?v=d0703ed6';
+import { t, lang } from '../words.js?v=d0703ed6';
+import { decisionStage, fireStage, useCss } from './common.js?v=d0703ed6';
 
-useCss(new URL('./workshop.css?v=d7f2dad4', import.meta.url));
+useCss(new URL('./workshop.css?v=d0703ed6', import.meta.url));
 
 const pick = (r, a) => a[Math.floor(r() * a.length)];
 const int = (r, lo, hi) => lo + Math.floor(r() * (hi - lo + 1));

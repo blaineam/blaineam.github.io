@@ -15,7 +15,7 @@ out of this repository on purpose.
 | `manners.js` | Whether a piece of text is acceptable: no rudeness, and nothing promotional in anything public |
 | `seal.js`, `send.js`, `config.json` | Sealing a finished run to the owner's key and sending it without a server |
 | `register.js`, `register.json`, `lights.json` | The public register and the lights on the map, for people who chose to sign and were approved |
-| `desk/` | The owner's private reading desk: keys, shares, reading runs |
+| `desk/` | The readers' private desk: runs, reading them stage by stage, notes between readers, keys, shares. `desk/stage.html` shows one stage the way the hiker met it |
 | `words.js`, `guide.json` | Translation (`t()`), the hiker's language, and who the trail guide is today (written by the site build from `content/site.json`) |
 
 Everything a hiker reads goes through `t('English sentence', { values })` from `words.js`; the
@@ -34,6 +34,36 @@ A hiker can go back to any finished stage (the step chips) or camp (the list und
 mend a slip, and is taken back to where they had got to afterwards.
 
 Everything runs in the browser. The run is saved on the device (`localStorage`, `wm-trail-v2`).
+
+## What the engine keeps for every stage
+
+Beside what a stage puts on `ctx.data`, the engine keeps:
+
+- `hints`: how many different hints the guide gave. `asks`: every press of the guide's button
+  (hearing the last hint again counts here, not in `hints`). The public register shows the
+  larger of the two.
+- `ms`: how long the stage was open.
+- `log`: the steps in order, each `[tenths of a second into the stage, kind, …]`: the stage
+  opened, something written (as what changed, so rewrites can be followed), a choice made, a
+  button pressed, what the stage said back, the guide asked, the stage finished. See `record()`
+  in `engine.js`. A text field is named by the key it is kept under: use `keep(field, ctx, key)`
+  from `camps/common.js`, or give the field a `name`. The log is sealed with the run and is
+  never part of anything public. The summit tells the hiker it is kept.
+
+## The reading desk
+
+`desk/` is where sealed runs are opened, with a key that stays in that browser. A reader walks a
+run one stage at a time: `desk/stage.html` (in a frame, never given the key) draws the stage
+with the camp's own code from a copy of what was kept, the way the hiker left it, and can play
+the `log` back from the first step with the waiting taken out. Runs walked before the log
+existed are shown as they were left.
+
+Readers can leave notes on a run or on one stage. A note is sealed to the trail's key, kept in
+the browser, and shared either as a notes file or through a private GitHub repository named at
+the desk (`notes/<run>/<note>.txt`, one sealed file each). Never a public repository.
+
+Once an issue carries the approval label, `trail-checked` or `trail-remove`, the register
+workflow closes it: open trail issues are the ones nobody has read yet.
 
 ## Writing a camp
 

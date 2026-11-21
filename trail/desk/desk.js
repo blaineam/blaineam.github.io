@@ -1,14 +1,18 @@
 /* The reading desk: where the keeper of the trail opens sealed runs.
  *
  * Everything happens in this browser. The private key is kept in IndexedDB as a locked
- * (non-extractable) key: this page can use it to open runs but cannot read it back out. Runs are
- * kept sealed and opened in memory each time. The only network requests are for this page's own
- * files and, when asked, the list of issues from api.github.com. Nothing is ever uploaded.
+ * (non-extractable) key: this page can use it to open runs but cannot read it back out. Runs, and
+ * the notes readers leave on them, are kept sealed and opened in memory each time. The only network requests are for this page's own
+ * files and, when asked, api.github.com: the list of issues, and (only if a private notes
+ * repository is named) the readers' sealed notes. Nothing else is ever uploaded.
+ *
+ * A stage is shown the way the hiker met it by stage.html, in a frame: that page draws it with the
+ * trail's own code from a copy of what the stage kept. It is never given the key.
  */
 import {
   generateKeyPair, exportPrivateKey, importPrivateKey, importPublicKey, sealRun, openRun, readEnvelope,
   readSealedBlock, readPublicBlock, inspectPublicBlock, publicPart, splitToShares, combineShares, decodeShare, CAMP_IDS, PRIVATE_CAMP, BEGIN,
-} from '../seal.js?v=d7f2dad4';
+} from '../seal.js?v=d0703ed6';
 
 const $ = (id) => document.getElementById(id);
 function h(tag, attrs, ...kids) {
@@ -31,20 +35,21 @@ const hexOf = async (text) => Array.from(new Uint8Array(await crypto.subtle.dige
 const db = (() => {
   let open;
   const get = () => open || (open = new Promise((res, rej) => {
-    const r = indexedDB.open('wm-trail-desk', 1);
-    r.onupgradeneeded = () => { r.result.createObjectStore('kv'); r.result.createObjectStore('runs', { keyPath: 'id' }); };
+    const r = indexedDB.open('wm-trail-desk', 2);
+    r.onupgradeneeded = () => { const d = r.result; for (const [name, opt] of [['kv'], ['runs', { keyPath: 'id' }], ['notes', { keyPath: 'id' }]]) if (!d.objectStoreNames.contains(name)) d.createObjectStore(name, opt); };
     r.onsuccess = () => res(r.result); r.onerror = () => rej(r.error);
   }));
   const tx = async (store, mode, fn) => { const d = await get(); return new Promise((res, rej) => { const t = d.transaction(store, mode), q = fn(t.objectStore(store)); t.oncomplete = () => res(q && q.result); t.onerror = t.onabort = () => rej(t.error); }); };
   return {
     get: (k) => tx('kv', 'readonly', (s) => s.get(k)), put: (k, v) => tx('kv', 'readwrite', (s) => s.put(v, k)), del: (k) => tx('kv', 'readwrite', (s) => s.delete(k)),
     runs: () => tx('runs', 'readonly', (s) => s.getAll()), putRun: (r) => tx('runs', 'readwrite', (s) => s.put(r)), delRun: (id) => tx('runs', 'readwrite', (s) => s.delete(id)),
+    notes: () => tx('notes', 'readonly', (s) => s.getAll()), putNote: (n) => tx('notes', 'readwrite', (s) => s.put(n)),
   };
 })();
-const TOKEN = 'wm-desk:token', REPO = 'wm-desk:repo';
+const TOKEN = 'wm-desk:token', REPO = 'wm-desk:repo', ME = 'wm-desk:me', NOTES_REPO = 'wm-desk:notes-repo';
 const local = { get: (k) => { try { return localStorage.getItem(k) || ''; } catch (e) { return ''; } }, set: (k, v) => { try { if (v) localStorage.setItem(k, v); else localStorage.removeItem(k); } catch (e) { /* private window */ } } };
 
-const state = { key: null, stewards: null, hasBackup: false, config: null, runs: [], opened: new Map(), ref: null, reading: null, freshShares: null };
+const state = { key: null, stewards: null, hasBackup: false, config: null, runs: [], opened: new Map(), ref: null, reading: null, freshShares: null, notes: new Map(), noteRecs: new Map(), walk: null, plain: false, about: {} };
 
 /* ---------- 1. the key ---------- */
 async function makeKey(pass, tell) {
@@ -90,7 +95,7 @@ function paintKey() {
             rsay.tell('Opening the backup…');
             const backup = JSON.parse(await file.files[0].text()), got = await importPrivateKey(backup, rp.value);
             const key = { privateKey: got.privateKey, publicJwk: got.publicJwk, kid: got.kid, created: new Date().toISOString() };
-            await db.put('key', key); await db.put('backup', backup); state.key = key; state.hasBackup = true; await reopenAll(); paintAll(); announce('The key is back in this browser.');
+            await db.put('key', key); await db.put('backup', backup); state.key = key; state.hasBackup = true; await reopenAll(); await openNotes(); paintAll(); announce('The key is back in this browser.');
           } catch (e) { rsay.tell(e instanceof SyntaxError ? 'That is not a key backup file.' : why(e), 'bad'); }
         })), rsay));
     return;
@@ -175,7 +180,7 @@ function paintShares() {
         if (!state.key) out.append(h('div', { class: 'row' }, btn('Use this key in this browser', async () => {
           const key = { privateKey: got.privateKey, publicJwk: got.publicJwk, kid: got.kid, created: new Date().toISOString() };
           await db.put('key', key); await db.put('stewards', { backup, made: key.created }); state.key = key; state.stewards = { backup, made: key.created };
-          await reopenAll(); paintAll(); announce('The key is in this browser. Runs can be opened now.');
+          await reopenAll(); await openNotes(); paintAll(); announce('The key is in this browser. Runs can be opened now.');
         }, 'btn--solid')));
       } catch (e) { csay.tell(e instanceof SyntaxError ? 'That is not a stewards’ file.' : why(e), 'bad'); }
     })), csay, out);
@@ -239,7 +244,8 @@ async function loadIssues(repo, token, tell) {
 }
 
 const SAMPLE = () => ({ v: 2, handle: 'Sample Hiker', seed: 7, began: new Date(Date.now() - 864e5).toISOString(), at: { camp: 'workshop', stage: 'done' }, camps: {
-  trailhead: { done: new Date(Date.now() - 8e7).toISOString(), parts: { route: { hints: 1, ms: 312000, done: true, moves: 33, best: 29, resets: 1, undos: 4, path: [126, 127, 113, 99, 100, 86] }, sky: { hints: 0, ms: 95000, done: true, tries: 2 }, call: { hints: 0, ms: 140000, done: true, option: 'wait', said: 'I would wait for the others, and say so plainly.' }, fire: { hints: 0, ms: 260000, done: true, said: 'A sample answer at the campfire.\nIt has two lines.', ai: 'no' } } },
+  trailhead: { done: new Date(Date.now() - 8e7).toISOString(), parts: { route: { hints: 1, ms: 312000, done: true, moves: 33, best: 29, resets: 1, undos: 4, path: [126, 127, 113, 99, 100, 86] }, sky: { hints: 0, ms: 95000, done: true, tries: 2 }, choice: { hints: 1, asks: 2, ms: 140000, done: true, option: 'split', said: 'I would split the group, and say so plainly to everyone before we set off.',
+      log: [[0, 'o'], [140, 'c', 'choice', 'valley', 1], [310, 'w', 'said', 0, 0, 'I would take'], [345, 'w', 'said', 12, 0, ' the valley way down'], [700, 'l', 'Nobody is marking this one. Say what you would really say.'], [760, 'l', 'Nobody is marking this one. Say what you would really say.'], [930, 'c', 'choice', 'split', 1], [1010, 'w', 'said', 8, 24, 'split the group'], [1040, 'b', 'That is my call'], [1040, 's', 'Say a little more, in your own words.', 0], [1250, 'w', 'said', 23, 0, ', and say so plainly to everyone before we set off.'], [1390, 'b', 'That is my call'], [1390, 'd']] }, fire: { hints: 0, ms: 260000, done: true, said: 'A sample answer at the campfire.\nIt has two lines.', ai: 'no' } } },
   workshop: { done: new Date(Date.now() - 4e7).toISOString(), parts: { pipes: { hints: 2, ms: 480000, done: true, retries: 3, said: 'Found the leak on the third try.' } } },
 } });
 
@@ -247,9 +253,9 @@ function sourceText(rec) { const s = rec.source; return s.type === 'issue' ? `Is
 
 /** Compares what an issue shows publicly with what the sealed run would produce. */
 function publicCheck(rec, got) {
-  if (!rec.pub) return rec.source.type === 'issue' ? 'Nothing public' : '–';
+  if (!rec.pub) return rec.source.type === 'issue' ? 'Nothing public' : 'Not sent through GitHub, so nothing is public';
   const strip = (p) => { if (!p) return ''; const { profile, ...rest } = p; return JSON.stringify(rest); };
-  return strip(rec.pub) === strip(publicPart(got.run, {})) ? 'Public part matches the run' : 'Public part DIFFERS from the sealed run';
+  return strip(rec.pub) === strip(publicPart(got.run, {})) ? 'The public part matches the run' : 'The public part DIFFERS from the sealed run';
 }
 
 function paintRuns() {
@@ -285,23 +291,21 @@ function paintRuns() {
     })) : h('p', { class: 'callout', text: 'There is no key in this browser, so runs can be collected here but not opened. Make or restore a key in “The key”.' }),
     say);
 
-  if (!state.runs.length) { el.append(h('p', { class: 'hint', text: 'No runs here yet.' })); return; }
-  const rows = state.runs.slice().sort((a, b) => String(b.source.at || b.added).localeCompare(String(a.source.at || a.added))).map((rec) => {
-    const got = state.opened.get(rec.id) || { error: 'Not opened yet.' }, ok = !got.error, ch = ok && got.meta.choices ? got.meta.choices : {};
-    const isRef = state.ref === rec.id;
-    return h('tr', { class: state.reading === rec.id ? 'is-open' : '' },
-      h('th', { scope: 'row' }, ok ? String(got.run.handle || '(no name)') : 'Could not be opened', isRef ? h('span', { class: 'tag tag--on', text: 'reference' }) : null),
-      h('td', null, rec.source.url && /^https:\/\/github\.com\//.test(rec.source.url) ? h('a', { href: rec.source.url, target: '_blank', rel: 'noopener noreferrer', text: sourceText(rec) }) : sourceText(rec)),
-      h('td', { text: ok ? when(got.sealedAt) : '' }),
-      h('td', null, ok ? [['pool', 'for later'], ['now', 'consider now'], ['public', 'public']].map(([k, t]) => h('span', { class: 'tag' + (ch[k] === true ? ' tag--on' : ''), text: (ch[k] === true ? 'yes: ' : 'no: ') + t })) : h('span', { text: got.error })),
-      h('td', { text: ok ? publicCheck(rec, got) : '' }),
-      h('td', null, h('div', { class: 'row' }, ok ? btn('Read', () => read(rec.id), 'btn--small') : null,
+  if (!state.runs.length) { el.append(h('p', { class: 'hint', text: 'No runs here yet. When someone sends one, it will be waiting for you here.' })); return; }
+  const cards = state.runs.slice().sort((a, b) => String(b.source.at || b.added).localeCompare(String(a.source.at || a.added))).map((rec) => {
+    const got = state.opened.get(rec.id) || { error: 'Not opened yet.' }, ok = !got.error, isRef = state.ref === rec.id, n = notesFor(rec.id).length;
+    const link = rec.source.url && /^https:\/\/github\.com\//.test(rec.source.url) ? h('a', { href: rec.source.url, target: '_blank', rel: 'noopener noreferrer', text: sourceText(rec) }) : sourceText(rec);
+    return h('li', { class: 'run' + (state.reading === rec.id ? ' is-open' : '') },
+      h('h3', { class: 'run__name' }, ok ? String(got.run.handle || '(no name)') : 'A run that could not be opened', isRef ? h('span', { class: 'tag tag--on', text: 'your reference' }) : null),
+      h('p', { class: 'run__from' }, link, ok ? ` · sealed ${when(got.sealedAt)}` : ''),
+      ok ? asked(got.meta.choices || {}) : h('p', { class: 'hint', text: got.error }),
+      ok ? h('p', { class: 'hint', text: publicCheck(rec, got) + '.' + (n ? ` ${n} ${n === 1 ? 'note' : 'notes'} from readers.` : '') }) : null,
+      h('div', { class: 'row' }, ok ? btn(state.reading === rec.id ? 'Reading now' : 'Sit down with this run', () => read(rec.id), 'btn--solid btn--small') : null,
         ok ? btn(isRef ? 'Stop using as reference' : 'Use as reference', async () => { state.ref = isRef ? null : rec.id; await (state.ref ? db.put('ref', state.ref) : db.del('ref')); paintRuns(); paintRead(); }, 'btn--small') : null,
-        btn('Remove', async () => { if (!confirm('Remove this run from this browser? The issue or file it came from is not touched.')) return; await db.delRun(rec.id); state.runs = state.runs.filter((r) => r.id !== rec.id); state.opened.delete(rec.id); if (state.ref === rec.id) { state.ref = null; await db.del('ref'); } if (state.reading === rec.id) state.reading = null; paintRuns(); paintRead(); }, 'btn--small'))));
+        btn('Remove from this browser', async () => { if (!confirm('Remove this run from this browser? The issue or file it came from is not touched, and notes about it are kept.')) return; await db.delRun(rec.id); state.runs = state.runs.filter((r) => r.id !== rec.id); state.opened.delete(rec.id); if (state.ref === rec.id) { state.ref = null; await db.del('ref'); } if (state.reading === rec.id) state.reading = null; paintRuns(); paintRead(); }, 'btn--small btn--quiet')));
   });
-  el.append(h('div', { class: 'scroll', tabindex: 0, role: 'region', 'aria-label': 'Runs in this browser' }, h('table', null,
-    h('thead', null, h('tr', null, ['Trail name', 'From', 'Sealed', 'Their three choices', 'Public part', 'Actions'].map((t) => h('th', { scope: 'col', text: t })))), h('tbody', null, rows))),
-  h('p', { class: 'hint', text: 'Anyone can send a run under any trail name, and can copy someone else’s issue. “From” is the GitHub account that posted it; the trail name is whatever the hiker typed.' }));
+  el.append(h('ul', { class: 'runs', 'aria-label': 'Runs in this browser' }, cards),
+    h('p', { class: 'hint', text: 'Anyone can send a run under any trail name, and can copy someone else’s issue. The GitHub account is who posted it; the trail name is whatever the hiker typed.' }));
   paintPending(el);
 }
 
@@ -349,70 +353,301 @@ function paintPending(el) {
   if (refused.length) el.append(h('p', { class: 'hint', text: `Refused automatically and never published, whatever the label: ${refused.map((r) => `#${r.source.number} (${r.why === 'name' ? 'trail name not allowed' : r.why === 'line' ? 'line not allowed' : 'not a valid public block'})`).join(', ')}.` }));
 }
 
-/* ---------- 4. reading ---------- */
-const CAMP_NAMES = { trailhead: 'The Trailhead', workshop: 'The Workshop', shelter: 'The Shelter', overlook: 'The Overlook', summit: 'The Summit' };
-const TRACE = { ms: 'Time', hints: 'Asked Luma', retries: 'Retries', resets: 'Fresh starts', undos: 'Steps back', tries: 'Tries', moves: 'Moves', best: 'Fewest possible', done: 'Finished' };
-const span = (ms) => { const s = Math.round((+ms || 0) / 1000); return s < 60 ? `${s} s` : `${Math.floor(s / 60)} min ${s % 60} s`; };
+/* ---------- notes between readers ----------
+ * A note is a few words one reader leaves for the others: on a whole run, or on one stage of it.
+ * Each note is sealed to the trail's key like a run is, so it can be read only where the key is.
+ * They are kept in this browser. To share them there are two ways, both without a server of our
+ * own: a notes file passed from hand to hand, or a private GitHub repository that every reader
+ * can reach, where each note is one small sealed file (notes/<run>/<note>.txt). */
+const NOTE_ID = /^[0-9a-f]{16,32}$/, RUN_ID = /^[0-9a-f]{24}$/;
+const me = () => local.get(ME).trim().slice(0, 60);
+const notesFor = (runId, where) => [...state.notes.values()].filter((n) => n.run === runId && !n.gone && (where === undefined || n.where === where)).sort((a, b) => String(a.at).localeCompare(String(b.at)));
+function validNote(n, rec) {
+  return n && n.kind === 'desk-note' && n.id === rec.id && n.run === rec.run && NOTE_ID.test(n.id) && RUN_ID.test(n.run) && typeof n.text === 'string' && n.text.length <= 6000
+    && typeof n.by === 'string' && n.by.length <= 60 && typeof n.where === 'string' && n.where.length <= 80 && typeof n.at === 'string' && typeof n.edited === 'string';
+}
+async function openNotes() {
+  state.notes.clear(); if (!state.key) return;
+  for (const rec of state.noteRecs.values()) { try { const n = (await openRun(rec.env, state.key.privateKey, { kid: state.key.kid })).run; if (validNote(n, rec)) state.notes.set(rec.id, n); } catch (e) { /* sealed to another key, or not a note */ } }
+}
+async function saveNote(n) {
+  n.edited = new Date().toISOString();
+  const old = state.noteRecs.get(n.id), rec = { id: n.id, run: n.run, env: await sealRun(n, state.key.publicJwk, { note: true }), sha: old ? old.sha : null, dirty: true };
+  await db.putNote(rec); state.noteRecs.set(rec.id, rec); state.notes.set(n.id, n);
+}
+/** A note from a file or the notes repository: kept when it is new here or newer than ours. */
+async function takeNote(rec, fromRepo) {
+  if (!state.key || !rec || !NOTE_ID.test(rec.id) || !RUN_ID.test(rec.run) || typeof rec.env !== 'string') return 'bad';
+  let n; try { n = (await openRun(rec.env, state.key.privateKey, { kid: state.key.kid })).run; } catch (e) { return 'bad'; }
+  if (!validNote(n, rec)) return 'bad';
+  const ours = state.notes.get(rec.id), mine = state.noteRecs.get(rec.id);
+  if (ours && ours.edited > n.edited) return 'ours';
+  if (ours && ours.edited === n.edited) { if (fromRepo && mine) { mine.sha = rec.sha; mine.dirty = false; await db.putNote(mine); } return 'same'; }
+  const keep = { id: rec.id, run: rec.run, env: rec.env, sha: fromRepo ? rec.sha : mine ? mine.sha : null, dirty: !fromRepo };
+  await db.putNote(keep); state.noteRecs.set(keep.id, keep); state.notes.set(n.id, n);
+  return 'newer';
+}
 
-/* One stage of one run: the trace (numbers and yes/no) first, then what was written, then anything longer folded away. */
-function side(part, who) {
-  const box = h('div', { class: 'side' }, who ? h('p', { class: 'side__who', text: who }) : null);
-  if (!part || typeof part !== 'object') { box.append(h('p', { class: 'absent', text: 'Not reached.' })); return box; }
-  const trace = h('ul', { class: 'trace', 'aria-label': 'How it went' }), answers = [], more = [];
-  const keys = Object.keys(part).sort((a, b) => (a in TRACE ? Object.keys(TRACE).indexOf(a) : 99) - (b in TRACE ? Object.keys(TRACE).indexOf(b) : 99));
-  for (const k of keys) {
-    const v = part[k];
-    if (typeof v === 'number' || typeof v === 'boolean') trace.append(h('li', null, (TRACE[k] || k) + ' ', h('b', { text: k === 'ms' ? span(v) : v === true ? 'yes' : v === false ? 'no' : String(v) })));
-    else if (typeof v === 'string') answers.push(h('div', { class: 'answer' }, h('p', { class: 'answer__k', text: k }), h('p', { class: 'answer__v', text: v || '(empty)' })));
-    else if (v != null) more.push(h('details', null, h('summary', { text: `${k} (${Array.isArray(v) ? v.length + ' steps' : 'details'})` }), h('pre', { tabindex: 0, text: JSON.stringify(v, null, 1).slice(0, 20000) })));
-  }
-  box.append(trace, ...answers, ...more);
+function notesBox(runId, where, title) {
+  const box = h('section', { class: 'notes' });
+  const paint = () => {
+    box.textContent = '';
+    const list = notesFor(runId, where), say = sayer();
+    box.append(h('h4', { class: 'notes__h', text: title }));
+    if (!list.length) box.append(h('p', { class: 'hint', text: 'No notes here yet.' }));
+    for (const n of list) {
+      const mineToo = n.by === me();
+      box.append(h('article', { class: 'note' }, h('p', { class: 'note__by' }, h('b', { text: n.by || 'A reader' }), ` · ${when(n.at)}${n.edited > n.at ? ' · changed ' + when(n.edited) : ''}`), h('p', { class: 'note__text', text: n.text }),
+        mineToo ? h('div', { class: 'row' }, btn('Change', () => { text.value = n.text; editing = n; text.focus(); go.textContent = 'Save the change'; }, 'btn--small btn--quiet'),
+          btn('Take it back', async () => { if (!confirm('Take this note back? It disappears for the other readers too, the next time notes are shared.')) return; await saveNote({ ...n, text: '', gone: true }); paint(); paintRuns(); }, 'btn--small btn--quiet')) : null));
+    }
+    if (!state.key) { box.append(h('p', { class: 'hint', text: 'Notes need the key in this browser.' })); return; }
+    let editing = null;
+    const text = h('textarea', { rows: 3, maxlength: 4000, class: 'notes__text', placeholder: 'What struck you? What would you ask them?' });
+    const name = h('input', { maxlength: 60, autocomplete: 'off', placeholder: 'Your name, as the other readers know you' }); name.value = me();
+    const go = btn('Leave this note', async () => {
+      const said = text.value.trim(), who = name.value.trim().slice(0, 60);
+      if (!who) return say.tell('Write your name first, so the others know whose note it is.', 'bad');
+      if (!said) return say.tell('The note is empty.', 'bad');
+      local.set(ME, who); go.disabled = true;
+      try {
+        if (editing) await saveNote({ ...editing, text: said });
+        else { const at = new Date().toISOString(); await saveNote({ kind: 'desk-note', id: Array.from(crypto.getRandomValues(new Uint8Array(12)), (b) => b.toString(16).padStart(2, '0')).join(''), run: runId, where, text: said, by: who, at, edited: at }); }
+        paint(); paintRuns(); paintShare();
+      } catch (e) { go.disabled = false; say.tell(why(e), 'bad'); }
+    }, 'btn--small btn--solid');
+    box.append(...[field('A note for the other readers', text), me() ? null : field('Your name', name), h('div', { class: 'row' }, go), say].filter(Boolean));
+  };
+  paint();
   return box;
 }
 
-function read(id) { state.reading = id; paintRuns(); paintRead(); $('read-h').scrollIntoView({ block: 'start' }); announce('The run is open below.'); }
-
-function paintRead() {
-  const el = $('read'); el.textContent = '';
-  const rec = state.runs.find((r) => r.id === state.reading), got = rec && state.opened.get(rec.id);
-  if (!rec || !got || got.error) { el.append(h('p', { class: 'hint', text: 'Open a run from the list above to read it here.' })); return; }
-  const refRec = state.ref && state.ref !== rec.id ? state.runs.find((r) => r.id === state.ref) : null, refGot = refRec && state.opened.get(refRec.id), ref = refGot && !refGot.error ? refGot.run : null;
-  const run = got.run, ch = got.meta.choices || {};
-  const fact = (k, v) => h('div', null, h('dt', { text: k }), h('dd', { text: v }));
-  el.append(
-    h('h3', { text: String(run.handle || '(no name)') }),
-    h('dl', { class: 'facts' }, fact('From', sourceText(rec)), fact('Began', when(run.began)), fact('Sealed', when(got.sealedAt)),
-      fact('Keep in mind for later', ch.pool === true ? 'Yes' : 'No'), fact('Consider now', ch.now === true ? 'Yes' : 'No'), fact('On the register', ch.public === true ? 'Yes' : 'No'),
-      fact('How to reach them', typeof got.meta.contact === 'string' && got.meta.contact ? got.meta.contact : rec.source.login ? `GitHub: ${rec.source.login}` : 'Not given'), fact('Public part', publicCheck(rec, got))),
-    ref ? h('p', { class: 'callout', text: `Shown beside the reference run (${String(ref.handle || 'no name')}). Nothing is scored or added up: the two are side by side so you can read them.` })
-      : h('p', { class: 'hint', text: state.ref === rec.id ? 'This is the reference run.' : 'To read a run beside your own, add your own run (an unsealed run file is fine) and press “Use as reference” in the list.' }));
-  const campIds = [...CAMP_IDS, ...Object.keys(run.camps || {}).filter((id) => !CAMP_IDS.includes(id))];
-  for (const id of campIds) {
-    const camp = run.camps && run.camps[id], refCamp = ref && ref.camps && ref.camps[id];
-    if (!camp && !refCamp) continue;
-    const parts = camp && camp.parts && typeof camp.parts === 'object' ? camp.parts : {}, refParts = refCamp && refCamp.parts && typeof refCamp.parts === 'object' ? refCamp.parts : {};
-    const box = h('div', { class: 'camp' }, h('h3', { text: CAMP_NAMES[id] || id }),
-      h('p', { class: 'hint', text: (camp && camp.done ? `Reached ${when(camp.done)}.` : camp ? 'Started, not finished.' : 'Not reached.') + (id === PRIVATE_CAMP ? ' This camp is private: nothing in it is ever public.' : '') }));
-    for (const stage of [...Object.keys(parts), ...Object.keys(refParts).filter((k) => !(k in parts))]) {
-      box.append(h('div', { class: 'stage' }, h('h4', { text: stage }),
-        h('div', { class: 'pair' + (ref ? ' pair--two' : '') }, side(parts[stage], ref ? String(run.handle || 'This run') : ''), ref ? Object.assign(side(refParts[stage], `Reference: ${String(ref.handle || '')}`), { className: 'side side--ref' }) : null)));
+async function syncNotes(repo, token, tell) {
+  if (!state.key) return tell('Notes need the key in this browser.', 'bad');
+  if (!/^[A-Za-z0-9-]+\/[A-Za-z0-9_.-]+$/.test(repo)) return tell('Write the notes repository as owner/name.', 'bad');
+  if (!token) return tell('Sharing notes through GitHub needs a token: fine-grained, the notes repository only, “Contents: Read and write”. Put it in the token box under “Runs”.', 'bad');
+  if (/^ghp_/.test(token)) return tell('That is a classic token, which can reach every repository you have. Use a fine-grained one.', 'bad');
+  local.set(NOTES_REPO, repo);
+  const gh = (path, opt = {}) => fetch(`https://api.github.com/repos/${repo}${path}`, { ...opt, headers: { Accept: 'application/vnd.github+json', Authorization: `Bearer ${token}`, ...(opt.body ? { 'Content-Type': 'application/json' } : {}) } });
+  try {
+    tell('Looking at the notes repository…');
+    const info = await gh(''); if (!info.ok) return tell(info.status === 404 ? 'GitHub found no such repository, or the token cannot see it.' : info.status === 401 ? 'GitHub did not accept the token.' : `GitHub answered ${info.status}.`, 'bad');
+    const meta = await info.json();
+    if (meta.private !== true) return tell('That repository is public. The notes are sealed, but anyone could see that readers wrote notes, how many, and when. Use a private repository that only the readers can reach.', 'bad');
+    let tree = []; const tr = await gh(`/git/trees/${encodeURIComponent(meta.default_branch || 'main')}?recursive=1`);
+    if (tr.ok) tree = (await tr.json()).tree || []; else if (tr.status !== 404 && tr.status !== 409) return tell(`GitHub answered ${tr.status}.`, 'bad');
+    const remote = new Map();
+    for (const f of tree) { const m = /^notes\/([0-9a-f]{24})\/([0-9a-f]{16,32})\.txt$/.exec(String(f.path)); if (m && f.type === 'blob') remote.set(m[2], { run: m[1], sha: f.sha }); }
+    let got = 0, sent = 0, failed = 0;
+    for (const [id, f] of remote) {
+      const rec = state.noteRecs.get(id); if (rec && rec.sha === f.sha) continue;
+      const b = await gh(`/git/blobs/${f.sha}`); if (!b.ok) { failed++; continue; }
+      let env; try { env = atob(String((await b.json()).content).replace(/\s+/g, '')); } catch (e) { failed++; continue; }
+      const r = await takeNote({ id, run: f.run, env, sha: f.sha }, true);
+      if (r === 'newer') got++; else if (r === 'ours') { rec.sha = f.sha; rec.dirty = true; await db.putNote(rec); }
     }
-    el.append(box);
+    for (const rec of state.noteRecs.values()) {
+      if (!state.notes.has(rec.id) || (!rec.dirty && remote.has(rec.id))) continue;
+      const res = await gh(`/contents/notes/${rec.run}/${rec.id}.txt`, { method: 'PUT', body: JSON.stringify({ message: 'A note', content: btoa(rec.env), ...(remote.has(rec.id) ? { sha: remote.get(rec.id).sha } : {}) }) });
+      if (!res.ok) { failed++; continue; }
+      rec.sha = ((await res.json()).content || {}).sha || null; rec.dirty = false; await db.putNote(rec); sent++;
+    }
+    paintRuns(); paintRead();
+    $('share').querySelector('.say').tell(`Notes shared: ${got} new or changed from the others, ${sent} of yours sent.` + (failed ? ` ${failed} could not be read or sent (the token may not be allowed to write there).` : ''), failed ? 'bad' : 'good');
+  } catch (e) { tell('GitHub could not be reached. Your notes are still kept in this browser.', 'bad'); }
+}
+
+function paintShare() {
+  const el = $('share'); if (!el) return; el.textContent = '';
+  const say = sayer(), total = [...state.notes.values()].filter((n) => !n.gone).length, waiting = [...state.noteRecs.values()].filter((r) => r.dirty && state.notes.has(r.id)).length;
+  const name = h('input', { maxlength: 60, autocomplete: 'off' }); name.value = me(); name.addEventListener('change', () => local.set(ME, name.value.trim().slice(0, 60)));
+  const repo = h('input', { class: 'mono', autocapitalize: 'off', spellcheck: 'false', placeholder: 'owner/name of a private repository' }); repo.value = local.get(NOTES_REPO);
+  const file = h('input', { type: 'file', accept: '.json,application/json' });
+  file.addEventListener('change', async () => {
+    try {
+      const obj = JSON.parse(await file.files[0].text()); if (!obj || obj.kind !== 'trail-desk-notes' || !Array.isArray(obj.notes)) return say.tell('That is not a notes file.', 'bad');
+      let got = 0; for (const rec of obj.notes.slice(0, 5000)) if ((await takeNote(rec, false)) === 'newer') got++;
+      paintRuns(); paintRead(); $('share').querySelector('.say').tell(`${got} new or changed ${got === 1 ? 'note' : 'notes'} added from the file.`, 'good');
+    } catch (e) { say.tell('That is not a notes file.', 'bad'); }
+  });
+  el.append(
+    h('p', { text: 'Notes are for the readers only. Each one is sealed to the trail’s key before it is kept, so it can be read only where the key is: here, and on the other readers’ desks.' }),
+    h('p', { class: 'hint', text: `${total} ${total === 1 ? 'note' : 'notes'} in this browser${waiting ? `, ${waiting} not shared yet` : ''}.` }),
+    field('Your name on your notes', name),
+    h('h3', { text: 'Share through a private repository' }),
+    h('p', { class: 'hint', text: 'Make a private GitHub repository that every reader can reach, and name it here. Each note is stored there as one small sealed file. The token in “Runs” is used; it needs “Contents: Read and write” on that repository. Never use a public repository for this.' }),
+    field('Notes repository', repo),
+    h('div', { class: 'row' }, btn('Share notes now', () => syncNotes(repo.value.trim(), local.get(TOKEN), (t, k) => say.tell(t, k)), 'btn--solid')),
+    h('h3', { text: 'Or pass a notes file from hand to hand' }),
+    h('div', { class: 'row' }, btn('Save all notes as a file', () => { download('trail-desk-notes.json', JSON.stringify({ kind: 'trail-desk-notes', v: 1, notes: [...state.noteRecs.values()].filter((r) => state.notes.has(r.id)).map(({ id, run, env }) => ({ id, run, env })) })); say.tell('Saved. The file is sealed: only a desk with the key can read it.', 'good'); })),
+    field('Add notes from another reader’s file', file), say);
+}
+
+/* ---------- reading ---------- */
+const CAMP_NAMES = { trailhead: 'The Trailhead', workshop: 'The Workshop', shelter: 'The Shelter', overlook: 'The Overlook', summit: 'The Summit' };
+const TRACE = { ms: 'Time here', hints: 'Hints from Luma', asks: 'Pressed “Ask Luma”', retries: 'Retries', resets: 'Fresh starts', undos: 'Steps back', tries: 'Tries', moves: 'Moves', best: 'Fewest possible', revisits: 'Came back to mend it', rude: 'Turned back for language', done: 'Finished' };
+const span = (ms) => { const s = Math.round((+ms || 0) / 1000); return s < 60 ? `${s} s` : s < 3600 ? `${Math.floor(s / 60)} min ${s % 60} s` : `${Math.floor(s / 3600)} h ${Math.floor((s % 3600) / 60)} min`; };
+const partsOf = (run, id) => { const c = run && run.camps && run.camps[id]; return c && c.parts && typeof c.parts === 'object' ? c.parts : {}; };
+
+/* Their three choices at the summit, in words. None of them is a right or a wrong answer. */
+function asked(ch) {
+  const line = (on, yes, no) => h('li', { class: on ? 'is-on' : '' }, h('span', { class: 'asked__mark', 'aria-hidden': 'true', text: on ? '●' : '○' }), on ? yes : no);
+  return h('ul', { class: 'asked' }, line(ch.pool === true, 'Asked to be kept in mind for later', 'Did not ask to be kept in mind for later'),
+    line(ch.now === true, 'Asked to be considered now', 'Did not ask to be considered now'), line(ch.public === true, 'Asked to be on the trail register', 'Did not ask to be on the register'));
+}
+
+/* What a stage kept, in three parts: how it went (numbers), what was written, and everything else folded away. */
+function kept(part) {
+  const trace = h('ul', { class: 'trace', 'aria-label': 'How it went' }), answers = [], more = [];
+  if (!part || typeof part !== 'object') return { trace: h('p', { class: 'absent', text: 'Not reached.' }), answers, more };
+  const keys = Object.keys(part).sort((a, b) => (a in TRACE ? Object.keys(TRACE).indexOf(a) : 99) - (b in TRACE ? Object.keys(TRACE).indexOf(b) : 99));
+  for (const k of keys) {
+    const v = part[k];
+    if (k === 'log') continue;                                    // the step-by-step record: followed in the stage itself
+    if (typeof v === 'number' || typeof v === 'boolean') trace.append(h('li', null, (TRACE[k] || k) + ' ', h('b', { text: k === 'ms' ? span(v) : v === true ? 'yes' : v === false ? 'no' : String(v) })));
+    else if (typeof v === 'string') answers.push(h('figure', { class: 'answer' }, h('figcaption', { class: 'answer__k', text: k }), h('blockquote', { class: 'answer__v', text: v || '(left empty)' })));
+    else if (v != null) more.push(h('details', null, h('summary', { text: `${k} (${Array.isArray(v) ? v.length + ' steps' : 'details'})` }), h('pre', { tabindex: 0, text: JSON.stringify(v, null, 1).slice(0, 20000) })));
+  }
+  return { trace, answers, more };
+}
+function side(part, who) {
+  const k = kept(part);
+  return h('div', { class: 'side' }, who ? h('p', { class: 'side__who', text: who }) : null, k.trace, ...k.answers, ...k.more);
+}
+
+function read(id) { state.reading = id; state.walk = null; paintRuns(); paintRead(); $('read-h').scrollIntoView({ block: 'start' }); announce('The run is open below.'); }
+
+/* The frame that shows a stage the way the hiker met it (stage.html). One frame, reused. */
+let frame = null, frameReady = false, shown = null;
+function sendStage() {
+  if (!frame || !frameReady || !shown) return;
+  frame.hidden = false;
+  frame.contentWindow.postMessage({ wmDesk: 1, type: 'show', ...shown }, location.origin);
+}
+addEventListener('message', (e) => {
+  if (!frame || e.origin !== location.origin || e.source !== frame.contentWindow || !e.data || e.data.wmDesk !== 1) return;
+  const m = e.data;
+  if (m.type === 'ready') { frameReady = true; sendStage(); }
+  else if (m.type === 'size' && Number.isFinite(m.height)) frame.style.height = Math.max(120, Math.min(20000, Math.ceil(m.height) + 4)) + 'px';
+  else if (m.type === 'none') frame.hidden = true;
+  else if (m.type === 'camp' && typeof m.id === 'string' && Array.isArray(m.stages)) {
+    state.about[m.id] = { name: String(m.name || '').slice(0, 80), stages: m.stages.slice(0, 40).map((s) => ({ id: String(s.id), label: String(s.label || s.id).slice(0, 60), title: String(s.title || s.label || s.id).slice(0, 120) })) };
+    paintWalk(false);
+  }
+});
+
+function stagesOf(run, ref, id) {
+  const have = [...Object.keys(partsOf(run, id)), ...Object.keys(partsOf(ref, id))].filter((k, i, a) => a.indexOf(k) === i), about = state.about[id];
+  if (!about) return have.map((k) => ({ id: k, label: k, title: k }));
+  return [...about.stages.filter((s) => have.includes(s.id)), ...have.filter((k) => !about.stages.some((s) => s.id === k)).map((k) => ({ id: k, label: k, title: k }))];
+}
+
+/* The walk: one stage at a time, as the hiker met it, with what was kept and the readers' notes beside it. */
+function paintWalk(reload) {
+  const el = $('walk'); if (!el) return;
+  const rec = state.runs.find((r) => r.id === state.reading), got = rec && state.opened.get(rec.id); if (!rec || !got || got.error) return;
+  const refRec = state.ref && state.ref !== rec.id ? state.runs.find((r) => r.id === state.ref) : null, refGot = refRec && state.opened.get(refRec.id), ref = refGot && !refGot.error ? refGot.run : null;
+  const run = got.run, campIds = CAMP_IDS.filter((id) => (run.camps && run.camps[id]) || (ref && ref.camps && ref.camps[id]));
+  if (!campIds.length) { el.textContent = ''; el.append(h('p', { class: 'hint', text: 'This run has no camps in it yet.' })); return; }
+  if (!state.walk || !campIds.includes(state.walk.camp)) state.walk = { camp: campIds[0], stage: null };
+  const stages = stagesOf(run, ref, state.walk.camp);
+  if (!stages.some((s) => s.id === state.walk.stage)) state.walk.stage = stages[0] ? stages[0].id : null;
+  const here = stages.find((s) => s.id === state.walk.stage), camp = run.camps && run.camps[state.walk.camp], part = partsOf(run, state.walk.camp)[state.walk.stage];
+  const go = (campId, stageId) => { state.walk = { camp: campId, stage: stageId }; paintWalk(true); $('walk').scrollIntoView({ block: 'start' }); };
+  const flat = campIds.flatMap((id) => stagesOf(run, ref, id).map((s) => [id, s.id])), at = flat.findIndex(([c, s]) => c === state.walk.camp && s === state.walk.stage);
+
+  const head = $('walk-head'), aside = $('walk-aside'), foot = $('walk-foot');
+  head.textContent = ''; aside.textContent = ''; foot.textContent = '';
+  head.append(
+    h('div', { class: 'camps', role: 'tablist', 'aria-label': 'Camps' }, campIds.map((id) => h('button', { type: 'button', role: 'tab', class: 'camps__tab' + (id === state.walk.camp ? ' is-now' : ''), 'aria-selected': id === state.walk.camp ? 'true' : 'false', onclick: () => go(id, null) },
+      h('b', { text: CAMP_NAMES[id] || id }), h('small', { text: run.camps && run.camps[id] && run.camps[id].done ? when(run.camps[id].done) : run.camps && run.camps[id] ? 'not finished' : 'not reached' })))),
+    h('p', { class: 'hint', text: (camp && camp.done ? `Reached ${when(camp.done)}.` : camp ? 'Started, not finished.' : 'Not reached.') + (state.walk.camp === PRIVATE_CAMP ? ' This camp is private: nothing in it is ever public.' : '') }),
+    h('ol', { class: 'steps', 'aria-label': 'Stages of this camp' }, stages.map((s) => { const n = notesFor(rec.id, `${state.walk.camp}/${s.id}`).length; return h('li', { class: s.id === state.walk.stage ? 'is-now' : '' }, h('button', { type: 'button', 'aria-current': s.id === state.walk.stage ? 'step' : null, onclick: () => go(state.walk.camp, s.id) }, s.label, n ? h('span', { class: 'steps__notes', text: String(n), title: `${n} ${n === 1 ? 'note' : 'notes'}` }) : null)); })));
+  if (!here) return;
+
+  const k = kept(part), isRegister = state.walk.camp === 'summit' && here.id === 'register';
+  aside.append(h('h3', { class: 'walk__title', text: here.title }), h('h4', { text: 'How it went' }), k.trace);
+  if (isRegister) aside.append(h('h4', { text: 'What they asked for at the tin' }), asked(got.meta.choices || {}), h('p', { class: 'hint', text: 'These are theirs to choose. None of them is a right or a wrong answer, and leaving all three empty is a complete ending too.' }));
+  if (k.answers.length) aside.append(h('h4', { text: 'In their words' }), ...k.answers);
+  if (k.more.length) aside.append(h('details', { class: 'fold' }, h('summary', { text: 'Everything else kept at this stage' }), ...k.more));
+  if (ref) aside.append(h('details', { class: 'fold' }, h('summary', { text: `Beside the reference run (${String(ref.handle || 'no name')})` }), h('p', { class: 'hint', text: 'Nothing is scored or added up. The reference is there to read beside, not to measure against.' }), side(partsOf(ref, state.walk.camp)[here.id], '')));
+  aside.append(notesBox(rec.id, `${state.walk.camp}/${here.id}`, 'Readers’ notes on this stage'));
+
+  foot.append(h('div', { class: 'row walk__nav' },
+    at > 0 ? btn('‹ The stage before', () => go(flat[at - 1][0], flat[at - 1][1])) : h('span'),
+    at < flat.length - 1 ? btn('Walk on ›', () => go(flat[at + 1][0], flat[at + 1][1]), 'btn--solid') : h('span', { class: 'hint', text: 'That is the end of the walk.' })));
+
+  if (reload) {
+    shown = { handle: String(run.handle || ''), seed: Number.isInteger(run.seed) ? run.seed : null, camp: state.walk.camp, stage: here.id, data: part && typeof part === 'object' ? part : null, parts: partsOf(run, state.walk.camp) };
+    $('walk-none').hidden = !isRegister && !!part;
+    $('walk-none').textContent = isRegister ? 'The register is the hiker’s own page for sealing and sending, so it is not shown again here. What they asked for is beside this.' : part ? '' : 'This hiker did not reach this stage.';
+    if (isRegister || !part) { if (frame) frame.hidden = true; } else sendStage();
   }
 }
 
+function paintRead() {
+  const el = $('read'); el.textContent = ''; frame = null; frameReady = false; shown = null;
+  const rec = state.runs.find((r) => r.id === state.reading), got = rec && state.opened.get(rec.id);
+  if (!rec || !got || got.error) { el.append(h('p', { class: 'hint', text: 'Choose a run above and sit down with it here.' })); return; }
+  const refRec = state.ref && state.ref !== rec.id ? state.runs.find((r) => r.id === state.ref) : null, refGot = refRec && state.opened.get(refRec.id), ref = refGot && !refGot.error ? refGot.run : null;
+  const run = got.run, ch = got.meta.choices || {}, name = String(run.handle || 'This hiker');
+  const all = CAMP_IDS.flatMap((id) => Object.values(partsOf(run, id))).filter((p) => p && typeof p === 'object');
+  const sum = (key) => all.reduce((n, p) => n + (typeof p[key] === 'number' && p[key] > 0 ? p[key] : 0), 0), reached = CAMP_IDS.filter((id) => run.camps && run.camps[id] && run.camps[id].done);
+  const hints = sum('hints'), asks = sum('asks'), counted = all.some((p) => typeof p.asks === 'number');
+  const fact = (k, v) => h('div', null, h('dt', { text: k }), h('dd', { text: v }));
+  el.append(...[
+    h('div', { class: 'reader' }, h('img', { class: 'reader__luma', src: '../luma.webp', alt: '', width: 96, height: 96 }),
+      h('div', null, h('h3', { class: 'reader__name', text: `${name}’s walk` }),
+        h('p', { class: 'reader__story', text: `${name} set out on ${when(run.began)} and ${reached.length === CAMP_IDS.length ? 'walked the whole trail, all five camps' : reached.length ? `reached ${reached.length} of the ${CAMP_IDS.length} camps, as far as ${CAMP_NAMES[reached[reached.length - 1]]}` : 'has not finished a camp yet'}. `
+          + `The stages were open for ${span(sum('ms'))} in all, which counts any time the page was simply left open. `
+          + (hints ? `Luma gave ${hints} ${hints === 1 ? 'hint' : 'hints'}` : 'Luma was not asked for a hint') + (counted ? ` (the button was pressed ${asks} ${asks === 1 ? 'time' : 'times'}).` : '.') }),
+        asked(ch))),
+    h('dl', { class: 'facts' }, fact('Sent', sourceText(rec)), fact('Sealed', when(got.sealedAt)), fact('How to reach them', typeof got.meta.contact === 'string' && got.meta.contact ? got.meta.contact : rec.source.login ? `GitHub: ${rec.source.login}` : 'Not given'), fact('What is public', publicCheck(rec, got))),
+    counted ? null : h('p', { class: 'hint', text: 'This run was walked before the trail counted every press of “Ask Luma”. The number above is how many different hints were given: a stage with one hint counts once however often it was asked for.' }),
+    h('div', { class: 'row' }, btn(state.plain ? 'Walk it stage by stage' : 'Lay the whole walk out on one page', () => { state.plain = !state.plain; paintRead(); }, 'btn--small'),
+      h('span', { class: 'hint', text: ref ? `Read beside the reference run (${String(ref.handle || 'no name')}).` : state.ref === rec.id ? 'This is the reference run.' : 'To read a run beside your own, add your own and choose “Use as reference”.' }))].filter(Boolean));
+
+  if (!state.plain) {
+    frame = h('iframe', { class: 'walk__frame', src: 'stage.html', title: 'The stage as the hiker met it' });
+    el.append(h('div', { class: 'walk', id: 'walk' }, h('div', { id: 'walk-head' }),
+      h('div', { class: 'walk__grid' }, h('div', { class: 'walk__stage' }, h('p', { class: 'hint walk__none', id: 'walk-none', hidden: true }), frame), h('aside', { class: 'walk__aside', id: 'walk-aside', 'aria-label': 'What was kept, and notes' })),
+      h('div', { id: 'walk-foot' })));
+    paintWalk(true);
+  } else {
+    const campIds = [...CAMP_IDS, ...Object.keys(run.camps || {}).filter((id) => !CAMP_IDS.includes(id))];
+    for (const id of campIds) {
+      const camp = run.camps && run.camps[id], refCamp = ref && ref.camps && ref.camps[id];
+      if (!camp && !refCamp) continue;
+      const parts = partsOf(run, id), refParts = partsOf(ref, id);
+      const box = h('div', { class: 'camp' }, h('h3', { text: CAMP_NAMES[id] || id }),
+        h('p', { class: 'hint', text: (camp && camp.done ? `Reached ${when(camp.done)}.` : camp ? 'Started, not finished.' : 'Not reached.') + (id === PRIVATE_CAMP ? ' This camp is private: nothing in it is ever public.' : '') }));
+      for (const s of stagesOf(run, ref, id)) {
+        const notes = notesFor(rec.id, `${id}/${s.id}`);
+        box.append(h('div', { class: 'stage' }, h('h4', { text: s.title }),
+          h('div', { class: 'pair' + (ref ? ' pair--two' : '') }, side(parts[s.id], ref ? name : ''), ref ? Object.assign(side(refParts[s.id], `Reference: ${String(ref.handle || '')}`), { className: 'side side--ref' }) : null),
+          notes.length ? h('div', { class: 'notes' }, h('h4', { class: 'notes__h', text: 'Readers’ notes' }), notes.map((n) => h('article', { class: 'note' }, h('p', { class: 'note__by' }, h('b', { text: n.by }), ` · ${when(n.at)}`), h('p', { class: 'note__text', text: n.text })))) : null));
+      }
+      el.append(box);
+    }
+  }
+  el.append(notesBox(rec.id, '', `Readers’ notes on ${name}’s walk as a whole`));
+}
+
 /* ---------- start ---------- */
-function paintAll() { paintKey(); paintShares(); paintRuns(); paintRead(); }
+function paintAll() { paintKey(); paintShares(); paintRuns(); paintRead(); paintShare(); document.body.classList.toggle('has-key', !!state.key); }
 
 async function start() {
+  const hour = new Date().getHours();
+  $('hello').textContent = hour < 5 ? 'Still up?' : hour < 12 ? 'Good morning.' : hour < 18 ? 'Good afternoon.' : 'Good evening.';
   try {
     [state.key, state.stewards, state.runs, state.ref] = [await db.get('key') || null, await db.get('stewards') || null, await db.runs() || [], await db.get('ref') || null];
     state.hasBackup = !!(await db.get('backup'));
+    for (const rec of await db.notes() || []) state.noteRecs.set(rec.id, rec);
   } catch (e) {
     $('key').append(h('p', { class: 'callout callout--bad', text: 'This browser will not let the page keep anything (a private window, perhaps). The desk needs to keep the key here, so open it in an ordinary window.' })); return;
   }
   paintAll();                                                                          // usable at once, with or without a connection
-  await reopenAll(); paintRuns();
+  await reopenAll(); await openNotes(); paintRuns(); paintRead(); paintShare();
   try {
     const res = await fetch(new URL('../config.json', import.meta.url), { cache: 'no-cache' }), cfg = res.ok ? await res.json() : null;
     if (cfg) { state.config = { publicKey: cfg.publicKey || null, kid: cfg.publicKey ? (await importPublicKey(cfg.publicKey)).kid : '', repo: typeof cfg.repo === 'string' ? cfg.repo : '', required: !(cfg.moderation && cfg.moderation.required === false), label: cfg.moderation && typeof cfg.moderation.approvalLabel === 'string' && cfg.moderation.approvalLabel ? cfg.moderation.approvalLabel : 'trail:approved' }; paintKey(); paintRuns(); }

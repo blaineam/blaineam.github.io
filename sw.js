@@ -3,6 +3,9 @@
  * - Pages: network first, so a visitor online always gets the current page; the saved copy is the fallback.
  * - Everything else on this origin (styles, scripts, images, data): served from the saved copy at once and
  *   refreshed in the background, so the next visit has the new one.
+ * - Data a page asks for with `cache: 'no-cache'` (the trail register and its lights, the trail's settings):
+ *   network first, like a page. The page said it wants today's copy, and a list that only catches up on the
+ *   visit after next looks broken. The saved copy is still the fallback with no connection.
  * - After the first visit the page asks this worker to "warm" the cache: every page of the site plus its
  *   styles, scripts, small data files and the home page's thumbnails, listed in /offline-files.json (written
  *   by scripts/build-offline.mjs). Full-size photographs, panoramas, app screenshots and audio are large
@@ -60,12 +63,24 @@ async function file(request, event) {
   return fresh;
 }
 
+/* A file the page asked for fresh: the network's copy if it comes in time, else the saved one. */
+async function live(request) {
+  const cache = await caches.open(FILES);
+  try {
+    const res = await Promise.race([fetch(request), new Promise((_, no) => setTimeout(() => no(new Error('slow')), 6000))]);
+    if (good(res)) cache.put(request, res.clone());
+    return res;
+  } catch (e) {
+    return (await cache.match(request)) || (await cache.match(request, { ignoreSearch: true })) || Response.error();
+  }
+}
+
 self.addEventListener('fetch', (event) => {
   const req = event.request;
   if (req.method !== 'GET' || req.headers.has('range')) return;
   const url = new URL(req.url);
   if (url.origin !== self.location.origin || skip(url) || url.searchParams.has('wm')) return;   // ?wm= : the page is filling the opt-in media cache itself
-  event.respondWith(req.mode === 'navigate' ? page(req) : file(req, event));
+  event.respondWith(req.mode === 'navigate' ? page(req) : req.cache === 'no-cache' || req.cache === 'reload' ? live(req) : file(req, event));
 });
 
 /* Save the whole site's pages and small files, a few at a time, without getting in the visitor's way. */

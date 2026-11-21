@@ -31,7 +31,7 @@
  * the body, makes the envelope fail to open.
  */
 
-import { clean, checkName, checkPublic, rude } from './manners.js?v=d7f2dad4';
+import { clean, checkName, checkPublic, rude } from './manners.js?v=d0703ed6';
 
 const subtle = globalThis.crypto.subtle;
 const te = new TextEncoder(), td = new TextDecoder('utf-8', { fatal: true });
@@ -334,7 +334,7 @@ export function publicPart(run, choices = {}) {
     let here = 0; const parts = own(camp, 'parts');
     if (parts && typeof parts === 'object') for (const k of Object.keys(parts)) {
       const p = parts[k]; if (!p || typeof p !== 'object') continue;
-      ms += tally(own(p, 'ms')); here += tally(own(p, 'hints')); restarts += tally(own(p, 'resets')) + tally(own(p, 'retries'));
+      ms += tally(own(p, 'ms')); here += Math.max(tally(own(p, 'hints')), tally(own(p, 'asks')));   /* asks: every press of the button (newer runs); hints: how many different hints were given */ restarts += tally(own(p, 'resets')) + tally(own(p, 'retries'));
     }
     out.hints[id] = Math.round(here); hints += here; counted++;
   }

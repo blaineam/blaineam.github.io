@@ -10,6 +10,9 @@ name: Trail register
 # This repository and its logs are public. The script reads only the public block of an issue,
 # never the sealed one, and prints counts only.
 #
+# Once an issue carries the approval label, "trail-checked" or "trail-remove" the script closes it,
+# so the open trail issues are the ones nobody has read yet. Closing is not one of the triggers below.
+#
 # Issue text is hostile input. Nothing from an issue is ever placed into a `run:` line here:
 # the `if:` below only compares it, and the script fetches the issues itself through the API.
 #
@@ -26,7 +29,7 @@ on:
 
 permissions:
   contents: write      # commit the two JSON files
-  issues: read
+  issues: write        # close a trail issue once a person has dealt with it
   actions: write       # ask the Pages workflow to publish them (last step)
 
 concurrency:

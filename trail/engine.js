@@ -6,9 +6,9 @@
  *   { id, name, sub, intro, stages: [{ id, label, hints, mount(el, ctx) }], tally(parts) }
  * See trail/README.md for the contract a stage gets (ctx). */
 
-import { checkName, checkWritten, clean } from './manners.js?v=d7f2dad4';
-import { drawMap as drawTrail, vignette, luma } from './scenery.js?v=d7f2dad4';
-import { t } from './words.js?v=d7f2dad4';
+import { checkName, checkWritten, clean } from './manners.js?v=d0703ed6';
+import { drawMap as drawTrail, vignette, luma } from './scenery.js?v=d0703ed6';
+import { t } from './words.js?v=d0703ed6';
 const lower = (name) => name.charAt(0).toLowerCase() + name.slice(1);                 // "The Summit" → "the Summit", "Le Sommet" → "le Sommet"
 
 const $ = (id) => document.getElementById(id);
@@ -28,7 +28,7 @@ export function h(tag, attrs, ...kids) {
 }
 
 /* ---------- the run: everything that is kept ---------- */
-let run = null, CAMPS = [], NAMES = [], clock = 0, leave = [], stageHints = null, leaving = false;
+let run = null, CAMPS = [], NAMES = [], clock = 0, leave = [], stageHints = null, leaving = false, jot = () => {};
 try { run = JSON.parse(localStorage.getItem(KEY) || 'null'); } catch (e) { /* private window: play without saving */ }
 const save = () => { try { localStorage.setItem(KEY, JSON.stringify(run)); } catch (e) { /* fine */ } };
 const campData = (id) => (run.camps[id] = run.camps[id] || { parts: {} });
@@ -59,7 +59,7 @@ const SCENES = { trailhead: 'trail', workshop: 'bench', shelter: 'hut', overlook
 const TIMES = { trailhead: 'day', workshop: 'dusk', shelter: 'dusk', overlook: 'night', summit: 'dusk' };
 const campOf = (id) => CAMPS.find((c) => c.id === id);
 function tick() { if (clock && run.at && run.at.stage !== 'done') part(run.at.camp, run.at.stage).ms += Date.now() - clock; clock = Date.now(); }
-function clearStage() { leave.forEach((fn) => { try { fn(); } catch (e) { /* a camp's own clean-up must not stop the walk */ } }); leave = []; stageHints = null; $('stage').textContent = ''; }
+function clearStage() { jot = () => {}; leave.forEach((fn) => { try { fn(); } catch (e) { /* a camp's own clean-up must not stop the walk */ } }); leave = []; stageHints = null; $('stage').textContent = ''; }
 
 /* Going back: any finished stage (or an earlier camp's patch) can be opened again to mend a slip.
  * Where the hiker had got to is remembered, and they are taken back there afterwards. */
@@ -98,6 +98,7 @@ function show(campId, stageId, quiet) {
     data, seed: run.seed, hiker: run.handle, reduced, save,
     rng: (salt) => rng((run.seed ^ hash(campId + '/' + stageId + '/' + (salt || ''))) >>> 0),
     say: (text, good) => {
+      if (text) jot('s', String(text).slice(0, 240), good ? 1 : 0);
       say.textContent = text || ''; say.classList.toggle('is-good', !!good); stale = !!text;
       if (text) { const b = say.getBoundingClientRect(); if (b.bottom > innerHeight - 8 || b.top < 70) say.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'center' }); }
     },
@@ -107,16 +108,74 @@ function show(campId, stageId, quiet) {
     done: (delay) => {
       if (finished) return;
       // Manners: everything written at this stage is tidied, and rough language is turned back.
-      const refuse = (function scan(o) { for (const k in o) { const v = o[k]; if (typeof v === 'string') { o[k] = clean(v, 4000); const no = k !== 'aiHow' && checkWritten(o[k]); if (no) return no; } else if (v && typeof v === 'object') { const no = scan(v); if (no) return no; } } return null; })(data);
+      // (Not the step-by-step record: it is kept exactly as it happened, and is only ever read sealed.)
+      const refuse = (function scan(o) { for (const k in o) { if (o === data && k === 'log') continue; const v = o[k]; if (typeof v === 'string') { o[k] = clean(v, 4000); const no = k !== 'aiHow' && checkWritten(o[k]); if (no) return no; } else if (v && typeof v === 'object') { const no = scan(v); if (no) return no; } } return null; })(data);
       if (refuse) { data.rude = (data.rude || 0) + 1; save(); ctx.say(refuse); return; }
-      finished = true; tick(); data.done = true; save();
+      jot('d'); finished = true; tick(); data.done = true; save();
       if (run.resume) data.revisits = (data.revisits || 0) + 1;
       // someone who went back to mend a slip returns to where they had got to; everyone else walks on
       setTimeout(() => { const r = run.resume; if (r) resume(); else show(campId, at + 1 < camp.stages.length ? camp.stages[at + 1].id : 'done'); }, reduced ? Math.min(delay || 0, 500) : delay || 0);
     },
   };
   stage.mount(body, ctx);
+  record(card, data, say);
   if (!quiet) card.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'start' });
+}
+
+/* ---------- the steps of a stage, kept in order ----------
+ * Beside what a stage keeps for itself, the engine keeps a short list of what happened at it, so
+ * that whoever reads the run later can follow it step by step: what was written (and rewritten),
+ * what was chosen, which buttons were pressed, what the stage answered, and each time the guide
+ * was asked. It goes with the run, sealed, and is never part of anything public.
+ *
+ * data.log is a list of [tenths of a second spent at this stage so far, kind, …]:
+ *   ['o']                     the stage was opened (again, if this is not the first)
+ *   ['w', field, at, cut, text]  writing: from character `at`, `cut` characters went and `text` came
+ *   ['c', field, value, on]   a choice: a radio button, a tick box (on: 1 or 0) or a list
+ *   ['b', label]              a button pressed
+ *   ['s', text, good]         what the stage said back
+ *   ['l', text]               the guide was asked, and what the guide said
+ *   ['d']                     the stage was finished
+ * A field is named by what the stage keeps it as (data-k, set by keep() in camps/common.js), else
+ * its name, else '#' and its place among the stage's fields. */
+const LOG_MAX = 700, TEXT_MAX = 6000;
+function record(card, data, say) {
+  const log = Array.isArray(data.log) ? data.log : (data.log = []);
+  const now = () => Math.max(0, Math.round(((data.ms || 0) + (clock ? Date.now() - clock : 0)) / 100));
+  const add = (...e) => { if (log.length < LOG_MAX) log.push([now(), ...e]); };
+  const fields = () => [...card.querySelectorAll('textarea, input, select')];
+  const nameOf = (el) => el.dataset.k || el.name || '#' + fields().indexOf(el);
+  const isText = (el) => el.matches('textarea, input:not([type="radio"]):not([type="checkbox"]):not([type="range"]):not([type="file"]):not([type="password"])');
+  const was = new WeakMap(), waiting = new Map();
+  for (const el of fields()) if (isText(el)) was.set(el, el.value);
+  const flush = (el) => {
+    const w = waiting.get(el); if (w) { clearTimeout(w.timer); waiting.delete(el); }
+    const a = was.has(el) ? was.get(el) : '', b = el.value.slice(0, TEXT_MAX); if (a === b) return;
+    let p = 0; while (p < a.length && p < b.length && a[p] === b[p]) p++;
+    let q = 0; while (q < a.length - p && q < b.length - p && a[a.length - 1 - q] === b[b.length - 1 - q]) q++;
+    add('w', nameOf(el), p, a.length - p - q, b.slice(p, b.length - q)); was.set(el, b);
+  };
+  const flushAll = () => { for (const el of [...waiting.keys()]) flush(el); };
+  card.addEventListener('focusin', (e) => { if (isText(e.target) && !was.has(e.target)) was.set(e.target, e.target.value); }, true);
+  card.addEventListener('input', (e) => {
+    const el = e.target; if (!el.matches || !isText(el)) return;
+    const w = waiting.get(el) || { since: Date.now() }; clearTimeout(w.timer);
+    if (Date.now() - w.since > 6000) return flush(el);                // a long stretch of typing is kept in pieces
+    w.timer = setTimeout(() => flush(el), 1500); waiting.set(el, w);
+  }, true);
+  card.addEventListener('focusout', (e) => { if (waiting.has(e.target)) flush(e.target); }, true);
+  card.addEventListener('change', (e) => {
+    const el = e.target; if (!el.matches) return;
+    if (el.matches('input[type="radio"], select, input[type="range"]')) add('c', nameOf(el), String(el.value).slice(0, 80), 1);
+    else if (el.matches('input[type="checkbox"]')) add('c', nameOf(el), String(el.value).slice(0, 80), el.checked ? 1 : 0);
+  }, true);
+  card.addEventListener('click', (e) => {
+    const b = e.target.closest && e.target.closest('button, [role="button"], summary'); if (!b || !card.contains(b) || say.contains(b)) return;
+    flushAll(); add('b', (b.getAttribute('aria-label') || b.textContent || '').replace(/\s+/g, ' ').trim().slice(0, 60));
+  }, true);
+  jot = (...e) => { flushAll(); if (e.length) add(...e); };
+  leave.push(flushAll);
+  add('o');
 }
 
 /* ---------- Luma: hints, counted ---------- */
@@ -127,7 +186,10 @@ function askLuma() {
   let text = Array.isArray(list) ? list[Math.min(data.hints, list.length - 1)] : list;
   if (typeof text === 'function') text = text();
   if (!text) return;
-  if (!Array.isArray(list) || data.hints < list.length) { data.hints++; save(); }      // hearing the last hint again is free
+  // hints: how many different hints were given (hearing the last one again adds nothing). asks: every press of the button.
+  data.asks = (data.asks || 0) + 1; jot('l', String(text).slice(0, 240));
+  if (!Array.isArray(list) || data.hints < list.length) data.hints++;
+  save();
   $('luma-text').textContent = text; $('luma-say').hidden = false; $('luma-ask').setAttribute('aria-expanded', 'true');
 }
 
@@ -191,7 +253,7 @@ export function start(camps, names) {
     save(); begin(true);
   });
   matchMedia('(max-width: 720px)').addEventListener('change', drawMap);
-  window.addEventListener('pagehide', () => { if (run && run.at && !leaving) { tick(); save(); } });
+  window.addEventListener('pagehide', () => { if (run && run.at && !leaving) { jot(); tick(); save(); } });
   drawMap();
   if (run && run.handle && run.v === 2) begin();
 }

@@ -12,8 +12,8 @@
  * Settings come from trail/config.json. Until a public key is there, sending is "not open yet"
  * and the hiker can still save the run as a file.
  */
-import { t } from './words.js?v=d7f2dad4';
-import { sealRun, publicPart, buildIssueUrl, importPublicKey, nameProblem, lineProblem, LIMITS } from './seal.js?v=d7f2dad4';   // nameProblem/lineProblem are manners.js's checkName/checkPublic, plus a few disguises
+import { t } from './words.js?v=d0703ed6';
+import { sealRun, publicPart, buildIssueUrl, importPublicKey, nameProblem, lineProblem, LIMITS } from './seal.js?v=d0703ed6';   // nameProblem/lineProblem are manners.js's checkName/checkPublic, plus a few disguises
 
 function h(tag, attrs, ...kids) {
   const e = document.createElement(tag);
@@ -22,7 +22,7 @@ function h(tag, attrs, ...kids) {
   return e;
 }
 let styled = false;
-function style() { if (styled) return; styled = true; document.head.append(h('link', { rel: 'stylesheet', href: new URL('./plumbing.css?v=d7f2dad4', import.meta.url).href })); }
+function style() { if (styled) return; styled = true; document.head.append(h('link', { rel: 'stylesheet', href: new URL('./plumbing.css?v=d0703ed6', import.meta.url).href })); }
 
 /** Reads trail/config.json. Returns { open, key, kid, repo, email, why }; never throws. */
 export async function loadConfig(url = new URL('./config.json', import.meta.url)) {
@@ -203,7 +203,7 @@ export function mountSend(el, { run, save = () => {}, hiker } = {}) {
     h('h3', { id: `${uid}-h`, text: t('Send your run, if you would like to') }),
     h('p', { text: t('Your run has stayed on this device the whole way. Sending it is up to you. Leaving every box empty and closing the tin is a complete ending too: you still walked the trail.') }),
     h('div', { class: 'send__truth' },
-      h('p', null, h('strong', { text: t('Encrypted:') + ' ' }), t('every answer, choice and campfire reflection, how you solved each puzzle, your first two choices below, and how to reach you. It is locked in this browser before it goes anywhere, and only the keeper of the trail holds the key. Today that is Blaine Miller. One day it may be four people he trusts, and it would take three of them together to open anything.')),
+      h('p', null, h('strong', { text: t('Encrypted:') + ' ' }), t('every answer, choice and campfire reflection, how you went about each stage step by step (what you wrote and then changed, what you pressed, and each time you asked {guide}), your first two choices below, and how to reach you. It is locked in this browser before it goes anywhere, and only the keeper of the trail holds the key. Today that is Blaine Miller. One day it may be four people he trusts, and it would take three of them together to open anything.')),
       h('p', null, h('strong', { text: t('Not encrypted:') + ' ' }), t('only what the preview below shows, and only if you choose to go on the register. If you send through GitHub, your GitHub name and the date are on the issue either way, because that is how GitHub works.'))),
     choices, profile,
     h('div', { class: 'send__pv' }, previewTitle, previewBox, previewNote),

@@ -792,7 +792,7 @@
  "down is level {n} with the flag": "下方是第 {n} 层，有旗子",
  "east": "东方",
  "empty": "空",
- "every answer, choice and campfire reflection, how you solved each puzzle, your first two choices below, and how to reach you. It is locked in this browser before it goes anywhere, and only the keeper of the trail holds the key. Today that is Blaine Miller. One day it may be four people he trusts, and it would take three of them together to open anything.": "你的每个回答、选择和篝火旁的思考，你解每道谜题的过程，你在下面的前两个选择，以及联系你的方式。它在离开之前就在这个浏览器里被锁上了，只有小径的守护人拿着钥匙。现在这个人是 Blaine Miller。将来可能是他信任的四个人，需要其中三人一起才能打开任何东西。",
+ "every answer, choice and campfire reflection, how you went about each stage step by step (what you wrote and then changed, what you pressed, and each time you asked {guide}), your first two choices below, and how to reach you. It is locked in this browser before it goes anywhere, and only the keeper of the trail holds the key. Today that is Blaine Miller. One day it may be four people he trusts, and it would take three of them together to open anything.": "你的每个回答、选择和篝火旁的思考，你一步步走过每个关卡的过程（你写下又改掉的内容、你按下的按钮，以及你每次向{guide}求助），你在下面的前两个选择，以及联系你的方式。它在离开之前就在这个浏览器里被锁上了，只有小径的守护人拿着钥匙。现在这个人是 Blaine Miller。将来可能是他信任的四个人，需要其中三人一起才能打开任何东西。",
  "fit it here": "装在这里",
  "fixed": "已修好",
  "fuel": "燃料",

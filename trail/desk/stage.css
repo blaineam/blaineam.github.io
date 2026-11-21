@@ -1,0 +1,27 @@
+/* One stage of the trail shown inside the reading desk (stage.html). The stage itself is drawn
+ * by the trail's own stylesheet; this is only the frame around it and the "follow along" bar. */
+html, body.wm.trail-page.desk-stage { margin: 0; padding: 0; background: transparent; min-height: 0; overflow: hidden; }
+body.desk-stage .trail { max-width: none; margin: 0; padding: 2px; }
+body.desk-stage .stage { animation: none; margin-bottom: 12px; }
+.desk-stage__wait, .desk-stage__note { margin: 0; padding: 14px 4px; color: var(--wm-faint); font-size: .95rem; }
+body.desk-stage .luma { margin: 0 0 12px; align-items: flex-start; }
+body.desk-stage .luma__say { border-radius: 4px 18px 18px 18px; align-items: center; gap: 12px; padding: 10px 16px 10px 10px; }
+.desk-stage__face .tr-luma { width: 44px; height: 44px; display: block; border-radius: 50%; box-shadow: none; }
+
+.desk-player { margin: 0; padding: 16px; border: 1px solid var(--wm-line); border-radius: 22px; background: var(--wm-surface); }
+.desk-player__row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.desk-player__row .wm-btn { min-height: 44px; padding: 0 1em; font-size: .9rem; }
+.desk-player__speed { display: inline-flex; align-items: center; gap: 8px; margin-left: auto; font-size: .86rem; font-weight: 600; color: var(--wm-soft); }
+.desk-player__speed select { width: auto; min-height: 44px; padding: 0 10px; border-radius: 12px; border: 1px solid var(--wm-line); background: var(--wm-bg-2); color: var(--wm-ink); font: inherit; }
+.desk-player input[type="range"] { width: 100%; margin: 14px 0 6px; accent-color: var(--wm-green, #5fd3b0); }
+.desk-player__now { min-height: 3.2em; margin: 0; color: var(--wm-ink); font: 500 1.05rem/1.5 var(--wm-serif); }
+.desk-player__now small { display: block; font: 600 .78rem/1.4 var(--wm-sans); letter-spacing: .04em; color: var(--wm-faint); }
+.desk-player__list { position: relative; margin: 10px 0 0; padding: 0; list-style: none; max-height: 15rem; overflow: auto; border-top: 1px solid var(--wm-line); }
+.desk-player__list li { margin: 0; }
+.desk-player__list button { display: grid; grid-template-columns: 5.5rem 1fr; gap: 10px; width: 100%; min-height: 40px; padding: 6px 8px; border: 0; border-radius: 10px; background: none; color: var(--wm-soft); font: 500 .9rem/1.4 var(--wm-sans); text-align: left; cursor: pointer; }
+.desk-player__list button:hover { background: var(--wm-surface-2); }
+.desk-player__list button i { font-style: normal; color: var(--wm-faint); font-variant-numeric: tabular-nums; }
+.desk-player__list .is-now button { background: color-mix(in srgb, var(--wm-green, #5fd3b0) 16%, transparent); color: var(--wm-ink); }
+.desk-player__list .is-later button { opacity: .55; }
+.desk-player__list .is-gap { padding: 4px 8px; font-size: .8rem; color: var(--wm-faint); font-style: italic; }
+.desk-touched { outline: 2px solid var(--wm-green, #5fd3b0); outline-offset: 3px; border-radius: 10px; }

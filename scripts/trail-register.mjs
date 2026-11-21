@@ -28,6 +28,11 @@
  *     takes the entry out ("restore me" puts it back; the latest of the two counts).
  *   - The label "trail-remove" on any of an account's trail issues takes that account out
  *     (only people with write access can label). "trail-checked" marks an entry as read.
+ *
+ * Tidying up: once a person has dealt with a trail issue (it carries the approval label,
+ * "trail-checked" or "trail-remove"), --ci closes it, so the open issues are the ones nobody has
+ * read yet. Closing changes nothing else: closed issues are read exactly like open ones, the
+ * sealed run stays where it is, and the hiker's "remove me" still works.
  *   - Trail names are not verified. When two accounts use the same name, the one whose claim is
  *     older (the lowest issue number carrying that name) keeps it bare; later ones get n: 2, 3…
  *
@@ -175,11 +180,22 @@ async function main(argv) {
   const issues = local ? await fromFolder(path.resolve(local)) : await fromGitHub(process.env.GITHUB_REPOSITORY, process.env.GITHUB_TOKEN);
   const { register, lights, stats } = buildRegister(issues, { requireApproval, approvalLabel });
   const a = await writeIfChanged(path.join(out, 'register.json'), register), b = await writeIfChanged(path.join(out, 'lights.json'), lights);
+  let closed = 0;
+  if (!local && process.env.GITHUB_TOKEN) for (const issue of issues) {
+    const labels = labelsOf(issue), body = typeof issue.body === 'string' ? issue.body : '';
+    if (issue.state !== 'open' || !Number.isInteger(issue.number)) continue;
+    if (!labels.includes('trail') && !body.slice(0, LIMITS.issueBody).includes(MARK.run)) continue;
+    if (!labels.includes(approvalLabel) && !labels.includes('trail-checked') && !labels.includes('trail-remove')) continue;
+    try {
+      const res = await fetch(`https://api.github.com/repos/${process.env.GITHUB_REPOSITORY}/issues/${issue.number}`, { method: 'PATCH', headers: { Accept: 'application/vnd.github+json', 'X-GitHub-Api-Version': '2022-11-28', 'User-Agent': 'trail-register', Authorization: `Bearer ${process.env.GITHUB_TOKEN}`, 'Content-Type': 'application/json' }, body: JSON.stringify({ state: 'closed', state_reason: 'completed' }) });
+      if (res.ok) closed++;
+    } catch (e) { /* tidying is a nicety: the register itself is already written */ }
+  }
   const rows = [['Issues read', stats.issues], ['Trail issues', stats.trail], ['Accounts', stats.accounts], ['Listed', stats.entries],
     [requireApproval ? 'Waiting to be read and approved' : 'Approval not required', requireApproval ? stats.waiting : '–'],
     ['Left by their own word', stats.removedByAuthor], ['Removed by label', stats.removedByLabel], ['Nothing public', stats.noPublicBlock],
     ['Refused: trail name not allowed', stats.refusedName], ['Refused: line not allowed', stats.refusedLine], ['Refused: not a valid public block', stats.refusedShape],
-    ['Shared names', stats.sharedNames]];
+    ['Shared names', stats.sharedNames], ['Read issues closed', closed]];
   console.log('trail register: ' + rows.map(([k, v]) => `${k}: ${v}`).join('; ') + `. ${a || b ? 'Files changed.' : 'Nothing changed.'}`);
   if (process.env.GITHUB_STEP_SUMMARY) {
     try { await appendFile(process.env.GITHUB_STEP_SUMMARY, `### Trail register\n\n| | |\n|---|---|\n${rows.map(([k, v]) => `| ${k} | ${v} |`).join('\n')}\n\n${a || b ? 'Files changed.' : 'Nothing changed.'}\n`); } catch (e) { /* the summary is a nicety */ }
