@@ -1,6 +1,6 @@
 // Renders songs off the main thread so the UI never stutters.
-import { render, renderAsync } from './lib/arrange.mjs?v=2ad173b0';
-import { encodeWav } from './lib/wav.mjs?v=2ad173b0';
+import { render, renderAsync } from './lib/arrange.mjs?v=3cab07a5';
+import { encodeWav } from './lib/wav.mjs?v=3cab07a5';
 
 // With `parallel`, the mix's channel effects (the reverbs: most of a render
 // where there's no JIT, as in Lockdown Mode) run at once on a few workers of
@@ -9,7 +9,7 @@ let pool = null, jobId = 0;
 const waiting = new Map();
 function fx(job) {
   pool ??= Array.from({ length: Math.min(4, Math.max(1, (navigator.hardwareConcurrency || 2) - 1)) }, () => {
-    const w = new Worker(new URL('./fx-worker.js?v=2ad173b0', import.meta.url), { type: 'module' });
+    const w = new Worker(new URL('./fx-worker.js?v=3cab07a5', import.meta.url), { type: 'module' });
     w.onmessage = (e) => { const p = waiting.get(e.data.jid); waiting.delete(e.data.jid); e.data.error ? p.reject(new Error(e.data.error)) : p.resolve(e.data.x); };
     w.onerror = (e) => { e.preventDefault?.(); for (const p of waiting.values()) p.reject(new Error(e.message || 'An effects worker stopped')); waiting.clear(); pool?.forEach((x) => x.terminate()); pool = null; };
     return w;

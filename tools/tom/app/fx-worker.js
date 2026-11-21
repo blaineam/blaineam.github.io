@@ -1,5 +1,5 @@
 // One channel of the mix's effects (echo + reverb), for worker.js's pool.
-import { channelFx } from './lib/arrange.mjs?v=2ad173b0';
+import { channelFx } from './lib/arrange.mjs?v=3cab07a5';
 
 self.onmessage = (e) => {
   const { jid, job } = e.data;
