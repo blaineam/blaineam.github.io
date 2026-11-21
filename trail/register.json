@@ -1,5 +1,48 @@
 {
   "v": 1,
   "note": "Self-reported by hikers who asked to be listed. Written by scripts/trail-register.mjs; do not edit by hand.",
-  "entries": []
+  "entries": [
+    {
+      "handle": "Blaine",
+      "camps": [
+        {
+          "id": "trailhead",
+          "done": "2026-11-20"
+        },
+        {
+          "id": "workshop",
+          "done": "2026-11-20"
+        },
+        {
+          "id": "shelter",
+          "done": "2026-11-21"
+        },
+        {
+          "id": "overlook",
+          "done": "2026-11-21"
+        },
+        {
+          "id": "summit",
+          "done": "2026-11-21"
+        }
+      ],
+      "minutes": 1023,
+      "hints": {
+        "trailhead": 1,
+        "workshop": 3,
+        "shelter": 0,
+        "summit": 0
+      },
+      "flags": {
+        "quiet": false,
+        "longWay": false,
+        "shortestWay": true,
+        "oneSitting": false,
+        "restarts": 0
+      },
+      "profile": {
+        "line": "A Believer, a dreamer and an adventurer who likes to solve puzzles in interesting ways!"
+      }
+    }
+  ]
 }

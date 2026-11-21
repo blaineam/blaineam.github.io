@@ -1,4 +1,9 @@
 {
   "v": 1,
-  "lights": []
+  "lights": [
+    {
+      "handle": "Blaine",
+      "camp": "summit"
+    }
+  ]
 }
