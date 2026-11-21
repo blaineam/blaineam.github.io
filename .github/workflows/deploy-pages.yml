@@ -70,6 +70,15 @@ jobs:
           CONTINGENCY_NOTE: ${{ secrets.CONTINGENCY_NOTE }}
         run: node scripts/build-site.mjs
 
+      # /shell is drawn by awk, and every machine has a different one: mawk on Debian and
+      # Ubuntu, gawk, BusyBox awk on routers, the one true awk on macOS and the BSDs. A slip
+      # that one of them minds (mawk refuses a local variable named like a function) breaks
+      # the script only there. This draws every screen with each of them before it ships.
+      - name: Check /shell on every awk
+        run: |
+          sudo apt-get install -y -qq mawk gawk busybox original-awk >/dev/null 2>&1 || echo "::warning::could not install every awk; testing the ones present"
+          sh scripts/tui-test.sh
+
       # Regenerates apps/apps-by-blaine-miller.jpg, every app's
       # apps/<slug>/assets/images/poster.jpg, and .poster-cache.json.
       # `--force` is intentional: we always re-run the hue-sampling

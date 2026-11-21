@@ -1352,6 +1352,10 @@ const TUI_UI = {
     'm.stopped': 'music stopped', 'm.stoppedwhy': 'music stopped: {1}', 'm.tuning': 'tuning in to Tom...',
     'm.vol': 'volume {1}%',
     'h.tm': 'time machine', 'h.now': 'back to now', 'h.fx': 'seasons', 'h.date': 'type a date', 'm.fxon': 'seasonal effects on', 'm.fxoff': 'seasonal effects off', 'm.baddate': 'not a date: {1}', 'contrib.y': '{1} contributions in {2}', 'gh.none': 'nothing on GitHub yet on this date', 'h.help': 'help', 'm.utf': 'other languages need a UTF-8 terminal',
+    'h.dot': 'dotfiles', 'dot.title': 'Install my dotfiles?',
+    'dot.p': 'For {1}: this saves {2} in your home folder (replacing an older copy) and adds one line to your shell startup files so new shells load it. The first time it loads it may install a few small tools.',
+    'dot.keys': 'y installs  /  any other key cancels',
+    'm.dotok': 'dotfiles installed: open a new shell to use them', 'm.dotfail': 'could not download the dotfiles', 'm.dotno': 'nothing was installed',
   },
   'zh-Hans': {
     t1: '概览', t2: '项目', t3: '经历', t4: '摄影', t5: '联系',
@@ -1373,6 +1377,7 @@ const TUI_UI = {
     'm.nonode': '播放音乐需要 node', 'm.noplayer': '找不到音频播放器', 'm.notmp': '无法创建临时文件夹',
     'm.stopped': '音乐已停止', 'm.stoppedwhy': '音乐已停止：{1}', 'm.tuning': '正在连接 Tom...', 'm.vol': '音量 {1}%',
     'h.tm': '时光机', 'h.now': '回到现在', 'h.fx': '节日效果', 'h.date': '输入日期', 'm.fxon': '节日效果已开启', 'm.fxoff': '节日效果已关闭', 'm.baddate': '不是有效日期：{1}', 'contrib.y': '{2} 年共 {1} 次贡献', 'gh.none': '这个日期还没有 GitHub 贡献', 'h.help': '帮助',
+    'h.dot': 'dotfiles', 'dot.title': '安装我的 dotfiles？', 'dot.p': '为 {1} 准备：这会将 {2} 保存到你的主目录（替换旧版本），并在 shell 启动文件中添加一行，让新的 shell 自动加载它。首次加载时可能会安装几个小工具。', 'dot.keys': 'y 安装  /  其他任意键取消', 'm.dotok': 'dotfiles 已安装：打开新的 shell 即可使用', 'm.dotfail': '无法下载 dotfiles', 'm.dotno': '未安装任何内容',
   },
   ja: {
     t1: '概要', t2: 'プロジェクト', t3: '経歴', t4: '写真', t5: '連絡先',
@@ -1394,6 +1399,7 @@ const TUI_UI = {
     'm.nonode': '音楽には node が必要です', 'm.noplayer': 'オーディオプレーヤーが見つかりません', 'm.notmp': '一時フォルダを作れません',
     'm.stopped': '音楽が止まりました', 'm.stoppedwhy': '音楽が止まりました：{1}', 'm.tuning': 'Tom に接続中...', 'm.vol': '音量 {1}%',
     'h.tm': 'タイムマシン', 'h.now': '現在に戻る', 'h.fx': '季節の演出', 'h.date': '日付を入力', 'm.fxon': '季節の演出をオンにしました', 'm.fxoff': '季節の演出をオフにしました', 'm.baddate': '日付ではありません：{1}', 'contrib.y': '{2}年のコントリビューション {1} 件', 'gh.none': 'この日付にはまだ GitHub の記録がありません', 'h.help': 'ヘルプ',
+    'h.dot': 'dotfiles', 'dot.title': '私の dotfiles をインストールしますか？', 'dot.p': '{1} さん向け：ホームフォルダに {2} を保存し（古いコピーは置き換えます）、新しいシェルで読み込まれるようにシェルの起動ファイルに1行追加します。初回の読み込み時にいくつかの小さなツールがインストールされることがあります。', 'dot.keys': 'y でインストール  /  他のキーでキャンセル', 'm.dotok': 'dotfiles をインストールしました：新しいシェルを開いてください', 'm.dotfail': 'dotfiles をダウンロードできませんでした', 'm.dotno': '何もインストールされませんでした',
   },
   de: {
     t1: 'Übersicht', t2: 'Projekte', t3: 'Erfahrung', t4: 'Fotografie', t5: 'Kontakt',
@@ -1415,6 +1421,7 @@ const TUI_UI = {
     'm.nonode': 'Musik braucht node', 'm.noplayer': 'kein Audioplayer gefunden', 'm.notmp': 'kein temporärer Ordner',
     'm.stopped': 'Musik gestoppt', 'm.stoppedwhy': 'Musik gestoppt: {1}', 'm.tuning': 'Tom wird eingestellt...', 'm.vol': 'Lautstärke {1} %',
     'h.tm': 'Zeitmaschine', 'h.now': 'zurück ins Jetzt', 'h.fx': 'Jahreszeiten', 'h.date': 'Datum tippen', 'm.fxon': 'Jahreszeiten-Effekte an', 'm.fxoff': 'Jahreszeiten-Effekte aus', 'm.baddate': 'kein Datum: {1}', 'contrib.y': '{1} Beiträge im Jahr {2}', 'gh.none': 'zu diesem Datum noch nichts auf GitHub', 'h.help': 'Hilfe',
+    'h.dot': 'dotfiles', 'dot.title': 'Meine dotfiles installieren?', 'dot.p': 'Für {1}: Dies speichert {2} im Home-Ordner (eine ältere Kopie wird ersetzt) und fügt den Shell-Startdateien eine Zeile hinzu, damit neue Shells es laden. Beim ersten Laden werden eventuell ein paar kleine Tools installiert.', 'dot.keys': 'y installiert  /  andere Taste bricht ab', 'm.dotok': 'dotfiles installiert: zum Nutzen neue Shell öffnen', 'm.dotfail': 'dotfiles konnten nicht geladen werden', 'm.dotno': 'nichts wurde installiert',
   },
   fr: {
     t1: 'Aperçu', t2: 'Projets', t3: 'Expérience', t4: 'Photographie', t5: 'Contact',
@@ -1436,6 +1443,7 @@ const TUI_UI = {
     'm.nonode': 'la musique nécessite node', 'm.noplayer': 'aucun lecteur audio trouvé', 'm.notmp': 'pas de dossier temporaire',
     'm.stopped': 'musique arrêtée', 'm.stoppedwhy': 'musique arrêtée : {1}', 'm.tuning': 'Tom s’accorde...', 'm.vol': 'volume {1} %',
     'h.tm': 'voyage dans le temps', 'h.now': 'retour au présent', 'h.fx': 'saisons', 'h.date': 'tapez une date', 'm.fxon': 'effets de saison activés', 'm.fxoff': 'effets de saison désactivés', 'm.baddate': 'date invalide : {1}', 'contrib.y': '{1} contributions en {2}', 'gh.none': 'rien encore sur GitHub à cette date', 'h.help': 'aide',
+    'h.dot': 'dotfiles', 'dot.title': 'Installer mes dotfiles ?', 'dot.p': 'Pour {1} : cela enregistre {2} dans votre dossier personnel (en remplaçant une ancienne copie) et ajoute une ligne à vos fichiers de démarrage du shell pour que les nouveaux shells le chargent. Au premier chargement, quelques petits outils peuvent être installés.', 'dot.keys': 'y installe  /  autre touche annule', 'm.dotok': 'dotfiles installés : ouvrez un nouveau shell pour les utiliser', 'm.dotfail': 'impossible de télécharger les dotfiles', 'm.dotno': 'rien n\'a été installé',
   },
   es: {
     t1: 'Resumen', t2: 'Proyectos', t3: 'Experiencia', t4: 'Fotografía', t5: 'Contacto',
@@ -1457,6 +1465,7 @@ const TUI_UI = {
     'm.nonode': 'la música necesita node', 'm.noplayer': 'no hay reproductor de audio', 'm.notmp': 'sin carpeta temporal',
     'm.stopped': 'música detenida', 'm.stoppedwhy': 'música detenida: {1}', 'm.tuning': 'sintonizando a Tom...', 'm.vol': 'volumen {1} %',
     'h.tm': 'máquina del tiempo', 'h.now': 'volver al presente', 'h.fx': 'temporadas', 'h.date': 'escribe una fecha', 'm.fxon': 'efectos de temporada activados', 'm.fxoff': 'efectos de temporada desactivados', 'm.baddate': 'fecha no válida: {1}', 'contrib.y': '{1} contribuciones en {2}', 'gh.none': 'aún nada en GitHub en esta fecha', 'h.help': 'ayuda',
+    'h.dot': 'dotfiles', 'dot.title': '¿Instalar mis dotfiles?', 'dot.p': 'Para {1}: esto guarda {2} en tu carpeta personal (reemplazando una copia anterior) y agrega una línea a tus archivos de inicio del shell para que los shells nuevos lo carguen. La primera vez que se cargue puede instalar algunas herramientas pequeñas.', 'dot.keys': 'y instala  /  otra tecla cancela', 'm.dotok': 'dotfiles instalados: abre un shell nuevo para usarlos', 'm.dotfail': 'no se pudieron descargar los dotfiles', 'm.dotno': 'no se instaló nada',
   },
   ko: {
     t1: '개요', t2: '프로젝트', t3: '경력', t4: '사진', t5: '연락처',
@@ -1478,6 +1487,7 @@ const TUI_UI = {
     'm.nonode': '음악을 들으려면 node가 필요합니다', 'm.noplayer': '오디오 플레이어가 없습니다', 'm.notmp': '임시 폴더를 만들 수 없습니다',
     'm.stopped': '음악이 멈췄습니다', 'm.stoppedwhy': '음악이 멈췄습니다: {1}', 'm.tuning': 'Tom에 연결하는 중...', 'm.vol': '볼륨 {1}%',
     'h.tm': '타임머신', 'h.now': '현재로 돌아가기', 'h.fx': '계절 효과', 'h.date': '날짜 입력', 'm.fxon': '계절 효과 켜짐', 'm.fxoff': '계절 효과 꺼짐', 'm.baddate': '날짜가 아닙니다: {1}', 'contrib.y': '{2}년 기여 {1}회', 'gh.none': '이 날짜에는 아직 GitHub 기록이 없습니다', 'h.help': '도움말',
+    'h.dot': 'dotfiles', 'dot.title': '제 dotfiles를 설치할까요?', 'dot.p': '{1} 님용: 홈 폴더에 {2}을(를) 저장하고(이전 사본은 교체됩니다) 새 셸이 이를 불러오도록 셸 시작 파일에 한 줄을 추가합니다. 처음 불러올 때 작은 도구 몇 개가 설치될 수 있습니다.', 'dot.keys': 'y 설치  /  다른 키 취소', 'm.dotok': 'dotfiles 설치됨: 새 셸을 열어 사용하세요', 'm.dotfail': 'dotfiles를 다운로드할 수 없습니다', 'm.dotno': '아무것도 설치되지 않았습니다',
   },
   'pt-BR': {
     t1: 'Visão geral', t2: 'Projetos', t3: 'Experiência', t4: 'Fotografia', t5: 'Contato',
@@ -1499,6 +1509,7 @@ const TUI_UI = {
     'm.nonode': 'a música precisa do node', 'm.noplayer': 'nenhum player de áudio encontrado', 'm.notmp': 'sem pasta temporária',
     'm.stopped': 'música parada', 'm.stoppedwhy': 'música parada: {1}', 'm.tuning': 'sintonizando o Tom...', 'm.vol': 'volume {1}%',
     'h.tm': 'máquina do tempo', 'h.now': 'voltar ao presente', 'h.fx': 'estações', 'h.date': 'digite uma data', 'm.fxon': 'efeitos sazonais ligados', 'm.fxoff': 'efeitos sazonais desligados', 'm.baddate': 'data inválida: {1}', 'contrib.y': '{1} contribuições em {2}', 'gh.none': 'ainda nada no GitHub nesta data', 'h.help': 'ajuda',
+    'h.dot': 'dotfiles', 'dot.title': 'Instalar meus dotfiles?', 'dot.p': 'Para {1}: isso salva {2} na sua pasta pessoal (substituindo uma cópia antiga) e adiciona uma linha aos seus arquivos de inicialização do shell para que novos shells o carreguem. Na primeira vez que carregar, pode instalar algumas ferramentas pequenas.', 'dot.keys': 'y instala  /  outra tecla cancela', 'm.dotok': 'dotfiles instalados: abra um novo shell para usá-los', 'm.dotfail': 'não foi possível baixar os dotfiles', 'm.dotno': 'nada foi instalado',
   },
   it: {
     t1: 'Panoramica', t2: 'Progetti', t3: 'Esperienza', t4: 'Fotografia', t5: 'Contatti',
@@ -1520,6 +1531,7 @@ const TUI_UI = {
     'm.nonode': 'la musica richiede node', 'm.noplayer': 'nessun lettore audio trovato', 'm.notmp': 'nessuna cartella temporanea',
     'm.stopped': 'musica ferma', 'm.stoppedwhy': 'musica ferma: {1}', 'm.tuning': 'sintonizzo Tom...', 'm.vol': 'volume {1}%',
     'h.tm': 'macchina del tempo', 'h.now': 'torna al presente', 'h.fx': 'stagioni', 'h.date': 'scrivi una data', 'm.fxon': 'effetti stagionali attivi', 'm.fxoff': 'effetti stagionali disattivi', 'm.baddate': 'data non valida: {1}', 'contrib.y': '{1} contributi nel {2}', 'gh.none': 'ancora niente su GitHub in questa data', 'h.help': 'aiuto',
+    'h.dot': 'dotfiles', 'dot.title': 'Installare i miei dotfiles?', 'dot.p': 'Per {1}: questo salva {2} nella tua cartella home (sostituendo una copia precedente) e aggiunge una riga ai file di avvio della shell così che le nuove shell lo carichino. Al primo caricamento potrebbe installare alcuni piccoli strumenti.', 'dot.keys': 'y installa  /  altro tasto annulla', 'm.dotok': 'dotfiles installati: apri una nuova shell per usarli', 'm.dotfail': 'impossibile scaricare i dotfiles', 'm.dotno': 'non è stato installato nulla',
   },
 };
 // these also go in upper case (tab names, panel headings); the renderer cannot upper-case Unicode
