@@ -34,7 +34,9 @@
   --ease: cubic-bezier(.2, .7, .2, 1);
   --pad: clamp(18px, 4.5vw, 56px);
   --max: 1180px;
-  --nav-h: 60px;
+  /* As a Home Screen app the page runs under the status bar: the bar grows by that much and keeps its buttons below it. */
+  --safe-t: env(safe-area-inset-top, 0px);
+  --nav-h: calc(60px + var(--safe-t));
 }
 
 /* Light: when the device asks for it (unless the visitor chose dark), or when the visitor chose it. */
@@ -117,7 +119,7 @@ html[data-view="photo"] #luma { order: -1; }
 .flow .btn--ghost:hover { border-color: var(--accent); }
 
 /* ---------- nav ---------- */
-.nav { position: fixed; inset: 0 0 auto; z-index: 40; height: var(--nav-h); display: flex; align-items: center; gap: 12px; padding: 0 max(var(--pad), env(safe-area-inset-right)) 0 max(var(--pad), env(safe-area-inset-left)); color: #fff; transition: background-color .35s, color .35s, box-shadow .35s; }
+.nav { position: fixed; inset: 0 0 auto; z-index: 40; height: var(--nav-h); display: flex; align-items: center; gap: 12px; padding: var(--safe-t) max(var(--pad), env(safe-area-inset-right)) 0 max(var(--pad), env(safe-area-inset-left)); color: #fff; transition: background-color .35s, color .35s, box-shadow .35s; }
 .nav.is-stuck { background: color-mix(in srgb, var(--bg) 82%, transparent); color: var(--ink); -webkit-backdrop-filter: blur(18px) saturate(160%); backdrop-filter: blur(18px) saturate(160%); box-shadow: 0 1px 0 var(--line); }
 .nav__brand { display: flex; align-items: center; gap: 10px; font-weight: 650; text-decoration: none; letter-spacing: -.01em; margin-right: auto; min-height: 44px; }
 .nav__brand img { width: 34px; height: 34px; border-radius: 50%; object-fit: cover; box-shadow: 0 0 0 1.5px rgba(255, 255, 255, .5); }

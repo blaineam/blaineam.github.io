@@ -14,6 +14,14 @@
   'use strict';
   var script = document.currentScript || document.querySelector('script[src*="shell.js"]');
   var active = (script && script.getAttribute('data-active')) || 'none';
+  // Opened from the Home Screen, the page runs under the status bar. Ask for the whole screen so
+  // the bar can tell how tall the status bar is (shell.css keeps its buttons below it).
+  try {
+    if (window.navigator.standalone || (window.matchMedia && window.matchMedia('(display-mode: standalone)').matches)) {
+      var vp = document.querySelector('meta[name="viewport"]');
+      if (vp && !/viewport-fit/.test(vp.content)) vp.content += ', viewport-fit=cover';
+    }
+  } catch (e) {}
   var LINKS = [
     ['apps', '/apps/', 'Apps'],
     ['tools', '/tools/', 'Tools'],
