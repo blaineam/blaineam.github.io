@@ -275,7 +275,7 @@
               <span class="faq-icon">▼</span>
             </button>
             <div class="faq-answer">
-              <p data-i18n="absolutely-enter-space-offers.202494">Absolutely! Enter Space offers a free 7-day trial with full access to every feature — no restrictions. This gives you plenty of time to connect your cloud accounts, set up syncs, and see how Enter Space fits into your workflow before deciding on a plan.</p>
+              <p data-i18n="absolutely-enter-space-offers.e9ad58">Absolutely! Enter Space offers a free 7-day trial with full access to every feature — no restrictions. This gives you plenty of time to connect your cloud accounts, set up syncs, and see how Enter Space fits into your workflow before deciding on a plan. The trial comes with the Monthly and Yearly subscriptions; the one-time Lifetime purchase has no trial.</p>
               <p data-i18n-html="if-you-run-into.07a3b1">If you run into any issues during your trial (or at any point after subscribing), please don't hesitate to <a href="#" class="obf-mail" data-u="enter-space" data-d="wemiller" data-t="com" style="color: var(--accent);">reach out to me</a>. I'm happy to help troubleshoot and resolve any problems. Fixing issues for you makes the app better for everyone.</p>
             </div>
           </div>
@@ -453,19 +453,13 @@
               <span class="faq-icon">▼</span>
             </button>
             <div class="faq-answer">
-              <p data-i18n="enter-space-is-a.3bcc75">Enter Space is a paid app — the entire app requires an active subscription or a one-time lifetime purchase to use. There is no free tier or partially unlocked mode. After your 7-day free trial, you can choose the plan that works best for you:</p>
-              <ul data-until>
-                <li data-i18n-html="monthly-7-99-month.4ec214"><strong>Monthly</strong> — $7.99/month (introductory) · $9.99/month after October 1</li>
-                <li data-i18n-html="yearly-29-99-year.5ce641"><strong>Yearly</strong> — $29.99/year (introductory) · $49.99/year after October 1</li>
-                <li data-i18n-html="lifetime-59-99-one.e3e850"><strong>Lifetime</strong> — $59.99 one-time (introductory) · $99.99 after October 1</li>
-              </ul>
-              <ul data-from hidden>
+              <p data-i18n="enter-space-is-a.143928">Enter Space is a paid app — the entire app requires an active subscription or a one-time lifetime purchase to use. There is no free tier or partially unlocked mode. Choose the plan that works best for you:</p>
+              <ul>
                 <li data-i18n-html="monthly-9-99-month.78e3f9"><strong>Monthly</strong> — $9.99/month</li>
                 <li data-i18n-html="yearly-49-99-year.bd7fc7"><strong>Yearly</strong> — $49.99/year</li>
                 <li data-i18n-html="lifetime-99-99-one.7c5e38"><strong>Lifetime</strong> — $99.99 one-time</li>
               </ul>
-              <p data-until data-i18n="the-current-introductory-pricing.c5d41c">The current introductory pricing is available for a limited time, and no additional sales are planned after this period. Pricing is subject to change as features and market conditions evolve. All plans — including subscriptions and the lifetime purchase — support Apple Family Sharing, so one purchase can cover your entire family.</p>
-              <p data-from hidden data-i18n="pricing-is-subject-to.3248b6">Pricing is subject to change as features and market conditions evolve. All plans — including subscriptions and the lifetime purchase — support Apple Family Sharing, so one purchase can cover your entire family.</p>
+              <p data-i18n="pricing-is-subject-to.3248b6">Pricing is subject to change as features and market conditions evolve. All plans — including subscriptions and the lifetime purchase — support Apple Family Sharing, so one purchase can cover your entire family.</p>
               <p data-i18n-html="us-prices-shown-the.000d77">US prices shown; the App Store shows yours. <a href="../pricing/">See plans and prices</a></p>
             </div>
           </div>
@@ -546,14 +540,6 @@
   </footer>
 
   <script src="../../app-showcase.js?v=bec2b426"></script>
-  <script>
-    // Enter Space's App Store prices change on 1 October 2026 (scheduled in App Store Connect).
-    (function () {
-      var after = Date.now() >= Date.parse('2026-10-01T00:00:00-07:00');
-      document.querySelectorAll('[data-until]').forEach(function (el) { el.hidden = after; });
-      document.querySelectorAll('[data-from]').forEach(function (el) { el.hidden = !after; });
-    })();
-  </script>
   <script>
     // Resolve obfuscated mailto links on first use (delegated: i18n.js re-renders the answers).
     (function () {

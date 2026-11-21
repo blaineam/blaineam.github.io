@@ -4,10 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pricing · Enter Space</title>
-  <meta name="description" content="Enter Space plans and prices: Monthly, Yearly or a one-time Lifetime purchase, a 7-day free trial, Family Sharing, and how it compares.">
+  <meta name="description" content="Enter Space plans and prices: Monthly, Yearly or a one-time Lifetime purchase, a 7-day free trial on subscriptions, Family Sharing, and how it compares.">
   <link rel="canonical" href="https://wemiller.com/apps/enter-space/pricing/">
   <meta property="og:title" content="Pricing · Enter Space">
-  <meta property="og:description" content="Enter Space plans and prices: Monthly, Yearly or a one-time Lifetime purchase, a 7-day free trial, Family Sharing, and how it compares.">
+  <meta property="og:description" content="Enter Space plans and prices: Monthly, Yearly or a one-time Lifetime purchase, a 7-day free trial on subscriptions, Family Sharing, and how it compares.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://wemiller.com/apps/enter-space/pricing/">
   <meta property="og:image" content="https://wemiller.com/apps/enter-space/assets/images/poster.jpg?v=168a5a94">
@@ -74,9 +74,6 @@
     .dp-closing .btn-buy, .dp-plan .btn-buy { background: var(--es-hero); color: #fff; box-shadow: 0 10px 28px var(--es-glow); }
     .es-trial { margin: 0 auto 0.6rem; text-align: center; font-size: 1.1rem; color: var(--text-primary); }
     .es-trial span { font-weight: 700; color: var(--primary-color); }
-    .es-deadline { margin: 0 auto 1.6rem; text-align: center; font-size: 0.95rem; color: var(--text-muted); }
-    .dp-plan-future { font-size: 0.88rem !important; color: var(--text-muted) !important; }
-    .dp-plan-future .strikethrough { font-weight: 600; }
     .es-assure { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem 1.4rem; margin: 1rem 0 0; padding: 0; list-style: none; font-size: 0.92rem; color: var(--text-secondary); }
     .es-assure li::before { content: "✓ "; color: var(--primary-color); font-weight: 700; }
     .dp-compare .check { color: var(--primary-color); font-weight: 700; }
@@ -129,28 +126,23 @@
     </header>
 
     <section class="dp-section" id="plans">
-      <p class="es-trial" data-i18n-html="start-with-a-free.00ecae">Start with a <span>free 7-day trial</span> — no commitment, full access to everything.</p>
-      <p class="es-deadline" data-until data-i18n="introductory-pricing-ends-october.6a18d0">Introductory pricing ends October 1. Prices go up after that, and no further sale is planned.</p>
+      <p class="es-trial" data-i18n-html="start-with-a-free.f6f5a5">Start with a <span>free 7-day trial</span> on Monthly or Yearly — no commitment, full access to everything.</p>
       <div class="dp-plans">
         <div class="dp-plan">
           <p class="dp-plan-name" data-i18n="monthly.d31edb">Monthly</p>
-          <p class="dp-price"><span data-until>$7.99</span><span data-from hidden>$9.99</span> <small data-i18n="per-month.d0e619">per month</small></p>
+          <p class="dp-price">$9.99 <small data-i18n="per-month.d0e619">per month</small></p>
           <p data-i18n="flexibility-to-subscribe-month.691daf">Flexibility to subscribe month-to-month</p>
-          <p class="dp-plan-future" data-until data-i18n-html="9-99-mo-after.983862"><span class="strikethrough">$9.99/mo</span> after Oct 1</p>
         </div>
         <div class="dp-plan is-featured">
           <span class="dp-plan-badge" data-i18n="best-value.ca89f1">Best Value</span>
           <p class="dp-plan-name" data-i18n="yearly.7622eb">Yearly</p>
-          <p class="dp-price"><span data-until>$29.99</span><span data-from hidden>$49.99</span> <small data-i18n="per-year.d412fe">per year</small></p>
-          <p data-until data-i18n="save-over-68-compared.2c1795">Save over 68% compared to monthly</p>
-          <p data-from hidden data-i18n="save-over-58-compared.69fd96">Save over 58% compared to monthly</p>
-          <p class="dp-plan-future" data-until data-i18n-html="49-99-yr-after.23b911"><span class="strikethrough">$49.99/yr</span> after Oct 1</p>
+          <p class="dp-price">$49.99 <small data-i18n="per-year.d412fe">per year</small></p>
+          <p data-i18n="save-over-58-compared.69fd96">Save over 58% compared to monthly</p>
         </div>
         <div class="dp-plan">
           <p class="dp-plan-name" data-i18n="lifetime.8d33f3">Lifetime</p>
-          <p class="dp-price"><span data-until>$59.99</span><span data-from hidden>$99.99</span> <small data-i18n="one-time-purchase.8ebbdc">one-time purchase</small></p>
+          <p class="dp-price">$99.99 <small data-i18n="one-time-purchase.8ebbdc">one-time purchase</small></p>
           <p data-i18n="pay-once-use-forever.87c60c">Pay once, use forever — no recurring fees</p>
-          <p class="dp-plan-future" data-until data-i18n-html="99-99-after-oct.c639b6"><span class="strikethrough">$99.99</span> after Oct 1</p>
         </div>
       </div>
       <p class="dp-fine" data-i18n="all-plans-support-apple.46b41c">All plans support Apple Family Sharing — one subscription covers your entire family.</p>
@@ -173,9 +165,9 @@
             <tr><th scope="col" data-i18n="feature.ad565d">Feature</th><th scope="col" class="is-us">Enter Space</th><th scope="col" data-i18n="cloudmounter.4cc61e">CloudMounter</th><th scope="col" data-i18n="mountain-duck.ed3961">Mountain Duck</th><th scope="col" data-i18n="file-browser-pro.9f260b">File Browser Pro</th></tr>
           </thead>
           <tbody>
-            <tr><th scope="row" data-i18n="price.3e8248">Price</th><td class="is-us"><strong data-until data-i18n="from-7-99-mo.03a4b7">From $7.99/mo</strong><strong data-from hidden data-i18n="from-9-99-mo.983d9e">From $9.99/mo</strong></td><td data-i18n="from-29-99-yr.cade10">From $29.99/yr</td><td data-i18n="49-per-platform.1269bc">$49 per platform</td><td data-i18n="14-99-per-platform.6a6139">$14.99 per platform</td></tr>
+            <tr><th scope="row" data-i18n="price.3e8248">Price</th><td class="is-us"><strong data-i18n="from-9-99-mo.983d9e">From $9.99/mo</strong></td><td data-i18n="from-29-99-yr.cade10">From $29.99/yr</td><td data-i18n="49-per-platform.1269bc">$49 per platform</td><td data-i18n="14-99-per-platform.6a6139">$14.99 per platform</td></tr>
             <tr><th scope="row" data-i18n="free-trial.11d1f9">Free Trial</th><td class="is-us" data-i18n-html="7-days.3723e6"><span class="check">✓</span> 7 days</td><td data-i18n-html="7-days.3723e6"><span class="check">✓</span> 7 days</td><td data-i18n-html="14-days.8ab0c3"><span class="check">✓</span> 14 days</td><td class="no"><span class="dp-sr" data-i18n="no.816c52">No</span></td></tr>
-            <tr><th scope="row" data-i18n="lifetime-option.06548a">Lifetime Option</th><td class="is-us"><span class="check">✓</span> <span data-until>$59.99</span><span data-from hidden>$99.99</span></td><td class="yes"><span class="dp-sr" data-i18n="yes.5397e0">Yes</span></td><td class="yes"><span class="dp-sr" data-i18n="yes.5397e0">Yes</span></td><td class="no"><span class="dp-sr" data-i18n="no.816c52">No</span></td></tr>
+            <tr><th scope="row" data-i18n="lifetime-option.06548a">Lifetime Option</th><td class="is-us"><span class="check">✓</span> $99.99</td><td class="yes"><span class="dp-sr" data-i18n="yes.5397e0">Yes</span></td><td class="yes"><span class="dp-sr" data-i18n="yes.5397e0">Yes</span></td><td class="no"><span class="dp-sr" data-i18n="no.816c52">No</span></td></tr>
             <tr><th scope="row">Family Sharing</th><td class="is-us yes"><span class="dp-sr" data-i18n="yes.5397e0">Yes</span></td><td class="no"><span class="dp-sr" data-i18n="no.816c52">No</span></td><td class="no"><span class="dp-sr" data-i18n="no.816c52">No</span></td><td class="no"><span class="dp-sr" data-i18n="no.816c52">No</span></td></tr>
             <tr><th scope="row" data-i18n="licensing.aa636d">Licensing</th><td class="is-us"><strong data-i18n="universal-purchase.f89ab1">Universal purchase</strong></td><td data-i18n="mac-only.858ac5">Mac only</td><td data-i18n="mac-only.858ac5">Mac only</td><td data-i18n="per-platform.f37f69">Per platform</td></tr>
             <tr><th scope="row" data-i18n="iphone-ipad.0e7acd">iPhone &amp; iPad</th><td class="is-us yes"><span class="dp-sr" data-i18n="yes.5397e0">Yes</span></td><td class="no"><span class="dp-sr" data-i18n="no.816c52">No</span></td><td class="no"><span class="dp-sr" data-i18n="no.816c52">No</span></td><td class="yes"><span class="dp-sr" data-i18n="yes.5397e0">Yes</span></td></tr>
@@ -210,7 +202,7 @@
               <span class="faq-icon">▼</span>
             </button>
             <div class="faq-answer">
-              <p data-i18n="absolutely-enter-space-offers.202494">Absolutely! Enter Space offers a free 7-day trial with full access to every feature — no restrictions. This gives you plenty of time to connect your cloud accounts, set up syncs, and see how Enter Space fits into your workflow before deciding on a plan.</p>
+              <p data-i18n="absolutely-enter-space-offers.e9ad58">Absolutely! Enter Space offers a free 7-day trial with full access to every feature — no restrictions. This gives you plenty of time to connect your cloud accounts, set up syncs, and see how Enter Space fits into your workflow before deciding on a plan. The trial comes with the Monthly and Yearly subscriptions; the one-time Lifetime purchase has no trial.</p>
             </div>
           </div>
           <div class="faq-item">
@@ -219,19 +211,13 @@
               <span class="faq-icon">▼</span>
             </button>
             <div class="faq-answer">
-              <p data-i18n="enter-space-is-a.3bcc75">Enter Space is a paid app — the entire app requires an active subscription or a one-time lifetime purchase to use. There is no free tier or partially unlocked mode. After your 7-day free trial, you can choose the plan that works best for you:</p>
-              <ul data-until>
-                <li data-i18n-html="monthly-7-99-month.4ec214"><strong>Monthly</strong> — $7.99/month (introductory) · $9.99/month after October 1</li>
-                <li data-i18n-html="yearly-29-99-year.5ce641"><strong>Yearly</strong> — $29.99/year (introductory) · $49.99/year after October 1</li>
-                <li data-i18n-html="lifetime-59-99-one.e3e850"><strong>Lifetime</strong> — $59.99 one-time (introductory) · $99.99 after October 1</li>
-              </ul>
-              <ul data-from hidden>
+              <p data-i18n="enter-space-is-a.143928">Enter Space is a paid app — the entire app requires an active subscription or a one-time lifetime purchase to use. There is no free tier or partially unlocked mode. Choose the plan that works best for you:</p>
+              <ul>
                 <li data-i18n-html="monthly-9-99-month.78e3f9"><strong>Monthly</strong> — $9.99/month</li>
                 <li data-i18n-html="yearly-49-99-year.bd7fc7"><strong>Yearly</strong> — $49.99/year</li>
                 <li data-i18n-html="lifetime-99-99-one.7c5e38"><strong>Lifetime</strong> — $99.99 one-time</li>
               </ul>
-              <p data-until data-i18n="the-current-introductory-pricing.c5d41c">The current introductory pricing is available for a limited time, and no additional sales are planned after this period. Pricing is subject to change as features and market conditions evolve. All plans — including subscriptions and the lifetime purchase — support Apple Family Sharing, so one purchase can cover your entire family.</p>
-              <p data-from hidden data-i18n="pricing-is-subject-to.3248b6">Pricing is subject to change as features and market conditions evolve. All plans — including subscriptions and the lifetime purchase — support Apple Family Sharing, so one purchase can cover your entire family.</p>
+              <p data-i18n="pricing-is-subject-to.3248b6">Pricing is subject to change as features and market conditions evolve. All plans — including subscriptions and the lifetime purchase — support Apple Family Sharing, so one purchase can cover your entire family.</p>
               <p data-i18n="us-prices-shown-the.46666e">US prices shown; the App Store shows yours.</p>
             </div>
           </div>
@@ -303,13 +289,5 @@
   </footer>
 
   <script src="../../app-showcase.js?v=bec2b426"></script>
-  <script>
-    // Enter Space's App Store prices change on 1 October 2026 (scheduled in App Store Connect).
-    (function () {
-      var after = Date.now() >= Date.parse('2026-10-01T00:00:00-07:00');
-      document.querySelectorAll('[data-until]').forEach(function (el) { el.hidden = after; });
-      document.querySelectorAll('[data-from]').forEach(function (el) { el.hidden = !after; });
-    })();
-  </script>
 </body>
 </html>
