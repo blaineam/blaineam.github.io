@@ -12,7 +12,7 @@
  * checks can be skipped by someone determined. A word list cannot catch everything, crude
  * humour least of all, so anything public is also read by a person before it is shown. */
 
-import { t } from './words.js?v=3f0bc4fd';
+import { t } from './words.js?v=47c94598';
 
 // Stems, matched on whole words after undoing the usual disguises (f*ck, sh1t, a$$, fuuuck).
 const WORDS = ['fuck', 'fuk', 'fck', 'shit', 'sht', 'bullshit', 'bitch', 'btch', 'bastard', 'asshole', 'ass', 'arse', 'arsehole', 'dick', 'dickhead', 'cock', 'cunt', 'twat', 'pussy', 'prick', 'wank', 'wanker', 'jerkoff', 'piss', 'pissed', 'crap', 'damn', 'goddamn', 'slut', 'whore', 'hoe', 'skank', 'douche', 'douchebag', 'jackass', 'dumbass', 'dipshit', 'motherfucker', 'mofo', 'screw you', 'stfu', 'gtfo', 'wtf', 'lmfao', 'boobs', 'tits', 'titties', 'boner', 'porn', 'porno', 'nude', 'nudes', 'sexy', 'horny', 'milf', 'cum', 'jizz', 'fap', 'fart', 'poop', 'turd', 'butthole', 'penis', 'vagina', 'dildo', 'blowjob', 'handjob', 'rimjob', 'orgasm', 'anal', 'retard', 'retarded', 'spaz', 'fag', 'faggot', 'dyke', 'tranny', 'nigger', 'nigga', 'chink', 'spic', 'kike', 'gook', 'wetback', 'coon', 'paki', 'raghead', 'nazi', 'hitler', 'kys', 'kill yourself'];

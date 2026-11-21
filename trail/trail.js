@@ -1,7 +1,7 @@
 /* The Trail: which camps exist, in order. The engine (engine.js) does the walking; each camp is
  * its own module in camps/. A camp that fails to load is simply "not open yet" on the map. */
-import { start } from './engine.js?v=3f0bc4fd';
-import { t, loadWords } from './words.js?v=3f0bc4fd';
+import { start } from './engine.js?v=47c94598';
+import { t, loadWords } from './words.js?v=47c94598';
 
 await loadWords();                 // before any camp is imported: camps translate their words as they load
 
@@ -16,7 +16,7 @@ const NAMES = [
 
 const camps = [];
 for (const { id } of NAMES) {
-  try { camps.push((await import(`./camps/${id}.js?v=3f0bc4fd`)).default); }
+  try { camps.push((await import(`./camps/${id}.js?v=47c94598`)).default); }
   catch (e) { break; }                       // camps open in order: stop at the first one that is not there
 }
 start(camps, NAMES);
@@ -24,7 +24,7 @@ start(camps, NAMES);
 // The register: people who chose to sign it, and their lights on the map. Optional: the trail
 // works without it, and it shows nothing when nobody has signed.
 try {
-  const { mountRegister, drawLights } = await import('./book.js?v=3f0bc4fd');
+  const { mountRegister, drawLights } = await import('./book.js?v=47c94598');
   const { lights } = await mountRegister(document.getElementById('register'));
   const paint = () => { try { drawLights(lights); } catch (e) { /* the map still works without lights */ } };
   paint(); document.addEventListener('trail:map', paint);

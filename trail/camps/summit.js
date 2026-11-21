@@ -1,10 +1,10 @@
 /* Camp 5, the Summit: everything together, and the decision. One bad week to plan, a notice to
  * write, a vote to lose gracefully, a last fire, and then the register: sign it or do not. */
-import { h } from '../engine.js?v=3f0bc4fd';
-import { decisionStage, fireStage, useCss, keep } from './common.js?v=3f0bc4fd';
-import { t } from '../words.js?v=3f0bc4fd';
+import { h } from '../engine.js?v=47c94598';
+import { decisionStage, fireStage, useCss, keep } from './common.js?v=47c94598';
+import { t } from '../words.js?v=47c94598';
 
-useCss(new URL('./summit.css?v=3f0bc4fd', import.meta.url).href);
+useCss(new URL('./summit.css?v=47c94598', import.meta.url).href);
 
 /* ---------- 1: the week ----------
  * A real kind of week for someone looking after an app people rely on. There are more things
@@ -89,7 +89,11 @@ function register(el, ctx) {
     sendArea,
     h('button', { class: 'wm-btn', type: 'button', text: t('Close the tin'), onclick: () => ctx.done() }));
   // send.js asks the same three questions itself (and seals the run), so when it is there it takes over.
-  import('../send.js?v=3f0bc4fd').then((m) => { if (m.mountSend) { own.remove(); note.remove(); delete ctx.data.choices; m.mountSend(sendArea, { run: ctx.run, save: ctx.save, hiker: ctx.hiker }); } })
+  import('../send.js?v=47c94598').then((m) => { if (m.mountSend) {
+    // Anything ticked in the moment before send.js arrived is carried over, never dropped.
+    const send = (ctx.run.send = ctx.run.send && typeof ctx.run.send === 'object' ? ctx.run.send : {});
+    for (const k of ['pool', 'now', 'public']) if (c[k] === true) send[k] = true;
+    own.remove(); note.remove(); delete ctx.data.choices; m.mountSend(sendArea, { run: ctx.run, save: ctx.save, hiker: ctx.hiker }); } })
     .catch(() => { sendArea.append(h('p', { class: 'note', text: t('Sending a run is not open yet. Your choices are kept with your run on this device.') })); });
 }
 

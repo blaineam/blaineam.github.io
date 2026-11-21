@@ -8,8 +8,8 @@
  * checked again here and put on the page as text, never as HTML. When a file is missing or empty
  * the register just says nobody has signed yet.
  */
-import { sanitizePublic, CAMP_IDS } from './seal.js?v=3f0bc4fd';
-import { t, lang } from './words.js?v=3f0bc4fd';
+import { sanitizePublic, CAMP_IDS } from './seal.js?v=47c94598';
+import { t, lang } from './words.js?v=47c94598';
 
 const CAMP_NAMES = { trailhead: t('The Trailhead'), workshop: t('The Workshop'), shelter: t('The Shelter'), overlook: t('The Overlook'), summit: t('The Summit') };
 
@@ -20,7 +20,7 @@ function h(tag, attrs, ...kids) {
   return e;
 }
 let styled = false;
-function style() { if (styled) return; styled = true; document.head.append(h('link', { rel: 'stylesheet', href: new URL('./plumbing.css?v=3f0bc4fd', import.meta.url).href })); }
+function style() { if (styled) return; styled = true; document.head.append(h('link', { rel: 'stylesheet', href: new URL('./plumbing.css?v=47c94598', import.meta.url).href })); }
 
 async function getJson(url) {
   try { const res = await fetch(url, { cache: 'no-cache' }); return res.ok ? await res.json() : null; } catch (e) { return null; }
