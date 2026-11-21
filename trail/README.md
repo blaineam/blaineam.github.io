@@ -14,7 +14,7 @@ out of this repository on purpose.
 | `scenery.js` | Every drawing: the map, the scene at the top of a stage, the campfire. Luma is her own photograph (`luma.webp`) |
 | `manners.js` | Whether a piece of text is acceptable: no rudeness, and nothing promotional in anything public |
 | `seal.js`, `send.js`, `config.json` | Sealing a finished run to the owner's key and sending it without a server |
-| `register.js`, `register.json`, `lights.json` | The public register and the lights on the map, for people who chose to sign and were approved |
+| `book.js`, `book.json`, `lights.json` | The public register (not named "register": the site's firewall challenges any address with that word in it, so the browser could never load them) and the lights on the map, for people who chose to sign and were approved |
 | `desk/` | The readers' private desk: runs, reading them stage by stage, notes between readers, keys, shares. `desk/stage.html` shows one stage the way the hiker met it |
 | `words.js`, `guide.json` | Translation (`t()`), the hiker's language, and who the trail guide is today (written by the site build from `content/site.json`) |
 

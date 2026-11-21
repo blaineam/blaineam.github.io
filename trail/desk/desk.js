@@ -12,7 +12,7 @@
 import {
   generateKeyPair, exportPrivateKey, importPrivateKey, importPublicKey, sealRun, openRun, readEnvelope,
   readSealedBlock, readPublicBlock, inspectPublicBlock, publicPart, splitToShares, combineShares, decodeShare, CAMP_IDS, PRIVATE_CAMP, BEGIN,
-} from '../seal.js?v=d0703ed6';
+} from '../seal.js?v=3f0bc4fd';
 
 const $ = (id) => document.getElementById(id);
 function h(tag, attrs, ...kids) {

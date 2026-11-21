@@ -3,13 +3,13 @@
  *   const { entries, lights } = await mountRegister(el)    draws the register into el
  *   drawLights(lights)                                     puts the lights on the trail map
  *
- * Both files it reads (trail/register.json, trail/lights.json) are written by
+ * Both files it reads (trail/book.json, trail/lights.json) are written by
  * scripts/trail-register.mjs from what hikers chose to make public. Everything read from them is
  * checked again here and put on the page as text, never as HTML. When a file is missing or empty
  * the register just says nobody has signed yet.
  */
-import { sanitizePublic, CAMP_IDS } from './seal.js?v=d0703ed6';
-import { t, lang } from './words.js?v=d0703ed6';
+import { sanitizePublic, CAMP_IDS } from './seal.js?v=3f0bc4fd';
+import { t, lang } from './words.js?v=3f0bc4fd';
 
 const CAMP_NAMES = { trailhead: t('The Trailhead'), workshop: t('The Workshop'), shelter: t('The Shelter'), overlook: t('The Overlook'), summit: t('The Summit') };
 
@@ -20,7 +20,7 @@ function h(tag, attrs, ...kids) {
   return e;
 }
 let styled = false;
-function style() { if (styled) return; styled = true; document.head.append(h('link', { rel: 'stylesheet', href: new URL('./plumbing.css?v=d0703ed6', import.meta.url).href })); }
+function style() { if (styled) return; styled = true; document.head.append(h('link', { rel: 'stylesheet', href: new URL('./plumbing.css?v=3f0bc4fd', import.meta.url).href })); }
 
 async function getJson(url) {
   try { const res = await fetch(url, { cache: 'no-cache' }); return res.ok ? await res.json() : null; } catch (e) { return null; }
@@ -30,10 +30,10 @@ const shown = (e) => (e.n ? `${e.handle} ·${e.n}` : e.handle);
 
 /** Reads and re-checks both files. Never throws; missing files give empty lists. */
 export async function loadRegister(base = new URL('./', import.meta.url)) {
-  const [reg, lit] = await Promise.all([getJson(new URL('register.json', base)), getJson(new URL('lights.json', base))]);
+  const [reg, lit] = await Promise.all([getJson(new URL('book.json', base)), getJson(new URL('lights.json', base))]);
   return checkRegister(reg, lit);
 }
-/** The checking itself, apart from the fetching: (register.json, lights.json) as parsed → { entries, lights }. */
+/** The checking itself, apart from the fetching: (book.json, lights.json) as parsed → { entries, lights }. */
 export function checkRegister(reg, lit) {
   const entries = [];
   for (const raw of reg && Array.isArray(reg.entries) ? reg.entries.slice(0, 5000) : []) {

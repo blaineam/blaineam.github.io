@@ -3,7 +3,7 @@
  *
  *   node scripts/trail-register.mjs --ci                      read the issues of $GITHUB_REPOSITORY, write trail/*.json
  *   node scripts/trail-register.mjs --local <folder>          read sample issues (*.json) from a folder instead
- *                                   [--out <folder>]          where to write register.json and lights.json (default: trail/)
+ *                                   [--out <folder>]          where to write book.json and lights.json (default: trail/)
  *                                   [--config <file>]         moderation settings (default: trail/config.json)
  *
  * Every issue is treated as hostile. Only the public block of an issue is looked at, and it goes
@@ -179,7 +179,7 @@ async function main(argv) {
   } catch (e) { /* no config: the safe defaults stand */ }
   const issues = local ? await fromFolder(path.resolve(local)) : await fromGitHub(process.env.GITHUB_REPOSITORY, process.env.GITHUB_TOKEN);
   const { register, lights, stats } = buildRegister(issues, { requireApproval, approvalLabel });
-  const a = await writeIfChanged(path.join(out, 'register.json'), register), b = await writeIfChanged(path.join(out, 'lights.json'), lights);
+  const a = await writeIfChanged(path.join(out, 'book.json'), register), b = await writeIfChanged(path.join(out, 'lights.json'), lights);
   let closed = 0;
   if (!local && process.env.GITHUB_TOKEN) for (const issue of issues) {
     const labels = labelsOf(issue), body = typeof issue.body === 'string' ? issue.body : '';

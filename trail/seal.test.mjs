@@ -11,7 +11,7 @@ import { fileURLToPath } from 'node:url';
 import * as S from './seal.js';
 import { buildRegister, readEntry } from '../scripts/trail-register.mjs';
 import { checkName, checkPublic } from './manners.js';
-import { checkRegister } from './register.js';
+import { checkRegister } from './book.js';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const CANARY = 'CANARY';
@@ -415,9 +415,9 @@ test('the register script: local mode, twice, same bytes, quiet log', async () =
     for (const [i, one] of all.slice(12).entries()) await writeFile(path.join(src, `b-${String(i).padStart(2, '0')}.json`), JSON.stringify(one));
     await writeFile(path.join(src, 'broken.json'), '{ nope');
     const run = () => promisify(execFile)(process.execPath, [path.join(here, '../scripts/trail-register.mjs'), '--local', src, '--out', out]);
-    const first = await run(), a = await readFile(path.join(out, 'register.json'), 'utf8'), l = await readFile(path.join(out, 'lights.json'), 'utf8');
+    const first = await run(), a = await readFile(path.join(out, 'book.json'), 'utf8'), l = await readFile(path.join(out, 'lights.json'), 'utf8');
     const second = await run();
-    assert.equal(await readFile(path.join(out, 'register.json'), 'utf8'), a); assert.equal(await readFile(path.join(out, 'lights.json'), 'utf8'), l);
+    assert.equal(await readFile(path.join(out, 'book.json'), 'utf8'), a); assert.equal(await readFile(path.join(out, 'lights.json'), 'utf8'), l);
     assert.match(first.stdout, /Files changed\./); assert.match(second.stdout, /Nothing changed\./);
     assert.deepEqual(JSON.parse(a), buildRegister(all).register);
     for (const log of [first.stdout + first.stderr, second.stdout + second.stderr]) assert.ok(!/Robin|Mallory|Walker|user1|example|script|sh1t|bullsh|follow/i.test(log), 'the log names nobody: ' + log);

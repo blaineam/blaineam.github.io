@@ -17,7 +17,7 @@ import { fileURLToPath } from 'node:url';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const TRAIL = path.join(ROOT, 'trail'), check = process.argv.includes('--check');
-const DATA = new Set(['config.json', 'register.json', 'lights.json']);      // fetched fresh every time; never stamped
+const DATA = new Set(['config.json', 'book.json', 'lights.json']);      // fetched fresh every time; never stamped
 
 const all = [];
 (function walk(dir) { for (const f of fs.readdirSync(dir, { withFileTypes: true })) { const p = path.join(dir, f.name); if (f.isDirectory()) walk(p); else all.push(p); } })(TRAIL);

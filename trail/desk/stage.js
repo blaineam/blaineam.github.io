@@ -8,9 +8,9 @@
  *
  * Nothing here is saved or sent: the stage is given a copy, and "save" and "done" do nothing.
  * This frame never has the key. It talks only to the page that holds it, on this same site. */
-import { h, hash, rng, reduced } from '../engine.js?v=d0703ed6';
-import { vignette, luma } from '../scenery.js?v=d0703ed6';
-import { loadWords, guide } from '../words.js?v=d0703ed6';
+import { h, hash, rng, reduced } from '../engine.js?v=3f0bc4fd';
+import { vignette, luma } from '../scenery.js?v=3f0bc4fd';
+import { loadWords, guide } from '../words.js?v=3f0bc4fd';
 
 const $ = (id) => document.getElementById(id);
 const CAMPS = ['trailhead', 'workshop', 'shelter', 'overlook', 'summit'];
@@ -26,7 +26,7 @@ let leave = [], card = null, body = null, sayLine = null, events = [], at = 0, t
 async function show(msg) {
   clearInterval(timer); leave.forEach((fn) => { try { fn(); } catch (e) { /* fine */ } }); leave = [];
   const campId = CAMPS.includes(msg.camp) ? msg.camp : null; if (!campId) return tell({ type: 'none' });
-  let camp; try { camp = (await import(`../camps/${campId}.js?v=d0703ed6`)).default; } catch (e) { return tell({ type: 'none' }); }
+  let camp; try { camp = (await import(`../camps/${campId}.js?v=3f0bc4fd`)).default; } catch (e) { return tell({ type: 'none' }); }
   tell({ type: 'camp', id: campId, name: camp.name, stages: camp.stages.map((s) => ({ id: s.id, label: s.label, title: s.title || s.label })) });
   const idx = camp.stages.findIndex((s) => s.id === msg.stage), stage = camp.stages[idx];
   // the register is the hiker's own sending page (it would offer to seal and send): the desk shows those choices itself

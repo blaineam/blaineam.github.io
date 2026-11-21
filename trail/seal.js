@@ -31,7 +31,7 @@
  * the body, makes the envelope fail to open.
  */
 
-import { clean, checkName, checkPublic, rude } from './manners.js?v=d0703ed6';
+import { clean, checkName, checkPublic, rude } from './manners.js?v=3f0bc4fd';
 
 const subtle = globalThis.crypto.subtle;
 const te = new TextEncoder(), td = new TextDecoder('utf-8', { fatal: true });
