@@ -5,7 +5,7 @@ import { $, el } from './dom.js?v=65858b99';
 import { fmtNum, fmtPct, fmtClock, fmtDateTime, fmtAgo } from './format.js?v=86b54455';
 import { placeName, deviceLabel } from './entry.js?v=de62f770';
 import { shadowNote } from './wander.js?v=b40b3e3f';
-import { weightScale, weightFromScale, widthPx, legendText, fmtWeight, fmtBytes } from './weight.js?v=8da15ceb';
+import { weightScale, weightFromScale, widthPx, legendText, fmtWeight, fmtBytes } from './weight.js?v=7b9bc8df';
 
 const FEED_MAX = 60;
 
@@ -161,7 +161,9 @@ export function createInspector({ api, notify, onRule, names = null }) {
     R.action.className = 'act ' + action;
     R.action.textContent = action;
     const dest = lane ? lane.dest : e && e.dests && e.dests[0];
-    R.place.textContent = dest ? placeName(dest) : action === 'blocked' ? 'Blocked at home' : 'No destination';
+    // Traffic that came from outside is described by where it came from.
+    const inbound = lane ? lane.inbound : !!(e && e.inbound);
+    R.place.textContent = dest ? (inbound ? 'From ' : '') + placeName(dest) : action === 'blocked' ? 'Blocked at home' : 'No destination';
     const cl = lane ? lane.client : e.client;
     const nm = (e && e.device) || (names ? names.label(cl) : cl);
     R.device.textContent = nm && nm !== cl ? nm + '  ' + cl : cl;

@@ -3,8 +3,8 @@
 // (internal/traffic, internal/portal/api_traffic.go) owns the numbers;
 // nothing here estimates anything. Kept apart from trafficview.js so all
 // of it is unit-tested (test/traffic.test.js) with no DOM.
-import { fmtBytes } from './weight.js?v=8da15ceb';
-import { fmtBitsPerSecond } from './watch.js?v=79562f0e';
+import { fmtBytes } from './weight.js?v=7b9bc8df';
+import { fmtBitsPerSecond } from './watch.js?v=51704dfa';
 
 export { fmtBytes, fmtBitsPerSecond };
 
@@ -304,7 +304,44 @@ export function tileLabels(status) {
   if (!readingNow(s.router)) return { down: '', up: '', total: 'Total so far' };
   const src = s.router.source || 'your router';
   const word = (s.router.status || {}).estimated ? 'sampled' : 'measured';
+  // On the router itself the whole network's rate is read off the WAN port.
+  if (s.live_source === 'wan') return { down: 'measured at the WAN port', up: 'measured at the WAN port', total: 'Since Shepherd started reading' };
   return { down: word + ' from ' + src, up: word + ' from ' + src, total: 'Since Shepherd started reading' };
+}
+
+// A running total "since Shepherd started" starts again from nothing every
+// time Shepherd restarts, so the same afternoon can read 40 GB or 200 MB.
+// The stored history does not have that problem. These three turn it into a
+// fixed figure: what moved today, since midnight on the viewer's clock.
+
+// startOfToday is local midnight for the day containing nowMs.
+export function startOfToday(nowMs) {
+  const d = new Date(nowMs);
+  d.setHours(0, 0, 0, 0);
+  return d.getTime();
+}
+
+// todayTotals reads GET /api/traffic/top for today into the network total
+// and each device's own.
+export function todayTotals(top) {
+  const out = { down: 0, up: 0, byDevice: new Map() };
+  for (const d of (top && top.devices) || []) {
+    const down = Number(d.down) || 0;
+    const up = Number(d.up) || 0;
+    out.down += down;
+    out.up += up;
+    if (d.device_id) out.byDevice.set(d.device_id, { down, up });
+  }
+  return out;
+}
+
+// showWatchSection says whether the Watch mode card belongs on the screen.
+// It is a second way to measure, and offering it under figures that
+// already come from the router reads as something still to set up. It
+// stays while it is the one measuring, or when nothing else is.
+export function showWatchSection(status) {
+  const s = status || {};
+  return !!s.measuring || !readingNow(s.router);
 }
 
 // measurementNote is the one sentence under the live tiles saying how the
@@ -328,6 +365,11 @@ export function liveChartCaption(status, samples, pollMs) {
   const mins = Math.max(0.1, Math.round((samples * pollMs) / 6000) / 10);
   const span = 'The last ' + mins + ' minutes';
   if (!readingNow((status || {}).router)) return span + ', one sample every ' + Math.round(pollMs / 1000) + ' seconds.';
+  // Measured at the WAN port, the line is the network's real throughput,
+  // sampled as often as the screen asks.
+  if (status.live_source === 'wan') {
+    return span + ', measured at the WAN port, one sample every ' + Math.round(pollMs / 1000) + ' seconds.';
+  }
   const every = ((status.router.status || {}).interval_seconds) || 0;
   return span + '. Your ' + (status.router.source || 'router') + ' is read every ' + every
     + ' seconds, so the line steps rather than curves.';

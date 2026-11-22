@@ -5,37 +5,37 @@ import { $ } from './js/dom.js?v=65858b99';
 import { createApi } from './js/api.js?v=798e1c8c';
 import { startActivityReports } from './js/activity.js?v=bd3000e7';
 import { createDemoApi } from './js/demoapi.js?v=c182fda9';
-import { DemoGenerator, DEMO_HOME } from './js/demo.js?v=e0b32cdd';
+import { DemoGenerator, DEMO_HOME } from './js/demo.js?v=e4e37c65';
 import { normalizeEntry, destKey, placeName } from './js/entry.js?v=de62f770';
 import { LiveSource } from './js/sources.js?v=e6dc9a01';
 import { ReplaySource } from './js/replay.js?v=bb8a7a3f';
 import { ReplayClock } from './js/clock.js?v=8fa6af79';
-import { Model } from './js/model.js?v=dffd8884';
-import { weightScale, entryWeight } from './js/weight.js?v=8da15ceb';
+import { Model } from './js/model.js?v=c5d54bc0';
+import { weightScale, entryWeight } from './js/weight.js?v=7b9bc8df';
 import { validLatLon } from './js/geo.js?v=248f9f1a';
 import { fmtClock } from './js/format.js?v=86b54455';
-import { createDetails } from './js/details.js?v=be05806c';
-import { createTiles, createFeed, createFilters, createLegend, createInspector, createTimeline } from './js/hud.js?v=46a4d6db';
+import { createDetails } from './js/details.js?v=b1866f92';
+import { createTiles, createFeed, createFilters, createLegend, createInspector, createTimeline } from './js/hud.js?v=c68992a3';
 import { createToaster } from './js/ui.js?v=4d208003';
-import { createMgmt } from './js/mgmt.js?v=5495569c';
+import { createMgmt } from './js/mgmt.js?v=5493c5e5';
 import { createNameBook } from './js/names.js?v=e79e15ee';
 import { createPolicyStore } from './js/policystore.js?v=3aa33de9';
-import { createDevices } from './js/devices.js?v=80ebf5f8';
-import { createBlocking, createDevicePolicy } from './js/blocking.js?v=2b5e3d57';
-import { createUpstreams } from './js/upstreamsview.js?v=c815cc67';
-import { createBackend } from './js/backendview.js?v=62504c7e';
-import { createAlarms } from './js/alarmsview.js?v=1a59b17c';
-import { createVulnscan } from './js/vulnscanview.js?v=c4f21462';
-import { createNethealth } from './js/nethealthview.js?v=a3fe7afb';
-import { createWatch } from './js/watchview.js?v=85884493';
-import { createTraffic } from './js/trafficview.js?v=c079bcbe';
-import { createReverseProxy } from './js/reverseproxyview.js?v=6c2b28a1';
-import { createDhcp } from './js/dhcpview.js?v=14ad37d0';
-import { createHistory } from './js/historyview.js?v=a033ffd7';
-import { createAccountability } from './js/accountability.js?v=fdae881a';
-import { createDemoMgmt } from './js/demomgmt.js?v=42e68043';
-import { DEVICE_BY_IP } from './js/demodata.js?v=1f5ce92d';
-import { createLocking } from './js/lockingview.js?v=cab5fcf6';
+import { createDevices } from './js/devices.js?v=59d55f92';
+import { createBlocking, createDevicePolicy } from './js/blocking.js?v=9406fc24';
+import { createUpstreams } from './js/upstreamsview.js?v=17add3a0';
+import { createBackend } from './js/backendview.js?v=fc6376b2';
+import { createAlarms } from './js/alarmsview.js?v=47501170';
+import { createVulnscan } from './js/vulnscanview.js?v=b108fe97';
+import { createNethealth } from './js/nethealthview.js?v=928c11f7';
+import { createWatch } from './js/watchview.js?v=377b9966';
+import { createTraffic } from './js/trafficview.js?v=348b0dec';
+import { createReverseProxy } from './js/reverseproxyview.js?v=0ea59d8f';
+import { createDhcp } from './js/dhcpview.js?v=7427fa9d';
+import { createHistory } from './js/historyview.js?v=1a23f2a3';
+import { createAccountability } from './js/accountability.js?v=c8e7c24c';
+import { createDemoMgmt } from './js/demomgmt.js?v=57c4282e';
+import { DEVICE_BY_IP } from './js/demodata.js?v=b89cb40d';
+import { createLocking } from './js/lockingview.js?v=22b45a24';
 import { lockedURL, unlockedURL, signInOrder, autoTryPasskey, methodLabel } from './js/locking.js?v=198c7ce4';
 import { requestOptions, assertionJSON, ceremonyError } from './js/passkeys.js?v=0fe3526c';
 
@@ -743,7 +743,7 @@ async function initGlobe() {
   let map = null;
   if (params.get('nogl') !== '1') {
     try {
-      const { Globe, webglAvailable } = await import('./js/globe.js?v=155edfa1');
+      const { Globe, webglAvailable } = await import('./js/globe.js?v=77430ff7');
       if (webglAvailable()) map = new Globe($('#stage'), opts);
     } catch (err) {
       if (DEBUG) console.warn('3d globe unavailable:', err && err.message);
@@ -751,7 +751,7 @@ async function initGlobe() {
   }
   const flat = !map;
   if (flat) {
-    const { FlatMap, canvas2dAvailable } = await import('./js/flatmap.js?v=1f55b3c4');
+    const { FlatMap, canvas2dAvailable } = await import('./js/flatmap.js?v=2f6b93dc');
     if (!canvas2dAvailable()) throw new Error('no canvas');
     map = new FlatMap($('#stage'), opts);
     document.body.classList.add('flatmap');

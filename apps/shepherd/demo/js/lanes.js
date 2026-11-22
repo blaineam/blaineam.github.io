@@ -3,7 +3,7 @@
 // look visibly thicker than one-off lookups. Lanes live in fixed slots so the
 // renderer can map them onto instanced GPU buffers without reallocation.
 import { destKey } from './entry.js?v=de62f770';
-import { entryWeight, MODES } from './weight.js?v=8da15ceb';
+import { entryWeight, MODES } from './weight.js?v=7b9bc8df';
 import { latLonToVec3, greatCircleAngle, arcLift } from './geo.js?v=248f9f1a';
 
 const MAX_DOMAINS = 8;
@@ -81,7 +81,12 @@ export class LaneTable {
     const now = entry.t;
     for (let i = 0; i < n; i++) {
       const d = entry.dests[i];
-      const key = entry.client + '|' + destKey(d);
+      // Blocked traffic gets a lane of its own, so one place can show both
+      // what got through and what was turned away rather than flickering
+      // between the two colours.
+      // Traffic that came from outside is its own lane too: it travels the
+      // other way.
+      const key = entry.client + '|' + destKey(d) + (entry.action === 'blocked' ? '|blocked' : '') + (entry.inbound ? '|in' : '');
       let lane = this.byKey.get(key);
       if (!lane) {
         if (!this.free.length) this._evictOldest();
@@ -90,7 +95,7 @@ export class LaneTable {
           dest: { lat: d.lat, lon: d.lon, ip: d.ip, city: d.city, country: d.country },
           to: latLonToVec3(d.lat, d.lon),
           from: null, angle: 0, lift: 0,
-          action: entry.action, wandering: false, shadow: false, w: 0, wt: now, count: 0, bytes: 0,
+          action: entry.action, inbound: !!entry.inbound, wandering: false, shadow: false, w: 0, wt: now, count: 0, bytes: 0,
           first: now, last: now, lastName: entry.name, lastComet: -Infinity,
           domains: new Map(), created: true,
         };
@@ -146,4 +151,45 @@ export class LaneTable {
     for (const lane of this.removed) this._remove(lane);
     return this.removed;
   }
+}
+
+// A comet runs along a lane in the direction the traffic went. Most of it
+// leaves home for somewhere; what arrived from outside, such as a
+// connection the firewall turned away at the door, starts at its source
+// and runs home.
+//
+// Something turned away never got in, so its comet does not land at home
+// either. It stops short, against a dome around home that is only ever
+// seen by what breaks on it. DOME_ANGLE is the dome's radius as an angle
+// at the centre of the globe (about 900 km on the ground), big enough to
+// see with the whole planet in view.
+export const DOME_ANGLE = 0.14;
+
+// domeStop is how far along its lane a comet gets, from 0 to 1: all the
+// way, except for traffic from outside that was blocked. A lane shorter
+// than the dome is wide still shows half of its length.
+export function domeStop(lane) {
+  if (!(lane.inbound && lane.action === 'blocked')) return 1;
+  const angle = lane.angle || 0;
+  if (!(angle > 0)) return 1;
+  return 1 - Math.min(0.5, Math.max(0.05, DOME_ANGLE / angle));
+}
+
+// These two say which end is which, and where the comet stops, for the
+// globe (unit vectors) and the flat map (latitude and longitude).
+export function cometVectors(lane) {
+  const stop = domeStop(lane);
+  return lane.inbound ? { start: lane.to, end: lane.from, stop } : { start: lane.from, end: lane.to, stop };
+}
+
+export function cometLatLon(lane, home) {
+  const far = { lat: lane.dest.lat, lon: lane.dest.lon };
+  const near = { lat: home.lat, lon: home.lon };
+  const stop = domeStop(lane);
+  const start = lane.inbound ? far : near;
+  const end = lane.inbound ? near : far;
+  // Where it stops, going the short way round in longitude.
+  const dLon = ((end.lon - start.lon + 540) % 360) - 180;
+  const hit = { lat: start.lat + (end.lat - start.lat) * stop, lon: start.lon + dLon * stop };
+  return { start, end, stop, hit };
 }
