@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Own AI Server · Ari Helper</title>
+  <meta name="description" content="Step by step: turn a gaming PC with an NVIDIA graphics card into a private AI server for Ari Helper — Ollama for chat, vision and code, ComfyUI and LocalAI for pictures and video — reachable only over your own Tailscale network.">
+  <link rel="canonical" href="https://wemiller.com/apps/ari-helper/home-ai-server/">
+  <meta property="og:title" content="Your Own AI Server · Ari Helper">
+  <meta property="og:description" content="Step by step: turn a gaming PC with an NVIDIA graphics card into a private AI server for Ari Helper — Ollama for chat, vision and code, ComfyUI and LocalAI for pictures and video — reachable only over your own Tailscale network.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://wemiller.com/apps/ari-helper/home-ai-server/">
+  <meta property="og:image" content="https://wemiller.com/apps/ari-helper/assets/images/poster.jpg?v=d8b4e92f">
+  <meta name="apple-itunes-app" content="app-id=6480045555">
+  <link rel="stylesheet" href="../../app-showcase.css?v=353680bd">
+  <link rel="stylesheet" href="../../_shared/depth.css?v=1d90991e">
+  <style>
+    :root {
+      /* Ari Helper: the icon's pink-to-coral glow over a near-black plum night. */
+      --app-primary: #F093FB;
+      --app-secondary: #F5576C;
+      --app-accent: #FFA8A8;
+      --primary-color: #1A1419;
+      --secondary-color: #F5576C;
+      --ah-display-face: ui-serif, "New York", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+      --ah-text-face: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+      --ah-paper: #F7F3F1;
+      --ah-paper-2: #EFE8E5;
+      --ah-body: #3E353C;
+      --ah-quiet: #655A62;
+      --ah-rule: rgba(26, 20, 25, 0.14);
+      --ah-accent-ink: #B8283F;
+      --ah-ornament: linear-gradient(90deg, #F093FB, #F5576C);
+      --ah-shadow: drop-shadow(0 30px 40px rgba(26, 20, 25, 0.24)) drop-shadow(0 6px 10px rgba(26, 20, 25, 0.10));
+      --ah-hero-bg: radial-gradient(ellipse 70% 50% at 50% 0%, rgba(240, 147, 251, 0.22) 0%, transparent 65%), radial-gradient(ellipse 60% 45% at 50% 100%, rgba(245, 87, 108, 0.30) 0%, transparent 70%), linear-gradient(180deg, #0F0B12 0%, #19141C 100%);
+      --ah-hero-ink: #F6EFF4;
+      --ah-hero-kicker: #F7B4FC;
+      --ah-button: linear-gradient(120deg, #F093FB 0%, #F5576C 100%);
+      --ah-button-ink: #1A0E14;
+      --ah-button-glow: rgba(245, 87, 108, 0.35);
+      --ah-focus: #F7B4FC;
+      --ah-closing-bg: radial-gradient(ellipse 55% 60% at 50% 100%, rgba(245, 87, 108, 0.14) 0%, transparent 70%), var(--ah-paper-2);
+      --text-primary: #1A1419;
+      --glass-bg: rgba(247, 243, 241, 0.8);
+      --glass-border: rgba(26, 20, 25, 0.08);
+      --ah-measure: 1120px;
+      --bg-primary: var(--ah-paper);
+      --bg-secondary: var(--ah-paper-2);
+      --text-secondary: var(--ah-body);
+      --text-muted: var(--ah-quiet);
+      --glass-shadow: none;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --primary-color: #F7B4FC;
+        --ah-paper: #18131A;
+        --ah-paper-2: #211A23;
+        --ah-body: #E3DAE0;
+        --ah-quiet: #B0A4AD;
+        --ah-rule: rgba(243, 236, 241, 0.14);
+        --ah-accent-ink: #FF8A9A;
+        --ah-shadow: drop-shadow(0 30px 44px rgba(0, 0, 0, 0.55)) drop-shadow(0 6px 10px rgba(0, 0, 0, 0.30));
+        --ah-closing-bg: radial-gradient(ellipse 55% 60% at 50% 100%, rgba(245, 87, 108, 0.18) 0%, transparent 70%), var(--ah-paper-2);
+        --text-primary: #F3ECF1;
+        --glass-bg: rgba(24, 19, 26, 0.8);
+        --glass-border: rgba(243, 236, 241, 0.08);
+      }
+    }
+    :root { --bg-card: var(--ah-paper-2); --border-color: var(--ah-rule); }
+    body { background: var(--ah-paper); }
+    .nav-links .nav-link, .nav-links .btn-buy { white-space: nowrap; }
+    [hidden] { display: none !important; }
+    /* .dp-sr is position:absolute; without a positioned scroll box its static position in
+       off-screen table cells widened the mobile layout viewport to ~612px. */
+    .dp-table-wrap { position: relative; }
+    .dp-closing .btn-buy, .dp-plan .btn-buy { background: var(--ah-hero); color: #fff; box-shadow: 0 10px 28px var(--ah-glow); }
+    .dp-faq-group { scroll-margin-top: 80px; }
+    .faq-answer .dp-list { margin: 0.4rem 0 1.2rem; }
+    .faq-answer .dp-list li { font-size: 0.95rem; padding: 0.3rem 0; }
+    .faq-answer code { font-size: 0.85em; overflow-wrap: anywhere; }
+    .faq-answer a { color: var(--primary-color); }
+    .dp-closing .btn-buy, .dp-plan .btn-buy { background: var(--ah-button); color: var(--ah-button-ink); box-shadow: 0 10px 28px var(--ah-button-glow); }
+  </style>
+    <style>
+    .dp-header .guide-lede { max-width: 720px; margin: 0.75rem auto 1.25rem; padding: 0 1.25rem; color: var(--ah-hero-ink); opacity: 0.86; font-size: 1.08rem; line-height: 1.6; }
+    .guide { max-width: 820px; margin: 0 auto; padding: 0 1.25rem 4rem; color: var(--ah-body); line-height: 1.65; }
+    .guide h2 { font-family: var(--ah-display-face); color: var(--text-primary); margin: 3rem 0 0.75rem; font-size: 1.7rem; scroll-margin-top: 80px; }
+    .guide h3 { color: var(--text-primary); margin: 1.6rem 0 0.4rem; font-size: 1.1rem; }
+    .guide p, .guide li { font-size: 1rem; }
+    .guide ol, .guide ul { padding-left: 1.4rem; }
+    .guide li { margin: 0.35rem 0; }
+    .guide pre { background: var(--ah-paper-2); border: 1px solid var(--ah-rule); border-radius: 10px; padding: 0.85rem 1rem; overflow-x: auto; font-size: 0.85rem; line-height: 1.5; }
+    .guide code { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: 0.88em; overflow-wrap: anywhere; }
+    .guide pre code { overflow-wrap: normal; }
+    .guide a { color: var(--ah-accent-ink); }
+    .guide .note { border-left: 3px solid var(--app-secondary); background: var(--ah-paper-2); padding: 0.75rem 1rem; border-radius: 0 10px 10px 0; margin: 1.2rem 0; }
+    .guide table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.95rem; }
+    .guide th, .guide td { text-align: left; padding: 0.5rem 0.6rem; border-bottom: 1px solid var(--ah-rule); vertical-align: top; }
+    .guide-table-wrap { overflow-x: auto; }
+    .guide .step { display: inline-block; min-width: 1.8rem; height: 1.8rem; line-height: 1.8rem; text-align: center; border-radius: 50%; background: var(--ah-button); color: var(--ah-button-ink); font-size: 0.95rem; margin-right: 0.5rem; font-family: var(--ah-text-face); }
+  </style>
+</head>
+<body>
+  <nav class="app-nav">
+    <div class="nav-container">
+      <a href="../../" class="nav-logo nav-brand" title="← Apps" aria-label="← Apps"
+         data-i18n-attr="title:apps.2d61f2;aria-label:apps.2d61f2">
+        <span class="nav-brand-back" aria-hidden="true">←</span>
+        <img class="nav-brand-icon" src="../assets/images/icon.png?v=a2c46a74" alt="" width="60" height="60">
+        <span class="nav-brand-name">Ari Helper</span>
+      </a>
+      <button class="mobile-menu-toggle" aria-label="Menu">☰</button>
+      <ul class="nav-links">
+        <li><a href="../" class="nav-link" data-i18n="overview.0efc2e">Overview</a></li>
+        <li><a href="../features/" class="nav-link" data-i18n="features.fc338f">Features</a></li>
+        <li><a href="../pricing/" class="nav-link" data-i18n="pricing.a0d9bb">Pricing</a></li>
+        <li><a href="../faq/" class="nav-link" data-i18n="faq.03688b">FAQ</a></li>
+        <li><a href="https://apps.apple.com/us/app/ari-helper/id6480045555?pt=118981620&ct=wm-ari-helper-home-ai-server&mt=8" target="_blank" rel="noopener noreferrer" class="btn-buy">App Store</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main>
+    <header class="dp-header">
+      <p class="dp-eyebrow">Guide</p>
+      <h1>Turn your gaming PC into your own AI server</h1>
+      <p class="guide-lede">A gaming PC sits idle most of the day with one of the fastest AI chips you own inside it. This guide sets it up as a private server that Ari Helper on your iPhone, iPad and Mac can use for chat, vision, code, pictures and video. When you sit down to play, the PC is yours again.</p>
+      <ul class="dp-jumps">
+        <li><a href="#before">Before you start</a></li>
+        <li><a href="#tailscale">1 · Tailscale</a></li>
+        <li><a href="#ollama">2 · Ollama</a></li>
+        <li><a href="#comfyui">3 · ComfyUI</a></li>
+        <li><a href="#localai">4 · LocalAI</a></li>
+        <li><a href="#gaming">5 · Gaming time</a></li>
+        <li><a href="#trouble">Troubleshooting</a></li>
+      </ul>
+    </header>
+
+    <article class="guide">
+
+      <h2 id="before">Before you start</h2>
+      <p>You'll set up three free, open-source servers. Each one does a different job, and you only need the ones you want:</p>
+      <div class="guide-table-wrap">
+        <table>
+          <thead><tr><th>Server</th><th>What Ari uses it for</th><th>In Ari</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Ollama</strong></td><td>Chat, reading photos (vision) and writing code</td><td>Settings › Self-Hosted › Ollama</td></tr>
+            <tr><td><strong>ComfyUI</strong></td><td>Pictures and video clips, with full control over models and workflows</td><td>Settings › Self-Hosted › ComfyUI</td></tr>
+            <tr><td><strong>LocalAI</strong> <em>(optional)</em></td><td>An all-in-one server for chat, pictures and clips behind one address</td><td>Settings › Self-Hosted › LocalAI</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>What you need:</strong></p>
+      <ul>
+        <li>Windows 11 (or an up-to-date Windows 10) on the gaming PC.</li>
+        <li>An NVIDIA graphics card with at least 12 GB of video memory. A 24 GB card (RTX 3090, 3090 Ti, 4090, 5090) runs the larger models and video comfortably.</li>
+        <li>A current NVIDIA Game Ready or Studio driver.</li>
+        <li>About 150 GB free on an SSD. Models are large; video models especially.</li>
+        <li>Ari Helper on your iPhone, iPad or Mac.</li>
+      </ul>
+      <div class="note">
+        <strong>Privacy by design.</strong> Every server below listens only on the PC itself (<code>127.0.0.1</code>). The PC then shares them with your own devices over <a href="https://tailscale.com" rel="noopener noreferrer" target="_blank">Tailscale</a>, a private network that only devices signed in to your account can join. None of these servers has a password of its own, so never expose them to your home network or the internet. Ari's Fortress Mode treats Tailscale addresses as your own network, so all of this keeps working with Fortress Mode on.
+      </div>
+
+      <h2 id="tailscale"><span class="step">1</span>Join your devices with Tailscale</h2>
+      <ol>
+        <li>Install Tailscale on the gaming PC from <a href="https://tailscale.com/download" rel="noopener noreferrer" target="_blank">tailscale.com/download</a> and sign in.</li>
+        <li>Install Tailscale on your iPhone, iPad and Mac, and sign in with the <em>same</em> account.</li>
+        <li>In the Tailscale admin console, open <strong>DNS</strong> and make sure <strong>MagicDNS</strong> is on.</li>
+        <li>Find the PC's name in the Tailscale app. It looks like <code>gaming-pc.tail1234.ts.net</code>. You'll use it for every address in Ari below; this guide writes it as <code>YOUR-PC</code>.</li>
+      </ol>
+      <p>Open <strong>Terminal</strong> (or PowerShell) on the PC for the commands in this guide. The <code>tailscale</code> command is available once Tailscale is installed.</p>
+
+      <h2 id="ollama"><span class="step">2</span>Ollama: chat, vision and code</h2>
+      <ol>
+        <li>Download and run <strong>OllamaSetup.exe</strong> from <a href="https://ollama.com/download" rel="noopener noreferrer" target="_blank">ollama.com/download</a>. Ollama starts with Windows and listens on <code>127.0.0.1:11434</code>. Leave it that way: don't turn on any "expose to network" option and don't set <code>OLLAMA_HOST</code> to <code>0.0.0.0</code>.</li>
+        <li>So games get their video memory back quickly, make Ollama unload idle models after two minutes. Open <strong>Settings</strong>, search for <strong>environment variables</strong>, choose <strong>Edit environment variables for your account</strong> and add:
+          <pre><code>OLLAMA_KEEP_ALIVE = 2m</code></pre>
+          Then quit Ollama from the system tray and start it again from the Start menu.</li>
+        <li>Download some models. Good starting points for a 24 GB card (see <a href="https://ollama.com/library" rel="noopener noreferrer" target="_blank">ollama.com/library</a> for newer ones; on a 12–16 GB card pick the smaller sizes):
+          <pre><code>ollama pull gemma3:27b         # general chat that can also read photos
+ollama pull qwen2.5-coder:32b  # code
+ollama pull qwen2.5vl:7b       # fast photo and document reading</code></pre></li>
+        <li>Share Ollama with your devices over Tailscale:
+          <pre><code>tailscale serve --bg --tcp 11434 tcp://127.0.0.1:11434</code></pre></li>
+        <li>In Ari, open <strong>Settings › Self-Hosted › Ollama</strong>, enter <code>http://YOUR-PC:11434</code> and tap <strong>Validate Connection</strong>. Your models appear in the model menu.</li>
+      </ol>
+
+      <h2 id="comfyui"><span class="step">3</span>ComfyUI: pictures and video</h2>
+      <h3>Install</h3>
+      <ol>
+        <li>Download the portable NVIDIA build, <a href="https://github.com/Comfy-Org/ComfyUI/releases/latest/download/ComfyUI_windows_portable_nvidia.7z" rel="noopener noreferrer" target="_blank">ComfyUI_windows_portable_nvidia.7z</a>, and extract it with <a href="https://www.7-zip.org" rel="noopener noreferrer" target="_blank">7-Zip</a> to a short path such as <code>C:\AI\ComfyUI</code>.</li>
+        <li>Start it with <strong>run_nvidia_gpu.bat</strong> (in newer packages it's inside the <code>advanced</code> folder). Don't add <code>--listen</code>; ComfyUI should stay on <code>127.0.0.1:8188</code>.</li>
+        <li>Open <code>http://127.0.0.1:8188</code> in a browser on the PC to check it's running.</li>
+      </ol>
+      <h3>Add a picture model</h3>
+      <p>Put a checkpoint (a single <code>.safetensors</code> model file) in <code>ComfyUI\models\checkpoints</code>. An SDXL checkpoint, or an FP8 "all-in-one" FLUX checkpoint, is a good first choice. Ari runs any checkpoint there directly: pick it in the model menu and ask for a picture. Attach a photo and Ari uses it as the starting point.</p>
+      <h3>Add video (and anything else) with a workflow</h3>
+      <ol>
+        <li>In ComfyUI, open <strong>Workflow › Browse Templates</strong> and pick a video template, such as one of the Wan 2.2 text-to-video or image-to-video templates. ComfyUI offers to download the models it needs.</li>
+        <li>Run it once in the browser to make sure it works on your card.</li>
+        <li>Make sure the video node saves <strong>MP4 (H.264)</strong>. Apple devices can't play WebM.</li>
+        <li>Optional: in the prompt box, replace the text with <code>{{prompt}}</code>. Ari also understands <code>{{negative_prompt}}</code>, <code>{{seed}}</code>, <code>{{width}}</code>, <code>{{height}}</code> and <code>{{image}}</code>. Without them, Ari finds the prompt box connected to the sampler by itself.</li>
+        <li>Choose <strong>Workflow › Export (API)</strong> and save the <code>.json</code> file somewhere your Apple devices can reach, like iCloud Drive.</li>
+        <li>In Ari, <strong>Settings › Self-Hosted › ComfyUI › Import workflow file</strong> (or paste the file's text). Imported workflows appear in the ComfyUI model menu; ones that make video are labelled.</li>
+      </ol>
+      <h3>Connect Ari</h3>
+      <ol>
+        <li>Share ComfyUI over Tailscale:
+          <pre><code>tailscale serve --bg --tcp 8188 tcp://127.0.0.1:8188</code></pre></li>
+        <li>In Ari, open <strong>Settings › Self-Hosted › ComfyUI</strong>, enter <code>http://YOUR-PC:8188</code> and tap <strong>Validate Connection</strong>. Ari shows the graphics card it found and lists your checkpoints.</li>
+        <li>Turn on <strong>Free GPU memory after each run</strong> if you want ComfyUI to hand the card back as soon as each picture or clip is done.</li>
+      </ol>
+
+      <h2 id="localai"><span class="step">4</span>LocalAI: optional all-in-one server</h2>
+      <p>LocalAI puts chat, pictures and clips behind one address with a model gallery you install from in a browser. Its native Windows build only runs chat models, so for pictures and video it runs in Docker.</p>
+      <ol>
+        <li>Install <a href="https://www.docker.com/products/docker-desktop/" rel="noopener noreferrer" target="_blank">Docker Desktop</a> with the <strong>WSL 2</strong> backend, and turn on <strong>Start Docker Desktop when you sign in</strong>.</li>
+        <li>Start LocalAI with GPU support, published only on the PC itself:
+          <pre><code>docker run -d --name local-ai --restart unless-stopped --gpus all -p 127.0.0.1:8080:8080 localai/localai:latest-gpu-nvidia-cuda-12</code></pre>
+          (Use the <code>-cuda-13</code> image instead on a recent driver. See <a href="https://localai.io/docs/start/install/containers/" rel="noopener noreferrer" target="_blank">LocalAI's container guide</a> to keep downloaded models in a folder that survives updates.)</li>
+        <li>Open <code>http://127.0.0.1:8080</code> on the PC and install models from the gallery: a picture model (a FLUX or SDXL entry), a video model if you want clips, and a chat model if you like.</li>
+        <li>Share it over Tailscale:
+          <pre><code>tailscale serve --bg --tcp 8080 tcp://127.0.0.1:8080</code></pre></li>
+        <li>In Ari, open <strong>Settings › Self-Hosted › LocalAI</strong>, enter <code>http://YOUR-PC:8080</code> and tap <strong>Validate Connection</strong>. Choose the picture or video model, and turn on <strong>This model makes video clips</strong> for video models (Ari guesses from the name). Tap <strong>Use LocalAI's chat models too</strong> to add its chat models to the model menu.</li>
+      </ol>
+
+      <h2 id="gaming"><span class="step">5</span>Share the PC with your games</h2>
+      <ul>
+        <li><strong>Start with Windows.</strong> Ollama and Docker Desktop already do. For ComfyUI, press <kbd>Win</kbd>+<kbd>R</kbd>, type <code>shell:startup</code>, and put a shortcut to <code>run_nvidia_gpu.bat</code> in that folder. Tailscale's <code>serve</code> settings survive restarts.</li>
+        <li><strong>Keep it awake while you're away.</strong> In <strong>Settings › System › Power</strong>, set the PC not to sleep when plugged in, or Ari can't reach it.</li>
+        <li><strong>Hand the card back before you play.</strong> Ollama unloads by itself after two minutes. To free everything at once, save this as <code>game-mode.bat</code> on the desktop and run it before you start a game:
+          <pre><code>@echo off
+rem Unload ComfyUI's models
+curl -s -X POST http://127.0.0.1:8188/free -H "Content-Type: application/json" -d "{\"unload_models\":true,\"free_memory\":true}"
+rem Unload every model Ollama has loaded
+for /f "skip=1 tokens=1" %%m in ('ollama ps') do ollama stop %%m
+rem Pause LocalAI (start it again with: docker start local-ai)
+docker stop local-ai
+echo GPU is free. Have fun.</code></pre></li>
+        <li>A request from Ari while you're playing still works; it just loads the model again and competes with the game for the card.</li>
+      </ul>
+
+      <h2 id="trouble">Troubleshooting</h2>
+      <h3>Validate Connection fails</h3>
+      <ul>
+        <li>On the PC, check the server answers locally: open <code>http://127.0.0.1:11434</code>, <code>:8188</code> or <code>:8080</code> in a browser.</li>
+        <li>Run <code>tailscale serve status</code> on the PC and make sure the port is listed.</li>
+        <li>Make sure the iPhone or Mac has Tailscale connected, and that you used the full <code>.ts.net</code> name.</li>
+      </ul>
+      <h3>"Out of memory" or a very slow first run</h3>
+      <p>The first run loads the model from disk, which can take a minute. If it fails with out of memory, close other GPU apps, use FP8 or smaller models, lower the resolution or number of frames, or run <code>game-mode.bat</code> to clear what's loaded.</p>
+      <h3>Ari says the clip can't be played</h3>
+      <p>Set the workflow's video node to save MP4 (H.264), export it again with <strong>Export (API)</strong>, and re-import it in Ari.</p>
+      <h3>Ari can't find the prompt in my workflow</h3>
+      <p>Type <code>{{prompt}}</code> into the text box that should receive the prompt, export again, and re-import.</p>
+      <h3>Should I use <code>--listen</code> or open the firewall?</h3>
+      <p>No. That shares the server with every device on your network, and none of these servers asks for a password. Tailscale gives your own devices access without that risk. If Windows asks whether to allow a server on public or private networks, choose <strong>Cancel</strong>.</p>
+
+      <p style="margin-top: 3rem;"><a href="../faq/">More questions about Ari Helper →</a></p>
+    </article>
+  </main>
+
+
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-links">
+        <a href="../../" class="footer-link" data-i18n="all-apps.429449">All Apps</a>
+        <a href="../../pinline/" class="footer-link">Pinline</a>
+        <a href="../../enter-space/" class="footer-link">Enter Space</a>
+        <a href="../../blip/" class="footer-link">Blip</a>
+        <a href="../../sami/" class="footer-link">Sami</a>
+        <a href="../../tilebreak/" class="footer-link">Tilebreak</a>
+        <a href="../../mi-speaks/" class="footer-link">Mi Speaks</a>
+        <a href="../../embr/" class="footer-link">Embr</a>
+        <a href="../../deepsi/" class="footer-link">DeepSi</a>
+        <a href="../../luma-editor/" class="footer-link">Luma Editor</a>
+        <a href="../../wise-flyer/" class="footer-link">Wise Flyer</a>
+        <a href="../../glint/" class="footer-link">Glint</a>
+        <a href="/privacy/" class="footer-link" data-i18n="privacy.cf0148">Privacy</a>
+        <a href="/terms/" class="footer-link" data-i18n="terms.a55a27">Terms</a>
+        <a href="/support/" class="footer-link" data-i18n="support.f32d5a">Support</a>
+        <a href="/" class="footer-link" data-i18n="portfolio.036b18">Portfolio</a>
+      </div>
+
+      <div class="footer-social-links">
+        <a href="https://x.com/apps_by_blaine" class="social-icon-link" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)">
+          <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+          </svg>
+        </a>
+        <a href="https://www.instagram.com/apps.by.blaine/" class="social-icon-link" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+          <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+          </svg>
+        </a>
+        <a href="https://www.youtube.com/@AppsByBlaine" class="social-icon-link" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+          <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+          </svg>
+        </a>
+      </div>
+
+      <p style="color: var(--text-muted); margin-top: var(--spacing-md);" data-i18n-html="blaine-miller-all-rights.b327c2">
+        © <span id="year"></span> Blaine Miller. All rights reserved.
+      </p>
+    </div>
+  </footer>
+
+  <script src="../../app-showcase.js?v=bec2b426"></script>
+</body>
+</html>

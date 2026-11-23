@@ -11,6 +11,7 @@
   "can-ari-make-pictures.118d41": "没有 Draw Things，Ari 也能生成图像吗？",
   "can-i-share-conversations.a8722e": "可以把对话分享给别人吗？",
   "can-i-tell-whether.15df7c": "我能判断一张图片是否来自 Ari Helper 吗？",
+  "can-i-use-my.2fa65d": "可以把我的游戏电脑用作 Ari 的 AI 服务器吗？",
   "chat.2ced57": "对话",
   "confirmation-dialogs-before-sending.f86ec0": "<strong>确认对话框</strong> — 在向外部服务商发送提示词之前，Ari Helper 可以弹出确认对话框，让你始终有机会在任何数据离开设备前查看将要发送的内容，以及接收数据的服务商。",
   "conversations-sync-across-all.2f9544": "对话通过 iCloud 在你所有的 Apple 设备间同步。在 iPhone 上开始聊天，在 iPad 或 Mac 上无缝续聊。当你的两台设备在同一 Wi-Fi 下处于唤醒状态时，Ari 还会把对话直接经由本地网络递过去，约一秒即达，无需等待下一次 iCloud 往返。",
@@ -52,6 +53,7 @@
   "whether-you-re-running.ddec8d": "无论是完全在设备端运行模型、连接局域网中自建的 Ollama 实例，还是使用云端服务商 —— Ari Helper 都让你为每一次对话选择最合适的隐私级别。",
   "yes-ari-helper-adds.e07bf7": "可以。Ari Helper 会为它生成的图片添加隐形标记，标记存在于图像本身，而不是重新保存就会被清除的元数据中，并且能经受住常规压缩。<a href=\"../watermark/\">在这里检查图片</a>——检查在你的浏览器中完成，不会上传任何内容。",
   "yes-ari-helper-can.edbeb5": "可以。Ari Helper 能完全在你的设备上生成图像。在 Ari 的“浏览模型”中下载图像模型，或用“导入模型”带入你自己的 Stable Diffusion 模型文件，然后在任意对话中描述想要的图像。模型下载完成后，你的提示词和图像都会留在设备上。如果你更喜欢，仍然可以使用 Draw Things 和云端图像模型。",
+  "yes-ari-helper-connects.c3d7fd": "可以。Ari Helper 可以连接 Ollama 来聊天、识图和写代码，也可以连接 ComfyUI 和 LocalAI 来生成图片和视频，它们运行在你自己的、配有好显卡的电脑上。你的设备通过 Tailscale 私密访问。<a href=\"../home-ai-server/\">查看分步设置指南（英文）</a>",
   "yes-ari-helper-is.0f9dc6": "是的。Ari Helper 现已在欧盟全境上架销售，法国也包括在内。除中国大陆外，Apple 提供的所有 App Store 国家和地区均可下载；中国大陆对生成式 AI 内容另有规定。",
   "yes-when-using-local.7d1876": "当然！使用本地设备端模型或局域网中的 Ollama 时，任何数据都不会离开你的设备或本地网络。私密模式配合生物识别锁定，为敏感对话再添一重保护。",
   "yes-you-can-share.13d3cb": "当然！你可以将对话分享为精美的图片或 HTML 文件，非常适合与亲友和同事分享见解、代码片段或创意内容。"
