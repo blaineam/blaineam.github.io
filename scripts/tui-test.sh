@@ -3,7 +3,7 @@
 # BusyBox awk (OpenWrt, Alpine) and the "one true awk". They disagree about small things (mawk
 # will not take a local variable named like a function), and a slip only shows on the awk that
 # minds. This draws every kind of screen with each awk found here and fails if any of them
-# prints an error, exits non-zero or draws nothing.
+# prints an error, exits non-zero or draws nothing, and has each compose a little music.
 #
 #   sh scripts/tui-test.sh            test the generated ./shell
 #   sh scripts/tui-test.sh path       test another copy
@@ -65,7 +65,23 @@ try() {
     shot "search count" 1 -v want=count -v q=haven
     shot "search hit" 0 -v want=hit -v q=haven -v sel=0
     shot "pick a day" 1 -v want=pick -v psel=1 -v td=
-    [ "$bad" = 0 ] && echo "  $name: $n screens, no errors"
+    # the radio: a few bars of three songs, the same bytes again from a later sample, a 44-byte header,
+    # and (where this awk cannot print a zero byte) 8-bit sound with none in it
+    for song in 0 1 2; do
+      n=$((n + 1))
+      compose 7 "$song" "$T/title" "" 0 2 >"$T/pcm" 2>"$T/err"; code=$?
+      compose 7 "$song" "$T/title2" "" 1000 2 >"$T/pcm2" 2>>"$T/err"
+      size=$(wc -c <"$T/pcm"); size=$((size)); why=
+      if [ "$code" != 0 ] || [ -s "$T/err" ]; then why="exit $code"
+      elif [ "$size" -lt 20000 ] || [ ! -s "$T/title" ]; then why="no song ($size bytes)"
+      elif [ "$B8" = 0 ] && [ $((size % 2)) = 1 ]; then why="odd 16-bit size"
+      elif [ "$B8" = 1 ] && [ "$(tr -d '\000' <"$T/pcm" | wc -c)" -ne "$size" ]; then why="a zero byte in 8-bit sound"
+      elif ! tail -c +$((1000 * (2 - B8) + 1)) "$T/pcm" | cmp -s - "$T/pcm2"; then why="different from a later sample"
+      elif [ "$(wavhdr "$size" | wc -c)" -ne 44 ]; then why="WAV header is not 44 bytes"
+      fi
+      if [ -n "$why" ]; then bad=$((bad + 1)); echo "  $name: FAILED radio song $song: $why"; head -n 5 "$T/err" | sed 's/^/      /'; fi
+    done
+    [ "$bad" = 0 ] && echo "  $name: $n screens and songs, no errors ($([ "$B8" = 1 ] && echo 8 || echo 16)-bit sound)"
     exit "$bad"
   ) || BAD=$((BAD + 1))
 }

@@ -13,9 +13,10 @@
 #   /               search everything, enter jumps to the match
 #   r               download the resume as a PDF into the folder you ran this from
 #                   (Markdown instead if the download fails)
-#   m               music: Tom composes a live station (synthwave, lo-fi, rock). Optional: it
-#                   needs node and an audio player, fetches Tom's engine into a temporary
-#                   folder, and removes that folder when you turn it off or quit.
+#   m               music: a little radio composes synthwave, lo-fi and rock as it plays. It is
+#                   written in awk right here and downloads nothing; the sound goes to the player
+#                   your system already has (afplay, pw-play, paplay or aplay) through a
+#                   temporary folder that it removes when you turn it off or quit.
 #   - / +           music volume down / up (0-10; WEMILLER_VOLUME sets where it starts)
 #   L               next language
 #   D               install my dotfiles (wemiller.com/dotfiles) for the user running this. It asks
@@ -1175,6 +1176,133 @@ SEASONS=1; case "${WEMILLER_SEASONS:-1}" in 0|off|no|false) SEASONS=0 ;; esac
 NOWD=$(date +%Y-%m-%d)
 tui() { data | LC_ALL=C awk -v lang="$LANGC" -v today="$NOWD" -v when="$WHEN" -v fx="$SEASONS" "$@" "$PROG"; }
 
+# ---- the radio behind m: songs composed in awk, written as WAV by sh ----
+RADIO=$(cat <<'WM_RADIO'
+# The radio: composes song n of station `seed` and writes it as raw mono PCM, SR samples a second,
+# from sample `off` on, at volume `vol` (0-10, 10 when unset): 16-bit little-endian, or 8-bit with
+# no zero byte when b8 is set (not every awk can print one). Its title goes to the file tf. The
+# same seed and n always make the same song; cut keeps only its first few bars (for the tests).
+function rnd(k) { return int(rand() * k) }
+function pick(s,   a) { return a[rnd(split(s, a, " ")) + 1] }
+function hz(m) { return 440 * exp((m - 69) * L2) / SR }
+function nt(d) { return root + SC[d % 7 + 1] + 12 * int(d / 7) }
+function tune(o, lo,   i, d) {                 # two bars of eighth notes, a step or two at a time
+  d = lo + rnd(4)
+  for (i = 0; i < 16; i++) {
+    if (i % 4 && rnd(10) < 3) { MO[o, i] = -1; continue }
+    d += rnd(5) - 2; if (d < lo) d = lo + 1; if (d > lo + 7) d = lo + 6
+    MO[o, i] = d
+  }
+}
+BEGIN {
+  L2 = log(2) / 12; TAU = 8 * atan2(1, 1)
+  srand(seed * 1000 + n)
+  ST = rnd(3) + 1                              # 1 synthwave, 2 lo-fi, 3 rock
+  if (ST == 1) {
+    bpm = 92 + rnd(24); sw = 0; split("0 2 3 5 7 8 10", SC, " "); prog = pick("0,5,2,6 0,5,3,4 5,3,0,6 0,3,5,4")
+    W1 = "Neon Chrome Midnight Sunset Laser Vapor Electric Velvet Cobalt Turbo"; W2 = "Drive Boulevard Skyline Arcade Horizon Run Grid Coast Nights Pulse"
+    K = "1000100010001000"; H = "1111111111111111"; form = "00001111111122222222111111113333"; style = "synthwave"
+  } else if (ST == 2) {
+    bpm = 72 + rnd(14); sw = .2; split("0 2 4 5 7 9 11", SC, " "); prog = pick("1,4,0,5 3,2,1,0 0,5,1,4 3,4,2,5")
+    W1 = "Rainy Sleepy Paper Late Window Quiet Amber Dusty Mellow Slow"; W2 = "Notes Tea Study Cafe Afternoon Pages Lanterns Steps Letters Haze"
+    K = "1000000100100000"; H = "1010101010101010"; form = "0011111111222222221111"; style = "lo-fi"
+  } else {
+    bpm = 120 + rnd(30); sw = 0; split("0 2 3 5 7 8 10", SC, " "); prog = pick("0,5,6,0 0,3,5,6 0,6,5,6 5,6,0,0")
+    W1 = "Iron Loud Wild Burning Highway Broken Steel Electric Last Restless"; W2 = "Engine Road Fire Heart Thunder Riders Signal Machine Weekend Static"
+    K = "1000001010100000"; H = "1010101010101010"; form = "0011111111222222221111111133"; style = "rock"
+  }
+  root = 40 + rnd(8); split(prog, P, ","); tune(0, 7); tune(1, 9)
+  printf "%s %s (%s)\n", pick(W1), pick(W2), style > tf; close(tf)
+  if (cut) form = substr(form, 1, cut)
+  bars = length(form); stp = SR * 60 / bpm / 4; total = 0
+  for (s = 0; s < bars * 16; s++) total += int(stp * (s % 2 ? 1 - sw : 1 + sw))
+  fade = total - int(stp * 16 * (ST == 2 ? 4 : 2)); t = 0
+  G = 24000 * (vol == "" ? 1 : (vol / 10) ^ 2)
+  cf1 = cf2 = cf3 = cf4 = bf = lf = af = 0; kp = sp = lp = hp = cp1 = cp2 = cp3 = cp4 = cq1 = cq2 = cq3 = 0
+  KE = SE = HE = CE = 0; ce = be = le = ae = 0
+  for (bar = 0; bar < bars; bar++) {
+    sec = substr(form, bar + 1, 1) + 0; d = P[bar % 4 + 1] + 0
+    for (s = 0; s < 16; s++) {
+      len = int(stp * (s % 2 ? 1 - sw : 1 + sw))
+      # drums: everything in the verses and bridge, only the kick under a synthwave intro
+      if ((sec == 1 || sec == 2 || (sec == 0 && ST == 1)) && substr(K, s + 1, 1) == "1") { KE = 1; KF = 140 / SR }
+      if ((sec == 1 || sec == 2) && (s == 4 || s == 12)) SE = ST == 2 ? .5 : 1
+      if (sec < 3 && substr(H, s + 1, 1) == "1") HE = (s % 4 == 2 ? .5 : .3) * (ST == 1 && s % 2 ? .5 : 1)
+      if (s == 0 && sec && bar % 8 == (ST == 2 ? 2 : 4) && sec < 3) CE = .6
+      # chords: a held pad, soft sevenths twice a bar, or power chords on the eighths
+      if (ST == 3 ? (sec == 2 ? s % 8 == 0 : s % 2 == 0) : ST == 2 ? (s == 0 || s == 6) : s == 0) {
+        if (ST == 3) { m = nt(d) - 12; cf1 = hz(m); cf2 = hz(m + 7); cf3 = hz(m + 12); cf4 = 0; cpk = .3; cl = sec == 2 ? 8 * len : len * .8; cat = 30 }
+        else { cf1 = hz(nt(d)); cf2 = hz(nt(d + 2)); cf3 = hz(nt(d + 4)); cf4 = ST == 2 ? hz(nt(d + 6)) : 0
+               cpk = ST == 2 ? .2 : .16; cl = ST == 2 ? (s ? 10 : 6) * len : 16 * len; cat = ST == 2 ? 400 : 3000 }
+        ca = 0
+      }
+      # bass
+      if (ST == 2) { if (sec < 3 || s == 0) if (s == 0 || s == 7 || s == 10) { bf = hz(nt(d) - 12); ba = 0; bl = 3 * len; bpk = .5 } }
+      else if (sec && s % 2 == 0 && (sec < 3 || s == 0)) { bf = hz(nt(d) - 12 + (ST == 1 && s % 4 == 2 ? 12 : 0)); ba = 0; bl = len * 1.6; bpk = ST == 3 ? .4 : .35 }
+      # the tune: one in the verses, another in the bridge
+      if ((sec == 1 || sec == 2) && s % 2 == 0) { md = MO[sec - 1, (bar % 2) * 8 + s / 2]; if (md >= 0) { lf = hz(nt(md)); la = 0; ll = 2 * len * (1 + rnd(2)); lpk = ST == 2 ? .25 : .2 } }
+      # an arpeggio under synthwave
+      if (ST == 1 && sec) { af = hz(nt(d + 2 * (s % 3)) + 12); aa = 0; al = len * .7 }
+      for (i = 0; i < len; i++) {
+        x = 0; tt = t++
+        if (cf1) {
+          if (ca < cl) ce = ca < cat ? ca * cpk / cat : cpk; else if ((ce *= .9992) < .0005) cf1 = 0
+          ca++
+          if ((cp1 += cf1) >= 1) cp1--; if ((cp2 += cf2) >= 1) cp2--; if ((cp3 += cf3) >= 1) cp3--
+          if (ST == 1) {
+            if ((cq1 += cf1 * 1.007) >= 1) cq1--; if ((cq2 += cf2 * 1.007) >= 1) cq2--; if ((cq3 += cf3 * 1.007) >= 1) cq3--
+            x += (cp1 + cp2 + cp3 + cq1 + cq2 + cq3 - 3) * ce
+          } else if (ST == 2) {
+            if ((cp4 += cf4) >= 1) cp4--
+            x += ((cp1 < .5 ? cp1 : 1 - cp1) + (cp2 < .5 ? cp2 : 1 - cp2) + (cp3 < .5 ? cp3 : 1 - cp3) + (cp4 < .5 ? cp4 : 1 - cp4) - 1) * 4 * ce
+          } else { w = ((cp1 < .5) + (cp2 < .5) + (cp3 < .5)) * 6 - 9; w *= ce; x += w / (1 + (w < 0 ? -w : w)) * .35 }
+        }
+        if (bf) {
+          if (ba < bl) be = ba < 40 ? ba * bpk / 40 : bpk; else if ((be *= .9992) < .0005) bf = 0
+          ba++; if ((bp += bf) >= 1) bp--
+          x += (ST == 2 ? sin(TAU * bp) : ST == 3 ? (bp < .5 ? .7 : -.7) : bp + bp - 1) * be
+        }
+        if (lf) {
+          if (la < ll) le = la < 80 ? la * lpk / 80 : lpk; else if ((le *= .9992) < .0005) lf = 0
+          la++; if ((lq += lf) >= 1) lq--
+          x += (ST == 3 ? lq + lq - 1 : ST == 2 ? 4 * (lq < .5 ? lq : 1 - lq) - 1 : (lq < .5 ? .8 : -.8)) * le
+        }
+        if (af) {
+          if (aa < al) ae = aa < 20 ? aa * .0035 : .07; else if ((ae *= .999) < .0005) af = 0
+          aa++; if ((aq += af) >= 1) aq--
+          x += aq < .25 ? 1.5 * ae : -.5 * ae
+        }
+        if (KE > .001) { kp += KF; KF = KF * .9993 + .0308 / SR; x += sin(TAU * kp) * KE * .9; KE *= .99975 }
+        if (SE + HE + CE > .002) {
+          r = rand() * 2 - 1; hh = r - hp; hp = r
+          if (SE > .001) { x += (r * .35 + sin(TAU * (sp += 190 / SR)) * .15) * SE; SE *= ST == 1 ? .99985 : .9996 }
+          x += hh * (HE * .12 + CE * .1); HE *= .997; CE *= .99985
+        }
+        if (ST == 2) { if (rand() < .0003) x += rand() * .3 - .15; lp += (x - lp) * .35; x = lp }
+        if (tt < 3000) x *= tt / 3000; else if (tt > fade) x *= (total - tt) / (total - fade)
+        if (tt < off) continue
+        y = int(x / (1 + (x < 0 ? -x : x) * .25) * G)
+        if (b8) { y = int(y / 256) + 128; printf "%c", (y < 1 ? 1 : (y > 255 ? 255 : y)) }
+        else { if (y < 0) y += 65536; printf "%c%c", y % 256, int(y / 256) }
+      }
+    }
+  }
+}
+WM_RADIO
+)
+SR=22050
+# Not every awk can print a zero byte (BusyBox cannot): there the sound is 8-bit, with none in it.
+B8=1; [ $(LC_ALL=C awk 'BEGIN { printf "%c%c", 0, 65 }' | wc -c) = 2 ] && B8=0
+# compose <station> <n> <title file> [volume] [from sample] [bars]: song n as raw PCM on stdout
+compose() { LC_ALL=C awk -v SR="$SR" -v b8="$B8" -v seed="$1" -v n="$2" -v tf="$3" -v vol="${4:-}" -v off="${5:-0}" -v cut="${6:-0}" "$RADIO"; }
+# wavhdr <bytes>: the 44-byte WAV header for that much of it
+le() { wv=$1; wk=$2; while [ "$wk" -gt 0 ]; do printf "\\$(printf %03o $((wv % 256)))"; wv=$((wv / 256)); wk=$((wk - 1)); done; }
+wavhdr() {
+  wb=$((2 - B8))
+  printf RIFF; le $(($1 + 36)) 4; printf 'WAVEfmt '; le 16 4; le 1 2; le 1 2
+  le "$SR" 4; le $((SR * wb)) 4; le "$wb" 2; le $((8 * wb)) 2; printf data; le "$1" 4
+}
+
 TTY=/dev/tty
 ( : <"$TTY" ) 2>/dev/null || TTY=
 if [ -z "$TTY" ] || [ ! -t 1 ]; then
@@ -1205,90 +1333,73 @@ MDIR=; MPID=; MSG=
 music_off() {
   [ -n "$MPID" ] && kill "$MPID" 2>/dev/null
   MPID=
-  # only ever removes the temporary folder this script made (it holds our run.mjs)
-  if [ -n "$MDIR" ] && [ -d "$MDIR" ] && [ -f "$MDIR/run.mjs" ]; then rm -rf "$MDIR"; fi
+  if [ -n "$MDIR" ] && [ -d "$MDIR" ] && [ -f "$MDIR/radio" ]; then
+    [ -s "$MDIR/pid" ] && kill "$(cat "$MDIR/pid")" 2>/dev/null      # the player: quiet at once
+    rm -rf "$MDIR"                             # only ever the temporary folder this script made
+  fi
   MDIR=
 }
+# gain <0-10>: the level as the players take it, 0.00 to 1.00 (a square, as ears hear it)
+gain() { printf '%d.%02d' $(($1 * $1 / 100)) $(($1 * $1 % 100)); }
+# play <wav> <0-10> <k>: in the background; the player's pid goes in "pid", "end.k" appears when it stops
+play() {
+  ( case $PLAYER in
+      afplay) afplay -v "$(gain "$2")" "$1" & ;;
+      pw-play) pw-play --volume="$(gain "$2")" "$1" & ;;
+      paplay) paplay --volume=$((65536 * $2 * $2 / 100)) "$1" & ;;
+      *) aplay -q "$1" & ;;                     # aplay has no volume: the song is written at the level
+    esac
+    echo $! >"$MDIR/pid"; wait $!; : >"$MDIR/end.$3" ) >/dev/null 2>&1 &
+}
+# The radio itself, in the background: compose a song, play it, compose the next while it plays.
+# A new volume restarts the player where it was, so every player gets one, even with no volume flag.
+radio() {
+  trap - EXIT
+  KID=
+  trap 'kill $KID $(cat "$MDIR/pid" 2>/dev/null) 2>/dev/null; exit 0' TERM HUP
+  station=$(( $(date +%s) % 100000 + $$ % 1000 )); k=0; n=0; cur=0
+  TICK=1; sleep 0.01 2>/dev/null && TICK=0.25
+  # mk <n> <slot> [from sample]: song n as slot.wav (aplay: at today's volume, which goes in slot.v)
+  mk() {
+    mv=; [ "$PLAYER" = aplay ] && mv=$(cat "$MDIR/vol")
+    compose "$station" "$1" "$MDIR/$2.t" "$mv" "${3:-0}" >"$MDIR/$2.pcm" & KID=$!
+    wait "$KID" && [ -s "$MDIR/$2.pcm" ] || { echo '%stoppedwhy|could not compose' >"$MDIR/now"; exit 1; }
+    { wavhdr $(wc -c <"$MDIR/$2.pcm"); cat "$MDIR/$2.pcm"; } >"$MDIR/$2.wav"; rm -f "$MDIR/$2.pcm"
+    echo "$mv" >"$MDIR/$2.v"
+  }
+  mk 0 s0
+  while :; do
+    nxt=$((1 - cur))
+    [ "$PLAYER" = aplay ] && [ "$(cat "$MDIR/s$cur.v")" != "$(cat "$MDIR/vol")" ] && mk "$n" "s$cur"
+    tr -d '\n' <"$MDIR/s$cur.t" >"$MDIR/now"
+    vol=$(cat "$MDIR/vol"); k=$((k + 1)); play "$MDIR/s$cur.wav" "$vol" "$k"; t0=$(date +%s); at=0
+    mk $((n + 1)) "s$nxt"                      # the next song, while this one plays
+    while [ ! -e "$MDIR/end.$k" ]; do
+      sleep "$TICK" & KID=$!; wait "$KID"
+      v=$(cat "$MDIR/vol" 2>/dev/null) || exit 0
+      [ "$v" = "$vol" ] && continue
+      at=$((at + ($(date +%s) - t0) * SR)); vol=$v
+      kill "$(cat "$MDIR/pid")" 2>/dev/null; while [ ! -e "$MDIR/end.$k" ]; do sleep "$TICK"; done
+      if [ "$PLAYER" = aplay ]; then mk "$n" cue "$at"
+      else
+        skip=$((at * (2 - B8))); left=$(($(wc -c <"$MDIR/s$cur.wav") - 44 - skip))
+        [ "$left" -gt 0 ] || break
+        { wavhdr "$left"; tail -c +$((45 + skip)) "$MDIR/s$cur.wav"; } >"$MDIR/cue.wav"
+      fi
+      k=$((k + 1)); play "$MDIR/cue.wav" "$vol" "$k"; t0=$(date +%s)
+    done
+    rm -f "$MDIR"/end.*; n=$((n + 1)); cur=$nxt
+  done
+}
 music_on() {
-  command -v node >/dev/null 2>&1 || { MSG='%nonode'; return; }
   PLAYER=
-  for p in afplay paplay aplay ffplay play; do
+  for p in afplay pw-play paplay aplay; do     # the ones that come with the system
     if command -v "$p" >/dev/null 2>&1; then PLAYER=$p; break; fi
   done
   [ -n "$PLAYER" ] || { MSG='%noplayer'; return; }
   MDIR=$(mktemp -d 2>/dev/null) || { MDIR=; MSG='%notmp'; return; }
-  echo "$VOL" >"$MDIR/vol"
-  cat >"$MDIR/run.mjs" <<'WM_TOM'
-// Tom, played from a terminal: fetch the engine once, then compose, write and play one song
-// after another. The next song is composed while the current one plays. The volume (0-10) is
-// read from the file "vol"; when it changes, the rest of the song is re-written at the new level
-// and the player picks up where it was, so it works with any player, even ones with no volume flag.
-import { writeFile, readFile, mkdir } from 'node:fs/promises';
-import { spawn } from 'node:child_process';
-const [origin, dir, player] = process.argv.slice(2);
-const FILES = '@TOM_FILES@'.split(' ');
-const say = (s) => writeFile(`${dir}/now`, s).catch(() => {});
-let child = null;
-const stop = () => { try { child?.kill(); } catch {} process.exit(0); };
-for (const sig of ['SIGTERM', 'SIGINT', 'SIGHUP']) process.on(sig, stop);
-try {
-  await say('%tuning');
-  await mkdir(`${dir}/lib`, { recursive: true });
-  await Promise.all(FILES.map(async (f) => {
-    const r = await fetch(`${origin}/tools/tom/app/lib/${f}`);
-    if (!r.ok) throw new Error(`could not fetch ${f}`);
-    await writeFile(`${dir}/lib/${f}`, Buffer.from(await r.arrayBuffer()));
-  }));
-  const { radioTrack, trackTitle } = await import(`${dir}/lib/radio.mjs`);
-  const { render } = await import(`${dir}/lib/arrange.mjs`);
-  const { encodeWav } = await import(`${dir}/lib/wav.mjs`);
-  const seed = Math.random().toString(36).slice(2, 8);
-  const make = (n) => {
-    const song = radioTrack('mix', seed, n, { styles: ['synthwave', 'lofi', 'rock'], quickStart: true });
-    const out = render(song);
-    const w = encodeWav(out.L, out.R, out.sampleRate);
-    return { title: `${trackTitle(song)} (${song.style})`, L: out.L, R: out.R, rate: out.sampleRate };
-  };
-  const level = async () => {
-    const v = Number(String(await readFile(`${dir}/vol`, 'utf8').catch(() => '7')).trim());
-    return Number.isFinite(v) ? Math.max(0, Math.min(10, v)) : 7;
-  };
-  const wav = (s, from, v) => {
-    const g = (v / 10) ** 2, L = s.L.subarray(from), R = s.R.subarray(from);
-    const l = new Float32Array(L.length), r = new Float32Array(R.length);
-    for (let i = 0; i < L.length; i++) { l[i] = L[i] * g; r[i] = R[i] * g; }
-    const w = encodeWav(l, r, s.rate);
-    return ArrayBuffer.isView(w) ? Buffer.from(w.buffer, w.byteOffset, w.byteLength) : Buffer.from(w);
-  };
-  let next = make(0), part = 0;
-  for (let n = 0; ; n++) {
-    const cur = next;
-    await say(cur.title);
-    let from = 0, vol = await level(), composed = false;
-    while (from < cur.L.length) {
-      const file = `${dir}/song${part++ % 2}.wav`;
-      await writeFile(file, wav(cur, from, vol));
-      const args = player === 'ffplay' ? ['-nodisp', '-autoexit', '-loglevel', 'quiet', file] : player === 'afplay' ? [file] : ['-q', file];
-      child = spawn(player, args, { stdio: 'ignore' });
-      const t0 = Date.now();
-      let ended = false, moved = 0;
-      const done = new Promise((res) => child.on('exit', () => { ended = true; res(); }));
-      if (!composed) { composed = true; next = make(n + 1); }
-      while (!ended) {
-        await Promise.race([done, new Promise((res) => setTimeout(res, 250))]);
-        if (ended) break;
-        const v = await level();
-        if (v !== vol) { moved = Date.now() - t0; vol = v; child.kill(); await done; }
-      }
-      if (!moved) break;
-      from += Math.floor((moved / 1000) * cur.rate);
-    }
-  }
-} catch (e) {
-  await say('%stoppedwhy|' + String(e.message || e).replace(/\|/g, '/').slice(0, 40));
-}
-WM_TOM
-  node "$MDIR/run.mjs" "${WM_ORIGIN:-@ORIGIN@}" "$MDIR" "$PLAYER" >/dev/null 2>&1 &
+  : >"$MDIR/radio"; echo "$VOL" >"$MDIR/vol"; echo '%tuning' >"$MDIR/now"
+  radio </dev/null >/dev/null 2>&1 &
   MPID=$!
   MSG=
 }
