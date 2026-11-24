@@ -13,9 +13,9 @@
 #   /               search everything, enter jumps to the match
 #   r               download the resume as a PDF into the folder you ran this from
 #                   (Markdown instead if the download fails)
-#   m               music: a little radio composes synthwave, lo-fi and rock as it plays. It is
-#                   written in awk right here and downloads nothing; the sound goes to the player
-#                   your system already has (afplay, pw-play, paplay or aplay) through a
+#   m               music: Tom Jr., a little Tom, composes synthwave, lo-fi and rock as it plays.
+#                   It is written in awk right here and downloads nothing; the sound goes to the
+#                   player your system already has (afplay, pw-play, paplay or aplay) through a
 #                   temporary folder that it removes when you turn it off or quit.
 #   - / +           music volume down / up (0-10; WEMILLER_VOLUME sets where it starts)
 #   L               next language
@@ -1176,7 +1176,7 @@ SEASONS=1; case "${WEMILLER_SEASONS:-1}" in 0|off|no|false) SEASONS=0 ;; esac
 NOWD=$(date +%Y-%m-%d)
 tui() { data | LC_ALL=C awk -v lang="$LANGC" -v today="$NOWD" -v when="$WHEN" -v fx="$SEASONS" "$@" "$PROG"; }
 
-# ---- the radio behind m: songs composed in awk, written as WAV by sh ----
+# ---- Tom Jr., the radio behind m: a little Tom in awk, its songs written as WAV by sh ----
 RADIO=$(cat <<'WM_RADIO'
 # The radio: composes song n of station `seed` and writes it as raw mono PCM, SR samples a second,
 # from sample `off` on, at volume `vol` (0-10, 10 when unset): 16-bit little-endian, or 8-bit with
