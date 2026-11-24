@@ -131,7 +131,7 @@
         <li><a href="#ollama">2 · Ollama</a></li>
         <li><a href="#comfyui">3 · ComfyUI</a></li>
         <li><a href="#localai">4 · LocalAI</a></li>
-        <li><a href="#gaming">5 · Gaming time</a></li>
+        <li><a href="#gaming">5 · Game mode</a></li>
         <li><a href="#trouble">Troubleshooting</a></li>
       </ul>
     </header>
@@ -225,20 +225,34 @@ ollama pull qwen2.5vl:7b       # fast photo and document reading</code></pre></l
         <li>In Ari, open <strong>Settings › Self-Hosted › LocalAI</strong>, enter <code>http://YOUR-PC:8080</code> and tap <strong>Validate Connection</strong>. Choose the picture or video model, and turn on <strong>This model makes video clips</strong> for video models (Ari guesses from the name). Tap <strong>Use LocalAI's chat models too</strong> to add its chat models to the model menu.</li>
       </ol>
 
-      <h2 id="gaming"><span class="step">5</span>Share the PC with your games</h2>
+      <h2 id="gaming"><span class="step">5</span>Hand the GPU to your games automatically</h2>
+      <p>A small watcher script does this for you. The moment a game starts, it stops Ollama, ComfyUI and LocalAI so the game gets all of the video memory. When you quit the game, the AI servers start again a few seconds later, ready for Ari.</p>
+      <ol>
+        <li>Download <a href="ai-game-mode.ps1" download><strong>ai-game-mode.ps1</strong></a> and save it in <code>C:\AI</code>.</li>
+        <li>If you put ComfyUI somewhere other than <code>C:\AI\ComfyUI</code>, open the script in Notepad and change <code>$ComfyUIDir</code> near the top.</li>
+        <li>Open PowerShell in <code>C:\AI</code> and install it:
+          <pre><code>powershell -ExecutionPolicy Bypass -File .\ai-game-mode.ps1 -Install</code></pre>
+          This adds a hidden task named <strong>AI Game Mode</strong> that runs whenever you sign in, and starts it now. It also starts ComfyUI for you, so if you made a startup shortcut for <code>run_nvidia_gpu.bat</code>, delete it.</li>
+        <li>Check what it sees:
+          <pre><code>powershell -ExecutionPolicy Bypass -File .\ai-game-mode.ps1 -Status</code></pre></li>
+      </ol>
+      <h3>How it knows you're playing</h3>
+      <p>Anything running from a game library counts as a game: every Steam library, Epic, GOG, Xbox (<code>XboxGames</code>), EA, Ubisoft, Riot and Blizzard game folders are found automatically, on every drive. Launchers sitting in the tray don't count, so having Steam or the Epic launcher open won't pause anything.</p>
       <ul>
-        <li><strong>Start with Windows.</strong> Ollama and Docker Desktop already do. For ComfyUI, press <kbd>Win</kbd>+<kbd>R</kbd>, type <code>shell:startup</code>, and put a shortcut to <code>run_nvidia_gpu.bat</code> in that folder. Tailscale's <code>serve</code> settings survive restarts.</li>
-        <li><strong>Keep it awake while you're away.</strong> In <strong>Settings › System › Power</strong>, set the PC not to sleep when plugged in, or Ari can't reach it.</li>
-        <li><strong>Hand the card back before you play.</strong> Ollama unloads by itself after two minutes. To free everything at once, save this as <code>game-mode.bat</code> on the desktop and run it before you start a game:
-          <pre><code>@echo off
-rem Unload ComfyUI's models
-curl -s -X POST http://127.0.0.1:8188/free -H "Content-Type: application/json" -d "{\"unload_models\":true,\"free_memory\":true}"
-rem Unload every model Ollama has loaded
-for /f "skip=1 tokens=1" %%m in ('ollama ps') do ollama stop %%m
-rem Pause LocalAI (start it again with: docker start local-ai)
-docker stop local-ai
-echo GPU is free. Have fun.</code></pre></li>
-        <li>A request from Ari while you're playing still works; it just loads the model again and competes with the game for the card.</li>
+        <li><strong>A game it misses</strong> (installed somewhere unusual): add its program name to <code>$ExtraGames</code> at the top of the script, e.g. <code>'MyGame.exe'</code>.</li>
+        <li><strong>Something that isn't a game keeps the AI paused</strong> (a tool installed through Steam, for example): the log names whatever triggered the pause, so add that name to <code>$IgnoreGames</code>. The log is at <code>%LOCALAPPDATA%\AIGameMode\ai-game-mode.log</code>.</li>
+        <li>After editing the script, run <code>-Install</code> again to restart it.</li>
+      </ul>
+      <h3>Options</h3>
+      <ul>
+        <li><strong>Stop or unload.</strong> By default the servers stop entirely while you play, so nothing can load a model in the middle of your game; Ari reports that the server isn't answering until you quit. Set <code>$PauseMode = 'Unload'</code> to keep them answering with their models unloaded instead. Ari can then still use the PC mid-game, at the cost of some video memory while it does.</li>
+        <li><strong>How fast it comes back.</strong> <code>$ResumeSeconds</code> (3 by default) is how long it waits after the last game exits, so a game that restarts itself doesn't bounce the servers.</li>
+        <li><strong>By hand.</strong> <code>-Pause</code> frees the GPU now, <code>-Resume</code> brings the servers back, and <code>-Uninstall</code> removes the task.</li>
+      </ul>
+      <h3>Keep it reachable</h3>
+      <ul>
+        <li><strong>Stay awake while you're away.</strong> In <strong>Settings › System › Power</strong>, set the PC not to sleep when plugged in, or Ari can't reach it.</li>
+        <li>Ollama and Docker Desktop start with Windows on their own, the watcher starts ComfyUI, and Tailscale's <code>serve</code> settings survive restarts.</li>
       </ul>
 
       <h2 id="trouble">Troubleshooting</h2>
@@ -249,7 +263,7 @@ echo GPU is free. Have fun.</code></pre></li>
         <li>Make sure the iPhone or Mac has Tailscale connected, and that you used the full <code>.ts.net</code> name.</li>
       </ul>
       <h3>"Out of memory" or a very slow first run</h3>
-      <p>The first run loads the model from disk, which can take a minute. If it fails with out of memory, close other GPU apps, use FP8 or smaller models, lower the resolution or number of frames, or run <code>game-mode.bat</code> to clear what's loaded.</p>
+      <p>The first run loads the model from disk, which can take a minute. If it fails with out of memory, close other GPU apps, use FP8 or smaller models, lower the resolution or number of frames, or run the watcher with <code>-Pause</code> to clear what's loaded.</p>
       <h3>Ari says the clip can't be played</h3>
       <p>Set the workflow's video node to save MP4 (H.264), export it again with <strong>Export (API)</strong>, and re-import it in Ari.</p>
       <h3>Ari can't find the prompt in my workflow</h3>
