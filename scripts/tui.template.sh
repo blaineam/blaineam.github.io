@@ -1184,7 +1184,9 @@ RADIO=$(cat <<'WM_RADIO'
 # same seed and n always make the same song; cut keeps only its first few bars (for the tests).
 function rnd(k) { return int(rand() * k) }
 function pick(s,   a) { return a[rnd(split(s, a, " ")) + 1] }
-function hz(m) { return 440 * exp((m - 69) * L2) / SR }
+function hz(m) { return HZ[m] }
+# a sine from two parabolas, p in [0, 1): BusyBox awk can be built with no sin() at all
+function sn(p) { return p < .5 ? 16 * p * (.5 - p) : 16 * (p - .5) * (p - 1) }
 function nt(d) { return root + SC[d % 7 + 1] + 12 * int(d / 7) }
 function tune(o, lo,   i, d) {                 # two bars of eighth notes, a step or two at a time
   d = lo + rnd(4)
@@ -1195,7 +1197,9 @@ function tune(o, lo,   i, d) {                 # two bars of eighth notes, a ste
   }
 }
 BEGIN {
-  L2 = log(2) / 12; TAU = 8 * atan2(1, 1)
+  # no exp(), log() or sin() anywhere: BusyBox awk can be built without them. Pitches come from a table.
+  HZ[69] = 440 / SR; for (m = 70; m < 128; m++) HZ[m] = HZ[m - 1] * 1.0594630943592953
+  for (m = 68; m >= 0; m--) HZ[m] = HZ[m + 1] / 1.0594630943592953
   srand(seed * 1000 + n)
   ST = rnd(3) + 1                              # 1 synthwave, 2 lo-fi, 3 rock
   if (ST == 1) {
@@ -1217,7 +1221,7 @@ BEGIN {
   bars = length(form); stp = SR * 60 / bpm / 4; total = 0
   for (s = 0; s < bars * 16; s++) total += int(stp * (s % 2 ? 1 - sw : 1 + sw))
   fade = total - int(stp * 16 * (ST == 2 ? 4 : 2)); t = 0
-  G = 24000 * (vol == "" ? 1 : (vol / 10) ^ 2)
+  G = 24000 * (vol == "" ? 1 : vol * vol / 100)
   cf1 = cf2 = cf3 = cf4 = bf = lf = af = 0; kp = sp = lp = hp = cp1 = cp2 = cp3 = cp4 = cq1 = cq2 = cq3 = 0
   KE = SE = HE = CE = 0; ce = be = le = ae = 0
   for (bar = 0; bar < bars; bar++) {
@@ -1260,7 +1264,7 @@ BEGIN {
         if (bf) {
           if (ba < bl) be = ba < 40 ? ba * bpk / 40 : bpk; else if ((be *= .9992) < .0005) bf = 0
           ba++; if ((bp += bf) >= 1) bp--
-          x += (ST == 2 ? sin(TAU * bp) : ST == 3 ? (bp < .5 ? .7 : -.7) : bp + bp - 1) * be
+          x += (ST == 2 ? sn(bp) : ST == 3 ? (bp < .5 ? .7 : -.7) : bp + bp - 1) * be
         }
         if (lf) {
           if (la < ll) le = la < 80 ? la * lpk / 80 : lpk; else if ((le *= .9992) < .0005) lf = 0
@@ -1272,16 +1276,17 @@ BEGIN {
           aa++; if ((aq += af) >= 1) aq--
           x += aq < .25 ? 1.5 * ae : -.5 * ae
         }
-        if (KE > .001) { kp += KF; KF = KF * .9993 + .0308 / SR; x += sin(TAU * kp) * KE * .9; KE *= .99975 }
+        if (KE > .001) { if ((kp += KF) >= 1) kp--; KF = KF * .9993 + .0308 / SR; x += sn(kp) * KE * .9; KE *= .99975 }
         if (SE + HE + CE > .002) {
           r = rand() * 2 - 1; hh = r - hp; hp = r
-          if (SE > .001) { x += (r * .35 + sin(TAU * (sp += 190 / SR)) * .15) * SE; SE *= ST == 1 ? .99985 : .9996 }
+          if (SE > .001) { if ((sp += 190 / SR) >= 1) sp--; x += (r * .35 + sn(sp) * .15) * SE; SE *= ST == 1 ? .99985 : .9996 }
           x += hh * (HE * .12 + CE * .1); HE *= .997; CE *= .99985
         }
         if (ST == 2) { if (rand() < .0003) x += rand() * .3 - .15; lp += (x - lp) * .35; x = lp }
         if (tt < 3000) x *= tt / 3000; else if (tt > fade) x *= (total - tt) / (total - fade)
         if (tt < off) continue
         y = int(x / (1 + (x < 0 ? -x : x) * .25) * G)
+        if (y > 32767) y = 32767; else if (y < -32767) y = -32767
         if (b8) { y = int(y / 256) + 128; printf "%c", (y < 1 ? 1 : (y > 255 ? 255 : y)) }
         else { if (y < 0) y += 65536; printf "%c%c", y % 256, int(y / 256) }
       }
