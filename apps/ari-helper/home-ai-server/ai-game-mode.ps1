@@ -47,9 +47,12 @@ $ManageOllama  = $true
 $ManageComfyUI = $true
 $ManageLocalAI = $true
 
-# Where the ComfyUI portable package was extracted, and its port.
-$ComfyUIDir  = 'C:\AI\ComfyUI'
-$ComfyUIPort = 8188
+# ComfyUI runs inside the Comfy Desktop app. Turn on "Auto start" for your
+# build there, so that opening the app starts ComfyUI again. The script finds
+# the app by itself; set the full path to "Comfy Desktop.exe" only if -Status
+# says it can't.
+$ComfyDesktopExe = ''
+$ComfyUIPort     = 8188
 
 # Docker container name used for LocalAI.
 $LocalAIContainer = 'local-ai'
@@ -79,7 +82,7 @@ $IgnoreGames = @(
 $TaskName = 'AI Game Mode'
 $StateDir = Join-Path $env:LOCALAPPDATA 'AIGameMode'
 $LogPath  = Join-Path $StateDir 'ai-game-mode.log'
-$ComfyLog = Join-Path $StateDir 'comfyui.log'
+$ComfyExeFile = Join-Path $StateDir 'comfy-desktop-path.txt'
 New-Item -ItemType Directory -Force -Path $StateDir | Out-Null
 
 function Write-Log([string]$Message) {
@@ -189,6 +192,35 @@ function Get-ComfyProcesses {
         Where-Object { $_.CommandLine -like '*ComfyUI*main.py*' }
 }
 
+function Get-ComfyDesktopProcesses { @(Get-Process -Name 'Comfy Desktop' -ErrorAction SilentlyContinue) }
+
+# While the app is open, remember where it lives: that's how it gets reopened.
+function Save-ComfyDesktopPath($Processes) {
+    foreach ($p in $Processes) {
+        $path = $null
+        try { $path = $p.Path } catch { }
+        if ($path) { Set-Content -Path $ComfyExeFile -Value $path; return }
+    }
+}
+
+function Find-ComfyDesktop {
+    $candidates = @($ComfyDesktopExe)
+    if (Test-Path $ComfyExeFile) { $candidates += (Get-Content $ComfyExeFile -TotalCount 1) }
+    foreach ($root in @("$env:LOCALAPPDATA\Programs", $env:ProgramFiles)) {
+        if ($root) { $candidates += "$root\Comfy Desktop\Comfy Desktop.exe" }
+    }
+    foreach ($c in $candidates) { if ($c -and (Test-Path $c)) { return $c } }
+    # Last resort: whatever the Start menu shortcut points at.
+    foreach ($menu in @("$env:APPDATA\Microsoft\Windows\Start Menu\Programs", "$env:ProgramData\Microsoft\Windows\Start Menu\Programs")) {
+        $link = Get-ChildItem $menu -Recurse -Filter 'Comfy Desktop.lnk' -ErrorAction SilentlyContinue | Select-Object -First 1
+        if ($link) {
+            $target = (New-Object -ComObject WScript.Shell).CreateShortcut($link.FullName).TargetPath
+            if ($target -and (Test-Path $target)) { return $target }
+        }
+    }
+    return $null
+}
+
 function Test-Docker { [bool](Get-Command docker -ErrorAction SilentlyContinue) }
 
 function Stop-AI {
@@ -201,9 +233,16 @@ function Stop-AI {
                 Write-Log '  ComfyUI: models unloaded'
             } catch { }
         } else {
+            # The app first, so it doesn't report its ComfyUI as crashed,
+            # then any ComfyUI process still holding video memory.
+            $app = @(Get-ComfyDesktopProcesses)
+            if ($app.Count) {
+                Save-ComfyDesktopPath $app
+                $app | Stop-Process -Force -ErrorAction SilentlyContinue
+            }
             $procs = @(Get-ComfyProcesses)
             foreach ($c in $procs) { Stop-Process -Id $c.ProcessId -Force -ErrorAction SilentlyContinue }
-            if ($procs.Count) { Write-Log '  ComfyUI: stopped' }
+            if ($app.Count -or $procs.Count) { Write-Log '  ComfyUI: stopped (Comfy Desktop closed)' }
         }
     }
     if ($ManageOllama) {
@@ -247,17 +286,18 @@ function Start-AI {
             Write-Log '  Ollama: started (ollama serve)'
         }
     }
-    if ($ManageComfyUI -and -not (Get-ComfyProcesses) -and -not (Test-Port $ComfyUIPort)) {
-        $python = Join-Path $ComfyUIDir 'python_embeded\python.exe'
-        if (Test-Path $python) {
-            # Same as run_nvidia_gpu.bat, without a window, and still only on
-            # 127.0.0.1 (no --listen): Tailscale shares it with your devices.
-            Start-Process -FilePath $python -WorkingDirectory $ComfyUIDir -WindowStyle Hidden `
-                -ArgumentList '-s', 'ComfyUI\main.py', '--windows-standalone-build', '--port', "$ComfyUIPort" `
-                -RedirectStandardOutput $ComfyLog -RedirectStandardError "$ComfyLog.err"
-            Write-Log '  ComfyUI: started'
-        } else {
-            Write-Log "  ComfyUI: not found in $ComfyUIDir (set `$ComfyUIDir at the top of this script)"
+    if ($ManageComfyUI) {
+        $open = @(Get-ComfyDesktopProcesses)
+        if ($open.Count) {
+            Save-ComfyDesktopPath $open
+        } elseif (-not (Test-Port $ComfyUIPort)) {
+            $exe = Find-ComfyDesktop
+            if ($exe) {
+                Start-Process -FilePath $exe -WindowStyle Minimized
+                Write-Log '  ComfyUI: opened Comfy Desktop'
+            } else {
+                Write-Log '  ComfyUI: Comfy Desktop not found (open it once, or set $ComfyDesktopExe at the top of this script)'
+            }
         }
     }
     if ($ManageLocalAI -and (Test-Docker)) {
@@ -276,6 +316,10 @@ function Show-Status {
     Write-Host ("Game running : {0}" -f $(if ($game) { "$($game.ProcessName) ($($game.Path))" } else { 'none' }))
     Write-Host ("Ollama       : {0}" -f $(if (Test-Port 11434) { 'serving on 127.0.0.1:11434' } else { 'stopped' }))
     Write-Host ("ComfyUI      : {0}" -f $(if (Test-Port $ComfyUIPort) { "serving on 127.0.0.1:$ComfyUIPort" } else { 'stopped' }))
+    $open = @(Get-ComfyDesktopProcesses)
+    if ($open.Count) { Save-ComfyDesktopPath $open }
+    $comfyApp = Find-ComfyDesktop
+    Write-Host ("Comfy app    : {0}" -f $(if ($comfyApp) { $comfyApp } else { 'not found (open Comfy Desktop, then run -Status again)' }))
     Write-Host ("LocalAI      : {0}" -f $(if (Test-Port 8080) { 'serving on 127.0.0.1:8080' } else { 'stopped' }))
     Write-Host ("Task         : {0}" -f $(if (Get-ScheduledTask -TaskName $TaskName -ErrorAction SilentlyContinue) { 'installed' } else { 'not installed' }))
     Write-Host 'Game folders :'
@@ -314,6 +358,8 @@ function Invoke-Watcher {
 }
 
 function Install-Task {
+    $running = @(Get-ComfyDesktopProcesses)
+    if ($running.Count) { Save-ComfyDesktopPath $running }
     $script = $PSCommandPath
     $action = New-ScheduledTaskAction -Execute 'powershell.exe' `
         -Argument "-NoProfile -WindowStyle Hidden -ExecutionPolicy Bypass -File `"$script`" -Watch"
@@ -326,12 +372,6 @@ function Install-Task {
     Start-ScheduledTask -TaskName $TaskName
     Write-Host "Installed '$TaskName'. It runs at every sign-in and is running now."
     Write-Host "Log: $LogPath"
-    $startup = [Environment]::GetFolderPath('Startup')
-    $old = Get-ChildItem $startup -Filter '*.lnk' -ErrorAction SilentlyContinue | Where-Object { $_.Name -like '*nvidia*' -or $_.Name -like '*ComfyUI*' }
-    if ($old) {
-        Write-Host "This task starts ComfyUI itself now. Remove the old startup shortcut(s) in $startup :"
-        $old | ForEach-Object { Write-Host "  $($_.Name)" }
-    }
 }
 
 if ($Install)   { Install-Task; return }

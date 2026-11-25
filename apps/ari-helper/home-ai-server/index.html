@@ -187,18 +187,20 @@ ollama pull qwen2.5vl:7b       # fast photo and document reading</code></pre></l
       </ol>
 
       <h2 id="comfyui"><span class="step">3</span>ComfyUI: pictures and video</h2>
+      <p>Use <strong>Comfy Desktop</strong>, the official ComfyUI app. It sets up Python and the GPU libraries for you, so there's nothing to type.</p>
       <h3>Install</h3>
       <ol>
-        <li>Download the portable NVIDIA build, <a href="https://github.com/Comfy-Org/ComfyUI/releases/latest/download/ComfyUI_windows_portable_nvidia.7z" rel="noopener noreferrer" target="_blank">ComfyUI_windows_portable_nvidia.7z</a>, and extract it with <a href="https://www.7-zip.org" rel="noopener noreferrer" target="_blank">7-Zip</a> to a short path such as <code>C:\AI\ComfyUI</code>.</li>
-        <li>Start it with <strong>run_nvidia_gpu.bat</strong> (in newer packages it's inside the <code>advanced</code> folder). Don't add <code>--listen</code>; ComfyUI should stay on <code>127.0.0.1:8188</code>.</li>
-        <li>Open <code>http://127.0.0.1:8188</code> in a browser on the PC to check it's running.</li>
+        <li>Go to <a href="https://www.comfy.org/download" rel="noopener noreferrer" target="_blank">comfy.org/download</a>, click <strong>Download Desktop</strong> and run the Windows installer.</li>
+        <li>Open <strong>Comfy Desktop</strong>. On the <strong>Install ComfyUI on this PC</strong> screen, check that it detected your NVIDIA card, accept the terms and click <strong>Install</strong>. If it asks you to update the NVIDIA driver, update it.</li>
+        <li>When it finishes, ComfyUI opens in its own window. In the Comfy Desktop sidebar, right-click your build and make sure <strong>Auto start</strong> is on, so ComfyUI starts whenever the app opens.</li>
+        <li>Leave the build's <strong>Startup arguments</strong> without <code>--listen</code> and keep the default port, so ComfyUI stays on <code>127.0.0.1:8188</code>. To check, open <code>http://127.0.0.1:8188</code> in a browser on the PC. If it doesn't load, the build's <strong>Overview</strong> tab shows the port it's using: close whatever else is using 8188 and restart the build.</li>
       </ol>
       <h3>Add a picture model</h3>
-      <p>Put a checkpoint (a single <code>.safetensors</code> model file) in <code>ComfyUI\models\checkpoints</code>. An SDXL checkpoint, or an FP8 "all-in-one" FLUX checkpoint, is a good first choice. Ari runs any checkpoint there directly: pick it in the model menu and ask for a picture. Attach a photo and Ari uses it as the starting point.</p>
+      <p>Put a checkpoint (a single <code>.safetensors</code> model file) in <code>%LOCALAPPDATA%\Comfy-Desktop\ComfyUI-Shared\models\checkpoints</code> (paste that into File Explorer's address bar). If you chose a different folder, <strong>Desktop settings › Folders</strong> shows where it is. An SDXL checkpoint, or an FP8 "all-in-one" FLUX checkpoint, is a good first choice. Ari runs any checkpoint there directly: pick it in the model menu and ask for a picture. Attach a photo and Ari uses it as the starting point.</p>
       <h3>Add video (and anything else) with a workflow</h3>
       <ol>
         <li>In ComfyUI, open <strong>Workflow › Browse Templates</strong> and pick a video template, such as one of the Wan 2.2 text-to-video or image-to-video templates. ComfyUI offers to download the models it needs.</li>
-        <li>Run it once in the browser to make sure it works on your card.</li>
+        <li>Run it once in ComfyUI to make sure it works on your card.</li>
         <li>Make sure the video node saves <strong>MP4 (H.264)</strong>. Apple devices can't play WebM.</li>
         <li>Optional: in the prompt box, replace the text with <code>{{prompt}}</code>. Ari also understands <code>{{negative_prompt}}</code>, <code>{{seed}}</code>, <code>{{width}}</code>, <code>{{height}}</code> and <code>{{image}}</code>. Without them, Ari finds the prompt box connected to the sampler by itself.</li>
         <li>Choose <strong>Workflow › Export (API)</strong> and save the <code>.json</code> file somewhere your Apple devices can reach, like iCloud Drive.</li>
@@ -229,13 +231,14 @@ ollama pull qwen2.5vl:7b       # fast photo and document reading</code></pre></l
       <p>A small watcher script does this for you. The moment a game starts, it stops Ollama, ComfyUI and LocalAI so the game gets all of the video memory. When you quit the game, the AI servers start again a few seconds later, ready for Ari.</p>
       <ol>
         <li>Download <a href="ai-game-mode.ps1" download><strong>ai-game-mode.ps1</strong></a> and save it in <code>C:\AI</code>.</li>
-        <li>If you put ComfyUI somewhere other than <code>C:\AI\ComfyUI</code>, open the script in Notepad and change <code>$ComfyUIDir</code> near the top.</li>
+        <li>Open Comfy Desktop and leave it running while you install the script, so the script can note where the app is. Check that <strong>Auto start</strong> is on for your build (section 3).</li>
         <li>Open PowerShell in <code>C:\AI</code> and install it:
           <pre><code>powershell -ExecutionPolicy Bypass -File .\ai-game-mode.ps1 -Install</code></pre>
-          This adds a hidden task named <strong>AI Game Mode</strong> that runs whenever you sign in, and starts it now. It also starts ComfyUI for you, so if you made a startup shortcut for <code>run_nvidia_gpu.bat</code>, delete it.</li>
+          This adds a hidden task named <strong>AI Game Mode</strong> that runs whenever you sign in, and starts it now. It also opens Comfy Desktop for you whenever the AI servers should be running.</li>
         <li>Check what it sees:
           <pre><code>powershell -ExecutionPolicy Bypass -File .\ai-game-mode.ps1 -Status</code></pre></li>
       </ol>
+      <p>When a game starts, the script closes Comfy Desktop completely, which also stops ComfyUI. When you quit the game, it opens the app again and <strong>Auto start</strong> brings ComfyUI back; you can minimize the window. <strong>Save any workflow you're editing before you play</strong>, because closing the app this way discards unsaved changes.</p>
       <h3>How it knows you're playing</h3>
       <p>Anything running from a game library counts as a game: every Steam library, Epic, GOG, Xbox (<code>XboxGames</code>), EA, Ubisoft, Riot and Blizzard game folders are found automatically, on every drive. Launchers sitting in the tray don't count, so having Steam or the Epic launcher open won't pause anything.</p>
       <ul>
@@ -245,14 +248,14 @@ ollama pull qwen2.5vl:7b       # fast photo and document reading</code></pre></l
       </ul>
       <h3>Options</h3>
       <ul>
-        <li><strong>Stop or unload.</strong> By default the servers stop entirely while you play, so nothing can load a model in the middle of your game; Ari reports that the server isn't answering until you quit. Set <code>$PauseMode = 'Unload'</code> to keep them answering with their models unloaded instead. Ari can then still use the PC mid-game, at the cost of some video memory while it does.</li>
+        <li><strong>Stop or unload.</strong> By default the servers stop entirely while you play, so nothing can load a model in the middle of your game; Ari reports that the server isn't answering until you quit. Set <code>$PauseMode = 'Unload'</code> to keep them answering with their models unloaded instead (Comfy Desktop then stays open). Ari can then still use the PC mid-game, at the cost of some video memory while it does.</li>
         <li><strong>How fast it comes back.</strong> <code>$ResumeSeconds</code> (3 by default) is how long it waits after the last game exits, so a game that restarts itself doesn't bounce the servers.</li>
         <li><strong>By hand.</strong> <code>-Pause</code> frees the GPU now, <code>-Resume</code> brings the servers back, and <code>-Uninstall</code> removes the task.</li>
       </ul>
       <h3>Keep it reachable</h3>
       <ul>
         <li><strong>Stay awake while you're away.</strong> In <strong>Settings › System › Power</strong>, set the PC not to sleep when plugged in, or Ari can't reach it.</li>
-        <li>Ollama and Docker Desktop start with Windows on their own, the watcher starts ComfyUI, and Tailscale's <code>serve</code> settings survive restarts.</li>
+        <li>Ollama and Docker Desktop start with Windows on their own, the watcher opens Comfy Desktop, and Tailscale's <code>serve</code> settings survive restarts.</li>
       </ul>
 
       <h2 id="trouble">Troubleshooting</h2>
