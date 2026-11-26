@@ -202,7 +202,7 @@ ollama pull qwen2.5vl:7b       # fast photo and document reading</code></pre></l
         <li>In ComfyUI, open <strong>Workflow › Browse Templates</strong> and pick a video template, such as one of the Wan 2.2 text-to-video or image-to-video templates. ComfyUI offers to download the models it needs.</li>
         <li>Run it once in ComfyUI to make sure it works on your card.</li>
         <li>Make sure the video node saves <strong>MP4 (H.264)</strong>. Apple devices can't play WebM.</li>
-        <li>Optional: in the prompt box, replace the text with <code>{{prompt}}</code>. Ari also understands <code>{{negative_prompt}}</code>, <code>{{seed}}</code>, <code>{{width}}</code>, <code>{{height}}</code> and <code>{{image}}</code>. Without them, Ari finds the prompt box connected to the sampler by itself.</li>
+        <li>Optional: to choose where your prompt goes, replace the text in that prompt box with <code>\{\{prompt\}\}</code>, backslashes included. ComfyUI treats plain braces in many text boxes as "pick one of these" and removes them when it exports; the backslashes keep them, and the exported file contains <code>{{prompt}}</code>. Do the same in each box that should receive your prompt. Ari also understands <code>negative_prompt</code>, <code>seed</code>, <code>width</code>, <code>height</code> and <code>image</code> written the same way. Add placeholders after your test run, because ComfyUI would send them to the model as they are. Without them, Ari finds the prompt box by itself.</li>
         <li>Choose <strong>Workflow › Export (API)</strong> and save the <code>.json</code> file somewhere your Apple devices can reach, like iCloud Drive.</li>
         <li>In Ari, <strong>Settings › Self-Hosted › ComfyUI › Import workflow file</strong> (or paste the file's text). Imported workflows appear in the ComfyUI model menu; ones that make video are labelled.</li>
       </ol>
@@ -270,7 +270,7 @@ ollama pull qwen2.5vl:7b       # fast photo and document reading</code></pre></l
       <h3>Ari says the clip can't be played</h3>
       <p>Set the workflow's video node to save MP4 (H.264), export it again with <strong>Export (API)</strong>, and re-import it in Ari.</p>
       <h3>Ari can't find the prompt in my workflow</h3>
-      <p>Type <code>{{prompt}}</code> into the text box that should receive the prompt, export again, and re-import.</p>
+      <p>Type <code>\{\{prompt\}\}</code>, backslashes included, into each text box that should receive the prompt, export again, and re-import. If the exported file shows only <code>prompt</code> in that box, the backslashes were missing.</p>
       <h3>Should I use <code>--listen</code> or open the firewall?</h3>
       <p>No. That shares the server with every device on your network, and none of these servers asks for a password. Tailscale gives your own devices access without that risk. If Windows asks whether to allow a server on public or private networks, choose <strong>Cancel</strong>.</p>
 
