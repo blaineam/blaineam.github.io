@@ -234,6 +234,23 @@
   var viewButtons = $$('.views [data-view-to]'), pill = $('.views__pill');
   var gallery = $('#g'), setButtons = $$('.sets [data-set]'), allPhotos = $$('.ph', gallery), PAGE = 24, PREVIEW = 12, galleryLimit = PAGE, galleryOpen = false;
 
+  // Pack the gallery without reordering it. A tile reports a new size when it is first shown, when the
+  // columns change width and when a filter brings it back, so nothing else has to ask for a repack.
+  if (gallery && window.ResizeObserver) {
+    var sizes = new ResizeObserver(function (entries) {
+      entries.map(function (e) {
+        var el = e.target, h = el.offsetHeight;
+        return [el, h && Math.round(h + parseFloat(getComputedStyle(el).marginBottom || 0))];
+      }).forEach(function (m) { if (m[1]) m[0].style.gridRowEnd = 'span ' + m[1]; });
+    });
+    var watch = function (el) { if (el.nodeType === 1) sizes.observe(el); };
+    gallery.classList.add('is-packed');
+    Array.prototype.forEach.call(gallery.children, watch);
+    if (window.MutationObserver) new MutationObserver(function (changes) {
+      changes.forEach(function (c) { Array.prototype.forEach.call(c.addedNodes, watch); });
+    }).observe(gallery, { childList: true });
+  }
+
   function movePill() {
     var on = viewButtons.filter(function (b) { return b.getAttribute('aria-pressed') === 'true'; })[0];
     if (!on || !pill) return;

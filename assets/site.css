@@ -362,7 +362,11 @@ html:not(.js) .gbar { display: none; }
 .lb__meta { display: flex; flex-wrap: wrap; gap: 4px 14px; margin-top: 6px; font: 500 .8rem/1.5 var(--mono); color: rgba(255, 255, 255, .72); }
 .lb__meta span { display: inline-flex; align-items: center; gap: 5px; white-space: nowrap; }
 .lb__meta svg { width: 1.15em; height: 1.15em; color: var(--accent); flex: none; }
-.g { columns: 4 250px; column-gap: 10px; }
+.g { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, max(250px, calc((100% - 30px) / 4))), 1fr)); column-gap: 10px; align-items: start; }
+.g > * { min-width: 0; }
+/* photographs read left to right, then down. site.js gives each one as many 1px rows as it is tall,
+   which packs them closely without changing their order; without it they sit in ordinary rows. */
+.g.is-packed { grid-auto-rows: 1px; }
 .ph { position: relative; display: block; margin-bottom: 10px; border-radius: 12px; overflow: hidden; background: var(--c, #1a2233); break-inside: avoid; cursor: zoom-in; transform: translateZ(0); }
 .ph img { width: 100%; transition: transform .9s var(--ease), opacity .7s ease; }
 .js .ph img:not(.is-loaded) { opacity: 0; }
@@ -375,7 +379,7 @@ html:not(.js) .gbar { display: none; }
 #g-end { height: 1px; }
 html:not(.js) #g-more, html:not(.js) #tl-more { display: none; }
 .js .years[data-open="false"] .year:not(:first-child), .js .years[data-open="false"] .year:first-child .tl:nth-of-type(n+10) { display: none; }
-@media (max-width: 560px) { .g { columns: 2; column-gap: 6px; } .ph { margin-bottom: 6px; border-radius: 8px; } }
+@media (max-width: 560px) { .g { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 6px; } .ph { margin-bottom: 6px; border-radius: 8px; } }
 
 .verse { max-width: 46rem; margin: clamp(48px, 8vw, 96px) auto 0; text-align: center; font: italic 400 clamp(1.1rem, 2vw, 1.4rem)/1.6 var(--serif); color: var(--soft); text-wrap: balance; }
 .verse cite { display: block; margin-top: .9em; font: 600 .8rem var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--faint); }
