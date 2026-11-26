@@ -330,6 +330,8 @@ const heroCopy = {
           <p class="bday" id="bday" hidden data-born="${esc(site.luma.born)}" ${['count', 'one', 'today', 'after'].map((k) => `data-${k}="${esc(t('bday.' + k))}"`).join(' ')} data-i18n-attr="${['count', 'one', 'today', 'after'].map((k) => `data-${k}:bday.${k}`).join(';')}" aria-live="polite"></p>`,
 };
 
+// The dogs' view (internally still "luma") shows both dogs' photographs.
+const isPup = (p) => p.tags.includes('luma') || p.tags.includes('nova');
 const lumaBorn = new Date(site.luma.born + 'T00:00:00');
 const lumaEnd = lumaPassed ? new Date(lumaPassed + 'T00:00:00') : new Date();
 const lumaAge = lumaEnd.getFullYear() - lumaBorn.getFullYear() - (lumaEnd < new Date(lumaEnd.getFullYear(), lumaBorn.getMonth(), lumaBorn.getDate()) ? 1 : 0);
@@ -340,7 +342,7 @@ const stats = [
   [String(photos.length), 'stat.photos', 'photo'],
   [String(panoCount), 'stat.panos', 'photo'],
   [String(lumaAge), 'stat.lumaage', 'luma', lumaPassed ? '' : ` data-age-from="${site.luma.born}"`],
-  [String(photos.filter((p) => p.tags.includes('luma')).length), 'stat.luma', 'luma'],
+  [String(photos.filter(isPup).length), 'stat.luma', 'luma'],
   [String(resume.skills.reduce((n, g) => n + g.items.length, 0)), 'stat.langs', 'maker hire'],
 ];
 
@@ -415,7 +417,7 @@ const jsonLd = {
 
 // Runs before first paint: picks the view from the URL (or the hostname) so the right hero is
 // the first thing drawn. Without JavaScript the page simply shows the default view.
-const bootScript = `(function(){var d=document.documentElement,q=new URLSearchParams(location.search),v=q.get("v"),m=q.get("mode"),h=${JSON.stringify(site.domains)}[location.hostname.toLowerCase()];var w=v==="120"||v==="photo"?"photo":v==="luma"?"luma":m==="hire"||m==="maker"?m:h||d.getAttribute("data-view");d.setAttribute("data-view",w);var hs=${JSON.stringify(Object.fromEntries(VIEWS.filter((v) => heroData[v][0]).map((v) => [v, heroData[v][0].set])))}[w];if(hs){var k=document.createElement("link");k.rel="preload";k.as="image";k.setAttribute("imagesrcset",hs);k.setAttribute("imagesizes","100vw");k.setAttribute("fetchpriority","high");document.head.appendChild(k)}d.classList.add("js");var th=null;try{th=localStorage.getItem("wm-theme");if(th==="light"||th==="dark")d.setAttribute("data-theme",th);else th=null}catch(e){}if(th?th==="light":(window.matchMedia&&matchMedia("(prefers-color-scheme: light)").matches))d.setAttribute("data-hero","light");try{var c=navigator.connection;if(c&&(c.saveData||/2g/.test(c.effectiveType||"")))d.classList.add("lite")}catch(e){}})();`;
+const bootScript = `(function(){var d=document.documentElement,q=new URLSearchParams(location.search),v=q.get("v"),m=q.get("mode"),h=${JSON.stringify(site.domains)}[location.hostname.toLowerCase()];var w=v==="120"||v==="photo"?"photo":v==="nova"||v==="luma"?"luma":m==="hire"||m==="maker"?m:h||d.getAttribute("data-view");d.setAttribute("data-view",w);var hs=${JSON.stringify(Object.fromEntries(VIEWS.filter((v) => heroData[v][0]).map((v) => [v, heroData[v][0].set])))}[w];if(hs){var k=document.createElement("link");k.rel="preload";k.as="image";k.setAttribute("imagesrcset",hs);k.setAttribute("imagesizes","100vw");k.setAttribute("fetchpriority","high");document.head.appendChild(k)}d.classList.add("js");var th=null;try{th=localStorage.getItem("wm-theme");if(th==="light"||th==="dark")d.setAttribute("data-theme",th);else th=null}catch(e){}if(th?th==="light":(window.matchMedia&&matchMedia("(prefers-color-scheme: light)").matches))d.setAttribute("data-hero","light");try{var c=navigator.connection;if(c&&(c.saveData||/2g/.test(c.effectiveType||"")))d.classList.add("lite")}catch(e){}})();`;
 
 const profile = stamp('profile.jpg');
 const avatar = stamp('assets/avatar.jpg');   // 192 px copy of profile.jpg for the header and the tab icon (the full photo is 160 KB)
@@ -600,7 +602,7 @@ ${resume.education.map((e, i) => `            <p data-since="${e.start.replace(/
       </section>
 
       <section class="sec sec--band" id="luma" data-views="maker photo" aria-labelledby="luma-h">
-        <a class="band reveal" href="?v=luma" data-view-to="luma">
+        <a class="band reveal" href="?v=nova" data-view-to="luma">
           <img src="${stamp(lumaPhoto.thumb)}" alt="${esc(lumaPhoto.alt)}" width="${lumaPhoto.w}" height="${lumaPhoto.h}" loading="lazy" decoding="async">
           <span class="band__copy">
             <span class="eyebrow">${I.paw}luma.dog</span>
@@ -695,7 +697,7 @@ ${site.social.map((s) => `          <li${/^(youtube|instagram|x|twitter)$/i.test
     <h2 id="tm-h">${I.clock}<span data-i18n="tm.title">${esc(t('tm.title'))}</span></h2>
     ${T('tm.p', 'p')}
     <div class="tm__grid">
-${['newyear', 'easter', 'memorial', 'birthday', 'july4', 'summer', 'fall', 'halloween', 'luma', 'veterans', 'christmas'].map((d) => `      <a href="/?${d === 'luma' ? 'v=luma&amp;' : ''}when=${d}" data-when="${d}" data-i18n="tm.d.${d}">${esc(t('tm.d.' + d))}</a>`).join('\n')}
+${['newyear', 'easter', 'memorial', 'birthday', 'july4', 'summer', 'fall', 'halloween', 'luma', 'veterans', 'christmas'].map((d) => `      <a href="/?${d === 'luma' ? 'v=nova&amp;' : ''}when=${d}" data-when="${d}" data-i18n="tm.d.${d}">${esc(t('tm.d.' + d))}</a>`).join('\n')}
     </div>
     <form class="tm__date" id="tm-form">
       <label><span data-i18n="tm.pick">${esc(t('tm.pick'))}</span><input type="datetime-local" id="tm-input" required></label>
@@ -1144,7 +1146,7 @@ write('app-sheets.json', JSON.stringify(sheets) + '\n');
 
 const entries = [];
 const sections = [['#work', 'work.h'], ['#projects', 'tl.h'], ['#gallery', 'ph.h'], ['/?mode=hire#experience', 'exp.h'], ['/resume/', 'exp.resume'],
-  ['/?v=luma', 'luma.h'], ['#contact', 'c.h'], ['#contact', 'tui.h']];
+  ['/?v=nova', 'luma.h'], ['#contact', 'c.h'], ['#contact', 'tui.h']];
 for (const [u, k] of sections) entries.push({ k: 'section', t: t(k), i: k, u });
 for (const p of projects) {
   entries.push({ k: 'project', t: p.title, d: p.tagline || strip(p.description).slice(0, 110), u: p.link || `/#p-${p.id}`,
@@ -1344,8 +1346,8 @@ const TUI_UI = {
     skills: 'Skills', education: 'Education', numbers: 'By the numbers', byyear: 'Projects by year', latest: 'Latest',
     contrib: '{1} contributions in the last year', less: 'less', more: 'more',
     enteropens: 'enter opens', fullresume: 'enter: full resume', openselected: 'enter opens the selected one', fullresumemd: 'Full resume:',
-    'n.apps': 'apps shipped', 'n.media': 'photos & panos', 'n.years': 'years building', 'n.projects': 'projects', 'n.langs': 'langs & tools', 'n.luma': 'Luma photos',
-    'g.gallery': 'Gallery', 'g.sky': 'Landscape & sky', 'g.luma': 'Luma', 'g.panos': '360 panoramas', 'g.books': 'Photo journals', 'g.puzzles': 'Puzzles',
+    'n.apps': 'apps shipped', 'n.media': 'photos & panos', 'n.years': 'years building', 'n.projects': 'projects', 'n.langs': 'langs & tools', 'n.luma': 'Pup photos',
+    'g.gallery': 'Gallery', 'g.sky': 'Landscape & sky', 'g.luma': 'Luma & Nova', 'g.panos': '360 panoramas', 'g.books': 'Photo journals', 'g.puzzles': 'Puzzles',
     'c.email': 'Email', 'c.resume': 'Resume', 'c.web': 'Website',
     'm.saved': 'saved {1} in {2}', 'm.offline': 'offline: saved {1}', 'm.nowrite': 'could not write here',
     'm.noplayer': 'no audio player found', 'm.notmp': 'no temporary folder',
@@ -1370,8 +1372,8 @@ const TUI_UI = {
     skills: '技能', education: '教育经历', numbers: '数据一览', byyear: '每年项目数', latest: '最新',
     contrib: '过去一年 {1} 次贡献', less: '少', more: '多',
     enteropens: '按 enter 打开', fullresume: 'enter：完整简历', openselected: '按 enter 打开所选项', fullresumemd: '完整简历：',
-    'n.apps': '已发布应用', 'n.media': '照片与全景', 'n.years': '年开发经验', 'n.projects': '个项目', 'n.langs': '语言与工具', 'n.luma': 'Luma 的照片',
-    'g.gallery': '图库', 'g.sky': '风景与天空', 'g.luma': 'Luma', 'g.panos': '360° 全景', 'g.books': '摄影日记', 'g.puzzles': '拼图',
+    'n.apps': '已发布应用', 'n.media': '照片与全景', 'n.years': '年开发经验', 'n.projects': '个项目', 'n.langs': '语言与工具', 'n.luma': '狗狗照片',
+    'g.gallery': '图库', 'g.sky': '风景与天空', 'g.luma': 'Luma & Nova', 'g.panos': '360° 全景', 'g.books': '摄影日记', 'g.puzzles': '拼图',
     'c.email': '邮箱', 'c.resume': '简历', 'c.web': '网站',
     'm.saved': '已将 {1} 保存到 {2}', 'm.offline': '离线：已保存 {1}', 'm.nowrite': '无法在此处写入',
     'm.noplayer': '找不到音频播放器', 'm.notmp': '无法创建临时文件夹',
@@ -1392,8 +1394,8 @@ const TUI_UI = {
     skills: 'スキル', education: '学歴', numbers: '数字で見る', byyear: '年別プロジェクト', latest: '最新',
     contrib: '過去1年間のコントリビューション {1} 件', less: '少', more: '多',
     enteropens: 'enter で開く', fullresume: 'enter：履歴書の全文', openselected: 'enter で選んだ項目を開きます', fullresumemd: '履歴書の全文：',
-    'n.apps': 'リリースアプリ', 'n.media': '写真・パノラマ', 'n.years': '年の開発歴', 'n.projects': 'プロジェクト', 'n.langs': '言語とツール', 'n.luma': 'Lumaの写真',
-    'g.gallery': 'ギャラリー', 'g.sky': '風景と空', 'g.luma': 'Luma', 'g.panos': '360°パノラマ', 'g.books': 'フォトジャーナル', 'g.puzzles': 'パズル',
+    'n.apps': 'リリースアプリ', 'n.media': '写真・パノラマ', 'n.years': '年の開発歴', 'n.projects': 'プロジェクト', 'n.langs': '言語とツール', 'n.luma': '2匹の写真',
+    'g.gallery': 'ギャラリー', 'g.sky': '風景と空', 'g.luma': 'Luma & Nova', 'g.panos': '360°パノラマ', 'g.books': 'フォトジャーナル', 'g.puzzles': 'パズル',
     'c.email': 'メール', 'c.resume': '履歴書', 'c.web': 'ウェブサイト',
     'm.saved': '{1} を {2} に保存しました', 'm.offline': 'オフライン：{1} を保存しました', 'm.nowrite': 'ここには保存できません',
     'm.noplayer': 'オーディオプレーヤーが見つかりません', 'm.notmp': '一時フォルダを作れません',
@@ -1414,8 +1416,8 @@ const TUI_UI = {
     skills: 'Kenntnisse', education: 'Ausbildung', numbers: 'In Zahlen', byyear: 'Projekte pro Jahr', latest: 'Neu',
     contrib: '{1} Beiträge im letzten Jahr', less: 'weniger', more: 'mehr',
     enteropens: 'enter öffnet', fullresume: 'enter: ganzer Lebenslauf', openselected: 'enter öffnet den gewählten Eintrag', fullresumemd: 'Vollständiger Lebenslauf:',
-    'n.apps': 'fertige Apps', 'n.media': 'Fotos & Panos', 'n.years': 'Jahre Erfahrung', 'n.projects': 'Projekte', 'n.langs': 'Technologien', 'n.luma': 'Fotos von Luma',
-    'g.gallery': 'Galerie', 'g.sky': 'Landschaft & Himmel', 'g.luma': 'Luma', 'g.panos': '360°-Panoramen', 'g.books': 'Fototagebücher', 'g.puzzles': 'Puzzles',
+    'n.apps': 'fertige Apps', 'n.media': 'Fotos & Panos', 'n.years': 'Jahre Erfahrung', 'n.projects': 'Projekte', 'n.langs': 'Technologien', 'n.luma': 'Hundefotos',
+    'g.gallery': 'Galerie', 'g.sky': 'Landschaft & Himmel', 'g.luma': 'Luma & Nova', 'g.panos': '360°-Panoramen', 'g.books': 'Fototagebücher', 'g.puzzles': 'Puzzles',
     'c.email': 'E-Mail', 'c.resume': 'Lebenslauf', 'c.web': 'Website',
     'm.saved': '{1} in {2} gespeichert', 'm.offline': 'offline: {1} gespeichert', 'm.nowrite': 'kann hier nicht speichern',
     'm.noplayer': 'kein Audioplayer gefunden', 'm.notmp': 'kein temporärer Ordner',
@@ -1436,8 +1438,8 @@ const TUI_UI = {
     skills: 'Compétences', education: 'Formation', numbers: 'En chiffres', byyear: 'Projets par année', latest: 'Récents',
     contrib: '{1} contributions sur les douze derniers mois', less: 'moins', more: 'plus',
     enteropens: 'enter pour ouvrir', fullresume: 'enter : CV complet', openselected: 'enter ouvre l’élément choisi', fullresumemd: 'CV complet :',
-    'n.apps': 'apps publiées', 'n.media': 'photos & panos', 'n.years': 'ans de métier', 'n.projects': 'projets', 'n.langs': 'technologies', 'n.luma': 'photos de Luma',
-    'g.gallery': 'Galerie', 'g.sky': 'Paysages & ciel', 'g.luma': 'Luma', 'g.panos': 'Panoramas 360°', 'g.books': 'Carnets photo', 'g.puzzles': 'Puzzles',
+    'n.apps': 'apps publiées', 'n.media': 'photos & panos', 'n.years': 'ans de métier', 'n.projects': 'projets', 'n.langs': 'technologies', 'n.luma': 'photos des chiens',
+    'g.gallery': 'Galerie', 'g.sky': 'Paysages & ciel', 'g.luma': 'Luma & Nova', 'g.panos': 'Panoramas 360°', 'g.books': 'Carnets photo', 'g.puzzles': 'Puzzles',
     'c.email': 'E-mail', 'c.resume': 'CV', 'c.web': 'Site web',
     'm.saved': '{1} enregistré dans {2}', 'm.offline': 'hors ligne : {1} enregistré', 'm.nowrite': 'impossible d’écrire ici',
     'm.noplayer': 'aucun lecteur audio trouvé', 'm.notmp': 'pas de dossier temporaire',
@@ -1458,8 +1460,8 @@ const TUI_UI = {
     skills: 'Habilidades', education: 'Formación', numbers: 'En cifras', byyear: 'Proyectos por año', latest: 'Lo último',
     contrib: '{1} contribuciones en el último año', less: 'menos', more: 'más',
     enteropens: 'enter para abrir', fullresume: 'enter: CV completo', openselected: 'enter abre el elemento elegido', fullresumemd: 'CV completo:',
-    'n.apps': 'apps publicadas', 'n.media': 'fotos y panos', 'n.years': 'años creando', 'n.projects': 'proyectos', 'n.langs': 'tecnologías', 'n.luma': 'fotos de Luma',
-    'g.gallery': 'Galería', 'g.sky': 'Paisaje y cielo', 'g.luma': 'Luma', 'g.panos': 'Panorámicas 360°', 'g.books': 'Diarios de fotos', 'g.puzzles': 'Rompecabezas',
+    'n.apps': 'apps publicadas', 'n.media': 'fotos y panos', 'n.years': 'años creando', 'n.projects': 'proyectos', 'n.langs': 'tecnologías', 'n.luma': 'fotos de perros',
+    'g.gallery': 'Galería', 'g.sky': 'Paisaje y cielo', 'g.luma': 'Luma & Nova', 'g.panos': 'Panorámicas 360°', 'g.books': 'Diarios de fotos', 'g.puzzles': 'Rompecabezas',
     'c.email': 'Correo', 'c.resume': 'Currículum', 'c.web': 'Sitio web',
     'm.saved': '{1} guardado en {2}', 'm.offline': 'sin conexión: {1} guardado', 'm.nowrite': 'no se pudo guardar aquí',
     'm.noplayer': 'no hay reproductor de audio', 'm.notmp': 'sin carpeta temporal',
@@ -1480,8 +1482,8 @@ const TUI_UI = {
     skills: '기술', education: '학력', numbers: '숫자로 보기', byyear: '연도별 프로젝트', latest: '최신',
     contrib: '지난 1년간 기여 {1}회', less: '적음', more: '많음',
     enteropens: 'enter로 열기', fullresume: 'enter: 이력서 전체', openselected: 'enter로 선택한 항목 열기', fullresumemd: '이력서 전체:',
-    'n.apps': '출시한 앱', 'n.media': '사진·파노라마', 'n.years': '년 개발 경력', 'n.projects': '프로젝트', 'n.langs': '언어와 도구', 'n.luma': 'Luma 사진',
-    'g.gallery': '갤러리', 'g.sky': '풍경과 하늘', 'g.luma': 'Luma', 'g.panos': '360° 파노라마', 'g.books': '포토 저널', 'g.puzzles': '퍼즐',
+    'n.apps': '출시한 앱', 'n.media': '사진·파노라마', 'n.years': '년 개발 경력', 'n.projects': '프로젝트', 'n.langs': '언어와 도구', 'n.luma': '강아지 사진',
+    'g.gallery': '갤러리', 'g.sky': '풍경과 하늘', 'g.luma': 'Luma & Nova', 'g.panos': '360° 파노라마', 'g.books': '포토 저널', 'g.puzzles': '퍼즐',
     'c.email': '이메일', 'c.resume': '이력서', 'c.web': '웹사이트',
     'm.saved': '{2}에 {1} 저장됨', 'm.offline': '오프라인: {1} 저장됨', 'm.nowrite': '여기에 저장할 수 없습니다',
     'm.noplayer': '오디오 플레이어가 없습니다', 'm.notmp': '임시 폴더를 만들 수 없습니다',
@@ -1502,8 +1504,8 @@ const TUI_UI = {
     skills: 'Habilidades', education: 'Formação', numbers: 'Em números', byyear: 'Projetos por ano', latest: 'Recentes',
     contrib: '{1} contribuições no último ano', less: 'menos', more: 'mais',
     enteropens: 'enter abre', fullresume: 'enter: currículo completo', openselected: 'enter abre o item selecionado', fullresumemd: 'Currículo completo:',
-    'n.apps': 'apps publicados', 'n.media': 'fotos e panos', 'n.years': 'anos criando', 'n.projects': 'projetos', 'n.langs': 'tecnologias', 'n.luma': 'fotos de Luma',
-    'g.gallery': 'Galeria', 'g.sky': 'Paisagem e céu', 'g.luma': 'Luma', 'g.panos': 'Panoramas 360°', 'g.books': 'Diários de fotos', 'g.puzzles': 'Quebra-cabeças',
+    'n.apps': 'apps publicados', 'n.media': 'fotos e panos', 'n.years': 'anos criando', 'n.projects': 'projetos', 'n.langs': 'tecnologias', 'n.luma': 'fotos dos cães',
+    'g.gallery': 'Galeria', 'g.sky': 'Paisagem e céu', 'g.luma': 'Luma & Nova', 'g.panos': 'Panoramas 360°', 'g.books': 'Diários de fotos', 'g.puzzles': 'Quebra-cabeças',
     'c.email': 'E-mail', 'c.resume': 'Currículo', 'c.web': 'Site',
     'm.saved': '{1} salvo em {2}', 'm.offline': 'offline: {1} salvo', 'm.nowrite': 'não foi possível salvar aqui',
     'm.noplayer': 'nenhum player de áudio encontrado', 'm.notmp': 'sem pasta temporária',
@@ -1524,8 +1526,8 @@ const TUI_UI = {
     skills: 'Competenze', education: 'Formazione', numbers: 'In cifre', byyear: 'Progetti per anno', latest: 'Ultimi',
     contrib: '{1} contributi nell’ultimo anno', less: 'meno', more: 'più',
     enteropens: 'enter apre', fullresume: 'enter: CV completo', openselected: 'enter apre la voce scelta', fullresumemd: 'CV completo:',
-    'n.apps': 'app pubblicate', 'n.media': 'foto e panorami', 'n.years': 'anni di lavoro', 'n.projects': 'progetti', 'n.langs': 'tecnologie', 'n.luma': 'foto di Luma',
-    'g.gallery': 'Galleria', 'g.sky': 'Paesaggi e cielo', 'g.luma': 'Luma', 'g.panos': 'Panorami a 360°', 'g.books': 'Diari fotografici', 'g.puzzles': 'Puzzle',
+    'n.apps': 'app pubblicate', 'n.media': 'foto e panorami', 'n.years': 'anni di lavoro', 'n.projects': 'progetti', 'n.langs': 'tecnologie', 'n.luma': 'foto dei cani',
+    'g.gallery': 'Galleria', 'g.sky': 'Paesaggi e cielo', 'g.luma': 'Luma & Nova', 'g.panos': 'Panorami a 360°', 'g.books': 'Diari fotografici', 'g.puzzles': 'Puzzle',
     'c.email': 'Email', 'c.resume': 'Curriculum', 'c.web': 'Sito web',
     'm.saved': '{1} salvato in {2}', 'm.offline': 'offline: salvato {1}', 'm.nowrite': 'impossibile scrivere qui',
     'm.noplayer': 'nessun lettore audio trovato', 'm.notmp': 'nessuna cartella temporanea',
@@ -1570,7 +1572,7 @@ function tuiRecords(lang, clean) {
   for (const k of Object.keys(S).filter((x) => /^(tm|fut)\./.test(x))) put(`T:${k}`, 'T', k, tr(k, t(k)));
   for (const k of Object.keys(S).filter((x) => x.startsWith('season.'))) put(`T:g.${k.slice(7)}`, 'T', `g.${k.slice(7)}`, tr(k, t(k)));
   [['n.apps', appCount], ['n.media', photos.length + panoCount], ['n.years', yearsBuilding], ['n.projects', projects.length],
-    ['n.langs', skillCount], ['n.luma', tagged('luma')]].forEach(([k, v], i) => put(`N:${i}`, 'N', i + 1, ui[k], v));
+    ['n.langs', skillCount], ['n.luma', photos.filter(isPup).length]].forEach(([k, v], i) => put(`N:${i}`, 'N', i + 1, ui[k], v));
   for (const x of artItems) put(`i:${x.item}:${x.n}`, 'i', x.item, x.n, tr(photoBy[x.file].title ? `ph.${photoBy[x.file].id}.t` : `ph.${photoBy[x.file].id}.alt`, photoBy[x.file].title || photoBy[x.file].alt));
   photos.filter((ph) => ph.title || ph.alt || ph.caption).forEach((ph, i) => put(`F:${i}`, 'F', i + 1,
     [tr(`ph.${ph.id}.t`, ph.title), tr(`ph.${ph.id}.c`, ph.caption), ph.title ? '' : tr(`ph.${ph.id}.alt`, ph.alt)].filter(Boolean).join('. '), `${site.origin}/#${ph.id}`,
@@ -1587,7 +1589,7 @@ function tuiRecords(lang, clean) {
     e.start.replace(/^(\d\d)\/(\d{4})$/, '$2-$1')));
   [['g.gallery', photos.length, `${site.origin}/?v=120`, `${tr('hero.photo.h', t('hero.photo.h'))} ${tr('hero.photo.p', t('hero.photo.p'))}`],
     ['g.sky', tagged('120'), `${site.origin}/?v=120`, tr('ph.p', t('ph.p'))],
-    ['g.luma', tagged('luma'), `${site.origin}/?v=luma`, `${tr('hero.luma.h', t('hero.luma.h'))} ${tr('hero.luma.p', t('hero.luma.p'))}`],
+    ['g.luma', photos.filter(isPup).length, `${site.origin}/?v=nova`, `${tr('hero.luma.h', t('hero.luma.h'))} ${tr('hero.luma.p', t('hero.luma.p'))}`],
     ['g.panos', panoCount, `${site.origin}/panos/`, tr('x.panos', t('x.panos'))],
     ['g.books', '', `${site.origin}/books/`, tr('x.books', t('x.books'))],
     ['g.puzzles', '', `${site.origin}/puzzles/`, tr('x.puzzles', t('x.puzzles'))]].forEach(([k, n, u, x], i) => put(`H:${i}`, 'H', i + 1, ui[k], n, u, x));
@@ -1605,7 +1607,7 @@ const tuiData = [
   ...allYears.map((y) => rec('Y', y, projects.filter((p) => p.date.startsWith(y)).length)),
   // For the time machine and the seasons (the same calendar as the site, content/site.json):
   // every photograph's date and tags, the seasons, Luma, and the future's dogs and founder date.
-  ...photos.map((ph) => ['Q', ph.taken || '', ph.tags.includes('luma') ? 1 : 0, ph.tags.includes('120') ? 1 : 0].join('\t')),
+  ...photos.map((ph) => ['Q', ph.taken || '', isPup(ph) ? 1 : 0, ph.tags.includes('120') ? 1 : 0].join('\t')),
   ...(site.seasons || []).map((z) => ['Z', z.id, z.from || '', z.to || '', z.day || '', z.rule || '', z.before ?? '', z.after ?? '', z.date || '', z.effect || '', z.greet ? 1 : 0, z.lights ? 1 : 0].join('\t')),
   // earlier years of GitHub, one character a day, for the time machine
   ...Object.entries(contrib?.years || {}).sort().map(([y, v]) => ['W', y, v.total, v.levels].join('\t')),

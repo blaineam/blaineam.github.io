@@ -9,8 +9,8 @@
   "openToWork": false,
   "_openToWork_help": "true shows the 'Open to senior & principal roles' badge in hire mode.",
 
-  "domains": { "120.media": "photo", "www.120.media": "photo", "luma.dog": "luma", "www.luma.dog": "luma" },
-  "_domains_help": "If one of these hostnames ever serves this site directly it opens in that view. Redirects to /?v=120 and /?v=luma keep working either way.",
+  "domains": { "120.media": "photo", "www.120.media": "photo", "luma.dog": "luma", "www.luma.dog": "luma", "supernova.dog": "luma", "www.supernova.dog": "luma" },
+  "_domains_help": "If one of these hostnames ever serves this site directly it opens in that view. Redirects to /?v=120 and /?v=nova keep working either way (/?v=luma still opens the dogs' view).",
 
   "views": {
     "maker": {
@@ -26,7 +26,7 @@
       "cta": [["#gallery", "cta.gallery"], ["/panos/", "cta.pano"]]
     },
     "luma": {
-      "hero": ["bmp-68.webp", "bmp-62.webp", "bmp-144.webp"],
+      "hero": ["bmp-184.webp", "bmp-68.webp", "bmp-62.webp", "bmp-144.webp"],
       "cta": [["#gallery", "cta.luma"]]
     }
   },
@@ -137,9 +137,9 @@
     "view.maker": "Everything",
     "view.hire": "Work",
     "view.photo": "Photography",
-    "view.luma": "Luma",
+    "view.luma": "Luma & Nova",
 
-    "hero.maker.eyebrow": "Senior Software Engineer · Photographer · Luma's human",
+    "hero.maker.eyebrow": "Senior Software Engineer · Photographer · Luma & Nova's human",
     "hook.lead": "I build what's missing, the way it should have been.",
     "hook.years": "A social network for the people I love, with no servers and nobody watching: that's <a href=\"apps/haven/\">Haven</a>. Cloud storage that feels like it's on my device: that's <a href=\"apps/enter-space/\">Enter Space</a>. 14+ years in, the list keeps growing.",
     "hook.built": "See what I've built",
@@ -158,10 +158,10 @@
     "cta.gallery": "Open the gallery",
     "cta.pano": "Step into a panorama",
 
-    "hero.luma.eyebrow": "luma.dog",
-    "hero.luma.h": "This is Luma. She's a very good dog.",
-    "hero.luma.p": "Trail scout, campfire supervisor, professional fluff.",
-    "cta.luma": "See Luma",
+    "hero.luma.eyebrow": "luma.dog · supernova.dog",
+    "hero.luma.h": "Meet Luma and Nova. Two very good dogs.",
+    "hero.luma.p": "Luma: trail scout, campfire supervisor, professional fluff. Nova: the new pup, learning from the best.",
+    "cta.luma": "See the pups",
     "season.newyear": "Happy New Year",
     "season.easter": "Happy Easter",
     "season.memorial": "Memorial Day. Remembering those who gave all.",
@@ -220,8 +220,8 @@
     "stat.media": "photos & panoramas",
     "stat.panos": "360° panoramas",
     "stat.langs": "languages & tools",
-    "stat.luma": "photos of Luma",
-    "stat.lumaage": "years old",
+    "stat.luma": "photos of the pups",
+    "stat.lumaage": "Luma's age",
 
     "work.h": "Selected work",
     "work.p": "Things I built because they didn't exist the way they should.",
@@ -254,7 +254,7 @@
     "ph.play": "Slideshow",
     "ph.set.all": "Everything",
     "ph.set.120": "Landscape & sky",
-    "ph.set.luma": "Luma",
+    "ph.set.luma": "Luma & Nova",
     "ph.cam": "Camera",
     "ph.cam.all": "All cameras",
     "ph.sort": "Sort",
@@ -269,9 +269,9 @@
     "radial.photos": "Photos",
     "for-his-invisible-attributes.f98eec": "For his invisible attributes, that is, his eternal power and divine nature, have been clearly seen since the creation of the world, being understood through what he has made. As a result, people are without excuse. <cite>Romans 1:20</cite>",
 
-    "luma.h": "Meet Luma",
-    "luma.p": "Every trail photo here had a supervisor. Luma has a whole collection.",
-    "luma.cta": "See Luma's photos",
+    "luma.h": "Meet Luma & Nova",
+    "luma.p": "Every trail photo here had a supervisor. Now there's a new recruit.",
+    "luma.cta": "See their photos",
 
     "soft.h": "I also build software",
     "soft.p": "A private social network with no servers, phone VR, a home-network guardian and twenty more.",

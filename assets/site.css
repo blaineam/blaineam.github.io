@@ -213,6 +213,7 @@ html[data-view="hire"] .hero__topo { display: block; }
 
 /* Luma's view: she is the point, so the scrim only darkens the bottom where the words sit */
 html[data-view="luma"] .hero__img { filter: none; object-position: 50% 32%; }
+html[data-view="luma"] .hero__img[src*="bmp-184."] { object-position: 50% 24%; }   /* a portrait photograph: keep Nova's face in frame */
 html[data-view="luma"] .hero__scrim { background:
   linear-gradient(to top, rgba(4, 7, 13, .94) 0%, rgba(4, 7, 13, .7) 22%, rgba(4, 7, 13, .12) 48%, transparent 62%),
   linear-gradient(to bottom, rgba(4, 7, 13, .5) 0%, transparent 16%); }
@@ -370,7 +371,7 @@ html:not(.js) .gbar { display: none; }
 .ph:hover .ph__t, .ph:focus-visible .ph__t { opacity: 1; transform: none; }
 @media (hover: none) { .ph__t { opacity: 1; transform: none; } }
 .ph.is-later { display: none; }   /* not reached yet: more arrive as the page is scrolled */
-.g[data-set="120"] .ph:not(.t-120), .g[data-set="luma"] .ph:not(.t-luma) { display: none; }
+.g[data-set="120"] .ph:not(.t-120), .g[data-set="luma"] .ph:not(.t-luma):not(.t-nova) { display: none; }
 #g-end { height: 1px; }
 html:not(.js) #g-more, html:not(.js) #tl-more { display: none; }
 .js .years[data-open="false"] .year:not(:first-child), .js .years[data-open="false"] .year:first-child .tl:nth-of-type(n+10) { display: none; }

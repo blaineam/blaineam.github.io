@@ -1,6 +1,7 @@
 {
   "_help": "One entry per file in /slides. Every field is optional: title, caption, alt, taken (YYYY-MM-DD), camera, lens, focal35 (mm, 35 mm equivalent), aperture, shutter, iso (the editor at /edit/ fills these from the photo; scripts/photo-meta.mjs recovers them for older photos), video (a YouTube link: the photograph becomes its still, and the player loads only when someone presses play), tags (\"120\" = the 120.media set, \"luma\" = the luma.dog set), featured (shown on the home page before 'Show all'), order (number; higher shows first), taken (YYYY-MM-DD) and camera (both override what content/photo-meta.json recovered from the original; the /edit/ editor fills them in for a new photo). A new .webp dropped into /slides appears automatically, newest number first, even with no entry here.",
   "photos": {
+    "bmp-184.webp": {"alt": "Nova, a black, white and tan puppy, lying on the carpet with a happy open mouth", "tags": ["nova"], "featured": true},
     "bmp-183.webp": {"alt":"Campfire in front of a giant sequoia","tags":["120"],"featured":true},
     "bmp-182.webp": {"alt":"A man kneeling with Luma beside a river","tags":["luma"]},
     "bmp-181.webp": {"alt":"Sky framed by dark treetops","tags":["120"]},

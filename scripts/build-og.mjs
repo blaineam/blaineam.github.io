@@ -33,7 +33,7 @@ const POSTERS = [
   { id: 'work', title: site.name, sub: 'Senior Software Engineer: real-time data platforms, infrastructure and 25+ shipped apps.', bg: 'map' },
   { id: 'resume', title: 'Resume', sub: `${site.name}, Senior Software Engineer`, bg: 'map' },
   { id: 'photography', title: 'Photography', sub: 'Dark skies, old forests and a very good dog.', bg: 'slides/bmp-17.webp' },
-  { id: 'luma', title: 'Luma', sub: 'Trail scout, campfire supervisor, professional fluff.', bg: 'slides/bmp-68.webp' },
+  { id: 'luma', title: 'Luma & Nova', sub: 'Two very good dogs.', bg: 'slides/bmp-68.webp' },
   { id: 'panos', title: 'Panoramas', sub: 'Step inside the photograph and look around.', bg: 'slides/bmp-73.webp' },
   { id: 'puzzles', title: 'Puzzles', sub: 'Any photograph here, cut into a jigsaw.', bg: 'jigsaw', photo: 'slides/bmp-26.webp' },
   { id: 'xr', title: 'In VR', sub: 'The gallery, the panoramas and the apps, around you.', bg: 'vr', photos: ['slides/bmp-17.webp', 'slides/bmp-9.webp', 'slides/bmp-68.webp'] },

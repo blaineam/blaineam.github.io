@@ -66,7 +66,7 @@
     set('stat.years', Math.max(0, num('stat.years') - (new Date().getFullYear() - travelTo.getFullYear())) + '+');
     set('stat.media', String(Math.max(0, num('stat.media') - (before - left))));
     set('stat.photos', String(left));
-    set('stat.luma', String($$('.ph.t-luma').length));
+    set('stat.luma', String($$('.ph.t-luma, .ph.t-nova').length));
     root.setAttribute('data-past', '');
   })();
   // the sky behind "Say hello" reads the destination from here (named days are resolved above)
@@ -246,7 +246,7 @@
     var u = new URL(location.href);
     u.searchParams.delete('v'); u.searchParams.delete('mode');
     if (view === 'photo') u.searchParams.set('v', '120');
-    else if (view === 'luma') u.searchParams.set('v', 'luma');
+    else if (view === 'luma') u.searchParams.set('v', 'nova');
     else if (view !== defaultView) u.searchParams.set('mode', view);
     return u;
   }
@@ -256,7 +256,7 @@
   function inSet() {
     var set = gallery.getAttribute('data-set');
     return allPhotos.filter(function (a) {
-      return set === 'all' || a.classList.contains('t-' + set);
+      return set === 'all' || a.classList.contains('t-' + set) || (set === 'luma' && a.classList.contains('t-nova'));
     });
   }
   // Order: the owner's own, or by capture date (photographs with no known date go last).
@@ -1218,7 +1218,7 @@
       if (!a || e.metaKey || e.ctrlKey || e.shiftKey) return;
       e.preventDefault();
       var id = a.getAttribute('data-when');
-      warp(travelUrl(id, id === 'luma' ? 'luma' : null));
+      warp(travelUrl(id, id === 'luma' ? 'nova' : null));
     });
     $('#tm-form').addEventListener('submit', function (e) {
       e.preventDefault();

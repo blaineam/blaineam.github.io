@@ -134,7 +134,7 @@ to the repository can save (see [`edit/README.md`](edit/README.md)). To preview 
 | Camera and capture date for the photographs | `node scripts/photo-meta.mjs <folder of exported originals>` matches them and writes [`content/photo-meta.json`](content/photo-meta.json); or set `"camera"` / `"taken"` by hand in `content/photos.json` |
 | Add a video | `content/photos.json` → `"video": "https://youtu.be/…"` on a photograph. The photo is the still; YouTube is contacted only when a visitor presses play |
 | Title, caption or alt text for a photograph | [`content/photos.json`](content/photos.json) → `"title"`, `"caption"`, `"alt"` |
-| Put a photograph in the 120.media or luma.dog set | `content/photos.json` → `"tags": ["120"]` or `["luma"]` |
+| Put a photograph in the 120.media or dogs' (`/?v=nova`) set | `content/photos.json` → `"tags": ["120"]`, `["luma"]` or `["nova"]` |
 | Update experience, skills, education | [`content/resume.json`](content/resume.json) |
 | Change the email, Signal or Haven link | `node scripts/build-site.mjs --encode 'mailto:…'`, paste into `content/site.json` → `contact` |
 | Change the social bios | `content/site.json` → `bios` |
