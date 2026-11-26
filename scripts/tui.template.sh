@@ -349,7 +349,8 @@ function dogs(   a, b, n, i, k, nx, soon, round, nm, life, adopt, who, R) {
     if (DGB[i] <= DN && DN < DGE[i]) { AL[++nal] = i; if (DGR[i] && DGN[i] == "Luma") lumahere = 1 }
     else if (DGE[i] <= DN) GO[++ngo] = i
   }
-  dogchanged = ngo || nal != 1 || !DGR[AL[1]]
+  dogchanged = ngo || !nal
+  for (i = 1; i <= nal; i++) if (!DGR[AL[i]]) dogchanged = 1
   if (!dogchanged) return
   who = ""; for (i = 1; i <= nal; i++) who = who (i > 1 ? " & " : "") DGN[AL[i]]
   if (who == "" && ngo) who = DGN[GO[ngo]]

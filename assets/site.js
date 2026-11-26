@@ -1094,7 +1094,7 @@
     }
     var alive = dogs.filter(function (d) { return d.born <= travelTo && travelTo < d.end; });
     var gone = dogs.filter(function (d) { return d.end <= travelTo; });
-    var changed = gone.length || alive.length !== 1 || !alive[0].real;
+    var changed = gone.length || !alive.length || alive.some(function (d) { return !d.real; });
     var lumaCopy = $('.hero__copy[data-views="luma"]'), museum = null, tiles = [], cards = [];
     var lumaHere = alive.some(function (d) { return d.real && d.name === 'Luma'; });
     var PALETTES = [[200, 262, 322], [168, 212, 282], [150, 192, 252], [284, 324, 204], [190, 232, 302], [316, 268, 196]];
@@ -1119,7 +1119,8 @@
         // her photographs leave the living dogs' category and become her room in the museum
         allPhotos.forEach(function (a) { if (a.classList.contains('t-luma')) { a.classList.remove('t-luma'); a.classList.add('t-lumapast'); } });
       }
-      dogs.forEach(function (d, k) { d.set = d.real && d.name === 'Luma' ? (lumaHere ? 'luma' : 'lumapast') : alive.indexOf(d) >= 0 ? 'luma' : 'dog-' + k; d.k = k; });
+      dogs.forEach(function (d, k) { var here = alive.indexOf(d) >= 0; d.set = d.real ? (here ? 'luma' : d.name.toLowerCase() + 'past') : here ? 'luma' : 'dog-' + k; d.k = k; });
+      if (gone.some(function (d) { return d.real && d.name === 'Nova'; })) allPhotos.forEach(function (a) { if (a.classList.contains('t-nova')) { a.classList.remove('t-nova'); a.classList.add('t-novapast'); } });
       alive.concat(gone.slice(-24)).forEach(function (d) {
         if (d.real) return;
         for (var q = 0; q < (alive.indexOf(d) >= 0 ? 4 : 7); q++) { var t = ghostTile(d.k * 5 + q, d.set); tiles.push(t); gallery.appendChild(t); }
@@ -1131,7 +1132,8 @@
         gone.slice(-24).reverse().forEach(function (d) {
           var card = make('button', 'museum__dog'), cap = make('span', 'museum__cap');
           card.type = 'button'; card.setAttribute('data-set', d.set); card.setAttribute('aria-pressed', 'false');
-          if (d.real && lumaPic) { var im = make('img'); im.src = lumaPic.getAttribute('src') || lumaPic.currentSrc; im.alt = ''; im.loading = 'lazy'; card.appendChild(im); }
+          var own = d.name === 'Nova' ? $('.ph.t-novapast img') : lumaPic;
+          if (d.real && own) { var im = make('img'); im.src = own.getAttribute('src') || own.currentSrc; im.alt = ''; im.loading = 'lazy'; card.appendChild(im); }
           else card.appendChild(ghostTile(d.k * 5 + 3, ''));
           cap.appendChild(make('strong', '', d.name)); cap.appendChild(make('span', '', d.born.getFullYear() + ' – ' + d.end.getFullYear()));
           card.appendChild(cap); grid.appendChild(card); cards.push(card);

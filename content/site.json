@@ -42,9 +42,9 @@
 
   "future": {
     "founderFrom": "2075-06-03",
-    "dogs": { "lifespan": 12, "adoptAt": 6, "names": ["Marlo", "Cyfer", "Root", "Hektur", "Flynn", "Sage", "Whyro", "Zefyx"], "real": [] }
+    "dogs": { "lifespan": 12, "adoptAt": 6, "names": ["Sora", "Marlo", "Cyfer", "Root", "Hektur", "Flynn", "Sage", "Whyro", "Zefyx"], "real": [{ "name": "Nova", "born": "2026-06-01" }] }
   },
-  "_future_help": "What the time machine shows when a visitor travels forward. founderFrom: from this date the site reads as carried on by others, with a founder note in place of the hero. dogs: each dog lives about lifespan years and the next one arrives when the current one is adoptAt years old; names are stand-ins used in order. When a real dog joins, add { \"name\": \"…\", \"born\": \"YYYY-MM-DD\" } to real (and \"passed\" when the day comes): real dogs replace the stand-ins from that point. Luma is taken from luma above.",
+  "_future_help": "What the time machine shows when a visitor travels forward. founderFrom: from this date the site reads as carried on by others, with a founder note in place of the hero. dogs: each dog lives about lifespan years and the next one arrives when the current one is adoptAt years old; names are stand-ins used in order. When a real dog joins, add { \"name\": \"…\", \"born\": \"YYYY-MM-DD\" } to real (and \"passed\" when the day comes): real dogs replace the stand-ins from that point. Luma is taken from luma above. Nova's born date is a placeholder until the real birthday is filled in (only its year is ever shown). Stand-ins start adoptAt years after the youngest real dog.",
 
   "seasons": [
     { "id": "newyear",   "from": "12-31", "to": "01-01", "day": "01-01", "effect": "fireworks", "colors": ["#ffffff", "#ffffff", "#ffffff", "#ffd27a", "#ffd27a", "#ffd27a", "#ff5a5a", "#ff5a5a", "#6cb6ff", "#9dffcf", "#c9a8ff"], "greet": true },

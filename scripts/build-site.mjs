@@ -1177,7 +1177,7 @@ for (const p of photos) {
 }
 // The trail's guide is the real dog of the day: Luma first, then whoever is added to future.dogs.real.
 // A later dog may have its own photographs at trail/guide-<name>.webp and trail/guide-<name>-big.webp.
-write('trail/guide.json', JSON.stringify({ dogs: [{ name: 'Luma', born: site.luma.born, passed: site.luma.passed || '' }, ...(site.future?.dogs?.real || [])].map((d) => {
+write('trail/guide.json', JSON.stringify({ dogs: [{ name: 'Luma', born: site.luma.born, passed: site.luma.passed || '' }, ...(site.future?.dogs?.real || []).filter((d) => fs.existsSync(path.join(ROOT, 'trail', `guide-${String(d.name).toLowerCase().replace(/[^a-z0-9]+/g, '-')}.webp`)))].map((d) => {
   const slug = String(d.name).toLowerCase().replace(/[^a-z0-9]+/g, '-'), pic = (f) => (fs.existsSync(path.join(ROOT, 'trail', f)) ? '/trail/' + f : undefined);
   return { name: d.name, born: d.born || '', passed: d.passed || '', photo: d.name === 'Luma' ? undefined : pic(`guide-${slug}.webp`), photoBig: d.name === 'Luma' ? undefined : pic(`guide-${slug}-big.webp`) };
 }) }, null, 1) + '\n');
