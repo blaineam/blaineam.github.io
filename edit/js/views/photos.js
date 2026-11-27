@@ -7,7 +7,8 @@ import { convertImage, canEncodeWebp, MAX_SIDE } from '../image.js';
 import { settings } from '../settings.js';
 import { pickMedia, photoItems, photoUpload } from './picker.js';
 
-const TAGS = [['120', 'Landscape & sky'], ['luma', 'Luma']];
+const DOGS = [['luma', 'Luma'], ['nova', 'Nova']];   // either one, or both, puts a photo on the Luma & Nova page
+const TAGS = [['120', 'Landscape & sky'], ...DOGS];
 const kb = (n) => (n > 1048576 ? (n / 1048576).toFixed(1) + ' MB' : Math.max(1, Math.round(n / 1024)) + ' KB');
 
 /**
@@ -157,7 +158,7 @@ export function photosView(root) {
       const m = photoMeta(n);
       if (tag === 'noalt' && m.alt) return false;
       if (tag === 'new' && !isPending(n)) return false;
-      if ((tag === '120' || tag === 'luma') && !(m.tags || []).includes(tag)) return false;
+      if (TAGS.some(([v]) => v === tag) && !(m.tags || []).includes(tag)) return false;
       return !q || [n, m.title, m.caption, m.alt, m.camera || (state.photoExif[n] || {}).camera, m.taken].some((s) => s && String(s).toLowerCase().includes(q));
     });
     count.textContent = `${shown.length} of ${all.length} shown` + (state.removed.length ? ` · ${state.removed.length} to be deleted` : '');
@@ -173,10 +174,25 @@ export function photosView(root) {
             m.featured ? h('span', { class: 'badge' }, 'Featured') : null,
             m.alt ? null : h('span', { class: 'badge badge--bad' }, 'No description')),
           m.title ? h('span', { class: 'ptile__t' }, m.title) : null),
-        reorder ? gripBtn(m.title || name) : null);
+        reorder ? gripBtn(m.title || name) : dogToggles(name, m.title || m.alt || name));
     }));
     if (!shown.length) grid.append(h('li', { class: 'empty' }, 'No photos match.'));
     clear(removedHost); if (state.removed.length) removedHost.append(removedBox());
+  }
+  /** Luma and Nova, one tap each on the thumbnail. Only the button changes: redrawing the grid would reload every picture. */
+  function dogToggles(name, label) {
+    return h('div', { class: 'ptile__dogs', role: 'group', 'aria-label': `Dogs in ${label}` }, DOGS.map(([v, t]) => {
+      const has = () => (photoMeta(name).tags || []).includes(v);
+      const b = h('button', { type: 'button', class: 'ptile__dog', 'data-dog': v, 'aria-pressed': String(has()), 'aria-label': `${t} is in ${label}`,
+        onclick: () => {
+          const on = !has(), rest = (photoMeta(name).tags || []).filter((x) => x !== v);
+          setPhotoMeta(name, { tags: on ? [...rest, v] : rest });
+          b.setAttribute('aria-pressed', String(on));
+          announce(`${t} ${on ? 'added to' : 'removed from'} ${label}.`);
+        },
+      }, t);
+      return b;
+    }));
   }
   const removedBox = () => h('div', { class: 'callout' }, h('p', null, 'To be deleted when you commit:'),
     h('ul', { class: 'plain' }, state.removed.map((n) => h('li', { class: 'row' }, h('span', { class: 'mono' }, n), btn('Keep it', () => restorePhoto(n))))));

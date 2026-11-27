@@ -13,7 +13,7 @@ const GROUPS = {
   xr: 'XR offer', c: 'Contact', tui: 'Terminal app', search: 'Search', foot: 'Footer',
 };
 const EFFECTS = ['snow', 'leaves', 'fireflies', 'embers', 'petals', 'stars', 'confetti', 'fireworks'];
-const VIEW_NAMES = { maker: 'Maker (default)', hire: 'Work', photo: 'Photography', luma: 'Luma' };
+const VIEW_NAMES = { maker: 'Maker (default)', hire: 'Work', photo: 'Photography', luma: 'Luma & Nova' };
 
 export function textView(root) {
   let q = '';

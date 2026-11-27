@@ -105,7 +105,7 @@ export const EN = {
   'list.failed': 'This list did not load',
   'set.all': 'All',
   'set.120': 'Landscape & sky',
-  'set.luma': 'Luma',
+  'set.luma': 'Luma & Nova',
   'home.sub': 'Photographs, panoramas, apps and fourteen years of work',
   'home.xp': 'Roles, projects and skills on a timeline',
   'home.open': 'Open ›',

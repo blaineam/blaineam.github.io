@@ -25,7 +25,7 @@ behind it, the headline, and which sections follow, without leaving the page:
 | **Everything** | [wemiller.com](https://wemiller.com) | "I build what's missing": selected work, every project since 2012, the photographs, Luma |
 | **Work** | [wemiller.com/hire](https://wemiller.com/hire) (`/?mode=hire`) | No photograph, no dog: title and summary, selected work, experience, skills, education and the [resume](https://wemiller.com/resume/) |
 | **Photography** | [120.media](https://120.media) (`/?v=120`) | The full gallery first; software shrinks to one card |
-| **Luma** | [luma.dog](https://luma.dog) (`/?v=luma`) | Luma's photographs first, and her birthday countdown every October |
+| **Luma & Nova** | [luma.dog](https://luma.dog), [supernova.dog](https://www.supernova.dog) (`/?v=nova`; `/?v=luma` still works) | The pups' photographs first, and Luma's birthday countdown every October |
 
 Whatever the view, the rest is the same page:
 
@@ -105,7 +105,7 @@ Design constraints the page holds itself to:
   the pages load no third-party scripts.
 - **No yellow.** One blue accent (green in the photography and Luma views).
 
-Old addresses are unchanged: `/`, `/?v=120`, `/?v=luma`, `/#gallery`, `/#projects`, `/apps/…`,
+Old addresses still work: `/`, `/?v=120`, `/?v=luma` (now `/?v=nova`), `/#gallery`, `/#projects`, `/apps/…`,
 `/tools/…`, `/panos/`, `/books/`, `/puzzles/`, `/speedtest/`, `/support/`, `/pay/`.
 
 ---
@@ -275,8 +275,8 @@ what is served.
 ### Domains
 
 GitHub Pages serves one custom domain (`wemiller.com`, in `CNAME`). `120.media` and `luma.dog`
-forward to `wemiller.com/?v=120` and `wemiller.com/?v=luma`, which open the photography and Luma
-views. If either hostname is ever pointed at the site directly, `content/site.json` → `domains`
+forward to `wemiller.com/?v=120` and `wemiller.com/?v=luma` (an alias of `?v=nova`), which open
+the photography and Luma & Nova views. If either hostname is ever pointed at the site directly, `content/site.json` → `domains`
 already maps it to the right view.
 
 ### Store-link campaigns

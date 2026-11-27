@@ -7,7 +7,7 @@ import { h, clear, field, select, btn, id, toast, announce } from '../ui.js';
 import { state, photoOrder, photoMeta, isPending, localPhotoUrl, fileUrl } from '../store.js';
 import { photoImg, importPhotos } from './photos.js';
 
-const TAG_NAMES = { 120: 'Landscape & sky', luma: 'Luma', featured: 'Featured', new: 'New', nodesc: 'No description' };
+const TAG_NAMES = { 120: 'Landscape & sky', luma: 'Luma', nova: 'Nova', featured: 'Featured', new: 'New', nodesc: 'No description' };
 
 /** Every photograph in the gallery, as picker items. */
 export function photoItems() {

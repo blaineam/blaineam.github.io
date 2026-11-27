@@ -6,7 +6,7 @@
 //   const cal = createCalendar(siteJson);
 //   cal.parseWhen('christmas' | '2031-10-22' | '2031-10-22T21:30')  → { date, clock } | null
 //   cal.seasonOn(date)        → { season, onDay } | null     (null in the founder era)
-//   cal.dogsAt(date)          → { alive, gone, changed, lumaHere }
+//   cal.dogsAt(date)          → { alive, gone, changed, gonePups }
 //   cal.isFounder(date), cal.NAMED
 
 const p2 = (n) => ('0' + n).slice(-2);
@@ -92,7 +92,9 @@ export function createCalendar(cfg) {
     }
     dogs.forEach((x, k) => { x.k = k; });
     const alive = dogs.filter((x) => x.born <= when && when < x.end), gone = dogs.filter((x) => x.end <= when);
-    return { alive, gone, changed: gone.length > 0 || alive.length !== 1 || !alive[0].real, lumaHere: alive.some((x) => x.real && x.name === 'Luma') };
+    // The real dogs living together is today's page, not a changed future.
+    const gonePups = gone.filter((x) => x.real).map((x) => x.name.toLowerCase());
+    return { alive, gone, changed: gone.length > 0 || !alive.length || alive.some((x) => !x.real), gonePups };
   }
 
   // The years of unwritten work shown when travelling forward: the first years after today, the

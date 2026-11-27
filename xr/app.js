@@ -892,9 +892,12 @@ export async function start(opts) {
   const dogTiles = (list, each) => { const out = []; for (const d of list) if (!d.real) for (let q = 0; q < each; q++) out.push({ kind: 'ghost-photo', label: d.name, seed: d.k * 5 + q, c: COL.bg2 }); return out; };
   function galleryItems(set) {
     if (set === 'all') return photos;
-    const lumas = photos.filter((p) => p.tags.includes('luma'));
-    if (set === 'luma') return dogs && dogs.changed ? (dogs.lumaHere ? lumas : []).concat(dogTiles(dogs.alive, 4)) : lumas;
-    if (set === 'museum') return dogs ? (dogs.lumaHere ? [] : lumas).concat(dogTiles(dogs.gone.slice(-12), 3)) : [];
+    // A photograph stays with the living while any real dog in it is still here; otherwise it is in the museum.
+    const gonePups = dogs ? dogs.gonePups : [];
+    const pups = photos.filter((p) => p.tags.includes('luma') || p.tags.includes('nova'));
+    const here = pups.filter((p) => ['luma', 'nova'].some((n) => p.tags.includes(n) && !gonePups.includes(n)));
+    if (set === 'luma') return dogs && dogs.changed ? here.concat(dogTiles(dogs.alive, 4)) : pups;
+    if (set === 'museum') return dogs ? pups.filter((p) => !here.includes(p)).concat(dogTiles(dogs.gone.slice(-12), 3)) : [];
     return photos.filter((p) => p.tags.includes(set));
   }
   const galleryCount = () => { const a = AREAS[0], n = a.items.reduce((k, x) => k + (x.kind === 'photo' ? 1 : 0), 0); return a.set === 'all' ? tr('count.gallery', { n }) : n ? tr('count.set', { n, set: SETS[a.set] }) : SETS[a.set]; };     // dogs nobody has photographed yet: just their names

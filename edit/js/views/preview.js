@@ -6,7 +6,7 @@ import { h, btn, select, check } from '../ui.js';
 import { state, draft, base, photoOrder, photoMeta, isPending, localPhotoUrl, assetFor, fileUrl } from '../store.js';
 import { deepEqual } from '../jsonpatch.js';
 
-const PAGES = [['../', 'Home'], ['../?mode=hire', 'Home: work view'], ['../?v=120', 'Home: photography'], ['../?v=luma', 'Home: Luma']];
+const PAGES = [['../', 'Home'], ['../?mode=hire', 'Home: work view'], ['../?v=120', 'Home: photography'], ['../?v=nova', 'Home: Luma & Nova']];
 const slug = (s) => String(s).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 
 export function previewPane(root) {
@@ -115,7 +115,7 @@ export function previewPane(root) {
       const img = el.querySelector('img');
       const changed = !deepEqual(baseMap[name] || {}, m);
       el.classList.toggle('is-feat', !!m.featured);
-      for (const t of ['120', 'luma']) el.classList.toggle('t-' + t, (m.tags || []).includes(t));
+      for (const t of ['120', 'luma', 'nova']) el.classList.toggle('t-' + t, (m.tags || []).includes(t));
       m.title ? el.setAttribute('data-title', m.title) : el.removeAttribute('data-title');
       m.caption ? el.setAttribute('data-caption', m.caption) : el.removeAttribute('data-caption');
       if (img) img.alt = m.alt || '';

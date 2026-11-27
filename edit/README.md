@@ -76,6 +76,10 @@ be changed without a GitHub token that only the repository's owner can create.
   full-size file; Settings has the default. To make the switch work without the original, a
   clean resized copy (no watermark, no metadata, quality 0.95) is kept in the browser until
   the photo is committed; it is never uploaded.
+- **Dog tags.** Every thumbnail on the Photos tab has **Luma** and **Nova** buttons (hidden
+  while reordering); a photo can have either or both, and either puts it on the Luma & Nova
+  page. The same two are checkboxes in the photo's form, filters above the grid and in the
+  media picker.
 - **Pre-filled from the file.** Before the re-encode, `js/exif.js` (own code, no library) reads
   the original and the form opens with whatever it found, each field marked "From the photo",
   editable, and removable ("Clear camera details" empties them all). Written to the photo's
@@ -175,7 +179,7 @@ All of this is in place; it is listed so that a change on either side is made on
    (`protectedPhotos`) where to look.
 6. **Preview hooks.** `js/views/preview.js` relies on this markup from the home page template:
    `data-i18n`, `data-i18n-html`, `data-i18n-attr="attr:key;…"`; `#g a.ph#bmp-<n>` with
-   `data-title`, `data-caption`, `.ph__t`, classes `is-feat`, `t-120`, `t-luma`;
+   `data-title`, `data-caption`, `.ph__t`, classes `is-feat`, `t-120`, `t-luma`, `t-nova`;
    `details.tl#p-<id>` (`summary strong`, `summary time`, `.tl__body > p`, `.chips`, `a.tl__go`);
    `a.card[data-app]` (`h3`, `.card__tag`); `.jobs article.job`; `.skills dl > div`. If the
    template changes these, the preview silently shows less; update it together.
