@@ -26,13 +26,19 @@
   }
   function memorialOf(yr) { var d = new Date(yr, 4, 31, 12); d.setDate(31 - ((d.getDay() + 6) % 7)); return d; } // last Monday of May
   var SEASONS = []; try { SEASONS = JSON.parse($('#season').getAttribute('data-seasons')) || []; } catch (e) {}
-  var LUMA_BORN = ($('#bday') && $('#bday').getAttribute('data-born')) || '';
+  var DOG_BORN = {};                                           // the named days that are a dog's birthday
+  [['luma', '#bday'], ['nova', '#bday-nova']].forEach(function (d) { var el = $(d[1]); if (el) DOG_BORN[d[0]] = el.getAttribute('data-born'); });
   function eventDate(id, today) {
     var s = SEASONS.filter(function (x) { return x.id === id; })[0], k, d = null, y = today.getFullYear();
-    if (id !== 'luma' && (!s || s.date)) return s && s.date ? new Date(s.date + 'T12:00:00') : null;
+    var born = DOG_BORN[id];
+    if (born) {                                                // the latest birthday, or the first one while it is still to come
+      var at = function (yr) { return new Date(yr, +born.slice(5, 7) - 1, +born.slice(8, 10), 12); };
+      d = at(at(y) <= today ? y : y - 1);
+      return d.getFullYear() > +born.slice(0, 4) ? d : at(+born.slice(0, 4) + 1);
+    }
+    if (!s || s.date) return s && s.date ? new Date(s.date + 'T12:00:00') : null;
     for (k = 0; k < 2; k++) {
-      if (id === 'luma') d = new Date(y - k, +LUMA_BORN.slice(5, 7) - 1, +LUMA_BORN.slice(8, 10), 12);
-      else d = s.rule === 'easter' ? easterOf(y - k) : s.rule === 'memorial' ? memorialOf(y - k) : new Date(y - k, +(s.day || s.from).slice(0, 2) - 1, +(s.day || s.from).slice(3, 5), 12);
+      d = s.rule === 'easter' ? easterOf(y - k) : s.rule === 'memorial' ? memorialOf(y - k) : new Date(y - k, +(s.day || s.from).slice(0, 2) - 1, +(s.day || s.from).slice(3, 5), 12);
       if (d <= today) return d;
     }
     return d;
@@ -43,7 +49,7 @@
     if (!w) return null;
     var m = /^(\d{4}-\d\d-\d\d)(?:T(\d\d:\d\d))?$/.exec(w);
     if (m) { if (m[2]) travelClock = m[2]; return isNaN(Date.parse(m[1] + 'T' + (m[2] || '12:00') + ':00')) ? null : new Date(m[1] + 'T' + (m[2] || '12:00') + ':00'); }
-    return eventDate(w === 'luma-birthday' ? 'luma' : w, new Date());
+    return eventDate(w.replace(/^(luma|nova)-birthday$/, '$1'), new Date());
   })();
   function nowDate() { return travelTo ? new Date(travelTo.getTime()) : new Date(); }
   // Travelling into the past takes away whatever had not happened yet: apps not released, jobs not
@@ -494,13 +500,13 @@
     if ('IntersectionObserver' in window) new IntersectionObserver(function (en) { seen = en[0].isIntersecting; if (seen) start(); else stop(); }).observe(c.parentNode);
   })();
 
-  /* ---------- Luma's birthday: a countdown through October, a party on the day ---------- */
-  var bday = $('#bday');
-  if (bday) (function () {
+  /* ---------- the dogs' birthdays: a countdown through the month, a party on the day ---------- */
+  $$('.bday').forEach(function (bday) {
     var born = bday.getAttribute('data-born').split('-').map(Number);
     var now = nowDate();
     if (now.getMonth() + 1 !== born[1]) return;
     var age = now.getFullYear() - born[0], left = born[2] - now.getDate();
+    if (age < 1) return;                                       // the month a puppy was born is not a birthday
     var key = left > 1 ? 'count' : left === 1 ? 'one' : left === 0 ? 'today' : 'after';
     function draw() {
       bday.textContent = bday.getAttribute('data-' + key).replace('{n}', left).replace('{age}', age);
@@ -533,8 +539,8 @@
       });
     }
     party();
-    doc.addEventListener('click', function () { setTimeout(party, 400); }); // also when someone switches to Luma's view
-  })();
+    doc.addEventListener('click', function () { if (bday.isConnected) setTimeout(party, 400); }); // also on switching to the dogs' view
+  });
 
   $$('[data-age-from]').forEach(function (el) {
     var b = el.getAttribute('data-age-from').split('-').map(Number), n = nowDate();
@@ -1128,10 +1134,10 @@
     };
     if (changed && lumaCopy && gallery) {
       root.setAttribute('data-dogs', lumaHere ? 'mixed' : 'future');
+      gone.forEach(function (d) { if (!d.real) return; var line = $(d.name === 'Luma' ? '#bday' : '#bday-' + d.name.toLowerCase()); if (line) line.parentNode.removeChild(line); });
       var scrim = $('.hero__scrim'), big = ghostTile(alive.length ? alive[0].k || 2 : 2, '');   // the backdrop of the dogs' view: nobody has photographed them yet
       big.className = 'gph hero__ghost'; if (scrim) scrim.parentNode.insertBefore(big, scrim);
       if (!lumaHere) {
-        if ($('#bday')) $('#bday').parentNode.removeChild($('#bday'));
         ['stat.lumaage', 'stat.luma'].forEach(function (k) { var el = $('[data-stat="' + k + '"]'); if (el) el.parentNode.hidden = true; });
         // her photographs leave the living dogs' category and become her room in the museum
         allPhotos.forEach(function (a) { if (a.classList.contains('t-luma')) { a.classList.remove('t-luma'); a.classList.add('t-lumapast'); } });
@@ -1237,7 +1243,7 @@
       if (!a || e.metaKey || e.ctrlKey || e.shiftKey) return;
       e.preventDefault();
       var id = a.getAttribute('data-when');
-      warp(travelUrl(id, id === 'luma' ? 'nova' : null));
+      warp(travelUrl(id, id === 'luma' || id === 'nova' ? 'nova' : null));
     });
     $('#tm-form').addEventListener('submit', function (e) {
       e.preventDefault();

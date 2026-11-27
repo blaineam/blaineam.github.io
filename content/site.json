@@ -38,7 +38,7 @@
   "_contingency_help": "The contingency plan's calendar, in days since the last heartbeat (docs/CONTINGENCY.md). ownerNudgeDays: when the owner is asked if he is there. quietDays: when the trusted people are told (nothing public). publicDays: when they are asked to confirm. confirmationsNeeded: how many must agree. reminderEveryDays, waitDays: how often they are reminded, and how long one of them can make everyone wait. state is \"normal\" or \"contingency\"; the daily run sets it when enough people have confirmed, and any heartbeat sets it back.",
 
   "luma": { "born": "2020-10-22", "passed": "" },
-  "_luma_help": "Luma's birthday. Through October her view counts down to the 22nd, then celebrates. When the day comes, set passed to that date (YYYY-MM-DD): her view becomes a memorial and the countdown stops. Preview: node scripts/build-site.mjs --luma-passed 2035-01-01. Celebrate her birthday after the fact with /?when=luma, or any day with /?v=luma&when=2027-10-22.",
+  "_luma_help": "Luma's birthday. Through October her view counts down to the 22nd, then celebrates. When the day comes, set passed to that date (YYYY-MM-DD): her view becomes a memorial and the countdown stops. Preview: node scripts/build-site.mjs --luma-passed 2035-01-01. Celebrate her birthday after the fact with /?when=luma, or any day with /?v=luma&when=2027-10-22. Nova's birthday is in future.dogs.real: July gets the same countdown and party from her first birthday on (/?when=nova). The bday.after and bday.nova.after strings name the dates, so change them with the birthdays.",
 
   "future": {
     "founderFrom": "2075-06-03",
@@ -196,12 +196,17 @@
     "tm.d.fall": "Fall",
     "tm.d.halloween": "Halloween",
     "tm.d.luma": "Luma's birthday",
+    "tm.d.nova": "Nova's birthday",
     "tm.d.veterans": "Veterans Day",
     "tm.d.christmas": "Christmas",
     "bday.count": "{n} days until Luma turns {age}",
     "bday.one": "Tomorrow Luma turns {age}",
     "bday.today": "Happy birthday, Luma! {age} today.",
     "bday.after": "Luma turned {age} on October 22.",
+    "bday.nova.count": "{n} days until Nova turns {age}",
+    "bday.nova.one": "Tomorrow Nova turns {age}",
+    "bday.nova.today": "Happy birthday, Nova! {age} today.",
+    "bday.nova.after": "Nova turned {age} on July 20.",
 
     "luma.memorial.h": "Remembering Luma, a very good dog.",
     "luma.memorial.p": "Trail scout, campfire supervisor, professional fluff. She made every one of these photographs better.",

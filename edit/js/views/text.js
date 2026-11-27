@@ -8,7 +8,7 @@ import { recordList } from './records.js';
 
 const GROUPS = {
   _: 'Page title and search description', skip: 'Skip link', nav: 'Navigation', view: 'View switcher', hero: 'Hero', hook: 'Hero: maker lines',
-  cta: 'Buttons', season: 'Season greetings', tm: 'Time machine', bday: 'Luma’s birthday', stat: 'Numbers', work: 'Featured work', sheet: 'App preview sheet',
+  cta: 'Buttons', season: 'Season greetings', tm: 'Time machine', bday: 'Dog birthdays', stat: 'Numbers', work: 'Featured work', sheet: 'App preview sheet',
   tl: 'Project timeline', exp: 'Experience', ph: 'Photography', radial: 'Explore: names', luma: 'Luma band', soft: 'Software band', x: 'Explore: descriptions',
   xr: 'XR offer', c: 'Contact', tui: 'Terminal app', search: 'Search', foot: 'Footer',
 };

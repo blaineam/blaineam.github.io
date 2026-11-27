@@ -929,7 +929,7 @@ export async function start(opts) {
   function applySeason() {
     const on = cal.seasonOn(nowDate());
     fx.set(on ? { effect: on.season.effect, colors: on.season.colors, lights: on.season.lights } : null);
-    greeting = !on || !on.onDay || !on.season.greet ? '' : on.season.id === 'luma' ? site('bday.today', '').replace('{age}', on.age) : site('season.' + on.season.id, '');
+    greeting = !on || !on.onDay || !on.season.greet ? '' : on.season.id === 'luma' || on.season.id === 'nova' ? site(on.season.id === 'nova' ? 'bday.nova.today' : 'bday.today', '').replace('{age}', on.age) : site('season.' + on.season.id, '');
   }
 
   // Rebuild what the scene shows for the date in force.
@@ -1106,7 +1106,7 @@ export async function start(opts) {
     THREE, ui, EYE, invalidate, cal,
     onGo(d) { travelTo(d, ''); },
     onNow() { travelTo(null); },
-    onNamed(id) { const d = cal.eventDate(id, new Date()); if (d) { if (id === 'luma') AREAS[0].set = 'luma'; travelTo(d, ''); } },
+    onNamed(id) { const d = cal.eventDate(id, new Date()); if (d) { if (id === 'luma' || id === 'nova') AREAS[0].set = 'luma'; travelTo(d, ''); } },
     onChange() { rebuildTargets(); },
   });
   search.group.visible = timeMachine.group.visible = false;

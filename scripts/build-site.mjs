@@ -305,6 +305,14 @@ const heroSrcset = srcsetOf(hero0);
 const cta = (view) => site.views[view].cta.map(([href, key], i) =>
   `<a class="btn ${i ? 'btn--ghost' : 'btn--solid'}" href="${esc(href)}"><span data-i18n="${key}">${esc(t(key))}</span>${i ? '' : I.arrow}</a>`).join('\n            ');
 
+// One countdown line per real dog; assets/site.js shows the one whose birthday month it is.
+const novaDog = (site.future?.dogs?.real || []).find((d) => d.name === 'Nova' && !d.passed);
+const novaBorn = novaDog ? novaDog.born : '';
+function birthdayLine(id, born, key) {
+  const kinds = ['count', 'one', 'today', 'after'];
+  return `<p class="bday" id="${id}" hidden data-born="${esc(born)}" ${kinds.map((k) => `data-${k}="${esc(t(`${key}.${k}`))}"`).join(' ')} data-i18n-attr="${kinds.map((k) => `data-${k}:${key}.${k}`).join(';')}" aria-live="polite"></p>`;
+}
+
 const heroCopy = {
   maker: `
           <p class="hand" data-i18n="hello-i-m-blaine.854c20">Hello, I'm Blaine Miller</p>
@@ -327,7 +335,7 @@ const heroCopy = {
           <p class="eyebrow">${I.paw}<span data-i18n="hero.luma.eyebrow">${esc(t('hero.luma.eyebrow'))}</span></p>
           ${T('hero.luma.h', 'h1')}
           ${T('hero.luma.p', 'p', 'class="lede"')}
-          <p class="bday" id="bday" hidden data-born="${esc(site.luma.born)}" ${['count', 'one', 'today', 'after'].map((k) => `data-${k}="${esc(t('bday.' + k))}"`).join(' ')} data-i18n-attr="${['count', 'one', 'today', 'after'].map((k) => `data-${k}:bday.${k}`).join(';')}" aria-live="polite"></p>`,
+          ${birthdayLine('bday', site.luma.born, 'bday')}${novaBorn ? birthdayLine('bday-nova', novaBorn, 'bday.nova') : ''}`,
 };
 
 // The dogs' view (internally still "luma") shows both dogs' photographs.
@@ -697,7 +705,7 @@ ${site.social.map((s) => `          <li${/^(youtube|instagram|x|twitter)$/i.test
     <h2 id="tm-h">${I.clock}<span data-i18n="tm.title">${esc(t('tm.title'))}</span></h2>
     ${T('tm.p', 'p')}
     <div class="tm__grid">
-${['newyear', 'easter', 'memorial', 'birthday', 'july4', 'summer', 'fall', 'halloween', 'luma', 'veterans', 'christmas'].map((d) => `      <a href="/?${d === 'luma' ? 'v=nova&amp;' : ''}when=${d}" data-when="${d}" data-i18n="tm.d.${d}">${esc(t('tm.d.' + d))}</a>`).join('\n')}
+${['newyear', 'easter', 'memorial', 'birthday', 'july4', 'summer', 'fall', 'halloween', 'luma', 'veterans', 'christmas'].flatMap((d) => (d === 'summer' && novaBorn ? ['nova', d] : [d])).map((d) => `      <a href="/?${d === 'luma' || d === 'nova' ? 'v=nova&amp;' : ''}when=${d}" data-when="${d}" data-i18n="tm.d.${d}">${esc(t('tm.d.' + d))}</a>`).join('\n')}
     </div>
     <form class="tm__date" id="tm-form">
       <label><span data-i18n="tm.pick">${esc(t('tm.pick'))}</span><input type="datetime-local" id="tm-input" required></label>
@@ -1611,7 +1619,7 @@ const tuiData = [
   ...(site.seasons || []).map((z) => ['Z', z.id, z.from || '', z.to || '', z.day || '', z.rule || '', z.before ?? '', z.after ?? '', z.date || '', z.effect || '', z.greet ? 1 : 0, z.lights ? 1 : 0].join('\t')),
   // earlier years of GitHub, one character a day, for the time machine
   ...Object.entries(contrib?.years || {}).sort().map(([y, v]) => ['W', y, v.total, v.levels].join('\t')),
-  rec('S', 'luma_born', site.luma.born), rec('S', 'luma_passed', lumaPassed || ''), rec('S', 'founder_from', site.future?.founderFrom || ''),
+  rec('S', 'luma_born', site.luma.born), rec('S', 'nova_born', novaBorn), rec('S', 'luma_passed', lumaPassed || ''), rec('S', 'founder_from', site.future?.founderFrom || ''),
   rec('S', 'dog_life', site.future?.dogs?.lifespan || 12), rec('S', 'dog_adopt', site.future?.dogs?.adoptAt || 6), rec('S', 'dog_names', (site.future?.dogs?.names || []).join(',')),
   rec('S', 'dog_real', (site.future?.dogs?.real || []).map((d) => [d.name, d.born, d.passed || ''].join('/')).join(',')),
 ];

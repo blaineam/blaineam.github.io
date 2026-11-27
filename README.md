@@ -51,7 +51,7 @@ Whatever the view, the rest is the same page:
   Memorial Day, June 3, July 4, Halloween, Veterans Day and Christmas. Never in the Work view.
 - **Time machine**: the footer has a time machine. Pick a destination (Christmas, July 4th, Luma's
   birthday…) or any date and the page warps there: seasons, greetings, Luma's age and her
-  birthday party all behave as if it were that day, with a destination-time readout and a "Back
+  birthday parties (Luma's in October, Nova's in July) all behave as if it were that day, with a destination-time readout and a "Back
   to the present" button. It is all in the address, so a moment can be shared after the fact:
   `/?when=luma`, `/?when=christmas`, `/?when=2027-10-22`, `/?when=2027-10-22T21:30` (a time of
   day sets the sky too). A named day means its most recent occurrence. The page also keeps to
@@ -125,6 +125,7 @@ to the repository can save (see [`edit/README.md`](edit/README.md)). To preview 
 | Show the "Open to senior & principal roles" badge | `content/site.json` → `"openToWork": true` |
 | Change a seasonal celebration or its dates | `content/site.json` → `seasons` (visit with `/?when=2026-12-25`) |
 | Luma's birthday | `content/site.json` → `luma.born` (replay with `/?when=luma`) |
+| Nova's birthday | `content/site.json` → `future.dogs.real` → `born` (visit with `/?when=nova`); update the `bday.nova.after` string with it |
 | Change the header links on every other page | [`assets/shell.js`](assets/shell.js) → `LINKS` |
 | Choose the hero photographs of a view | `content/site.json` → `views.<view>.hero` |
 | Choose the six featured projects | `content/site.json` → `featured` |

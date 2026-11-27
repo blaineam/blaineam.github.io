@@ -22,23 +22,30 @@ const dayNo = (d) => Math.round(new Date(d.getFullYear(), d.getMonth(), d.getDat
 const plus = (d, years) => { const x = new Date(d.getTime()); x.setMonth(x.getMonth() + Math.round(years * 12)); return x; };
 
 // The days the time machine offers by name, in the order the home page lists them.
-export const NAMED = ['newyear', 'easter', 'memorial', 'birthday', 'july4', 'summer', 'fall', 'halloween', 'luma', 'veterans', 'christmas'];
+export const NAMED = ['newyear', 'easter', 'memorial', 'birthday', 'july4', 'summer', 'fall', 'halloween', 'luma', 'veterans', 'christmas'].flatMap((d) => (d === 'summer' ? ['nova', d] : [d]));
 
 export function createCalendar(cfg) {
   cfg = cfg || {};
   const SEASONS = Array.isArray(cfg.seasons) ? cfg.seasons : [];
   const lumaBorn = (cfg.luma && cfg.luma.born) || '';
   const fut = cfg.future || {};
+  const novaDog = ((fut.dogs && fut.dogs.real) || []).find((x) => x.name === 'Nova');
+  const dogBorn = { luma: lumaBorn, nova: (novaDog && novaDog.born) || '' };   // the named days that are a birthday
 
   // A named day means its most recent occurrence, so a celebration can be replayed afterwards.
   function eventDate(id, today) {
     const s = SEASONS.find((x) => x.id === id), y = today.getFullYear();
-    if (id === 'luma' && !lumaBorn) return null;
-    if (id !== 'luma' && (!s || s.date)) return s && s.date ? new Date(s.date + 'T12:00:00') : null;
+    if (id in dogBorn) {                                      // the latest birthday, or the first one while it is still to come
+      const born = dogBorn[id];
+      if (!born) return null;
+      const at = (yr) => new Date(yr, +born.slice(5, 7) - 1, +born.slice(8, 10), 12);
+      const last = at(at(y) <= today ? y : y - 1);
+      return last.getFullYear() > +born.slice(0, 4) ? last : at(+born.slice(0, 4) + 1);
+    }
+    if (!s || s.date) return s && s.date ? new Date(s.date + 'T12:00:00') : null;
     let d = null;
     for (let k = 0; k < 2; k++) {
-      if (id === 'luma') d = new Date(y - k, +lumaBorn.slice(5, 7) - 1, +lumaBorn.slice(8, 10), 12);
-      else d = s.rule === 'easter' ? easterOf(y - k) : s.rule === 'memorial' ? memorialOf(y - k) : new Date(y - k, +(s.day || s.from).slice(0, 2) - 1, +(s.day || s.from).slice(3, 5), 12);
+      d = s.rule === 'easter' ? easterOf(y - k) : s.rule === 'memorial' ? memorialOf(y - k) : new Date(y - k, +(s.day || s.from).slice(0, 2) - 1, +(s.day || s.from).slice(3, 5), 12);
       if (d <= today) return d;
     }
     return d;
@@ -50,7 +57,7 @@ export function createCalendar(cfg) {
       const date = new Date(m[1] + 'T' + (m[2] || '12:00') + ':00');
       return isNaN(date.getTime()) ? null : { date, clock: m[2] || '' };
     }
-    const date = eventDate(w === 'luma-birthday' ? 'luma' : w, new Date());
+    const date = eventDate(w.replace(/^(luma|nova)-birthday$/, '$1'), new Date());
     return date ? { date, clock: '' } : null;
   }
   const isFounder = (date) => !!fut.founderFrom && date >= new Date(fut.founderFrom + 'T00:00:00');
@@ -63,8 +70,10 @@ export function createCalendar(cfg) {
       if (s.rule) { const base = dayNo(s.rule === 'easter' ? easterOf(y) : memorialOf(y)); return today >= base - (s.before || 0) && today <= base + (s.after || 0); }
       return s.from <= s.to ? md >= s.from && md <= s.to : md >= s.from || md <= s.to;      // a range may wrap the new year
     };
-    // Luma's birthday is its own party on the home page; here it is one more day on the calendar.
-    if (lumaBorn && md === lumaBorn.slice(5)) return { season: { id: 'luma', effect: 'confetti', greet: true }, onDay: true, age: y - +lumaBorn.slice(0, 4) };
+    // The dogs' birthdays are their own parties on the home page; here each is one more day on the calendar.
+    for (const [id, born] of Object.entries(dogBorn)) {
+      if (born && md === born.slice(5) && y > +born.slice(0, 4)) return { season: { id, effect: 'confetti', greet: true }, onDay: true, age: y - +born.slice(0, 4) };
+    }
     const season = SEASONS.find(active);
     if (!season) return null;
     const onDay = season.date ? true : season.rule ? today === dayNo(season.rule === 'easter' ? easterOf(y) : memorialOf(y)) : md === (season.day || season.from) || (!season.day && season.from === season.to);
@@ -74,7 +83,9 @@ export function createCalendar(cfg) {
   // The dogs of a year. Luma is real; after her come stand-ins (names from future.dogs.names) until real ones are chosen.
   function dogsAt(when) {
     const real = new Date(), d = fut.dogs || {}, names = d.names || [], dogs = [];
-    let list = d.real && d.real.length ? d.real : lumaBorn ? [{ name: 'Luma', born: lumaBorn, passed: (cfg.luma && cfg.luma.passed) || '' }] : [], last = null, n = 0;
+    const luma = lumaBorn ? [{ name: 'Luma', born: lumaBorn, passed: (cfg.luma && cfg.luma.passed) || '' }] : [];
+    const list = luma.concat((d.real || []).filter((x) => !(luma.length && x.name === 'Luma')));
+    let last = null, n = 0;
     for (const r of list) {
       const born = new Date(r.born + 'T12:00:00');
       last = { name: r.name, born, end: r.passed ? new Date(r.passed + 'T12:00:00') : plus(born, d.lifespan || 12), real: true };

@@ -205,12 +205,19 @@ function memorial(yr,   n) { n = dnum(yr, 5, 31); return n - mod(n + 3, 7) }   #
 # A named day means its most recent occurrence (as on the site), so a celebration can be replayed.
 function lastof(id,   j, k, d, y) {
   j = ZI[id]
-  if (id != "luma" && !j) return ""
+  if (id == "luma" || id == "nova") {   # a birthday: the latest one, or the first while it is still to come
+    if (S[id "_born"] == "") return ""
+    y = substr(today, 1, 4) + 0
+    d = dofs(sprintf("%04d", y) substr(S[id "_born"], 5))
+    if (d > TN) y--
+    if (y <= substr(S[id "_born"], 1, 4) + 0) y = substr(S[id "_born"], 1, 4) + 1
+    return dofs(sprintf("%04d", y) substr(S[id "_born"], 5))
+  }
+  if (!j) return ""
   if (j && ZDATE[j] != "") return dofs(ZDATE[j])
   y = substr(today, 1, 4) + 0
   for (k = 0; k < 2; k++) {
-    if (id == "luma") d = dofs(sprintf("%04d", y - k) substr(S["luma_born"], 5))
-    else if (ZRULE[j] == "easter") d = easter(y - k)
+    if (ZRULE[j] == "easter") d = easter(y - k)
     else if (ZRULE[j] == "memorial") d = memorial(y - k)
     else d = dofs(sprintf("%04d", y - k) "-" (ZDAY[j] != "" ? ZDAY[j] : ZFROM[j]))
     if (d <= TN) return d
@@ -451,8 +458,8 @@ function lights(r, c0, c1,   x, i, cols5, on) {
 function pickitems(   a, n, i) {
   npk = 0
   if (travel) { PKI[++npk] = "now"; PKL[npk] = U["tm.now"]; PKD[npk] = today }
-  n = split("newyear easter memorial birthday july4 summer fall halloween luma veterans christmas", a, " ")
-  for (i = 1; i <= n; i++) { PKI[++npk] = a[i]; PKL[npk] = U["tm.d." a[i]]; PKD[npk] = dstr(resolve(a[i])) }
+  n = split("newyear easter memorial birthday july4 nova summer fall halloween luma veterans christmas", a, " ")
+  for (i = 1; i <= n; i++) { if (a[i] == "nova" && S["nova_born"] == "") continue; PKI[++npk] = a[i]; PKL[npk] = U["tm.d." a[i]]; PKD[npk] = dstr(resolve(a[i])) }
 }
 function picker(   w, h, r0, c0, i, n, r, style, first, shown, lab) {
   pickitems()
