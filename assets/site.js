@@ -1263,6 +1263,8 @@
     };
     stampDate(); doc.addEventListener('i18n:applied', stampDate);
     tmBar.hidden = false;
+    // The bar takes a second row where its labels are long; the sky view's buttons sit above it.
+    if (window.ResizeObserver) new ResizeObserver(function () { root.style.setProperty('--tm-h', tmBar.offsetHeight + 'px'); }).observe(tmBar);
     if (!reduced) root.classList.add('is-arriving');
   }
 
