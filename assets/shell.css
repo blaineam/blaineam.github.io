@@ -1,7 +1,7 @@
 /* wemiller.com — shared shell for every page that is not the home page.
  *
  * Gives a page the same colours, type, header and footer as the home page (assets/site.css).
- * Use: <link rel="stylesheet" href="/assets/shell.css?v=07f7d6ac"> and
+ * Use: <link rel="stylesheet" href="/assets/shell.css?v=8afd1843"> and
  *      <script src="/assets/shell.js?v=469ca290" defer data-active="apps"></script>
  * then style the page with the --wm-* tokens below instead of its own colours.
  * System fonts only, no yellow or gold anywhere, light and dark follow the system.
