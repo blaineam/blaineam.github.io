@@ -267,10 +267,14 @@
   function movePill() {
     var on = viewButtons.filter(function (b) { return b.getAttribute('aria-pressed') === 'true'; })[0];
     if (!on || !pill) return;
+    // one line when the four fit, two by two when they do not (a narrow screen, longer words)
+    var box = on.parentNode;
+    box.classList.remove('is-stacked');
+    var last = box.querySelectorAll('button'); last = last[last.length - 1];   // the pill, still where it was, would widen scrollWidth
+    if (last.offsetLeft + last.offsetWidth > box.clientWidth - 3) box.classList.add('is-stacked');   // 4 px of padding, 1 of rounding
     pill.style.width = on.offsetWidth + 'px';
-    pill.style.transform = 'translateX(' + on.offsetLeft + 'px)';
-    // on a narrow phone the switcher scrolls sideways: keep the chosen view in sight
-    var box = on.parentNode; if (box.scrollWidth > box.clientWidth + 1) box.scrollLeft = Math.max(0, on.offsetLeft - (box.clientWidth - on.offsetWidth) / 2);
+    pill.style.height = on.offsetHeight + 'px';
+    pill.style.transform = 'translate(' + on.offsetLeft + 'px, ' + on.offsetTop + 'px)';
   }
   // The dogs and the photographs have addresses of their own, so that a copied address carries that
   // page's link preview (DOORS in scripts/build-site.mjs). A door already open keeps its own path.
@@ -384,6 +388,8 @@
     if (stale && isHome(path)) history.replaceState(null, '', urlFor(view));
   })();
   window.addEventListener('resize', movePill);
+  // and whenever a label changes size (a late font or dictionary), so the pill stays under its button
+  if (window.ResizeObserver) { var labels = new ResizeObserver(function () { movePill(); }); viewButtons.forEach(function (b) { labels.observe(b); }); }
   window.addEventListener('load', movePill);
   doc.addEventListener('i18n:applied', function () { requestAnimationFrame(movePill); });
   requestAnimationFrame(function () { root.classList.add('pill-ready'); });
