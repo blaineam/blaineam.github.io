@@ -286,7 +286,7 @@ that sends a visitor on to the view:
 |---|---|---|
 | millers.dog | `https://wemiller.com/dogs/` | `/?v=dog` |
 | luma.dog | `https://wemiller.com/dogs/luma/` | `/?v=dog` |
-| supernova.dog | `https://wemiller.com/dogs/supernova/` | `/?v=dog` |
+| supernova.dog | `https://wemiller.com/dogs/nova/` | `/?v=dog` |
 | 120.media | `https://wemiller.com/photos/` | `/?v=120` |
 
 Redirects straight to `?v=120`, `?v=dog`, `?v=nova` or `?v=luma` still open the right view; their

@@ -863,7 +863,7 @@ write('index.html', index);
 const DOORS = [
   { paths: ['dogs', 'dog', 'pets'], to: '/?v=dog', domain: 'millers.dog', poster: 'millers-dog', k: 'hero.luma' },
   { paths: ['dogs/luma'], to: '/?v=dog', domain: 'luma.dog', poster: 'luma-dog', k: 'hero.luma' },
-  { paths: ['dogs/supernova'], to: '/?v=dog', domain: 'supernova.dog', poster: 'supernova-dog', k: 'hero.luma' },
+  { paths: ['dogs/nova'], to: '/?v=dog', domain: 'supernova.dog', poster: 'supernova-dog', k: 'hero.luma' },
   { paths: ['photos'], to: '/?v=120', domain: '120.media', poster: '120-media', k: 'hero.photo' },
 ];
 for (const door of DOORS) {
