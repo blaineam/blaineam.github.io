@@ -278,21 +278,22 @@ what is served.
 GitHub Pages serves one custom domain (`wemiller.com`, in `CNAME`); the other domains redirect to
 it. **millers.dog** is the dogs' long-term name; luma.dog and supernova.dog keep working.
 
-Link previews are read from the HTML as served, so a domain only gets a preview of its own when its
-redirect points at its front door. Each is a small generated page with its own title and poster
-that sends a visitor on to the view:
+Link previews are read from the HTML as served, so the dogs' and photography views also live at
+addresses of their own: generated copies of the home page, each with its own title and poster.
+Nothing redirects, so the address a visitor copies or shares carries that preview.
 
-| Domain | Redirect it to | Visitor lands on |
-|---|---|---|
-| millers.dog | `https://wemiller.com/dogs/` | `/?v=dog` |
-| luma.dog | `https://wemiller.com/dogs/luma/` | `/?v=dog` |
-| supernova.dog | `https://wemiller.com/dogs/nova/` | `/?v=dog` |
-| 120.media | `https://wemiller.com/photos/` | `/?v=120` |
+| Domain | Redirect it to |
+|---|---|
+| millers.dog | `https://wemiller.com/dogs/` |
+| luma.dog | `https://wemiller.com/dogs/luma/` |
+| supernova.dog | `https://wemiller.com/dogs/nova/` |
+| 120.media | `https://wemiller.com/photos/` |
 
-Redirects straight to `?v=120`, `?v=dog`, `?v=nova` or `?v=luma` still open the right view; their
-preview is the home page's. `/dog/` and `/pets/` are front doors too, and any other path starting
-with a dog word (`/luma`, `/nova`, `/millers`, `/pups/…`) is caught by `404.html`. If a hostname is
-ever pointed at the site directly, `content/site.json` → `domains` already maps it to its view.
+`?v=dog`, `?v=nova`, `?v=luma`, `?v=120` and the like open the right view and then show its own
+address. A `?v=` link shared as typed still gets the home page's preview. `/dog/` and `/pets/` are
+copies of `/dogs/`, and any other path starting with a dog word (`/luma`, `/nova`, `/millers`,
+`/pups/…`) is sent there by `404.html`. If a hostname is ever pointed at the site directly,
+`content/site.json` → `domains` already maps it to its view.
 
 ### Store-link campaigns
 

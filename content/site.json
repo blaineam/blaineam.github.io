@@ -10,7 +10,7 @@
   "_openToWork_help": "true shows the 'Open to senior & principal roles' badge in hire mode.",
 
   "domains": { "120.media": "photo", "www.120.media": "photo", "luma.dog": "luma", "www.luma.dog": "luma", "supernova.dog": "luma", "www.supernova.dog": "luma", "millers.dog": "luma", "www.millers.dog": "luma" },
-  "_domains_help": "If one of these hostnames ever serves this site directly it opens in that view. Redirects to /?v=120, /?v=dog, /?v=nova and /?v=luma all keep working. For a link preview of its own, point a domain at its front door: millers.dog to /dogs/, luma.dog to /dogs/luma/, supernova.dog to /dogs/nova/, 120.media to /photos/ (DOORS in scripts/build-site.mjs).",
+  "_domains_help": "If one of these hostnames ever serves this site directly it opens in that view. Redirects to /?v=120, /?v=dog, /?v=nova and /?v=luma all keep working. Those addresses then show the view's own, which is what carries its link preview. Point a domain at its front door: millers.dog to /dogs/, luma.dog to /dogs/luma/, supernova.dog to /dogs/nova/, 120.media to /photos/ (DOORS in scripts/build-site.mjs).",
 
   "views": {
     "maker": {

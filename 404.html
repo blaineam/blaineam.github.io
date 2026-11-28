@@ -22,7 +22,7 @@
 (function () {
   // The catch-all for the dogs: /luma, /nova, /pets/anything and so on all open their page.
   if (/^\/(dogs?|pets?|pups?|pupp(y|ies)|luma|nova|supernova|millers(\.dog)?)(\/|$)/i.test(location.pathname)) {
-    location.replace('/?v=dog' + location.hash); return;
+    location.replace('/dogs/' + location.search + location.hash); return;
   }
   var m = location.pathname.match(/\/apps\/haven\/u\/([^\/?#]+)/);
   if (m) { location.replace('/apps/haven/?u=' + m[1] + location.hash); }

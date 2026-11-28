@@ -271,12 +271,20 @@
     // on a narrow phone the switcher scrolls sideways: keep the chosen view in sight
     var box = on.parentNode; if (box.scrollWidth > box.clientWidth + 1) box.scrollLeft = Math.max(0, on.offsetLeft - (box.clientWidth - on.offsetWidth) / 2);
   }
+  // The dogs and the photographs have addresses of their own, so that a copied address carries that
+  // page's link preview (DOORS in scripts/build-site.mjs). A door already open keeps its own path.
+  var DOORS = {
+    luma: { at: '/dogs/', v: 'dog', test: function (p) { return /^\/(dogs(\/(luma|nova))?|dog|pets)\/$/.test(p); } },
+    photo: { at: '/photos/', v: '120', test: function (p) { return p === '/photos/'; } }
+  };
+  function isHome(p) { return p === '/' || DOORS.luma.test(p) || DOORS.photo.test(p); }
   function urlFor(view) {
     var u = new URL(location.href);
     u.searchParams.delete('v'); u.searchParams.delete('mode');
-    if (view === 'photo') u.searchParams.set('v', '120');
-    else if (view === 'luma') u.searchParams.set('v', 'dog');
-    else if (view !== defaultView) u.searchParams.set('mode', view);
+    var door = DOORS[view];
+    if (isHome(u.pathname)) u.pathname = door ? (door.test(u.pathname) ? u.pathname : door.at) : '/';
+    else if (door) u.searchParams.set('v', door.v);   // a preview copy of the page, somewhere else
+    if (!door && view !== defaultView) u.searchParams.set('mode', view);
     return u;
   }
   // Which photographs belong to the chosen set, in order. The gallery shows the first few and
@@ -351,6 +359,11 @@
     switchView(t.getAttribute('data-view-to'));
   });
   applyView(root.getAttribute('data-view'), { initial: true });
+  (function () {
+    var view = root.getAttribute('data-view'), path = location.pathname, door = DOORS[view];
+    var stale = door ? new URLSearchParams(location.search).has('v') : path !== '/';
+    if (stale && isHome(path)) history.replaceState(null, '', urlFor(view));
+  })();
   window.addEventListener('resize', movePill);
   window.addEventListener('load', movePill);
   doc.addEventListener('i18n:applied', function () { requestAnimationFrame(movePill); });
@@ -1221,7 +1234,12 @@
     var u = new URL(location.href);
     u.searchParams.delete('date');
     if (when) u.searchParams.set('when', when); else u.searchParams.delete('when');
-    if (view) { u.searchParams.delete('mode'); u.searchParams.set('v', view); }
+    if (view) {
+      var to = view === 'dog' ? 'luma' : view;
+      u.searchParams.delete('mode'); u.searchParams.delete('v');
+      if (DOORS[to] && isHome(u.pathname)) { if (!DOORS[to].test(u.pathname)) u.pathname = DOORS[to].at; }
+      else u.searchParams.set('v', view);
+    }
     u.hash = '';
     return u.toString();
   }
@@ -1455,7 +1473,7 @@
   function go(e) {
     dialog.close();
     var u = new URL(e.u, location.origin);
-    if (u.pathname === location.pathname && u.hash) {
+    if ((u.pathname === location.pathname || (u.pathname === '/' && isHome(location.pathname))) && u.hash) {
       if (u.search && u.search !== location.search) { location.href = e.u; return; }
       location.hash = u.hash;
       var target = doc.getElementById(u.hash.slice(1));
