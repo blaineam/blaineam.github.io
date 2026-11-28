@@ -76,10 +76,9 @@ be changed without a GitHub token that only the repository's owner can create.
   full-size file; Settings has the default. To make the switch work without the original, a
   clean resized copy (no watermark, no metadata, quality 0.95) is kept in the browser until
   the photo is committed; it is never uploaded.
-- **Dog tags.** Every thumbnail on the Photos tab has **Luma** and **Nova** buttons (hidden
-  while reordering); a photo can have either or both, and either puts it on the Luma & Nova
-  page. The same two are checkboxes in the photo's form, filters above the grid and in the
-  media picker.
+- **Dog tags.** **Luma** and **Nova** are checkboxes under "Sets" in each photo's form; a photo
+  can have either or both, and either puts it on the Luma & Nova page (and on that dog's own
+  page). Both are also filters above the grid and in the media picker.
 - **Pre-filled from the file.** Before the re-encode, `js/exif.js` (own code, no library) reads
   the original and the form opens with whatever it found, each field marked "From the photo",
   editable, and removable ("Clear camera details" empties them all). Written to the photo's

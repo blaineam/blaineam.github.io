@@ -344,7 +344,11 @@ function renamePending(p, to) {
   const map = photoMap(), from = p.name;
   if (map[from]) { const d = state.files.photos.draft; d.photos = Object.fromEntries(Object.entries(map).map(([k, v]) => [k === from ? to : k, v])); }
   const views = draft('site').views || {};
-  for (const v of Object.values(views)) if (Array.isArray(v.hero)) v.hero = v.hero.map((h) => (h === from ? to : h));
+  const swap = (list) => list.map((h) => (h === from ? to : h));
+  for (const v of Object.values(views)) {
+    if (Array.isArray(v.hero)) v.hero = swap(v.hero);
+    for (const n of Object.keys(v.pups || {})) v.pups[n] = swap(v.pups[n]);
+  }
   p.name = to; p.file = to.replace(/\.webp$/, '.' + p.ext);
 }
 export async function addPhoto({ blob, clean, ext, width, height, exif, watermarked = false, wantMark = false }) {

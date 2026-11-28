@@ -284,7 +284,8 @@ if (!VIEWS.includes(site.mode)) throw new Error('content/site.json → mode must
 
 // Hero photographs also get a 1024 px copy (slides/hero/), so a phone is not sent the 1600 px one.
 const HERO_W = 1024;
-for (const f of new Set(VIEWS.flatMap((v) => site.views[v].hero))) {
+const PUPS = site.views.luma.pups || {};
+for (const f of new Set([...VIEWS.flatMap((v) => site.views[v].hero), ...Object.values(PUPS).flat()])) {
   const p = photoBy[f];
   if (!p) throw new Error(`content/site.json → views hero names ${f}, which is not in /slides`);
   const out = `slides/hero/${f}`;
@@ -295,7 +296,8 @@ for (const f of new Set(VIEWS.flatMap((v) => site.views[v].hero))) {
   p.mid = exists(out) ? out : null;
 }
 const srcsetOf = (p) => [`${stamp(p.thumb)} ${Math.min(THUMB_W, p.w)}w`, p.mid && `${stamp(p.mid)} ${HERO_W}w`, `${stamp(p.full)} ${p.w}w`].filter(Boolean).join(', ');
-const heroData = Object.fromEntries(VIEWS.map((v) => [v, site.views[v].hero.map((f) => {
+const heroSetsOf = [...VIEWS.map((v) => [v, site.views[v].hero]), ...Object.entries(PUPS).map(([n, list]) => [`pup-${n}`, list])];
+const heroData = Object.fromEntries(heroSetsOf.map(([v, list]) => [v, list.map((f) => {
   const p = photoBy[f];
   return { s: stamp(p.thumb), l: stamp(p.full), a: p.alt, c: p.c, set: srcsetOf(p) };
 })]));
@@ -429,7 +431,7 @@ const jsonLd = {
 // ?v=nova and ?v=luma are what the older domain redirects use. 404.html has the same list for paths.
 const DOG_WORDS = '^(dogs?|pets?|pups?|pupp(y|ies)|luma|nova|millers(\\.dog)?)$';
 const PHOTO_WORDS = '^(120(\\.media)?|photos?|photography)$';
-const bootScript = `(function(){var d=document.documentElement,q=new URLSearchParams(location.search),v=q.get("v"),m=q.get("mode"),h=${JSON.stringify(site.domains)}[location.hostname.toLowerCase()];var w=/${PHOTO_WORDS}/i.test(v||"")?"photo":/${DOG_WORDS}/i.test(v||"")?"luma":m==="hire"||m==="maker"?m:h||d.getAttribute("data-view");d.setAttribute("data-view",w);var hs=${JSON.stringify(Object.fromEntries(VIEWS.filter((v) => heroData[v][0]).map((v) => [v, heroData[v][0].set])))}[w];if(hs){var k=document.createElement("link");k.rel="preload";k.as="image";k.setAttribute("imagesrcset",hs);k.setAttribute("imagesizes","100vw");k.setAttribute("fetchpriority","high");document.head.appendChild(k)}d.classList.add("js");var th=null;try{th=localStorage.getItem("wm-theme");if(th==="light"||th==="dark")d.setAttribute("data-theme",th);else th=null}catch(e){}if(th?th==="light":(window.matchMedia&&matchMedia("(prefers-color-scheme: light)").matches))d.setAttribute("data-hero","light");try{var c=navigator.connection;if(c&&(c.saveData||/2g/.test(c.effectiveType||"")))d.classList.add("lite")}catch(e){}})();`;
+const bootScript = `(function(){var d=document.documentElement,q=new URLSearchParams(location.search),v=q.get("v"),m=q.get("mode"),h=${JSON.stringify(site.domains)}[location.hostname.toLowerCase()];var w=/${PHOTO_WORDS}/i.test(v||"")?"photo":/${DOG_WORDS}/i.test(v||"")?"luma":m==="hire"||m==="maker"?m:h||d.getAttribute("data-view");d.setAttribute("data-view",w);var u=d.getAttribute("data-pup");var hs=${JSON.stringify(Object.fromEntries(Object.keys(heroData).filter((v) => heroData[v][0]).map((v) => [v, heroData[v][0].set])))}[w==="luma"&&u?"pup-"+u:w];if(hs){var k=document.createElement("link");k.rel="preload";k.as="image";k.setAttribute("imagesrcset",hs);k.setAttribute("imagesizes","100vw");k.setAttribute("fetchpriority","high");document.head.appendChild(k)}d.classList.add("js");var th=null;try{th=localStorage.getItem("wm-theme");if(th==="light"||th==="dark")d.setAttribute("data-theme",th);else th=null}catch(e){}if(th?th==="light":(window.matchMedia&&matchMedia("(prefers-color-scheme: light)").matches))d.setAttribute("data-hero","light");try{var c=navigator.connection;if(c&&(c.saveData||/2g/.test(c.effectiveType||"")))d.classList.add("lite")}catch(e){}})();`;
 
 const profile = stamp('profile.jpg');
 const avatar = stamp('assets/avatar.jpg');   // 192 px copy of profile.jpg for the header and the tab icon (the full photo is 160 KB)
@@ -508,7 +510,7 @@ ${LANGS.map((l) => `  <link rel="alternate" hreflang="${l}" href="${site.origin}
         <div class="hero__scrim"></div>
         <canvas class="hero__confetti" id="season-fx" hidden></canvas>
         <canvas class="hero__confetti" id="confetti" hidden></canvas>
-        <script>(function(){try{var v=document.documentElement.getAttribute("data-view");var h=JSON.parse(document.getElementById("top").getAttribute("data-hero"))[v][0],a=document.getElementById("hero-a");if(!h)return;a.style.background=h.c;a.sizes="100vw";a.srcset=h.set;a.src=h.s}catch(e){}})();</script>
+        <script>(function(){try{var d=document.documentElement,v=d.getAttribute("data-view"),u=d.getAttribute("data-pup");var h=JSON.parse(document.getElementById("top").getAttribute("data-hero"))[v==="luma"&&u?"pup-"+u:v][0],a=document.getElementById("hero-a");if(!h)return;a.style.background=h.c;a.sizes="100vw";a.srcset=h.set;a.src=h.s}catch(e){}})();</script>
       </div>
       <canvas class="hero__topo" id="topo" aria-hidden="true"></canvas>
       <div class="hero__inner">
@@ -592,6 +594,8 @@ ${resume.education.map((e, i) => `            <p data-since="${e.start.replace(/
             <button type="button" data-set="all" aria-pressed="true" data-i18n="ph.set.all">${esc(t('ph.set.all'))}</button>
             <button type="button" data-set="120" aria-pressed="false" data-i18n="ph.set.120">${esc(t('ph.set.120'))}</button>
             <button type="button" data-set="luma" aria-pressed="false" data-i18n="ph.set.luma">${esc(t('ph.set.luma'))}</button>
+            <button type="button" class="sets__pup" data-set="pup-luma" aria-pressed="false">Luma</button>
+            <button type="button" class="sets__pup" data-set="pup-nova" aria-pressed="false">Nova</button>
           </div>
           <label class="gsort"><span data-i18n="ph.sort">${esc(t('ph.sort'))}</span>
             <select id="g-sort">
@@ -867,8 +871,8 @@ write('index.html', rooted(index));
 // Point each domain's redirect at the first path. assets/site.js keeps the address there.
 const DOORS = [
   { paths: ['dogs', 'dog', 'pets'], view: 'luma', domain: 'millers.dog', poster: 'millers-dog', k: 'hero.luma' },
-  { paths: ['dogs/luma'], view: 'luma', domain: 'luma.dog', poster: 'luma-dog', k: 'hero.luma' },
-  { paths: ['dogs/nova'], view: 'luma', domain: 'supernova.dog', poster: 'supernova-dog', k: 'hero.luma' },
+  { paths: ['dogs/luma'], view: 'luma', pup: 'luma', domain: 'luma.dog', poster: 'luma-dog', k: 'hero.luma' },
+  { paths: ['dogs/nova'], view: 'luma', pup: 'nova', domain: 'supernova.dog', poster: 'supernova-dog', k: 'hero.luma' },
   { paths: ['photos'], view: 'photo', domain: '120.media', poster: '120-media', k: 'hero.photo' },
 ];
 function doorPage(door) {
@@ -897,7 +901,7 @@ function doorPage(door) {
   const top = index.slice(0, cut).replace(own, '').replace(/<title>[^<]*<\/title>/, () => head);
   return rooted(top + index.slice(cut))
     .replace('<!DOCTYPE html>', `<!DOCTYPE html>\n<!-- Generated by scripts/build-site.mjs. The front door for ${door.domain}. -->`)
-    .replace('data-view="maker" data-default-view="maker"', `data-view="${door.view}" data-default-view="maker"`);
+    .replace('data-view="maker" data-default-view="maker"', `data-view="${door.view}" data-default-view="maker"${door.pup ? ` data-pup="${door.pup}"` : ''}`);
 }
 for (const door of DOORS) {
   const html = doorPage(door);

@@ -228,7 +228,8 @@
   }
   function cycleHero(view, immediate) {
     clearInterval(heroTimer);
-    var set = heroSets[view] || [];
+    var pup = root.getAttribute('data-pup');
+    var set = heroSets[view === 'luma' && pup ? 'pup-' + pup : view] || [];
     if (!set.length) return; // the work view has no photograph
     heroIndex = 0;
     if (immediate) showHero(set[0]);
@@ -282,7 +283,11 @@
     var u = new URL(location.href);
     u.searchParams.delete('v'); u.searchParams.delete('mode');
     var door = DOORS[view];
-    if (isHome(u.pathname)) u.pathname = door ? (door.test(u.pathname) ? u.pathname : door.at) : '/';
+    if (isHome(u.pathname)) {
+      var pup = view === 'luma' && root.getAttribute('data-pup');
+      // one dog in focus has that dog's address; otherwise a door already open keeps its own path
+      u.pathname = !door ? '/' : pup ? door.at + pup + '/' : door.test(u.pathname) && !/\/(luma|nova)\/$/.test(u.pathname) ? u.pathname : door.at;
+    }
     else if (door) u.searchParams.set('v', door.v);   // a preview copy of the page, somewhere else
     if (!door && view !== defaultView) u.searchParams.set('mode', view);
     return u;
@@ -293,6 +298,7 @@
   function inSet() {
     var set = gallery.getAttribute('data-set');
     return allPhotos.filter(function (a) {
+      if (set.indexOf('pup-') === 0) return a.classList.contains('t-' + set.slice(4));
       return set === 'all' || a.classList.contains('t-' + set) || (set === 'luma' && a.classList.contains('t-nova'));
     });
   }
@@ -328,6 +334,17 @@
     if (!keep) galleryLimit = PAGE;
     paintGallery();
   }
+  // On the dogs' view the Luma and Nova filters put that dog in focus (as luma.dog and
+  // supernova.dog do on arrival): the hero and the address go with it, until another is chosen.
+  function focusPup(set) {
+    if (root.getAttribute('data-view') !== 'luma') return;
+    var pup = set.indexOf('pup-') === 0 ? set.slice(4) : null;
+    if (pup === root.getAttribute('data-pup')) return;
+    if (pup) root.setAttribute('data-pup', pup); else root.removeAttribute('data-pup');
+    cycleHero('luma', true);
+    var u = urlFor('luma'); u.hash = location.hash;
+    history.replaceState(null, '', u);
+  }
   if ('IntersectionObserver' in window) {
     new IntersectionObserver(function (en) {
       if (!galleryOpen || !en[0].isIntersecting || galleryLimit >= inSet().length) return;
@@ -336,10 +353,12 @@
   } else galleryLimit = 9999;
   function applyView(view, opts) {
     opts = opts || {};
+    if (!opts.initial || view !== 'luma') root.removeAttribute('data-pup');   // choosing a view lifts a one-dog focus
+    var pup = root.getAttribute('data-pup');
     root.setAttribute('data-view', view);
     viewButtons.forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-view-to') === view)); });
     galleryOpen = view === 'photo' || view === 'luma';
-    setGallery(view === 'photo' ? '120' : view === 'luma' ? 'luma' : 'all');
+    setGallery(view === 'photo' ? '120' : view === 'luma' ? (pup ? 'pup-' + pup : 'luma') : 'all');
     movePill();
     cycleHero(view, !opts.initial);
     if (!opts.initial) {
@@ -691,7 +710,7 @@
     }
   });
   setButtons.forEach(function (b) {
-    b.addEventListener('click', function () { galleryOpen = true; setGallery(b.getAttribute('data-set')); });
+    b.addEventListener('click', function () { var set = b.getAttribute('data-set'); galleryOpen = true; setGallery(set); focusPup(set); });
   });
   if ($('#g-sort')) $('#g-sort').addEventListener('change', function () { sortGallery(this.value); galleryOpen = true; galleryLimit = PAGE; paintGallery(); });
   $('#g-more').addEventListener('click', openGallery);
@@ -774,7 +793,7 @@
     history.replaceState(null, '', '#' + a.id);
   }
   function openPhoto(a, autoplay) {
-    if (inSet().indexOf(a) < 0) setGallery('all');
+    if (inSet().indexOf(a) < 0) { setGallery('all'); focusPup('all'); }
     galleryOpen = true;
     if (inSet().indexOf(a) >= galleryLimit) galleryLimit = inSet().indexOf(a) + PAGE;
     paintGallery();

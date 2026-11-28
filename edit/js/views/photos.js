@@ -7,8 +7,8 @@ import { convertImage, canEncodeWebp, MAX_SIDE } from '../image.js';
 import { settings } from '../settings.js';
 import { pickMedia, photoItems, photoUpload } from './picker.js';
 
-const DOGS = [['luma', 'Luma'], ['nova', 'Nova']];   // either one, or both, puts a photo on the Luma & Nova page
-const TAGS = [['120', 'Landscape & sky'], ...DOGS];
+// Luma, Nova, or both, puts a photo on the Luma & Nova page; each also has a page and a filter of their own.
+const TAGS = [['120', 'Landscape & sky'], ['luma', 'Luma'], ['nova', 'Nova']];
 const kb = (n) => (n > 1048576 ? (n / 1048576).toFixed(1) + ' MB' : Math.max(1, Math.round(n / 1024)) + ' KB');
 
 /**
@@ -174,25 +174,10 @@ export function photosView(root) {
             m.featured ? h('span', { class: 'badge' }, 'Featured') : null,
             m.alt ? null : h('span', { class: 'badge badge--bad' }, 'No description')),
           m.title ? h('span', { class: 'ptile__t' }, m.title) : null),
-        reorder ? gripBtn(m.title || name) : dogToggles(name, m.title || m.alt || name));
+        reorder ? gripBtn(m.title || name) : null);
     }));
     if (!shown.length) grid.append(h('li', { class: 'empty' }, 'No photos match.'));
     clear(removedHost); if (state.removed.length) removedHost.append(removedBox());
-  }
-  /** Luma and Nova, one tap each on the thumbnail. Only the button changes: redrawing the grid would reload every picture. */
-  function dogToggles(name, label) {
-    return h('div', { class: 'ptile__dogs', role: 'group', 'aria-label': `Dogs in ${label}` }, DOGS.map(([v, t]) => {
-      const has = () => (photoMeta(name).tags || []).includes(v);
-      const b = h('button', { type: 'button', class: 'ptile__dog', 'data-dog': v, 'aria-pressed': String(has()), 'aria-label': `${t} is in ${label}`,
-        onclick: () => {
-          const on = !has(), rest = (photoMeta(name).tags || []).filter((x) => x !== v);
-          setPhotoMeta(name, { tags: on ? [...rest, v] : rest });
-          b.setAttribute('aria-pressed', String(on));
-          announce(`${t} ${on ? 'added to' : 'removed from'} ${label}.`);
-        },
-      }, t);
-      return b;
-    }));
   }
   const removedBox = () => h('div', { class: 'callout' }, h('p', null, 'To be deleted when you commit:'),
     h('ul', { class: 'plain' }, state.removed.map((n) => h('li', { class: 'row' }, h('span', { class: 'mono' }, n), btn('Keep it', () => restorePhoto(n))))));
@@ -242,7 +227,7 @@ export function photosView(root) {
       const seqMove = (fn) => { const seq = photoOrder(); const i = seq.indexOf(name); const to = fn(i, seq.length); if (to !== i && to >= 0 && to < seq.length) { applyPhotoOrder(move(seq, i, to)); pos.textContent = position(); } };
       const position = () => { const seq = photoOrder(); return `Position ${seq.indexOf(name) + 1} of ${seq.length}`; };
       const pos = h('p', { class: 'hint', role: 'status' }, position());
-      const uses = Object.entries(draft('site').views || {}).filter(([, v]) => (v.hero || []).includes(name)).map(([k]) => k);
+      const uses = Object.entries(draft('site').views || {}).filter(([, v]) => [v.hero || [], ...Object.values(v.pups || {})].some((l) => l.includes(name))).map(([k]) => k);
       body.append(
         h('div', { class: 'pedit' },
           h('div', { class: 'pedit__img' }, imgHost, info, markHost),

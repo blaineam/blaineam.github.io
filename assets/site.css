@@ -213,7 +213,10 @@ html[data-view="hire"] .hero__topo { display: block; }
 
 /* Luma's view: she is the point, so the scrim only darkens the bottom where the words sit */
 html[data-view="luma"] .hero__img { filter: none; object-position: 50% 32%; }
-html[data-view="luma"] .hero__img[src*="bmp-184."] { object-position: 50% 24%; }   /* a portrait photograph: keep Nova's face in frame */
+/* portrait photographs: keep Nova's face in frame */
+html[data-view="luma"] .hero__img[src*="bmp-184."] { object-position: 50% 24%; }
+html[data-view="luma"] .hero__img[src*="bmp-186."] { object-position: 50% 16%; }
+html[data-view="luma"] .hero__img[src*="bmp-185."] { object-position: 50% 36%; }
 html[data-view="luma"] .hero__scrim { background:
   linear-gradient(to top, rgba(4, 7, 13, .94) 0%, rgba(4, 7, 13, .7) 22%, rgba(4, 7, 13, .12) 48%, transparent 62%),
   linear-gradient(to bottom, rgba(4, 7, 13, .5) 0%, transparent 16%); }
@@ -361,6 +364,9 @@ details[open] > summary .tl__chev { transform: rotate(180deg); }
 .sets { display: inline-flex; padding: 4px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); }
 .sets button { min-height: 38px; padding: 0 14px; border: 0; border-radius: 999px; background: none; cursor: pointer; font-weight: 600; font-size: .9rem; color: var(--soft); transition: background-color .25s, color .25s; }
 .sets button[aria-pressed="true"] { background: var(--ink); color: var(--bg); }
+.sets .sets__pup { display: none; }
+html[data-view="luma"] .sets .sets__pup { display: block; }
+html[data-view="luma"] .sets { flex-wrap: wrap; border-radius: 22px; }
 html:not(.js) .gbar { display: none; }
 
 .gsort { display: inline-flex; align-items: center; gap: 8px; margin-left: auto; font-size: .86rem; font-weight: 600; color: var(--soft); }
@@ -585,6 +591,16 @@ html.is-arriving .hero__media { animation: arrive .9s var(--ease); }
 .lb__bar button svg, .lb__bar a svg { width: 22px; height: 22px; }
 #lb-play svg:last-child, #lb-play[aria-pressed="true"] svg:first-child { display: none; }
 #lb-play[aria-pressed="true"] svg:last-child { display: block; }
+/* On a narrow screen the words get the full width and a block of their own above the counter and
+   buttons: there is height to spare there, and no width to share. */
+@media (max-width: 640px) {
+  .lb__bar { flex-wrap: wrap; row-gap: 12px; padding-top: 56px; background: linear-gradient(to top, rgba(0, 0, 0, .9) 0%, rgba(0, 0, 0, .74) 62%, transparent); }
+  .lb__cap { flex: 0 0 100%; margin: 0; max-height: 34vh; overflow-y: auto; overscroll-behavior: contain; touch-action: pan-y; }
+  .lb__cap:empty { display: none; }
+  .lb__n { margin-right: auto; padding-left: 0; }
+  .lb__frame { inset: 0 0 168px; }
+  .lb__frame iframe { max-height: calc(100dvh - 168px); }
+}
 body.is-locked { overflow: hidden; }
 
 /* view switch: cross-fade the whole page where the browser can */

@@ -26,7 +26,9 @@
       "cta": [["#gallery", "cta.gallery"], ["/panos/", "cta.pano"]]
     },
     "luma": {
-      "hero": ["bmp-184.webp", "bmp-68.webp", "bmp-62.webp", "bmp-144.webp"],
+      "hero": ["bmp-68.webp", "bmp-184.webp", "bmp-62.webp", "bmp-144.webp"],
+      "_pups_help": "The hero photographs when one dog is in focus (luma.dog at /dogs/luma/, supernova.dog at /dogs/nova/, or the Luma and Nova filters).",
+      "pups": { "luma": ["bmp-68.webp", "bmp-62.webp", "bmp-144.webp"], "nova": ["bmp-184.webp", "bmp-186.webp", "bmp-185.webp"] },
       "cta": [["#gallery", "cta.luma"]]
     }
   },

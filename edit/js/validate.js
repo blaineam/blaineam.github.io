@@ -31,7 +31,7 @@ export function validate() {
     else for (const v of VIEWS) {
       const hero = site.views[v] && site.views[v].hero;
       if (!strs(hero)) { bad(`Switches: the ${v} view needs a list of hero photographs (it may be empty).`); continue; }
-      hero.forEach((f) => { if (!names.has(f)) bad(`Switches: the ${v} view uses ${f} as a hero photograph, which ${state.removed.includes(f) ? 'is being deleted' : 'does not exist'}.`); });
+      [...hero, ...Object.values(site.views[v].pups || {}).flat()].forEach((f) => { if (!names.has(f)) bad(`Switches: the ${v} view uses ${f} as a hero photograph, which ${state.removed.includes(f) ? 'is being deleted' : 'does not exist'}.`); });
     }
     if (!Array.isArray(site.seasons)) bad('Seasons must be a list.');
     else site.seasons.forEach((s, i) => {
