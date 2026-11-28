@@ -647,6 +647,12 @@
             .demo-detail { display: none !important; }
             .demo-wrapper { height: 440px; }
         }
+        /* Cross-platform callout */
+        .bl-platforms { max-width: 820px; margin: 0 auto; padding: clamp(3.5rem, 8vw, 6rem) 16px; text-align: center; border-top: 1px solid var(--bl-rule); }
+        .bl-platforms .bl-lede { max-width: 40rem; margin-inline: auto; }
+        .bl-platform-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.6rem; margin: 1.6rem 0 0; }
+        .bl-platform-links a { display: inline-flex; align-items: center; min-height: 44px; padding: 0.55rem 1.1rem; border: 1px solid var(--bl-rule); border-radius: 999px; color: var(--bl-ink); text-decoration: none; font-weight: 600; font-size: 0.95rem; }
+        .bl-platform-links a:hover { border-color: currentColor; }
     </style>
   <link rel="alternate" hreflang="x-default" href="https://wemiller.com/apps/blip/">
   <link rel="alternate" hreflang="en" href="https://wemiller.com/apps/blip/">
@@ -689,6 +695,8 @@
         <a href="https://github.com/blaineam/blip/releases/tag/windows-v2.1.0" data-i18n="download-for-windows.e03d00">Download for Windows</a>
         <span aria-hidden="true">·</span>
         <a href="https://github.com/blaineam/blip/releases/tag/linux-v2.1.0-beta.2" data-i18n="download-for-linux.4febca">Download for Linux (beta)</a>
+        <span aria-hidden="true">·</span>
+        <a href="https://github.com/blaineam/blip/releases/tag/android-v2.1.0-beta.1" data-i18n="download-for-android-beta.6bc002">Download for Android (beta)</a>
         <span aria-hidden="true">·</span>
         <a href="https://github.com/blaineam/blip" target="_blank" rel="noopener noreferrer" data-i18n="source-on-github.c60f2f">Source on GitHub</a>
     </p>
@@ -1194,6 +1202,20 @@
     <p data-i18n="most-system-monitors-use.88a179">Most system monitors use hundreds of megabytes of memory. Blip uses about 42.</p>
 </section>
 
+<!-- Cross-platform: said out loud, not only in the small links. -->
+<section class="bl-platforms" id="platforms">
+    <p class="bl-eyebrow" data-i18n="cross-platform.b69938">Cross-platform</p>
+    <h2 class="bl-display" data-i18n="blip-isn-t-just.888234">Blip isn’t just for Mac anymore</h2>
+    <p class="bl-lede" data-i18n="blip-runs-on-mac.3ae232">Blip runs on Mac, iPhone, iPad and Windows, with Linux and Android in beta. The Android beta is an APK from GitHub, not on Google Play. All are free and open source.</p>
+    <p class="bl-platform-links">
+        <a href="https://github.com/blaineam/blip/releases/latest/download/Blip.dmg" data-i18n="direct-download-for-mac.1c7de5">Direct download for Mac</a>
+        <a href="https://apps.apple.com/us/app/blip-stats/id6762329495?pt=118981620&ct=wm-blip&mt=8" data-i18n="blip-stats-on-the.4bae9a">Blip Stats on the App Store</a>
+        <a href="https://github.com/blaineam/blip/releases/tag/windows-v2.1.0" data-i18n="download-for-windows.e03d00">Download for Windows</a>
+        <a href="https://github.com/blaineam/blip/releases/tag/linux-v2.1.0-beta.2" data-i18n="download-for-linux-beta.4febca">Download for Linux (beta)</a>
+        <a href="https://github.com/blaineam/blip/releases/tag/android-v2.1.0-beta.1" data-i18n="download-for-android-beta.6bc002">Download for Android (beta)</a>
+    </p>
+</section>
+
 <!-- Three stories: one idea, one headline, two sentences at most, one device. -->
 <main id="stories">
     <section class="bl-chapter" id="bench">
@@ -1302,6 +1324,10 @@
             <p class="bl-faq-answer" data-i18n-html="yes-as-a-beta.3f722d">Yes, as a beta. <a href="https://github.com/blaineam/blip/releases/tag/linux-v2.1.0-beta.2">Blip for Linux</a> (x64, arm64 and armv7) is a free download from GitHub that needs no root. It hasn’t been tried on real Linux desktops yet, so please <a href="https://github.com/blaineam/blip/issues/new?template=linux-beta.yml">open an issue</a> for anything that doesn’t work.</p>
         </details>
         <details class="bl-faq-item">
+            <summary data-i18n="is-there-an-android.2b6378">Is there an Android version?</summary>
+            <p class="bl-faq-answer" data-i18n-html="yes-as-a-beta.1fa397">Yes, as a beta. <a href="https://github.com/blaineam/blip/releases/tag/android-v2.1.0-beta.1">Blip for Android</a> (Android 10 or newer) is a free APK from GitHub. It isn’t on Google Play, so Android asks you to allow installs from your browser or file app. It hasn’t been tried on a physical device yet, so please <a href="https://github.com/blaineam/blip/issues/new">open an issue</a> for anything that doesn’t work.</p>
+        </details>
+        <details class="bl-faq-item">
             <summary data-i18n="is-blip-available-in.3bdff6">Is Blip available in the European Union?</summary>
             <p class="bl-faq-answer" data-i18n="yes-blip-is-on.991f87">Yes. Blip is on the App Store everywhere in the European Union, France included, and the direct download and Homebrew cask work everywhere.</p>
         </details>
@@ -1322,6 +1348,8 @@
         <a href="https://github.com/blaineam/blip/releases/tag/windows-v2.1.0" data-i18n="download-for-windows.e03d00">Download for Windows</a>
         <span aria-hidden="true">·</span>
         <a href="https://github.com/blaineam/blip/releases/tag/linux-v2.1.0-beta.2" data-i18n="download-for-linux.4febca">Download for Linux (beta)</a>
+        <span aria-hidden="true">·</span>
+        <a href="https://github.com/blaineam/blip/releases/tag/android-v2.1.0-beta.1" data-i18n="download-for-android-beta.6bc002">Download for Android (beta)</a>
         <span aria-hidden="true">·</span>
         <a href="https://github.com/blaineam/blip" target="_blank" rel="noopener noreferrer" data-i18n="source-on-github.c60f2f">Source on GitHub</a>
     </p>

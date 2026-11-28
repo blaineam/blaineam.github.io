@@ -419,6 +419,12 @@
         }
         .osd-value { font-family: var(--gl-sans); }
         @media (max-width: 640px) { .demo-container { padding: 18px; } .key { width: 24px; height: 21px; } }
+        /* Cross-platform callout */
+        .gl-platforms { max-width: 820px; margin: 0 auto; padding: clamp(3.5rem, 8vw, 6rem) 16px; text-align: center; border-top: 1px solid var(--gl-rule); }
+        .gl-platforms .gl-lede { max-width: 40rem; margin-inline: auto; }
+        .gl-platform-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.6rem; margin: 1.6rem 0 0; }
+        .gl-platform-links a { display: inline-flex; align-items: center; min-height: 44px; padding: 0.55rem 1.1rem; border: 1px solid var(--gl-rule); border-radius: 999px; color: var(--gl-ink); text-decoration: none; font-weight: 600; font-size: 0.95rem; }
+        .gl-platform-links a:hover { border-color: currentColor; }
     </style>
   <link rel="alternate" hreflang="x-default" href="https://wemiller.com/apps/glint/">
   <link rel="alternate" hreflang="en" href="https://wemiller.com/apps/glint/">
@@ -507,6 +513,18 @@
 <section class="gl-statement">
     <span class="gl-sun" aria-hidden="true"></span>
     <p data-i18n="no-electron-no-frameworks.5c8180">No Electron. No frameworks. Just your keyboard and your display.</p>
+</section>
+
+<!-- Cross-platform: said out loud, not only in the small links. -->
+<section class="gl-platforms" id="platforms">
+    <p class="gl-eyebrow" data-i18n="cross-platform.b69938">Cross-platform</p>
+    <h2 class="gl-display" data-i18n="glint-isn-t-just.795d72">Glint isn’t just for Mac anymore</h2>
+    <p class="gl-lede" data-i18n="glint-now-has-a.b78ca4">Glint now has a Windows preview and an experimental Linux version that hasn’t been tested on real monitors yet. All are free and open source.</p>
+    <p class="gl-platform-links">
+        <a href="https://github.com/blaineam/Glint/releases/latest/download/Glint.dmg" data-i18n="download-for-mac.752ca6">Download for Mac</a>
+        <a href="https://github.com/blaineam/Glint#windows-10--11-preview-no-admin-needed" data-i18n="windows-preview.4b0cad">Windows (preview)</a>
+        <a href="https://github.com/blaineam/Glint#linux-experimental" data-i18n="linux-experimental.c1ef0f">Linux (experimental)</a>
+    </p>
 </section>
 
 <!-- Three stories: one idea, one headline, two sentences at most, one picture. -->
