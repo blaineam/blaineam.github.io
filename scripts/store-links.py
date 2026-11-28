@@ -207,6 +207,8 @@ def files(scope: str | None, include_mirrored: bool) -> list[Path]:
         # .claude/ holds other sessions' worktrees — whole checkouts of this site.
         if "node_modules" in p.parts or ".claude" in p.parts or ".git" in p.parts:
             return False
+        if p.is_relative_to(ROOT / "apps/haven/app"):   # a release's own files, byte for byte
+            return False
         return include_mirrored or not is_mirrored(p)
 
     found = set(base.rglob("*.html"))

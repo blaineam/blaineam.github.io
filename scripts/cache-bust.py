@@ -42,7 +42,9 @@ MIRRORED = {"apps/haven", "apps/blip", "apps/glint", "apps/lathe", "apps/shepher
 # Mirrored web apps that stamp their own module URLs (Tom's scripts/stamp.mjs writes ?v=<commit>,
 # and its service worker reads that format back; SvelteKit names Monkr's by content hash). Never
 # stamped here, even with --mirrored.
-SELF_STAMPED = {"tools/tom/app", "tools/monkr/app"}
+# Haven's web client is a release's own files, unpacked at deploy time and compared byte for byte
+# with that release: never stamped (its code sits in a folder named after its bytes).
+SELF_STAMPED = {"tools/tom/app", "tools/monkr/app", "apps/haven/app"}
 
 IMAGE_SUFFIXES = {".png", ".jpg", ".jpeg", ".webp", ".gif", ".svg", ".ico", ".avif"}
 # Our own scripts and stylesheets: served with the same year-long lifetime as images.

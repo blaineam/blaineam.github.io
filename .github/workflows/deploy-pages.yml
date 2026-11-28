@@ -18,6 +18,12 @@ on:
       - 'og/**'
       - 'contingency/**'
   workflow_dispatch:
+  # Haven asks for a deploy when it publishes a web client (the step "Add Haven's web client").
+  repository_dispatch:
+    types: [haven-web-client]
+  # And once a day in case that ask never arrived.
+  schedule:
+    - cron: '47 8 * * *'
 
 permissions:
   contents: write       # needed to commit regenerated posters back to main
@@ -177,6 +183,29 @@ jobs:
       # stamp that tells browsers a new deploy is out. Last, so it sees every page as it will be served.
       - name: Build the offline file list
         run: node scripts/build-offline.mjs
+
+      # Haven's web client at /apps/haven/app/: the files of Haven's newest release (a full
+      # `vX.Y.Z` or a web-only `web-vX.Y.Z-N`), unpacked here and committed nowhere. Last, after
+      # every step that rewrites pages, so what is served is the release byte for byte
+      # (Haven's Scripts/verify-web-site.mjs checks it). It shares this site's origin by the
+      # owner's decision (Haven docs/DECISIONS.md D24). If it cannot be fetched the deploy
+      # fails and the site already live stays up.
+      - name: Add Haven's web client
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          tag=$(gh release list --repo blaineam/haven --exclude-drafts --exclude-pre-releases --limit 40 \
+            --json tagName,publishedAt \
+            -q '[.[] | select(.tagName | test("^(v|web-v)[0-9]+\\.[0-9]+\\.[0-9]+(-[0-9]+)?$"))] | sort_by(.publishedAt) | last | .tagName // ""')
+          [ -n "$tag" ] || { echo "::error::no Haven release found"; exit 1; }
+          gh release download "$tag" --repo blaineam/haven --pattern haven-web-site.tar.gz --dir "$RUNNER_TEMP/haven-web" --clobber
+          rm -rf apps/haven/app && mkdir -p apps/haven/app
+          tar -C apps/haven/app -xzf "$RUNNER_TEMP/haven-web/haven-web-site.tar.gz"
+          grep -q 'name="haven-host" content="site"' apps/haven/app/index.html
+          # Only a build whose code sits in its own folder may go where scripts are cached for a year.
+          grep -q 'src="r/[0-9a-f]\{12\}/app.js"' apps/haven/app/index.html || { echo "::error::$tag predates the versioned layout"; exit 1; }
+          echo "- Haven web client: $tag at /apps/haven/app/" >> "$GITHUB_STEP_SUMMARY"
 
       # upload-pages-artifact tars the whole checkout minus .git/.github, so drop what the site
       # never serves (the poster generator's node_modules, ~17 MB).

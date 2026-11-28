@@ -18,7 +18,9 @@
  */
 const VERSION = '90dc11ae080a';   // rewritten by scripts/build-offline.mjs
 const PAGES = 'wm-pages-v1', FILES = 'wm-files-v1';
-const OWN_WORKER = ['/tools/tom/app/', '/tools/monkr/app/', '/apps/shepherd/demo/'];
+// Haven's web client (a linked, end-to-end encrypted device) is left alone too: it is always loaded
+// from the network exactly as its release published it, never saved or answered by this worker.
+const OWN_WORKER = ['/tools/tom/app/', '/tools/monkr/app/', '/apps/shepherd/demo/', '/apps/haven/app/'];
 const NEVER = ['/edit/', '/pay/', '/out/', '/scripts/', '/sw.js'];
 const LOCAL = /^(localhost|127\.0\.0\.1|\[::1\])$/.test(self.location.hostname);
 

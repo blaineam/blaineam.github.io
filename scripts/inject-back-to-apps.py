@@ -37,7 +37,9 @@ def main(slugs: list[str]) -> int:
         if not directory.is_dir():
             print(f"  {slug}: not mirrored here yet")
             continue
-        pages = sorted(directory.rglob("*.html"))
+        # Haven's web client under app/ is a release's own files, compared byte for byte.
+        pages = sorted(p for p in directory.rglob("*.html")
+                       if not (slug == "haven" and p.relative_to(directory).parts[0] == "app"))
         added = sum(inject(page) for page in pages)
         touched += added
         print(f"  {slug}: {added} of {len(pages)} page(s) given the pill")

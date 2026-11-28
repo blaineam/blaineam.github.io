@@ -21,7 +21,7 @@ import { fileURLToPath } from 'node:url';
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const CHECK = process.argv.includes('--check');
 const SKIP_DIRS = new Set(['.git', '.github', '.claude', 'node_modules', 'scripts', 'out', 'content', 'docs', 'edit', 'pay']);
-const SKIP_PREFIX = ['tools/tom/app/', 'tools/monkr/app/', 'apps/shepherd/demo/', 'assets/sky/demo.html', 'assets/sky/test.mjs', 'assets/sky/build-stars.mjs', 'assets/sky/starter.json', 'puzzles/js/template.html'];
+const SKIP_PREFIX = ['tools/tom/app/', 'tools/monkr/app/', 'apps/haven/app/', 'apps/shepherd/demo/', 'assets/sky/demo.html', 'assets/sky/test.mjs', 'assets/sky/build-stars.mjs', 'assets/sky/starter.json', 'puzzles/js/template.html'];
 const FILE_EXT = new Set(['.css', '.js', '.mjs', '.json', '.svg', '.woff2', '.woff', '.ttf', '.webmanifest', '.txt']);
 const ALWAYS = new Set(['assets/sky/stars.json', 'assets/icon-192.png', 'assets/icon-512.png', 'profile.jpg', 'search-index.json']);
 const MAX = 400 * 1024;
