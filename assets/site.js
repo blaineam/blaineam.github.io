@@ -162,7 +162,13 @@
 
   /* ---------- nav ---------- */
   var nav = $('#nav');
-  function onScroll() { nav.classList.toggle('is-stuck', window.scrollY > window.innerHeight * 0.55); }
+  // The bar gets its backing as soon as the hero's words reach it (they stay at full strength while
+  // the visitor reads down the hero), and in any case once past the middle of the screen.
+  function onScroll() {
+    var words = $$('.hero__copy').filter(function (c) { return c.offsetHeight; })[0];
+    var met = window.scrollY > 0 && words && words.getBoundingClientRect().top < nav.offsetHeight;
+    nav.classList.toggle('is-stuck', met || window.scrollY > window.innerHeight * 0.55);
+  }
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
 

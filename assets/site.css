@@ -255,13 +255,19 @@ html[data-view="hire"] .hero__inner { padding-top: calc(var(--nav-h) + clamp(56p
 .hero__img.is-on { animation: drift 26s ease-in-out infinite alternate; }
 @keyframes drift { from { transform: scale(1.02); } to { transform: scale(1.1) translate3d(-1%, -1.2%, 0); } }
 
-/* The hero recedes as the page scrolls over it (where scroll-driven animation exists). */
-@supports (animation-timeline: scroll()) {
+/* The hero recedes as it leaves (where scroll-driven animation exists). It is timed by the hero's
+   own edge, not by the screen: nothing fades until the hero's bottom has risen to the middle of the
+   screen, so a hero taller than the screen stays fully readable while the visitor scrolls down it.
+   (The max() keeps a short hero, which starts above the middle, from loading already faded.) */
+@supports (animation-timeline: view()) {
   @media (prefers-reduced-motion: no-preference) {
-    .hero__inner { animation: recede linear both; animation-timeline: scroll(root); animation-range: 0 90vh; }
-    @keyframes recede { to { opacity: 0; transform: translateY(-9vh); } }
-    .hero__media { animation: dim linear both; animation-timeline: scroll(root); animation-range: 0 100vh; }
-    @keyframes dim { to { transform: translateY(12vh); opacity: .35; } }
+    /* inset 0: by default the timeline takes off the page's scroll-padding for the nav bar, which starts the fade early. */
+    .hero { view-timeline-name: --hero; view-timeline-axis: block; view-timeline-inset: 0px; }
+    .hero__inner { animation: recede linear both; animation-timeline: --hero; animation-range: exit-crossing max(45%, calc(100% - 50vh)) exit-crossing 100%; }
+    @keyframes recede { to { opacity: 0; transform: translateY(-6vh); } }
+    .hero__media { animation: sink linear both, dim linear both; animation-timeline: --hero, --hero; animation-range: exit-crossing 0% exit-crossing 100%, exit-crossing max(45%, calc(100% - 50vh)) exit-crossing 100%; }
+    @keyframes sink { to { transform: translateY(12vh); } }
+    @keyframes dim { to { opacity: .35; } }
   }
 }
 
