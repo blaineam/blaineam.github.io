@@ -97,6 +97,8 @@
     .guide table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.95rem; }
     .guide th, .guide td { text-align: left; padding: 0.5rem 0.6rem; border-bottom: 1px solid var(--ah-rule); vertical-align: top; }
     .guide-table-wrap { overflow-x: auto; }
+    .guide .models td:first-child code, .guide .models td:last-child { white-space: nowrap; overflow-wrap: normal; }
+    .guide .models td:nth-child(2) { min-width: 15rem; }
     .guide .step { display: inline-block; min-width: 1.8rem; height: 1.8rem; line-height: 1.8rem; text-align: center; border-radius: 50%; background: var(--ah-button); color: var(--ah-button-ink); font-size: 0.95rem; margin-right: 0.5rem; font-family: var(--ah-text-face); }
   </style>
 </head>
@@ -197,7 +199,61 @@ ollama pull qwen2.5vl:7b       # fast photo and document reading</code></pre></l
       </ol>
       <h3>Add a picture model</h3>
       <p>Put a checkpoint (a single <code>.safetensors</code> model file) in <code>%LOCALAPPDATA%\Comfy-Desktop\ComfyUI-Shared\models\checkpoints</code> (paste that into File Explorer's address bar). If you chose a different folder, <strong>Desktop settings › Folders</strong> shows where it is. An SDXL checkpoint, or an FP8 "all-in-one" FLUX checkpoint, is a good first choice. Ari runs any checkpoint there directly: pick it in the model menu and ask for a picture. Attach a photo and Ari uses it as the starting point.</p>
-      <h3>Add video (and anything else) with a workflow</h3>
+      <h3 id="video-workflow">Ready-made video workflow (recommended)</h3>
+      <p>This download makes short video clips from one workflow. Ask with words only and SDXL makes a still picture, then Wan 2.2 animates it. Attach a photo and Wan 2.2 animates your photo instead. Clips are H.264 MP4, about 5 seconds long.</p>
+      <p><a href="ari-sdxl-video-workflow.zip" download><strong>Download ari-sdxl-video-workflow.zip</strong></a>, then right-click it and choose <strong>Extract All</strong>. Inside are:</p>
+      <ul>
+        <li><code>sdxl-video-gen-ari-api.json</code>: the file you import into Ari.</li>
+        <li><code>sdxl-video-gen-ari.json</code>: the same workflow, to open and edit in ComfyUI.</li>
+        <li><code>ari_helper_nodes</code>: a required ComfyUI add-on.</li>
+        <li><code>README.md</code>: full notes on the workflow.</li>
+      </ul>
+      <ol>
+        <li><strong>Install the add-on.</strong> In the Comfy Desktop sidebar, right-click your build and choose <strong>Show in Explorer</strong> (or <strong>Show in folder</strong>). In that folder, open <code>ComfyUI\custom_nodes</code> and copy the whole <code>ari_helper_nodes</code> folder into it. It needs no extra Python packages. An add-on is code that runs on your PC, so only install ones you trust; this one is a few short files you can read first.</li>
+        <li><strong>Download the seven models</strong> (about 45 GB). Save each one under <code>%LOCALAPPDATA%\Comfy-Desktop\ComfyUI-Shared\models</code> in the folder shown, creating the folder if it isn't there. Keep the file names exactly as they are.
+          <div class="guide-table-wrap models">
+            <table>
+              <thead><tr><th>Folder</th><th>File (click to download)</th><th>Size</th></tr></thead>
+              <tbody>
+            <tr><td><code>checkpoints</code></td><td><a href="https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0/resolve/main/sd_xl_base_1.0.safetensors" rel="noopener noreferrer" target="_blank"><code>sd_xl_base_1.0.safetensors</code></a></td><td>6.9 GB</td></tr>
+            <tr><td><code>diffusion_models</code></td><td><a href="https://huggingface.co/Comfy-Org/Wan_2.2_ComfyUI_Repackaged/resolve/main/split_files/diffusion_models/wan2.2_i2v_high_noise_14B_fp8_scaled.safetensors" rel="noopener noreferrer" target="_blank"><code>wan2.2_i2v_high_noise_14B_fp8_scaled.safetensors</code></a></td><td>14.3 GB</td></tr>
+            <tr><td><code>diffusion_models</code></td><td><a href="https://huggingface.co/Comfy-Org/Wan_2.2_ComfyUI_Repackaged/resolve/main/split_files/diffusion_models/wan2.2_i2v_low_noise_14B_fp8_scaled.safetensors" rel="noopener noreferrer" target="_blank"><code>wan2.2_i2v_low_noise_14B_fp8_scaled.safetensors</code></a></td><td>14.3 GB</td></tr>
+            <tr><td><code>loras</code></td><td><a href="https://huggingface.co/Comfy-Org/Wan_2.2_ComfyUI_Repackaged/resolve/main/split_files/loras/wan2.2_i2v_lightx2v_4steps_lora_v1_high_noise.safetensors" rel="noopener noreferrer" target="_blank"><code>wan2.2_i2v_lightx2v_4steps_lora_v1_high_noise.safetensors</code></a></td><td>1.2 GB</td></tr>
+            <tr><td><code>loras</code></td><td><a href="https://huggingface.co/Comfy-Org/Wan_2.2_ComfyUI_Repackaged/resolve/main/split_files/loras/wan2.2_i2v_lightx2v_4steps_lora_v1_low_noise.safetensors" rel="noopener noreferrer" target="_blank"><code>wan2.2_i2v_lightx2v_4steps_lora_v1_low_noise.safetensors</code></a></td><td>1.2 GB</td></tr>
+            <tr><td><code>text_encoders</code></td><td><a href="https://huggingface.co/Comfy-Org/Wan_2.1_ComfyUI_repackaged/resolve/main/split_files/text_encoders/umt5_xxl_fp8_e4m3fn_scaled.safetensors" rel="noopener noreferrer" target="_blank"><code>umt5_xxl_fp8_e4m3fn_scaled.safetensors</code></a></td><td>6.7 GB</td></tr>
+            <tr><td><code>vae</code></td><td><a href="https://huggingface.co/Comfy-Org/Wan_2.2_ComfyUI_Repackaged/resolve/main/split_files/vae/wan_2.1_vae.safetensors" rel="noopener noreferrer" target="_blank"><code>wan_2.1_vae.safetensors</code></a></td><td>0.25 GB</td></tr>
+              </tbody>
+            </table>
+          </div></li>
+        <li><strong>Restart ComfyUI</strong> (right-click your build, then <strong>Restart</strong>). <strong>View logs</strong> should show <code>[ari-cleanup] on</code>.</li>
+        <li><strong>Test it on the PC.</strong> Drag <code>sdxl-video-gen-ari.json</code> onto the ComfyUI window and click <strong>Run</strong>. It uses the example values in the <strong>Ari Helper inputs</strong> group. The workflow was built on ComfyUI 0.46.0, so update ComfyUI if it reports missing nodes. If a model is reported missing, check its folder and file name.</li>
+        <li><strong>Add it to Ari.</strong> Open <strong>Settings › Self-Hosted › ComfyUI › Import workflow file</strong> and choose <code>sdxl-video-gen-ari-api.json</code>. Get the file to your iPhone, iPad or Mac first, for example with iCloud Drive. After you finish <a href="#connect-ari">Connect Ari</a> below, pick the workflow in the model menu.</li>
+      </ol>
+      <h4>Write separate picture and motion prompts</h4>
+      <p>Put <code>|||</code> between what the picture shows and how it moves:</p>
+      <pre><code>a red fox in a snowy forest, wildlife photograph ||| the fox slowly turns its head as snow falls</code></pre>
+      <p>Without <code>|||</code>, both parts get your whole prompt. With a photo attached, only the motion part is used. Don't type backslashes anywhere in this workflow; it already has its placeholders.</p>
+      <h4>Choose the video shape</h4>
+      <div class="note">
+        <strong>Videos start out square.</strong> Ari doesn't have a size setting for ComfyUI yet, so it asks for 1024×1024. This workflow turns that into a 960×960 video, and crops an attached photo to a square. For widescreen or portrait, set the size in the workflow as below.
+      </div>
+      <ol>
+        <li>Open <code>sdxl-video-gen-ari.json</code> in ComfyUI and find the <strong>ARI width</strong> and <strong>ARI height</strong> boxes.</li>
+        <li>In both, delete everything in <code>from_ari</code> so it's empty.</li>
+        <li>Set each <code>test_value</code>: <strong>832</strong> by <strong>480</strong> for widescreen, or <strong>480</strong> by <strong>832</strong> for portrait. For about 720p, use 1280 by 720 (or 720 by 1280); it's slower and needs more memory.</li>
+        <li>Choose <strong>Workflow › Export (API)</strong> and import the new file into Ari.</li>
+      </ol>
+      <h4>Edit it later</h4>
+      <p>Edit <code>sdxl-video-gen-ari.json</code>, save it in ComfyUI, then <strong>Export (API)</strong> and import that file into Ari. Apart from width and height above, leave each <code>from_ari</code> box as it is so Ari can fill it in. A <code>test_value</code> is used when you run the workflow in ComfyUI, and also whenever Ari doesn't send that value.</p>
+      <ul>
+        <li><strong>Faster, or running out of memory:</strong> set <strong>SETTING: max video pixels</strong> to <code>399360</code>. The default, <code>921600</code>, is about 720p and is the largest size the workflow will make.</li>
+        <li><strong>Clip length:</strong> change <code>length</code> on <strong>Image to video (81 frames)</strong>. 81 frames is about 5 seconds.</li>
+        <li><strong>Extra LoRAs:</strong> the three boxes marked <strong>Optional</strong> are turned off. Before turning one on (select it and press <strong>Ctrl+B</strong>), choose your own LoRA file in it. The file shown there is only a stand-in.</li>
+      </ul>
+      <h4>Cleanup after download</h4>
+      <p>For videos requested by Ari, the add-on deletes the video, the photo you attached and the job's history (which holds your prompts) about a minute after the whole video downloads. Anything never downloaded is deleted after about an hour. Viewing or downloading the whole video from any device counts, as does using this workflow from another app that talks to ComfyUI. Runs you start in the ComfyUI window are kept. To keep Ari's videos on the PC too, change the <strong>Save MP4</strong> box's <code>filename_prefix</code> so it doesn't start with <code>ari-private/</code>, then export and import again.</p>
+      <p>This is ordinary deletion, not secure erasure, and it doesn't reach backups or synced copies. The MP4 you receive can contain the workflow and your prompts; adding <code>--disable-metadata</code> to the build's startup arguments stops that for all your workflows. The README lists the other limits.</p>
+      <h3>Or use your own workflow for video (and anything else)</h3>
       <ol>
         <li>In ComfyUI, open <strong>Workflow › Browse Templates</strong> and pick a video template, such as one of the Wan 2.2 text-to-video or image-to-video templates. ComfyUI offers to download the models it needs.</li>
         <li>Run it once in ComfyUI to make sure it works on your card.</li>
@@ -206,7 +262,7 @@ ollama pull qwen2.5vl:7b       # fast photo and document reading</code></pre></l
         <li>Choose <strong>Workflow › Export (API)</strong> and save the <code>.json</code> file somewhere your Apple devices can reach, like iCloud Drive.</li>
         <li>In Ari, <strong>Settings › Self-Hosted › ComfyUI › Import workflow file</strong> (or paste the file's text). Imported workflows appear in the ComfyUI model menu; ones that make video are labelled.</li>
       </ol>
-      <h3>Connect Ari</h3>
+      <h3 id="connect-ari">Connect Ari</h3>
       <ol>
         <li>Share ComfyUI over Tailscale:
           <pre><code>tailscale serve --bg --tcp 8188 tcp://127.0.0.1:8188</code></pre></li>
@@ -269,6 +325,10 @@ ollama pull qwen2.5vl:7b       # fast photo and document reading</code></pre></l
       <p>The first run loads the model from disk, which can take a minute. If it fails with out of memory, close other GPU apps, use FP8 or smaller models, lower the resolution or number of frames, or run the watcher with <code>-Pause</code> to clear what's loaded.</p>
       <h3>Ari says the clip can't be played</h3>
       <p>Set the workflow's video node to save MP4 (H.264), export it again with <strong>Export (API)</strong>, and re-import it in Ari.</p>
+      <h3>The ready-made video workflow shows missing or red boxes</h3>
+      <p>If the <strong>Ari</strong> boxes are missing, check that <code>ari_helper_nodes</code> is directly inside your build's <code>ComfyUI\custom_nodes</code> folder (not inside a second folder of the same name), restart ComfyUI and look for errors in <strong>View logs</strong>. For other boxes, update ComfyUI.</p>
+      <h3>My videos are square</h3>
+      <p>See <a href="#video-workflow">Choose the video shape</a> under the ready-made workflow.</p>
       <h3>Ari can't find the prompt in my workflow</h3>
       <p>Type <code>\{\{prompt\}\}</code>, backslashes included, into each text box that should receive the prompt, export again, and re-import. If the exported file shows only <code>prompt</code> in that box, the backslashes were missing.</p>
       <h3>Should I use <code>--listen</code> or open the firewall?</h3>
