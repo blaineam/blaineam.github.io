@@ -26,6 +26,8 @@ PAGES = [
      "https://wemiller.com/apps/ari-helper/watermark/", "bottom-right"),
     ("apps/scripture-alone/security/index.html", "apps.scripture-alone.security",
      "https://wemiller.com/apps/scripture-alone/security/", "bottom-left"),
+    ("apps/enter-space/light/index.html", "apps.enter-space.light",
+     "https://wemiller.com/apps/enter-space/light/", "bottom-left"),
 ] + [
     (f"apps/{slug}/index.html", f"apps.{slug}", f"https://wemiller.com/apps/{slug}/", "bottom-left")
     for slug in [

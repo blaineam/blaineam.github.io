@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Enter Space Light for Windows, Linux and Android</title>
+  <meta name="description" content="Enter Space Light is a free, open-source app that brings core Enter Space features to Windows, Linux and Android: cloud drives, backups, syncs and Time Portal.">
+  <link rel="canonical" href="https://wemiller.com/apps/enter-space/light/">
+  <meta property="og:title" content="Enter Space Light for Windows, Linux and Android">
+  <meta property="og:description" content="Free and open source: your cloud storage as drives, with backups, syncs and Time Portal.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://wemiller.com/apps/enter-space/light/">
+  <meta property="og:image" content="https://wemiller.com/apps/enter-space/light/icon.png">
+  <meta name="theme-color" content="#0a0a2e">
+  <link rel="icon" href="icon.png">
+  <link rel="stylesheet" href="../../app-showcase.css?v=353680bd">
+  <link rel="stylesheet" href="../../_shared/depth.css?v=1d90991e">
+  <style>
+    :root {
+      --app-primary: #4f6bf6;
+      --app-secondary: #6d4df0;
+      --app-accent: #6ee7ff;
+      --primary-color: #2B2F8F;    /* deep indigo: headlines on paper */
+      --secondary-color: #6d4df0;
+      --es-accent-ink: #4B3BC4;
+      --es-hero: linear-gradient(180deg, #0a0a2e 0%, #141451 55%, #21216f 100%);
+      --es-hero-glow: radial-gradient(ellipse 60% 45% at 50% 100%, rgba(110, 231, 255, 0.20) 0%, transparent 70%), radial-gradient(ellipse 45% 40% at 90% 5%, rgba(109, 77, 240, 0.30) 0%, transparent 70%);
+      --es-hero-ink: #F4F6FF;
+      --es-hero-em: #9FEFFF;
+      --es-hero-kicker: rgba(159, 239, 255, 0.9);
+      --es-btn: linear-gradient(180deg, #9FEFFF, #6EE7FF);
+      --es-btn-ink: #0A0A2E;
+      --es-glow: rgba(110, 231, 255, 0.28);
+      --es-display: system-ui, -apple-system, "SF Pro Display", "Segoe UI", sans-serif;
+      --es-paper: #FFFFFF;
+      --es-paper-2: #F2F3FC;
+      --es-rule: rgba(20, 20, 81, 0.12);
+      --es-quiet: #5C5F7E;
+      --es-body: #2C2E48;
+      --es-shadow: drop-shadow(0 30px 40px rgba(20, 20, 81, 0.22)) drop-shadow(0 6px 10px rgba(20, 20, 81, 0.10));
+      --bg-primary: var(--es-paper);
+      --bg-secondary: var(--es-paper-2);
+      --text-primary: #10112E;
+      --text-secondary: var(--es-body);
+      --text-muted: var(--es-quiet);
+      --glass-bg: rgba(255, 255, 255, 0.8);
+      --glass-border: rgba(20, 20, 81, 0.10);
+      --glass-shadow: none;
+      --es-measure: 1120px;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --primary-color: #B7C2FF;
+        --secondary-color: #9FEFFF;
+        --es-accent-ink: #9FEFFF;
+        --es-paper: #0B0B26;
+        --es-paper-2: #121236;
+        --es-rule: rgba(183, 194, 255, 0.14);
+        --es-quiet: #A2A7CC;
+        --es-body: #DADDF2;
+        --es-shadow: drop-shadow(0 30px 44px rgba(0, 0, 0, 0.6)) drop-shadow(0 6px 10px rgba(0, 0, 0, 0.35));
+        --text-primary: #F4F6FF;
+        --glass-bg: rgba(11, 11, 38, 0.8);
+        --glass-border: rgba(183, 194, 255, 0.08);
+      }
+    }
+    .btn-buy { box-shadow: 0 4px 15px rgba(10, 10, 46, 0.30); }
+    :root { --bg-card: var(--es-paper-2); --border-color: var(--es-rule); }
+    body { background: var(--es-paper); }
+    .nav-links .nav-link, .nav-links .btn-buy { white-space: nowrap; }
+    [hidden] { display: none !important; }
+    /* .dp-sr is position:absolute; without a positioned scroll box its static position in
+       off-screen table cells widened the mobile layout viewport to ~612px. */
+    .dp-table-wrap { position: relative; }
+    .dp-closing .btn-buy, .dp-plan .btn-buy { background: var(--es-hero); color: #fff; box-shadow: 0 10px 28px var(--es-glow); }
+    .esl-icon { display: block; width: 96px; height: 96px; margin: 0 auto 1.2rem; filter: drop-shadow(0 14px 24px rgba(10, 10, 46, 0.35)); }
+    .esl-cta { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.75rem; margin: 1.8rem 0 0; }
+    .esl-cta .btn-buy, .dp-closing .btn-buy, .dp-plan .btn-buy { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 0.7rem 1.4rem; border-radius: 999px; }
+    .esl-cta .esl-ghost { background: transparent; color: var(--text-primary); border: 1px solid var(--es-rule); box-shadow: none; }
+    .dp-plan .btn-buy { margin-top: auto; }
+    .esl-cta .btn-buy:not(.esl-ghost), .dp-plan .btn-buy, .dp-closing .btn-buy { background: var(--es-btn); color: var(--es-btn-ink); box-shadow: 0 10px 28px var(--es-glow); }
+    .dp-plan p:not([class]) { margin-bottom: 1rem; }
+    .esl-note { max-width: 44rem; margin: 0 0 1rem; line-height: 1.65; color: var(--es-body); }
+    .esl-note a, .esl-legal a, .dp-standfirst a { color: var(--es-accent-ink); }
+    .esl-note code { font-size: 0.92em; overflow-wrap: anywhere; }
+    .esl-legal { max-width: 44rem; margin: 1.6rem 0 0; font-size: 0.9rem; line-height: 1.6; color: var(--es-quiet); }
+    @media (max-width: 600px) { .esl-cta { flex-direction: column; max-width: 22rem; margin-left: auto; margin-right: auto; } }
+  </style>
+  <link rel="alternate" hreflang="x-default" href="https://wemiller.com/apps/enter-space/light/">
+  <link rel="alternate" hreflang="en" href="https://wemiller.com/apps/enter-space/light/">
+  <link rel="alternate" hreflang="zh-Hans" href="https://wemiller.com/apps/enter-space/light/?lang=zh-Hans">
+  <link rel="alternate" hreflang="ja" href="https://wemiller.com/apps/enter-space/light/?lang=ja">
+  <link rel="alternate" hreflang="de" href="https://wemiller.com/apps/enter-space/light/?lang=de">
+  <link rel="alternate" hreflang="fr" href="https://wemiller.com/apps/enter-space/light/?lang=fr">
+  <link rel="alternate" hreflang="es" href="https://wemiller.com/apps/enter-space/light/?lang=es">
+  <link rel="alternate" hreflang="ko" href="https://wemiller.com/apps/enter-space/light/?lang=ko">
+  <link rel="alternate" hreflang="pt-BR" href="https://wemiller.com/apps/enter-space/light/?lang=pt-BR">
+  <link rel="alternate" hreflang="it" href="https://wemiller.com/apps/enter-space/light/?lang=it">
+  <script src="/i18n/i18n.js" defer data-page="apps.enter-space.light" data-pos="bottom-left"></script>
+</head>
+<body>
+  <nav class="app-nav">
+    <div class="nav-container">
+      <a href="../" class="nav-logo nav-brand" title="← Enter Space" aria-label="← Enter Space">
+        <span class="nav-brand-back" aria-hidden="true">←</span>
+        <img class="nav-brand-icon" src="icon.png" alt="" width="60" height="60">
+        <span class="nav-brand-name" data-i18n="enter-space-light.91c8d9">Enter Space Light</span>
+      </a>
+      <button class="mobile-menu-toggle" aria-label="Menu">☰</button>
+      <ul class="nav-links">
+        <li><a href="#download" class="nav-link" data-i18n="download.a479c9">Download</a></li>
+        <li><a href="#unsigned" class="nav-link" data-i18n="installing.e38432">Installing</a></li>
+        <li><a href="../" class="nav-link">Enter Space</a></li>
+        <li><a href="https://github.com/blaineam/enter-space-light" target="_blank" rel="noopener noreferrer" class="btn-buy" data-cta>GitHub</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main>
+    <header class="dp-header">
+      <img class="esl-icon" src="icon.png" alt="Enter Space Light app icon" width="512" height="512">
+      <p class="dp-eyebrow" data-i18n="free-and-open-source.768751">Free and open source</p>
+      <h1 data-i18n="enter-space-light.91c8d9">Enter Space Light</h1>
+      <p class="dp-standfirst" data-i18n="the-core-of-enter.26e8a4">The core of Enter Space for Windows, Linux and Android. Use Google Drive, Dropbox, OneDrive, S3, your NAS and more as drives, and back them up or keep them in sync.</p>
+      <div class="esl-cta">
+        <a href="#download" class="btn-buy" data-i18n="download.a479c9">Download</a>
+        <a href="https://github.com/blaineam/enter-space-light" target="_blank" rel="noopener noreferrer" class="btn-buy esl-ghost" data-i18n="view-the-source-on.e1be36">View the source on GitHub</a>
+      </div>
+    </header>
+
+    <section class="dp-section" id="what">
+      <h2 data-i18n="what-it-does.ca032b">What it does</h2>
+      <p class="dp-lede" data-i18n="it-is-built-on.f17961">It is built on rclone, with a tray icon and a small settings window on desktop. Your files stay in the apps you already use.</p>
+      <ul class="dp-grid">
+        <li class="dp-card">
+          <span class="dp-card-icon" aria-hidden="true">💾</span>
+          <h3 data-i18n="cloud-storage-as-a.82aeb4">Cloud storage as a drive</h3>
+          <p data-i18n="a-drive-letter-in.81784a">A drive letter in File Explorer on Windows, a folder on Linux, and a location in the Files app on Android.</p>
+        </li>
+        <li class="dp-card">
+          <span class="dp-card-icon" aria-hidden="true">🔁</span>
+          <h3 data-i18n="backups-and-syncs.322c2a">Backups and syncs</h3>
+          <p data-i18n="copy-mirror-move-or.f0f06e">Copy, mirror, move or two-way. Run them on a schedule or at sign-in; on Windows and Linux, also when a chosen USB drive is plugged in.</p>
+        </li>
+        <li class="dp-card">
+          <span class="dp-card-icon" aria-hidden="true">🕰️</span>
+          <h3>Time Portal</h3>
+          <p data-i18n="browse-a-backup-as.c20b1e">Browse a backup as it was at any earlier run, then restore files or whole folders.</p>
+        </li>
+        <li class="dp-card">
+          <span class="dp-card-icon" aria-hidden="true">🛡️</span>
+          <h3 data-i18n="safer-by-default.4bf751">Safer by default</h3>
+          <p data-i18n="backups-keep-old-versions.dc0a03">Backups keep old versions, and a delete guard stops a run that would delete more than a quarter of the backup.</p>
+        </li>
+        <li class="dp-card">
+          <span class="dp-card-icon" aria-hidden="true">⚙️</span>
+          <h3 data-i18n="tuned-for-you.2c8e03">Tuned for you</h3>
+          <p data-i18n="caching-retries-and-rate.8c99c3">Caching, retries and rate limits are set for each provider. Your own advanced settings still win.</p>
+        </li>
+        <li class="dp-card">
+          <span class="dp-card-icon" aria-hidden="true">🧰</span>
+          <h3 data-i18n="your-rclone-conf.9ba506">Your rclone.conf</h3>
+          <p data-i18n="it-uses-rclone-s.99b80b">It uses rclone’s standard config file, so remotes you already set up are there. A command line is included on Windows and Linux.</p>
+        </li>
+      </ul>
+    </section>
+
+    <section class="dp-section" id="download">
+      <h2 data-i18n="download.a479c9">Download</h2>
+      <p class="dp-lede" data-i18n="every-build-comes-from.3a0e52">Every build comes from GitHub Releases, not from an app store. Open the latest release and pick the file for your system.</p>
+      <div class="dp-plans">
+        <div class="dp-plan">
+          <p class="dp-plan-name" data-i18n="windows-10-and-11.de89be">Windows 10 and 11</p>
+          <p data-i18n="x64-and-arm-run.a73d7f">x64 and Arm. Run the installer, or use the portable zip. Drive letters need the free WinFsp driver, which the installer adds if it is missing.</p>
+          <a href="https://github.com/blaineam/enter-space-light/releases/latest" target="_blank" rel="noopener noreferrer" class="btn-buy" data-i18n="get-it-for-windows.7d7027">Get it for Windows</a>
+        </div>
+        <div class="dp-plan">
+          <p class="dp-plan-name" data-i18n="linux.83ad85">Linux</p>
+          <p data-i18n="x86-64-and-arm64.3f8dea">x86_64 and arm64, as .deb, .rpm or .tar.gz. The tarball installs without root and needs FUSE 3.</p>
+          <a href="https://github.com/blaineam/enter-space-light/releases/latest" target="_blank" rel="noopener noreferrer" class="btn-buy" data-i18n="get-it-for-linux.7bbc5f">Get it for Linux</a>
+        </div>
+        <div class="dp-plan">
+          <p class="dp-plan-name" data-i18n="android-8-0-and.4bcfe0">Android 8.0 and later</p>
+          <p data-i18n="an-arm64-apk-you.558552">An arm64 APK you install yourself. The Android version is new: it has been tested on an emulator, not yet widely on real phones.</p>
+          <a href="https://github.com/blaineam/enter-space-light/releases/latest" target="_blank" rel="noopener noreferrer" class="btn-buy" data-i18n="get-the-apk.0e5168">Get the APK</a>
+        </div>
+      </div>
+      <p class="dp-fine" data-i18n="on-android-drives-show.807d81">On Android, drives show up in the Files app and in file pickers. Apps that only open ordinary file paths can’t see them.</p>
+    </section>
+
+    <section class="dp-section" id="unsigned">
+      <h2 data-i18n="before-you-install.52da18">Before you install</h2>
+      <p class="dp-lede" data-i18n="these-builds-are-distributed.4c7558">These builds are distributed outside the app stores, so your system may ask you to confirm.</p>
+      <p class="esl-note" data-i18n-html="windows-the-builds-aren.39366a"><strong>Windows:</strong> the builds aren’t code-signed yet, so SmartScreen may warn you. Check your download against the SHA256SUMS file in the release, then choose “More info” and “Run anyway”.</p>
+      <p class="esl-note" data-i18n-html="android-it-isn-t.293c7c"><strong>Android:</strong> it isn’t on Google Play, so Android asks you to allow installs from your browser or file app. The APK is signed with the project’s own key, and the <a href="https://github.com/blaineam/enter-space-light#android-80-and-later-arm64" target="_blank" rel="noopener noreferrer">README lists its fingerprint</a>. The app doesn’t check for updates, so install new versions the same way.</p>
+      <p class="esl-note" data-i18n-html="linux-install-the-package.229b6a"><strong>Linux:</strong> install the package or run the tarball’s install script. The <a href="https://github.com/blaineam/enter-space-light#install" target="_blank" rel="noopener noreferrer">install guide on GitHub</a> has the commands.</p>
+      <p class="esl-legal" data-i18n-html="code-signing-policy-free.e8e59b">Code signing policy: free code signing provided by <a href="https://about.signpath.io" target="_blank" rel="noopener noreferrer">SignPath.io</a>, certificate by <a href="https://signpath.org" target="_blank" rel="noopener noreferrer">SignPath Foundation</a>. The application is in progress, and releases so far are not signed. Read the <a href="https://github.com/blaineam/enter-space-light/blob/main/docs/CODE-SIGNING.md" target="_blank" rel="noopener noreferrer">code signing policy</a> and the <a href="https://github.com/blaineam/enter-space-light/blob/main/PRIVACY.md" target="_blank" rel="noopener noreferrer">privacy policy</a>.</p>
+    </section>
+
+    <section class="dp-section" id="apple">
+      <h2 data-i18n="on-an-apple-device.8887e8">On an Apple device?</h2>
+      <p class="esl-note" data-i18n="enter-space-is-the.58a804">Enter Space is the full app for iPhone, iPad, Mac and Apple TV, with photo, video and music libraries and Files and Finder integration. Enter Space Light is its smaller, free sibling, and backups made by the Apple app can be browsed and restored in it.</p>
+      <a class="learn-more" href="../" data-i18n="meet-enter-space.f0f24e">Meet Enter Space</a>
+    </section>
+  </main>
+
+  <section class="dp-closing">
+    <h2 data-i18n="free-and-yours-to.e670b8">Free, and yours to read, change and build</h2>
+    <a href="https://github.com/blaineam/enter-space-light" target="_blank" rel="noopener noreferrer" class="btn-buy" data-cta data-i18n="enter-space-light-on.41f11a">Enter Space Light on GitHub</a>
+    <p class="dp-alt" data-i18n="licensed-under-gpl-3.1309c1">Licensed under GPL-3.0. No accounts and no telemetry.</p>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-links">
+        <a href="../../" class="footer-link" data-i18n="all-apps.429449">All Apps</a>
+        <a href="../../pinline/" class="footer-link">Pinline</a>
+        <a href="../../blip/" class="footer-link">Blip</a>
+        <a href="../../ari-helper/" class="footer-link">Ari Helper</a>
+        <a href="../../sami/" class="footer-link">Sami</a>
+        <a href="../../tilebreak/" class="footer-link">Tilebreak</a>
+        <a href="../../mi-speaks/" class="footer-link">Mi Speaks</a>
+        <a href="../../embr/" class="footer-link">Embr</a>
+        <a href="../../deepsi/" class="footer-link">DeepSi</a>
+        <a href="../../luma-editor/" class="footer-link">Luma Editor</a>
+        <a href="../../wise-flyer/" class="footer-link">Wise Flyer</a>
+        <a href="../../glint/" class="footer-link">Glint</a>
+        <a href="/privacy/" class="footer-link" data-i18n="privacy.cf0148">Privacy</a>
+        <a href="/terms/" class="footer-link" data-i18n="terms.a55a27">Terms</a>
+        <a href="/support/" class="footer-link" data-i18n="support.f32d5a">Support</a>
+        <a href="/" class="footer-link" data-i18n="portfolio.036b18">Portfolio</a>
+      </div>
+
+      <!-- Social Media Links -->
+      <div class="footer-social-links">
+        <a href="https://x.com/apps_by_blaine" class="social-icon-link" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)">
+          <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+          </svg>
+        </a>
+        <a href="https://www.instagram.com/apps.by.blaine/" class="social-icon-link" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+          <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.6100 4.1009 4.1009.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.1009 4.1009-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.1009-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.1009-4.1009 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.1100 2.759-6.1100 6.1100s2.759 6.163 6.1100 6.163 6.1100-2.759 6.1100-6.163c0-3.403-2.759-6.1100-6.1100-6.1100zm0 10.1100c-2.209 0-4-1.79-4-4 0-2.209 1.7100-4 4-4s4 1.7100 4 4c0 2.21-1.7100 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+          </svg>
+        </a>
+        <a href="https://www.youtube.com/@AppsByBlaine" class="social-icon-link" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+          <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+          </svg>
+        </a>
+      </div>
+
+      <p style="color: var(--text-muted); margin-top: var(--spacing-md);" data-i18n-html="blaine-miller-all-rights.b327c2">
+        © <span id="year"></span> Blaine Miller. All rights reserved.
+      </p>
+    </div>
+  </footer>
+
+  <script src="../../app-showcase.js?v=bec2b426"></script>
+</body>
+</html>
