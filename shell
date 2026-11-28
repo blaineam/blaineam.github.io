@@ -430,7 +430,7 @@ K	3	2 - 4 YEARS	Python, Kafka, ClickHouse, Helm, FluxCD, Bento, C#, Cypress, Gra
 E	1	Bachelor's of Science Degree, Computer and Information Systems with a focus in Website Development.	DeVry University, 01/2013 - 12/2015	2013-01
 H	1	Gallery	189	https://wemiller.com/?v=120	Night skies, tall trees and the long way home. Photographs and 360 deg panoramas you can stand inside, made on the nights and trails between projects.
 H	2	Landscape & sky	115	https://wemiller.com/?v=120	I also photograph the night sky.
-H	3	Luma & Nova	55	https://wemiller.com/?v=nova	Meet Luma and Nova. Two very good dogs. Luma: trail scout, campfire supervisor, professional fluff. Nova: the new pup, learning from the best.
+H	3	Luma & Nova	55	https://wemiller.com/?v=dog	Meet Luma and Nova. Two very good dogs. Luma: trail scout, campfire supervisor, professional fluff. Nova: the new pup, learning from the best.
 H	4	360 panoramas	214	https://wemiller.com/panos/	360 deg panoramas to stand inside
 H	5	Photo journals		https://wemiller.com/books/	Photo journals, page by page
 H	6	Puzzles		https://wemiller.com/puzzles/	Jigsaws cut from my photographs
@@ -1329,7 +1329,7 @@ K	3	2–4 年	Python, Kafka, ClickHouse, Helm, FluxCD, Bento, C#, Cypress, Grafa
 E	1	理学学士学位, 计算机与信息系统专业，主攻网站开发。	DeVry University, 01/2013 - 12/2015	2013-01
 H	1	图库	189	https://wemiller.com/?v=120	夜空、大树，还有绕远的回家路。 照片，以及可以置身其中的 360° 全景，都拍摄于项目之间的夜晚与山径。
 H	2	风景与天空	115	https://wemiller.com/?v=120	我也拍摄夜空。
-H	3	Luma & Nova	55	https://wemiller.com/?v=nova	认识一下 Luma 和 Nova。两只超乖的狗狗。 Luma：步道侦察员、营火监工、专业毛团。Nova：新来的小狗，正在跟前辈学本事。
+H	3	Luma & Nova	55	https://wemiller.com/?v=dog	认识一下 Luma 和 Nova。两只超乖的狗狗。 Luma：步道侦察员、营火监工、专业毛团。Nova：新来的小狗，正在跟前辈学本事。
 H	4	360° 全景	214	https://wemiller.com/panos/	可以置身其中的 360° 全景
 H	5	摄影日记		https://wemiller.com/books/	摄影手记，一页一页翻
 H	6	拼图		https://wemiller.com/puzzles/	用我的照片切成的拼图
@@ -1743,7 +1743,7 @@ K	3	2〜4 年	Python, Kafka, ClickHouse, Helm, FluxCD, Bento, C#, Cypress, Grafa
 E	1	理学士（Bachelor of Science）, コンピュータ・情報システム専攻（Web開発重点）。	DeVry University, 01/2013 - 12/2015	2013-01
 H	1	ギャラリー	189	https://wemiller.com/?v=120	夜空と、高い木々と、遠回りの帰り道。 写真と、中に立てる360°パノラマ。プロジェクトの合間の夜やトレイルで撮りました。
 H	2	風景と空	115	https://wemiller.com/?v=120	夜空の写真も撮っています。
-H	3	Luma & Nova	55	https://wemiller.com/?v=nova	LumaとNovaをご紹介。とってもいい子の2匹です。 Luma：トレイルの偵察係、焚き火の監督、プロのもふもふ。Nova：新入りの子犬。先輩から勉強中です。
+H	3	Luma & Nova	55	https://wemiller.com/?v=dog	LumaとNovaをご紹介。とってもいい子の2匹です。 Luma：トレイルの偵察係、焚き火の監督、プロのもふもふ。Nova：新入りの子犬。先輩から勉強中です。
 H	4	360°パノラマ	214	https://wemiller.com/panos/	中に立てる360°パノラマ
 H	5	フォトジャーナル		https://wemiller.com/books/	フォトジャーナルを、1ページずつ
 H	6	パズル		https://wemiller.com/puzzles/	私の写真から作ったジグソーパズル
@@ -2149,7 +2149,7 @@ K	3	2–4 JAHRE	Python, Kafka, ClickHouse, Helm, FluxCD, Bento, C#, Cypress, Gra
 E	1	Bachelor of Science, Computer- und Informationssysteme mit Schwerpunkt Webentwicklung.	DeVry University, 01/2013 - 12/2015	2013-01
 H	1	Galerie	189	https://wemiller.com/?v=120	Nachthimmel, hohe Bäume und der lange Weg nach Hause. Fotografien und 360°-Panoramen zum Hineinstellen, entstanden in den Nächten und auf den Trails zwischen den Projekten.
 H	2	Landschaft & Himmel	115	https://wemiller.com/?v=120	Ich fotografiere auch den Nachthimmel.
-H	3	Luma & Nova	55	https://wemiller.com/?v=nova	Das sind Luma und Nova. Zwei sehr brave Hunde. Luma: Spürnase auf dem Trail, Lagerfeuer-Aufseherin, Flausch von Beruf. Nova: der neue Welpe, in der Lehre bei den Besten.
+H	3	Luma & Nova	55	https://wemiller.com/?v=dog	Das sind Luma und Nova. Zwei sehr brave Hunde. Luma: Spürnase auf dem Trail, Lagerfeuer-Aufseherin, Flausch von Beruf. Nova: der neue Welpe, in der Lehre bei den Besten.
 H	4	360°-Panoramen	214	https://wemiller.com/panos/	360°-Panoramen zum Hineinstellen
 H	5	Fototagebücher		https://wemiller.com/books/	Fototagebücher, Seite für Seite
 H	6	Puzzles		https://wemiller.com/puzzles/	Puzzles aus meinen Fotografien
@@ -2545,7 +2545,7 @@ K	3	2 À 4 ANS	Python, Kafka, ClickHouse, Helm, FluxCD, Bento, C#, Cypress, Graf
 E	1	Licence (Bachelor of Science), Informatique et systèmes d’information, spécialisation en développement web.	DeVry University, 01/2013 - 12/2015	2013-01
 H	1	Galerie	189	https://wemiller.com/?v=120	Ciels nocturnes, grands arbres et le long chemin du retour. Des photographies et des panoramas à 360° dans lesquels on peut se tenir, réalisés au fil des nuits et des sentiers, entre deux projets.
 H	2	Paysages & ciel	115	https://wemiller.com/?v=120	Je photographie aussi le ciel nocturne.
-H	3	Luma & Nova	55	https://wemiller.com/?v=nova	Voici Luma et Nova. Deux très bons chiens. Luma : éclaireuse des sentiers, cheffe du feu de camp, boule de poils professionnelle. Nova : le nouveau chiot, à bonne école.
+H	3	Luma & Nova	55	https://wemiller.com/?v=dog	Voici Luma et Nova. Deux très bons chiens. Luma : éclaireuse des sentiers, cheffe du feu de camp, boule de poils professionnelle. Nova : le nouveau chiot, à bonne école.
 H	4	Panoramas 360°	214	https://wemiller.com/panos/	Des panoramas 360° à vivre de l'intérieur
 H	5	Carnets photo		https://wemiller.com/books/	Carnets photo, page après page
 H	6	Puzzles		https://wemiller.com/puzzles/	Des puzzles découpés dans mes photos
@@ -2958,7 +2958,7 @@ K	3	2 - 4 AÑOS	Python, Kafka, ClickHouse, Helm, FluxCD, Bento, C#, Cypress, Gra
 E	1	Licenciatura (Bachelor of Science), Sistemas informáticos y de información, con especialización en desarrollo web.	DeVry University, 01/2013 - 12/2015	2013-01
 H	1	Galería	189	https://wemiller.com/?v=120	Cielos nocturnos, árboles altos y el camino largo a casa. Fotografías y panorámicas de 360° en las que puedes meterte, hechas en las noches y los senderos entre proyecto y proyecto.
 H	2	Paisaje y cielo	115	https://wemiller.com/?v=120	También fotografío el cielo nocturno.
-H	3	Luma & Nova	55	https://wemiller.com/?v=nova	Te presento a Luma y Nova. Dos perros muy buenos. Luma: exploradora de senderos, supervisora de fogatas, peluche profesional. Nova: el nuevo cachorro, aprendiendo de la mejor.
+H	3	Luma & Nova	55	https://wemiller.com/?v=dog	Te presento a Luma y Nova. Dos perros muy buenos. Luma: exploradora de senderos, supervisora de fogatas, peluche profesional. Nova: el nuevo cachorro, aprendiendo de la mejor.
 H	4	Panorámicas 360°	214	https://wemiller.com/panos/	Panorámicas de 360° para meterte dentro
 H	5	Diarios de fotos		https://wemiller.com/books/	Diarios fotográficos, página a página
 H	6	Rompecabezas		https://wemiller.com/puzzles/	Rompecabezas hechos con mis fotografías
@@ -3372,7 +3372,7 @@ K	3	2~4년	Python, Kafka, ClickHouse, Helm, FluxCD, Bento, C#, Cypress, Grafana,
 E	1	이학사 학위, 컴퓨터 및 정보 시스템 전공, 웹사이트 개발 중점.	DeVry University, 01/2013 - 12/2015	2013-01
 H	1	갤러리	189	https://wemiller.com/?v=120	밤하늘, 키 큰 나무, 그리고 멀리 돌아 집으로 가는 길. 프로젝트 사이사이의 밤과 트레일에서 담은 사진, 그리고 그 안에 서 볼 수 있는 360° 파노라마.
 H	2	풍경과 하늘	115	https://wemiller.com/?v=120	밤하늘 사진도 찍습니다.
-H	3	Luma & Nova	55	https://wemiller.com/?v=nova	Luma와 Nova를 소개합니다. 정말 착한 두 강아지예요. Luma: 트레일 정찰대, 캠프파이어 감독, 전문 털뭉치. Nova: 새로 온 아기 강아지, 최고의 선배에게 배우는 중.
+H	3	Luma & Nova	55	https://wemiller.com/?v=dog	Luma와 Nova를 소개합니다. 정말 착한 두 강아지예요. Luma: 트레일 정찰대, 캠프파이어 감독, 전문 털뭉치. Nova: 새로 온 아기 강아지, 최고의 선배에게 배우는 중.
 H	4	360° 파노라마	214	https://wemiller.com/panos/	안에 서 볼 수 있는 360° 파노라마
 H	5	포토 저널		https://wemiller.com/books/	한 장씩 넘겨 보는 사진 저널
 H	6	퍼즐		https://wemiller.com/puzzles/	제 사진으로 만든 직소 퍼즐
@@ -3782,7 +3782,7 @@ K	3	2 - 4 ANOS	Python, Kafka, ClickHouse, Helm, FluxCD, Bento, C#, Cypress, Graf
 E	1	Bacharelado (Bachelor of Science), Sistemas de Computação e Informação, com ênfase em Desenvolvimento Web.	DeVry University, 01/2013 - 12/2015	2013-01
 H	1	Galeria	189	https://wemiller.com/?v=120	Céus noturnos, árvores altas e o caminho mais longo para casa. Fotografias e panoramas 360° em que você pode entrar, feitos nas noites e trilhas entre um projeto e outro.
 H	2	Paisagem e céu	115	https://wemiller.com/?v=120	Também fotografo o céu noturno.
-H	3	Luma & Nova	55	https://wemiller.com/?v=nova	Conheça Luma e Nova. Dois cães muito bonzinhos. Luma: batedora de trilhas, supervisora de fogueira, fofura profissional. Nova: o filhote novo, aprendendo com quem sabe.
+H	3	Luma & Nova	55	https://wemiller.com/?v=dog	Conheça Luma e Nova. Dois cães muito bonzinhos. Luma: batedora de trilhas, supervisora de fogueira, fofura profissional. Nova: o filhote novo, aprendendo com quem sabe.
 H	4	Panoramas 360°	214	https://wemiller.com/panos/	Panoramas 360° para você entrar
 H	5	Diários de fotos		https://wemiller.com/books/	Diários fotográficos, página por página
 H	6	Quebra-cabeças		https://wemiller.com/puzzles/	Quebra-cabeças feitos com as minhas fotografias
@@ -4187,7 +4187,7 @@ K	3	2 - 4 ANNI	Python, Kafka, ClickHouse, Helm, FluxCD, Bento, C#, Cypress, Graf
 E	1	Laurea triennale (Bachelor of Science), Sistemi informatici e informativi, con indirizzo in sviluppo web.	DeVry University, 01/2013 - 12/2015	2013-01
 H	1	Galleria	189	https://wemiller.com/?v=120	Cieli notturni, alberi alti e la strada lunga verso casa. Fotografie e panorami a 360° in cui puoi entrare, nati nelle notti e sui sentieri tra un progetto e l'altro.
 H	2	Paesaggi e cielo	115	https://wemiller.com/?v=120	Fotografo anche il cielo notturno.
-H	3	Luma & Nova	55	https://wemiller.com/?v=nova	Ecco Luma e Nova. Due cani bravissimi. Luma: esploratrice di sentieri, supervisora del falò, batuffolo professionista. Nova: il nuovo cucciolo, a scuola dalla migliore.
+H	3	Luma & Nova	55	https://wemiller.com/?v=dog	Ecco Luma e Nova. Due cani bravissimi. Luma: esploratrice di sentieri, supervisora del falò, batuffolo professionista. Nova: il nuovo cucciolo, a scuola dalla migliore.
 H	4	Panorami a 360°	214	https://wemiller.com/panos/	Panorami a 360° in cui entrare
 H	5	Diari fotografici		https://wemiller.com/books/	Diari fotografici, pagina dopo pagina
 H	6	Puzzle		https://wemiller.com/puzzles/	Puzzle ricavati dalle mie fotografie

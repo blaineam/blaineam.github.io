@@ -34,6 +34,11 @@ const POSTERS = [
   { id: 'resume', title: 'Resume', sub: `${site.name}, Senior Software Engineer`, bg: 'map' },
   { id: 'photography', title: 'Photography', sub: 'Dark skies, old forests and a very good dog.', bg: 'slides/bmp-17.webp' },
   { id: 'luma', title: 'Luma & Nova', sub: 'Two very good dogs.', bg: 'slides/bmp-68.webp' },
+  // One for each domain's front door (DOORS in build-site.mjs): the line above the title is the domain.
+  { id: 'millers-dog', eye: 'millers.dog', title: 'Luma & Nova', sub: 'Two very good dogs.', bg: 'slides/bmp-187.webp', pos: 'center 55%', signLeft: true },
+  { id: 'luma-dog', eye: 'luma.dog', title: 'Luma & Nova', sub: 'Two very good dogs.', bg: 'slides/bmp-68.webp' },
+  { id: 'supernova-dog', eye: 'supernova.dog', title: 'Luma & Nova', sub: 'Two very good dogs.', bg: 'slides/bmp-186.webp', pos: 'center 12%', split: true },
+  { id: '120-media', eye: '120.media', title: 'Photography', sub: 'Dark skies, old forests and very good dogs.', bg: 'slides/bmp-17.webp' },
   { id: 'panos', title: 'Panoramas', sub: 'Step inside the photograph and look around.', bg: 'slides/bmp-73.webp' },
   { id: 'puzzles', title: 'Puzzles', sub: 'Any photograph here, cut into a jigsaw.', bg: 'jigsaw', photo: 'slides/bmp-26.webp' },
   { id: 'xr', title: 'In VR', sub: 'The gallery, the panoramas and the apps, around you.', bg: 'vr', photos: ['slides/bmp-17.webp', 'slides/bmp-9.webp', 'slides/bmp-68.webp'] },
@@ -222,7 +227,7 @@ const page = (p, n) => `<!doctype html><html lang="${p.lang || 'en'}"><meta char
   * { box-sizing: border-box; margin: 0; }
   html, body { width: ${W}px; height: ${H}px; overflow: hidden; background: #05080f; color: #fff; -webkit-font-smoothing: antialiased; }
   body { position: relative; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif; }
-  .bg { position: absolute; inset: 0; ${p.bg === 'map' ? `background: radial-gradient(90% 120% at 82% 8%, ${p.tone === 'green' ? '#12503f 0%, #0a211c 46%' : '#173a73 0%, #0a1730 46%'}, #05080f 100%);` : DRAWN.includes(p.bg) ? 'background: #05080f;' : `background: url("file://${at(p.bg)}") center / cover;`} }
+  .bg { position: absolute; inset: 0; ${p.bg === 'map' ? `background: radial-gradient(90% 120% at 82% 8%, ${p.tone === 'green' ? '#12503f 0%, #0a211c 46%' : '#173a73 0%, #0a1730 46%'}, #05080f 100%);` : DRAWN.includes(p.bg) ? 'background: #05080f;' : `background: url("file://${at(p.bg)}") ${p.pos || 'center'} / cover;`} }
   .bg svg { position: absolute; inset: 0; }
   .bg.map svg { -webkit-mask-image: radial-gradient(95% 110% at 85% 10%, #000 0%, rgba(0,0,0,.6) 45%, transparent 82%); }
   .shade { position: absolute; inset: 0; background: ${p.bg === 'map' || p.bg === 'vr' ? 'none' : p.bg === 'trail' ? 'linear-gradient(to right, rgba(6,10,14,.9) 0%, rgba(6,10,14,.62) 30%, rgba(6,10,14,0) 58%), linear-gradient(to top, rgba(6,10,14,.55) 0%, rgba(6,10,14,0) 40%)' : p.bg === 'speed' || p.bg === 'space' ? 'linear-gradient(to right, rgba(5,8,15,.82) 0%, rgba(5,8,15,.5) 36%, rgba(5,8,15,0) 62%)' : 'linear-gradient(to top, rgba(4,7,13,.92) 0%, rgba(4,7,13,.62) 38%, rgba(4,7,13,.12) 72%), linear-gradient(to right, rgba(4,7,13,.5), transparent 60%)'}; }
@@ -232,11 +237,13 @@ const page = (p, n) => `<!doctype html><html lang="${p.lang || 'en'}"><meta char
   h1 { margin-top: 22px; font: 500 ${p.title.length > 12 ? 104 : 124}px/1 ui-serif, "New York", "Iowan Old Style", Palatino, Georgia, "Noto Serif", "Liberation Serif", "DejaVu Serif", serif; letter-spacing: -.025em; }
   p { margin-top: 22px; max-width: 880px; font-size: 34px; line-height: 1.3; color: rgba(255,255,255,.86); text-wrap: balance; }
   .sign { position: absolute; right: 64px; top: 46px; font: 400 54px/1 Hand, cursive; color: rgba(255,255,255,.9); transform: rotate(-3deg); }
+  ${p.signLeft ? '.sign { right: auto; left: 72px; }' : ''}
+  ${p.split ? '.bg { left: 640px; } .shade { left: 640px; background: linear-gradient(to right, #05080f 0%, rgba(5,8,15,0) 24%); } .copy h1 { font-size: 90px; } .copy { right: 580px; } .sign { right: auto; left: 72px; }' : ''}
 </style><body>
   <div class="bg ${p.bg === 'map' ? 'map' : ''}">${p.bg === 'map' ? contours(W, H, 6, 40 + n * 37, 12 + n * 23, p.tone === 'green' ? '#5fd3b0' : '#6cb6ff') : p.bg === 'jigsaw' ? jigsaw(p.photo) : p.bg === 'vr' ? vrScene(p.photos) : p.bg === 'speed' ? speedArt() : p.bg === 'space' ? spaceArt() : p.bg === 'trail' ? trailArt(p.photo) : ''}</div><div class="shade"></div>
   ${p.title === site.name ? '' : `<div class="sign">${esc(site.name)}</div>`}
   <div class="rule"></div>
-  <div class="copy"><div class="eye">${esc(host)}</div><h1>${esc(p.title)}</h1>${p.sub ? `<p>${esc(p.sub)}</p>` : ''}</div>
+  <div class="copy"><div class="eye">${esc(p.eye || host)}</div><h1>${esc(p.title)}</h1>${p.sub ? `<p>${esc(p.sub)}</p>` : ''}</div>
 </body></html>`;
 
 const CHROMES = ['/Applications/Google Chrome.app/Contents/MacOS/Google Chrome', '/Applications/Chromium.app/Contents/MacOS/Chromium',

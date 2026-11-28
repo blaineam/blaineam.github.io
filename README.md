@@ -25,7 +25,7 @@ behind it, the headline, and which sections follow, without leaving the page:
 | **Everything** | [wemiller.com](https://wemiller.com) | "I build what's missing": selected work, every project since 2012, the photographs, Luma |
 | **Work** | [wemiller.com/hire](https://wemiller.com/hire) (`/?mode=hire`) | No photograph, no dog: title and summary, selected work, experience, skills, education and the [resume](https://wemiller.com/resume/) |
 | **Photography** | [120.media](https://120.media) (`/?v=120`) | The full gallery first; software shrinks to one card |
-| **Luma & Nova** | [luma.dog](https://luma.dog), [supernova.dog](https://www.supernova.dog) (`/?v=nova`; `/?v=luma` still works) | The pups' photographs first, and Luma's birthday countdown every October |
+| **Luma & Nova** | millers.dog, [luma.dog](https://luma.dog), [supernova.dog](https://www.supernova.dog) (`/?v=dog`; `?v=nova`, `?v=luma`, `?v=pets` and the like work too) | The pups' photographs first, and Luma's birthday countdown every October |
 
 Whatever the view, the rest is the same page:
 
@@ -105,7 +105,7 @@ Design constraints the page holds itself to:
   the pages load no third-party scripts.
 - **No yellow.** One blue accent (green in the photography and Luma views).
 
-Old addresses still work: `/`, `/?v=120`, `/?v=luma` (now `/?v=nova`), `/#gallery`, `/#projects`, `/apps/…`,
+Old addresses still work: `/`, `/?v=120`, `/?v=luma` and `/?v=nova` (now `/?v=dog`), `/#gallery`, `/#projects`, `/apps/…`,
 `/tools/…`, `/panos/`, `/books/`, `/puzzles/`, `/speedtest/`, `/support/`, `/pay/`.
 
 ---
@@ -135,7 +135,7 @@ to the repository can save (see [`edit/README.md`](edit/README.md)). To preview 
 | Camera and capture date for the photographs | `node scripts/photo-meta.mjs <folder of exported originals>` matches them and writes [`content/photo-meta.json`](content/photo-meta.json); or set `"camera"` / `"taken"` by hand in `content/photos.json` |
 | Add a video | `content/photos.json` → `"video": "https://youtu.be/…"` on a photograph. The photo is the still; YouTube is contacted only when a visitor presses play |
 | Title, caption or alt text for a photograph | [`content/photos.json`](content/photos.json) → `"title"`, `"caption"`, `"alt"` |
-| Put a photograph in the 120.media or dogs' (`/?v=nova`) set | `content/photos.json` → `"tags": ["120"]`, `["luma"]` or `["nova"]` |
+| Put a photograph in the 120.media or dogs' (`/?v=dog`) set | `content/photos.json` → `"tags": ["120"]`, `["luma"]` or `["nova"]` |
 | Update experience, skills, education | [`content/resume.json`](content/resume.json) |
 | Change the email, Signal or Haven link | `node scripts/build-site.mjs --encode 'mailto:…'`, paste into `content/site.json` → `contact` |
 | Change the social bios | `content/site.json` → `bios` |
@@ -275,10 +275,24 @@ what is served.
 
 ### Domains
 
-GitHub Pages serves one custom domain (`wemiller.com`, in `CNAME`). `120.media` and `luma.dog`
-forward to `wemiller.com/?v=120` and `wemiller.com/?v=luma` (an alias of `?v=nova`), which open
-the photography and Luma & Nova views. If either hostname is ever pointed at the site directly, `content/site.json` → `domains`
-already maps it to the right view.
+GitHub Pages serves one custom domain (`wemiller.com`, in `CNAME`); the other domains redirect to
+it. **millers.dog** is the dogs' long-term name; luma.dog and supernova.dog keep working.
+
+Link previews are read from the HTML as served, so a domain only gets a preview of its own when its
+redirect points at its front door. Each is a small generated page with its own title and poster
+that sends a visitor on to the view:
+
+| Domain | Redirect it to | Visitor lands on |
+|---|---|---|
+| millers.dog | `https://wemiller.com/dogs/` | `/?v=dog` |
+| luma.dog | `https://wemiller.com/dogs/luma/` | `/?v=dog` |
+| supernova.dog | `https://wemiller.com/dogs/supernova/` | `/?v=dog` |
+| 120.media | `https://wemiller.com/photos/` | `/?v=120` |
+
+Redirects straight to `?v=120`, `?v=dog`, `?v=nova` or `?v=luma` still open the right view; their
+preview is the home page's. `/dog/` and `/pets/` are front doors too, and any other path starting
+with a dog word (`/luma`, `/nova`, `/millers`, `/pups/…`) is caught by `404.html`. If a hostname is
+ever pointed at the site directly, `content/site.json` → `domains` already maps it to its view.
 
 ### Store-link campaigns
 

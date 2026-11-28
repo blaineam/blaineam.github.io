@@ -9,8 +9,8 @@
   "openToWork": false,
   "_openToWork_help": "true shows the 'Open to senior & principal roles' badge in hire mode.",
 
-  "domains": { "120.media": "photo", "www.120.media": "photo", "luma.dog": "luma", "www.luma.dog": "luma", "supernova.dog": "luma", "www.supernova.dog": "luma" },
-  "_domains_help": "If one of these hostnames ever serves this site directly it opens in that view. Redirects to /?v=120 and /?v=nova keep working either way (/?v=luma still opens the dogs' view).",
+  "domains": { "120.media": "photo", "www.120.media": "photo", "luma.dog": "luma", "www.luma.dog": "luma", "supernova.dog": "luma", "www.supernova.dog": "luma", "millers.dog": "luma", "www.millers.dog": "luma" },
+  "_domains_help": "If one of these hostnames ever serves this site directly it opens in that view. Redirects to /?v=120, /?v=dog, /?v=nova and /?v=luma all keep working. For a link preview of its own, point a domain at its front door: millers.dog to /dogs/, luma.dog to /dogs/luma/, supernova.dog to /dogs/supernova/, 120.media to /photos/ (DOORS in scripts/build-site.mjs).",
 
   "views": {
     "maker": {
@@ -158,7 +158,7 @@
     "cta.gallery": "Open the gallery",
     "cta.pano": "Step into a panorama",
 
-    "hero.luma.eyebrow": "luma.dog · supernova.dog",
+    "hero.luma.eyebrow": "millers.dog",
     "hero.luma.h": "Meet Luma and Nova. Two very good dogs.",
     "hero.luma.p": "Luma: trail scout, campfire supervisor, professional fluff. Nova: the new pup, learning from the best.",
     "cta.luma": "See the pups",

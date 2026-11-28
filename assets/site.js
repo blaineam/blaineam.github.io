@@ -275,7 +275,7 @@
     var u = new URL(location.href);
     u.searchParams.delete('v'); u.searchParams.delete('mode');
     if (view === 'photo') u.searchParams.set('v', '120');
-    else if (view === 'luma') u.searchParams.set('v', 'nova');
+    else if (view === 'luma') u.searchParams.set('v', 'dog');
     else if (view !== defaultView) u.searchParams.set('mode', view);
     return u;
   }
@@ -1249,7 +1249,7 @@
       if (!a || e.metaKey || e.ctrlKey || e.shiftKey) return;
       e.preventDefault();
       var id = a.getAttribute('data-when');
-      warp(travelUrl(id, id === 'luma' || id === 'nova' ? 'nova' : null));
+      warp(travelUrl(id, id === 'luma' || id === 'nova' ? 'dog' : null));
     });
     $('#tm-form').addEventListener('submit', function (e) {
       e.preventDefault();

@@ -425,7 +425,11 @@ const jsonLd = {
 
 // Runs before first paint: picks the view from the URL (or the hostname) so the right hero is
 // the first thing drawn. Without JavaScript the page simply shows the default view.
-const bootScript = `(function(){var d=document.documentElement,q=new URLSearchParams(location.search),v=q.get("v"),m=q.get("mode"),h=${JSON.stringify(site.domains)}[location.hostname.toLowerCase()];var w=v==="120"||v==="photo"?"photo":v==="nova"||v==="luma"?"luma":m==="hire"||m==="maker"?m:h||d.getAttribute("data-view");d.setAttribute("data-view",w);var hs=${JSON.stringify(Object.fromEntries(VIEWS.filter((v) => heroData[v][0]).map((v) => [v, heroData[v][0].set])))}[w];if(hs){var k=document.createElement("link");k.rel="preload";k.as="image";k.setAttribute("imagesrcset",hs);k.setAttribute("imagesizes","100vw");k.setAttribute("fetchpriority","high");document.head.appendChild(k)}d.classList.add("js");var th=null;try{th=localStorage.getItem("wm-theme");if(th==="light"||th==="dark")d.setAttribute("data-theme",th);else th=null}catch(e){}if(th?th==="light":(window.matchMedia&&matchMedia("(prefers-color-scheme: light)").matches))d.setAttribute("data-hero","light");try{var c=navigator.connection;if(c&&(c.saveData||/2g/.test(c.effectiveType||"")))d.classList.add("lite")}catch(e){}})();`;
+// Every word that means the dogs' page, as ?v=<word>. ?v=dog is the address the site hands out;
+// ?v=nova and ?v=luma are what the older domain redirects use. 404.html has the same list for paths.
+const DOG_WORDS = '^(dogs?|pets?|pups?|pupp(y|ies)|luma|nova|millers(\\.dog)?)$';
+const PHOTO_WORDS = '^(120(\\.media)?|photos?|photography)$';
+const bootScript = `(function(){var d=document.documentElement,q=new URLSearchParams(location.search),v=q.get("v"),m=q.get("mode"),h=${JSON.stringify(site.domains)}[location.hostname.toLowerCase()];var w=/${PHOTO_WORDS}/i.test(v||"")?"photo":/${DOG_WORDS}/i.test(v||"")?"luma":m==="hire"||m==="maker"?m:h||d.getAttribute("data-view");d.setAttribute("data-view",w);var hs=${JSON.stringify(Object.fromEntries(VIEWS.filter((v) => heroData[v][0]).map((v) => [v, heroData[v][0].set])))}[w];if(hs){var k=document.createElement("link");k.rel="preload";k.as="image";k.setAttribute("imagesrcset",hs);k.setAttribute("imagesizes","100vw");k.setAttribute("fetchpriority","high");document.head.appendChild(k)}d.classList.add("js");var th=null;try{th=localStorage.getItem("wm-theme");if(th==="light"||th==="dark")d.setAttribute("data-theme",th);else th=null}catch(e){}if(th?th==="light":(window.matchMedia&&matchMedia("(prefers-color-scheme: light)").matches))d.setAttribute("data-hero","light");try{var c=navigator.connection;if(c&&(c.saveData||/2g/.test(c.effectiveType||"")))d.classList.add("lite")}catch(e){}})();`;
 
 const profile = stamp('profile.jpg');
 const avatar = stamp('assets/avatar.jpg');   // 192 px copy of profile.jpg for the header and the tab icon (the full photo is 160 KB)
@@ -610,10 +614,10 @@ ${resume.education.map((e, i) => `            <p data-since="${e.start.replace(/
       </section>
 
       <section class="sec sec--band" id="luma" data-views="maker photo" aria-labelledby="luma-h">
-        <a class="band reveal" href="?v=nova" data-view-to="luma">
+        <a class="band reveal" href="?v=dog" data-view-to="luma">
           <img src="${stamp(lumaPhoto.thumb)}" alt="${esc(lumaPhoto.alt)}" width="${lumaPhoto.w}" height="${lumaPhoto.h}" loading="lazy" decoding="async">
           <span class="band__copy">
-            <span class="eyebrow">${I.paw}luma.dog</span>
+            <span class="eyebrow">${I.paw}millers.dog</span>
             ${T(lumaPassed ? 'luma.memorial.h' : 'luma.h', 'strong', 'id="luma-h"')}
             ${T(lumaPassed ? 'luma.memorial.p' : 'luma.p', 'span')}
             <span class="band__go"><span data-i18n="luma.cta">${esc(t('luma.cta'))}</span>${I.arrow}</span>
@@ -705,7 +709,7 @@ ${site.social.map((s) => `          <li${/^(youtube|instagram|x|twitter)$/i.test
     <h2 id="tm-h">${I.clock}<span data-i18n="tm.title">${esc(t('tm.title'))}</span></h2>
     ${T('tm.p', 'p')}
     <div class="tm__grid">
-${['newyear', 'easter', 'memorial', 'birthday', 'july4', 'summer', 'fall', 'halloween', 'luma', 'veterans', 'christmas'].flatMap((d) => (d === 'summer' && novaBorn ? ['nova', d] : [d])).map((d) => `      <a href="/?${d === 'luma' || d === 'nova' ? 'v=nova&amp;' : ''}when=${d}" data-when="${d}" data-i18n="tm.d.${d}">${esc(t('tm.d.' + d))}</a>`).join('\n')}
+${['newyear', 'easter', 'memorial', 'birthday', 'july4', 'summer', 'fall', 'halloween', 'luma', 'veterans', 'christmas'].flatMap((d) => (d === 'summer' && novaBorn ? ['nova', d] : [d])).map((d) => `      <a href="/?${d === 'luma' || d === 'nova' ? 'v=dog&amp;' : ''}when=${d}" data-when="${d}" data-i18n="tm.d.${d}">${esc(t('tm.d.' + d))}</a>`).join('\n')}
     </div>
     <form class="tm__date" id="tm-form">
       <label><span data-i18n="tm.pick">${esc(t('tm.pick'))}</span><input type="datetime-local" id="tm-input" required></label>
@@ -849,6 +853,53 @@ if (PREVIEW) {   // a look at a state without changing a single published file
   process.exit(0);
 }
 write('index.html', index);
+
+/* ---------- a front door for each domain ---------- */
+
+// Link previews are read from the HTML as served, and a static host serves one page for every
+// ?v=. So each domain gets a page of its own with its own title and poster (scripts/build-og.mjs),
+// which sends a person straight on to the view. Point the domain's redirect at the first path.
+// Preview robots do not run the script; there is deliberately no meta refresh, which some follow.
+const DOORS = [
+  { paths: ['dogs', 'dog', 'pets'], to: '/?v=dog', domain: 'millers.dog', poster: 'millers-dog', k: 'hero.luma' },
+  { paths: ['dogs/luma'], to: '/?v=dog', domain: 'luma.dog', poster: 'luma-dog', k: 'hero.luma' },
+  { paths: ['dogs/supernova'], to: '/?v=dog', domain: 'supernova.dog', poster: 'supernova-dog', k: 'hero.luma' },
+  { paths: ['photos'], to: '/?v=120', domain: '120.media', poster: '120-media', k: 'hero.photo' },
+];
+for (const door of DOORS) {
+  const title = strip(t(`${door.k}.h`)), about = strip(t(`${door.k}.p`)), image = `${site.origin}/${stamp(`og/${door.poster}.jpg`)}`;
+  for (const p of door.paths) write(`${p}/index.html`, `<!DOCTYPE html>
+<!-- Generated by scripts/build-site.mjs. The front door for ${door.domain}. -->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>${esc(title)}</title>
+  <meta name="description" content="${esc(about)}">
+  <meta name="robots" content="noindex">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="${door.domain}">
+  <meta property="og:title" content="${esc(title)}">
+  <meta property="og:description" content="${esc(about)}">
+  <meta property="og:url" content="${site.origin}/${door.paths[0]}/">
+  <meta property="og:image" content="${image}">
+  <meta property="og:image:secure_url" content="${image}">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="${esc(`${door.domain}: ${title}`)}">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="${esc(title)}">
+  <meta name="twitter:description" content="${esc(about)}">
+  <meta name="twitter:image" content="${image}">
+  <script>(function(){var u=new URL(${JSON.stringify(door.to)},location.origin);new URLSearchParams(location.search).forEach(function(v,k){if(k!=="v")u.searchParams.set(k,v)});location.replace(u.pathname+u.search+location.hash)})();</script>
+  <style>body{margin:0;min-height:100vh;display:grid;place-items:center;background:#070b14;color:#eef2f8;font:1.1rem system-ui,sans-serif}a{color:#6cb6ff}</style>
+</head>
+<body>
+  <p><a href="${esc(door.to)}">${esc(title)}</a></p>
+</body>
+</html>
+`);
+}
 
 /* ---------- /hire/ ---------- */
 
@@ -1154,7 +1205,7 @@ write('app-sheets.json', JSON.stringify(sheets) + '\n');
 
 const entries = [];
 const sections = [['#work', 'work.h'], ['#projects', 'tl.h'], ['#gallery', 'ph.h'], ['/?mode=hire#experience', 'exp.h'], ['/resume/', 'exp.resume'],
-  ['/?v=nova', 'luma.h'], ['#contact', 'c.h'], ['#contact', 'tui.h']];
+  ['/?v=dog', 'luma.h'], ['#contact', 'c.h'], ['#contact', 'tui.h']];
 for (const [u, k] of sections) entries.push({ k: 'section', t: t(k), i: k, u });
 for (const p of projects) {
   entries.push({ k: 'project', t: p.title, d: p.tagline || strip(p.description).slice(0, 110), u: p.link || `/#p-${p.id}`,
@@ -1597,7 +1648,7 @@ function tuiRecords(lang, clean) {
     e.start.replace(/^(\d\d)\/(\d{4})$/, '$2-$1')));
   [['g.gallery', photos.length, `${site.origin}/?v=120`, `${tr('hero.photo.h', t('hero.photo.h'))} ${tr('hero.photo.p', t('hero.photo.p'))}`],
     ['g.sky', tagged('120'), `${site.origin}/?v=120`, tr('ph.p', t('ph.p'))],
-    ['g.luma', photos.filter(isPup).length, `${site.origin}/?v=nova`, `${tr('hero.luma.h', t('hero.luma.h'))} ${tr('hero.luma.p', t('hero.luma.p'))}`],
+    ['g.luma', photos.filter(isPup).length, `${site.origin}/?v=dog`, `${tr('hero.luma.h', t('hero.luma.h'))} ${tr('hero.luma.p', t('hero.luma.p'))}`],
     ['g.panos', panoCount, `${site.origin}/panos/`, tr('x.panos', t('x.panos'))],
     ['g.books', '', `${site.origin}/books/`, tr('x.books', t('x.books'))],
     ['g.puzzles', '', `${site.origin}/puzzles/`, tr('x.puzzles', t('x.puzzles'))]].forEach(([k, n, u, x], i) => put(`H:${i}`, 'H', i + 1, ui[k], n, u, x));

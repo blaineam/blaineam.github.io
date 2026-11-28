@@ -6,7 +6,7 @@ import { h, btn, select, check } from '../ui.js';
 import { state, draft, base, photoOrder, photoMeta, isPending, localPhotoUrl, assetFor, fileUrl } from '../store.js';
 import { deepEqual } from '../jsonpatch.js';
 
-const PAGES = [['../', 'Home'], ['../?mode=hire', 'Home: work view'], ['../?v=120', 'Home: photography'], ['../?v=nova', 'Home: Luma & Nova']];
+const PAGES = [['../', 'Home'], ['../?mode=hire', 'Home: work view'], ['../?v=120', 'Home: photography'], ['../?v=dog', 'Home: Luma & Nova']];
 const slug = (s) => String(s).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 
 export function previewPane(root) {
